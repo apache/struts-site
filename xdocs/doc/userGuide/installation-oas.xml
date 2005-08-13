@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<document url="installation-oas.html">
+
+  <properties>
+    <title>The Struts Framework Project - Installation - Orion Application Server</title>
+  </properties>
+
+  <body>
+<chapter name="5.2 Installation" href="installation">
+<section name="Installing Struts with your servlet container" href="Containers">
+
+<h4 id="orion">Orion Application Server</h4>
+
+<p>In the steps below, <code>$ORION_HOME</code> refers to the directory in which
+  you have installed Orion, and <code>$STRUTS_HOME</code> is the directory in
+  which you unpacked the Struts binary distribution.</p>
+
+<ul>
+  <li>Modify the file <code>$ORION_HOME/config/application.xml</code> to define
+    the two new applications, by adding the following declarations, immediately
+    following the <code>web-module</code> directive for the default web application:</li>
+</ul>
+
+<pre>&lt;web-module id="strutsDoc"
+path="$STRUTS_HOME/webapps/struts-documentation.war"/>
+&lt;web-module id="strutsExample"
+path="$STRUTS_HOME/webapps/struts-example.war"/>
+</pre>
+
+<ul>
+  <li>Modify the file <code>$ORION_HOME/config/default-web-site.xml</code> (or
+    the configuration file for any other Orion web site) to include the following
+    declarations, after the declaration for the &lt;default-web-app> if any:</li>
+</ul>
+
+<pre>&lt;web-app application="default" name="strutsDoc"
+  root="/struts-documentation"/>
+&lt;web-app application="default" name="strutsExample"
+  root="/struts-example"/>
+</pre>
+
+<ul>
+  <li>After you start Orion, you should now be able to access these applications
+    (assuming you haven't changed the port number from the default of 80) at:</li>
+</ul>
+
+<pre>http://localhost/struts-documentation
+http://localhost/struts-example
+</pre>
+
+<ul>
+  <li>Versions of Orion up to at least 1.0.3 have a bug related to ServletContext.getResource()
+    calls that prevent the Struts example application from working out of the
+    box. This manifests itself as a JSP error when you try to access the example
+    application, with the following message:<br/>
+    <code>javax.servlet.jsp.JspException: Missing resources attributeorg.apache.struts.action.MESSAGE</code><br/>
+    followed by an error traceback. There will also be an initialization error
+    message in the <code>ORION_HOME/log/global-application.log</code> log file.
+    To work around this problem, you can take the following steps:
+  <ul>
+    <li>Go to the <code>$STRUTS_HOME/webapps</code> directory, where you will
+      note that Orion has automatically expanded each web application into an
+      unpacked directory structure.</li>
+    <li>Go to the <code>$STRUTS_HOME/webapps/struts-example/WEB-INF</code> directory,
+      and copy the file <code>struts-config.xml</code> one directory up (that
+      is, into <code>$STRUTS_HOME/webapps/struts-example</code>.</li>
+    <li>Modify the <code>$STRUTS_HOME/webapps/struts-example/WEB-INF/web.xm</code>
+      file, changing the value of the "config" initialization parameter (for the
+      action servlet) from <code>/WEB-INF/struts-config.xml</code> to <code>/action.xml</code>.</li>
+    <li>Restart Orion, and you should be able to access the example application.</li>
+    <li>Note that this workaround has a negative security-related side effect:
+      your <code>struts-conifig.xml</code> file can now be retrieved by remote
+      clients at the following URL:<br/>
+      <code>http://localhost/struts-example/struts-config.xml</code><br/>
+      Therefore, you should be sure you do not store sensitive information (such
+      as database passwords) in this file. </li>
+  </ul>
+  </li>
+</ul>
+
+  <hr/>
+  <p>Back to <a href="installation.html#Containers">Installation</a></p>
+</section>
+</chapter>
+</body>
+</document>

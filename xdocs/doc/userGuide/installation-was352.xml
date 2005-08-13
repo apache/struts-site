@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<document url="installation-was352.html">
+
+  <properties>
+    <title>The Struts Framework Project - Installation - WebSphere 3.5.2</title>
+  </properties>
+
+  <body>
+<chapter name="5.2 Installation" href="installation">
+<section name="Installing Struts with your servlet container" href="Containers">
+
+<h4 id="was352">WebSphere Application Server 3.5 FixPack 2</h4>
+
+<ul>
+<li>In the steps below, <code>$WAS_HOME</code> refers to the directory in which you
+  have installed WebSphere Application Server, and <code>$STRUTS_HOME</code> is the
+  directory in which you unpacked the Struts binary distribution.</li>
+
+<li>WebSphere before 3.5.2 did not support JSP 1.1 and Servlet 2.2, which
+  made it difficult to get Struts functioning without massive code changes.
+  Please upgrade to 3.5.2 (3.5 with FixPack 2)  before attempting to use
+  Struts. See <a href="http://www.ibm.com/software/webservers/appserv/efix.html">http://www.ibm.com/software/webservers/appserv/efix.html</a>
+  for download and install instructions on FixPack 2 for WebSphere 3.5</li>
+
+<li>Warning: Struts will not work with WebSphere 3.5.2 out of the box. Fixes
+  expected to be in WebSphere 3.5.3 (not released at time of writing) should
+  correct this. However, you can successfully get WebSphere 3.5.2 working
+  with Struts.</li>
+
+<li>Make sure the WebSphere Application Server is started. Under Windows
+  NT/2000, it's the "IBM WS AdminServer" service.</li>
+
+<li>Start the WebSphere Administrative Console.</li>
+
+<li>Once it's started, select "Convert a War File" from the tasks toolbar
+  option, or from the Console->Tasks menu. This will cause a "Convert War
+  File" Wizard dialog to appear.</li>
+
+<li>Select a Servlet Engine to host the web application that will result
+  from converting the War file, e.g. "Default Servlet Engine", by expanding
+  the tree control under Nodes. Press the Next button.</li>
+
+<li>Select a Virtual Host to associate the resulting web application with,
+  e.g. "default host". Press the Next button.</li>
+
+<li>Press the Browse button and choose the
+  <code>$STRUTS_HOME/webapps/struts-example.war</code>. Press the Next button</li>
+
+<li>Select a destination directory for the resulting web application, e.g.
+  <code>$WAS_HOME/hosts/default_host</code>. Press the Next button</li>
+
+<li>Enter a "Web Application Web Path", e.g. struts-example, and a "Web
+  Application Name", e.g. struts-example. Press the Finish button.</li>
+
+<li>You should, after a lengthy pause, get a message box with the text
+  Command "convert war file" completed successfully. Press Ok.</li>
+
+<li>You now need to add jaxp.jar and a jaxp compatible parser, e.g.
+  parser.jar from JAXP 1.0.1 to the struts-example web application's
+  servlets directory, e.g.
+  <code>$WAS_HOME/AppServer/hosts/default_host/struts-example/servlets</code></li>
+
+<li>At this point, if WAS 3.5.2 correctly implemented Servlet 2.2, all
+  would be fine. However, WAS 3.5.2  returns null for calls to
+  <code>ServletContext.getResource(String)</code> or
+  <code>ServletContext.getResourceAsStream(String)</code>. This manifests itself as an
+  exception in the application server stdout log, e.g.
+  <code>default_server_stdout.log.</code></li>
+
+<li>Warning: Don't be fooled by the fact that the web application starts
+  successfully from the Admin Console. It actually doesn't. The Admin
+  Console is lying. If you try to access the webapp
+  e.g. <code>http://localhost/struts-example/</code> it will fail.</li>
+
+<li>At this point, you need to patch the Struts source. There are three
+  places <code>getResourceAsStream</code> is called:</li></ul>
+ <pre>
+    ResourceTag.doStartTag()
+    ActionServlet.initMapping()
+    PropertyMessageResources.loadLocale(String)
+</pre>
+  <p>of these, <code>ActionServlet</code> is the most important.</p>
+
+<ul><li>Change the source from</li></ul>
+<pre>
+    // Acquire an input stream to our configuration resource
+    InputStream input = getServletContext().getResourceAsStream(config);
+</pre>
+<p>to</p>
+<pre>
+    // Acquire an input stream to our configuration resource
+    InputStream input = new
+      java.io.FileInputStream(getServletContext().getRealPath(config));
+ </pre>
+<ul><li>  Make similar changes to the other classes if necessary.</li>
+
+<li>Recompile ActionServlet and copy the <code>.class</code> file to <br/>
+
+<code>$WAS_HOME/AppServer/hosts/default_host/struts-example/servlets/<br/>
+org/apache/struts/action/ActionServlet.class</code></li>
+
+<li>Another bug with WAS 3.5.2's classloaders is that Class.getResource()
+  wont load a resource from a jar, so you must copy<br/>
+  <code>$STRUTS_HOME/lib/struts-config_1_0.dtd</code> <br/>
+  to <br/>
+  <code>$WAS_HOME/AppServer/hosts/default_host/struts-example/servlets/org/apache/struts/resources/struts-config_1_0.dtd</code><br/>
+  or be connected to the Internet to fetch the dtd from the Jakarta web site.</li>
+
+<li>Start your webapp in the Admin Console</li>
+
+<li>Test the example application by loading the following URL in your
+  browser of choice: <a href="http://localhost/struts-example/">http://localhost/struts-example/" >http://localhost/struts-example/</a></li>
+</ul>
+  <hr/>
+  <p>Back to <a href="installation.html#Containers">Installation</a></p>
+</section>
+</chapter>
+</body>
+</document>

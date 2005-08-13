@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<document url="wizard-example.html">
+
+  <properties>
+    <title>Struts Flow - Wizard Example</title>
+  </properties>
+
+  <body>
+      <section name="Wizard Example" href="overview">
+
+        <p>This example shows how Struts Flow can be used to easily create a multi-page form, commonly called a wizard.  
+        The example uses a script called <code>wizard.js</code> which uses Struts Flow to define a <code>Wizard</code> object. 
+        The <code>Wizard</code> object handles displaying forms, automatic handling of forward-backward navigation buttons, and data model population.  
+        The validation and population processes are pluggable so custom code can be inserted at those steps.
+        </p>
+        <p>
+        To demonstrate the wizard, this example shows a user registration process with three screens: names, hobbies, and a summary 
+        display.  A <code>java.util.Map</code> is used to store the information submitted by the forms.  
+        To keep it simple, no Struts JSP tags are used, but could be by wrapping model with an <code>ActionForm</code>.
+        There are three parts to the example: the flow code which uses the Wizard object, the Struts config, and the JSP's that display the output.  
+        </p>
+      </section>
+      <section name="Flow Code" href="flow">
+        <p>Here is what the flow code looks like:
+        </p>
+<pre>
+
+importPackage(Packages.java.util);
+flow.load("/WEB-INF/wizard.js");
+
+function main() {
+  var model = new HashMap();
+
+  var wizard = new Wizard(model);
+
+  // plug in custom population method
+  wizard.populate = populate;
+
+  // plug in custom validation method
+  wizard.validate = validate;
+      
+  wizard.showForm("name-form", {
+                  "title" : "User Name Information"
+                  });
+  wizard.showForm("hobbies-form", {
+                  "title" : "User Hobbies"
+                  });
+  wizard.showForm("summary-form", {
+                  "title" : "User Summary"
+                  });  
+}
+
+function populate() {
+  m = struts.paramValues;
+  for (i = m.keySet().iterator(); i.hasNext(); ) {
+    key = i.next();
+    this.model.put(key, m.get(key)[0]);
+  }
+  // Bug in commons-chain prevents this
+  //this.model.putAll(struts.paramValues);
+}
+
+function validate() {
+  if (this.model.get("name").length() &lt; 2) {
+    return "Name must be specified";
+  }
+}
+
+</pre>
+        <p>Notice the logic for the wizard itself is really simple.  The validation and population methods can either be manually done as 
+        show here, or use frameworks like commons-validator and commons-beanutils.  Notice also there is no handing of navigation as that 
+        is all taken care of by the Wizard object.
+        </p>
+    </section>
+    <section name="Struts Configuration" href="struts">
+        <p>To configure this application with Struts, the following action mapping and plug-in are defined in <code>struts-config.xml</code>:</p>
+<pre>
+  &lt;action-mappings>
+
+    &lt;action    path="/registration"
+               type="net.sf.struts.flow.FlowAction"
+          className="net.sf.struts.flow.FlowMapping">
+          
+      &lt;set-property property="function" value="main" />
+
+      &lt;forward name="name-form"              path="/name-form.jsp"/>
+      &lt;forward name="hobbies-form"              path="/hobbies-form.jsp"/>
+      &lt;forward name="summary-form"              path="/summary-form.jsp"/>
+    &lt;/action>
+ &lt;/action-mappings>   
+
+
+&lt;action-mappings>
+
+&lt;plug-in className="net.sf.struts.flow.FlowPlugIn">
+    &lt;set-property property="scripts" value="/WEB-INF/wizard-flow.js" />
+&lt;/plug-in>
+</pre>
+    <p> The <code>function</code> property of the custom action mapping tells <code>FlowAction</code> which
+    JavaScript function to call.  Each form in the wizard has its own forward.</p>
+  </section>
+  <section name="JSP Presentation" href="jsp">
+        <p>This is the first form in the wizard:</p>
+<pre>
+&lt;html>
+&lt;head>
+  &lt;title>&lt;%=request.getAttribute("title")%>&lt;/title>
+&lt;/head>
+&lt;body>
+
+  &lt;h1>&lt;%=request.getAttribute("title")%>&lt;/h1>
+  &lt;p>
+  Enter your name information:
+  &lt;/p>
+
+  &lt;center style="color:red">&lt;%=(request.getAttribute("errors") != null ? request.getAttribute("errors") : "")%>&lt;/center>
+  &lt;form action="registration.do" method="POST">
+
+  &lt;% java.util.Map form = (java.util.Map)request.getAttribute("form"); %>
+  &lt;table>
+   &lt;tr>
+      &lt;th>First Name&lt;/th>
+      &lt;td>&lt;input type="text" name="name" value="&lt;%=(form.get("name") != null ? form.get("name") : "")%>"/>&lt;/td>
+    &lt;/tr>
+
+   &lt;tr>
+      &lt;th>Last Name&lt;/th>
+      &lt;td>&lt;input type="text" name="lastname" value="&lt;%=(form.get("lastname") != null ? form.get("lastname") : "")%>"/>&lt;/td>
+    &lt;/tr>
+
+   &lt;tr>
+      &lt;th>Middle Name&lt;/th>
+      &lt;td>&lt;input type="text" name="middlename" value="&lt;%=(form.get("middlename") != null ? form.get("middlename") : "")%>"/>&lt;/td>
+    &lt;/tr>
+  &lt;/table>
+
+  &lt;input type="hidden" name="contid" value='&lt;%= request.getAttribute("contid") %>' />
+  &lt;input type="submit" name="next" value="Next" />
+  &lt;/form>
+
+&lt;/body>
+&lt;/html>
+</pre>
+<p>The hidden input variable <code>contid</code> stores the continuation to load from when the form gets submitted.  Since no Struts JSP tags are used, scriptlets are necessary to retrieve and display data stored in the request.</p>
+        
+      </section>
+  </body>
+</document>

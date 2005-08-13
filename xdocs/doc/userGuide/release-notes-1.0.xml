@@ -1,0 +1,283 @@
+<?xml version="1.0"?>
+<document url="release-notes-1.0.html">
+
+  <properties>
+    <title>Struts Release Notes (Version 1.0)</title>
+  </properties>
+
+  <body>
+
+  <section name="Introduction" href="Introduction">
+
+    <p>This document contains the release notes for
+    <strong>Version 1.0</strong> of the Struts Framework,
+    and covers changes that have taken place since
+    <a href="release-notes-1.0-b3.html">Version 1.0-beta-3</a>
+    was released.  The following sections cover
+    <a href="#New">New Features</a> and <a href="#Changes">Changes</a>
+    to Struts.</p>
+
+  </section>
+
+
+  <section name="What's Included?" href="Included">
+
+    <p>The binary distribution of this release includes the following
+    files relevant to Struts 1.0:</p>
+    <ul>
+    <li><code>INSTALL</code> - Brief installation instructions.  See
+        the <code>Struts Documentation Application</code>, or online at
+        <a href="http://jakarta.apache.org/struts/">http://jakarta.apache.org/struts/</a>
+        for more information.</li>
+    <li><code>LICENSE</code> - The Apache Software Foundation license that
+        defines the terms under which you can use Struts (and other software
+        licensed by Apache).</li>
+    <li><code>README</code> - A brief introduction to Struts.</li>
+    <li><code>lib/</code> - Directory containing files you will need in
+        your own applications.  The individual files of interest are:
+        <ul>
+        <li><code>struts.jar</code> - JAR file that contains the compiled
+            Java classes for both version 0.5 and 1.0 of Struts.  You must
+            place this file in the <code>/WEB-INF/lib</code> directory of
+            your web application.</li>
+        <li><code>struts-xxxxx.tld</code> - The tag library descriptor files
+            for the Struts 1.0 tag libraries (bean, html, logic, and
+            template).  You must place these files in the <code>/WEB-INF</code>
+            directory of your web application, and reference them with
+            appropriate <code>&lt;taglib&gt;</code> directives in your
+            web.xml file.  <strong>NOTE</strong> - The struts-form.tld
+            file is deprecated; you should use the struts-html.tld file
+            instead.</li>
+        <li><code>jdbc2_0-stdext.jar</code> - The JDBC 2.0 Optional Package
+            API classes (package <code>javax.sql</code>).  You will need to
+            include this file in the <code>/WEB-INF/lib</code> directory
+            of your application, if it is not already made visible to web
+            applications by your servlet container.</li>
+        <li><code>struts-config_1_0.dtd</code> - The document type descriptor
+            (DTD) for the Struts configuration file (which is typically named
+            <code>/WEB-INF/struts-config.xml</code>.  Your configuration file
+            will be validated against an internal copy of this DTD -- this
+            copy is available for reference purposes only.</li>
+        <li><code>web-app_2_2.dtd</code> - The document type descriptor (DTD)
+            for web.xml files conforming to the Servlet 2.2 specification.
+            This copy is for reference purposes only.</li>
+        <li><code>web-app_2_3.dtd</code> - The document type descriptor (DTD)
+            for web.xml files conforming to the Servlet 2.3 specification.
+            This copy is for reference purposes only.</li>
+        </ul></li>
+    <li><code>webapps/</code> - Web Application Archive (WAR) files for the
+        web applications that are included with Struts.</li>
+    </ul>
+
+    <p>For backwards compatibility only, the binary distribution also
+    includes the following files that conform to the Struts 0.5 milestone
+    release APIs.  Usage of these files and APIs is deprecated, and they
+    will be removed from releases after Struts 1.0:</p>
+    <ul>
+    <li><code>lib/</code> - Directory containing files you will need in
+        your own applications.  The individual files of interest are:
+        <ul>
+        <li><code>struts.jar</code> - JAR file that contains the compiled
+            Java classes for both version 0.5 and 1.0 of Struts.  You must
+            place this file in the <code>/WEB-INF/lib</code> directory of
+            your web application.</li>
+        <li><code>struts.tld</code> - The tag library descriptor file for
+            the 0.5 version of the Struts tags.  You must place this file
+            in the <code>/WEB-INF</code> directory of your web application,
+            and reference it with appropriate <code>&lt;taglib&gt;</code>
+            directives in your web.xml file.</li>
+        </ul></li>
+    </ul>
+
+  </section>
+
+
+  <section name="What's New?" href="New">
+
+    <p><strong>DEPRECATIONS</strong> - The entire custom tag library
+    that is documented in <code>struts.tld</code> has been deprecated.
+    These tags correspond to the Struts 0.5 functionality that is also
+    deprecated, and have been replaced (and considerably enhanced) in
+    the various individual tag libraries.</p>
+
+    <p><strong>DEPRECATIONS</strong> - The entire custom tag library
+    that is documented in <code>struts-form.tld</code> has been deprecated
+    because this library has been renamed <code>struts-html.tld</code>
+    instead.</p>
+
+    <p><strong>DEPRECATIONS</strong> - Several classes in the
+    <code>org.apache.struts.util</code> package have been marked as
+    deprecated in their entirety, because they will be replaced by
+    versions from the Jakarta Commons project once those packages are
+    released.  These deprecated classes will <strong>not</strong> be
+    removed until a release after Struts 1.1.  In general, the only
+    change required inside user code using these classes will be to
+    update the <code>import</code> statement.  The following classes
+    are involved:</p>
+    <ul>
+    <li>ArrayStack</li>
+    <li>BeanUtils</li>
+    <li>ConvertUtils</li>
+    <li>FastArrayList</li>
+    <li>FastHashMap</li>
+    <li>FastTreeMap</li>
+    <li>GenericConnection</li>
+    <li>GenericDataSource</li>
+    <li>PropertyUtils</li>
+    </ul>
+
+    <p>The following new features have been added to the basic controller
+    framework (package <code>org.apache.struts.action</code>):</p>
+
+    <p>The following new features have been added to the utility classes
+    (package <code>org.apache.struts.util</code>):</p>
+
+
+    <p>The following new features have been added to the
+    <em>struts-html</em> custom tag library (package
+    <code>org.apache.struts.taglib.html</code>):</p>
+    <ul>
+    <li>The <code>&lt;html:link&gt;</code> tag now supports the optional
+        <code>title</code> attribute, that causes some browsers to display
+        alternate text when the mouse is hovered over a hyperlink.</li>
+    </ul>
+
+    <p>The following new features have been added to the
+    <em>struts-logic</em> custom tag library (package
+    <code>org.apache.struts.taglib.logic</code>):</p>
+    <ul>
+    <li>The <code>&lt;logic:iterate&gt;</code> tag now supports a new
+        attribute, <code>indexId</code>.  This attribute names a page scope
+        attribute (and corresponding scripting variable) that will be
+        exposed in the nested body of the iteration, which will contain
+        the current loop index as a java.lang.Integer.</li>
+    </ul>
+
+    <p>The following new features have been added to the
+    <em>struts-template</em> custom tag library (package
+    <code>org.apache.struts.taglib.template</code>):</p>
+
+
+    <p>The following new features have been added to the Struts Documentation
+    application (and corresponding contents on the Struts web site):</p>
+
+  </section>
+
+
+  <section name="Changes and Bug Fixes" href="Changes">
+
+    <p>The following changes and bug fixes have occurred in the configuration
+    files related to Struts:</p>
+    <ul>
+    <li>The documentation about configuring a data source element in the
+        <code>struts-config.xml</code> file has been updated to emphasize
+        the use of <code>&lt;set-property&gt;</code> elements nested inside
+        the <code>&lt;data-source&gt;</code> element.  No further additional
+        attributes will be added to the <code>&lt;data-source&gt;</code>
+        element in the DTD to support custom properties of particular
+        data source implementations.</li>
+    </ul>
+
+    <p>The following changes and bug fixes have occurred in the basic
+    controller framework (package <code>org.apache.struts.action</code>):</p>
+    <ul>
+    <li>Several issues introduced with the internal wrapping of multipart
+        requests have been fixed.</li>
+    <li>The instance variables in the <code>ActionForm</code> base class
+        are now transient, so that <code>ActionForm</code> instances can
+        actually be serialized.  <strong>WARNING</strong> - If you deserialize
+        such an <code>ActionForm</code> instance and attempt to use it within
+        the Struts framework, be sure to call <code>setServlet()</code> (and
+        <code>setMultipartRequestHander()</code> if appropriate) first.</li>
+    </ul>
+
+    <p>The following changes and bug fixes have occurred in the file upload
+    package (package <code>org.apache.struts.upload</code>):</p>
+    <ul>
+    <li>Fixed a bug that could cause corruption in the uploaded file,
+        by converting sequences of \r\n\n into \r\n\r\n.</li>
+    </ul>
+
+    <p>The following changes and bug fixes have occurred in the utilities
+    (package <code>org.apache.struts.util</code>):</p>
+    <ul>
+    <li>Corrected a cut-and-paste typo that caused NullPointerException
+        on attempts to use the new <code>pingQuery</code> property that
+        was added in Struts 1.0-b3.</li>
+    <li>Fix operation ordering so that <code>RequestUtils.lookup()</code>
+        will throw a JspException when the specified bean is missing, in
+        accordance with its JavaDoc documentation.</li>
+    <li>Digester calls to <code>Rule.body()</code> methods will now trim
+        leading and trailing whitespace first, consistent with the behavior
+        of other body processing performed within the rules.</li>
+    <li>Correct the calculation of an absolute URL from a context-relative
+        path in <code>RequestUtils.absoluteURL()</code>.</li>
+    </ul>
+
+    <p>The following changes and bug fixes have occurred in the
+    <em>struts-bean</em> custom tag library (package
+    <code>org.apache.struts.taglib.bean</code>):</p>
+    <ul>
+    <li>The <code>&lt;bean:include&gt;</code> tag will now pass a session
+        identifier on to the included request (assuming that it is part of
+        the same web application), even if the current request is maintaining
+        session identity with cookies.  Previously, this only worked if you
+        were using URL rewriting.</li>
+    </ul>
+
+    <p>The following changes and bug fixes have occurred in the
+    <em>struts-html</em> custom tag library (package
+    <code>org.apache.struts.taglib.html</code>):</p>
+    <ul>
+    <li>For all tags where Struts generates attributes that are allowed to
+        be minimized in the HTML specification (i.e. checked, disabled,
+        multiple, readonly, and selected), generate attribute values equal
+        to the attribute name, as required by HTML 4.01, section 3.3.4.
+        For example, generate <code>checked="checked"</code> instead of
+        <code>checked="true"</code> for the "checked" attribute.</li>
+    <li>Correctly generate a <code>&lt;a name="my name"&gt;&lt;&gt;</code>
+        element when the <code>linkName</code> attribute is used on the
+        <code>&lt;html:link&gt;</code> tag.</li>
+    </ul>
+
+    <p>The following changes and bug fixes have occurred in the
+    <em>struts-logic</em> custom tag library (package
+    <code>org.apache.struts.taglib.logic</code>):</p>
+    <ul>
+    <li>Update the processing performed by the
+        <code>&lt;logic:present&gt;</code> and
+        <code>&lt;logic:notPresent&gt;</code> tags to reflect the changed
+        behavior of <code>RequestUtils.lookup()</code>.</li>
+    </ul>
+
+    <p>The following changes and bug fixes to the Struts Documentation
+    application (and corresponding contents on the Struts web site) have
+    occurred:</p>
+    <ul>
+    <li>Links to subscribe and unsubscribe from the STRUTS-DEV and
+        STRUTS-USER mailing lists have been added to the home page.</li>
+    <li>Miscellaneous corrections to typos and hyperlinks.</li>
+    <li>Cleaned up problems in the stylesheets used to create documentation
+        pages that formerly emitted <code>&lt;project&gt;</code> tags in the
+        generated HTML, and generated incorrect references to link colors in
+        the navigation bar.</li>
+    <li>Added a "Who We Are" page to the documentation.</li>
+    </ul>
+
+    <p>The following changes and bug fixes to the Struts Example Application
+    have occurred:</p>
+    <ul>
+    <li>The <code>name</code> and <code>page</code> attributes of the
+        <code>&lt;app:checkLogon&gt;</code> tag now accept runtime
+        expressions.</li>
+    </ul>
+
+    <p>The following changes and bug fixes to the Struts Template Example
+    Application have occurred:</p>
+
+  </section>
+
+
+  </body>
+
+</document>

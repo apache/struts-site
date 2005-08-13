@@ -1,0 +1,666 @@
+<?xml version="1.0"?>
+<document url="release-notes.html">
+  <properties>
+    <title>Struts Release Notes (since 1.1)</title>
+  </properties>
+  <body>
+      <section name="Introduction" href="Introduction">
+        <p>This section contains release notes for changes that have taken place since
+        <a href="release-notes-1.1.html">Version 1.1</a> was released.</p>
+      </section>
+      <section name="What's Included?" href="Included">
+        <p>The binary distribution of this release includes the following files relevant to Struts:</p>
+        <ul>
+          <li>
+          <code>INSTALL.txt</code> - Brief installation instructions. For more detail, see the
+          <code>Struts User Guide</code>, either through the Struts Documentation application or online at
+          <a href="http://struts.apache.org/">http://struts.apache.org/</a>.</li>
+          <li>
+          <code>LICENSE.txt</code> - The Apache Software Foundation license that defines the terms under which you can use Struts (and other software licensed by Apache).</li>
+          <li>
+          <code>contrib/</code> - Additional libraries developed by the Struts team which are not yet part of the core distribution.</li>
+          <li>
+          <code>lib/</code> - Directory containing files you will need in your own applications. The individual files of interest are:
+          <ul>
+            <li>
+            <code>antlr-#.#.jar</code> - ANTLR, ANother Tool for Language Recognition, a public domain library made available by
+            <a href="http://www.antlr.org/">antlr.org</a>.</li>
+            <li>
+            <code>commons-*-#.#.jar</code> - Various packages from the
+            <a href="http://jakarta.apache.org/commons/">Jakarta Commons Project</a> that Struts relies on. You are welcome to use these classes in your own applications. These JAR files should be copied into the
+            <code>/WEB-INF/lib</code> directory of your web application.</li>
+            <li>
+            <code>jakarta-oro-#.#.jar</code> - JAR file containing the Jakarta ORO package, utilitied by the Struts Valdiator. You must place this file in the
+            <code>/WEB-INF/lib</code> directory of your web application to use the Struts Validator package.</li>
+            <li>
+            <code>struts-#.#.jar</code> - JAR file that contains the compiled Java classes of Struts. You must place this file in the
+            <code>/WEB-INF/lib</code> directory of your web application.</li>
+            <li>
+            <code>struts-*.tld</code> - The tag library descriptor files for the Struts tag libraries (bean, html, logic, and nested). When these taglibs are used, you must place these files in the
+            <code>/WEB-INF</code> directory of your web application and reference them with appropriate
+            <code>&lt;taglib&gt;</code> directives in your web.xml file.</li>
+            <li>
+            <code>struts-config_1_2.dtd</code> - The Document Type Definition (DTD) for the Struts 1.2 configuration file (which is typically named
+            <code>/WEB-INF/struts-config.xml</code>). Your configuration file will be validated against an internal copy of this DTD -- this copy is available for reference purposes only.</li>
+            <li>
+            <code>struts-config_1_1.dtd</code> - The Document Type Definition (DTD) for the Struts 1.1 configuration file (which is typically named
+            <code>/WEB-INF/struts-config.xml</code>). Your configuration file will be validated against an internal copy of this DTD -- this copy is available for reference purposes only.</li>
+            <li>
+            <code>struts-config_1_0.dtd</code> - The Document Type Definition (DTD) for the Struts 1.0 configuration file (which is typically named
+            <code>/WEB-INF/struts-config.xml</code>. Your configuration file will be validated against an internal copy of this DTD -- this copy is available for reference purposes only.</li>
+            <li>
+            <code>web-app_2_2.dtd</code> - The Document Type Definition (DTD) for web.xml files conforming to the Servlet 2.2 specification. This copy is for reference purposes only.</li>
+            <li>
+            <code>web-app_2_3.dtd</code> - The Document Type Definition (DTD) for web.xml files conforming to the Servlet 2.3 specification. This copy is for reference purposes only.</li>
+          </ul></li>
+          <li>
+          <code>webapps/</code> - Web Application Archive (WAR) files for the web applications that are included with Struts.</li>
+        </ul>
+        <p>For the version requirements of each library, see the
+        <a href="installation.html">Installation chapter</a>.</p>
+      </section>
+      <section name="What's new?" href="New">
+        <p>This section highlights new features added and critical changes made since the last release. Other interesting changes are listed in the
+        <a href="#Changes">What Changed?</a> section. Subscribers to the
+        <a href="../using.html#Lists">struts-dev mailing list</a>, receive reports of all changes as they are made.</p>
+        <p>
+        <strong>Deprecations</strong> - Many constructs were deprecated for the Struts 1.1 release, most of which have now been removed. Before moving to this release, you should clean-compile your application with deprecation warnings enabled. Alternatives should be available for all decprecated constructs.
+        <strong>You are strongly advised</strong> to resolve all Struts 1.1. deprecations before moving to this release. Removed constructs most likely to affect developers are:</p>
+        <ul>
+          <li>
+          <code>org.apache.struts.Action</code> statics: Use
+          <code>org.apache.struts.Global</code> statics instead.</li>
+          <li>
+          <code>Action.perform</code>: Use
+          <code>Action.execute</code> instead.</li>
+        </ul>
+        <p>Although not removed or deprecated, in many cases
+        <strong>you should replace</strong> the 
+        <code>ActionErrors</code> with the preferred
+        <code>ActionMessages</code> to ensure correct operation.</p>
+        <p>
+        <strong>TagUtils and ModuleUtils</strong> - Many utility methods previously found in
+        <code>org.apache.struts.utils.RequestUtils</code> have been moved to
+        <code>org.apache.struts.taglibs.TagUtils</code> or
+        <code>org.apache.struts.utils.ModuleUtils</code>.</p>
+        <p>
+        <strong>GenericDataSource / GenericConnection implementations removed</strong> - The datasources manager is still supported, but our own datasource
+        <em>implementation</em>is not. You are welcome to plug in your own DataSource implementation, but we do not have the resources to maintain one of our own. If your container does not supply a DataSource implementation, the DBCP package from the Jakarta Commons is suggested.</p>
+        <p>
+          <strong>Validator enhancements</strong>
+        </p>
+        <ul>
+          <li>ValidWhen - The Struts Validator now supports a ValidWhen rule, so that one validation can be dependant on another.
+          <a href="dev_validator.html#validWhen">Details ...</a></li>
+          <li>IntRange now checks select-one and radio fields. Example: This allows populating combo boxes with valid choices plus one additional choice with a caption something like "Choose one" and a value 0f "-1". Then when the user attempts to submit the form, you can look for the value of "-1" and advise if nothing was selected.</li>
+          <li>You can now force the clientside Javascript validation to check all constraints, instead of stopping at the first error. By setting a new property,
+          <code>stopOnFirstError</code>, on the Validator PlugIn to false.
+          <a href="dev_validator.html#stopOnFirstError">Details ...</a></li>
+          <li>The "required" validation can now handle checkboxes, radio,select-one, and select-multiple field types. See the updated Validator example application to see these new features in action.</li>
+          <li>A standard
+          <code>validateUrl</code> rule lets you check if a property contains a well-formed URL.</li>
+        </ul>
+        <p>
+        <strong>DigestingPlugIn</strong> - A new standard PlugIn that helps you create your own object graph in application scope. This is handy way to create business objects for Actions to call. Check the latest MailReader eaxmple application to see the DigestingPlugin in action.</p>
+        <p>
+        <strong>ModuleConfigVerifier</strong> - While not exactly new, a standard class for verifying module configurations is also available in the PlugIn packages. As it stands, the
+        <code>ModuleConfigVerifier</code> mainly confirms that various components of the Struts object graph were loaded. However, ambitious developers could extend this class with additional checks to ensure the Struts configuration is internally consistent.</p>
+        <p>
+        <strong>Maven project files</strong> - While still under development, significant progress has been made toward putting the Struts build process under
+        <a href="http://maven.apache.org">Maven</a>. The core JAR and TLDs can be built using Maven, leveraging the shared Maven repository for our many dependencies. You can find the current maven.xml and project.xml in the root directory of the Struts source distribution. However, at this time, the original Ant build files are still the official mechanism for building Struts.</p>
+        <p>
+        <strong>New Configuration DTD</strong> - The
+        <code>
+          <a href="http://struts.apache.org/dtds/struts-config_1_2.dtd">struts-config_1_2.dtd</a>
+        </code> is preferred to the deprecated Struts Configuration 1.1 DTD. The new DTD adds two new elements &lt;display-name&gt; and &lt;description&gt; to the struts-config element. These elements are for use by struts config file tools and document generation. In the Struts 1.2.x series, existing Struts configuration files can be loaded using either DTD version.</p>
+        <p>
+        <strong>New Taglib URIs</strong> - The URIs for the tag libraries have been changed to reflect the move of Struts from Jakarta to an Apache top level project. For compatibility purposes, TLDs with the old URIs are still available, but users are encouraged to update their usage accordingly.</p>
+        <p>
+        <strong>New Committers</strong> - We are pleased to welcome Steve Raeburn, Don Brown, Joe Germuska and Niall Pemberton to the team of Struts Committers.</p>
+        <p>
+        <strong>Struts-Chain</strong> - Still experimental, this new "contrib" package utilizes the new Chain of Responsibilty package in the Jakarta Sandbox to create a new breed of RequestProcessor. Look for this to become the default implementation in a future release.</p>
+        <p>
+        <strong>MappingDispatchAction</strong> - A new standard Action that dispatches to a method named by the ActionMapping parameter.</p>
+        <p>
+        <strong>Cancel handlers</strong> - DispatchAction, LookupDispatchAction, and MappingDispatchAction - Now provide default cancel handler that can be overridden. It also also possible to specify the default handler name.</p>
+        <p>
+        <strong>Session-scoped ActionMessages</strong> - You can now save ActionMessages in the session and have them cleaned up after the first use. There is now an alternate form of Action.saveMessages() that stores messages in the session. ActionMessages.isAccessed() returns true after the messages have been retrieved one time. RequestProcessor.processCachedMessages() queries isAccessed() to determine if it should remove the messages from the session.</p>
+        <p>
+        <strong>JA Mailreader</strong> - The Struts Mailreader Example application now includes a Japanese resource file.</p>
+        <p>
+        <strong>Tiles EL</strong> - The Tiles tags are now avaiable through the Struts EL taglib, which is based on JSTL.</p>
+        <p>
+        <strong>Wildcard Mappings</strong> - You can now use wildcards in your action-mappings. For details see
+        <a href="building_controller.html#action_mapping_wildcards">Using Wildcards in ActionMappings</a> as well as the Struts Mailreader Example application.</p>
+        <p>
+         <strong>Action attributes</strong> - An Action attribute has been added to the html img tag, to match what's available on the html link tag now.
+         </p>
+        <p>
+       <strong>Module attribute</strong> - A new "module" attribute is available on the forward element as well as several of the core tags. This attribute allows you to specify another module by name (or "prefix") to create direct links between modules. The new module attribute is preferered to the <code>contextRelative</code> attribute and can often be used in lieu of a "SwitchAction".
+        </p>
+
+      </section>
+      <section name="What Changed?" href="Changes">
+        <p>This section highlights some of the changes that have taken place since the last release. Subscribers to the
+        <a href="../using.html#Lists">struts-dev mailing list</a>, receive reports of all changes as they are made.</p>
+        <p>
+          <strong>General Changes</strong>
+        </p>
+        <ul>
+          <li>2004-09-02 - URI for Struts DTD changed to reflect move to an Apache top level project.</li>
+        </ul>
+        <ul>
+          <li>2004-08-31 - Code changes to re-enable building with JDK 1.3.</li>
+        </ul>
+        <ul>
+          <li>2003-03-14 - Move license on all source code files to ASL 2.0.</li>
+        </ul>
+        <ul>
+          <li>2003-12-30 - Add inital STATUS LOG.</li>
+        </ul>
+        <p>
+          <strong>Build Changes</strong>
+        </p>
+        <ul>
+            <li>
+                2004-07-09: struts.xsl: Give each "src" variable a distinct name to follow XSL rules.
+            </li>
+            <li>
+                2004-07-08: build.properties.sample.lib: Add a simplified build.properties file for use by developers who are not actively involved in Jakarta development. This template assumes the developer is using JARS from our "lib" distribution.
+            </li>
+        </ul>
+        <ul>
+         <li>2004-04-14 - project.properties: Adjust properties to use alternate repo for nightly builds.</li>
+        </ul>
+        <ul>
+          <li>2003-08-09 - build.xml: Adjust loading order of properties files to go from most local (current directory) to most global (${user.home}/build.properties).</li>
+          <li>2003-08-08 - maven.xml,project.xml - Maven build files.</li>
+        </ul>
+        <p>
+        <strong>Configuration Changes</strong> [
+        <code>/conf/shared</code>]</p>
+        <ul>
+          <li>2003-08-09 - Add two new elements &lt;description-short%gt; and &lt;description-long&gt; for use by struts config file tools and document generation.</li>
+        </ul>
+        <ul>
+          <li>2003-07-04 - struts-config_1_2.dtd: Added 1.2 struts-config.dtd. This is a copy of the 1.1 DTD except that the &lt;data-source&gt; "type" attribute is now required because Struts does not supply a default DataSource implementation.</li>
+        </ul>
+        <p>
+        <strong>Project-wide Changes</strong>
+        </p>
+          <ul>
+              <li>2004-01-14 - Update License format to please Maven Checkstyle reports.</li>
+              <li>2004-01-10 - Removed @author javadoc tags from all classes; updated volunteers.xml to list missing people.</li>
+         </ul>
+        <p>
+        <strong>Default Package Changes</strong> [
+        <code>org.apache.struts</code>]</p>
+        <ul>
+          <li>2003-07-04 - Globals: Removed deprecated APPLICATION_KEY.</li>
+          <li>2003-07-03 - Globals,ActionServlet,RequestUtils: Moved initialization of module prefix list to the new ActionServlet.initModulePrefixes() method from RequestUtils.getModulePrefixes() because of a potential race condition documented in PR# 21091. This also required a move of the RequestUtils.PREFIXES constant to Globals.MODULE_PREFIXES_KEY.</li>
+        </ul>
+        <p>
+        <strong>Action Package Changes</strong> [
+        <code>org.apache.struts.action</code>]</p>
+        <ul>
+          <li>2004-09-10 - Corrected Japanese translation of message resources.</li>
+          <li>2004-09-07 - Action: Use ActionMessages instead of ActionErrors.</li>
+          <li>2004-09-03 - ActionServlet: Eliminate performance bottleneck in obtaining request processor.</li>
+          <li>2004-09-03 - ActionForward: New copy constructor that takes module parameter; deprecate copy constructor missing this parameter.</li>
+          <li>2004-09-02 - Correct javadoc for ActionErrors.</li>
+        </ul>
+        <ul>
+          <li>2004-08-10 - DynaActionForm: Change Map's key from String to Object in toString().</li>
+        </ul>
+        <ul>
+            <li>2004-07-01 - TestDynaActionFormClass: Correct operation of static method calls.</li>
+        </ul>
+        <ul>
+           <li>2004-06-26 - Action: Add getErrors, getMessages, addErrors, and AddMessages methods, to better manage error handling. </li>
+        </ul>
+        <ul>
+          <li>2004-04-01 - ActionConfigMatcher: Added support for multiple wildcard replacements.</li>
+        </ul>
+        <ul>
+           <li>2004-03-16 - ActionForward: Add "copy constructor".</li>
+        </ul>
+        <ul>
+          <li>2004-01-24 - DynaActionForm: Enhance so that it can be initialized using a FormBeanConfig object. Add corresponding method to RequestUtils to create an ActionForm by passing only a FormBeanConfig and an ActionServlet object.</li>
+          <li>2004-01-19 - ActionMapping, ActionConfig: Push "findException" from ActionMapping up to ActionConfig so that everyone can take advantage of the superclass search logic.</li>
+        </ul>
+        <ul>
+          <li>2003-09-29 - RequestProcessor,ActionMappingMatcher,WildcardHelper: Added optional wildcard support for action mappings.</li>
+          <li>2003-09-11 - Action,ActionMessages,RequestProcessor: Added ability to save ActionMessages in the session and have them cleaned up after the first use.</li>
+        </ul>
+        <ul>
+          <li>2003-08-23 - Action: Deprecate saveErrors(HttpServletRequest, ActionErrors) in favor of saveErrors(HttpServletRequest, ActionMessages).</li>
+          <li>2003-08-23 - RequestProcessor: Replaced ActionErrors reference with ActionMessages.</li>
+          <li>2003-08-23 - ActionMessages, ActionErrors: Deprecated ActionErrors.GLOBAL_ERROR in favor of ActionMessages.GLOBAL_MESSAGE.</li>
+          <li>2003-08-16 - ExceptionHandler: Added storeException() method that takes an ActionMessage instead of ActionError.</li>
+          <li>2003-08-13 - ActionError: Deprecate ActionError in favor of ActionMessage</li>
+          <li>2003-08-08 - ActionServlet,ActionFormBeans,ActionForwards,ActionMappings.java v 1.13 : Removed references to ActionMappings, ActionFormBeans, and ActionForwards.</li>
+        </ul>
+        <ul>
+          <li>2003-07-26 - Action: getLocale() now calls RequestUtils.getUserLocale() to prevent session creation.</li>
+          <li>2003-07-04 - Action,ActionException: Removed deprecated getResources() method.</li>
+          <li>2003-07-04 - Action: Removed deprecated perform() methods.</li>
+          <li>2003-07-03 - ActionServlet: Removed support for some of the deprecated servlet init parameters.</li>
+          <li>2003-07-03 - Globals,ActionServlet,RequestUtils: Moved initialization of module prefix list to the new ActionServlet.initModulePrefixes() method from RequestUtils.getModulePrefixes() because of a potential race condition documented in PR# 21091. This also required a move of the RequestUtils.PREFIXES constant to Globals.MODULE_PREFIXES_KEY.</li>
+          <li>2003-07-02 - RequestProcessor: Deprecated log() methods in favor of commons-logging.</li>
+          <li>2003-07-02 - ActionSerlvet: Removed deprecated method.</li>
+          <li>2003-07-02 - ActionServlet: Removed references to deprecated ApplicationConfig class.</li>
+          <li>2003-07-02 - ActionServlet,NoOpAction: Removed deprecated ActionServlet debug level and logging methods.</li>
+          <li>2003-07-02 - RequestProcessor: Changed processRoles() to send a 403 Forbidden response if the role check fails. Also removed deprecated methods.</li>
+          <li>2003-07-01 - Action: Removed deprecated constants and toHex() method.</li>
+        </ul>
+        <p>
+        <strong>Actions Package Changes</strong> [
+        <code>org.apache.struts.actions</code>]</p>
+        <ul>
+          <li>2004-06-24 - RedeployableActionServlet: Provides support for WebLogi hot-deploy.</li>
+        </ul>
+        <ul>
+          <li>2003-12-22 - DispatchAction: Add detection of recursive calls.</li>
+        </ul>
+        <ul>
+          <li>2003-08-13 - DispatchAction,LookupDispatchAction: Add 'default' and a 'cancel' handlers to DispatchAction and LookupDispatchAction.</li>
+          <li>2003-08-12 - MappingDispatchAction: Addition of MappingDispatchAction that dispatches to a method named by the ActionMapping parameter.</li>
+        </ul>
+        <ul>
+          <li>2003-07-11 - DispatchAction,ForwardAction,IncludeAction,SwitchAction: Throw exceptions from execute() method instead of sending a failure response to the client. This allows the exception handling mechanism to respond to the error gracefully.</li>
+          <li>2003-07-03 - LookupDispatchAction: Fixed synchronization problem (PR# 21224). Also refactored some code into a new initLookupMap() method.</li>
+        </ul>
+        <p>
+        <strong>Config Package</strong> [
+        <code>org.apache.struts.config</code>]</p>
+          <ul>
+              <li>
+              2004-07-31 - Enhance support for "lazy" dynabeans or POJO beans. "Lazy" DynaBeans will hopefully soon be released with Beanutils 1.7.0. These changes will make it easier to plug either a regular JavaBean or a "lazy" DynaBean into struts as an ActionForm. * FormBeanConfig now sets up the properties of DynaBeans which use a MutableDynaClass. * FormBeanConfig now handles POJO beans by wrapping the specified bean using WrapDynaBean and the new BeanValidatorForm. * RequestUtils has been changed so that properties starting with "org.apache.struts" are not attempted to be populated in the ActionForm.
+              </li>
+          </ul>
+        <ul>
+         <li>2004-04-14 - ModuleConfig.java: Local, as well as global, ActionForwards now observe pluggable classes. </li>
+         <li>2004-04-08 - ModuleConfigImpl: Added a list to store ActionConfigs to ensure when enumerated, they are in the order in which they were added.</li>
+        </ul>
+        <ul>
+          <li>2004-02-17 - Undeprecate and Restore the functionality for the 'type' attribute on form-beans and global-forwards elements in the config file.</li>
+          <li>2004-02-13 - Add module property to ForwardConfig to support direct cross-linking between modules. </li>
+        </ul>
+        <ul>
+          <li>2004-01-10 - Changed WildcardHelper methods from statics to instance methods to allow subclasses to override and customize behavior. Changed WildcardHelper.match() to accept a generic Map parameter rather than HashMap.</li>
+        </ul>
+        <ul>
+          <li>2003-08-08 - ConfigHelper,ConfigHelperInterface: Removed references to ActionMappings, ActionFormBeans, and ActionForwards.</li>
+        </ul>
+        <ul>
+          <li>2003-07-27 - ConfigHelper: Deprecate methods() since they return objects that have been deprecated. The ModuleConfig object should be used to lookup these items.</li>
+          <li>2003-07-16 - ModuleConfigFactory: Catch only relevant exceptions instead of Throwable and made LOG final.</li>
+          <li>2003-07-04 - struts-config_1_2.dtd, ControllerConfig.java: Removed deprecated debug controller attribute.</li>
+          <li>2003-07-04 - ActionConfig: Removed deprecated perform() methods.</li>
+          <li>ApplicationConfig: removed in favor of ModuleConfig.</li>
+        </ul>
+        <p>
+        <strong>Contrib Packages</strong> [
+        <code>/contrib</code>]</p>
+        <ul>
+            <li>2004-06-29 - struts-chain: Wrap HttpServletRequest to ensure correct handling of URIs.</li>
+        </ul>
+        <ul>
+            <li>2004-02-29 - struts-chain: Fix problem with large uploads being deleted if validation failed.</li>
+        </ul>
+        <ul>
+            <li>2004-01-15 - struts-chain: Add Tiles support. Add null check for type, to support forward actions; also add commons loggging</li>
+            <li>2004-01-14 - struts-chain: Add support for 'unknown' actions.</li>
+        </ul>
+        <ul>
+          <li>2004-07-07 - struts-faces: correct operation of &lt;s:base&gt; tag and add portlet specific version.</li>
+          <li>2004-03-08 - struts-faces: updated for JSF 1.0 final release.</li>
+          <li>2003-12-31 - struts-faces: Initial support for Tiles; partial "Tilesization" of example app; *not* ready for prime time but comments definately welcome.</li>
+          <li>2003-12-29 - struts-faces: Various updates regarding the JSF Final Draft and to prepare for Tiles support.</li>
+          <li>2003-12-17 - struts-jericho: Whiteboard directory for Struts-Jericho, a working proposal for Struts 2.x.</li>
+        </ul>
+        <ul>
+          <li>2003-09-07 - strutsel.taglib.tiles: Addition of "tiles-el" library</li>
+        </ul>
+          <ul>
+              <li>2004-08-10 - TilesUtilImpl: Remove "static" modifier from doInclude() method.
+              </li>
+          </ul>
+        <ul>
+          <li>2003-08-11 - struts-chain: Initial check-in of an experimental library that decomposes the Struts 1.1 request procoessor, using the newly checked in Commons Sandbox project called "chain" supporting the Chain of Responsibility pattern.</li>
+          <li>2003-08-10 - strutsel: Added action attribute added in base class</li>
+          <li>2003-08-10 - strutsel: Removed deprecated FormTag attributes: name, scope, type.</li>
+          <li>2003-08-10 - struts-legacy: Removed package (GenericDataSource and GenericConnection).</li>
+        </ul>
+        <ul>
+          <li>2003-07-26 - strutsel: Updated tags to match recent attribute changes to tags in base library.</li>
+        </ul>
+        <p>
+        <strong>Plugins Package</strong> [
+        <code>org.apache.struts.plugins</code>]</p>
+        <ul>
+          <li>2003-08-07 - DigestingPlugIn.java: Added DigestingPlugIn.</li>
+        </ul>
+        <p>
+        <strong>Taglib Package Changes</strong> [
+        <code>org.apache.struts.taglib</code>]</p>
+        <ul>
+            <li>2004-06-26 - EmptyTag: Add support for arrays.</li>
+        </ul>
+        <ul>
+            <li>2004-02-24 - createDynamicJavascript: Move test for null validator form inside "createDynamicJavascript" so that those who use the tag to generate static javascript don't get a JspException.</li>
+        </ul>
+        <ul>
+          <li>2003-09-09 - TagUtils: Log error message when keys or bundles are missing.</li>
+        </ul>
+        <ul>
+          <li>2003-08-23 - TagUtils: Deprecated getActionErrors() in favor of getActionMessages().</li>
+          <li>2003-08-16 - TagUtils: Replaced ActionError with ActionMessage.</li>
+          <li>2003-08-02 - LocalStrings.properties,TagUtils: Move message resources from util package.</li>
+        </ul>
+        <ul>
+          <li>2003-07-26 - TagUtils,RequestUtils: Added TagUtils class for taglibs to use instead of RequestUtils. We should migrate any method in RequestUtils that takes a PageContext parameter and/or throws JspException. A clean separation will help keep RequestUtils smaller and allow the taglibs to be easily split off of the core Struts distribution.</li>
+        </ul>
+        <p>
+        <strong>Bean Taglib Package Changes</strong> [
+        <code>org.apache.struts.taglib.bean</code>]</p>
+        <ul>
+          <li>2004-01-14 - WriteTag: Use client locale when applying date format.</li>
+          <li>2004-01-01 - WriteTag: Add notes regarding discovering localized notations.</li>
+        </ul>
+        <ul>
+          <li>2003-08-28 - IncludeTag: Rename setCookie to addCookie since it isn't a bean setter</li>
+        </ul>
+        <ul>
+          <li>2003-07-13 - MessageTag: Simplified args[] creation, deprecated unused defaultLocale variable.</li>
+        </ul>
+        <p>
+        <strong>HTML Taglib Package Changes</strong> [
+        <code>org.apache.struts.taglib.html</code>]:</p>
+        <ul>
+          <li>2004-08-24 - ImgTag: Correct usage in a module environment.</li>
+        </ul>
+        <ul>
+            <li>2004-07-21 - Add accept-charset attribute to the FormTag.</li>
+            <li>2004-07-01 - JavascriptValidatorTag - Correct naming of JS methods when multiple forms are used.</li>
+        </ul>
+        <ul>
+          <li>2004-05-17 - OptionsCollectionTag,OptionsTag: Filter values as well as labels.</li>
+        </ul>
+        <ul>
+            <li>2004-03-08 - JavascriptValidatorTag - Allow multiple forms to be on the same page by generating a unique variable name based on form name. </li>
+        </ul>
+        <ul>
+          <li>2004-02-14 - Substitute "-" for "/" in JavaScript function name when form is subclass of ValidatorActionForm.</li>
+          <li>2004-02-07 - Add "module" attribute to IncludeTag, ImgTag, LinkTag, and RewriteTag, as well as to Forward.
+              This permits a module to be referenced by name (or "prefix) for direct cross-linking between modules.</li>
+          <li>2004-02-04 - Run validator messages through a routine to escape quote marks so that the emitted JavaScript is syntactically correct.</li>
+          <li>2004-02-04 - Throw JspException when no form is found in the ValidatorResources under the specified 'name'.</li>
+         </ul>
+          <ul>
+          <li>2004-01-18 - Add "action" attribute to img tag.</li>
+          <li>2004-01-09 - Add disabled element to TLD.</li>
+          <li>2004-01-03 - Add 10 new tests that cover "some" of the functionality provided by html:options. More to come.</li>
+          <li>2004-01-01 - In link-related tags, allow LocalCharacterEncoding to be specified conditionally.</li>
+        </ul>
+        <ul>
+          <li>2003-11-28 - JavascriptValidatorTag - Removed getNextVar() and replaceChar() methods and use a simpler javascript identifier naming scheme. All variables with be named a0, a1, etc. to prevent using reserved words as variable names.</li>
+        </ul>
+        <ul>
+          <li>2003-08-19 - Remove "request scope" references from messages tag. The messages are searched for in all scopes.</li>
+          <li>2003-08-10 - struts-html.xml,RewriteTag.java: Added action attribute to rewrite tag.</li>
+          <li>2003-08-10 - Removed deprecated FormTag attributes: name, scope, type.</li>
+        </ul>
+        <ul>
+          <li>2003-07-08 - struts-html.xml,FormTag,JavascriptValidatorTag: Added scriptLanguage property to the form and javascript tags for PR# 17234. This property is ignored in XHTML mode but allows developers to turn off the "language" attribute of &lt;script&gt; tags in HTML.</li>
+          <li>2003-07-03 - FormTag: Added disabled check to focus JavaScript</li>
+          <li>2003-07-02 - HtmlTag: Removed deprecated method.</li>
+          <li>2003-07-02 - BaseHandlerTag: Use RequestUtils.isXhtml() instead of duplicating logic.</li>
+          <li>2003-07-02 - ErrorsTag: Don't render new lines</li>
+        </ul>
+        <p>
+        <strong>Logic Taglib Package Changes</strong> [
+        <code>org.apache.struts.taglib.logic</code>]:</p>
+        <ul>
+           <li>2004-01-16 - logic:redirect - Add action attribute.</li>
+        </ul>
+        <ul>
+          <li>2003-07-31 - PresentTag,RedirectTag: Replace depricated method calls with non-deprecated ones.</li>
+        </ul>
+        <p>
+        <strong>Nested Taglib Package Changes</strong> [
+        <code>org.apache.struts.taglib.nested</code>]:</p>
+        <ul>
+            <li>2004-03-22 - Add missing filter attribute to nested:options and nested:optionsCollection.</li>
+        </ul>
+        <ul>
+          <li>2004-01-01 - Correct operation of NestedMessage* tags by implementing NestedPropertySupport rather than NestedNameSupport.</li>
+        </ul>
+        <ul>
+          <li>2003-08-10 - Removed deprecated FormTag attributes: name, scope, type.</li>
+        </ul>
+        <ul>
+          <li>2003-07-03 - struts-nested.xml: Added styleId to nested:hidden</li>
+        </ul>
+        <p>
+        <strong>Tiles Taglib Package Changes</strong> [
+        <code>org.apache.struts.taglib.tiles</code>]:</p>
+        <ul>
+          <li>2004-05-17 - PutTag: Manage tag body content more carefully to ensure pooled tags do not display old content with empty tiles.</li>
+        </ul>
+        <ul>
+          <li>2003-09-07 - ImportAttributeTag,UseAttributeTag: Removing "final" from class declaration, to allow class to be extended in "tiles-el" (or other classes).</li>
+        </ul>
+        <ul>
+          <li>2003-07-27 - xmlDefinition/XmlParser: Remove deprecated/non functional digester logging method.</li>
+          <li>2003-07-10 - TagUtils: Deprecated getProperty() because it provided no value over calling PropertyUtils.getProperty() directly.</li>
+          <li>2003-07-08 - TilesServlet,ActionComponentServlet: Formatted code, removed deprecated constant.</li>
+          <li>2003-07-04 - ActionController: Call Action.execute() instead of perform().</li>
+        </ul>
+        <p>
+        <strong>Tiles Package Changes</strong> [
+        <code>org.apache.struts.tiles</code>]:</p>
+        <ul>
+          <li>2003-09-13 - Controller: Added execute() method to Tiles Controller interface.</li>
+        </ul>
+        <ul>
+          <li>2003-08-16 - portal.UserMenuAction: Replaced hardcoded debugging with commons logging.</li>
+        </ul>
+        <ul>
+          <li>2003-07-31 - xmlDefinition/I18nFactorySet: Replace deprecated constant reference with it's base interface equal.</li>
+          <li>2003-07-31 - actions/DefinitionDispatcherAction: Replace deprecated method with current one. Still one method DefinitionUtil.setActionDefinition that doesn't have a replacement. It's a simple method but I don't know where a good place to move it would be.</li>
+          <li>2003-07-31 - actions/ReloadDefinitionsAction: Use TilesUtil.createDefinitionsFactory(request,context) instead of deprecated method().</li>
+          <li>2003-07-21 - struts-*config.xml: Remove the use of the deprecated action NoOpAction. Replace by ForwardAction.</li>
+          <li>2003-07-21 - *Action: Replace the deprecated perform(..) method by the new execute(...) method.</li>
+          <li>2003-07-12 - DefinitionDispatcherAction: Use commons-logging to record error messages instead of printing them to the response.</li>
+          <li>2003-07-10 - TilesAction: Removed deprecated perform() method.</li>
+          <li>2003-07-09 - Removed deprecated TilesUtil.applicationClass() method.</li>
+          <li>2003-07-08 - DefinitionsUtil.java: Deprecated debug level constants, removed some deprecated methods.</li>
+          <li>2003-07-08 - ChannelFactorySet: Use commons-logging instead of printing to stdout.</li>
+          <li>2003-07-07 - InsertTag: Fixed exception handling. Instead of swallowing exceptions or printing the stack trace on the page, the exceptions are logged and rethrown as JspException for the page error handling mechanism to deal with.</li>
+          <li>2003-07-07 - InsertTag: More code cleanup, removed deprecated method, deprecated ROLE_DELIMITER because it is only used internally to this class</li>
+          <li>2003-07-04 - ComponentContext: Removed deprecated constructor</li>
+          <li>2003-07-02 - Changed UntyppedAttribute class name to UntypedAttribute (spelling error).</li>
+        </ul>
+        <p>
+        <strong>Upload Package Changes</strong> [
+        <code>org.apache.struts.upload</code>]:</p>
+        <ul>
+          <li>2004-04-08 - CommonsMultipartRequestHandler: Made CommonsFormFile serializable since it gets put into the session</li>
+        </ul>
+        <ul>
+          <li>2004-03-22 - Allow MultipartPost with latin1 characters over Linux.</li>
+        </ul>
+        <ul>
+          <li>2004-01-21 - Add support for an "EncodingFilter" to handle multibyte file names.</li>
+        </ul>
+        <ul>
+          <li>2003-11-26 - DiskMultipartRequestHandler: Deprecate DiskMultipartRequestHandler and friends, which is the buggy old upload implementation, no longer used as the default as of Struts 1.1. This will be removed after 1.2 (meaning as of 1.3/2.0).</li>
+        </ul>
+        <ul>
+          <li>2003-07-31 - MultipartElement: Remove deprecated methods.</li>
+        </ul>
+        <p>
+        <strong>Utility Package Changes</strong> [
+        <code>org.apache.struts.util</code>]:</p>
+        <ul>
+            <li>
+                2004-07-21 - ModuleUtil: Add module support to the bundle attribute.
+                2004-07-07 - TokenProcessor: Ensure that tokens returned differ even if called quickly by tracking last value used.
+            </li>
+        </ul>
+        <ul>
+          <li>2004-04-08 - RequestUtils: Fixed inappropriate serialization of ModuleConfig when a DynaActionForm was put in the session.</li>
+        </ul>
+        <ul>
+          <li>2003-09-22 - LabelValueBean: Implement Comparable interface.</li>
+        </ul>
+        <ul>
+          <li>2003-08-16 - ModuleException: Added getActionMessage() to replace the getError() method.</li>
+          <li>2003-08-02 - LocalStrings.properties: Move message resources to taglib TagUtil package.</li>
+          <li>2003-08-02 - ModuleUtils.java,RequestUtils.java: Moved module related methods to new ModuleUtils class.</li>
+        </ul>
+        <ul>
+          <li>2003-07-26 - TagUtils,RequestUtils: Added TagUtils class for taglibs to use instead of RequestUtils. We should migrate any method in RequestUtils that takes a PageContext parameter and/or throws JspException. A clean separation will help keep RequestUtils smaller and allow the taglibs to be easily split off of the core Struts distribution.</li>
+          <li>2003-07-25 - RequestUtils: Backwards compatibility fix. Changed ModuleConfig lookups to use getModuleConfig so that default module config is returned if one is not already present in the request</li>
+          <li>2003-07-16 - RequestUtils: Make retrieveMessageResources() module-aware by adding the module prefix to the bundle name when retrieving from application context.</li>
+          <li>2003-07-03 - LabelValueBean: Added equals and hashCode() methods.</li>
+          <li>2003-07-03 - Globals,ActionServlet,RequestUtils: Moved initialization of module prefix list to the new ActionServlet.initModulePrefixes() method from RequestUtils.getModulePrefixes() because of a potential race condition documented in PR# 21091. This also required a move of the RequestUtils.PREFIXES constant to Globals.MODULE_PREFIXES_KEY.</li>
+          <li>2003-07-02 - RequestUtils,TestRequestUtils: Removed deprecated "application" methods in favor of "module" methods.</li>
+          <li>2003-07-02 - LabelValueBean: Added default constructor.</li>
+        </ul>
+        <p>
+        <strong>Validator Package Changes</strong> [
+        <code>org.apache.struts.validator</code>]</p>
+        <ul>
+          <li>2004-09-03 - ValidWhen: Added new test cases.</li>
+          <li>2004-09-03 - ValidWhen: Correct parsing of integer values.</li>
+        </ul>
+        <ul>
+          <li>2004-06-24 - ValidWhen: "allow '_' (underscore) in identifiers.</li>
+        </ul>
+        <ul>
+         <li>2004-04-16 - FieldChecks: Add optional variables to configure various aspects of URL validation.</li>
+         <li>2004-04-03 - ValidatorPlugIn: Modify Validator PlugIn to validate XML file and errros now throw an exception to loudly flag an error. Remove deprecated classes, now in Commons Validator.</li>
+         <li>2004-04-02 - Add a getValidationKey method to make it eaiser for subclasses to use different rules for finding the Validator form. </li>
+        </ul>
+        <ul>
+          <li>2004-02-20 - Changed FieldCheck so that it examines all indexed fields and does not stop on the first failure.</li>
+        </ul>
+        <ul>
+          <li>2004-01-17 - Changed initValidator() to accept an ActionMessages object instead of ActionErrors; changed ACTION_ERRORS_PARAM name to ACTION_MESSAGES_PARAM.</li>
+          <li>2004-01-17 - Add section to Validator User Guide listing standard validations.</li>
+        </ul>
+        <ul>
+          <li>2003-12-21 - Add rest of form to fr.CA formset to correct operation; Use action form of html:link;</li>
+        </ul>
+        <ul>
+          <li>2003-10-06 - FieldChecks - Add validateUrl. Remove deprecated validateRange.</li>
+        </ul>
+        <ul>
+          <li>2003-09-26 - FieldChecks,ValidWhen: Changed validator signatures to use ActionMessages rather than ActionErrors, was breaking validations.</li>
+          <li>2003-09-26 - validator-rules.xml: Modify JavaScript to honor datePattern option.</li>
+          <li>2003-09-24 - validator-rules.xml: Add ability of required to handle checkboxes, radio,select-one, and select-multiple field types.</li>
+        </ul>
+        <ul>
+          <li>2003-07-30 - validator-rules.xml: Remove deprecated range() method. Use intRange() instead.</li>
+          <li>2003-07-30 - validator-rules.xml: Allow intRange validation of select-one and radio fields. In some form combo boxes you might have the combo boxes populated with valid choices plus one additional choice with a caption something like "Choose one" and a value 0f "-1". Then when the user attempts to submit the form, you can look for the value of "-1" and yell at them if they failed to pick something.</li>
+          <li>2003-07-28 - JavascriptValidatorTag.java,ValidatorPlugIn.java: Enhancement to allow checking of all constraints instead of aborting. The default is same as struts 1.1.</li>
+          <li>2003-07-26 - Resources: Deprecated Resources.getLocale() because it created sessions. Use RequestUtils.getUserLocale() instead.</li>
+          <li>2003-07-02 - Resources: Rewrote getArgs() method to use arrays and loops, which removes limitation of 4 args.</li>
+          <li>2003-07-02 - Resources: Remove deprecated methods</li>
+          <li>2003-07-02 - Validator,ValdiatorUtils: Changed processRoles() to send a 403 Forbidden response if the role check fails. Also removed deprecated methods.</li>
+          <li>2003-07-01 - Add validwhen validation to package.</li>
+        </ul>
+        <p>
+        <strong>Documentation Application Changes</strong> [
+        <code>struts-documentation.war</code>]:</p>
+        <ul>
+          <li>2004-08-31 - Added a Struts download page, reflecting the move to an Apache top level project.</li>
+          <li>2004-08-24 - Fix build script errors on Eclipse HOW-TO page.</li>
+        </ul>
+        <ul>
+            <li>2004-07-11 - Add links to development releases.</li>
+            <li>2004-07-07 - Rename "status.xml" to "roadmap.xml" to avoid confusion with STATUS.txt file.</li>
+            <li>2004-07-07 - Extend prior draft of bylaws page with additional material from Jakarta site and link to main menu.</li>
+        </ul>
+        <ul>
+          <li>2004-03-28 - Added Trifork server to Installing Struts on Various Containers section.</li>
+          <li>2004-03-24 - Document new exception-throwing behavior in html:javascript when dynamicJavascript is true but no form can be identified.</li>
+        </ul>
+        <ul>
+          <li>2003-11-27 - resource: Move resource area to
+          <a href="http://struts.sf.net/">Struts SourceForge site</a>.</li>
+        </ul>
+        <p>
+        <strong>MailReader Example Application Changes</strong> [
+        <code>struts-example.war</code>]:</p>
+         <ul>
+             <li>2004-03-07 - Various refactorings to JSP pages, welcome and login action.</li>
+         </ul>
+        <ul>
+          <li>2004-01-08 - Use (new) DigestingPlugIn to create the menu of server types.</li>
+        </ul>
+        <ul>
+          <li>2003-12-21 - Change to use typical welcome.do - welcome.jsp approach; Use "name" rather than "attribute" in configuration, per documented and common practice; Use action form of html:link</li>
+          <li>2003-10-25 - Updated to include the usage of wildcards in action mappings.</li>
+        </ul>
+        <ul>
+          <li>2003-08-30 - AlternateApplicationResources_ja.properties,ApplicationResources_ja.properties: Provide Japanese resources.</li>
+          <li>2003-08-16 - Changed ActionError to ActionMessage.</li>
+        </ul>
+        <p>
+        <strong>Combined Examples Application</strong> [
+        <code>struts-examples.war</code>]</p>
+        <ul>
+          <li>2004-09-07 - Fix problems with running the application while not connected to the internet.</li>
+          <li>2004-09-03 - Change Commons Validator DTD to version 1.1.3.</li>
+        </ul>
+        <ul>
+          <li>2004-01-17 - Add tests to to hmlt:link page for forwards, actions, and pages.</li>
+          <li>2004-01-16 - exercises: Add test pages for html:img and logic:forward,redirect. Add test pages for html:img and logic:forward,redirect tags</li>
+          <li>2004-01-08 - Convert Taglib-Exercises, Upload, and Validator example applications into modules of a combined examples application.</li>
+        </ul>
+        <p>
+        <strong>Exercise module Changes</strong>:</p>
+        <ul>
+          <li>2004-01-09 - Enable inputForward.</li>
+          <li>2004-01-01 - Add several tests to bean:write: localized numbers; date format pattern; localization.</li>
+        </ul>
+        <ul>
+          <li>2003-07-23 - html-messages.jsp: Updated to reference Globals constants.</li>
+        </ul>
+        <p>
+          <strong>Upload Example module Changes</strong>
+        </p>
+        <ul>
+          <li>2004-01-09 - Enable inputForward; use message tags for validation errors; refine markup on display page.</li>
+          <li>2004-01-08 - Convert to Upload example application to module under the "examples" application.</li>
+        </ul>
+        <ul>
+          <li>2003-08-16 - Changed ActionError to ActionMessage.</li>
+        </ul>
+        <p>
+          <strong>Validator Example module Changes</strong>
+        </p>
+          <ul>
+            <li>2004-06-25 - Update arg elements to use new dynamic feature, that does not requiring numbering. </li>
+          </ul>
+        <ul>
+          <li>2004-03-25 - Modify example to test proper behaviour is a property is named 'name'.</li>
+        </ul>
+        <ul>
+          <li>2004-01-09 - Enable inputForward.</li>
+          <li>2004-01-08 - Convert to Validator Example application to module under the "examples" application.</li>
+        </ul>
+        <ul>
+          <li>2003-12-21 - Add rest of form to fr.CA formset to correct operation.</li>
+          <li>2003-09-24 - Modify Validator example to show use of 'required' for checkboxes, radio,select-one, and select-multiple field types.</li>
+        </ul>
+      </section>
+      <section>
+        <p class="right">Next:
+        <a href="installation.html">Installation</a></p>
+      </section>
+  </body>
+</document>

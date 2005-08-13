@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<document url="installation-ubs72.html">
+
+  <properties>
+    <title>The Struts Framework Project - Installation - Bluestone UBS 7.2</title>
+  </properties>
+
+  <body>
+<chapter name="5.2 Installation" href="installation">
+<section name="Installing Struts with your servlet container" href="Containers">
+<h4 id="bluestone">Bluestone Universal Business Server 7.2</h4>
+
+<ul>
+  <li>You need UBS version 7.2 to run war file applications. The UBS 7.2.2 evaluation
+    is located <a href="http://www.bluestone.com/SaISAPI.dll/SaServletEngine.class/products/downloads.jsp">here</a>.
+    If you're using version 7.2.1, you need to download the WAR file patch, located
+    in the product enhancement section of Bluestone's website <a href="http://www.bluestone.com/SaISAPI.dll/SaServletEngine.class/products/wfe.jsp">here</a>
+  </li>
+  <li> After installation of the correct version and/or patch of UBS 7.2, you
+    need to modify your apserver.txt file to point to the correct directory for
+    your war file applications. Look for the section that says something similar
+    to the following:<br />
+    <pre>
+  [SaServletEngine.class]
+  session_affinity=1
+  type=1
+  program=/SaServletEngine.class
+  file_path=f:\webapps
+  host=localhost:20000
+</pre>
+  </li>
+
+  <li>Use the directory specified by the "file_path" variable, or modify it to
+    point to your own custom webapp directory. Copy the "struts-documention.war"
+    and "struts-example.war" files into that webapp directory, and start the UBS
+    (read documentation distributed with UBS for information on how to start it
+    if necessary). Your webapps are now accessible from the following URL:
+    <p class="center"> http://localhost/&lt;PLUGIN&gt;/SaServletEngine.class/struts-example/<br />
+      http://localhost/&lt;PLUGIN&gt;/SaServletEngine.class/struts-documentation/
+    </p>
+  </li>
+
+  <li> Note: "&lt;PLUGIN&gt;" represents the plugin you are using for your specific
+    webserver. For Apache on Windows, it might be "cgi-bin/SaCGI.exe", for IIS
+    on Windows, it might be "scripts/SaCGI.exe" or "scripts/ISAPI.dll". Consult
+    the UBS documentation for more information. </li>
+</ul>
+  <hr/>
+  <p>Back to <a href="installation.html#Containers">Installation</a></p>
+</section>
+</chapter>
+</body>
+</document>

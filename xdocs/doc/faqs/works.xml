@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<document url="./newbie.xml">
+<properties>
+<title>How Does Struts Work? - Apache Struts</title>
+</properties>
+<body>
+<chapter href="faq" name="How does Struts work?">
+
+<section href="how" name="How does Struts work?">
+
+<p>
+    Java Servlets are designed to handle requests made by Web browsers.
+    Java ServerPages are designed to create dynamic Web pages that can turn billboard sites into live applications.
+    Struts uses a special Servlet as a switchboard to route requests from Web browsers to the appropriate ServerPage.
+    This makes Web applications much easier to design, create, and maintain.
+</p>
+
+<p>
+    Here is some more detail on the mechanisms and dependencies of Struts:
+</p>
+
+<ul>
+   <li>
+      The web application that you develop has a deployment descriptor
+      (<code>WEB-INF/web.xml</code>) which you must write. This file describes
+      the configuration of your web application, including welcome pages (the
+      file that is shown in a directory when none is specified by the request),
+      mappings to servlets (path or extension name), and parameters to those
+      servlets.<br/>
+
+      In this file, you configure the Struts
+      <a href="../api/org/apache/struts/action/ActionServlet.html"><code>ActionServlet</code></a>
+      as the servlet that will handle all requests for a given mapping (usually
+      the extension <code>.do</code>). This is the "switchboard" mentioned
+      above.<br/>
+
+      In this same file, you configure the <code>ActionServlet</code> to use
+      one or more configuration files for Struts itself.<br/>
+      For this text, assume we are installing the web application on the server
+      at <code>/myapp</code>, and are using the simplest possible configuration
+      from there.<br/>
+
+      If you need more details on deployment descriptors, read
+      the Servlet Specification available from Sun Microsystem's
+      <a href="http://java.sun.com">Java site</a>.<br/>
+   </li>
+   <li>
+      In the Struts configuration file(s), you associate paths with
+      the controller components of your application, known as
+      <a href="../api/org/apache/struts/action/Action.html"><code>Action</code></a>
+      classes (i.e. "login" ==&gt; LoginAction class). This tells the Struts
+      <code>ActionServlet</code> that when the incoming request is
+      <code>http://myhost/myapp/login.do</code> it should invoke your
+      controller component <code>LoginAction</code>.<br/>
+
+      Note the extension <code>.do</code> in this URL. The extension causes
+      your container (i.e.  Tomcat) to call the <code>ActionServlet</code>,
+      which sees the word "login" as the thing you want to do. The
+      configuration is referenced, and your <code>LoginAction</code> is
+      executed.<br/>
+   </li>
+   <li>
+      For each <code>Action</code>, you also configure Struts with the names of
+      the resulting page(s) that can be shown as a result of that action. There
+      can be more than one view as the result of an action (often, there are at
+      least two: one for success, and one for failure).<br/>
+
+      Your <code>Action</code> (the controller component you write) is based on
+      these <em>logical</em> result mapping names. It reports back to the
+      <code>ActionServlet</code> using words like "success", "failure",
+      "ready", "ok", "UserIsIncompetent", etc.  The Struts system (through the
+      configuration that you wrote) knows how to forward to the proper
+      <em>specific</em> page. This has the added advantage of reconfiguration of
+      the view layer by simply editing the Struts XML configuration file.<br/>
+
+      At this point Struts knows how to delegate to your controller components,
+      and what to show as a result of your controller processing. The "model"
+      part of the application is completely up to you, and is called from
+      within your controller components.
+   </li>
+   <li>
+      You may also associate a Java Bean with an action (or set of actions) in
+      the Struts configuration file. The Java Bean is used as a repository for
+      form or display data that can be communicated between the view and
+      controller layer.<br/>
+
+      These Beans are automatically made visible to your controller components
+      (like <code>LoginAction</code>) and any view page that is associated with
+      that controller. <br/>
+
+      These Beans can also be validated with the help of the Struts system to
+      help insure that the user is putting good data in the form. They can be
+      carried along with a session, allowing forms to span multiple pages of
+      the view, and Actions in the controller.<br/>
+
+      <strong>Note</strong>: You must be using some sort of server-side
+      technology (JSP, Velocity, XSLT) for the view layer (going <em>to</em> the
+      client) to see this data (plain HTML won't work). Struts works on the
+      server side, so the client's view has to be composed there.<br/>
+
+      The client feeds the data back through normal form submission (POST/GET)
+      methods, and the Struts system updates that data in the Bean before
+      calling your controller components.
+   </li>
+   <li>
+      Within your web application will be pages that represent the view your
+      users will see. These can be JSP pages, Velocity Templates,
+      XSLT pages, and so forth.
+      A set of JSP tags is bunded with the Struts distribution so that you
+      can get started right away, but any standard presentation technology
+      can be used with Struts.<br/>
+
+      Even plain HTML files can be used within your Struts application,
+      although they will not take full advantage of all of the dynamic
+      features.<br/>
+
+      Following the example of the Struts JSP taglibs, several other
+      packages are available to make the framework easy to use with your
+      favorite presentation technology.
+      For Velocity templates, there are the
+      <a href="http://jakarta.apache.org/velocity/">Velocity</a> ViewTools
+      for Struts.
+      If you want to use XSLT in you application, you can choose between
+      <a href="http://www.openroad.ca/opencode/">stxx</a> and
+      <a href="http://it.cappuccinonet.com/strutscx/">
+      StrutsCX</a>.<br/>
+
+      These packages make the standard Struts framework elements look and
+      feel like a seamless part of the original presentation technology.
+      Struts also makes it easy to mix and match.
+      If need be, you can use JSP, Velocity templates, and XSLT all in
+      the same application!<br/>
+
+      Since Struts relies on standard Servlet technologies, you should be
+      able to use any Java presentation technology with Struts.
+   </li>
+   <li>
+      While the focus of the Struts framework is on the controller,
+      the presentation layer is a significant part of any application.
+      The Struts JSP taglibs include a number of generic and Struts-specific
+      tags to help you use dynamic data in your view. <br/>
+
+      The custom JSP tags account for a good deal of the Struts code base. It
+      is educational to note that as of version 1.1b3 the Java code for the
+      core of Struts was about 28,000 lines, and the Java code for the tag
+      libraries (including tiles) was about 41,000 lines.<br/>
+
+      These tags help you glue your view layer to the controller layer without
+      having to embed a lot of Java in the JSP. This gives the page an XML
+      look, and can be easier for web designers to deal with than a plain JSP. It
+      also helps minimize dependencies between the controller and view.<br/>
+
+      The custom tags are used to create forms (and invisibly interact with the
+      Bean mentioned previously), logically forward to other pages, and invoke
+      other actions of the web application.<br/>
+
+      There are also tags that help you with internationalization, error
+      messages, etc.<br/>
+
+      All of these abilities depend in some way on the configuration files you
+      supplied to Struts.
+   </li>
+</ul>
+<p>
+   It is important for you to remember that the mechanism described here is
+   only in effect when the <code>ActionServlet</code> is handling the
+   request.
+</p>
+<p>
+   Since this only happens when a request is submitted that causes your
+   container (i.e. Tomcat, WebSphere, etc.) to call <code>ActionServlet</code>,
+   you must be sure that any page that relies on Struts is done through a
+   request that will map to the <code>ActionServlet</code> (i.e. has a
+   <code>.do</code> extension).
+</p>
+ </section>
+
+</chapter></body></document>

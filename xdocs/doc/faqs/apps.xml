@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<document url="./apps.xml">
+<properties>
+<title>Building Applications</title>
+</properties>
+<body>
+<chapter name="How to Build Applications" href="building_apps">
+<section href="intro" name="About This Document">
+<p>
+This document outlines one possible sequence of development steps that can be followed to create a
+Struts application.  It is not intended as a complete description of each
+referenced development activity.  More detailed documentation is available
+elsewhere and is referenced by "(more...)" links where possible.
+</p>
+</section>
+
+<section href="caveats" name="Caveats">
+<ol>
+<li>Requirements development and design are outside of the scope of this  document.</li>
+<li>For help installing Struts, see the <a href="../userGuide/installation.html">Getting Started</a> chapter.</li>
+<li>There are many other ways to approach Struts development and there are many
+    other features available besides the ones discussed below. This document
+    outlines only one way to get started.</li>
+<li>This document focuses on form/data centric applications, but may also work with
+    other types of applications.</li>
+<li>This material was written for Struts 1.1 (beta 2) and now 1.2.2</li>
+</ol>
+</section>
+
+<section href="overview" name="Overview">
+<ol>
+<li>Implement data entry forms as JSP files.</li>
+<li>Implement one or more <code>ActionForm</code> descendents to buffer data
+    between JSPs and Actions.</li>
+<li>Create an XML document that defines the validation rules for your
+    application.</li>
+<li>Implement one or more <code>Action</code> descendents to respond form
+    submissions.</li>
+<li>Create <code>struts-config.xml</code> to associate forms with
+    actions.</li>
+<li>Create or update <code>web.xml</code> to reference
+    <code>ActionServlet</code>, taglibs used by Struts.</li>
+<li>Parallel Tasks
+<ol>
+<li>Building</li>
+<li>Unit Testing</li>
+<li>Deployment</li>
+</ol>
+</li>
+</ol>
+</section>
+
+<section href="details" name="Details">
+<ol>
+<li>Implement data entry forms as JSP files.
+<ol>
+<li>Use elements from the <code>html</code> taglib
+    to define the form elements. <a href="../userGuide/struts-html.html">
+    (more...)</a></li>
+<li>Use <code>message</code> and other elements from the <code>bean</code>
+    taglib to define the labels and other static text of the form. 
+    <a href="../userGuide/struts-bean.html">(more...)</a>
+<ol>
+<li>Create and maintain a properties file of the text elements
+    to be displayed. <a href="../userGuide/preface.html#resources">(more...) 
+    </a></li>
+</ol>
+</li>
+<li>Use <code>property</code> attributes to link form fields to 
+    <code>ActionForm</code> instance variables.</li>
+</ol>
+</li>
+<li>Implement one or more <code>ActionForm</code> descendents
+    to buffer data between JSPs and Actions.
+<ol>
+<li>Create get/set pairs that correspond to the property names
+    in your related JSP form. Example:
+<pre>&lt;html:text property="city" /&gt;</pre>
+    needs:
+<pre>getCity() and setCity(String c)</pre>
+</li>
+<li>When needed, create a <code>reset</code> method
+    that sets the fields of the <code>ActionForm</code> to their default values. Most ActionForms do not need to do this.</li>
+</ol>
+</li>
+<li>Create an XML document that defines the validation rules for your
+    application.</li>
+<li>Implement one or more <code>Action</code> descendents
+    to respond to form submissions.
+<ol>
+<li>Descend from DispatchAction or LookupDispatchAction if you
+    want one class to handle more than one kind of event (example: one Action
+    to handle 'insert', 'update' and 'delete' events, using a different "surrogate" execute method for each). <a href="http://husted.com/struts/tips/002.html">(more...)</a></li>
+<li>Use the <code>execute</code> method
+    (or its surrogates) of your Action class to interface with objects in your
+    application responsible for database interaction, such as EJBs, etc.
+    <!-- [:TODO: find good doc to link to] -->
+</li>
+<li>Use the return value of the <code>execute</code> method
+    (or its surrogates) direct the user interface to the appropriate next page.
+<!-- [:TODO: find good doc to link to] -->
+</li>
+</ol>
+</li>
+<li>Create <code>struts-config.xml</code> to
+    associate forms with actions. The file minimally needs:</li>
+<li>Create or update <code>web.xml</code> to
+    reference <code>ActionServlet</code>, taglibs used by Struts. <a href="../userGuide/configuration.html#dd_config"> (more...)</a></li>
+<li>Parallel Tasks
+<ol>
+<li>Building
+<ol>
+<li>Use Ant. It can compile, create WAR file, perform XSLT
+   transformations, run unit tests, interact with version control systems,
+   clean up, etc. <a href="http://jakarta.apache.org/ant"> (more...)</a></li>
+<li>Create and use build script incrementally, as you create
+    files that need to be copied, compiled, etc. </li>
+</ol>
+</li>
+<li>Unit Testing
+<ol>
+<li>Unit test normal java beans with JUnit. <a href="http://www.junit.org"> (more...)</a></li>
+<li>Unit test JSP, taglibs and conventional servlet components
+    with Cactus. <a href="http://jakarta.apache.org/cactus"> (more...)</a></li>
+<li>Unit test Action servlets with StrutsTestCase. <a href="http://strutstestcase.sourceforge.net"> (more...)</a></li>
+<li>Add all unit tests to the build script as a separate
+    target. This target should use the <code>junit</code> tag to launch each TestCase descendent. <a href="http://jakarta.apache.org/ant/manual/OptionalTasks/junit.html"> (more...)</a></li>
+</ol>
+</li>
+<li>Deployment
+<ol>
+<li>Build script should create a war file containing the
+    files developed above, along with files that make up the Struts framework.
+    <!-- [:TODO: describe this further, look for doc to link to] -->
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol></section>
+</chapter>
+</body>
+</document>

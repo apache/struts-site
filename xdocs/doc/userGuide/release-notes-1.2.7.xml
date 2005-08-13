@@ -1,0 +1,754 @@
+<?xml version="1.0"?>
+<document url="release-notes.html">
+  <properties>
+    <title>Struts Release Notes (since 1.2.4)</title>
+  </properties>
+ <body>
+ <chapter name="6.1 Release Notes - Version 1.2.7" href="release_notes">
+      <section name="Introduction" href="Introduction">
+          <p>
+              This section contains release notes for changes that have taken
+              place since
+              <a href="release-notes-1.2.4.html">Version 1.2.4</a>.
+              To keep up-to-date on all changes to Struts, subscribe to the
+              dev@ list.
+          </p>
+          <p>
+              <b>Notes on upgrading</b> are maintained in the
+              <a href="http://wiki.apache.org/struts/StrutsUpgrade">Wiki Upgrade pages</a>.
+              The wiki is a community maintained resource - please feel free to add your
+              input so that everyone can benefit from the collective experience.
+          </p>
+          <p>
+             For the version requirements of each library, see the 
+             <a href="installation.html">Installation chapter</a>.
+          </p>
+ 
+      </section>
+
+      <section name="Highlights of Changes" href="Highlight">
+          <p>
+              The purpose of this section is to highlight the new features since the
+              Version 1.2.4 release. For detailed information concerning changes 
+              see the <a href="#Detail">Detailed Changes</a> section.
+          </p>
+          <h3>Dependencies</h3>
+          <p>
+              Struts has changed its dependencies on the following software components:
+          </p>
+              <ul>
+                   <li>Commons BeanUtils dependency changed to Version 1.7.0</li>
+                   <li>Commons Digester dependency changed to Version 1.6</li>
+                   <li>Commons Validator dependency changed to Version 1.1.4</li>
+                   <li>Dependency on Commons Collections has been removed</li>
+                   <li>Dependency on Commons Lang has been removed</li>
+              </ul>
+
+          <h3>Core Struts</h3>
+          <h4>Saving Messages in the Session</h4>
+          <p>
+              A new method to store <i>errors</i> in the Session [<code>saveErrors(HttpSession, ActionMessages)</code>]
+              has been added to <i>Action</i> along with the automatic removal of these errors once they have been
+              accessed. This is equivalent to the facility for <i>messages</i> that was included in the Version 1.2.4
+              release.
+          </p>
+
+          <h4>Re-directing ActionForward</h4>
+          <p>
+              <i>ActionRedirect</i> is a subclass of ActionForward which is designed for use in redirecting requests, 
+                            with support for adding parameters at runtime. See the <i>javadoc</i> for more details.
+          </p>
+
+          <h4>Download Action</h4>
+          <p>
+              <i>DownloadAction</i> is an abstract action that provides the nuts and bolts for downloading 
+              files. See the <i>javadocs</i> and <a href="http://wiki.apache.org/struts/StrutsFileDownload">Wiki</a>
+              for further information.
+          </p>
+
+          <h4>Dispatch Helper</h4>
+          <p>
+              <i>ActionDispatcher</i> is a helper class for providing <i>DispatchAction</i> type behaviour
+              without having to inherit from <i>DispatchAction</i>. See the <i>javadoc</i> for more details.
+          </p>
+
+          <h4><i>Lazy</i> Validator Form</h4>
+          <p>
+              A <i>DynaBean</i> flavour ActionForm which doesn't need its properties to be
+              defined and provides <i>Lazy List</i> and <i>Lazy Map</i> behaviours.
+          </p>
+          <h4> Config Files in jars</h4>
+          <p>
+              Config files (i.e. Struts config, Validator config and Tiles config files) can now be stored in jars.
+              Struts checks the servlet context, as before but if not found Struts now tries the classloader to try
+              and get them.
+          </p>
+          <h3>Tag Library Changes</h3>
+          <h4>Highlighting Errors</h4>
+          <p>
+              Struts can now automatically highlight error fields using the new <i>errorKey</i>,
+              <i>errorStyle</i>, <i>errorStyleClass</i> and <i>errorStyleId</i> attributes on the HTML
+              Input Tags. See the <a href="struts-html.html">User Guide</a> for details of these attributes.
+          </p>
+          <h4>Readonly / Disabled Forms</h4>
+          <p>
+              It is now possible to either <i>disable</i> or make <i>read only</i> all fields for a form
+              using the new <i>readonly</i> and <i>disabled</i> attributes on the &lt;html:form&gt; tag.
+              <b>N.B.</b>The <i>readonly</i> attribute only affects  &lt;html:text&gt;, &lt;html:textarea&gt;
+              and &lt;html:password&gt; as per the HTML 4 specification.
+              See the <a href="struts-html.html#form">User Guide</a> for details of these attributes.
+          </p>
+
+          <h4>HTML Tag Refactoring</h4>
+          <p>
+              Many of the <i>HTML</i> tags have been refactored to make them easier to extend.
+          </p>
+             <ul><li>A <b>prepareOtherAttributes()</b> method was added - called just before the closing
+                     tag element, it provides a place to render additional attributes.</li>
+                 <li>The <i>name</i> attribute rendering is now in a <b>prepareName()</b> method to make it
+                     easier to provide custom behaviour.</li>
+                 <li>The <i>value</i> attribute rendering is now in a <b>prepareValue()</b> method to make it
+                     easier to provide custom behaviour.</li>
+                 <li>When rendering an attribute, these tags now use the <i>getter</i> for the property rather than the
+                     actual property - that means that if you wanted, for example to override the TextTag's <i>styleClass</i>
+                     then one option is to override the getStyleClass() method.</li>
+                 <li>Rendering of attributes now uses a simple <b>prepareAttribute()</b> method to generate the 
+                     <i>name="attribute"</i> format, making most attribute rendering a one line statement.</li>
+             </ul>
+          <h4>Bundle Attribute</h4>
+          <p>
+              The <i>bundle</i> attribute has been added to the following <i>HTML</i> tags:
+              ButtonTag, CancelTag, CheckboxTag, FileTag, FrameTag, HiddenTag, LinkTag, MultiboxTag,
+              PasswordTag, RadioTag, ResetTag, SelectTag, SubmitTag, TextTag, TextareaTag.
+              See the <a href="struts-html.html">User Guide</a> for details of the bundle attribute
+              for these tags.
+          </p>
+          <h4>ErrorTag</h4>
+          <p>
+              Now has <b>header</b>, <b>footer</b>, <b>prefix</b>, <b>suffix</b> attributes.
+              See the <a href="struts-html.html#errors">User Guide</a> for details of these attributes.
+          </p>
+
+          <h3>Validator</h3>
+          <h4>Resource Bundle Support</h4>
+          <p>
+              The <i>bundle</i> attribute for the &lt;msg&gt; and &lt;arg&gt; elements in the Validator
+              configuration file (e.g. <i>validation.xml</i>) are now supported along with the <i>resource</i>
+              attribute on the &lt;msg&gt; element.
+          </p>
+          <p>
+              New pages have been added to the <i>struts-examples</i> webapp showing the new 
+              <i>Resource Bundle Support</i> and a page for <i>validwhen</i> examples.
+          </p>
+
+          <h3>Subversion</h3>
+          <p>
+              Struts has migrated it's source repository from CVS to Subversion, following which the
+              repository has been refactored into subprojects. The subproject re-factoring does not
+              however affect the 1.2.x series which is released from the
+              <a href="http://svn.apache.org/viewcvs.cgi/struts/core/branches/STRUTS_1_2_BRANCH/">STRUTS_1_2</a> branch.
+          </p>
+          <h3>People</h3>
+          <p>
+              On the <a href="../volunteers.html">people</a> front, in addition to <i>Martin Cooper</i>  being 
+              appointed the <a href="../announce.html#a20050331">new PMC chair</a>, one new committer, 
+              <i>Hubert Rabago</i>, accepted an invitation to join us, and we welcome back <i>David Geary</i> 
+              from emeritus to active status.
+          </p>
+          
+      </section>
+
+      <section name="Detailed Changes" href="Detail">
+          <p>
+              This section contains the details of changes since version 1.2.4 with links to
+              bugzilla tickets and Subversion Revision details. It is split into the following
+              sub-sections.
+          </p>
+          <ul>
+              <li><a href="#STRUTS_1_2_7">Version 1.2.7 Changes</a></li>
+              <li><a href="#STRUTS_1_2_6">Version 1.2.6 Changes</a></li>
+              <li><a href="#STRUTS_1_2_5">Version 1.2.5 Changes</a></li>
+          </ul>
+  
+      <h3 id="STRUTS_1_2_7">Version 1.2.7</h3>
+
+          <p>
+              After <a href="http://svn.apache.org/viewcvs.cgi/struts/core/tags/STRUTS_1_2_6/">Version 1.2.6 was tagged</a>
+              the <a href="http://svn.apache.org/viewcvs.cgi/struts/core/branches/STRUTS_1_2_BRANCH/">1.2 Branch</a>
+              was created and work started on the next version (<i>1.3.x series</i>). Work has continued on
+              both versions and <i>Revision</i> numbers shown in brackets are where a change has been ported
+              from the current development version into the <i>1.2 Branch</i>.
+          </p>
+
+         <table>
+             <thead><tr>
+                 <th>Modification</th><th>Revision</th><th>Bugzilla</th><th>Description</th>
+             </tr></thead>
+             <tr>
+                 <td align="center">2005-05-05</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=168223&amp;view=rev">168223</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Fix 1.2.x Build - remove duplicate "el" directory from "contrib".</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-05-05</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=168218&amp;view=rev">168218</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Fix 1.2.x build to include struts-chain in the "contrib" directory (from sandbox STRUTS_1_2_BRANCH).</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-05-03</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=168011&amp;view=rev">168011</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=168012&amp;view=rev">168012</a>)</td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Prevent NullPointerException when toString() is called before dynaClass is initialized.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-29</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=165304&amp;view=rev">165304</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=165305&amp;view=rev">165305</a>)</td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Retrieve FormTag stored in Request scope, rather than the TagSupport's findAncestorWithClass() .</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-29</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=165186&amp;view=rev">165186</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=165208&amp;view=rev">165208</a>)</td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Fixing value escape so that both backslashes and quotes are escaped correctly.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-28</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=165158&amp;view=rev">165158</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=165160&amp;view=rev">165160</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=20034">20034</a></td>
+                 <td>Additional fix to "Invalid cache in InsertTag" for a problem on Orion.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-28</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=165097&amp;view=rev">165097</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=33989">33989</a></td>
+                 <td>Fix cactus tests to work with Cactus 1.7.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-27</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=164922&amp;view=rev">164922</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164927&amp;view=rev">164927</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=23127">23127</a></td>
+                 <td>Page attribute of img and image tags doesn't use pagePattern setting.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-26</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=164814&amp;view=rev">164814</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164831&amp;view=rev">164831</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=34624">34624</a></td>
+                 <td>BeanValidatorForm's getValidationKey method should call mapping.getAttribute().</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-26</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=164745&amp;view=rev">164745</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164746&amp;view=rev">164746</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31270">31270</a></td>
+                 <td>Add ActionDispatcher to provide dispatch behavior to classes that do not extend DispatchAction.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-26</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=164729&amp;view=rev">164729</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164862&amp;view=rev">164862</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=19901">19901</a></td>
+                 <td>Add a check for null page value and throwing more informative exception.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-26</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=164723&amp;view=rev">164723</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164860&amp;view=rev">164860</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=16653">16653</a></td>
+                 <td>Add a check for missing Validator Resources and throw a more useful error message.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-26</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=164718&amp;view=rev">164718</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164858&amp;view=rev">164858</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31658">31658</a></td>
+                 <td>LogonAction does not check errors in appropriate place.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-25</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs?rev=164734&amp;view=rev">164734</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164703&amp;view=rev">164703</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=34314">34314</a></td>
+                 <td>Add TilesRequestProcessor handling for NoSuchDefinitionException.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-25</td>
+                 <td align="center">
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164684&amp;view=rev">164684</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=33132">33132</a></td>
+                 <td>Implement Servlet 2.3/2.4 methods using reflection in MultipartRequestWrapper.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-25</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=164591&amp;view=rev">164591</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164590&amp;view=rev">164590</a>)</td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Synchronize the <i>Nested</i> tag attributes for changes made in 
+                     <a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=17708">Bug #17708</a> and
+                     <a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=21603">Bug #21603</a>.
+               </td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-23</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=164343&amp;view=rev">164343</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164340&amp;view=rev">164340</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=33122">33122</a></td>
+                 <td>Resolve &lt;html:link&gt; ClassCastException when a non String paramId value already exists in the params map.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-21</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=162109&amp;view=rev">162109</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164337&amp;view=rev">164337</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=33918 ">33918 </a></td>
+                 <td>Allow saving errors to the session in the same way that messages are.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-21</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=162094&amp;view=rev">162094</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=164334&amp;view=rev">164334</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=33238">33238</a></td>
+                 <td>Change JavascriptValidatorTag to escape double quotes in variable values.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-12</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=161093&amp;view=rev">161093</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=164336&amp;view=rev">164336</a>)</td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Change DigestingPlugIn to give an explicit message when configSource/configPath yields a null URL.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-06</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=160261&amp;view=rev">160261</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=160262&amp;view=rev">160262</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=21603">21603</a></td>
+                 <td>Automatic readonly/disabled settings using new &lt;html:form&gt; tag attributes.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-04-06</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=160255&amp;view=rev">160255</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=160256&amp;view=rev">160256</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=32778">32778</a></td>
+                 <td>Resolve HTML Link Tag not working with JSTL Loop Tag.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-03-31</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=159608&amp;view=rev">159608</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=159609&amp;view=rev">159609</a>)</td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Improve ValidWhen Exception Handling - exceptions are now logged and
+                     validation fails returning an error message with details of the error.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-03-31</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=159583&amp;view=rev">159583</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=159606&amp;view=rev">159606</a>)</td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>A validwhen examples page and validation resource/bundles example pages (Server Side 
+                     and JavaScript) have been added to the struts-examples webapp.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-03-29</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=159342&amp;view=rev">159342</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Commons Validator dependency changed to version 1.1.4.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-03-28</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=159292&amp;view=rev">159292</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Add "bundle" attribute to El version of JavascriptValidatorTag.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-03-28</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=159269&amp;view=rev">159269</a> &amp;
+                    <a href="http://svn.apache.org/viewcvs.cgi?rev=159268&amp;view=rev">159268</a> 
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=159291&amp;view=rev">159291</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=21760">21760</a> 
+                                    <a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=18169">18169</a></td>
+                 <td>Resolve #21760 Support for non-default resource bundles in validation. 
+                     Resolve #18169 Resource attribute of msg tag in the validation.xml doesn't work.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-03-22</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=158622&amp;view=rev">158622</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=158617&amp;view=rev">158617</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=34120">34120</a></td>
+                 <td>Fix invalid XML in the struts-doc-config.xml file in the Tiles Documentation webapp.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-03-20</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=158267&amp;view=rev">158267</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=158730&amp;view=rev">158730</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=27089">27089</a></td>
+                 <td>Add doubleRange validator to the validator-rules.xml</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-03-19</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=158216&amp;view=rev">158216</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=158727&amp;view=rev">158727</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=34027">34027</a></td>
+                 <td>Name attribute is no longer rendered in the &lt;html:form&gt; tag if the rendering mode is XHTML.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-03-14</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=157398&amp;view=rev">157398</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=157399&amp;view=rev">157399</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=33876">33876</a></td>
+                 <td>JavaDoc corrections.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-03-14</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=157395&amp;view=rev">157395</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=157397&amp;view=rev">157397</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=33998 ">33998</a></td>
+                 <td>Fix @link() tags</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-02-15</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=153901&amp;view=rev">153901</a>
+                     (<a href="http://svn.apache.org/viewcvs.cgi?rev=164747&amp;view=rev">164747</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=866">866</a></td>
+                 <td>Add ActionRedirect class to allow adding request parameters to redirecting forwards.</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-02-09</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=153065&amp;view=rev">153065</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=158605&amp;view=rev">158605</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=14042">14042</a></td>
+                 <td>Resolve memory leaks with JBoss 3.x +(Tomcat/Jetty).</td>
+             </tr>
+             <tr>
+                 <td align="center">2005-01-06</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=124417&amp;view=rev">124417</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=124418&amp;view=rev">124418</a>)</td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Change DownloadAction to use supplied buffer size. </td>
+             </tr>
+             <tr>
+                 <td align="center">2004-12-28</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=123473&amp;view=rev">123473</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=32490">32490</a></td>
+                 <td>Sync up the EL tags with their non-EL counterparts. This adds the 'bundle'
+                     attribute to many tags, and also the 'error*' attributes, and 'header', 'footer',
+                     'prefix' and 'suffix' for the Errors tag.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-12-27</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=123447&amp;view=rev">123447</a>, 
+                     <a href="http://svn.apache.org/viewcvs.cgi?rev=123444&amp;view=rev">123444</a> &amp;
+                     <a href="http://svn.apache.org/viewcvs.cgi?rev=123442&amp;view=rev">123442</a> 
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=123587&amp;view=rev">123587</a>)</td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=32504">32504</a>
+                                    <a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=32016">32016</a></td>
+                 <td>Change ModuleException to ensure all constructors invoke super. 
+                     Resolve #32504 - document the means used to format values in the &lt;bean:write&gt; tag. 
+                     Resolve #32016 - wrap the hidden token field in a &lt;div&gt; element for HTML 4.01 Strict compliance.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-12-12</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=111630&amp;view=rev">111630</a>
+                    (<a href="http://svn.apache.org/viewcvs.cgi?rev=159674&amp;view=rev">159674</a>)</td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Remove use of "enum" as its a keyword in Java 5.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-20</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=106043&amp;view=rev">106043</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td><b><a href="http://svn.apache.org/viewcvs.cgi/struts/core/branches/STRUTS_1_2_BRANCH/">1.2.x Branch</a> created</b></td>
+             </tr>
+         </table>
+
+     <h3 id="STRUTS_1_2_6">Version 1.2.6</h3>
+
+         <table>
+             <thead><tr>
+                 <th>Modification</th><th>Revision</th><th>Bugzilla</th><th>Description</th>
+             </tr></thead>
+             <tr>
+                 <td align="center">2004-11-20</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=106041&amp;view=rev">106041</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td><a href="http://svn.apache.org/viewcvs.cgi/struts/core/tags/STRUTS_1_2_6/">Version 1.2.6</a> tagged</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-20</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=105966&amp;view=rev">105966</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31642">31642</a></td>
+                 <td>Resolve &lt;bean:include&gt; always include Session id (if any) even for external Urls (href attribute)</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-20</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=105965&amp;view=rev">105965</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=32283">32283</a></td>
+                 <td>Two slashes created by TagUtils.getActionMappingURL for webapps in root context</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-20</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=105963&amp;view=rev">105963</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=32265">32265</a></td>
+                 <td>Add a warning to reset FormFile</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-20</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=105907&amp;view=rev">105907</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=32323">32323</a></td>
+                 <td>Shale mailreader example should define the servlet version as 2.4</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-19</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=105888&amp;view=rev">105888</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Changes to update maven build after SVN layout re-org.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-19</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=105881&amp;view=rev">105881</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Remove redundant definitions of maven.repo.central and maven.repo.central.directory</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-19</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=105785&amp;view=rev">105785</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Added ability to load struts, validator, and tiles config files from classloader if not 
+                     found in the servlet context.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-19</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=105787&amp;view=rev">105787</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Better handling of servlet initialization errors to mark the servlet as unavailable and
+                     notify the developer of the probable cause.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-18</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=76271&amp;view=rev">76271</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Add missing base class for Shale test cases.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-17</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=76098&amp;view=rev">76098</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=32134">32134</a></td>
+                 <td>Must use contextRelative to forward to Actions in Default module.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-13</td>
+                 <td colspan="2" align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=57587&amp;view=rev">57587</a> - 
+                     <a href="http://svn.apache.org/viewcvs.cgi?rev=65927&amp;view=rev">65927</a><br />(not consecutive)</td>
+                 <td>Subversion repository rearranged into separate core, el, faces and sandbox subprojects.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-09</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=57108&amp;view=rev">57108</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31983">31983</a></td>
+                 <td>Validator validwhen documentation typo.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-09</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=57099&amp;view=rev">57099</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=32123">32123</a></td>
+                 <td>DigestingPlugIn can't load a digester rule file.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-06</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=56770&amp;view=rev">56770</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=32047">32047</a></td>
+                 <td>"Created" boolean in FacesRequestProcessor.doForward() not being set</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-05</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=56678&amp;view=rev">56678</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=23924">23924</a></td>
+                 <td>Improve TagUtils.filter() performance.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-11-03</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=56532&amp;view=rev">56532</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Add LazyValidatorForm</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-30</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=56018&amp;view=rev">56018</a>, 
+                                    <a href="http://svn.apache.org/viewcvs.cgi?rev=56513&amp;view=rev">56513</a>, 
+                                    <a href="http://svn.apache.org/viewcvs.cgi?rev=56520&amp;view=rev">56520</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Change BeanUtils dependency to 1.7.0, Digester dependency to 1.6 and remove Collections Dependency</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-30</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=56011&amp;view=rev">56011</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Add "actions/DownloadAction.java", an abstract action that provides the nuts and bolts 
+                     for downloading files.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-29</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=55980&amp;view=rev">55980</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Document that if a link to a forward is used to switch modules, the path must point to an action.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-26</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=55577&amp;view=rev">55577</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31399">31399</a></td>
+                 <td>Message resources file in Struts Blank is misplaced. 
+                     [<a href="http://svn.apache.org/viewcvs.cgi?rev=55584&amp;view=rev">55584</a>] Update README
+                     with new layout.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-26</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=55576&amp;view=rev">55576</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31348">31348</a></td>
+                 <td>Using a tiles definition as errorPage causes infinite looping</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-24</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=55416&amp;view=rev">55416</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31761">31761</a></td>
+                 <td>NullPointerException in ActionServlet</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-22</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=55318&amp;view=rev">55318</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31850">31850</a></td>
+                 <td>Implement Serializable on ActionServletWrapper</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-20</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=55110&amp;view=rev">55110</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Add documentation to base chain-config.xml to help Tiles users.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-18</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=55025&amp;view=rev">55025</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31755">31755</a></td>
+                 <td>Document the default value for "scope" on an &lt;action&gt; element in the DTD for a
+                     struts-config.xml file (along with all the other documentation).</td>
+             </tr>
+         </table>
+
+     <h3 id="STRUTS_1_2_5">Version 1.2.5</h3>
+
+         <table>
+             <thead><tr>
+                 <th>Modification</th><th>Revision</th><th>Bugzilla</th><th>Description</th>
+             </tr></thead>
+             <tr>
+                 <td align="center">2004-10-17</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=54947&amp;view=rev">54947</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td><a href="http://svn.apache.org/viewcvs.cgi/struts/core/tags/STRUTS_1_2_5/">Version 1.2.5</a> tagged</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-16</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=54936&amp;view=rev">54936</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Update several Javadoc parameter names to resolve Javadoc generation warnings</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-16</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=54892&amp;view=rev">54892</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Remove dependency on commons-lang.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-16</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=54889&amp;view=rev">54889</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Update roadmap for 1.2.4 / 1.2.5 releases.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-09</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=54187&amp;view=rev">54187</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Move Struts-Faces from "contrib" to the trunk.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-03</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=51829&amp;view=rev">51829</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Add header,footer,prefix,suffix attributes to ErrorsTag.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-03</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=51825&amp;view=rev">51825</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31481">31481</a></td>
+                 <td>Have Tiles ControllerSupport execute() call perform() for backward compatibility.
+                     To be removed after version 1.2.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-03</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=51824&amp;view=rev">51824</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Add validwhen test to compare two Strings containing numbers.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-03</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=51823&amp;view=rev">51823</a></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31514">31514</a></td>
+                 <td>validwhen validator should do numeric compare when both items convertable to Integer.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-10-01</td>
+                 <td align="center"><a href="http://svn.apache.org/viewcvs.cgi?rev=51759&amp;view=rev">51759</a></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td><b>Move repository to Subversion.</b></td>
+             </tr>
+             <tr>
+                 <td align="center">2004-09-23</td>
+                 <td align="center"><i>cvs</i></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=17708">17708</a></td>
+                 <td>Better i18n and alternate bundle support for html tags. Add missing "bundle" attribute
+                     to tld for html tags. Tags affected are ButtonTag, CancelTag, CheckboxTag, FileTag,
+                     FrameTag, HiddenTag, LinkTag, MultiboxTag, PasswordTag, RadioTag, ResetTag, SelectTag,
+                     SubmitTag,TextTag, TextareaTag. Also added a test for the bundle attribute for each of
+                     the above tags.</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-09-23</td>
+                 <td align="center"><i>cvs</i></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31212">31212</a>
+                                    <a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=20417">20417</a></td>
+                 <td>Add missing nested tag attributes.
+                     Resolve #31212 "nested:link module attribute not specified in tld".
+                     Resolve #20417 "Attribute idName not declared for NestedRadioTag".</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-09-23</td>
+                 <td align="center"><i>cvs</i></td>
+                 <td align="center"><a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=31374">31374</a></td>
+                 <td>Forward path in Validator struts-config.xml in struts-examples incorrect</td>
+             </tr>
+             <tr>
+                 <td align="center">2004-09-23</td>
+                 <td align="center"><i>cvs</i></td>
+                 <td align="center"><i>n/a</i></td>
+                 <td>Refactor some of the HTML tags make extending them easier. 
+                     <ul><li>added prepareOtherAttributes() method</li>
+                         <li>added prepareName() method</li>
+                         <li>use getters rather than instance variables</li>
+                         <li>refactored SubmitTag - ButtonTag, CancelTag and ResetTag now inherit from SubmitTag.</li>
+                     </ul></td>
+             </tr>
+         </table>
+      </section>
+
+     <section>
+       <p class="right">Next:
+       <a href="installation.html">Installation</a></p>
+     </section>
+ </chapter>
+</body>
+</document>

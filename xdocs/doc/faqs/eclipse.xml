@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+
+<document url="./ssl.xml">
+
+<properties>
+
+
+<title>How to setup a basic Struts project using Eclipse IDE - Apache Struts</title>
+
+</properties>
+
+<body>
+
+<chapter href="eclipse" name="How to setup a basic Struts project using Eclipse IDE">
+<section name="Legal Disclamer">
+
+<p>
+* DISCLAIMER - This simple How-To shows you one of many ways to setup a working project using<br/>
+the Struts framework.  This is mainly geared toward struts users who are new to Eclipse, and<br/> 
+don't want to spend a lot of time figuring out the differences between their old IDE (if any)<br/>
+and this one.<br/>
+<br/>
+I will also apologize ahead of time for the formatting of this page.<br/>
+</p>
+In this How-To, I will demonstrate (using Eclipse 2.0.1) how to setup, compile, run,<br/> 
+and debug the struts-example web application that is bundled with the distribution.<br/>
+<br/>
+Next, I will modify the code to pull some data from a MySql database using the popular <br/>
+relational mapping tool OJB. (This is actually quite simple)
+
+</section>
+
+<section name="Let's get started">
+Before we begin, you will need to create a directory somewhere to store your project.<br/>
+I typically use C:\personal\development\Projects\(some project)<br/>
+Once that's done, extract the struts-example.war to that directory <br/>
+(using your favorite zip utility)<br/>
+<br/>
+Delete the META-INF folder because this will be created during the build/jar/war process.<br/>
+            
+Add a build.xml file to the project root.  I use something like this:
+
+  <pre>
+  
+&lt;project name="Struts Example" default="main" basedir="."&gt;
+
+    &lt;!--  This is a basic build script, only the minimums here --&gt;
+
+    &lt;!-- Tell ant to use my environment variables --&gt;
+    &lt;property environment="env"/&gt;
+
+    &lt;property file="./build.properties"/&gt;
+
+    &lt;!-- 
+         This build script assumes Tomcat 5 is the servlet container.
+         Modify as necessary if a different container is being used.
+    --&gt;
+    &lt;property name="tomcat.home"        value="${env.CATALINA_HOME}"/&gt;
+    &lt;property name="servlet.jar"        value="${tomcat.home}/common/lib/servlet-api.jar"/&gt;
+    &lt;property name="jsp.jar"            value="${tomcat.home}/common/lib/jsp-api.jar"/&gt;
+    &lt;property name="deploy.dir"         value="${tomcat.home}/webapps"/&gt;
+    &lt;property name="build.compiler"     value="modern"/&gt;
+    &lt;property name="build.dir"          value="./WEB-INF/classes" /&gt;
+    &lt;property name="src.dir"            value="./WEB-INF/src"/&gt;
+    &lt;property name="war.file"           value="struts-example"/&gt;
+    &lt;property name="war.file.name"      value="${war.file}.war"/&gt;
+
+    &lt;path id="project.class.path"&gt;
+        &lt;fileset dir="./WEB-INF/lib/"&gt;
+            &lt;include name="**/*.jar"/&gt;
+        &lt;/fileset&gt;
+        &lt;pathelement path="${src.dir}"/&gt;
+        &lt;pathelement path="${servlet.jar}"/&gt;
+        &lt;pathelement path="${jsp.jar}"/&gt;
+    &lt;/path&gt;
+
+    &lt;target name="clean"&gt;
+        &lt;delete dir="${build.dir}" includeEmptyDirs="true" /&gt;
+    &lt;/target&gt;
+
+    &lt;target name="prep"&gt;
+        &lt;mkdir dir="${build.dir}"/&gt;
+    &lt;/target&gt;
+
+    &lt;target name="compile"&gt;
+        &lt;javac srcdir="${src.dir}"
+               destdir="${build.dir}"
+               debug="on"
+               deprecation="on"&gt;
+        &lt;include name="**/*.java"/&gt;
+        &lt;classpath refid="project.class.path"/&gt;
+        &lt;/javac&gt;
+    &lt;/target&gt;
+
+    &lt;target name="cleanWebApp"&gt;
+        &lt;delete file="${deploy.dir}/${war.file.name}" /&gt;
+        &lt;delete dir="${deploy.dir}/${war.file}" includeEmptyDirs="true" /&gt;
+    &lt;/target&gt;
+
+    &lt;target name="war"&gt;
+        &lt;war warfile="${war.file.name}" webxml="./WEB-INF/web.xml"&gt;
+             &lt;fileset dir="./" includes="**/*.*" excludes="*.war, **/*.nbattrs, web.xml, **/WEB-INF/**/*.*, **/project-files/**/*.*"/&gt;
+             &lt;webinf  dir="./WEB-INF"    includes="**/*" excludes="web.xml, **/*.jar, **/*.class"/&gt;
+             &lt;lib     dir="./WEB-INF/lib"/&gt;
+             &lt;classes dir="${build.dir}"/&gt;
+             &lt;classes dir="${src.dir}"&gt;
+                 &lt;include name="**/*.properties"/&gt;				
+             &lt;/classes&gt;
+        &lt;/war&gt;
+    &lt;/target&gt;
+
+    &lt;target name="deploy"&gt;
+        &lt;copy todir="${deploy.dir}"&gt;
+            &lt;fileset dir="./" includes="${war.file.name}"/&gt;
+        &lt;/copy&gt;
+    &lt;/target&gt;
+
+    &lt;target name="main" depends="clean, prep, cleanWebApp, compile, war"/&gt;
+
+&lt;/project&gt;
+
+  </pre>
+
+    <ol>
+        <li>
+            Create a new project.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style01.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            New Java Project<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style02.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Browse for the folder you created for your project.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style03.jpg"></img><br/><br/><br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style04.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Eclipse will detect your source folders from any subdirectories under your project.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style05.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            In our case, this is where the src folder was placed.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style06.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Default standard libs are automatically added depending on the type of project.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style07.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Add the existing web app jars.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style08.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Now we need to add a few jars from the file system.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style09.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            We always need this one (servlet.jar)<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style10.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Ahhhh...everything looks ok for now.  You can always go back and modify these settings <br/>
+            later.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style11.jpg"></img><br/><br/><br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style12.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            When everything settles down, you should see something like this (of course, it might 
+            look different depending on your installation/customization):<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style13.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Compilation warnings and errors are detected immediately.  In this screenshot, I drill down<br/>
+            into the source folder, package, file, class, and double click on the method....which <br/>
+            brings up the source editor.  I hover the mouse over the offending warning to see <br/>
+            a description of what's wrong.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style14.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            I changed ApplicationConfig to ModuleConfig, then saved and now I see new errors.<br/>
+            You can right click and import ModuleConfig right from the error.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style15.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            A quick look at the import section.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style18.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Right click, Source, Organize Imports<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style20.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Ahhhh...better<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style21.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            From the Package Explorer, right click your build.xml and run Ant:<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style22.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Is this cool or what?<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style23.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Uh Oh!<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style24.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Quick look at what jars are being used to process my build.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style26.jpg"></img><br/><br/><br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style25.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            I simply removed all the existing jars from the IDE's Ant configuration and<br/>
+            added all from my own installation.<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style27.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Can't forget that last one<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style28.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Everything went ok (for me)<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style30.jpg"></img><br/><br/><br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style29.jpg"></img><br/><br/><br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style31.jpg"></img><br/><br/><br/>
+        </li>
+        <li>
+            Time to test-drive<br/>
+            <img alt="" src="../images/how-to/eclipse/developing-eclipse-style32.jpg"></img><br/><br/><br/>
+        </li>
+    </ol>
+
+</section>
+
+</chapter></body></document>

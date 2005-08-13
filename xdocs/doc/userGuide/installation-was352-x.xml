@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<document url="installation-was352-x.html">
+
+  <properties>
+    <title>The Struts Framework Project - Installation - WebSphere 3.5.2</title>
+  </properties>
+
+  <body>
+<chapter name="5.2 Installation" href="installation">
+<section name="Installing Struts with your servlet container" href="Containers">
+
+<h4 id="was352">WebSphere Application Server 3.5 and the Example Application</h4>
+
+<p>Server: Windows 2000 Server with WebSphere 3.5.3 Advanced</p>
+<ol>
+<li>Start up the adminserver. </li>
+<li>Start up Admin Console. </li>
+<li>Use the Convert War file task to convert the struts-example.war from the
+struts-b1 distrib as-is. </li>
+<li>Convert to the default_server, default servlet engine and standard
+install directory (c:\websphere\appserver\hosts\default_host). </li>
+<li>Create a WEB-INF directory in the servlets dir and copy
+struts-config.xml, database.xml AND web.xml into it (Keep WEB-INF with all
+the TLD's under web - both WEB-INF directories must be present). </li>
+<li>Copy jaxp 1.0.1's (NOT 1.1.1's) jaxp.jar and parser.jar to the servlets
+directory of the strut-example webapp. </li>
+<li>In the servlets directory, open struts.jar with WinZip.  Extract the
+three DTD's (struts-config_1_0.dtd, web-app_2_2.dtd and web-app_2_3.dtd)
+into the servlets directory making sure you use folder names (so the files
+extract to servlets/org/apache/struts/resources). </li>
+<li>Click on struts-example in the Admin Console under Default Server/Default
+Servlet Engine and click the advanced tab on the right hand side of the
+screen. </li>
+<li>Down where it says Default Error Page, enter /ErrorReporter and then
+click Apply. </li>
+<li>Start the Default Server via the Admin Console. You should see a whole
+bunch of ActionServlet messages in the default_host_stdout.log file with no
+exceptions. </li>
+<li>Via a browser accessed the app using
+http://localhost/struts-example/index.jsp. </li>
+<li>If it returns "Application not Available" then go back to the Admin
+Console, right-click on struts-example and select Restart WebApp. </li>
+<li>Once it reports success, go back to the URL above and try again - it
+should work flawlessly. </li>
+</ol>
+<p>
+For whatever reason, some installations do not like XML files that reference
+PUBLIC DTD's - if in looking at the default_host_stdout.log file you see
+errors about invalid public URL references during DTD registrations, or if
+your pages say "cannot find //logon or //saveRegistration (ie. action
+mappings) then do the following:</p>
+<ol>
+<li>Stop Default Server</li>
+<li>Go to servlets\WEB-INF\ and edit web.xml and struts_config.xml.</li>
+<li>In the DOCTYPE declaration, change the word PUBLIC to SYSTEM and
+completely remove the line that reads "-//Sun Microsystems, Inc.//DTD Web
+Application 2.2//EN" from web.xml and remove "-//Apache Software
+Foundation//DTD Struts Configuration 1.0//EN" from struts-config.xml. </li>
+<li>Save these changes and go back to step 10 above.</li>
+</ol>
+<p>Just as a troubleshooting guide - </p>
+<p>If you are getting errors like "Cannot find ActionMappings, etc..." or
+"Cannot find key org.apache.struts.MESSAGE"  then your application is most
+likely still bombing on the struts-config issue that Richard discovered.
+The above steps SHOULD correct that leaving nothing out.  If you are getting
+404 errors about //logon or something not found, then you are still having
+XML config troubles and it is not initializing the Action servlet properly.
+Follow the steps above in regards to DTD's and it should work.</p>
+<p>As a final thought, I obviously haven't gotten to test too much but I don't
+believe that there are ANY coding changes that need to be made to the actual
+struts source.  Everything about getting it to work in WebSphere has been a
+WebSphere configuration issue thus far (and I don't think I'll be having any
+more). </p>
+<p>If changing the DTD's to SYSTEM, do so ONLY AFTER using the Convert a War
+util.  Ant doesn't seem to like it the other way! :)</p>
+  <hr/>
+  <p>Back to <a href="installation.html#Containers">Installation</a></p>
+</section>
+</chapter>
+</body>
+</document>

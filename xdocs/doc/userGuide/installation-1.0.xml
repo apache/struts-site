@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<document url="installation-1.0.html">
+
+  <properties>
+    <title>The Struts Framework Project - Installation (1.0)</title>
+  </properties>
+
+  <body>
+
+  <section name="Prerequisite Software" href="Prerequisites">
+
+  <p>The Struts binary distribution needs three other software packages installed to 
+  operate. You may already have these installed on your system. To build Struts from 
+  source you may need to acquire and install several others. The complete list is as 
+  follows:</p>
+
+  <ul>
+  <li><strong>Java Development Kit</strong> - You <strong>must</strong> download and install
+      a Java2 (version 1.2 or later) Java Development Kit implementation for
+      your operating system platform.
+      A good starting point for locating Java Development Kit distributions is
+      <a href="http://java.sun.com/j2se">http://java.sun.com/j2se</a>.</li>
+  
+  <li><strong>Servlet Container</strong> - You <strong>must</strong> download and install a
+      servlet container that is compatible with the Servlet API Specification,
+      version 2.2 or later, and the JavaServer Pages (JSP) Specification,
+      version 1.1 or later.  One popular choice is to download Apache's
+      <a href="http://jakarta.apache.org/tomcat">Tomcat</a> (version 3.1
+      or later required, version 3.2 or later recommended).</li>
+
+  <li><strong>XML Parser</strong> - Struts <strong>requires</strong> the presence of an XML
+      parser that is compatible with the Java API for XML Parsing (JAXP)
+      specification, 1.0 or later.  You can download and install the JAXP
+      <a href="http://java.sun.com/xml">reference implementation</a>,
+      which is required for building the Struts source distribution.  In
+      Struts-based web applications, you may replace the reference
+      implementation classes with any other JAXP compliant parser, such as
+      <a href="http://xml.apache.org/xerces-j">Xerces</a>.  See detailed
+      instructions related to the parser in the instructions for
+      <a href="#Building">building</a> and <a href="#Installing">installing</a>
+      Struts, below.</li>
+
+  <li><strong>Ant Build System</strong> - If you are building Struts from the
+      source distribution, you must download and install version 1.3 or later
+      of the <a href="http://jakarta.apache.org/ant">Ant</a> build system.
+      This package is also strongly recommended for use in developing your
+      own web applications based on Struts.
+      <ul>
+      <li>If you are using the release version of Ant version 1.3, you will
+          also need to download the "optional.jar" file that contains the
+          implementation of Ant's <code>&lt;style&gt;</code> command.</li>
+      <li>Make sure that the "ant" and "ant.bat" scripts are executable, by
+          adding the $ANT_HOME/bin directory to your PATH environment
+          variable.</li>
+      </ul></li>
+
+  <li><strong>JDBC 2.0 Optional Package Classes</strong> - Struts supports
+      an optional implementation of <code>javax.sql.DataSource</code>, so it
+      requires the API classes to be compiled.  They can be downloaded from
+      <a href="http://java.sun.com/products/jdbc/download.html">http://java.sun.com/products/jdbc/download.html</a>.</li>
+
+  <li><strong>Xalan XSLT Processor</strong> - If you are building Struts from
+      the source distribution, you must download and install version 1.2
+      (problems have been reported with current versions of Xalan 2.0)
+      of the <a href="http://xml.apache.org/xalan">Xalan</a>
+      XSLT processor (which also includes the Xerces XML parser), or use the
+      version of Xalan included in the JAXP 1.1 release.  This
+      processor is used to convert the Struts documentation from its internal
+      XML-based format into the HTML that is presented in the Struts
+      documentation application.</li>
+  </ul>
+
+  </section>
+
+  <section name="Install A Struts Binary Distribution" href="Installing">
+
+    <p>First, download a binary distribution of Struts by following the
+    instructions <a href="../acquiring.html">here</a>.  Then, make sure
+    you have downloaded and installed the
+    <a href="#Prerequisites">prerequisite</a> software packages described
+    above.</p>
+
+    <p>Unpack the Struts binary distribution into a convenient directory.
+    (If you <a href="#Building">build Struts from the source distribution</a>, 
+    the result of the build will already be an unpacked binary distribution 
+    for you). The distribution consists of the following contents:</p>
+
+    <ul>
+    <li><strong>lib/struts.jar</strong> - This JAR file contains all of the
+        Java classes included in Struts.  It should be copied into the
+        <code>WEB-INF/lib</code> directory of your web application.
+        <em>WARNING</em> - If you are going to be hosting multiple Struts
+        based applications on the same servlet container, you will be tempted
+        to place the <code>struts.jar</code> file into the shared repository
+        supported by your container.  Be advised that this will like cause you
+        to encounter ClassNotFoundException problems unless <em>all</em> of
+        your application classes are stored in the shared repository.</li>
+    <li><strong>lib/struts*.tld</strong> - These are the "tag library
+        descriptor" files that describe the custom tags in the various Struts
+        tag libraries.  They should be copied into the <code>WEB-INF</code>
+        directory of your web application.</li>
+    <li><strong>webapps/struts-blank.war</strong> - This is a simple "web
+        application archive" file containing a basic starting point for
+        building your own Struts-based applications.</li>
+    <li><strong>webapps/struts-documentation.war</strong> - This is a
+        "web application archive" file containing all of the Struts
+        documentation found on the
+        <a href="http://jakarta.apache.org/struts">Struts web site</a>
+        (including these pages).  You can install this web application
+        on any servlet container compatible with Servlet API 2.2 or later.</li>
+    <li><strong>webapps/struts-example.war</strong> - This is an example
+        web application that uses a large percentage of Struts features.
+        You can install this web application on any servlet container
+        compatible with the Servlet 2.2 (or later) and JSP 1.1 (or later)
+        specifications.  If an XML parser is not made available to web
+        applications by your container, you will need to add one to the
+        WEB-INF/lib directory of this web application.</li>
+    <li><strong>webapps/struts-exercise-taglib.war</strong> - This web
+        application contains test pages for the various custom tags supported
+        by Struts.  It is primarily of use to developers who are enhancing the
+        Struts custom tag libraries, but may also be useful as simple examples
+        of the usage of various Struts tags.</li>
+    <li><strong>webapps/struts-template.war</strong> - This web application
+        both introduces and demonstrates the Struts template tags.</li>       
+    <li><strong>webapps/struts-upload.war</strong> - This web application
+        is a quick example of uploading files using the Struts framework.</li>
+        </ul>
+
+    <p>To use Struts in your own application, you will need to follow
+    these steps:</p>
+    <ul>
+    <li>Copy the file <code>lib/struts.jar</code> from the Struts distribution
+        into the <code>WEB-INF/lib</code> directory of your web application.
+        </li>
+    <li>Copy the all of the files that match <code>lib/struts*.tld</code>
+        from the Struts distribution into the <code>WEB-INF</code> directory
+        of your web application.</li>
+    <li>Modify the <code>WEB-INF/web.xml</code> file for your web application
+        to include a <code>&lt;servlet&gt;</code> element to define the
+        controller servlet, and a <code>&lt;servlet-mapping&gt;</code> element
+        to establish which request URIs are mapped to this servlet.  Use the
+        <code>WEB-INF/web.xml</code> file from the Struts example application
+        for a detailed example of the required syntax.</li>
+    <li>Modify the <code>WEB-INF/web.xml</code> file of your web application
+        to include the following tag library declarations:</li>
+    </ul>
+
+<pre>&lt;taglib&gt;
+  &lt;taglib-uri&gt;/WEB-INF/struts-bean.tld&lt;/taglib-uri&gt;
+  &lt;taglib-location&gt;/WEB-INF/struts-bean.tld&lt;/taglib-location&gt;
+&lt;/taglib&gt;
+
+&lt;taglib&gt;
+  &lt;taglib-uri&gt;/WEB-INF/struts-html.tld&lt;/taglib-uri&gt;
+  &lt;taglib-location&gt;/WEB-INF/struts-html.tld&lt;/taglib-location&gt;
+&lt;/taglib&gt;
+
+&lt;taglib&gt;
+  &lt;taglib-uri&gt;/WEB-INF/struts-logic.tld&lt;/taglib-uri&gt;
+  &lt;taglib-location&gt;/WEB-INF/struts-logic.tld&lt;/taglib-location&gt;
+&lt;/taglib&gt;
+
+&lt;taglib&gt;
+  &lt;taglib-uri&gt;/WEB-INF/struts-template.tld&lt;/taglib-uri&gt;
+  &lt;taglib-location&gt;/WEB-INF/struts-template.tld&lt;/taglib-location&gt;
+&lt;/taglib&gt;
+</pre>
+
+    <ul>
+    <li>Create a file <code>WEB-INF/struts-config.xml</code> that defines the
+        action mappings and other characteristics of your specific application.
+        You can use the <code>struts-config.xml</code> file from the Struts
+        example application for a detailed example of the required syntax.</li>
+    <li>At the top of each JSP page that will use the Struts custom tags,
+        add line(s) declaring the Struts custom tag libraries used on
+        this particular page, like this:</li>
+    </ul>
+
+<pre>&lt;%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %&gt;
+&lt;%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %&gt;
+&lt;%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %&gt;
+&lt;%@ taglib uri="/WEB-INF/struts-template.tld" prefix="template" %&gt;
+</pre>
+
+    <ul>
+    <li>When compiling the Java classes that comprise your application, be sure
+        to include the <code>struts.jar</code> file (copied earlier) on the
+        CLASSPATH that is submitted to the compiler.</li>
+    </ul>
+</section> 
+
+<section name="Installing Struts with your servlet container" href="Containers"> 
+
+<p><strong>WARNING</strong> - Do <strong>NOT</strong> add
+<code>struts.jar</code> to the classpath of your servlet container in an
+attempt to avoid placing it in the <code>/WEB-INF/lib</code> directory of
+each individual web app!  Doing so will cause problems with
+<code>ClassNotFoundException</code> exceptions.</p>
+
+<p>For most containers, you need only to: </p>
+<ul>
+  <li>Copy the WAR files in your Struts <code>/webapp</code> directory to your 
+    containers <code>webapps</code> directory. </li>
+  <li>In some cases, you may need to restart your container if it is running.</li>
+</ul>
+<h4>Status of various containers</h4>
+<ul>
+  <li>Bluestone Universal Business Server - <a href="installation-ubs72.html">Additional 
+    steps required.</a></li>
+  <li>Borland Application Server 4.5 -No additional 
+    steps required.</li>
+  <li>iPlanet Application Server - Service Pack 2 is recommended. Note that the database 
+  object in the Struts-Example application is not compatible with this container.</li>
+  <li>iPlanet Web Server - <a href="installation-ip.html">Additional steps required.</a></li>
+  <li>iPortal Application Server - <a href="installation-ipas.html">Additional steps required.</a></li>
+  <li>Jetty - <a href="installation-jetty.html">Additional steps required.</a></li>
+  <li>JRun - <a href="installation-jr30.html">Additional steps required.</a></li>
+  <li>Orion Application Server - <a href="installation-oas.html">Additional steps 
+    required.</a></li>
+  <li>Resin 1.2+ "standalone" - No additional steps required.</li>
+  <li>SilverStream 3.7.1 and later - <a href="installation-sas.html">Additional steps required.</a></li>
+  <li>Tomcat 3.1 and prior - Not recommended. Use Tomcat 3.2.1 or later.</li>
+  <li>Tomcat 3.2.1 with Apache - <a href="installation-tc.html">Additional steps 
+    required.</a></li>
+  <li>Tomcat 3.2.1+ "standalone" - No additional steps required.</li>
+  <li>Tomcat 4.0 - No additional steps required.</li>
+  <li>Weblogic - <a href="installation-wls5.html">Additional steps required.</a></li>
+  <li>WebLogic 6.0+ - No additional steps required.</li>
+  <li>WebSphere - <a href="installation-was352.html">Additional steps required.</a></li>
+  <li>WebSphere - <a href="installation-was352-x.html">Steps for the Example Application.</a></li></ul>
+</section> 
+
+
+  <section name="Building Struts From Source" href="Building">
+
+    <p>First, download a source distribution of Struts by following the
+    instructions <a href="../acquiring.html">here</a>.  Then, make sure
+    you have downloaded and installed <strong>all</strong> of the
+    <a href="#Prerequisites">prerequisite</a> software packages described
+    above.</p>
+
+    <p>To build Struts, you will need to customize the build process to the
+    details of your development environment as follows:</p>
+    <ul>
+    <li>The Struts source distribution uses a file named
+        <code>build.properties</code> (in the top-level directory of the
+        distribution) to identify the location of external components
+        that Struts depends on.</li>
+    <li>There is no <code>build.properties</code> file included with the
+        source distribution.  However, there is an example file named
+        <code>build.properties.example</code> that you can copy to
+        <code>build.properties</code> and then customize.</li>
+    <li>The properties you must configure in <code>build.properties</code> are:
+        <ul>
+        <li><strong>catalina.home</strong> - Pathname to the directory of your
+            binary distribution of Tomcat 4.0 (required only if you wish to
+            use the <code>deploy.catalina</code> target).</li>
+        <li><strong>servletapi.home</strong> - Pathname to the directory of
+            your binary distribution of the Servlet API classes.</li>
+        <li><strong>tomcat.home</strong> - Pathname to the directory of your
+            binary distribution of Tomcat 3.2 (required only if you wish to
+            use the <code>deploy.tomcat</code> target).</li>
+        <li><strong>xerces.home</strong> - Pathname to the directory of your
+            binary distribution of the Xerces parser, version 1.2 or 1.3
+            (required only if you wish to use the <code>deploy.catalina</code>
+            target).</li>
+        </ul></li>
+    <li>If you are a Struts developer with write access to the CVS repository,
+        be sure that you do <strong>NOT</strong> check in a copy of the
+        <code>build.properties</code> file, since it will be different for
+        each individual developer.</li>
+    </ul>
+
+    <p>To build a "distribution" version of Struts, first change your current
+    directory to the directory in which you have unpacked the Struts
+    source distribution, and (if necessary) create or customize the
+    <code>build.properties</code> file as described above.  Then, type:</p>
+<pre>
+        ant dist
+</pre>
+
+    <p>This command will create a binary distribution of Struts, in a
+    directory named <code>dist</code> (relative to where you
+    are compiling from).  This directory contains an exact replica of the
+    files included in a binary distribution of Struts, as described
+    in the <a href="#Installing">preceding section</a>.</p>
+
+  </section>
+
+</body>
+</document>

@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<document url="index.html">
+
+  <properties>
+    <title>Shale Framework</title>
+  </properties>
+
+  <body>
+
+
+    <section name="Shale Framework"      href="background">
+
+
+      <subsection name="Background"      href="background-background">
+
+        <p>Little did anyone know, when the first few lines of code were
+        committed to the <a href="http://struts.apache.org">Struts</a>
+        CVS repository in June 2000, that a revolution was brewing.  Prior
+        to that time, there were few useful models for best practices for
+        the architecture of web based applcations.  The best we could do
+        was handwaving about "Model 1" and "Model 2" approaches.</p>
+
+        <p>The original implementation of Struts, which was released as a
+        1.0 product approximately one year later, changed all that.  As
+        more and more people came to understand the advantages of building
+        on top of a stable and supported framework, and as more and more
+        developers adopted it for their own application development, and
+        as more and more books helped everyone understand how to use the
+        framework correctly, and as more and more development tools provided
+        support for building Struts based applications, the word changed.
+        A small open source project became a defacto industry standard that,
+        even today, is very popular.</p>
+
+        <p>But that was then ... and this is now.  In the years that Struts
+        has been around (five and counting as of this writing), vastly
+        improved technologies have become available from many talented
+        architects and designers.  Moore's Law has continued its seemingly
+        inexhaustible progress.  Developers have grown in their ability to
+        understand the benefits of a monolithic controller architecture ...
+        as well as increasingly developing preferences towards agility,
+        code reuse, unit tests, and building applications by composition
+        instead of inheritance.</p>
+
+        <p>One of the critical success factors for Struts has been, and
+        continues to be, an obvious commitment on the part of the Struts
+        developers towards backwards compatibility.  This has led to Struts
+        being both praised (for protecting the investment of developers
+        with thousands of applications critically dependent on the framework)
+        and dissed (for being a dinosaur compared to all the "latest and
+        greatest" favorite technological approaches).  History has shown,
+        in terms of its continued popularity, that this is a good
+        strategic approach.</p>
+
+        <p>But, it is also time to harvest many of the great ideas that have
+        matured in the last several years.  It is time to base a web tier
+        framework on top of the new standard API in this space (JavaServer Faces),
+        and eliminate the need to implement redundant features, instead of just
+        treating JSF as a UI component technology.  It is time to answer the
+        question "if we knew then what we know now, what would Struts have
+        looked like?"</p>
+
+        <p>Thus, Shale is a proposal for a modern web application framework,
+        fundamentaly based on JavaServer Faces, and focused on improving
+        ease of use for developers adopting JSF as a foundational technology
+        in their own development environments.  At the same time, the
+        architecture of Shale is a set of fine grained services (and service
+        options) that can be combined as needed to meet particular application
+        requirements, rather than a monolithic request processor that is hard
+        to customize and extend.  In addition, integration links for other
+        frameworks and framework components are provided, to ease development
+        when combinations of technologies are required.</p>
+
+        <blockquote><em>EDITOR'S NOTE:  Why "Shale"?  As others have pointed out,
+        the cultural rules of engagement at Apache encourage both evolution
+        and revolution in software designs.  Revolutions are typically assigned
+        code names while they are under discussion, gaining access to the
+        branding of the overall project once they are accepted (or, going off
+        on their own if they are not).  Other proposals for Struts 2.x have
+        talked about tearing down the walls inside the framework, and those
+        are Good Things.  Shale's architecture, on the other hand, is based
+        on the principle that we should fundamentally divide the notion of a
+        web application framework into solid individual layers, much as we
+        see geologically in shale deposits around our volcanoes and coastlines.
+        Each layer of the framework should focus on the specific requirements
+        that are relevant to that layer -- and use of one layer should not
+        necessarily require the use of all the rest (although it's certainly
+        reasonable for synergies to exist if all the layers are chosen :-).
+        Hence, "shale".</em></blockquote>
+
+      </subsection>
+
+
+      <subsection name="Foundations"    href="background-foundations">
+
+        <p>Shale is based on (and requires a runtime environment that
+        supports) the following foundation technologies:</p>
+
+        <ul>
+        <li>Java Runtime Environment (JRE) 1.4 or later.</li>
+        <li>Servlet API 2.4 or later. (*)</li>
+        <li>JavaServer Pages 2.0 or later. (*)</li>
+        <li>JavaServer Faces 1.1 or later.</li>
+        <li>JSP Standard Tag Library (JSTL) 1.1 or later.</li>
+        <li>Apache Commons BeanUtils 1.7 or later.</li>
+        <li>Apache Commons Chain 1.0 or later.</li>
+        <li>Apache Commons Digester 1.7 or later.</li>
+        <li>Apache Commons Logging 1.0.4 or later.</li>
+        </ul>
+
+        <p>(*) Although the sample applications shipped with Shale are
+        configured for these Servlet and JSP versions, at the time of this
+        writing Shale itself does not rely on them; you can successfully
+        run Shale based applications on a Servlet 2.3 / JSP 1.2 platform
+        by using the appropriate syntax in deployment descriptors and JSP
+        pages, and substituting a JSTL 1.0 library for the JSTL 1.1 library
+        listed above.  This is <strong>not</strong> a committed feature for
+        a 1.0 release, unless discussion on the development and user mailing
+        lists indicates that it is important to a significant number of
+        users.</p>
+
+        <p>Various optional Shale components have dependencies on the following
+        additional runtime technologies:</p>
+
+        <ul>
+        <li>Apache Commons Validator 1.1.4 or later.</li>
+        <li>Spring Framework 1.2.2 or later.</li>
+        <li>Struts Tiles (Stand Alone) - currently in Struts Sandbox.</li>
+        </ul>
+
+        <p>If you wish to work on Shale itself, you will require the following
+        additional resources:</p>
+
+        <ul>
+        <li>Java Development Kit (JDK) 1.4 or later.</li>
+        <li>Apache Ant 1.6.3 or later.</li>
+        <li>FindBugs (SourceForge Project) 0.8.6 or later (optional).</li>
+        <li>JUnit 3.8.1 or later.</li>
+        </ul>
+                
+      </subsection>
+
+
+    </section>
+
+
+    <section name="Shale Features"       href="features">
+
+      <p>The major features of the Shale Framework are described in the
+      following detail sections:</p>
+
+      <ul>
+        <li><a href="features.html#view">View Controller</a> - Convenient
+            mechanism to associate a "backing" Java class with each
+            JavaServer Faces <em>view</em> in an application, with predefined
+            event handers for events significant to an application developer.</li>
+        <li><a href="features.html#dialog">Dialog Manager</a> - Mechanism to
+            define a "conversation" with a user that requires multiple HTTP
+            requests to implement, modeled as a state diagram.</li>
+        <li><a href="features.html#application">Application Manager</a> -
+            Traditional application wide front controller features that should
+            be applied to every request.</li>
+        <li><a href="features.html#validation">Validation</a> - Integration with
+            the <a href="http://jakarta.apache.org/commons/validator/">
+            Jakarta Commons Validator Framework</a>, supporting both client side
+            and server side validations based on a single set of configured
+            validation rules.</li>
+        <li><a href="features.html#remoting">Remoting</a> - Server side support
+            for applications that employ <a href="http://wikipedia.org/wiki/AJAX">
+            AJAX</a> (Asynchronous JavaScript and XML) style interactions.</li>
+        <li><a href="features.html#spring">Spring Integration</a> - Integration
+            with the <a href="http://www.springframework.org">Spring Framework</a>,
+            allowing the use of Spring's dependency injection framework to create
+            JavaServer Faces managed beans.</li>
+        <li><a href="features.html#clay">Reusable Views</a> - An innovative
+            sub-framework for supporting the configuration of reusable subtrees
+            of JavaServer Faces components for customizable reuse.</li>
+        <li><a href="features.html#test">Test Framework</a> - Set of mock objects
+            and <a href="junit.org">JUnit</a> test case base classes suitable for
+            testing both the framework classes themselves, as well as application
+            components built on top of the framework.</li>
+      </ul>
+
+    </section>
+
+
+    <section name="Shale Download"       href="download">
+
+      <p>Nightly builds of Shale are available from
+      <a href="http://cvs.apache.org/builds/struts/nightly/struts-shale/">
+      http://cvs.apache.org/builds/struts/nightly/struts-shale/</a>.
+      For convenience, there are four available packages:</p>
+
+      <ul>
+      <li><a href="http://cvs.apache.org/builds/struts/nightly/struts-shale/core-library/">
+          Core Library</a> - The fundamental core of Shale, required for
+          all applications using the framework.</li>
+      <li><a href="http://cvs.apache.org/builds/struts/nightly/struts-shale/clay-plugin/">
+          Clay Plug-In</a> - Library supporting reusable view fragments.</li>
+      <li><a href="http://cvs.apache.org/builds/struts/nightly/struts-shale/test-framework/">
+          Test Framework</a> - Library of mock objects and convenience base
+          classes for JUnit test cases, suitable for testing both the framework
+          itself and the components of applications built on top of Shale.</li>
+      <li><a href="http://cvs.apache.org/builds/struts/nightly/struts-shale/use-cases/">
+          Use Cases Sample App</a> - Composite set of use case based examples
+          of Shale features.</li>
+      </ul>
+
+    </section>
+
+
+    <section name="Shale Documentation"  href="documentation">
+
+      <p>Online Javadocs for Shale (based on the SVN trunk) are
+      periodically updated at:</p>
+
+      <ul>
+      <li><a href="http://people.apache.org/~craigmcc/shale-core-javadocs/">
+          Core Library</a>.</li>
+      <li><a href="http://people.apache.org/~craigmcc/shale-clay-javadocs/">
+          Clay Plug-In</a>.</li>
+      <li><a href="http://people.apache.org/~craigmcc/shale-test-javadocs/">
+          Test Framework</a>.</li>
+      <li><a href="http://people.apache.org/~craigmcc/shale-usecases-javadocs/">
+          Use Cases Sample App</a>.</li>
+      </ul>
+
+    </section>
+
+
+    <section name="Shale Issue Tracking" href="issue">
+
+      <p>Please report any bugs, or log any enhancement requests, in the
+      <a href="http://issues.apache.org/bugzilla">Apache Issue Tracking System</a>,
+      using product <code>Struts</code> and component <code>Shale</code>.</p>
+
+    </section>
+
+
+  </body>
+
+</document>

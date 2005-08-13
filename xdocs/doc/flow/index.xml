@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<document url="index.html">
+
+  <properties>
+    <title>Struts Flow</title>
+  </properties>
+
+  <body>
+
+    <section name="Struts Flow" href="overview">
+      <p>
+Struts Flow is a port of <a href="http://cocoon.apache.org">Cocoon's</a> <a
+href="http://cocoon.apache.org/2.1/userdocs/flow/index.html">Control Flow</a> to Struts to allow complex workflow, like
+multi-form wizards, to be easily implemented using continuations-capable JavaScript. It provides the ability to describe
+the order of Web pages that have to be sent to the client, at any given point in time in an application. The flow
+scripts fulfill the role of Struts Actions, however, they can be used along side traditional Java-based Struts Actions.
+
+        </p>
+        <p>This is an example of a Struts Flow server-side script which logs the user on to an application:
+        <pre>
+function login() {
+  userManager = struts.applicationScope["userManager"];
+  error = "";
+  while (struts.sessionScope["curUser"] == null) {
+    forwardAndWait("loginForm", {"error" : error});
+    user = struts.param["user"];
+    passwd = struts.param["passwd"];
+    if (userManager.login(user, passwd)) {
+      struts.sessionScope["curUser"] = user;
+    } else {
+      error = "Invalid login, please try again";
+    }
+  }
+}  
+        </pre>
+        The <code>forwardAndWait()</code> method sends an HTML page to the user and waits for a response. When the form
+        is submitted, Struts Flow restores the variable values and restarts the script where it left off. There are more
+        detailed examples in the <a href="#examples">Examples</a> section.
+        </p>
+        <p>
+        Since continuations are best implemented in Javascript, Struts Flow also focuses on making Javascript
+        easier to use and better integrated into the Java environment borrowing several ideas from <a 
+        href="http://groovy.codehaus.org">Groovy</a>.  First, information in Collections classes
+        can be accessed using Javascript array (<code>foo[1]</code>) and object (<code>foo["bar"]</code>) notations.
+        Also, Struts Flow uses <a href="http://www.json.org">JSON</a> to allow client-side Javascript running
+        in a browser to call server-side Javascript flow functions.  <a href="http://www.trimpath.com/project/wiki/JavaScriptTemplates">Javascript Templates</a>
+        can be used on the server and client side with Struts Flow to support a 100% Javascript view layer.
+        Finally, core Java API classes like <code>java.io.File</code> have additonal methods and properties
+        added to them.  For example, to process each line of a text file, you can use the following closure:
+        </p>
+<pre>
+  file = new java.io.File("foo.txt");
+  file.eachLine(
+    function(line) {
+      print(line);
+    }
+  );
+</pre>
+        <p>
+        While the initial target of the extracted Control Flow is Struts, the Flow code and Javascript extensions
+        are reusable from other 
+        non-Struts environments.  This means Control Flow could be used to drive non-Struts JSP applications, portlets, or even complex web services.
+        </p>
+    </section>  
+      <section name="Features" href="features">
+            <ul>
+              <li>Easily script complex workflows</li>
+              <li>Full access to Struts features</li>
+              <li>Can exist side-by-side regular Struts actions</li>
+              <li>Ability to run in non-Struts environments (uses Jakarta's Commons-Chain)</li>
+              <li>Enhanced Java API methods and Collections integration</li>
+              <li>Remote RPC support (termed Ajax but with JSON instead of XML) for calling flow methods from the client</li>
+              <li>Includes Wizard library to help easily create complex wizards</li> 
+              <li>Includes <a href="http://www.trimpath.com/project/wiki/JavaScriptTemplates">Javascript Templates</a> library to replace JSP for a 100% Javascript view layer.</li> 
+              <li>Includes number guessing, remote rpc, Javascript Templates, and wizard examples</li> 
+            </ul>
+      </section>
+      <section name="Documentation and Examples" href="examples">
+        <p>
+          The quickest way to understand how Struts Flow works is to take a look at the examples below, and even to
+          download and run them yourself. Once you have your "hello world" application running, use the "Built-in
+          Resources" section on the left to learn what methods and variables Struts Flow makes available to every
+          script. Finally, Struts Flow enhances the standard Java API by adding methods and properties to many classes
+          to keep your Struts Flow scripts short and to the point. A list of the extensions is also on the left under
+          the heading"Java Enhancements".
+        </p>
+             <p>The following examples show how Struts Flow can be used:
+             </p>
+            <ul>
+                <li><a href="guess-example.html">Number Guess Game Example</a> - A simple number guessing game</li>
+                <li><a href="remote-example.html">Number Guess Game Example - Remote Edition</a> - The above game but with a remote call from the client Javascript to let the user "cheat"</li>
+                <li><a href="templates-example.html">Number Guess Game Example - Templates Edition</a> - The above example, but rendering all HTML on both the server and client side using <a
+        href="http://www.trimpath.com/project/wiki/JavaScriptTemplates">Javascript Templates</a>.</li>
+                <li><a href="wizard-example.html">Wizard Example</a> - Shows a simple wizard framework built on top of Struts Flow that handles back and forward navigation automatically.</li>
+            </ul>
+          <p>
+            For more documentation about the general concept of flow and continuations, the <a href="http://cocoon.apache.org">Apache Cocoon</a> <a href="http://cocoon.apache.org/2.1/userdocs/flow/index.html">Control Flow</a> pages might be useful as the core of Struts Flow was originally extracted from Cocoon.
+          </p>
+       </section>   
+      <section name="What's New" href="new">
+        <section name="0.5 - Unreleased">
+            <ul>
+              <li>Added better Collections support within Javascript</li>
+              <li>Upgraded Rhino library to 1.6 which features native continuations support</li>
+              <li>Added framework for adding methods and properties to core Java API classes</li>
+              <li>Added JSON support</li>
+              <li>Added client Javascript library and server-side support for calling flow functions from the brower</li>
+              <li>Added Javascript Templates library for generating HTML content on the server and client side</li>
+              <li>Moved project to Apache Struts</li>
+              <li>Added new remote number guessing game example to demonstrate remote Javascript flow calls</li>
+              <li>Added new templates number guessing game example to demonstrate a 100% Javascript application</li>
+              <li>Added new documentation generated from the Java and Javascript source files</li>
+            </ul>
+        </section>
+        <section name="0.2 - September 10, 2004">
+            <ul>
+              <li>Added wizard library to make wizard creation easy</li>
+              <li>Added wizard example</li>
+              <li>Updated and improved documentation</li>
+              <li>Fixed a few bugs</li>
+            </ul>
+        </section>
+        <section name="0.1 - June 3, 2004">
+            <ul>
+              <li>Hooks into Struts' logging</li>
+              <li>Added continuation expiration system</li>
+              <li>Added support for JavaScript debugger</li>
+              <li>Improved Struts integration</li>
+              <li>Added full JavaDocs</li>
+              <li>Added many more configuration options</li>
+            </ul>
+        </section>
+        <section name="Initial Import - May 12, 2004">
+            <ul>
+              <li>Example working</li>
+              <li>Struts integration functioning</li>
+              <li>Needs better Struts form integration</li>
+              <li>Needs to hook into Struts' logging</li>
+            </ul>
+        </section>
+     </section>   
+      <section name="Requirements" href="requirements">
+          <p>
+            Struts-specific features of Struts Flow requires Struts 1.1 or greater.
+          </p>
+      </section>
+ </body>
+</document>

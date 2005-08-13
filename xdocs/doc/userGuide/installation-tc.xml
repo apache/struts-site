@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<document url="installation-tc.html">
+
+  <properties>
+    <title>The Struts Framework Project - Installation - Tomcat with Apache</title>
+  </properties>
+
+  <body>
+<chapter name="5.2 Installation" href="installation">
+<section name="Installing Struts with your servlet container" href="Containers">
+<h4 id="tc321">Tomcat 3.2.1 With Apache</h4>
+<p>Note that the instructions for Tomcat 4 will be different than those for Tomcat 3,
+but the Tomcat 4.0 web connector is still under development. Versions of Tomcat prior
+to 3.2.1 are not recommend for use with Struts.</p>
+<ul>
+  <li>These instructions assume you have successfully integrated Tomcat with Apache
+    according to the Tomcat documentation.</li>
+  <li>Copy "struts-documentation.war" and "struts-example.war" to your $TOMCAT_HOME/webapps
+    directory</li>
+  <li>Restart Tomcat if it is already running</li>
+  <li>Tomcat will generate a file "$TOMCAT_HOME/conf/tomcat-apache.conf" that
+    will be used by Apache. This file is regenerated every time you start Tomcat,
+    so copy this file to a safe place (such as your Apache configuration directory;
+    on Unix systems this is usually <code>/usr/local/apache/conf</code>.</li>
+  <li>If you are running Tomcat 3.1, Tomcat will not have generated the entries
+    for your new applications. Add the following lines to the <code>tomcat-apache.conf</code>
+    file that you have saved, replacing $TOMCAT_HOME with the path to your Tomcat
+    home directory:</li>
+</ul>
+<pre>
+Alias /struts-documentation "$TOMCAT_HOME/webapps/struts-documentation
+  &lt;Directory "$TOMCAT_HOME/webapps/struts-documentation>
+    Options Indexes FollowSymLinks
+  &lt;/Directory>
+    ApJServMount /struts-documentation/servlet /struts-documentation
+  &lt;Location "/struts-documentation/WEB-INF/">
+    AllowOverride None
+    deny from all
+  &lt;/Location>
+Alias /struts-example "$TOMCAT_HOME/webapps/struts-example"
+  &lt;Directory "$TOMCAT_HOME/webapps/struts-example>
+    Options Indexes FollowSymLinks
+  &lt;/Directory>
+    ApJServMount /struts-example/servlet /struts-example
+  &lt;Location "/struts-example/WEB-INF/">
+    AllowOverride None
+    deny from all
+  &lt;/Location>
+</pre>
+<ul>
+  <li>The generated file above does not know anything
+    about extension mappings defined in a web.xml file, so the "*.do" URIs that
+    go to the controller servlet will not be recognized. To fix this, add the
+    following line to the saved version of "tomcat-apache.conf", after the corresponding
+    line for the .jsp extension:<br/>
+    <code>AddHandler jserv-servlet .do</code></li>
+  <li>Ensure that the saved version of "tomcat-apache.conf" is referenced in your
+    Apache "httpd.conf" configuration file. A typical use would have the following
+    line at the bottom of "httpd.conf":<br/>
+    <code>Include /usr/local/apache/conf/tomcat-apache.conf</code></li>
+  <li>In order to recognize "index.jsp" as a default page for web applications,
+    search in your "httpd.conf" for a "DirectoryIndex" directive. If you have
+    one, add "index.jsp" to the end of the list, so that it might look like this:<br/>
+    <code>DirectoryIndex index.html index.jsp</code><br/>
+    If you do not have such an entry, add one like this:<br/>
+    <code>DirectoryIndex index.jsp</code></li>
+  <li>Restart Apache to make it aware of the new applications. You should now
+    be able to access the applications from a browser like this:<br/>
+    <code>http://localhost/struts-documentation<br/>
+    http://localhost/struts-example</code></li>
+</ul>
+  <hr/>
+  <p>Back to <a href="installation.html#Containers">Installation</a></p>
+</section>
+</chapter>
+</body>
+</document>

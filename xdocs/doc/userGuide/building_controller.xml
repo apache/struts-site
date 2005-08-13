@@ -1,0 +1,1711 @@
+<?xml version="1.0"?>
+<document url="building_controller.html">
+
+<!--
+// ======================================================================== 78
+-->
+
+<properties>
+    <title>The Struts User Guide - Building Controller Components</title>
+</properties>
+
+<body>
+<chapter name="4. Building Controller Components" href="building_controller">
+
+<section name="4.1 Overview" href="overview">
+
+    <p>
+    Now that we understand how to construct the Model and View components
+    of your application, it is time to focus on the <code>Controller</code>
+    components.  
+    Struts includes a servlet that implements the primary function of mapping 
+    a request URI to an <code>Action</code> class.  
+    Therefore, your primary responsibilities related to the Controller are:
+    </p>
+
+    <ul>
+    
+        <li>
+        Write an <code>ActionForm</code> class to mediate between the Model
+        and the View. (See also <a href="../faqs/actionForm.html">Building
+        an ActionForm</a>).
+        </li>
+
+        <li>
+        Write an <code>Action</code> class for each logical request that may
+        be received (extend <code>org.apache.struts.action.Action</code>).
+        </li>
+
+        <li>
+        Configure a ActionMapping (in XML) for each logical request that may
+        be submitted. 
+        The XML configuration file is usually named 
+        <code>struts-config.xml</code>.
+        </li>
+
+    </ul>
+    
+    <p>
+    To deploy your application, you will also need to:
+    </p>
+    
+    <ul>
+
+        <li>
+        Update the web application deployment descriptor file (in XML)
+        for your application to include the necessary Struts components.
+        </li>
+
+        <li>
+        Add the appropriate Struts components to your application.
+        </li>
+        
+    </ul>
+    
+    <p>
+    The latter two items are covered in the 
+    "<a href="configuration.html">Configuring Applications</a>" chapter.
+    </p>
+
+</section>
+
+<section name="4.2 The ActionServlet" href="action_servlet">
+
+    <p>
+    For those of you familiar with MVC architecture, the ActionServlet
+    represents the C - the controller.  
+    The job of the controller is to:
+    </p>
+    
+    <ul>
+    
+    <li>
+    process user requests, 
+    </li>
+    
+    <li>
+    determine what the user is trying to achieve according to the request, 
+    </li>
+    
+    <li>
+    pull data from the model (if necessary) to be given to the appropriate 
+    view, and 
+    </li>
+    
+    <li>
+    select the proper view to respond to the user.  
+    </li>
+    
+    </ul>
+    
+    <p>
+    The Struts controller delegates most of this grunt work to the
+    <a href="#request_processor">Request Processor</a> and Action classes.
+    </p>
+    
+    <p>
+    In addition to being the front controller for your application, the
+    ActionServlet instance also is responsible for initialization and
+    clean-up of resources.  
+    When the controller initializes, it first loads the application config 
+    corresponding to the "config" init-param.
+    It then goes through an enumeration of all <code>init-param</code>
+    elements, looking for those elements who's name starts with
+    <code>config/</code>.  
+    For each of these elements, Struts loads the configuration file specified 
+    by the value of that <code>init-param</code>, and assigns a "prefix" 
+    value to that module's ModuleConfig instance consisting of the piece
+    of the <code>init-param</code> name following "config/".  
+    For example, the module prefix specified by the 
+    <code>init-param config/foo</code> would be "foo". 
+    This is important to know, since this is how the controller determines 
+    which module will be given control of processing the request.  
+    To access the module foo, you would use a URL like:
+    </p>
+    
+    <pre>http://localhost:8080/myApp/foo/someAction.do</pre>
+    
+    <p>
+    For each request made of the controller, the method
+    <code>process(HttpServletRequest, HttpServletResponse)</code> will be
+    called.  
+    This method simply determines which module should service the request and 
+    then invokes that module's RequestProcessor's process method, passing the 
+    same request and response.
+    </p>
+
+</section>
+
+<section name="4.2.1 Request Processor" href="request_processor">
+
+    <p>
+    The RequestProcessor is where the majority of the core processing 
+    occurs for each request.  
+    Let's take a look at the helper functions the process method invokes 
+    in-turn:
+    </p>
+
+    <table>
+    <tr>
+        <td>
+        <code>processPath</code>
+        </td>
+        <td>
+        Determine the path that invoked us.  
+        This will be used later to retrieve an ActionMapping.
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+        <code>processLocale</code>
+        </td>
+        <td>
+        Select a locale for this request, if one hasn't already been 
+        selected, and place it in the request.
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+        <code>processContent</code> 
+        </td>
+        <td>
+        Set the default content type (with optional character encoding) for 
+        all responses if requested.
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+        <code>processNoCache</code>
+        </td>
+        <td>
+        If appropriate, set the following response headers: "Pragma", 
+        "Cache-Control", and "Expires".
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+        <code>processPreprocess</code>
+        </td>
+        <td>
+        This is one of the "hooks" the RequestProcessor makes available for 
+        subclasses to override.  
+        The default implementation simply returns <code>true</code>.  
+        If you subclass RequestProcessor and override processPreprocess you 
+        should either return <code>true</code> (indicating process should 
+        continue processing the request) or <code>false</code> (indicating 
+        you have handled the request and the process should return)
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+        <code>processMapping</code> 
+        </td>
+        <td>
+        Determine the ActionMapping associated with this path.
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+        <code>processRoles</code> 
+        </td>
+        <td>
+        If the mapping has a role associated with it, ensure the requesting 
+        user has the specified role.  
+        If they do not, raise an error and stop processing of the request.
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+        <code>processActionForm</code> 
+        </td>
+        <td>
+        Instantiate (if necessary) the ActionForm associated with this 
+        mapping (if any) and place it into the appropriate scope.
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+        <code>processPopulate</code>
+        </td>
+        <td>
+        Populate the ActionForm associated with this request, if any.
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+        <code>processValidate</code> 
+        </td>
+        <td>
+        Perform validation (if requested) on the ActionForm associated with 
+        this request (if any).
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+        <code>processForward</code>
+        </td>
+        <td>
+        If this mapping represents a forward, forward to the path specified 
+        by the mapping.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+        <code>processInclude</code> 
+        </td>
+        <td>
+        If this mapping represents an include, include the result of 
+        invoking the path in this request.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+        <code>processActionCreate</code>
+        </td>
+        <td>
+        Instantiate an instance of the class specified by the current 
+        ActionMapping (if necessary).
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+        <code>processActionPerform</code> 
+        </td>
+        <td>
+        This is the point at which your action's <code>perform</code> or 
+        <code>execute</code> method will be called.
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+         <code>processForwardConfig</code>
+        </td>
+        <td>
+        Finally, the process method of the RequestProcessor takes the 
+        ActionForward returned by your Action class, and uses to select the 
+        next resource (if any).
+        Most often the ActionForward leads to the presentation page that
+        renders the response.
+        </td>
+    </tr>
+
+    </table>
+
+</section>
+
+<section name="4.3 ActionForm Classes" href="action_form_classes">
+
+    <p>
+    An ActionForm represents an HTML form that the user interacts with over 
+    one or more pages.  
+    You will provide properties to hold the state of the form with getters 
+    and setters to access them.  
+    ActionForms can be stored in either the session (default) or request 
+    scopes.  
+    If they're in the session it's important to implement the form's 
+    <code>reset</code> method to initialize the form before each use.  
+    Struts sets the ActionForm's properties from the request parameters and 
+    sends the validated form to the appropriate Action's <code>execute</code> 
+    method.
+    </p>
+
+    <p>
+    When you code your <code>ActionForm</code> beans, keep the following
+    principles in mind:
+    </p>
+
+    <ul>
+    
+    <li>
+    The <code>ActionForm</code> class itself requires no specific
+    methods to be implemented.  
+    It is used to identify the role these particular beans play in the overall 
+    architecture.  
+    Typically, an <code>ActionForm</code> bean will have only property getter 
+    and property setter methods, with no business logic.
+    </li>
+    
+    <li>
+    The ActionForm object also offers a standard validation mechanism.
+    If you override a "stub" method, and provide error messages in the
+    standard application resource, Struts will automatically validate the
+    input from the form (using your method). 
+    See "<a href="./building_view.html#form_validation">Automatic Form
+    Validation</a>" for details. Of course, you can also ignore the
+    ActionForm validation and provide your own in the Action object.
+    </li>
+
+    <li>
+    Define a property (with associated <code>getXxx</code> and
+    <code>setXxx</code> methods) for each field that is present in the
+    form.  
+    The field name and property name must match according to the usual 
+    JavaBeans conventions (see the Javadoc for the 
+    <code>java.beans.Introspector</code> class for a start on information
+    about this).  
+    For example, an input field named <code>username</code> will cause the 
+    <code>setUsername</code> method to be called.
+    </li>
+
+    <li>
+    Buttons and other controls on your form can also be defined as properties.
+    This can help determine which button or control was selected when the
+    form was submitted. 
+    Remember, the ActionForm is meant to represent your data-entry form, not 
+    just the data beans.
+    </li>
+    
+    <li>
+    Think of your ActionForm beans as a firewall between HTTP and the Action.
+    Use the <code>validate</code> method to ensure all required properties 
+    are present, and that they contain reasonable values. 
+    An ActionForm that fails validation will not even be presented to the 
+    Action for handling.
+    </li>
+    
+    <li>
+    You may also place a bean instance on your form, and use nested property
+    references. 
+    For example, you might have a "customer" bean on your ActionForm, and 
+    then refer to the property "customer.name" in your presentation page.
+    This would correspond to the methods <code>customer.getName()</code> and
+    <code>customer.setName(string Name)</code> on your customer bean. 
+    See the Tag Library Developer Guides for more about using nested syntax 
+    with the Struts JSP tags.
+    </li>
+    
+    <li>
+    <em>Caution:</em> If you nest an existing bean instance on your form, think
+    about the properties it exposes. 
+    Any public property on an ActionForm that accepts a single String value 
+    can be set with a query string. 
+    It may be useful to place beans that can affect the business state inside 
+    a thin "wrapper" that exposes only the properties required. 
+    This wrapper can also provide a filter to be sure runtime properties are 
+    not set to inappropriate values.
+    </li>
+    
+    </ul>
+
+</section>
+
+<section name="4.3.1 DynaActionForm Classes" href="dyna_action_form_classes">
+
+    <p>
+    Maintaining a separate concrete ActionForm class for each form in your
+    Struts application is time-consuming.
+    It is particularly frustrating when all the ActionForm does is gather
+    and validate simple properties that are passed along to a business
+    JavaBean.
+    </p>
+    <p>
+    This bottleneck can be alleviated through the use of DynaActionForm classes.
+    Instead of creating a new ActionForm subclass and new get/set methods for 
+    each of your bean's properties, you can list its properties, type, and 
+    defaults in the Struts configuration file.
+    </p>
+    
+    <p>
+    For example, add the following to struts-config.xml for a UserForm bean 
+    that stores a user's given and family names:
+    </p>
+    
+<pre><code><![CDATA[
+<form-bean 
+    name="UserForm" 
+    type="org.apache.struts.action.DynaActionForm">
+    <form-property 
+        name="givenName" 
+        type="java.lang.String" 
+        initial="John"/>
+    <form-property 
+        name="familyName" 
+        type="java.lang.String" 
+        initial="Smith"/>
+</form-bean>
+]]></code></pre>
+
+    <p>
+    The types supported by DynaActionForm include:
+    </p>
+    
+    <ul>
+    
+        <li>
+        java.lang.BigDecimal
+        </li>
+
+        <li>
+        java.lang.BigInteger
+        </li>
+
+        <li>
+        boolean and java.lang.Boolean
+        </li>
+
+        <li>
+        byte and java.lang.Byte
+        </li>
+
+        <li>
+        char and java.lang.Character
+        </li>
+
+        <li>
+        java.lang.Class
+        </li>
+
+        <li>
+        double and java.lang.Double
+        </li>
+
+        <li>
+        float and java.lang.Float
+        </li>
+
+        <li>
+        int and java.lang.Integer
+        </li>
+
+        <li>
+        long and java.lang.Long
+        </li>
+
+        <li>
+        short and java.lang.Short
+        </li>
+
+        <li>
+        java.lang.String
+        </li>
+
+        <li>
+        java.sql.Date
+        </li>
+
+        <li>
+        java.sql.Time
+        </li>
+
+        <li>
+        java.sql.Timestamp
+        </li>
+    
+    </ul>
+
+    <p>
+        You may also specify Arrays of these types (e.g. <code>String[]</code>).
+        You may also specify a concrete implementation of the Map Interface,
+        such as <code>java.util.HashMap</code>,
+        or a List implementation, such as <code>java.util.ArrayList</code>.
+    </p>
+
+    <p>
+    If you do not supply an initial attribute, numbers will be initialized to 
+    0 and objects to <code>null</code>.
+    </p>
+    
+    <p>
+    In JSP pages using the original Struts custom tags, attributes of
+    <code>DynaActionForm</code> objects can be referenced just like ordinary
+    <code>ActionForm</code> objects. Wherever a Struts tag refers to a
+    "property", the tags will automatically use the DynaActionForm properties
+    just like those of a conventional JavaBean.
+    You can even expose DynaActionForm properties using bean:define.
+    (Although, you can't use bean:define to <strong>instantiate</strong> a DynaActionForm,
+    since it needs to be setup with the appropriate dyna-properties).
+    </p>
+
+    <p>
+    If you are using the Struts JSTL EL taglib, the references are different,
+    however.
+    Only properties of ordinary <code>ActionForm</code> objects can be directly
+    accessed through the JSTL expression language syntax.  
+    The <code>DynaActionForm</code> properties must be accessed through a
+    slightly different syntax. 
+    The JSTL EL syntax for referencing a property
+    of an <code>ActionForm</code> goes like this:
+    </p>
+    
+<pre><code>${formbean.prop}</code></pre>
+    
+    <p>
+    The syntax for referencing a property of a <code>DynaActionForm</code>
+    would be:
+    </p>
+
+<pre><code>${dynabean.map.prop}</code></pre>
+
+    <p>
+    The <code>map</code> property is a property of 
+    <code>DynaActionForm</code> which represents the <code>HashMap</code>
+    containing the <code>DynaActionForm</code> properties.
+    </p>
+
+    <p>
+    DynaActionForms are meant as an easy solution to a common problem:
+    <em>Your ActionForms use simple properties and standard validations,
+    and you just pass these properties over to another JavaBean</em>
+    (say using <code>BeanUtils.copyProperties(myBusinessBean,form)</code>).
+    </p>
+
+    <p>
+    DynaActionForms are <strong>not</strong> a drop-in replacement for ActionForms.
+    If you need to access ActionForm properties in your Action, you will need to
+    use the map-style accessor, like <code>myForm.get("name")</code>.
+    If you actively use the ActionForm object in your Action,
+    then you may want to use conventional ActionForms instead.
+    </p>
+
+    <p>
+    DynaActionForms cannot be instantiated using a no-argument constructor.
+    In order to simulate the extra properties,
+    there is a lot of machinery involved in their construction.
+    You must rely on Struts to instantiate a DynaActionForm for you,
+    via the ActionMapping.
+    </p>
+
+    <p>
+    If need be, you can extend the DynaActionForm to add custom
+    validate and reset methods you might need.
+    Simply specify your subclass in the struts-config instead.
+    However, you cannot mix conventional properties and DynaProperties.
+    A conventional getter or setter on a DynaActionForm won't be found
+    by the reflection utilities.
+    </p>
+
+    <p>
+    To use DynaActionForms with the Struts Validator, specify
+    <code>org.apache.struts.validator.ValidatorActionForm</code>
+    (or your subclass) as the form-bean class.
+    </p>
+
+    <p>
+    And, of course, while the  DynaActionForm may support various binary types,
+    properties used with the <code>html:text</code> tag should still be
+    String properties.
+    </p>
+
+    <p>
+    DynaActionForms relieve developers of maintaining simple ActionForms. For even
+    less maintenance, try Niall Pemberton's
+    <a href="http://www.niallp.pwp.blueyonder.co.uk/">LazyActionForm</a>.
+    </p>
+
+</section>
+
+<section name="4.3.2 Map-backed ActionForms" href="map_action_form_classes">
+
+    <p>
+    The DynaActionForm classes offer the ability to create ActionForm beans 
+    at initialization time, based on a list of properties enumerated in the 
+    Struts configuration file. 
+    However, many HTML forms are generated dynamically at request time. 
+    Since the properties of these forms' ActionForm beans are not all known 
+    ahead of time, we need a new approach.
+    </p>
+    
+    <p>
+    Struts allows you to make one or more of your ActionForm's properties' 
+    values a Map instead of a traditional atomic object. 
+    You can then store the data from your form's dynamic fields in that Map. 
+    Here is an example of a map-backed ActionForm class:
+    </p>
+    
+<pre><code><![CDATA[public FooForm extends ActionForm {
+
+    private final Map values = new HashMap();
+
+    public void setValue(String key, Object value) {
+        values.put(key, value);
+    }
+
+    public Object getValue(String key) {
+        return values.get(key);
+    }
+
+}
+]]></code></pre>
+
+    <p>
+    In its corresponding JSP page, you can access objects stored in the 
+    values map using a special notation: <code>mapname(keyname)</code>. 
+    The parentheses in the bean property name indicate that:
+    </p>
+    
+    <ul>
+    
+        <li>
+        The bean property named <code>mapname</code> is indexed using Strings
+        (probably backed by a Map), and that 
+        </li>
+
+        <li>
+        Struts should look for get/set methods that take a String key 
+        parameter to find the correct sub-property value. 
+        Struts will, of course, use the <code>keyname</code> value from the 
+        parentheses when it calls the get/set methods.
+        </li>
+    
+    </ul>
+    
+    <p>
+    Here is a simple example:
+    </p>
+
+<pre><code><![CDATA[<html:text property="value(foo)"/>]]></code></pre>
+
+    <p>
+    This will call the <code>getValue</code> method on FooForm with a key 
+    value of "<code>foo</code>" to find the property value. 
+    To create a form with dynamic field names, you could do the following:
+    </p>
+
+<pre><code><![CDATA[
+<% 
+	for (int i = 0; i < 10; i++) {
+		String name = "value(foo-" + i + ")";
+%>
+		<html:text property="<%= name %>"/>
+		<br/>
+<%
+	}
+%>
+]]></code></pre>
+
+    <p>
+    Note that there is nothing special about the name <code>value</code>. 
+    Your map-backed property could instead be named <code>property</code>, 
+    <code>thingy</code>, or any other bean property name you prefer. 
+    You can even have multiple map-backed properties on the same bean.
+    </p>
+    
+    <p>
+    In addition to map-backed properties, you can also create list-backed 
+    properties. 
+    You do so by creating indexed get/set methods on your bean:
+    </p>
+    
+<pre><code><![CDATA[public FooForm extends ActionForm {
+
+    private final List values = new ArrayList();
+
+    public void setValue(int key, Object value) {
+        values.set(key, value);
+    }
+
+    public Object getValue(int key) {
+        return values.get(key);
+    }
+}
+]]></code></pre>
+
+    <p>
+    In your presentation pages, you access individual entries in a list-backed 
+    property by using a different special notation: 
+    <code>listname[index]</code>. 
+    The braces in the bean property name indicate that the bean property named 
+    <code>listname</code> is indexed (probably backed by a List), and that 
+    Struts should look for get/set methods that take an index parameter in 
+    order to find the correct sub-property value.
+    </p>
+
+    <p>
+        While map-backed ActionForms provide you with more flexibility, they do not support the same range of syntax
+        available to conventional or DynaActionForms.
+        You might have difficulty referencing <a href="../faqs/indexedprops.html">indexed or mapped properties</a>
+        using a map-backed ActionForm.
+        The <code>validwhen</code> validator (since Struts 1.2.1) also does not support map-backed ActionForms.
+    </p>
+
+</section>
+
+<section name="4.4 Action Classes" href="action_classes">
+
+    <p>
+    The <code>Action</code> class defines two methods that could be
+    executed depending on your servlet environment:
+    </p>
+
+<pre><code>public ActionForward execute(ActionMapping mapping,
+                     ActionForm form,
+                     ServletRequest request,
+                     ServletResponse response)
+throws Exception;
+
+public ActionForward execute(ActionMapping mapping,
+                     ActionForm form,
+                     HttpServletRequest request,
+                     HttpServletResponse response)
+throws Exception;
+</code></pre>
+
+    <p>
+    Since the majority of Struts projects are focused on building web 
+    applications, most projects will only use the "HttpServletRequest" 
+    version.
+    A non-HTTP execute() method has been provided for applications that are 
+    not specifically geared towards the HTTP protocol.  
+    </p>
+
+    <p>
+    The goal of an <code>Action</code> class is to process a request, via
+    its <code>execute</code> method, and return an <code>ActionForward</code> 
+    object that identifies where control should be forwarded (e.g. a JSP, 
+    Tile definition, Velocity template, or another Action) to provide the 
+    appropriate response.  
+    In the <em>MVC/Model 2</em> design pattern, a typical <code>Action</code> 
+    class will often implement logic like the following in its 
+    <code>execute</code> method:
+    </p>
+    
+    <ul>
+    
+        <li>
+        Validate the current state of the user's session (for example, 
+        checking that the user has successfully logged on).
+        If the <code>Action</code> class finds that no logon exists, the 
+        request can be forwarded to the presentation page that displays the 
+        username and password prompts for logging on.  
+        This could occur because a user tried to enter an application "in the 
+        middle" (say, from a bookmark), or because the session has timed out, 
+        and the servlet container created a new one.
+        </li>
+
+        <li>
+        If validation is not complete, validate the form bean properties as 
+        needed. 
+        If a problem is found, store the appropriate error message keys as a 
+        request attribute, and forward control back to the input form so that 
+        the errors can be corrected.
+        </li>
+
+        <li>
+        Perform the processing required to deal with this request (such as
+        saving a row into a database).  
+        This <em>can</em> be done by logic code embedded within the 
+        <code>Action</code> class itself, <strong>but</strong> should generally be 
+        performed by calling an appropriate method of a business logic bean.
+        </li>
+
+        <li>
+        Update the server-side objects that will be used to create the next
+        page of the user interface (typically request scope or session scope
+        beans, depending on how long you need to keep these items available).
+        </li>
+
+        <li>
+        Return an appropriate <code>ActionForward</code> object that 
+        identifies the presentation page to be used to generate this response, 
+        based on the newly updated beans. 
+        Typically, you will acquire a reference to such an object by calling 
+        <code>findForward</code> on either the <code>ActionMapping</code> 
+        object you received (if you are using a logical name local to this 
+        mapping), or on the controller servlet itself (if you are using a 
+        logical name global to the application).
+        </li>
+    
+    </ul>
+
+    <p>
+    In Struts 1.0, Actions called a <code>perform</code> method instead of 
+    the now-preferred <code>execute</code> method. 
+    These methods use the same parameters and differ only in which exceptions 
+    they throw. 
+    The elder <code>perform</code> method throws <code>SerlvetException</code> 
+    and <code>IOException</code>. 
+    The new <code>execute</code> method simply throws <code>Exception</code>. 
+    The change was to facilitate the Declarative Exception handling feature 
+    introduced in Struts 1.1.
+    </p>
+    
+    <p>
+    The <code>perform</code> method may still be used in Struts 1.1 but is 
+    deprecated.
+    The Struts 1.1 method simply calls the new <code>execute</code> method 
+    and wraps any <code>Exception</code> thrown as a 
+    <code>ServletException</code>.
+    </p>
+
+   </section>
+   
+   <section name="4.4.1 Action Class Design Guidelines" href="action_design_guide">
+
+    <p>
+    Remember the following design guidelines when coding <code>Action</code> 
+    classes:
+    </p>
+
+    <ul>
+    
+        <li>
+        <strong>Write code for a multi-threaded environment</strong> -
+        The controller servlet creates <strong>only one instance of your
+        <code>Action</code> class</strong>, and uses this one instance to service
+        all requests.  
+        Thus, you need to write thread-safe <code>Action</code> classes.
+        Follow the same guidelines you would use to write thread-safe 
+        Servlets.  
+        Here are two general guidelines that will help you write scalable, 
+        thread-safe Action classes:
+        
+        <ul>
+        
+            <li>
+            <strong>Only Use Local Variables</strong> - The most important principle 
+            that aids in thread-safe coding is to use only local variables, 
+            <strong>not instance variables</strong>, in your <code>Action</code> class.  
+            Local variables are created on a stack that is assigned (by your 
+            JVM) to each request thread, so there is no need to worry about 
+            sharing them.  
+            An <code>Action</code> can be factored into several local methods, 
+            so  long as all variables needed are passed as method parameters. 
+            This assures thread safety, as the JVM handles such variables 
+            internally using the call stack which is associated with a single 
+            Thread.
+            </li>
+            
+            <li>
+            <strong>Conserve Resources</strong> - As a general rule, allocating scarce 
+            resources and keeping them across requests from the same user 
+            (in the user's session) can cause scalability problems.  
+            For example, if your application uses JDBC and you  allocate a 
+            separate JDBC connection for every user, you are probably going
+            to run in some scalability issues when your site suddenly shows 
+            up on Slashdot.  
+            You should strive to use pools and release resources (such as 
+            database connections) prior to forwarding control to the 
+            appropriate View component -- even if a bean method you have 
+            called throws an exception.
+            </li>
+            
+        </ul>
+    
+        </li>
+
+        <li>
+        <strong>Don't throw it, catch it!</strong> - Ever used a commercial website only to 
+        have a stack trace or exception thrown in your face after you've already 
+        typed in your credit card number and clicked the purchase button?  
+        Let's just say it doesn't inspire confidence.  
+        Now is your chance to deal with these application errors - in the 
+        <code>Action</code> class.  
+        If your application specific code throws expections you should catch these 
+        exceptions  in your Action class, log them in your application's log 
+        (<code>servlet.log("Error message", exception)</code>) and return the 
+        appropriate ActionForward.
+        </li>
+    
+    </ul>
+
+    <p>
+    It is wise to avoid creating lengthy and complex Action classes.
+    If you start to embed too much logic in the <code>Action</code> class 
+    itself, you will begin to find the <code>Action</code> class hard to 
+    understand, maintain, and impossible to reuse.  
+    Rather than creating overly complex Action classes, it is generally a 
+    good practice to move most of the persistence, and "business logic" to a 
+    separate application layer.  
+    When an Action class becomes lengthy and procedural, it may be a good time 
+    to refactor your application architecture and move some of this logic
+    to another conceptual layer; 
+    otherwise, you may be left with an inflexible application which can only 
+    be accessed in a web-application environment.
+    Struts should be viewed as simply the <strong>foundation</strong> for implementing 
+    MVC in your applications. 
+    Struts provides you with a useful control layer, but it is not a fully 
+    featured platform for building MVC applications, soup to nuts.
+    </p>
+
+    <p>
+    The MailReader example application included with Struts stretches this design
+    principle somewhat, because the business logic itself is embedded in the
+    <code>Action</code> classes. 
+    This should be considered something of a bug in the design of the example,
+    rather than an intrinsic feature of the Struts architecture, or an 
+    approach to be emulated.
+    In order to demonstrate, in simple terms, the different ways Struts can be
+    used, the MailReader application does not always follow best practices.
+    </p>
+      
+</section>
+   
+<section name="4.5 Exception Handler" href="exception_handler">
+
+    <p>
+    You can define an ExceptionHandler to execute when an Action's 
+    <code>execute</code> method throws an Exception.  
+    First, you need to subclass 
+    <code>org.apache.struts.action.ExceptionHandler</code> and override the 
+    <code>execute</code> method.
+    Your <code>execute</code> method should process the Exception and return 
+    an ActionForward object to tell Struts where to forward to next.  
+    Then you configure your handler in struts-config.xml like this:
+    </p>
+    
+<pre><code><![CDATA[<global-exceptions>
+    <exception 
+      key="some.key" 
+      type="java.io.IOException" 
+      handler="com.yourcorp.ExceptionHandler"/>
+</global-exceptions>
+]]></code></pre>
+    
+    <p>
+    This configuration element says that 
+    <code>com.yourcorp.ExceptionHandler.execute</code> will be called when 
+    any IOException is thrown by an Action.  
+    The <code>key</code> is a key into your message resources properties file 
+    that can be used to retrieve an error message.
+    </p>
+    <p>
+    If the <code>handler</code> attribute is not specified, the default handler
+    stores the exception in the request attribute under the value of the 
+    <code>Globals.EXCEPTION_KEY</code> global key.
+    </p>
+
+    <p>
+    The possible attributes for the "exception" element are as follows:
+    </p>
+    <table>
+    <tr>
+        <th>Attribute</th>
+        <th>Description</th>
+        <th>Default</th>
+    </tr>    
+    <tr>
+        <td>
+        <code>bundle</code>
+        </td>
+        <td>
+            Servlet context attribute for the message resources bundle
+            associated with this handler. The default attribute is the
+            value specified by the string constant declared at
+            <code>Globals.MESSAGES_KEY</code>.
+        </td>
+        <td>
+            <code>org.apache.struts.Globals.MESSAGES_KEY</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <code>className</code>
+        </td>
+        <td>
+            The configuration bean for this ExceptionHandler object.
+            If specified, className must be a subclass of the default
+            configuration bean
+        </td>
+        <td>
+            "<code>org.apache.struts.config.ExceptionConfig</code>"
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <code>extends</code>
+        </td>
+        <td>
+            The name of the exception handler that this 
+            will inherit configuration information from.
+        </td>
+        <td>
+            None
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <code>handler</code>
+        </td>
+        <td>
+            Fully qualified Java class name for this exception handler.
+        </td>
+        <td>
+            "<code>org.apache.struts.action.ExceptionHandler</code>"
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <code>key</code>
+        </td>
+        <td>
+            The key to use with this handler's message resource bundle
+            that will retrieve the error message template for this
+            exception.
+        </td>
+        <td>
+            None
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <code>path</code>
+        </td>
+        <td>
+            The module-relative URI to the resource that will complete
+            the request/response if this exception occurs.
+        </td>
+        <td>
+            None
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <code>scope</code>
+        </td>
+        <td>
+            The context ("request" or "session") that is used to access
+            the ActionMessage object [org.apache.struts.action.ActionMessage]
+            for this exception.
+        </td>
+        <td>
+            "<code>request</code>"
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <code>type</code>
+        </td>
+        <td>
+            Fully qualified Java class name of the exception type to
+            register with this handler.
+        </td>
+        <td>
+            None
+        </td>
+    </tr>
+    </table>
+    
+    <p>
+    You can override global exception handlers by defining a handler inside an 
+    action definition.
+    </p>
+    
+    <p>
+    A common use of ExceptionHandlers is to configure one for 
+    <code>java.lang.Exception</code> so it's called for any exception and log 
+    the exception to some data store.
+    </p>
+    
+</section>
+
+<section name="4.6 PlugIn Classes" href="plugin_classes">
+
+    <p>
+    The <em>PlugIn</em> interface extends Action and so that applications can
+    easily hook into the ActionServlet lifecycle. 
+    This interface defines two methods, <code>init()</code> and 
+    <code>destroy()</code>, which are called at application startup and 
+    shutdown, respectively. 
+    A common use of a Plugin Action is to configure or load 
+    application-specific data as the web application is starting up.
+    </p>
+    
+    <p>
+    At runtime, any resource setup by <code>init</code> would be accessed by 
+    Actions or business tier classes. 
+    The PlugIn interface allows you to setup resources, but does not provide 
+    any special way to access them. 
+    Most often, the resource would be stored in application context, under
+    a known key, where other components can find it.
+    </p>
+    
+    <p>
+    PlugIns are configured using &lt;plug-in&gt; elements within the
+    Struts configuration file. 
+    See <a href="configuration.html#plugin_config"> PlugIn Configuration</a> 
+    for details.
+    </p>
+
+</section>
+
+<section name="4.7 The ActionMapping Implementation" href="actionmapping">
+
+    <p>
+    In order to operate successfully, the Struts controller servlet needs
+    to know several things about how each request URI should be mapped to an
+    appropriate <code>Action</code> class.  
+    The required knowledge has been encapsulated in a Java class named 
+    <em>ActionMapping</em>, the most important properties are as follows:
+    </p>
+
+    <ul>
+    
+        <li>
+        <code>type</code> - Fully qualified Java class name of the Action 
+        implementation class used by this mapping.
+        </li>
+
+        <li>
+        <code>name</code> - The name of the form bean defined in the config file
+        that this action will use.
+        </li>
+
+        <li>
+        <code>path</code> - The request URI path that is matched to select this
+        mapping.  
+        See below for examples of how matching works and how to use wildcards 
+        to match multiple request URIs.
+        </li>
+
+        <li>
+        <code>unknown</code> - Set to <code>true</code> if this action
+        should be configured as the default for this application, to handle
+        all requests not handled by another action.  
+        Only one action can be defined as a default within a single application.
+        </li>
+
+        <li>
+        <code>validate</code> - Set to <code>true</code> if the 
+        <code>validate</code> method of the action associated with this mapping 
+        should be called.
+        </li>
+
+        <li>
+        <code>forward</code> - The request URI path to which control is passed
+        when this mapping is invoked. 
+        This is an alternative to declaring a <code>type</code> property. 
+        </li>
+
+    </ul>
+
+</section>
+
+<section name="4.8 Writing Action Mappings" href="config">
+
+    <p>
+    How does the controller servlet learn about the mappings you want?
+    It would be possible (but tedious) to write a small Java class that simply
+    instantiated new <code>ActionMapping</code> instances, and called all of
+    the appropriate setter methods.  
+    To make this process easier, Struts uses the Jakarta Commons Digester component
+    to parse an XML-based description of the desired mappings and create the 
+    appropriate objects initialized to the appropriate default values.
+    See the <a href="http://jakarta.apache.org/commons">Jakarta Commons 
+    website</a> for more information about the Digester.
+    </p>
+
+    <p>
+    The developer's responsibility is to create an XML file named
+    <code>struts-config.xml</code> and place it in the WEB-INF directory of 
+    your application. 
+    This format of this document is described by the Document Type Definition
+    (DTD) maintained at
+    <a href="http://struts.apache.org/dtds/struts-config_1_2.dtd">
+    http://struts.apache.org/dtds/struts-config_1_2.dtd</a>.
+    This chapter covers the configuration elements that you will typically 
+    write as part of developing your application.
+    There are several other elements that can be placed in the 
+    struts-config file to customize your application. 
+    See "<a href="configuration.html">Configuring Applications</a>" for more 
+    about the other elements in the Struts configuration file. 
+    </p>
+
+    <p>
+    The controller uses an internal copy of this document to parse the 
+    configuration; an Internet connection is not required for operation.
+    </p>
+
+    <p>
+    The outermost XML element must be <code>&lt;struts-config&gt;</code>. 
+    Inside of the &lt;struts-config&gt; element, there are three important 
+    elements that are used to describe your actions:
+    </p>
+    
+    <ul>
+    
+        <li>
+        <code>&lt;form-beans&gt;</code>
+        </li>
+    
+        <li>
+        <code>&lt;global-forwards&gt;</code>
+        </li>
+    
+        <li>
+        <code>&lt;action-mappings&gt;</code>
+        </li>
+
+    </ul>
+    
+    <p>
+    <code><strong>&lt;form-beans&gt;</strong></code><br />
+    This section contains your form bean definitions.  
+    Form beans are descriptors that are used to create ActionForm instances 
+    at runtime. 
+    You use a &lt;form-bean&gt; element for each form bean, which has the 
+    following important attributes:
+    </p>
+    
+    <ul>
+    
+        <li>
+        <code>name</code>: A unique identifier for this bean, which will be 
+        used to reference it in corresponding action mappings. 
+        Usually, this is also the name of the request or session attribute 
+        under which this form bean will be stored.
+        </li>
+
+        <li>
+        <code>type</code>: The fully-qualified Java classname of the 
+        ActionForm subclass to use with this form bean.
+        </li>
+
+    </ul>
+
+    <p>
+    <strong>&lt;global-forwards&gt;</strong><br />
+    This section contains your global forward definitions.  
+    Forwards are instances of the ActionForward class returned from an 
+    ActionForm's <code>execute</code> method. 
+    These map logical names to specific resources (typically JSPs), allowing 
+    you to change the resource without changing references to it throughout 
+    your application.
+    You use a <code>&lt;forward&gt;</code> element for each forward 
+    definition, which has the following important attributes:
+    </p>
+    
+    <ul>
+    
+        <li>
+        <code>name</code>: The logical name for this forward.  
+        This is used in your ActionForm's <code>execute</code> method to 
+        forward to the next appropriate resource. 
+        Example: homepage
+        </li>
+
+        <li>
+        <code>path</code>: The context relative path to the resource.
+        Example: /index.jsp or /index.do
+        </li>
+
+        <li>
+        <code>redirect</code>: <code>True</code> or <code>false</code> 
+        (default).  
+        Should the ActionServlet redirect to the resource instead of forward?
+        </li>
+
+    </ul>
+    
+    <p>
+    <code><strong>&lt;action-mappings&gt;</strong></code><br />
+    This section contains your action definitions.  
+    You use an <code>&lt;action&gt;</code> element for each of the mappings 
+    you would like to define.  
+    Most action elements will define at least the following attributes:
+    </p>
+
+    <ul>
+
+        <li>
+        <code>path</code>: The application context-relative path to the 
+        action.
+        </li>
+
+        <li>
+        <code>type</code>: The fully qualified java classname of your 
+        Action class.
+        </li>
+
+        <li>
+        <code>name</code>: The name of your 
+        <code>&lt;form-bean&gt;</code> element to use with this action
+        </li>
+
+    </ul>
+
+    <p>Other often-used attributes include:</p>
+
+    <ul>
+    
+        <li>
+        <code>parameter</code>: A general-purpose attribute often used by 
+        "standard" Actions to pass a required property.
+        </li>
+    
+        <li>
+        <code>roles</code>: A comma-delimited list of the user security roles 
+        that can access this mapping.
+        </li>
+    
+    </ul>
+
+    <p>
+    For a complete description of the elements that can be used with the 
+    <code>action</code> element, see the
+    <a href="http://struts.apache.org/dtds/struts-config_1_2.dtd">
+    Struts Configuration DTD</a> and the
+    <a href="../api/org/apache/struts/action/ActionMapping.html">ActionMapping 
+    documentation</a>.
+    </p>
+
+</section>
+
+<section name="4.8.1 ActionMapping Example" href="action_mapping_example">
+
+    <p>
+    Here's a mapping entry based on the MailReader example
+    application. The MailReader application now uses DynaActionForms.
+    But in this example, we'll show a conventinal
+    ActionForm instead, to illustrate the usual workflow.
+    Note that the entries for all the other actions are left out:
+    </p>
+
+<pre><code><![CDATA[<struts-config>
+    <form-beans>
+        <form-bean
+            name="logonForm"
+            type="org.apache.struts.webapp.example.LogonForm" />
+     </form-beans>
+    <global-forwards
+        type="org.apache.struts.action.ActionForward">
+        <forward 
+            name="logon" 
+            path="/logon.jsp"
+            redirect="false" />
+    </global-forwards>
+    <action-mappings>
+        <action
+            path="/logon"
+            type="org.apache.struts.webapp.example.LogonAction"
+            name="logonForm"
+            scope="request"
+            input="/logon.jsp"
+            unknown="false"
+            validate="true" />
+    </action-mappings>
+</struts-config>
+]]></code></pre>
+
+    <p>
+    First the form bean is defined.  
+    A basic bean of class "<code>org.apache.struts.webapp.example.LogonForm</code>"
+    is mapped to the logical name "<code>logonForm</code>". 
+    This name is used as a request attribute name for the form
+    bean.
+    </p>
+
+    <p>
+    The "<code>global-forwards</code>" section is used to create logical name 
+    mappings for commonly used presentation pages.  
+    Each of these forwards is available through a call to your action mapping 
+    instance, i.e. <code>mapping.findForward("logicalName")</code>.
+    </p>
+
+    <p>
+    As you can see, this mapping matches the path <code>/logon</code> 
+    (actually, because the MailReader example application uses extension 
+    mapping, the request URI you specify in a JSP page would end in 
+    <code>/logon.do</code>).
+    When a request that matches this path is received, an instance of the
+    <em>LogonAction</em> class will be created (the first time only) and used.
+    The controller servlet will look for a bean in request scope under key
+    <code>logonForm</code>, creating and saving a bean of the specified class
+    if needed.
+    </p>
+   
+    <p>
+    Optional but very useful are the local "<code>forward</code>" elements. 
+    In the MailReader example application, many actions include a local 
+    "success" and/or "failure" forward as part of an action mapping.
+    </p>
+
+<pre><code><![CDATA[<!-- Edit mail subscription -->
+<action    
+    path="/editSubscription"
+    type="org.apache.struts.webapp.example.EditSubscriptionAction"
+    name="subscriptionForm"
+    scope="request"
+    validate="false">
+    <forward 
+        name="failure" 
+        path="/mainMenu.jsp"/>
+    <forward 
+        name="success" 
+        path="/subscription.jsp"/>
+</action>
+]]></code></pre>
+
+    <p>
+    Using just these two extra properties, the Action classes are almost 
+    totally independent of the actual names of the presentation pages. 
+    The pages can be renamed (for example) during a redesign, with negligible 
+    impact on the Action classes themselves.
+    If the names of the "next" pages were hard coded into the Action classes, 
+    all of these classes would also need to be modified. 
+    Of course, you can define whatever local <code>forward</code> properties 
+    makes sense for your own application.
+    </p>
+
+    <p>
+    The Struts configuration file includes several other elements that you 
+    can use to customize your application. 
+    See "<a href="configuration.html">Configuring Applications</a>" for details.
+    </p>
+
+</section>
+
+<section name="4.9 Using ActionMappings for Pages" href="module_config-use_actions">
+
+    <p>
+    Fronting your pages with ActionMappings is <em>essential</em> when using 
+    modules, since doing so is the only way you involve the 
+    controller in the request -- and you want to!  
+    The controller puts the application configuration in the request,
+    which makes available all of your module-specific configuration data 
+    (including which message resources you are using, request-processor,
+    and so forth).
+    </p>
+    
+    <p>
+    The simplest way to do this is to use the <code>forward</code> property 
+    of the ActionMapping:
+    </p>
+    
+    <pre>&lt;action path="/view" forward="/view.jsp"/></pre>
+
+</section>
+
+<section name="4.10 Using Wildcards in ActionMappings" href="action_mapping_wildcards">
+
+    <p>
+    [Since Struts 1.2.0] As a Struts application grows in size, so will the number of action
+    mappings. Wildcards can be used to combine similiar mappings into one
+    more generic mapping.  
+    </p>
+    <p>
+    The best way to explain wildcards is to show an example and walk through 
+    how it works.  This example modifies the previous mapping in the <a 
+    href="#action_mapping_example">ActionMapping Example</a> section to use
+    wildcards to match all pages that start with <code>/edit</code>:
+    </p> 
+
+<pre><code><![CDATA[<!-- Generic edit* mapping -->
+<action    
+    path="/edit*"
+    type="org.apache.struts.webapp.example.Edit{1}Action"
+    name="{1}Form"
+    scope="request"
+    validate="false">
+    <forward 
+        name="failure" 
+        path="/mainMenu.jsp"/>
+    <forward 
+        name="success" 
+        path="/{1}.jsp"/>
+</action>
+]]></code></pre>
+
+    <p>
+    The "<code>*</code>" in the path attribute allows the mapping to match the 
+    request URIs <code>/editSubscription</code>, <code>editRegistration</code>,
+    or any other URI that starts with 
+    <code>/edit</code>, however <code>/editSubscription/add</code> would not be 
+    matched.  The part of 
+    the URI matched by the wildcard will then be substituted into various 
+    attributes of the action mapping and its action forwards replacing 
+    <code>{1}</code>.
+    For the rest of the request, Struts will see the action mapping and its 
+    action forwards containing the new values.
+    </p>
+   
+    <p>
+    Mappings are matched against the request in the order they appear in
+    the Struts configuration file. If more than one pattern matches the
+    last one wins, so less specific patterns must appear before more
+    specific ones. However, if the request URL can be matched against
+    a path without any wildcards in it, no wildcard matching is performed
+    and order in not important.
+    </p>
+    <p>
+    Wildcard patterns can contain one or more of the following special tokens:
+    </p>
+
+    <table>
+        <tr>
+            <td>
+            <code>*</code>
+            </td>
+            <td>
+            Matches zero or more characters excluding the 
+            slash ('/') character.
+            </td>
+        </tr>       <tr>
+            <td>
+            <code>**</code>
+            </td>
+            <td>
+            Matches zero or more characters including the 
+            slash ('/') character.
+            </td>
+        </tr>       <tr>
+            <td>
+            <code>\character</code>
+            </td>
+            <td>
+            The backslash character is used as an escape
+            sequence.  Thus <code>\*</code> matches the character asterisk 
+            ('*'), and <code>\\</code>
+            matches the character backslash ('\').
+            </td>
+        </tr>
+    </table>    
+
+    <p>
+    In the action mapping and action forwards, the wildcard-matched values can
+    be accessed with the token <code>{N}</code> where <code>N</code>
+    is a number from 1 to 9 indicating
+    which wildcard-matched value to substitute.  The whole request URI can be
+    accessed with the <code>{0}</code> token.
+    </p>
+
+    <p>
+    The action mapping attributes that will accept wildcard-matched strings
+    are:
+    </p>
+
+    <ul>
+        <li><code>type</code></li>
+        <li><code>name</code></li>
+        <li><code>roles</code></li>
+        <li><code>parameter</code></li>
+        <li><code>attribute</code></li>
+        <li><code>forward</code></li>
+        <li><code>include</code></li>
+        <li><code>input</code></li>
+    </ul>
+
+    <p>
+    Also, the action mapping properties (set using the <code>&lt;set-property key="foo"
+     value="bar"&gt;</code> syntax) will accept wildcard-matched strings in their 
+    <code>value</code> attribute.
+    </p>
+
+   <p>
+    The action forward attributes that will accept wildcard-matched strings
+    are:
+    </p>
+
+    <ul>
+        <li><code>path</code></li>
+    </ul>
+
+</section>
+
+<section name="4.11 Commons Logging Interface" href="logging">
+    <p>
+    Struts doesn't configure logging itself -- it's all done by
+    <a href="http://jakarta.apache.org/commons/">commons-logging</a> 
+    under the covers. 
+    The default algorithm is a search:
+    </p>
+    
+    <ul>
+    
+        <li>
+        If Log4J is there, use it.
+        </li>
+
+        <li>
+        If JDK 1.4 is there, use it.
+        </li>
+
+        <li>
+        Otherwise, use SimpleLog.
+        </li>
+    
+    </ul>
+    
+    <p>
+    The commons-logging interface is an <em>ultra-thin</em> bridge to many 
+    different logging implementations.  
+    The intent is to remove compile- and run-time dependencies on any 
+    single logging implementation.  
+    For more information about the currently-supported implementations, 
+    please refer to the
+    <a href="http://jakarta.apache.org/commons/logging/api/index.html">
+    the description for the <code>org.apache.commons.logging</code> 
+    package</a>.
+    </p>
+    
+    <p>
+    Because Struts uses commons-logging and, therefore, includes the necessary 
+    JAR files for <strong>you</strong> to use commons-logging, you've probably had the 
+    occasional fleeting thought, <em>"Should I use
+    commons-logging?"</em> 
+    The answer (surprise!) depends on the requirements for your particular 
+    project. 
+    If one of your requirements is the ability to easily change logging 
+    implementations with zero impact on your application, then commons-logging 
+    is a very good option.
+    </p>
+    
+    <p>
+    <em>"Great!  What do I do to get started using commons-logging in my own 
+    code?"</em>
+    </p>
+    
+    <p>
+    Using commons-logging in your own code is very simple - all you need are 
+    two imports and a declaration for a logger.
+    Let's take a look:
+    </p>
+    
+<pre><code>package com.foo;
+// ...
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+...
+public class Foo {
+    // ...
+    private static Log log = LogFactory.getLog(Foo.class);
+    // ...
+    public void setBar(Bar bar) {
+        if (log.isTraceEnabled()) { 
+            log.trace("Setting bar to " + bar);
+        }
+        this.bar = bar;
+    }
+// ...
+}
+</code></pre>
+    
+    <p>
+    The general idea is to instantiate a single logger per class and to
+    use a name for the logger which reflects where it's being used.  The
+    example is constructed with the class itself.  This gives the
+    logger the name of com.foo.Foo.  Doing things this way lets you
+    easily see where the output is coming from, so you can quickly
+    pin-point problem areas.  In addition, you are able to enable/disable
+    logging in a very fine-grained way.
+    </p>
+
+    <p>
+    For examples of using logging in Struts classes, see the
+    Action classes in the Struts MailReader example application.
+    </p>
+
+</section>
+
+<section>
+    <p class="right">
+    Next: <a href="./configuration.html">Configuring Applications</a>
+    </p>
+</section>
+
+</chapter>
+</body>
+</document>

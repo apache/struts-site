@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<document url="installation-novell.html">
+
+  <properties>
+    <title>The Struts Framework Project - Installation - Novell ExteNd Application Server</title>
+  </properties>
+
+  <body>
+<chapter name="5.2 Installation" href="installation">
+<section name="Installing Struts with your servlet container" href="Containers">
+
+<h4 id="orion">Novell ExteNd Application Server 4.0</h4>
+
+<strong>Using the ExteNd Workbench to deploy a WAR to the Novell ExteNd
+application server:</strong>
+<ul>
+  <li>Start the Novell ExteNd application server.</li>
+  <li>Using the ExteNd Workbench, create a new project:
+    <ol>
+    <li>File &gt; New Project</li>
+    <li>Select <em>Deploy-Only</em> and click <code>OK</code></li>
+    <li>Under Archive File select the appropriate Struts WAR file</li>
+    <li>Indicate the type of file (i.e. WAR 1.2)</li>
+    <li>Give the Deploy-Only project a name (i.e. struts-example)</li>
+    <li>Give the Deploy-Only project a location
+        (i.e. <code>D:\Struts</code>)</li>
+    <li>Click <code>Next</code></li>
+    <li>Review the material to be sure everything is correct</li>
+    <li>Click <code>Finish</code></li>
+    </ol>
+  </li>
+  <li>Setting up a deployment plan and server profile:
+    <ol>
+    <li>Right click on the project icon you just created and
+        select <em>Deployment Plan</em></li>
+    <li>Select <code>OK</code> when asked to create a new deployment
+        plan</li>
+    <li>Save the deployment plan</li>
+    <li>Create a server profile:  Projects &gt; Deployment Settings</li>
+    <li>Click on the Server Profiles tab</li>
+    <li>Select a server profile and click <code>OK</code></li>
+    </ol>
+  </li>
+  <li>Deploy the project:
+    <ol>
+    <li>Project &gt; Deploy Archive</li>
+    </ol>
+  </li>
+</ul>
+
+<strong>Deploying a WAR from a command line using SilverCmd:</strong>
+<ul>
+  <li>Start the SilverStream application server.</li>
+  <li>Create an XML deployment plan for the <code>struts-example.war</code>
+      application.</li>
+  <li>Call the file <code>struts-example-depl-plan.xml</code>.  You
+      can use the following contents for the file:
+<pre><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE warJarOptions PUBLIC
+  "-//Silverstream Software, Inc.//DTD J2EE WAR Deployment Plan//EN"
+  "deploy_war.dtd">
+<warJarOptions>
+  <warJar>
+    <warJarName>struts-example.war</warJarName>
+    <isEnabled>true</isEnabled>
+    <urls>
+      <el>struts-example</el>
+    </urls>
+  </warJar>
+</warJarOptions>
+]]></pre>
+  </li>
+  <li>Create an XML deployment plan for the
+      <code>struts-documentation.war</code> application.</li>
+  <li>Call the file <code>struts-documentation-depl-plan.xml</code>.  You
+      can use the following contents for the file:
+<pre><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE warJarOptions PUBLIC
+  "-//Silverstream Software, Inc.//DTD J2EE WAR Deployment Plan//EN"
+  "deploy_war.dtd">
+<warJarOptions>
+  <warJar>
+    <warJarName>struts-documentation.war</warJarName>
+    <isEnabled>true</isEnabled>
+    <urls>
+      <el>struts-documentation</el>
+    </urls>
+  </warJar>
+</warJarOptions>
+]]></pre>
+  </li>
+  <li>Run the following "SilverCmd DeployWAR" commands to deploy the
+      applications.  You can change 'localhost' to whatever server you
+      are deploying to.  You can change 'Silvermaster' to whatever
+      database you are deploying to.
+<pre><![CDATA[
+SilverCmd DeployWar localhost Silvermaster struts-example.war
+  -f struts-example-depl-plan.xml
+SilverCmd DeployWar localhost Silvermaster struts-documentation.war
+  -f struts-documentation-depl-plan.xml
+]]></pre>
+  </li>
+</ul>
+
+  <hr/>
+  <p>Back to <a href="installation.html#Containers">Installation</a></p>
+</section>
+</chapter>
+</body>
+</document>

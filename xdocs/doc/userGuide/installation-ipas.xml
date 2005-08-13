@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<document url="installation-ipas.html">
+    <properties>
+        <title>The Struts Framework Project - Installation - iPortal Application Server</title>
+    </properties>
+    <body>
+    <chapter name="5.2 Installation" href="installation">
+        <section name="Installing Struts with your servlet container" href="Containers">
+            <h4>
+                <a name="ipas13">iPortal Application Server 1.3</a>
+            </h4>
+            <strong>Tested with: Windows 2000</strong>
+            <h4>Important Note:</h4>
+            <p>At the moment, iPAS 1.3 is not fully compliant with the JSP 1.1/1.2
+specification. </p>
+            <p>Specifically, the automatic type conversions for custom tag parameters
+specified in "Issue  7" of the JSP 1.1 Errata and in the JSP 1.2 Proposed
+Final Draft have not yet been implemented.</p>
+            <p>As it stands, JSP pages that make use of Struts taglibs whose parameters
+require  conversion (such as booleans) will not compile under JRun. This
+includes the Struts Example Application. Attempting to run the example
+application will result in an exception similar to the following being
+thrown:</p>
+<pre>
+/struts-example/index.jsp:
+
+Compilation failed [IT_Builder:1000]
+ at com.iona.j2ee.builder.JavaBuilder.build(JavaBuilder.java:84)
+ at com.iona.j2ee.builder.JspBuilder.build(JspBuilder.java:51)
+ at com.iona.j2ee.builder.WarBuilder.build(WarBuilder.java:111)
+ at com.iona.j2ee.builder.EarBuilder.build(EarBuilder.java:99)
+ at com.iona.j2ee.builder.EarBuilder.main(EarBuilder.java:223)
+ at iportal.build.main(build.java:14)
+ ocale(boolean) in org.apache.struts.taglib.html.HtmlTag
+   cannot be applied to (java.lang.String)
+       _x0.setLocale("true");
+            ^
+ 1 error
+</pre>
+            <p>(For more details see refer to:<br/>
+                
+                    <a href="http://www.mail-archive.com/struts-user@jakarta.apache.org/msg01860.html">http://www.mail-archive.com/struts-user@jakarta.apache.org/msg01860.html</a>
+                )
+        </p>
+            <p>The following instructions describe how to install the Struts Example
+Application under iPAS 1.3. A subsequent section describes how the Struts
+Example Application can be patched to work with Struts.</p>
+            <p>The following instructions assume the following:</p>
+            <ul>
+                <li>iPortal Application Server 1.3 has been installed.</li>
+                <li>Both the Strut and XML Parser libraries are in your classpath.</li>
+            </ul>
+            <h4>Installing the struts example application</h4>
+            <ul>
+                <li>Start iPAS Services by clicking on the [Start iPAS Services] menu item. </li>
+                <li>Start the iPortal Application Server by clicking on the [iPortal Application Server] menu item. </li>
+                <li>Start a command shell. Change to the <code>$INSTALLDIR\IONA</code> and run the
+setenvs.bat file.</li>
+                <li>Create a directory called jars.</li>
+            </ul>
+            <p>Now run the EARSCO tool. Type <code>java iportal.earsco</code> and at the prompts do:</p>
+            <ul>
+                <li>Next</li>
+                <li>Type in the application name of <code>struts-example</code> then click next.</li>
+                <li>In step three click the check box and enter the name of the
+   WAR <code>struts-example</code>.Then click next.</li>
+                <li>Click on Finish.</li>
+            </ul>
+            <p>Now you must copy the contents of the struts-example war into the EARSCO
+directory structure as follows: </p>
+            <p>Under <code>$INSTALLDIR\IONA\jars\struts-examples\src\struts-example.war</code> you
+copy contents into the following directories: etc, lib, src and web.</p>
+            <ul>
+                <li>Copy all files in the root directory <br/>
+                    <code>$INSTALLDIR\jakarta-tomcat-3.2.1\webapps\struts-example\WEB-INF</code>
+                    <br/>
+   into the earsco directory<br/>
+                    <code>$INSTALLDIR\IONA\jars\struts-examples\src\struts-example.war\etc</code>
+                    <br/>
+   Do not copy in the classes or lib directories.</li>
+                <li>Copy the directory <br/>
+                    <code>$INSTALLDIR\jakarta-tomcat-3.2.1\webapps\struts-example\WEB-INF\lib</code>
+                    <br/>
+   into the earsco directory<br/>
+                    <code>$INSTALLDIR\IONA\jars\struts-examples\src\struts-example.war\lib</code>
+                </li>
+                <li>Copy the directory <br/>
+                    <code>$INSTALLDIR\jakarta-tomcat-3.2.1\webapps\struts-example\WEB-INF\classes</code>
+                    <br/>
+   into the earsco directory<br/>
+                    <code>$INSTALLDIR\IONA\jars\struts-examples\src\struts-example.war\src</code>
+                    <br/>
+                </li>
+                <li>Copy the directory <br/>
+                    <code>$INSTALLDIR\jakarta-tomcat-3.2.1\webapps\struts-example </code>
+                    <br/>
+   into the earsco directory <br/>
+                    <code>$INSTALLDIR\IONA\jars\struts-examples\src\struts-example.war\web</code>
+                    <br/>
+                </li>
+                <li>Next modify the application.xml in the <br/>
+                    <code>$INSTALLDIR\IONA\jars\struts-examples\etc</code> directory to this: </li>
+            </ul>
+            <pre>
+     &lt;application>
+
+     &lt;!-- Add display name -->
+           &lt;display-name>Struts Example&lt;/display-name>
+                 .......
+</pre>
+            <ul>
+                <li>Last update the cc.xml in the <br/>
+                    <code>$INSTALLDIR\IONA\jars\struts-examples directory as follows:</code>
+                </li>
+            </ul>
+            <pre>
+     &lt;configuration>
+       &lt;web-app>
+         &lt;context-root>struts-example&lt;/context-root>
+       &lt;/web-app>
+     &lt;/configuration>
+</pre>
+            <p>Now you are ready to compile and deploy the struts-example.</p>
+            <p>To compile the source from the $INSTALLDIR\IONA\jars\struts-examples type </p>
+            <p>
+                <code>java iportal.build</code>
+            </p>
+            <p>Next, type</p>
+            <p>
+                <code>java iportal.deploy</code>
+            </p>
+            <p>The first time you deploy you will be prompted by a Deploy wizard and asked to
+supply both locations of the struts-example.ear file and of the cc.xml file.
+Once both elements have been satisfied continue until the finish button and
+click it. The EAR file should deploy successfully.</p>
+            <p>Test the sample application by using the following URL in the browser:</p>
+            <p>
+                <code>http://hostname:9000/struts-example/index.jsp</code>
+            </p>
+            <p>The <code>struts-documentation.war</code> can be installed using the same procedure.</p>
+            <h4>Patching the struts example application</h4>
+            <p>As mentioned at the beginning of these notes, the Struts Example Application
+will not run under iPAS 1.3 without modification. The following changes will
+need to be made:</p>
+            <ul>
+                <li>index.jsp, logon.jsp: Change &lt;html:html locale="true"> to <br/>&lt;html:html locale=&lt;%= true %>></li>
+                <li>registration.jsp, subscription.jsp: Change all instances of filter="true" to <br/>filter=&lt;%= true %></li>
+            </ul>
+            <hr/>
+            <p>Back to <a href="installation.html#Containers">Installation</a>
+            </p>
+        </section>
+    </chapter>
+    </body>
+</document>

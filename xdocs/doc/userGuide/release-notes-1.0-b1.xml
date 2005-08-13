@@ -1,0 +1,431 @@
+<?xml version="1.0"?>
+<document url="release-notes-1.0-b1.html">
+
+  <properties>
+    <title>Struts Release Notes (Version 1.0-beta-1)</title>
+  </properties>
+
+  <body>
+
+  <section name="Introduction" href="Introduction">
+
+  <p>This document contains the release notes for
+  <strong>Version 1.0-beta-1</strong> of the Struts Framework.
+  The following sections cover
+  <a href="#New">New Features</a> and <a href="#Changes">Changes</a> since
+  the <strong>Version 0.5</strong> of Struts was made available.</p>
+
+  <p>One global new feature to take note of is that Struts 1.0 requires
+  a Java2 (JDK 1.2 or later) platform on which to run.</p>
+
+  </section>
+
+
+  <section name="What's New?" href="New">
+
+  <p>The following major new features have been added to the controller
+  servlet and associated classes
+  (package <code>org.apache.struts.action</code>):</p>
+  <ul>
+  <li>A new configuration file format, including the
+      <a href="../../dtds/struts-config_1_0.dtd">Document Type Definition (DTD)</a>
+      it is based on, is available for configuring the Struts controller
+      servlet.  Support for the previous format is still present, but will
+      be phased out by the 1.0 release.</li>
+  <li>If enabled by setting the <code>locale</code> servlet initialization
+      parameter to <code>true</code>, the controller servlet will now calculate
+      a Locale for this user (based on the Locale returned by the servlet
+      container, or by the HTTP headers included with the request)
+      and store it in the user's session, unless the application
+      has stored one there already.</li>
+  <li>Application <code>Action</code> instances now have lifecycle support.
+      The controller servlet will call <code>setServlet()</code> with a
+      non-null argument when the instance is first created, and call it with
+      a <code>null</code> argument when the instance is being shut down.</li>
+  <li>The collection of "standard" Struts actions (in package
+      <code>org.apache.struts.actions</code>) is kicked off with a set of
+      simple actions that allow on-the-fly changes in the form bean, forward,
+      and mapping definitions registered with the controller servlet.  These
+      actions would normally be configured behind security constraints to
+      prevent interference with the operation of your application but can be
+      very useful during development.</li>
+  <li>A new representation of error messages (<code>ActionError</code> and
+      <code>ActionErrors</code>) has been created that allows errors to be
+      associated with individual fields, and stores parameter replacement
+      values along with the messages keys.</li>
+  <li>The <code>ActionForm</code> interface has been converted to a base class,
+      with default implementations of some useful functionality.  In addition,
+      the new class provides two <code>validate()</code> methods that take
+      the current mapping and current request as arguments, in order to provide
+      access to more context information than just the properties of this
+      particular form bean.</li>
+  <li>The new <code>ActionForm</code> class also provides two
+      <code>reset()</code> methods that take the current mapping and current
+      request as arguments, in order to provide access to more context
+      information (particularly important on multi-page forms so that the form
+      bean knows which properties to reset).  Among other things, use of the
+      <code>reset()</code> methods can prevent problems with checkbox fields
+      -- simply reset boolean fields to <code>false</code> and they will be
+      set to <code>true</code> (during auto-population of the form bean
+      properties) only if the checkbox was actually checked.</li>
+  <li>All servlet context attributes created by the Struts controller servlet
+      itself (but not the Struts Example application) now implement
+      <code>java.io.Serializable</code>.</li>
+  <li>The <code>Action</code> class now includes support for "transactional
+      tokens", so that you can detect cases where the user submitted a form,
+      then went back and resubmitted the form again.</li>
+  </ul>
+
+  <p>The following major new features have been added to the
+  <em>struts-bean</em> custom tag library (package
+  <code>org.apache.struts.taglib.bean</code>):</p>
+  <ul>
+  <li>A new custom tag, <code>&lt;bean:page&gt;</code>, is available
+      to expose key items from the page context associated with the current
+      page as scripting variables, and as page-scope beans.  For example,
+      you can use the following sequence to render the server information
+      string returned by our servlet context:
+      <pre>
+      &lt;bean:page id="app" property="application"/&gt;
+      &lt;bean:write name="app" property="serverInfo"/&gt;
+      </pre></li>
+  <li>A new custom tag, <code>&lt;bean:struts&gt;</code>, is available
+      to expose internal Struts configuration objects (form bean, forward,
+      and mapping definitions) as scripting variables and page-scope beans.
+      For example, you can use the following sequence to render the actual
+      context-relative path of an <code>ActionForward</code> object:
+      <pre>
+      &lt;bean:struts id="link" forward="success"/&gt;
+      &lt;bean:write name="link" property="path"/&gt;
+      </pre></li>
+  <li>All of the tags in this library that accept a <code>name</code>
+      attribute referring to a JSP bean now also accept an optional
+      <code>scope</code> attribute to define the scope in which to search
+      for that bean.  If not specified, all scopes are searched.</li>
+  <li>The <code>&lt;bean:size&gt;</code> tag will create a bean that stores
+      the number of elements of an array, Collection, or Map.</li>
+  </ul>
+
+  <p>The <em>struts-html</em> custom tag library has been created (package
+  <code>org.apache.struts.taglib.html</code>), based on the old tags that
+  were related to HTML form presentation.  The following differences from
+  the old tags are notable:</p>
+  <ul>
+  <li>You must now reference the "struts-html.tld" TLD to access these
+      tags.</li>
+  <li>All attribute names matching JavaScript event handlers are now all
+      lower case (onClick --&gt; onclick) to conform to XHTML.</li>
+  <li>The <code>options1</code> tag has been eliminated since Struts is now
+      based on Java2.</li>
+  <li>All tag implementation classes have had their <code>final</code>
+      modifiers removed, and <code>private</code> instance variables
+      changed to <code>protected</code>.  This makes it possible to easily
+      subclass these tags to provide specialized functionality.</li>
+  <li>The <code>&lt;html:link&gt;</code> tag has been enhanced to support
+      a new <code>page</code> attribute that allows you to use
+      context-relative URIs in a portable manner.</li>
+  <li>A new <code>&lt;html:html&gt;</code> tag has been created that
+      renders an HTML <code>&lt;html&gt;</code> element with appropriate
+      <code>lang</code> and <code>xml:lang</code> attributes, based on the
+      locale stored for the user's session (if there is one).</li>
+  <li>A new <code>&lt;rewrite&gt;</code> tag has been created that
+      renders a request URI, possibly encoded with a session identifier,
+      based on exactly the same rules used by the <code>&lt;link&gt;</code>
+      tag that generates hyperlinks.  These constants can be useful when
+      you are creating JavaScript code that needs to be aware of Struts
+      addressing concepts.</li>
+  <li>The <code>options</code> tag now supports a new <code>collection</code> attribute,
+      which can be used to specify a collection whose beans have properties
+      that return the value (to be returned to the server) and the label (to
+      be displayed to the user) from a single collection.  The previous
+      support for processing parallel collections is still available.</li>
+  <li>The <code>form</code> tag has been enhanced to look up the name of the
+      form bean, it's Java class, and the scope in which the bean should be
+      created or accessed, from the corresponding action mapping entry in the
+      "struts-config.xml" file, if the <code>name</code>, <code>scope</code>,
+      and <code>type</code> attributes are not specified.  This removes the
+      need to make changes in two places when these values are changed.</li>
+  <li>A new <code>&lt;image&gt;</code> tag has been added, to create
+      HTML input tags of type "image".</li>
+<li>The <code>form</code> tag has been enhanced to read its configuration from 
+      a corresponding action mapping entry in the "struts-config.xml" file, 
+      if the <code>name</code>, <code>scope</code>, and <code>type</code> 
+      attributes are not specified. It can look up the name of the
+      form bean, its Java class, the scope in which the bean should be
+      created or accessed, plus the path to which the form should be
+      submitted. This removes the need to make changes in two places when these 
+      values are changed. It works for cases where the controller servlet is 
+      extension mapped or path mapped.</li>
+  <li>The <code>&lt;html:img&gt;</code> tag has been added, to render an HTML
+      <code>&lt;img&gt;</code> tag.</li>
+  </ul>
+
+  <p>A new package of Actions and associated classes for handling file uploads
+  has been created (package <code>org.apache.struts.upload</code>):</p>
+  <ul>
+  <li>The basic package of file upload handling actions has been created.</li>
+  <li>An example application illustrating the use of the new features
+      has been added (<code>webapps/struts-upload.war</code>).</li>
+  </ul>
+
+  <p>The following major new features have been added to the utility classes
+  library (package <code>org.apache.struts.util</code>):</p>
+  <ul>
+  <li>Initial implementation of a JDBC data source that implements the
+      <code>javax.sql.DataSource</code> interface from the JDBC 2.0 Standard
+      Extensions API.  This implementation may be configured based on new
+      extensions to the Struts configuration file DTD, and the configured
+      data sources / connection pools are made available to application
+      components as a servlet context attribute (i.e. an application scope
+      bean).</li>
+  <li>The previous implementation of <code>MessageResources</code>, which was
+      ultimately based on <code>java.util.ResourceBundle</code>, has been
+      completely replaced and re-implemented.  The primary features of the
+      new implementation are:
+      <ul>
+      <li>All components stored as servlet context attributes now implement
+          the <code>java.io.Serializable</code> interface, to better integrate
+          with application servers that prefer this.</li>
+      <li>The <code>MessageResources</code> and <code>MessageResourcesFactory</code>
+          classes have been abstracted so that you can easily create your
+          own implementations that derive their message strings from resources
+          other than property files.</li>
+      </ul></li>
+  <li>Property gets and sets made through <code>PropertyUtils</code> can now
+      use a new syntax for indexed and nested properties.</li>
+  <li>Conversion to and from numeric types now support a configurable default
+      value to use when conversion fails.</li>
+  </ul>
+
+  <p>The following major new features have been added to the
+  <em>Struts Example Application</em>:</p>
+  <ul>
+  <li>The form beans used in the example application now use request scope
+      rather than session scope.  This is the preferred approach for single
+      page forms that contain <em>all</em> of your relevant properties,
+      because there is no need to maintain such form beans across requests.
+      Note that the action classes have been coded so that they work with
+      either request scope or session scope beans.</li>
+  <li>The Struts Example Application has been updated to utilize the new
+      (separated) custom tag libraries, rather than the old combined one,
+      as well as the latest features of the tags being used.</li>
+  <li>A "Walking Tour of the Struts Example Application" has been added, to
+      highlight features for newcomers to Struts.</li>
+  </ul>
+
+  <p>The following major new documentation updates have been added to
+  Struts:</p>
+  <ul>
+  <li>All documentation is generated from XML input files, using a standard
+      stylesheet to create a common look and feel.</li>
+  <li>Developer Guides for the Java classes in the
+      <code>org.apache.struts.digester</code> and
+      <code>org.apache.struts.util</code> packages.</li>
+  <li>Developer Guides for the following Struts custom tag libraries have
+      been added:  <code>struts-bean</code>, <code>struts-html</code>,
+      <code>struts-logic</code>, and <code>struts-template</code>.</li>
+  <li>The Struts Users Guide has been brought up to date with respect to
+      all of the changes since Struts 0.5, and separated into multiple
+      HTML pages for easy reading.</li>
+  <li>Installation information has been updated to include platform-specific
+      notes, issues, and workarounds.</li>
+  <li>A new resources page now points at external information and resources
+      related to Struts.</li>
+  <li>A new example application, <code>struts-blank</code>, is included as a
+      quick starting point for new application development.</li>
+  </ul>
+
+  </section>
+
+
+  <section name="Changes and Bug Fixes" href="Changes">
+
+  <p>The following changes and bug fixes to the controller servlet and
+  associated classes (package <code>org.apache.struts.action</code>) have
+  occurred:</p>
+  <ul>
+  <li>The <code>ActionMapping</code> interface has been converted to a base
+      class instead, to reduce the impact of future enhancements.  Anyone who
+      has extended the <code>ActionMappingBase</code> convenience base class
+      (which has been deprecated) should extend <code>ActionMapping</code>
+      instead.</li>
+  <li>In conjunction with the new configuration file format mentioned above,
+      the properties of <code>ActionMapping</code> have been substantially
+      updated.  See the
+      <a href="../../api/org/apache/struts/action/ActionMapping.html">API
+      Documentation</a> for more information</li>
+  <li>The <code>Action</code> interface has been converted to a base class
+      instead, to reduce the impact of future enhancements.  Anyone who has
+      extended the <code>ActionBase</code> convenience base class (which
+      has been deprecated) should extend <code>Action</code> instead.</li>
+  <li>In conjunction with the above change, the <code>servlet</code>
+      argument has been removed from the parameter list for the
+      <code>perform()</code> method, because it is now redundant -- the
+      associated servlet is set via the <code>setServlet()</code> method
+      when the <code>Action</code> instance is first created.</li>
+  <li>Responsibility for creating <code>Action</code> instances has been moved
+      from <code>ActionMapping</code> to the controller servlet, so that
+      instance lifecycle management can be performed.  As a side effect of this
+      change, if you had two actions that used the same Action class name,
+      there will now be only one (shared) instance of the Action class,
+      rather than two.</li>
+  <li>New <code>log(String, int)</code> method that logs the associated message
+      only if you have configured the debugging detail level for the servlet to
+      an equal or higher value.</li>
+  <li>In <code>ActionServlet</code>, the functionality to populate form bean
+      parameters from a request, and the functionality to validate the form
+      bean's contents, has been separated into two methods that can be
+      overridden individually if required.</li>
+  <li>The <code>ActionServlet</code> functionality to call the
+      <code>validate()</code> method of a form bean is skipped if the user
+      pressed the Cancel key (i.e. the submit button created by the
+      <code>&lt;html:cancel&gt;</code> custom tag), or if the selected
+      mapping does not define an input form to return control to.</li>
+  <li>The controller servlet may now be used as the target of a
+      <code>RequestDispatcher.include()</code> or
+      <code>&lt;jsp:include/&gt;</code> call.  Previously, it would mistakenly
+      use the original request URI, rather than the included path, to calculate
+      which action class to execute.</li>
+  <li>The <code>ActionMappings.getUnknown()</code> method now takes the current
+      request as an parameter, so that context-sensitive decisions can be
+      made.</li>
+  <li>When the controller servlet processes an <code>ActionForward</code> that
+      has the <code>redirect</code> property set, it now performs URL rewriting
+      to maintain session state even if cookies are not being used.</li>
+  <li>The <code>ActionErrors</code> class now includes a method that will
+      return an Iterator over the error messages related to a particular
+      input field.</li>
+  </ul>
+
+  <p>The following changes and bug fixes to the Digester module
+  (package <code>org.apache.struts.digester</code>) have occurred:</p>
+  <ul>
+  <li>The <code>Digester.resolveEntity()</code> method has been enhanced
+      to correctly handle local URIs so that it works with resources loaded via
+      <code>Class.getResource()</code>.</li>
+  <li>The input source handed to the Digester is now closed, even if a
+      parsing exception is throw.</li>
+  </ul>
+
+  <p>The following changes and bug fixes to the <em>struts-bean</em> custom
+  tag library (package <code>org.apache.struts.taglib.bean</code>) have
+  occurred:</p>
+  <ul>
+  <li>By default, the <code>&lt;bean:write&gt;</code> tag will filter output
+      for characters sensitive to HTML.  You can turn this off by adding a
+      <code>filter="false"</code> attribute.</li>
+  <li>When performing a <code>&lt;bean:include&gt;</code> in a page that is
+      part of a session, pass the session identifier along on the generated
+      request so that it will be part of the same session.</li>
+  <li>The <code>&lt;bean:define&gt;</code> tag can now create
+      beans directly from the <code>value</code> attribute, if desired.</li>
+  <li>The <code>&lt;bean:define&gt;</code> tag now accepts an optional
+      <code>toScope</code> attribute, to declare which scope the new bean
+      should be created in.  The default remains <code>page</code> scope.</li>
+  <li>Default values can now be specified on <code>&lt;bean:cookie&gt;</code>,
+      <code>&lt;bean:header&gt;</code>, and
+      <code>&lt;bean:parameter&gt;</code> tags, which are used when the
+      corresponding value is not present in the current request.</li>
+  </ul>
+
+  <p>The following changes and bug fixes to the <em>struts-html</em> custom
+  tag library (package <code>org.apache.struts.taglib.html</code>) have
+  occurred:</p>
+  <ul>
+  <li><strong>WARNING</strong> - When the Struts 0.5 tag library was originally
+      split into separate libraries, this library was named
+      <em>struts-form</em>, to reflect the fact that the majority of tags
+      related to creating input forms.  It has been renamed to
+      <em>struts-html</em> to reflect the fact that all of the tags in this
+      library are relevant only when building HTML-based user interfaces.</li>
+  <li>The <code>&lt;html:html&gt;</code> tag now supports a
+      <code>locale="true"</code> attribute that requests the same Locale
+      negotiation (based on the presence of an <code>Accept-Language</code>
+      header) that is performed by the controller servlet.</li>
+  <li>The <code>&lt;html:link&gt;</code> tag now supports the ability to add
+      a single request parameter (based on a bean property) in addition to the
+      ability to add request parameters from a Map.</li>
+  <li>The <code>&lt;html:errors&gt;</code> tag lets you select only the error
+      messages related to a particular input field, or all errors.</li>
+  <li>The <code>&lt;html:password&gt;</code> tag now optionally redisplays
+      the previous value of the input field.</li>
+  <li>The value returned by a <code>&lt;html:multibox&gt;</code> tag can now
+      be specified in the body of the tag, as well as via the
+      <code>value</code> attribute.</li>
+  </ul>
+
+  <p>The following changes and bug fixes to the <em>struts-logic</em>
+  custom tag library (package <code>org.apache.struts.taglib.logic</code>)
+  have occurred:</p>
+  <ul>
+  <li>The <code>&lt;logic:present&gt;</code> and
+      <code>&lt;logic:notPresent&gt;</code> tags now accept a <code>role</code>
+      attribute that allows you to detect whether the currently authenticated
+      user does, or does not, possess a particular security role.</li>
+  </ul>
+
+  <p>The following changes and bug fixes to the <em>struts-template</em>
+  custom tag library (package <code>org.apache.struts.taglib.template</code>)
+  have occurred:</p>
+  <ul>
+  <li>The <code>&lt;template:put&gt;</code> tag now accepts a
+      <code>direct</code> attribute that causes the content being put to be
+      rendered directly, rather than being included.</li>
+  </ul>
+
+  <p>The following changes and bug fixes to the Utilities package
+  (package <code>org.apache.struts.util</code>) have occurred:</p>
+  <ul>
+  <li>Fixed <code>PropertyUtils.getPropertyType()</code> to correctly return
+      the underlying element type even if there was a non-indexed property
+      getter method.</li>
+  <li>Added a missing "return" statement to
+      <code>PropertyUtils.setIndexedProperty()</code>.</li>
+  <li>Functionality in <code>BeanUtils</code> that previously duplicated
+      functionality that was earlier moved to <code>PropertyUtils</code>
+      has been removed.</li>
+  <li>Fixed <code>PropertyUtils.copyProperties()</code> to skip cases where
+      the origin bean has a getter method but the destination bean does not
+      have a setter method.</li>
+  <li>Added <code>BeanUtils.cloneBean()</code> to create a new instance of
+      an existing bean, and copy all known properties, even if the bean class
+      does not implement <code>Cloneable</code>.</li>
+  <li>The <code>BeanUtils</code> class has been refactored so that it, and
+      the associated <code>ConvertUtils</code> and <code>PropertyUtils</code>
+      classes, can easily be used without having to have the servlet API
+      classes available on the classpath.</li>
+  <li>Property introspection is now smarter, so that you can access public
+      methods declared in an implemented interface, even if the class itself
+      is not public.</li>
+  </ul>
+
+  <p>The following changes and bug fixes to the Struts Example Application
+  (package <code>org.apache.struts.example</code> and the corresponding web
+  components) have occurred:</p>
+  <ul>
+  <li>Used the <code>reset()</code> methods defined by the
+      <code>ActionForm</code> interface to reset form bean properties to
+      default values.  This is particularly important to make boolean
+      properties (represented visually by checkboxes) work correctly.</li>
+  <li>Eliminate the special-case handling of null String values in the
+      form beans.  Such handling is not necessary because the custom tags
+      correctly deal with null String values.</li>
+  <li>Use the <code>PropertyUtils.copyProperties()</code> method to initially
+      populate form beans from underlying data objects, and to update date
+      objects when a transaction is successfully completed.  Note that using
+      this approach dramatically lessens an action class's dependence on the
+      specific properties of the form bean and corresponding data object
+      in many use cases.</li>
+  <li>Added an <code>autoConnect</code> boolean property to the Subscription
+      data object, primarily to illustrate that representing a boolean
+      property with a checkbox now works correctly if you set the property
+      to <code>false</code> in the <code>reset()</code> method of your
+      form beans.</li>
+  </ul>
+
+  </section>
+
+  </body>
+
+</document>
+

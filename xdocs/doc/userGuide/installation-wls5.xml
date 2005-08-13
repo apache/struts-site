@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<document url="installation-wls5.html">
+
+  <properties>
+    <title>The Struts Framework Project - Installation - Weblogic 5.1 sp8</title>
+  </properties>
+
+  <body>
+<chapter name="5.2 Installation" href="installation">
+<section name="Installing Struts with your servlet container" href="Containers">
+
+<h4 id="wls5">Weblogic 5.1 (service pack 8)</h4>
+<ul>
+  <li>Obtain and install the Xerces XML parser (problems have been reported with
+    the Sun reference implementation). Put xerces.jar in your WebLogic system
+    path.</li>
+  <li>Obtain and unpack the Struts binary distribution (this procedure assumes
+    it was extracted to <code>c:\jakarta-struts</code>).</li>
+  <li>Add an entry to weblogic.properties for each of the Struts web applications
+    that you would like to configure. For example, to make the struts-example
+    application available, add the following line to weblogic.properties:<br/>
+    <code>weblogic.httpd.webApp.strutsexample=<br/>
+    c:/jakarta-struts/webapps/struts-example.war</code></li>
+  <li>You do not need to include struts.jar or any of the application specific
+    classes in the WebLogic classpath, since this will be done automatically (unless
+    deploying an unpacked web archive- see below).</li>
+  <li>Start WebLogic server and point your web browser to the struts application.
+    For example, to connect to the example application added in step 3:<br/>
+    <code>http://localhost:7001/strutsexample</code></li>
+  <li>This example application depends on the Struts specific resource file ApplicationResources.properties
+    to be present on the classpath. However, WebLogic only extracts *.class files
+    from the archive so this file will not be found, resulting in an error the
+    first time it is needed- something similar to: javax.servlet.ServletException:
+    runtime failure in custom tag 'message'. Steps 6 &amp; 7 will need to be performed
+    for this application, and any other that relies on ApplicationResources.properties.</li>
+  <li>Extract ApplicationResources.properties from the *.war file, and manually
+    copy it to the respective package in the _tmp_war_ directory WebLogic created
+    for this application. Again referring to the struts-example application, this
+    would be:<br/>
+    <code>c:\jakarta-struts\webapps\WEB-INF\_tmp_war_strutsexample</code></li>
+  <li>Restart WebLogic. You will now be able to run the application:<br/>
+    <code>http://localhost:7001/strutsexample</code></li>
+</ul>
+<p>The above steps should be followed for applications deployed as *.war files.
+  For unpacked web applications, configuration involves adding both <code>struts.jar</code>
+  and <code>/WEB-INF/classes</code> to the WebLogic classpath. For this reason,
+  I would suggest deploying applications as war files to WebLogic. However, the
+  same example application can be successfully deployed in extracted format by
+  modifying weblogic.properties (assuming the war was extracted to directory webapps/struts-example):</p>
+<p><code>weblogic.httpd.webApp.strutsexample=<br/>
+  c:/jakarta-struts/webapps/struts-example/</code></p>
+<p>And starting WebLogic with the updated WebLogic classpath. For example:</p>
+<p><code>c:\jdk1.3\bin\java -ms16m -mx64m<br/>
+  -classpath c:\weblogic\lib\weblogic510sp8boot.jar;</code></p>
+  <hr/>
+  <h4>Additional Recommendations</h4>
+  <ul>
+  <li>Servlet and JSP-Reloading should be turned off. First, you pay a performance
+    penalty. Depending on the number of JSPs, the number of requests and the
+    configured checking interval, the server will slow down. Second, with JSP- and
+    Servlet reloading, one opens the door for various Weblogic classloader problems,
+    that are difficult to diagnose, difficult to handle and often lead to lost
+    HTTP-sessions.</li>
+  <li>Set the name of the <code>sessionid</code> to <code>JSESSIONID</code>, if cookies are used for session
+    tracking and to jsessionid, if sessions are URL-based. (There are additional
+    problems related to URL-based sessions, caused from BEA's way to encode the session
+    id (J2EE-incompatible) as query-param. Especially &lt;bean:include&gt; will not work with
+    URL-based sessions yet. However, using the correct session name solves at least some
+    problems.)</li>
+  <li>Configure the JSP-Servlet registration in <code>weblogic.properties</code> for
+    maximum J2EE-compliance and/or for maximum performance.</li></ul>
+  <p>The JSP-Servlet supports some initialization parameters that can be customized to get
+    best performance, maximum compliance or (as shown below) easier debugging:</p>
+<pre>
+  weblogic.httpd.initArgs.*.jsp=\
+       pageCheckSeconds=-1,\
+        setEmptyStrings=false,\
+         compileCommand=./_jspCompiler_.cmd,\
+             workingDir=/weblogic/myserver/tmp_classfiles,\
+          keepgenerated=true,\
+                  debug=true,\
+                verbose=true
+</pre>
+<p>In the above example, the batch file (<code>_jspCompiler_.cmd</code>) invokes jikes
+   which results dramatically reduced startup times (jikes is about three times faster
+   than javac.) The batchfile contains only a single line:</p>
+
+<pre>@jikes -g -nowarn %*</pre>
+
+<p>The next configuration could be used when all tests have been done and speed is the
+major concern ...</p>
+
+<pre>
+  weblogic.httpd.initArgs.*.jsp=\
+       pageCheckSeconds=-1,\
+        setEmptyStrings=false,\
+         compileCommand=./_jspCompiler_.cmd,\
+             workingDir=/weblogic/myserver/tmp_classfiles,\
+          keepgenerated=false,\
+                  debug=false,\
+                verbose=false
+</pre>
+
+<p>... together with ...</p>
+
+<pre>@jikes -O -nowarn %*</pre>
+
+<p>Weblogic supports similar settings through <code>&lt;context-params&gt;</code> in <code>web.xml</code>
+(Please read the latest documentation at the BEA website for details.)</p>
+<p>For additional issues, see also <a
+href="http://www.mail-archive.com/struts-dev@jakarta.apache.org/msg00284.html">More
+fixes for WLS 5.1 SP8</a> from the Struts Developer mailing list</p>
+<hr/>
+  <p>Back to <a href="installation.html#Containers">Installation</a></p>
+</section>
+</chapter>
+</body>
+</document>

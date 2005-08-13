@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<document url="installation-jr30.html">
+
+  <properties>
+    <title>The Struts Framework Project - Installation - JRun 3.0</title>
+  </properties>
+
+  <body>
+<chapter name="5.2 Installation" href="installation">
+<section name="Installing Struts with your servlet container" href="Containers">
+
+<h4 id="jrun">JRUN 3.0 SP2A, VERSION 3.02A.11614</h4>
+
+<strong>Tested with: Microsoft IIS 5.0, Windows 2000</strong>
+
+<h4>Important Note:</h4>
+
+<p>At the moment, JRun is not fully compliant with the JSP 1.1/1.2
+specification. </p>
+
+<p>Specifically, the automatic type conversions for custom tag parameters
+specified in "Issue  7" of the JSP 1.1 Errata and in the JSP 1.2 Proposed
+Final Draft have not yet been implemented.</p>
+
+<p>As it stands, JSP pages that make use of Struts taglibs whose parameters
+require  conversion (such as booleans) will not compile under JRun. This
+includes the Struts Example Application. Attempting to run the example
+application will result in an exception similar to the following being
+thrown:</p>
+
+<pre>
+/struts-example/index.jsp:
+
+javax.servlet.ServletException: Compilation error occurred:
+
+allaire.jrun.scripting.DefaultCFE:
+
+Errors reported by compiler:
+c:/JRun/servers/default/Struts
+  Example/WEB-INF/jsp/jrun__index2ejspa.java:41:1:41:27:
+
+Error: No match was found for method "setLocale(java.lang.String)".
+</pre>
+
+<p>(For more details see refer to:<br/>
+<a href="http://www.mail-archive.com/struts-user@jakarta.apache.org/msg01860.html">http://www.mail-archive.com/struts-user@jakarta.apache.org/msg01860.html</a>)</p>
+
+<p>The following instructions describe how to install the Struts Example
+Application under JRun. A subsequent section describes how the Struts Example
+Application can be patched to work with Struts</p>
+
+<p>The following instructions assume the following:</p>
+
+<ul>
+<li>JRun has been installed and integrated with the web server of choice.</li>
+
+<li>$APP_SERVER_NAME is the name of the application server used to host the
+  application.  (When JRun is first installed, it creates an application
+  server called JRun Default Server).</li>
+
+<li>$APP_SERVER_DIR is the directory used to hold applications hosted by
+  $APP_SERVER_NAME.  For the JRun Default Server, the directory is
+  $JRUN_HOME/servers/default where $JRUN_HOME is the directory where
+  JRun is installed.</li>
+</ul>
+
+<h4>Installing the struts example application</h4>
+
+<ul>
+<li>Login to the JRun Management Console.</li>
+
+<li>On the left pane, select $APP_SERVER_NAME. A page showing the
+  current server status will be shown on the right pane.</li>
+
+<li>On the right pane, click on the WAR Deployment link. A page
+  containing a list of the currently deployed web applications will be
+  shown.</li>
+
+<li>On the right pane, click on Deploy an Application. Complete the Web
+  Application Information form as follows:
+
+  <ul>
+  <li>Servlet War File or Directory:  Enter the full path where
+      struts-example.war is found or click on Browse to select
+      the path.</li>
+  <li>JRun Server Name:  $APP_SERVER_NAME</li>
+  <li>Application Name:  Struts Example</li>
+  <li>Application Hosts:  All Hosts</li>
+  <li>Application URL:   /struts-example</li>
+  <li>Application Deploy Directory:  will default to
+      $APP_SERVER_NAME/Struts Example (or the name as specified for
+      Application Name).</li>
+  </ul>
+</li>  
+
+<li>Once the form is complete, click on the Deploy button.</li>
+
+<li>If deployment is successful, restart the application server by
+  clicking on <code>$APP_SERVER_NAME</code> on the left pane. A page showing the
+  current server status will be shown on the right pane. Click the
+  Restart Server button to restart the application server.</li>
+
+<li>Test the sample application by using the following URL in the
+  browser:<br/>
+    <code>http://hostname/struts-example/index.jsp</code><br/>
+  The struts-documentation.war can be installed using the same
+  procedure.</li>
+</ul>
+
+<h4>Installing unpacked web applications</h4>
+
+<p>The above steps should be followed for applications deployed as <code>*.war</code> files.</p>
+
+<p>For unpacked web applications, configuration involves the following steps:</p>
+
+<ul>
+<li>From the JRun Management Console, select <code>$APP_SERVER_NAME</code> (on the
+  left pane) and click on WAR Deployment (on the right pane).</li>
+
+<li>On the right pane, click on Create an Application and complete the
+  Web Application Information form as follows:</li>
+
+<li>JRun Server Name:  $APP_SERVER_NAME
+
+  <ul>
+  <li>Application Name:  myApplication</li>
+  <li>Application Hosts:  All Hosts</li>
+  <li>Application URL:   /myApplication</li>
+  <li>Application Deploy Directory:  will default to<br/>
+    <code>$APP_SERVER_NAME/myApplication</code></li>
+  </ul>
+</li>  
+
+<li>Click on Create to submit the form.</li>
+
+<li>Once the web application is created, install and configure the struts
+  components (struts.jar, struts*.tld, etc) for the web application under
+  <code>$APP_SERVER_NAME/myApplication/WEB-INF</code></li>
+
+<li>Install the remaining components of the application:  .class files,
+  JSP pages,.properties files etc  as required.</li>
+
+<li>To configure the extension mapping of the request URI (ie *.do) to
+  the action servlet, expand <code>$APP_SERVER_NAME</code> on the left pane, expand
+  the Web Applications branch and click on myApplication. The right pane
+  will display the configuration options for myApplication. Click on
+  Servlet URL Mappings. A list of existing mappings will be shown. Click
+  the Edit button and create the following entry:
+
+  <ul>
+  <li>Virtual Path/Extension:   *.do</li>
+  <li>Servlet Invoked:  action</li>
+  </ul>
+</li>  
+
+<li>Click on the Update button to save the changes.</li>
+<li>Restart the application server.</li>
+<li>The application should now be accessible from the browser.</li>
+</ul>
+
+<p>The JRun application server will need to be restarted each time one of the
+following changes are made to the web application:</p>
+
+<ul>
+<li><code>.class</code> or <code>.jar</code> files are modified</li>
+<li><code>.properties</code> files are modified</li>
+<li><code>.xml</code> files are modified</li>
+</ul>
+
+<h4>Patching the struts example application</h4>
+
+<p>As mentioned at the beginning of these notes, the Struts Example Application
+will not run under JRun without modification.  The following changes will need
+to be made:</p>
+
+<ul>
+<li>index.jsp, logon.jsp: Change &lt;html:html locale="true"> to <br/>&lt;html:html locale=&lt;%= true %>></li>
+<li>logon.jsp: Change &lt;html:html redisplay="true"> to <br/>&lt;html:html redisplay=&lt;%= true %>></li>
+<li>registration.jsp, subscription.jsp: Change all instances of filter="true" to <br/>filter=&lt;%= true %></li>
+</ul>
+  <hr/>
+  <p>Back to <a href="installation.html#Containers">Installation</a></p>
+</section>
+</chapter>
+</body>
+</document>

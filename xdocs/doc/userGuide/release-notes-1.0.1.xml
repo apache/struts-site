@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<document url="release-notes-1.0.1.html">
+
+  <properties>
+    <title>Struts Release Notes (Version 1.0.1)</title>
+  </properties>
+
+  <body>
+
+  <section name="Introduction" href="Introduction">
+
+    <p>This document contains the release notes for
+    <strong>Version 1.0.1 </strong> of the Struts Framework,
+    and covers changes that have taken place since
+    <a href="release-notes-1.0.html">Version 1.0</a>
+    was released.  The following sections cover
+    <a href="#New">New Features</a> and <a href="#Changes">Changes</a>
+    to Struts.</p>
+
+    <p>This version covers bug-fixes only; no new functionality.</p>
+
+  </section>
+
+
+  <section name="What's Included?" href="Included">
+
+    <p>The binary distribution of this release includes the following
+    files relevant to Struts 1.0.1:</p>
+    <ul>
+    <li><code>INSTALL</code> - Brief installation instructions.  See
+        the <code>Struts Documentation Application</code>, or online at
+        <a href="http://jakarta.apache.org/struts/">http://jakarta.apache.org/struts/</a>
+        for more information.</li>
+    <li><code>LICENSE</code> - The Apache Software Foundation license that
+        defines the terms under which you can use Struts (and other software
+        licensed by Apache).</li>
+    <li><code>README</code> - A brief introduction to Struts.</li>
+    <li><code>lib/</code> - Directory containing files you will need in
+        your own applications.  The individual files of interest are:
+        <ul>
+        <li><code>struts.jar</code> - JAR file that contains the compiled
+            Java classes for version 1.0 of Struts.  You must
+            place this file in the <code>/WEB-INF/lib</code> directory of
+            your web application.</li>
+        <li><code>struts-xxxxx.tld</code> - The tag library descriptor files
+            for the Struts 1.0.1 tag libraries (bean, html, logic, and
+            template).  You must place these files in the <code>/WEB-INF</code>
+            directory of your web application, and reference them with
+            appropriate <code>&lt;taglib&gt;</code> directives in your
+            web.xml file.</li>
+        <li><code>jdbc2_0-stdext.jar</code> - The JDBC 2.0 Optional Package
+            API classes (package <code>javax.sql</code>).  You will need to
+            include this file in the <code>/WEB-INF/lib</code> directory
+            of your application, if it is not already made visible to web
+            applications by your servlet container.</li>
+        <li><code>struts-config_1_0.dtd</code> - The document type descriptor
+            (DTD) for the Struts configuration file (which is typically named
+            <code>/WEB-INF/struts-config.xml</code>.  Your configuration file
+            will be validated against an internal copy of this DTD -- this
+            copy is available for reference purposes only.</li>
+        <li><code>web-app_2_2.dtd</code> - The document type descriptor (DTD)
+            for web.xml files conforming to the Servlet 2.2 specification.
+            This copy is for reference purposes only.</li>
+        <li><code>web-app_2_3.dtd</code> - The document type descriptor (DTD)
+            for web.xml files conforming to the Servlet 2.3 specification.
+            This copy is for reference purposes only.</li>
+        </ul>
+        </li>
+        <li><code>webapps/</code> - Web Application Archive (WAR) files for the
+            web applications that are included with Struts.</li>
+    </ul>
+
+    <p>The struts 0.5 milestone API release is no longer supported,
+       and has been removed as of Struts 1.1.</p>
+
+  </section>
+
+
+  <section name="What's New?" href="New">
+
+
+    <p>The following new features have been added to the basic controller
+    framework (package <code>org.apache.struts.action</code>):</p>
+
+    <p>The following new features have been added to the utility classes
+    (package <code>org.apache.struts.util</code>):</p>
+    <ul>
+    <li>LocalStrings: Correct message regarding replaceable parameter so that it does not append an extraneous character.</li>
+    <li>MessageResources: Escape any single quote characters that are included in the specified message string.</li>
+    <li>Allow a transaction token to be the only parameter in computeParameters().</li>
+    <li>Change RequestUtils to encode ampersands when building a query string.</li>
+    </ul>
+
+    <p>The following new features have been added to the
+    <em>struts-html</em> custom tag library (package
+    <code>org.apache.struts.taglib.html</code>):</p>
+
+    <p>The following new features have been added to the
+    <em>struts-logic</em> custom tag library (package
+    <code>org.apache.struts.taglib.logic</code>):</p>
+
+    <p>The following new features have been added to the
+    <em>struts-template</em> custom tag library (package
+    <code>org.apache.struts.taglib.template</code>):</p>
+
+    <p>The following new features have been added to the Struts Documentation
+    application (and corresponding contents on the Struts web site):</p>
+
+  </section>
+
+
+  <section name="Changes and Bug Fixes" href="Changes">
+
+    <p>The following changes and bug fixes have occurred in the configuration
+    files related to Struts:</p>
+
+    <p>The following changes and bug fixes have occurred in the basic
+    controller framework (package <code>org.apache.struts.action</code>):</p>
+    <ul>
+    <li>Modify ActionForm class to use ActionServletWrapper rather than expose ActionServlet.</li>
+    <li>Add ActionServletWrapper class. Used by ActionForm to prevent the Public String properties of ActionServlet from being changed via a query string.</li>
+    <li>Unconditionally pass the selected mapping as a request attribute under key Action.MAPPING_KEY, even if no form bean is specified.</li>
+    <li>Avoid a NullPointerException in corner cases caused by failed initialization of ActionServlet.</li>
+    </ul>
+
+    <p>The following changes and bug fixes have occurred in the file upload
+    package (package <code>org.apache.struts.upload</code>):</p>
+    <ul>
+    <li>Fixed lost byte problem in BufferedMultipartInputStream</li>
+    <li>Fixed ArrayIndexOutOfBoundsException situations</li>
+    <li>Better reporting for premature closing of input streams while reading multipart requests.</li>
+    <li>Additional fix for file corruption problem with uploads and new line characters.</li>
+    </ul>
+
+    <p>The following changes and bug fixes have occurred in the utilities
+    (package <code>org.apache.struts.util</code>):</p>
+    <ul>
+    <li>Modify RequestUtils class to use ActionServletWrapper rather than expose ActionServlet.</li>
+    <li><code>ConvertUtils.convertCharacter()</code> will now detect empty strings and return the default value.</li>
+    </ul>
+
+    <p>The following changes and bug fixes have occurred in the
+    <em>struts-bean</em> custom tag library (package
+    <code>org.apache.struts.taglib.bean</code>):</p>
+    <ul>
+    <li>Correct the generated scripting variable type when the &lt;bean:cookie&gt;, &lt;bean:header&gt;, or &lt;bean:parameter&gt; tag is used with the "multiple" attribute.</li>
+    </ul>
+
+    <p>The following changes and bug fixes have occurred in the
+    <em>struts-html</em> custom tag library (package
+    <code>org.apache.struts.taglib.html</code>):</p>
+    <ul>
+    <li>Fixed FormTag to exclude query string when identifying action mapping name.</li>
+    <li>Correct MultiboxTagdoAfterBody() to return SKIP_BODY instead of SKIP_PAGE.</li>
+    <li>Added the 'align' attribute to the &lt;html:image&gt; tag.</li>
+    <li>On the Options tag, if the property specified by the "property" attribute returns null, it now throws an error message that indicates what the real problem is, rather than causing an NPE.</li>
+    <li>Added 'style' and 'styleClass' attributes for &lt;html:option&gt; and &lt;html:options&gt; tags.</li>
+    <li>Correctly URLEncode the query string parameter value on ImgTag, even if there is only a single parameter.</li>
+    </ul>
+
+
+    <p>The following changes and bug fixes have occurred in the
+    <em>struts-logic</em> custom tag library (package
+    <code>org.apache.struts.taglib.logic</code>):</p>
+    <ul>
+    <li>The <code>&lt;html:errors&gt;</code> when the property tag is
+    specified, errors are no longer printed if the specified property
+    has no errors. Previously errors were always printed! Future
+    enhancements would include additional attributes to always turn
+    off the header or footer. </li>
+    </ul>
+
+    <p>The following changes and bug fixes to the Struts Documentation
+    application (and corresponding contents on the Struts web site) have
+    occurred:</p>
+    <ul>
+    <li>Add installation notes for Jetty.</li>
+    <li>In the Tag Developers Guide, add more detail regarding file upload requirements.</li>
+    <li>In the Introduction, added references to basic background material.</li>
+    <li>In Building View Components, clarify that additional i18n support may be provided by the browser, and is outside the scope of the framework.</li>
+    <li>In Building Controller Components, document 'validating' init-param, add defaults for various parameters, clarify that some web.xml settings are not Struts-specific.</li>
+    <li>Correct the example page in the User's Guide (Building View Components) to reflect current practice.</li>
+    <li>Revised installation instructions for SilverStream and Resin.</li>
+    </ul>
+
+    <p>The following changes and bug fixes to the Struts Example Application
+    have occurred:</p>
+    <ul>
+    <li>Remove references to saving database data from "tour" document, since this functionality was removed.</li>
+    </ul>
+
+    <p>The following changes and bug fixes to the Struts Template Example
+    Application have occurred:</p>
+
+
+    <p>The following changes and bug fixes to the Struts Exercise Taglib Example
+    Application have occurred:</p>
+    <ul>
+    <li>Added test case for &lt;html:select> using &lt;html:options> based on a collection
+  saved in the page context.</li>
+    </ul> 
+
+  </section>
+
+
+  </body>
+
+</document>

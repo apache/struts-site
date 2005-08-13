@@ -1,0 +1,839 @@
+<?xml version="1.0"?>
+<document url="index.html">
+
+  <properties>
+    <title>Shale Framework Features</title>
+  </properties>
+
+  <body>
+
+
+    <section name="Shale View Controller" href="view">
+
+
+      <subsection name="Introduction"   href="view-introduction">
+
+        <p>Shale supports a mechanism that provides a 1:1 relationship between
+        a view tier presentation technology, which is responsible for creating
+        an HTTP response (such as a JSP page), and a corresponding JavaBean class
+        containing event handling logic, (optionally) values used in the dynamic
+        rendering of the response, and (optionally) bindings to the individual
+        user interface components included in the response page.  Such a JavaBean
+        class is known (in JavaServer Faces terminology) as a <em>backing bean</em>.
+        In most circumstances, such a bean will be registered as a managed bean
+        (configured for creation in request scope).</p>
+
+        <p>JavaServer Faces does not require that a backing bean implement any
+        particular interface, or extend any particular base class.  Therefore,
+        Shale does not impose any such restriction either.  Instead, it promises
+        that <em>if</em> an application's backing bean implements the
+        <code>ViewController</code> interface, then certain extra services will
+        be provided "for free."</p>
+
+      </subsection>
+
+
+      <subsection name="Provided Services" href="view-services">
+
+        <p>Each backing bean that implements <code>ViewController</code> will
+        support a boolean property <code>postback</code>, which will be set to
+        <code>true</code> if this view is the one that is processing a form
+        submit previously rendered by the same page, or <code>false</code> if
+        this view was newly navigated to.  The property will be set before any
+        of the lifecycle methods described below are called, so that application
+        logic may perform conditional tasks based on this state.</p>
+        
+        <p>As part of the standard JavaServer Faces managed beans processing, any
+        <code>&lt;managed-property&gt;</code> elements in the configuration
+        file, that are nested inside the <code>&lt;managed-bean&gt;</code>
+        element for this backing bean, will also be processed when a new bean
+        instance is created.  You can use either literal values or value binding
+        expressions to customize properties on your backing bean class.  Fans
+        of <em>Dependency Injection</em> will see that the managed beans facility
+        provides support for such a framework, using Setter Injection as the
+        mechanism for injecting dependencies.</p>
+
+        <p>In addition, the following lifecycle events are called, by the
+        framework, at certain points in the JavaServer Faces request processing
+        lifecycle:</p>
+
+        <ul>
+        <li><strong>init()</strong> - Called immediately after the view that
+            this backing bean is associated with is created.  (Technically, it
+            happens when <code>ViewManager.createView()</code> is called.)
+            For a postback, this happens during the <em>Restore View</em>
+            phase of the request processing lifecycle, once it has been
+            determined which view should be restored.  If your application
+            navigates from one page to another, the <code>init()</code> method
+            of the second page will be called as part of the
+            <code>NavigationHandler.handleNavigation()</code> processing.
+            <blockquote>
+              Use this method to acquire resources that you will need, no
+              matter whether this is a postback request, a rendering request,
+              or both.
+            </blockquote></li>
+        <li><strong>preprocess()</strong> - Called after the <em>Restore View</em>
+            phase has been completed, but before <em>Apply Request Values</em>
+            phase starts, <strong>only</strong> for the view that will be
+            processing the postback.
+            <blockquote>
+              Use this method to acquire resources (such as database connections)
+              that you will need to process the postback.
+            </blockquote></li>
+        <li><strong>prerender()</strong> - Called immediately before the
+            <em>Render Response</em> phase that actually causes the view to
+            be rendered.  This method will <strong>only</strong> be called for
+            the view that is actually rendered (the current view if you are
+            redisplaying, or the new view if you perform navigation).
+            <blockquote>
+              Use this method to acquire resources (such as database connections,
+              or performing queries) that you will need if this view is the one
+              to be rendered.  NOTE - when portlet support is integrated, all of
+              the portlets on the current page will receive this event.
+            </blockquote></li>
+        <li><strong>destroy()</strong> - If <code>init()</code> was ever called
+            for a <code>ViewController</code>, then it is guaranteed that
+            <code>destroy()</code> will be called as well.
+            <blockquote>
+              Use this method to release any resources acquired during an earlier
+              event handler.
+            </blockquote></li>
+        </ul>
+
+        <p>It can be difficult initially to visualize the order that events will
+           occur, based solely on the descriptions above.  Let's look at some
+           common scenarios and see what happens when:</p>
+        
+        <ul>
+        <li><em>Initial navigation to welcome page, or a page directly accessed
+            via a URL</em>:
+            <ul>
+            <li>Backing bean is instantiated during <em>Restore View</em> phase,
+                which notices that there is no previous state to restore.</li>
+            <li>The <code>setPostback(false)</code> and <code>init()</code> methods
+                on your backing bean are called.</li>
+            <li>Because there is no previous state to restore, there will be no
+                form submit processing.</li>
+            <li>The <code>prerender()</code> method is called.</li>
+            <li>Standard <em>Render Response</em> phase processing occurs,
+                which causes the view to be rendered.</li>
+            <li>The <code>destroy()</code> method is called.</li>
+            </ul></li>
+        <li><em>Postback processed by a page that then redisplays itself (by
+            returning <code>null</code> from the action handler.</em>:
+            <ul>
+            <li>Backing bean is instantiated during <em>Restore View</em> phase,
+                which notices that there is previous state to restore.</li>
+            <li>The <code>setPostback(true)</code> and <code>init()</code> methods
+                on your backing bean are called.</li>
+            <li>Standard <em>Apply Request Values</em> through <em>Invoke
+                Application</em> phase processing occurs, which includes calling
+                your action and value change event handlers.</li>
+            <li>The <code>prerender()</code> method is called.</li>
+            <li>Standard <em>Render Response</em> phase processing occurs,
+                which causes the view to be rendered.</li>
+            <li>The <code>destroy()</code> method is called.</li>
+            </ul></li>
+        <li><em>Postback processed by page A, which then navigates to page B</em>:
+            <ul>
+            <li>Backing bean for page A is instantiated during <em>Restore View</em>
+                phase, which notices that there is previous state to restore.</li>
+            <li>The <code>setPostback(true)</code> and <code>init()</code> methods
+                on your backing bean for page A are called.</li>
+            <li>Standard <em>Apply Request Values</em> through <em>Invoke
+                Application</em> phase processing occurs for page A, which
+                includes calling your action and value change event handlers.</li>
+            <li>As part of the navigation process, the backing bean for
+                page B is created.</li>
+            <li>The <code>prerender()</code> method for page B is called.</li>
+            <li>Standard <em>Render Response</em> phase processing occurs,
+                which causes the view to be rendered.</li>
+            <li>The <code>destroy()</code> method is called for both page B
+                and page A (since two backing beans were instantiated).</li>
+            </ul></li>
+        </ul>
+
+      </subsection>
+
+
+      <subsection name="Using View Controller" href="view-using">
+
+        <p>For each JavaServer Faces <em>view</em> that you wish to associate
+        with a <code>ViewController</code> backing bean, you must:</p>
+
+        <ul>
+          <li>Implement the <code>ViewController</code> interface.  The
+              most convenient way to do this is likely to be extending the
+              convenience base class (<code>org.apache.shale.view.ViewController</code>).</li>
+          <li>As required by the JavaBeans specification, provide a no-args
+              public constructor.</li>
+          <li>Declare your backing bean as a managed bean.  In nearly all
+              circumstances, you will want the bean to be placed in
+              request scope.</li>
+          <li>(Optional) Provide public JavaBean properties that may be set
+              to customize the functionality provided by this bean.  Typically,
+              such properties will be configured based on the managed beans
+              configuration defined in the JavaServer Faces configuration
+              resources for your application.</li>
+          <li>Ensure that the functionality of your backing bean is
+              <strong>not</strong> dependent upon the order in which property
+              setters are called, since managed beans are configured via
+              the "setter injection" pattern.</li>
+          <li>Create event handlers for the lifecycle events of interest,
+              plus standard JavaServer Faces event handlers for things like
+              actions and value changes.</li>
+          <li>(Optional but recommended) write a corresponding JUnit test
+              case using the Shale <a href="features.html#test">Test Framework</a>.
+              Because nearly all of your property and event handling methods
+              have no JavaServer Faces API dependencies for their parameter
+              signatures, it is generally quite easy to write such tests.</li>
+        </ul>
+
+      </subsection>
+
+
+    </section>
+
+
+    <section name="Shale Dialog Manager" href="dialog">
+
+
+      <subsection name="Introduction"   href="dialog-introduction">
+
+        <p>One of the frustrating aspects of organizing the flow of control
+        in a web based application is that fact that it is composed of
+        completely disconnected interactions with the client (via the
+        HTTP protocol).  The popularity of application frameworks based
+        on model-view-controller (MVC) principles, and particularly the
+        emergence of the <em>front controller</em> design pattern, have
+        become the de facto standard architectural approach.</p>
+
+        <p>Like other frameworks, JavaServer Faces supports a mechanism
+        to define navigation rules for transitions between views.  The
+        actual processing is performed by an implementation of
+        the <code>javax.faces.application.NavigationHandler</code>.  The
+        standard implementation provided by the framework (which can be
+        customized via a pluggable API) performs transitions from one view
+        to another based on three inputs:</p>
+
+        <ul>
+        <li>What view is currently processing this form submit?</li>
+        <li>Which of the potentially several actions were invoked?  (This
+            allows you to support different "submit" buttons with different
+            functionality, or share actions between, say, a "Save" button
+            at the top and bottom of a table.)</li>
+        <li>What "logical outcome" was returned by the action that was
+            invoked?</li>
+        </ul>
+
+        <p>Basing navigation on outcomes, by the way, assists in reducing
+        the coupling between pages, because the developer that writes the
+        action method is only focused on reporting "what happened" rather
+        than worrying about "where do I go next".  This concept is also
+        found in the way Struts has <code>Action.execute()</code> methods
+        that return a logical <code>ActionForward</code> describing the
+        outcome of performing the action.</p>
+
+        <p>However, it is still difficult to reuse individual views in
+        more than one "conversation" or "dialog" with the user, nor to
+        treat one dialog as a "black box" subroutine that can be called by
+        more than one calling dialog.  To address these needs, Shale
+        offers Dialog Manager support.</p>
+
+        <p>The functionality of this feature was <strong>heavily</strong>
+        inspired by the implementation of Spring Webflow (Preview 2),
+        whose home page is:</p>
+        <blockquote>
+        <a href="http://opensource.atlassian.com/confluence/spring/display/WEBFLOW/Home">
+        http://opensource.atlassian.com/confluence/spring/display/WEBFLOW/Home</a>
+        </blockquote>
+
+      </subsection>
+
+
+      <subsection name="Services Provided" href="dialog-services">
+
+        <p>Conceptually, a <em>dialog</em> can be thought of as a set of labelled
+        states, connected by labelled transitions between those states.  Indeed,
+        a UML <em>State Diagram</em> is a popular way to represent the
+        architecture of such a dialog.  Each dialog has a specified starting
+        state (with an automatic transition to this state when the dialog is
+        first started), and one or more ending states.</p>
+
+        <p>Shale supports four state types, with specific implementations
+        realized as described below.</p>
+
+        <ul>
+        <li><em>ActionState</em> - Represents a call to a public method, taking
+            no parameters, and returning a String that will be treated as the
+            logical outcome.  The method to be called is configured with a
+            JavaServer Faces <em>method binding expression</em>, which means
+            you can leverage the managed beans facility to instantiate your
+            processing classes on demand.  The logical outcome is used to
+            drive the transition to the next state, as described below.</li>
+        <li><em>ViewState</em> - Represents the rendering of a JavaServer Faces
+            <em>view</em>, followed by a wait for the subsequent form submit.
+            The logical outcome returned by the action method (typically on
+            the <code>ViewController</code> bean that you've associated with
+            the current page) is used to drive the transition to the next
+            state, as described below.</li>
+        <li><em>SubdialogState</em> - Represents pushing the state of the
+            current dialog onto a stack, and starting a specified new dialog
+            at its starting state.  When the subordinate dialog returns, the
+            calling dialog is resumed, with the logical outcome returned by
+            the subordinate dialog is used to drive the transition to the next
+            state, as described below.</li>
+        <li><em>EndState</em> - Terminates the current dialog (popping the
+            stack if we are inside a subdialog), and returns a logical outcome
+            (to drive transition) in one of two ways:
+            <ul>
+            <li>If a view identifier was configured, cause that view to be
+                rendered and return the logical outcome from the application
+                action that is invoked (just like a ViewState, but also
+                terminates the dialog).</li>
+            <li>If no view identifier was configured (meaning that the parent
+                dialog will be responsible for rendering the response to the
+                current request), simply return the logical outcome that
+                caused this EndState to be selected.</li>
+            </ul></li>
+        </ul>
+
+        <p>Transitions between states are performed by consulting the set of
+        <em>Transition</em>s that have been defined (either locally for this
+        State, or globally for the entire Dialog), matching on logical outcome.
+        The matching Transition is then used to select the identifier of the
+        next state to be performed (which can be of any type).</p>
+
+        <p>It is <strong>not</strong> required that all JavaServer Faces
+        interactions be organized into dialogs -- you can have a mix of
+        dialog and standard navigation processing.  Indeed, to enter a
+        dialog in the first place, simply have one of your standard action
+        methods return a logical outcome of <strong>dialog:xxxxx</strong>,
+        which will cause the dialog named <code>xxxxx</code> to be entered
+        at its starting state.  Once that dialog completes, standard
+        JavaServer Navigation will resume.</p>
+
+        <p>The configuration of a Dialog is represented as a tree of
+        JavaBeans defined in the <code>org.apache.shale.dialog</code>
+        package, rooted at an instance <code>Dialog</code>.  The set of
+        all known <code>Dialog</code> instances is stored in a <code>Map</code>,
+        keyed by dialog identifier, which is stored in an application scope
+        attribute named by symbolic constant <code>Globals.DIALOGS</code>.
+        The <code>Dialog</code> instances may be configured by any desired
+        mechanism; however, the most commonly used will likely be an XML
+        document that conforms to a DTD provided by Shale.</p>
+
+      </subsection>
+
+
+      <subsection name="Using Dialog Manager" href="dialog-using">
+
+        <p>To use the Dialog Manager facilities in Shale, take the following
+        steps:</p>
+
+        <ul>
+        <li>Model your dialog as a series of <em>State</em>s with transitions
+            between them labelled with the logical outcome that selects
+            that particular transition.  A UML State Diagram is a very useful
+            mechanism for visualizing such a model.</li>
+        <li>Build the views (and corresponding <code>ViewController</code> beans)
+            that comprise your dialog, using standard JavaServer Faces and
+            (optional) Shale <code>ViewController</code> facilities.</li>
+        <li>Define your dialogs in an XML document, conventionally named
+            <code>/WEB-INF/dialog-config.xml</code>, that conforms to the
+            required DTD, which defines all the state transitions:
+            <blockquote><pre>
+&lt;!DOCTYPE dialogs PUBLIC
+  "-//Apache Software Foundation//DTD Shale Dialog Configuration 1.0//EN"
+  "http://struts.apache.org/dtds/shale-dialog-config-1_0.dtd">
+
+&lt;dialogs>
+
+  &lt;dialog name="First Dialog Name" start="Start State Id">
+    ... &lt;action/>, &lt;view/>, &lt;subdialog/>, and &lt;exit/> elements for states ...
+  &lt;/dialog>
+
+  &lt;dialog name="Second Dialog Name" start="Start State Id">
+    ... &lt;action/>, &lt;view/>, &lt;subdialog/>, and &lt;exit/> elements for states ...
+  &lt;/dialog>
+
+  ...
+
+&lt;/dialogs>
+</pre></blockquote></li>
+        <li>If you have more than one dialog configuration file, or you have
+            defined your only dialog configuration file as a web application
+            resource with a name different than the one described above, use
+            a context initiaization parameter to define a comma-delimited list
+            of context-relative paths to configuration resources to be loaded:
+            <blockquote><pre>
+&lt;context-param>
+  &lt;param-name>org.apache.shale.dialog.CONFIGURATION&lt;/param-name>
+  &lt;param-value>/WEB-INF/foo.xml,/WEB-INF/bar.xml&lt;/param-value>
+&lt;/context-param>
+</pre></blockquote></li>
+        <li>In addition to the dialog configuration resources defined by this
+            context initialization parameter, a resource named
+            <code>/WEB-INF/dialog-config.xml</code> will be automatically
+            processed, if it exists.</li>
+<!--
+        <li>Alternatively, or in addition to the above, any JAR file in
+            <code>/WEB-INF/lib</code> will be scanned for configuration
+            documents at <code>META-INF/dialog-config.xml</code>.  Such
+            resources will be automatically processed, making it easy to
+            define JAR files with dialog configurations and corresponding
+            Java classes and resources, which are recognized simply by
+            including this JAR file in the application.</li>
+-->
+        <li>To initiate a dialog named "xxxxx", configure one of your standard
+            JavaServer Faces actions to return a logical outcome of
+            <code>dialog:xxxxx</code></li>
+        </ul>
+
+      </subsection>
+
+
+    </section>
+
+
+    <section name="Shale Application Manager" href="application">
+
+      <p>FIXME - Describe application manager feature.</p>
+
+    </section>
+
+
+    <section name="Commons Validator Integration"   href="validation">
+
+      <subsection name="Validation Introduction"    href="validation-introduction">
+
+        <p>JavaServer Faces 1.x does not explicitly support client-side
+		  validation and only provides a minimal set of server-side
+		  validators. On the other hand, <a href="http://jakarta.apache.org/commons/validator/">Apache Commons Validator</a>
+		  supports both client- and server-side validators and comes
+		  with the following useful validators:</p>
+
+        <ul>
+        <li>Credit Card</li>
+        <li>Date</li>
+        <li>Email</li>
+		  <li>Generic</li>
+		  <li>ISBN</li>
+		  <li>URL</li>
+        </ul>
+
+        <p>All of the preceeding validators can be executed either on
+		  the client or the server, or both. Shale integrates JavaServer Faces
+		  and the Commons Validator.</p> 
+
+      </subsection>
+
+      <subsection name="Services Provided" href="validation-services">
+
+        <p>Shale provides two JSP tags that let you use the Commons Validator:
+		  <code>s:commonsValidator</code> and <code>s:validatorScript</code>. The
+		  former lets you attach a commons validator to a JSF input component and
+		  the latter generates JavaScript validation code for validating each JSF component
+		  that has one or more Commons validators in a particular form. You can attach as 
+		  many Commons validators to a single JSF input component as you wish.</p>
+
+      </subsection>
+
+      <subsection name="Using Commons Validator Integration" href="validation-using">
+
+        <p>Here's what you need to do to use Shale validation:</p>
+		  <ul>
+		  	<li>Add <code>validator-rules.xml</code>, from the Commons Validator distribution,
+			    to your <code>WEB-INF</code> directory. (You can find a copy of <code>validator-rules.xml</code>
+				 in the Shale use-cases example. See <code>.../shale/use-cases/src/web/WEB-INF/validator-rules.xml</code>)
+			</li>
+			<li>
+			    Add an <code>onsubmit</code> attribute to your <code>h:form</code> tag that calls
+				 the JavaScript validation function generated by <code>s:validatorScript</code>.
+			</li>
+			<li>
+			    Add Commons validators to JSF input components with <code>s:commonsValidator</code>
+			</li>
+			<li>
+			    Add an <code>s:validatorScript</code> tag at the end of the <code>h:form</code> tag's body.
+			</li>
+		  </ul>
+
+        <p>Here's an example:</p>
+<pre>
+&lt;%@ taglib uri="http://struts.apache.org/shale/core" prefix="s" %&gt;
+...
+&lt;h:form onsubmit="validateForm(this)"&gt;
+
+    &lt;h:inputText id="creditCardNumber" 
+                      size="16"
+                   value="#{userContext.creditCardNumber}"&gt;
+
+        &lt;s:commonsValidator type="required"
+                                                 arg="#{msgs.creditCardNumberPrompt}"
+                                           server="true"
+                                            client="true"/&gt;
+
+        &lt;s:commonsValidator type="mask"
+                                             mask="[4-6].*"
+                                                 arg="#{msgs.creditCardNumberPrompt}"
+                                           server="true"
+                                            client="true"/&gt;
+
+        &lt;s:commonsValidator type="creditCard" 
+	                                         arg="#{msgs.creditCardNumberPrompt}" 
+                                           server="true"&gt;
+    &lt;/h:inputText&gt; 
+
+    &lt;h:message for="creditCardNumber" styleClass="errors"/&gt; 
+
+    &lt;s:validatorScript functionName="validateForm"/&gt;
+&lt;/form&gt;
+...
+</pre>
+        <p>In the preceeding example, we've attached three Commons validators to a single
+		     JSF input component. To pass validation, the field must have a value that
+			  starts with a number between 4 and 6 inclusive and that value must be a valid
+			  credit card number as verified by the <a href="http://en.wikipedia.org/wiki/Luhn_algorithm">Luhn</a> algorithm. Two of the
+			  validations are performed on both client and server and one is performed
+			  on the server only.</p>
+			  <p><strong>Note:</strong> <i>At the present time, you have the option to forego
+			  server-side validation, which is considered very bad practice. Users can turn off
+			  JavaScript, so you should always backup client-side validation with server-side
+			  validation. In the future, Shale may enforce server-side validation if it's
+			  not explicitly specified.</i></p>
+      </subsection>
+
+   </section>
+
+    <section name="Shale Remoting"            href="remoting">
+
+      <p>FIXME - Describe remoting feature.</p>
+
+    </section>
+
+
+    <section name="Shale JNDI Integration"    href="jndi">
+
+      <subsection name="JNDI Introduction"    href="jndi-introduction">
+
+        <p>The <em>Java Naming and Directory Interface</em> (JNDI) API is
+        commonly used in a Java2 Enterprise Edition (J2EE) (recently renamed
+        to Java Enterprise Edition (Java EE)) to acquire references to
+        resources that are declared in either:</p>
+
+        <ul>
+        <li>The deployment descriptor (<code>web.xml</code>) provided with
+            the application.</li>
+        <li>The customized configuration settings applied when the application
+            is depoyed to a particular instance of a particular application
+            server.</li>
+        </ul>
+
+        <p>As an example of the usefulness of this technique, consider an
+        application that requires a JDBC data source (i.e. a connection pool).
+        Consider also that the development environment contains two instances
+        of the database (development and staging), in addition to the production
+        instance.  If your application can define just a <em>reference</em>
+        to the data source, then the same web application archive (WAR) can
+        be deployed, unchanged, to <strong>any</strong> of these instances.
+        The hookup to a particular database instance is performed through
+        deployment configuration, rather than modifying property settings in
+        the WAR for each environment.</p>
+
+      </subsection>
+
+      <subsection name="Services Provided" href="jndi-services">
+
+        <p>Shale includes custom instances of the <code>VariableResolver</code>
+        and <code>PropertyResolver</code> APIs, from JavaServer Faces, that
+        allow value binding and method binding expressions to navigate through
+        the JNDI <code>InitialContext</code> (and subcontexts) that are provided
+        to each web application by the application server.  Such expressions can
+        be used to configure the values for properties of a JSF component, in
+        the usual way.  In addition, expressions can be evaluated programatically
+        in your event handling code -- providing an easier to use mechanism for
+        acquiring such resources.</p>
+
+        <p>For example, assume you have a data source (i.e. instance of
+        <code>javax.sql.DataSoruce</code>) with a resource reference name
+        of <code>jdbc/CustomerDB</code> defined in your deployment descriptor.
+        You can programmatically gain access to this data source by evaluating
+        the following expression:</p>
+
+        <blockquote><code>#{jndi['jdbc/CustomerDB']}</code></blockquote>
+            
+      </subsection>
+
+      <subsection name="Using JNDI Integration" href="jndi-using">
+
+        <p>Two examples of using the JNDI integration capabilities are
+        presented -- one using a value binding to a JSF component property,
+        and one using programmatic access to acquire a resource.</p>
+
+        <p><strong>(1) Binding to JSF Component Property</strong></p>
+        
+        <p>JNDI supports the concept of <em>environment entries</em> that can
+        be declared in the deployment descriptor, and optionally modified by
+        the deployment configuration when the application is instaled in a
+        particular environment.  Let's assume that you have a boolean
+        environment entry to define whether your application is running in
+        debug mode or not, declared in <code>web.xml</code> like this:</p>
+
+        <blockquote><pre>
+&lt;env-entry&gt;
+  &lt;description&gt;Flag indicating whether we run in debug mode.&lt;/description&gt;
+  &lt;env-entry-name&gt;debugMode&lt;/env-entry-name&gt;
+  &lt;env-entry-value&gt;false&lt;/env-entry-value&gt;
+  &lt;env-entry-type&gt;java.lang.Boolean&lt;env-entry-type&gt;
+&lt;/env-entry&gt;
+</pre></blockquote>
+
+        <p>Now, assume you have a status message that you only want to have
+        displayed when debug mode is enabled.  You can bind the
+        <code>rendered</code> property of the component to this environment
+        entry value:</p>
+
+        <blockquote><pre>
+&lt;h:outputText ... rendered="#{jndi.debugMode}" .../&gt;
+</pre></blockquote>
+
+        <p><strong>(2) Programmatic Resource Access</strong></p>
+
+        <p>Assume you have a data source reference (discussed in the introduction)
+        defined in your <code>web.xml</code> like this:</p>
+
+        <blockquote><pre>
+&lt;resource-ref&gt;
+  &lt;description&gt;Customer Database&lt;/description&gt;
+  &lt;res-ref-name&gt;jdbc/CustomerDB&lt;/res-ref-name&gt;
+  &lt;res-type&gt;javax.sql.DataSource&lt;/res-type&gt;
+  &lt;res-auth&gt;Container&lt;/res-auth&gt;
+&lt;/resource-ref&gt;
+</pre></blockquote>
+
+        <p>You can acquire a <code>java.sql.Connection</code> from this data
+        source with code like the following (note that the convenience base
+        class <code>BaseViewController</code> contains a <code>getBean()</code>
+        method that substantially reduces the amount of code needed):</p>
+
+        <blockquote><pre>
+FacesContext context = FacesContext.getCurrentInstance();
+ValueBinding vb =
+  context.getApplication().createValueBinding("#{jndi['jdbc/CustomerDB'].connection}");
+Connection conn = (Connection) vb.getValue(context);
+</pre></blockquote>
+
+        <p>This works by first retrieving the JNDI-configured data source
+        instance, and then calling its <code>getConnection()</code> method.
+        After you are through with the connection, return it to the pool
+        by calling the connection's <code>close()</code> method.</p>
+
+      </subsection>
+
+    </section>
+
+
+    <section name="Shale Spring Integration"  href="spring">
+
+      <p>FIXME - Describe Spring integration feature.</p>
+
+    </section>
+
+
+    <section name="Shale Reusable Views"      href="clay">
+
+      <subsection name="Clay Introduction"    href="clay-introduction">
+
+        <p>The <strong>Clay</strong> component is a complex JavaServer Faces
+        component that features a way to build more reusable view fragments.
+        As it's name implies, the Clay component can be shaped and molded into
+        a subtree of JSF components acting as a &quot;stand-in&quot;
+        for the JSP tags normally required to add components 
+        to the view's component tree.</p>
+
+      </subsection>
+
+      <subsection name="Clay View Composition Options"   href="clay-view-options">
+
+        <p>There are three options for creating the Clay component subtree.</p>
+
+        <ol>
+        <li>The Clay subtree can be formed by strictly using a XML configuration
+            that resembles JSF/JSP tags.  The meta-data used to define a
+            component is similar to Tiles. It provides composition and allows
+            for inheritance relationships.  Clay's approach is unique. The
+            granularity is targeted at the declaration of JSF components versus
+            composition of JSP fragments.
+            <blockquote><pre>
+&lt;clay:clay id="address" jsfid="addressPanel"/&gt;
+</pre></blockquote></li>
+        <li>The subtree can be formed using a Tapestry like HTML layout.  HTML
+            elements are bound to corresponding JSF components using a
+            <code>jsfid</code> attribute. This attribute binds the HTML mock-up
+            with a component declared in the Clay view configuration files.
+            Some HTML elements, the such as the <code>FORM</code> element,
+            have an implied mapping to a JSF component.  If the mapping is
+            not explicitly declared using the <code>jsfid</code> attribute and
+            there is not an assumed mapping, the default mapping is to the 
+            standard <code>verbatim</code> (<code>ouputText</code>) component.
+            This combines the first option's component definitions
+            with the flexibility of using HTML for layout.<br/> 
+           <blockquote><pre>
+&lt;clay:clay id="address" jsfid="address.html"/&gt;
+</pre></blockquote></li>
+        <li>The subtree can also be defined at runtime.  The Clay component
+            provides a postback validation method event,
+            <code>shapeValidator</code>, that can be bound to the associated
+            <code>ViewController</code>. The event is fired on the
+            <code>ViewController</code> when the subtree is first created.
+            Responding to this event, the view controller will construct a
+            graph of objects used by the Clay component to build the
+            subcomponent tree.   The object's graph is representative of
+            the first two declarative approaches.
+            <blockquote><pre>
+&lt;clay:clay id="address" jsfid="RUNTIME" shapeValidator="#{fullAddress.createSubtree}"/&gt;
+</pre></blockquote></li>
+        </ol>
+
+      </subsection>
+
+      <subsection name="Clay Key Reuse Features"   href="clay-reuse-features">
+
+        <p>The Clay XML configuration data is a replacement for the JSF/JSP tags.
+        A base configuration file is provide in the META-INF directory of the
+        <code>shale-clay.jar</code> archive.  The configuration document 
+        type definitions have similarities to the JSP tags, but are designed
+        to be more generic.  The same node structure is used to define a
+        variety of resources.</p>
+ 
+        <p>A <code>component</code> is a "top-level" element.  In the DTD, a
+        <code>component</code> can represent a JSF component, converter,
+        validator, action listener or value change listener.  Only
+        "top-level" elements can be the root of a clay subtree.  The
+        <code>componentType</code> attribute defines the association
+        to the face's resource.  The <code>jsfid</code> attribute is a
+        logical unique identifier.
+        <blockquote><pre>
+&lt;component jsfid="outputText" componentType="javax.faces.HtmlOutputText"/&gt;
+&lt;component jsfid="validateLongRange" componentType="javax.faces.LongRange"/&gt;
+</pre></blockquote></p>
+      
+        <p>A <code>component</code> can extend another component, thereby
+        inheriting <code>attributes</code> and contained <code>element</code>
+        nodes from the parent component.  This is accomplished by using
+        the <code>extends</code> attribute.  The  value of the
+        <code>extends</code> attribute should be a <code>jsfid</code> of
+        the parent <code>component</code> definition.
+        <blockquote><pre>
+&lt;component jsfid="baseLabel" extends="outputLabel" allowBody="false"&gt;
+  &lt;attributes&gt;
+    &lt;set name="style" value="color:blue"/&gt;
+  &lt;/attributes&gt;
+&lt;/component&gt;
+&lt;component jsfid="cityLabel" extends="baseLabel"&gt; 
+  &lt;attributes&gt;
+    &lt;set name="value" value="City:"/&gt;		
+    &lt;set name="for"   value="city"/&gt;
+  &lt;/attributes&gt;
+&lt;/component&gt;
+</pre></blockquote></p>
+
+        <p>A <code>component</code> node has an attribute container.  This is
+        a generic container to hold all <code>attributes</code> that would
+        be represented by associated JSF/JSP Tags.  Attributes are added or
+        overridden in inheritance using the attribute <code>name</code> as the 
+        unique identifier.      
+        <blockquote><pre>
+&lt;component jsfid="addressPanel" extends="panelGrid"&gt;
+  &lt;attributes&gt;<br/>
+    &lt;set name="columns" value="2" /&gt;
+  &lt;/attributes&gt;
+  &lt;element renderId="1" jsfid="street1Label"/&gt;
+  &lt;element renderId="2" jsfid="street1"/&gt;
+&lt;/component&gt;
+&lt;component jsfid="addressPanelEx" extends="addressPanel"&gt;
+  &lt;attributes&gt;
+    &lt;set name="columns" value="3" /&gt;
+  &lt;/attributes&gt;
+  &lt;element renderId="3" jsfid="street1Message"/&gt;
+&lt;/component&gt;
+</pre></blockquote></p>
+ 
+       <p>The <code>element</code> node is the composition glue.  Components
+       are uniquely defined by a <code>renderId</code> attribute.  This
+       integer value defines the sequential order within the outer
+       <code>component</code>.  The <code>renderId</code> attribute also
+       acts as the "method signature" for the <code>element</code> when
+       resolving inheritance.  This means components can extend other
+       components by overriding or extending elements based on the
+       <code>renderId</code> of the first level of child components. 
+       <blockquote><pre>
+&lt;component jsfid="ssnColumn" extends="column" id="ssn"&gt;
+  &lt;element renderId="1" jsfid="outputText" facetName="header"&gt;
+    &lt;attributes&gt;
+      &lt;set name="value" value="SSN" /&gt;
+    &lt;/attributes&gt;
+  &lt;/element&gt;        
+  &lt;element renderId="2" jsfid="outputText"&gt;
+    &lt;attributes&gt;
+      &lt;set name="value" useValueLateBinding="true" value="#{e.ssn}" /&gt;
+    &lt;/attributes&gt;
+   &lt;/element&gt;      
+&lt;/component&gt;				
+&lt;component jsfid="personTable" extends="dataTable"&gt;
+  &lt;attributes&gt;
+    &lt;set name="value" useValueLateBinding="true" value="#{managed-bean-name.persons}"/&gt;
+    &lt;set name="var"   value="e"/&gt;
+    &lt;set name="rows"  value="5"/&gt; 
+    &lt;set name="first"  value="1"/&gt; 	
+    &lt;set name="border" value="1"/&gt;
+    &lt;set name="cellpadding" value="3"/&gt;       
+  &lt;/attributes&gt;
+  &lt;element renderId="1" jsfid="firstNameColumn"/&gt;
+  &lt;element renderId="2" jsfid="lastNameColumn"/&gt;
+&lt;/component&gt;
+&lt;component jsfid="employeeTable" extends="personTable"&gt;	    
+  &lt;element renderId="0" jsfid="ssnColumn"/&gt;    
+  &lt;element renderId="3" jsfid="birthDateColumn"/&gt;    
+&lt;/component&gt;
+</pre></blockquote></p>
+
+        <p>Clay also allows reuse of view fragments bound to different logical
+        managed bean names.  Managed bean names in Shale will most likely
+        resolve to a <code>ViewController</code> implementation.  Decoupling
+        a view with the managed bean name is accomplished by using a simple
+        token replacement on the expression. This is only performed on
+        attribute values containing faces EL bindings.  A token value of
+        "managed-bean-name" is replaced with the value of the Clay
+        <code>managedBeanName</code> property.  This preprocessing is
+        performed prior to applying the meta attribute values to the target
+        JavaServer Faces component's properties.<br/>
+        <blockquote><pre>
+&lt;clay:clay id="saveResidential" managedBeanName="residentialAddress" jsfid="saveCommand"/&gt; 
+&lt;clay:clay id="saveBusiness" managedBeanName="businessAddress" jsfid="saveCommand"/&gt;
+&lt;component jsfid="saveCommand" extends="commandButton"&gt; 
+  &lt;attributes&gt;
+    &lt;set name="value" value="Save" /&gt;		
+    &lt;set name="action" useValueLateBinding="true" value="#{managed-bean-name.save}" /&gt;	
+    &lt;set name="actionListener" useMethodLateBinding="true" value="#{managed-bean-name.saveAction}"/&gt;			   	
+  &lt;/attributes&gt;
+  &lt;actionListener jsfid="logNavigationActionListener"/&gt;
+&lt;/component&gt;
+</pre></blockquote></p>
+
+      </subsection>
+ 
+    </section>
+
+
+    <section name="Shale Test Framework"      href="test">
+
+      <p>FIXME - Describe Test Framework feature.</p>
+
+    </section>
+
+
+  </body>
+
+</document>

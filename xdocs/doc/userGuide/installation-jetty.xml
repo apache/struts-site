@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+
+<document url="installation-ip.html">
+
+<properties>
+  <title>The Struts Framework Project - Installation - Jetty</title>
+</properties>
+
+<body>
+<chapter name="5.2 Installation" href="installation">
+<section name="Installing Struts with your servlet container" href="Containers">
+
+<h4 id="jetty">Jetty Java HTTP Servlet Server</h4>
+
+<p>
+Jetty is a small, pure-Java, open source HTTP server that supports the
+2.3 Servlet spec and JSP 1.2. Jetty can be downloaded from
+<a href="http://www.mortbay.com/jetty">http://www.mortbay.com/jetty</a>.
+</p>
+
+<p>
+Struts WAR files run nearly straight out of the box when placed
+underneath Jetty's webapps directory. The one additional step needed
+is to add an entry for each WAR file to the Jetty server configuration
+file in order to map the appropriate request paths to the added Struts
+web applications (using "&lt;Call name="addWebApplication"&gt;...").
+</p>
+
+<p>
+So for example, if you have copied the WAR files that come with the
+Struts binary distribution into a subdirectory of the
+"%JETTY_HOME%/webapps" called "%JETTY_HOME%/webapps/struts" so that
+you have:
+</p>
+
+<pre>
+- %JETTY_HOME%/webapps/struts/struts-documentation.war
+- %JETTY_HOME%/webapps/struts/struts-example.war
+- %JETTY_HOME%/webapps/struts/struts-exercise-taglib.war
+- %JETTY_HOME%/webapps/struts/struts-upload.war
+- %JETTY_HOME%/webapps/struts/struts-blank.war
+</pre>
+
+<p>
+And you want to run Jetty using the demo.xml configuration file that
+comes with Jetty, just add the following block to demo.xml, anywhere
+after the Listeners are declared.
+</p>
+
+<pre>
+&lt;!-- Jetty config for Struts BEGIN --&gt;
+
+  &lt;Call name="addWebApplication"&gt;
+    &lt;Arg&gt;/struts/struts-documentation/*&lt;/Arg&gt;
+    &lt;Arg&gt;&lt;SystemProperty name="jetty.home"
+        default="."/&gt;/webapps/struts/struts-documentation.war&lt;/Arg&gt;
+    &lt;Arg&gt;&lt;SystemProperty name="jetty.home"
+        default="."/&gt;/etc/webdefault.xml&lt;/Arg&gt;
+    &lt;Arg type="boolean"&gt;false&lt;/Arg&gt; &lt;!-- if true,
+        expand war in temp dir --&gt;
+  &lt;/Call&gt;
+
+  &lt;Call name="addWebApplication"&gt;
+    &lt;Arg&gt;/struts/struts-example/*&lt;/Arg&gt;
+    &lt;Arg&gt;&lt;SystemProperty name="jetty.home"
+        default="."/&gt;/webapps/struts/struts-example.war&lt;/Arg&gt;
+    &lt;Arg&gt;&lt;SystemProperty name="jetty.home"
+        default="."/&gt;/etc/webdefault.xml&lt;/Arg&gt;
+    &lt;Arg type="boolean"&gt;true&lt;/Arg&gt; &lt;!-- if true,
+        expand war in temp dir --&gt;
+  &lt;/Call&gt;
+
+  &lt;Call name="addWebApplication"&gt;
+    &lt;Arg&gt;/struts/struts-exercise-taglib/*&lt;/Arg&gt;
+    &lt;Arg&gt;&lt;SystemProperty name="jetty.home"
+        default="."/&gt;/webapps/struts/struts-exercise-taglib.war&lt;/Arg&gt;
+    &lt;Arg&gt;&lt;SystemProperty name="jetty.home"
+        default="."/&gt;/etc/webdefault.xml&lt;/Arg&gt;
+    &lt;Arg type="boolean"&gt;false&lt;/Arg&gt; &lt;!-- if true,
+        expand war in temp dir --&gt;
+  &lt;/Call&gt;
+
+  &lt;Call name="addWebApplication"&gt;
+    &lt;Arg&gt;/struts/struts-upload/*&lt;/Arg&gt;
+    &lt;Arg&gt;&lt;SystemProperty name="jetty.home"
+        default="."/&gt;/webapps/struts/struts-upload.war&lt;/Arg&gt;
+    &lt;Arg&gt;&lt;SystemProperty name="jetty.home"
+        default="."/&gt;/etc/webdefault.xml&lt;/Arg&gt;
+    &lt;Arg type="boolean"&gt;true&lt;/Arg&gt; &lt;!-- if true,
+        expand war in temp dir --&gt;
+  &lt;/Call&gt;
+
+  &lt;Call name="addWebApplication"&gt;
+    &lt;Arg&gt;/struts/struts-blank/*&lt;/Arg&gt;
+    &lt;Arg&gt;&lt;SystemProperty name="jetty.home"
+        default="."/&gt;/webapps/struts/struts-blank.war&lt;/Arg&gt;
+    &lt;Arg&gt;&lt;SystemProperty name="jetty.home"
+        default="."/&gt;/etc/webdefault.xml&lt;/Arg&gt;
+    &lt;Arg type="boolean"&gt;true&lt;/Arg&gt; &lt;!-- if true,
+        expand war in temp dir --&gt;
+  &lt;/Call&gt;
+
+&lt;!-- Jetty config for Struts END --&gt;
+</pre>
+
+<hr/>
+<p>Back to <a href="installation.html#Containers">Installation</a></p>
+
+</section>
+</chapter>
+</body>
+</document>

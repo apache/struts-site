@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<document url="remote-example.html">
+
+  <properties>
+    <title>Struts Flow - Remote Example</title>
+  </properties>
+
+  <body>
+      <section name="Number Guessing Game Example - Remote Edition" href="overview">
+        <p>This example shows the number guessing game demonstrated in the <a href="guess-example.html">previous example</a>,
+        but now we add a browser remote function call to show how easy it is to call server-side Javascript functions
+        from client-side Javascript.
+        Struts Flow provides a client Javascript library and server-side framework support for calling flow functions
+        remotely from the client's web browser.
+        Function calls on the server are executed in the 
+        flow so the global variable state is available to be read and modified.  In this example, we add a "cheat"
+        button that will let the user see the secret number, but penalize their number of guesses by 5.  The
+        two new parts to the example are in the flow code and the guess.jsp file.
+        </p>
+      </section>
+      <section name="Flow Code" href="flow">
+        <p>Here is what the flow code looks like:
+        </p>
+<pre>
+var random;
+var guesses;
+
+function main() {
+
+  random =  Math.round( Math.random() * 9 ) + 1;
+  var hint = "No hint for you!"
+  guesses = 0;
+
+  while (true) {
+
+    // send guess page to user and wait for response.  Specify only cheat() 
+    // can be called remotely.
+    forwardAndWait("failure", 
+       { "hint"    : hint,
+         "guesses" : guesses},
+       ["cheat"]);
+
+    print("processing a user guess "+struts.param.guess);
+    // process user's guess
+    var guess = parseInt( struts.param.guess );
+    guesses++;
+    if (guess) {
+      if (guess > random) {
+        hint = "Nope, lower!"
+      } 
+      else if (guess &lt; random) {
+        hint = "Nope, higher!"
+      } 
+      else {
+        // correct guess
+        break;
+      }
+    }
+  }
+
+  // send success page to user
+  forwardAndWait("success", 
+     {"random"  : random, 
+      "guess"   : guess, 
+      "guesses" : guesses} );
+}
+
+function cheat() {
+    guesses += 5;
+    return {"secret":random, "guesses":guesses};
+}
+</pre>
+        <p>The big change here is several variables have been moved to outside the function to allow access by
+        the new cheat() function.  The cheat() function adds 5 to the number of guesses then returns the secret
+        number.  Struts Flow converts the returned object into <a href="http://www.json.org">JSON</a> and returns
+        it to the client.</p>
+    </section>
+ <section name="JSP Presentation" href="jsp">
+        <p>This example adds the "cheat" button to the number guessing form, <code>guess.jsp</code>.  When
+        pressed, the Javascript uses the clientFlow.js library to call the cheat() function on the server.</p>
+<pre>
+&lt;?xml version="1.0"?>
+&lt;html>
+&lt;head>
+  &lt;title>Struts Flow number guessing game&lt;/title>
+    &lt;script type="text/javascript">
+  &lt;!--
+function init() {
+    this.contid = "&lt;%=request.getAttribute("contid")%>";
+    this.client = new ClientFlow("guess.do");
+}   
+function cheat() {
+    result = client.call("cheat", contid);
+    alert("The secret number is "+result.secret+". After applying a penalty, you have guessed "+result.guesses+" times");
+    contid = result.contid;
+}
+    -->
+  &lt;/script>
+  &lt;script type="text/javascript" src="clientFlow.js" />
+&lt;/head>
+&lt;body onload="init()">
+
+  &lt;h1>Guess the Number Between 1 and 10&lt;/h1>
+  
+  &lt;h2>&lt;%= request.getAttribute("hint") %>&lt;/h2>
+  
+  &lt;h3>You've guessed &lt;%= request.getAttribute("guesses") %> times.&lt;/h3>
+  
+  &lt;form method="post" action="guess.do">
+    &lt;input type="hidden" name="contid" value='&lt;%= request.getAttribute("contid") %>' />
+    &lt;input type="text" name="guess"/>
+    &lt;input type="submit"/>
+    &lt;input type="button" onclick="cheat()" value="Cheat" />
+  &lt;/form>
+  
+&lt;/body>
+&lt;/html>
+</pre>
+<p>The key to the function call executing in the server flow is passing the continuation id to the client flow
+instance.
+</p>
+        
+      </section>
+  </body>
+</document>
