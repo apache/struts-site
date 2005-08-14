@@ -10,9 +10,9 @@
 </properties>
 
 <body>
-<chapter name="3. Building View Components" href="building_view">
+<section name="3. Building View Components">
 
-<section name="3.1 Overview" href="overview">
+<subsection name="3.1 Overview">
 
     <p>
     This chapter focuses on the task of building the <em>View</em> components
@@ -25,9 +25,9 @@
     Several other topics related to the View components are briefly discussed.
     </p>
 
-</section>
+</subsection>
 
-<section name="3.2 Internationalized Messages" href="i18n">
+<subsection name="3.2 Internationalized Messages">
 
     <p>
     A few years ago, application developers could count on having to support
@@ -163,7 +163,7 @@
     <code>com.mycompany.mypackage.MyApplication</code>.
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <servlet>
 <servlet-name>action</servlet-name>
 <servlet-class>
@@ -177,7 +177,7 @@ org.apache.struts.action.ActionServlet
 </init-param>
 <!-- ... -->
 </servlet>
-]]></code></pre>
+]]></source>
 
     <p>
     The important thing is for the resource bundle to be found on the
@@ -195,16 +195,16 @@ org.apache.struts.action.ActionServlet
     directory to the <code>classes</code> directory:
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <!-- Copy any configuration files -->
 <copy todir="classes">
 <fileset dir="src/conf"/>
 </copy>
-]]></code></pre>
+]]></source>
 
-</section>
+</subsection>
 
-<section name="3.3 Forms and FormBean Interactions" href="form_beans">
+<subsection name="3.3 Forms and FormBean Interactions">
 
 <p>
     <strong>Note:</strong> While the examples given here use JSP and custom tags,
@@ -232,10 +232,10 @@ org.apache.struts.action.ActionServlet
     look like this (in JSP):
     </p>
    
-<pre><code><![CDATA[
+<source><![CDATA[
 <input type="text" name="username"
 value="<%= loginBean.getUsername() >"/>
-]]></code></pre>
+]]></source>
 
     <p>
     which is difficult to type correctly, confuses HTML developers who are
@@ -246,9 +246,9 @@ value="<%= loginBean.getUsername() >"/>
     The case above would be rendered like this using Struts:
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <html:text property="username"/>;
-]]></code></pre>
+]]></source>
 
     <p>
     with no need to explicitly refer to the JavaBean from which the initial
@@ -271,10 +271,10 @@ value="<%= loginBean.getUsername() >"/>
     Buiding an ActionForm Howto</a>".
     </p>
 
-</section>
+</subsection>
 
 
-<section name="3.3.1 Indexed &amp; Mapped Properties" href="indexed">
+<subsection name="3.3.1 Indexed and Mapped Properties">
 
     <p>
     Property references in JSP pages using the Struts framework can reference
@@ -296,9 +296,9 @@ value="<%= loginBean.getUsername() >"/>
  href="../faqs/indexedprops.html"><em>Indexed Properties, Mapped Properties,
  and Indexed Tags</em></a>.
 </p>
-</section>
+</subsection>
 
-<section name="3.3.2 Input Field Types Supported" href="form_input">
+<subsection name="3.3.2 Input Field Types Supported">
 
     <p>
     Struts defines HTML tags for all of the following types of input fields,
@@ -360,9 +360,9 @@ value="<%= loginBean.getUsername() >"/>
     the field knows what bean to use for initializing displayed values.
     </p>
 
-</section>
+</subsection>
 
-<section name="3.3.3 Other Useful Presentation Tags" href="presentation_tags">
+<subsection name="3.3.3 Other Useful Presentation Tags">
 
     <p>
     There are several tags useful for creating presentations, consult the 
@@ -418,9 +418,9 @@ value="<%= loginBean.getUsername() >"/>
     
     </ul>
 
-</section>
+</subsection>
 
-<section name="3.3.4 Automatic Form Validation" href="form_validation">
+<subsection name="3.3.4 Automatic Form Validation">
 
     <p>
     In addition to the form and bean interactions described above, Struts
@@ -429,10 +429,10 @@ value="<%= loginBean.getUsername() >"/>
     class:
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 validate(ActionMapping mapping,
 HttpServletRequest request);
-]]></code></pre>
+]]></source>
 
     <p>
     The <code>validate</code> method is called by the controller servlet after
@@ -482,9 +482,9 @@ HttpServletRequest request);
     validate ActionForms.
     </p>
     
-</section>
+</subsection>
 
-<section name="3.3.5 The Struts Validator" href="validator">
+<subsection name="3.3.5 The Struts Validator">
 
     <p>
     Configuring the Validator to perform form validation is easy.
@@ -502,7 +502,7 @@ HttpServletRequest request);
     <li>
     You must define the validation rules in an xml file like this:
     
-<pre><code><![CDATA[
+<source><![CDATA[
 <form-validation>
 <formset>             
 <form name="logonForm">
@@ -512,18 +512,18 @@ HttpServletRequest request);
 </form>        
 </formset>   
 </form-validation>
-]]></code></pre>
+]]></source>
 The msg element points to the message resource key to use when generating the error message.
 </li>
 <li>Lastly, you must enable the ValidatorPlugin in the struts-config.xml file like this:
-<pre><code><![CDATA[
+<source><![CDATA[
 <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
 <set-property 
 property="pathnames" 
 value="/WEB-INF/validator-rules.xml, 
     /WEB-INF/validation.xml"/>
 </plug-in>
-]]></code></pre>
+]]></source>
 
         </li>
     </ol>
@@ -540,9 +540,9 @@ value="/WEB-INF/validator-rules.xml,
     <a href="./dev_validator.html">Developers Guide</a>.
     </p>
     
-</section>
+</subsection>
 
-<section name="3.4 Other Presentation Techniques" href="other_presentations">
+<subsection name="3.4 Other Presentation Techniques">
 
     <p>
     Although the look and feel of your application can be completely
@@ -553,9 +553,9 @@ value="/WEB-INF/validator-rules.xml,
     Several options are discussed in the following sections.
     </p>
   
-</section>
+</subsection>
 
-<section name="3.4.1 Application-Specific Custom Tags" href="custom_tags">
+<subsection name="3.4.1 Application-Specific Custom Tags">
 
     <p>
     Beyond using the custom tags provided by the Struts library, it is easy
@@ -586,9 +586,9 @@ value="/WEB-INF/validator-rules.xml,
     in package <code>org.apache.struts.example</code>, along with the other Java
     classes that are used in this application.
     </p>
-</section>
+</subsection>
 
-<section name="3.4.2 Page Composition With Includes" href="includes">
+<subsection name="3.4.2 Page Composition With Includes">
 
     <p>
     Creating the entire presentation of a page in one JSP file (with custom
@@ -667,9 +667,9 @@ value="/WEB-INF/validator-rules.xml,
     
     </ul>
 
-</section>
+</subsection>
 
-<section name="3.4.3 Page Composition With Tiles" href="Tiles">
+<subsection name="3.4.3 Page Composition With Tiles">
 
     <p>
     Tiles is a powerful templating library that allows you to construct views 
@@ -682,28 +682,28 @@ value="/WEB-INF/validator-rules.xml,
         Create a /layout/layout.jsp file that contains your app's common look and 
         feel:
     
-<pre><code><![CDATA[
+<source><![CDATA[
 <html>
 <body>
 <tiles:insert attribute="body"/>
 </body>
 </html>
-]]></code></pre>
+]]></source>
         </li>
         
         <li>
     Create your /index.jsp homepage file:
     
-<pre><code><![CDATA[
+<source><![CDATA[
 <h1>This is my homepage</h1>
-]]></code></pre>
+]]></source>
 
         </li>
 
         <li>
         Create a /WEB-INF/tiles-defs.xml file that looks like this:
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <tiles-definitions>
 <definition 
     name="layout" 
@@ -716,32 +716,32 @@ value="/WEB-INF/validator-rules.xml,
         value="/index.jsp"/>
 </definition>
 <tiles-definitions>
-]]></code></pre>
+]]></source>
         </li>
 
         <li>
         Setup the TilesPlugin in the struts-config.xml file:
         
-<pre><code><![CDATA[
+<source><![CDATA[
 <plug-in 
     className="org.apache.struts.tiles.TilesPlugin">
     <set-property 
         property="definitions-config" 
         value="/WEB-INF/tiles-defs.xml"/>
 </plug-in>
-]]></code></pre>
+]]></source>
         </li>
         
         <li>
         Setup an action mapping in struts-config.xml to point to your 
         homepage tile:
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <action 
 path="/index"
 type="org.apache.struts.actions.ForwardAction"
 parameter="homepage"/>
-]]></code></pre>
+]]></source>
         </li>
         </ol>
 
@@ -758,9 +758,9 @@ parameter="homepage"/>
         See the tiles-documentation webapp for in-depth examples.
         </p>
   
-  </section>
+  </subsection>
 
-  <section name="3.4.4 Image Rendering Components" href="image_rendering">
+  <subsection name="3.4.4 Image Rendering Components">
 
         <p>
         Some applications require dynamically generated images, like the 
@@ -791,9 +791,9 @@ parameter="homepage"/>
         
     </ul>
     
-  </section>
+  </subsection>
 
-  <section name="3.4.5 Rendering Text" href="text_rendering">
+  <subsection name="3.4.5 Rendering Text">
 
     <p>
     Some applications require dynamically generated text or markup,
@@ -802,16 +802,16 @@ parameter="homepage"/>
     PrintWriter, this is very easy to do from an Action:
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 response.setContentType("text/plain"); // or text/xml
 PrintWriter writer = response.getWriter();
 // use writer to render text
 return(null);
-]]></code></pre>
+]]></source>
 
-</section>
+</subsection>
 
-    <section name="3.4.6 The Struts-EL Tag Library" href="struts-el">
+    <subsection name="3.4.6 The Struts-EL Tag Library">
     
     <p>
     The <strong>Struts-EL</strong> tag library is a contributed library in
@@ -827,17 +827,17 @@ return(null);
     attribute values.  For instance, to print a message from a properties
     file based on a resource key, you would use the
     <code>bean:write</code> tag, perhaps like this:</p>
-    <pre><code>
+    <source>
     <![CDATA[<bean:message key='<%= stringvar %>'/>]]>
-    </code></pre>
+    </source>
 
     <p>
     This assumes that <code>stringvar</code> exists as a JSP scripting
     variable.  If you're using the <strong>Struts-EL</strong> library, the
     reference looks very similar, but slightly different, like this:</p>
-    <pre><code>
+    <source>
     <![CDATA[<bean-el:message key="${stringvar}"/>]]>
-    </code></pre>
+    </source>
 
     <p>
     If you want to know how to properly use the <strong>Struts-EL</strong>
@@ -882,15 +882,15 @@ return(null);
     For more see, <a href="../faqs/struts-el.html">Struts-El Extension</a> in the FAQ/HOWTO section.
     </p>
 
-</section>
+</subsection>
 
-<section>
+<subsection>
     <p class="right">
     Next: <a href="building_controller.html">Building Controller 
     Components</a>
     </p>
-</section>
+</subsection>
 
-</chapter>
+</section>
 </body>
 </document>

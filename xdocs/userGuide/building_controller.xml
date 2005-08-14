@@ -10,9 +10,9 @@
 </properties>
 
 <body>
-<chapter name="4. Building Controller Components" href="building_controller">
+<section name="4. Building Controller Components">
 
-<section name="4.1 Overview" href="overview">
+<subsection name="4.1 Overview">
 
     <p>
     Now that we understand how to construct the Model and View components
@@ -67,9 +67,9 @@
     "<a href="configuration.html">Configuring Applications</a>" chapter.
     </p>
 
-</section>
+</subsection>
 
-<section name="4.2 The ActionServlet" href="action_servlet">
+<subsection name="4.2 The ActionServlet">
 
     <p>
     For those of you familiar with MVC architecture, the ActionServlet
@@ -100,7 +100,7 @@
     
     <p>
     The Struts controller delegates most of this grunt work to the
-    <a href="#request_processor">Request Processor</a> and Action classes.
+    <a href="#4_2_1_Request_Processor">Request Processor</a> and Action classes.
     </p>
     
     <p>
@@ -134,9 +134,9 @@
     same request and response.
     </p>
 
-</section>
+</subsection>
 
-<section name="4.2.1 Request Processor" href="request_processor">
+<subsection name="4.2.1 Request Processor">
 
     <p>
     The RequestProcessor is where the majority of the core processing 
@@ -305,9 +305,9 @@
 
     </table>
 
-</section>
+</subsection>
 
-<section name="4.3 ActionForm Classes" href="action_form_classes">
+<subsection name="4.3 ActionForm Classes">
 
     <p>
     An ActionForm represents an HTML form that the user interacts with over 
@@ -344,7 +344,7 @@
     If you override a "stub" method, and provide error messages in the
     standard application resource, Struts will automatically validate the
     input from the form (using your method). 
-    See "<a href="./building_view.html#form_validation">Automatic Form
+    See "<a href="./building_view.html#3_3_4_Automatic_Form_Validation">Automatic Form
     Validation</a>" for details. Of course, you can also ignore the
     ActionForm validation and provide your own in the Action object.
     </li>
@@ -401,9 +401,9 @@
     
     </ul>
 
-</section>
+</subsection>
 
-<section name="4.3.1 DynaActionForm Classes" href="dyna_action_form_classes">
+<subsection name="4.3.1 DynaActionForm Classes">
 
     <p>
     Maintaining a separate concrete ActionForm class for each form in your
@@ -424,7 +424,7 @@
     that stores a user's given and family names:
     </p>
     
-<pre><code><![CDATA[
+<source><![CDATA[
 <form-bean 
     name="UserForm" 
     type="org.apache.struts.action.DynaActionForm">
@@ -437,7 +437,7 @@
         type="java.lang.String" 
         initial="Smith"/>
 </form-bean>
-]]></code></pre>
+]]></source>
 
     <p>
     The types supported by DynaActionForm include:
@@ -541,14 +541,14 @@
     of an <code>ActionForm</code> goes like this:
     </p>
     
-<pre><code>${formbean.prop}</code></pre>
+<source>${formbean.prop}</source>
     
     <p>
     The syntax for referencing a property of a <code>DynaActionForm</code>
     would be:
     </p>
 
-<pre><code>${dynabean.map.prop}</code></pre>
+<source>${dynabean.map.prop}</source>
 
     <p>
     The <code>map</code> property is a property of 
@@ -606,9 +606,9 @@
     <a href="http://www.niallp.pwp.blueyonder.co.uk/">LazyActionForm</a>.
     </p>
 
-</section>
+</subsection>
 
-<section name="4.3.2 Map-backed ActionForms" href="map_action_form_classes">
+<subsection name="4.3.2 Map-backed ActionForms">
 
     <p>
     The DynaActionForm classes offer the ability to create ActionForm beans 
@@ -626,7 +626,7 @@
     Here is an example of a map-backed ActionForm class:
     </p>
     
-<pre><code><![CDATA[public FooForm extends ActionForm {
+<source><![CDATA[public FooForm extends ActionForm {
 
     private final Map values = new HashMap();
 
@@ -639,7 +639,7 @@
     }
 
 }
-]]></code></pre>
+]]></source>
 
     <p>
     In its corresponding JSP page, you can access objects stored in the 
@@ -667,7 +667,7 @@
     Here is a simple example:
     </p>
 
-<pre><code><![CDATA[<html:text property="value(foo)"/>]]></code></pre>
+<source><![CDATA[<html:text property="value(foo)"/>]]></source>
 
     <p>
     This will call the <code>getValue</code> method on FooForm with a key 
@@ -675,7 +675,7 @@
     To create a form with dynamic field names, you could do the following:
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <% 
 	for (int i = 0; i < 10; i++) {
 		String name = "value(foo-" + i + ")";
@@ -685,7 +685,7 @@
 <%
 	}
 %>
-]]></code></pre>
+]]></source>
 
     <p>
     Note that there is nothing special about the name <code>value</code>. 
@@ -700,7 +700,7 @@
     You do so by creating indexed get/set methods on your bean:
     </p>
     
-<pre><code><![CDATA[public FooForm extends ActionForm {
+<source><![CDATA[public FooForm extends ActionForm {
 
     private final List values = new ArrayList();
 
@@ -712,7 +712,7 @@
         return values.get(key);
     }
 }
-]]></code></pre>
+]]></source>
 
     <p>
     In your presentation pages, you access individual entries in a list-backed 
@@ -732,16 +732,16 @@
         The <code>validwhen</code> validator (since Struts 1.2.1) also does not support map-backed ActionForms.
     </p>
 
-</section>
+</subsection>
 
-<section name="4.4 Action Classes" href="action_classes">
+<subsection name="4.4 Action Classes">
 
     <p>
     The <code>Action</code> class defines two methods that could be
     executed depending on your servlet environment:
     </p>
 
-<pre><code>public ActionForward execute(ActionMapping mapping,
+<source>public ActionForward execute(ActionMapping mapping,
                      ActionForm form,
                      ServletRequest request,
                      ServletResponse response)
@@ -752,7 +752,7 @@ public ActionForward execute(ActionMapping mapping,
                      HttpServletRequest request,
                      HttpServletResponse response)
 throws Exception;
-</code></pre>
+</source>
 
     <p>
     Since the majority of Struts projects are focused on building web 
@@ -841,9 +841,9 @@ throws Exception;
     <code>ServletException</code>.
     </p>
 
-   </section>
+   </subsection>
    
-   <section name="4.4.1 Action Class Design Guidelines" href="action_design_guide">
+   <subsection name="4.4.1 Action Class Design Guidelines">
 
     <p>
     Remember the following design guidelines when coding <code>Action</code> 
@@ -942,9 +942,9 @@ throws Exception;
     used, the MailReader application does not always follow best practices.
     </p>
       
-</section>
+</subsection>
    
-<section name="4.5 Exception Handler" href="exception_handler">
+<subsection name="4.5 Exception Handler">
 
     <p>
     You can define an ExceptionHandler to execute when an Action's 
@@ -957,13 +957,13 @@ throws Exception;
     Then you configure your handler in struts-config.xml like this:
     </p>
     
-<pre><code><![CDATA[<global-exceptions>
+<source><![CDATA[<global-exceptions>
     <exception 
       key="some.key" 
       type="java.io.IOException" 
       handler="com.yourcorp.ExceptionHandler"/>
 </global-exceptions>
-]]></code></pre>
+]]></source>
     
     <p>
     This configuration element says that 
@@ -1100,9 +1100,9 @@ throws Exception;
     the exception to some data store.
     </p>
     
-</section>
+</subsection>
 
-<section name="4.6 PlugIn Classes" href="plugin_classes">
+<subsection name="4.6 PlugIn Classes">
 
     <p>
     The <em>PlugIn</em> interface extends Action and so that applications can
@@ -1126,13 +1126,13 @@ throws Exception;
     <p>
     PlugIns are configured using &lt;plug-in&gt; elements within the
     Struts configuration file. 
-    See <a href="configuration.html#plugin_config"> PlugIn Configuration</a> 
+    See <a href="configuration.html#5_2_3_PlugIn_Configuration">PlugIn Configuration</a> 
     for details.
     </p>
 
-</section>
+</subsection>
 
-<section name="4.7 The ActionMapping Implementation" href="actionmapping">
+<subsection name="4.7 The ActionMapping Implementation">
 
     <p>
     In order to operate successfully, the Struts controller servlet needs
@@ -1182,9 +1182,9 @@ throws Exception;
 
     </ul>
 
-</section>
+</subsection>
 
-<section name="4.8 Writing Action Mappings" href="config">
+<subsection name="4.8 Writing Action Mappings">
 
     <p>
     How does the controller servlet learn about the mappings you want?
@@ -1352,9 +1352,9 @@ throws Exception;
     documentation</a>.
     </p>
 
-</section>
+</subsection>
 
-<section name="4.8.1 ActionMapping Example" href="action_mapping_example">
+<subsection name="4.8.1 ActionMapping Example">
 
     <p>
     Here's a mapping entry based on the MailReader example
@@ -1364,7 +1364,7 @@ throws Exception;
     Note that the entries for all the other actions are left out:
     </p>
 
-<pre><code><![CDATA[<struts-config>
+<source><![CDATA[<struts-config>
     <form-beans>
         <form-bean
             name="logonForm"
@@ -1388,7 +1388,7 @@ throws Exception;
             validate="true" />
     </action-mappings>
 </struts-config>
-]]></code></pre>
+]]></source>
 
     <p>
     First the form bean is defined.  
@@ -1423,7 +1423,7 @@ throws Exception;
     "success" and/or "failure" forward as part of an action mapping.
     </p>
 
-<pre><code><![CDATA[<!-- Edit mail subscription -->
+<source><![CDATA[<!-- Edit mail subscription -->
 <action    
     path="/editSubscription"
     type="org.apache.struts.webapp.example.EditSubscriptionAction"
@@ -1437,7 +1437,7 @@ throws Exception;
         name="success" 
         path="/subscription.jsp"/>
 </action>
-]]></code></pre>
+]]></source>
 
     <p>
     Using just these two extra properties, the Action classes are almost 
@@ -1456,9 +1456,9 @@ throws Exception;
     See "<a href="configuration.html">Configuring Applications</a>" for details.
     </p>
 
-</section>
+</subsection>
 
-<section name="4.9 Using ActionMappings for Pages" href="module_config-use_actions">
+<subsection name="4.9 Using ActionMappings for Pages">
 
     <p>
     Fronting your pages with ActionMappings is <em>essential</em> when using 
@@ -1477,9 +1477,9 @@ throws Exception;
     
     <pre>&lt;action path="/view" forward="/view.jsp"/></pre>
 
-</section>
+</subsection>
 
-<section name="4.10 Using Wildcards in ActionMappings" href="action_mapping_wildcards">
+<subsection name="4.10 Using Wildcards in ActionMappings">
 
     <p>
     [Since Struts 1.2.0] As a Struts application grows in size, so will the number of action
@@ -1489,11 +1489,11 @@ throws Exception;
     <p>
     The best way to explain wildcards is to show an example and walk through 
     how it works.  This example modifies the previous mapping in the <a 
-    href="#action_mapping_example">ActionMapping Example</a> section to use
+    href="#4_8_1_ActionMapping_Example">ActionMapping Example</a> section to use
     wildcards to match all pages that start with <code>/edit</code>:
     </p> 
 
-<pre><code><![CDATA[<!-- Generic edit* mapping -->
+<source><![CDATA[<!-- Generic edit* mapping -->
 <action    
     path="/edit*"
     type="org.apache.struts.webapp.example.Edit{1}Action"
@@ -1507,7 +1507,7 @@ throws Exception;
         name="success" 
         path="/{1}.jsp"/>
 </action>
-]]></code></pre>
+]]></source>
 
     <p>
     The "<code>*</code>" in the path attribute allows the mapping to match the 
@@ -1603,9 +1603,9 @@ throws Exception;
         <li><code>path</code></li>
     </ul>
 
-</section>
+</subsection>
 
-<section name="4.11 Commons Logging Interface" href="logging">
+<subsection name="4.11 Commons Logging Interface">
     <p>
     Struts doesn't configure logging itself -- it's all done by
     <a href="http://jakarta.apache.org/commons/">commons-logging</a> 
@@ -1664,7 +1664,7 @@ throws Exception;
     Let's take a look:
     </p>
     
-<pre><code>package com.foo;
+<source>package com.foo;
 // ...
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1681,7 +1681,7 @@ public class Foo {
     }
 // ...
 }
-</code></pre>
+</source>
     
     <p>
     The general idea is to instantiate a single logger per class and to
@@ -1698,14 +1698,14 @@ public class Foo {
     Action classes in the Struts MailReader example application.
     </p>
 
-</section>
+</subsection>
 
-<section>
+<subsection>
     <p class="right">
     Next: <a href="./configuration.html">Configuring Applications</a>
     </p>
-</section>
+</subsection>
 
-</chapter>
+</section>
 </body>
 </document>
