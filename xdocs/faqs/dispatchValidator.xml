@@ -8,9 +8,9 @@
 
 <body>
 
-<chapter href="dispatch-validator" name="Dispatching And Validating">
+<section name="Dispatching And Validating">
 
-<section name="Overview">
+<subsection name="Overview">
 
     <p>
     This is simple example to illustrate how to build a multi-page
@@ -20,9 +20,9 @@
     form field validations.
     </p>
 
-</section>
+</subsection>
 
-<section href="dispatch" name="Using the DispatchAction">
+<subsection name="Using the DispatchAction">
 
     <p>
     The example used is a simple two page wizard.  The first page prompts
@@ -30,9 +30,9 @@
     The application URL has the form
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 http://localhost:8080/howto/name.do?submitName=enterName
-]]></code></pre>
+]]></source>
     <p>
     where the <code>submitName</code> parameter is used to specify the name
     of the method in the action class that will be called to
@@ -40,7 +40,7 @@ http://localhost:8080/howto/name.do?submitName=enterName
     <code>parameter</code> attribute specifies the name of the dispatch request parameter (i.e. <code>parameter="submitName"</code>).
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <action path="/name"
         type="com.acme.AcmeAction"
         name="acmeForm"
@@ -52,11 +52,11 @@ http://localhost:8080/howto/name.do?submitName=enterName
     <forward name="address"
             path="/pages/address.jsp"/>
 </action>
-]]></code></pre>
+]]></source>
 
 The method <code>enterName</code> simply forwards to the first page.
 
-<pre><code><![CDATA[
+<source><![CDATA[
 public ActionForward enterName(ActionMapping mapping,
                                ActionForm form,
                                HttpServletRequest request,
@@ -66,7 +66,7 @@ public ActionForward enterName(ActionMapping mapping,
     return mapping.findForward("name");
 
 }
-]]></code></pre>
+]]></source>
 
 On the page <code>name.jsp</code> is a hidden field for the <code>submitName</code> parameter.
 
@@ -74,13 +74,13 @@ Submitting the name page calls method <code>enterAddress</code> by using
 Javascript to set the <code>submitName</code> parameter
 
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <html:submit onclick="this.form.submitName.value='enterAddress'"/>
-]]></code></pre>
+]]></source>
 
 The <code>enterAddress</code> method then forwards to the address page.
 
-<pre><code><![CDATA[
+<source><![CDATA[
 public ActionForward enterAddress(ActionMapping mapping,
                                   ActionForm form,
                                   HttpServletRequest request,
@@ -89,24 +89,24 @@ public ActionForward enterAddress(ActionMapping mapping,
 
     return mapping.findForward("address");
 }
-]]></code></pre>
+]]></source>
 
 On the <code>adddress.jsp</code> page, we again dynamically set the <code>submitName</code>
 parameter.
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <html:submit value="submit" onclick="this.form.submitName.value='submitAddress'"/>
-]]></code></pre>
+]]></source>
 
 And the action path that is submitted is
 
-<pre><code><![CDATA[
+<source><![CDATA[
     <html:form action="/address">
-]]></code></pre>
+]]></source>
 
 The action mapping for <code>/address</code> is
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <action path="/address"
         type="com.acme.AcmeAction"
         name="acmeForm"
@@ -121,14 +121,14 @@ The action mapping for <code>/address</code> is
                  path="/pages/done.jsp"/>
 
 </action>
-]]></code></pre>
+]]></source>
 
 Note that two action mappings are required to handle the page flow (we'll discuss why
 in the next section).
 
-</section>
+</subsection>
 
-<section href="validations" name="Validations">
+<subsection name="Validations">
 
 Let's now add some validations to require input fields using the
 Validator.  In validation.xml, there's a <code>formset</code> definition
@@ -136,7 +136,7 @@ that specifies two field validations for the form bean
 named <code>acmeForm</code>.
 
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <formset>
    <form name="acmeForm">
       <field property="firstName" page="1" depends="required">
@@ -147,7 +147,7 @@ named <code>acmeForm</code>.
       </field>
     </form>
   </formset>
-]]></code></pre>
+]]></source>
 
 We need to identify the page where the input field resides so that
 we can control which validations are triggered for a given form
@@ -161,15 +161,15 @@ the page number.
 
   In <code>name.jsp</code>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <html:hidden property="page" value="1"/>
-]]></code></pre>
+]]></source>
 
   In <code>address.jsp</code>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <html:hidden property="page" value="2"/>
-]]></code></pre>
+]]></source>
 
 The Validator will use the value of the page property in determining which validations to run.
 
@@ -178,9 +178,9 @@ is required for each page since the <code>input</code> attribute specifies the p
 to in case validation fails.  Therefore we need to define an action mapping for each page
 that could be displayed after a validation fails.
 
-</section>
+</subsection>
 
-<section href="cancel" name="Cancel and Previous">
+<subsection name="Cancel and Previous">
 
 The tricky part is how to setup Previous and Cancel buttons
 for each of the pages.  If the user clicks Previous then
@@ -191,17 +191,17 @@ The solution for Previous is to set the page number property
 to the number of the previous page, effectively circumventing
 the validations associated with the current page.
 
-<pre><code><![CDATA[
+<source><![CDATA[
    <html:submit value="previous"
           onclick="this.form.submitName.value='previous'; this.form.page.value='1'"/>
-]]></code></pre>
+]]></source>
 
 For cancel, there are two options.  We could use the Struts
 Cancel button or create an action specifically designed to process
 a cancel request.  The <code>cancel</code> action has no associated validations.
 
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <action path="/cancel"
         type="com.acme.CancelAction">
 
@@ -209,19 +209,19 @@ a cancel request.  The <code>cancel</code> action has no associated validations.
              path="/pages/cancel.jsp"/>
 
 </action>
-]]></code></pre>
+]]></source>
 
 And the Cancel button submits to the <code>/cancel</code> action path.
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <html:submit value="cancel" onclick="this.form.action='/acme/cancel.do'"/>
-]]></code></pre>
+]]></source>
 
 The full example is <a href="dispatchValidator.zip"> here </a>.
 
-</section>
+</subsection>
 
-  </chapter>
+  </section>
  </body>
 
 </document>
