@@ -11,9 +11,9 @@
 
 <body>
 
-<chapter name="Struts Validator Guide">
+<section name="Struts Validator Guide">
 
-<section href="validator" name="Struts Validator">
+<subsection href="validator" name="Struts Validator">
 
     <p>
     The Struts Validator, in some form, has been available since the
@@ -58,9 +58,9 @@
     example).
     </p>
 
-</section>
+</subsection>
 
-<section href="i18n" name="Internationalization">
+<subsection href="i18n" name="Internationalization">
 
     <p>
     Each validator form is grouped within a <code>FormSet</code> element in
@@ -98,7 +98,7 @@
     message.
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <field
     property="lastName"
     depends="required,mask">
@@ -111,7 +111,7 @@
         <var-value>^[a-zA-Z]*$</var-value>
     </var>
 </field>
-]]></code></pre>
+]]></source>
 
     <p>
     By default the arg0-arg3 elements will try to look up the <code>key</code>
@@ -126,7 +126,7 @@
     using modules.
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <field
     property="integer"
     depends="required,integer,intRange">
@@ -148,22 +148,22 @@
         <var-value>20</var-value>
     </var>
     </field>
-]]></code></pre>
+]]></source>
 
-</section>
+</subsection>
 
-    <section href="builtin" name="Standard Built In Validations">
+    <subsection href="builtin" name="Standard Built In Validations">
 
         <p>
         Validator ships with a set of pre-defined validators, as follows:
         </p>
             <ul>
               <li><strong>required</strong> - mandatory field validation. Has no variables.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="name" depends="required">
         <arg0 key="customer.name"/>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>requiredif</strong> - field dependant validator
                   <pre>Deprecated, use validwhen.</pre>
@@ -173,77 +173,77 @@
               </li>
               <li><strong>minlength</strong> - validate input data isn't less than a specified minimum length.
                   Requires a <code>minlength</code> variable.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="name" depends="required,minlength">
         <arg0 key="customer.name"/>
         <arg1 name="minlength" key="${var:minlength}" resource="false"/>
         <var><var-name>minlength</var-name><var-value>3</var-value></var>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>maxlength</strong> - validate input data doesn't exceed a specified maximum length.
                   Requires a <code>maxlength</code> variable.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="name" depends="required,maxlength">
         <arg0 key="customer.name"/>
         <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
         <var><var-name>maxlength</var-name><var-value>30</var-value></var>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>mask</strong> - validate format according to a regular expression.
                   Requires a <code>mask</code> variable to specify the regular expression.
                   Since version 1.1, the regular expression must start
                   with a <code>^</code> and end with a <code>$</code> (see example below).
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="name" depends="required,mask">
         <msg name="mask" key="registrationForm.lastname.maskmsg"/>
         <arg0 key="registration.name"/>
         <var><var-name>mask</var-name><var-value>^[a-zA-Z]*$</var-value></var>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>byte</strong> - validates that a field can be converted to a Byte.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="age" depends="byte">
         <arg0 key="employee.age"/>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>short</strong> - validates that a field can be converted to a Short.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="productnumber" depends="short">
         <arg0 key="order.prodno"/>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>integer</strong> - validates that a field can be converted to an Integer.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="ordernumber" depends="integer">
         <arg0 key="order.number"/>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>long</strong> - validates that a field can be converted to a Long.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="ordernumber" depends="long">
         <arg0 key="order.number"/>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>float</strong> - validates that a field can be converted to a Float.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="amount" depends="float">
         <arg0 key="sale.amount"/>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>double</strong> - validates that a field can be converted to a Double.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="amount" depends="double">
         <arg0 key="sale.amount"/>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>date</strong> - validates that a field can be converted to a Date.
                   This validator uses <code>java.text.SimpleDateFormat</code> to parse the date and
@@ -252,18 +252,18 @@
                   between using the <code>datePatternStrict</code> and <code>datePattern</code> variables
                   is that <code>datePatternStrict</code> checks additionally that the input data is the same
                   length as the pattern specified (so for example 1/1/2004 would fail with a pattern of <code>MM/dd/yyyy</code>).
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="saledate" depends="required,date">
         <arg0 key="myForm.saledate"/>
         <var><var-name>datePattern</var-name><var-value>MM/dd/yyyy</var-value></var>
     </field>
-    ]]></code></pre>
-    <pre><code><![CDATA[
+    ]]></source>
+    <source><![CDATA[
     <field property="saledate" depends="required,date">
         <arg0 key="sale.orderdate"/>
         <var><var-name>datePatternStrict</var-name><var-value>MM/dd/yyyy</var-value></var>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>range</strong> - validate number range.
                   <pre>Deprecated, use intRange, longRange, floatRange or doubleRange.</pre>
@@ -272,7 +272,7 @@
                   Requires <code>min</code> and <code>max</code> variables to specify the range.
                   This validator depends on the <code>integer</code> validator
                   which must also be in the field's <code>depends</code> attribute.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="age" depends="required,integer,intRange">
         <arg0 key="employee.age"/>
         <arg1 name="intRange" key="${var:min}" resource="false"/>
@@ -280,13 +280,13 @@
         <var><var-name>min</var-name><var-value>18</var-value></var>
         <var><var-name>max</var-name><var-value>65</var-value></var>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>longRange</strong> - validates that an long field is within a specified range.
                   Requires <code>min</code> and <code>max</code> variables to specify the range.
                   This validator depends on the <code>long</code> validator
                   which must also be in the field's <code>depends</code> attribute.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="age" depends="required,long,longRange">
         <arg0 key="employee.age"/>
         <arg1 name="longRange" key="${var:min}" resource="false"/>
@@ -294,13 +294,13 @@
         <var><var-name>min</var-name><var-value>18</var-value></var>
         <var><var-name>max</var-name><var-value>65</var-value></var>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>floatRange</strong> - validates that a float field is within a specified range
                   Requires <code>min</code> and <code>max</code> variables to specify the range.
                   This validator depends on the <code>float</code> validator
                   which must also be in the field's <code>depends</code> attribute.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="ordervalue" depends="required,float,floatRange">
         <arg0 key="order.value"/>
         <arg1 name="floatRange" key="${var:min}" resource="false"/>
@@ -308,13 +308,13 @@
         <var><var-name>min</var-name><var-value>100</var-value></var>
         <var><var-name>max</var-name><var-value>4.99</var-value></var>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>doubleRange</strong> - validates that a double field is within a specified range
                   Requires <code>min</code> and <code>max</code> variables to specify the range.
                   This validator depends on the <code>double</code> validator
                   which must also be in the field's <code>depends</code> attribute.
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="ordervalue" depends="required,double,doubleRange">
         <arg0 key="employee.age"/>
         <arg1 name="doubleRange" key="${var:min}" resource="false"/>
@@ -322,21 +322,21 @@
         <var><var-name>min</var-name><var-value>100</var-value></var>
         <var><var-name>max</var-name><var-value>4.99</var-value></var>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>creditCard</strong> - validate credit card number format
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="name" depends="required, creditCard">
         <arg0 key="customer.cardnumber"/>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>email</strong> - validate email address format
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="customeremail" depends="email">
         <arg0 key="customer.email"/>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
               <li><strong>url</strong> - validates url format.
                   Has four <i>optional</i> variables (<code>allowallschemes</code>,
@@ -355,7 +355,7 @@
                         not specified then the defaults are used which are <code>http</code>, 
                         <code>https</code> and <code>ftp</code>.</li>
                   </ul>
-    <pre><code><![CDATA[
+    <source><![CDATA[
     <field property="custUrl" depends="url">
         <arg0 key="customer.url"/>
     </field>
@@ -371,13 +371,13 @@
            <var-value>http,https,telnet,file</var-value>
         </var>
     </field>
-    ]]></code></pre>
+    ]]></source>
               </li>
             </ul>
-    </section>
+    </subsection>
 
 
-<section href="members" name="Constants/Variables">
+<subsection href="members" name="Constants/Variables">
 
     <p>
     Global constants can be inside the global tags and FormSet/Locale
@@ -392,7 +392,7 @@
     last.
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <global>
     <constant>
         <constant-name>zip</constant-name>
@@ -409,7 +409,7 @@
  <var-value>${zip}</var-value>
 </var>
 </field>
-]]></code></pre>
+]]></source>
 
     <p>
     The var element under a field can be used to store variables for use by a
@@ -418,7 +418,7 @@
     <code>getVar(String key)</code> method.
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <field
     property="integer"
     depends="required,integer,intRange">
@@ -440,11 +440,11 @@
         <var-value>20</var-value>
     </var>
     </field>
-]]></code></pre>
+]]></source>
 
-</section>
+</subsection>
 
-<section href="validwhen" name="Designing Complex Validations with validwhen">
+<subsection href="validwhen" name="Designing Complex Validations with validwhen">
     <p>
     [Since Struts 1.2.0] A frequent requirement in validation design is to validate one field
     against another (for example, if you have asked the user to type in
@@ -482,7 +482,7 @@
       The <code>emailAddress</code> field is only required if the
       <code>sendNewsletter</code> field is not null.  You could code
       this using validwhen as:</p>
-<pre><code><![CDATA[
+<source><![CDATA[
 <field property="emailAddress" depends="validwhen">
       <arg0 key="userinfo.emailAddress.label"/>
         <var>
@@ -490,7 +490,7 @@
           <var-value>((sendNewsletter == null) or (*this* != null))</var-value>
         </var>
       </field>
-]]></code></pre>
+]]></source>
 <p>
       Which reads as: this field is valid if <code>sendNewsletter</code> is 
       <code>null</code> or the field value is not <code>null</code>.</p>
@@ -502,7 +502,7 @@
       a property called orderLines.
       If you wished to verify that every line with part number also had
       a quantity entered, you could do it with:</p>
-<pre><code><![CDATA[
+<source><![CDATA[
     <field property="quantity" indexedListProperty="orderLines" depends="validwhen">
       <arg0 key="orderform.quantity.label"/>
         <var>
@@ -510,7 +510,7 @@
           <var-value>((orderLines[].partNumber == null) or (*this* != null))</var-value>
         </var>
       </field>
-]]></code></pre>
+]]></source>
      <p>
      Which reads as: This field is value if the corresponding <code>partNumber
      </code> field is <code>null</code>, or this field is not <code>null</code>.
@@ -519,7 +519,7 @@
      As a final example, imagine a form where the user must enter their
      height in inches, and if they are under 60 inches in height, it is
      an error to have checked off nbaPointGuard as a career.</p>
-<pre><code><![CDATA[
+<source><![CDATA[
     <field property="nbaPointGuard" depends="validwhen">
       <arg0 key="careers.nbaPointGuard.label"/>
         <var>
@@ -527,7 +527,7 @@
           <var-value>((heightInInches >= 60) or (*this* == null))</var-value>
         </var>
       </field>
-]]></code></pre>
+]]></source>
      <p>
      A few quick notes on the grammer.</p>
      <ul>
@@ -537,8 +537,8 @@
        comparison is done, otherwise a string comparison is done.
        </li>
      </ul>
-</section>
-<section href="plugs" name="Pluggable Validators">
+</subsection>
+<subsection href="plugs" name="Pluggable Validators">
 
     <p>
     By convention, the validators your application uses can beloaded through a
@@ -586,7 +586,7 @@
     Example Validator Configuration from the default validator-rules.xml.
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <validator name="required"
       classname="org.apache.struts.validator.FieldChecks"
          method="validateRequired"
@@ -609,7 +609,7 @@
                  javax.servlet.http.HttpServletRequest"
         depends=""
             msg="errors.invalid"/>
-]]></code></pre>
+]]></source>
 
     <p>
     <strong>Creating Pluggable Validators</strong>
@@ -680,9 +680,9 @@
     A mutli-part form expects the page attribute to be set.
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <html:hidden property="page" value="1"/>
-]]></code></pre>
+]]></source>
 
     <p>
     <strong>Comparing Two Fields</strong>
@@ -695,7 +695,7 @@
     password and there is the main password field and a confirmation field.
     </p>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 <validator name="twofields"
        classname="com.mysite.StrutsValidator"
        method="validateTwoFields"
@@ -709,9 +709,9 @@
              <var-value>password2</var-value>
           </var>
 </field>
-]]></code></pre>
+]]></source>
 
-<pre><code><![CDATA[
+<source><![CDATA[
 public static boolean validateTwoFields(
     Object bean,
     ValidatorAction va, 
@@ -753,11 +753,11 @@ public static boolean validateTwoFields(
 
     return true;
 }
-]]></code></pre>
+]]></source>
 
-</section>
+</subsection>
 
-<section href="validator-bugs" name="Known Bugs">
+<subsection href="validator-bugs" name="Known Bugs">
 
     <p>
     Since the Struts Validator relies on the Commons Validator, problem
@@ -779,9 +779,9 @@ public static boolean validateTwoFields(
 
     </ul>
 
-</section>
+</subsection>
 
-<section href="conditionals" name="Conditionally required fields">
+<subsection href="conditionals" name="Conditionally required fields">
 
     <p>
     You can define logic like "only validate this field if field X is
@@ -980,9 +980,9 @@ public static boolean validateTwoFields(
     the only restriction is that they must all be AND or OR, you can't mix.
     </p>
 
-</section>
+</subsection>
 
-    <section href="stopOnFirstError" name="Unstoppable JavaScript Validations">
+    <subsection href="stopOnFirstError" name="Unstoppable JavaScript Validations">
 
         <p>
         [Since Struts 1.2.0] You can force the clientside Javascript validation
@@ -1009,9 +1009,9 @@ public static boolean validateTwoFields(
 </code>
 </pre>
 
-    </section>
+    </subsection>
 
-    <section href="api" name="Validator API Guide">
+    <subsection href="api" name="Validator API Guide">
 
     <p>
     A concise
@@ -1020,9 +1020,9 @@ public static boolean validateTwoFields(
     Struts Validator API Guide</a> is available to help you get started.
     </p>
 
-</section>
+</subsection>
 
-<section href="resources" name="Validator Resources">
+<subsection href="resources" name="Validator Resources">
 
 	<p>
     <a href="http://otn.oracle.com/oramag/oracle/04-jan/o14dev_struts.html">
@@ -1053,8 +1053,8 @@ public static boolean validateTwoFields(
     available as a free download (PDF).
     </p>
 
-</section>
+</subsection>
 
-</chapter>
+</section>
 </body>
 </document>
