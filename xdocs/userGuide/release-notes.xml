@@ -13,6 +13,8 @@
               <a href="release-notes-1.2.7.html">Version 1.2.7</a>.
               To keep up-to-date on all changes to Struts, subscribe to the
               (commits at struts.apache.org) list.
+              To preview our plans for upcoming changes,
+              please visit the <a href="http://struts.apache.org/roadmap.html">Roadmap page</a>.
           </p>
           <p>
               <b>Notes on upgrading</b> are maintained in the
@@ -49,8 +51,8 @@
           <p>
               Since Struts 1.2.7, we have subdivided Struts into several subprojects,
               each with its own release cycle.
-              The codebases that were part of Struts 1.2.7 will start with version 1.3.0,
-              but, thereafter, will increment independently of each other.
+              The codebases that were part of Struts 1.2.7 will inherit version 1.3.0,
+              but, hereafter, subproject revisions will increment independently of each other.
           </p>
 
           <p>
@@ -68,11 +70,123 @@
 
           <h3>Struts Applications</h3>
 
-          <p>...</p>
+          <p>No significant changes.</p>
 
           <h3>Struts Core</h3>
 
-          <p>...</p>
+          <p>
+              Changes to Struts Core include
+          </p>
+
+          <ul>
+              <li>
+                  Composable Request Processor
+              </li>
+              <li>
+                  Arbitrary configuration properties
+              </li>
+              <li>
+                  Enhanced Global Exception Handlers
+              </li>
+              <li>
+                  Extends attribute
+              </li>
+              <li>
+                  "isCommitted" Exception Handling
+              </li>
+              <li>
+                  Postback Actions
+              </li>
+              <li>
+                  Wildcard ActionConfig properties
+              </li>
+          </ul>
+
+          <h4>Composable Request Processor</h4>
+          <p>
+              In prior versions, the request processing guantlet is represented as a series
+              of methods.
+              While it was easy to override the methods to provide different functionality,
+              it was not easy to use multiple extension that each wanted to override
+              the request processor in a different way.
+          </p>
+          <p>
+              For Struts 1.3, we turned the request processor methods into Commands
+              that are part of a flexible Chain of Commands.
+              Rather than subclassing a monolithic object,
+              we can now just replace Commands.
+              Commands can also be inserted or removed, if needed,
+              to extend or streamline the request processing gauntlet
+              to meets the needs of different kinds of applications.
+          </p>
+          <p>
+              We fully expect the Struts 1.3 request processor to be backwardly
+              compatible with earlier versions.
+              But, to be prudent, we wanted to release 1.3 with the Composable
+              Request Processor before making additional changes.
+          </p>
+          <p>
+              We've made a few other changes and improvements in Struts 1.3.x,
+              but the two big-ticket items are subprojects and the new request processor.
+          </p>
+
+          <h4>Arbitrary configuration properties</h4>
+          <p>
+              Most every Struts configuration element now accepts a map of key/value pairs.
+              Arbitrary configuration properties let us externalize more of our configurations,
+              encouraging reuse.
+          </p>
+          <p>
+              Arbitrary Configuration should make it easier for everyone
+              to write reusable chunks of code, for ActionMappings, Exception Handlers,
+              and other members.
+          </p>
+
+          <h4>Enhanced Global Exception Handlers</h4>
+          <p>
+              We now support use of global exception handlers in cases when no ActionConfig has yet been identified,
+              as in with "preprocessing" commands in a custom request processing chain.
+              In the case when there is no ActionConfig,
+              the AbstractExceptionHandler will now call a new method in ModuleConfig which
+              provides similar logic for finding a globally mapped exception handler for the given exception class
+              or any of its superclasses.
+          </p>
+
+          <h4>Extends attribute</h4>
+          <p>
+              In the Struts configuration file,
+              we can now use the <b>extends</b> attribute to adopt default settings from another element,
+              as we already can in the Tiles configuration files.
+         </p>
+          <p>
+              Extends makes using XML elements much more like object-orientated programming.
+              You can setup a base element, and then only specify the behavior that changes.
+              Extends lets us set default values and then "program by difference".
+              When elements are not relentlessly chanting the same things over and over,
+              it's easier to see the forest for the trees.
+          </p>
+
+          <h4>"isCommitted" Exception Handling</h4>
+          <p>
+              When using Tiles, sometimes the response is already committed when an exception occurs.
+              Now, the ExceptionHandler tests <code>response.isCommitted</code>,
+              and, if true, includes the configured view path, rather than forwarding to it.
+              The updated ExceptionHandler accepts new configuration attributes which let you
+              choose alternate behavior, or no behavior at all. See the JavaDoc for details.
+          </p>
+
+          <h4>Postback Forms</h4>
+          <p>
+              The action attribute of the Form taglib is now optional.
+              If omitted, the original URI of the original request is used.
+          </p>
+
+          <h4>Wildcard ActionConfig properties</h4>
+          <p>
+              Wildcards can now be used in the properties of an ActionConfig.
+              This makes it easier to pass multiple request-time values to the Action
+              without complicating the "parameter" attibute.
+          </p>
 
           <h3>Struts EL</h3>
 
