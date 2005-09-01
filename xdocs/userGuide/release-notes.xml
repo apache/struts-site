@@ -36,7 +36,12 @@
               Version 1.2.7 release.
               For more detail, see the Project Info reports for each subproject,
               which include a complete changelog and list of external dependencies.
-          </p>
+         </p>
+         <p>
+              You can also access to the Struts source repository and change logs directly through both
+              <a href="http://svn.apache.org/viewcvs.cgi/struts/core/trunk/?root=Apache-SVN">web browser</a>
+              and <a href="http://www.apache.org/dev/version-control.html"> Subversion client</a> interfaces.
+         </p>
 
           <h3>People</h3>
 
@@ -85,7 +90,7 @@
           <h3>Struts Core</h3>
 
           <p>
-              Changes to Struts Core include
+              Major changes to Struts Core include
           </p>
 
           <ul>
@@ -200,15 +205,8 @@
 
           <h3>Struts EL</h3>
 
-          <p>Changes to Struts EL are minor.</p>
-
+          <p>Aside from addressing deprecrations, there was one minor change to Struts EL.</p>
           <ul>
-              <li>
-                  Update to replace ActionError references with ActionMessage.
-              </li>
-              <li>
-                  Remove html:img's deprecated lowsrc attribute and references to it.
-              </li>
               <li>
                   Remove reference to html:html's locale attr in TestELHtmlTag
               </li>
@@ -230,13 +228,66 @@
 
           <h3>Struts Taglibs</h3>
 
-          <p>...</p>
+          <p>
+              We're changed the way we generate our reference documentation for the taglibs,
+              but we think you will find the new reference just as useful as the old.
+              Otherwise, we made only minor fixes to the trusty Struts Taglibs.
+            </p>
+
+          <ul>
+              <li>
+                  Update error message for when value is null to specify the id of the bean being defined.
+              </li>
+              <li>
+                  Updated tag to filter value field to prevent it from breaking HTML if the value has reserved
+                  characters in it.
+              </li>
+              <li>
+                  Changed logic so that the "must specify only one of..." message only get's thrown if the user is
+                  specifying more than one of the available options.
+                  The code was throwing the message if the user didn't specify any at all and should be flowing
+                  down to the "no value specified" error message.
+                  Update "can contain only one of..." message to specify which bean has the error.
+              </li>
+              <li>
+                  Update FormTag to provide better debug message in the scenario where an action mapping is missing a
+                  form bean name.
+              </li>
+              <li>
+                 Update TagUtils to provide a more specific error message in the case where properties on a formbean
+                  are not found. Basically this change handles the scenario where the Constants.BEAN_KEY value was
+                  being displayed as the bean name.
+                  Now, the actualy bean name will be displayed.
+              </li>
+              <li>
+                  Changing rendering of the form name to use the 'id' attribute when in in XHTML strict mode.
+                  If an 'id' is already identified with the 'tyleId' attribute, an exception is thrown.
+             </li>
+              <li>
+                  Changed dynamic focus javascript to choose form using 'id' attribute in XHTML mode
+              </li>
+              <li>
+                  Changed the "action" attribute of the Form taglib to be optional.
+                  If omitted, the original URI of the request is used.
+              </li>
+              <li>
+                  Filter anchors out when determining action mapping name.
+              </li>
+              <li>
+                  Fix MessagesTag so that non-resource messages are possible for multiple messages,
+                  instead of just the first one.
+              </li>
+              <li>
+                  Added escape for single quotes in javascript values
+              </li>
+          </ul>
 
           <h3>Struts Tiles</h3>
 
-          <p>Tiles is being refactored into a standalone package that can be used with or without Struts.</p>
-
-          <p>...</p>
+          <p>
+              Tiles is being refactored into a standalone package that can be used with or without Struts.
+              For more on how this affects Tiles users, see the Tiles subproject site.
+          </p>
 
       </subsection>
 
