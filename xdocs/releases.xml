@@ -9,9 +9,11 @@
   <body>
     <section name="Release Guidelines">
     <a name="status"/>
-    <p>This document describes the Struts 
+    <p>This document describes the Apache Struts
       <a href="#Releases">release process</a> and our
-      <a href="#Coding">coding conventions</a>. Both stable and development releases are 
+      <a href="#Coding">coding conventions</a>,
+      which are applicable to all subprojects.
+      Both stable and development releases are
       <a href="acquiring.html">available for download</a>.</p>
     </section>
     <section name="Release Guidelines">
@@ -35,7 +37,7 @@
           <li><strong>Distributing</strong> - Checksum, sign, mirror, update download page, announce.</li>
         </ul></li>
         <li>Committers are <b>required</b> to post a release plan before tagging the repository and should wait the traditional 72 hours before proceeding.</li>
-        <li>A checklist format can be used for the <a href="http://wiki.apache.org/struts/StrutsRelease126">release plan</a>, to help step through the process. The plan may be maintained in the repository or on the <a href="http://wiki.apache.org/struts/">Struts wiki</a>.</li>
+        <li>A checklist format can be used for the <a href="http://wiki.apache.org/struts/StrutsReleasePlans">release plan</a>, to help step through the process. The plan may be maintained in the repository or on the <a href="http://wiki.apache.org/struts/">Struts wiki</a>.</li>
         <li>Our dependencies on external JARs (including Commons JARs) should be in line with our own release status. Our nightly build can be dependant on another nightly build. Our beta can be dependant on another beta (or "release candidate"), but should avoid a dependance on a nightly build.
         Our General Availability release may only have dependencies on other GA, final, or stable releases.</li>
         <li>Use your own discretion as to detail needed by the Release Notes. A high-level description of the changes is more important than providing uninterpreted detail. At a minimum, new features and deprecations should be summarized, since these are commonly asked questions. Ideally, the release notes should be maintained continuously for the nightly build so that we they do not need to be assembled at the last minute.</li>
@@ -43,7 +45,7 @@
         <strong>latest production release of J2SE</strong>, to take advantage of all available compiler enhancements.</li>
         <li>If you have multiple J2SE versions configured, run the JUnit and Cactus tests using the same configuration that will be used to build the distribution.</li>
         <li>There is a "release" target in the buildfile that will zip and tar the distribution. Before uploading the distribution, extract the sample web applications and deploy the WARs under each of the "supported" containers (if you can). Play test each application under each container to be sure they operate nominally.</li>
-        <li>The test build can be posted to the internal distribution directory (cvs.apache.org/struts/) and announced to the Struts DEV and PMC lists (only!). Do not announce a test build on any other Apache lists or link to it from an Apache website.</li>
+        <li>The test build can be posted to the internal distribution directory (svn.apache.org/struts/) and announced to the Struts DEV and PMC lists (only!). Do not announce a test build on any other Apache lists or link to it from an Apache website.</li>
         <li>If the test build is voted to Alpha, Beta, or GA status, the release can announced to the User list and linked from the website.</li>
         <li>Any formal release may be submitted for mirroring. All GA releases <b>must</b> be mirrored.</li>
         <li>After announcing a release, remember to update the Acquiring and Announcements pages. If the release is to be mirrored, wait at least 24 hours after submittal before making public announcements (as stated in the <a href="http://apache.org/dev/mirrors.html">Apache Mirroring guidelines</a>).</li>
@@ -55,7 +57,11 @@
       <p>Source code and documentation contributed to the Struts repositories should observe the:</p>
       <ul>
         <li>
-        <a href="http://jakarta.apache.org/site/source.html">Jakarta project guidelines</a>,</li>
+            The
+            "<a href="http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html">
+            Code Conventions for the Java Programming Language</a>",
+            as published by Sun.
+        </li>
         <li>
         <a href="http://www.ambysoft.com/elementsJavaStyle.html">Elements of Java Style</a>, and</li>
         <li>
@@ -92,22 +98,22 @@
         <b>You do not need to change the copyright year unless you change the file.</b>Every source file should include the ASF copyright notice and current Apache License and copyright.</li>
         <li>Provide high-level API compatibility for any changes made within the same major release series (#.x.x). Changes which adversely affect compatibility should be slotted for the next major release series (++#.x.x).</li>
         <li>Our favorite books about programming are 
-        <a href="http://www.amazon.com/exec/obidos/ISBN=0201633612/hitchhikeguidetoA/">Design Patterns</a>,
-        <a href="http://www.amazon.com/exec/obidos/ISBN=0201485672/hitchhikeguidetoA/">Refactoring</a>, and
-        <a href="http://www.amazon.com/exec/obidos/ISBN=0735619670/hitchhikeguidetoA/">Code Complete</a> (2d).</li>
+        <a href="http://www.amazon.com/exec/obidos/ISBN=0201633612/apachesoftwar-20/">Design Patterns</a>,
+        <a href="http://www.amazon.com/exec/obidos/ISBN=0201485672/apachesoftwar-20/">Refactoring</a>, and
+        <a href="http://www.amazon.com/exec/obidos/ISBN=0735619670/apachesoftwar-20/">Code Complete</a> (2d).</li>
         <li>Our favorite book about open source development is the 
-        <a href="http://www.amazon.com/exec/obidos/ISBN=1565927249/hitchhikeguidetoA/">The Cathedral and the Bazaar</a>.</li>
+        <a href="http://www.amazon.com/exec/obidos/ISBN=1565927249/apachesoftwar-20/">The Cathedral and the Bazaar</a>.</li>
         <li>Our favorite science fiction author is 
         <a href="http://www.nitrosyncretic.com/rah/">Robert Heinlein</a>. 
-        <a href="http://www.tuxedo.org/~esr/jargon/html/entry/TANSTAAFL.html">TANSTAAFL</a>.
+        <a href="http://jargon.net/jargonfile/t/TANSTAAFL.html">TANSTAAFL</a>.
         <br />(Except on Friday, when we favor 
-        <a href="http://carbon.cudenver.edu/~mstilman/zaphod/">Douglas Adams</a>. 
-        <a href="http://news.bbc.co.uk/1/hi/uk/1326657.stm">SLATFATF</a>.)</li>
+        <a href="http://news.bbc.co.uk/1/hi/uk/1326657.stm">Douglas Adams</a>).
+        </li>
       </ul>
     </section>
     <section>
       <p class="right">Next: 
-      <a href="http://struts.apache.org/roadmap.html">Roadmap</a></p>
+      <a href="javadoc.html">Javadoc Index</a></p>
     </section>
   </body>
 </document>
