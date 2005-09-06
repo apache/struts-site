@@ -6,190 +6,67 @@
 -->
 
 <properties>
-    <title>The Apache Struts Web Application Framework</title>
+    <title>Apache Struts Project</title>
 </properties>
 
 <body>
 
-<section name="Welcome to Struts">
+<section name="Welcome to Apache Struts!">
 <a name="Welcome"/>
-
     <p>
-    Welcome to Struts!
-    The goal of this project is to provide an open source framework for 
-    building Java web applications.
+        The goal of the Apache Struts project is to encourage application
+        architectures based on the "Model 2" approach, a variation of the
+        classic Model-View-Controller (MVC) design paradigm.
+        Under Model 2,
+        a servlet manages business logic execution,
+        and presentation logic resides mainly in server pages.
     </p>
 
     <p>
-    The core of the Struts framework is a flexible control layer based on
-    <a href="userGuide/preface.html">standard technologies</a> like Java 
-    Servlets, JavaBeans, ResourceBundles, and XML, as well as various
-    <a href="http://jakarta.apache.org/commons/index.html">Jakarta Commons</a> packages.
-    Struts encourages application architectures based on the Model 2 approach,
-    a variation of the classic
-    <a href="http://java.sun.com/blueprints/guidelines/designing_enterprise_applications_2e/web-tier/web-tier5.html">
-    <strong>Model-View-Controller</strong></a> (MVC) design paradigm.
+        The Apache Struts project encourages Model 2 designs in two ways.
+        First, by providing open source frameworks and toolkits
+        that help developers build applications for the web.
+        Second, by providing friendly and honest mailing lists
+        where both newcomers and veterans discuss how to use Struts software
+        in their own Model 2 applications.
     </p>
 
     <p>
-        Struts provides its own <strong>Controller</strong> component and integrates with <a href="userGuide/preface.html#layers">
-        other technologies</a> to provide the Model and the View.
-
-        For the <strong>Model</strong>, Struts can interact with standard data access
-        technologies, like <a href="http://java.sun.com/products/jdbc/">JDBC</a> and
-        <a href="http://java.sun.com/products/ejb/">EJB</a>, as well as most any third-party packages, like
-        Hibernate, iBATIS, or Object Relational Bridge.
-
-        For the <strong>View</strong>, Struts works well with 
-        <a href="http://java.sun.com/products/jsp/">JavaServer Pages</a>, including
-        <a href="./faqs/kickstart.html#jsf">JSTL and JSF</a>, as well as Velocity Templates, XSLT, and
-        other presentation systems.
+        Originally, the Apache Struts software was distributed
+        as one monolithic bundle.
+        Today, the Struts project is comprised of several subprojects.
+        Each subproject has its own website, documentation, and release cycle,
+        and may be downloaded separately.
+        The six original Apache Struts subprojects --
+        Core, Taglibs, Tiles, Extras, Applications, and EL --
+        are also being bundled into a distribution known as "Struts Classic".
     </p>
 
     <p>
-    The Struts framework provides the invisible underpinnings every 
-    professional web application needs to survive.
-    Struts helps you create an extensible development environment for your 
-    application, based on published standards and proven design patterns.
+        Apache Struts is a volunteer project and
+        all support for the framework is provided by unpaid volunteers.
+        This documentation bundle and the mailing lists are the primary ways
+        to learn how to use Struts.
+        The next few pages are devoted to helping you understand
+        what resources are available to you.
+        Since Apache Struts is a volunteer project,
+        and our resources are limited,
+        it is important that we first help you help yourself.
     </p>
 
     <p>
-    Struts is a project of the
-    <a href="http://www.apache.org">The Apache Software Foundation</a>.
-    The official Struts home page is at
-    <a href="http://struts.apache.org/">
-    http://struts.apache.org/</a>.
+        Struts is a project of the
+        <a href="http://www.apache.org">The Apache Software Foundation</a>.
+        The official Apache Struts home page is at
+        <a href="http://struts.apache.org/">
+        http://struts.apache.org/</a>.
     </p>
 
-    <p>
-        Struts is a volunteer project and all support for the framework is provided by unpaid volunteers.
-        This documentation bundle and the mailing lists are the primary ways to learn how to use Struts.
-        The next few pages are devoted to helping you understand what resources are available to you.
-        Since Struts is a volunteer project, and our resources are limited, it is important that we first help you
-        help yourself.
-    </p>
-
-</section>
-    
-    <section name="Struts in a Nutshell">
-    <a name="nutshell"/>
-
-        <p>
-            A <a href="http://java.sun.com/webservices/docs/1.0/tutorial/doc/WebApp.html">web application</a> uses a
-            deployment descriptor to initialize resources like <a href="userGuide/preface.html#servlets">servlets</a>
-            and <a href="userGuide/preface.html#jsp">taglibs</a>.
-            The deployment descriptor is formatted as a <a href="userGuide/preface.html#xml">XML</a> document and named
-            "web.xml".
-            Likewise, Struts uses a configuration file to initialize its own resources.
-            These resources include <a href="userGuide/building_controller.html#action_form_classes">ActionForms</a> to
-            collect input from users,
-            <a href="http://struts.apache.org/userGuide/building_controller.html#actionmapping">
-            ActionMappings</a> to direct input to server-side
-            <a href="http://struts.apache.org/userGuide/building_controller.html#action_classes">Actions</a>,
-            and ActionForwards to select output pages.
-        </p>
-
-        <p>
-            Here's a simple Struts configuration (struts-config.xml) for a login workflow:
-        </p>
-
-    <pre><code><![CDATA[
-    <?xml version="1.0" encoding="ISO-8859-1" ?>
-    <!DOCTYPE struts-config PUBLIC
-          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
-          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
-    <struts-config>
-        <form-beans>
-            <form-bean
-                name="logonForm"
-                type="app.LogonForm"/>
-        </form-beans>
-        <action-mappings>
-            <action
-                path="/Welcome"
-                forward="/pages/Welcome.jsp"/>
-            <action
-                path="/Logon"
-                forward="/pages/Logon.jsp"/>
-            <action
-                path="/LogonSubmit"
-                type="app.LogonAction"
-                name="logonForm"
-                scope="request"
-                validate="true"
-                input="/pages/Logon.jsp">
-                <forward
-                    name="success"
-                    path="/pages/Welcome.jsp"/>
-                <forward
-                    name="failure"
-                    path="/pages/Logon.jsp"/>
-            </action>
-            <action
-                path="/Logoff"
-                type="app.LogoffAction">
-                <forward
-                    name="success"
-                    path="/pages/Logoff.jsp"/>
-            </action>
-        </action-mappings>
-        <message-resources parameter="resources.application"/>
-    </struts-config>
-    ]]></code></pre>
-
-        <p>
-            There are several other resources you can specify in Struts configuration files.
-            You can specify validations for the ActionForms in an XML descriptor, using the
-            <a href="userGuide/dev_validator.html">Struts Validator</a>.
-            Another extension, <a href="userGuide/dev_tiles.html">Tiles</a>, helps you build pages from smaller
-            fragments.
-        </p>
-
-        <p>
-            Struts is an extensible framework.
-            Every class deployed by Struts can be replaced by your own default class.
-            The properties of your default class can be set using the
-            <a href="http://jakarta.apache.org/commons/digester/"> Digester's</a> <code>set-property</code> feature.
-            This is one reason why there are so many <a href="http://struts.sourceforge.net/community/index.html">contributor extensions</a> for
-            Struts.
-            Struts provides a base framework, but you can still write <b>your</b> application <b>your</b> way.
-        </p>
-
-        <p>
-            For more about Struts and its underlying technologies, see the <a href="userGuide/index.html">User
-            Guide</a> and the Developer Guides.
-        </p>
-
-    </section>
-
-    <section name="Is Struts the best choice for every project?">
-
-        <p>
-            No. If you need to write a very simple application, with a handful of pages,
-            then you might consider a "Model 1" solution that uses only server pages.
-        </p>
-
-        <p>
-            But, if you are writing a more complicated application, with dozens of pages,
-            that need to be maintained over time, then Struts can help. For more about
-            whether Model 1 or or MVC/Model 2 is right for you, see
-            <a href="http://www.javaworld.com/javaworld/jw-12-1999/jw-12-ssj-jspmvc.html">Understanding JavaServer
-            Pages Model 2 architecture</a> and
-            <a href="http://www.scioworks.net/devnews/articles/struts_adoption_issues/index.html">
-            Issues in Struts Adoption</a>.
-        </p>
-
-    </section>
-
-<section>
-    <p>
-    <a href="faqs/kickstart.html#jsf">What about JSTL and JavaServer Faces?</a>
-    </p>
 </section>
 
 <section>
    <p class="right">
-   Next: <a href="learning.html">Learning About Struts</a>
+   Next: <a href="volunteers.html">Who We Are</a>
    </p>
 </section>
 
