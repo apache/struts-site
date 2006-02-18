@@ -27,6 +27,93 @@ limitations under the License.
 
     <part>
         <title>Product Line</title>
+
+        <faq id="subprojects">
+            <question>Why are there so many subprojects now?</question>
+            <answer>
+                <p>
+                    Over the years, the Action framework grew to include not only a
+                    controller and a set of taglibs but several other extensions,
+                    like Tiles, EL, Scripting, and Flow. There were also some
+                    optional classes that some people liked, but not everyone needed
+                    (like DispatchAction).
+                </p>
+
+                <p>
+                    Releasing all of this code together has been like hanging wall
+                    paper. We smooth a crease here, and another wrinkle crops up over
+                    there. In order to promote lighter, regular releases, we've
+                    subdivided the monolithic Struts 1.2 distribution into seven
+                    distinct subprojects: Action, EL, Extras, Site, Taglib, and
+                    Tiles.
+                </p>
+
+                <p>
+                    Now, if we want to make a change to a JSP tag, we can release
+                    Taglib without re-releasing everything else. Likewise, if we want
+                    to add a nifty new Action to Extras, we can just release Extras,
+                    without re-releasing everything else.
+                </p>
+
+                <p>
+                    Of course, the next question is: "Which versions of work with the
+                    "best available" release of Action?" To answer that question,
+                    we provide the Struts Action Library, which contains the set of
+                    JARs that work with the "best available" release of Action.
+                </p>
+            </answer>
+        </faq>
+
+        <faq id="dependencies">
+            <question>
+                But what if a new feature in Taglibs depends on a new feature in
+                Action? Won't you still have to release them together?
+            </question>
+            <answer>
+                <p>
+                    Hmmm, almost. This sort of thing already happens with the Commons
+                    components. We might have to release a new version of Commons
+                    Validator and test it against the development build of Struts
+                    Action. The same thing would continue to happen. It's just
+                    instead of
+                    being a Commons component and a Struts component, it's two
+                    Struts components. No big woof.
+                </p>
+                <p>
+                    The difference is that now we get to choose what is released
+                    together. The infrastructure does not make that decision for us.
+                </p>
+            </answer>
+        </faq>
+
+        <faq id="confusing">
+            <question>Won't it be confusing for people to bundle, say, Action 1.3.4
+                with Taglib 1.3.2?</question>
+            <answer>
+                <p>
+                    We also bundle Action 1.3.0 with Commons-Validator 1.2.0.
+                    and Commons-BeanUtils 1.7.0, and several other JARs with their
+                    own version numbers. Same difference.
+                </p>
+                <p>
+                    To make it easy for people to grab the "best available"
+                    combination of JARs, we offer the Struts Action Library.
+                </p>
+            </answer>
+        </faq>
+
+        <faq id="classic">
+            <question>Is Struts Classic another name for the Struts Action Framework?
+            </question>
+            <answer>
+                <p>Struts Classic is a codename for the work we needed to do to
+                    create and release the seven new subprojects we extracted from
+                    Struts 1.2. It is not a product per-se, but shorthand for the
+                    1.3.0 build of the seven projects.
+                </p>
+            </answer>
+        </faq>
+
         <faq id="shale">
             <question>Why are you offering both Struts Shale and Struts Action
                 Framework? Don't they compete for new development?</question>
@@ -110,51 +197,51 @@ limitations under the License.
         </faq>
 
         <faq id="ti">
-        <question>What about Ti? What about WebWork?</question>
-        <answer>
-        <p>
-            <a href="http://wiki.apache.org/struts/StrutsTi">Struts
-                Ti</a>
-            (short for Titanium) is a codename for Struts Action
-            Framework 2.x.
-            In late November 2005, the Ti proposal was amended to
-            include a merger with
-            <a href="http://www.opensymphony.com/webwork/">Open
-                Symphony WebWork</a>
-            .
-            Under this plan, the next stable release of WebWork is
-            being donated to Apache Struts,
-            and the lead WebWork committers are joining the Struts
-            community.
-            The WebWork codebase is being brought into the ASF through
-            the Apache Incubator.
-            Once licensing and related issues are resolved,
-            the codebase will be made part of the Apache Struts
-            framework.
-        </p>
-        <p>
-            WebWork started as a
-            <a href="http://incubator.apache.org/learn/rules-for-revolutionaries.html">
-                Struts Revolution</a>
-            .
-            Over the years, it has evolved into a superb action-based
-            framework that retains many Struts 1.x paradigms.
-        </p>
-        <p>
-            People who have worked with both Struts 1.x and WebWork
-            2.x tend to agree that it is a logical candidate for
-            Struts Action Framework 2.x.
-            If you look the Struts Action 1.x roadmap and the WebWork
-            2.x feature set,
-            you'll see that WebWork has already does most of what we
-            wanted Struts Action to do.
-            If we finished the roadmap ourselves, Struts Action would
-            end up as a WebWork workalike.
-            Rather than reinvent the wheel,
-            Ti has become a proposal to put the WebWork wheel back on
-            the Struts axle.
-        </p>
-        </answer>
+            <question>What about Ti? What about WebWork?</question>
+            <answer>
+                <p>
+                    <a href="http://wiki.apache.org/struts/StrutsTi">Struts
+                        Ti</a>
+                    (short for Titanium) is a codename for Struts Action
+                    Framework 2.x.
+                    In late November 2005, the Ti proposal was amended to
+                    include a merger with
+                    <a href="http://www.opensymphony.com/webwork/">Open
+                        Symphony WebWork</a>
+                    .
+                    Under this plan, the next stable release of WebWork is
+                    being donated to Apache Struts,
+                    and the lead WebWork committers are joining the Struts
+                    community.
+                    The WebWork codebase is being brought into the ASF through
+                    the Apache Incubator.
+                    Once licensing and related issues are resolved,
+                    the codebase will be made part of the Apache Struts
+                    framework.
+                </p>
+                <p>
+                    WebWork started as a
+                    <a href="http://incubator.apache.org/learn/rules-for-revolutionaries.html">
+                        Struts Revolution</a>
+                    .
+                    Over the years, it has evolved into a superb action-based
+                    framework that retains many Struts 1.x paradigms.
+                </p>
+                <p>
+                    People who have worked with both Struts 1.x and WebWork
+                    2.x tend to agree that it is a logical candidate for
+                    Struts Action Framework 2.x.
+                    If you look the Struts Action 1.x roadmap and the WebWork
+                    2.x feature set,
+                    you'll see that WebWork has already does most of what we
+                    wanted Struts Action to do.
+                    If we finished the roadmap ourselves, Struts Action would
+                    end up as a WebWork workalike.
+                    Rather than reinvent the wheel,
+                    Ti has become a proposal to put the WebWork wheel back on
+                    the Struts axle.
+                </p>
+            </answer>
         </faq>
 
         <faq id="xwork">
@@ -164,8 +251,10 @@ limitations under the License.
 
                 <p>
                     For the time being, there is no plan to migrate XWork to
-                    the ASF. Struts Action has always had many dependencies on external
-                    packages.So long as packages like XWork and Sitemesh are doing well
+                    the ASF. Struts Action has always had many dependencies on
+                    external
+                    packages.So long as packages like XWork and Sitemesh are doing
+                    well
                     at OpenSymphony, there is no reason to make further changes.
                 </p>
             </answer>
@@ -236,17 +325,6 @@ limitations under the License.
             </answer>
         </faq>
 
-        <faq id="action">
-            <question>What's the difference between Struts Action Framework
-                and Struts Classic?</question>
-            <answer>
-                <p>For the Struts Action Framework 1.3.x series, we subdivided
-                    the monolithic Struts 1.2.x distribution into several
-                    discrete subprojects. Struts Classic is a codename for the
-                    work we needed to do to create and release the new
-                    subprojects.</p>
-            </answer>
-        </faq>
     </part>
 
     <part>
