@@ -1,0 +1,300 @@
+<?xml version="1.0"?>
+<document url="./struts-faces-1.xml">
+
+  <properties>
+    <title>About Struts and JavaServer Faces [forward-looking]</title>
+  </properties>
+
+  <body>
+
+<section name="background" href="Background">
+<p>
+[18-Sep-2002] JavaServer Faces (JSF) is being developed as JSR 127 under the Java
+Community Process, with the goal of creating a standard framework for user
+interface components to be used in web applications.  Included will be the
+following basic features:
+</p>
+
+<ul>
+<li>
+  User interface component model
+</li>
+
+<li>
+  Event handling model
+</li>
+
+<li>
+  Validation framework
+</li>
+
+<li>
+  Flexible rendering model (plugin support for rendering different
+  kinds of HTML, or different markup languages and technologies)
+</li>
+
+<li>
+  A standard RenderKit (and associated Renderers) for generating basic
+  HTML/4.01 markup.  This library is primarily for making JSF useful
+  out of the box, and allow apps to be portable across JSF
+  implementations.  However, we expect a lot of innovation in this
+  area among competing JSF implementations.
+</li>
+</ul>
+
+<p>
+All of the above functionality is available via standard Java APIs, and is
+thus not tied to JavaServer Pages (JSP).  However, because a large
+majority of JSF users will also be using JSP, an additional set of
+requirements is included in the JSF specification, including:
+</p>
+
+<ul>
+<li>
+  A standard tag library for generic things that are independent of
+  the specific RenderKit in use (such as adding a validator to a
+  component).
+</li>
+
+<li>
+  A standard tag library for the basic HTML RenderKit, with a tag for
+  each combination of a component type and a method of rendering that
+  component type.  An example will make this clearer -- consider the
+  UISelectOne component, which represents a list of options, and allows
+  only a single option from the list to be selected.  Such a component
+  can be rendered in three different ways (in the basic HTML RenderKit),
+  each with a different Renderer and a corresponding custom tag:<br/>
+
+  &lt;h:selectone_listbox> - Display a list of all the possible
+  options (expanding the box to include all of them so that no scrollbar
+  is required).<br/>
+
+  &lt;h:selectone_menu> -  Display as a combo box (the traditional HTML
+  &lt;select> element with size="1").<br/>
+
+  &lt;h:selectone_radio> - Display as a set of radio buttons and
+  corresponding labels.
+</li>
+</ul>
+
+<p>
+Note that the application developer doesn't know or care which mechanism
+was used to display this component -- that's up to the page author, who
+will pick the desired representation by virtue of which tag he or she
+selects (at the Java API level, you make this choice by setting the
+"rendererType" property on the component instance).  This is one of the
+many advances that JSF provides over Struts tags, where there is one and
+only one way to render each individual element.
+</p>
+
+<p>
+There are also provisions for creating more complex components like grids,
+tree controls, and the like -- a common theme you will see is "compose
+complex things out of little things" -- that is accomplished in JSP by
+nesting component tags inside each other, just like you nest HTML &lt;input>
+elements inside a &lt;form> element.
+</p>
+
+<p>
+For more information about JavaServer Faces, and an early access draft of
+the specification (and an early access version of the RI that corresponds
+to an even earlier draft of the spec), you'll want to bookmark:
+</p>
+
+<p>
+  <a href="http://java.sun.com/j2ee/javaserverfaces/">http://java.sun.com/j2ee/javaserverfaces/</a>
+</p>
+
+<p>
+In addition, there is a forum on the Java Developer Connection (free
+registration required) focused on JavaServer Faces, so please ask your
+general Faces-related questions there instead of here.  Here's a direct
+link to the forum page:
+</p>
+
+<p>
+  <a href="http://java.sun.com/j2ee/javaserverfaces/">http://forums.java.sun.com/forum.jsp?forum=427</a>
+</p>
+
+<p>
+Note that JavaServer Faces depends on Servlet 2.3 and JSP 1.2 (i.e. J2EE
+1.3 containers).
+</p>
+</section>
+
+<section href="struts" name="How does this affect Struts?">
+<p>
+At first glance, the low level components sound a lot like the struts-html
+tag library that Struts users know and love.  Indeed, there is a very
+substantial amount of overlap.  So, what's going to happen?
+</p>
+
+<p>
+In my JavaOne BOF on Struts (March, 2002), I made the statement that
+Struts would have a very clean integration with JSF, so that you can use
+JSF components in your user interface, but continue to use the controller,
+Actions, and associated business logic.  Indeed, I stated that it will be
+possible to transition your application from using Struts HTML tags to
+using Faces component tags, one page at a time -- in most cases, with zero
+changes to the business logic or Action classes and minimal changes to the
+&lt;forward> elements in your struts-config.xml configuration file.
+</p>
+
+<p>
+Along with developing JavaServer Faces itself (I am the specification lead
+for JSR-127), I have been working on just such an integration library for
+Struts (1.1 only; sorry in advance to 1.0 users).  While not completed
+yet, it is clear that the goals stated in the previous paragraph are
+achievable with the current evolving design of JSF.  While things can
+always change in the future, many JSR-127 expert group members consider
+high quality integration with Struts to be an important success factor for
+JavaServer Faces to be accepted.  Therefore, I do not expect that JSF will
+evolve in ways that make this kind of integration difficult or impossible.
+</p>
+
+<p>
+From the developer's perspective, you will need to do only the following
+to start using JSF components in your pages:
+</p>
+
+<ul>
+<li>
+  Add a new struts-faces.jar file, and the JAR files for an
+  appropriate JSF implementation, to your /WEB-INF/lib directory.
+</li>
+
+<li>
+  Note that JSF and the JSP Standard Tag Library (JSTL) interoperate
+  very nicely, so you will also be able to use JSTL tags in your
+  new pages if you wish to.
+</li>
+
+<li>
+  Add a couple of elements to your web.xml deployment descriptor,
+  corresponding to the requirements outlined in Chapter 9 of the
+  JSF specification.
+</li>
+
+<li>
+  Transition one page at a time to use the new tag libraries,
+  making an appropriate modification to the &lt;forward> elements
+  for your pages (the URL needs to change to meet Faces requirements).
+</li>
+</ul>
+
+<p>
+The integration library will be available as a separately packaged
+download that runs with Struts 1.1, and will include a converted copy of
+the canonical struts-example web application so that you can see exactly
+what had to change in order to use Struts with JSF.
+</p>
+
+<p>
+Besides the integration classes themselves (primarily an implementation of
+the JSF ApplicationHandler API), the library will include some
+Struts-flavored components and renderers that provide functionality
+similar to that provided by the existing struts-html tags, when this is
+not provided by the standard JSF components.  For example, there will be a
+Struts version of the UIForm component that accepts an "action" attribute
+that looks up the corresponding action mapping, and creates the form bean
+as needed, just like the &lt;html:form> tag does today.
+</p>
+
+<p>
+The good news -- development of this integration library is well under
+way.
+</p>
+
+<p>
+The bad news -- you can't see it quite yet.  This is primarily because it
+relies on changes to JSF that have occurred since the early access release
+of the RI was published, so you wouldn't be able to use it anyway.
+However, as soon as it is feasible, this library will be added to the
+"contrib" folder of Struts, with the sources (and downloadable
+distributions) available under the usual Apache license terms.  (The
+source code will also give you a head start at creating your own JSF
+components, too).
+</p>
+</section>
+
+<section href="choices" name="So what user interface technology should i choose?">
+<p>
+Everyone's functionality and schedule requirements are different.
+However, the following points summarize my basic recommendations and
+thoughts about the future:
+</p>
+
+<ul>
+<li>If you have existing Struts-based applications that use the existing
+  HTML tag library, feel free to continue to use them if you wish.
+  Struts 1.1 offers full support for this existing functionality.
+</li>
+
+<li>
+  Once the integration library becomes available, you should do some
+  experimenting and prototyping to determine the effort required to
+  migrate your apps to the new JSF component architecture (I'm betting
+  that the extra functionality you gain by doing this will be well
+  worth the effort in many cases).  As described above, the actual
+  migration can be done piecemeal -- it doesn't need to happen all
+  at once.
+</li>
+
+<li>
+  For applications now (or about to be) under development that have
+  relatively short term schedules (i.e. the next few months), you
+  should probably stick with the existing HTML library.
+</li>
+
+<li>
+  For applications with a longer lead time, seriously consider waiting
+  for the ability to use JSF components instead of the Struts HTML
+  tag library.  Doing this will let you leverage not only the standard
+  HTML components that come with JSF out of the box, but also the rich
+  libraries of JSF components likely to be created by third parties in
+  the future (including Struts developers).
+</li>
+</ul>
+
+<p>
+For Struts after 1.1 is released, the developers haven't yet had formal
+conversations (which will happen on STRUTS-DEV) about what a future Struts
+will look like.  However, I'm going to continue to advocate a long term
+migration to using standards like JSF and JSTL when they are available,
+and de-emphasize the further development of the Struts proprietary tag
+libraries.
+</p>
+
+<p>
+The Struts tag libraries have had a tremendous positive impact on the
+development of the standard Java APIs for user interfaces.  I joked with
+the JSTL spec lead that Struts users would *never* accept JSTL without an
+expression language at least as powerful as the Struts one; and there is
+more than a little truth to that statement :-).  The same thing is
+happening now for the HTML tags -- and it's time for us to start migrating
+to the standards, which gives us the time to focus on extending Struts in
+other directions in the future.
+</p>
+
+<p>
+Comments?  Questions?  If it's about Struts, or Struts/JSF integration,
+feel free to ask about these issues on STRUTS-DEV or STRUTS-USER (although
+I'm going to be relatively incommunicado over the next week; I'll be in
+Yokohama at JavaOne Japan and only intermittently connected to email).
+Questions about JSF itself should be addressed to the JSF forum at the URL
+listed above.
+</p>
+
+<p>
+And thanks to all of you for your continued support and use of Struts --
+the community that has developed around this framework continues to amaze
+and humble me.
+</p>
+
+<p>
+Craig McClanahan
+</p>
+</section>
+</body>
+</document>
+

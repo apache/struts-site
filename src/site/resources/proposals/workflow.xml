@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<document url="./proposal-workflow.xml">
+
+  <properties>
+    <title>Proposal - Workflow Management System</title>
+  </properties>
+
+  <body>
+
+    <section name="Recent Developments">
+
+        <p>
+            Work on this initiative has stalled.
+            It is recommended that interested parties look to the
+            <a href="http://jakarta.apache.org/commons/jelly/index.html">Commons Jelly</a> product.
+            A way to persist the workflow state between sessions is needed, but Jelly otherwise fills the needs
+            identified by this proosal.
+        </p>
+
+    </section>
+
+  <section name="Background and Goals">
+
+  <p>Struts 1.0 has become an increasingly popular platform for constructing
+  web applications based on a Model-View-Controller type design pattern (also
+  known as the <em>Front Controller</em> pattern.  It has achieved this
+  popularity for many reasons, but key among them have been:</p>
+  <ul>
+  <li>The simplicity of the basic organizational principles (once you
+      understand them)</li>
+  <li>The principle of <em>logical naming</em> to assist in isolating
+      the view layer and the model layer, so that changes in one do not
+      have to impact the other</li>
+  <li>A rich set of tools to assist in creating pages with dynamic content
+      exposed by the model layer through JavaBeans</li>
+  </ul>
+
+  <p>One consequence of the original Struts design, however, is that the
+  framework does not provide much assistance in organizing business
+  transactions that require more than one interaction with the user (i.e.
+  they span more than one JSP page and/or Action).  Applications are left
+  to manage navigation issues, as well as deal with ActionForms whose
+  logical contents crosses page boundaries.</p>
+
+  <p>The original Struts design materially assists page designers in creating
+  dynamic pages, while protecting them from having to be very concerned with
+  the business logic -- other than the names of the JavaBeans used to
+  communicate model layer data to the presentation layer.  However, Struts 1.0
+  still requires a Java developer to be involved on the business logic side
+  (even if all of the functional logic is already available in Java classes)
+  in order to create the Action classes.</p>
+
+  <p>The purpose of this <em>Workflow Management System</em> proposal is to
+     address some of these consequences.  In particular, it intends to address
+     the following set of goals:</p>
+  <ul>
+  <li>Create a means where multiple-user-interaction business processes can be
+      configured (scripted), including support for conditional processing
+      and branching.</li>
+  <li>Support scripting elements that lets business application experts,
+      who are not necessarily Java developers, can integrate pre-existing
+      business functionality that is available as public methods on
+      arbitrary Java classes.</li>
+  <li>Assist page designers in creating the user interface elements that
+      correspond to navigation links within, or between, work flows.</li>
+  </ul>
+
+  </section>
+
+
+  <section name="Use Cases and Examples">
+
+    <p>To give a flavor of what scripted workflow activities might look like,
+    it is useful to consider some possible use case scenarios.  The
+    syntax that is shown for the examples should be considered as
+    illustrative of what should be possible, rather than normative.
+    No rigorous attempt has been made to guarantee consistency
+    between (or even within) these examples.</p>
+
+    <subsection name="Application Logon">
+
+      <p>The example application included with Struts (like many other
+      web applications) uses application-managed security, including
+      a logon form.  Consider that a business logic bean might be available
+      (in some scope under key <code>authenticator</code>)
+      that knows how to authenticate users given a username and password.
+      It could be utilized to script application logon like this:</p>
+
+<pre>
+&lt;activity id="Application Logon"&gt;
+
+  &lt;-- Display the logon form (web framework independent) --&gt;
+  &lt;web:forward id="display" page="/logon.jsp"/&gt;
+
+  &lt;-- Authenticate the username and password, returning a Principal
+      if accepted, or null if not --&gt;
+  &lt;web:set  name="username" value="$parameter:username"/&gt;
+  &lt;web:set  name="password" value="$parameter:password"/&gt;
+  &lt;core:invoke bean="authenticator" method="authenticate"&gt;
+    &lt;core:param type="java.lang.String" value="$username"/&gt;
+    &lt;core:param type="java.lang.String" value="$password"/&gt;
+    &lt;core:return name="principal"/&gt;
+  &lt;/core:invoke&gt;
+
+  &lt;-- If no Principal was returned, branch back to the logon form --&gt;
+  &lt;core:if expr="$principal == null"&gt;
+    &lt;web:set name="error" value="$messages.lookup('invalid.logon')"/&gt;
+    &lt;core:branch idref="display"/&gt;
+  &lt;/core:if&gt;
+
+  &lt;-- Exit to the "Main Menu" workflow --&gt;
+  &lt;core:goto name="Main Menu"/&gt;
+
+&lt;/activity&gt;
+</pre>
+
+    </subsection>
+
+
+    <subsection name="Simple Multi-Page Wizard">
+
+      <p>Many complex data entry operations can be simplified (from the
+      user's point of view) by dividing them up into a series of simple
+      dialog pages that ask a few (often one) question that leads ultimately
+      to a completed set of information required to process a request.
+      In many cases, each page of the interaction will have navigation
+      controls so that the user can short cut to immediate execution,
+      or cancel the entire interaction.  Such an interaction might be
+      modelled like this:</p>
+
+<pre>
+&lt;activity id="Simple Wizard Application"&gt;
+
+  &lt;!-- Display the first page of the iteration --&gt;
+  &lt;!-- (Using Struts-specific logical-to-physical mapping) --&gt;
+  &lt;struts:forward id="page1" name="Simple Wizard Page 1"&gt;
+
+  &lt;!-- Process navigation input from the first page --&gt;
+  &lt;!-- (Can do something much like this framework-independently too) --&gt;
+  &lt;struts:navigate&gt;
+    &lt;struts:branch control="CANCEL" idref="cancel"/&gt;
+    &lt;struts:branch control="FINISH" idref="finish"/&gt;
+    &lt;struts:branch control="NEXT"   idref="page2"/&gt;
+  &lt;/struts:navigate&gt;
+
+  &lt;!-- Display the second page of the iteration --&gt;
+  &lt;struts:forward id="page2" name="Simple Wizard Page 2"&gt;
+
+  &lt;!-- Process navigation input from the second page --&gt;
+  &lt;struts:navigate&gt;
+    &lt;struts:branch control="CANCEL" idref="cancel"/&gt;
+    &lt;struts:branch control="FINISH" idref="finish"/&gt;
+    &lt;struts:branch control="NEXT"   idref="page3"/&gt;
+    &lt;struts:branch control="PREV"   idref="page1"/&gt;
+  &lt;/struts:navigate&gt;
+
+  &lt;!-- Display the third page of the iteration --&gt;
+  &lt;struts:forward id="page3" name="Simple Wizard Page 3"&gt;
+
+  &lt;!-- Process navigation input from the third page --&gt;
+  &lt;struts:navigate&gt;
+    &lt;struts:branch control="CANCEL" idref="cancel"/&gt;
+    &lt;struts:branch control="FINISH" idref="finish"/&gt;
+    &lt;struts:branch control="PREV"   idref="page2"/&gt;
+  &lt;/struts:navigate&gt;
+
+  &lt;!-- Process the FINISH navigation control as appropriate --&gt;
+  &lt;xxx:yyy id="finish" .../&gt;
+  &lt;core:goto name="Main Menu"/&gt;
+
+  &lt;!-- Process the CANCEL navigation control as appropriate --&gt;
+  &lt;xxx:yyy id="cancel" .../&gt;
+  &lt;core:goto name="Main Menu"/&gt;
+
+&lt;/activity&gt;
+</pre>
+
+
+      <p>Not illustrated above, but also interesting to explore, would be
+      the situation where choices on one page affect whether some pages
+      in the overall flow might be skipped.</p>
+
+    </subsection>
+
+
+  </section>
+
+
+  <section name="User Visible Features">
+
+
+    <p>Workflow system capabilities will be exposed to applications through
+    Java APIs that represent both the static description of particular
+    activities and the dynamic current state of a computation.  Object
+    factory and pluggable implementation patterns shall be used where
+    appropriate to maximize the generality and flexibility of the system.</p>
+
+
+    <subsection name="Workflow Management System Implementation Objects">
+
+      <p>The following classes represent the primary components of the
+      workflow management system:</p>
+
+      <p><strong>Registry</strong> - Collection into which multiple
+      <em>Process</em> and <em>Activity</em> static descriptions can be
+      stored and retrieved by String-valued keys.</p>
+
+      <p><strong>Process</strong> - The static description of a tree of
+      business activities that are executed in a nested fashion, often by
+      separate individuals (or application systems).</p>
+
+      <p><strong>Activity</strong> - The static description of a sequence
+      of Steps that are generally executed by a single individual (or
+      application system), within a reasonably short period of time.</p>
+
+      <p><strong>Step</strong> - The static description of an individual
+      task to be performed as a discrete, indivisible, unit.  Steps can
+      also be nested inside other steps, to provide for looping and
+      conditional processing.  A rich set of built-in Step implementations
+      shall be provided (including powerful capabilities such as the
+      execution of an arbitrary method on an arbitrary Java object), and
+      mechanisms to extend the set of supported Step implementations
+      allows arbitrary extensibility.</p>
+
+      <p><strong>Context</strong> - The dynamic state of a computation
+      through an <em>Activity</em> (or a set of nested <em>Activities</em>),
+      including provision of storage space for JavaBeans produced and
+      consumed by other Steps.  Contexts keep track of the current Step
+      being executed, so that activity processing can be suspended and
+      resumed later.</p>
+
+      <p><strong>Scope</strong> - A <code>Map</code> into which
+      arbitrary Java objects can stored and retrieved by String-valued keys.
+      Context support a number of individual Scopes, each of which can be
+      plugged in from application logic, to provide integration into
+      existing application functionality.  For example, in a web application
+      implementation, Scopes will generally be mapped directly to request
+      attributes, session attributes, and servlet context attributes as
+      provided by the Servlet API.</p>
+
+    </subsection>
+
+
+    <subsection name="Built-In Steps">
+
+      <p>A rich variety of built-in <em>Step</em> implementations (and
+      corresponding XML elements in specified namespaces) will be provided
+      as part of the basic workflow engine, and as part of the associated
+      Struts integration of this engine.</p>
+
+      <p><strong>Bean Interaction</strong> - The ability to get and set
+      JavaBeans in arbitrary Scopes (mapped via the Context to real collections
+      of objects).</p>
+
+      <p><strong>Control Flow</strong> - Conditionals and looping, where
+      control flow Steps can contain nested sets of Steps to an arbitrary
+      degree.</p>
+
+      <p><strong>Method Execution</strong> - Execute arbitrary public methods
+      of beans stored in some Scope, passing specified arguments (expressions
+      or bean references) and returning the method's result (if any) to a
+      named bean in some Scope.  To maximize usefulness of the workflow
+      system in composing applications, <strong>no</strong> restrictions
+      should be placed on the object types these Steps can interact with.</p>
+
+      <p><strong>Activity Management</strong> - GOTO a named Activity
+      (exiting the current one), CALL a named Activity (resuming the current
+      one when the called Activity returns, RETURN from a called Activity,
+      EXIT the Activity system.</p>
+
+      <p><strong>User Interaction</strong> - Suspend workflow execution to
+      interact with the user in some application specific way.  For example,
+      a web application would display a page and wait for input to be
+      submitted before resuming the workflow.</p>
+
+      <p><strong>Specialized Processing</strong> - Prebuilt Steps for common
+      processing functions such as XSLT transformations, performing
+      arbitrary SQL queries, sending mail, and so on.</p>
+
+    </subsection>
+
+
+  </section>
+
+
+  <section name="Implementation Notes">
+
+  <p>The implementation of this proposal will be divided into three major
+  development layers:</p>
+  <ul>
+  <li>Core workflow management system capabilities and built in Step
+      implementations that are independent of application environment.
+      [Code in jakarta-commons]</li>
+  <li>Specialized implementation of workflow management system components
+      that integrate with the Servlet API in a manner that is independent
+      of any specific application framework.  [Code in jakarta-commons]</li>
+  <li>Specialized implementation of workflow management system components
+      that is tightly integrated with Struts's internal architecture and
+      custom tag libraries.  [Code in jakarta-struts]</li>
+  </ul>
+
+  <p>The workflow management system will support the general concept of
+  <em>Scopes</em> in which beans can be stashed, with pluggable
+  implementations for integration into different working environments.
+  None of the APIs in the workflow engine itself will have any reference
+  to the web layer (i.e. no imports of <code>javax.servlet.*</code>).</p>
+
+  <p>Suitable object factory and pluggability APIs will be included
+  to guarantee extensibility of the basic framework.
+  </p>
+
+  <p>Scripting of business transactions will be codified in XML documents
+  that conform to an appropriate DTD and/or schema.  The XML technology
+  that is used will facilitate extensible definitions of <em>Steps</em>
+  and other components, in both the XML description of these components and
+  in the set of Java objects that implements them.
+  </p>
+
+    
+  <p>When designing the detailed syntax of the XML representation
+  of Steps, consider whether it is feasible for advanced development
+  tools to "compile" activities into individual classes to optimize
+  overall performance.
+  </p>
+  
+  <p>When designing the detailed syntax of the XML representation
+  of Steps, consideration should be given to emulating the syntax
+  of other XML applications that are similar in spirit or detail
+  to the concepts of scripting a business transaction.  Useful
+  models to consider include:
+  </p>
+    <ul>
+    <li><a href="http://www.w3.org/TR/xslt">XSL Transformations (XSLT)</a>
+        - Includes control flow mechanisms that are becoming widely
+        known and understood, which could be mimicked.</li>
+    <li><a href="http://jakarta.apache.org/taglibs/jsptl-doc/intro.html">
+        JSP Standard Tag Library (Early Access)</a> - The design goals for
+        many of the JSP custom tags in this library (produced by the
+        JSR-052 expert group under the Java Community Process) are similar
+        enough to provide a useful model for conditionals, looping, and
+        interaction with objects in arbitrary scopes.</li>
+    </ul>
+
+    <p>To maximize the usefulness of built-in actions, an expression
+    language that knows how to manipulate objects in the Scopes associated
+    with the current Context will need to be supported.  Useful models to
+    consider include:</p>
+    <ul>
+    <li><a href="http://www.w3.org/TR/xpath">XML Path Language (XPath)</a>
+        - Will be familiar to XML-oriented application developers because
+        it is used throughout the suite of XML specifications.</li>
+    <li>JavaScript like expression languages - Will be familiar to page
+        developers (as well as Struts developers familiar with the
+        nested and indexed property accessor syntax of many Struts tags).</li>
+    </ul>
+
+    <p>From the workflow script developer's point of view, XML namespaces
+    will be used to introduce extended sets of Step implementations.  There
+    will need to be mechanisms to map a particular namespace to a set of
+    legal XML elements (within that namespace) and corresponding Java
+    classes that provide the functionality for those Steps.</p>
+
+  <p>The web layer integration will include a mechanism to map scopes (from
+  the workflow perspective) into the standard <em>request</em>,
+  <em>session</em>, and <em>application</em> scopes of the web layer.
+  Thus, workflow scripts will be able to place beans in appropriate
+  scopes such that JSP pages can directly pull that data into the presentation,
+  much as Struts Actions (and the business logic classes that are called by
+  those Actions) can place beans there in a Struts 1.0 based application.
+  Utilizing these capabilities, application developers will be able to
+  "script" the business logic requirements of many applications, by
+  combining functional logic already available as methods on business
+  logic beans, without having to involve Java programmers to create new
+  Actions (or otherwise synthesize business logic out of the constituent
+  pieces).</p>
+
+  <p>Components in the web layer integration may import APIs from the
+  Servlet and JSP specifications, but not from any application specific
+  framework.  Framework-specific integration will occur on top of the
+  generic web layer integration.</p>
+
+  <p>In addition, the Struts integration will include a small custom tag
+  library will be included, so that page
+  developers can easily create navigational links and controls.  Examples
+  of such controls include links to the "next", "previous", and "finish"
+  pages of a wizard dialog, a "cancel" button to exit a workflow early, or
+  an "invoke" button to invoke a new workflow as a subroutine, and then
+  return to the current step of the original workflow.  Utilizing these
+  capabilities, page developers can create the individual visible pieces
+  of a work flow dialog, without having to be involved in navigational
+  complexities.</p>
+
+  </section>
+
+
+  </body>
+
+</document>
