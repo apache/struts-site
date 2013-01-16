@@ -30,10 +30,10 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.apache.struts</groupId>
     <artifactId>struts-site</artifactId>
     <version>1</version>
     <packaging>pom</packaging>
+
     <name>Struts Site</name>
     <url>http://struts.apache.org/index.html</url>
 
@@ -64,6 +64,10 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <properties>
+        <site.output>${project.build.directory}/site</site.output>
+    </properties>
 
     <distributionManagement>
         <site>
@@ -133,9 +137,23 @@
                 </executions>
             </plugin>
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <configuration>
+                        <siteDirectory>${basedir}/content</siteDirectory>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
     </build>
 
     <reporting>
+        <outputDirectory>${site.output}</outputDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
