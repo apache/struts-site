@@ -212,6 +212,52 @@
 
     </build>
 
+    <profiles>
+        <profile>
+            <id>update-draft-docs</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.2</version>
+                        <executions>
+                            <execution>
+                                <id>cwiki-docs</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <classpathScope>runtime</classpathScope>
+                                    <includeProjectDependencies>true</includeProjectDependencies>
+                                    <mainClass>org.apache.cxf.cwiki.SiteExporter</mainClass>
+                                    <arguments>
+                                        <argument>-d</argument>
+                                        <argument>${project.build.directory}/cwiki/WW</argument>
+                                        <argument>-password</argument>
+                                        <argument>${confluence.password}</argument>
+                                        <argument>-user</argument>
+                                        <argument>${confluence.user}</argument>
+                                        <argument>${basedir}/src/etc/docs.cfg</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.cxf.site-export</groupId>
+                    <artifactId>cxf-site-export</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
     <reporting>
         <outputDirectory>${site.output}</outputDirectory>
         <plugins>
