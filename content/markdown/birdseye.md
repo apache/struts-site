@@ -56,4 +56,33 @@ is the best choice for teams who value elegant solutions to difficult problems.
 
 ## Why should you use Apache Struts?
 
-TODO
+Apache Struts is a modern, maintained and full-featured web framework. It has been there
+for years and give the huge user base it is unlikely it will go away anytime soon
+in the future. Not only that we have dedicated users and developers on the project.
+Apache Struts is licensed to the Apache License 2.0 and this will not change. We maintain
+a clean IP and you are "safe" to use the project. Sometimes you are not "safe" to use
+a project when a company controls the SCM. Access to Source Code doesn't mean it is free.
+With Apache Struts, you are not only free to "do what you want with it", you can even
+contribute (which is not always the case). And best of it: you can become a part of the
+core team too.
+
+It is usually very easy to integrate other technologies with Apache Struts. If you are
+using an ORM like Apache Cayenne, Hibernate or JDBC you will not have any restrictions.
+Apache Struts is not even tied too much to a frontend technology. In old days it was
+JSP, then came Velocity and Freemarker. Nowadays you might build your web application
+with just static HTML and AngularJS. Or you want to use Sitemesh or Tiles. This all
+is no problem due to Struts elegant and easy to use extension mechanisms.
+
+Unlike other, component oriented frameworks, we do not aim to hide the stateless nature
+of the web. We think it is perfectly acceptable to build upon a Request/Response cycle.
+We also think the MVC pattern is not so bad, just because it is old. In fact, we believe
+the Apache Struts architecture is clean and easy to understand.
+
+Of course, if you wish to build components on the server side which render on the front end
+side, you are most likely wrong with Struts. This is a different approach which promises
+to reduce the amount of HTML/JavaScript knowledge needed and to create reusable components for
+the view layer. Projects like <a href="http://wicket.apache.org">Wicket</a> and
+<a href="http://tapestry.apache.org">Tapestry</a> serve this purpose very well. As with every
+framework you need to decide if it makes sense for you to build components or if
+you are better with the Struts-approach.
+
