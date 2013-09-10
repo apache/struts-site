@@ -29,7 +29,7 @@ This page reflects some knowledge from the
     # git config user.name <Your Name>
     # git config user.email <Your Email>
 
-    git svn init --prefix=origin/ --tags=tags --trunk=trunk --branches=branches https://svn.apache.org/repos/asf/struts/struts2
+    git svn init -s https://svn.apache.org/repos/asf/struts/struts2/
     git svn rebase
 
 
