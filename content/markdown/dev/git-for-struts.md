@@ -33,11 +33,16 @@ This page reflects some knowledge from the
     git svn rebase
 
 
-You might need to accept SSL certificates from Apache. Please check the fingerprint of the servers.
-If in doubt, ask at Struts mailing list if somebody can confirm the server. It also might
-happen that the last command quits with:
+You might need to accept SSL certificates from Apache. Please check the 
+[fingerprint of the servers](http://www.apache.org/dev/machines).
+If in doubt, ask at Struts mailing list or Apache infra. 
+
+If you are frequently asked on the certificates or if you get that error:
 
     Unable to determine upstream SVN information from working tree history
+
+...then you should make sure you are using SVN version 1.7 (not 1.8, not 1.6).
+Please also consult the [troubleshooting page](troubleshooting-git-svn.html).
 
 You can go on for now and ignore this message.
 After this, you'll need to fetch the old history.
