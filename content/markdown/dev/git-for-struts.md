@@ -29,7 +29,7 @@ This page reflects some knowledge from the
     # git config user.name <Your Name>
     # git config user.email <Your Email>
 
-    git svn init -s https://svn.apache.org/repos/asf/struts/struts2/
+    git svn init --prefix=originsvn/ -s https://svn.apache.org/repos/asf/struts/struts2/
     git svn rebase
 
 
@@ -55,6 +55,19 @@ When you change something in the code, you can commit it with:
     git svn dcommit
 
 This will commit all your git commits to svn. One git commit == 1 svn revision. Consider rebase.
+Please don't forget, there is the --dry-run option, which tests the commit only.
+
+It will output things like:
+
+    diff-tree 56bfadfc12a8129e5ea6668714fae34704242636~1 56bfadfc12a8129e5ea6668714fae34704242636
+
+You can watch the modification with git again:
+
+    git diff-tree 56bfadfc12a8129e5ea6668714fae34704242636~1 56bfadfc12a8129e5ea6668714fae34704242636
+
+Which will output for example:
+
+    :000000 100644 0000000000000000000000000000000000000000 e2b24b623fc1cf2d0316a48bb1d69a9eeb7e0719 A  .gitignore
 
 
 ## Working with SVN branches
@@ -92,12 +105,13 @@ If you are sending a pull request, please send it to the Apache Struts teams rep
 the official mirror. We cannot accept and close pull requests there which is the reason
 we have an own account. You can find it here:
 
-    [https://github.com/apachestruts/struts2](https://github.com/apachestruts/struts2)
+[https://github.com/apachestruts/struts2](https://github.com/apachestruts/struts2)
+
+Please send the pull request to "trunk".
 
 It is of course possible to add us as upstream repo:
 
-    git remote add upstream https://github.com/apachestruts/struts2
-
+    git remote add upstream git@github.com:apachestruts/struts2
 
 ## Working with remote branches from GitHub
 
@@ -116,6 +130,14 @@ When merge conflicts happen, these can be resolved using:
 After the merge, you need to commit the changes to svn with:
 
     git svn dcommit
+
+## What, if the svn commit goes wrong
+
+When git svn messed up the repository, you just can revert the SVN revision. Reverting in SVN 
+is basically merging a previous commit. Like:
+
+    svn merge -r1521783:1521602 .
+    svn commit -m 'reverted wrong git svn dcommit' .
 
 ## Further reading
 
