@@ -1,12 +1,14 @@
-# Volunteers
+<head>
+<title>Volunteers</title>
+</head>
 
-## Volunteers
+# Volunteers
 
 The project consists of a diverse group of volunteers who share common values regarding collaborative,
 community-based open source development. If you are interested in some statistics, you can find
 some [here](http://www.apache.org/~vgritsenko/stats/projects/struts)
 
-### Project Management Committee Members
+## Project Management Committee Members
 
 Committee members are listed in the chronological order, according to the date each person become a committer
 or committee member.
@@ -29,7 +31,7 @@ or committee member.
 - Johannes Geppert (jogep at apache.org)
 - Christian Grobmeier (grobmeier at apache.org)
 
-### Committers
+## Committers
 
 Other committers are listed in the chronological order, according to the date each person became a committer.
 
@@ -45,7 +47,7 @@ Other committers are listed in the chronological order, according to the date ea
 - Bruce A. Phillips (bphillips at apache.org)
 - Greg Huber (ghuber at apache.org)
 
-### Emeritus Volunteers
+## Emeritus Volunteers
 
 Emeritus volunteers are no longer active in the project. An emeritus volunteer can become active again upon request.
 ("Merit never expires.")
