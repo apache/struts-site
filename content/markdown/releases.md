@@ -1,12 +1,12 @@
-# Release Guidelines
+<head><title>Release Guidelines</title></head>
 
-## Release Guidelines
+# Release Guidelines
 
 This document describes the Apache Struts release process and our [coding conventions](#Coding),
 which are applicable to all subprojects. Both stable and development releases are
 [available for download.](downloads.html)
 
-## Release Process
+# Release Process
 
 A [point release](http://commons.apache.org/releases/versioning.html) should be made before and after
 any product change that is not a "fully-compatible change" (see link). This includes moving a dependency from
@@ -60,13 +60,13 @@ Additional remarks:
 - If a serious flaw if found in a test build or release, it may be withdrawn by a majority vote of the PMC and
   removed from ASF distribution channels.
 
-## Coding Conventions and Guidelines
+# Coding Conventions and Guidelines
 
 Source code and documentation contributed to the Struts repositories should observe the:
 - The ["Code Conventions for the Java Programming Language"](http://www.oracle.com/technetwork/java/codeconvtoc-136057.html),
   as published by Oracle.
 
-### Clarifications
+# Clarifications
 - First, "Observe the style of the original". Resist the temptation to make stylistic changes for their own
   sake. But, if you must reformat code, commit style changes separately from code changes. Either change
   the style, commit, and then change the code, or vice-versa.

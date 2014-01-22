@@ -1,6 +1,4 @@
-<head>
-<title>Volunteers</title>
-</head>
+<head><title>Volunteers</title></head>
 
 # Volunteers
 

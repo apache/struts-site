@@ -1,3 +1,5 @@
+<head><title>Git for Struts</title></head>
+
 # Using Git with Struts
 
 So far, Struts 2 is using SVN. There are plans to move on to GIT but

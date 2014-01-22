@@ -1,6 +1,6 @@
-# Dev Mailing List
+<head><title>Dev Mailing List</title></head>
 
-## Development Lists
+# Development Lists
 
 The following mailing lists are meant for people who want to contribute to Struts itself. Patches, Documentation
 improvements and discussion on future Struts are welcome. **For questions on using Struts, please subscribe to the
@@ -36,7 +36,7 @@ Please make sure you have read the guidelines on [this page](mail.html)
 </table>
 
 
-## Archives
+# Archives
 
 You can read the [ASF Mail](http://mail-archives.apache.org/mod_mbox/struts-dev/) or the
 [Mark Mail](http://markmail.org/list/org.apache.struts.dev/) archives if you are looking for older discussions.
