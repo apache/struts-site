@@ -17,20 +17,20 @@ Please make sure you have read the guidelines on [this page](mail.html)
     </tr>
     <tr>
         <td>Struts-Dev</td>
-        <td><a href="mailto:dev-subscribe@struts.apache.org?subject=subscribe&amp;body=subscribe"></a></td>
-        <td><a href="mailto:dev-unsubscribe@struts.apache.org?subject=unsubscribe&amp;body=unsubscribe">dev-unsubscribe@struts.apache.org</a></td>
+        <td><a href="mailto:dev-subscribe@struts.apache.org?subject=subscribe&amp;body=subscribe">subscribe</a></td>
+        <td><a href="mailto:dev-unsubscribe@struts.apache.org?subject=unsubscribe&amp;body=unsubscribe">unsubscribe</a></td>
         <td>Contact other developers interested in expanding and improving Struts functionality.</td>
     </tr>
     <tr>
         <td>Struts-Commits</td>
-        <td><a href="mailto:commits-subscribe@struts.apache.org?subject=subscribe&amp;body=subscribe">commits-subscribe@struts.apache.org</a></td>
-        <td><a href="mailto:commits-unsubscribe@struts.apache.org?subject=unsubscribe&amp;body=unsubscribe">commits-unsubscribe@struts.apache.org</a></td>
+        <td><a href="mailto:commits-subscribe@struts.apache.org?subject=subscribe&amp;body=subscribe">subscribe</a></td>
+        <td><a href="mailto:commits-unsubscribe@struts.apache.org?subject=unsubscribe&amp;body=unsubscribe">unsubscribe</a></td>
         <td>Receive notifications of changes to the Struts source code repository.</td>
     </tr>
     <tr>
         <td>Struts-Issues</td>
-        <td><a href="mailto:issues-subscribe@struts.apache.org?subject=subscribe&amp;body=subscribe">issues-subscribe@struts.apache.org</a></td>
-        <td><a href="mailto:issues-unsubscribe@struts.apache.org?subject=unsubscribe&amp;body=unsubscribe">issues-unsubscribe@struts.apache.org</a></td>
+        <td><a href="mailto:issues-subscribe@struts.apache.org?subject=subscribe&amp;body=subscribe">subscribe</a></td>
+        <td><a href="mailto:issues-unsubscribe@struts.apache.org?subject=unsubscribe&amp;body=unsubscribe">unsubscribe</a></td>
         <td>Receive notifications from the Struts issue tracker.</td>
     </tr>
 </table>
