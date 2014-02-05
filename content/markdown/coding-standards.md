@@ -66,18 +66,18 @@ Some suggestions how to improve the code:
 
 - use static imports
 
-    a.add("type", "hidden")
-     .add("id", "__multiselect_" + defaultString(escapeHtml4(id)));
+        a.add("type", "hidden")
+         .add("id", "__multiselect_" + defaultString(escapeHtml4(id)));
 
 - use dedicated method
 
-    a.add("type", "hidden")
-     .add("id", "__multiselect_" + safeId(id));
+        a.add("type", "hidden")
+         .add("id", "__multiselect_" + safeId(id));
 
 - use builder
 
-    a.add("type", "hidden")
-     .add("id", HtmlID.with("__multiselect_").withSafeId(id).create());
+        a.add("type", "hidden")
+         .add("id", HtmlID.with("__multiselect_").withSafeId(id).create());
 
 As you can see, reformatting a code is just the beginning, you shouldn't stop there and think *how can I improve
 readability* and follow that path to the end.
