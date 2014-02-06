@@ -7,6 +7,14 @@ Struts uses Git and to manage the repository the git-flow was adopted, to read m
 - http://nvie.com/posts/a-successful-git-branching-model/
 - https://github.com/nvie/gitflow
 
+After cloning the repository locally you must initialize git-flow:
+
+     git flow init -d
+
+and done!
+
+Please remember that `master` branch cannot be modified directly from now on!
+
 ## Contributing with GitHub
 
 If you would like to contribute using the GitHub tools you need to know we can only
