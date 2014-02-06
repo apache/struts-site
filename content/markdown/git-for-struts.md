@@ -7,6 +7,14 @@ Struts uses Git and to manage the repository the git-flow was adopted, to read m
 - http://nvie.com/posts/a-successful-git-branching-model/
 - https://github.com/nvie/gitflow
 
+First step is to install git-flow locally on your box, please follow the steps from this link
+
+https://github.com/nvie/gitflow/wiki/Installation
+
+Now you can clone Struts repository locally
+
+    git clone https://git-wip-us.apache.org/repos/asf/struts.git    
+
 After cloning the repository locally you must initialize git-flow:
 
      git flow init -d
