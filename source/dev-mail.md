@@ -1,4 +1,7 @@
-<head><title>Dev Mailing List</title></head>
+---
+layout: default
+title: Dev Mailing List
+---
 
 # Development Lists
 

@@ -1,4 +1,7 @@
-<head><title>Project Management Committee Charter</title></head>
+---
+layout: default
+title: Project Management Committee Charter
+---
 
 # Apache Struts PMC Charter
 

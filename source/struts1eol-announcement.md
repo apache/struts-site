@@ -1,4 +1,7 @@
-<head><title>Apache Struts 1 EOL Announcement</title></head>
+---
+layout: default
+title: Apache Struts 1 EOL Announcement
+---
 
 # Apache Struts 1 End-Of-Life (EOL) Announcement
 

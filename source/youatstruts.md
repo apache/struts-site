@@ -1,4 +1,7 @@
-<head><title>You at Struts</title></head>
+---
+layout: default
+title: You at Struts
+---
 
 # You at Apache Struts
 

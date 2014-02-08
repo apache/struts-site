@@ -1,4 +1,7 @@
-<head><title>Volunteers</title></head>
+---
+layout: default
+title: Volunteers
+---
 
 # Volunteers
 

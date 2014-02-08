@@ -1,4 +1,7 @@
-<head><title>Apache Struts 1 EOL Press Release</title></head>
+---
+layout: default
+title: Apache Struts 1 EOL Press Release
+---
 
 # Apache Struts 1 End-Of-Life (EOL) Press Release
 

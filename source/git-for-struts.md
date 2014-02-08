@@ -1,4 +1,7 @@
-<head><title>Git for Struts</title></head>
+---
+layout: default
+title: Git for Struts
+---
 
 # Using Git with Struts
 

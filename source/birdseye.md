@@ -1,4 +1,7 @@
-<head><title>From a birds eye</title></head>
+---
+layout: default
+title: From a birds eye
+---
 
 # From a birds eye
 

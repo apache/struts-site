@@ -1,4 +1,7 @@
-<head><title>Coding standards</title></head>
+---
+layout: default
+title: Coding standards
+---
 
 # In the first place
 

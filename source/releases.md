@@ -1,4 +1,7 @@
-<head><title>Release Guidelines</title></head>
+---
+layout: default
+title: Release Guidelines
+---
 
 # Release Guidelines
 

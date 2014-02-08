@@ -1,4 +1,7 @@
-<head><title>Source Code</title></head>
+---
+layout: default
+title: Source Code
+---
 
 # Source Code
 
