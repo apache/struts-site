@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Welcome to the Apache Struts project</title>
+  <title>Coding standards</title>
 
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="/css/main.css">
@@ -18,7 +18,7 @@
 </head>
 <body>
 
-  <header>
+<header>
   <!-- Fixed navbar -->
 <nav>
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -100,69 +100,90 @@
 </header>
 
 
-  <article>
-    <section>
-      <div class="container">
-  <div class="jumbotron">
-    <h1>Apache Struts</h1>
-    <p>
-      Apache Struts is a free, open-source, MVC framework for creating elegant,
-      modern Java web applications.  It favors convention over configuration, is
-      extensible using a plugin architecture, and ships with plugins to support
-      REST, AJAX and JSON.
-    </p>
-    <a href="http://struts.apache.org/download.cgi#struts2316" class="btn btn-primary btn-large">Download</a>
-    <a href="primer.html" class="btn btn-info btn-large">Technology Primer</a>
-  </div>
-</div>
+<article class="container">
+  <section class="col-md-12">
+    <h1>In the first place</h1>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <h2>Struts 2.3.16 GA</h2>
-      <p>Apache Struts 2.3.16 GA has been released on 8 december 2013.</p>
-      <a href="http://struts.apache.org/release/2.3.x/docs/version-notes-2316.html">Version notes</a>
-    </div>
-    <div class="col-md-4">
-      <h2>Want to help?</h2>
-      <p>We welcome your help! If you want to learn more about how to build
-         and patch the Struts 2 codebase, please read the <a href="youatstruts.html">Developer Docs</a>
-      </p>
-    </div>
-    <div class="col-md-4">
-      <h2>Apache Struts 1</h2>
-      <p><strong>End-Of-Life (EOL)</strong></p>
-      <p>The Struts 1.x web framework has reached its end of life and is no longer officially supported.
-         <a href="struts1eol-announcement.html">Read the announcment</a> or the official <a href="struts1eol-press.html">Press release</a>
-      </p>
-    </div>
-  </div>
-</div>
+<p>Please remember that most of the time others will read your code. Focusing on that allow you to gain required perspective
+about how code should look like. Defaults, margins, convention doesn&#39;t matter if what you write is hard to read.</p>
 
-<div class="container">
-<div class="row col-md-12 text-center">
-  <hr/>
-</div>
+<p><strong>Readability is the first rule!</strong></p>
 
-<p></div>
-<div class="container">
-<div class="row">
-  <div class="col-md-3">
-    <div>Official IRC channel: <a href="irc://irc.freenode.net/struts">#struts</a></div>
-  </div>
-  <div class="col-md-9">
-    <div id="fb-root"></div>
-    <div class="fb-like" data-href="https://www.facebook.com/apachestruts" data-send="true" data-width="450"
-         data-show-faces="false"></div>
-    <div class="g-plusone" data-size="medium" data-href="http://struts.apache.org/"></div>
-    <a href="https://twitter.com/TheApacheStruts" class="twitter-follow-button" data-show-count="false">Follow
-      @TheApacheStruts</a>
-  </div>
-</div>
-</div></p>
+<h2>Separation of concern</h2>
 
-    </section>
-  </article>
+<p>If you want to reformat given file, part of class, etc do it in a dedicated commit. Never ever mix bug fixing,
+new feature implementation with code reformatting. Thus only confuses people reviewing your code.</p>
+
+<p><strong>Reformat different than coding!</strong></p>
+
+<h2>Ask!</h2>
+
+<p>If something isn&#39;t clear, you have doubts and anything else - ask! Maybe during materialising your thoughts as text
+you will gain the answer - Rubber Duck effect :-) Anyway, instead spending time on looking for solution - ask.</p>
+
+<p>The best place to ask question is Struts Developers List <a href="mailto:dev@struts.apache.org">dev@struts.apache.org</a></p>
+
+<h2>WIP</h2>
+
+<p>If you have any idea how to improve this guideline, don&#39;t hesitate to send them to us! Any help is welcome!</p>
+
+<h1>Examples</h1>
+
+<p>Below examples shows how you should proceed when adjusting given part of source code via reformatting, extracting
+or improving.</p>
+
+<h2>From defaults to extractions</h2>
+
+<p>The original source code:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Hidden input section
+a = new Attributes();
+a.add(&quot;type&quot;, &quot;hidden&quot;)
+    .add(&quot;id&quot;, &quot;__multiselect_&quot; + StringUtils.defaultString(StringEscapeUtils.escapeHtml4(id)))
+    .add(&quot;name&quot;, &quot;__multiselect_&quot; + StringUtils.defaultString(StringEscapeUtils.escapeHtml4(name)))
+    .add(&quot;value&quot;, &quot;&quot;).addIfTrue(&quot;disabled&quot;, disabled);
+start(&quot;input&quot;, a);
+end(&quot;input&quot;);
+</code></pre></div>
+<p>After applying default reformatting (80 columns margin):</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Hidden input section
+a = new Attributes();
+a.add(&quot;type&quot;, &quot;hidden&quot;)
+    .add(&quot;id&quot;,
+        &quot;__multiselect_&quot;
+            + StringUtils
+                .defaultString(StringEscapeUtils
+                    .escapeHtml4(id)))
+    .add(&quot;name&quot;,
+        &quot;__multiselect_&quot;
+            + StringUtils
+                .defaultString(StringEscapeUtils
+                    .escapeHtml4(name)))
+    .add(&quot;value&quot;, &quot;&quot;).addIfTrue(&quot;disabled&quot;, disabled);
+start(&quot;input&quot;, a);
+end(&quot;input&quot;);
+</code></pre></div>
+<p>Some suggestions how to improve the code:</p>
+
+<ul>
+<li><p>use static imports</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">a.add(&quot;type&quot;, &quot;hidden&quot;)
+ .add(&quot;id&quot;, &quot;__multiselect_&quot; + defaultString(escapeHtml4(id)));
+</code></pre></div></li>
+<li><p>use dedicated method</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">a.add(&quot;type&quot;, &quot;hidden&quot;)
+ .add(&quot;id&quot;, &quot;__multiselect_&quot; + safeId(id));
+</code></pre></div></li>
+<li><p>use builder</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">a.add(&quot;type&quot;, &quot;hidden&quot;)
+ .add(&quot;id&quot;, HtmlID.with(&quot;__multiselect_&quot;).withSafeId(id).create());
+</code></pre></div></li>
+</ul>
+
+<p>As you can see, reformatting a code is just the beginning, you shouldn&#39;t stop there and think <em>how can I improve
+readability</em> and follow that path to the end.</p>
+
+  </section>
+</article>
 
   <hr/>
 <footer class="container">
