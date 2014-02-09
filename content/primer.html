@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140206"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Key Technologies Primer</title>
+
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <script type="text/javascript" src="/js/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts">
+  <img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <!-- Fixed navbar -->
+<nav>
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Apache Struts <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="index.html">Welcome</a></li>
+              <li><a href="downloads.html">Downloads</a></li>
+              <li><a href="announce.html">Announcements</a></li>
+              <li><a href="http://www.apache.org/licenses/">License</a></li>
+              <li><a href="http://apache.org/foundation/thanks.html">Thanks!</a></li>
+              <li><a href="http://apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Support <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="mail.html">User Mailing List</a></li>
+              <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+              <li><a href="security.html">Reporting Security Issues</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Documentation <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="birdseye.html">Birds Eye</a></li>
+              <li><a href="primer.html">Key Technologies</a></li>
+              <li><a href="kickstart.html">Kickstart FAQ</a></li>
+              <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+              <li><a href="http://struts.apache.org/release/2.3.x/index.html">Struts 2</a></li>
+              <li><a href="http://struts.apache.org/release/1.3.x/index.html">Struts 1</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Contributing <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="youatstruts.html">You at Struts</a></li>
+              <li><a href="helping.html">How to Help FAQ</a></li>
+              <li><a href="dev-mail.html">Development Lists</a></li>
+              <li class="divider"></li>
+              <li><a href="git-for-struts.html">Git for Struts</a></li>
+              <li><a href="builds.html">Source Code</a></li>
+              <li><a href="coding-standards.html">Coding standards</a></li>
+              <li class="divider"></li>
+              <li><a href="releases.html">Release Guidelines</a></li>
+              <li><a href="bylaws.html">PMC Charter</a></li>
+              <li><a href="volunteers.html">Volunteers</a></li>
+              <li><a href="https://git-wip-us.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </div>
+</nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="pull-left">
+        <a href="/" id="bannerLeft">
+          <img src="/img/struts.gif" alt="Apache Struts"/>
+        </a>
+      </div>
+      <div class="pull-right"><a href="http://www.apache.org" id="bannerRight">
+        <img src="/img/asf-logo.gif" alt="Apache Software Foundation"/>
+      </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <h1>Key Technologies Primer</h1>
+
+<blockquote>
+<p><em>&quot;The time has come,&quot; the Walrus said, &quot;To talk of many things:
+ Of shoes -- and ships -- and sealing-wax -- Of cabbages -- and kings --
+ And why the sea is boiling hot -- And whether pigs have wings.&quot;</em></p>
+</blockquote>
+
+<h2>Intention</h2>
+
+<p>If you would like to get started with Apache Struts you most likely want
+to know what technologies you need to learn. This document shall give you
+a brief overview what you need to successfully run a Struts project.</p>
+
+<p>If you still can&#39;t decide if Struts is for you or if you have any questions,
+feel free to contact us via the <a href="mail.html">Struts user mailinglist</a>.</p>
+
+<h2>Key Technologies</h2>
+
+<h3>What you need to know</h3>
+
+<p>The framework documentation is written for active web developers and assumes
+a working knowledge about how Java web applications are built.
+Before getting started, you should understand the basics of several key technologies:</p>
+
+<ul>
+<li><a href="#http">HTTP and HTML</a></li>
+<li><a href="#cycle">The HTTP Request/Response Cycle</a></li>
+<li><a href="#java">The Java Language and Application Frameworks</a></li>
+<li><a href="#javascript">JavaScript, AJAX, and SOAP</a></li>
+<li><a href="#resources">Properties Files and ResourceBundles</a></li>
+<li><a href="#containers">Servlets, Filters and Web Containers</a></li>
+<li><a href="#jsp">JavaServer Pages and JSP Tag Libraries</a></li>
+<li><a href="#xml">Extensible Markup Language (XML)</a></li>
+<li><a href="#jaas">JAAS</a></li>
+<li><a href="#mvc">Model View Controller</a></li>
+</ul>
+
+<p>This primer briefly defines each of these technologies but does not
+describe them in detail. For your convenience, links to further information
+are often provided where it makes sense.</p>
+
+<h3>General starting points</h3>
+
+<p>If you are not familiar with the Java language generally,then the best starting point is the
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Java Tutorial</a>.</p>
+
+<p>If you are familiar with Java, but not the mentioned technologies,
+the best overall starting point is the <a href="http://docs.oracle.com/javaee/7/tutorial/doc/">Java EE Tutorial</a>.</p>
+
+<p>If you&#39;ve created web applications for other platforms, you
+may be able to follow along and visit the other references as needed. The core
+technologies used by Struts are also used by most other Java web development products, so
+the background information will be useful in any Java project.</p></p>
+
+<h3><a name="http"></a>HTTP, HTML and User Agents</h3>
+
+<p>The World Wide Web was built over the Hypertext Transfer Protocol
+<a href="http://www.ietf.org/rfc/rfc2616.txt?number=2616">(HTTP)</a>
+and the Hypertext Markup Language <a href="http://www.w3.org/MarkUp/">(HTML)</a>.
+A User Agent, like a web browser, uses HTTP to request a HTML document.
+The browser then formats and displays the document to its user. HTTP is used to
+transport more the HTML, HTML from the browser to render the view.</p>
+
+<p>If you would like to learn HTML, we recommend
+<a href="http://www.w3.org/MarkUp/Guide/">Getting started with HTML</a> by Dave Raggett.</p>
+
+<h3><a name="cycle"></a>The HTTP Request/Response cycle</h3>
+
+<p>A very important part of HTTP for the web developer is the request/response cycle. To use HTTP
+you have to make a request. A HTTP server, like a web server, is then obliged to respond. When you
+build your web application, you design it to react to a HTTP request by returning a HTTP response.
+Frameworks often abstract much of these nuts and bolts, but it is important to understand
+what is happening behind the scenes.</p>
+
+<p>If you are not familiar with the HTTP request/response you should learn about it.
+There is a lot of help available in the internet, like
+<a href="http://docs.webplatform.org/wiki/tutorials/How_does_the_Internet_work">How does the Internet work?</a></p>
+
+<h3><a name="java"></a>The Java Language and Application Frameworks</h3>
+
+<p>Struts is written in the
+<a href="http://www.oracle.com/us/technologies/java/overview/index.html">Java programming language</a>.
+Java is an object-orientated language, and the framework makes good use of many
+object-orientated techniques. A good understanding of Java, and especially
+object-orientated programming (OOP) and threading, will help
+you get the most out of Struts.</p>
+
+<h4><a name="reflection"></a>Reflection and Introspection</h4>
+
+<p>Reflection is the process of determining which member fields and methods are available on an object.
+Introspection is a specialized form of reflection used by the JavaBean API.
+Using Introspection, we can determine which methods of a Object are intended to be accessed by other objects.
+The getters and the setters, for example.</p>
+
+<p>Struts uses Introspection to convert HTTP parameters into JavaBean properties and to populate HTML
+fields from JavaBean properties. This technique makes it easy to &quot;roundtrip&quot; properties
+between HTML forms and JavaBeans.</p>
+
+<p>While it is not necessary to have a deep understanding of these concepts when you start with Apache
+Struts, it will help you when your application grows and becomes more complex.</p>
+
+<h4><a name="resources"></a>Properties Files and ResourceBundles</h4>
+
+<p>Java applications, including web applications, are often
+configured using <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html">Properties</a>
+files. Properties files are the basis for the
+<a href="http://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle.html">ResourceBundles</a>
+that the framework uses to provide message resources to an application.</p>
+
+<p>The Java Tutorials provide a
+<a href="http://docs.oracle.com/javase/tutorial/essential/environment/properties.html">great introduction to Properties</a>.</p>
+
+<p>Java ResourceBundles use one or more Properties files to provide internationalized messages
+to users based their <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Locale.html">Locale</a>.
+Support for localizing an application was built into the framework from the ground-up.</p>
+
+<p>Again the Java Tutorials provide
+<a href="http://docs.oracle.com/javase/tutorial/i18n/resbundle/concept.html">more information</a>.</p>
+
+<h4><a name="threads"></a>Threads</h4>
+
+<p>With Struts 1 you were required to know a lot about how to write code which
+can run in a multi-threaded environment. With Struts 2 this is no longer necessary.
+In an Struts 2 environment each action caused by a HTTP request
+is a plain old Java object which is instanced for each request.</p>
+
+<h3><a name="javascript"></a>JavaScript, AJAX, and SOAP</h3>
+
+<p>WIth HTTP and HTML you can already provide static web pages. Today this is much
+often not longer enough and your application users might expect a interactive user interface.
+Web developers often resort to <a href="http://en.wikipedia.org/wiki/JavaScript">JavaScript</a>
+to make web applications more interesting.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/AJAX">AJAX</a> is a technology often used by JavaScript programmers
+to create web applications that are as interactive and responsive as desktop applications.
+It is possible, to load a view parts of the website or just the data
+from the (Struts) application instead of regenerating the whole view.</p>
+
+<p>Apache Struts provides plugins to easily work with AJAX and even JavaScript. Where Struts can&#39;t provide
+the necessary functionality, third parties provide extensions for the required behavior.</p>
+
+<p>Another technology that can enhance the HTTP request/response cycle is <a href="http://en.wikipedia.org/wiki/SOAP">SOAP</a>.
+Using SOAP, an application can access data and invoke business logic on another server using HTTP as transfer
+layer. Using AJAX and SOAP together is becoming a popular way for page to submit finely-grained
+requests directly to a remote server, while still retaining a separation of concerns between the
+the business logic and the page markup. Depending on your applications need, it might be not necessary
+for you to learn about SOAP.</p>
+
+<h3><a name="containers"></a>Servlets, Filters, and Web Containers</h3>
+
+<p>Since Java is an object-orientated language, the
+<a href="http://docs.oracle.com/javaee/6/tutorial/doc/bnafd.html">Java Servlet</a>
+platform strives to cast HTTP into an object-orientated form.
+This strategy makes it easier for Java developers to concentrate on what they need their
+application to do -- rather than the mechanics of HTTP.</p>
+
+<p>A Java-aware HTTP server can pass a request to a servlet container.
+The container can fulfill the request or it can pass the request back to the HTTP server.
+The container decides whether it can handle the request by checking its list of servlets.
+If there is a servlet registered for the request, the container passes the request to the servlet.</p>
+
+<p>When a request comes in, the container checks to see if there is a servlet registered for that request.
+If there is a match, the request is given to the servlet. If not, the request is returned to the HTTP server.</p>
+
+<p>It&#39;s the container&#39;s job to manages the servlet lifecycle. The container creates the servlets, invokes the servlets,
+and ultimately disposes the servlets.</p>
+
+<p>The old Struts 1 version relied heavily on servlets and good knowledge about it usually helped a lot
+with developing web applications.</p>
+
+<p>With Struts 2, you&#39;ll need only a basic understanding of Servlets. Struts actually uses a so called
+ServletFilter to &quot;make things work&quot;. In general you are not required to write Servlets when
+using Struts 2. It still helps to know what Servlets, Filters and Containers are.</p>
+
+<p>Filters let you compose a set of components that will process a request or
+response. Filters are aggregated into a chain in which each filter
+has a chance to process the request and response before and after
+it is processed by subsequent filters (and the servlet that is ultimately called).</p>
+
+<h3><a name="session"></a>Sessions</h3>
+
+<p>One of the key characteristics of HTTP is that it is
+<em>stateless</em>. In other words, there is nothing built in to
+HTTP that identifies a subsequent request from the same user as being
+related to a previous request from that user. This makes building an
+application that wants to engage in a conversation with the user over
+several requests to be somewhat difficult.</p>
+
+<p>To alleviate this difficulty, the servlet API provides a programmatic
+concept called a <em>session</em>, represented as an object that
+implements the <code>javax.servlet.http.HttpSession</code>
+interface. The servlet container will use one of two techniques
+(cookies or URL rewriting) to ensure that the next request from the
+same user will include the <em>session id</em>
+for this session, so that state information saved in the session can be associated with
+multiple requests. This state information is stored in
+<em>session attributes</em> (in JSP, they are known as &quot;session scope beans&quot;).</p>
+
+<p>To avoid occupying resources indefinitely when a user fails to
+complete an interaction, sessions have a configurable <em>timeout interval</em>.
+If the time gap between two requests exceeds this interval, the session
+will be timed out, and all session attributes removed. You define a
+default session timeout in your web application deployment descriptor.</p>
+
+<p>It is important to know that Session data most often occupies RAM memory
+of your server. Depending on your container you may have different options to
+bypass this.</p>
+
+<p>Struts 2 provides easy ways to create and access a session.</p>
+
+<h3><a name="webapp"></a>Web Applications</h3>
+
+<p>Just as a HTTP server can be used to host several distinct
+websites, a servlet container can be used to host more than one web
+application. The Java servlet platform provides a well-defined
+mechanism for organizing and deploying web applications.
+Each application runs in its own namespace so that they
+can be developed and deployed separately.
+A web application can be assembled into a Web Application
+Archive, or WAR file.
+The single WAR can be uploaded to the server and
+automatically deployed.</p>
+
+<p>You definitely need to learn how you can build a war file from your Struts
+application and deploy it to your server. This might require knowledge of
+build tools like <a href="http://maven.apache.org">Maven</a> and addition reading
+in the documentation of your server vendor.</p>
+
+<h3><a name="security"></a>Security</h3>
+
+<p>One detail that can be configured in the Web application deployment descriptor is container-managed security.
+Declarative security can be used to protect requests for URIs that match given patterns.
+Pragmatic security can be used to fine-tune security make authorization decisions based on the time of day,
+the parameters of a call, or the internal state of a Web component.
+It can also be used to restrict authentication based on information in a database.</p>
+
+<p>For more about security, you should read the
+<a href="http://docs.oracle.com/javaee/6/tutorial/doc/gijrp.html">Java EE tutorial</a>.
+Other projects, like <a href="http://shiro.apache.org/">Apache Shiro</a> or
+<a href="http://www.springframework.org/spring-security/">Spring Security</a> might also help
+you to secure your web application.</p>
+
+<h3><a name="jsp"></a>JavaServer Pages, JSP Tag Libraries, and JavaServer Faces</h3>
+
+<p>If you write a classic web app, you might need a view component.
+One of the first of its kind was <a href="http://www.oracle.com/technetwork/java/javaee/jsp/index.html">JSP</a>.</p>
+
+<p>While still powerful and fully supported by Struts, people might prefer other technologies
+like Velocity and Freemarker. Both are also first class citizens for Struts.</p>
+
+<p>All have in common that you would start writing HTML markup and add dynamic features using
+JSP tags (same goes for Velocity and Freemarker). While it is not recommended, JSP even supports
+adding plain Java to the markup. Reading about the
+<a href="http://www.oracle.com/technetwork/java/index-jsp-135995.html">JSTL</a> or, even better,
+the <a href="http://docs.oracle.com/javaee/5/tutorial/doc/bnahq.html">Unified expression language</a>
+is recommended.</p>
+
+<p>That said, you can easily access your data model from the view. And render it appropriate.
+If you would like to use a more modern approach, you will love to hear Struts 2 provides
+features to return <a href="http://json.org">JSON</a>, which usually fuels AJAX driven webpages.
+With that it is easily possible to use jQuery or <a href="http://www.angularjs.org">AngularJS</a>
+as a front end layer and even completely discard JSP.</p>
+
+<p><a name="view_frameworks"></a></p>
+
+<p>As mentioned, aside from Java Server Pages, there are several other
+presentation technologies available to Struts:</p>
+
+<ul>
+<li><a href="http://www.freemarker.org/">Freemarker</a></li>
+<li><a href="http://www.lowagie.com/iText/">iText (PDF)</a></li>
+<li><a href="http://jaspersoft.com/">JasperReports</a></li>
+<li><a href="http://velocity.apache.org/">Velocity</a></li>
+<li><a href="http://www.w3.org/TR/xslt">XSLT</a></li>
+</ul>
+
+<h3><a name="xml"></a>Extensible Markup Language (XML)</h3>
+
+<p>The features provided by the framework rely on a number of
+objects that are sometimes deployed using a configuration file written in
+<a href="http://www.w3.org/XML/">Extensible Markup Language</a>.
+XML is also used to configure Java web applications; so, this is yet another
+familiar approach.</p>
+
+<p>Luckily Struts 2 reduces the need for XML to almost zero. While a basic knowledge on XML is always good,
+it is no longer crucial to write long XML documents to create a Struts
+application. If you would like to read more about it, please visit the page of the
+<a href="http://struts.apache.org/release/2.1.x/docs/convention-plugin.html">Convention plugin</a>.</p>
+
+<h3><a name="mvc"></a>Model View Controller (MVC)</h3>
+
+<p>Web applications based on JavaServer Pages sometimes
+commingle database code, page design code, and control flow
+code. In practice, we find that unless these concerns are
+separated, larger applications become difficult to maintain.</p>
+
+<p>One way to separate concerns in a software application is
+to use a Model-View-Controller (MVC) architecture. The
+Model represents the business or database code, the View
+represents the page design code, and the Controller
+represents the navigational code.</p>
+
+<p>The term &quot;MVC&quot; originated with the SmallTalk
+Model-View-Controller framework.
+In Smalltalk MVC, the View updates itself from the Model, via
+the &quot;Observer&quot; pattern. The original MVC pattern is like a
+closed loop: The View talks to the Controller, which talks to
+the Model, which talks to the View.</p>
+
+<p>But, a direct link between the Model and the View is not
+practical for web applications, and we modify the classic MVC
+arrangement so that it would look less like a loop and more
+like a horseshoe with the controller in the middle.</p>
+
+<p>In the MVC/Model 2 design pattern, application flow is mediated
+by a central Controller. The Controller delegates requests -
+in our case, HTTP requests - to an appropriate handler. The
+handlers are tied to a Model, and each handler acts as an
+adapter between the request and the Model. The Model
+represents, or encapsulates, an application&#39;s business logic or
+state. Control is usually then forwarded back through the
+Controller to the appropriate View. The forwarding can be
+determined by consulting a set of mappings, usually loaded from a
+database or configuration file. This provides a loose coupling
+between the View and Model, which can make applications
+significantly easier to create and maintain.</p>
+
+<p>While MVC is a convenient paradigm, many workers find that
+applcations may utilize more than three layers.
+For example, within the Model, there is often distinct business
+logic and data access layers.</p>
+
+<p>The framework provides the control layer for a Model 2 web
+applications. Developers can use this layer with other standard
+technologies to build the business, data access, and presentation layers.</p>
+
+<p>For more about MVC, see</p>
+
+<ul>
+<li><a href="http://st-www.cs.uiuc.edu/users/smarch/st-docs/mvc.html">Smalltalk MVC framework</a>.</li>
+<li><a href="http://en.wikipedia.org/wiki/Model_view_controller">Wikipedia - MVC</a></li>
+</ul>
+
+<h2><a name="logic_frameworks"></a>Business Logic Frameworks</h2>
+
+<p>Most teams still roll their own business logic layer using
+plain old JavaBeans (POJOs). Though, business layer frameworks are beginning to emerge,
+and now include:</p>
+
+<ul>
+<li><a href="http://springframework.org/">Spring</a></li>
+<li><a href="http://code.google.com/p/google-guice/%E2%80%8E">Google Guice</a></li>
+<li><a href="http://commons.apache.org/chain/">Commons Chain of Responsiblity</a></li>
+<li>or you can rely on features of the bundled Struts XWork</li>
+</ul>
+
+<h3><a name="data_frameworks"></a>Data Access Frameworks</h3>
+
+<p>Most often, the business layer is seen to be distinct from
+the data access layer. Some teams roll their own data access objects (DAOs),
+but more and more teams are turning to one of the many
+data access frameworks. Some popular data access frameworks include:</p>
+
+<ul>
+<li><a href="http://cayenne.apache.org/">Apache Cayenne</a></li>
+<li><a href="http://docs.oracle.com/javaee/5/tutorial/doc/bnblr.html">Enterprise Java Beans</a></li>
+<li><a href="http://www.hibernate.org/">Hibernate</a></li>
+<li><a href="http://code.google.com/p/mybatis">myBATIS</a></li>
+</ul>
+
+  </section>
+</article>
+
+  <hr/>
+<footer class="container">
+  <div class="row col-md-12 text-center">
+    Copyright &copy; 2000-2014 <a href="http://www.apache.org/">The Apache Software Foundation</a>. All Rights Reserved.
+  </div>
+  <div class="row col-md-12 text-center">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts
+    project logos are trademarks of The Apache Software Foundation.
+  </div>
+</footer>
+
+
+</body>
+</html>
