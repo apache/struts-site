@@ -20,7 +20,7 @@ Read-only access to the Apache Struts source repository is available through bot
 
 With the [Git client](http://git-scm.com/) installed, obtaining a working copy of the Struts codebase is as simple as
 
-    > git clone http://git.apache.org/repos/asf/struts.git
+    > git clone http://git.apache.org/struts.git
 
 (Committers with write access should use the **https** protocol instead)
 
