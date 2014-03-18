@@ -26,56 +26,44 @@ and done!
 
 Please remember that `master` branch cannot be modified directly from now on!
 
+## Non-committers
+
 If you aren't a committer you must use this link below or mirror at GitHub
 
     git clone git://git.apache.org/struts.git struts-copy
 
 ## Contributing with GitHub
 
-If you would like to contribute using the GitHub tools you need to know we can only
-accept your work if we have your [ICLA](http://www.apache.org/licenses/icla.txt) on file.
-Please read the document carefully, sign and send it to us. Basically this document
-protects you and the end users for legal problems. It allows the Apache Software Foundation
-to use your code and distribute it.
-You should receive an email a few days after you submitted it and appear in the 
-[committer index](http://people.apache.org/committer-index.html) in the section "unlisted CLAs".
+Using GitHub mirror is the simplest way to contribute to Apache Struts if you are not a member
+of Struts Committers group.
 
-Once done, you can clone the [Apache Struts mirror on GitHub](https://github.com/apache/struts):
+First you must have an account created at GitHub to be able perform the next step. If you don't,
+go ahead and create one just right now! Please remember to setup
+[SSH keys](https://help.github.com/articles/generating-ssh-keys) and test them!
 
-    git clone git@github.com:apache/struts.git struts-mirror.git
+When ready go to [https://github.com/apache/struts](https://github.com/apache/struts) and click `Fork` button
+in top right corner. This will fork Apache Struts repository and will create your private (but public) repository
+with the source code.
 
-Please create an issue on our [issue tracker](https://issues.apache.org/jira/browse/WW).
-You'll receive an issue number which you should use to create a working branch (for example WW-4196).
+Next step is to clone your repo locally, information how to do this you will find on right sidebar of your repo
+under `SSH clone URL` headline.
 
-If you are sending a pull request, please send it to the Apache Struts teams repo and not
-the official mirror. We cannot accept and close pull requests there which is the reason
-we have an own account. You can find it here:
+Now you are ready to work with Apache Struts code base. Perform your changes, commit them and
+next push to GitHub! Remember: commit in Git is different than commit in Subversion!
 
-[https://github.com/apachestruts/struts]
+With your changes pushed to GitHub you can prepare a Pull Request (short: PR). Go to Apache Struts
+mirror - [https://github.com/apache/struts](https://github.com/apache/struts) - then to
+[Pull request](https://github.com/apache/struts/pulls) and hit
+[New Pull Request](https://github.com/apache/struts/compare/) button.
 
-Please send the pull request to "trunk".
+If not already selected, click on `compare across forks.` Right now you must select from the dropdowns on right
+your fork and branch to compare the differences with Apache Struts develop branch.
 
-It is of course possible to add us as upstream repo:
+Finally hit `Create Pull Request` button and you are done!
 
-    git remote add upstream git@github.com:apachestruts/struts
-
-## Working with remote branches from GitHub
-
-You can add a remote branch from GitHub like this:
-
-    git remote add opensourceio git@github.com:opensourceio/struts
-
-Pull changes with:
-
-    git pull opensourceio anotherbranch
-
-When merge conflicts happen, these can be resolved using:
-
-    git mergetool
-
-After the merge, you need to commit the changes to Apache Git with:
-
-    git commit
+Unfortunately not yet. We (Apache Struts committers) can use PRs just for review, we cannot accept your work
+directly, so you must fill a JIRA ticket and assign a file with patch to it. But that bother about that right now -
+go and hack!
 
 ## Further reading
 
