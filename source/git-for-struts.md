@@ -26,6 +26,10 @@ and done!
 
 Please remember that `master` branch cannot be modified directly from now on!
 
+If you aren't a committer you must use this link below or mirror at GitHub
+
+    git clone git://git.apache.org/struts.git struts-copy
+
 ## Contributing with GitHub
 
 If you would like to contribute using the GitHub tools you need to know we can only
