@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.apache.struts</groupId>
+        <artifactId>struts2-parent</artifactId>
+        <version>2.3.16.1</version>
+    </parent>
+
+    <artifactId>struts2-docs</artifactId>
+    <packaging>pom</packaging>
+    <name>Struts 2 Draft Docs</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>cwiki-docs</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <includeProjectDependencies>true</includeProjectDependencies>
+                            <mainClass>org.apache.cxf.cwiki.SiteExporter</mainClass>
+                            <arguments>
+                                <argument>-d</argument>
+                                <argument>${project.build.directory}/cwiki/WW</argument>
+                                <argument>-password</argument>
+                                <argument>${confluence.password}</argument>
+                                <argument>-user</argument>
+                                <argument>${confluence.user}</argument>
+                                <argument>${basedir}/src/etc/docs.cfg</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.apache.cxf.site-export</groupId>
+            <artifactId>cxf-site-export</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
