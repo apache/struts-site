@@ -112,6 +112,48 @@
   Skip to: <a href="announce-2013.html">Announcements - 2013</a>
 </p>
 
+<h4><span id="a20140424"> 24 April 2014 - Struts up to 2.3.16.1: Zero-Day Exploit Mitigation</h4>
+
+<p>In Struts 2.3.16.1, an issue with ClassLoader manipulation via request parameters was supposed to be resolved. Unfortunately, 
+the correction wasn&#39;t sufficient.</p>
+
+<p>A security fix release fully addressing this issue is in preparation and will be released as soon as possible.</p>
+
+<p>Once the release is available, all Struts 2 users are strongly recommended to update their installations.</p>
+
+<p><strong>Until the release is available, all Struts 2 users are strongly recommended to apply the following mitigation:</strong></p>
+
+<p>In your struts.xml, replace all custom references to params-interceptor with the following code, especially regarding the class-pattern
+found at the beginning of the excludeParams list:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;interceptor-ref name=&quot;params&quot;&gt;
+   &lt;param name=&quot;excludeParams&quot;&gt;(.*\.|^|.*|\[(&#39;|&quot;))(c|C)lass(\.|(&#39;|&quot;)]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*&lt;/param&gt;
+&lt;/interceptor-ref&gt;
+</code></pre></div>
+<p>If you are using default interceptor stacks packaged in struts-default.xml, change your parent packages to a customized secured configuration
+as in the following example. Given you are using defaultStack so far, change your packages from</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;package name=&quot;default&quot; namespace=&quot;/&quot; extends=&quot;struts-default&quot;&gt;
+    &lt;default-interceptor-ref name=&quot;defaultStack&quot; /&gt;
+    ...
+    ...
+&lt;/package&gt;
+</code></pre></div>
+<p>to</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;package name=&quot;default&quot; namespace=&quot;/&quot; extends=&quot;struts-default&quot;&gt;
+    &lt;interceptors&gt;
+        &lt;interceptor-stack name=&quot;secureDefaultStack&quot;&gt;
+            &lt;interceptor-ref name=&quot;defaultStack&quot;&gt;
+                &lt;param name=&quot;params.excludeParams&quot;&gt;(.*\.|^|.*|\[(&#39;|&quot;))(c|C)lass(\.|(&#39;|&quot;)]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*&lt;/param&gt;
+            &lt;/interceptor-ref&gt;
+        &lt;/interceptor-stack&gt;
+    &lt;/interceptors&gt;
+
+    &lt;default-interceptor-ref name=&quot;secureDefaultStack&quot; /&gt;
+    ...
+&lt;/package&gt; 
+</code></pre></div>
+<p>Please follow the Apache Struts Announcements to stay updated regarding the upcoming security release. Most likely the release will be available within the next 72 hours.
+Please prepare for upgrading all Struts 2 based production systems to the new release version once available.</p>
+
 <h4><span id="a20140302"> 2 March 2014 - Struts 2.3.16.1 General Availability Release - Security Fix Release</h4>
 
 <p>The Apache Struts group is pleased to announce that Struts 2.3.15.2 is available as a &quot;General Availability&quot;
