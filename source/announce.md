@@ -8,7 +8,7 @@ title: Announcements
   Skip to: <a href="announce-2013.html">Announcements - 2013</a>
 </p>
 
-#### <span id="a20140424"> 2 March 2014 - Struts up to 2.3.16.1: Zero-Day Exploit Mitigation
+#### <span id="a20140424"> 24 April 2014 - Struts up to 2.3.16.1: Zero-Day Exploit Mitigation
 
 In Struts 2.3.16.1, an issue with ClassLoader manipulation via request parameters was supposed to be resolved. Unfortunately, 
 the correction wasn't sufficient.
