@@ -8,6 +8,25 @@ title: Announcements
   Skip to: <a href="announce-2013.html">Announcements - 2013</a>
 </p>
 
+#### <span id="a20140424"> 24 April 2014 - Struts 2.3.16.2 General Availability Release - Security Fix Release
+
+The Apache Struts group is pleased to announce that Struts 2.3.16.2 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+Two security issues were solved with this release:
+
+  - [S2-021](http://struts.apache.org/release/2.3.x/docs/s2-021.html)
+    Improves excluded params to avoid ClassLoader manipulation via ParametersInterceptor
+  - [S2-021](http://struts.apache.org/release/2.3.x/docs/s2-021.html)
+    Adds excluded params to CookieInterceptor to avoid ClassLoader manipulation when the interceptors is configured
+    to accept all cookie names (wildcard matching via "*")
+
+All developers are strongly advised to perform this action.
+
 #### <span id="a20140424"> 24 April 2014 - Struts up to 2.3.16.1: Zero-Day Exploit Mitigation
 
 In Struts 2.3.16.1, an issue with ClassLoader manipulation via request parameters was supposed to be resolved. Unfortunately, 
@@ -55,7 +74,7 @@ Please prepare for upgrading all Struts 2 based production systems to the new re
 
 #### <span id="a20140302"> 2 March 2014 - Struts 2.3.16.1 General Availability Release - Security Fix Release
 
-The Apache Struts group is pleased to announce that Struts 2.3.15.2 is available as a "General Availability"
+The Apache Struts group is pleased to announce that Struts 2.3.16.1 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
 
 Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
