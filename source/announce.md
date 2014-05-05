@@ -8,6 +8,22 @@ title: Announcements
   Skip to: <a href="announce-2013.html">Announcements - 2013</a>
 </p>
 
+#### <span id="a20140503"> 3 May 2014 - Struts 2.3.16.3 General Availability Release - Security Fix Release
+
+The Apache Struts group is pleased to announce that Struts 2.3.16.3 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+One medium security issue was solved with this release:
+
+  - [S2-022](http://struts.apache.org/release/2.3.x/docs/s2-022.html)
+    Extends excluded params in CookieInterceptor to avoid manipulation of Struts' internals
+
+All developers are strongly advised to perform this action.
+
 #### <span id="a20140424"> 24 April 2014 - Struts 2.3.16.2 General Availability Release - Security Fix Release
 
 The Apache Struts group is pleased to announce that Struts 2.3.16.2 is available as a "General Availability"
