@@ -5,6 +5,8 @@ title: Submitting patches
 
 # Submitting patches
 
+## Committers
+
 Struts uses Git and to manage the repository the git-flow was adopted, to read more about that please follow the links below:
 
 - http://nvie.com/posts/a-successful-git-branching-model/
