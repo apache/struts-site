@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Git for Struts
+title: Submitting patches
 ---
 
-# Using Git with Struts
+# Submitting patches
 
 Struts uses Git and to manage the repository the git-flow was adopted, to read more about that please follow the links below:
 
@@ -32,10 +32,21 @@ If you aren't a committer you must use this link below or mirror at GitHub
 
     git clone git://git.apache.org/struts.git struts-copy
 
+## Security patches
+
+**Please read carefully, this is very important!**
+
+If you prepared a patch to solve security issue in Apache Struts, in the first step contact us via
+[Security Mailing List](mailto:security@struts.apache.org). Don't publish any information about possible vulnerability.
+Thus will allow us coordinate the work and review if the information about issue can be disclosed publicly.
+We don't want to inform hackers before we can protect our users :-)
+
+**Be responsible!!!**
+
 ## Contributing with GitHub
 
 Using GitHub mirror is the simplest way to contribute to Apache Struts if you are not a member
-of Struts Committers group.
+of Struts Comitters group.
 
 First you must have an account created at GitHub to be able perform the next step. If you don't,
 go ahead and create one just right now! Please remember to setup
@@ -60,10 +71,6 @@ If not already selected, click on `compare across forks.` Right now you must sel
 your fork and branch to compare the differences with Apache Struts develop branch.
 
 Finally hit `Create Pull Request` button and you are done!
-
-Unfortunately not yet. We (Apache Struts committers) can use PRs just for review, we cannot accept your work
-directly, so you must fill a JIRA ticket and assign a file with patch to it. But that bother about that right now -
-go and hack!
 
 ## Further reading
 
