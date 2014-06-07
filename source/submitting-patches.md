@@ -77,3 +77,29 @@ Finally hit `Create Pull Request` button and you are done!
 ## Further reading
 
  * [Git at Apache](http://wiki.apache.org/general/GitAtApache)
+
+# <span id="patch-reward">Google's Patch Reward program
+
+During [SFHTML5](http://www.meetup.com/sfhtml5/) Google announced that they adding the Apache Struts project to
+[the Google's Security Patch Reward Program](https://www.google.com/about/appsecurity/patch-rewards/).
+
+What does it mean?
+
+If you prepared a patch that eliminates a security vulnerability or improves existing security mechanism
+you can get a bounty :-) You will find more details on
+[the Google's blog](http://googleonlinesecurity.blogspot.com/2013/10/going-beyond-vulnerability-rewards.html)
+ or under the link above, just to give you a quick guideline how does it work:
+
+- prepare a patch and submit it to our [JIRA](https://issues.apache.org/jira/browse/WW),
+  it can be a Pull Request on GitHub as well, but must reference the JIRA ticket.
+- let us know that you did something great, post a message to [Struts Dev mailing list](dev-mail.html)
+- we will review the patch and if it's a real great thing then we will merge it into our code base
+- just wait on official release of the Apache Struts and now you can request the reward from Google :-)
+
+**NOTE**
+
+If you are concerned that your patch can disclose a security vulnerability, instead of submitting it as a ticket,
+send it directly to the [Struts Security team](mailto:security@struts.apache.org). This will give us the possibility
+to prepare a new release with your patch in secret.
+
+Have fun and code!
