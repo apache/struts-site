@@ -13,6 +13,7 @@ before disclosing them in a public forum**.
 
 We cannot accept regular bug reports or other queries at this address, we ask that you use our
 [issue tracker (JIRA)](https://issues.apache.org/jira/browse/WW) for those.
+
 `All mail sent to this address that does not relate to security problems in the Apache
 Struts source code will be ignored`.
 

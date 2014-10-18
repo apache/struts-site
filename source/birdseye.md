@@ -48,10 +48,10 @@ Struts provides the glue that joins the various elements of the standard Java pl
 into a coherent whole. Our goal is to leverage existing standards by producing the missing
 pieces we need to create enterprise-grade applications that are easy to maintain over time.
 
-Long time the Apache Struts Project offered two major versions of the Struts framework.
-Meanwhile we maintaining only Struts 2. It is recommended to upgrade all Struts 1.x
-application to Struts 2. Please do not start any more applications on top of Struts 1.x,
-as you will not receive security patches any more.
+The Apache Struts Project offered two major versions of the Struts framework. Currently we are 
+only maintaining the Struts 2 version. It is recommended to upgrade all Struts 1.x application 
+to Struts 2. Please do not start new application development using Struts 1.x, as we are no longer 
+issuing security patches.
 
 Struts 2 was originally known as WebWork 2. After working independently for several years,
 the WebWork and Struts communities joined forces to create Struts 2. The 2.x framework
