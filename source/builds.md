@@ -48,8 +48,8 @@ or
 Maven will automatically download any dependencies as needed.
 
 For more about using Maven to build Struts 2, see
-[Building the framework from source](/2.x/docs/building-the-framework-from-source.html) in the
-[Struts 2 Contributors Guide.](/2.x/docs/contributors-guide.html)
+[Building the framework from source](/docs/building-the-framework-from-source.html) in the
+[Struts 2 Contributors Guide.](/docs/contributors-guide.html)
 
 For more about using Maven to build Struts 1, see our [Maven wiki page.](http://wiki.apache.org/struts/StrutsMaintenanceMaven)
 
