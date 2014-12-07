@@ -8,6 +8,53 @@ title: Announcements
   Skip to: <a href="announce-2013.html">Announcements - 2013</a>
 </p>
 
+#### <span id="a20141207"> 12 December 2014 - Struts 2.3.20 General Availability with Security Fix Release
+
+The Apache Struts group is pleased to announce that Struts 2.3.20 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+One medium security issue was solved with this release:
+
+  - [S2-023](http://struts.apache.org/docs/s2-023.html)
+    Generated value of token can be predictable
+
+Besides that, this release contains several fixes and improvements just to mention few of them:
+
+  - merged security fixes from version 2.3.16.1, 2.3.16.2, 2.3.16.3
+  - extended existing security mechanism to block access to given Java packages and Classes
+  - collection Parameters for `RedirectResult`
+  - make `ParametersInterceptor` supports chinese in hash key by default
+  - `themes.properties` can be loaded using `ServletContext` allows to put template folder under WEB-INF or on classpath
+  - new tag `datetextfield`
+  - only valid Ognl expressions are cached
+  - custom `TextProvider` can be used for validation errors of model driven actions
+  - `datetimepicker`'s label fixed
+  - `PropertiesJudge` removed and properties are checked in `SecurityMemberAccess`
+  - resource reloading works in IBM JVM
+  - default reloading settings were removed from default.properties
+  - `commons-fileupload` library upgraded to version 1.3.1 to fix potential security vulnerability
+  - the scheme attribute accepts expressions in `s:url` tag
+  - solves problem with infinite loop in `FastByteArrayOutputStream`
+  - `LocalizedTextUtil` supports many ClassLoaders
+  - Bill of Materials pom was introduced
+  - `debug=browser|console` was migrated to jQuery
+  - `struts_dojo.js` was fixed
+  - interface `org/apache/struts2/views/TagLibrary` was restored and marked as `@Depreacted`
+
+and many other small improvements, please careful read the [version notes](http://struts.apache.org/docs/version-notes-2320.html).
+
+**All developers are strongly advised to perform this action.**
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 5.
+
+Should any issues arise with your use of any version of the Struts framework,
+please post your comments to the user list, and, if appropriate, file a tracking ticket.
+
 #### <span id="a20140503"> 3 May 2014 - Struts 2.3.16.3 General Availability Release - Security Fix Release
 
 The Apache Struts group is pleased to announce that Struts 2.3.16.3 is available as a "General Availability"
@@ -19,7 +66,7 @@ to maintaining applications over time.
 
 One medium security issue was solved with this release:
 
-  - [S2-022](http://struts.apache.org/release/2.3.x/docs/s2-022.html)
+  - [S2-022](http://struts.apache.org/docs/s2-022.html)
     Extends excluded params in CookieInterceptor to avoid manipulation of Struts' internals
 
 All developers are strongly advised to perform this action.
@@ -35,9 +82,9 @@ to maintaining applications over time.
 
 Two security issues were solved with this release:
 
-  - [S2-021](http://struts.apache.org/release/2.3.x/docs/s2-021.html)
+  - [S2-021](http://struts.apache.org/docs/s2-021.html)
     Improves excluded params to avoid ClassLoader manipulation via ParametersInterceptor
-  - [S2-021](http://struts.apache.org/release/2.3.x/docs/s2-021.html)
+  - [S2-021](http://struts.apache.org/docs/s2-021.html)
     Adds excluded params to CookieInterceptor to avoid ClassLoader manipulation when the interceptors is configured
     to accept all cookie names (wildcard matching via "*")
 
@@ -99,9 +146,9 @@ to maintaining applications over time.
 
 Two security issues were solved with this release:
 
-  - [S2-020](http://struts.apache.org/release/2.3.x/docs/s2-020.html) ClassLoader manipulation
+  - [S2-020](http://struts.apache.org/docs/s2-020.html) ClassLoader manipulation
     via request parameters
-  - [S2-020](http://struts.apache.org/release/2.3.x/docs/s2-020.html) Commons FileUpload library was upgraded
+  - [S2-020](http://struts.apache.org/docs/s2-020.html) Commons FileUpload library was upgraded
     to version 1.3.1 to prevent DoS attacks
 
 All developers are strongly advised to perform this action.
