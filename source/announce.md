@@ -8,7 +8,7 @@ title: Announcements
   Skip to: <a href="announce-2013.html">Announcements - 2013</a>
 </p>
 
-#### <span id="a20141207"> 12 December 2014 - Struts 2.3.20 General Availability with Security Fix Release
+#### <span id="a20141207"> 7 December 2014 - Struts 2.3.20 General Availability with Security Fix Release
 
 The Apache Struts group is pleased to announce that Struts 2.3.20 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
