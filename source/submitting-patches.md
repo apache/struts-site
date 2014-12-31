@@ -28,7 +28,7 @@ and done!
 
 Please remember that `master` branch cannot be modified directly from now on!
 
-## Non-committers
+## Non-committers 
 
 If you aren't a committer you must use this link below or mirror at GitHub
 
@@ -116,7 +116,7 @@ after pushing changes, `asfbot` will close the PR at GitHub.
 
  * [Git at Apache](http://wiki.apache.org/general/GitAtApache)
 
-# <span id="patch-reward">Google's Patch Reward program
+# Google's Patch Reward program {#patch-reward}
 
 During [SFHTML5](http://www.meetup.com/sfhtml5/) Google announced that they adding the Apache Struts project to
 [the Google's Security Patch Reward Program](https://www.google.com/about/appsecurity/patch-rewards/).
