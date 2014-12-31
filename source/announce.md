@@ -8,7 +8,7 @@ title: Announcements
   Skip to: <a href="announce-2013.html">Announcements - 2013</a>
 </p>
 
-#### <span id="a20141207"> 7 December 2014 - Struts 2.3.20 General Availability with Security Fix Release
+####  7 December 2014 - Struts 2.3.20 General Availability with Security Fix Release {#a20141207}
 
 The Apache Struts group is pleased to announce that Struts 2.3.20 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
@@ -55,7 +55,7 @@ Servlet API 2.4, JSP API 2.0, and Java 5.
 Should any issues arise with your use of any version of the Struts framework,
 please post your comments to the user list, and, if appropriate, file a tracking ticket.
 
-#### <span id="a20140503"> 3 May 2014 - Struts 2.3.16.3 General Availability Release - Security Fix Release
+#### 3 May 2014 - Struts 2.3.16.3 General Availability Release - Security Fix Release {#a20140503}
 
 The Apache Struts group is pleased to announce that Struts 2.3.16.3 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
@@ -71,7 +71,7 @@ One medium security issue was solved with this release:
 
 All developers are strongly advised to perform this action.
 
-#### <span id="a20140424"> 24 April 2014 - Struts 2.3.16.2 General Availability Release - Security Fix Release
+#### 24 April 2014 - Struts 2.3.16.2 General Availability Release - Security Fix Release {#a20140424}
 
 The Apache Struts group is pleased to announce that Struts 2.3.16.2 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
@@ -90,7 +90,7 @@ Two security issues were solved with this release:
 
 All developers are strongly advised to perform this action.
 
-#### <span id="a20140424"> 24 April 2014 - Struts up to 2.3.16.1: Zero-Day Exploit Mitigation
+#### 24 April 2014 - Struts up to 2.3.16.1: Zero-Day Exploit Mitigation {#a20140424}
 
 In Struts 2.3.16.1, an issue with ClassLoader manipulation via request parameters was supposed to be resolved. Unfortunately, 
 the correction wasn't sufficient.
@@ -135,7 +135,7 @@ to
 Please follow the Apache Struts Announcements to stay updated regarding the upcoming security release. Most likely the release will be available within the next 72 hours.
 Please prepare for upgrading all Struts 2 based production systems to the new release version once available.
 
-#### <span id="a20140302"> 2 March 2014 - Struts 2.3.16.1 General Availability Release - Security Fix Release
+#### 2 March 2014 - Struts 2.3.16.1 General Availability Release - Security Fix Release {#a20140302}
 
 The Apache Struts group is pleased to announce that Struts 2.3.16.1 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
@@ -153,7 +153,7 @@ Two security issues were solved with this release:
 
 All developers are strongly advised to perform this action.
 
-#### <span id="a20140221"> 21 February 2014 - Immediately upgrade commons-fileupload to version 1.3.1
+#### 21 February 2014 - Immediately upgrade commons-fileupload to version 1.3.1 {#a20140221}
 
 The Apache Struts Team recommends to immediately upgrade your Struts 2
 based projects to use the latest released version of Commons
