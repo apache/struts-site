@@ -10,9 +10,11 @@
   <title>{{ page.title }}</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
 
-  <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
   <script type="text/javascript" src="js/community.js"></script>
 </head>
@@ -27,6 +29,20 @@
 </article>
 
 {% include footer.html %}
+
+<script>
+$(function() {
+  return $("h2, h3, h4, h5, h6").each(function(i, el) {
+    var $el, icon, id;
+    $el = $(el);
+    id = $el.attr('id');
+    icon = '<i class="fa fa-link"></i>';
+    if (id) {
+      return $el.prepend($("<a />").addClass("header-link").attr("href", "#" + id).html(icon));
+    }
+  });
+});
+</script>
 
 </body>
 </html>
