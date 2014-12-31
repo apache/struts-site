@@ -9,12 +9,12 @@ title: Submitting patches
 
 Struts uses Git and to manage the repository the git-flow was adopted, to read more about that please follow the links below:
 
-- http://nvie.com/posts/a-successful-git-branching-model/
-- https://github.com/nvie/gitflow
+- [http://nvie.com/posts/a-successful-git-branching-model/](http://nvie.com/posts/a-successful-git-branching-model/)
+- [https://github.com/petervanderdoes/gitflow](https://github.com/petervanderdoes/gitflow)
 
-First step is to install git-flow locally on your box, please follow the steps from this link
+First step is to install git-flow AVH Edition locally on your box, please follow the steps from this link
 
-https://github.com/nvie/gitflow/wiki/Installation
+ - [https://github.com/petervanderdoes/gitflow/wiki](https://github.com/petervanderdoes/gitflow/wiki)
 
 Now you can clone Struts repository locally
 
@@ -73,6 +73,44 @@ If not already selected, click on `compare across forks.` Right now you must sel
 your fork and branch to compare the differences with Apache Struts develop branch.
 
 Finally hit `Create Pull Request` button and you are done!
+
+### How to merge Pull Requests
+
+This section is for committers only who want to merge incoming Pull Requests. Please remember that the repo at GitHub
+is read-only, we (committers) have limited rights to it.
+
+To merge PR please add GitHub as a new remote to your local copy
+
+    git remote add github git@github.com:apache/struts.git
+
+then you can fetch the PR localy and put it under a branch
+
+    git fetch github pull/28/head:some-branch    
+
+where
+
+ - `github` is remote name
+ - `28` is Pull Request id (https://github.com/apache/struts/pull/28)
+ - `some-branch` local branch name, it can be the same as used to create the PR
+ 
+now you can switch to this branch and test, review it
+ 
+    git checkout some-branch
+
+after reviewing, switch back to the `develop` branch and merge
+
+    git checkout develop
+    git merge some-branch -m "WW-XXXX Merges #28 which resolves ..."
+
+using `-m` you can define your own merge message, it's a good way to link merge commit with ticket in JIRA
+
+    git branch -d some-branch
+
+remove the branch as it isn't needed anymore
+
+    git push
+
+after pushing changes, `asfbot` will close the PR at GitHub. 
 
 ## Further reading
 
