@@ -53,7 +53,7 @@ the best overall starting point is the [Java EE Tutorial](http://docs.oracle.com
 If you've created web applications for other platforms, you
 may be able to follow along and visit the other references as needed. The core
 technologies used by Struts are also used by most other Java web development products, so
-the background information will be useful in any Java project.</p>
+the background information will be useful in any Java project.
 
 ### <a name="http"></a>HTTP, HTML and User Agents
 
