@@ -25,7 +25,7 @@ One medium security issue was solved with this release:
 **All developers are strongly advised to perform this action.**
 
 The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
-Servlet API 2.4, JSP API 2.0, and Java 5.
+Servlet API 2.4, JSP API 2.0, and Java 6.
 
 Should any issues arise with your use of any version of the Struts framework,
 please post your comments to the user list, and, if appropriate, file a tracking ticket.
