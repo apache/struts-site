@@ -31,6 +31,7 @@ or committee member.
 - Maurizio Cucchiara (mcucchiara at apache.org)
 - Johannes Geppert (jogep at apache.org)
 - Christian Grobmeier (grobmeier at apache.org)
+- Christoph Nenning (cnenning at apache.org)
 
 ## Committers
 
@@ -47,7 +48,6 @@ Other committers are listed in the chronological order, according to the date ea
 - John Lindal (jafl at apache.org)
 - Bruce A. Phillips (bphillips at apache.org)
 - Greg Huber (ghuber at apache.org)
-- Christoph Nenning (cnenning at apache.org)
 
 ## Emeritus Volunteers
 
