@@ -6,8 +6,7 @@ title: Volunteers
 # Volunteers
 
 The project consists of a diverse group of volunteers who share common values regarding collaborative,
-community-based open source development. If you are interested in some statistics, you can find
-some [here](http://www.apache.org/~vgritsenko/stats/projects/struts)
+community-based open source development.
 
 ## Project Management Committee Members
 
