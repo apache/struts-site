@@ -8,6 +8,15 @@ title: Announcements
   Skip to: <a href="announce-2014.html">Announcements - 2014</a>
 </p>
 
+#### 26 August 2015 - Security Bulletin S2-025 {#a20150826}
+
+The Apache Struts group is pleased to announce that a new security bulletin was published - 
+[S2-025](/docs/s2-025.html)
+
+Thanks to Taki Uchiyama from JPCERT/CC who reported two potential XSS vulnerabilities available 
+in older versions of The Apache Struts 2. Please read the mentioned security bulletin for more details
+and also reading our [Security guideline](/docs/security.html) will help you secure your application 
+
 #### 31 July 2015 - Struts 2.5-BETA1 (BETA) {#a20150731}
 
 The Apache Struts group is pleased to announce that Struts 2.5-BETA1 is available as a "BETA"
