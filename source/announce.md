@@ -8,6 +8,27 @@ title: Announcements
   Skip to: <a href="announce-2014.html">Announcements - 2014</a>
 </p>
 
+#### 1 October 2015 - Struts 2.5-BETA2 (BETA) {#a20151001}
+
+The Apache Struts group is pleased to announce that Struts 2.5-BETA2 is available as a "BETA" release.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release contains several breaking changes and improvements just to mention few of them:
+
+ - New security option was added - Strict Method Invocation (also known as Strict DMI), see WW-4540
+ - Add support for latest stable AngularJS in Maven archetype, see WW-4522   
+
+and many other improvements, please check the version notes
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments 
+to the user list, and, if appropriate, file a tracking ticket.
+
 #### 24 September 2015 - Struts 2.3.24.1 General Availability with Security Fix Release {#a20150924}
 
 The Apache Struts group is pleased to announce that Struts 2.3.24.1 is available as a "General Availability"
