@@ -48,7 +48,7 @@ If you are not familiar with the Java language generally,then the best starting 
 [Java Tutorial](http://docs.oracle.com/javase/tutorial/index.html).
 
 If you are familiar with Java, but not the mentioned technologies,
-the best overall starting point is the [Java EE Tutorial](http://docs.oracle.com/javaee/7/tutorial/doc/).
+the best overall starting point is the [Java EE Tutorial](https://docs.oracle.com/javaee/7/tutorial/).
 
 If you've created web applications for other platforms, you
 may be able to follow along and visit the other references as needed. The core
