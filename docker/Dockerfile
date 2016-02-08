@@ -4,23 +4,29 @@ LABEL Description="This image is used to support building Apache Struts main web
 RUN \
   apt-get update && \
   apt-get install -y \
+    make \
+    gcc \
+    sudo \
+    netcat \
+    iproute \
+    net-tools \
     vim \
     bzip2 \
-    gcc \
     git-core \
-    make \
     libssl-dev \
     libreadline-dev \
     zlib1g-dev \
     node \
-    sudo \
     curl && \
-    
+  apt-get clean && \
+
   addgroup --system --gid 1000 jekyll &&  \
   adduser --system --ingroup jekyll --uid 1000 --home /home/jekyll --disabled-password jekyll && \
   mkdir -p /srv/jekyll && \
   chown jekyll:jekyll /srv/jekyll && \
   echo "jekyll ALL=NOPASSWD:ALL" >> /etc/sudoers
+WORKDIR /srv/jekyll
+EXPOSE 4000
 USER jekyll
 RUN \
   cd && \
@@ -44,11 +50,8 @@ RUN \
   gem clean && gem install bundler --no-document && \
   
   sudo rm -rf /usr/lib/ruby/gems/*/cache/*.gem
-WORKDIR /srv/jekyll
-EXPOSE 4000
 ENV HOME /home/jekyll
-ENV HOSTNAME struts-jekyll
 ENV PATH ${PATH}:${HOME}/.rbenv/plugins/ruby-build/bin
 ENV PATH ${PATH}:${HOME}/.rbenv/bin
 ENV PATH ${PATH}:${HOME}/.rbenv/shims
-CMD ["bundle", "install"]
+CMD ["bundle", "exec", "jekyll", "serve", "--watch", "--trace", "--host=0.0.0.0"]
