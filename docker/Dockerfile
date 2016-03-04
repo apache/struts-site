@@ -25,6 +25,7 @@ RUN \
   mkdir -p /srv/jekyll && \
   chown jekyll:jekyll /srv/jekyll && \
   echo "jekyll ALL=NOPASSWD:ALL" >> /etc/sudoers
+ADD run-jekyll.sh /usr/bin/run-jekyll.sh
 WORKDIR /srv/jekyll
 EXPOSE 4000
 USER jekyll
@@ -54,4 +55,4 @@ ENV HOME /home/jekyll
 ENV PATH ${PATH}:${HOME}/.rbenv/plugins/ruby-build/bin
 ENV PATH ${PATH}:${HOME}/.rbenv/bin
 ENV PATH ${PATH}:${HOME}/.rbenv/shims
-CMD ["bundle", "exec", "jekyll", "serve", "--watch", "--trace", "--host=0.0.0.0"]
+ENTRYPOINT ["/usr/bin/run-jekyll.sh"]
