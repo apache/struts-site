@@ -8,6 +8,50 @@ title: Announcements
   Skip to: <a href="announce-2015.html">Announcements - 2015</a>
 </p>
 
+#### 18 March 2016 - Struts 2.3.28 General Availability with Security Fix Release {#a20160318}
+
+The Apache Struts group is pleased to announce that Struts 2.3.28 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release addresses three potential security vulnerabilities:
+
+  - [S2-028](/docs/s2-028.html)
+    Possible XSS vulnerability in pages not using UTF-8 was fixed.
+
+  - [S2-029](/docs/s2-029.html)
+    Forced double OGNL evaluation, when evaluated on raw user input in tag attributes, may lead to remote code execution.
+
+  - [S2-030](/docs/s2-030.html)
+    I18NInterceptor narrows selected locale to those available in JVM to reduce possibility of another XSS vulnerability.
+
+**All developers are strongly advised to perform this action.**
+
+
+This release contains several breaking changes and improvements just to mention few of them:
+
+ - New Configurationprovider type was introduced - ServletContextAwareConfigurationProvider, see WW-4410
+ - Setting status code in HttpHeaders isn't ignored anymore, see WW-4545
+ - Spring BeanPostProcessor(s) are called only once to constructed objects., see WW-4554
+ - OGNL was upgraded to version 3.0.13, see WW-4562
+ - Tiles 2 Plugin was upgraded to latest available Tiles 2 version, see WW-4568
+ - A dedicated assembly with minimal set of jars was defined, see WW-4570
+ - Struts2 Rest plugin properly handles JSESSIONID with DMI, see WW-4585
+ - Improved the Struts2 Rest plugin to honor Accept header, see WW-4588
+ - MessageStoreInterceptor was refactored to use PreResultListener to store messages, see WW-4605
+ - A new annotation was added to support configuring Tiles - @TilesDefinition, see WW-4606
+
+and many other improvements, please check the version notes
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 6.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
 #### 26 January 2016 - Struts 2.5-BETA3 (BETA) {#a20160126}
 
 The Apache Struts group is pleased to announce that Struts 2.5-BETA3 is available as a "BETA" release.
