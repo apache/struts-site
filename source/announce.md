@@ -8,6 +8,59 @@ title: Announcements
   Skip to: <a href="announce-2015.html">Announcements - 2015</a>
 </p>
 
+#### 19 April 2016 - Struts 2.3.28.1 General Availability with Security Fixes Release {#a20160419}
+
+The Apache Struts group is pleased to announce that Struts 2.3.28.1 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release addresses two potential security vulnerabilities:
+
+  - [S2-031](/docs/s2-031.html)
+    Possible RCE vulnerability in `XSLTResult` was fixed.
+
+  - [S2-032](/docs/s2-032.html)
+    Prevents execution of chained expressions based on new `isSequence` flag introduce in appropriated OGNL versions.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 6.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+#### 19 April 2016 - Struts 2.3.20.3 & 2.3.24.3 General Availability with Security Fixes Release {#a20160419-1}
+
+The Apache Struts group is pleased to announce that Struts 2.3.20.3 & Struts 2.3.24.3 are available as a "General Availability"
+releases. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release addresses two potential security vulnerabilities:
+
+  - [S2-029](/docs/s2-029.html)
+    Forced double OGNL evaluation, when evaluated on raw user input in tag attributes, may lead to remote code execution.
+
+  - [S2-031](/docs/s2-031.html)
+    Possible RCE vulnerability in `XSLTResult` was fixed.
+
+  - [S2-032](/docs/s2-032.html)
+    Prevents execution of chained expressions based on new `isSequence` flag introduce in appropriated OGNL versions.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 6.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
 #### 18 March 2016 - Struts 2.3.28 General Availability with Security Fix Release {#a20160318}
 
 The Apache Struts group is pleased to announce that Struts 2.3.28 is available as a "General Availability"
