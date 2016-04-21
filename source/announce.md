@@ -33,6 +33,8 @@ Servlet API 2.4, JSP API 2.0, and Java 6.
 Should any issues arise with your use of any version of the Struts framework, please post your comments
 to the user list, and, if appropriate, file a tracking ticket.
 
+You can download this version from our [download](download.html#struts-ga) page.
+
 #### 19 April 2016 - Struts 2.3.20.3 & 2.3.24.3 General Availability with Security Fixes Release {#a20160419-1}
 
 The Apache Struts group is pleased to announce that Struts 2.3.20.3 & Struts 2.3.24.3 are available as a "General Availability"
@@ -60,6 +62,8 @@ Servlet API 2.4, JSP API 2.0, and Java 6.
 
 Should any issues arise with your use of any version of the Struts framework, please post your comments
 to the user list, and, if appropriate, file a tracking ticket.
+
+You can download these versions from our [download](download.html#prior-releases) page.
 
 #### 18 March 2016 - Struts 2.3.28 General Availability with Security Fix Release {#a20160318}
 
