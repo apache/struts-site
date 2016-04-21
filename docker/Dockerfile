@@ -20,4 +20,4 @@ RUN \
 EXPOSE 4000
 WORKDIR /srv/jekyll
 USER jekyll
-ENTRYPOINT bundle install && bundle exec jekyll serve --watch --trace --host=0.0.0.0
+ENTRYPOINT bundle install && bundle exec jekyll serve --watch --trace --host=0.0.0.0 --force_polling
