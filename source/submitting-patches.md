@@ -7,26 +7,14 @@ title: Submitting patches
 
 ## Committers
 
-Struts uses Git and to manage the repository the git-flow was adopted, to read more about that please follow the links below:
-
-- [http://nvie.com/posts/a-successful-git-branching-model/](http://nvie.com/posts/a-successful-git-branching-model/)
-- [https://github.com/petervanderdoes/gitflow](https://github.com/petervanderdoes/gitflow)
-
-First step is to install git-flow AVH Edition locally on your box, please follow the steps from this link
-
- - [https://github.com/petervanderdoes/gitflow/wiki](https://github.com/petervanderdoes/gitflow/wiki)
-
-Now you can clone Struts repository locally
+Struts uses Git so you must install git client locally and then you can clone Struts repository:
 
     git clone https://git-wip-us.apache.org/repos/asf/struts.git    
 
-After cloning the repository locally you must initialize git-flow:
-
-     git flow init -d
-
 and done!
 
-Please remember that `master` branch cannot be modified directly from now on!
+Please remember that `master` branch should be used only for small fast commits, if you are working on a large
+change it is better to do it on dedicated branch or even via GitHub.
 
 ## Non-committers 
 
@@ -38,8 +26,8 @@ If you aren't a committer you must use this link below or mirror at GitHub
 
 **Please read carefully, this is very important!**
 
-If you prepared a patch to solve security issue in Apache Struts, in the first step contact us via
-[Security Mailing List](mailto:security@struts.apache.org). Don't publish any information about possible vulnerability.
+If you prepared a patch to solve security issue in the Apache Struts, in the first step contact us via
+[Security Mailing List](mailto:security@struts.apache.org). **Don't publish any information about possible vulnerability**.
 Thus will allow us coordinate the work and review if the information about issue can be disclosed publicly.
 We don't want to inform hackers before we can protect our users :-)
 
@@ -47,30 +35,30 @@ We don't want to inform hackers before we can protect our users :-)
 
 ## Contributing with GitHub
 
-Using GitHub mirror is the simplest way to contribute to Apache Struts if you are not a member
-of Struts Comitters group.
+Using GitHub mirror is the simplest way to contribute to the Apache Struts if you are not a member
+of Struts Committers group.
 
 First you must have an account created at GitHub to be able perform the next step. If you don't,
 go ahead and create one just right now! Please remember to setup
 [SSH keys](https://help.github.com/articles/generating-ssh-keys) and test them!
 
 When ready go to [https://github.com/apache/struts](https://github.com/apache/struts) and click `Fork` button
-in top right corner. This will fork Apache Struts repository and will create your private (but public) repository
+in top right corner. This will fork the Apache Struts' repository and will create your private (but public) repository
 with the source code.
 
 Next step is to clone your repo locally, information how to do this you will find on right sidebar of your repo
 under `SSH clone URL` headline.
 
-Now you are ready to work with Apache Struts code base. Perform your changes, commit them and
+Now you are ready to work with the Apache Struts' code base. Perform your changes, commit them and
 next push to GitHub! Remember: commit in Git is different than commit in Subversion!
 
-With your changes pushed to GitHub you can prepare a Pull Request (short: PR). Go to Apache Struts
+With your changes pushed to GitHub you can prepare a Pull Request (short: PR). Go to the Apache Struts
 mirror - [https://github.com/apache/struts](https://github.com/apache/struts) - then to
 [Pull request](https://github.com/apache/struts/pulls) and hit
 [New Pull Request](https://github.com/apache/struts/compare/) button.
 
 If not already selected, click on `compare across forks.` Right now you must select from the dropdowns on right
-your fork and branch to compare the differences with Apache Struts develop branch.
+your fork and branch to compare the differences with the Apache Struts' `master` branch.
 
 Finally hit `Create Pull Request` button and you are done!
 
@@ -83,7 +71,7 @@ To merge PR please add GitHub as a new remote to your local copy
 
     git remote add github git@github.com:apache/struts.git
 
-then you can fetch the PR localy and put it under a branch
+then you can fetch the PR locally and put it under a branch
 
     git fetch github pull/28/head:some-branch    
 
@@ -97,9 +85,9 @@ now you can switch to this branch and test, review it
  
     git checkout some-branch
 
-after reviewing, switch back to the `develop` branch and merge
+after reviewing, switch back to the `master` branch and merge
 
-    git checkout develop
+    git checkout master
     git merge some-branch -m "WW-XXXX Merges #28 which resolves ..."
 
 using `-m` you can define your own merge message, it's a good way to link merge commit with ticket in JIRA
