@@ -44,7 +44,7 @@ Apache Struts 2 is an elegant, extensible framework for creating enterprise-read
 The framework is designed to streamline the full development cycle, from building, to deploying,
 to maintaining applications over time.
 
-This release addresses two potential security vulnerabilities:
+These releases address three potential security vulnerabilities:
 
   - [S2-029](/docs/s2-029.html)
     Forced double OGNL evaluation, when evaluated on raw user input in tag attributes, may lead to remote code execution.
