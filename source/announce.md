@@ -8,6 +8,49 @@ title: Announcements
   Skip to: <a href="announce-2015.html">Announcements - 2015</a>
 </p>
 
+#### 9 May 2016 - Struts 2.5 General Availability {#a20160509}
+
+The Apache Struts group is pleased to announce that Struts 2.5 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release contains several breaking changes and improvements just to mention few of them:
+
+ - XWork source was merged into Struts Core source, it means that there be no more xwork artifact nor dedicated jar
+ - Spring dependency for tests and spring plugin was upgraded to version 4.1.6, see WW-4510.
+ - Struts2 internal logging api was marked as deprecated and was replaced with new Log4j2 api as logging layer, see WW-4504.
+ - Struts2 is now build with JDK7, see WW-4503.
+ - New plugin to support bean validation is now part of the distribution, see WW-4505.
+ - Deprecated plugins are now removed from the distribution and are not longer supported anymore.
+   - Dojo Plugin
+   - Codebehind Plugin
+   - JSF Plugin
+   - Struts1 Plugin
+ - New security option was added - Strict Method Invocation (also known as Strict DMI), see WW-4540
+ - Added support for latest stable AngularJS in Maven archetype, see WW-4522
+ - Dropped support for id and name - replaced with var, see WW-2069
+ - Dedicated archive with a minimal set of dependencies was introduced, see WW-4570
+ - It is possible to use multiple names when defining a result, see WW-4590
+ - Rest plugin honors Accept header, see WW-4588
+ - New result 'JSONActionRedirectResult' in json-plugin was defined, see WW-4591
+ - Tiles plugin was upgrade to the latest Tiles 3 and tiles3-plugin was dropped, see WW-4584
+ - JasperReports plugins was upgraded to JasperReport 6.0, see WW-4381
+ - OGNL was upgraded to version 3.1.4 and it breaks access to properties as it follows Java Bean Specification, see WW-4207 and WW-3909
+ - Annotations to configure Tiles, see WW-4594 and Tiles Plugin
+
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.html#struts-ga) page.
+
 #### 19 April 2016 - Struts 2.3.28.1 General Availability with Security Fixes Release {#a20160419}
 
 The Apache Struts group is pleased to announce that Struts 2.3.28.1 is available as a "General Availability"
