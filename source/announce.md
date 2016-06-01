@@ -8,6 +8,22 @@ title: Announcements
   Skip to: <a href="announce-2015.html">Announcements - 2015</a>
 </p>
 
+#### 1 June 2016 - Two security vulnerabilities reported {#a20160601}
+
+Two potential security vulnerabilities were reported which were already addressed in the latest Apache Struts 2 versions.
+Those reports just added other vectors of attack.
+
+ - [S2-033](/docs/s2-033.html)
+   Remote Code Execution can be performed when using REST Plugin with ! operator when Dynamic Method Invocation is enabled
+
+ - [S2-034](/docs/s2-034.html)
+   OGNL cache poisoning can lead to DoS vulnerability
+
+Please read carefully the Security Bulletins and take suggested actions. The simplest way to avoid those vulnerabilities
+in your application is to upgrade the Apache Struts to latest available version in 2.3.x series or to the Apache Struts 2.5.
+
+You can download those versions from our [download](download.html#struts-ga) page.
+
 #### 9 May 2016 - Struts 2.5 General Availability {#a20160509}
 
 The Apache Struts group is pleased to announce that Struts 2.5 is available as a "General Availability"
