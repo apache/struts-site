@@ -19,19 +19,19 @@ Please make sure you have read the guidelines on [this page](mail.html)
         <th>Description</th>
     </tr>
     <tr>
-        <td>Struts-Dev</td>
+        <td><a href="https://lists.apache.org/list.html?dev@struts.apache.org">Struts-Dev</a></td>
         <td><a href="mailto:dev-subscribe@struts.apache.org?subject=subscribe&amp;body=subscribe">subscribe</a></td>
         <td><a href="mailto:dev-unsubscribe@struts.apache.org?subject=unsubscribe&amp;body=unsubscribe">unsubscribe</a></td>
         <td>Contact other developers interested in expanding and improving Struts functionality.</td>
     </tr>
     <tr>
-        <td>Struts-Commits</td>
+        <td><a href="https://lists.apache.org/list.html?commits@struts.apache.org">Struts-Commits</a></td>
         <td><a href="mailto:commits-subscribe@struts.apache.org?subject=subscribe&amp;body=subscribe">subscribe</a></td>
         <td><a href="mailto:commits-unsubscribe@struts.apache.org?subject=unsubscribe&amp;body=unsubscribe">unsubscribe</a></td>
         <td>Receive notifications of changes to the Struts source code repository.</td>
     </tr>
     <tr>
-        <td>Struts-Issues</td>
+        <td><a href="https://lists.apache.org/list.html?issues@struts.apache.org">Struts-Issues</a></td>
         <td><a href="mailto:issues-subscribe@struts.apache.org?subject=subscribe&amp;body=subscribe">subscribe</a></td>
         <td><a href="mailto:issues-unsubscribe@struts.apache.org?subject=unsubscribe&amp;body=unsubscribe">unsubscribe</a></td>
         <td>Receive notifications from the Struts issue tracker.</td>
