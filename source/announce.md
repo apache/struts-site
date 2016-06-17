@@ -8,6 +8,61 @@ title: Announcements
   Skip to: <a href="announce-2015.html">Announcements - 2015</a>
 </p>
 
+#### 17 June 2016 - Struts 2.3.29 General Availability with Security Fixes Release {#a20160617}
+
+The Apache Struts group is pleased to announce that Struts 2.3.29 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release addresses two potential security vulnerabilities:
+
+  - [S2-035](/docs/s2-035.html)
+    Action name clean up is error prone
+
+  - [S2-036](/docs/s2-036.html)
+    Forced double OGNL evaluation, when evaluated on raw user input in tag attributes,
+    may lead to remote code execution (similar to S2-029)
+
+  - [S2-037](/docs/s2-037.html)
+    Remote Code Execution can be performed when using REST Plugin.
+
+  - [S2-038](/docs/s2-038.html)
+    It is possible to bypass token validation and perform a CSRF attack
+
+  - [S2-039](/docs/s2-039.html)
+    Getter as action method leads to security bypass
+
+  - [S2-040](/docs/s2-040.html)
+    Input validation bypass using existing default action method.
+
+  - [S2-041](/docs/s2-041.html)
+    Possible DoS attack when using URLValidator
+
+This release contains several breaking changes and improvements just to mention few of them:
+
+ - Json result type breaks
+ - MessageStorePreResultListener doesn't store messages for 3rd-party RedirectResult subclasses
+ - Multiple tiles.xml in web.xml
+ - New Tiles version can not find tiles*.xml files in sub-directories
+ - EmailValidator flags .cat emails as invalid
+ - Struts2 JSON Plugin: messages in fieldsErrors are serialized twice since jdk1.7_80
+ - Tile definition Inheritance/overriding is broken in Struts2 tiles plugin 2.3.28+
+ - `<s:submit>` generates a value attribute for type=image which violates W3C
+ - ClassCastException while generating report using Struts 2.3.28 and jasperreports 4.5.1
+
+**All developers are strongly advised to perform this action.**
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 6.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.html#struts-ga) page.
+
 #### 1 June 2016 - Two security vulnerabilities reported {#a20160601}
 
 Two potential security vulnerabilities were reported which were already addressed in the latest Apache Struts 2 versions.
@@ -145,7 +200,6 @@ This release addresses three potential security vulnerabilities:
     I18NInterceptor narrows selected locale to those available in JVM to reduce possibility of another XSS vulnerability.
 
 **All developers are strongly advised to perform this action.**
-
 
 This release contains several breaking changes and improvements just to mention few of them:
 
