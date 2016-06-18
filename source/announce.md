@@ -8,6 +8,44 @@ title: Announcements
   Skip to: <a href="announce-2015.html">Announcements - 2015</a>
 </p>
 
+#### 18 June 2016 - Struts 2.5.1 General Availability {#a20160618}
+
+The Apache Struts group is pleased to announce that Struts 2.5.1 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release addresses one potential security vulnerability:
+
+  - [S2-041](/docs/s2-041.html)
+    Possible DoS attack when using URLValidator
+
+Also all security patches applied to version Struts 2.3.29 were also applied to this version (just in case).
+
+This release contains several improvements just to mention few of them:
+
+ - contentType override ignored for JSONInterceptor - see WW-4558
+ - MessageStorePreResultListener does not store messages for 3rd-party RedirectResult subclasses - see WW-4618
+ - EmailValidator flags .cat emails as invalid - see WW-4626
+ - SMI cannot be disabled - see WW-4632
+ - Centre alignment does not seem to work in Velocity tags - see WW-4634
+ - Unable to process Jar entry (javassist-3.20.0-GA.jar) - see WW-4637
+ - Strict Method Invocation breaks Action-Less Results - see WW-4643
+ - When method is not allowed throw exception with meaningful message - see WW-4640
+ - update struts2 bom - see WW-4644
+
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.html#struts-ga) page.
+
 #### 17 June 2016 - Struts 2.3.29 General Availability with Security Fixes Release {#a20160617}
 
 The Apache Struts group is pleased to announce that Struts 2.3.29 is available as a "General Availability"
@@ -17,7 +55,7 @@ Apache Struts 2 is an elegant, extensible framework for creating enterprise-read
 The framework is designed to streamline the full development cycle, from building, to deploying,
 to maintaining applications over time.
 
-This release addresses two potential security vulnerabilities:
+This release addresses these potential security vulnerabilities:
 
   - [S2-035](/docs/s2-035.html)
     Action name clean up is error prone
