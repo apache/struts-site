@@ -8,6 +8,61 @@ title: Announcements
   Skip to: <a href="announce-2015.html">Announcements - 2015</a>
 </p>
 
+#### 7 July 2016 - Struts 2.5.2 General Availability {#a20160707}
+
+The Apache Struts group is pleased to announce that Struts 2.5.2 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+Struts 2.5.2 release contains several improvements just to mention few of them:
+
+ - SecurityMemberAccess exclude class design issue, see WW-4645
+ - Json deserialization does not work in 2.5.1, see WW-4650
+ - Negative number is considered an arithmetic expression, see WW-4651
+ - Wildcard redirect and path `/static/`, see WW-4656
+ - Upgrade commons-fileupload to the latest version, see WW-4648
+ - Cleans up logic in `StreamResult` and update docs, see WW-4655
+
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
+#### 7 July 2016 - Struts 2.3.30 General Availability {#a20160707-2}
+
+The Apache Struts group is pleased to announce that Struts 2.3.30 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release contains several breaking changes and improvements just to mention few of them:
+
+ - Pre-evaluation of "name" attribute stopped working, see WW-4641
+ - Unable to retrieve `s:hidden` field values, see WW-4642
+ - SecurityMemberAccess exclude class design issue, see WW-4645
+ - Negative number is considered an arithmetic expression, see WW-4651
+ - Upgrade commons-fileupload to the latest version, see WW-4648
+
+**All developers are strongly advised to perform this action.**
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 6.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-2330) page.
+
 #### 18 June 2016 - Struts 2.5.1 General Availability {#a20160618}
 
 The Apache Struts group is pleased to announce that Struts 2.5.1 is available as a "General Availability"
@@ -44,7 +99,7 @@ Servlet API 2.4, JSP API 2.0, and Java 7.
 Should any issues arise with your use of any version of the Struts framework, please post your comments
 to the user list, and, if appropriate, file a tracking ticket.
 
-You can download this version from our [download](download.html#struts-ga) page.
+You can download this version from our [download](download.cgi#struts-ga) page.
 
 #### 17 June 2016 - Struts 2.3.29 General Availability with Security Fixes Release {#a20160617}
 
@@ -99,7 +154,7 @@ Servlet API 2.4, JSP API 2.0, and Java 6.
 Should any issues arise with your use of any version of the Struts framework, please post your comments
 to the user list, and, if appropriate, file a tracking ticket.
 
-You can download this version from our [download](download.html#struts-ga) page.
+You can download this version from our [download](download.cgi#struts-ga) page.
 
 #### 1 June 2016 - Two security vulnerabilities reported {#a20160601}
 
@@ -115,7 +170,7 @@ Those reports just added other vectors of attack.
 Please read carefully the Security Bulletins and take suggested actions. The simplest way to avoid those vulnerabilities
 in your application is to upgrade the Apache Struts to latest available version in 2.3.x series or to the Apache Struts 2.5.
 
-You can download those versions from our [download](download.html#struts-ga) page.
+You can download those versions from our [download](download.cgi#struts-ga) page.
 
 #### 9 May 2016 - Struts 2.5 General Availability {#a20160509}
 
@@ -158,7 +213,7 @@ Servlet API 2.4, JSP API 2.0, and Java 7.
 Should any issues arise with your use of any version of the Struts framework, please post your comments
 to the user list, and, if appropriate, file a tracking ticket.
 
-You can download this version from our [download](download.html#struts-ga) page.
+You can download this version from our [download](download.cgi#struts-ga) page.
 
 #### 19 April 2016 - Struts 2.3.28.1 General Availability with Security Fixes Release {#a20160419}
 
@@ -185,7 +240,7 @@ Servlet API 2.4, JSP API 2.0, and Java 6.
 Should any issues arise with your use of any version of the Struts framework, please post your comments
 to the user list, and, if appropriate, file a tracking ticket.
 
-You can download this version from our [download](download.html#struts-ga) page.
+You can download this version from our [download](download.cgi#struts-ga) page.
 
 #### 19 April 2016 - Struts 2.3.20.3 & 2.3.24.3 General Availability with Security Fixes Release {#a20160419-1}
 
@@ -215,7 +270,7 @@ Servlet API 2.4, JSP API 2.0, and Java 6.
 Should any issues arise with your use of any version of the Struts framework, please post your comments
 to the user list, and, if appropriate, file a tracking ticket.
 
-You can download these versions from our [download](download.html#prior-releases) page.
+You can download these versions from our [download](download.cgi#prior-releases) page.
 
 #### 18 March 2016 - Struts 2.3.28 General Availability with Security Fix Release {#a20160318}
 
