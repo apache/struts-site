@@ -32,6 +32,7 @@ or committee member.
 - Christian Grobmeier (grobmeier at apache.org)
 - Christoph Nenning (cnenning at apache.org)
 - Greg Huber (ghuber at apache.org)
+- Aleksandr Mashchenko (amashchenko at apache.org)
 
 ## Committers
 
@@ -47,7 +48,6 @@ Other committers are listed in the chronological order, according to the date ea
 - Mathias Bogaert (pathos at apache.org)
 - John Lindal (jafl at apache.org)
 - Bruce A. Phillips (bphillips at apache.org)
-- Aleksandr Mashchenko (amashchenko at apache.org)
 
 ## Emeritus Volunteers
 
