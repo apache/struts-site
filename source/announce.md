@@ -8,6 +8,39 @@ title: Announcements
   Skip to: <a href="announce-2015.html">Announcements - 2015</a>
 </p>
 
+#### 18 October 2016 - Struts 2.3.31 General Availability {#a20161018}
+
+The Apache Struts group is pleased to announce that Struts 2.3.31 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release addresses two potential security vulnerabilities:
+
+- Possible path traversal in the Convention plugin [S2-042](/docs/s2-042.html)
+- Using the Config Browser plugin in production [S2-043](/docs/s2-043.html)
+
+Also this release contains several breaking changes and improvements just to mention few of them:
+
+- webconsole can always be accessed, see WW-4601
+- Space character and includeParams,see WW-4628
+- ParametersInterceptor excludeParams only applies to first instance of params interceptor in paramsPrepareParamsStack,see WW-4667
+- Select box does not pre-select chosen values,see WW-4675
+- StrutsPrepareAndExecuteFilter should check for response committed status,see WW-4674
+- Allow directly accessing I18N keys from Tiles definitions,see WW-4685
+
+**All developers are strongly advised to perform this action.**
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 6.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-2331) page.
+
 #### 7 July 2016 - Struts 2.5.2 General Availability {#a20160707}
 
 The Apache Struts group is pleased to announce that Struts 2.5.2 is available as a "General Availability"
