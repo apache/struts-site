@@ -8,6 +8,58 @@ title: Announcements
   Skip to: <a href="announce-2015.html">Announcements - 2015</a>
 </p>
 
+#### 21 October 2016 - Struts 2.5.5 General Availability {#a20161021}
+
+The Apache Struts group is pleased to announce that Struts 2.5.5 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release contains several breaking changes and improvements just to mention few of them:
+
+ - webconsole can always be accessed, see WW-4601
+ - Space character and includeParams, see WW-4628
+ - Empty <s:param name="p1" value=""/> is being supressed, see WW-4631
+ - remove ASM 3 from struts2, see WW-4646
+ - SMI do not work with JSON plugin, see WW-4649
+ - Concurrency issue in addDefaultResourceBundle, see WW-4652
+ - Action parameters should be included when building the URL to action, see WW-4654
+ - StreamResult closes outputstream early, see WW-4662
+ - NullPointerException when displaying a form without action attribute, see WW-4663
+ - ParametersInterceptor excludeParams only applies to first instance of params interceptor in paramsPrepareParamsStack, see WW-4667
+ - URL validator is case sensitive, see WW-4671
+ - Select box does not pre-select chosen values, see WW-4675
+ - Tiles-Plugin unable to load tiles definition XML, see WW-4679
+ - Missing brackets in checkbox.ftl of css_xhtml template, see WW-4681
+ - Move Struts Archetypes to dedicated project, see WW-4316
+ - Add dedicated class to represent Http Parameters, see WW-4572
+ - ParametersInterceptor should check collection index to against DOS, see WW-4620
+ - Move example portlet-app into struts-examples, see WW-4660
+ - Upgrade JFreeChart plugin to the latest version of JFreeChart, see WW-4670
+ - StrutsPrepareAndExecuteFilter should check for response commited status, see WW-4674
+ - ConversionErrorInterceptor to extend MethodFilterInterceptor, see WW-4676
+ - I18N Interceptor automatically validates Locale, see WW-4677
+ - Upgrade Tiles to 3.0.7 GA version, see WW-4680
+ - Allow directly accessing I18N keys from Tiles defintions, see WW-4685
+ - Merge two existing I18NInterceptors into one, see WW-4686
+ - Exclude "java.ext.dirs" when scanning for actions, see WW-4688
+ - CycleDetector - use enum instead of String constants, see WW-4689
+ - Upgrade Commons Collections to 4.1, see WW-4695
+ - Upgrade to Log4j 2.7, see WW-4696
+ - Warn about excluded action/method only when DMI is disabled, see WW-4697
+
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-gq) page.
+
 #### 18 October 2016 - Struts 2.3.31 General Availability {#a20161018}
 
 The Apache Struts group is pleased to announce that Struts 2.3.31 is available as a "General Availability"
