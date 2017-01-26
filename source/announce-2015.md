@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Announcements
+title: Announcements 2015
 ---
 # Announcements
 
