@@ -83,9 +83,8 @@ If you still need to change something, please remember to comit and push changes
     
 as `my-branch` was already connected with remote branch.
 
-The final step is to open a Pull Request (short: PR) against the original Apache Struts repo, go to Github. 
-Go to the Apache Struts mirror - [https://github.com/apache/struts](https://github.com/apache/struts) - then to
-[Pull request](https://github.com/apache/struts/pulls) and hit
+The final step is to open a Pull Request (short: PR) against the original Apache Struts repo. Go to the [Apache Struts 
+mirror]https://github.com/apache/struts), then to [Pull request](https://github.com/apache/struts/pulls) and hit
 [New Pull Request](https://github.com/apache/struts/compare/) button.
 
 If not already selected, click on `compare across forks.` Right now you must select from the dropdowns on right
