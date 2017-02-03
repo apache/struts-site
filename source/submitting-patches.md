@@ -14,7 +14,7 @@ Struts uses Git so you must install git client locally and then you can clone St
 and done!
 
 Please remember that `master` branch should be used only for small fast commits, if you are working on a large
-change it is better to do it on dedicated branch or even via GitHub.
+change it is better to do it on dedicated branch or even via GitHub (which is preferred).
 
 ## Non-committers 
 
@@ -46,14 +46,45 @@ When ready go to [https://github.com/apache/struts](https://github.com/apache/st
 in top right corner. This will fork the Apache Struts' repository and will create your private (but public) repository
 with the source code.
 
-Next step is to clone your repo locally, information how to do this you will find on right sidebar of your repo
-under `SSH clone URL` headline.
+Next step is to clone your the original repo locally
 
-Now you are ready to work with the Apache Struts' code base. Perform your changes, commit them and
-next push to GitHub! Remember: commit in Git is different than commit in Subversion!
+    git git@github.com:apache/struts.git
+    
+This will be an `origin`, you cannot push changes to the `origin` but don't worry, you will use your fork.
 
-With your changes pushed to GitHub you can prepare a Pull Request (short: PR). Go to the Apache Struts
-mirror - [https://github.com/apache/struts](https://github.com/apache/struts) - then to
+Now is time to add your fork as a remote
+
+    git remote add fork git@github.com:myusername/struts.git 
+
+Right now you should have two remotes defined for the repo, `origin` and `fork`, use below command to confirm that
+
+    git remote -v 
+
+Now you are ready to work with the Apache Struts' code base. Start with switching to `master` branch (if not already on it)
+
+    git checkout master
+    
+now is time to fetch any changes from remote repository
+
+    git fetch
+    git pull
+    
+you should create a branch to keep your changes and it must be done off the `master` branch
+
+    git checkout -b my-branch
+
+Do you changes and commit them to `my-branch`, when you're done you can push the changes to GitHub, to your fork.
+
+    git push -u fork my-branch
+    
+If you still need to change something, please remember to comit and push changes, but this time you can use just
+
+    git push
+    
+as `my-branch` was already connected with remote branch.
+
+The final step is to open a Pull Request (short: PR) against the original Apache Struts repo, go to Github. 
+Go to the Apache Struts mirror - [https://github.com/apache/struts](https://github.com/apache/struts) - then to
 [Pull request](https://github.com/apache/struts/pulls) and hit
 [New Pull Request](https://github.com/apache/struts/compare/) button.
 
@@ -61,6 +92,21 @@ If not already selected, click on `compare across forks.` Right now you must sel
 your fork and branch to compare the differences with the Apache Struts' `master` branch.
 
 Finally hit `Create Pull Request` button and you are done!
+
+After your PR got accepted and merged you must clean up your local repo, please witch branch to `master`
+
+    git checkout master
+    
+and fetch updates from remote
+
+    git fetch -p
+    git pull
+    
+and now you can delete your local branch
+
+    git branch -d my-branch
+    
+and you are ready to start working on another feature/issue.
 
 ### How to merge Pull Requests
 
