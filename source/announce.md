@@ -19,29 +19,25 @@ to maintaining applications over time.
 
 This release contains several breaking changes and improvements just to mention few of them:
 
- - Included XSL files' URI not being resolved for actions with result `type="xslt"`, see WW-2561
- - `ConcurrentModificationException` using `s:iterator` (intermittent), see WW-3019
- - `ObjectFactory` reporting ERROR's when you attempt to set parameters on a Redirect result, see WW-3170
- - preselect values in `<s:optgroup>`, see WW-4367
- - File upload error message always in default language, see WW-4636
- - Can no longer clear parameter on a `<s:url>` tag, see WW-4701
- - List based parameters no longer work when there is only one value, see WW-4702
- - `NullPointerException` in `ActionSupport` when use `ModelDriven`, see WW-4703
- - Multiselect parameter behavior different between struts 2.5.5 and 2.5.1, see WW-4707 
- - Invalid field value for field "id", see WW-4709
- - Scope interceptor always resets because of `org.apache.struts2.dispatcher.HttpParameters`, see WW-4715
- - `focusElement` form attribute not working, see WW-4718
- - Portlet Issue with `I18Interceptor`, see WW-4722
- - Allow `<constant/>` value substitution in XML configuration, see WW-4698
- - Upgrade to latest OGNL version, see WW-4704
- - Add support for long type to `<s:date>` tag, see WW-4705
- - Disallow access to `HttpParameters.toMap`, see WW-4710
- - `<s:text/>` tag should not evaluate `defaultMessage` against a `ValueStack` by default, see WW-4711
- - `TextProviderHelper#getText()` should perform cleaning of `defaultMessage`, see WW-4712
- - Refactor file upload support to allow create virtual representation of `java.io.File`, see WW-4717
- - Move `DefaultClassFinder` into `Convention` plugin, see WW-4719
- - `HttpParameters` should behave like a `Map`, see WW-4720
- - Add support for `roundingMode` in `<s:number/>` tag, see WW-4721
+ - How to handle 404 when using wildcard instead of error 500 when the wildcard method doesn't exist
+ - MessageStoreInterceptor must handle all redirects
+ - `MaxMultiPartUpload` limited to 2GB (Long --> Integer)
+ - Struts 2.5.8 no longer supports the `<include>` directive in the `struts.xml`
+ - `JSONValidationInterceptor` change static parameters names
+ - `ServletDispatcherResult` can't handle parameters anymore
+ - `TokenInterceptor` synchronized on `session.getId().intern()`
+ - XSLT error during transformation
+ - No default parameter defined for result `json` of type `org.apache.struts2.json.JSONResult`
+ - `I18Interceptor` ignores session or cookie Locale after first lookup failure
+ - `EmailValidator` does not accept new domain suffixes
+ - `AnnotationValidationInterceptor` : `NullPointerException` when method is null
+ - `struts.xml` include not loading in dependant jar files
+ - `AnnotationValidationInterceptor` should consult `UnknownHandler` before throwing `NoSuchMethodException`
+ - `ActionSupport.LOG` should be private
+ - Remove `StrutsObjectFactory` and define `StrutsInterceptorFactory` instead
+ - Make `OgnlValueStack` and `OgnlValueStackFactory` More Extensible
+ - Make interceptor parameters dynamic
+ - allow include other config files from classpath
 
 **All developers are strongly advised to perform this action.**
 
