@@ -73,7 +73,7 @@ you should create a branch to keep your changes and it must be done off the `mas
 
     git checkout -b my-branch
 
-Do you changes and commit them to `my-branch`, when you're done you can push the changes to GitHub, to your fork.
+Do your changes and commit them to `my-branch`, when you're done you can push the changes to GitHub, to your fork.
 
     git push -u fork my-branch
     
