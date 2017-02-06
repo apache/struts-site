@@ -22,7 +22,6 @@ This release contains several breaking changes and improvements just to mention 
  - How to handle 404 when using wildcard instead of error 500 when the wildcard method doesn't exist
  - MessageStoreInterceptor must handle all redirects
  - `MaxMultiPartUpload` limited to 2GB (Long --> Integer)
- - Struts 2.5.8 no longer supports the `<include>` directive in the `struts.xml`
  - `JSONValidationInterceptor` change static parameters names
  - `ServletDispatcherResult` can't handle parameters anymore
  - `TokenInterceptor` synchronized on `session.getId().intern()`
