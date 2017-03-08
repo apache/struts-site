@@ -140,7 +140,7 @@ Servlet API 2.4, JSP API 2.0, and Java 6.
 Should any issues arise with your use of any version of the Struts framework, please post your comments
 to the user list, and, if appropriate, file a tracking ticket.
 
-You can download this version from our [download](download.cgi#struts-2331) page.
+You can download this version from our [download](download.cgi#struts-23x) page.
 
 #### 7 July 2016 - Struts 2.5.2 General Availability {#a20160707}
 

@@ -31,6 +31,29 @@ to the user list, and, if appropriate, file a tracking ticket.
 
 You can download this version from our [download](download.cgi#struts-ga) page.
 
+#### 7 march 2017 - Struts 2.3.32 General Availability {#a20170307-2}
+
+The Apache Struts group is pleased to announce that Struts 2.3.32 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+This release addresses one potential security vulnerability:
+
+- Possible Remote Code Execution when performing file upload based on Jakarta Multipart parser - [S2-045](/docs/s2-045.html)
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 6.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-23x) page.
+
 #### 3 February 2017 - Struts 2.5.10 General Availability {#a20170203}
 
 The Apache Struts group is pleased to announce that Struts 2.5.10 is available as a "General Availability"
