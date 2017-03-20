@@ -23,7 +23,7 @@ Those plugins were released to allow users running older versions of the Apache 
 You don't have to migrate to the latest version (which is still preferable) but by applying one of those plugins, 
 your application won't be vulnerable anymore.
 
-It is a drop-in installation, just select a proper jar gile and copy it to `WEB-INF/lib` folder.
+It is a drop-in installation, just select a proper jar file and copy it to `WEB-INF/lib` folder.
 Please read the [README](https://github.com/apache/struts-extras) for more details and supported Apache Struts versions.
 
 **All developers are strongly advised to perform this action.**
