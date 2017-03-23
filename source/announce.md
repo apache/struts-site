@@ -8,6 +8,30 @@ title: Announcements
   Skip to: <a href="announce-2016.html">Announcements - 2016</a>
 </p>
 
+#### 23 march 2017 - Struts Extras secure Multipart plugins General Availability - versions 1.1 {#a20170323}
+
+The Apache Struts group is pleased to announce that the Apache Struts 2 Secure Jakarta Multipart parser plugin 1.1 
+and Apache Struts 2 Secure Jakarta Stream Multipart parser plugin 1.1 are available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+These releases address one critical security vulnerability:
+
+- Possible Remote Code Execution when performing file upload based on Jakarta Multipart parser
+  [S2-045](/docs/s2-045.html), [S2-046](/docs/s2-046.html)
+
+Those plugins were released to allow users running older versions of the Apache Struts secure their applications
+in an easy way. You don't have to migrate to the latest version (which is still preferable) but by applying one of those 
+plugins,  your application won't be vulnerable anymore.
+
+Please read the [README](https://github.com/apache/struts-extras) for more details and supported Apache Struts versions.
+
+**All developers are strongly advised to perform this action.**
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download those plugins from our [download](download.cgi#struts-extras) page.
+
 #### 20 march 2017 - Struts Extras secure Multipart plugins General Availability {#a20170320}
 
 The Apache Struts group is pleased to announce that the Apache Struts 2 Secure Jakarta Multipart parser plugin 
