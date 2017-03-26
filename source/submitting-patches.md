@@ -77,7 +77,7 @@ Do your changes and commit them to `my-branch`, when you're done you can push th
 
     git push -u fork my-branch
     
-If you still need to change something, please remember to comit and push changes, but this time you can use just
+If you still need to change something, please remember to commit and push changes, but this time you can use just
 
     git push
     
