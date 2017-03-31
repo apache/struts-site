@@ -4,10 +4,14 @@ title: Key Technologies Primer
 ---
 
 # Key Technologies Primer
+{:.no_toc}
 
   >  *"The time has come," the Walrus said, "To talk of many things:
   >  Of shoes -- and ships -- and sealing-wax -- Of cabbages -- and kings --
   >  And why the sea is boiling hot -- And whether pigs have wings."*
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Intention
 
@@ -55,7 +59,7 @@ may be able to follow along and visit the other references as needed. The core
 technologies used by Struts are also used by most other Java web development products, so
 the background information will be useful in any Java project.
 
-### <a class="anchor" name="http"></a>HTTP, HTML and User Agents
+### HTTP, HTML and User Agents {#http}
 
 The World Wide Web was built over the Hypertext Transfer Protocol
 [(HTTP)](http://www.ietf.org/rfc/rfc2616.txt?number=2616)
@@ -67,7 +71,7 @@ transport more the HTML, HTML from the browser to render the view.
 If you would like to learn HTML, we recommend
 [Getting started with HTML](http://www.w3.org/MarkUp/Guide/) by Dave Raggett.
 
-### <a class="anchor" name="cycle"></a>The HTTP Request/Response cycle
+### The HTTP Request/Response cycle {#cycle}
 
 A very important part of HTTP for the web developer is the request/response cycle. To use HTTP
 you have to make a request. A HTTP server, like a web server, is then obliged to respond. When you
@@ -79,7 +83,7 @@ If you are not familiar with the HTTP request/response you should learn about it
 There is a lot of help available in the internet, like
 [How does the Internet work?](http://docs.webplatform.org/wiki/tutorials/How_does_the_Internet_work)
 
-### <a class="anchor" name="java"></a>The Java Language and Application Frameworks
+### The Java Language and Application Frameworks
 
 Struts is written in the
 [Java programming language](http://www.oracle.com/us/technologies/java/overview/index.html).
@@ -88,7 +92,7 @@ object-orientated techniques. A good understanding of Java, and especially
 object-orientated programming (OOP) and threading, will help
 you get the most out of Struts.
 
-#### <a class="anchor" name="reflection"></a>Reflection and Introspection
+#### Reflection and Introspection {#reflection}
 
 Reflection is the process of determining which member fields and methods are available on an object.
 Introspection is a specialized form of reflection used by the JavaBean API.
@@ -102,7 +106,7 @@ between HTML forms and JavaBeans.
 While it is not necessary to have a deep understanding of these concepts when you start with Apache
 Struts, it will help you when your application grows and becomes more complex.
 
-#### <a class="anchor" name="resources"></a>Properties Files and ResourceBundles
+#### Properties Files and ResourceBundles {#resources}
 
 Java applications, including web applications, are often
 configured using [Properties](http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html)
@@ -120,14 +124,14 @@ Support for localizing an application was built into the framework from the grou
 Again the Java Tutorials provide
 [more information](http://docs.oracle.com/javase/tutorial/i18n/resbundle/concept.html).
 
-#### <a class="anchor" name="threads"></a>Threads
+#### Threads {#threads}
 
 With Struts 1 you were required to know a lot about how to write code which
 can run in a multi-threaded environment. With Struts 2 this is no longer necessary.
 In an Struts 2 environment each action caused by a HTTP request
 is a plain old Java object which is instanced for each request.
 
-### <a class="anchor" name="javascript"></a>JavaScript, AJAX, and SOAP
+### JavaScript, AJAX, and SOAP {#javascript}
 
 WIth HTTP and HTML you can already provide static web pages. Today this is much
 often not longer enough and your application users might expect a interactive user interface.
@@ -149,7 +153,7 @@ requests directly to a remote server, while still retaining a separation of conc
 the business logic and the page markup. Depending on your applications need, it might be not necessary
 for you to learn about SOAP.
 
-### <a class="anchor" name="containers"></a>Servlets, Filters, and Web Containers
+### Servlets, Filters, and Web Containers {#containers}
 
 Since Java is an object-orientated language, the
 [Java Servlet](http://docs.oracle.com/javaee/6/tutorial/doc/bnafd.html)
@@ -180,7 +184,7 @@ response. Filters are aggregated into a chain in which each filter
 has a chance to process the request and response before and after
 it is processed by subsequent filters (and the servlet that is ultimately called).
 
-### <a class="anchor" name="session"></a>Sessions
+### Sessions #{session}
 
 One of the key characteristics of HTTP is that it is
 *stateless*. In other words, there is nothing built in to
@@ -211,7 +215,7 @@ bypass this.
 
 Struts 2 provides easy ways to create and access a session.
 
-### <a class="anchor" name="webapp"></a>Web Applications
+### Web Applications {#webapp}
 
 Just as a HTTP server can be used to host several distinct
 websites, a servlet container can be used to host more than one web
@@ -229,7 +233,7 @@ application and deploy it to your server. This might require knowledge of
 build tools like [Maven](http://maven.apache.org) and addition reading
 in the documentation of your server vendor.
 
-### <a class="anchor" name="security"></a>Security
+### Security {#security}
 
 One detail that can be configured in the Web application deployment descriptor is container-managed security.
 Declarative security can be used to protect requests for URIs that match given patterns.
@@ -243,7 +247,7 @@ Other projects, like [Apache Shiro](http://shiro.apache.org/) or
 [Spring Security](http://www.springframework.org/spring-security/) might also help
 you to secure your web application.
 
-### <a class="anchor" name="jsp"></a>JavaServer Pages, JSP Tag Libraries, and JavaServer Faces
+### JavaServer Pages, JSP Tag Libraries, and JavaServer Faces {#jsp}
 
 If you write a classic web app, you might need a view component.
 One of the first of its kind was [JSP](http://www.oracle.com/technetwork/java/javaee/jsp/index.html).
@@ -275,7 +279,7 @@ presentation technologies available to Struts:
   - [Velocity](http://velocity.apache.org/)
   - [XSLT](http://www.w3.org/TR/xslt)
 
-### <a class="anchor" name="xml"></a>Extensible Markup Language (XML)
+### Extensible Markup Language (XML) {#xml}
 
 The features provided by the framework rely on a number of
 objects that are sometimes deployed using a configuration file written in
@@ -288,7 +292,7 @@ it is no longer crucial to write long XML documents to create a Struts
 application. If you would like to read more about it, please visit the page of the
 [Convention plugin](http://struts.apache.org/release/2.1.x/docs/convention-plugin.html).
 
-### <a class="anchor" name="mvc"></a>Model View Controller (MVC)
+### Model View Controller (MVC) {#mvc}
 
 Web applications based on JavaServer Pages sometimes
 commingle database code, page design code, and control flow
@@ -340,7 +344,7 @@ For more about MVC, see
   - [Smalltalk MVC framework](http://st-www.cs.uiuc.edu/users/smarch/st-docs/mvc.html).
   - [Wikipedia - MVC](http://en.wikipedia.org/wiki/Model_view_controller)
 
-## <a class="anchor" name="logic_frameworks"></a>Business Logic Frameworks
+## Business Logic Frameworks {#logic-frameworks}
 
 Most teams still roll their own business logic layer using
 plain old JavaBeans (POJOs). Though, business layer frameworks are beginning to emerge,
@@ -351,7 +355,7 @@ and now include:
   - [Commons Chain of Responsiblity](http://commons.apache.org/chain/)
   - or you can rely on features of the bundled Struts XWork
 
-### <a class="anchor" name="data_frameworks"></a>Data Access Frameworks
+## Data Access Frameworks {#data-frameworks}
 
 Most often, the business layer is seen to be distinct from
 the data access layer. Some teams roll their own data access objects (DAOs),

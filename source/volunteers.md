@@ -4,6 +4,10 @@ title: Volunteers
 ---
 
 # Volunteers
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 The project consists of a diverse group of volunteers who share common values regarding collaborative,
 community-based open source development.

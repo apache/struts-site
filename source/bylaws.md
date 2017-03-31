@@ -3,7 +3,13 @@ layout: default
 title: Project Management Committee Charter
 ---
 
-# Apache Struts PMC Charter
+# Project Management Committee Charter
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
+
+## Apache Struts PMC Charter
 
 Struts is a Project of the [Apache Software Foundation](http://apache.org/foundation) (ASF), formed by a resolution
 of the [ASF Board of Directors](http://apache.org/foundation/board/). As an ASF Project, Struts is subject to the
@@ -13,54 +19,54 @@ The Project Charter incorporates by reference the current version
 of [How the ASF works](http://apache.org/foundation/how-it-works.html, with the additional guidelines
 and clarifications found herein.
 
-# Roles and Responsibilities
+## Roles and Responsibilities
 
 The roles and responsibilities that people can assume in the project are based on merit.
 Everybody can help no matter what their role. Those who have been long term or valuable contributors to
 the project can earn the right to commit directly to the source repository and to cast binding votes during
 the decision-making process.
 
-# Users.
+## Users
 
 Users are the people who use the products of the Project. People in this role aren't contributing code,
 but they are using the products, reporting bugs, making feature requests, and such. This is by far
 the most important category of people as, without users, there is no reason for the Project.
 When a user starts to contribute code or documentation patches, they become a Contributor.
 
-# Contributors.
+## Contributors
 
 Contributors are the people who write code or documentation patches or contribute positively to the project
 in other ways. When a volunteer's patch is applied, the contribution is recognized in the version control log.
 
 
-# Committers.
+## Committers
 
 Contributors who give frequent and valuable contributions to a subproject of the Project can have their status
 promoted to that of a "*Committer*" for that subproject. A Committer has write access to the source code repository.
 Committer status is granted by the Project Management Committee by majority vote.
 
 
-# Project Management Committee (PMC).
+## Project Management Committee (PMC)
 
 Committers and other volunteers who frequently participate with valuable contributions may have their status promoted
 to that of a "*Project Management Committee Member*". The PMC is responsible for the day-to-day management
 of the Project.
 
-# Management
+### Management
 
 The Vice President is appointed by the ASF Board. The Vice President is assisted by the Project Management Committee
 (PMC) and also serves as the PMC chair. The PMC may nominate new members. Nominees may then be approved
 with a 3/4 majority vote of the PMC. Membership can be revoked by a unanimous vote of all the active PMC members
 other than the member in question. The list of active PMC members can be found on our [Volunteers page](volunteers.html).
 
-# PMC Duties
+### PMC Duties
 
 The PMC is responsible for the day-to-day management of the Struts Project. The PMC oversees all changes
 made to the codebase. The PMC must ensure that all code under a Apache Struts repository is the lawful property
 of the Foundation and may be distributed under the [Apache Software License](http://apache.org/licenses/).
 All releases of a Struts subproject must be sanctioned by the Project Management Committee.
 
-# Subprojects
+### Subprojects
 
 Subprojects are the Project's unit of release. Each subproject should represent an implementation of a Struts framework
 or a related component. Each subproject should focus on creating, maintaining, and releasing a single software
@@ -75,13 +81,13 @@ identify the initial source from which the project is to be populated, identify 
 repositories, if any, which are to be created. Creation of a new subproject requires approval by a 3/4 majority
 vote of the PMC.
 
-# Decision Making
+## Decision Making
 
 All [Volunteers](http://apache.org/foundation/how-it-works.html#roles) (Users, Developers, Committers, PMC Members)
 are encouraged to participate in the decision-making process, but binding decisions are made only
 by the Project Management Committee.
 
-# Voting
+### Voting
 
 Any subscriber to the list may [vote](http://apache.org/foundation/voting.html) on any issue or action item.
 Votes from Developers and Committers are especially welcome. However, the only binding votes are those cast by a PMC
@@ -139,7 +145,7 @@ Voting represent consensus and votes are never final. Circumstances change, and 
 to a +1 after discussion, and likewise a +1 may be converted to a -1. By convention, Committers should allow a vote
 to circulate for 72 hours before taking action.
 
-# Action Items
+## Action Items
 
 All decisions revolve around "*Action Items*". Action Items consist of the following:
 - Long Term Plans
@@ -149,28 +155,28 @@ All decisions revolve around "*Action Items*". Action Items consist of the follo
 - Release Plan
 - Release Grade
 
-## Long Term Plans
+### Long Term Plans
 
 Long term plans are simply announcements that group members are working on particular issues related to the Project.
 These items are not voted on, but Committers and PMC Members who do not agree with a particular plan, or think that
 an alternative plan would be better, are obligated to inform the group of their feelings.
 
-## Short Term Plan
+### Short Term Plan
 
 Short term plans are announcements that a volunteer is working on a particular set of documentation or code files
 with the implication that other volunteers should avoid them or try to coordinate their changes.
 
-## Product Changes
+### Product Changes
 
 All product changes to the repository are subject to lazy consensus.
 
-## Showstoppers
+### Showstoppers
 
 Showstoppers are issues that require a fix be in place before the next public release. They are designated as "blockers"
 in the issue tracker in order to focus special attention on these problems. An issue becomes a showstopper when it is
 designated as such in the issue tracker by a PMC member and remains so by lazy consensus.
 
-## Release Plan
+### Release Plan
 
 A release plan must be used to keep all volunteers aware of when a release is desired, whether it will be a major,
 minor, or milestone release, who will be the release manager, when the repository will be tagged to create
@@ -178,23 +184,20 @@ the distribution, and other assorted information to keep volunteers from trippin
 plan must be incorporated into the product documentation, or otherwise announced to the DEV list.
 Lazy majority decides each issue in a release plan.
 
-
-## Release Grade
+### Release Grade
 
 After a proposed release is built, it must be tested and classified before being released to the general public.
 The proposed release may be assigned "Alpha", "Beta" or "General Availability" classifications by majority vote.
 Once a release is classified by the PMC Members, it may be distributed to the general public on behalf of the Foundation.
 Distributions may be reclassified or withdrawn by majority vote, but the release number may not be reused by another distribution.
 
-
-# Sandbox
+## Sandbox
 
 Pursuant to the ["Rules for Revolutionaries"](http://incubator.apache.org/learn/rules-for-revolutionaries.html),
 any committer may submit experimental material to the Sandbox area of the repository at his or her own discretion.
 
-Material must be moved from the sandbox to the main repository before it can be released.
-
-If a sandbox whiteboard becomes dormant for six or more months, it may be moved to the archive section of the repository.
+Material must be moved from the sandbox to the main repository before it can be released. If a sandbox whiteboard 
+becomes dormant for six or more months, it may be moved to the archive section of the repository.
 
 Experimental material that is outside the scope of the Struts project may also be  submitted to the
 [Apache Labs](http://labs.apache.org/)

@@ -4,6 +4,10 @@ title: Helping
 ---
 
 # How to Help FAQ
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
   - ### What can my company do to help support Apache Struts?
 

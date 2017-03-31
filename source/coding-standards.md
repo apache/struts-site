@@ -3,7 +3,13 @@ layout: default
 title: Coding standards
 ---
 
-# In the first place
+# Coding standards
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
+
+## In the first place
 
 Please remember that most of the time others will read your code. Focusing on that allow you to gain required perspective
 about how code should look like. Defaults, margins, convention doesn't matter if what you write is hard to read.

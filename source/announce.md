@@ -3,6 +3,10 @@ layout: default
 title: Announcements
 ---
 # Announcements
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 <p class="pull-right">
   Skip to: <a href="announce-2016.html">Announcements - 2016</a>

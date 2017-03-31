@@ -4,6 +4,10 @@ title: From a birds eye
 ---
 
 # From a birds eye
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## The Apache Struts web framework
 

@@ -4,6 +4,10 @@ title: Kickstart FAQ
 ---
 
 # Kickstart FAQ
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## General
 

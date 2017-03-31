@@ -4,6 +4,10 @@ title: Source Code
 ---
 
 # Source Code
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 As a convenience to developers who are helping to create and maintain the Apache Struts framework,
 public access to the live source code repository is available. This is our one-and-only development repository.
@@ -30,7 +34,7 @@ With the [Git client](http://git-scm.com/) installed, obtaining a working copy o
 For more about using version control systems at Apache, see the ASF's
 [Source Code Repositories](http://www.apache.org/dev/#version-control) page.
 
-# Building Apache Struts
+## Building Apache Struts
 
 If you are building Apache Struts from source, we recommend that you install and use
 [Apache Maven 3.](http://maven.apache.org) During the build process, Maven will automatically acquire
@@ -53,7 +57,7 @@ For more about using Maven to build Struts 2, see
 
 For more about using Maven to build Struts 1, see our [Maven wiki page.](http://wiki.apache.org/struts/StrutsMaintenanceMaven)
 
-# NightlyBuilds
+## NightlyBuilds
 
 As part of our continuous integration practice, we also make available each morning the
 [latest stable development build.](https://builds.apache.org/view/S-Z/view/Struts/job/Struts2-JDK6/lastStableBuild/org.apache.struts$struts2-assembly/)
@@ -66,7 +70,7 @@ If you do **not** plan to contribute to the development of the framework, then y
 NOTE: The Struts 2 nightly build is not fully operational. We suggest that contributors checkout
 the [source code](#SourceCode) instead.
 
-# Test Builds
+## Test Builds
             
 As we prepare for a new release, the project group may create interim *test builds*. When test builds are available,
 we post them [here](http://people.apache.org/builds/struts/) in binary, source and library distributions.
@@ -78,7 +82,7 @@ made the "Best Available" release. If the group feels that a build requires more
 as "Beta" release. When a test build is upgraded to "Beta" or "GA" by a vote of the project members,
 we make the distribution available as a formal [release.](downloads.html)
 
-# Maven Snapshots
+## Maven Snapshots
 
 When a distribution is first made available, it is rated as a development build or "snapshot". Later, the quality
 of the distribution may be upgraded to "Beta" or "General Availability", based on feedback from the community,
@@ -94,7 +98,7 @@ specify the ASF Snapshot repository in the project's POM.
     </repositories>
 
 
-# Licensing of Apache Struts Builds
+## Licensing of Apache Struts Builds
 
 Apache Struts 2 source code and documentation is licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements. See the NOTICE file included in any distribution for additional information
