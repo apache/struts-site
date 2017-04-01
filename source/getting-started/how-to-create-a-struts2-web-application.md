@@ -52,6 +52,7 @@ project folder structure. In your pom.xml include the following:
     <finalName>basic_struts</finalName>
 </build>
 ```
+{:title="Final name"}
 
 __Step 2 - Add index.jsp__
 
