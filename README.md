@@ -6,16 +6,16 @@ To test website locally you can use the below command:
 
  > bundle exec jekyll serve -w --trace --host 0.0.0.0
 
-or you can use `Docker`` (please install it first) with one of the provided scripts:
+or you can use `Docker` (please install it first) with one of the provided scripts:
 
  > ./docker-run.fish
 
-when running fish-shell, or:
+when running `fish-shell`, or:
 
  > ./docker-run.sh
 
-when running Bash or Sh.
+when running `Bash` or `Sh`.
 
-All pages are generated into 'content' folder.
+All pages are generated into the `content` folder.
 
 There are two scripts used to build the image but this should be used only when `Dockerfile` was modified.
