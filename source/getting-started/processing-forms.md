@@ -94,7 +94,7 @@ To collect the above information we'll use a Struts 2 form. When creating this f
     <s:form action="register">
 
       <s:textfield name="personBean.firstName" label="First name" />
-      <s:textfield  name="personBean.lastName" label="Last name" />
+      <s:textfield name="personBean.lastName" label="Last name" />
       <s:textfield name="personBean.email"  label ="Email"/>  
       <s:textfield name="personBean.age"  label="Age"  />
  
