@@ -227,3 +227,5 @@ If we implement the same concept by creating _es.properties versions of `global.
 __Summary__
 
 We've covered how to use message resources (resource bundles) in Struts 2 and also introduced how Struts 2 enables internationalization (i18n) in this tutorial. To fully understand these concepts and learn more about Struts 2 consult the main Struts 2 documentation available at [http://struts.apache.org](http://struts.apache.org).
+
+|Return to [Form validation](form-validation.html)|or|onward to [Exception handling](exception-handling.html)|

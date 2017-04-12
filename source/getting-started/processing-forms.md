@@ -229,3 +229,5 @@ If everything is correct, you should be able to create the war file, deploy the 
 Fill out the form and click the submit button. You should then see the thankyou.jsp page.
 
 ![thanyoujsp.png](attachments/att14975000_thanyoujsp.png)
+
+|Return to [Coding Struts 2 Actions](coding-actions.html)|or|onward to [Form validation](form-validation.html)|

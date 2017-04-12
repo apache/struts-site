@@ -121,3 +121,5 @@ The fieldexpression validator is useful when doing conditional validation of a u
 __Summary__
 
 The Struts 2 framework provides easy-to-use validation methodologies. You can add a validate method to the Action class or have a separate XML file with validation rules or you can use a combination of both methodologies.
+
+|Return to [Form tags](form-tags.html)|or|onward to [Control tags](control-tags.html)|

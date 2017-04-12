@@ -110,3 +110,5 @@ In addition to specifying your own stack of interceptors, you can also write you
 __Summary__
 
 Interceptors provide the Struts 2 framework with both power and flexibility. Developers may add additional interceptors (either ones provided by Struts 2 or ones they create) to the stack of interceptors executed when an Action class is called.
+
+|Return to [Annotations](annotations.html)|or|onward to [Unit Testing](unit-testing.html)|

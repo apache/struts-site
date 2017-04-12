@@ -19,7 +19,7 @@ The Struts 2 config browser plugin provides details about the configuration the 
 To use the plugin in your application, just call index.action in namespace config-browser. For example you could have the following link on your admin page (or just anywhere during your development).
 
 ```html
-<a href="<s:url action="index" namespace="config-browser" />">Launch the configuration browser</a>
+<a href='<s:url action="index" namespace="config-browser" />'>Launch the configuration browser</a>
 ```
 
 In the example application, there is a link to the configuration browser on the index.jsp page.
@@ -57,3 +57,5 @@ __Summary__
 Using the configuration browser plugin and the debugging interceptor can assist you in trouble shooting a problem with a Struts 2 web application. These tools should only be used in development.
 
 Prior to creating your war file for deployment to production you should change devmode to false and remove the debugging links. You may also want to adjust the level of logging in your log properties file to a higher level (info or warn) to reduce the number of log messages.
+
+|Return to [Exception handling](exception-handling.html)|or|onward to [Form tags](form-tags.html)|

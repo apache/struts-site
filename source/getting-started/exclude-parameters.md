@@ -84,3 +84,5 @@ To see the log messages written when not excluding the submit parameter remove t
 __Summary__
 
 It's a nice feature of the Struts 2 framework that it logs during development which request parameters will and will not be processed. During development of a Struts 2 web application it's a good practice to review these log messages to determine if there are any parameters that the framework should not process. For those parameters the Struts 2 framework should not process add the parameter name (or a regular expression that can be used to identify multiple parameter names) to the comma-delimited list that is the value for the `<param name="params.excludeParams">` node.
+
+|Return to [Preparable Interface](preperable-interface.html)|or|back to [Getting started](index.html)|

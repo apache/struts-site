@@ -132,3 +132,5 @@ In the `struts.xml` configuration file you must specify the Spring id value for
 __Summary__
 
 In this tutorial we reviewed how to use the Struts 2 Spring plugin to integrate Spring and Struts. By using the Struts 2 Spring plugin you can have Spring manage the dependencies of your ActionSupport classes. Of course you can also take advantage of the many other benefits (AOP, Spring JDBC) that the Spring framework provides.
+
+|Return to [Themes](themes.html)|or|onward to [Annotations](annotations.html)|

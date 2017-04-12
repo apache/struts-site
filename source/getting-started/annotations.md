@@ -92,3 +92,5 @@ When we don't use a struts.xml file, we can set the value of these Struts 2 para
 __Summary__
 
 We've just scratched the surface of what the Struts 2 convention plugin provides to reduce or eliminate the need to use an XML file to configure your Struts 2 application. The Struts 2 Convention plugin provides ways to map multiple actions to the same method, map results to different view pages, map errors to view pages, and much more. Be sure to read through the [Convention Plugin](//struts.apache.org/docs/convention-plugin.html) documentation for alternative ways to configure your Struts 2 application.
+
+|Return to [Spring and Struts 2](spring.html)|or|onward to [Introducing Interceptors](introducing-interceptors.html)|

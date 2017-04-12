@@ -41,3 +41,5 @@ When you run the example application, look in the log to see when the prepare me
 __Summary__
 
 When your application requires specific statements to be executed no matter which method of the Action class is called or when validation fails, you should implement the Preparable interface and override the prepare method.
+
+|Return to [HTTP Session](http-session.html)|or|onward to [Exclude Parameters](exclude-parameters.html)|

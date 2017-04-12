@@ -144,3 +144,5 @@ __Summary__
 You can easily override the default theme used by Struts 2 to control the appearance and layout of a Struts 2 tag. Each Struts 2 tag has an associated template file (e.g. `select.ftl`) that is in a folder named after the theme (e.g. xhtml). By default the Struts framework will look in the Struts 2 core Jar file for the theme folder and templates. However, if you include your own theme folder (e.g. KUTheme) under webapp/template (or WebContent/template in the Ant version) and specify that folder name (e.g. KUTheme) as the value for the theme attribute, then the Struts 2 framework will look in that theme folder for the tag's template.
 
 To learn more about how to use the Struts 2 themes and how you can override them, visit [Themes and Templates Documentation](//struts.apache.org/docs/themes-and-templates.html) .
+
+|Return to [Wildcard method selection](wildcard-method-selection.html)|or|onward to [Spring and Struts 2](spring.html)|

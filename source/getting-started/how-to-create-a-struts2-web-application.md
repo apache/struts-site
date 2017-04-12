@@ -225,3 +225,5 @@ __Getting Help__
 The [Struts 2 user mailing list](/mail.html) is an excellent place to get help.  If you are having a problem getting 
 this Basic Struts 2 application to work search the Struts 2 mailing list. If you don't find an answer to your problem, 
 post a question on the mailing list.  
+
+|Return to [Getting started](index.html)|or|onward to [Hello World using Struts 2](hello-world-using-struts2.html)|

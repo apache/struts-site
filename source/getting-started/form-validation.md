@@ -93,3 +93,5 @@ This tutorial covered validating a user's form input by adding a validate method
 __Up Next__
 
 In our next tutorial we'll cover how to use message resource files to separate out the text from the view page.
+
+|Return to [Processing Forms](processing-forms.html)|or|onward to [Message resource files](message-resource-files.html)|

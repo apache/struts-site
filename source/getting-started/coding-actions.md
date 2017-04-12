@@ -116,3 +116,4 @@ __Summary__
 
 This tutorial introduced you to how to code the Action class so it can process user input on a form or values in a query string parameter. If the form had numerous fields, it would be cumbersome to have a set method that matches up with each form field. So our next tutorial will cover how to integrate a model class, form fields in the view and form processing in the Action class.
 
+|Return to [Using Struts 2 Tags](using-tags.html)|or|onward to [Processing Forms](processing-forms.html)|

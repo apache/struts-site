@@ -115,3 +115,5 @@ The example project includes both methods for mitigating the SessionAware securi
 __Summary__
 
 When your Action class needs to access the HTTP session object implement the SessionAware interface and override the setSession method. Be sure to also implement the ParameterNameAware interface and override the acceptableParameterName method to mitigate a potential security vulnerability. If you have multiple actions that implement SessionAware then consider modifying the params interceptor's excludeParams value as part of your Struts 2 package setup.
+
+|Return to [Unit Testing](unit-testing.html)|or|onward to [Preparable Interface](preperable-interface.html)|

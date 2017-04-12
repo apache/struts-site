@@ -96,3 +96,5 @@ When the exception interceptor is triggered it adds to the fields available for 
 __Summary__
 
 Struts 2 provides a easy to use configuration for handling uncaught exceptions and redirecting users to appropriate view pages. You can configure exception handling to be global for all actions or to just for a specific action. You can also enable the Struts 2 framework to log the uncaught exceptions.
+
+|Return to [Message resource files](message-resource-files.html)|or|onward to [Debugging Struts](debugging-struts.html)|

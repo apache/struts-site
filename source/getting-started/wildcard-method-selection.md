@@ -74,3 +74,5 @@ The Struts 2 documentation also recommends turning off the option to use the dyn
 __Summary__
 
 By using the wildcard method selection technique explained above, you can significantly reduce the number of action mapping nodes you need to write and manage in the Struts 2 XML configuration file.
+
+|Return to [Form validation using XML](form-validation-using-xml.html)|or|onward to [Themes](themes.html)|

@@ -210,3 +210,5 @@ Since getMessageStore of HelloWorldAction class returns a MessageStore object, S
 ![displaymessagestore.png](attachments/att14974995_displaymessagestore.png)
 
 We covered a lot in this tutorial, but we've really only scratched the surface of how to use the Struts 2 tags. Consult the _Struts 2 Tag Reference_  for much more information about all the Struts 2 tags.
+
+|Return to [Hello World using Struts 2](hello-world-using-struts2.html)|or|onward to [Coding Struts 2 Actions](coding-actions.html)|

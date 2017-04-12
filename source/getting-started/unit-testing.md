@@ -108,3 +108,5 @@ In the last assertEquals statement my test checks that the Struts 2 framework re
 __Summary__
 
 There is much more you can do with the Struts 2 JUnit plugin to help you test the methods of your Action class in conjunction with the Struts 2 framemwork. If your Struts 2 application uses Spring to inject dependencies into the Action class then the Struts 2 JUnit Plugin has a StrutsSpringTestCase that your test class should extend. Please read [Testing Actions](//struts.apache.org/docs/testing-actions.html) to learn more.
+
+|Return to [Introducing Interceptors](introducing-interceptors.html)|or|onward to [HTTP Session](http-session.html)|

@@ -217,3 +217,5 @@ Your browser sends to the web server a request for the URL [http://localhost:808
 The framework uses Actions to process HTML forms and other requests. The `Action` class returns a result-name such as `SUCCESS`, `ERROR` or `INPUT`. Based on the mappings loaded from the `struts.xml`, a given result-name may select a page (as in this example), another action, or some other web resource (image, PDF).
 
 When a server page is rendered, most often it will include dynamic data provided by the Action. To make it easy to display dynamic data, the framework provides a set of tags that can be used along with HTML markup to create a server page.
+
+|Return to [How to create a Struts 2 web application](how-to-create-a-struts2-web-application.html)|or|onward to [Using Struts 2 Tags](using-tags.html)|
