@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Themes
 ---
 ## Themes
@@ -26,16 +26,16 @@ generates this HTML markup:
 
 ```html
 <tr>
-<td class="tdLabel">
-<label for="save_personBean_sport" class="label">Favorite sport:</label>
-</td>
-<td>
-<select name="personBean.sport" id="save_personBean_sport">
-    <option value="football">football</option>
-    <option value="baseball">baseball</option>
-    <option value="basketball" selected="selected">basketball</option>
-</select>
-</td>
+    <td class="tdLabel">
+        <label for="save_personBean_sport" class="label">Favorite sport:</label>
+    </td>
+    <td>
+        <select name="personBean.sport" id="save_personBean_sport">
+            <option value="football">football</option>
+            <option value="baseball">baseball</option>
+            <option value="basketball" selected="selected">basketball</option>
+        </select>
+    </td>
 </tr>
 ```
 

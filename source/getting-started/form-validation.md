@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Form Validation
 ---
 ## Form Validation
@@ -31,19 +31,19 @@ Add the following validate method to Register.java (the Action class).
 **validate method**
 
 ```java
-    public void validate(){
-        if (personBean.getFirstName().length() == 0) {
-            addFieldError("personBean.firstName", "First name is required.");
-        }
-
-        if (personBean.getEmail().length() == 0) {
-            addFieldError("personBean.email", "Email is required.");
-        }
-
-        if (personBean.getAge() < 18) {
-            addFieldError("personBean.age", "Age is required and must be 18 or older");
-        }
+public void validate(){
+    if (personBean.getFirstName().length() == 0) {
+        addFieldError("personBean.firstName", "First name is required.");
     }
+
+    if (personBean.getEmail().length() == 0) {
+        addFieldError("personBean.email", "Email is required.");
+    }
+
+    if (personBean.getAge() < 18) {
+        addFieldError("personBean.age", "Age is required and must be 18 or older");
+    }
+}
 ```
 
 When the user presses the submit button on the register form, Struts 2 will transfer the user's input to the personBean's instance fields. Then Struts 2 will automatically execute the validate method. If any of the if statements are true, Struts 2 will call its addFieldError method (which our Action class inherited by extending ActionSupport).
@@ -69,7 +69,7 @@ So when validation fails and Struts 2 returns input, the Struts 2 framework will
 So the following addFieldError method call:
 
 ```java
-    addFieldError("personBean.firstName", "First name is required.")
+addFieldError("personBean.firstName", "First name is required.")
 ```
 
 will cause the message "First name is required" to be displayed above the firstName field on the form.

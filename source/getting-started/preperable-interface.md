@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Preperable Interface
 ---
 ## Preparable Interface
@@ -29,9 +29,9 @@ If you examine class EditAction in the example application (see above) you'll se
 **EditAction.java prepare Method**
 
 ```java
-   carModelsAvailable = carModelsService.getCarModels() ;
-		
-   setPersonBean(editService.getPerson());
+carModelsAvailable = carModelsService.getCarModels();
+
+setPersonBean(editService.getPerson());
 ```
 
 The above statements get the car model values used to populate the car model check boxes displayed in the form and also get the information about the Person object being edited.

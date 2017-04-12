@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Http Session
 ---
 ## HTTP Session
@@ -73,15 +73,15 @@ Using SessionAware does introduce a potential security vulnerability that you sh
 **HelloWorldAction.java acceptableParameterName Method**
 
 ```java
-    public boolean acceptableParameterName(String parameterName) {
-        boolean allowedParameterName = true ;
+public boolean acceptableParameterName(String parameterName) {
+    boolean allowedParameterName = true ;
 
-        if ( parameterName.contains("session")  || parameterName.contains("request") ) {
-            allowedParameterName = false ;
-        } 
-		
-        return allowedParameterName;
-    }
+    if ( parameterName.contains("session")  || parameterName.contains("request") ) {
+        allowedParameterName = false ;
+    } 
+
+    return allowedParameterName;
+}
 ```
 
 This method will be called by the Struts 2 framework for each parameter in the request scope. By returning false if the parameter name contains "session" we are telling the Struts 2 framework to ignore that parameter. This will prevent a malicious user from trying to hack the HTTP session object.
@@ -91,19 +91,20 @@ Instead of having each action that implements SessionAware also implement the Pa
 **struts.xml configure params interceptor**
 
 ```xml
-    <package name="basicstruts2" extends="struts-default">
-        <interceptors>
-            <interceptor-stack name="appDefault">
-                <interceptor-ref name="defaultStack">
-                    <param name="exception.logEnabled">true</param>
-                    <param name="exception.logLevel">ERROR</param>
-                    <param name="params.excludeParams">dojo..*,^struts..*,^session..*,^request..*,^application..*,^servlet(Request|Response)..*,parameters...*</param>
-                </interceptor-ref>
-            </interceptor-stack>
-        </interceptors>
-		
-        <default-interceptor-ref name="appDefault" />
-...
+<package name="basicstruts2" extends="struts-default">
+    <interceptors>
+        <interceptor-stack name="appDefault">
+            <interceptor-ref name="defaultStack">
+                <param name="exception.logEnabled">true</param>
+                <param name="exception.logLevel">ERROR</param>
+                <param name="params.excludeParams">dojo..*,^struts..*,^session..*,^request..*,^application..*,^servlet(Request|Response)..*,parameters...*</param>
+            </interceptor-ref>
+        </interceptor-stack>
+    </interceptors>
+
+    <default-interceptor-ref name="appDefault" />
+    ...
+</package>
 ```
 
 The above code will ensure that every action in the "basicstruts2" package that implements the SessionAware interface will exclude from processing parameters that starts with the strings provided in the params.excludeParams noded.

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Message Resource Files
 ---
 ## Message Resource Files
@@ -78,9 +78,9 @@ We use the Struts 2 url tag to create a link to action registerInput. We then us
 **registerInput action node for struts.xml**
 
 ```xml
-    <action name="registerInput" class="org.apache.struts.register.action.Register" method="input" >
-        <result name="input">/register.jsp</result>
-    </action>
+<action name="registerInput" class="org.apache.struts.register.action.Register" method="input" >
+    <result name="input">/register.jsp</result>
+</action>
 ```
 
 The above action node instructs the Struts 2 framework to execute class Register's input method in response to action registerInput. The input method is inherited by class Register from class ActionSupport. The default behavior of the inherited input method is to return the String input. The result node above specifies that if the returned result is "input" then render the view register.jsp.
@@ -172,8 +172,8 @@ To use the contact key in a view page, add the following markup to index.jsp jus
 **Using contact property**
 
 ```html
-    <hr />
-    <s:text name="contact" />
+<hr />
+<s:text name="contact" />
 ```
 
 Rebuild the war file, deploy it to your Servlet container, and then go to index.action. You should see:
@@ -209,11 +209,11 @@ In our example application, we need to tell Struts 2 to use a locale value of es
 **Specify The Locale As a URL Parameter**
 
 ```html
-    <h3>Registro español</h3>
-    <s:url action="registerInput" var="registerInputLinkES">
-        <s:param name="request_locale">es</s:param>
-    </s:url>
-    <p><a href="${registerInputLinkES}">Por favor, regístrese</a> para nuestro sorteo</p>
+<h3>Registro español</h3>
+<s:url action="registerInput" var="registerInputLinkES">
+    <s:param name="request_locale">es</s:param>
+</s:url>
+<p><a href="${registerInputLinkES}">Por favor, regístrese</a> para nuestro sorteo</p>
 ```
 
 In the above markup we've added a parameter named request_locale to the URL. The value of that parameter is es. The Action class that responds to this URL (Register.java) will see that the locale is es and will look for property files with _es (for example `Register_es.properties`). It will use those property files to find the values of the property keys referenced by the view page (e.g. personBean.firstName).

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Exception handling
 ---
 ## Exception Handling
@@ -19,15 +19,15 @@ Using the Struts 2 framework you can specify in the struts.xml how the framework
 To enable global exception handling you need to add two nodes to `struts.xml`: `global-exception-mapping` and `global-results`. For example examine the `struts.xml` from the exception_handling project.
 
 ```xml
-    <global-results>
-        <result name="securityerror">/securityerror.jsp</result>
-  	<result name="error">/error.jsp</result>
-    </global-results>
+<global-results>
+    <result name="securityerror">/securityerror.jsp</result>
+    <result name="error">/error.jsp</result>
+</global-results>
 
-    <global-exception-mappings>
-	<exception-mapping exception="org.apache.struts.register.exceptions.SecurityBreachException" result="securityerror" />
-	 <exception-mapping exception="java.lang.Exception" result="error" />
-    </global-exception-mappings>
+<global-exception-mappings>
+    <exception-mapping exception="org.apache.struts.register.exceptions.SecurityBreachException" result="securityerror" />
+    <exception-mapping exception="java.lang.Exception" result="error" />
+</global-exception-mappings>
 ```
 
 The global exception mapping node tells the Struts 2 framework what to do if an uncaught exception of the type specified (or a child of that type) is thrown by the the application. For example if a SecurityBreachException is thrown but not caught, the Struts 2 Action class will return a result of "securityerror". All other uncaught exceptions will cause the Struts 2 Action class to return a result of "error".
@@ -39,11 +39,11 @@ __Exception Handling Per Action__
 If you need to handle an exception in a specific way for a certain action you can use the exception-mapping node within the action node.
 
 ```xml
-   <action name="actionspecificexception" class="org.apache.struts.register.action.Register" method="throwSecurityException">
-      <exception-mapping exception="org.apache.struts.register.exceptions.SecurityBreachException" result="login" />
-      <result>/register.jsp</result>
-      <result name="login">/login.jsp</result>
-   </action>
+<action name="actionspecificexception" class="org.apache.struts.register.action.Register" method="throwSecurityException">
+   <exception-mapping exception="org.apache.struts.register.exceptions.SecurityBreachException" result="login" />
+   <result>/register.jsp</result>
+   <result name="login">/login.jsp</result>
+</action>
 ```
 
 The above action node from the example application's struts.xml file specifies that if the method `throwSecurityException` throws an uncaught exception of type `SecurityBreachException` the Struts 2 framework should return a result of login. The login result will cause the user's browser to be redirected to login.jsp.
@@ -82,13 +82,13 @@ __Display Exception Information In Browser__
 You can display information about the exception in the browser if you want by using s:property tags with a value of exception and exceptionStack. For example in error.jsp is this markup.
 
 ```html
-   <h4>The application has malfunctioned.</h4>
+<h4>The application has malfunctioned.</h4>
 
-   <p>  Please contact technical support with the following information:</p> 
+<p>Please contact technical support with the following information:</p> 
 
-   <h4>Exception Name: <s:property value="exception" /> </h4>
+<h4>Exception Name: <s:property value="exception" /> </h4>
 
-   <h4>Exception Details: <s:property value="exceptionStack" /></h4> 
+<h4>Exception Details: <s:property value="exceptionStack" /></h4> 
 ```
 
 When the exception interceptor is triggered it adds to the fields available for display the exception message and the exception's stack trace.

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Spring
 ---
 ## Spring and Struts 2
@@ -35,7 +35,7 @@ Spring provides a mechanism to manage dependencies by injecting them at run time
 **EditAction Class No Hard-Coded Dependency**
 
 ```java
-    private EditService editService ;
+private EditService editService;
 ```
 
 At run time the Spring framework will provide an object of a class that implements the EditService interface.

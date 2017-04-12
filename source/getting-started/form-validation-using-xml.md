@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Form validation using XML
 ---
 ## Form Validation Using XML

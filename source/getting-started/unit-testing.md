@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Unit testing
 ---
 ## Unit Testing
@@ -29,10 +29,10 @@ To test the validate method we want Struts to call the Struts action that will c
 **struts.xml**
 
 ```xml
-    <action name="register" class="org.apache.struts.register.action.Register" method="execute">
-        <result name="success">/thankyou.jsp</result>
-        <result name="input">/register.jsp</result>
-    </action>
+<action name="register" class="org.apache.struts.register.action.Register" method="execute">
+    <result name="success">/thankyou.jsp</result>
+    <result name="input">/register.jsp</result>
+</action>
 ```
 
 Remember the validate method will be called automatically by the framework before calling the execute method. If validation fails the Struts framework will return "input". If there are no validation errors then the framework will call the execute method and return whatever String the execute method returns.
@@ -87,19 +87,19 @@ To test that validation should fail, I just need to have a test method that does
 ```java
 @Test
 public void testExecuteValidationFailsMissingFirstName() throws Exception() {
-  //request.setParameter("personBean.firstName", "Bruce");
-  request.setParameter("personBean.lastName", "Phillips");
-  request.setParameter("personBean.email", "bphillips@ku.edu");
-  request.setParameter("personBean.age", "19");
-
-  ActionProxy actionProxy = getActionProxy("/register.action");
-  Register action = (Register) actionProxy.getAction() ;
-
-  assertNotNull("The action is null but should not be.", action);
-
-  String result = actionProxy.execute();
-
-  assertEquals("The execute method did not return " + ActionSupport.INPUT + " but should have.", ActionSupport.INPUT, result);
+    //request.setParameter("personBean.firstName", "Bruce");
+    request.setParameter("personBean.lastName", "Phillips");
+    request.setParameter("personBean.email", "bphillips@ku.edu");
+    request.setParameter("personBean.age", "19");
+    
+    ActionProxy actionProxy = getActionProxy("/register.action");
+    Register action = (Register) actionProxy.getAction() ;
+    
+    assertNotNull("The action is null but should not be.", action);
+    
+    String result = actionProxy.execute();
+    
+    assertEquals("The execute method did not return " + ActionSupport.INPUT + " but should have.", ActionSupport.INPUT, result);
 }
 ```
 

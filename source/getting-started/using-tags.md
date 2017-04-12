@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Using tags
 ---
 ## Using Tags

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Annotations
 ---
 ## Annotations
@@ -24,7 +24,7 @@ Struts 2 enables the use of standard naming conventions and annotations when you
 <dependency>
     <groupId>org.apache.struts</groupId>
     <artifactId>struts2-convention-plugin</artifactId>
-    <version>2.5.10.1</version>
+    <version>X.X.X.X</version>
 </dependency>
 ```
 If you're using Ant then copy the struts2-convention-plugin jar file from the Struts 2 download to your WEB-INF/lib folder.

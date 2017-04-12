@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: How to create a Struts 2 web application
 ---
 ## How To Create A Struts 2 Web Application

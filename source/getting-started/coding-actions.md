@@ -1,12 +1,10 @@
 ---
-layout: default
+layout: getting-started
 title: Coding actions
 ---
 ## Coding actions
 
 This tutorial assumes you've completed the [Using Struts 2 Tags](#PAGE_14811875) tutorial and have a working using_tags project. The example code for this tutorial, coding_action, is available for checkout from the Struts 2 GitHub repository: [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
-
-> 
 
 __Introduction__
 
@@ -77,15 +75,15 @@ For the example application associated with this tutorial add the following Java
 **Add userName to HelloWorldAction**
 
 ```java
-    private String userName;
+private String userName;
 
-    public String getUserName() {
-        return userName;
-    }
+public String getUserName() {
+    return userName;
+}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+public void setUserName(String userName) {
+    this.userName = userName;
+}
 ```
 
 To personalize the MessageStore message (recall that class MessageStore is storing the message to display) add the following Java code to the HelloWorldAction's execute method after the statement that instantiates the MessageStore object.
@@ -93,9 +91,9 @@ To personalize the MessageStore message (recall that class MessageStore is stori
 **Add userName value to message**
 
 ```java
-    if (userName != null) {
-        messageStore.setMessage( messageStore.getMessage() + " " + userName);
-    }
+if (userName != null) {
+    messageStore.setMessage( messageStore.getMessage() + " " + userName);
+}
 ```
 
 Now build and deploy the application. Enter your name in the form and click the submit button. You should see the following page.

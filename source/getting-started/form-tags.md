@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Form tags
 ---
 ## Form Tags
@@ -72,16 +72,16 @@ Here is the HTML that results from using the above Struts 2 select tag.
 
 ```html
 <tr>
-  <td class="tdLabel">
-    <label for="save_personBean_sport" class="label">Favorite sport:</label>
-  </td>
-  <td>
-    <select name="personBean.sport" id="save_personBean_sport">
-      <option value="football">football</option>
-      <option value="baseball">baseball</option>
-      <option value="basketball" selected="selected">basketball</option>
-    </select>
-  </td>
+    <td class="tdLabel">
+        <label for="save_personBean_sport" class="label">Favorite sport:</label>
+    </td>
+    <td>
+        <select name="personBean.sport" id="save_personBean_sport">
+            <option value="football">football</option>
+            <option value="baseball">baseball</option>
+            <option value="basketball" selected="selected">basketball</option>
+        </select>
+    </td>
 </tr>
 ```
 
@@ -111,19 +111,19 @@ The Array of String objects returned are used to create the individual radio but
 
 ```html
 <tr>
-  <td class="tdLabel">
-    <label for="save_personBean_gender" class="label">Gender:</label>
-  </td>
-  <td>
-    <input type="radio" name="personBean.gender" id="save_personBean_gendermale" value="male"/>
-    <label for="save_personBean_gendermale">male</label>
-    
-    <input type="radio" name="personBean.gender" id="save_personBean_genderfemale" value="female"/>
-    <label for="save_personBean_genderfemale">female</label>
-    
-    <input type="radio" name="personBean.gender" id="save_personBean_gendernot sure" checked="checked" value="not sure"/>
-    <label for="save_personBean_gendernot sure">not sure</label>
-  </td>
+    <td class="tdLabel">
+        <label for="save_personBean_gender" class="label">Gender:</label>
+    </td>
+    <td>
+        <input type="radio" name="personBean.gender" id="save_personBean_gendermale" value="male"/>
+        <label for="save_personBean_gendermale">male</label>
+        
+        <input type="radio" name="personBean.gender" id="save_personBean_genderfemale" value="female"/>
+        <label for="save_personBean_genderfemale">female</label>
+        
+        <input type="radio" name="personBean.gender" id="save_personBean_gendernot sure" checked="checked" value="not sure"/>
+        <label for="save_personBean_gendernot sure">not sure</label>
+    </td>
 </tr>
 ```
 
@@ -154,18 +154,18 @@ displayed to the user. So the above Struts 2 select tag code results in this HTM
 
 ```html
 <tr>
-  <td class="tdLabel">
-    <label for="save_personBean_residency" class="label">State resident:</label>
-  </td>
-  <td>
-    <select name="personBean.residency" id="save_personBean_residency">
-      <option value="AZ">Arizona</option>
-      <option value="CA">California</option>
-      <option value="FL">Florida</option>
-      <option value="KS" selected="selected">Kansas</option>
-      <option value="NY">New York</option>
-    </select>
-  </td>
+    <td class="tdLabel">
+        <label for="save_personBean_residency" class="label">State resident:</label>
+    </td>
+    <td>
+        <select name="personBean.residency" id="save_personBean_residency">
+            <option value="AZ">Arizona</option>
+            <option value="CA">California</option>
+            <option value="FL">Florida</option>
+            <option value="KS" selected="selected">Kansas</option>
+            <option value="NY">New York</option>
+        </select>
+    </td>
 </tr>
 ```
 
@@ -192,12 +192,12 @@ Since the method getOver21 returns true, the checkbox is checked.
 
 ```html
 <tr>
-  <td valign="top" align="right"></td>
-  <td valign="top" align="left">
-    <input type="checkbox" name="personBean.over21" value="true" checked="checked" id="save_personBean_over21"/>
-    <input type="hidden" id="__checkbox_save_personBean_over21" name="__checkbox_personBean.over21" value="true" />
-    <label for="save_personBean_over21" class="checkboxLabel">21 or older</label>
-  </td>
+    <td valign="top" align="right"></td>
+    <td valign="top" align="left">
+        <input type="checkbox" name="personBean.over21" value="true" checked="checked" id="save_personBean_over21"/>
+        <input type="hidden" id="__checkbox_save_personBean_over21" name="__checkbox_personBean.over21" value="true" />
+        <label for="save_personBean_over21" class="checkboxLabel">21 or older</label>
+    </td>
 </tr>
 ```
 
@@ -242,23 +242,23 @@ the checkbox will be checked.
 
 ```html
 <tr>
-  <td class="tdLabel">
-    <label for="save_personBean_carModels" class="label">Car models owned:</label>
-  </td>
-  <td>
-    <input type="checkbox" name="personBean.carModels" value="Ford" id="personBean.carModels-1" checked="checked"/>
-    <label for="personBean.carModels-1" class="checkboxLabel">Ford</label>
-    
-    <input type="checkbox" name="personBean.carModels" value="Chrysler" id="personBean.carModels-2"/>
-    <label for="personBean.carModels-2" class="checkboxLabel">Chrysler</label>
-    
-    <input type="checkbox" name="personBean.carModels" value="Toyota" id="personBean.carModels-3"/>
-    <label for="personBean.carModels-3" class="checkboxLabel">Toyota</label>
-    
-    <input type="checkbox" name="personBean.carModels" value="Nissan" id="personBean.carModels-4" checked="checked"/>
-    <label for="personBean.carModels-4" class="checkboxLabel">Nissan</label>
-    <input type="hidden" id="__multiselect_save_personBean_carModels" name="__multiselect_personBean.carModels" value="" />
-  </td>
+    <td class="tdLabel">
+        <label for="save_personBean_carModels" class="label">Car models owned:</label>
+    </td>
+    <td>
+        <input type="checkbox" name="personBean.carModels" value="Ford" id="personBean.carModels-1" checked="checked"/>
+        <label for="personBean.carModels-1" class="checkboxLabel">Ford</label>
+        
+        <input type="checkbox" name="personBean.carModels" value="Chrysler" id="personBean.carModels-2"/>
+        <label for="personBean.carModels-2" class="checkboxLabel">Chrysler</label>
+        
+        <input type="checkbox" name="personBean.carModels" value="Toyota" id="personBean.carModels-3"/>
+        <label for="personBean.carModels-3" class="checkboxLabel">Toyota</label>
+        
+        <input type="checkbox" name="personBean.carModels" value="Nissan" id="personBean.carModels-4" checked="checked"/>
+        <label for="personBean.carModels-4" class="checkboxLabel">Nissan</label>
+        <input type="hidden" id="__multiselect_save_personBean_carModels" name="__multiselect_personBean.carModels" value="" />
+    </td>
 </tr>
 ```
 

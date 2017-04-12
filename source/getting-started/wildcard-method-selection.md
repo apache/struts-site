@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: getting-started
 title: Wildcard Method Selection
 ---
 ## Wildcard Method Selection
