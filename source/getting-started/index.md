@@ -2,7 +2,9 @@
 layout: default
 title: Getting started
 ---
+
 # Getting Started
+[Edit on GitHub]({{ site.repository_url }}/edit/master/source/{{ page.path }}){: .edit-on-gh title="Edit this page on GitHub"}
 
 The framework documentation is written for active web developers and assumes a working knowledge 
 about how Java web applications are built. For more about the underlying nuts and bolts, see 
