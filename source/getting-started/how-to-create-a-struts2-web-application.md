@@ -143,9 +143,14 @@ To see what's happening under the hood, the example application for this tutoria
     <artifactId>log4j-core</artifactId>
     <version>2.8.2</version>
 </dependency>
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>2.8.2</version>
+</dependency>
 ```
 
-Setup a `log4j2.xml` configuration in the `src/main/resources` folder which contains the following
+Using both `log4j-core` and `log4j-api` allows to use the latest version of Log4j2 without a clash with version provided by the framework. Setup a `log4j2.xml` configuration in the `src/main/resources` folder which contains the following
 
 **log4j2.xml**
 
