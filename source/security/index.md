@@ -1,10 +1,13 @@
 ---
 layout: default
-title: Security (WIP)
+title: Security
 ---
 
 # Security
+{:.no_toc}
 
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ### Security tips
 
@@ -177,15 +180,15 @@ public class RealAction extends BaseAction {
         super.save();
         return SUCCESS;
     }
-}    
- 
+}
+
 public class BaseAction extends AbstractAction {
     public String save() throws Exception {
         save(Double.MAX_VALUE);
         return SUCCESS;
     }
 }
- 
+
 public abstract class AbstractAction extends ActionSupport {
     protected void save(Double val) {
         // some logic
