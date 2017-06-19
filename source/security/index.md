@@ -5,6 +5,7 @@ title: Security
 
 # Security
 {:.no_toc}
+[Edit on GitHub]({{ site.repository_url }}/edit/master/source/{{ page.path }}){: .edit-on-gh title="Edit this page on GitHub"}
 
 * Will be replaced with the ToC, excluding a header
 {:toc}
