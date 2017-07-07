@@ -12,6 +12,19 @@ title: Announcements
   Skip to: <a href="announce-2016.html">Announcements - 2016</a>
 </p>
 
+#### 9 July 2017 - Possible RCE in the Struts Showcase app in the Struts 1 plugin example in the Struts 2.3.x series {#a20170707}
+
+A potential security vulnerability was reported in the Struts 1 plugin used in the Struts 2.3.x series.
+It is possible to perform a Remote Code Execution attack if given construction exists in the vulnerable
+application. Please read the security bulletin for more details and inspect your application.
+
+ - [S2-048](/docs/s2-048.html)
+   Possible RCE in the Struts Showcase app in the Struts 1 plugin example in Struts 2.3.x series
+
+NOTE: Please notice that this vulnerability does not affect applications using Struts 2.5.x series 
+or applications that do not use the Struts 1 plugin. Even if the plugin is available but certain code 
+construction is not present, your application is safe.
+
 #### 23 march 2017 - Struts Extras secure Multipart plugins General Availability - versions 1.1 {#a20170323}
 
 The Apache Struts group is pleased to announce that the Apache Struts 2 Secure Jakarta Multipart parser plugin 1.1 
