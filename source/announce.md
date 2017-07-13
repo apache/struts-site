@@ -12,6 +12,79 @@ title: Announcements
   Skip to: <a href="announce-2016.html">Announcements - 2016</a>
 </p>
 
+#### 17 July 2017 - Struts 2.5.12 General Availability {#a20170717}
+
+The Apache Struts group is pleased to announce that Struts 2.5.12 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release contains fixes for the following potential security vulnerabilities:
+
+ - [S2-047](/docs/s2-047.html)
+   Possible DoS attack when using URLValidator
+ - [S2-049](/docs/s2-049.html)
+   A DoS attack is available for Spring secured actions,
+
+Except the above this release also contains several improvements just to mention few of them:
+
+ - `double` and `Double` are not validated with the same decimal separator
+ - `ognl.MethodFailedException` when you do not enter a value for a field mapped to an int
+ - `Double` Value Conversion with requestLocale=de
+ - The `TextProvider` injection in `ActionSupport` isn't quite integrated into the framework's core DI
+ - Struts2 raise `java.lang.ClassCastException` when Result type is `chain`
+ - `@InputConfig` annotation is not working when integrating with spring aop
+ - Validators do not work for multiple values
+ - `BigDecimal` are not converted according context locale
+ - `NullPointerException` when displaying a form without action attribute
+ - Http Sessions forcefully created for all requests using I18nInterceptor with default Storage value.
+ - `cssErrorClass` attribute has no effect on `label` tag
+ - Why `JSONValidationInterceptor` return Status Code `400 BAD_REQUEST` instead of `200 SUCCESS`
+ - @autowired does not work since Struts 2.3.28.1
+ - Mixed content https to http when upgraded to 2.3.32 or 2.5.10.1
+ - Upgrade from struts2-tiles3-plugin to struts2-tiles-plugin gives a NoSuchDefinitionException
+ - Aspects are not executed when chaining AOPed actions
+ - Duplicate hidden input field checkboxListHandler
+ - The value of checkbox getted in server-side is "false" when no any checkbox been selected.
+ - refactor file upload framework
+ - `creditCard` validator available in Struts 1 missing in Struts 2
+ - No easy way to have an empty interceptor stack if have default stack
+ - `@TypeConversion` converter attribute to class
+ - Convert `LocalizedTextUtil` into a bean with default implementation
+ - NPE in `StrutsTilesContainerFactory` when resource isn't found
+ - Buffer/Flush behaviour in `FreemarkerResult`
+ - Struts2 should know and consider config time class of user's Actions
+ - getters of exclude-sets in OgnlUtil should return immutable collections
+ - Mark `site-graph` plugin as deprecated
+ - Use `TextProviderFactory` instead of `TextProvider` as bean's dependency
+ - Create `LocaleProviderFactory` and uses instead of `LocaleProvider`
+ - Improve error logging in `DefaultDispatcherErrorHandler`
+ - Make `jakarta-stream` multipart parser more extensible
+ - Make Multipart parsers more extensible
+ - Add proper validation if request is a multipart request
+ - Make `SecurityMethodAccess` excluded classes & packages definitions immutable
+ - Upgrade to Log4j2 2.8.2
+ - Allow disable file upload support via an configurable option
+ - Stop using `DefaultLocalizedTextProvider#localeFromString` static util method
+ - Don't add `JBossFileManager` as a possible FileManager when not on JBoss
+ - There is no `@LongRangeFieldValidator` annotation to support `LongRangeFieldValidator`
+ - Upgrade to commons-lang 3.6
+ - Update commons-fileupload
+
+> Please read the [Version Notes](/docs/version-notes-2512.html) to find more details about performed bug fixes and improvements.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
 #### 9 July 2017 - Possible RCE in the Struts Showcase app in the Struts 1 plugin example in the Struts 2.3.x series {#a20170707}
 
 A potential security vulnerability was reported in the Struts 1 plugin used in the Struts 2.3.x series.
