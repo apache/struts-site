@@ -5,7 +5,7 @@ title: Core Developers Guide (WIP)
 
 # Core Developers Guide (WIP)
 
-Struts 2 processes requests using three core types: [interceptors](interceptor-configuration.html), [actions](#PAGE_14122), and [results](result-configuration.html). 
+Struts 2 processes requests using three core types: [interceptors](interceptor-configuration.html), [actions](action-configuration.html), and [results](result-configuration.html). 
 Each may be configured via XML or annotations.
 
 ## Developing Applications with Struts 2
@@ -18,7 +18,7 @@ Each may be configured via XML or annotations.
 
 ## Configuration
 
-- [Configuration by Convention] - export https://cwiki.apache.org/confluence/display/WW/Convention+Plugin
+- [Configuration by Convention](../plugins/convention/)
 - [Annotations](annotations.html)
 - [Configuration Elements](configuration-elements.html)
   - [Actions](action-configuration.html), [Wildcard Mappings](wildcard-mappings.html), [Beans](bean-configuration.html), [Constants](constant-configuration.html)
