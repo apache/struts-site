@@ -26,7 +26,7 @@ This release contains fixes for the following potential security vulnerabilities
  - [S2-047](/docs/s2-047.html)
    Possible DoS attack when using URLValidator
  - [S2-049](/docs/s2-049.html)
-   A DoS attack is available for Spring secured actions,
+   A DoS attack is available for Spring secured actions
 
 Except the above this release also contains several improvements just to mention few of them:
 
@@ -84,6 +84,38 @@ Should any issues arise with your use of any version of the Struts framework, pl
 to the user list, and, if appropriate, file a tracking ticket.
 
 You can download this version from our [download](download.cgi#struts-ga) page.
+
+#### 17 July 2017 - Struts 2.3.33 General Availability {#a20170717-2}
+
+The Apache Struts group is pleased to announce that Struts 2.3.32 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+This release addresses two potential security vulnerabilities:
+
+ - [S2-049](/docs/s2-049.html)
+   A DoS attack is available for Spring secured actions
+ - [S2-048](/docs/s2-048.html)
+   Possible RCE in the Struts Showcase app in the Struts 1 plugin example in Struts 2.3.x series
+   
+Also this version resolves the following issues:    
+
+ - `EmailValidator` does not accept new domain suffixes
+ - Revision number still missing from `dojo.js` and `dojo.js.uncompressed.js`
+ - Strange Behavior Parsing Action Requests
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 6.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-23x) page.
 
 #### 9 July 2017 - Possible RCE in the Struts Showcase app in the Struts 1 plugin example in the Struts 2.3.x series {#a20170707}
 
