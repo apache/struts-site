@@ -187,7 +187,7 @@ The message is Hello World!
 
 ## Results and result codes
 
-The Convention Plugin will pre-configure all of you action classes when Struts is started. By default, this 
+The Convention Plugin will pre-configure all of your action classes when Struts is started. By default, this 
 configuration will also contain results for any JSPs that it can find within the application. The JSPs have 
 an additional feature that allows different JSPs to be used based on the result code of the action. Since action 
 methods return Strings and these Strings are traditionally used to locate results for the action, the Convention plugin 
@@ -491,8 +491,8 @@ public class HelloWorld extends ActionSupport {
 }
 ```
 
-The following interceptors will be applied to "action1": `interceptor-1` , all interceptors from `defaultStack`,
-`validation`. All interceptors from `defaultStack` will be applied to "action2".
+The following interceptors will be applied to "action1": `interceptor-1`, all interceptors from `defaultStack`, 
+and `validation`. For "action2", `interceptor-1` and all interceptors from `defaultStack` will be applied to "action2".
 
 > If you get errors like "Unable to find interceptor class referenced by ref-name XYZ". This means that the package 
 > where Convention is placing your actions, does not extend the package where the interceptor is defined. To fix this 
