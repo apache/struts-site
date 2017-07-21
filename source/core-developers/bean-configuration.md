@@ -15,9 +15,10 @@ _Spring_  or _Sitemesh_.
 ## Beans
 
 The bean element has one required attribute, `class`, which specifies the Java class to be created or manipulated.
-A bean can either 
-1 be created by the framework's container and injected into internal framework objects, or
-2 have values injected to its static methods
+A bean can either:
+ 
+1. be created by the framework's container and injected into internal framework objects, or
+2. have values injected to its static methods
 
 The first use, object injection, is generally accompanied by the `type` attribute, which tells the container which 
 interface this object implements.  
