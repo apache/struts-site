@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>ActionMapper</title>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/highlighter/github-theme.css" rel="stylesheet">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts" class="github-ribbon">
+  <img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/downloads.html">Downloads</a></li>
+                <li><a href="/announce.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="http://apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="http://apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Project info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/docs/tutorials.html">Tutorials</a></li>
+                <li><a href="/docs/faqs.html">FAQs</a></li>
+                <li><a href="/docs/guides.html">Guides</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/docs/plugins.html">Plugin APIs</a></li>
+                <li><a href="/docs/tag-reference.html">Tag reference</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+                <li class="divider"></li>                
+                <li><a href="/core-developers/">Core Developers Guide (WIP)</a></li>
+                <li><a href="/plugins/">Plugins (WIP)</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li class="divider"></li>
+                <li><a href="/releases.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://git-wip-us.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    <h1 id="actionmapper">ActionMapper</h1>
+
+<p>####Description####</p>
+
+<p>The ActionMapper interface provides a mapping between HTTP requests and action invocation requests and vice-versa.</p>
+
+<p>When given an HttpServletRequest, the ActionMapper may return null if no action invocation request matches or it may return an {{ActionMapping}} that describes an action invocation for the framework to try.</p>
+
+<p>The ActionMapper is not required to guarantee that the {{ActionMapping}} returned be a real action or otherwise ensure a valid request. Accordingly, most ActionMappers do not need to consult the Struts configuration just to determine if a request should be mapped.</p>
+
+<p>Just as requests can be mapped from HTTP to an action invocation, the opposite is true as well. However, because HTTP requests (when shown in HTTP responses) must be in String form, a String is returned rather than an actual request object.</p>
+
+<p>####DefaultActionMapper####</p>
+
+<p>Default action mapper implementation, using the standard</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>*.[ext]
+</code></pre>
+</div>
+<p> (where ext usually <strong>action</strong>) pattern. The extension is looked up from the Struts configuration key {&lt;b&gt;{struts.action.extension}}.</p>
+
+<p>To help with dealing with buttons and other related requirements, this mapper (and other {{ActionMapper}}s, we hope) has the ability to name a button with some predefined prefix and have that button name alter the execution behaviour. The four prefixes are:</p>
+
+<ul>
+  <li>Method prefix - </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>method:default
+</code></pre>
+</div>
+
+<ul>
+  <li>Action prefix - </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>action:dashboard
+</code></pre>
+</div>
+
+<p>In addition to these four prefixes, this mapper also understands the action naming pattern of</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>foo!bar
+</code></pre>
+</div>
+<p> in either the extension form (eg: </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>foo!bar.action
+</code></pre>
+</div>
+<p>) or in the prefix form (eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>action:foo!bar
+</code></pre>
+</div>
+<p>). This syntax tells this mapper to map to the action named</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>foo
+</code></pre>
+</div>
+<p> and the method</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>bar
+</code></pre>
+</div>
+<p>.</p>
+
+<p>#####Method prefix#####</p>
+
+<p>With method-prefix, instead of calling baz action’s</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>execute()
+</code></pre>
+</div>
+<p> method (by default if it isn’t overridden in</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+<p> to be something else), the baz action’s</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>anotherMethod()
+</code></pre>
+</div>
+<p> will be called. A very elegant way determine which button is clicked. Alternatively, one would have submit button set a particular value on the action when clicked, and the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>execute()
+</code></pre>
+</div>
+<p> method decides on what to do with the setted value depending on which button is clicked.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!-- START SNIPPET: method-example --&gt;
+&lt;s:form action="baz"&gt;
+    &lt;s:textfield label="Enter your name" name="person.name"/&gt;
+    &lt;s:submit value="Create person"/&gt;
+    &lt;s:submit method="anotherMethod" value="Cancel"/&gt;
+&lt;/s:form&gt;
+&lt;!-- END SNIPPET: method-example --&gt;
+</code></pre>
+</div>
+
+<p>#####Action prefix#####</p>
+
+<p>With action-prefix, instead of executing baz action’s</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>execute()
+</code></pre>
+</div>
+<p> method (by default if it isn’t overridden in struts.xml to be something else), the anotherAction action’s</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>execute()
+</code></pre>
+</div>
+<p> method (assuming again if it isn’t overridden with something else in</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+<p>) will be executed.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!-- START SNIPPET: action-example --&gt;
+&lt;s:form action="baz"&gt;
+    &lt;s:textfield label="Enter your name" name="person.name"/&gt;
+    &lt;s:submit value="Create person"/&gt;
+    &lt;s:submit action="anotherAction" value="Cancel"/&gt;
+&lt;/s:form&gt;
+&lt;!-- END SNIPPET: action-example --&gt;
+</code></pre>
+</div>
+
+<p>#####Allowed action name RegEx#####</p>
+
+<p>By default the mapper will check if extracted action name matches provided RegEx, i.e. </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[a-zA-Z0-9._!/\-]*
+</code></pre>
+</div>
+<p>. You redefine this RegEx by defining a constant in </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+<p>named </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.allowed.action.names
+</code></pre>
+</div>
+<p>. If action name doesn’t match the RegEx a default action name will be returned which is defined as </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>index
+</code></pre>
+</div>
+<p>. You can also redefine this by specifying constant </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.default.action.name
+</code></pre>
+</div>
+<p>in </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+
+<p>#####Allowed method name RegEx#####</p>
+
+<p>The same logic as above is used for extracted methods, the default RegEx</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[a-zA-Z_]*[0-9]*)
+</code></pre>
+</div>
+<p>is used to check if method is allowed, you can change this by setting constant </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.allowed.method.names
+</code></pre>
+</div>
+<p>in </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+<p>. If method doesn’t match the RegEx a default method is returned, i.e. </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>execute
+</code></pre>
+</div>
+<p>. This can be changed by defining constant </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.default.method.name
+</code></pre>
+</div>
+<p>in </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+<p>.</p>
+
+<p>Please note that this funcionallity only works when <a href="https://cwiki\.apache\.org/confluence/display/WW/Action\+Configuration\#ActionConfiguration\-DynamicMethodInvocation">Dynamic Method Invocation</a>^[https://cwiki.apache.org/confluence/display/WW/Action+Configuration#ActionConfiguration-DynamicMethodInvocation] is enabled.</p>
+
+<p>####Custom ActionMapper####</p>
+
+<p>You can define your own ActionMapper by implementing</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>org.apache.struts2.dispatcher.mapper.ActionMapper
+</code></pre>
+</div>
+<p>then configuring Struts 2 to use the new class in struts.xml</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;bean type="org.apache.struts2.dispatcher.mapper.ActionMapper" name="mymapper" class="com.mycompany.myapp.MyActionMapper" /&gt;
+&lt;constant name="struts.mapper.class" value="mymapper" /&gt;
+
+</code></pre>
+</div>
+
+<p>Possible uses of the ActionMapper include defining your own, cleaner namespaces, such as URLs like <strong>/person/1</strong>, which would be similar to a request to <strong>/getPerson.action?personID=1</strong> using the DefaultActionMapper.</p>
+
+<p>####CompositeActionMapper####</p>
+
+<p>A composite action mapper that is capable of delegating to a series of  if the former failed to obtained a valid <em>ActionMapping</em>  or uri.</p>
+
+<p>It is configured through <a href="struts-xml.html">struts.xml</a>. For example, with the following entries in struts.xml</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;constant name="struts.mapper.class" value="composite" /&gt;
+&lt;constant name="struts.mapper.composite" value="struts,restful,restful2" /&gt;
+
+</code></pre>
+</div>
+
+<p>When</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CompositeActionMapper#getMapping(HttpServletRequest, ConfigurationManager)
+</code></pre>
+</div>
+<p>or</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CompositeActionMapper#getUriFromActionMapping(ActionMapping)
+</code></pre>
+</div>
+<p>is invoked,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CompositeActionMapper
+</code></pre>
+</div>
+<p>would go through these s in sequence starting from  identified by</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.mapper.composite.1
+</code></pre>
+</div>
+<p>, followed by</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.mapper.composite.2
+</code></pre>
+</div>
+<p>and finally</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.mapper.composite.3
+</code></pre>
+</div>
+<p>(in this case) until either one of the  return a valid result (not null) or it runs out of  in which case it will just return null for both</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CompositeActionMapper#getMapping(HttpServletRequest, ConfigurationManager)
+</code></pre>
+</div>
+<p>and</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CompositeActionMapper#getUriFromActionMapping(ActionMapping)
+</code></pre>
+</div>
+<p>methods.</p>
+
+<p>For example with the following in struts.xml:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;constant name="struts.mapper.class" value="composite" /&gt;
+&lt;constant name="struts.mapper.composite" value="struts,restful" /&gt;
+
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CompositeActionMapper
+</code></pre>
+</div>
+<p>will be configured with 2 ActionMapper, namely “struts” which is</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>org.apache.struts2.dispatcher.mapper.DefaultActionMapper
+</code></pre>
+</div>
+<p>and “restful” which is</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>org.apache.struts2.dispatcher.mapper.RestfulActionMapperRestfulActionMapper
+</code></pre>
+</div>
+<p>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CompositeActionMapper
+</code></pre>
+</div>
+<p>would consult each of them in order described above.</p>
+
+<p>####PrefixBasedActionMapper####</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><strong>PrefixBasedActionProxyFactory</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=org.apache.struts2.factory.PrefixBasedActionProxyFactory</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>####ActionMapper and ActionMapping objects####</p>
+
+<p>The ActionMapper fetches the ActionMapping object corresponding to a given request. Essentially, the ActionMapping is a data transfer object that collects together details such as the Action class and method to execute. The mapping is utilized by the Dispatcher and various user interface components. It is customizable through</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.mapper.class
+</code></pre>
+</div>
+<p>entry in</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.properties
+</code></pre>
+</div>
+<p>or</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+<p>. Note that the value of this constant is the name of the bean of the new mapper.</p>
+
+<p>#####Customize#####</p>
+
+<p>Custom ActionMapper must implement ActionMapper interface and have a default constructor.</p>
+
+<blockquote>
+
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;bean type="org.apache.struts2.dispatcher.mapper.ActionMapper" name="mymapper" class="com.mycompany.myapp.MyActionMapper" /&gt;
+&lt;constant name="struts.mapper.class" value="mymapper" /&gt;
+
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class MyCustomActionMapper implements ActionMapper {
+  public ActionMapping getMapping(HttpServletRequest request,
+                                  ConfigurationManager configManager) {
+    ....
+  }
+
+  public String getUriFromActionMapping(ActionMapping mapping) {
+    ....
+  }
+}
+
+</code></pre>
+</div>
+
+<p>(light-on) See also: <a href="restful-action-mapper.html">RestfulActionMapper</a></p>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2016 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    All Rights Reserved.
+  </div>
+  <div class="col-md-12">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>
+<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<script>
+$(function() {
+  return $("h2, h3, h4, h5, h6").each(function(i, el) {
+    var $el, id;
+    $el = $(el);
+    id = $el.attr('id');
+    if (id) {
+      $el.removeAttr('id');
+      return $el.before($("<a />").addClass('anchor').attr('name', id));
+    }
+  });
+});
+</script>
+
+</body>
+</html>

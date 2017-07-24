@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Type Conversion</title>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/highlighter/github-theme.css" rel="stylesheet">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts" class="github-ribbon">
+  <img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/downloads.html">Downloads</a></li>
+                <li><a href="/announce.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="http://apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="http://apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Project info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/docs/tutorials.html">Tutorials</a></li>
+                <li><a href="/docs/faqs.html">FAQs</a></li>
+                <li><a href="/docs/guides.html">Guides</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/docs/plugins.html">Plugin APIs</a></li>
+                <li><a href="/docs/tag-reference.html">Tag reference</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+                <li class="divider"></li>                
+                <li><a href="/core-developers/">Core Developers Guide (WIP)</a></li>
+                <li><a href="/plugins/">Plugins (WIP)</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li class="divider"></li>
+                <li><a href="/releases.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://git-wip-us.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    <h1 id="type-conversion">Type Conversion</h1>
+
+<p>Routine type conversion in the framework is transparent. Generally, all you need to do is ensure that HTML inputs have names that can be used in <em>OGNL</em>  expressions. (HTML inputs are form elements and other GET/POST parameters.)</p>
+
+<p>####Built in Type Conversion Support####</p>
+
+<p>Type Conversion is implemented by XWork.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.XWorkBasicConverter</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<ul>
+  <li>
+    <p>Enumerations</p>
+  </li>
+  <li>
+    <p>BigDecimal and BigInteger</p>
+  </li>
+</ul>
+
+<p>####Relationship to Parameter Names####</p>
+
+<p>There is no need to capture form values using intermediate Strings and primitives. Instead, the framework can read from and write to properties of objects addressed via OGNL expressions and perform the appropriate type conversion for you.</p>
+
+<p>Here are some tips for leveraging the framework’s type conversion capabilities:</p>
+
+<ul>
+  <li>
+    <p>Use OGNL expressions - the framework will automatically take care of creating the actual objects for you.</p>
+  </li>
+  <li>
+    <p>Use JavaBeans! The framework can only create objects that obey the JavaBean specification, provide no-arg constructions and include getters and setters where appropriate.</p>
+  </li>
+  <li>
+    <p>Remember that <em>person.name</em>  will call <strong>getPerson().setName()</strong>.  If the framework creates the Person object for you, it remember that a</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>setPerson
+</code></pre>
+</div>
+<p>method must also exist.</p>
+
+<ul>
+  <li>
+    <p>The framework will not instantiate an object if an instance already exists.  The PrepareInterceptor or action’s constructor can be used to create target objects before type conversion.</p>
+  </li>
+  <li>
+    <p>For lists and maps, use index notation, such as <em>people[0].name</em>  or <em>friends[‘patrick’].name</em> . Often these HTML form elements are being rendered inside a loop. For <em>JSP Tags</em> , use the iterator tag’s status attribute. For <em>FreeMarker Tags</em> , use the special property ${foo_index}[].</p>
+  </li>
+  <li>
+    <p>For multiple select boxes, it isn’t possible to use index notation to name each individual item. Instead, name your element <em>people.name</em>  and the framework will understand that it should create a new Person object for each selected item and set its name accordingly.</p>
+  </li>
+</ul>
+
+<p>####Creating a Type Converter####</p>
+
+<p>Create a type converter by extending StrutsTypeConverter.  The Converter’s role is to convert a String to an Object and an Object to a String.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ public class MyConverter extends StrutsTypeConverter {
+    public Object convertFromString(Map context, String[] values, Class toClass) {
+       .....
+    }
+
+    public String convertToString(Map context, Object o) {
+       .....
+    }
+ }
+
+</code></pre>
+</div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>To allow Struts to recognize that a conversion error has occurred, the converter class needs to throw XWorkException or preferably TypeConversionException.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+    </tr>
+  </tbody>
+</table>
+
+<p>####Applying a Type Converter to an Action####</p>
+
+<p>Create a file called ‘ActionClassName-conversion.properties’ in the same location of the classpath as the Action class itself resides.</p>
+
+<p>Eg. if the action class name is MyAction, the action-level conversion properties file should be named ‘MyAction-conversion.properties’.  If the action’s package is com.myapp.actions the conversion file should also be in the classpath at /com/myapp/actions/.</p>
+
+<p>Within the conversion file, name the action’s property and the Converter to apply to it:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+# syntax: &lt;propertyName&gt; = &lt;converterClassName&gt;
+point = com.acme.PointConverter 
+person.phoneNumber = com.acme.PhoneNumberConverter
+
+</code></pre>
+</div>
+
+<p>Type conversion can also be specified via <a href="#PAGE_14017">Annotations</a> within the action.</p>
+
+<p>####Applying a Type Converter to a bean or model####</p>
+
+<p>When getting or setting the property of a bean, the framework will look for “classname-conversion.properties” in the same location of the <strong>classpath</strong> as the target bean.  This is the same mechanism as used for actions.</p>
+
+<p><strong>Example:</strong> A custom converter is required for the Amount property of a Measurement bean.  The Measurement class cannot be modified as its located within one of the application’s dependencies.  The action using Measurement implements ModelDriven&lt;Measurement&gt; so it cannot apply converters to the properties directly.
+<strong>Solution:</strong> The conversion file needs to be in the same location of the classpath as Measurement.  Create a directory in your source or resources tree matching the package of Measurement and place the converters file there.</p>
+
+<p>eg. for com.acme.measurements.Measurement, create a file in the application source/resources at /com/acme/measurements/Measurement-conversion.properties:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+# syntax: &lt;propertyName&gt;=&lt;converterClassName&gt;
+amount=com.acme.converters.MyCustomBigDecimalConverter
+
+</code></pre>
+</div>
+
+<p>####Applying a Type Converter for an application####</p>
+
+<p>Application-wide converters can be specified in a file called xwork-conversion.properties located in the root of the classpath.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+# syntax: &lt;type&gt; = &lt;converterClassName&gt;
+java.math.BigDecimal = com.acme.MyBigDecimalConverter 
+
+</code></pre>
+</div>
+
+<p>####A Simple Example####</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.XWorkConverter</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>{snippet:id=i18n-note</td>
+      <td>javadoc=true</td>
+      <td>url=com.opensymphony.xwork2.conversion.impl.XWorkConverter}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The framework ships with a base helper class that simplifies converting to and from Strings,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>org.apache.struts2.util.StrutsTypeConverter
+</code></pre>
+</div>
+<p>. The helper class makes it easy to write type converters that handle converting objects to Strings as well as from Strings.</p>
+
+<p>From the JavaDocs:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=org.apache.struts2.util.StrutsTypeConverter</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>####Advanced Type Conversion####</p>
+
+<p>The framework also handles advanced type conversion cases, like null property handling and converting values in Maps and Collections, and type conversion error handling.</p>
+
+<p>#####Null Property Handling#####</p>
+
+<p>Null property handling will automatically create objects where null references are found.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.InstantiatingNullHandler</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.InstantiatingNullHandler</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>#####Collection and Map Support#####</p>
+
+<p>Collection and Map support provides intelligent null handling and type conversion for Java Collections.</p>
+
+<p>The framework supports ways to discover the object type for elements in a collection. The discover is made via an <em>ObjectTypeDeterminer</em> . A default implementation is provided with the framework. The Javadocs explain how Map and Collection support is discovered in the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>DefaultObjectTypeDeterminer
+</code></pre>
+</div>
+<p>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.DefaultObjectTypeDeterminer</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Additionally, you can create your own custom</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ObjectTypeDeterminer
+</code></pre>
+</div>
+<p>by implementing the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ObjectTypeDeterminer
+</code></pre>
+</div>
+<p>interface. There is also an optional ObjectTypeDeterminer that utilizes Java 5 generics. See the <a href="#PAGE_14017">Annotations</a> page for more information.</p>
+
+<p><strong>Indexing a collection by a property of that collection</strong></p>
+
+<p>It is also possible to obtain a unique element of a collection by passing the value of a given property of that element. By default, the property of the element of the collection is determined in <em>Class</em> -conversion.properties using</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>KeyProperty_xxx=yyy
+</code></pre>
+</div>
+<p>, where xxx is the property of the bean <em>Class</em>  that returns the collection and yyy is the property of the collection element that we want to index on.</p>
+
+<p>For an example, see the following two classes:</p>
+
+<p><strong>MyAction.java</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+/**
+ * @return a Collection of Foo objects
+ */
+public Collection getFooCollection()
+{
+    return foo;
+}
+
+</code></pre>
+</div>
+
+<p><strong>Foo.java</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+/**
+ * @return a unique identifier
+ */
+public Long getId()
+{
+    return id;
+}
+
+</code></pre>
+</div>
+
+<p>To enable type conversion, put the instruction</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>KeyProperty_fooCollection=id
+</code></pre>
+</div>
+<p>in the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>MyAction-conversion.properties
+</code></pre>
+</div>
+<p>file. This technique allows use of the idiom</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection(someIdValue)
+</code></pre>
+</div>
+<p>to obtain the Foo object with value</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>someIdValue
+</code></pre>
+</div>
+<p>in the Set</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection
+</code></pre>
+</div>
+<p>. For example,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection(22)
+</code></pre>
+</div>
+<p>would return the Foo object in the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection
+</code></pre>
+</div>
+<p>Collection whose</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>id
+</code></pre>
+</div>
+<p>property value was 22.</p>
+
+<p>This technique is useful, because it ties a collection element directly to its unique identifier. You are not forced to use an index. You can edit the elements of a collection associated to a bean without any additional coding. For example, parameter name</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection(22).name
+</code></pre>
+</div>
+<p>and value</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Phil
+</code></pre>
+</div>
+<p>would set name the Foo Object in the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection
+</code></pre>
+</div>
+<p>Collection whose</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>id
+</code></pre>
+</div>
+<p>property value was 22 to be Phil.</p>
+
+<p>The framework automatically converts the type of the parameter sent in to the type of the key property using type conversion.</p>
+
+<p>Unlike Map and List element properties, if</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection(22)
+</code></pre>
+</div>
+<p>does not exist, it will not be created. If you would like it created, use the notation</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection.makeNew[index]
+</code></pre>
+</div>
+<p>where <em>index</em>  is an integer 0, 1, and so on. Thus, parameter value pairs</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection.makeNew[0]=Phil
+</code></pre>
+</div>
+<p>and</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection.makeNew[1]=John
+</code></pre>
+</div>
+<p>would add two new Foo Objects to</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection --
+</code></pre>
+</div>
+<p>one with name property value</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Phil
+</code></pre>
+</div>
+<p>and the other with name property value</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>John
+</code></pre>
+</div>
+<p>. However, in the case of a Set, the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>equals
+</code></pre>
+</div>
+<p>and</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>hashCode
+</code></pre>
+</div>
+<p>methods should be defined such that they don’t only include the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>id
+</code></pre>
+</div>
+<p>property. Otherwise, one element of the null</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>id
+</code></pre>
+</div>
+<p>properties Foos to be removed from the Set.</p>
+
+<p>####An advanced example for indexed Lists and Maps####</p>
+
+<p>Here is the model bean used within the list. The KeyProperty for this bean is the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>id
+</code></pre>
+</div>
+<p>attribute.</p>
+
+<p><strong>MyBean.java</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+public class MyBean implements Serializable {
+
+    private Long id;
+    private String name;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public String toString() {
+        return "MyBean{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+
+</code></pre>
+</div>
+
+<p>The Action has a</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>beanList
+</code></pre>
+</div>
+<p>attribute initialized with an empty ArrayList.</p>
+
+<p><strong>MyBeanAction.java</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+public class MyBeanAction implements Action {
+
+    private List beanList = new ArrayList();
+    private Map beanMap = new HashMap();
+
+    public List getBeanList() {
+        return beanList;
+    }
+
+    public void setBeanList(List beanList) {
+        this.beanList = beanList;
+    }
+
+    public Map getBeanMap() {
+        return beanMap;
+    }
+
+    public void setBeanMap(Map beanMap) {
+        this.beanMap = beanMap;
+    }
+
+    public String execute() throws Exception {
+        return SUCCESS;
+    }
+}
+
+</code></pre>
+</div>
+
+<p>These</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>conversion.properties
+</code></pre>
+</div>
+<p>tell the TypeConverter to use MyBean instances as elements of the List.</p>
+
+<p><strong>MyBeanAction-conversion.properties</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+KeyProperty_beanList=id
+Element_beanList=MyBean
+CreateIfNull_beanList=true
+
+</code></pre>
+</div>
+
+<ul>
+  <li>When submitting this via a form, the</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>id
+</code></pre>
+</div>
+<p>value is used as KeyProperty for the MyBean instances in the beanList.</p>
+
+<ul>
+  <li>
+    <p>Notice the () notation! Do not use [] notation, which is for Maps only!</p>
+  </li>
+  <li>
+    <p>The value for name will be set to the MyBean instance with this special id.</p>
+  </li>
+  <li>
+    <p>The List does not have null values added for unavailable id values. This approach avoids the risk of OutOfMemoryErrors!</p>
+  </li>
+</ul>
+
+<p><strong>MyBeanAction.jsp</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;s:iterator value="beanList" id="bean"&gt;
+  &lt;stextfield name="beanList(%{bean.id}).name" /&gt;
+&lt;/s:iterator&gt;
+
+</code></pre>
+</div>
+
+<p>####Type Conversion Error Handling####</p>
+
+<p>Type conversion error handling provides a simple way to distinguish between an input <em>validation</em>  problem and an input <em>type conversion</em>  problem.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=error-reporting|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.XWorkConverter</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>There are two ways the error reporting can occur:</p>
+
+<ol>
+  <li>
+    <p>Globally, using the <a href="conversion-error-interceptor.html">Conversion Error Interceptor</a></p>
+  </li>
+  <li>
+    <p>On a per-field basis, using the <a href="conversion-validator.html">conversion validator</a></p>
+  </li>
+</ol>
+
+<p>By default, the conversion interceptor is included in</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+</code></pre>
+</div>
+<p>in the default stack. To keep conversion errors from reporting globally, change the interceptor stack, and add additional validation rules.</p>
+
+<p>####Common Problems####</p>
+
+<p>#####Null and Blank Values#####</p>
+
+<p>Some properties cannot be set to null. Primitives like boolean and int cannot be null.  If your action needs to or will accept null or blank values, use the object equivalents Boolean and Integer.  Similarly, a blank string “” cannot be set on a primitive.  At the time of writing, a blank string also cannot be set on a BigDecimal or BigInteger.  Use server-side validation to prevent invalid values from being set on your properties (or handle the conversion errors appropriately).</p>
+
+<p>#####Interfaces#####</p>
+
+<p>The framework cannot instantiate an object if it can’t determine an appropriate implementation.  It recognizes well-known collection interfaces (List, Set, Map, etc) but cannot instantiate MyCustomInterface when all it sees is the interface. In this case, instantiate the target implementation first (eg. in a prepare method) or substitute in an implementation.</p>
+
+<p>#####Generics and Erasure#####</p>
+
+<p>The framework will inspect generics to determine the appropriate type for collections and array elements.  However, in some cases Erasure can result in base types that cannot be converted (typically Object or Enum).</p>
+
+<p>The following is an example of this problem:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+public abstract class Measurement&lt;T extends Enum&gt;
+   public void setUnits(T enumValue) {...}
+}
+
+public class Area extends Measurement&lt;UnitsOfArea&gt; {
+  @Override
+  public void setUnits(UnitsOfArea enumValue){...}
+}
+
+</code></pre>
+</div>
+
+<p>Although to the developer the area.setUnits(enumValue) method only accepts a UnitsOfArea enumeration, due to erasure the signature of this method is actually setUnits(java.lang.Enum). The framework does not know that the parameter is a UnitsOfArea and when it attempts to instantiate the Enum an exception is thrown (java.lang.IllegalArgumentException: java.lang.Enum is not an enum type).</p>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2016 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    All Rights Reserved.
+  </div>
+  <div class="col-md-12">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>
+<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<script>
+$(function() {
+  return $("h2, h3, h4, h5, h6").each(function(i, el) {
+    var $el, id;
+    $el = $(el);
+    id = $el.attr('id');
+    if (id) {
+      $el.removeAttr('id');
+      return $el.before($("<a />").addClass('anchor').attr('name', id));
+    }
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>File Upload</title>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/highlighter/github-theme.css" rel="stylesheet">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts" class="github-ribbon">
+  <img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/downloads.html">Downloads</a></li>
+                <li><a href="/announce.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="http://apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="http://apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Project info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/docs/tutorials.html">Tutorials</a></li>
+                <li><a href="/docs/faqs.html">FAQs</a></li>
+                <li><a href="/docs/guides.html">Guides</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/docs/plugins.html">Plugin APIs</a></li>
+                <li><a href="/docs/tag-reference.html">Tag reference</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+                <li class="divider"></li>                
+                <li><a href="/core-developers/">Core Developers Guide (WIP)</a></li>
+                <li><a href="/plugins/">Plugins (WIP)</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li class="divider"></li>
+                <li><a href="/releases.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://git-wip-us.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    <h1 id="PAGE_86602">File Upload</h1>
+
+<p>The Struts 2 framework provides built-in support for processing file uploads that conform to <a href="http://www\.ietf\.org/rfc/rfc1867\.txt">RFC 1867</a>^[http://www.ietf.org/rfc/rfc1867.txt], “Form-based File Upload in HTML”. When correctly configured the framework will pass uploaded file(s) into your Action class. Support for individual and multiple file uploads are provided. When a file is uploaded it will typically be stored in a temporary directory. Uploaded files should be processed or moved by your Action class to ensure the data is not lost. Be aware that servers may have a security policy in place that prohibits you from writing to directories other than the temporary directory and the directories that belong to your web application.</p>
+
+<p>#####Dependencies#####</p>
+
+<p>The Struts 2 framework leverages add-on libraries to handle the parsing of uploaded files. These libraries are not included in the Struts distribution, you must add them into your project. The libraries needed are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Library</th>
+      <th>URL</th>
+      <th>Struts 2.0.x</th>
+      <th>Struts 2.1.x</th>
+      <th>Struts 2.5.x</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Commons-FileUpload</td>
+      <td><a href="http://commons\.apache\.org/fileupload/">http://commons.apache.org/fileupload/</a></td>
+      <td>1.1.1</td>
+      <td>1.2.1</td>
+      <td>1.3.2</td>
+    </tr>
+    <tr>
+      <td>Commons-IO</td>
+      <td><a href="http://commons\.apache\.org/io/">http://commons.apache.org/io/</a></td>
+      <td>1.0</td>
+      <td>1.3.2</td>
+      <td>2.4</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If you are using Maven then you can add these libraries as dependencies in your project’s pom.xml.</p>
+
+<p><strong>Struts 2.0.x File Upload Dependencies</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
+    &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+    &lt;version&gt;1.1.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;commons-io&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+</code></pre>
+</div>
+
+<p><strong>Struts 2.1.x File Upload Dependencies</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
+    &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+    &lt;version&gt;1.2.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;commons-io&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
+    &lt;version&gt;1.3.2&lt;/version&gt;
+&lt;/dependency&gt;
+
+</code></pre>
+</div>
+
+<p>#####Basic Usage#####</p>
+
+<p>The</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>org.apache.struts2.interceptor.FileUploadInterceptor
+</code></pre>
+</div>
+<p>class is included as part of the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>defaultStack
+</code></pre>
+</div>
+<p>. As long as the required libraries are added to your project you will be able to take advantage of of the Struts 2 fileUpload capability. Configure an Action mapping for your Action class as you typically would.</p>
+
+<p><strong>Example action mapping:</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;action name="doUpload" class="com.example.UploadAction"&gt;
+    &lt;result name="success"&gt;good_result.jsp&lt;/result&gt;
+&lt;/action&gt;
+
+</code></pre>
+</div>
+
+<p>A form must be create with a form field of type file,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;INPUT type="file" name="upload"&gt;
+</code></pre>
+</div>
+<p>. The form used to upload the file must have its encoding type set to multipart/form-data,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;FORM action="doUpload" enctype="multipart/form-data" method="post"&gt;
+</code></pre>
+</div>
+<p>. The standard procedure for adding these elements is by using the Struts 2 tag libraries as shown in the following example:</p>
+
+<p><strong>Example JSP form tags:</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example-form|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+<p>The fileUpload interceptor will use setter injection to insert the uploaded file and related data into your Action class. For a form field named <strong>upload</strong> you would provide the three setter methods shown in the following example:</p>
+
+<p><strong>Example Action class:</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>package com.example;
+
+   import java.io.File;
+   import com.opensymphony.xwork2.ActionSupport;
+
+   public class UploadAction extends ActionSupport {
+      private File file;
+      private String contentType;
+      private String filename;
+
+      public void setUpload(File file) {
+         this.file = file;
+      }
+
+      public void setUploadContentType(String contentType) {
+         this.contentType = contentType;
+      }
+
+      public void setUploadFileName(String filename) {
+         this.filename = filename;
+      }
+
+      public String execute() {
+         //...
+         return SUCCESS;
+      }
+ }
+
+</code></pre>
+</div>
+
+<p>The purpose of each one of these methods is described in the table below. Notice that if you have multiple file form elements with different names you would be required to have another corresponding set of these methods for each file uploaded.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method Signature</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>setX(File file)</td>
+      <td>The file that contains the content of the uploaded file. This is a temporary file and file.getName() will not return the original name of the file</td>
+    </tr>
+    <tr>
+      <td>setXContentType(String contentType)</td>
+      <td>The mime type of the uploaded file</td>
+    </tr>
+    <tr>
+      <td>setXFileName(String fileName)</td>
+      <td>The actual file name of the uploaded file (not the HTML name)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>#####Uploading Multiple Files#####</p>
+
+<p>As mentioned in the previous section one technique for uploading multiple files would be to simply have multiple form input elements of type file all with different names. This would require a number of setter methods that was equal to 3 times the number of files being uploaded. Another option is to use Arrays or java.util.Lists. The following examples are taken from the Showcase example application that is part sample applications you can download at <a href="http://struts\.apache\.org/download\.cgi">http://struts.apache.org/download.cgi</a>. For the Action mapping details see</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts-fileupload.xml
+</code></pre>
+</div>
+<p>in the sample application download.</p>
+
+<p><strong>Uploading Multiple Files using Arrays</strong></p>
+
+<p><strong>multipleUploadUsingArray.jsp</strong> Notice all file input types have the same name.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;s:form action="doMultipleUploadUsingArray" method="POST" enctype="multipart/form-data"&gt;
+  &lt;s:file label="File (1)" name="upload" /&gt;
+  &lt;s:file label="File (2)" name="upload" /&gt;
+  &lt;s:file label="FIle (3)" name="upload" /&gt;
+  &lt;s:submit cssClass="btn btn-primary"/&gt;
+&lt;/s:form&gt;
+</code></pre>
+</div>
+
+<p><strong>MultipleFileUploadUsingArrayAction.java</strong></p>
+
+<p> </p>
+
+<p>**
+**</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class MultipleFileUploadUsingArrayAction extends ActionSupport {
+	private File[] uploads;
+	private String[] uploadFileNames;
+	private String[] uploadContentTypes;
+
+	public String upload() throws Exception {
+		System.out.println("\n\n upload2");
+		System.out.println("files:");
+		for (File u : uploads) {
+			System.out.println("*** " + u + "\t" + u.length());
+		}
+		System.out.println("filenames:");
+		for (String n : uploadFileNames) {
+			System.out.println("*** " + n);
+		}
+		System.out.println("content types:");
+		for (String c : uploadContentTypes) {
+			System.out.println("*** " + c);
+		}
+		System.out.println("\n\n");
+		return SUCCESS;
+	}
+	public File[] getUpload() {
+		return this.uploads;
+	}
+	public void setUpload(File[] upload) {
+		this.uploads = upload;
+	}
+	public String[] getUploadFileName() {
+		return this.uploadFileNames;
+	}
+	public void setUploadFileName(String[] uploadFileName) {
+		this.uploadFileNames = uploadFileName;
+	}
+	public String[] getUploadContentType() {
+		return this.uploadContentTypes;
+	}
+	public void setUploadContentType(String[] uploadContentType) {
+		this.uploadContentTypes = uploadContentType;
+	}
+}
+</code></pre>
+</div>
+
+<p> </p>
+
+<p><strong>Uploading Multiple Files using Lists</strong></p>
+
+<p><strong>multipleUploadUsingList.jsp</strong> Notice all file input types have the same name.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;s:form action="doMultipleUploadUsingList" method="POST" enctype="multipart/form-data"&gt;
+  &lt;s:file label="File (1)" name="upload" /&gt;
+  &lt;s:file label="File (2)" name="upload" /&gt;
+  &lt;s:file label="FIle (3)" name="upload" /&gt;
+  &lt;s:submit cssClass="btn btn-primary"/&gt;
+&lt;/s:form&gt;
+</code></pre>
+</div>
+
+<p><strong>MultipleFileUploadUsingListAction.java</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class MultipleFileUploadUsingListAction extends ActionSupport {
+	private List&lt;File&gt; uploads = new ArrayList&lt;File&gt;();
+	private List&lt;String&gt; uploadFileNames = new ArrayList&lt;String&gt;();
+	private List&lt;String&gt; uploadContentTypes = new ArrayList&lt;String&gt;();
+
+	public List&lt;File&gt; getUpload() {
+		return this.uploads;
+	}
+	public void setUpload(List&lt;File&gt; uploads) {
+		this.uploads = uploads;
+	}
+	public List&lt;String&gt; getUploadFileName() {
+		return this.uploadFileNames;
+	}
+	public void setUploadFileName(List&lt;String&gt; uploadFileNames) {
+		this.uploadFileNames = uploadFileNames;
+	}
+	public List&lt;String&gt; getUploadContentType() {
+		return this.uploadContentTypes;
+	}
+	public void setUploadContentType(List&lt;String&gt; contentTypes) {
+		this.uploadContentTypes = contentTypes;
+	}
+	public String upload() throws Exception {
+		System.out.println("\n\n upload1");
+		System.out.println("files:");
+		for (File u : uploads) {
+			System.out.println("*** " + u + "\t" + u.length());
+		}
+		System.out.println("filenames:");
+		for (String n : uploadFileNames) {
+			System.out.println("*** " + n);
+		}
+		System.out.println("content types:");
+		for (String c : uploadContentTypes) {
+			System.out.println("*** " + c);
+		}
+		System.out.println("\n\n");
+		return SUCCESS;
+	}
+}
+</code></pre>
+</div>
+
+<p>#####Advanced Configuration#####</p>
+
+<p>The Struts 2</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>default.properties
+</code></pre>
+</div>
+<p>file defines several settings that affect the behavior of file uploading. You may find in necessary to change these values. The names and default values are:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.multipart.parser=jakarta
+struts.multipart.saveDir=
+struts.multipart.maxSize=2097152
+
+</code></pre>
+</div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Please remember that the <strong>struts.multipart.maxSize</strong> is the size limit of the whole request, which means when you uploading multiple files, the sum of their size must be below the <strong>struts.multipart.maxSize</strong>!</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+    </tr>
+  </tbody>
+</table>
+
+<p>In order to change theses settings you define a constant in your applications</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+<p>file like so:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
+	"http://struts.apache.org/dtds/struts-2.0.dtd"&gt;</span>
+<span class="nt">&lt;struts&gt;</span>
+    <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.maxSize"</span> <span class="na">value=</span><span class="s">"1000000"</span> <span class="nt">/&gt;</span>
+    ...
+<span class="nt">&lt;/struts&gt;</span>
+
+</code></pre>
+</div>
+
+<p>Additionally the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fileUpload
+</code></pre>
+</div>
+<p>interceptor has settings that can be put in place for individual action mappings by customizing your interceptor stack.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;action name="doUpload" class="com.example.UploadAction"&gt;
+    &lt;interceptor-ref name="basicStack"/&gt;
+    &lt;interceptor-ref name="fileUpload"&gt;
+        &lt;param name="allowedTypes"&gt;text/plain&lt;/param&gt;
+    &lt;/interceptor-ref&gt; 
+    &lt;interceptor-ref name="validation"/&gt;
+    &lt;interceptor-ref name="workflow"/&gt;
+
+    &lt;result name="success"&gt;good_result.jsp&lt;/result&gt;
+&lt;/action&gt;
+
+</code></pre>
+</div>
+
+<p><strong>File Size Limits</strong></p>
+
+<p>There are two separate file size limits. First is</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.multipart.maxSize
+</code></pre>
+</div>
+<p>which comes from the Struts 2</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>default.properties
+</code></pre>
+</div>
+<p>file. This setting exists for security reasons to prohibit a malicious user from uploading extremely large files to file up your servers disk space. This setting defaults to approximately 2 megabytes and should be adjusted to the maximum size file (2 gigs max) that your will need the framework to receive. If you are uploading more than one file on a form the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.multipart.maxSize
+</code></pre>
+</div>
+<p>applies to the combined total, not the individual file sizes. The other setting,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>maximumSize
+</code></pre>
+</div>
+<p>, is an interceptor setting that is used to ensure a particular Action does not receive a file that is too large. Notice the locations of both settings in the following example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
+	"http://struts.apache.org/dtds/struts-2.0.dtd"&gt;</span>
+<span class="nt">&lt;struts&gt;</span>
+    <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.maxSize"</span> <span class="na">value=</span><span class="s">"1000000"</span> <span class="nt">/&gt;</span>
+    
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"doUpload"</span> <span class="na">class=</span><span class="s">"com.example.UploadAction"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"fileUpload"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"maximumSize"</span><span class="nt">&gt;</span>500000<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;/interceptor-ref&gt;</span> 
+        <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"validation"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"workflow"</span><span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+<span class="nt">&lt;/struts&gt;</span>
+
+</code></pre>
+</div>
+
+<p><strong>File Types</strong></p>
+
+<p>There are two ways to limit the uploaded file type, declaratively and programmatically. To declaratively limit the file type a comma separated list of allowedTypes can be specified as a fileUpload interceptor param as shown in the following example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;action name="doUpload" class="com.example.UploadAction"&gt;
+    &lt;interceptor-ref name="basicStack"/&gt;
+    &lt;interceptor-ref name="fileUpload"&gt;
+        &lt;param name="allowedTypes"&gt;image/jpeg,image/gif&lt;/param&gt;
+    &lt;/interceptor-ref&gt; 
+    &lt;interceptor-ref name="validation"/&gt;
+    &lt;interceptor-ref name="workflow"/&gt;
+
+    &lt;result name="success"&gt;good_result.jsp&lt;/result&gt;
+&lt;/action&gt;
+
+</code></pre>
+</div>
+
+<p>When the uploaded file type does not match one of the MIME types specified a field error will be created as described in the next section entitled Error Messages. Programmatically limiting the file type means using the information passed in to your Action class via the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>setXContentType(String contentType)
+</code></pre>
+</div>
+<p>method. The benefit to this type of approach would be that it’s more flexible and no interceptor configuration would be needed if file sizes are keep under 2 megs.</p>
+
+<p><strong>Error Messages</strong></p>
+
+<p>If an error occurs several field errors will be added assuming that the action implements</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>com.opensymphony.xwork2.ValidationAware
+</code></pre>
+</div>
+<p>or extends</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>com.opensymphony.xwork2.ActionSupport
+</code></pre>
+</div>
+<p>. These error messages are based on several i18n values stored in struts-messages.properties, a default i18n file processed for all i18n requests. You can override the text of these messages by providing text for the following keys:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Key</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>struts.messages.error.uploading</td>
+      <td>A general error that occurs when the file could not be uploaded</td>
+    </tr>
+    <tr>
+      <td>struts.messages.error.file.too.large</td>
+      <td>Occurs when the uploaded file is too large as specified by maximumSize.</td>
+    </tr>
+    <tr>
+      <td>struts.messages.error.content.type.not.allowed</td>
+      <td>Occurs when the uploaded file does not match the expected content types specified</td>
+    </tr>
+    <tr>
+      <td>struts.messages.error.file.extension.not.allowed</td>
+      <td>Occurs when uploaded file has disallowed extension</td>
+    </tr>
+    <tr>
+      <td>struts.messages.upload.error.SizeLimitExceededException</td>
+      <td>Occurs when the upload request (as a whole) exceed configured <strong>struts.multipart.maxSize</strong></td>
+    </tr>
+    <tr>
+      <td>struts.messages.upload.error.&lt;Exception class SimpleName&gt;</td>
+      <td>Occurs when any other exception took place during file upload process</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Temporary Directories</strong></p>
+
+<p>All uploaded files are saved to a temporary directory by the framework before being passed in to an Action. Depending on the allowed file sizes it may be necessary to have the framework store these temporary files in an alternate location. To do this change</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.multipart.saveDir
+</code></pre>
+</div>
+<p>to the directory where the uploaded files will be placed. If this property is not set it defaults to</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>javax.servlet.context.tempdir
+</code></pre>
+</div>
+<p>. Keep in mind that on some operating systems, like Solaris,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/tmp
+</code></pre>
+</div>
+<p>is memory based and files stored in that directory would consume an amount of RAM approximately equal to the size of the uploaded file.</p>
+
+<p><strong>Alternate Libraries</strong></p>
+
+<p>The</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.multipart.parser
+</code></pre>
+</div>
+<p>used by the fileUpload interceptor to handle HTTP POST requests, encoded using the MIME-type multipart/form-data, can be changed out. Currently there are two choices, jakarta and pell. The jakarta parser is a standard part of the Struts 2 framework needing only its required libraries added to a project. The pell parser uses Jason Pell’s multipart parser instead of the Commons-FileUpload library. The pell parser is a Struts 2 plugin, for more details see: <em>pell multipart plugin</em> . There was a third alternative, cos, but it was removed due to licensing incompatibilities.</p>
+
+<p>As from Struts version 2.3.18 a new implementation of </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>MultiPartRequest
+</code></pre>
+</div>
+<p>was added - </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>JakartaStreamMultiPartRequest
+</code></pre>
+</div>
+<p>. It can be used to handle large files, see <a href="https://issues\.apache\.org/jira/browse/WW\-3025">WW-3025</a>^[https://issues.apache.org/jira/browse/WW-3025] for more details, but you can simple set</p>
+
+<blockquote>
+  <p>&lt;constant name=”struts.multipart.parser” value=”jakarta-stream” /&gt;</p>
+</blockquote>
+
+<p>in struts.xml to start using it.</p>
+
+<p><strong>Request validation</strong></p>
+
+<p>The </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.multipart.validationRegex
+</code></pre>
+</div>
+<p> is used to define a RegEx to be used to validate if the incoming request is a multipart request. The request must use the</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>POST
+</code></pre>
+</div>
+<p> method and match the RegEx, by default the RegEx is defined as follow:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>^multipart\\/form-data(; boundary=[a-zA-Z0-9]{1,70})?
+</code></pre>
+</div>
+
+<p>Please read <a href="https://www\.w3\.org/Protocols/rfc1341/7\_2\_Multipart\.html">RFC1341</a>^[https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html] the <strong>Multipart section</strong> for more details, existing Struts</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Multipart
+</code></pre>
+</div>
+<p> parsers support only </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>multipart/form-data
+</code></pre>
+</div>
+<p> content type. This option is available since Struts 2.3.11.</p>
+
+<p><strong>Disabling file upload support</strong></p>
+
+<p>You can alternatively disable the whole file upload mechanism defining a constant in </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+<p>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;constant name="struts.multipart.enabled" value="false"/&gt;
+</code></pre>
+</div>
+
+<p>With this constant in place, Struts will ignore a </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Content-Type
+</code></pre>
+</div>
+<p>header and will treat each request as an ordinary http request. This option is available since Struts 2.3.11.</p>
+
+<p> </p>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2016 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    All Rights Reserved.
+  </div>
+  <div class="col-md-12">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>
+<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<script>
+$(function() {
+  return $("h2, h3, h4, h5, h6").each(function(i, el) {
+    var $el, id;
+    $el = $(el);
+    id = $el.attr('id');
+    if (id) {
+      $el.removeAttr('id');
+      return $el.before($("<a />").addClass('anchor').attr('name', id));
+    }
+  });
+});
+</script>
+
+</body>
+</html>
