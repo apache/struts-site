@@ -1,0 +1,558 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Validation</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="core-developers-guide.html">Core Developers Guide</a>&nbsp;&gt;&nbsp;<a href="validation.html">Validation</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Validation</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14292">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14292">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14292">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14292">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14292">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14292">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><p>Struts 2 validation is configured via XML or annotations. Manual validation in the action is also possible, and may be combined with XML and annotation-driven validation.</p><p>Validation also depends on both the <code>validation</code> and <code>workflow</code> interceptors (both are included in the default interceptor stack). The <code>validation</code> interceptor does the validation itself and creates a list of field-specific errors. The <code>workflow</code> interceptor checks for the presence of validation errors: if any are found, it returns the "input" result (by default), taking the user back to the form which contained the validation errors.</p><p>If we're using the default settings <em>and</em> our action doesn't have an "input" result defined <em>and</em> there are validation (or, incidentally, type conversion) errors, we'll get an error message back telling us there's no "input" result defined for the action.</p><p><strong>CONTENTS</strong></p><p><style type="text/css">/*<![CDATA[*/
+div.rbtoc1499928416993 {padding: 0px;}
+div.rbtoc1499928416993 ul {list-style: none;margin-left: 0px;}
+div.rbtoc1499928416993 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style></p><div class="toc-macro rbtoc1499928416993">
+<ul class="toc-indentation"><li><span class="TOCOutline">1</span> <a shape="rect" href="#Validation-UsingAnnotations">Using Annotations</a></li><li><span class="TOCOutline">2</span> <a shape="rect" href="#Validation-BeanValidation">Bean Validation</a></li><li><span class="TOCOutline">3</span> <a shape="rect" href="#Validation-Examples">Examples</a></li><li><span class="TOCOutline">4</span> <a shape="rect" href="#Validation-BundledValidators">Bundled Validators</a></li><li><span class="TOCOutline">5</span> <a shape="rect" href="#Validation-RegisteringValidators">Registering Validators</a></li><li><span class="TOCOutline">6</span> <a shape="rect" href="#Validation-TurningonValidation">Turning on Validation</a></li><li><span class="TOCOutline">7</span> <a shape="rect" href="#Validation-ValidatorScopes">Validator Scopes</a>
+<ul class="toc-indentation"><li><span class="TOCOutline">7.1</span> <a shape="rect" href="#Validation-Notes">Notes</a></li></ul>
+</li><li><span class="TOCOutline">8</span> <a shape="rect" href="#Validation-DefiningValidationRules">Defining Validation Rules</a></li><li><span class="TOCOutline">9</span> <a shape="rect" href="#Validation-LocalizingandParameterizingMessages">Localizing and Parameterizing Messages</a></li><li><span class="TOCOutline">10</span> <a shape="rect" href="#Validation-ValidatorFlavor">Validator Flavor</a></li><li><span class="TOCOutline">11</span> <a shape="rect" href="#Validation-Non-FieldValidatorVsField-Validatorvalidatortypes">Non-Field Validator Vs Field-Validator</a></li><li><span class="TOCOutline">12</span> <a shape="rect" href="#Validation-Short-CircuitingValidator">Short-Circuiting Validator</a></li><li><span class="TOCOutline">13</span> <a shape="rect" href="#Validation-HowValidatorsofanActionareFound">How Validators of an Action are Found</a></li><li><span class="TOCOutline">14</span> <a shape="rect" href="#Validation-Writingcustomvalidators">Writing custom validators</a></li><li><span class="TOCOutline">15</span> <a shape="rect" href="#Validation-Resources">Resources</a></li><li><span class="TOCOutline">16</span> <a shape="rect" href="#Validation-Next:">Next: Localization</a></li></ul>
+</div><h2 id="Validation-UsingAnnotations">Using Annotations</h2><p><a shape="rect" href="validation-annotation.html">Annotations</a> can be used as an alternative to XML for validation.</p><p>&#160;</p><h2 id="Validation-BeanValidation">Bean Validation</h2><p>With struts 2.5 comes the Bean Validation Plugin. That is an alternative to the classic struts validation described here. See the <a shape="rect" href="bean-validation-plugin.html">Plugin Page</a> for details.</p><h2 id="Validation-Examples">Examples</h2><p>In all examples given here, the validation message displayed is given in plain English - to internationalize the message, put the string in a properties file and use a property key instead, specified by the 'key' attribute. It will be looked up by the framework (see <a shape="rect" href="localization.html">Localization</a>).</p><ol><li><a shape="rect" href="basic-validation.html">Basic Validation</a></li><li><a shape="rect" href="client-validation.html">Client-side Validation</a></li><li><a shape="rect" href="ajax-validation.html">AJAX Validation</a></li><li><a shape="rect" href="using-field-validators.html">Using Field Validators</a></li><li><a shape="rect" href="using-non-field-validators.html">Using Non Field Validators</a></li><li><a shape="rect" href="using-visitor-field-validator.html">Using Visitor Field Validator</a></li><li><a shape="rect" href="how-do-we-repopulate-controls-when-validation-fails.html">How do we repopulate controls when validation fails</a> (FAQ entry)</li></ol><h2 id="Validation-BundledValidators">Bundled Validators</h2><div class="confluence-information-macro confluence-information-macro-note"><p class="title">Note</p><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>When using a Field Validator, Field Validator Syntax is <strong>ALWAYS</strong> preferable than using the Plain Validator Syntax as it facilitates grouping of field-validators according to fields. This is very handy especially if a field needs to have many <code>field-validators</code> which is almost always the case.</p></div></div><ol><li><a shape="rect" href="conversion-validator.html">conversion validator</a></li><li><a shape="rect" href="date-validator.html">date validator</a></li><li><a shape="rect" href="double-validator.html">double validator</a></li><li><a shape="rect" href="email-validator.html">email validator</a></li><li><a shape="rect" href="expression-validator.html">expression validator</a></li><li><a shape="rect" href="fieldexpression-validator.html">fieldexpression validator</a></li><li><a shape="rect" href="int-validator.html">int validator</a></li><li><a shape="rect" href="regex-validator.html">regex validator</a></li><li><a shape="rect" href="required-validator.html">required validator</a></li><li><a shape="rect" href="requiredstring-validator.html">requiredstring validator</a></li><li><a shape="rect" href="short-validator.html">short validator</a></li><li><a shape="rect" href="stringlength-validator.html">stringlength validator</a></li><li><a shape="rect" href="url-validator.html">url validator</a></li><li><a shape="rect" href="visitor-validator.html">visitor validator</a></li><li><a shape="rect" href="conditionalvisitor-validator.html">conditionalvisitor validator</a></li></ol><h2 id="Validation-RegisteringValidators">Registering Validators</h2><p></p><p>Validation rules are handled by validators, which must be registered with
+the ValidatorFactory (using the registerValidator method). The simplest way to do so is to add a file name
+validators.xml in the root of the classpath (/WEB-INF/classes) that declares
+all the validators you intend to use.</p>The following list shows the default validators included in the framework and is an example of the syntax used to declare our own validators.<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE validators PUBLIC
+        &quot;-//Apache Struts//XWork Validator Definition 1.0//EN&quot;
+        &quot;http://struts.apache.org/dtds/xwork-validator-definition-1.0.dtd&quot;&gt;
+
+&lt;validators&gt;
+    &lt;validator name=&quot;required&quot; class=&quot;com.opensymphony.xwork2.validator.validators.RequiredFieldValidator&quot;/&gt;
+    &lt;validator name=&quot;requiredstring&quot; class=&quot;com.opensymphony.xwork2.validator.validators.RequiredStringValidator&quot;/&gt;
+    &lt;validator name=&quot;int&quot; class=&quot;com.opensymphony.xwork2.validator.validators.IntRangeFieldValidator&quot;/&gt;
+    &lt;validator name=&quot;long&quot; class=&quot;com.opensymphony.xwork2.validator.validators.LongRangeFieldValidator&quot;/&gt;
+    &lt;validator name=&quot;short&quot; class=&quot;com.opensymphony.xwork2.validator.validators.ShortRangeFieldValidator&quot;/&gt;
+    &lt;validator name=&quot;double&quot; class=&quot;com.opensymphony.xwork2.validator.validators.DoubleRangeFieldValidator&quot;/&gt;
+    &lt;validator name=&quot;date&quot; class=&quot;com.opensymphony.xwork2.validator.validators.DateRangeFieldValidator&quot;/&gt;
+    &lt;validator name=&quot;expression&quot; class=&quot;com.opensymphony.xwork2.validator.validators.ExpressionValidator&quot;/&gt;
+    &lt;validator name=&quot;fieldexpression&quot; class=&quot;com.opensymphony.xwork2.validator.validators.FieldExpressionValidator&quot;/&gt;
+    &lt;validator name=&quot;email&quot; class=&quot;com.opensymphony.xwork2.validator.validators.EmailValidator&quot;/&gt;
+    &lt;validator name=&quot;creditcard&quot; class=&quot;com.opensymphony.xwork2.validator.validators.CreditCardValidator&quot;/&gt;
+    &lt;validator name=&quot;url&quot; class=&quot;com.opensymphony.xwork2.validator.validators.URLValidator&quot;/&gt;
+    &lt;validator name=&quot;visitor&quot; class=&quot;com.opensymphony.xwork2.validator.validators.VisitorFieldValidator&quot;/&gt;
+    &lt;validator name=&quot;conversion&quot; class=&quot;com.opensymphony.xwork2.validator.validators.ConversionErrorFieldValidator&quot;/&gt;
+    &lt;validator name=&quot;stringlength&quot; class=&quot;com.opensymphony.xwork2.validator.validators.StringLengthFieldValidator&quot;/&gt;
+    &lt;validator name=&quot;regex&quot; class=&quot;com.opensymphony.xwork2.validator.validators.RegexFieldValidator&quot;/&gt;
+    &lt;validator name=&quot;conditionalvisitor&quot; class=&quot;com.opensymphony.xwork2.validator.validators.ConditionalVisitorFieldValidator&quot;/&gt;
+&lt;/validators&gt;
+]]></script>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><p class="title">Struts 2.1 and Prior</p><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The <code>validators.xml</code> used to reference a DTD hosted by Opensymphony, the original location of the XWork project. Since the the move to Apache Struts, DTDs were changed. Please ensure in your projects to include the DTD header as described in the examples found here</p></div></div><div class="confluence-information-macro confluence-information-macro-note"><p class="title">Struts 2.0.7 and Prior</p><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The <code>validators.xml</code> containing custom validators needs to contain a copy of the default validators. No DTD was used in validators.xml. See: <a shape="rect" class="external-link" href="http://struts.apache.org/2.x/docs/release-notes-208.html#ReleaseNotes2.0.8-MigrationfrompreviousReleases">http://struts.apache.org/2.x/docs/release-notes-208.html#ReleaseNotes2.0.8-MigrationfrompreviousReleases</a></p></div></div><h2 id="Validation-TurningonValidation">Turning on Validation</h2><p>The default interceptor stack, "defaultStack", already has validation turned on. When creating your own interceptor-stack be sure to include <strong>both</strong> the <code>validation</code> and <code>workflow</code> interceptors. From <code>struts-default.xml</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;interceptor-stack name="defaultStack"&gt;
+   ...
+   &lt;interceptor-ref name="validation"&gt;
+      &lt;param name="excludeMethods"&gt;input,back,cancel,browse&lt;/param&gt;
+   &lt;/interceptor-ref&gt;
+   &lt;interceptor-ref name="workflow"&gt;
+      &lt;param name="excludeMethods"&gt;input,back,cancel,browse&lt;/param&gt;
+   &lt;/interceptor-ref&gt;
+&lt;/interceptor-stack&gt;
+</pre>
+</div></div><p>Beginning with version 2.0.4 Struts provides an extension to XWork's <code>com.opensymphony.xwork2.validator.ValidationInterceptor</code> interceptor.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;interceptor name="validation" class="org.apache.struts2.interceptor.validation.AnnotationValidationInterceptor"/&gt;
+</pre>
+</div></div><p>This interceptor allows us to turn off validation for a specific method by using the <code>@org.apache.struts2.interceptor.validation.SkipValidation</code> annotation on the action method.</p><h2 id="Validation-ValidatorScopes">Validator Scopes</h2><p></p><p>Field validators, as the name indicate, act on single fields accessible through an action.
+A validator, in contrast, is more generic and can do validations in the full action context,
+involving more than one field (or even no field at all) in validation rule.
+Most validations can be defined on per field basis. This should be preferred over
+non-field validation wherever possible, as field validator messages are bound to the
+related field and will be presented next to the corresponding input element in the
+respecting view.</p><p>Non-field validators only add action level messages. Non-field validators
+are mostly domain specific and therefore offer custom implementations.
+The most important standard non-field validator provided by XWork
+is ExpressionValidator.</p><h3 id="Validation-Notes">Notes</h3><p></p><p>Non-field validators takes precedence over field validators
+regardless of the order they are defined in *-validation.xml. If a non-field
+validator is short-circuited, it will causes its non-field validator to not
+being executed. See validation framework documentation for more info.</p><h2 id="Validation-DefiningValidationRules">Defining Validation Rules</h2><p></p><p></p><p>Validation rules can be specified:</p>
+<ol><li> Per Action class: in a file named ActionName-validation.xml</li><li> Per Action alias: in a file named ActionName-alias-validation.xml</li><li> Inheritance hierarchy and interfaces implemented by Action class:
+ XWork searches up the inheritance tree of the action to find default
+ validations for parent classes of the Action and interfaces implemented</li></ol>
+<p>Here is an example for SimpleAction-validation.xml:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;!DOCTYPE validators PUBLIC &quot;-//Apache Struts//XWork Validator 1.0.3//EN&quot;
+		&quot;http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd&quot;&gt;
+&lt;validators&gt;
+  &lt;field name=&quot;bar&quot;&gt;
+      &lt;field-validator type=&quot;required&quot;&gt;
+          &lt;message&gt;You must enter a value for bar.&lt;/message&gt;
+      &lt;/field-validator&gt;
+      &lt;field-validator type=&quot;int&quot;&gt;
+          &lt;param name=&quot;min&quot;&gt;6&lt;/param&gt;
+          &lt;param name=&quot;max&quot;&gt;10&lt;/param&gt;
+          &lt;message&gt;bar must be between ${min} and ${max}, current value is ${bar}.&lt;/message&gt;
+      &lt;/field-validator&gt;
+  &lt;/field&gt;
+  &lt;field name=&quot;bar2&quot;&gt;
+      &lt;field-validator type=&quot;regex&quot;&gt;
+          &lt;param name=&quot;expression&quot;&gt;[0-9],[0-9]&lt;/param&gt;
+          &lt;message&gt;The value of bar2 must be in the format &quot;x, y&quot;, where x and y are between 0 and 9&lt;/message&gt;
+     &lt;/field-validator&gt;
+  &lt;/field&gt;
+  &lt;field name=&quot;date&quot;&gt;
+      &lt;field-validator type=&quot;date&quot;&gt;
+          &lt;param name=&quot;min&quot;&gt;12/22/2002&lt;/param&gt;
+          &lt;param name=&quot;max&quot;&gt;12/25/2002&lt;/param&gt;
+          &lt;message&gt;The date must be between 12-22-2002 and 12-25-2002.&lt;/message&gt;
+      &lt;/field-validator&gt;
+  &lt;/field&gt;
+  &lt;field name=&quot;foo&quot;&gt;
+      &lt;field-validator type=&quot;int&quot;&gt;
+          &lt;param name=&quot;min&quot;&gt;0&lt;/param&gt;
+          &lt;param name=&quot;max&quot;&gt;100&lt;/param&gt;
+          &lt;message key=&quot;foo.range&quot;&gt;Could not find foo.range!&lt;/message&gt;
+      &lt;/field-validator&gt;
+  &lt;/field&gt;
+  &lt;validator type=&quot;expression&quot;&gt;
+      &lt;param name=&quot;expression&quot;&gt;foo lt bar &lt;/param&gt;
+      &lt;message&gt;Foo must be greater than Bar. Foo = ${foo}, Bar = ${bar}.&lt;/message&gt;
+  &lt;/validator&gt;
+&lt;/validators&gt;
+]]></script>
+</div></div><p>Here we can see the configuration of validators for the SimpleAction class.
+Validators (and field-validators) must have a type attribute, which refers
+to a name of an Validator registered with the ValidatorFactory as above.
+Validator elements may also have &lt;param&gt; elements with name and value attributes
+to set arbitrary parameters into the Validator instance. See below for discussion
+of the message element.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>In this context, "Action Alias" refers to the action name as given in the Struts configuration. Often, the name attribute matches the method name, but they may also differ.</p></div></div><h2 id="Validation-LocalizingandParameterizingMessages">Localizing and Parameterizing Messages</h2><p></p><p></p><p>Each Validator or Field-Validator element must define one message element inside
+the validator element body. The message element has 1 attributes, key which is not
+required. The body of the message tag is taken as the default message which should
+be added to the Action if the validator fails. Key gives a message key to look up
+in the Action's ResourceBundles using getText() from LocaleAware if the Action
+implements that interface (as ActionSupport does). This provides for Localized
+messages based on the Locale of the user making the request (or whatever Locale
+you've set into the LocaleAware Action). After either retrieving the message from
+the ResourceBundle using the Key value, or using the Default message, the current
+Validator is pushed onto the ValueStack, then the message is parsed for \${...}
+sections which are replaced with the evaluated value of the string between the
+\${ and }. This allows you to parameterize your messages with values from the
+Validator, the Action, or both.</p>
+
+
+<p></p><p>If the validator fails, the validator is pushed onto the ValueStack and the
+message - either the default or the locale-specific one if the key attribute is
+defined (and such a message exists) - is parsed for ${...} sections which are
+replaced with the evaluated value of the string between the ${ and }. This
+allows you to parameterize your messages with values from the validator, the
+Action, or both. </p>
+
+<p></p><p><b>NOTE:</b> Since validation rules are in an XML file, you must make sure
+you escape special characters. For example, notice that in the expression
+validator rule above we use "&amp;gt;" instead of "&gt;". Consult a resource on XML
+for the full list of characters that must be escaped. The most commonly used
+characters that must be escaped are: &amp; (use &amp;amp<img align="middle" class="emoticon" src="null/icons/emoticons/wink.png" height="16" width="16" alt="" border="0">, &gt; (user &amp;gt<img align="middle" class="emoticon" src="null/icons/emoticons/wink.png" height="16" width="16" alt="" border="0">, and &lt; (use &amp;lt<img align="middle" class="emoticon" src="null/icons/emoticons/wink.png" height="16" width="16" alt="" border="0">.</p>
+
+<p></p><p>Here is an example of a parameterized message:</p>
+<p>This will pull the min and max parameters from the IntRangeFieldValidator and
+the value of bar from the Action.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+bar must be between ${min} and ${max}, current value is ${bar}.
+]]></script>
+</div></div><p></p><p>Another notable fact is that the provided message value is capable of containing OGNL expressions.
+Keeping this in mind, it is possible to construct quite sophisticated messages.</p>
+<p>See the following example to get an impression:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;message&gt;${getText(&quot;validation.failednotice&quot;)}! ${getText(&quot;reason&quot;)}: ${getText(&quot;validation.inputrequired&quot;)}&lt;/message&gt;
+]]></script>
+</div></div><h2 id="Validation-ValidatorFlavor">Validator Flavor</h2><p></p><p></p><p>The validators supplied by the XWork distribution (and any validators you
+might write yourself) come in two different flavors:</p>
+
+<p></p><ol><li> Plain Validators / Non-Field validators </li><li> FieldValidators </li></ol>
+
+<p></p><p>Plain Validators (such as the ExpressionValidator) perform validation checks
+that are not inherently tied to a single specified field. When you declare a
+plain Validator in your -validation.xml file you do not associate a fieldname
+attribute with it. (You should avoid using plain Validators within the
+&lt;field-validator&gt; syntax described below.)</p>
+
+<p></p><p>FieldValidators (such as the EmailValidator) are designed to perform
+validation checks on a single field. They require that you specify a fieldname
+attribute in your -validation.xml file. There are two different (but equivalent)
+XML syntaxes you can use to declare FieldValidators (see "&lt;validator&gt; vs.
+&lt;field-Validator&gt; syntax" below).</p>
+
+<p></p><p>There are two places where the differences between the two validator flavors
+are important to keep in mind:</p>
+
+<p></p><ol><li> when choosing the xml syntax used for declaring a validator
+(either &lt;validator&gt; or &lt;field-validator&gt;)</li><li> when using the short-circuit capability</li></ol>
+
+<p></p><p><b>NOTE:</b>Note that you do not declare what "flavor" of validator you are
+using in your -validation.xml file, you just declare the name of the validator
+to use and Struts will know whether it's a "plain Validator" or a "FieldValidator"
+by looking at the validation class that the validator's programmer chose
+to implement.</p><h2 id="Validation-Non-FieldValidatorVsField-Validatorvalidatortypes">Non-Field Validator Vs Field-Validator <span class="confluence-anchor-link" id="Validation-validatortypes"></span></h2><p>There are two ways you can define validators in your -validation.xml file:</p><ol><li>&lt;validator&gt;</li><li>&lt;field-validator&gt;</li></ol><p>Keep the following in mind when using either syntax:</p><p>Non-Field-Validator: The &lt;validator&gt; element allows you to declare both types of validators (either a plain Validator a field-specific FieldValidator).</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;validator type="expression&gt; 
+    &lt;param name="expression"&gt;foo gt bar&lt;/param&gt; 
+    &lt;message&gt;foo must be great than bar.&lt;/message&gt; 
+&lt;/validator&gt; 
+</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;validator type="required"&gt; 
+    &lt;param name="fieldName"&gt;bar&lt;/param&gt; 
+    &lt;message&gt;You must enter a value for bar.&lt;/message&gt; 
+&lt;/validator&gt; 
+</pre>
+</div></div><p><strong>field-validator</strong>: The &lt;field-validator&gt; elements are basically the same as the &lt;validator&gt; elements except that they inherit the fieldName attribute from the enclosing &lt;field&gt; element. FieldValidators defined within a &lt;field-validator&gt; element will have their fieldName automatically filled with the value of the parent &lt;field&gt; element's fieldName attribute. The reason for this structure is to conveniently group the validators for a particular field under one element, otherwise the fieldName attribute would have to be repeated, over and over, for each individual &lt;validator&gt;.</p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>It is always better to defined field-validator inside a &lt;field&gt; tag instead of using a &lt;validator&gt; tag and supplying fieldName as its param as the xml code itself is clearer (grouping of field is clearer)</p></div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Note that you should only use FieldValidators (not plain Validators) within a block. A plain Validator inside a &lt;field&gt; will not be allowed and would generate error when parsing the xml, as it is not allowed in the defined dtd (xwork-validator-1.0.2.dtd)</p></div></div><p>Declaring a FieldValidator using the &lt;field-validator&gt; syntax:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;field name="email_address"&gt; 
+    &lt;field-validator type="required"&gt; 
+        &lt;message&gt;You cannot leave the email address field empty.&lt;/message&gt; 
+    &lt;/field-validator&gt; 
+    &lt;field-validator type="email"&gt; 
+        &lt;message&gt;The email address you entered is not valid.&lt;/message&gt; 
+    &lt;/field-validator&gt; 
+&lt;/field&gt; 
+</pre>
+</div></div><p>The choice is yours. It's perfectly legal to only use elements without the elements and set the fieldName attribute for each of them. The following are effectively equal:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;field name="email_address"&gt; 
+    &lt;field-validator type="required"&gt; 
+        &lt;message&gt;You cannot leave the email address field empty.&lt;/message&gt; 
+    &lt;/field-validator&gt; 
+    &lt;field-validator type="email"&gt; 
+        &lt;message&gt;The email address you entered is not valid.&lt;/message&gt; 
+    &lt;/field-validator&gt; 
+&lt;/field&gt; 
+ 
+&lt;validator type="required"&gt; 
+    &lt;param name="fieldName"&gt;email_address&lt;/param&gt; 
+    &lt;message&gt;You cannot leave the email address field empty.&lt;/message&gt; 
+&lt;/validator&gt; 
+&lt;validator type="email"&gt; 
+    &lt;param name="fieldName"&gt;email_address&lt;/param&gt; 
+    &lt;message&gt;The email address you entered is not valid.&lt;/message&gt; 
+&lt;/validator&gt; 
+</pre>
+</div></div><h2 id="Validation-Short-CircuitingValidator">Short-Circuiting Validator</h2><p></p><p></p><p>It is possible to short-circuit a stack of validators.
+Here is another sample config file containing validation rules from the
+Xwork test cases: Notice that some of the &lt;field-validator&gt; and
+&lt;validator&gt; elements have the short-circuit attribute set to true.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;!DOCTYPE validators PUBLIC
+        &quot;-//Apache Struts//XWork Validator 1.0.3//EN&quot;
+ 	   &quot;http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd&quot;&gt;
+&lt;validators&gt;
+  &lt;!-- Field Validators for email field --&gt;
+  &lt;field name=&quot;email&quot;&gt;
+      &lt;field-validator type=&quot;required&quot; short-circuit=&quot;true&quot;&gt;
+          &lt;message&gt;You must enter a value for email.&lt;/message&gt;
+      &lt;/field-validator&gt;
+      &lt;field-validator type=&quot;email&quot; short-circuit=&quot;true&quot;&gt;
+          &lt;message&gt;Not a valid e-mail.&lt;/message&gt;
+      &lt;/field-validator&gt;
+  &lt;/field&gt;
+  &lt;!-- Field Validators for email2 field --&gt;
+  &lt;field name=&quot;email2&quot;&gt;
+     &lt;field-validator type=&quot;required&quot;&gt;
+          &lt;message&gt;You must enter a value for email2.&lt;/message&gt;
+      &lt;/field-validator&gt;
+     &lt;field-validator type=&quot;email&quot;&gt;
+          &lt;message&gt;Not a valid e-mail2.&lt;/message&gt;
+      &lt;/field-validator&gt;
+  &lt;/field&gt;
+  &lt;!-- Plain Validator 1 --&gt;
+  &lt;validator type=&quot;expression&quot;&gt;
+      &lt;param name=&quot;expression&quot;&gt;email.equals(email2)&lt;/param&gt;
+      &lt;message&gt;Email not the same as email2&lt;/message&gt;
+  &lt;/validator&gt;
+  &lt;!-- Plain Validator 2 --&gt;
+  &lt;validator type=&quot;expression&quot; short-circuit=&quot;true&quot;&gt;
+      &lt;param name=&quot;expression&quot;&gt;email.startsWith(&#39;mark&#39;)&lt;/param&gt;
+      &lt;message&gt;Email does not start with mark&lt;/message&gt;
+  &lt;/validator&gt;
+&lt;/validators&gt;
+]]></script>
+</div></div><p></p><p><b>short-circuiting and Validator flavors</b></p>
+<p>Plain validator takes precedence over field-validator. They get validated
+first in the order they are defined and then the field-validator in the order
+they are defined. Failure of a particular validator marked as short-circuit
+will prevent the evaluation of subsequent validators and an error (action
+error or field error depending on the type of validator) will be added to
+the ValidationContext of the object being validated.</p>
+
+<p></p><p>In the example above, the actual execution of validator would be as follows:</p>
+
+<p></p><ol><li> Plain Validator 1</li><li> Plain Validator 2</li><li> Field Validators for email field</li><li> Field Validators for email2 field</li></ol>
+
+<p></p><p>Since Plain Validator 2 is short-circuited, if its validation failed,
+it will causes Field validators for email field and Field validators for email2
+field to not be validated as well.</p>
+
+<p></p><p><b>Usefull Information:</b>
+More complicated validation should probably be done in the validate()
+method on the action itself (assuming the action implements Validatable
+interface which ActionSupport already does).</p>
+
+<p></p><p>
+A plain Validator (non FieldValidator) that gets short-circuited will
+completely break out of the validation stack. No other validators will be
+evaluated and plain validators takes precedence over field validators meaning
+that they get evaluated in the order they are defined before field validators
+get a chance to be evaluated.
+</p><p></p><p><b>Short cuircuiting and validator flavours</b></p>
+<p>A FieldValidator that gets short-circuited will only prevent other
+FieldValidators for the same field from being evaluated. Note that this
+"same field" behavior applies regardless of whether the &lt;validator&gt; or
+&lt;field-validator&gt; syntax was used to declare the validation rule.
+By way of example, given this -validation.xml file:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;validator type=&quot;required&quot; short-circuit=&quot;true&quot;&gt;
+  &lt;param name=&quot;fieldName&quot;&gt;bar&lt;/param&gt;
+  &lt;message&gt;You must enter a value for bar.&lt;/message&gt;
+&lt;/validator&gt;
+
+&lt;validator type=&quot;expression&quot;&gt;
+  &lt;param name=&quot;expression&quot;&gt;foo gt bar&lt;/param&gt;
+  &lt;message&gt;foo must be great than bar.&lt;/message&gt;
+&lt;/validator&gt;
+]]></script>
+</div></div><p></p><p>both validators will be run, even if the "required" validator short-circuits.
+"required" validators are FieldValidator's and will not short-circuit the plain
+ExpressionValidator because FieldValidators only short-circuit other checks on
+that same field. Since the plain Validator is not field specific, it is
+not short-circuited.</p><h2 id="Validation-HowValidatorsofanActionareFound">How Validators of an Action are Found</h2><p></p><p></p><p>As mentioned above, the framework will also search up the inheritance tree
+of the action to find default validations for interfaces and parent classes of
+the Action. If you are using the short-circuit attribute and relying on
+default validators higher up in the inheritance tree, make sure you don't
+accidentally short-circuit things higher in the tree that you really want!</p>
+<p>
+The effect of having common validators on both
+</p>
+<ul><li>&lt;actionClass&gt;-validation.xml</li><li>&lt;actionClass&gt;-&lt;actionAlias&gt;-validation.xml</li></ul>
+<p>
+It should be noted that the nett effect will be validation on both the validators available
+in both validation configuration file. For example if we have 'requiredstring' validators defined
+in both validation xml file for field named 'address', we will see 2 validation error indicating that
+the the address cannot be empty (assuming validation failed). This is due to WebWork
+will merge validators found in both validation configuration files.
+</p>
+<p>
+The logic behind this design decision is such that we could have common validators in
+&lt;actionClass&gt;-validation.xml and more context specific validators to be located
+in &lt;actionClass&gt;-&lt;actionAlias&gt;-validation.xml
+</p><h2 id="Validation-Writingcustomvalidators">Writing custom validators</h2><p>If you want to write custom validator use on of these classes as a starting point:</p><ul style="list-style-type: square;"><li>com.opensymphony.xwork2.validator.validators.ValidatorSupport</li><li>com.opensymphony.xwork2.validator.validators.FieldValidatorSupport</li><li>com.opensymphony.xwork2.validator.validators.RangeValidatorSupport</li><li>com.opensymphony.xwork2.validator.validators.RepopulateConversionErrorFieldValidatorSupport</li></ul><h2 id="Validation-Resources">Resources</h2><p><a shape="rect" class="external-link" href="http://today.java.net/pub/a/today/2006/01/19/webwork-validation.html" rel="nofollow">WebWork Validation</a></p><h2 id="Validation-Next:">Next: <a shape="rect" href="localization.html">Localization</a></h2></div>
+        </div>
+
+                    <div class="tabletitle">
+                Children
+            <span class="smalltext" id="show" style="display: inline;">
+              <a href="javascript:showChildren()">Show Children</a></span>
+            <span class="smalltext" id="hide" style="display: none;">
+              <a href="javascript:hideChildren()">Hide Children</a></span>
+            </div>
+            <div class="greybox" id="children" style="display: none;">
+                                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                            </div>
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

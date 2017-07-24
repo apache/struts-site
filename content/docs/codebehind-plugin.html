@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Codebehind Plugin</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="plugin-developers-guide.html">Plugin Developers Guide</a>&nbsp;&gt;&nbsp;<a href="codebehind-plugin.html">Codebehind Plugin</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Codebehind Plugin</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=29637">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=29637">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=29637">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=29637">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=29637">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=29637">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><div class="confluence-information-macro confluence-information-macro-warning"><p class="title">Deprecated Plugin</p><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>Since 2.1 this plugin has been deprecated in favor of the <a shape="rect" href="convention-plugin.html">Convention Plugin</a>. See <a shape="rect" href="converting-application-from-codebehind-to-convention-plugin.html">this page</a> for details on how to port your application to the Convention plugin.</p></div></div>
+
+<p>The Codebehind Plugin reduces mundane configuration by adding "Page Controller" conventions. </p>
+
+<p>There are two common situations where the plugin applies convention over configuration:</p>
+
+<ol><li><strong>Default mappings</strong> - (or "pages with no mappings") These are cases where the page is mostly static and doesn't require an Action class to execute logic.  Common examples are index pages and those that heavily use JSP tags or JSF components.</li><li><strong>Default results</strong> - The purpose of most Actions is to execute code to prepare the data for a specific page. The name of this page is often the same as the Action itself.</li></ol>
+
+
+<p>To improve the first case, the plugin will detect the presence of a page with no corresponding Struts mapping and automatically substitute a mapping that uses the default Action class for the package, which is usually ActionSupport, a NO-OP Action.  </p>
+
+<p>For the problem of default results, the plugin will make it unnecessary to define those results by detecting the presence of a page for that Action and creating the appropriate configuration on-the-fly. </p>
+
+<p>In these two ways, the plugin encourages a page-based development style, handling the linking of Struts actions with pages and pages with Results in a common way.</p>
+
+<p><img class="emoticon emoticon-tick" src="https://cwiki.apache.org/confluence/s/en_GB/5982/f2b47fb3d636c8bc9fd0b11c0ec6d0ae18646be7.1/_/images/icons/emoticons/check.png" data-emoticon-name="tick" alt="(tick)"> To see the plugin in action, review the "Person Manager" example in the Showcase application.</p>
+
+<h2 id="CodebehindPlugin-Features">Features</h2>
+
+<ul><li>Provides default mappings for pages that don't have Actions</li><li>Provides default results by auto-discovering pages</li></ul>
+
+
+<h2 id="CodebehindPlugin-Usage">Usage</h2>
+
+<p>To use this plugin, simply copy its jar into your application.  The plugin can be used to find default mappings and results.</p>
+
+<h3 id="CodebehindPlugin-DefaultMappings">Default Mappings</h3>
+
+<p>To better facilitate a code-behind development approach, the plugin will detect the case where the request has no defined Struts action mapping, yet there exists a corresponding page.  It will then create a dummy action mapping referencing the default Action class (usually ActionSupport), allowing the page to be displayed normally.  Additionally, the default interceptor stack for the configured package will be applied, bringing the workflow benefits of interceptor stacks to simple pages.</p>
+
+<p>When no explicitly configured Action can be found for a request, the plugin searches the web application for a likely page. Specifically, the following pattern is used to locate a page:</p>
+
+<p><code>/NAMESPACE/ACTION.(jsp|vm|ftl)</code></p>
+
+<p>For example, if the request is for <code><a shape="rect" class="external-link" href="http://www.company.com/myapp/member/login.action" rel="nofollow">http://www.company.com/myapp/member/login.action</a></code>, the plugin will look for the following pages, in this order: </p>
+
+<ol><li><code>/member/login.jsp</code></li><li><code>/member/login.vm</code></li><li><code>/member/login.ftl</code></li></ol>
+
+
+<p>If any of those pages are found, the plugin will construct an ActionConfig object on the fly, using the ActionSupport class for the Action and a single Result that points to the discovered page.  The ActionConfig will be put in the configured package, meaning that it will inherit the default Interceptor stack for that package.  The default package is <code>codebehind-default</code>, however, it can be configured in any <a shape="rect" href="constant-configuration.html">configuration file</a> via the <code>struts.codebehind.defaultPackage</code> constant.</p>
+
+<h3 id="CodebehindPlugin-DefaultResults">Default Results</h3>
+
+<p>In many applications, a majority of Results could have the same root name as the action mapping.  To reduce this unnecessary configuration, the Struts plugin will try to guess the appropriate Result, if none is explicitly configured.  This technique works for any result code, including <code>success</code>. When combined with the <a shape="rect" href="zero-configuration.html">Zero Configuration</a> style, the amount of configuration in an application dwindles to next to nothing.</p>
+
+<p>When no explicitly configured Result is found for an Action's result code, the plugin, again, searches the web application for a matching page. Specifically, the following patterns, in the following order, are used to locate a page:</p>
+
+<ol><li><code>/NAMESPACE/ACTION-RESULT_CODE.(jsp|vm|ftl)</code></li><li><code>/NAMESPACE/ACTION.(jsp|vm|ftl)</code></li></ol>
+
+
+<p>These two patterns are searched for each of the three default page extensions: jsp, vm, and ftl.  For example, if the request is for <code><a shape="rect" class="external-link" href="http://www.company.com/myapp/member/login.action" rel="nofollow">http://www.company.com/myapp/member/login.action</a></code>, so that the action name is <code>login</code> and the namespace is <code>member</code>, and the Action class returned a code of <code>success</code>, the plugin will look for the following pages, in this order: </p>
+
+<ol><li><code>/member/login-success.jsp</code></li><li><code>/member/login.jsp</code></li><li><code>/member/login-success.vm</code></li><li><code>/member/login.vm</code></li><li><code>/member/login-success.ftl</code></li><li><code>/member/login.ftl</code></li></ol>
+
+
+<p>If any of those pages are found, the appropriate Result will be constructed and processed.</p>
+
+<h3 id="CodebehindPlugin-Settings">Settings</h3>
+
+<p>The following settings can be customized.  See the <a shape="rect" class="external-link" href="http://cwiki.apache.org/confluence/display/WW/Configuration+Files">developer guide</a>.</p>
+
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Setting</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Default</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Possible Values</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>struts.codebehind.defaultPackage</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The default package to use for created Action mappings</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>codebehind-default</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Any existing package name</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>struts.configuration.classpath.disableActionScanning</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Whether to disable scanning the classpath for Action classes or not</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>true</code> or <code>false</code></p></td></tr></tbody></table></div>
+
+
+<h3 id="CodebehindPlugin-Installation">Installation</h3>
+
+<p>This plugin can be installed by copying the plugin jar into your application's <code>/WEB-INF/lib</code> directory.  No other files need to be copied or created.</p></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

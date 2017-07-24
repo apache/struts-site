@@ -1,0 +1,425 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>OSGi Plugin</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="plugin-developers-guide.html">Plugin Developers Guide</a>&nbsp;&gt;&nbsp;<a href="osgi-plugin.html">OSGi Plugin</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">OSGi Plugin</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=114995">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=114995">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=114995">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=114995">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=114995">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=114995">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><h2 id="OSGiPlugin-Overview">Overview</h2>
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>This plugin is only experimental and can change in the future.</p></div></div>
+
+<p>This plugin provides support for starting an instance of Apache Felix inside a web application, and scanning installed bundles for Struts configuration. An admin bundle is also provided. It can be used with Glassfish 3 as well (Glassfish 3 based on Apache Felix as well), but in such a way <code>struts.osgi.host</code> must be defined.</p>
+
+<h2 id="OSGiPlugin-Features">Features</h2>
+
+<ul><li>GUI for bundle administration</li><li>Web access to Felix Shell</li><li>Application packages can be divided into bundles</li><li>Supports Velocity and FreeMarker templates</li><li>Supports Struts Spring integration</li><li>Supports integration with the Convention plugin</li></ul>
+
+
+<h2 id="OSGiPlugin-MissingFeatures">Missing Features</h2>
+
+<ul><li>Probably can't access application classes from bundles, including Spring classes</li><li><em>constant</em> declarations in the bundled XML config files are ignored, these constants need to be set in the application XML config files (struts.xml)</li></ul>
+
+
+<h2 id="OSGiPlugin-AboutRunlevels">About Run levels</h2>
+<p>There are two ways of organizing bundles. If third party bundles will not be used, then the application bundles can just be placed under <code>/WEB-INF/classes/bundles</code>. Bundles in this dir will be started in run level 2, the Apache Felix framework's bundles will be loaded in run level 1. If third parties bundles will be used, or you need to start bundles on different run level, create sub dirs under <code>/WEB-INF/classes/bundles</code> with numeric names (starting from "2" because "1" is reserved for Felix), which correspond to the run level number. For example bundles under <code>/WEB-INF/classes/bundles/2</code> will be started in run level 2, and bundles under <code>/WEB-INF/classes/bundles/3</code> will be started in run level 3.</p>
+
+<h2 id="OSGiPlugin-SimpleUsage">Simple Usage</h2>
+
+<p>Add these lines to MANIFEST.MF:</p>
+<div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>Struts2-Enabled: true
+Export-Package: com.mycompany.myapp.actions
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: foo.actions
+Import-Package: com.opensymphony.xwork2
+</pre>
+</div></div>
+<p>Now the jar is ready to be deployed.  Drop the jar into the <code>/WEB-INF/classes/bundles</code> directory and it will automatically be installed when the application starts up.</p>
+
+<h2 id="OSGiPlugin-UsingSpring">Using Spring</h2>
+<div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>By default Spring OSGi loads its xml config files asynchronously, which causes the OSGi plugin to fail while starting. To fix this add this line to MANIFEST.MF:</p>
+<div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>Spring-Context:*;create-asynchronously:=false
+</pre>
+</div></div>
+<p>Or if using The Apache Felix maven plugin (see below for details):</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;Spring-Context&gt;*;create-asynchronously:=false&lt;/Spring-Context&gt;
+</pre>
+</div></div></div></div>
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>Please note that you <strong>do not</strong> need to have the Struts Spring plugin in your application, in order to use Spring with the OSGi plugin.</p></div></div>
+<p>If you want to use the Spring as the object factory for your actions, then follow these steps:</p>
+<ol><li>Place your Spring xml files under <code>/META-INF/spring</code> in the <strong>bundle</strong> jar file</li><li>Place your Spring xml files under <code>/spring</code> (they must be in the classpath, if you are using maven, put thme under /src/resources/spring) in the <strong>application</strong></li><li>Copy all the bundle jar files into <code>/WEB-INF/classes/bundles</code> in your <strong>application</strong></li><li>Make sure that the following properties are set in struts.xml or struts.properties in your <strong>application</strong>:
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;constant name="struts.objectFactory" value="osgi" /&gt;
+&lt;constant name="struts.objectFactory.delegate" value="springOsgi" /&gt;
+</pre>
+</div></div></li><li>Configure your <strong>web.xml</strong> like:
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app id="WebApp_9" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"&gt;
+
+    &lt;display-name&gt;Struts Blank&lt;/display-name&gt;
+
+    &lt;filter&gt;
+        &lt;filter-name&gt;struts2-prepare&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter&lt;/filter-class&gt;
+    &lt;/filter&gt;
+
+    &lt;filter&gt;
+        &lt;filter-name&gt;struts2-execute&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter&lt;/filter-class&gt;
+    &lt;/filter&gt;
+
+     &lt;filter-mapping&gt;
+        &lt;filter-name&gt;struts2-prepare&lt;/filter-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/filter-mapping&gt;
+
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;struts2-execute&lt;/filter-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/filter-mapping&gt;
+
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.apache.struts2.osgi.StrutsOsgiListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.apache.struts2.dispatcher.ng.listener.StrutsListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+    &lt;context-param&gt;
+        &lt;param-name&gt;contextClass&lt;/param-name&gt;
+        &lt;param-value&gt;org.springframework.osgi.web.context.support.OsgiBundleXmlWebApplicationContext&lt;/param-value&gt;
+    &lt;/context-param&gt;
+    &lt;context-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;osgibundle:/META-INF/spring/*.xml&lt;/param-value&gt;
+    &lt;/context-param&gt;
+    &lt;context-param&gt;
+        &lt;param-name&gt;parentContextKey&lt;/param-name&gt;
+        &lt;param-value&gt;parent-context-bean&lt;/param-value&gt;
+    &lt;/context-param&gt;
+&lt;/web-app&gt;
+</pre>
+</div></div></li><li>Add the Spring OSGi, and Spring Web dependencies to your web app, if you are using maven:
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+    &lt;version&gt;2.5.5&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+     &lt;groupId&gt;org.springframework.osgi&lt;/groupId&gt;
+     &lt;artifactId&gt;spring-osgi-web&lt;/artifactId&gt;
+     &lt;version&gt;1.1.2&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+</div></div></li><li>Download Spring OSGi and copy all the required bundles under <strong>/classes/bundles/2</strong>. For Struts OSGi 1.1.2, these are the required bundles:
+<div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>com.springsource.org.aopalliance-1.0.0.jar
+com.springsource.org.apache.commons.logging-1.1.1.jar
+org.springframework.aop-2.5.5.A.jar
+org.springframework.beans-2.5.5.A.jar
+org.springframework.context-2.5.5.A.jar
+org.springframework.core-2.5.5.A.jar
+org.springframework.osgi.core-1.1.2.A.jar
+org.springframework.osgi.extender-1.1.2.A.jar
+org.springframework.osgi.io-1.1.2.A.jar
+org.springframework.osgi.web-1.1.2.A.jar
+org.springframework.web-2.5.5.A.jar
+</pre>
+</div></div></li><li>Put your bundles under <strong>/classes/bundles/3</strong></li></ol>
+
+
+<h2 id="OSGiPlugin-UsingVelocity">Using Velocity</h2>
+
+<p>If you are going to use Velocity results, then add Velocity and Common Digester jars to your application. Using maven:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;dependency&gt;
+    &lt;groupId&gt;velocity&lt;/groupId&gt;
+    &lt;artifactId&gt;velocity&lt;/artifactId&gt;
+    &lt;version&gt;1.5&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;velocity-tools&lt;/groupId&gt;
+    &lt;artifactId&gt;velocity-tools&lt;/artifactId&gt;
+    &lt;version&gt;1.3&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;commons-digester&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-digester&lt;/artifactId&gt;
+    &lt;version&gt;1.8&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+</div></div>
+
+<h2 id="OSGiPlugin-UsingTheConventionPlugin">Using The Convention Plugin</h2>
+
+<p>The Convention plugin will discover actions in bundles in the same way that it discovers them in normal applications. The Convention plugin expects result templates to be (by default) stored under <em>/WEB-INF/content</em>. When packaging actions inside bundles, there won't be a <em>WEB-INF</em> folder, so you must let Convention know where the templates are located. There are two ways of doing so(assuming the templates are under <em>/content</em>):</p>
+
+<p>1. Set the templates location constant in struts.xml (in the application struts.xml, not a bundled struts.xml)</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;constant name="struts.convention.result.path" value="/content/"/&gt;
+</pre>
+</div></div>
+<p>2. Using the ResultPath annotation</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+@ResultPath("/content")
+public class HelloWorldAction extends ActionSupport
+...
+}
+</pre>
+</div></div>
+
+<h2 id="OSGiPlugin-TheOSGiinterceptor">The OSGi interceptor</h2>
+<p>The OSGi plugins defines the <code>osgi</code> interceptor and <code>osgiStack</code>(<code>defaultStack</code> plus the <code>osgi</code> interceptor) in the package <code>osgi-default</code>. This interceptor will check the action and if it implements <code>org.apache.struts2.osgi.interceptor.BundleContextAware</code>, it will invoke setBundleContext(BundleContext bundleContext) on the action, passing the BundleContext of the OSGi container. The interceptor also checks if the class implements <code>org.apache.struts2.osgi.interceptor.ServiceAware&lt;T&gt;</code>, if it does, setServices(List&lt;T&gt; services) will be called, where T is the type of a service published in the OSGi container. For example, lets assume an installed bundle publishes a service with the interface <code>BookPriceLookup</code>, to get all the instances of this service, an action would look like:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+public class BookPriceAction extends ActionSupport implements ServiceAware&lt;BookPriceLookup&gt; {
+    private List&lt;BookPriceLookup&gt; services;
+
+    public void setServices(List&lt;BookPriceLookup&gt; services) {
+        this.services = services;
+    }
+}
+</pre>
+</div></div>
+<div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>Keep in mind that the interceptor is not defined in the default struts package, so when using Convention, you need to specify the parent package as "osgi-default", either using annotations (@ParentPackage), or XML(<strong>this XML fragment must be in the struts XML config file in the application, not the bundle's</strong>, this is a current limitation of the OSGi plugin):</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;constant name="struts.convention.default.parent.package" value="osgi-default" /&gt;
+</pre>
+</div></div></div></div>
+
+<h2 id="OSGiPlugin-Adminbundle">Admin bundle</h2>
+<p>An admin bundle is distributed with struts, which provides a simple interface to list the installed bundles. Using this interface the bundles can be stopped, started and updated (reloaded from the file system). This interface also provides information on the installed bundles, like OSGi metadata, and a list of packages and actions loaded from each bundle. An interactive AJAX shell is also available, which is just a web interface to the Apache Felix Shell. To use this bundle, just copy the jar file to /bundles (same place where the application bundles are installed) and open <a shape="rect" class="external-link" href="http://localhost:PORT/CONTEXT/osgi/admin/" rel="nofollow">http://localhost:PORT/CONTEXT/osgi/admin/</a> (replace <em>PORT</em> and <em>context</em>)</p>
+
+<h2 id="OSGiPlugin-Aboutstopping/startingbundles">About stopping/starting bundles</h2>
+<p>When a bundle is started, the OSGi plugin will check for the header <code>Struts2-Enabled</code> in it. If it is set to "true", the bundle will be scanned for XML config and Convention config. When a bundle is stopped, any actions that were loaded from it will be removed from the runtime configuration.</p>
+
+<h2 id="OSGiPlugin-Settings">Settings</h2>
+
+<p>The following settings can be customized.  See the <a shape="rect" class="external-link" href="http://cwiki.apache.org/confluence/display/WW/Configuration+Files">developer guide</a>.</p>
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Setting </p></th><th colspan="1" rowspan="1" class="confluenceTh"><p> Description </p></th><th colspan="1" rowspan="1" class="confluenceTh"><p> Default </p></th><th colspan="1" rowspan="1" class="confluenceTh"><p> Possible Values </p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> <code>struts.objectFactory.delegate</code> </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> The alias of the ObjectFactory to wrap </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> <code>struts</code> </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Any configured alias </p></td></tr></tbody></table></div>
+
+
+<p>The following setting must be set as context parameters in <em>web.xml</em>, because they are used by the StrutsOsgiListener, for example:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;context-param&gt;
+    &lt;param-name&gt;struts.osgi.clearBundleCache&lt;/param-name&gt;
+    &lt;param-value&gt;false&lt;/param-value&gt;
+&lt;/context-param&gt;
+</pre>
+</div></div>
+
+<p>If you are running your application on Glassfish 3 (which already contains Apache Felix) you must specify <code>struts.osgi.host</code>, like below:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;context-param&gt;
+    &lt;param-name&gt;struts.osgi.host&lt;/param-name&gt;
+    &lt;param-value&gt;Glassfish&lt;/param-value&gt;
+&lt;/context-param&gt;
+</pre>
+</div></div>
+
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Setting </p></th><th colspan="1" rowspan="1" class="confluenceTh"><p> Description </p></th><th colspan="1" rowspan="1" class="confluenceTh"><p> Default </p></th><th colspan="1" rowspan="1" class="confluenceTh"><p> Possible Values </p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> <code>struts.osgi.clearBundleCache</code> </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Delete all installed bundles when the container starts </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> true</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> true or false </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> <code>struts.osgi.runLevel</code> </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Run level to start the container </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> 3 </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> &gt;=3 </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> <code>struts.osgi.logLevel</code> </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Log level for Apache Felix </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> 1 (Error) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>1 = error, 2 = warning, 3 = information, and 4 = debug </p></td></tr></tbody></table></div>
+
+
+<h2 id="OSGiPlugin-BuildingbundleswithMaven">Building bundles with Maven</h2>
+<p>Jar files can be turned into bundles using the <a shape="rect" class="external-link" href="http://cwiki.apache.org/FELIX/bundle-plugin-for-maven-bnd.html">Maven Bundle Plugin</a> like:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Maven Bundle Plugin Example</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.felix&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-bundle-plugin&lt;/artifactId&gt;
+            &lt;extensions&gt;true&lt;/extensions&gt;
+            &lt;version&gt;2.0.0&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;instructions&gt;
+                    &lt;manifestLocation&gt;META-INF&lt;/manifestLocation&gt;
+                    &lt;Struts2-Enabled&gt;true&lt;/Struts2-Enabled&gt;
+                    &lt;Export-Package&gt;org.apache.struts2.osgi.demo&lt;/Export-Package&gt;
+                    &lt;Import-Package&gt;*,com.opensymphony.xwork2&lt;/Import-Package&gt;
+                    &lt;Spring-Context&gt;*;create-asynchronously:=false&lt;/Spring-Context&gt;
+                &lt;/instructions&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</pre>
+</div></div>
+
+<h2 id="OSGiPlugin-StrutsOSGi+SpringOSGidiagram">Struts OSGi + Spring OSGi diagram</h2>
+<p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="osgi-plugin.data/struts-osgi.jpg"></span></p>
+
+<h2 id="OSGiPlugin-Resources">Resources</h2>
+
+<ul><li><a shape="rect" class="external-link" href="http://www.osgi.org" rel="nofollow">OSGi</a></li><li><a shape="rect" class="external-link" href="http://felix.apache.org">Apache Felix</a></li><li><a shape="rect" class="external-link" href="http://www.springsource.org/osgi" rel="nofollow">Spring OSGi </a></li></ul></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

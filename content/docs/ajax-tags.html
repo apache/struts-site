@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Ajax Tags</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="tag-developers-guide.html">Tag Developers Guide</a>&nbsp;&gt;&nbsp;<a href="struts-tags.html">Struts Tags</a>&nbsp;&gt;&nbsp;<a href="ajax-tags.html">Ajax Tags</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Ajax Tags</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=31510">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=31510">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=31510">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=31510">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=31510">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=31510">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><div class="confluence-information-macro confluence-information-macro-warning"><p class="title">Dojo plugin is deprecated</p><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>The Dojo plugin will be deprecated on Struts 2.1</p></div></div>
+<div class="confluence-information-macro confluence-information-macro-note"><p class="title">Struts 2.0 versus Struts 2.1 and the Dojo tags</p><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>The easiest way to get documentation for Struts 2.0 Dojo tag usage is to look at older Struts 2 documentation, like the <a shape="rect" class="external-link" href="http://struts.apache.org/2.0.11/docs/ajax-tags.html">Struts 2.0.11 Ajax tags wiki documentation</a>.</p>
+
+<p><strong>Please</strong> check that documentation and the Dojo tag examples in the showcase app of the appropriate Struts 2 version before asking questions on the struts-user mailing list!</p>
+
+<hr>
+
+<p><strong>THE WIKI IS NOT VERSIONABLE</strong> (in a practical way).</p>
+
+<p>The documentation here is for the most current Struts 2, not necessarily the most current <em>release</em>. We try to add version-specific documentation notes but have undoubtedly missed some locations.</p></div></div>
+
+<h2 id="AjaxTags-Description">Description</h2>
+<p>To use the AJAX tags from 2.1 on you must:</p>
+
+<ul><li>Include the Dojo Plugin distributed with Struts 2 in your /WEB-INF/lib folder.</li><li>Add <em>&lt;%@ taglib prefix="sx" uri="/struts-dojo-tags" %&gt;</em> to your page.</li><li>Include the <a shape="rect" href="dojo-head.html">head</a> tag on the page, which can be configured for performance or debugging purposes.</li></ul>
+
+
+<h2 id="AjaxTags-HandlingAJAXResponses">Handling AJAX Responses</h2>
+
+<p>The following attributes affect the handling of all ajax responses.</p>
+
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Attribute</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Default Value</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>parseContent</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>true</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>When true, Dojo will parse the response into an XHTML Document Object and traverse the nodes searching for Dojo Widget markup.  The parse and traversal is performed prior to inserting the nodes into the DOM. This attribute must be enabled to nest Dojo widgets (dojo tags) within responses. There's significant processing involved to create and parse the document so switch this feature off when not required. Note also that the response must be valid XHTML for cross-browser support and widgets must have unique IDs.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>separateScripts</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>true</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>When true, Dojo will extract the &lt;script&gt; tags from the response, concatenate the extracted code into one block, create a new Function whose body is the extracted code and immediately invoke the function. The invocation is performed after the DOM has been updated with the XHTML. The function is executed within the scope of the widget (that is, the  <strong>this</strong> variable points to the widget instance).<br clear="none">
+When false, Dojo will extract the &lt;script&gt; tags from the response, concatenate the extracted code into one block and:<br clear="none">
+*in IE:  invoke window.execScript() on the code<br clear="none">
+*in other browsers: create a &lt;script&gt; node containing the code and insert that node into the DOM<br clear="none">
+This invocation occurs after the DOM has been updated with the XHTML. Note that scripts may not be executed if it is not valid to create a &lt;script&gt; node in the DOM at the destination.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>executeScripts</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>false</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>When true, Dojo will extract code from the &lt;script&gt; tags from the response and execute it based on the separateScripts value.<br clear="none">
+When false, the XHTML response is inserted into the DOM and &lt;script&gt; nodes are ignored. </p></td></tr></tbody></table></div>
+
+
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>It's possible that the updated DOM will not include &lt;script&gt; nodes even though the inline code has been executed.</p></div></div>
+<div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ensure the response is XHTML-compliant (including, for example, thead and tbody tags in tables).<br clear="none">
+If you intend to run inline javascript:<br clear="none">
+*Ensure the  javascript can be concatenated and executed in one block,<br clear="none">
+*set executeScripts=true,<br clear="none">
+*set separateScripts=true (the reliable option)</p></div></div>
+<h2 id="AjaxTags-Topics">Topics</h2>
+<p>Most of the AJAX tags use Dojo topics for event notification and communication between them, to learn about topics visit <a shape="rect" class="external-link" href="http://dojotoolkit.org/book/dojo-book-0-4/part-5-connecting-pieces/event-system/topics" rel="nofollow">Dojo's documentation</a></p>
+
+<h2 id="AjaxTags-Examples">Examples</h2>
+<p>Examples can be found on the documentation for each tag in the <a shape="rect" href="ui-tag-reference.html">UI Tag Reference</a> page, for additional examples see <a shape="rect" href="ajax-and-javascript-recipes.html">Ajax and JavaScript Recipes</a> and the Showcase application distributed with Struts 2.</p>
+
+<h2 id="AjaxTags-Tags">Tags</h2>
+<ul><li><a shape="rect" href="dojo-anchor.html">a</a></li><li><a shape="rect" href="autocompleter.html">autocompleter</a></li><li><a shape="rect" href="bind.html">bind</a></li><li><a shape="rect" href="datetimepicker.html">datetimepicker</a></li><li><a shape="rect" href="dojo-div.html">div</a></li><li><a shape="rect" href="dojo-head.html">head</a></li><li><a shape="rect" href="dojo-submit.html">submit</a></li><li><a shape="rect" href="tabbedpanel.html">tabbedpanel</a></li><li><a shape="rect" href="dojo-textarea.html">textarea</a></li><li><a shape="rect" href="tree.html">tree</a></li><li><a shape="rect" href="treenode.html">treenode</a></li></ul>
+
+</div>
+        </div>
+
+                    <div class="tabletitle">
+                Children
+            <span class="smalltext" id="show" style="display: inline;">
+              <a href="javascript:showChildren()">Show Children</a></span>
+            <span class="smalltext" id="hide" style="display: none;">
+              <a href="javascript:hideChildren()">Hide Children</a></span>
+            </div>
+            <div class="greybox" id="children" style="display: none;">
+                                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                            </div>
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

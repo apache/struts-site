@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Tabular inputs with HashMap</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="faqs.html">FAQs</a>&nbsp;&gt;&nbsp;<a href="cookbook.html">Cookbook</a>&nbsp;&gt;&nbsp;<a href="tabular-inputs-with-hashmap.html">Tabular inputs with HashMap</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Tabular inputs with HashMap</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14235">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14235">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14235">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14235">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14235">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14235">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent">
+
+<h2 id="TabularinputswithHashMap-Intro">Intro</h2>
+
+<p>I have a need to enter tabular data, like marks from a list of examination candidates.</p>
+
+<p>This is how it's done :</p>
+
+<p>the mark.vm file..</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+#foreach ( $candidate in $candidateList )
+  #tag( TextField "label=" "name=marks['$candidate.id']" "value='$candidate.mark'" "size=3" )
+#end
+</pre>
+</div></div>
+
+<p>the SaveMarksAction</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+
+public class SaveMarksAction extends ActionSupport {
+	private Map marks = new HashMap();
+
+	public Map getMarks() {
+		return marks;
+	}
+
+
+	public String execute() throws Exception {
+		// get list of candidate IDs
+		List candidateIds = marks.keySet();
+
+		for (Iterator iter = candidateIds.iterator(); iter.hasNext();) {
+			String candidateId = (String) iter.next();
+			String mark = parseMap(marks.get(candidateId));
+
+			// process candidates and marks...
+		}
+
+	}
+
+	// helper function to parse the map of entries....
+	private static String parseMap(String[] map) {
+		if (map == null) {
+			return null;
+		}
+		if (map.length != 1) {
+			return null;
+		}
+		return map[0];
+	}
+
+
+}
+</pre>
+</div></div>
+<h2 id="TabularinputswithHashMap-Explanation">Explanation</h2>
+
+<p>The resulting vm file is rendered as </p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+&lt;input type="text" name="marks[OS:'candidateId1']" value="4" size="3"/&gt;
+&lt;input type="text" name="marks[OS:'candidateId2']" value="5" size="3"/&gt;
+&lt;input type="text" name="marks[OS:'candidateId3']" value="6" size="3"/&gt;
+&lt;input type="text" name="marks[OS:'candidateId4']" value="7" size="3"/&gt;
+</pre>
+</div></div>
+
+<p>Webwork will populate the marks into the Map marks via </p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+private Map marks = new HashMap();
+
+public Map getMarks() {
+	return marks;
+}
+</pre>
+</div></div>
+
+<p>whereby you can get the list of candidateIds via </p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+List candidateIds = marks.keySet();
+</pre>
+</div></div>
+
+<p>and the individual marks via </p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+for (Iterator iter = candidateIds.iterator(); iter.hasNext();) {
+	String candidateId = (String) iter.next();
+	String mark = parseMap(marks.get(candidateId));
+}
+</pre>
+</div></div>
+
+<h2 id="TabularinputswithHashMap-Possibleenhancements">Possible enhancements</h2>
+
+<p>Couple tabular inputs with some sortable table component (javascript, client side)</p>
+<ul><li><a shape="rect" class="external-link" href="http://webfx.eae.net/dhtml/sortabletable/sortabletable.html" rel="nofollow">http://webfx.eae.net/dhtml/sortabletable/sortabletable.html</a></li></ul>
+
+
+<p>or </p>
+
+<p>DisplayTag (server side)</p>
+<ul><li><a shape="rect" class="external-link" href="http://displaytag.sourceforge.net/" rel="nofollow">http://displaytag.sourceforge.net/</a></li><li><a shape="rect" class="external-link" href="http://www.displaytag.org/index.jsp" rel="nofollow">http://www.displaytag.org/index.jsp</a></li></ul>
+
+
+<p>I believe there's some discussion on the mailing list about using Ognl to handle it automatically. I didn't follow it in detail, but from what I know, (do correct me if I'm wrong) the Ognl method is not available yet. The above works for now. </p>
+<h2 id="TabularinputswithHashMap-Conclusion">Conclusion</h2>
+
+<p>Feedback, comments and suggestions on better methods to perform the same function are welcome. If there's a simpler way, or a customised component to handle this tabular input automatically, I believe it'll be very useful.</p></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

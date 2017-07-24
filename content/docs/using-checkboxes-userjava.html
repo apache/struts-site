@@ -1,0 +1,760 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Using Checkboxes - User.java</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="faqs.html">FAQs</a>&nbsp;&gt;&nbsp;<a href="cookbook.html">Cookbook</a>&nbsp;&gt;&nbsp;<a href="using-checkboxes.html">Using Checkboxes</a>&nbsp;&gt;&nbsp;<a href="using-checkboxes-userjava.html">Using Checkboxes - User.java</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Using Checkboxes - User.java</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=13877">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=13877">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=13877">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=13877">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=13877">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=13877">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent">
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+package cash.model;
+
+import net.sf.hibernate.HibernateException;
+
+import org.apache.log4j.Logger;
+
+import java.security.GeneralSecurityException;
+import java.security.MessageDigest;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TimeZone;
+import java.util.TreeSet;
+
+import cash.config.ConfigManager;
+import cash.util.Hex;
+import cash.util.HibernateUtil;
+import cash.util.UtcDate;
+import cash.validator.PasswordFormatValidator;
+
+/**
+ * Represents a User object.  Clients of this class should instantiate a User object with the
+ * multi-arg constructor rather than using setters.
+ *
+ * @author Joel Hockey
+ * @version $Id: $
+ * @hibernate.class
+ *      table="user"
+ *      dynamic-update="true"
+ *      optimistic-lock="version"
+ */
+public class User implements java.io.Serializable {
+    private static final Logger LOG = Logger.getLogger(User.class);
+
+    private static MessageDigest s_md5;
+    private static SecureRandom s_random;
+
+    private static final int MAX_LOGIN_FAILURE_COUNT = 20;
+    private static final boolean RESET_LOCKED_OUT_AFTER_TIME = true;
+    private static final long RESET_LOCKED_OUT_TIME = 1 * 60 * 60 * 1000; // 1 hour
+
+    private int m_id;
+    private int m_version;
+    private String m_username;
+    private String m_password;
+    private Date m_passwordChangeDate;
+    private String m_hashedPassword;
+    private SortedSet m_passwordHistory = new TreeSet();
+    private String m_salt;
+    private byte[] m_saltBytes;
+    private Date m_createDate;
+    private String m_email;
+    private Locale m_locale;
+    private TimeZone m_timeZone;
+    private String m_telephone;
+    private Date m_lastSuccessfulLogin;
+    private String m_lastSuccessfulLoginIp;
+    private Date m_lastFailedLogin;
+    private String m_lastFailedLoginIp;
+    private int m_loginFailureCount;
+    private int m_maxLoginFailureCount = MAX_LOGIN_FAILURE_COUNT;
+    private boolean m_resetLockedOutAfterTime = RESET_LOCKED_OUT_AFTER_TIME;
+    private long m_resetLockedOutTime = RESET_LOCKED_OUT_TIME;
+    private boolean m_lockedOut = false;
+    private boolean m_disabled = false;
+    private boolean m_isSuperUser = false;
+    private boolean m_passwordNeverExpires = false;
+    private Set m_privileges = new HashSet();
+
+    static {
+        try {
+            s_md5 = MessageDigest.getInstance("MD5");
+            s_random = SecureRandom.getInstance("SHA1PRNG");
+        } catch (GeneralSecurityException gse) {
+            // shouldn't happen
+            LOG.error("Error creating MD5 or SHA1PRNG", gse);
+            throw new RuntimeException("Error creating MD5 or SHA1PRNG");
+        }
+    }
+
+    /** default constructor for Hibernate */
+    public User() { }
+
+    /**
+     * Create a User.
+     *
+     * @param username The username for logging in
+     * @param password The user's password
+     * @param email The user's email
+     * @throws InvalidPasswordException if password is invalid.
+     */
+    public User(String username, String password, String email) throws InvalidPasswordException {
+
+        m_username = username;
+
+        // password
+        initSalt();
+        if (!PasswordFormatValidator.checkPasswordFormat(password)) {
+            throw new InvalidPasswordException();
+        }
+        m_hashedPassword = hashPassword(password);
+
+        m_createDate = UtcDate.createUtcDate();
+        m_email = email;
+        m_locale = Locale.getDefault();
+        m_timeZone = TimeZone.getDefault();
+    }
+
+    /** @param id The id to set */
+    public void setId(int id) { m_id = id; }
+
+    /**
+     * @return unique id of this User.  Generated by DB.
+     * @hibernate.id
+     *      generator-class="native"
+     */
+    public int getId() { return m_id; }
+
+    /** @param version The version of this object */
+    public void setVersion(int version) { m_version = version; }
+
+    /**
+     * @return version of this object
+     * @hibernate.version
+     */
+    public int getVersion() { return m_version; }
+
+    /** @param username The username to set */
+    public void setUsername(String username) { m_username = username; }
+
+    /**
+     * @return username
+     * @hibernate.property
+     *      length="32"
+     *      unique="true"
+     *      not-null="true"
+     */
+    public String getUsername() { return m_username; }
+
+    /**
+     * Set's the user's password without updating history or checking validity.
+     * This should only be used at User creation time, and password validity
+     * should be checked externally to this method.
+     * Do not use to update password, see {@link #changePassword(String)}
+     * @param password user's password
+     */
+    public void setPassword(String password) {
+        m_password = password;
+        if (m_salt == null) {
+            initSalt();
+        }
+        m_hashedPassword = hashPassword(password);
+        m_passwordChangeDate = UtcDate.createUtcDate();
+    }
+
+    /**
+     * This method is provided to help at User creation time.  It will only return
+     * valid values if {@link #setPassword(String)} has already been called.
+     * @return plaintext password.
+     */
+    public String getPassword() { return m_password; }
+
+    /** @param time Date (UTC) user last changed password. */
+    public void setPasswordChangeDate(Date time) { m_passwordChangeDate = time; }
+
+    /**
+     * @return UTC date of last password change
+     * @hibernate.property
+     *      type="cash.model.TimestampType"
+     *      length="23"
+     */
+    public Date getPasswordChangeDate() { return m_passwordChangeDate; }
+
+    /**
+     * Sets the user's hashed password.  This method is provided only for the use
+     * of hibernate.  Users of this class should not call this method.
+     * Use the {@link #setPassword(String)} method to set the plaintext password.
+     * @param hash The hashed password to set
+     */
+    public void setHashedPassword(String hash) {
+        m_hashedPassword = hash;
+    }
+
+    /**
+     * @return hashed password
+     * @hibernate.property
+     *      column="pwd"
+     *      length="32"
+     *      not-null="true"
+     */
+    public String getHashedPassword() { return m_hashedPassword; }
+
+    /**
+     * @param oldPasswords The last n passwords, where n
+     * is defined as noRepeatHistory in User configuration.  Passwords are ordered
+     * in descending order of creation.
+     */
+    public void setPasswordHistory(SortedSet oldPasswords) { m_passwordHistory = oldPasswords; }
+
+    /**
+     * @return Password history
+     * @hibernate.set
+     *      lazy="true"
+     *      sort="cash.model.PasswordHistory"
+     *      inverse="true"
+     *      cascade="all"
+     * @hibernate.collection-key
+     *      column="userId"
+     * @hibernate.collection-one-to-many
+     *      class="cash.model.PasswordHistory"
+     */
+    public SortedSet getPasswordHistory() { return m_passwordHistory; }
+
+    /** @param random The random salt to be used with password */
+    public void setSalt(String random) {
+        m_salt = random;
+        m_saltBytes = Hex.fromString(random);
+    }
+
+    /**
+     * @return random salt used with password
+     * @hibernate.property
+     *      length="32"
+     *      not-null="true"
+     */
+    public String getSalt() { return m_salt; }
+
+    /** @param time create date */
+    public void setCreateDate(Date time) { m_createDate = time; }
+
+    /**
+     * @return Date in UTC user was created.
+     * @hibernate.property
+     *      update="false"
+     *      not-null="true"
+     *      type="cash.model.TimestampType"
+     *      length="23"
+     */
+    public Date getCreateDate() { return m_createDate; }
+
+    /** @param email User's email */
+    public void setEmail(String email) { m_email = email; }
+
+    /**
+     * @return User's email
+     * @hibernate.property
+     *      length="255"
+     *      not-null="true"
+     */
+    public String getEmail() { return m_email; }
+
+    /** @param locale The User's locale.  This should be a 2 character field. */
+    public void setLocale(Locale locale) { m_locale = locale; }
+
+    /**
+     * @return User's locale.  Uses 2 character ISO-something value.
+     * @hibernate.property
+     *      not-null="true"
+     */
+    public Locale getLocale() { return m_locale; }
+
+    /** @param timeZone User's time zone */
+    public void setTimeZone(TimeZone timeZone) { m_timeZone = timeZone; }
+
+    /**
+     * @return User's timezone
+     * @hibernate.property
+     *      not-null="true"
+     */
+    public TimeZone getTimeZone() { return m_timeZone; }
+
+    /** @param telephone User's telephone */
+    public void setTelephone(String telephone) { m_telephone = telephone; }
+
+    /**
+     * @return Telephone of user
+     * @hibernate.property
+     *      length="16"
+     */
+    public String getTelephone() { return m_telephone; }
+
+    /** @param time user's last successful login date in UTC. */
+    public void setLastSuccessfulLogin(Date time) { m_lastSuccessfulLogin = time; }
+
+    /**
+     * @return UTC date of last successful login
+     * @hibernate.property
+     *      type="cash.model.TimestampType"
+     *      length="23"
+     */
+    public Date getLastSuccessfulLogin() { return m_lastSuccessfulLogin; }
+
+    /** @param ip IP address used for user's last successful login. */
+    public void setLastSuccessfulLoginIp(String ip) { m_lastSuccessfulLoginIp = ip; }
+
+    /**
+     * @return IP address used for last successful login
+     * @hibernate.property
+     */
+    public String getLastSuccessfulLoginIp() { return m_lastSuccessfulLoginIp; }
+
+    /** @param time user's last failed login date in UTC. */
+    public void setLastFailedLogin(Date time) { m_lastFailedLogin = time; }
+
+    /**
+     * @return UTC date of last failed login
+     * @hibernate.property
+     *      type="cash.model.TimestampType"
+     *      length="23"
+     */
+    public Date getLastFailedLogin() { return m_lastFailedLogin; }
+
+    /** @param ip IP address used for user's last failed login. */
+    public void setLastFailedLoginIp(String ip) { m_lastFailedLoginIp = ip; }
+
+    /**
+     * @return IP address used for last failed login
+     * @hibernate.property
+     */
+    public String getLastFailedLoginIp() { return m_lastFailedLoginIp; }
+
+    /**
+     * Sets the number of times that a user has failed when attempting to login.
+     * This value is reset when a user logs in successfully, or their account is reset.
+     * @param count the value to set.
+     */
+    public void setLoginFailureCount(int count) { m_loginFailureCount = count; }
+
+    /**
+     * @return The number of times that a user has failed when attempting to login.
+     *  This value is reset when a user logs on successfully, or their account is reset.
+     * @hibernate.property
+     */
+    public int getLoginFailureCount() { return m_loginFailureCount; }
+
+    /**
+     * @param count The maximum number of times that a user may fail to login before
+     * their account is locked out
+     */
+    public void setMaxLoginFailureCount(int count) { m_maxLoginFailureCount = count; }
+
+    /**
+     * @return The maximum number of times that a user may fail to login before their account
+     * is locked out.
+     * @hibernate.property
+     */
+    public int getMaxLoginFailureCount() { return m_maxLoginFailureCount; }
+
+    /**
+     * @param reset Whether this user's account will be unlocked after a specified time when it is locked
+     * due to login failure.
+     * @see #setResetLockedOutAfterTime(boolean) setResetLockedOutAfterTime
+     */
+    public void setResetLockedOutAfterTime(boolean reset) { m_resetLockedOutAfterTime = reset; }
+
+    /**
+     * @return Whether this user's account will be unlocked after a specified time when it
+     * is locked out due to login failure.
+     * @see #getResetLockedOutAfterTime getResetLockedOutAfterTime
+     * @hibernate.property
+     */
+    public boolean getResetLockedOutAfterTime() { return m_resetLockedOutAfterTime; }
+
+    /**
+     * @param time The time in millis between login attempts before login failure count is reset.  Login failure
+     * count will only be reset if the Reset Locked Out After Time boolean is set to true.
+     */
+    public void setResetLockedOutTime(long time) { m_resetLockedOutTime = time; }
+
+    /**
+     * @return Time in milliseconds before account is auto-reset after login lockout.
+     * @hibernate.property
+     */
+    public long getResetLockedOutTime() { return m_resetLockedOutTime; }
+
+    /** @param lockedOut User's locked out status. */
+    public void setLockedOut(boolean lockedOut) { m_lockedOut = lockedOut; }
+
+    /**
+     * @return Whether this user's account is locked out
+     * @hibernate.property
+     */
+    public boolean isLockedOut() { return m_lockedOut; }
+
+    /** @param disabled User's disabled status. */
+    public void setDisabled(boolean disabled) { m_disabled = disabled; }
+
+    /**
+     * @return Whether this user's account disabled
+     * @hibernate.property
+     */
+    public boolean isDisabled() { return m_disabled; }
+
+    /** @param superUser True if user is super user */
+    public void setSuperUser(boolean superUser) { m_isSuperUser = superUser; }
+
+    /**
+     * @return Whether this user is a super user
+     * @hibernate.property
+     */
+    public boolean isSuperUser() { return m_isSuperUser; }
+
+    /** @param expires True if user's password never expires */
+    public void setPasswordNeverExpires(boolean expires) { m_passwordNeverExpires = expires; }
+
+    /**
+     * @return Whether this user's password ever expires
+     * @hibernate.property
+     */
+    public boolean getPasswordNeverExpires() { return m_passwordNeverExpires; }
+
+    /** @param privs Set of privileges for this user  */
+    public void setPrivileges(Set privs) { m_privileges = privs; }
+
+    /**
+     * @return Set of Privileges for this User.
+     * @hibernate.set
+     *      table="user_priv"
+     *      lazy="true"
+     *      cascade="all"
+     * @hibernate.collection-key
+     *      column="userId"
+     * @hibernate.collection-element
+     *      column="priv"
+     *      type="string"
+     */
+    public Set getPrivileges() { return m_privileges; }
+
+    /** convenience method of OGNL */
+    public void setPriv(String[] privs) {
+        for (int i = 0; i &lt; privs.length; i++) {
+            m_privileges.add(privs[i]);
+        }
+    }
+
+
+// other methods
+
+    /**
+     * Changes the user's password.  Password must meet criteria
+     * defined in configuration.  The user's password will be appended to
+     * a random 20 byte salt and then hashed using MD5 to create the
+     * value that will be stored in the DB.  The current Hibernate Session
+     * will be used to update pwd history.
+     *
+     * @param password The password to set
+     * @return true if password is changed, false if password was not changed
+     * because it did not meet password requirements.
+     * @throws HibernateException if error updating password history
+     */
+    public boolean changePassword(String password) throws HibernateException {
+        // check format
+        if (!PasswordFormatValidator.checkPasswordFormat(password)) {
+            return false;
+        }
+
+        // check history
+        // first check current password
+        String hashedPwd = hashPassword(password);
+        LOG.debug("checking if password is same as current");
+        if (hashedPwd.equals(m_hashedPassword)) {
+            LOG.info("password is same as current password");
+            return false;
+        }
+
+        LOG.debug("checking if password exists in history.  History size is " + m_passwordHistory.size());
+        for (Iterator i = getPasswordHistory().iterator(); i.hasNext(); ) {
+            PasswordHistory ph = (PasswordHistory)i.next();
+            if (hashedPwd.equals(ph.getHashedPassword())) {
+                LOG.info("password already used as one of last "
+                    + ConfigManager.getConfig().getUser().getNoRepeatHistory());
+                return false;
+            }
+        }
+
+        // add current pwd to history and truncate history if it is too long now
+        PasswordHistory ph = new PasswordHistory(this, m_hashedPassword);
+        m_passwordHistory.add(ph);
+        LOG.debug("saving old password into password history");
+        HibernateUtil.currentSession().save(ph);
+        // compare to (noRepeat - 1) because we are checking current as part of history
+        if (m_passwordHistory.size() &gt; ConfigManager.getConfig().getUser().getNoRepeatHistory() - 1) {
+            PasswordHistory toRemove = (PasswordHistory)m_passwordHistory.first();
+            LOG.info("Removing password history object for user " + m_username
+                    + " created: " + toRemove.getCreateDate());
+            m_passwordHistory.remove(toRemove);
+            HibernateUtil.currentSession().delete(toRemove);
+        }
+
+        // now set password and date
+        m_hashedPassword = hashedPwd;
+        m_passwordChangeDate = UtcDate.createUtcDate();
+        return true;
+    }
+
+    /**
+     * Hashes input pwd to see if it equals stored pwd hash value.
+     * @param pwd Password to check
+     * @return true if passwords are equal.
+     */
+
+    public boolean passwordEquals(String pwd) {
+        String hash = hashPassword(pwd);
+        return m_hashedPassword.equalsIgnoreCase(hash);
+    }
+
+    /**
+     * Hashes salt and password to produce hashed password.
+     * @param pwd Password to hash
+     * @return Hex encoding of MD5 hash of salt and pwd
+     */
+    private String hashPassword(String pwd) {
+        byte[] pwdBytes = pwd.getBytes();  //TODO:  should an encoding be specified here?
+        byte[] in = new byte[OS:m_saltBytes.length + pwdBytes.length];
+        System.arraycopy(m_saltBytes, 0, in, 0, m_saltBytes.length);
+        System.arraycopy(pwdBytes, 0, in, m_saltBytes.length, pwdBytes.length);
+        byte[] out = s_md5.digest(in);
+        return Hex.toString(out);
+    }
+
+    /** initialises salt */
+    private void initSalt() {
+        m_saltBytes = new byte[OS:16];
+        s_random.nextBytes(m_saltBytes);
+        m_salt = Hex.toString(m_saltBytes);
+    }
+
+    /** @return String representation of User */
+    public String toString() {
+        StringBuffer sb = new StringBuffer(500);
+        sb.append("[").append("ID:").append(m_id)
+        .append(",version:").append(m_version)
+        .append(",hashedPassword:").append(m_hashedPassword)
+        .append(",salt:").append(m_salt)
+        .append(",createDate:").append(m_createDate)
+        .append(",email:").append(m_email)
+        .append(",locale:").append(m_locale)
+        .append(",timeZone:").append(m_timeZone)
+        .append(",telephone:").append(m_telephone)
+        .append(",lastSuccessfulLogin:").append(m_lastSuccessfulLogin)
+        .append(",lastSuccessfulLoginIp:").append(m_lastSuccessfulLoginIp)
+        .append(",lastFailedLogin:").append(m_lastFailedLogin)
+        .append(",lastFailedLoginIp:").append(m_lastFailedLoginIp)
+        .append(",loginFailureCount:").append(m_loginFailureCount)
+        .append(",maxLoginFailureCount:").append(m_maxLoginFailureCount)
+        .append(",resetLockedOutAfterTime:").append(m_resetLockedOutAfterTime)
+        .append(",resetLockedOutTime:").append(m_resetLockedOutTime)
+        .append(",lockedOut:").append(m_lockedOut)
+        .append(",disabled:").append(m_disabled)
+        .append(",isSuperUser:").append(m_isSuperUser)
+        .append(",passwordNeverExpires:").append(m_passwordNeverExpires)
+        .append(",passwordChangeDate:").append(m_passwordChangeDate)
+        .append(",privs:").append(m_privileges);
+        return sb.toString();
+    }
+
+    /**
+     * Copies editable data from this object to User object provided.  This is used
+     * in Edit actions.  Not all fields are copied, only those that are editable
+     * @param user Object to copy to
+     */
+    public void copy(User user) {
+        user.setUsername(m_username);
+        user.setEmail(m_email);
+        user.setLocale(m_locale);
+        user.setTimeZone(m_timeZone);
+        user.setTelephone(m_telephone);
+        user.setLockedOut(m_lockedOut);
+        user.setDisabled(m_disabled);
+        user.setPasswordNeverExpires(m_passwordNeverExpires);
+
+        // do some smarts for privs removal.  Clear all if more than half are removed
+        if (m_privileges.size() &lt;= user.getPrivileges().size() / 2) {
+            LOG.debug("detected that many privs are removed, clearing all");
+            user.setPrivileges(m_privileges);
+        } else {
+            // find which ones should be removed
+            List toRemove = new ArrayList();
+            for (Iterator i = user.getPrivileges().iterator(); i.hasNext(); ) {
+                String priv = (String)i.next();
+                if (!m_privileges.contains(priv)) {
+                    toRemove.add(priv);
+                }
+            }
+
+            // remove them
+            for (int i = 0; i &lt; toRemove.size(); i++) {
+                user.getPrivileges().remove(toRemove.get(i));
+            }
+
+            // add all new privs
+            for (Iterator i = m_privileges.iterator(); i.hasNext(); ) {
+                user.getPrivileges().add(i.next());
+            }
+        }
+    }
+}
+</pre>
+</div></div></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

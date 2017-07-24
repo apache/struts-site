@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Building Struts 2 - Normal release</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="contributors-guide.html">Contributors Guide</a>&nbsp;&gt;&nbsp;<a href="creating-and-signing-a-distribution.html">Creating and Signing a Distribution</a>&nbsp;&gt;&nbsp;<a href="building-struts-2-normal-release.html">Building Struts 2 - Normal release</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Building Struts 2 - Normal release</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=27832970">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=27832970">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=27832970">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=27832970">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=27832970">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=27832970">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><h1 id="BuildingStruts2-Normalrelease-Content">Content</h1><p><style type="text/css">/*<![CDATA[*/
+div.rbtoc1488974256435 {padding: 0px;}
+div.rbtoc1488974256435 ul {list-style: none;margin-left: 0px;}
+div.rbtoc1488974256435 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style></p><div class="toc-macro rbtoc1488974256435">
+<ul class="toc-indentation"><li><span class="TOCOutline">1</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Gettingready">Getting ready</a></li><li><span class="TOCOutline">2</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-UpdateDraftDocswhenneeded">Update Draft Docs when needed</a></li><li><span class="TOCOutline">3</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Besureyourlocalcopyisup-to-date">Be sure your local copy is up-to-date</a></li><li><span class="TOCOutline">4</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Preparerelease">Prepare release</a></li><li><span class="TOCOutline">5</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Performtherelease">Perform the release</a></li><li><span class="TOCOutline">6</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Movetheassemblies">Move the assemblies</a></li><li><span class="TOCOutline">7</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Announceavailability">Announce availability</a></li><li><span class="TOCOutline">8</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Pushchanges">Push changes</a></li><li><span class="TOCOutline">9</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Voteonit">Vote on it</a></li><li><span class="TOCOutline">10</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Copyfiles">Copy files</a></li><li><span class="TOCOutline">11</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Promoterelease">Promote release</a></li><li><span class="TOCOutline">12</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Cleanupoldreleases">Clean up old releases</a></li><li><span class="TOCOutline">13</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Waitforrsync">Wait for rsync</a></li><li><span class="TOCOutline">14</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Updatesite">Update site</a></li><li><span class="TOCOutline">15</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Redeploythedocs(Optional)">Redeploy the docs (Optional)</a></li><li><span class="TOCOutline">16</span> <a shape="rect" href="#BuildingStruts2-Normalrelease-Postannouncements">Post announcements</a></li></ul>
+</div><h2 id="BuildingStruts2-Normalrelease-BuildingSteps(Struts)">Building Steps (Struts)</h2><h3 id="BuildingStruts2-Normalrelease-Gettingready">Getting ready</h3><ol><li>Create an "Struts 2.x.y omnibus ticket" ticket in JIRA to refer to in upcoming release related commit comments and for general documentation purposes. Mark it with priority "Blocker".</li><li>Switch to branch&#160;<code>develop</code></li><li>Ensure that the master POM and Struts Annotations have current releases</li><li>Review JIRA for any issues without a fix version set, and for any issues that should be resolved for the pending release.</li><li>Ensure that there are no repositories or pluginRepositories listed in the poms.</li><li>If you have committed all changes regarding the release process, close the omnibus ticket as it is the last open ticket for the upcoming release</li><li>Release the upcoming version in JIRA (under Administration/Manage Releases) and tag the release date</li><li>Add next milestone version to the JIRA roadmap</li><li>Create DONE and TODO filters for the new version, share with all, and remove obsolete TODO filter</li><li>Create a new Version Notes page in Confluence, link from <a shape="rect" href="migration-guide.html">Migration Guide</a>, and link to prior release page and JIRA DONE filters of the version to release</li><li>Export wiki pages and put them under&#160;<code>/docs</code></li></ol><h3 id="BuildingStruts2-Normalrelease-UpdateDraftDocswhenneeded">Update Draft Docs when needed</h3><p>Checkout&#160;<code>struts-site</code> project (see details at the bottom of this page) and perform export:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">cd struts-site
+mvn package</pre>
+</div></div><p>If build will fail try again - don't use&#160;<code>clean</code>, the exporter is going to update only outdated pages. After successful export, commit updated files into&#160;<code>struts-production</code></p><h3 id="BuildingStruts2-Normalrelease-Besureyourlocalcopyisup-to-date">Be sure your local copy is up-to-date</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">git fetch origin --prune
+git checkout master
+git pull</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Please remember to keep BOM subproject in sync - <code>&lt;struts-version.version&gt;X.X.X&lt;/struts-version.version&gt;</code> - must be the same as the parent pom. The latest Maven version handles this case very well but it's worth checking if the bits are in sync.</p></div></div><h3 id="BuildingStruts2-Normalrelease-Preparerelease">Prepare release</h3><p>Tag the release by using the "release:prepare" goal of Maven:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">mvn release:prepare -DautoVersionSubmodules=true
+</pre>
+</div></div><p>For a <a shape="rect" class="external-link" href="http://maven.apache.org/plugins/maven-release-plugin/usage.html">dry run</a>, add <code>-DdryRun=true</code>. If you do a dry run, use <code>mvn release:clean</code> to clean up after you have looked at the output.</p><p>When prompted for the SCM tag name, follow this pattern: STRUTS_2_3_[PATCH_VERSION]</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If you get an error message, try to re-run <code>mvn release:prepare -DautoVersionSubmodules=true</code> command again, <code>-Dresume</code> flag is set to true by default and the plugin will resume the release process from where it failed before.</p></div></div><p>Follow the link to get&#160;<a shape="rect" class="external-link" href="http://maven.apache.org/plugins/maven-release-plugin/examples/prepare-release.html">more information</a>&#160;about performed operation by release plugin.</p><h3 id="BuildingStruts2-Normalrelease-Performtherelease">Perform the release</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">mvn release:perform -DretryFailedDeploymentCount=10
+</pre>
+</div></div><p>Follow the link to get&#160;<a shape="rect" class="external-link" href="http://maven.apache.org/plugins/maven-release-plugin/examples/perform-release.html">more information</a>&#160;about performed operation by release plugin.&#160;<span style="line-height: 1.4285715;">After this step the artifacts will be hosted by </span><a shape="rect" class="external-link" href="http://repository.apache.org/" style="line-height: 1.4285715;">Nexus</a>. The&#160;<code>-DretryFailedDeploymentCount=10</code> is needed when there are problems with network connection (used just in case).</p><p>If you need to run perform again, (or in a different box), do:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">git checkout STRUTS_2_3_[PATCH_VERSION]
+mvn javadoc:javadoc deploy --no-plugin-updates -DperformRelease=true -Papache-release
+</pre>
+</div></div><p>Next, log in to <a shape="rect" class="external-link" href="http://repository.apache.org/">Nexus </a> and <strong>close</strong> staging repository.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Repository is identified by user name and public IP address, so if in meantime your IP changed, a new staging repository will be created so you must drop the old one (check the dates!) - if IP is the same, artifacts will be uploaded to the same repository as first attempt.</p></div></div><h3 id="BuildingStruts2-Normalrelease-Movetheassemblies">Move the assemblies</h3><p>To simplify testing, the assemblies have to be moved to the <code class="java plain">https:</code><code class="java comments">//dist.apache.org/repos/dist/dev/struts/</code><code>$VERSION</code> dir.</p><p>After closing repository in Nexus, check if the release files are available from staging repository as bellow:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">https://repository.apache.org/content/groups/staging/org/apache/struts/struts2-assembly/$VERSION/
+</pre>
+</div></div><p>In order to move the assemblies login to people.apache.org and execute the following code:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">#!/bin/sh
+
+#create the destination directory
+echo "Creating working dir $VERSION"
+mkdir $VERSION
+cd $VERSION
+
+# get the distro
+echo "Getting distro $VERSION"
+wget -erobots=off -nv  -l 1 --accept=zip,md5,sha1,asc -r --no-check-certificate -nd -nH https://repository.apache.org/content/groups/staging/org/apache/struts/struts2-assembly/$VERSION
+
+# rename files
+echo "Renaming files"
+for f in *2-assembly*.zip*
+do
+ mv $f `echo $f | sed s/2-assembly//g`
+done
+
+# remove unneeded files
+echo "Removing unneeded files"
+for f in struts2-assembly-*.pom*
+do
+ rm $f
+done
+
+# remove unneeded hashes
+echo "Removing unneeded files"
+rm *.asc.md5
+rm *.asc.sha1
+cd ..
+&#160;
+# checking in new version
+echo "Pushing test version $VERSION"
+svn --no-auth-cache co --depth empty https://dist.apache.org/repos/dist/dev/struts/ struts-dev
+mv $VERSION struts-dev/
+cd struts-dev
+svn add --force ./
+svn --no-auth-cache commit -m "Updates test release $VERSION"
+cd ..
+
+# cleaning up
+rm -r struts-dev
+
+echo "Done!"</pre>
+</div></div><p>After this step artifacts are available for test here&#160;<a shape="rect" class="external-link" href="https://dist.apache.org/repos/dist/dev/struts/">https://dist.apache.org/repos/dist/dev/struts/</a></p><h3 id="BuildingStruts2-Normalrelease-Announceavailability"><span style="font-size: 16.0px;line-height: 1.5625;">Announce availability</span></h3><p>Send a short e-mail to dev@struts.a.o informing about the new packages and to give people enough time to test the distribution (actual bits). Wait around a week before posting Vote. If no show-stoppers reported, start a vote thread for build quality designation.</p><h3 id="BuildingStruts2-Normalrelease-Pushchanges">Push changes</h3><p>Do not forget to push your local changes to the Apache repo</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">git push</pre>
+</div></div><h3 id="BuildingStruts2-Normalrelease-Voteonit">Vote on it</h3><p>Post a release/quality vote to the dev list (and <strong>only</strong> the dev list). The example mail is on <a shape="rect" href="sample-announcements.html">Sample announcements</a> page. If the vote result is for an ASF release (i.e. not test build), update site, announce. If the vote result is for GA, push to central.</p><h3 id="BuildingStruts2-Normalrelease-Copyfiles">Copy files</h3><p>After the vote, if the distribution is being mirrored (there was a favourable release vote) move all the artefa<span style="line-height: 1.4285715;">cts from <code>dev</code> folder into <code>release</code> folder:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">svn mv https://dist.apache.org/repos/dist/dev/struts/$VERSION/ https://dist.apache.org/repos/dist/release/struts/  </pre>
+</div></div><h3 id="BuildingStruts2-Normalrelease-Promoterelease">Promote release</h3><p>Log in again to <a shape="rect" class="external-link" href="http://repository.apache.org/">Nexus</a> and <strong>release</strong> the repository, it will be automatically replicated across Maven Repositories<br clear="none"> See <a shape="rect" class="external-link" href="http://maven.apache.org/developers/release/apache-release.html">Releasing a Maven-based project</a> for further details.</p><h3 id="BuildingStruts2-Normalrelease-Cleanupoldreleases">Clean up old releases</h3><p>Remove the old files from under <a shape="rect" class="external-link" href="https://dist.apache.org/repos/dist/release/struts/">https://dist.apache.org/repos/dist/release/struts/</a>&#160;to synchronise only the latest version with peers. All the files from <a shape="rect" class="external-link" href="https://dist.apache.org/repos/dist/release/struts/">https://dist.apache.org/repos/dist/release/struts/</a>&#160;are always mirrored to <a shape="rect" class="external-link" href="http://archive.apache.org/dist/struts/">http://archive.apache.org/dist/struts/</a>.&#160;You can use the below command:</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>svn del https://dist.apache.org/repos/dist/release/struts/2.3.x/
+</pre>
+</div></div><p>where <code>x</code> is the previous version to remove (or one more previous to keep current and one version back).</p><h3 id="BuildingStruts2-Normalrelease-Waitforrsync">Wait for rsync</h3><p>Wait 24 hours before proceeding.</p><h3 id="BuildingStruts2-Normalrelease-Updatesite"><span style="line-height: 1.5625;">Update site</span></h3><ul><li><p>Check out site src code</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">git clone https://git-wip-us.apache.org/repos/asf/struts-site.git
+</pre>
+</div></div></li><li>If a new DTD was defined, add it to&#160;<code>source/dtds</code></li><li>Update current version and release date in&#160;<code>struts-site/_config.yml</code></li><li>Update page source files<ul><li>struts-site/source/announce.md (if applicable, refer also to corresponding security bulletin)</li><li>struts-site/source/downloads.html (Prior Releases section)</li><li>struts-site/source/index.html (some parts will updated automatically with values defined in&#160;<code>_config.yml</code>)</li></ul></li><li>Generate site with Docker Jekyll image<ul><li>you must have Docker installed and running</li><li>if you are doing this the first time, download the official Struts image to build the site from&#160;<a shape="rect" class="external-link" href="https://hub.docker.com/r/theapachestruts/struts-site-jekyll/" rel="nofollow">https://hub.docker.com/r/theapachestruts/struts-site-jekyll/</a></li><li>start&#160;<code>docker-machine</code></li><li>now you can use one of the bash scripts already provided in the&#160;<code>struts-site</code>:<ul><li><code>docker-run.sh</code> - used with Bash</li><li><code>docker-run.fish</code> - to use with Fish Shell (via&#160;<code>fish docker-run.fish</code>)</li></ul></li><li>now you can check the generated site at http://localhost:4000</li></ul></li><li><p>Commit the changes and the generated content</p></li></ul><p>Now the changes must be deployed to production which is basically a separated Subversion repository, you check it out with command below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">svn co https://svn.apache.org/repos/infra/websites/production/struts/content struts-production</pre>
+</div></div><p>It's a good idea to keep that working copy to be used with future releases. Right now copy content of&#160;<code>struts-site/content</code>&#160;folder to&#160;<code>struts-production</code>&#160;folder, then commit changes. Next step is to update exported wiki pages. With current approach the pages are kept in&#160;<code>struts-production/docs</code>.</p><h3 id="BuildingStruts2-Normalrelease-Redeploythedocs(Optional)"><span style="line-height: 1.5625;">Redeploy the docs (Optional)</span></h3><ul style="list-style-type: square;"><li><p>Checkout source of the website and export Confluence pages</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">svn co https://svn.apache.org/repos/asf/struts/site/trunk struts-site
+cd struts-site
+mvn package</pre>
+</div></div><p>Now the whole Confluence space is exported to&#160;<code>target/cwiki/WW/docs/</code></p></li><li><p>Checkout copy of production website (if you didn't that before)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">svn co https://svn.apache.org/repos/infra/websites/production/struts/content/ struts-production</pre>
+</div></div><p>(you can checkout just a subtree, but it's better to checkout the whole repo especially when you want to update also the main web page)</p></li><li><p>Update production</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">cp -r struts-site/target/cwiki/WW/docs/* struts-production/docs/
+cd struts-production
+svn commit "Updates production"</pre>
+</div></div></li></ul><h3 id="BuildingStruts2-Normalrelease-Postannouncements"><span style="line-height: 1.5625;">Post announcements</span></h3><p>We leave this as the last step, once the artifacts have had time to sync up on the mirrors. Target it to: user@struts.a.o,&#160;announcements@struts.a.o&#160;and&#160;&#160;announce@a.o, samples are available at <a shape="rect" href="sample-announcements.html">Sample announcements</a> page</p></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>S2-036</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="security-bulletins.html">Security Bulletins</a>&nbsp;&gt;&nbsp;<a href="s2-036.html">S2-036</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">S2-036</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=64553424">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=64553424">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=64553424">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=64553424">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=64553424">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=64553424">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><h2 id="S2-036-Summary">Summary</h2>Forced double OGNL evaluation, when evaluated on raw user input in tag attributes, may lead to remote code execution (similar to S2-029)<div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Who should read this</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>All Struts 2 developers and users</p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Impact of vulnerability</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Possible Remote Code Execution vulnerability</p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Maximum security rating</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Medium</p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Recommendation</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Always validate incoming parameters' values when re-assigning them to certain Struts' tags attributes.</p><p>Don't use %{...} syntax in tag attributes other than <em>value</em> unless you have a valid use-case.</p><p>Alternatively upgrade to <a shape="rect" href="version-notes-2328.html">Struts 2.3.29</a> or <a shape="rect" href="version-notes-251.html">Struts 2.5.1</a></p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Affected Software</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Struts 2.0.0 - Struts<span style="color: rgb(23,35,59);"> 2.3.28.1</span></p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Reporters</p></th><td colspan="1" rowspan="1" class="confluenceTd"><span class="Apple-tab-span"><span>Alvaro</span>&#160;</span>Munoz alvaro dot munoz at hpe.com</td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>CVE Identifier</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>CVE-2016-4461</p></td></tr></tbody></table></div><h2 id="S2-036-Problem">Problem</h2><p>The same issue was reported in <a shape="rect" href="s2-029.html">S2-029</a> but the proposed solutions were not fully proper.&#160;The Apache Struts frameworks when forced, performs double evaluation of attributes' values assigned to certain tags so it is possible to pass in a value that will be evaluated again when a tag's attributes will be rendered.</p><h2 id="S2-036-Solution">Solution</h2><p>Adding a proper validation of each value that's coming in and it's used in tag's attributes.</p><p>Don't use forced evaluation of an attribute other than <em>value</em>&#160;using %{...} syntax unless really needed for a valid use-case.&#160;</p><p>By&#160;<span style="line-height: 1.42857;">upgrading to Struts 2.3.29 or 2.5.1, possible malicious effects of forced double evaluation are limited.</span></p><h2 id="S2-036-Backwardcompatibility">Backward compatibility</h2><p>Some backward incompatibility issues are expected when upgrading to Struts 2.3.29 - it can happen that some OGNL expressions stop working because of performing disallowed arithmetic operations and assigments.</p><h2 id="S2-036-Workaround">Workaround</h2><p>Not possible as this fix requires changes in OGNL and how Struts uses OGNL in certain aspects.</p><p>&#160;</p></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

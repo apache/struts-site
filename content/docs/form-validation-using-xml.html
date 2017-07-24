@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Form Validation Using XML</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="tutorials.html">Tutorials</a>&nbsp;&gt;&nbsp;<a href="getting-started.html">Getting Started</a>&nbsp;&gt;&nbsp;<a href="form-validation-using-xml.html">Form Validation Using XML</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Form Validation Using XML</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=20644608">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=20644608">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=20644608">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=20644608">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=20644608">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=20644608">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The example code for this tutorial, form_xml_validation, is available for checkout at <a shape="rect" class="external-link" href="https://github.com/apache/struts-examples" rel="nofollow">https://github.com/apache/struts-examples</a></p></div></div><h3 id="FormValidationUsingXML-Introduction">Introduction</h3><p>In this tutorial we'll cover how to validate a user's input in form fields using Struts 2's XML validation methodology. In the <a shape="rect" href="form-validation.html">Form Validation</a> tutorial we discussed validating a user's input using the validate method in the Action class. Using a separate XML validation file gives you the ability to use validators built-in to the Struts 2 framework.</p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The <a shape="rect" class="external-link" href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer to your problem, post a question on the mailing list.</p></div></div><h3 id="FormValidationUsingXML-ExampleApplication">Example Application</h3><p>The example application that supports this tutorial shows how to use Struts 2's XML validation methodology. The information that can be edited is encapsulated in an object of class Person.</p><p>To enable the user to edit his information that is stored in the Person object, we have this form:</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-content-image-border" src="form-validation-using-xml.data/form-validation-1.png"></span></p><p>When the user submits the form, we want to validate his entries into the form fields.</p><h3 id="FormValidationUsingXML-ValidationUsingXML">Validation Using XML</h3><p>To validate a user's form field entries you can use a separate XML file that contains your validation rules. The XML file that contains the validation rules must be named as ActionClassName-validation.xml. In the example application, the XML validation file is named EditAction-validation.xml (see src/main/resources/org/apache/struts/edit/action).</p><p>Struts 2 provides several different validators that you can use in the XML validation file. See <a shape="rect" href="validation.html">Validation</a> for a list of validators you can employ.</p><p>In the above form, we want to ensure the user enters a first name. To have the Struts 2 framework enforce that rule we can used the Struts 2 <a shape="rect" href="requiredstring-validator.html">requiredstring validator</a>. This validator checks that the user has entered a string value in the form field.</p><h3 id="FormValidationUsingXML-XMLValidatorFormat">XML Validator Format</h3><p>In the XML validation file (for this example that is EditAction-validation.xml), is this XML:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>XML Validator Required String</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">&lt;!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+ "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd"&gt;
+
+&lt;validators&gt;
+ &lt;validator type="requiredstring"&gt;
+ 	&lt;param name="fieldname"&gt;personBean.firstName&lt;/param&gt;
+ 	&lt;message&gt;First name is required.&lt;/message&gt;
+ &lt;/validator&gt;
+&lt;/validators&gt;
+
+</pre>
+</div></div><p>Within the validators node you can have 1 or more validator nodes. The type attribute specifies which validator you want the Struts 2 framework to use (see <a shape="rect" href="validation.html">Validation</a>). The param name="fieldname" node is used to tell the framework which form field entry to apply the rule to. See edit.jsp for the form fields and their name value (review <a shape="rect" href="struts-2-form-tags.html">Struts 2 Form Tags</a> if you're not familiar with how to use Struts 2 form tags). The message node is used to tell the framework what message to display if the validation fails.</p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>There are alternate ways to write the XML that goes in the validation XML file. See <a shape="rect" href="validation.html">Validation</a> in the Struts 2 documentation for a full discussion.</p></div></div><p>For example if the user doesn't enter a value in the first name form field and clicks on the Save Changes button, he will see the following.</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-content-image-border" src="form-validation-using-xml.data/form-validation-2.png"></span></p><h3 id="FormValidationUsingXML-ValidatingAnEmailAddress">Validating An Email Address</h3><p>You can use the Struts 2 <a shape="rect" href="email-validator.html">email validator</a> to validate the user's input in the email field. Here is the validator node that is in the EditAction-validation.xml file.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Email Validator</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;"> &lt;validator type="requiredstring"&gt;
+ 	&lt;param name="fieldname"&gt;personBean.email&lt;/param&gt;
+ 	&lt;message&gt;Email address is required.&lt;/message&gt;
+ &lt;/validator&gt;
+ &lt;validator type="email"&gt;
+ 	&lt;param name="fieldname"&gt;personBean.email&lt;/param&gt;
+ 	&lt;message&gt;Email address not valid.&lt;/message&gt;
+ &lt;/validator&gt;
+
+</pre>
+</div></div><p>Note that in the example, we are requiring the user to enter an email address and then validating the email address the user entered.</p><h3 id="FormValidationUsingXML-ValidatingAUser'sInputUsingARegularExpression">Validating A User's Input Using A Regular Expression</h3><p>The Struts 2 framework provides a powerful way to validate a user's form field input by using the <a shape="rect" href="regex-validator.html">regex validator</a>. In the example application, we want to ensure the user enters the phone number in the format 999-999-9999. We can use a regular expression and the <a shape="rect" href="regex-validator.html">regex validator</a> to enforce this rule.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>REGEX Validator</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;validator type="requiredstring"&gt;
+ 	&lt;param name="fieldname"&gt;personBean.phoneNumber&lt;/param&gt;
+ 	&lt;message&gt;Phone number is required.&lt;/message&gt;
+ &lt;/validator&gt;
+&lt;validator type="regex"&gt;
+	&lt;param name="fieldname"&gt;personBean.phoneNumber&lt;/param&gt;
+	&lt;param name="regex"&gt;&lt;![CDATA[\d{3}-\d{3}-\d{4}]]&gt;&lt;/param&gt;
+	&lt;message&gt;Phone number must be entered as 999-999-9999.&lt;/message&gt;
+&lt;/validator&gt;
+
+</pre>
+</div></div><p>The param name="expression" node is used to specify the regular expression that will be applied to the user's input. Note how the regular expression is contained within a CDATA section.</p><h3 id="FormValidationUsingXML-ValidatingAUser'sInputUsingAnOGNLExpression">Validating A User's Input Using An OGNL Expression</h3><p>In the example application, we want to ensure the user checks at least one of the car model check boxes. To enforce this rule we can use the <a shape="rect" href="fieldexpression-validator.html">fieldexpression validator</a>. Here's the XML for that validator node.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>FieldExpression Validator</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;validator type="fieldexpression"&gt;
+	&lt;param name="fieldname"&gt;personBean.carModels&lt;/param&gt;
+	&lt;param name="expression"&gt;&lt;![CDATA[personBean.carModels.length &gt; 0]]&gt;&lt;/param&gt;
+	&lt;message&gt;You must select at least one car model.&lt;/message&gt;
+&lt;/validator&gt;
+
+</pre>
+</div></div><p>The param name="expression" node contains an OGNL expression that evaluates to true or false. We haven't previously discussed OGNL, which stands for Object-Graph Navigation Language (see <a shape="rect" class="external-link" href="http://www.opensymphony.com/ognl/" rel="nofollow">http://www.opensymphony.com/ognl/</a> and <a shape="rect" href="ognl.html">OGNL</a>). OGNL expressions can be evaluated by the Struts 2 framework as Java statements.</p><p>In the above XML the value of the param name="expression" node, personBean.carModels.length &gt; 0, will be evaluated by the framework as a Java statement. The part personBean.carModels tells the framework to call the getCarModels method of class Person. That method returns an Array. Since class Array has a length attribute, the framework will get the value of the length attribute of the Array returned by the getCarModels method.</p><p>If the user did not check any of the check boxes, the Array returned by the getCarModels method will have a length value of 0. Since the complete OGNL expression will only evaluate to true if the length value is greater than 0, the validation fails. The user will see this.</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-content-image-border" src="form-validation-using-xml.data/form-validation-3.png"></span></p><p>The fieldexpression validator is useful when doing conditional validation of a user's input. If the OGNL expression doesn't evaluate to true then the user's input won't be allowed.</p><h3 id="FormValidationUsingXML-Summary">Summary</h3><p>The Struts 2 framework provides easy-to-use validation methodologies. You can add a validate method to the Action class or have a separate XML file with validation rules or you can use a combination of both methodologies.</p><h3 id="FormValidationUsingXML-UpNext">Up Next</h3><p>In our next tutorial we'll cover how to enable one action node in struts.xml to respond to several different action URLs.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Next</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Onward to <a shape="rect" href="wildcard-method-selection.html">Wildcard Method Selection</a></p></td></tr></tbody></table></div></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Processing Forms</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="tutorials.html">Tutorials</a>&nbsp;&gt;&nbsp;<a href="getting-started.html">Getting Started</a>&nbsp;&gt;&nbsp;<a href="how-to-create-a-struts-2-web-application.html">How To Create A Struts 2 Web Application</a>&nbsp;&gt;&nbsp;<a href="create-struts-2-web-application-with-artifacts-in-web-inf-lib-and-use-ant-to-build-the-application.html">Create Struts 2 Web Application With Artifacts In WEB-INF lib and Use Ant To Build The Application</a>&nbsp;&gt;&nbsp;<a href="hello-world-using-struts-2.html">Hello World Using Struts 2</a>&nbsp;&gt;&nbsp;<a href="using-struts-2-tags.html">Using Struts 2 Tags</a>&nbsp;&gt;&nbsp;<a href="coding-struts-2-actions.html">Coding Struts 2 Actions</a>&nbsp;&gt;&nbsp;<a href="processing-forms.html">Processing Forms</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Processing Forms</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14811889">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14811889">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14811889">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14811889">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14811889">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14811889">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This tutorial assumes you've completed the <a shape="rect" class="createlink" href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&amp;title=Coding+Struts+2+Actons&amp;linkCreation=true&amp;fromPageId=14811889">Coding Struts 2 Actons</a> tutorial and have a working coding_actions project. The example code for this tutorial, form_processing, is available for checkout from the Struts 2 GitHub subversion repository: <a shape="rect" class="external-link" href="https://github.com/apache/struts-examples" rel="nofollow">https://github.com/apache/struts-examples</a>.</p></div></div><h3 id="ProcessingForms-Introduction">Introduction</h3><p>In this tutorial we'll explore using Struts 2 to do more involved processing of a form submission. We'll cover how to use a Java model class to store the form input and how to create the Struts 2 form to match up with that model class.</p><p>The code provided in this tutorial may be added to the <a shape="rect" href="coding-struts-2-actions.html">Coding Struts 2 Actions</a> example or you can download this complete example from Google Code - <a shape="rect" class="external-link" href="http://code.google.com/p/struts2-examples/downloads/list" rel="nofollow">http://code.google.com/p/struts2-examples/downloads/list</a>.</p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The <a shape="rect" class="external-link" href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer to your problem, post a question on the mailing list.</p></div></div><h3 id="ProcessingForms-FormsandAJavaModelClass">Forms and A Java Model Class</h3><p>For this tutorial let's say we need to provide a form that a user may submit to register for a prize drawing. Our business rules state the user must provide his/her first name, last name, email address, and age.</p><p>To encapsulate this data, we'll use a simple Java class that follows the basic Java Bean specifications (public set/get methods for each instance field). If you're following along add this class to package org.apache.struts.register.model in the <a shape="rect" href="coding-struts-2-actions.html">Coding Struts 2 Actions</a> example.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Person.java</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">public class Person
+{
+    private String firstName;
+    private String lastName;
+    private String email;
+    private int age;
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public int getAge()
+    {
+        return age;
+    }
+
+    public void setAge( int age)
+    {
+        this.age = age;
+    }
+
+
+    public String toString()
+    {
+        return "First Name: " + getFirstName() + " Last Name:  " + getLastName() + 
+        " Email:      " + getEmail() + " Age:      " + getAge() ;
+    }
+}
+</pre>
+</div></div><p>Note a few points about the above class. There is a public set/get method for each instance field. The age attribute is of type integer. We've defined a public toString method that returns a String representing the state of the object. Since we haven't specified a constructor, Java will provide a default constructor that will set all instance fields to their null values.</p><h3 id="ProcessingForms-FormStructure">Form Structure</h3><p>To collect the above information we'll use a Struts 2 form. When creating this form the key concept we need to employ is to tie each form field to a specific instance field of an object of type Person. Let's look over the form first and then discuss some key points. Create a view page named register.jsp (in WebContent (Ant version) or src/main/webapp (Maven version) )</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>register.jsp</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">&lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;
+&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;
+&lt;%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /&gt;
+&lt;title&gt;Register&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h3&gt;Register for a prize by completing this form.&lt;/h3&gt;
+
+&lt;s:form action="register"&gt;
+
+ 	  &lt;s:textfield name="personBean.firstName" label="First name" /&gt;
+ 	  &lt;s:textfield  name="personBean.lastName" label="Last name" /&gt;
+ 	  &lt;s:textfield name="personBean.email"  label ="Email"/&gt;  
+ 	  &lt;s:textfield name="personBean.age"  label="Age"  /&gt;
+ 	  
+   	  &lt;s:submit/&gt;
+   	  
+&lt;/s:form&gt;	
+ 
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div></div><p>Since we are using Struts 2 tags, at the top of the page we need the Struts tag library declaration.</p><p>The Struts 2 form will submit to an action named register. We'll need to define that action in our struts.xml file.</p><p>Note the four Struts 2 textfield tags. Each tag has a name value that includes an attribute of the Person class (e.g. firstName). The name attribute's value also has a reference to an object called personBean. This object is of type Person. When we create the Action class that handles this form submission, we'll have to specify that object in that Action class (see below).</p><p>The complete name value, personBean.firstName, instructs Struts 2 to use the input value for that textfield as the argument to the personBean object's setFirstName method. So if the user types "Bruce" in the textfield that has the label "First name", the personBean's firstName instance field will have a value of "Bruce".</p><p>Note we have a Struts 2 textfield for each instance field of the class Person. Remember that Person class's age attribute is of type integer. All form field input values are Strings. Struts 2 will automatically convert the String value ("25") the user entered for the age form field to 25 when calling the setAge method of object personBean.</p><h3 id="ProcessingForms-CreatingtheActionClassToHandletheFormSubmission">Creating the Action Class To Handle the Form Submission</h3><p>When the user clicks on the submit button of the above form, the action "register" and the form data will be sent to the Struts 2 framework. We need an Action class to process this form. If you recall from the tutorial <a shape="rect" href="coding-struts-2-actions.html">Coding Struts 2 Actions</a> our Action class should extends the Struts 2 ActionSupport class.</p><p>Here is the Action class used for this example. Place it in package org.apache.struts.register.action.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Register.java Struts 2 Action Class</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">package org.apache.struts.register.action;
+
+import org.apache.struts.register.model.Person;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class Register extends ActionSupport {
+	
+	private static final long serialVersionUID = 1L;
+	
+	private Person personBean;
+	
+
+	@Override
+	public String execute() throws Exception {
+		
+		//call Service class to store personBean's state in database
+		
+		return SUCCESS;
+		
+	}
+	
+	public Person getPersonBean() {
+		
+		return personBean;
+		
+	}
+	
+	public void setPersonBean(Person person) {
+		
+		personBean = person;
+		
+	}
+
+}
+</pre>
+</div></div><p>In the Register class note that we've declared an attribute named personBean of type Person and there is a public get and set method for this object.</p><p>The Register class also overrides the execute method. The execute method is the one we will specify in the struts.xml to be called in response to the register action. In this example, the execute method just returns the String constant SUCCESS (inherited from ActionSupport class). But in a real application, within the execute method we would call upon other classes (Service objects) to perform the business processing of the form, such as storing the user's input into a data repository.</p><p>The personBean object of type Person declared in the Register Action class matches the personBean name we used in the form's textfields. When the form is submitted, the Struts 2 framework will inspect the Action class and look for an object named personBean. It will create that object using the Person class's default constructor. Then for each form field that has a name value of personBean.someAttribute (e.g personBean.firstName) it will call the personBean's public set method for that attribute and pass it the form field's value (the user input). This all happens before the execute method occurs.</p><p>When Struts 2 runs the execute method of class Register, the personBean object in class Register now has values for its instance fields that are equal to the values the user entered into the corresponding form fields.</p><p>By using a Java model class to encapsulate the data provided by the form we don't have to have a separate attribute (with public set/get methods) in the Action class (Register) for each form field.</p><h3 id="ProcessingForms-HandleSUCCESSBeingReturnedByExecuteMethod">Handle SUCCESS Being Returned By Execute Method</h3><p>When SUCCESS is returned by the execute method we want to display a simple thank you page that shows the user's registration. Add the thankyou.jsp below to either WebContent (Ant) or src/main/webapp (Maven).</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>thankyou.jsp</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">&lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;
+&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;
+&lt;%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /&gt;
+&lt;title&gt;Registration Successful&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h3&gt;Thank you for registering for a prize.&lt;/h3&gt;
+
+&lt;p&gt;Your registration information: &lt;s:property value="personBean" /&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;a href="&lt;s:url action='index' /&gt;" &gt;Return to home page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+</div></div><p>If you don't recall how the Struts 2 property and url tags work consult the <a shape="rect" href="using-struts-2-tags.html">Using Struts 2 Tags</a> tutorial.</p><h3 id="ProcessingForms-CreateactionNodeInstruts.xml">Create action Node In struts.xml</h3><p>To specify the relationship between the form submission page, the Struts 2 Action class, and the success view page we need to add an action node to struts.xml. Add this action node to struts.xml (src folder (Ant version) or src/main/resources (Maven version) ) after the hello action and before the closing package node.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>action node for struts.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;action name="register" class="org.apache.struts.register.action.Register" method="execute"&gt;
+  &lt;result name="success"&gt;/thankyou.jsp&lt;/result&gt;
+&lt;/action&gt;
+
+</pre>
+</div></div><p>The above action tells Struts 2 that when the register action is provided to call method execute of class Register. If that method returns result "success" return to the browser the thankyou.jsp.</p><p>Note that we don't need to tell Struts 2 anything about processing the form. The transfer of the form field input values to the personBean object will happen automatically provided we've followed the convention of naming our form fields to match personBean.attributeName (e.g. personBean.lastName).</p><h3 id="ProcessingForms-CreateALinkToregister.jsp">Create A Link To register.jsp</h3><p>So that the user can find the registration page, add this link to index.jsp</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Link to register.jsp</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">&lt;p&gt;&lt;a href="register.jsp"&gt;Please register&lt;/a&gt; for our prize drawing.&lt;/p&gt;
+</pre>
+</div></div><h3 id="ProcessingForms-RunTheExample">Run The Example</h3><p>If everything is correct, you should be able to create the war file, deploy the war file to your Servlet container, and open this URL in your web browser: <a shape="rect" class="external-link" href="http://localhost:8080/form_processing/index.action" rel="nofollow">http://localhost:8080/form_processing/index.action</a>. On that page should be a link to register. Click on that link and you should see the register.jsp page.<br clear="none"> <span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="processing-forms.data/registerjsp.png"></span></p><p>Fill out the form and click the submit button. You should then see the thankyou.jsp page.<br clear="none"> <span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="processing-forms.data/thanyoujsp.png"></span></p><p>In our next tutorial we'll cover how to validate the user's input in the form.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Next</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Onward to <a shape="rect" href="form-validation.html">Form Validation</a></p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Prev</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Return to <a shape="rect" href="coding-struts-2-actions.html">Coding Struts 2 Actions</a></p></td></tr></tbody></table></div></div>
+        </div>
+
+                    <div class="tabletitle">
+                Children
+            <span class="smalltext" id="show" style="display: inline;">
+              <a href="javascript:showChildren()">Show Children</a></span>
+            <span class="smalltext" id="hide" style="display: none;">
+              <a href="javascript:hideChildren()">Hide Children</a></span>
+            </div>
+            <div class="greybox" id="children" style="display: none;">
+                                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                            </div>
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

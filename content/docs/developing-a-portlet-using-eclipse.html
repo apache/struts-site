@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Developing a Portlet using Eclipse</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="tutorials.html">Tutorials</a>&nbsp;&gt;&nbsp;<a href="developing-a-portlet-using-eclipse.html">Developing a Portlet using Eclipse</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Developing a Portlet using Eclipse</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=62489">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=62489">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=62489">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=62489">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=62489">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=62489">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The Portlet support is experimental. Feedback is appreciated!</p></div></div>
+
+<h1 id="DevelopingaPortletusingEclipse-Index">Index</h1>
+
+<ol><li><a shape="rect" href="developing-a-portlet-using-eclipse.html">Introduction</a></li><li><a shape="rect" href="developing-a-portlet-using-eclipse.html">Installing Eclipse</a></li><li><a shape="rect" href="developing-a-portlet-using-eclipse.html">Installing Maven 2</a></li><li><a shape="rect" href="developing-a-portlet-using-eclipse.html">Installing Tomcat</a></li><li><a shape="rect" href="developing-a-portlet-using-eclipse.html">Creating the project</a></li><li><a shape="rect" href="developing-a-portlet-using-eclipse.html">Eclipse project generation</a></li><li><a shape="rect" href="developing-a-portlet-using-eclipse.html">Deploy as a servlet</a></li></ol>
+
+
+<h1 id="DevelopingaPortletusingEclipse-Step-by-StepTutorial">Step-by-Step Tutorial</h1>
+
+
+<h2 id="DevelopingaPortletusingEclipse-Introductionintro">Introduction <span class="confluence-anchor-link" id="DevelopingaPortletusingEclipse-intro"></span></h2>
+
+<p>This tutorial focuses on how to create an Eclipse development environment to create and debug portlets.  It does not cover portal deployment (which is different for each portal) and cheats a bit by using the struts2-archetype-portlet Maven 2 archetype.  We can get away with not talking about portlet development, because Struts 2 portlet support allows a carefully-written portlet to be ran as a regular servlet application, drastically simplifying our development setup.  Of course, to fully test your portlet, you will need to deploy the war into a portal server, but by running it in pure Tomcat, we can get 90% of the way there. Therefore, this tutorial requires Eclipse, Maven 2, and Tomcat to be installed.</p>
+
+<h2 id="DevelopingaPortletusingEclipse-InstallingEclipseinstall_eclipse">Installing Eclipse <span class="confluence-anchor-link" id="DevelopingaPortletusingEclipse-install_eclipse"></span></h2>
+
+<p>In the tutorial, we will be using Eclipse 3.3 which can be downloaded from <a shape="rect" class="external-link" href="http://www.eclipse.org" rel="nofollow">http://www.eclipse.org</a>.  I recommend the JEE package, which contains the popular (and required for this tutorial) Web Tools Project.</p>
+
+<h2 id="DevelopingaPortletusingEclipse-InstallingMaven2install_maven">Installing Maven 2 <span class="confluence-anchor-link" id="DevelopingaPortletusingEclipse-install_maven"></span></h2>
+
+<p>Apache Maven 2 can be found at <a shape="rect" class="external-link" href="http://maven.apache.org">http://maven.apache.org</a>.</p>
+
+<h2 id="DevelopingaPortletusingEclipse-InstallingTomcatinstall_tomcat">Installing Tomcat <span class="confluence-anchor-link" id="DevelopingaPortletusingEclipse-install_tomcat"></span></h2>
+
+<p>Apache Tomcat can be found at <a shape="rect" class="external-link" href="http://tomcat.apache.org">http://tomcat.apache.org</a>.  To install, simply unzip the distribution to a known location on your hard drive.</p>
+
+<h2 id="DevelopingaPortletusingEclipse-Creatingtheprojectcreate_project">Creating the project <span class="confluence-anchor-link" id="DevelopingaPortletusingEclipse-create_project"></span></h2>
+
+<p>To start, we will use the Struts 2 portlet Maven archetype, struts2-archetype-portlet, which will create a new portlet project will all the necessary files for a simple "hello world"-style portlet.  Open a terminal and type:</p>
+
+<div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>mvn archetype:create -DgroupId=com.mycompany.myportlet \
+                     -DartifactId=myportlet \
+                     -DarchetypeGroupId=org.apache.struts \
+                     -DarchetypeArtifactId=struts2-archetype-portlet \
+                     -DarchetypeVersion=2.0.9-SNAPSHOT \
+                     -DremoteRepositories=http://people.apache.org/repo/m2-snapshot-repository
+</pre>
+</div></div>
+
+<div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>Aternatively, you can use <a shape="rect" class="external-link" href="http://code.google.com/p/archy/" rel="nofollow">Archy</a>, a tool that provides an interactive command-line front-end to Maven Archetypes.</p></div></div>
+<p>This will result in the following layout:</p>
+
+<div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>./src/main/java/com/mycompany/myportlet/view/IndexAction.java
+./src/main/java/com/mycompany/myportlet/edit/IndexAction.java
+./src/main/webapp/WEB-INF/web.xml
+./src/main/webapp/WEB-INF/view/index.jsp
+./src/main/webapp/WEB-INF/portlet.xml
+./src/main/webapp/WEB-INF/edit/index-success.jsp
+./src/main/webapp/WEB-INF/edit/index-input.jsp
+./src/main/webapp/WEB-INF/help/index.jsp
+./src/main/webapp/index.jsp
+./src/main/resources/struts.xml
+./pom.xml
+</pre>
+</div></div>
+
+<p>As you can see, this portlet comes with a simple "hello world" view, but also default edit and help screens.</p>
+
+<h2 id="DevelopingaPortletusingEclipse-Eclipseprojectgenerationeclipse_generation">Eclipse project generation <span class="confluence-anchor-link" id="DevelopingaPortletusingEclipse-eclipse_generation"></span></h2>
+
+<p>A nice benefit of the Maven 2 build that new project comes equipped with is Maven 2 has a plugin that will generate all our Eclipse configuration.  Move into the 'myportlet' directory and type:</p>
+
+<div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>mvn -Dwtpversion=1.0 -DdownloadSources=true eclipse:eclipse
+</pre>
+</div></div>
+
+<div class="confluence-information-macro confluence-information-macro-note"><p class="title">First Eclipse and Maven project?</p><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>If this is your first time using Eclipse and Maven, Eclipse needs to know the path to the local maven repository. Therefore the classpath variable M2_REPO has to be set. Execute the following command:</p>
+<div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>mvn -Declipse.workspace=&lt;path-to-eclipse-workspace&gt; eclipse:add-maven-repo 
+</pre>
+</div></div>
+<p>You can also define a new classpath variable inside eclipse: From the menu bar, select Window &gt; Preferences. Select the Java &gt; Build Path &gt; Classpath Variables page.</p></div></div>
+
+<div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>For more information on the Maven Eclipse plugin, see its <a shape="rect" class="external-link" href="http://maven.apache.org/plugins/maven-eclipse-plugin/overview.html">homepage</a></p></div></div>
+
+<p>Now, your generated 'myportlet' Eclipse module is ready to be imported into your workspace.  In Eclipse, go to "File -&gt; Import... -&gt; General -&gt; Existing Projects into Workspace", select the your 'myportlet' directory, and follow the prompts.</p>
+
+<h2 id="DevelopingaPortletusingEclipse-Deployingyourportletasaservletdeploy_servlet">Deploying your portlet as a servlet <span class="confluence-anchor-link" id="DevelopingaPortletusingEclipse-deploy_servlet"></span></h2>
+
+<p>Since the Eclipse project was generated with the 'wtpversion' flag, it will be immediately recognized as a web application by Eclipse.  If this is your first time deploying web applications in Eclipse, you will need set up your Tomcat server.  To do this in Eclipse:</p>
+
+<ol><li>Navigate to "Window -&gt; Show View -&gt; Other..."</li><li>Open "Server" and select "Servers".  This will open a "Servers" tab, probably in your bottom tab panel.</li><li>Right-click in the new "Servers" tab and select "New -&gt; Server"</li><li>Select the version of Tomcat you installed and click "Next"</li><li>Click "Browse" and locate your Tomcat installation, and click "Next"</li><li>If "myportlet" isn't already in the "Configured projects" column, move it over and click "Finished"</li></ol>
+
+
+<p>Before we can run our portlet in Eclipse, I've found that you need to add the portlet jar to Tomcat.  To do this:</p>
+
+<ol><li>Right-click on the 'myportlet' project in the "Project Explorer" and select "Properties"</li><li>Click on "J2EE Module Dependencies</li><li>Click on the checkbox next to "M2_REPO/portlet-api/portlet-api/1.0/portlet-api-1.0.jar"</li><li>Click "OK"</li></ol>
+
+
+<p>Now, you should be able to run and debug your project in Tomcat.  The way I prefer to do this is to:</p>
+
+<ol><li>Right-click on the 'myportlet' project in the "Package Explorer" and select "Run As -&gt; Run on Server"</li><li>Select the Tomcat server you set up and click "Finish"</li></ol>
+
+
+<p>Eclipse will now run your portlet application as if it was a servlet.</p>
+
+<h2 id="DevelopingaPortletusingEclipse-AdditionalTipstips">Additional Tips <span class="confluence-anchor-link" id="DevelopingaPortletusingEclipse-tips"></span></h2>
+
+<ul><li>"View", "Edit", "Help" mode actions are mapped to the "/view", "/edit", "/help" namespaces respectively</li><li>The default action in each namespace is titled the "index" action</li><li>To add actions, just add the Action class and jsp following the shown conventions.  No <code>struts.xml</code> modification needed.</li><li>Use the Eclipse option "Debug As..." instead of "Run As..." to enable step through debugging</li></ul></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

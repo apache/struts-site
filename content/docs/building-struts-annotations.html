@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Building Struts Annotations</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="contributors-guide.html">Contributors Guide</a>&nbsp;&gt;&nbsp;<a href="creating-and-signing-a-distribution.html">Creating and Signing a Distribution</a>&nbsp;&gt;&nbsp;<a href="building-struts-annotations.html">Building Struts Annotations</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Building Struts Annotations</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=27832965">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=27832965">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=27832965">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=27832965">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=27832965">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=27832965">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><h1 id="BuildingStrutsAnnotations-Content">Content</h1>
+<style type="text/css">/*<![CDATA[*/
+div.rbtoc1488974251775 {padding: 0px;}
+div.rbtoc1488974251775 ul {list-style: none;margin-left: 0px;}
+div.rbtoc1488974251775 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class="toc-macro rbtoc1488974251775">
+<ul class="toc-indentation"><li><span class="TOCOutline">1</span> <a shape="rect" href="#BuildingStrutsAnnotations-Content">Content</a>
+<ul class="toc-indentation"><li><span class="TOCOutline">1.1</span> <a shape="rect" href="#BuildingStrutsAnnotations-BuildingSteps(StrutsAnnotations)">Building Steps (Struts Annotations)</a>
+<ul class="toc-indentation"><li><span class="TOCOutline">1.1.1</span> <a shape="rect" href="#BuildingStrutsAnnotations-Obtainafreshcheckoutofstrutsannotations">Obtain a fresh check out of struts annotations</a></li><li><span class="TOCOutline">1.1.2</span> <a shape="rect" href="#BuildingStrutsAnnotations-Preparerelease">Prepare release</a></li><li><span class="TOCOutline">1.1.3</span> <a shape="rect" href="#BuildingStrutsAnnotations-Performrelease">Perform release</a></li><li><span class="TOCOutline">1.1.4</span> <a shape="rect" href="#BuildingStrutsAnnotations-SendaVOTEemail">Send a VOTE email</a></li><li><span class="TOCOutline">1.1.5</span> <a shape="rect" href="#BuildingStrutsAnnotations-Promoterelease">Promote release</a></li></ul>
+</li></ul>
+</li></ul>
+</div>
+
+<h2 id="BuildingStrutsAnnotations-BuildingSteps(StrutsAnnotations)">Building Steps (Struts Annotations)</h2>
+<h3 id="BuildingStrutsAnnotations-Obtainafreshcheckoutofstrutsannotations">Obtain a fresh check out of struts annotations</h3>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+svn co https://svn.apache.org/repos/asf/struts/maven/trunk/struts-annotations struts-annotations
+</pre>
+</div></div>
+<h3 id="BuildingStrutsAnnotations-Preparerelease">Prepare release</h3>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+mvn release:prepare -Dusername=yourSvnUsername -Dpassword=yourSvnPassword
+</pre>
+</div></div>
+<p>Accept the suggested tag name</p>
+
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>For some reason, when using svn client 1.5, the release plugin might fail to tag the release, if it fails, run:<br clear="none">
+svn up -r head<br clear="none">
+mvn release:prepare -Dresume </p></div></div>
+
+<h3 id="BuildingStrutsAnnotations-Performrelease">Perform release</h3>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+mvn release:perform -Dusername=yourSvnUsername
+</pre>
+</div></div>
+<p>Log in to <a shape="rect" class="external-link" href="http://repository.apache.org/">Nexus</a> and <strong>close</strong> the staging repository.</p>
+<h3 id="BuildingStrutsAnnotations-SendaVOTEemail">Send a VOTE email</h3>
+<p>A sample template is at <a shape="rect" href="sample-announcements.html">Sample announcements</a> page (and DO wait for the 72 hours period)</p>
+<h3 id="BuildingStrutsAnnotations-Promoterelease">Promote release</h3>
+<p>If the Vote passed log in again to <a shape="rect" class="external-link" href="http://repository.apache.org/">Nexus</a> and <strong>promote</strong> the repository - it will be automatically synced with Maven Central Repository.</p></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

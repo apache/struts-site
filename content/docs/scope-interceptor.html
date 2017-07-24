@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Scope Interceptor</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="core-developers-guide.html">Core Developers Guide</a>&nbsp;&gt;&nbsp;<a href="interceptors.html">Interceptors</a>&nbsp;&gt;&nbsp;<a href="scope-interceptor.html">Scope Interceptor</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Scope Interceptor</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=13932">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=13932">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=13932">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=13932">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=13932">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=13932">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><p>
+This is designed to solve a few simple issues related to wizard-like functionality in Struts. One of those issues is
+that some applications have a application-wide parameters commonly used, such <i>pageLen</i> (used for records per
+page). Rather than requiring that each action check if such parameters are supplied, this interceptor can look for
+specified parameters and pull them out of the session.
+</p>
+
+<p></p><p>This works by setting listed properties at action start with values from session/application attributes keyed
+after the action's class, the action's name, or any supplied key. After action is executed all the listed properties
+are taken back and put in session or application context.
+</p>
+
+<p></p><p>To make sure that each execution of the action is consistent it makes use of session-level locking. This way it
+guarantees that each action execution is atomic at the session level. It doesn't guarantee application level
+consistency however there has yet to be enough reasons to do so. Application level consistency would also be a big
+performance overkill.
+</p>
+
+<p></p><p>Note that this interceptor takes a snapshot of action properties just before result is presented (using a {@link
+PreResultListener}), rather than after action is invoked. There is a reason for that: At this moment we know that
+action's state is "complete" as it's values may depend on the rest of the stack and specifically - on the values of
+nested interceptors.
+</p>
+<h2 id="ScopeInterceptor-Parameters">Parameters</h2>
+<p></p><ul></ul><p></p><ul><li>session - a list of action properties to be bound to session scope</li></ul><p></p><ul><li>application - a list of action properties to be bound to application scope</li></ul><p></p><ul><li>key - a session/application attribute key prefix, can contain following values:
+
+<p></p><ul></ul><p></p></li><li>CLASS - that creates a unique key prefix based on action namespace and action class, it's a default value</li></ul><p></p><ul><li>ACTION - creates a unique key prefix based on action namespace and action name</li></ul><p></p><ul><li>any other value is taken literally as key prefix</li></ul><p>
+
+</p><ul><li>type - with one of the following
+
+<p></p><ul></ul><p></p></li><li>start - means it's a start action of the wizard-like action sequence and all session scoped properties are reset
+to their defaults</li></ul><p></p><ul><li>end - means that session scoped properties are removed from session after action is run</li></ul><p></p><ul><li>any other value throws IllegalArgumentException</li></ul><p>
+</p>
+
+<p></p><ul><li>sessionReset - name of a parameter (defaults to 'session.reset') which if set, causes all session values to be reset to action's default values or application
+scope values, note that it is similar to type="start" and in fact it does the same, but in our team it is sometimes
+semantically preferred. We use session scope in two patterns - sometimes there are wizard-like action sequences that
+have start and end, and sometimes we just want simply reset current session values.</li></ul><p></p><ul><li>reset - boolean, defaults to false, if set, it has the same effect as setting all session values to be reset to action's default values or application.</li></ul><p></p><ul><li>autoCreateSession - boolean value, sets if the session should be automatically created.</li></ul>
+<h2 id="ScopeInterceptor-ExtendingtheInterceptor">Extending the Interceptor</h2>
+<p></p><p>There are no know extension points for this interceptor.</p>
+<h2 id="ScopeInterceptor-Examples">Examples</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;!-- As the filter and orderBy parameters are common for all my browse-type actions,
+     you can move control to the scope interceptor. In the session parameter you can list
+     action properties that are going to be automatically managed over session. You can
+     do the same for application-scoped variables--&gt;
+&lt;action name=&quot;someAction&quot; class=&quot;com.examples.SomeAction&quot;&gt;
+    &lt;interceptor-ref name=&quot;basicStack&quot;/&gt;
+    &lt;interceptor-ref name=&quot;hibernate&quot;/&gt;
+    &lt;interceptor-ref name=&quot;scope&quot;&gt;
+        &lt;param name=&quot;session&quot;&gt;filter,orderBy&lt;/param&gt;
+        &lt;param name=&quot;autoCreateSession&quot;&gt;true&lt;/param&gt;
+    &lt;/interceptor-ref&gt;
+    &lt;result name=&quot;success&quot;&gt;good_result.ftl&lt;/result&gt;
+&lt;/action&gt;
+]]></script>
+</div></div><h3 id="ScopeInterceptor-Somemoreexamples">Some more examples</h3><p>The scope interceptor can be used to pass arbitrary objects from one action ActionA to another other ActionB, provided you have a getter in ActionA and and a similar setter in actionB. Also, you should use a key parameter to make sure you tell ASF/WW which action gets which objects. This allows you to mix several actions with several scopes, without running the risk of getting wrong objects.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">    		&lt;action name="scopea" class="com.mevipro.test.action.ScopeActionA"&gt;
+			&lt;result name="success" type="dispatcher"&gt;/jsp/test.jsp&lt;/result&gt;
+			&lt;interceptor-ref name="basicStack"/&gt;
+			&lt;interceptor-ref name="scope"&gt;
+				&lt;param name="key"&gt;funky&lt;/param&gt;
+        		&lt;param name="session"&gt;person&lt;/param&gt;
+        		&lt;param name="autoCreateSession"&gt;true&lt;/param&gt;
+    		&lt;/interceptor-ref&gt;
+		&lt;/action&gt;
+		&lt;action name="scopeb" class="com.mevipro.test.action.ScopeActionB"&gt;
+			&lt;result name="success" type="dispatcher"&gt;/jsp/test.jsp&lt;/result&gt;
+			&lt;interceptor-ref name="scope"&gt;
+				&lt;param name="key"&gt;funky&lt;/param&gt;
+        		&lt;param name="session"&gt;person&lt;/param&gt;
+        		&lt;param name="autoCreateSession"&gt;true&lt;/param&gt;
+    		&lt;/interceptor-ref&gt;
+			&lt;interceptor-ref name="basicStack"/&gt;
+		&lt;/action&gt;
+</pre>
+</div></div><p>Don't forget: you'll need at least a getPerson() getter in ScopeActionA and a setPerson(Person person) setter in ScopeActionB, &#195;&#161;nd you need to make sure you specify the key (you don't need this if you only use one action, as in the example above). Without the key, the scope interceptor will store your variables, but won't set them on the other action.</p></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

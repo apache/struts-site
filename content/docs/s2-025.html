@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>S2-025</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="security-bulletins.html">Security Bulletins</a>&nbsp;&gt;&nbsp;<a href="s2-025.html">S2-025</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">S2-025</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=61312386">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=61312386">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=61312386">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=61312386">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=61312386">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=61312386">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><h2 id="S2-025-Summary">Summary</h2>Cross-Site Scripting Vulnerability in Debug Mode and in exposed JSP files<div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Who should read this</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>All Struts 2 developers and users</p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Impact of vulnerability</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p><span>A</span><span>ffects of a cross-site scripting vulnerability </span>when debug mode is switched on or JSPs are exposed in production environment.</p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Maximum security rating</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Low</p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Recommendation</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Turn off debug mode in production environment, apply tips from Security guideline to secure JSPs. An upgrade to <a shape="rect" class="external-link" href="http://struts.apache.org/download.cgi#struts2320">Struts 2.3.20</a> is recommended.</p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Affected Software</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Struts 2.0.0 - Struts <span style="color: rgb(23,35,59);">Struts 2.3.16.3</span></p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Reporter</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p><span style="color: rgb(34,34,34);"><span style="color: rgb(34,34,34);">Takayoshi Isayama, Mitsui Bussan Secure Directions, Inc.&#160;(vulnerability with JSPs)</span></span></p><p><span style="color: rgb(34,34,34);">anonymous (vulnerability with devMode)</span></p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>CVE Identifier</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>CVE-2015-5169</p></td></tr></tbody></table></div><h2 id="S2-025-Problem">Problem</h2><p>When the Struts2 debug mode is turned on, under certain conditions&#160;an arbitrary&#160;script may be executed in the 'Problem Report' screen. Also if JSP files are exposed to be accessed directly it's possible to execute an arbitrary script.</p><h2 id="S2-025-Solution">Solution</h2><p>It is generally not advisable to have debug mode switched on outside of the development environment. Debug mode should always be turned off in production setup. Also never expose JSPs files directly and hide them inside&#160;<code>WEB-INF</code> folder or define dedicated security constraints to block access to raw JSP files.&#160;Please also read our&#160;<a shape="rect" href="security.html">Security</a>&#160;guide - it contains useful informations how to secure your application.</p><p>Struts &gt;= 2.3.20 is not vulnerable to this attack. We recommend upgrading to Struts 2.3.20 or higher.</p><h2 id="S2-025-Backwardcompatibility">Backward compatibility</h2><p>No backward compatibility problems are expected.</p><h2 id="S2-025-Workaround">Workaround</h2><p>Upgrade to Struts 2.3.20</p><p><span style="font-size: 14.0px;line-height: 1.4285715;"><br clear="none"></span></p></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

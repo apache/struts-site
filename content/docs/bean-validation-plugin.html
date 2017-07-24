@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Bean Validation Plugin</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="plugin-developers-guide.html">Plugin Developers Guide</a>&nbsp;&gt;&nbsp;<a href="bean-validation-plugin.html">Bean Validation Plugin</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Bean Validation Plugin</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=57904184">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=57904184">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=57904184">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=57904184">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=57904184">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=57904184">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><h1 id="BeanValidationPlugin-BeanValidation">Bean Validation</h1><p>The Bean Validation plugin implements a bridge to use Bean Validation in struts actions. Bean Validation has been specified in JSR 303 and is part of the JavaEE platform. Full-fledged application servers already bring validation providers which can be leveraged by this plugin. The plugin integrates with other struts features like:</p><ul><li>i18n</li><li>model driven</li><li>AJAX Validation</li><li>workflow</li></ul><h1 id="BeanValidationPlugin-Setup">Setup</h1><p>In order to use the Bean Validation plugin, you first need to add the JAR file to the&#160;<code>WEB-INF/lib</code>&#160;directory of your application or include the dependency in your project's Maven POM file.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>pom.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.struts&lt;/groupId&gt;
+    &lt;artifactId&gt;struts2-bean-validation-plugin&lt;/artifactId&gt;
+    &lt;version&gt;X.X.X&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+</div></div><p>Where X.X.X is the current version of Struts 2. Please remember that the Bean Validation&#160;Plugin is available from version 2.5.</p><h1 id="BeanValidationPlugin-Configuration">Configuration</h1><p>This sample shows the configuration constants the plugin provides. It also shows how to enable bean-validation by extending your own application package from&#160;<code>struts-bean-validation</code> which comes along with the plugin.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>struts.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">    &lt;constant name="struts.beanValidation.providerClass" value="org.hibernate.validator.HibernateValidator"/&gt;
+    &lt;constant name="struts.beanValidation.ignoreXMLConfiguration" value="false"/&gt;
+    &lt;constant name="struts.beanValidation.convertMessageToUtf" value="false"/&gt;
+    &lt;constant name="struts.beanValidation.convertMessageFromEncoding" value="ISO-8859-1"/&gt;
+&#160;
+	&lt;package name="my-bean-validation" extends="struts-bean-validation"&gt;
+	&lt;/package&gt;</pre>
+</div></div><p>Here is another example that shows how you can combine bean-validation with other plugins by configuring your own Interceptor-Stack (note: this is just a very short example. In a real app you should take more care about your stack). You can combine bean validation with classic struts validation (or disable either) by putting the according interceptors in your stack (or by removing them from your stack).</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>struts.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">	&lt;package name="my-app-package" extends="struts-default"&gt;
+		&lt;interceptors&gt;
+			&lt;interceptor
+				&#160;name="beanValidation"
+				&#160;class="org.apache.struts.beanvalidation.validation.interceptor.BeanValidationInterceptor"/&gt;
+
+			&lt;interceptor-stack name="appDefaultStack"&gt;
+				&lt;interceptor-ref name="beanValidation"/&gt;
+				&lt;interceptor-ref name="defaultStack"/&gt;
+			&lt;/interceptor-stack&gt;
+		&lt;/interceptors&gt;
+	&lt;/package&gt;</pre>
+</div></div><p>&#160;</p><h1 id="BeanValidationPlugin-BeanValidationExample">Bean Validation Example</h1><p>Here is an example Action that makes use of bean validation. Note that some of the validation annotations are taken from <code>javax</code> package (which is defined in the JSR) while others are taken from the validaton provider (in this case: <code>hibernate</code>). You can specifiy own text keys in the <code>message</code> attribute of the annotations. If you do that the whole struts i18n mechanism kicks in to resolve those text keys.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>com.example.actions.BeanValidationAction</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">package com.example.actions;
+
+
+import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts.beanvalidation.constraints.FieldMatch;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.interceptor.validation.SkipValidation;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.ScriptAssert;
+import org.hibernate.validator.constraints.URL;
+import javax.validation.constraints.*;
+import java.util.Date;
+
+
+@Namespace("/bean-validation")
+@ParentPackage("my-bean-validation")
+@Action(results = {
+        @Result(name = "input", location = "bean-validation.jsp"),
+        @Result(name = "success", location = "/WEB-INF/validation/successFieldValidatorsExample.jsp")
+})
+@FieldMatch(first = "fieldExpressionValidatorField", second = "requiredValidatorField", message = "requiredValidatorField and fieldExpressionValidatorField are not matching")
+@ScriptAssert(lang = "javascript", script = "_this.dateValidatorField != null &amp;&amp; _this.dateValidatorField.before(new java.util.Date())", message = "Date need to before now")
+public class BeanValidationExampleAction extends ActionSupport {
+    @NotNull
+    private String requiredValidatorField = null;
+
+    @NotBlank
+    private String requiredStringValidatorField = null;
+
+    @NotNull(message="your.text.key.here")
+    @Min(1)
+    @Max(10)
+    private Integer integerValidatorField = null;
+
+    @NotNull
+    private Date dateValidatorField = null;
+
+    @NotNull
+    @Size(min = 4, max = 64)
+    @Email
+
+    private String emailValidatorField = null;
+
+    @NotNull
+    @Size(min = 4, max = 64)
+    @URL
+    private String urlValidatorField = null;
+
+    @NotNull
+    @Size(min = 2, max = 4)
+    private String stringLengthValidatorField = null;
+
+    @Pattern(regexp = "[^&lt;&gt;]+")
+    private String regexValidatorField = null;
+
+    private String fieldExpressionValidatorField = null;
+
+
+ public Date getDateValidatorField() {
+
+        return dateValidatorField;
+    }
+    public void setDateValidatorField(Date dateValidatorField) {
+        this.dateValidatorField = dateValidatorField;
+    }
+    public String getEmailValidatorField() {
+        return emailValidatorField;
+    }
+    public void setEmailValidatorField(String emailValidatorField) {
+        this.emailValidatorField = emailValidatorField;
+    }
+    public Integer getIntegerValidatorField() {
+        return integerValidatorField;
+    }
+    public void setIntegerValidatorField(Integer integerValidatorField) {
+        this.integerValidatorField = integerValidatorField;
+    }
+    public String getRegexValidatorField() {
+        return regexValidatorField;
+    }
+    public void setRegexValidatorField(String regexValidatorField) {
+        this.regexValidatorField = regexValidatorField;
+    }
+    public String getRequiredStringValidatorField() {
+        return requiredStringValidatorField;
+    }
+    public void setRequiredStringValidatorField(String requiredStringValidatorField) {
+        this.requiredStringValidatorField = requiredStringValidatorField;
+    }
+    public String getRequiredValidatorField() {
+        return requiredValidatorField;
+    }
+    public void setRequiredValidatorField(String requiredValidatorField) {
+        this.requiredValidatorField = requiredValidatorField;
+    }
+    public String getStringLengthValidatorField() {
+        return stringLengthValidatorField;
+    }
+    public void setStringLengthValidatorField(String stringLengthValidatorField) {
+        this.stringLengthValidatorField = stringLengthValidatorField;
+    }
+    public String getFieldExpressionValidatorField() {
+        return fieldExpressionValidatorField;
+    }
+    public void setFieldExpressionValidatorField(
+            String fieldExpressionValidatorField) {
+        this.fieldExpressionValidatorField = fieldExpressionValidatorField;
+    }
+    public String getUrlValidatorField() {
+        return urlValidatorField;
+    }
+    public void setUrlValidatorField(String urlValidatorField) {
+        this.urlValidatorField = urlValidatorField;
+    }
+}</pre>
+</div></div></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Coding Struts 2 Actions</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="tutorials.html">Tutorials</a>&nbsp;&gt;&nbsp;<a href="getting-started.html">Getting Started</a>&nbsp;&gt;&nbsp;<a href="how-to-create-a-struts-2-web-application.html">How To Create A Struts 2 Web Application</a>&nbsp;&gt;&nbsp;<a href="create-struts-2-web-application-with-artifacts-in-web-inf-lib-and-use-ant-to-build-the-application.html">Create Struts 2 Web Application With Artifacts In WEB-INF lib and Use Ant To Build The Application</a>&nbsp;&gt;&nbsp;<a href="hello-world-using-struts-2.html">Hello World Using Struts 2</a>&nbsp;&gt;&nbsp;<a href="using-struts-2-tags.html">Using Struts 2 Tags</a>&nbsp;&gt;&nbsp;<a href="coding-struts-2-actions.html">Coding Struts 2 Actions</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Coding Struts 2 Actions</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14811879">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14811879">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14811879">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14811879">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14811879">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14811879">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This tutorial assumes you've completed the <a shape="rect" href="using-struts-2-tags.html">Using Struts 2 Tags</a> tutorial and have a working using_tags project. The example code for this tutorial, coding_action, is available for checkout from the Struts 2 GitHub repository: <a shape="rect" class="external-link" href="https://github.com/apache/struts-examples" rel="nofollow">https://github.com/apache/struts-examples</a>.</p></div></div><h3 id="CodingStruts2Actions-Introduction">Introduction</h3><p>Coding a Struts 2 Action involves several parts:</p><p>1. Mapping an action to a class<br clear="none"> 2. Mapping a result to a view<br clear="none"> 3. Writing the controller logic in the Action class</p><p>In the previous tutorials we covered how to configure Struts to map a URL such as hello.action to a Action class such as HelloWorldAction (specifically the execute method).</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Action Mapping</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;action name="hello" class="org.apache.struts.helloworld.action.HelloWorldAction" method="execute"&gt;
+	&lt;result name="success"&gt;/HelloWorld.jsp&lt;/result&gt;
+&lt;/action&gt;
+
+</pre>
+</div></div><p>The Action mapping above also specified that if the execute method of class HelloWorldAction returns success then the view HelloWorld.jsp will be returned to the browser.</p><p>This tutorial will introduce you to the basics of writing the controller logic in the Action class.</p><h3 id="CodingStruts2Actions-Struts2ActionClasses">Struts 2 Action Classes</h3><p>Action classes act as the controller in the MVC pattern. Action classes respond to a user action, execute business logic (or call upon other classes to do that), and then return a result that tells Struts what view to render.</p><p>Struts 2 Action classes usually extend the <code>ActionSupport</code> class, which is provided by the Struts 2 framework. Class <code>ActionSupport</code> provides default implementations for the most common actions (e.g. execute, input) and also implements several useful Struts 2 interfaces. When your Action class extends class <code>ActionSupport</code> your class can either override the default implementations or inherit them.</p><p>If you examine class HelloWorldAction from tutorial <a shape="rect" href="using-struts-2-tags.html">Using Struts 2 Tags</a> you'll see that it extends class <code>ActionSupport</code> and then overrides method execute.</p><p>In method execute is where we placed what we want this controller to do in response to the hello.action.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Method execute of HelloWorldAction</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">public String execute() throws Exception {
+		
+	messageStore = new MessageStore() ;
+		
+	helloCount++;
+		
+	return SUCCESS;
+
+}
+
+</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Note that method execute declares it throws an Exception. We'll cover in a later tutorial how to configure Struts to handle any Exceptions thrown from the Action classes methods.</p></div></div><h3 id="CodingStruts2Actions-ProcessingFormInputInTheActionClass">Processing Form Input In The Action Class</h3><p>One of the most common responsibilities of the Action class is to process user input on a form and then make the result of the processing available to the view page. To illustrate this responsibility, let's say that on our view page, HelloWorld.jsp, we want<br clear="none"> to display a personal hello, such as "Hello Struts User Bruce."</p><p>In the <a shape="rect" href="using-struts-2-tags.html">Using Struts 2 Tags</a> example application we added a Struts 2 form to index.jsp.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Struts 2 Form Tags</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">&lt;s:form action="hello"&gt;
+
+	&lt;s:textfield name="userName" label="Your name" /&gt;
+	
+	&lt;s:submit value="Submit" /&gt;
+
+&lt;/s:form&gt;
+
+
+</pre>
+</div></div><p>Make a note of the value of the name attribute for the Struts 2 textfield tag, which is userName. When the user clicks on the submit button for the above form, the action hello will be executed (hello.action). The form field values will be posted to the Struts 2 Action class (HelloWorldAction). The Action class may automatically receive those form field values provided it has a public set method that matches the form field name value.</p><p>So for the HelloWorldAction class to automatically receive the userName value it must have a public method setUserName (note the JavaBean convention discussed in tutorial <a shape="rect" href="hello-world-using-struts-2.html">Hello World</a>).</p><p>For the example application associated with this tutorial add the following Java code to class HelloWorldAction.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Add userName to HelloWorldAction</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">	private String userName;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+</pre>
+</div></div><p>To personalize the MessageStore message (recall that class MessageStore is storing the message to display) add the following Java code to the HelloWorldAction's execute method after the statement that instantiates the MessageStore object.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Add userName value to message</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">if (userName != null) {
+			
+	messageStore.setMessage( messageStore.getMessage() + " " + userName);
+			
+}
+
+</pre>
+</div></div><p>Now build and deploy the application. Enter your name in the form and click the submit button. You should see the following page.<br clear="none"> <span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="coding-struts-2-actions.data/personalhello.png"></span></p><p>When the form is submitted, Struts will call any set methods of the HelloWorldAction class that match the form field names. So in this example method setUserName was called and passed the value the user entered in the userName form field.</p><p>On the index.jsp we also have a Struts 2 action link (see tutorial <a shape="rect" href="using-struts-2-tags.html">Using Struts 2 Tags</a>) that includes a query string parameter: userName=Bruce+Phillips. If you click on that link you should see the result of:<br clear="none"> <span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="coding-struts-2-actions.data/hellobruce.png"></span></p><p>Since the query string parameter is userName, Struts passed the value of that parameter to the setUserName method.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>On the view page, HelloWorld.jsp, you can also access the userName value by using the Struts 2 property tag (see tutorial <a shape="rect" href="using-struts-2-tags.html">Using Struts 2 Tags</a>). Try showing just the userName value on the view page.</p></div></div><h3 id="CodingStruts2Actions-Summary">Summary</h3><p>This tutorial introduced you to how to code the Action class so it can process user input on a form or values in a query string parameter. If the form had numerous fields, it would be cumbersome to have a set method that matches up with each form field. So in our next tutorial will cover how to integrate a model class, form fields in the view, and form processing in the Action class.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Next</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Onward to <a shape="rect" href="processing-forms.html">Processing Forms</a></p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Prev</p></th><td colspan="1" rowspan="1" class="confluenceTd"><p>Return to <a shape="rect" href="coding-struts-2-actions.html">Coding Struts 2 Actions</a></p></td></tr></tbody></table></div></div>
+        </div>
+
+                    <div class="tabletitle">
+                Children
+            <span class="smalltext" id="show" style="display: inline;">
+              <a href="javascript:showChildren()">Show Children</a></span>
+            <span class="smalltext" id="hide" style="display: none;">
+              <a href="javascript:hideChildren()">Hide Children</a></span>
+            </div>
+            <div class="greybox" id="children" style="display: none;">
+                                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                            </div>
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

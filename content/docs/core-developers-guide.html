@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Core Developers Guide</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="core-developers-guide.html">Core Developers Guide</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Core Developers Guide</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=13945">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=13945">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=13945">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=13945">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=13945">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=13945">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><p>Struts 2 processes requests using three core types: <a shape="rect" href="interceptor-configuration.html">interceptors</a>, <a shape="rect" href="action-configuration.html">actions</a>, and <a shape="rect" href="result-configuration.html">results</a>. Each may be configured via XML or annotations.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><td colspan="1" rowspan="1" class="confluenceTd"><ul><li>Developing Applications with Struts 2<ul><li><a shape="rect" href="nutshell.html">Nutshell</a></li><li><a shape="rect" href="ajax.html">AJAX</a></li><li><a shape="rect" href="dependency-injection.html">Dependency Injection</a></li><li><a shape="rect" href="profiling.html">Profiling</a></li><li><a shape="rect" href="debugging.html">Debugging</a></li><li><a shape="rect" href="devmode.html">Development Mode</a></li></ul></li><li>Configuration<ul><li><a shape="rect" href="convention-plugin.html">Configuration by Convention</a></li><li><a shape="rect" href="annotations.html">Annotations</a></li><li><a shape="rect" href="configuration-elements.html">Configuration Elements</a><ul><li><a shape="rect" href="action-configuration.html">Actions</a>, <a shape="rect" href="wildcard-mappings.html">Wildcard Mappings</a>, <a shape="rect" href="bean-configuration.html">Beans</a>, <a shape="rect" href="constant-configuration.html">Constants</a></li><li><a shape="rect" href="exception-configuration.html">Exceptions</a>, <a shape="rect" href="include-configuration.html">Includes</a>, <a shape="rect" href="interceptor-configuration.html">Interceptors</a></li><li><a shape="rect" href="namespace-configuration.html">Namespaces</a>, <a shape="rect" href="package-configuration.html">Packages</a>, <a shape="rect" href="result-configuration.html">Results</a></li><li><a shape="rect" href="unknown-handlers.html">Unknown Handlers</a>, <a shape="rect" href="dispatcher.html">Dispatcher</a></li></ul></li><li><a shape="rect" href="configuration-files.html">Configuration Files</a><ul><li><a shape="rect" href="webxml.html">web.xml</a></li><li><a shape="rect" href="strutsxml.html">struts.xml</a></li><li><a shape="rect" href="strutsproperties.html">struts.properties</a></li><li><a shape="rect" href="struts-defaultxml.html">struts-default.xml</a></li><li><a shape="rect" href="velocityproperties.html">velocity.properties</a></li><li><a shape="rect" href="struts-defaultvm.html">struts-default.vm</a></li></ul></li><li><a shape="rect" href="application-servers.html">Application Servers</a></li><li><a shape="rect" href="performance-tuning.html">Performance Tuning</a></li></ul></li><li><img class="emoticon emoticon-light-on" src="https://cwiki.apache.org/confluence/s/en_GB/5997/6f42626d00e36f53fe51440403446ca61552e2a2.1/_/images/icons/emoticons/lightbulb_on.png" data-emoticon-name="light-on" alt="(lightbulb)"><a shape="rect" href="security.html">Security</a></li></ul></td><td colspan="1" rowspan="1" class="confluenceTd"><ul><li><a shape="rect" href="testing-actions.html">Testing Actions</a><ul><li><a shape="rect" class="external-link" href="https://depressedprogrammer.wordpress.com/2007/06/18/unit-testing-struts-2-actions-spring-junit/" rel="nofollow">(arsenalist)</a></li><li><a shape="rect" class="external-link" href="http://fassisrosa.blogspot.com/2006/11/unit-testing-struts-20.html" rel="nofollow">(rosa)</a></li></ul></li><li><a shape="rect" href="interceptors.html">Interceptors</a><ul><li><a shape="rect" href="writing-interceptors.html">Writing Interceptors</a></li><li><a shape="rect" href="parameters-interceptor.html">Excluding Parameters</a></li></ul></li><li>Actions<ul><li><a shape="rect" href="model-driven.html">Model Driven</a></li><li><a shape="rect" href="action-chaining.html">Action Chaining</a></li><li><a shape="rect" href="actioneventlistener.html">ActionEventListener</a></li></ul></li><li>Results<ul><li><a shape="rect" href="result-types.html">Result Types</a></li><li><a shape="rect" href="dispatcherlistener.html">DispatcherListener</a></li><li><a shape="rect" href="preresultlistener.html">PreResultListener</a></li></ul></li><li><a shape="rect" href="validation.html">Validation</a></li><li><a shape="rect" href="localization.html">Localization</a><ul><li><a shape="rect" href="formatting-dates-and-numbers.html">Formatting Dates and Numbers</a></li></ul></li><li><a shape="rect" href="type-conversion.html">Type Conversion</a></li><li><a shape="rect" href="static-content.html">Static Content</a></li><li>Portlets<ul><li><a shape="rect" href="struts-2-portlet-tutorial.html">Tutorial</a></li><li><a shape="rect" href="portlet-plugin.html">Configuration/Documentation</a></li></ul></li><li><a shape="rect" href="logging.html">Logging</a></li><li><a shape="rect" href="faqs.html">FAQs</a><ul><li><a shape="rect" href="struts-2-maven-archetypes.html">Struts 2 Maven Archetypes</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li></ul></li><li><a shape="rect" class="external-link" href="http://struts.apache.org/maven/struts2-core/apidocs/index.html">Javadoc APIs</a></li></ul></td></tr></tbody></table></div><h2 id="CoreDevelopersGuide-Next:">Next: <a shape="rect" href="tag-developers-guide.html">Tag Developers Guide</a></h2></div>
+        </div>
+
+                    <div class="tabletitle">
+                Children
+            <span class="smalltext" id="show" style="display: inline;">
+              <a href="javascript:showChildren()">Show Children</a></span>
+            <span class="smalltext" id="hide" style="display: none;">
+              <a href="javascript:hideChildren()">Hide Children</a></span>
+            </div>
+            <div class="greybox" id="children" style="display: none;">
+                                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                            </div>
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

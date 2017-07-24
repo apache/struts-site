@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>OGNL</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="tag-developers-guide.html">Tag Developers Guide</a>&nbsp;&gt;&nbsp;<a href="ognl.html">OGNL</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">OGNL</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14198">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14198">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14198">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14198">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14198">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14198">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><p>OGNL is the Object Graph Navigation Language (see <a shape="rect" class="external-link" href="http://commons.apache.org/proper/commons-ognl/">http://commons.apache.org/proper/commons-ognl/</a> for the full documentation of OGNL). Here, we will cover a few examples of OGNL features that co-exist with the framework. To review basic concepts, refer to <a shape="rect" href="ognl-basics.html">OGNL Basics</a>.</p><p>The framework uses a standard naming context to evaluate OGNL expressions. The top level object dealing with OGNL is a Map (usually referred as a context map or context). OGNL has a notion of there being a root (or default) object within the context. In expression, the properties of the root object can be referenced without any special "marker" notion. References to other objects are marked with a pound sign (<code>#</code>).</p><p>The framework sets the OGNL context to be our ActionContext, and the value stack to be the OGNL root object. (The value stack is a set of several objects, but to OGNL it appears to be a single object.) Along with the value stack, the framework places other objects in the ActionContext, including Maps representing the application, session, and request contexts. These objects coexist in the ActionContext, alongside the value stack (our OGNL root).</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>                     |
+                     |--application
+                     |
+                     |--session
+       context map---|
+                     |--value stack(root)
+                     |
+                     |--action (the current action)
+                     |
+                     |--request
+                     |
+                     |--parameters
+                     |
+                     |--attr (searches page, request, session, then application scopes)
+                     |
+</pre>
+</div></div><p><img class="emoticon emoticon-information" src="https://cwiki.apache.org/confluence/s/en_GB/5982/f2b47fb3d636c8bc9fd0b11c0ec6d0ae18646be7.1/_/images/icons/emoticons/information.png" data-emoticon-name="information" alt="(info)"> There are other objects in the context map. The diagram is for example only.</p><p>The Action instance is always pushed onto the value stack. Because the Action is on the stack, and the stack is the OGNL root, references to Action properties can omit the <code>#</code> marker. But, to access other objects in the ActionContext, we must use the <code>#</code> notation so OGNL knows not to look in the root object, but for some other object in the ActionContext.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Referencing an Action property</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;s:property value="postalCode"/&gt;
+</pre>
+</div></div><p>Other (non-root) objects in the ActionContext can be rendered use the <code>#</code> notation.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;s:property value="#session.mySessionPropKey"/&gt; or
+&lt;s:property value="#session['mySessionPropKey']"/&gt; or
+&lt;s:property value="#request['myRequestPropKey']"/&gt;
+</pre>
+</div></div><p>The ActionContext is also exposed to Action classes via a static method.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">ActionContext.getContext().getSession().put("mySessionPropKey", mySessionObject);
+</pre>
+</div></div><p>You can also put expression for attributes that don't support dynamic content, like below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">&lt;c:set var="foo" value="bar" scope="request"/&gt;
+&lt;s:textfield name="username" label="%{#request.foo}" /&gt;
+</pre>
+</div></div><h2 id="OGNL-Collections(Maps,Lists,Sets)">Collections (Maps, Lists, Sets)</h2><p>Dealing with Collections (Maps, Lists, and Sets) in the framework comes often, so below please there are a few examples using the select tag. The <a shape="rect" class="external-link" href="http://commons.apache.org/proper/commons-ognl/language-guide.html#Collection_Construction">OGNL documentation</a> also includes some examples.</p><p>Syntax for list: {e1,e2,e3}. This idiom creates a List containing the String "name1", "name2" and "name3". It also selects "name2" as the default value.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;s:select label="label" name="name" list="{'name1','name2','name3'}" value="%{'name2'}" /&gt;
+</pre>
+</div></div><p>Syntax for map: #{key1:value1,key2:value2}. This idiom creates a map that maps the string "foo" to the string "foovalue" and "bar" to the string "barvalue":</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;s:select label="label" name="name" list="#{'foo':'foovalue', 'bar':'barvalue'}" /&gt;
+</pre>
+</div></div><p>To determine if an element exists in a Collection, use the operations <code>in</code> and <code>not in</code>.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;s:if test="'foo' in {'foo','bar'}"&gt;
+   muhahaha
+&lt;/s:if&gt;
+&lt;s:else&gt;
+   boo
+&lt;/s:else&gt;
+
+&lt;s:if test="'foo' not in {'foo','bar'}"&gt;
+   muhahaha
+&lt;/s:if&gt;
+&lt;s:else&gt;
+   boo
+&lt;/s:else&gt;
+</pre>
+</div></div><p>To select a subset of a collection (called projection), use a wildcard within the collection.</p><ul class="alternate"><li>? - All elements matching the selection logic</li><li>^ - Only the first element matching the selection logic</li><li>$ - Only the last element matching the selection logic</li></ul><p>To obtain a subset of just male relatives from the object person:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">person.relatives.{? #this.gender == 'male'}
+</pre>
+</div></div><h2 id="OGNL-LambdaExpressions">Lambda Expressions</h2><p>OGNL supports basic lamba expression syntax enabling you to write simple functions.</p><p>(Dedicated to all you math majors who didn't think you would ever see this one again.)</p><p>Fibonacci: if n==0 return 0; elseif n==1 return 1; else return fib(n-2)+fib(n-1);<br clear="none"> fib(0) = 0<br clear="none"> fib(1) = 1<br clear="none"> fib(11) = 89</p><div class="confluence-information-macro confluence-information-macro-information"><p class="title">How the expression works</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The lambda expression is everything inside the square brackets. The #this variable holds the argument to the expression, which in the following example is the number 11 (the code after the square-bracketed lamba expression, <code>#fib(11)</code>).</p></div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;s:property value="#fib =:[#this==0 ? 0 : #this==1 ? 1 : #fib(#this-2)+#fib(#this-1)], #fib(11)" /&gt;
+</pre>
+</div></div><h2 id="OGNL-Next:">Next: <a shape="rect" href="tag-syntax.html">Tag Syntax</a></h2></div>
+        </div>
+
+                    <div class="tabletitle">
+                Children
+            <span class="smalltext" id="show" style="display: inline;">
+              <a href="javascript:showChildren()">Show Children</a></span>
+            <span class="smalltext" id="hide" style="display: none;">
+              <a href="javascript:hideChildren()">Hide Children</a></span>
+            </div>
+            <div class="greybox" id="children" style="display: none;">
+                                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                            </div>
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

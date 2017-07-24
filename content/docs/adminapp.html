@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>AdminApp</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="tutorials.html">Tutorials</a>&nbsp;&gt;&nbsp;<a href="adminapp.html">AdminApp</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">AdminApp</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14086">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14086">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14086">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14086">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14086">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14086">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent">
+
+<p>TODO: Documenting updated version (currently at <a shape="rect" class="external-link" href="http://www.i-tao.com/adminapp.html" rel="nofollow">http://www.i-tao.com/adminapp.html</a>). IN PROGRESS.</p>
+
+<h2 id="AdminApp-Introduction">Introduction</h2>
+<p>This page aims at providing some additional information about the <a shape="rect" class="external-link" href="http://www.hibernate.org" rel="nofollow">Hibernate</a> <a shape="rect" class="external-link" href="http://www.hibernate.org/159.html#a5" rel="nofollow">AdminApp</a>. The Hibernate AdminApp (hereafter referred to as AA) was created by the Hibernate developers to show a possible implementation strategy for Hibernate with Webwork. Although AA can still be used as a starting point for webapplications, most of its libraries become quite aged (WW 2.0 beta, Hibernate 2, XWork 1.0 beta). Therefore, a shiny <a shape="rect" class="external-link" href="http://www.i-tao.com/adminapp.html" rel="nofollow">new fork</a> (AA2) has been created by Ron Chan.</p>
+
+<p>AA2 relies on WW2.2, Hibernate 3.1, and Spring as its IoC container (rather than XWork's, which has been deprecated in WW 2.2). We'll first discuss the original AA. Later on, we'll show the differences with AA2. Ron, if you're reading this, feel free to point out any mistakes/edit this document.</p>
+
+<p>Like we pointed out before, AA shows a possible implementation strategy to use Hibernate in WebWork in combination with a so-called open-session-in-view pattern (<a shape="rect" class="external-link" href="http://www.hibernate.org/43.html" rel="nofollow">more info</a>, <a shape="rect" class="external-link" href="http://www.jroller.com/page/cardsharp?entry=open_session_in_view_pattern" rel="nofollow">even more</a>). This pattern allows maximum flexibility in our view layer by creating a Hibernate Session object that will live till the end of the request (after the view has been rendered). This allows lazy loading of objects in our view, rather than having to preload all objects and their associations in our business layer, and yet ensures the correct disposing of the Session object.</p>
+
+<p>To accomplish this, AA uses XWork's <a shape="rect" href="dependency-injection.html">components</a> and <a shape="rect" href="interceptors.html">interceptors</a>:</p>
+
+<ul><li><a shape="rect" href="dependency-injection.html">components</a>: XWork manages the lifecycle of objects in several scopes (application, session, request) and takes care of the IoC through the ..Aware interfaces (so called enablers). Hibernate's expensive-to-create SessionFactory will thus be created in the application scope (meaning it will only be initialised once when the application starts up), while the Session objects, used to load our models, is registered in the request scope (will be created once per request).</li></ul>
+
+
+<ul><li><a shape="rect" href="interceptors.html">interceptors</a>: AA uses an interceptor (the HibernateInterceptor) to extract the Session from the WebWork action, so it can control the transactions, redirect/rollback on errors and properly dispose the Session after the view is rendered.</li></ul>
+
+
+<h2 id="AdminApp-AdminAppSourceOverview">AdminApp Source Overview</h2>
+
+<p>Now, let's properly dissect the AA files:</p>
+<ul><li>/lib: contains the various jars for our application. Nothing special here.</li><li>/src/java/org/hibernate/admin/action: lists our WebWork actions. All actions extend an abstract AbstractAction file, which overrides the execute() method from our XWork's ActionSupport. This is where we define a setHibernateSession() method, which is the method we declared in our enabler interface (HibernateSessionAware). This will notify XWork to invoke its IoC magic to set the HibernateSession.</li></ul>
+
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>org.hibernate.admin.action.AbstractAction</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+        public String execute() throws Exception {
+	
+		// We go to INPUT on field and data errors
+		if ( hasErrors() ) {
+			LOG.debug("action not executed, field or action errors");
+			LOG.debug( "Field errors: " + getFieldErrors() );
+			LOG.debug( "Action errors: " + getActionErrors() );
+			return INPUT;
+		}
+
+		LOG.debug("executing action");
+		return go();
+	}
+	
+	protected abstract String go() throws HibernateException;
+
+	public void setHibernateSession(HibernateSession session) {
+		this.session = session;
+	}
+
+	protected Session getSession() throws HibernateException {
+		return session.getSession();
+	}
+</pre>
+</div></div>
+<p>In this execute() method we'll simply call a abstract go() method (which is then defined in each of the actions). When we need the Hibernate Session, we use the getSession() method, inherited from our AbstractAction. Don't worry about transactions or saving so called dirty objects (our HibernateInterceptor takes care of all that). As you can see, this totally minimizes the LoC (lines of code) needed to retrieve or manipulated our models).</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>org.hibernate.admin.action.EditUserAction</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+public class EditUserAction extends AbstractAction {
+	//.. ommited for brevity
+	
+	protected String go() throws HibernateException {
+		..
+		getSession().update(user);
+		..
+		return SUCCESS;
+	}
+	
+	//.. getters and setters ommited
+
+}
+</pre>
+</div></div>
+
+<p>There are 3 more *-validation.xml files in this directory containing the validation logic for the Actions. XWork will validate your request before the action gets executed, so you can decouple your (simple) validation logic from your Action. For example, take a look at the CreateUserAction-validation.xml:</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>CreateUserAction-validation.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+..
+    &lt;field name="user.name.lastName"&gt;
+        &lt;field-validator type="requiredstring"&gt;
+            &lt;message&gt;You must enter a last name.&lt;/message&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+    &lt;field name="user.email"&gt;
+        &lt;field-validator type="email"&gt;
+            &lt;message&gt;Please correct the e-mail address.&lt;/message&gt;
+        &lt;/field-validator&gt;
+        &lt;field-validator type="required"&gt;
+            &lt;message&gt;Please enter an e-mail address.&lt;/message&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+..
+</pre>
+</div></div>
+
+<p><a shape="rect" href="validation.html">Several validator types</a> are available. Here we rely on XWork to validate our Actions, but it's also possible to validate our object Models (see <a shape="rect" href="validation.html">WW Validation</a>). You will mostly use these to validate submitted forms in your webapp. </p>
+
+<p>When a validator fails, you will automatically be returned to the input page with a clear indication which field failed to validate if: </p>
+
+<p>a) actually provided an input type in your <a shape="rect" href="strutsxml.html">struts.xml</a> file</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>xwork.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+	..
+        &lt;result name="input" type="dispatcher"&gt;
+		&lt;param name="location"&gt;/editUser.jsp&lt;/param&gt;
+	&lt;/result&gt;
+	..
+</pre>
+</div></div>
+<p>b) you enabled the validation interceptor in your <a shape="rect" href="strutsxml.html">struts.xml</a></p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>xwork.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+	..
+	&lt;interceptor-ref name="defaultStack"/&gt;
+	&lt;interceptor-ref name="validation"/&gt;
+	..
+</pre>
+</div></div>
+<p>c) you use the WebWork tag library (warning: this is the old syntax):</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>CreateUser.jsp</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+..
+&lt;ww:form name="'createUserForm'" action="'createUser.action'" method="'POST'"&gt;
+    &lt;ww:textfield label="'Username'" name="'user.handle'"/&gt;
+..
+</pre>
+</div></div>
+
+<p>New syntax (since 2.2):</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>CreateUser.jsp</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+..
+&lt;ww:form name="createUserForm" action="createUser" method="POST"&gt;
+    &lt;ww:textfield label="Username" name="user.handle"/&gt;
+..
+</pre>
+</div></div>
+
+<ul><li>/src/java/org/hibernate/admin/component: contains the components and enablers for both the HibernateSessionFactory and the HibernateSession. These components are declared in the /src/java/<a shape="rect" href="dependency-injection.html">components.xml</a> file (which will be copied to the root of your compiled classes afterwards):</li></ul>
+
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>components.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;components&gt;
+
+    &lt;component&gt;
+        &lt;scope&gt;request&lt;/scope&gt;
+        &lt;class&gt;org.hibernate.admin.component.HibernateSession&lt;/class&gt;
+        &lt;enabler&gt;org.hibernate.admin.component.HibernateSessionAware&lt;/enabler&gt;
+    &lt;/component&gt;
+
+    &lt;component&gt;
+        &lt;scope&gt;application&lt;/scope&gt;
+        &lt;class&gt;org.hibernate.admin.component.HibernateSessionFactory&lt;/class&gt;
+        &lt;enabler&gt;org.hibernate.admin.component.HibernateSessionFactoryAware&lt;/enabler&gt;
+    &lt;/component&gt;
+
+&lt;/components&gt;
+</pre>
+</div></div>
+
+<ul><li>/src/java/org/hibernate/admin/interceptor: contains the Hibernate interceptor. <a shape="rect" href="interceptors.html">Interceptors</a> are an incredibly powerful feature of WebWork - it allows you to control invocations before and after they excute, manipulate their results, or, as in our case, extract the HibernateSession object and dispose it after the Action has been executed (and the view rendered). Because we use a try/catch/finally block, we're able to catch exceptions and yet make sure our Session gets closed properly (the number one cause of db connection leaks).</li></ul>
+
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>org.hibernate.admin.interceptor.HibernateInterceptor</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+	public String intercept(ActionInvocation invocation) throws Exception {
+		Action action = invocation.getAction();
+		if ( !(action instanceof AbstractAction) ) return invocation.invoke();
+		
+		HibernateSession hs = ( (AbstractAction) action ).getHibernateSession();
+		try {
+			return invocation.invoke();
+		}
+		
+		// Note that all the cleanup is done
+		// after the view is rendered, so we
+		// have an open session in the view
+		
+		catch (Exception e) {	
+			hs.setRollBackOnly(true);
+			if (e instanceof HibernateException) {
+				LOG.error("HibernateException in execute()", e);
+				return Action.ERROR;
+			}
+			else {
+				LOG.error("Exception in execute()", e);
+				throw e;
+			}
+		}
+		
+		finally {
+			try {
+				hs.disposeSession();
+			}
+			catch (HibernateException e) {
+				LOG.error("HibernateException in dispose()", e);
+				return Action.ERROR;
+			}
+		}
+	}
+</pre>
+</div></div>
+
+
+<h2 id="AdminApp-Conclusion">Conclusion</h2>
+<p>In this document, we tried to point out several key features in the Hibernate AdminApp. In part II, we'll have a look at the new AdminApp, which is far more up to date, and uses Spring as its IoC container. No more implements ActionSupport or Aware interfaces, resulting in even cleaner code.</p>
+
+<p>AdminApp is a very good example of how a webapp can be structered, using as many advantages from the various frameworks as possible.</p></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

@@ -1,0 +1,1184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Ajax and JavaScript Recipes</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="tag-developers-guide.html">Tag Developers Guide</a>&nbsp;&gt;&nbsp;<a href="struts-tags.html">Struts Tags</a>&nbsp;&gt;&nbsp;<a href="ajax-tags.html">Ajax Tags</a>&nbsp;&gt;&nbsp;<a href="ajax-and-javascript-recipes.html">Ajax and JavaScript Recipes</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Ajax and JavaScript Recipes</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=56182">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=56182">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=56182">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=56182">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=56182">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=56182">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><div class="confluence-information-macro confluence-information-macro-warning"><p class="title">Dojo plugin is deprecated</p><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>The Dojo plugin will be deprecated on Struts 2.1</p></div></div>
+
+<style type="text/css">/*<![CDATA[*/
+div.rbtoc1488974082612 {padding: 0px;}
+div.rbtoc1488974082612 ul {list-style: none;margin-left: 0px;padding-left: 20px;}
+div.rbtoc1488974082612 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class="toc-macro rbtoc1488974082612">
+<ul class="toc-indentation"><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Common">Common</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Requests">Requests</a>
+<ul class="toc-indentation"><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Requestistriggeredbyatopic">Request is triggered by a topic</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Attachedtoanevent">Attached to an event</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Attachedtoaneventonmultiplesources">Attached to an event on multiple sources</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Attachedtomultipleeventsonmultiplesources">Attached to multiple events on multiple sources</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Updatetargetelementwithcontentreturnedfromurl">Update target element with content returned from url</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Updatemultipletargetelementswithcontentreturnedfromurl">Update multiple target elements with content returned from url</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Showindicatorwhilerequestisinprogress">Show indicator while request is in progress</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Highlightcontentoftargetwithbluecolor,for2seconds">Highlight content of target with blue color, for 2 seconds</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-ExecuteJavaScriptinthereturnedcontent">Execute JavaScript in the returned content</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Publishatopicbeforetherequest">Publish a topic before the request</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Publishatopicaftertherequest">Publish a topic after the request</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Publishatopiconerror">Publish a topic on error</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Showafixederrormessageonerror">Show a fixed error message on error</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Preventarequest">Prevent a request</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Submitaform(plainform)">Submit a form (plain form)</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Submitaform(usings:formtag)">Submit a form (using s:form tag)</a></li></ul>
+</li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Div">Div</a>
+<ul class="toc-indentation"><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Loadsitscontentafterpageisloaded">Loads its content after page is loaded</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Reloadscontentwhentopicispublished">Reloads content when topic is published</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Updatesitscontentevery2seconds,showsindicatorwhileloadingcontent">Updates its content every 2 seconds, shows indicator while loading content</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Loadsitscontentafteradelayof2seconds">Loads its content after a delay of 2 seconds</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Showsometextwhilecontentisloaded">Show some text while content is loaded</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Fixederrormessage">Fixed error message</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-ExecuteJavaScriptinthereturnedcontent.1">Execute JavaScript in the returned content</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Controlrefreshtimerusingtopics">Control refresh timer using topics</a></li></ul>
+</li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-DateandTimepicker">Date and Time picker</a>
+<ul class="toc-indentation"><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Datepicker">Date picker</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Timepicker">Time picker</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-SetvaluefromanString">Set value from an String</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Setvaluefromstack(valuemustevaluatetoeitheraDate,Calendar,oranStringthatcanbeparsedusingtheformatsdefinedinSimpleDateFormat,andRFC3339)">Set value from stack (value must evaluate to either a Date, Calendar, or an String that can be parsed using the formats defined in SimpleDateFormat, and RFC 3339)</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Set/GetvalueusingJavaScript">Set/Get value using JavaScript</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Stylethetextbox">Style the textbox</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Publishtopicwhenvaluechanges">Publish topic when value changes</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Useotherlocales.">Use other locales.</a></li></ul>
+</li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-TabbedPanel">Tabbed Panel</a>
+<ul class="toc-indentation"><li><a shape="rect" href="#AjaxandJavaScriptRecipes-LocalTabs">Local Tabs</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Localandremotetabs">Local and remote tabs</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Fixedsize(sizedoesnotadjusttocurrenttab)">Fixed size (size does not adjust to current tab)</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Donotloadtab2whenpageloads(itwillbeloadedwhenselected)">Do not load tab 2 when page loads (it will be loaded when selected)</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Reloadtabscontentwhenselected">Reload tabs content when selected</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Disabledtabs">Disabled tabs</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Enable/DisabletabsusingJavaScript">Enable/Disable tabs using JavaScript</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-SetTablabelspositiontobottom(canbe:top,right,bottom,left)">Set Tab labels position to bottom (can be: top, right, bottom, left)</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Allowtab2toberemoved(closed)">Allow tab 2 to be removed(closed)</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Publishtopicswhentabisselected">Publish topics when tab is selected</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-SelecttabusingJavaScript">Select tab using JavaScript</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Preventtab2frombeingselected">Prevent tab 2 from being selected</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Customizetemplatecsspath(Dojowidgettemplatecss)">Customize template css path (Dojo widget template css)</a></li></ul>
+</li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Autocompleter">Autocompleter</a>
+<ul class="toc-indentation"><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Fixedlist">Fixed list</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Setinitialvalue">Set initial value</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Forcevalidoption(restoreoptionwhenfocusislost)">Force valid option (restore option when focus is lost)</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-UsingtheJSONplugintogeneratethevalues(oneofthepossibleways)">Using the JSON plugin to generate the values (one of the possible ways)</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Exampleaction">Example action</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Setinitialkeyandvalue">Set initial key and value</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Changedefaultkeyname">Change default key name</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-JSONaccepted">JSON accepted</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Loadcharacterswhileusertypes(whentextsize&gt;=3)">Load characters while user types (when text size &gt;= 3)</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Hidedropdownarrow">Hide dropdown arrow</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Limitoptionsshownto3">Limit options shown to 3</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Allmatchingoptionsareshown">All matching options are shown</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Setdropdownheightandwidth,inpixels">Set dropdown height and width, in pixels</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Disableitwhenpageisloaded">Disable it when page is loaded</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Disableit/enableitusingJavaScript">Disable it/enable it using JavaScript</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Reloadoptionswhentopicispublished">Reload options when topic is published</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Submitformwhenoptionsareloaded">Submit form when options are loaded</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Filterfieldstopbesubmittedwhenoptionsareloaded(returntruetoinclude)">Filter fields top be submitted when options are loaded (return true to include)</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Linktwoautocompleters,usingtopics">Link two autocompleters, using topics</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Showoptions,butdon'tmakesuggestion(autocomple)inthetextbox">Show options, but don't make suggestion (autocomple) in the textbox</a></li><li><a shape="rect" href="#AjaxandJavaScriptRecipes-Preventoptionsfromloadingwhenpageloads">Prevent options from loading when page loads</a></li></ul>
+</li></ul>
+</div>
+
+
+<h4 id="AjaxandJavaScriptRecipes-Common">Common</h4>
+<p>All examples on this page assume the following JSP fragment is on the same page as the example.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;
+&lt;%@ taglib prefix="sx" uri="/struts-dojo-tags" %&gt;
+
+&lt;head&gt;
+    &lt;sx:head /&gt;
+&lt;/head&gt;
+
+&lt;s:url id="url" value="/MyAction.action" /&gt;
+</pre>
+</div></div>
+
+<h4 id="AjaxandJavaScriptRecipes-Requests">Requests</h4>
+<h5 id="AjaxandJavaScriptRecipes-Requestistriggeredbyatopic">Request is triggered by a topic</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:submit value="Make Request" onclick="dojo.event.topic.publish('/request')" /&gt;
+&lt;sx:bind listenTopics="/request" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Attachedtoanevent">Attached to an event</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind sources="submit" events="onclick" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Attachedtoaneventonmultiplesources">Attached to an event on multiple sources</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:submit value="Make Request" id="submit0" /&gt;
+&lt;s:submit value="Make Request" id="submit1" /&gt;
+&lt;sx:bind sources="submit0,submit1" events="onclick" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Attachedtomultipleeventsonmultiplesources">Attached to multiple events on multiple sources</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:textarea id="area0" /&gt;
+&lt;s:textarea id="area1" /&gt;
+&lt;sx:bind sources="area0,area1" events="onfocus,onchange" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Updatetargetelementwithcontentreturnedfromurl">Update target element with content returned from url</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:div id="div" /&gt;
+
+&lt;!-- With a bind tag --&gt;
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind targets="div" sources="submit" events="onclick" href="%{#url}" /&gt;
+
+&lt;!-- With a submit tag --&gt;
+&lt;sx:submit targets="div" value="Make Request" href="%{#url}" /&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;sx:a targets="div" value="Make Request" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Updatemultipletargetelementswithcontentreturnedfromurl">Update multiple target elements with content returned from url</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:div id="div0" /&gt;
+&lt;s:div id="div1" /&gt;
+
+&lt;!-- With a bind tag --&gt;
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind targets="div0,div1" sources="submit" events="onclick" href="%{#url}" /&gt;
+
+&lt;!-- With a submit tag --&gt;
+&lt;sx:submit targets="div0,div1" href="%{#url}" /&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;sx:a targets="div0,div1" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Showindicatorwhilerequestisinprogress">Show indicator while request is in progress</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;img id="indicator" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none" /&gt;
+
+&lt;!-- With a bind tag --&gt;
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind indicator="indicator" sources="submit" events="onclick" href="%{#url}" /&gt;
+
+&lt;!-- With a submit tag --&gt;
+&lt;sx:submit indicator="indicator" href="%{#url}" /&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;sx:a indicator="indicator" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Highlightcontentoftargetwithbluecolor,for2seconds">Highlight content of target with blue color, for 2 seconds</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:div id="div" /&gt;
+
+&lt;!-- With a bind tag --&gt;
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind highlightColor="blue" highlightDuration="2000" targets="div" sources="submit" events="onclick" href="%{#url}" /&gt;
+
+&lt;!-- With a submit tag --&gt;
+&lt;sx:submit highlightColor="blue" highlightDuration="2000" targets="div" href="%{#url}" /&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;sx:a highlightColor="blue" highlightDuration="2000" targets="div" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-ExecuteJavaScriptinthereturnedcontent">Execute JavaScript in the returned content</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:div id="div" /&gt;
+
+&lt;!-- With a bind tag --&gt;
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind executeScripts="true" targets="div" sources="submit" events="onclick" href="%{#url}" /&gt;
+
+&lt;!-- With a submit tag --&gt;
+&lt;sx:submit executeScripts="true" targets="div" href="%{#url}" /&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;sx:a executeScripts="true" targets="div" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Publishatopicbeforetherequest">Publish a topic before the request</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+dojo.event.topic.subscribe("/before", function(event, widget){
+   alert('inside a topic event. before request');
+   //event: event object
+   //widget: widget that published the topic
+});
+&lt;/script&gt;
+
+&lt;!-- With a bind tag --&gt;
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind beforeNotifyTopics="/before" sources="submit" events="onclick" href="%{#url}" /&gt;
+
+&lt;!-- With a submit tag --&gt;
+&lt;sx:submit beforeNotifyTopics="/before" href="%{#url}" /&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;sx:a beforeNotifyTopics="/before" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Publishatopicaftertherequest">Publish a topic after the request</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+dojo.event.topic.subscribe("/after", function(data, request, widget){
+   alert('inside a topic event. after request');
+   //data : text returned from request
+   //request: XMLHttpRequest object
+   //widget: widget that published the topic
+});
+&lt;/script&gt;
+
+&lt;!-- With a bind tag --&gt;
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind afterNotifyTopics="/after" sources="submit" events="onclick" href="%{#url}" /&gt;
+
+&lt;!-- With a submit tag --&gt;
+&lt;sx:submit afterNotifyTopics="/after" href="%{#url}" /&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;sx:a afterNotifyTopics="/after" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+
+<h5 id="AjaxandJavaScriptRecipes-Publishatopiconerror">Publish a topic on error</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+dojo.event.topic.subscribe("/error", function(error, request, widget){
+   alert('inside a topic event. on error');
+   //error : error object (error.message has the error message)
+   //request: XMLHttpRequest object
+   //widget: widget that published the topic
+});
+&lt;/script&gt;
+
+&lt;!-- With a bind tag --&gt;
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind errorNotifyTopics="/error" sources="submit" events="onclick" href="%{#url}" /&gt;
+
+&lt;!-- With a submit tag --&gt;
+&lt;sx:submit errorNotifyTopics="/error" href="%{#url}" /&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;sx:a errorNotifyTopics="/error" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Showafixederrormessageonerror">Show a fixed error message on error</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;div id="div" /&gt;
+
+&lt;!-- With a bind tag --&gt;
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind errorText="Error Loading" targets="div" sources="submit" events="onclick" href="%{#url}" /&gt;
+
+&lt;!-- With a submit tag --&gt;
+&lt;sx:submit errorText="Error Loading" targets="div" href="%{#url}" /&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;sx:a errorText="Error Loading" targets="div" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Preventarequest">Prevent a request</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+dojo.event.topic.subscribe("/before", function(event, widget){
+   alert('I will stop this request');
+   event.cancel = true;
+});
+&lt;/script&gt;
+
+
+&lt;!-- With a bind tag --&gt;
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind beforeNotifyTopics="/before" sources="submit" events="onclick" href="%{#url}" /&gt;
+
+&lt;!-- With a submit tag --&gt;
+&lt;sx:submit beforeNotifyTopics="/before" href="%{#url}" /&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;sx:a beforeNotifyTopics="/before" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Submitaform(plainform)">Submit a form (plain form)</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;form id="form"&gt;
+  &lt;input type=textbox name="data"&gt;
+&lt;/form&gt;
+
+&lt;!-- With a bind tag --&gt;
+&lt;s:submit value="Make Request" id="submit" /&gt;
+&lt;sx:bind formId="form" sources="submit" events="onclick" href="%{#url}" /&gt;
+
+&lt;!-- With a submit tag --&gt;
+&lt;sx:submit formId="form" href="%{#url}" /&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;sx:a formId="form" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Submitaform(usings:formtag)">Submit a form (using s:form tag)</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;!-- With a submit tag --&gt;
+&lt;s:form namespace="/mynamespace" action="MyAction"&gt;
+  &lt;input type=textbox name="data"&gt;
+  &lt;sx:submit /&gt;
+&lt;/s:form&gt;
+
+&lt;!-- With an anchor tag --&gt;
+&lt;s:form namespace="/mynamespace" action="MyAction"&gt;
+  &lt;input type=textbox name="data"&gt;
+  &lt;sx:a /&gt;
+&lt;/s:form&gt;
+</pre>
+</div></div>
+
+<h4 id="AjaxandJavaScriptRecipes-Div">Div</h4>
+<h5 id="AjaxandJavaScriptRecipes-Loadsitscontentafterpageisloaded">Loads its content after page is loaded</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:div href="%{#url}"&gt;
+  Initial Content
+&lt;/sx:div&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Reloadscontentwhentopicispublished">Reloads content when topic is published</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:div href="%{#url}" listenTopics="/refresh"&gt;
+  Initial Content
+&lt;/sx:div&gt;
+
+&lt;s:submit value="Refresh" onclick="dojo.event.topic.publish('/refresh')" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Updatesitscontentevery2seconds,showsindicatorwhileloadingcontent">Updates its content every 2 seconds, shows indicator while loading content</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;img id="indicator" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none"/&gt;
+&lt;sx:div href="%{#url}" updateFreq="2000"&gt;
+  Initial Content
+&lt;/sx:div&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Loadsitscontentafteradelayof2seconds">Loads its content after a delay of 2 seconds</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:div href="%{#url}" delay="2000"&gt;
+  Initial Content
+&lt;/sx:div&gt;
+</pre>
+</div></div>
+
+
+<h5 id="AjaxandJavaScriptRecipes-Showsometextwhilecontentisloaded">Show some text while content is loaded</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:div href="%{#url}" loadingText="reloading" showLoadingText="true"&gt;
+  Initial Content
+&lt;/sx:div&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Fixederrormessage">Fixed error message</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:div href="noaction" errorText="Error loading content"&gt;
+  Initial Content
+&lt;/sx:div&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-ExecuteJavaScriptinthereturnedcontent.1">Execute JavaScript in the returned content</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:div href="%{#url}" executeScripts="true"&gt;
+  Initial Content
+&lt;/sx:div&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Controlrefreshtimerusingtopics">Control refresh timer using topics</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:div href="%{#url}"
+        listenTopics="/refresh"
+	startTimerListenTopics="/startTimer"
+	stopTimerListenTopics="/stopTimer"
+	updateFreq="3000"&gt;
+  Initial Content
+&lt;/sx:div&gt;
+
+&lt;s:submit value="Refresh" onclick="dojo.event.topic.publish('/refresh')" /&gt;
+&lt;s:submit value="Start refresh timer" onclick="dojo.event.topic.publish('/startTimer')" /&gt;
+&lt;s:submit value="Stop refresh timer" onclick="dojo.event.topic.publish('/stopTimer')" /&gt;
+</pre>
+</div></div>
+
+<h4 id="AjaxandJavaScriptRecipes-DateandTimepicker">Date and Time picker</h4>
+<h5 id="AjaxandJavaScriptRecipes-Datepicker">Date picker</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:datetimepicker name="picker" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Timepicker">Time picker</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:datetimepicker type="time" name="picker" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-SetvaluefromanString">Set value from an String</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:datetimepicker value="%{'2007-01-01'}" name="picker" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Setvaluefromstack(valuemustevaluatetoeitheraDate,Calendar,oranStringthatcanbeparsedusingtheformatsdefinedinSimpleDateFormat,andRFC3339)">Set value from stack (value must evaluate to either a Date, Calendar, or an String that can be parsed using the formats defined in SimpleDateFormat, and RFC 3339)</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:datetimepicker value="date" name="picker" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Set/GetvalueusingJavaScript">Set/Get value using JavaScript</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+  function setValue() {
+     var picker = dojo.widget.byId("picker");
+     
+     //string value
+     picker.setValue('2007-01-01');
+     
+     //Date value
+     picker.setValue(new Date());
+  }
+  
+  function showValue() {
+     var picker = dojo.widget.byId("picker");
+     
+     //string value
+     var stringValue = picker.getValue();
+     alert(stringValue);
+      
+     //date value
+     var dateValue = picker.getDate();
+     alert(dateValue);
+  }
+&lt;/script&gt;
+
+&lt;sx:datetimepicker id="picker" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Stylethetextbox">Style the textbox</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:datetimepicker id="picker" cssStye="background:red" cssClass="someclass"/&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Publishtopicwhenvaluechanges">Publish topic when value changes</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+  dojo.event.topic.subscribe("/value", function(text, date, widget){
+      alert('value changed');
+      //textEntered: String entered in the textbox
+      //date: JavaScript Date object with the value selected
+      //widget: widget that published the topic 
+  });
+&lt;/script&gt; 
+
+&lt;sx:datetimepicker label="Order Date" valueNotifyTopics="/value"/&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Useotherlocales.">Use other locales. </h5>
+
+<div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>Locales must be specified in the sx:head tag.</p></div></div>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:head extraLocales="en-us,nl-nl,de-de" /&gt;
+
+&lt;sx:datetimepicker label="In German" name="dddp7" value="%{'2006-06-28'}" language="de-de" /&gt;
+&lt;sx:datetimepicker label="In Dutch"  name="dddp8" value="%{'2006-06-28'}" language="nl-nl" /&gt;
+</pre>
+</div></div>
+
+<h4 id="AjaxandJavaScriptRecipes-TabbedPanel">Tabbed Panel</h4>
+<h5 id="AjaxandJavaScriptRecipes-LocalTabs">Local Tabs</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:tabbedpanel id="tabContainer"&gt;
+   &lt;sx:div label="Tab 1" &gt;
+       Local Tab 1
+   &lt;/sx:div&gt;   
+   &lt;sx:div label="Tab 2" &gt;
+       Local Tab 2
+   &lt;/sx:div&gt;   
+&lt;/sx:tabbedpanel&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Localandremotetabs">Local and remote tabs</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:tabbedpanel id="tabContainer"&gt;
+   &lt;sx:div label="Local Tab 1" &gt;
+       Tab 1
+   &lt;/sx:div&gt;   
+   &lt;sx:div label="Remote Tab 2" href="%{#url}"&gt;
+       Remote Tab 2
+   &lt;/sx:div&gt;   
+&lt;/sx:tabbedpanel&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Fixedsize(sizedoesnotadjusttocurrenttab)">Fixed size (size does not adjust to current tab)</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:tabbedpanel cssStyle="width: 500px; height: 300px;" doLayout="true" id="tabContainer"&gt;
+   &lt;sx:div label="Tab 1" &gt;
+       Local Tab 1
+   &lt;/sx:div&gt;   
+   &lt;sx:div label="Tab 2" &gt;
+       Local Tab 2
+   &lt;/sx:div&gt;   
+&lt;/sx:tabbedpanel&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Donotloadtab2whenpageloads(itwillbeloadedwhenselected)">Do not load tab 2 when page loads (it will be loaded when selected)</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:tabbedpanel id="tabContainer"&gt;
+   &lt;sx:div label="Remote Tab 1" href="%{#url}"&gt;
+       Remote Tab 1
+   &lt;/sx:div&gt;  
+   &lt;sx:div label="Remote Tab 2" href="%{#url}" preload="false"&gt;
+       Remote Tab 1
+   &lt;/sx:div&gt;      
+&lt;/sx:tabbedpanel&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Reloadtabscontentwhenselected">Reload tabs content when selected</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:tabbedpanel id="tabContainer"&gt;
+   &lt;sx:div label="Remote Tab 1" href="%{#url}" refreshOnShow="true"&gt;
+       Remote Tab 1
+   &lt;/sx:div&gt;  
+   &lt;sx:div label="Remote Tab 2" href="%{#url}" refreshOnShow="true"&gt;
+       Remote Tab 2
+   &lt;/sx:div&gt;      
+&lt;/sx:tabbedpanel&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Disabledtabs">Disabled tabs</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:tabbedpanel id="tabContainer"&gt;
+   &lt;sx:div label="Tab 1" &gt;
+       Local Tab 1
+   &lt;/sx:div&gt;   
+   &lt;sx:div label="Tab 2" disabled="true"&gt;
+       Local Tab 2
+   &lt;/sx:div&gt;   
+&lt;/sx:tabbedpanel&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Enable/DisabletabsusingJavaScript">Enable/Disable tabs using JavaScript</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+   function enableTab(param) {
+      var tabContainer = dojo.widget.byId('tabContainer');
+      tabContainer.enableTab(param);
+   }
+    
+   
+   function disableTab(param) {
+      var tabContainer = dojo.widget.byId('tabContainer');
+      tabContainer.disableTab(param);
+   }
+&lt;/script&gt;
+
+&lt;sx:tabbedpanel id="tabContainer" id="tabContainer"&gt;
+   &lt;sx:div id="tab1" label="Tab 1"&gt;
+       Local Tab 1
+   &lt;/sx:div&gt;   
+   &lt;sx:div id="tab2" label="Tab 2" disabled="true"&gt;
+       Local Tab 2
+   &lt;/sx:div&gt;   
+&lt;/sx:tabbedpanel&gt;
+
+&lt;!-- By Tab Index --&gt;
+&lt;input type="button" onclick="enableTab(1)" value="Enable Tab 2 using Index" /&gt;
+&lt;input type="button" onclick="disableTab(1)" value="Disable Tab 2 using Index" /&gt;
+    
+&lt;!-- By Tab Id --&gt;
+&lt;input type="button" onclick="enableTab('tab2')" value="Enable Tab 2 using Id" /&gt;
+&lt;input type="button" onclick="disableTab('tab2')" value="Disable Tab 2 using Id" /&gt;
+   
+&lt;!-- By Widget --&gt;
+&lt;input type="button" onclick="enableTab(dojo.widget.byId('tab2'))" value="Enable Tab 2 using widget" /&gt;
+&lt;input type="button" onclick="disableTab(dojo.widget.byId('tab2'))" value="Disable Tab 2 using widget" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-SetTablabelspositiontobottom(canbe:top,right,bottom,left)">Set Tab labels position to bottom (can be: top, right, bottom, left)</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:tabbedpanel labelposition="bottom" id="tabContainer"&gt;
+   &lt;sx:div label="Tab 1" &gt;
+       Local Tab 1
+   &lt;/sx:div&gt;   
+   &lt;sx:div label="Tab 2" &gt;
+       Local Tab 2
+   &lt;/sx:div&gt;   
+&lt;/sx:tabbedpanel&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Allowtab2toberemoved(closed)">Allow tab 2 to be removed(closed)</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:tabbedpanel id="tabContainer"&gt;
+   &lt;sx:div label="Tab 1" &gt;
+       Local Tab 1
+   &lt;/sx:div&gt;   
+   &lt;sx:div label="Tab 2"  closable="true"&gt;
+       Local Tab 2
+   &lt;/sx:div&gt;   
+&lt;/sx:tabbedpanel&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Publishtopicswhentabisselected">Publish topics when tab is selected</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+   dojo.event.topic.subscribe('/before', function(event, tab, tabContainer) {
+      alert("Before selecting tab");
+   });
+
+   dojo.event.topic.subscribe('/after', function(tab, tabContainer) {
+      alert("After tab was selected");
+   });
+&lt;/script&gt;
+&lt;sx:tabbedpanel beforeSelectTabNotifyTopics="/before" afterSelectTabNotifyTopics="/after" id="tabContainer"&gt;
+   &lt;sx:div label="Tab 1"&gt;
+       Local Tab 1
+   &lt;/sx:div&gt;   
+   &lt;sx:div label="Tab 2"&gt;
+       Local Tab 2
+   &lt;/sx:div&gt;   
+&lt;/sx:tabbedpanel&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-SelecttabusingJavaScript">Select tab using JavaScript</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+   function selectTab(id) {
+     var tabContainer = dojo.widget.byId("tabContainer");
+     tabContainer.selectTab(id);
+   }
+&lt;/script&gt;
+&lt;sx:tabbedpanel id="tabContainer"&gt;
+   &lt;sx:div label="Tab 1" id="tab1"&gt;
+       Local Tab 1
+   &lt;/sx:div&gt;   
+   &lt;sx:div label="Tab 2" id="tab2"&gt;
+       Local Tab 2
+   &lt;/sx:div&gt;   
+&lt;/sx:tabbedpanel&gt;
+
+&lt;input type="button" onclick="selectTab('tab1')" value="Select tab 1" /&gt;
+&lt;input type="button" onclick="selectTab('tab2')" value="Select tab 2" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Preventtab2frombeingselected">Prevent tab 2 from being selected</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+   dojo.event.topic.subscribe('/before', function(event, tab, tabContainer) {
+      event.cancel = tab.widgetId == "tab2" ;
+   });
+&lt;/script&gt;
+&lt;sx:tabbedpanel beforeSelectTabNotifyTopics="/before" id="tabContainer"&gt;
+   &lt;sx:div id="tab1" label="Tab 1"&gt;
+       Local Tab 1
+   &lt;/sx:div&gt;   
+   &lt;sx:div id="tab2" label="Tab 2"&gt;
+       Local Tab 2
+   &lt;/sx:div&gt;   
+&lt;/sx:tabbedpanel&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Customizetemplatecsspath(Dojowidgettemplatecss)">Customize template css path (Dojo widget template css)</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:tabbedpanel templateCssPath="%{#cssUrl}" id="tabContainer"&gt;
+   &lt;sx:div id="tab1" label="Tab 1"&gt;
+       Local Tab 1
+   &lt;/sx:div&gt;   
+   &lt;sx:div id="tab2" label="Tab 2"&gt;
+       Local Tab 2
+   &lt;/sx:div&gt;   
+&lt;/sx:tabbedpanel&gt;
+</pre>
+</div></div>
+
+<h4 id="AjaxandJavaScriptRecipes-Autocompleter">Autocompleter</h4>
+<h5 id="AjaxandJavaScriptRecipes-Fixedlist">Fixed list</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter list="{'apple','banana','grape','pear'}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Setinitialvalue">Set initial value</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter list="{'apple','banana','grape','pear'}" value="apple"/&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Forcevalidoption(restoreoptionwhenfocusislost)">Force valid option (restore option when focus is lost)</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter list="{'apple','banana','grape','pear'}" forceValidOption="true"/&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-UsingtheJSONplugintogeneratethevalues(oneofthepossibleways)">Using the JSON plugin to generate the values (one of the possible ways)</h5>
+<p>The action</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>AutocompleterExample.java</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+public class AutocompleterExample extends ActionSupport {
+
+   public Map&lt;String, String&gt; getOptions() {
+      Map&lt;String,String&gt; options = new HashMap&lt;String,String&gt;();
+      options.put("Florida", "FL");
+      options.put("Alabama", "AL");
+
+      return options;
+   }
+}
+</pre>
+</div></div>
+
+<p>The mapping:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>struts.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;struts&gt;
+...
+   &lt;package name="autocompleter" namespace="/autocompleter" extends="json-default"&gt;
+       &lt;action name="getStates" class="AutocompleterExample"&gt;
+           &lt;result type="json"&gt;
+               &lt;param name="root"&gt;options&lt;/param&gt;&lt;/result&gt;
+       &lt;/action&gt;
+   &lt;/package&gt;
+...
+&lt;/struts&gt;
+</pre>
+</div></div>
+
+<p>The JSP (fragment):</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:url id="optionsUrl" namespace="/autocompleter" action="getStates" /&gt;
+
+&lt;sx:autocompleter href="%{#optionsUrl}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Exampleaction">Example action</h5>
+<p>When a form containing an autocompleter is submitted, two values will be submitted for each autocompleter, one for the selected value, and one for its associated key.</p>
+
+<p>The action:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>MyAction.java</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+public MyAction extends ActionSupport {
+    private String optionsKey;
+    private String options;
+
+    ...    
+}
+</pre>
+</div></div>
+
+<p>The JSP:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:form id="form"&gt;
+  &lt;sx:autocompleter name="options" label="Options" /&gt;
+&lt;/s:form&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Setinitialkeyandvalue">Set initial key and value</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:url id="optionsUrl" namespace="/autocompleter" action="getStates" /&gt;
+
+&lt;sx:autocompleter href="%{#optionsUrl}" value="Florida" keyValue="FL"/&gt;
+</pre>
+</div></div>
+
+
+<h5 id="AjaxandJavaScriptRecipes-Changedefaultkeyname">Change default key name</h5>
+<p>The action:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>MyAction.java</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+public MyAction extends ActionSupport {
+    private String superKey;
+    private String options;
+
+    ...    
+}
+</pre>
+</div></div>
+
+<p>The JSP:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:form id="form"&gt;
+  &lt;sx:autocompleter keyName="superKey" name="options" label="Options" /&gt;
+&lt;/s:form&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-JSONaccepted">JSON accepted</h5>
+<p>for this autocompleter:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter name="state" /&gt;
+</pre>
+</div></div>
+
+<p>The following JSON will be accepted:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Map(recommended as it is the easiest one to generate)</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: javascript; gutter: false; theme: Default" style="font-size:12px;">
+{
+    "Alabama" : "AL",
+    "Alaska" : "AK"
+}
+</pre>
+</div></div>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Array of arrays</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: javascript; gutter: false; theme: Default" style="font-size:12px;">
+[
+    ["Alabama", "AL"],
+    ["Alaska", "AK"]
+]
+</pre>
+</div></div>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Array inside object, same name as field</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: javascript; gutter: false; theme: Default" style="font-size:12px;">
+{
+    "state" : [
+        ["Alabama","AL"],
+        ["Alaska","AK"]
+    ]
+}     
+</pre>
+</div></div>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Map inside object, same name as field</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: javascript; gutter: false; theme: Default" style="font-size:12px;">
+{
+    "state" : {
+        "Alabama" : "Alabama",
+        "Alaska" : "AK"
+    }
+}    
+</pre>
+</div></div>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Array inside object, field in response starts with the name of the autocompleter("state" in this example)</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: javascript; gutter: false; theme: Default" style="font-size:12px;">
+{
+    "states" : [
+        ["Alabama","AL"],
+        ["Alaska","AK"]
+    ]
+}     
+</pre>
+</div></div>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>No name match, use first array found, and hope for the best</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: javascript; gutter: false; theme: Default" style="font-size:12px;">
+{
+    "Australopithecus" : [
+       ["Alabama","AL"],
+       ["Alaska","AK"]
+    ]
+}     
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Loadcharacterswhileusertypes(whentextsize&gt;=3)">Load characters while user types (when text size &gt;= 3)</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter href="%{#url}" loadOnTextChange="true" loadMinimumCount="3" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Hidedropdownarrow">Hide dropdown arrow</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter href="%{#url}" showDownArrow="false" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Limitoptionsshownto3">Limit options shown to 3</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter href="%{#url}" resultsLimit="3" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Allmatchingoptionsareshown">All matching options are shown</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter href="%{#url}" resultsLimit="-1" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Setdropdownheightandwidth,inpixels">Set dropdown height and width, in pixels</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter href="%{#url}" dropdownHeight="180" dropdownWidth="200" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Disableitwhenpageisloaded">Disable it when page is loaded</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter href="%{#url}" disabled="true" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Disableit/enableitusingJavaScript">Disable it/enable it using JavaScript</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+  function enableit() {
+     var autoCompleter = dojo.widget.byId("auto");
+     autoCompleter.enable();
+  }
+
+  function disableit() {
+     var autoCompleter = dojo.widget.byId("auto");
+     autoCompleter.disable();
+  }
+&lt;/script&gt;
+
+&lt;sx:autocompleter id="auto" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Reloadoptionswhentopicispublished">Reload options when topic is published</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter listenTopics="/reload" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Submitformwhenoptionsareloaded">Submit form when options are loaded</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;s:form id="form"&gt;
+  &lt;input type="textbox" name="data"&gt;
+&lt;/s:form&gt;
+
+&lt;sx:autocompleter formId="form" href="%{#url}"  /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Filterfieldstopbesubmittedwhenoptionsareloaded(returntruetoinclude)">Filter fields top be submitted when options are loaded (return true to include)</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;script type="text/javascript"&gt;
+  function filter(input) {
+     return input.name == "data1";
+  }
+&lt;/script&gt;
+
+&lt;s:form id="form"&gt;
+  &lt;input type="textbox" name="data0"&gt;
+  &lt;input type="textbox" name="data1"&gt;
+&lt;/s:form&gt;
+
+&lt;sx:autocompleter formId="form" formFilter="filter" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Linktwoautocompleters,usingtopics">Link two autocompleters, using topics</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;form id="selectForm"&gt;
+   &lt;sx:autocompleter  name="select" list="{'fruits','colors'}"  valueNotifyTopics="/changed" /&gt;
+&lt;/form&gt;
+
+&lt;sx:autocompleter  href="%{#url}" formId="selectForm" listenTopics="/changed" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Showoptions,butdon'tmakesuggestion(autocomple)inthetextbox">Show options, but don't make suggestion (autocomple) in the textbox</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter autoComplete="false" href="%{#url}" /&gt;
+</pre>
+</div></div>
+
+<h5 id="AjaxandJavaScriptRecipes-Preventoptionsfromloadingwhenpageloads">Prevent options from loading when page loads</h5>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">
+&lt;sx:autocompleter preload="false" href="%{#url}" /&gt;
+</pre>
+</div></div></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

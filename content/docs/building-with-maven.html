@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Building with Maven</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="contributors-guide.html">Contributors Guide</a>&nbsp;&gt;&nbsp;<a href="building-the-framework-from-source.html">Building the Framework from Source</a>&nbsp;&gt;&nbsp;<a href="building-with-maven.html">Building with Maven</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Building with Maven</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14147">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14147">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14147">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14147">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14147">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14147">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><a shape="rect" class="external-link" href="http://maven.apache.org">Maven 3.0.0 or later</a> is required to build Struts 2</p></div></div>
+<p>First, let's review some Maven basics. Maven uses the notion of a build <em>life-cycle</em> to which plugins can attach. Plugins are similar to Ant tasks. When a Maven build is invoked, we specify a point in the life-cycle up to which the build <em>should</em> proceed. The <em>compile</em> phase comes before <em>test</em>, and <em>test</em> comes before <em>package</em>, and <em>package</em> comes before <em>install</em>. Once we have Maven setup, we can invoke the Struts build, and specify which phase the build should use.</p>
+
+<h2 id="BuildingwithMaven-Installing">Installing</h2>
+
+<p>The <em>install</em> phase builds up the project ("package"), and installs any JARs it needs into your local repository (e.g. <code>~/.m2/repository</code>). Once installed, the JARs can be used by any other Maven project you build.&#160; The <em>install</em> phase is the <strong>default</strong> phase if none is specified.</p>
+
+<p>To run a basic install, change to the root of the source distribution, and enter</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Go!</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+&gt; mvn
+</pre>
+</div></div>
+<p>That's it! Maven will download any dependencies the build needs; run all unit tests; package up the JARs; then install the new JARs locally. For your convenience, copies of the JARs can be found in the <em>target</em> directories of each module. For example, after the build, the main JAR can found at <code>core/target/struts2-core-2.0-SNAPSHOT.jar</code>.</p>
+<div class="confluence-information-macro confluence-information-macro-warning"><p class="title">It's supposed to be automatic, but you might still have to press the button</p><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>Sometimes, licensing restrictions prevent Maven from downloading all the JARs that a build might need. For example, JavaMail and Activation, can only be downloaded from Sun. When this happens, Maven will display a helpful message that explains how to install these JARs manually. After downloading the required JAR, follow the instructions to install it to the your local repository. Once installed, the JAR is available to all your Maven builds, not just Struts.</p></div></div>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Initial Build Successful</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+[INFO] Reactor Summary:
+[INFO]
+[INFO] Struts 2 .......................................... SUCCESS [6.016s]
+[INFO] XWork: Core ....................................... SUCCESS [1:08.086s]
+[INFO] Struts 2 Core ..................................... SUCCESS [2:42.604s]
+[INFO] Struts Plugins .................................... SUCCESS [0.944s]
+[INFO] Struts 2 Spring Plugin ............................ SUCCESS [13.523s]
+[INFO] Struts 2 Convention Plugin ........................ SUCCESS [16.473s]
+[INFO] Struts 2 JUnit Plugin ............................. SUCCESS [13.325s]
+[INFO] Webapps ........................................... SUCCESS [1.027s]
+[INFO] Blank Webapp ...................................... SUCCESS [9.572s]
+[INFO] JBoss Blank Webapp ................................ SUCCESS [7.814s]
+[INFO] Mail Reader Webapp ................................ SUCCESS [7.028s]
+[INFO] Struts 2 Portlet Plugin ........................... SUCCESS [20.995s]
+[INFO] Struts 2 DWR Plugin ............................... SUCCESS [4.432s]
+[INFO] Struts 2 Tiles Plugin ............................. SUCCESS [4.451s]
+[INFO] Struts 2 Portlet Tiles Plugin ..................... SUCCESS [3.741s]
+[INFO] Portlet Webapp .................................... SUCCESS [28.480s]
+[INFO] Struts 2 Struts 1 Plugin .......................... SUCCESS [8.353s]
+[INFO] Struts 2 Dojo Plugin .............................. SUCCESS [30.181s]
+[INFO] Struts 2 JSF Plugin ............................... SUCCESS [6.000s]
+[INFO] Struts 2 Configuration Browser Plugin ............. SUCCESS [7.531s]
+[INFO] Struts 2 Sitemesh Plugin .......................... SUCCESS [6.159s]
+[INFO] Struts 2 JSON Plugin .............................. SUCCESS [16.944s]
+[INFO] Showcase Webapp ................................... SUCCESS [20.303s]
+[INFO] Struts 2 REST Plugin .............................. SUCCESS [10.015s]
+[INFO] Struts 2 Rest Showcase Example .................... SUCCESS [6.928s]
+[INFO] Struts 2 Codebehind Plugin ........................ SUCCESS [10.394s]
+[INFO] Struts 2 Java Templates Plugin .................... SUCCESS [9.633s]
+[INFO] Struts 2 Jasper Reports Plugin .................... SUCCESS [5.920s]
+[INFO] Struts 2 JFreeChart Plugin ........................ SUCCESS [18.296s]
+[INFO] Struts 2 Pell Multipart Plugin .................... SUCCESS [3.891s]
+[INFO] Struts 2 Plexus Plugin ............................ SUCCESS [4.715s]
+[INFO] Struts 2 Sitegraph Plugin ......................... SUCCESS [8.009s]
+[INFO] Struts 2 TestNG Plugin ............................ SUCCESS [6.012s]
+[INFO] Struts 2 OVal Plugin .............................. SUCCESS [9.629s]
+[INFO] Struts 2 OSGi Plugin .............................. SUCCESS [8.118s]
+[INFO] Struts 2 Embedded JSP Plugin ...................... SUCCESS [30.524s]
+[INFO] Struts 2 GXP Plugin ............................... SUCCESS [4.878s]
+[INFO] Struts 2 CDI Plugin ............................... SUCCESS [7.620s]
+[INFO] Struts 2 Tiles 3 Plugin ........................... SUCCESS [5.132s]
+[INFO] Struts OSGi Bundles ............................... SUCCESS [0.254s]
+[INFO] Struts 2 OSGi Admin Bundle ........................ SUCCESS [5.204s]
+[INFO] Struts 2 OSGi Demo Bundle ......................... SUCCESS [4.582s]
+[INFO] Struts 2 Maven Archetypes ......................... SUCCESS [0.198s]
+[INFO] Struts 2 Archetypes - Angular JS .................. SUCCESS [10.509s]
+[INFO] Struts 2 Archetypes - Blank ....................... SUCCESS [1.440s]
+[INFO] Struts 2 Archetypes - Blank Convention ............ SUCCESS [1.324s]
+[INFO] Struts 2 Archetypes - Database Portlet ............ SUCCESS [0.990s]
+[INFO] Struts 2 Archetypes - Plugin ...................... SUCCESS [0.923s]
+[INFO] Struts 2 Archetypes - Portlet ..................... SUCCESS [0.888s]
+[INFO] Struts 2 Archetypes - Starter ..................... SUCCESS [1.992s]
+[INFO] Struts 2 Assembly ................................. SUCCESS [1:37.556s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 12:23.728s
+[INFO] Finished at: Wed Oct 30 17:26:27 CET 2013
+[INFO] Final Memory: 57M/945M
+[INFO] ------------------------------------------------------------------------
+</pre>
+</div></div>
+
+<h3 id="BuildingwithMaven-Otherphases">Other phases</h3>
+
+<p>There are other phases that can be useful when working with Maven. The <em>package</em> phase will just JAR (or WAR) the modules. The <em>test</em> phase will only execute unit-tests. The <em>compile</em> phase will only build the source-code (but not the test sources). And the <em>clean</em> phase will remove all artifacts, typically the entire <em>target</em> directory.</p>
+
+<h2 id="BuildingwithMaven-BuildingIDEprojectfiles">Building IDE project files</h2>
+
+<p>Maven has a great feature that will allow you to build up your IDEA or Eclipse project files based on the project build structure. Using the Maven project files helps keep developers in-sync and efficient. The IDEA project files are pre-configured to define in the Run/Debug menu many common tasks, such as "execute all tests", "launch the showcase sample app", and so fort.</p>
+
+<h3 id="BuildingwithMaven-IDEAbyJetBrains">IDEA by JetBrains</h3>
+
+<p>The Maven IDEA plugin creates IDEA project and modules files, based on the Maven build configuraton (pom.xml).</p>
+
+<p>First, be sure you have the latest IDEA plugin for Maven.</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Get the latest plugin!</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+mvn -DconnectionUrl=scm:svn:http://svn.apache.org/repos/asf/maven/plugins/trunk/maven-idea-plugin \
+    -Dgoals=install \
+    scm:bootstrap
+</pre>
+</div></div>
+<p>Most often, we use Maven to build projects, but it can also run plugins directly. To build an IDEA project file for Struts 2, including all the modules, run</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Generate the project files</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+&gt; mvn idea:idea -Papps,extras,thirdparty,xwork
+</pre>
+</div></div>
+<p>Maven will generate <em>struts-parent.ipr</em>, <em>struts-parent.iws</em>, and an <em>iml</em> file for each module listed Open up <em>struts-parent.ipr</em> in IDEA, and you should be good to go.</p>
+
+<p>If you ever need to rebuild your projects, running the <code>idea:idea</code> command again will update your files without overriding any information that doesn't conflict. If you do want to overwrite the project files, specify the overwrite parameter as true.</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Starting over</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+&gt; mvn idea:idea -Doverwrite=true -Papps,extras,thirdparty,plugins,xwork
+
+If you only need to rebuild some of the modules, adjust the list of "profiles".
+</pre>
+</div></div>
+<div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Clearing the cache</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If you find the xwork module causing you problems, such as displaying as "XWork" when it should be named "xwork", the problem is likely to be within IDEA. Try clearing out your IDEA system cache and then run it again</p></div></div>
+
+<h2 id="BuildingwithMaven-Eclipse">Eclipse</h2>
+
+<p>For Eclipse, try</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Generating Eclipse</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+&gt; mvn -Pthirdparty,plugins,xwork eclipse:eclipse
+</pre>
+</div></div>
+<div class="confluence-information-macro confluence-information-macro-information"><p class="title">Feedback Wanted</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>Many Struts 2 developers use IDEA, and the Eclipse project files are not as well-tested or featureful as the IDEA versions. But as far as we know, they work!</p></div></div>
+
+<h2 id="BuildingwithMaven-IMPORTANT:RunningtheSampleApplicationsfromEclipseornon-IDEAIDEs">IMPORTANT: Running the Sample Applications from Eclipse or non-IDEA IDEs</h2>
+
+<p>Currently the sample applications can be deployed using the <a shape="rect" class="external-link" href="http://www.mortbay.org/maven-plugin/index.html" rel="nofollow">Maven 2 Jetty plugin</a>.  For example, you can run the showcase example application from the command line:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Runnning Showcase in Linux</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+cd apps/showcase
+mvn jetty:run
+</pre>
+</div></div>
+<p>You could also use one of the Maven IDE plugins to run the plugin or simply execute the <code>mvn</code> or <code>mvn.bat</code> file as an external application within your IDE.<br clear="none">
+A good tutorial on how to use the Maven 2 jetty plugin along with your IDE, including JPDA debugging support, can be found at the <a shape="rect" class="external-link" href="http://cwiki.apache.org/WICKET/maven-jetty-plugin.html">Apache Wicket documentation</a>.</p>
+
+<h2 id="BuildingwithMaven-MavenTips">Maven Tips</h2>
+
+<p>A few helpful tips for using Maven are provided:</p>
+
+<h3 id="BuildingwithMaven-SkipexportingpagesfromConfluence">Skip exporting pages from Confluence</h3>
+
+<p>The whole Struts2 documentation resists on Confluence and during normal build process is exported with SiteExporter tool locally to html files. To perform that, you must have an account on Confluence. In most cases you don't need to export the whole Confluence, so you can skip this, just type command:</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+mvn clean install -DskipWiki
+</pre>
+</div></div>
+
+<h3 id="BuildingwithMaven-Skipcreatingassemblies">Skip creating assemblies</h3>
+
+<p>During normal development cycle you don't need to create assembly packages which consist of all the libraries, example apps and docs - you can skip them as well:</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+mvn clean install -DskipAssembly
+</pre>
+</div></div>
+
+<h3 id="BuildingwithMaven-Offlinemode">Offline mode</h3>
+
+<p>If you are disconnected from the Internet or simply wish to make your build faster, pass in the <strong>-o</strong> argument and Maven won't check for new modules to download.</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Offline Mode</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+mvn -o
+</pre>
+</div></div>
+
+<h3 id="BuildingwithMaven-OutOfMemoryError">OutOfMemoryError</h3>
+
+<p>If you get an OutOfMemoryError while running the tests:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Memory Settings</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+// Bash
+export MAVEN_OPTS=-Xmx512m
+
+// Windows
+set MAVEN_OPTS=-Xmx512m
+</pre>
+</div></div>
+
+<h3 id="BuildingwithMaven-Skippingtestexecution">Skipping test execution</h3>
+
+<p>Although this shouldn't ever happen, sometimes tests do fail and you need to build the framework anyway. If there's a problem, you can pass in the skip tests parameter.</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Skip Tests</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+mvn -Dmaven.test.skip=true
+</pre>
+</div></div>
+<p>Of course, if you find tests are failing, please submit a patch to fix them!</p>
+
+<h3 id="BuildingwithMaven-Debuggingbuildfailures">Debugging build failures</h3>
+
+<p>Struts 2 depends on the current snapshot artifact of XWork 2.  Unfortunately, if XWork 2 is modified in a significant way, the Struts build doesn't check for and retrieve a new version of the XWork snapshot jar, resulting in compilation or unit test failures.</p>
+
+<p>The solution is to clear out any stale XWork 2 jars in your local Maven repository, usually by removing the directory <code>~/.m2/repository/opensymphony</code>.  This will force the Struts Maven build to pull down a fresh copy of XWork and hopefully resolve your problem.</p>
+
+<h2 id="BuildingwithMaven-Mirrors">Mirrors</h2>
+
+<p>The default mirror for Maven builds ("ibiblio") can be slow and unreliable. Maven lets you specify <a shape="rect" class="external-link" href="http://maven.apache.org/guides/mini/guide-mirror-settings.html">alternative mirrors</a> so that you don't have to depend on ibiblio for everything.</p>
+
+<p>You can add new mirrors through the Settings file (~/.m2/settings.xml).</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Mirror, Mirror</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;settings&gt;
+
+  &lt;mirrors&gt;
+    &lt;mirror&gt;
+      &lt;id&gt;dotsrc&lt;/id&gt;
+      &lt;url&gt;http://mirrors.dotsrc.org/maven2&lt;/url&gt;
+      &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+    &lt;/mirror&gt;
+  &lt;/mirrors&gt;
+
+&lt;/settings&gt;
+</pre>
+</div></div>
+<div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Sometimes the alternative mirrors have problems too or aren't updated at the same frequency as the main mirror. If you have trouble building, try commenting out the aternative mirror.</p></div></div>
+
+<h2 id="BuildingwithMaven-Firsttimebuilding">First time building</h2>
+
+<p>In some cases it has been seen that Maven will complain if a module doesn't exist, even though it is part of the current build. Often, the missing module turns up when executing <code>mvn package</code>. A simple fix for this is to run <code>mvn install</code> instead. If you have to do this, it will probably only be a one time thing.</p>
+
+<h3 id="BuildingwithMaven-Next:">Next: <a shape="rect" href="creating-and-signing-a-distribution.html">Creating and Signing a Distribution</a></h3></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

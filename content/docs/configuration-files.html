@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Configuration Files</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="guides.html">Guides</a>&nbsp;&gt;&nbsp;<a href="core-developers-guide.html">Core Developers Guide</a>&nbsp;&gt;&nbsp;<a href="configuration-files.html">Configuration Files</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Configuration Files</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14163">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14163">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14163">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14163">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14163">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14163">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><p>From a Struts developer point of view, the one required configuration file used by the framework is <code>web.xml</code>.  From here, you have full control over how Struts configures both itself and your application.  By default, Struts will load a set of internal configuration files to configure itself, then another set to configure your application, however it is possible to build an entire Struts application without writing a single configuration file other than <code>web.xml</code>.</p>
+
+<p>The table lists the files that you can use to configure the framework for your application. Some configuration files can be reloaded dynamically. Dynamic reloading makes interactive development possible. See <a shape="rect" href="reloading-configuration.html">Reloading configuration</a> for more.</p>
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> File </p></th><th colspan="1" rowspan="1" class="confluenceTh"><p> Optional </p></th><th colspan="1" rowspan="1" class="confluenceTh"><p> Location (relative to webapp) </p></th><th colspan="1" rowspan="1" class="confluenceTh"><p> Purpose </p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> <a shape="rect" href="webxml.html">web.xml</a> </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> no </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> /WEB-INF/ </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Web deployment descriptor to include all necessary framework components </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> <a shape="rect" href="strutsxml.html">struts.xml</a> </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> yes </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> /WEB-INF/classes/ </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Main configuration, contains result/view types, action mappings, interceptors, and so forth <br clear="none" class="atl-forced-newline"> </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> <a shape="rect" href="strutsproperties.html">struts.properties</a> </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> yes </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> /WEB-INF/classes/ </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Framework properties </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> <a shape="rect" href="struts-defaultxml.html">struts-default.xml</a> </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> yes </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> /WEB-INF/lib/struts2-core.jar </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Default configuration provided by Struts </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> <a shape="rect" href="struts-defaultvm.html">struts-default.vm</a> </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> yes </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> /WEB-INF/classes/ </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Default macros referenced by <code>velocity.properties</code> </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> struts-plugin.xml </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> yes </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> At the root of a plugin JAR</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Optional configuration files for <a shape="rect" href="plugins.html">Plugins</a> in the same format as <code>struts.xml</code>. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> <a shape="rect" href="velocityproperties.html">velocity.properties</a> </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> yes </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> /WEB-INF/classes/ </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Override the default <a shape="rect" href="velocity.html">Velocity</a> configuration </p></td></tr></tbody></table></div>
+
+
+<h2 id="ConfigurationFiles-StaticContent">Static Content</h2>
+
+<p>Common static content that is needed by the framework (JavaScript and CSS files, etc.) is served automatically by the FilterDispatcher filter.  Any request starting with "<code>/struts/</code>" denotes that static content is required, and then mapping the value after "<code>/struts/</code>" to common packages in the framework and, optionally in the application's class path.</p>
+
+<p>By default, the following packages are searched:</p>
+<ul class="alternate"><li>org.apache.struts2.static</li><li>template</li></ul>
+
+
+<p>Additional packages can be specified by providing a comma separated list to the configuration parameter named "packages" (configured in web.xml for the FilterDispatcher filter). When specifying additional static content, you should be careful not to expose sensitive configuration information (such as the password to a database).</p>
+
+<h2 id="ConfigurationFiles-Next:">Next: <a shape="rect" href="application-servers.html">Application Servers</a></h2></div>
+        </div>
+
+                    <div class="tabletitle">
+                Children
+            <span class="smalltext" id="show" style="display: inline;">
+              <a href="javascript:showChildren()">Show Children</a></span>
+            <span class="smalltext" id="hide" style="display: none;">
+              <a href="javascript:hideChildren()">Hide Children</a></span>
+            </div>
+            <div class="greybox" id="children" style="display: none;">
+                                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                            </div>
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

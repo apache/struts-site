@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>Create Struts 2 Web Application With Artifacts In WEB-INF lib and Use Ant To Build The Application</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="tutorials.html">Tutorials</a>&nbsp;&gt;&nbsp;<a href="getting-started.html">Getting Started</a>&nbsp;&gt;&nbsp;<a href="how-to-create-a-struts-2-web-application.html">How To Create A Struts 2 Web Application</a>&nbsp;&gt;&nbsp;<a href="create-struts-2-web-application-with-artifacts-in-web-inf-lib-and-use-ant-to-build-the-application.html">Create Struts 2 Web Application With Artifacts In WEB-INF lib and Use Ant To Build The Application</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">Create Struts 2 Web Application With Artifacts In WEB-INF lib and Use Ant To Build The Application</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14811863">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14811863">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14811863">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14811863">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14811863">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14811863">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><p>You can download this complete example, Basic_Struts2_Ant, from Google Code - <a shape="rect" class="external-link" href="http://code.google.com/p/struts2-examples/downloads/list" rel="nofollow">http://code.google.com/p/struts2-examples/downloads/list</a>.  Click on the link for Basic_Struts2_Ant.zip and save the file to your computer.  Unzip the file and you should have a folder named Basic_Struts2_Ant.  In that folder is a README.txt file with instruction on how to build and run the application.</p>
+
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>This tutorial assumes you already know how to create a Java web application, use Ant to build the web application archive (war) file, and deploy the war file to a Servlet container such as Tomcat or Jetty.</p></div></div>
+
+<p>To create a Struts 2 web application with the Struts 2 artifacts added to the the application's class path manually you will need to download the Struts 2 distribution from the <a shape="rect" class="external-link" href="http://struts.apache.org/downloads.html">Apache Struts website</a>.</p>
+
+<p>On the Struts 2 download page, click on the link for the current General Availability release.  In that release's section you'll find several links.  To get started with a basic Struts 2 web application you need to only download the Essential Dependencies Only zip file, which is approximately 12mb.</p>
+
+<p>After downloading this zip file, unzip it.  You should have a folder named the same as the current general availability release and in that folder will be a lib folder.  The lib folder contains the Struts 2 jar files (e.g. struts2-core-X.X.X.X.jar, where X.X.X.X is the version) and other jar files Struts 2 requires (e.g. xwork-core.X.X.X.jar).</p>
+
+<p>As we create our basic Struts 2 web application we will copy from the Struts 2 distribution lib folder just the jar files our application requires.  As we add features to our application in future tutorials we will copy other jar files.</p>
+
+<h3 id="CreateStruts2WebApplicationWithArtifactsInWEB-INFlibandUseAntToBuildTheApplication-Step1-CreateABasicJavaWebApplication">Step 1 - Create A Basic Java Web Application</h3>
+<p>In your Java IDE create a web application project named Basic_Struts2_Ant. To follow along with this tutorial your web application should have the following folder structure:</p>
+
+<p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="create-struts-2-web-application-with-artifacts-in-web-inf-lib-and-use-ant-to-build-the-application.data/Basic_Strut2_Ant_Structure.png"></span> </p>
+
+<p>Remember Struts 2 requires Servlet API 2.4 or higher, JSP 2.0 or higher, and Java 5 or higher.  The example project, Basic_Struts2_Ant, which you can download from Google code <a shape="rect" class="external-link" href="http://code.google.com/p/struts2-examples/downloads/list" rel="nofollow">http://code.google.com/p/struts2-examples/downloads/list</a> was created using Eclipse 3.5 with Java 6.</p>
+
+<h3 id="CreateStruts2WebApplicationWithArtifactsInWEB-INFlibandUseAntToBuildTheApplication-Step2-Addindex.jspandAntBuildFile">Step 2 - Add index.jsp and Ant Build File</h3>
+<p>Our next step is to add a simple index.jsp to this web application.  Create an index.jsp under WebContent with a title of "Basic Struts 2 Application - Welcome" and in the body add an h1 heading of "Welcome to Struts 2!"</p>
+
+<p>Next create an Ant build.xml file that will compile any Java classes and create the war file.  The code example download, Basic_Struts2_Ant, includes an Ant build.xml.</p>
+
+<p>Run the Ant target that creates the war file (in the example downloaded that is the archive target, which places the war file in the dist folder).  Copy the war file into your Servlet container so that it will deploy the war file.  </p>
+
+<p>Start up your Servlet container and in a web browser go to <a shape="rect" class="external-link" href="http://localhost:8080/Basic_Struts2_Ant/index.jsp" rel="nofollow">http://localhost:8080/Basic_Struts2_Ant/index.jsp</a>.  You should see the following:</p>
+
+<p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="create-struts-2-web-application-with-artifacts-in-web-inf-lib-and-use-ant-to-build-the-application.data/Basic_Struts2_Welcome.png"></span></p>
+
+<h3 id="CreateStruts2WebApplicationWithArtifactsInWEB-INFlibandUseAntToBuildTheApplication-Step3-AddStruts2JarFilesToClassPath">Step 3 - Add Struts 2 Jar Files To Class Path</h3>
+<p>Now that we know we have a working Java web application, lets add the minimal required Struts 2 framework Jar files to our web application's class path. We'll copy these Jar files from the lib folder of the Struts 2 download to the WEB-INF/lib folder in our web application.</p>
+
+<p>Find and copy to WEB-INF\lib these files (note X.X.X.X.jar refers to the version number):</p>
+
+<ol><li>asm-x.x.jar</li><li>asm-commons-x.x.jar</li><li>asm-tree-x.x.jar</li><li>commons-io-X.X.X.jar</li><li>commons-lang3-X.X.X.jar</li><li>commons-fileupload-X.X.X.jar</li><li>freemarker-X.X.X.jar</li><li>javassist-X.X.X.jar</li><li>ognl-X.X.X.jar</li><li>struts2-core-X.X.X.X.jar</li><li>xwork-core-X.X.X.jar</li></ol>
+
+
+
+<p>You can see from the above that the Struts 2 core jar depends on several other artifacts.  As we add additional Struts 2 features in future tutorials, we'll  need to add additional Struts 2 jar files and other transitive dependencies.</p>
+
+<h3 id="CreateStruts2WebApplicationWithArtifactsInWEB-INFlibandUseAntToBuildTheApplication-Step4-AddLogging">Step 4 - Add Logging</h3>
+<p>To see what's happening under the hood, the example application for this tutorial uses log4j.  You'll need to download the log4j jar file and copy it to WEB-INF/lib.  The example application uses log4j-1.2.14.jar <a shape="rect" class="external-link" href="http://archive.apache.org/dist/logging/log4j/1.2.14/">http://archive.apache.org/dist/logging/log4j/1.2.14/</a>.</p>
+
+<p>Setup a log4j.xml configuration in the src folder.  You can copy the one from the example application, which contains the following</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>log4j.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE log4j:configuration PUBLIC "-//log4j/log4j Configuration//EN" "log4j.dtd"&gt;
+
+&lt;log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"&gt;
+    
+    &lt;appender name="STDOUT" class="org.apache.log4j.ConsoleAppender"&gt;
+       &lt;layout class="org.apache.log4j.PatternLayout"&gt; 
+          &lt;param name="ConversionPattern" value="%d %-5p %c.%M:%L - %m%n"/&gt; 
+       &lt;/layout&gt; 
+    &lt;/appender&gt;
+ 
+    &lt;!-- specify the logging level for loggers from other libraries --&gt;
+    &lt;logger name="com.opensymphony"&gt;
+    	&lt;level value="DEBUG" /&gt;
+    &lt;/logger&gt;
+
+    &lt;logger name="org.apache.struts2"&gt;
+    	 &lt;level value="DEBUG" /&gt;
+    &lt;/logger&gt;
+  
+   &lt;!-- for all other loggers log only debug and above log messages --&gt;
+     &lt;root&gt;
+        &lt;priority value="INFO"/&gt; 
+        &lt;appender-ref ref="STDOUT" /&gt; 
+     &lt;/root&gt; 
+    
+&lt;/log4j:configuration&gt; 
+</pre>
+</div></div>
+<p>Note the above log4j configuration specifies the console as the log target.  </p>
+
+<h3 id="CreateStruts2WebApplicationWithArtifactsInWEB-INFlibandUseAntToBuildTheApplication-Step5-AddStruts2ServletFilter">Step 5 - Add Struts 2 Servlet Filter</h3>
+<p>To enable the Struts 2 framework to work with your web application you need to add a Servlet filter class and filter mapping to web.xml.  Below is the filter and filter-mapping nodes you should add to web.xml.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>web.xml Servlet Filter</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;filter&gt;
+  &lt;filter-name&gt;struts2&lt;/filter-name&gt;
+  &lt;filter-class&gt;org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+
+&lt;filter-mapping&gt;
+  &lt;filter-name&gt;struts2&lt;/filter-name&gt;
+   &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</pre>
+</div></div>
+<p>For more information about configuring the deployment descriptor for Struts 2 see <a shape="rect" href="webxml.html">web.xml</a>.  Note the url-pattern node value is /* meaning the Struts 2 filter will be  applied to all URLs for this web application.</p>
+
+<h3 id="CreateStruts2WebApplicationWithArtifactsInWEB-INFlibandUseAntToBuildTheApplication-Step6-Createstruts.xml">Step 6 - Create struts.xml</h3>
+<p>Struts 2 can use either an XML configuration file or annotations (or both) to specify the relationship between a URL, a Java class, and a view page (such as index.jsp). For our basic Struts 2 application, we'll use a minimal xml configuration.  Note the file name is struts.xml and it should be in the src folder (struts.xml must be on the web application's root class path).</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>struts.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd"&gt;
+
+&lt;struts&gt;
+
+	&lt;constant name="struts.devMode" value="true" /&gt;
+
+	&lt;package name="basicstruts2" extends="struts-default"&gt;
+
+		&lt;action name="index"&gt;
+			&lt;result&gt;/index.jsp&lt;/result&gt;
+		&lt;/action&gt;
+
+	&lt;/package&gt;
+
+&lt;/struts&gt;
+</pre>
+</div></div> 
+<p>This minimal Struts 2 configuration file tells the framework that if the URL ends in index.action to redirect the browser to index.jsp.</p>
+
+<p>For more information about the struts.xml configuration file see <a shape="rect" class="createlink" href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&amp;title=XML&amp;linkCreation=true&amp;fromPageId=14811863">XML</a>.</p>
+
+<h3 id="CreateStruts2WebApplicationWithArtifactsInWEB-INFlibandUseAntToBuildTheApplication-Step7-BuildandRuntheApplication">Step 7 - Build and Run the Application</h3>
+<p>With all of the above in place run the Ant target that creates the war file (in the example download that target is archive).  Remove the previously created war file and exploded web application folder from your Servlet container's webapps folder.  Copy to your Servlet container's webapps folder the new war you just created.  </p>
+
+<p>Start up the Servlet container.  View the console where you should see numerous debug messages that tell you the Struts 2 framework is being included in the Basic_Struts2_Ant web application.</p>
+
+<p>Open a web browser and go to <a shape="rect" class="external-link" href="http://localhost:8080/Basic_Struts2_Ant/index.action" rel="nofollow">http://localhost:8080/Basic_Struts2_Ant/index.action</a> (note that's index.action not index.jsp at the end of the URL).  You should see the same web page as when going to <a shape="rect" class="external-link" href="http://localhost:8080/Basic_Struts2_Ant/index.jsp" rel="nofollow">http://localhost:8080/Basic_Struts2_Ant/index.jsp</a>.  View the log messages written to the console and you should find several that discuss index.action and index.jsp:</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Struts 2 Log Messages</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+com.opensymphony.xwork2.DefaultActionProxy.debug:57 - Creating an DefaultActionProxy for namespace / and action name index
+...
+org.apache.struts2.dispatcher.ServletDispatcherResult.debug:57 - Forwarding to location /index.jsp
+</pre>
+</div></div>
+<p>Note that the xwork2 artifact is one of the Jar files we copied over to WEB-INF lib and is used heavily by the Struts 2 framework.</p>
+
+<h3 id="CreateStruts2WebApplicationWithArtifactsInWEB-INFlibandUseAntToBuildTheApplication-GettingHelp">Getting Help</h3>
+<p>The <a shape="rect" class="external-link" href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help.  If you are having a problem getting this Basic Struts 2 application to work search the Struts 2 mailing list.  If you don't find an answer to your problem, post a question on the mailing list.  </p>
+
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Next </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> Onward to <a shape="rect" href="hello-world-using-struts-2.html">Hello World Using Struts 2</a> </p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Prev </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> Return to <a shape="rect" href="tutorials.html">Tutorials</a> </p></td></tr></tbody></table></div>
+
+</div>
+        </div>
+
+                    <div class="tabletitle">
+                Children
+            <span class="smalltext" id="show" style="display: inline;">
+              <a href="javascript:showChildren()">Show Children</a></span>
+            <span class="smalltext" id="hide" style="display: none;">
+              <a href="javascript:hideChildren()">Hide Children</a></span>
+            </div>
+            <div class="greybox" id="children" style="display: none;">
+                                                    $page.link($child)
+                    <span class="smalltext">(Apache Struts 2 Documentation)</span>
+                    <br>
+                            </div>
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

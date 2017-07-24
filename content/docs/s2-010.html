@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>S2-010</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="security-bulletins.html">Security Bulletins</a>&nbsp;&gt;&nbsp;<a href="s2-010.html">S2-010</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">S2-010</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=30146792">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=30146792">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=30146792">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=30146792">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=30146792">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=30146792">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><h2 id="S2-010-Summary">Summary</h2>
+
+<p>
+</p><p>When using Struts 2 token mechanism for CSRF protection, token check may be bypassed by misusing known session attributes </p>
+
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Who should read this </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> All Struts 2 developers </p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Impact of vulnerability </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> CSRF protection weakening </p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Maximum security rating </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> Moderate </p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Recommendation </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> Developers should upgrade to <a shape="rect" class="external-link" href="http://struts.apache.org/download.cgi#struts2341">Struts 2.3.4.1</a> </p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Affected Software </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> Struts 2.0.0 - Struts 2.3.4 </p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Original JIRA Tickets </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> <a shape="rect" class="external-link" href="https://issues.apache.org/jira/browse/WW-3858">WW-3858</a> </p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Reporter </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> James K. Williams </p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> CVE Identifier </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> CVE-2012-4386 </p></td></tr></tbody></table></div>
+
+
+<h2 id="S2-010-Problem">Problem</h2>
+
+<p>The Struts 2 token mechanism (token tag and token interceptors) was originally targeted at providing double submit check for forms.</p>
+
+<p>In addition the mechanism basically qualifies for CSRF protection by implementing the Synchronizer Token Pattern, as described in the <a shape="rect" class="external-link" href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet" rel="nofollow">OWASP CSRF Prevention Cheat Sheet</a>.</p>
+
+<p>When used for that purpose, a possible attacker might manipulate a request by changing the token name configuration parameter to match a String typed session attribute known to him by name and value, along with changing the token value parameter to the value of the said session attribute. The token check mechanism is then bypassed by the existent session attribute matching the request's token configuration.</p>
+
+<h2 id="S2-010-Solution">Solution</h2>
+
+<p>As of Struts 2.3.4.1, token session attribute names are decoupled from token parameter names by namespace prefixing.</p>
+
+<p>Please upgrade to&#160;<a shape="rect" class="external-link" href="http://struts.apache.org/download.cgi#struts2341">Struts 2.3.4.1</a>.</p></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>

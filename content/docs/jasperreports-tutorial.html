@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="https://struts.apache.org/css/default.css">
+    <style type="text/css">
+        .dp-highlighter {
+            width:95% !important;
+        }
+    </style>
+    <style type="text/css">
+        .footer {
+            background-image:      url('https://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+            background-repeat:     repeat-x;
+            background-position:   left top;
+            padding-top:           4px;
+            color:                 #666;
+        }
+    </style>
+    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
+    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
+    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
+    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <script type="text/javascript" language="javascript">
+        var hide = null;
+        var show = null;
+        var children = null;
+
+        function init() {
+            /* Search form initialization */
+            var form = document.forms['search'];
+            if (form != null) {
+                form.elements['domains'].value = location.hostname;
+                form.elements['sitesearch'].value = location.hostname;
+            }
+
+            /* Children initialization */
+            hide = document.getElementById('hide');
+            show = document.getElementById('show');
+            children = document.all != null ?
+                    document.all['children'] :
+                    document.getElementById('children');
+            if (children != null) {
+                children.style.display = 'none';
+                show.style.display = 'inline';
+                hide.style.display = 'none';
+            }
+        }
+
+        function showChildren() {
+            children.style.display = 'block';
+            show.style.display = 'none';
+            hide.style.display = 'inline';
+        }
+
+        function hideChildren() {
+            children.style.display = 'none';
+            show.style.display = 'inline';
+            hide.style.display = 'none';
+        }
+    </script>
+    <title>JasperReports Tutorial</title>
+</head>
+<body onload="init()">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tr class="topBar">
+        <td align="left" valign="middle" class="topBarDiv" align="left" nowrap>
+            &nbsp;<a href="home.html">Home</a>&nbsp;&gt;&nbsp;<a href="tutorials.html">Tutorials</a>&nbsp;&gt;&nbsp;<a href="jasperreports-tutorial.html">JasperReports Tutorial</a>
+        </td>
+        <td align="right" valign="middle" nowrap>
+            <form name="search" action="https://www.google.com/search" method="get">
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="hidden" name="oe" value="UTF-8" />
+                <input type="hidden" name="domains" value="" />
+                <input type="hidden" name="sitesearch" value="" />
+                <input type="text" name="q" maxlength="255" value="" />
+                <input type="submit" name="btnG" value="Google Search" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="PageContent">
+    <div class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <div style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</div>
+        <div style="margin: 0px 10px 8px 10px"  class="pagetitle">JasperReports Tutorial</div>
+
+        <div class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=13906">
+                <img src="https://cwiki.apache.org/confluence/images/icons/notep_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Edit Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=13906">Edit Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+                <img src="https://cwiki.apache.org/confluence/images/icons/browse_space.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Browse Space"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=13906">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_page_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add Page"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=13906">Add Page</a>
+            &nbsp;
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=13906">
+                <img src="https://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif"
+                     height="16" width="16" border="0" align="absmiddle" title="Add News"></a>
+            <a href="https://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=13906">Add News</a>
+        </div>
+    </div>
+
+    <div class="pagecontent">
+        <div class="wiki-content">
+            <div id="ConfluenceContent"><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>The Struts 2 JasperReports plugin is a bridge from Struts 2 to JasperReports and does not include JasperReports itself, which must be downloaded separately.</p></div></div>
+
+<p><a shape="rect" class="external-link" href="http://jasperreports.sourceforge.net" rel="nofollow">JasperReports</a> is one of the leading open-source Java reporting libraries. It compiles <code>.jrxml</code> (XML source) to <code>.jasper</code> (compiled) files, which in turn can be transformed into several output types including PDF, HTML, CSV, and XLS.</p>
+
+<p>In the following example, we will use the framework to create a PDF with a list of persons. Our action will be used to create a List with <code>Person</code> objects, and our JasperReports Result will use this list to fill our template, and return the PDF.</p>
+
+<h2 id="JasperReportsTutorial-OurPersonclass">Our Person class</h2>
+
+<p>We start by defining a simple <code>Person</code> POJO class.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>com.acme.test.Person.java</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+package com.acme.test;
+
+public class Person {
+
+    private Long id;
+
+    private String name;
+
+    private String lastName;
+
+    public Person() {
+    }
+
+    public Person(String name, String lastName) {
+        this.name = name;
+        this.lastName = lastName;
+    }
+
+    public Person(Long id, String name, String lastName) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+</pre>
+</div></div>
+
+<h2 id="JasperReportsTutorial-JasperReportslibraries">JasperReports libraries</h2>
+
+<p>Before we can continue, we need to add the JR libraries to our classpath. You can download the JR project here: <a shape="rect" class="external-link" href="http://www.sourceforge.net/projects/jasperreports" rel="nofollow">http://www.sourceforge.net/projects/jasperreports</a><br clear="none">
+Save the jasperreports-X-project.zip to your harddisk, and extract the files.</p>
+
+<p>We need the following files:</p>
+<ul class="alternate"><li>dist/jasperreports-X.jar</li><li>lib/commons-*.jar (all the commons - except maybe for commons-logging)</li><li>lib/itext-X.jar</li><li>lib/jdt-compiler.jar</li></ul>
+
+
+<p>Copy these jars over to your S2_WEBAPP/WEB-INF/lib directory, and add them to your classpath.</p>
+
+<h2 id="JasperReportsTutorial-CreatingtheAction">Creating the Action</h2>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>com.acme.test.action.JasperAction</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+package com.acme.test.action;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.sf.jasperreports.engine.JasperCompileManager;
+
+import com.acme.test.Person;
+import com.opensymphony.xwork.ActionSupport;
+
+public class JasperAction extends ActionSupport {
+
+    /** List to use as our JasperReports dataSource. */
+    private List&lt;Person&gt; myList;
+
+    public String execute() throws Exception {
+
+        // Create some imaginary persons.
+        Person p1 = new Person(new Long(1), "Patrick", "Lightbuddie");
+        Person p2 = new Person(new Long(2), "Jason", "Carrora");
+        Person p3 = new Person(new Long(3), "Alexandru", "Papesco");
+        Person p4 = new Person(new Long(4), "Jay", "Boss");
+
+        // Store people in our dataSource list (normally they would come from a database).
+        myList = new ArrayList&lt;Person&gt;();
+        myList.add(p1);
+        myList.add(p2);
+        myList.add(p3);
+        myList.add(p4);
+
+        // Normally we would provide a pre-compiled .jrxml file
+        // or check to make sure we don't compile on every request.
+        try {
+            JasperCompileManager.compileReportToFile(
+                    "S2_WEBAPP/jasper/our_jasper_template.jrxml",
+                    "S2_WEBAPP/jasper/our_compiled_template.jasper");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ERROR;
+        }
+
+        return SUCCESS;
+    }
+
+    public List&lt;Person&gt; getMyList() {
+        return myList;
+    }
+}
+</pre>
+</div></div>
+
+<p>Our JasperAction creates a list of several People. The JasperCompileManager compiles the jrxml template to a .jasper file.</p>
+
+<div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>Again, don't use this in production code. You should of course either provide compiled templates, or do some sort of checking to avoid compiling the template on every request. But for our demonstration, or development, this suits our needs just fine.</p></div></div>
+
+<h2 id="JasperReportsTutorial-OurJaspertemplate">Our Jasper template</h2>
+
+<p>JR uses XML configuration to define templates which are compiled to .jasper files. These templates define the resulting report.<br clear="none">
+This is a handwritten version - for more complex versions I seriously suggest taking a look a the various GUI designers.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>our_jasper_template.jrxml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd"&gt;
+&lt;jasperReport name="jasper_test"&gt;
+  &lt;!-- Our fields from the Person class. --&gt;
+  &lt;field name="name" class="java.lang.String"/&gt;
+  &lt;field name="lastName" class="java.lang.String"/&gt;
+  &lt;title&gt;
+    &lt;band height="50"&gt;
+      &lt;staticText&gt;
+        &lt;reportElement x="0" y="0" width="180" height="15"/&gt;
+        &lt;textElement/&gt;
+        &lt;text&gt;&lt;![CDATA[Struts 2 JasperReports Sample]]&gt;&lt;/text&gt;
+      &lt;/staticText&gt;
+    &lt;/band&gt;
+  &lt;/title&gt;
+  &lt;pageHeader&gt;
+    &lt;band/&gt;
+  &lt;/pageHeader&gt;
+  &lt;columnHeader&gt;
+    &lt;band height="20"&gt;
+      &lt;staticText&gt;
+        &lt;reportElement x="180" y="0" width="180" height="20"/&gt;
+        &lt;textElement&gt;
+          &lt;font isUnderline="true"/&gt;
+        &lt;/textElement&gt;
+        &lt;text&gt;&lt;![CDATA[NAME]]&gt;&lt;/text&gt;
+      &lt;/staticText&gt;
+      &lt;staticText&gt;
+        &lt;reportElement x="360" y="0" width="180" height="20"/&gt;
+        &lt;textElement&gt;
+          &lt;font isUnderline="true"/&gt;
+        &lt;/textElement&gt;
+        &lt;text&gt;&lt;![CDATA[LASTNAME]]&gt;&lt;/text&gt;
+      &lt;/staticText&gt;
+    &lt;/band&gt;
+  &lt;/columnHeader&gt;
+  &lt;detail&gt;
+    &lt;band height="20"&gt;
+      &lt;textField&gt;
+        &lt;reportElement x="180" y="0" width="180" height="15"/&gt;
+        &lt;textElement/&gt;
+        &lt;textFieldExpression&gt;&lt;![CDATA[$F{name}]]&gt;&lt;/textFieldExpression&gt;
+      &lt;/textField&gt;
+      &lt;textField&gt;
+        &lt;reportElement x="360" y="0" width="180" height="15"/&gt;
+        &lt;textElement/&gt;
+        &lt;textFieldExpression&gt;&lt;![CDATA[$F{lastName}]]&gt;&lt;/textFieldExpression&gt;
+      &lt;/textField&gt;
+    &lt;/band&gt;
+  &lt;/detail&gt;
+  &lt;columnFooter&gt;
+    &lt;band/&gt;
+  &lt;/columnFooter&gt;
+  &lt;pageFooter&gt;
+    &lt;band height="15"&gt;
+      &lt;staticText&gt;
+        &lt;reportElement x="0" y="0" width="40" height="15"/&gt;
+        &lt;textElement/&gt;
+        &lt;text&gt;&lt;![CDATA[Page:]]&gt;&lt;/text&gt;
+      &lt;/staticText&gt;
+      &lt;textField&gt;
+        &lt;reportElement x="40" y="0" width="100" height="15"/&gt;
+        &lt;textElement/&gt;
+        &lt;textFieldExpression class="java.lang.Integer"&gt;&lt;![CDATA[$V{PAGE_NUMBER}]]&gt;&lt;/textFieldExpression&gt;
+      &lt;/textField&gt;
+    &lt;/band&gt;
+  &lt;/pageFooter&gt;
+  &lt;summary&gt;
+    &lt;band/&gt;
+  &lt;/summary&gt;
+&lt;/jasperReport&gt;
+</pre>
+</div></div>
+
+<p>Save this file in <code>S2_WEBAPP/jasper/</code> as 'our_jasper_template.jrxml'.</p>
+
+<p>Most important: we declared the fields name and lastName (two properties from our <code>Person</code> class). This means we will now be able to use these fields in our Jasper template.</p>
+
+<p>We define two columnheaders (NAME and LASTNAME), and then add our fields to the detail band (for a better explanation, look at the JR tutorial). This 'detail' band will iterate over our List of People. This is the default behaviour of JR - so if you want to display more information from the Person, add them to this band.</p>
+
+<p>In the detail band we use the</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+$F{name}
+</pre>
+</div></div>
+
+<p>expression. JasperReports will ask Struts to retrieve the <code>name</code> field value from a <code>Person</code> object; the <code>lastName</code> field is handled the same way.</p>
+
+<p>The rest is markup to define the layout.</p>
+
+<div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>Use a logger (commons-logging, log4j, ...) to watch <code>org.apache.struts2.views.jasperreports</code> in debug mode, if you have any troubles.</p></div></div>
+
+<h2 id="JasperReportsTutorial-RegisteringtheAction">Registering the Action</h2>
+
+<p>Using the JasperReports plugin requires adding the JasperReports result type as well as normal action configuration.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>struts.xml</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+&lt;package name="default" namespace="/" extends="jasperreports-default"&gt;
+    &lt;action name="myJasperTest" class="com.acme.test.action.JasperAction"&gt;
+        &lt;result name="success" type="jasper"&gt;
+            &lt;param name="location"&gt;/jasper/our_compiled_template.jasper&lt;/param&gt;
+            &lt;param name="dataSource"&gt;myList&lt;/param&gt;
+            &lt;param name="format"&gt;PDF&lt;/param&gt;
+        &lt;/result&gt;
+    &lt;/action&gt;
+    ...
+&lt;/package&gt;
+</pre>
+</div></div>
+
+<p>To use the JasperReports result type we must either (a) extend the <code>jasperreports-default</code> package that defines it or (b) manually define the JasperReport <code>jasper</code> result type ourselves.</p>
+
+<p>In the above example we extend the <code>jasperreports-default</code> package; we can define the <code>jasper</code> result type manually by defining it the same way the JasperReport plugin does:</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Manually defining the "jasper" result type</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">
+&lt;result-types&gt;
+    &lt;result-type name="jasper" class="org.apache.struts2.views.jasperreports.JasperReportsResult"/&gt;
+&lt;/result-types&gt;
+</pre>
+</div></div>
+
+<p>We configure our JasperAction with the name 'myJasperTest' - this means that we can execute this Action by sending a request to <code>myJasperTest.action</code> in our browser.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+&lt;action name="myJasperTest" class="com.acme.test.action.JasperAction"&gt;
+</pre>
+</div></div>
+
+<p>When our JasperAction executes correctly, we will use the Result type registered with the name 'jasper'. As discussed above the "jasper" result type is available from either extending the "jasperreports-default" package or by defining the result type manually.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+&lt;result name="success" type="jasper"&gt;
+</pre>
+</div></div>
+
+<p>The "location" parameter defines the location of the compiled jasper file, which will be filled by Struts 2 with our dataSource:</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+&lt;param name="location"&gt;/jasper/our_compiled_template.jasper&lt;/param&gt;
+</pre>
+</div></div>
+
+<p>The "dataSource" parameter defines the action property containing the collection of objects to use in our report. In this case it's the <code>myList</code> property which we manually filled with some <code>Person</code> objects.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+&lt;param name="dataSource"&gt;myList&lt;/param&gt;
+</pre>
+</div></div>
+
+<p>The "format" parameter specifies the output format of the report. Possible values include PDF, CSV, XLS and HTML.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+&lt;param name="format"&gt;PDF&lt;/param&gt;
+</pre>
+</div></div>
+
+<h2 id="JasperReportsTutorial-Conclusion">Conclusion</h2>
+
+<p>You should now be able to execute <a shape="rect" class="external-link" href="http://localhost:8080/YOUR_WEBAPP/myJasperTest.action" rel="nofollow">http://localhost:8080/YOUR_WEBAPP/myJasperTest.action</a> - and you should see a nice list of names.<br clear="none">
+Struts provides probably the most elegant way to deal with JasperReport files; specify the location of the .jasper file, specify what dataSource you want to use, and there you go.</p>
+
+<h2 id="JasperReportsTutorial-Backto">Back to <a shape="rect" href="tutorials.html">Tutorials</a></h2></div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="footer">
+    Generated by CXF SiteExporter
+</div>
+</body>
+</html>
