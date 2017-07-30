@@ -6,8 +6,6 @@ title: Processing forms
 
 This tutorial assumes you've completed the [Coding Struts 2 Actions](coding-actions.html) tutorial and have a working coding-actions project. The example code for this tutorial, form-processing, is available for checkout from the Struts 2 GitHub subversion repository: [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
 
-> 
-
 ### Introduction
 
 In this tutorial we'll explore using Struts 2 to do more involved processing of a form submission. We'll cover how to use a Java model class to store the form input and how to create the Struts 2 form to match up with that model class.
