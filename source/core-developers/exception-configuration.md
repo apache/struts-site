@@ -5,20 +5,16 @@ title: Exception Configuration
 
 # Exception Configuration
 
-Exception mappings is a powerful feature for dealing with an Action class that throws an Exception\. The core idea is that an Exception thrown during the Action method can be automatically caught and mapped to a predefined Result\. This declarative strategy is especially useful for frameworks, like Hibernate and Acegi, that throw RuntimeExceptions\.
+Exception mappings is a powerful feature for dealing with an Action class that throws an Exception. The core idea is 
+that an Exception thrown during the Action method can be automatically caught and mapped to a predefined Result. This 
+declarative strategy is especially useful for frameworks, like Hibernate and Acegi, that throw RuntimeExceptions.
 
-As with many other parts of the framework, an Interceptor is needed to activate the exception mapping functionality\. Below is a snippet from 
+As with many other parts of the framework, an Interceptor is needed to activate the exception mapping functionality. 
+Below is a snippet from `struts-default.xml` which has the exception mapping already activated.
 
-~~~~~~~
-struts-default.xml
-~~~~~~~
- which has the exception mapping already activated\.
+**snippet of struts-default.xml**
 
-**snippet of struts\-default\.xml**
-
-
-~~~~~~~
-
+```xml
 ...
 <interceptors>
     ...
@@ -50,37 +46,25 @@ struts-default.xml
     </interceptor-ref>
 </interceptor-stack>
 ...
+```
 
-~~~~~~~
+To use exception mapping, we simply need to map Exceptions to specific Results. The framework provides two ways 
+to declare an exception mapping `<exception-mapping/>` - globally or for a specific action mapping. The exception 
+mapping element takes two attributes, `exception` and `result`.
 
-To use exception mapping, we simply need to map Exceptions to specific Results\. The framework provides two ways to declare an exception mapping 
+When declaring an exception mapping, the Interceptor will find the closest class inheritance match between the Exception 
+thrown and the Exception declared. The Interceptor will examine all declared mappings applicable to the action mapping, 
+first local and then global mappings. If a match is found, the Result is processed, just as if it had been returned 
+by the Action.
 
-~~~~~~~
-<exception-mapping/>
-~~~~~~~
- \- globally or for a specific action mapping\. The exception mapping element takes two attributes, 
+> This process follows the same rules as a Result returned from an Action. It first looks for the Result in the local 
+> action mapping, and if not found, it looks for a global Result.
 
-~~~~~~~
-exception
-~~~~~~~
- and 
+Below is an example of global and local exception mappings.
 
-~~~~~~~
-result
-~~~~~~~
-\.
+**snippet from struts.xml**
 
-When declaring an exception mapping, the Interceptor will find the closest class inheritance match between the Exception thrown and the Exception declared\. The Interceptor will examine all declared mappings applicable to the action mapping, first local and then global mappings\. If a match is found, the Result is processed, just as if it had been returned by the Action\.
-
-(information) This process follows the same rules as a Result returned from an Action\. It first looks for the Result in the local action mapping, and if not found, it looks for a global Result\.
-
-Below is an example of global and local exception mappings\.
-
-**snippet from struts\.xml**
-
-
-~~~~~~~
-
+```xml
 <struts>
     <package name="default">
         ...
@@ -102,54 +86,17 @@ Below is an example of global and local exception mappings\.
         ...
     </package>
 </xwork>
-
-~~~~~~~
+```
 
 In the example above, here is what happens based upon each Exception:
 
-+ A 
+- A `java.sql.SQLException` will chain to the `SQLExceptionAction` (action mapping not shown)
+- A `com.company.SecurityException` will redirect to `Login.action`
+- Any other exception that extends `java.lang.Exception` will return the `/Exception.jsp` page
 
-~~~~~~~
-java.sql.SQLException
-~~~~~~~
- will chain to the 
+## Exception Values on the ValueStack
 
-~~~~~~~
-SQLExceptionAction
-~~~~~~~
- (action mapping not shown)
-
-+ A 
-
-~~~~~~~
-com.company.SecurityException
-~~~~~~~
- will redirect to 
-
-~~~~~~~
-Login.action
-~~~~~~~
-
-+ Any other exception that extends 
-
-~~~~~~~
-java.lang.Exception
-~~~~~~~
- will return the 
-
-~~~~~~~
-/Exception.jsp
-~~~~~~~
- page
-
-#####Exception Values on the ValueStack#####
-
-By default, the 
-
-~~~~~~~
-ExceptionMappingInterceptor
-~~~~~~~
- adds the following values to the Value Stack:
+By default, the `ExceptionMappingInterceptor` adds the following values to the Value Stack:
 
 | exception | The exception object itself |
 |-----------|-----------------------------|
@@ -157,9 +104,7 @@ ExceptionMappingInterceptor
 
 **Sample JSP using Error and Exception Values**
 
-
-~~~~~~~
- 
+```jsp 
 <h2>An unexpected error has occurred</h2>
 <p>
     Please report this error to your system administrator
@@ -177,14 +122,9 @@ ExceptionMappingInterceptor
 <p>
     <s:property value="%{exceptionStack}"/>
 </p>
+```
 
-~~~~~~~
+## Exception in constructors
 
-#####Exception in constructors#####
-
-Global exception mappings are designed to be used with exceptions thrown by action methods (like 
-
-~~~~~~~
-execute
-~~~~~~~
-)\. exceptions thrown from constructors will **not** be handled by global exception mappings\.
+Global exception mappings are designed to be used with exceptions thrown by action methods (like `execute`). exceptions 
+thrown from constructors will **not** be handled by global exception mappings.

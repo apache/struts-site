@@ -22,7 +22,7 @@ Each may be configured via XML or annotations.
 - [Annotations](annotations.html)
 - [Configuration Elements](configuration-elements.html)
   - [Actions](action-configuration.html), [Wildcard Mappings](wildcard-mappings.html), [Beans](bean-configuration.html), [Constants](constant-configuration.html)
-  - [Exceptions](exceptio-configuration.html), [Includes](include-configuration.html), [Interceptors](interceptor-configuration.html)
+  - [Exceptions](exception-configuration.html), [Includes](include-configuration.html), [Interceptors](interceptor-configuration.html)
   - [Namespaces](namespace-configuration.html), [Packages](package-configuration.html), [Results](result-configuration.html)
   - [Unknown Handlers](unknown-handlers.html), [Dispatcher](dispatcher.html)
 - [Configuration Files](configuration-files.html)
