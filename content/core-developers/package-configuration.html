@@ -126,30 +126,22 @@
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <h1 id="package-configuration">Package Configuration</h1>
 
-<p>Packages are a way to group actions, results, result types, interceptors, and interceptor-stacks into a logical configuration unit. Conceptually, packages are similiar to objects in that they can be extended and have individual parts that can be overridden by “sub” packages.</p>
+<p>Packages are a way to group actions, results, result types, interceptors, and interceptor-stacks into a logical 
+configuration unit. Conceptually, packages are similar to objects in that they can be extended and have individual 
+parts that can be overridden by “sub” packages.</p>
 
-<p>#####Packages#####</p>
+<h2 id="packages">Packages</h2>
 
-<p>The package element has one required attribute,</p>
+<p>The package element has one required attribute <code class="highlighter-rouge">name</code>, which acts as the key for later reference to the package. 
+The <code class="highlighter-rouge">extends</code> attribute is optional and allows one package to inherit the configuration of one or more previous packages 
+- including all interceptor, interceptor-stack, and action configurations.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>name
-</code></pre>
-</div>
-<p>, which acts as the key for later reference to the package. The</p>
+<blockquote>
+  <p>Note that the configuration file is processed sequentially down the document, so the package referenced 
+by an “extends” should be defined <em>above</em>  the package which extends it.</p>
+</blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>extends
-</code></pre>
-</div>
-<p>attribute is optional and allows one package to inherit the configuration of one or more previous packages - including all interceptor, interceptor-stack, and action configurations.</p>
-
-<p>(!)  Note that the configuration file is processed sequentially down the document, so the package referenced by an “extends” should be defined <em>above</em>  the package which extends it.</p>
-
-<p>The optional</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>abstract
-</code></pre>
-</div>
-<p>attribute creates a base package that can omit the action configuration.</p>
+<p>The optional <code class="highlighter-rouge">abstract</code> attribute creates a base package that can omit the action configuration.</p>
 
 <table>
   <thead>
@@ -173,7 +165,7 @@
     <tr>
       <td>namespace</td>
       <td>no</td>
-      <td>see <a href="#PAGE_14276">Namespace Configuration</a></td>
+      <td>see <a href="namespace-configuration.html">Namespace Configuration</a></td>
     </tr>
     <tr>
       <td>abstract</td>
@@ -183,61 +175,57 @@
   </tbody>
 </table>
 
-<p><strong>Simple usage</strong></p>
+<h3 id="simple-usage">Simple usage</h3>
 
 <p><strong>Package Example (struts.xml)</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;struts&gt;
-  &lt;package name="employee" extends="struts-default" namespace="/employee"&gt;
-    &lt;default-interceptor-ref name="crudStack"/&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
+  <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"employee"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/employee"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;default-interceptor-ref</span> <span class="na">name=</span><span class="s">"crudStack"</span><span class="nt">/&gt;</span>
 
-    &lt;action name="list" method="list"
-      class="org.apache.struts2.showcase.action.EmployeeAction" &gt;
-        &lt;result&gt;/empmanager/listEmployees.jsp&lt;/result&gt;
-        &lt;interceptor-ref name="basicStack"/&gt;
-    &lt;/action&gt;
-    &lt;action name="edit-*" class="org.apache.struts2.showcase.action.EmployeeAction"&gt;
-      &lt;param name="empId"&gt;{1}&lt;/param&gt;
-      &lt;result&gt;/empmanager/editEmployee.jsp&lt;/result&gt;
-        &lt;interceptor-ref name="crudStack"&gt;
-          &lt;param name="validation.excludeMethods"&gt;execute&lt;/param&gt;
-        &lt;/interceptor-ref&gt;
-      &lt;/action&gt;
-      &lt;action name="save" method="save"
-          class="org.apache.struts2.showcase.action.EmployeeAction" &gt;
-        &lt;result name="input"&gt;/empmanager/editEmployee.jsp&lt;/result&gt;
-        &lt;result type="redirect"&gt;edit-${currentEmployee.empId}.action&lt;/result&gt;
-      &lt;/action&gt;
-      &lt;action name="delete" method="delete"
-        class="org.apache.struts2.showcase.action.EmployeeAction" &gt;
-        &lt;result name="error"&gt;/empmanager/editEmployee.jsp&lt;/result&gt;
-        &lt;result type="redirect"&gt;edit-${currentEmployee.empId}.action&lt;/result&gt;
-      &lt;/action&gt;
-  &lt;/package&gt;
-&lt;/struts&gt;
-
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"list"</span> <span class="na">method=</span><span class="s">"list"</span>
+      <span class="na">class=</span><span class="s">"org.apache.struts2.showcase.action.EmployeeAction"</span> <span class="nt">&gt;</span>
+        <span class="nt">&lt;result&gt;</span>/empmanager/listEmployees.jsp<span class="nt">&lt;/result&gt;</span>
+        <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"edit-*"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.showcase.action.EmployeeAction"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"empId"</span><span class="nt">&gt;</span>{1}<span class="nt">&lt;/param&gt;</span>
+      <span class="nt">&lt;result&gt;</span>/empmanager/editEmployee.jsp<span class="nt">&lt;/result&gt;</span>
+        <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"crudStack"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"validation.excludeMethods"</span><span class="nt">&gt;</span>execute<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;/interceptor-ref&gt;</span>
+      <span class="nt">&lt;/action&gt;</span>
+      <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"save"</span> <span class="na">method=</span><span class="s">"save"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.showcase.action.EmployeeAction"</span> <span class="nt">&gt;</span>
+        <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/empmanager/editEmployee.jsp<span class="nt">&lt;/result&gt;</span>
+        <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"redirect"</span><span class="nt">&gt;</span>edit-${currentEmployee.empId}.action<span class="nt">&lt;/result&gt;</span>
+      <span class="nt">&lt;/action&gt;</span>
+      <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"delete"</span> <span class="na">method=</span><span class="s">"delete"</span>
+        <span class="na">class=</span><span class="s">"org.apache.struts2.showcase.action.EmployeeAction"</span> <span class="nt">&gt;</span>
+        <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"error"</span><span class="nt">&gt;</span>/empmanager/editEmployee.jsp<span class="nt">&lt;/result&gt;</span>
+        <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"redirect"</span><span class="nt">&gt;</span>edit-${currentEmployee.empId}.action<span class="nt">&lt;/result&gt;</span>
+      <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;/package&gt;</span>
+<span class="nt">&lt;/struts&gt;</span>
 </code></pre>
 </div>
 
-<p><strong>Inherit from more than one package</strong></p>
+<h3 id="inherit-from-more-than-one-package">Inherit from more than one package</h3>
 
 <p><strong>Multi package Example (struts.xml)</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;struts&gt;
-  &lt;package name="employee" extends="struts-default, json-default" namespace="/employee"&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
+  <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"employee"</span> <span class="na">extends=</span><span class="s">"struts-default, json-default"</span> <span class="na">namespace=</span><span class="s">"/employee"</span><span class="nt">&gt;</span>
 
-    &lt;action name="list" method="list" class="org.apache.struts2.showcase.action.EmployeeAction" &gt;
-        &lt;result&gt;/empmanager/listEmployees.jsp&lt;/result&gt;
-        &lt;result type="json"&gt;
-            &lt;param name="root"&gt;employees&lt;/param&gt;
-        &lt;/result&gt;
-    &lt;/action&gt;
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"list"</span> <span class="na">method=</span><span class="s">"list"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.showcase.action.EmployeeAction"</span> <span class="nt">&gt;</span>
+        <span class="nt">&lt;result&gt;</span>/empmanager/listEmployees.jsp<span class="nt">&lt;/result&gt;</span>
+        <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"root"</span><span class="nt">&gt;</span>employees<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
 
-  &lt;/package&gt;
-&lt;/struts&gt;
-
+  <span class="nt">&lt;/package&gt;</span>
+<span class="nt">&lt;/struts&gt;</span>
 </code></pre>
 </div>
 

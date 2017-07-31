@@ -126,170 +126,79 @@
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <h1 id="namespace-configuration">Namespace Configuration</h1>
 
-<p>The namespace attribute subdivides action configurations into logical modules, each with its own identifying prefix. Namespaces avoid conflicts between action names. Each namespace can have its own “menu” or “help” action, each with its own implementation. While the prefix appears in the browser URI, the tags are “namespace aware”, so the namespace prefix does not need to be embedded in forms and links.</p>
+<p>The namespace attribute subdivides action configurations into logical modules, each with its own identifying prefix.
+Namespaces avoid conflicts between action names. Each namespace can have its own “menu” or “help” action, each with 
+its own implementation. While the prefix appears in the browser URI, the tags are “namespace aware”, so the namespace 
+prefix does not need to be embedded in forms and links.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>Struts 2 Namespaces are the equivalent of Struts Action 1 modules, but more convenient and flexible.</td>
-    </tr>
-  </tbody>
-</table>
+<blockquote>
+  <p>Struts 2 Namespaces are the equivalent of Struts Action 1 modules, but more convenient and flexible.</p>
+</blockquote>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+<h2 id="default-namespace">Default Namespace</h2>
 
-<p>#####Default Namespace#####</p>
+<p>The default namespace is <code class="highlighter-rouge">""</code> - an empty string. The default namespace is used as a “catch-all” namespace. If an action 
+configuration is not found in a specified namespace, the default namespace is also be searched. The local/global 
+strategy allows an application to have global action configurations outside of the action element “extends” hierarchy.</p>
 
-<p>The default namespace is</p>
+<p>The namespace prefix can be registered with Java declarative security, to ensure only authorized users can access 
+the actions in a given namespace.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>""
-</code></pre>
-</div>
-<p>- an empty string. The default namespace is used as a “catch-all” namespace. If an action configuration is not found in a specified namespace, the default namespace is also be searched. The local/global strategy allows an application to have global action configurations outside of the action element “extends” hierarchy.</p>
+<h2 id="root-namespace">Root Namespace</h2>
 
-<p>The namespace prefix can be registered with Java declarative security, to ensure only authorized users can access the actions in a given namespace.</p>
+<p>A root namespace <code class="highlighter-rouge">"/"</code> is also supported. The root is the namespace when a request directly under the context path is 
+received. As with other namespaces, it will fall back to the default <code class="highlighter-rouge">""</code> namespace if a local action is not found.</p>
 
-<p>#####Root Namespace#####</p>
+<h2 id="namespace-example">Namespace Example</h2>
 
-<p>A root namespace (“/”) is also supported. The root is the namespace when a request directly under the context path is received. As with other namespaces, it will fall back to the default (“”) namespace if a local action is not found.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"default"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"foo"</span> <span class="na">class=</span><span class="s">"mypackage.simpleAction"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>greeting.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
 
-<p>#####Namespace Example#####</p>
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"bar"</span> <span class="na">class=</span><span class="s">"mypackage.simpleAction"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>bar1.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+<span class="nt">&lt;/package&gt;</span>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;package name="default"&gt;
-    &lt;action name="foo" class="mypackage.simpleAction"&gt;
-        &lt;result name="success" type="dispatcher"&gt;greeting.jsp&lt;/result&gt;
-    &lt;/action&gt;
+<span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"mypackage1"</span> <span class="na">namespace=</span><span class="s">"/"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"moo"</span> <span class="na">class=</span><span class="s">"mypackage.simpleAction"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>moo.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+<span class="nt">&lt;/package&gt;</span>
 
-    &lt;action name="bar" class="mypackage.simpleAction"&gt;
-        &lt;result name="success" type="dispatcher"&gt;bar1.jsp&lt;/result&gt;
-    &lt;/action&gt;
-&lt;/package&gt;
-
-&lt;package name="mypackage1" namespace="/"&gt;
-    &lt;action name="moo" class="mypackage.simpleAction"&gt;
-        &lt;result name="success" type="dispatcher"&gt;moo.jsp&lt;/result&gt;
-    &lt;/action&gt;
-&lt;/package&gt;
-
-&lt;package name="mypackage2" namespace="/barspace"&gt;
-    &lt;action name="bar" class="mypackage.simpleAction"&gt;
-        &lt;result name="success" type="dispatcher"&gt;bar2.jsp&lt;/result&gt;
-    &lt;/action&gt;
-&lt;/package&gt;
-
+<span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"mypackage2"</span> <span class="na">namespace=</span><span class="s">"/barspace"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"bar"</span> <span class="na">class=</span><span class="s">"mypackage.simpleAction"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>bar2.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+<span class="nt">&lt;/package&gt;</span>
 </code></pre>
 </div>
 
-<p>#####How the Code Works#####</p>
+<h3 id="how-the-code-works">How the Code Works</h3>
 
-<p>If a request for</p>
+<p>If a request for <code class="highlighter-rouge">/barspace/bar.action</code> is made, the <code class="highlighter-rouge">/barspace</code> namespace is searched for the <code class="highlighter-rouge">bar</code> action. 
+If found, the <code class="highlighter-rouge">bar</code> action is executed, else it will fall back to the default namespace. In the Namespace Example, 
+the <code class="highlighter-rouge">bar</code> action does exist in the <code class="highlighter-rouge">/barspace</code> namespace, so the <code class="highlighter-rouge">bar</code> action will be executed, and if “success” is 
+returned, the request will be forwarded to <code class="highlighter-rouge">bar2.jsp</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/barspace/bar.action
-</code></pre>
-</div>
-<p>is made, the</p>
+<p>If a request is made to <code class="highlighter-rouge">/barspace/foo.action</code>, the namespace <code class="highlighter-rouge">/barspace</code> will be checked for action <code class="highlighter-rouge">foo</code>. 
+If a local action is not found, the default namespace is checked. In the Namespace Example, there is no action <code class="highlighter-rouge">foo</code> 
+in the namespace <code class="highlighter-rouge">/barspace</code>, therefore the default will be checked and <code class="highlighter-rouge">/foo.action</code> will be executed.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/barspace
-</code></pre>
-</div>
-<p>namespace is searched for the</p>
+<p>In the Namespace Example, if a request for <code class="highlighter-rouge">moo.action</code> is made, the root namespace <code class="highlighter-rouge">"/"</code> is searched for a <code class="highlighter-rouge">moo</code> 
+action; if a root action is not found, the default namespace is checked. In this case, the <code class="highlighter-rouge">moo</code> action does exist 
+and will be executed. Upon success, the request would be forwarded to <code class="highlighter-rouge">bar2.jsp</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>bar
-</code></pre>
-</div>
-<p>action. If found, the</p>
+<p>If a request is made for <code class="highlighter-rouge">/foo.action</code>, the root <code class="highlighter-rouge">"/"</code> namespace will be checked. If <code class="highlighter-rouge">foo</code> is found, the root action 
+will be selected. Otherwise, the framework will check the default namespace. In the Namespace Example, the <code class="highlighter-rouge">foo</code> action 
+does not exist in the root namespace, so the default namespace is  checked, and the default foo action is executed.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>bar
-</code></pre>
-</div>
-<p>action is executed, else it will fall back to the default namespace. In the Namespace Example, the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>bar
-</code></pre>
-</div>
-<p>action does exist in the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>/barspace
-</code></pre>
-</div>
-<p>namespace, so the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>bar
-</code></pre>
-</div>
-<p>action will be executed, and if “success” is returned, the request will be forwarded to</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>bar2.jsp
-</code></pre>
-</div>
-<p>.</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>If a request is made to /barspace/foo.action, the namespace /barspace will be checked for action foo. If a local action is not found, the default namespace is checked. In the Namespace Example, there is no action foo in the namespace /barspace, therefore the default will be checked and /foo.action will be executed.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>In the Namespace Example, if a request for</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>moo.action
-</code></pre>
-</div>
-<p>is made, the root namespace (‘/’) is searched for a</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>moo
-</code></pre>
-</div>
-<p>action; if a root action is not found, the default namespace is checked. In this case, the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>moo
-</code></pre>
-</div>
-<p>action does exist and will be executed. Upon success, the request would be forwarded to</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>bar2.jsp
-</code></pre>
-</div>
-<p>.</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>If a request is made for /foo.action, the root / namespace will be checked. If foo is found, the root action will be selected. Otherwise, the framework will check the default namespace. In the Namespace Example, the foo action does not exist in the root namespace, so the default namespace is  checked, and the default foo action is executed.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>Namespace are not hierarchical like a file system path. There is one namespace level. For example if the URL /barspace/myspace/bar.action is requested, the framework will first look for namespace /barspace/myspace. If the action does not exist at /barspace/myspace, the search will immediately fall back to the default namespace “”. The framework will not parse the namespace into a series of “folders”. In the Namespace Example, the bar action in the default namespace would be selected.</p>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+<p>Namespace are not hierarchical like a file system path. There is one namespace level. For example if the URL 
+<code class="highlighter-rouge">/barspace/myspace/bar.action</code> is requested, the framework will first look for namespace <code class="highlighter-rouge">/barspace/myspace</code>. 
+If the action does not exist at <code class="highlighter-rouge">/barspace/myspace</code>, the search will immediately fall back to the default namespace <code class="highlighter-rouge">""</code>. 
+The framework will not parse the namespace into a series of “folders”. In the Namespace Example, the bar action 
+in the default namespace would be selected.</p>
 
   </section>
 </article>
