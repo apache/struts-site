@@ -140,12 +140,12 @@ under the License.
     <div class="pagecontent">
         <div class="wiki-content">
             <div id="ConfluenceContent"><p><style type="text/css">/*<![CDATA[*/
-div.rbtoc1502255740100 {padding: 0px;}
-div.rbtoc1502255740100 ul {list-style: disc;margin-left: 0px;}
-div.rbtoc1502255740100 li {margin-left: 0px;padding-left: 0px;}
+div.rbtoc1502256672145 {padding: 0px;}
+div.rbtoc1502256672145 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1502256672145 li {margin-left: 0px;padding-left: 0px;}
 
-/*]]>*/</style></p><div class="toc-macro rbtoc1502255740100">
-<ul class="toc-indentation"><li><a shape="rect" href="#Struts2.3to2.5migration-Dependencies">Dependencies</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-StrutsPrepareAndExecuteFilter">StrutsPrepareAndExecuteFilter</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-DTD">DTD</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-HTML5">HTML 5</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-Tagsattributes">Tags attributes</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-Divtag">Div tag</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-Fieldnames">Field names</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-Tiles">Tiles</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-Temp/WorkdirectoryofApplicationServer/ServletContainer">Temp/Work directory of ApplicationServer/ServletContainer</a></li></ul>
+/*]]>*/</style></p><div class="toc-macro rbtoc1502256672145">
+<ul class="toc-indentation"><li><a shape="rect" href="#Struts2.3to2.5migration-Dependencies">Dependencies</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-StrutsPrepareAndExecuteFilter">StrutsPrepareAndExecuteFilter</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-DTD">DTD</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-HTML5">HTML 5</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-Tagsattributes">Tags attributes</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-Divtag">Div tag</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-Fieldnames">Field names</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-Tiles">Tiles</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-Temp/WorkdirectoryofApplicationServer/ServletContainer">Temp/Work directory of ApplicationServer/ServletContainer</a></li><li><a shape="rect" href="#Struts2.3to2.5migration-NewLocaleawareconversionlogic">New Locale aware conversion logic</a></li></ul>
 </div><h3 id="Struts2.3to2.5migration-Dependencies">Dependencies</h3><p>Update Struts dependencies to 2.5.<br clear="none"><br clear="none">Remove the following plugin dependencies because they were dropped and aren't supported anymore.</p><ul><li>Dojo Plugin</li><li>Codebehind Plugin</li><li>JSF Plugin</li><li>Struts1 Plugin</li></ul><p>Please be aware that the framework is using Log4j2 now as a main logging layer, the existing old logging layer is deprecated and will be removed soon. Log4j2 supports many different logging implementations, please check documentations for more details.</p><h3 id="Struts2.3to2.5migration-StrutsPrepareAndExecuteFilter">StrutsPrepareAndExecuteFilter</h3><p>The&#160;<code>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</code> was moved to <code>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</code>.<br clear="none"><br clear="none">In web.xml replace this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
 <pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;filter&gt;
     &lt;filter-name&gt;struts2&lt;/filter-name&gt;
@@ -202,7 +202,13 @@ public void setStrng(String str) {...}</pre>
 &lt;/listener&gt;
 
 </pre>
-</div></div><p>&#160;</p><p>Optionally you may remove TilesDefinitions from XML and annotate actions instead. See <a shape="rect" href="tiles-plugin.html">Tiles Plugin</a> for more details.</p><h3 id="Struts2.3to2.5migration-Temp/WorkdirectoryofApplicationServer/ServletContainer">Temp/Work directory of ApplicationServer/ServletContainer</h3><p>Users reported it was necessary for them to remove temp/work directory of their ApplicationServer/ServletContainer. Likely to force server to recompile JSPs.</p><p>&#160;</p><p>&#160;</p></div>
+</div></div><p>&#160;</p><p>Optionally you may remove TilesDefinitions from XML and annotate actions instead. See <a shape="rect" href="tiles-plugin.html">Tiles Plugin</a> for more details.</p><h3 id="Struts2.3to2.5migration-Temp/WorkdirectoryofApplicationServer/ServletContainer">Temp/Work directory of ApplicationServer/ServletContainer</h3><p>Users reported it was necessary for them to remove temp/work directory of their ApplicationServer/ServletContainer. Likely to force server to recompile JSPs.</p><h3 id="Struts2.3to2.5migration-NewLocaleawareconversionlogic">New Locale aware conversion logic</h3><p>As from Struts 2.5.12 a new conversion logic was introduced which can affect your applications when using uncommon solutions. One of these is to use <code>a number literals</code> in Freemarker template. In such case Freemarker treats them as numbers (as <code>BigDecimal</code>s) and Struts logic converts them to a string with decimal zero, see the example below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;@s.textfield name="userId" value=35/&gt;</pre>
+</div></div><p>this snippet will produce the following Html control:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">&lt;input type="text" name="userId" value="35.0"/&gt;</pre>
+</div></div><p>To resolves this problem you must add quotes around the value:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: html; gutter: false; theme: Default" style="font-size:12px;">&lt;@s.textfield name="userId" value="35"/&gt;</pre>
+</div></div><p>This is due how Freemarker treats <a shape="rect" class="external-link" href="http://freemarker.org/docs/dgui_template_exp.html#dgui_template_exp_direct_number" rel="nofollow">a number literals</a>.</p><p>&#160;</p></div>
         </div>
 
         
