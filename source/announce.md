@@ -12,6 +12,16 @@ title: Announcements
   Skip to: <a href="announce-2016.html">Announcements - 2016</a>
 </p>
 
+#### 09 August 2017 - S2-049 Security Bulletin update {#a20170809}
+
+This is an update of the recently announced Security Bulletin - [S2-049](/docs/s2-049.html).
+
+The bulletin was extended with an additional information when the potential vulnerability
+can be present in your application. Please re-read the mentioned bulletin and apply required
+actions if needed.
+
+Please report any problems back to the [Struts Security](mailto:security@struts.apache.org) mailing list.
+
 #### 07 July 2017 - Struts 2.3.33 General Availability {#a20170707}
 
 The Apache Struts group is pleased to announce that Struts 2.3.32 is available as a "General Availability"
