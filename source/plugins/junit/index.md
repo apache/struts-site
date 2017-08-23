@@ -19,6 +19,7 @@ To test actions that do not use Spring, extend `StrutsTestCase`. The following e
 an action:
  
 - Mapping:
+
 ```xml
 <struts>
     <constant name="struts.objectFactory" value="spring"/>
@@ -29,7 +30,9 @@ an action:
     </package>
 </struts>
 ```
+
 - Action:
+
 ```java  
 public class TestAction extends ActionSupport {
     private String name;
@@ -43,7 +46,9 @@ public class TestAction extends ActionSupport {
     }
 }
 ```
+
 - JUnit:
+
 ```java
 package org.apache.struts2;
 
@@ -103,6 +108,7 @@ the classpath and outside the container.
 There are several utility methods and mock objects defined in StrutsTestCase which can be used to facilitate the testing:
 
 - Methods:
+
 |Method Name|Description|
 |-----------|-----------|
 |executeAction(String)|Pass the url for the action, and it will return the output of the action. This output **is not** the action result, like "success", but what would be written to the result stream. To use this the actions must be using a result type that can be read from the classpath, like FreeMarker, velocity, etc (if you are using the experimental Embedded JSP Plugin, you can use JSPs also)|
@@ -112,7 +118,9 @@ There are several utility methods and mock objects defined in StrutsTestCase whi
 |findValueAfterExecute(String)|Finds an object in the value stack, after an action has been executed|
 |applyAdditionalParams(ActionContext)|Can be overwritten in subclass to provide additional params and settings used during action invocation|
 |createAction(Class)|Can be used to instantiate an action which requires framework's dependencies to be injected (e.g. extending ActionSupport requires inject some internal dependencies)|
+
 - Fields:
+
 |Field|Description|
 |-----|-----------|
 |MockHttpServletRequest request|The request that will be passed to Struts. Make sure to set parameters in this object before calling methods like getActionProxy|
