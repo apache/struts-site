@@ -35,7 +35,7 @@ Each may be configured via XML or annotations.
 - [Application Servers](application-servers.html)
 - [Performance Tuning](performance-tuning.html)
 - [Security](../security/)
-- [Testing Actions] - export https://cwiki.apache.org/confluence/display/WW/Testing+Actions
+- [Testing Actions](../plugins/junit/)
   - [(arsenalist)](https://depressedprogrammer.wordpress.com/2007/06/18/unit-testing-struts-2-actions-spring-junit/)
   - [(rosa)](http://fassisrosa.blogspot.com/2006/11/unit-testing-struts-20\.html)
 - [Interceptors](interceptors.html)
