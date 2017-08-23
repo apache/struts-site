@@ -144,8 +144,9 @@ an action:</p>
 
 <ul>
   <li>Mapping:
-```xml
-    <struts>
+```xml</li>
+</ul>
+<struts>
     <constant name="struts.objectFactory" value="spring" />
     <package name="test" namespace="/test" extends="struts-default">
         <action name="testAction" class="org.apache.struts2.TestAction">
@@ -153,40 +154,38 @@ an action:</p>
         </action>
     </package>
 </struts>
-    <p>```</p>
-  </li>
-  <li>
-    <p>Action:
-```java<br />
+<div class="highlighter-rouge"><pre class="highlight"><code>- Action:
+```java  
 public class TestAction extends ActionSupport {
-    private String name;</p>
+    private String name;
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>public String getName() {
-    return name;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
-  
-public void setName(String name) {
-    this.name = name;
-} } ```
 </code></pre>
-    </div>
-  </li>
-  <li>
-    <p>JUnit:
+</div>
+<ul>
+  <li>JUnit:
 ```java
-package org.apache.struts2;</p>
+package org.apache.struts2;</li>
+</ul>
 
-    <p>import org.apache.struts2.dispatcher.mapper.ActionMapping;</p>
+<p>import org.apache.struts2.dispatcher.mapper.ActionMapping;</p>
 
-    <p>import java.util.HashMap;
+<p>import java.util.HashMap;
 import java.io.UnsupportedEncodingException;</p>
 
-    <p>import com.opensymphony.xwork2.ActionProxy;
+<p>import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.Action;</p>
 
-    <p>import javax.servlet.ServletException;</p>
+<p>import javax.servlet.ServletException;</p>
 
-    <p>public class StrutsTestCaseTest extends StrutsTestCase {
+<p>public class StrutsTestCaseTest extends StrutsTestCase {
     public void testGetActionMapping() {
         ActionMapping mapping = getActionMapping(“/test/testAction.action”);
         assertNotNull(mapping);
@@ -194,26 +193,26 @@ import com.opensymphony.xwork2.Action;</p>
         assertEquals(“testAction”, mapping.getName());
     }</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>public void testGetActionProxy() throws Exception {
+<div class="highlighter-rouge"><pre class="highlight"><code>public void testGetActionProxy() throws Exception {
     //set parameters before calling getActionProxy
     request.setParameter("name", "FD");
-      
+    
     ActionProxy proxy = getActionProxy("/test/testAction.action");
     assertNotNull(proxy);
-  
+
     TestAction action = (TestAction) proxy.getAction();
     assertNotNull(action);
-  
+
     String result = proxy.execute();
     assertEquals(Action.SUCCESS, result);
     assertEquals("FD", action.getName());
 }
-  
+
 public void testExecuteAction() throws ServletException, UnsupportedEncodingException {
     String output = executeAction("/test/testAction.action");
     assertEquals("Hello", output);
 }
-  
+
 public void testGetValueFromStack() throws ServletException, UnsupportedEncodingException {
     request.setParameter("name", "FD");
     executeAction("/test/testAction.action");
@@ -221,9 +220,7 @@ public void testGetValueFromStack() throws ServletException, UnsupportedEncoding
     assertEquals("FD", name);
 } } ```
 </code></pre>
-    </div>
-  </li>
-</ul>
+</div>
 
 <h2 id="the-template">The template</h2>
 
