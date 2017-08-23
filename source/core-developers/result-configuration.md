@@ -4,7 +4,10 @@ title: Result Configuration
 ---
 
 # Result Configuration
+{:.no_toc}
 
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 When an `action` class method completes, it returns a String. The value of the String is used to select a result element. 
 An action mapping will often have a set of results representing different possible outcomes. A standard set of result 
