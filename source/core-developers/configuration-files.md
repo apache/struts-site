@@ -19,7 +19,7 @@ See [Reloading configuration](reloading-configuration.html) for more.
 |[web.xml](web-xml.html)| no | /WEB-INF/ | Web deployment descriptor to include all necessary framework components |
 |[struts.xml](struts-xml.html)| yes | /WEB-INF/classes/ | Main configuration, contains result/view types, action mappings, interceptors, and so forth \
 |
-|[struts.properties](struts-properties.html)| yes | /WEB-INF/classes/ | Framework properties |
+|[default.properties](default-properties.html)| yes | /WEB-INF/classes/ | Framework properties |
 |[struts-default.xml](struts-default-xml.html)| yes | /WEB-INF/lib/struts2-core.jar | Default configuration provided by Struts |
 |[struts-default.vm](struts-default-vm.html)| yes | /WEB-INF/classes/ | Default macros referenced by velocity.properties|
 | struts-plugin.xml | yes | At the root of a plugin JAR| Optional configuration files for [Plugins](../plugins-developer-guide/)  in the same format as struts.xml. |
