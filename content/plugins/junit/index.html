@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Core Developers Guide (WIP)</title>
+  <title>Convention plugin</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -123,98 +123,152 @@
 
 <article class="container">
   <section class="col-md-12">
-    <h1 id="core-developers-guide-wip">Core Developers Guide (WIP)</h1>
+    <a href="../" title="back to Plugins"><< back to Plugins</a>
+    [Edit on GitHub](https://github.com/apache/struts-site/edit/master/source/plugins/junit/index.md){: .edit-on-gh title="Edit this page on GitHub"}
+    <h1 class="no_toc" id="junit-plugin">JUnit plugin</h1>
 
-<p>Struts 2 processes requests using three core types: <a href="interceptor-configuration.html">interceptors</a>, <a href="action-configuration.html">actions</a>, and <a href="result-configuration.html">results</a>. 
-Each may be configured via XML or annotations.</p>
-
-<h2 id="developing-applications-with-struts-2">Developing Applications with Struts 2</h2>
-
-<ul>
-  <li><a href="nutshell.html">Nutshell</a></li>
-  <li><a href="ajax.html">AJAX</a></li>
-  <li><a href="dependency-injection.html">Dependency Injection</a></li>
-  <li><a href="debugging.html">Debugging</a></li>
-  <li><a href="development-mode.html">Development Mode</a></li>
+<ul id="markdown-toc">
+  <li><a href="#struts-actions-without-spring" id="markdown-toc-struts-actions-without-spring">Struts actions (without Spring)</a></li>
+  <li><a href="#the-template" id="markdown-toc-the-template">The template</a></li>
+  <li><a href="#struts-actions-using-spring" id="markdown-toc-struts-actions-using-spring">Struts Actions using Spring</a></li>
 </ul>
 
-<h2 id="configuration">Configuration</h2>
+<p>The recommended way to test actions is to instantiate the action classes and test them. The <em>JUnit Plugin</em>  supports 
+testing actions within a Struts invocation, meaning that a full request is simulated, and the output of the action can 
+be tested.</p>
+
+<h2 id="struts-actions-without-spring">Struts actions (without Spring)</h2>
+
+<p>To test actions that do not use Spring, extend <code class="highlighter-rouge">StrutsTestCase</code>. The following example shows different ways of testing 
+an action:</p>
 
 <ul>
-  <li><a href="../plugins/convention/">Configuration by Convention</a></li>
-  <li><a href="annotations.html">Annotations</a></li>
-  <li><a href="configuration-elements.html">Configuration Elements</a>
-    <ul>
-      <li><a href="action-configuration.html">Actions</a>, <a href="wildcard-mappings.html">Wildcard Mappings</a>, <a href="bean-configuration.html">Beans</a>, <a href="constant-configuration.html">Constants</a></li>
-      <li><a href="exception-configuration.html">Exceptions</a>, <a href="include-configuration.html">Includes</a>, <a href="interceptor-configuration.html">Interceptors</a></li>
-      <li><a href="namespace-configuration.html">Namespaces</a>, <a href="package-configuration.html">Packages</a>, <a href="result-configuration.html">Results</a></li>
-      <li><a href="unknown-handlers.html">Unknown Handlers</a>, <a href="dispatcher.html">Dispatcher</a></li>
-    </ul>
+  <li>Mapping:
+```xml
+    <struts>
+    <constant name="struts.objectFactory" value="spring" />
+    <package name="test" namespace="/test" extends="struts-default">
+        <action name="testAction" class="org.apache.struts2.TestAction">
+            <result type="freemarker">/template.ftl</result>
+        </action>
+    </package>
+</struts>
+    <p>```</p>
   </li>
-  <li><a href="configuration-files.html">Configuration Files</a>
-    <ul>
-      <li><a href="web-xml.html">web.xml</a></li>
-      <li><a href="struts-xml.html">struts.xml</a></li>
-      <li><a href="default-properties.html">default.properties</a></li>
-      <li><a href="struts-default-xml.html">struts-default.xml</a></li>
-      <li><a href="velocity-properties.html">velocity.properties</a></li>
-      <li><a href="struts-default-vm.html">struts-default.vm</a></li>
-    </ul>
+  <li>
+    <p>Action:
+```java<br />
+public class TestAction extends ActionSupport {
+    private String name;</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>public String getName() {
+    return name;
+}
+  
+public void setName(String name) {
+    this.name = name;
+} } ```
+</code></pre>
+    </div>
   </li>
-  <li><a href="application-servers.html">Application Servers</a></li>
-  <li><a href="performance-tuning.html">Performance Tuning</a></li>
-  <li><a href="../security/">Security</a></li>
-  <li><a href="../plugins/junit/">Testing Actions</a>
-    <ul>
-      <li><a href="https://depressedprogrammer.wordpress.com/2007/06/18/unit-testing-struts-2-actions-spring-junit/">(arsenalist)</a></li>
-      <li><a href="http://fassisrosa.blogspot.com/2006/11/unit-testing-struts-20\.html">(rosa)</a></li>
-    </ul>
-  </li>
-  <li><a href="interceptors.html">Interceptors</a>
-    <ul>
-      <li><a href="writing-interceptors.html">Writing Interceptors</a></li>
-      <li><a href="parameters-interceptor.html">Excluding Parameters</a></li>
-    </ul>
-  </li>
-  <li>Actions
-    <ul>
-      <li><a href="model-driven.html">Model Driven</a></li>
-      <li><a href="action-chaining.html">Action Chaining</a></li>
-      <li><a href="action-event-listener.html">ActionEventListener</a></li>
-    </ul>
-  </li>
-  <li>Results
-    <ul>
-      <li><a href="result-types.html">Result Types</a></li>
-      <li><a href="dispatcher-listener.html">DispatcherListener</a></li>
-      <li><a href="pre-result-listener.html">PreResultListener</a></li>
-    </ul>
-  </li>
-  <li><a href="validation.html">Validation</a></li>
-  <li><a href="localization.html">Localization</a>
-    <ul>
-      <li><a href="formatting-dates-and-numbers.html">Formatting Dates and Numbers</a></li>
-    </ul>
-  </li>
-  <li><a href="type-conversion.html">Type Conversion</a></li>
-  <li><a href="static-content.html">Static Content</a></li>
-  <li>Portlets
-    <ul>
-      <li>[Tutorial] - export https://cwiki.apache.org/confluence/display/WW/Struts+2+Portlet+Tutorial</li>
-      <li>[Configuration/Documentation] - export https://cwiki.apache.org/confluence/display/WW/Portlet+Plugin</li>
-    </ul>
-  </li>
-  <li><a href="logging.html">Logging</a></li>
-  <li><a href="accessing-application-session-request-objects.html">Accessing application, session, request objects</a></li>
-  <li><a href="action-mapper-and-action-mapping.html">Action Mapper &amp; Action Mapping</a></li>
-  <li><a href="action-proxy-and-actionproxy-factory.html">Action Proxy &amp; ActionProxy Factory</a></li>
-  <li>[FAQs]
-    <ul>
-      <li><a href="#PAGE_108820">Struts 2 Maven Archetypes</a>\</li>
-      <li>[Cookbook]</li>
-    </ul>
+  <li>
+    <p>JUnit:
+```java
+package org.apache.struts2;</p>
+
+    <p>import org.apache.struts2.dispatcher.mapper.ActionMapping;</p>
+
+    <p>import java.util.HashMap;
+import java.io.UnsupportedEncodingException;</p>
+
+    <p>import com.opensymphony.xwork2.ActionProxy;
+import com.opensymphony.xwork2.Action;</p>
+
+    <p>import javax.servlet.ServletException;</p>
+
+    <p>public class StrutsTestCaseTest extends StrutsTestCase {
+    public void testGetActionMapping() {
+        ActionMapping mapping = getActionMapping(“/test/testAction.action”);
+        assertNotNull(mapping);
+        assertEquals(“/test”, mapping.getNamespace());
+        assertEquals(“testAction”, mapping.getName());
+    }</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>public void testGetActionProxy() throws Exception {
+    //set parameters before calling getActionProxy
+    request.setParameter("name", "FD");
+      
+    ActionProxy proxy = getActionProxy("/test/testAction.action");
+    assertNotNull(proxy);
+  
+    TestAction action = (TestAction) proxy.getAction();
+    assertNotNull(action);
+  
+    String result = proxy.execute();
+    assertEquals(Action.SUCCESS, result);
+    assertEquals("FD", action.getName());
+}
+  
+public void testExecuteAction() throws ServletException, UnsupportedEncodingException {
+    String output = executeAction("/test/testAction.action");
+    assertEquals("Hello", output);
+}
+  
+public void testGetValueFromStack() throws ServletException, UnsupportedEncodingException {
+    request.setParameter("name", "FD");
+    executeAction("/test/testAction.action");
+    String name = (String) findValueAfterExecute("name");
+    assertEquals("FD", name);
+} } ```
+</code></pre>
+    </div>
   </li>
 </ul>
+
+<h2 id="the-template">The template</h2>
+
+<p>If you use JSPs as the template engine you won’t be able to test the action output outside the container. 
+The <a href="../embeddedjsp/">Embedded JSP Plugin</a> can be used to overcome this limitation and be able to use JSPs from 
+the classpath and outside the container.</p>
+
+<p>There are several utility methods and mock objects defined in StrutsTestCase which can be used to facilitate the testing:</p>
+
+<ul>
+  <li>Methods:
+|Method Name|Description|
+|———–|———–|
+|executeAction(String)|Pass the url for the action, and it will return the output of the action. This output <strong>is not</strong> the action result, like “success”, but what would be written to the result stream. To use this the actions must be using a result type that can be read from the classpath, like FreeMarker, velocity, etc (if you are using the experimental Embedded JSP Plugin, you can use JSPs also)|
+|getActionProxy(String)|Builds an action proxy that can be used to invoke an action, by calling execute() on the returned proxy object. The return value of execute() is the action result, like “success”|
+|getActionMapping(String)|Gets an ActionMapping for the url|
+|injectStrutsDependencies(object)|Injects Struts dependencies into an object (dependencies are marked with Inject)|
+|findValueAfterExecute(String)|Finds an object in the value stack, after an action has been executed|
+|applyAdditionalParams(ActionContext)|Can be overwritten in subclass to provide additional params and settings used during action invocation|
+|createAction(Class)|Can be used to instantiate an action which requires framework’s dependencies to be injected (e.g. extending ActionSupport requires inject some internal dependencies)|</li>
+  <li>Fields:
+|Field|Description|
+|—–|———–|
+|MockHttpServletRequest request|The request that will be passed to Struts. Make sure to set parameters in this object before calling methods like getActionProxy|
+|MockHttpServletResponse response|The response object passed to Struts, you can use this class to test the output, response headers, etc|
+|MockServletContext servletContext|The servlet context object passed to Struts|</li>
+</ul>
+
+<h2 id="struts-actions-using-spring">Struts Actions using Spring</h2>
+
+<p>Make sure to add a dependency to the <a href="../spring/">Spring Plugin</a> to your <code class="highlighter-rouge">pom.xml</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>struts2-spring-plugin<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>STRUTS_VERSION<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+
+<p>If you use Spring as the object factory, the <code class="highlighter-rouge">StrutsSpringTestCase</code> class can be used to write your JUnits. This class 
+extends <code class="highlighter-rouge">StrutsTestCase</code> and has an <code class="highlighter-rouge">applicationContext</code> field of type <code class="highlighter-rouge">ApplicationContext</code>.</p>
+
+<p>The Spring context is loaded from <code class="highlighter-rouge">classpath\*:applicationContext.xml</code> by default. To provide a different location, 
+overwrite <code class="highlighter-rouge">getContextLocations</code>.</p>
 
   </section>
 </article>
