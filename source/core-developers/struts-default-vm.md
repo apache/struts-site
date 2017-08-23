@@ -5,18 +5,11 @@ title: struts-default.vm
 
 # struts-default.vm
 
-If Velocity is being use, the 
+If Velocity is being use, the `struts-default.vm` supplies some VelocityMacros that might be useful.
 
-~~~~~~~
-struts-default.vm
-~~~~~~~
- supplies some VelocityMacros that might be useful\.
+**struts-default.vm**
 
-**struts\-default\.vm**
-
-
-~~~~~~~
-
+```
 #macro(bean $bean_name $name)
    #set ($name = $action.bean($bean_name))
 #end
@@ -34,5 +27,4 @@ struts-default.vm
 #macro(property $object $property)
 $!{ognl.findValue($property, $object)}
 #end
-
-~~~~~~~
+```
