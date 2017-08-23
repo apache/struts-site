@@ -32,10 +32,9 @@ Interceptors can be configured on a per-action basis. Your own custom Intercepto
 the Interceptors bundled with the framework. Interceptors "set the stage" for the Action classes, doing much of 
 the "heavy lifting" before the Action executes.
 
-|Action Lifecyle|
-|---------------|
-|![overview.png](attachments/att1607_overview.png)
-|
+**Action Lifecyle**
+
+![overview.png](attachments/att1607_overview.png)
 
 In some cases, an Interceptor might keep an Action from firing, because of a double-submit or because validation failed. 
 Interceptors can also change the state of an Action before it executes.
