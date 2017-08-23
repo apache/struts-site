@@ -124,64 +124,44 @@
 <article class="container">
   <section class="col-md-12">
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/unknown-handlers.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="unknown-handlers">Unknown Handlers</h1>
 
 <p>Unknown Handler stacks are available from Struts 2.1 on.</p>
 
-<blockquote>
+<h2 id="unknown-handlers-1">Unknown Handlers</h2>
 
-</blockquote>
+<p>Unknown Handlers are classes that implement the <code class="highlighter-rouge">com.opensymphony.xwork2.UnknownHandler</code> interface, and are called 
+by the framework, when an unknown action, result, or method are executed. To define an unknown handler, create a class 
+implementing the mentioned interface, and add a bean definition to your struts.xml:</p>
 
-<p>#####Unkown Handlers#####</p>
-
-<p>Unknown Handlers are classes that implement the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>com.opensymphony.xwork2.UnknownHandler
-</code></pre>
-</div>
-<p>interface, and are called by the framework, when an unknown action, result, or method are executed. To define an unknown handler, create a class implementing the mentioned interface, and add a bean definition to your struts.xml:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;bean type="com.opensymphony.xwork2.UnknownHandler" name="handler" class="myclasses.SomeUnknownHandler"/&gt;
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.UnknownHandler"</span> <span class="na">name=</span><span class="s">"handler"</span> <span class="na">class=</span><span class="s">"myclasses.SomeUnknownHandler"</span><span class="nt">/&gt;</span>
 </code></pre>
 </div>
 
-<p>#####Stacking Unknown Handlers#####</p>
+<h2 id="stacking-unknown-handlers">Stacking Unknown Handlers</h2>
 
 <p>Multiple unknown handlers can be defined, using the <em>unknown-handler-stack</em>  tag:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;bean type="com.opensymphony.xwork2.UnknownHandler" name="handler1" class="com.opensymphony.xwork2.config.providers.SomeUnknownHandler"/&gt;
-&lt;bean type="com.opensymphony.xwork2.UnknownHandler" name="handler2" class="com.opensymphony.xwork2.config.providers.SomeUnknownHandler"/&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.UnknownHandler"</span> <span class="na">name=</span><span class="s">"handler1"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.config.providers.SomeUnknownHandler"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.UnknownHandler"</span> <span class="na">name=</span><span class="s">"handler2"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.config.providers.SomeUnknownHandler"</span><span class="nt">/&gt;</span>
 
-&lt;unknown-handler-stack&gt;
-   &lt;unknown-handler-ref name="handler1" /&gt;
-   &lt;unknown-handler-ref name="handler2" /&gt;
-&lt;/unknown-handler-stack&gt;
-
+<span class="nt">&lt;unknown-handler-stack&gt;</span>
+   <span class="nt">&lt;unknown-handler-ref</span> <span class="na">name=</span><span class="s">"handler1"</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;unknown-handler-ref</span> <span class="na">name=</span><span class="s">"handler2"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/unknown-handler-stack&gt;</span>
 </code></pre>
 </div>
 
-<p>When multiple unknown handlers are stacked like above, they will be called in the specified order, in the same cases when a single unknown handler would be called (when an unknown action, result, or method are executed), until one of them handles the requested action.</p>
+<p>When multiple unknown handlers are stacked like above, they will be called in the specified order, in the same cases 
+when a single unknown handler would be called (when an unknown action, result, or method are executed), until one of them 
+handles the requested action.</p>
 
-<p>#####Uknown Handlers Manager#####</p>
+<h2 id="unknown-handlers-manager">Unknown Handlers Manager</h2>
 
-<p>The default class that handles unknown handler stacks is</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>com.opensymphony.xwork2.DefaultUnknownHandlerManager
-</code></pre>
-</div>
-<p>, a custom implementation of this class can be provided by implementing the interface</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>com.opensymphony.xwork2.UnknownHandlerManager
-</code></pre>
-</div>
-<p>and setting the property</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.unknownHandlerManager
-</code></pre>
-</div>
+<p>The default class that handles unknown handler stacks is <code class="highlighter-rouge">com.opensymphony.xwork2.DefaultUnknownHandlerManager</code>, 
+a custom implementation of this class can be provided by implementing the interface <code class="highlighter-rouge">com.opensymphony.xwork2.UnknownHandlerManager</code>
+and setting the property <code class="highlighter-rouge">struts.unknownHandlerManager</code>.</p>
 
   </section>
 </article>

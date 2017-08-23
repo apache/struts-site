@@ -124,37 +124,21 @@
 <article class="container">
   <section class="col-md-12">
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/dispatcher.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="dispatcher">Dispatcher</h1>
 
-<p>###Description###</p>
+<p>Dispatcher is the main point of control which dispatch request execution to given actions. It is used 
+by <a href="web-xml.html">filters</a> / servlet / listener / portlet to set up and run Struts environment.</p>
 
-<p>Dispatcher is the main point of control which dispatch request execution to given actions. It is used by <a href="web-xml.html">filters</a> / servlet / listener / portlet to set up and run Struts environment.</p>
+<h2 id="error-handling">Error handling</h2>
 
-<p>####Error handling####</p>
+<p>When exception occurs (misconfiguration or some internal error), Dispatcher will pass handling to <code class="highlighter-rouge">DispatcherErrorHandler</code>
+which by default uses <code class="highlighter-rouge">HttpServletResponse#sendError</code> to report error back to client. It will be 404 or 500 by default 
+(depends on exception type).</p>
 
-<p>When exception occurs (misconfiguration or some internal error), Dispatcher will pass handling to </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>DispatcherErrorHandler
-</code></pre>
-</div>
-<p>which by default uses </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>HttpServletResponse#sendError
-</code></pre>
-</div>
-<p>to report error back to client. It will be 404 or 500 by default (depends on exception type).</p>
-
-<p>If you need a different type of handling you can implement your own </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>DispatcherErrorHandler
-</code></pre>
-</div>
-<p>and register it with Dispatcher using extension point </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.dispatcher.errorHandler
-</code></pre>
-</div>
-<p>, see <em>Plugins</em>  for how to register your own implementation of internal mechanism.</p>
+<p>If you need a different type of handling you can implement your own <code class="highlighter-rouge">DispatcherErrorHandler</code> and register it with 
+Dispatcher using extension point <code class="highlighter-rouge">struts.dispatcher.errorHandler</code>, see <a href="../plugins-developer-guide/">Plugins</a> for how 
+to register your own implementation of internal mechanism.</p>
 
   </section>
 </article>

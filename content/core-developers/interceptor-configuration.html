@@ -124,9 +124,12 @@
 <article class="container">
   <section class="col-md-12">
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/interceptor-configuration.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="interceptor-configuration">Interceptor Configuration</h1>
 
-<p>Interceptors allow you to define code to be executed before and/or after the execution of an Action method. (The “Filter” pattern.) Interceptors can be a powerful tool when developing applications. There are many, many use cases for Interceptors, including validation, property population, security, logging, and profiling.</p>
+<p>Interceptors allow you to define code to be executed before and/or after the execution of an Action method. 
+(The “Filter” pattern.) Interceptors can be a powerful tool when developing applications. There are many, many use cases 
+for Interceptors, including validation, property population, security, logging, and profiling.</p>
 
 <table>
   <thead>
@@ -151,55 +154,51 @@
   </tbody>
 </table>
 
-<p>Interceptors can be chained together to create an Interceptor “Stack”. If an action neeeds to check the client’s credentials, log the action, and time the action, all of these routines, and more, could be made part of the same Interceptor Stack.</p>
+<p>Interceptors can be chained together to create an Interceptor “Stack”. If an action needs to check the client’s 
+credentials, log the action, and time the action, all of these routines, and more, could be made part of the same 
+Interceptor Stack.</p>
 
-<p>Interceptors are implemented as Java classes, so each Interceptor has a class name. To make it easier to reference Interceptors, each class can be registered with the framework and given a unique, simpler name.</p>
+<p>Interceptors are implemented as Java classes, so each Interceptor has a class name. To make it easier to reference 
+Interceptors, each class can be registered with the framework and given a unique, simpler name.</p>
 
 <p><strong>Registering Interceptors</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;interceptors&gt;
-  &lt;interceptor name="security" class="com.company.security.SecurityInterceptor"/&gt;
-  &lt;interceptor-stack name="secureStack"&gt;
-    &lt;interceptor-ref name="security"/&gt;
-    &lt;interceptor-ref name="defaultStack"/&gt;
-  &lt;/interceptor-stack&gt;
-&lt;/interceptors&gt;
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;interceptors&gt;</span>
+  <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"security"</span> <span class="na">class=</span><span class="s">"com.company.security.SecurityInterceptor"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"secureStack"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"security"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/interceptor-stack&gt;</span>
+<span class="nt">&lt;/interceptors&gt;</span>
 </code></pre>
 </div>
 
-<p>(ok)  Individual Interceptors and Interceptors Stacks can be “mixed and matched” in any order when defining an Interceptor Stack.</p>
+<blockquote>
+  <p>Individual Interceptors and Interceptors Stacks can be “mixed and matched” in any order when defining an Interceptor Stack.</p>
+</blockquote>
 
-<p>(ok)  The framework will invoke each Interceptor on the stack <strong>in the order it is defined</strong>.</p>
+<blockquote>
+  <p>The framework will invoke each Interceptor on the stack <strong>in the order it is defined</strong>.</p>
+</blockquote>
 
-<p>Most applications will define a default Interceptor Stack, such as</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;default-interceptor-ref name="secureStack"/&gt;
-</code></pre>
-</div>
-
-<p>but any action may also define its own local stack.</p>
+<p>Most applications will define a default Interceptor Stack, such as <code class="highlighter-rouge">&lt;default-interceptor-ref name="secureStack"/&gt;</code> 
+but any action may also define its own local stack.</p>
 
 <p><strong>A local Interceptor Stack</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;action name="VelocityCounter" class="org.apache.struts2.example.counter.SimpleCounter"&gt;
-    &lt;result name="success"&gt;...&lt;/result&gt;
-    &lt;interceptor-ref name="defaultComponentStack"/&gt;
-&lt;/action&gt;
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"VelocityCounter"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.example.counter.SimpleCounter"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultComponentStack"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
 </code></pre>
 </div>
 
-<p>The default configuration (</p>
+<p>The default configuration - <a href="struts-default-xml.html">struts-default.xml</a>; sets up a default Interceptor Stack that 
+will work well for most applications.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-</code></pre>
-</div>
-<p>) sets up a default Interceptor Stack that will work well for most applications.</p>
-
-<p>(light-on) For more, see <a href="interceptors.html">Interceptors</a>.</p>
+<blockquote>
+  <p>For more, see <a href="interceptors.html">Interceptors</a>.</p>
+</blockquote>
 
   </section>
 </article>

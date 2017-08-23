@@ -124,21 +124,17 @@
 <article class="container">
   <section class="col-md-12">
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/configuration-files.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="configuration-files">Configuration Files</h1>
 
-<p>From a Struts developer point of view, the one required configuration file used by the framework is</p>
+<p>From a Struts developer point of view, the one required configuration file used by the framework is <code class="highlighter-rouge">web.xml</code>.<br />
+From here, you have full control over how Struts configures both itself and your application.  By default, Struts will 
+load a set of internal configuration files to configure itself, then another set to configure your application, however 
+it is possible to build an entire Struts application without writing a single configuration file other than <code class="highlighter-rouge">web.xml</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>web.xml
-</code></pre>
-</div>
-<p>.  From here, you have full control over how Struts configures both itself and your application.  By default, Struts will load a set of internal configuration files to configure itself, then another set to configure your application, however it is possible to build an entire Struts application without writing a single configuration file other than</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>web.xml
-</code></pre>
-</div>
-<p>.</p>
-
-<p>The table lists the files that you can use to configure the framework for your application. Some configuration files can be reloaded dynamically. Dynamic reloading makes interactive development possible. See <a href="reloading-configuration.html">Reloading configuration</a> for more.</p>
+<p>The table lists the files that you can use to configure the framework for your application. Some configuration files 
+can be reloaded dynamically. Dynamic reloading makes interactive development possible. 
+See <a href="reloading-configuration.html">Reloading configuration</a> for more.</p>
 
 <table>
   <thead>
@@ -169,7 +165,7 @@
       <td> </td>
     </tr>
     <tr>
-      <td><a href="struts-properties.html">struts.properties</a></td>
+      <td><a href="default-properties.html">default.properties</a></td>
       <td>yes</td>
       <td>/WEB-INF/classes/</td>
       <td>Framework properties</td>
@@ -190,7 +186,7 @@
       <td>struts-plugin.xml</td>
       <td>yes</td>
       <td>At the root of a plugin JAR</td>
-      <td>Optional configuration files for <em>Plugins</em>  in the same format as struts.xml.</td>
+      <td>Optional configuration files for <a href="../plugins-developer-guide/">Plugins</a>  in the same format as struts.xml.</td>
     </tr>
     <tr>
       <td><a href="velocity-properties.html">velocity.properties</a></td>
@@ -201,32 +197,22 @@
   </tbody>
 </table>
 
-<p>####Static Content####</p>
+<h2 id="static-content">Static Content</h2>
 
-<p>Common static content that is needed by the framework (JavaScript and CSS files, etc.) is served automatically by the FilterDispatcher filter.  Any request starting with “</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>/struts/
-</code></pre>
-</div>
-<p>” denotes that static content is required, and then mapping the value after “</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>/struts/
-</code></pre>
-</div>
-<p>” to common packages in the framework and, optionally in the application’s class path.</p>
+<p>Common static content that is needed by the framework (JavaScript and CSS files, etc.) is served automatically by 
+the FilterDispatcher filter.  Any request starting with <code class="highlighter-rouge">/struts/</code> denotes that static content is required, and then 
+mapping the value after <code class="highlighter-rouge">/struts/</code> to common packages in the framework and, optionally in the application’s class path.</p>
 
 <p>By default, the following packages are searched:</p>
 
 <ul>
-  <li>
-    <p>org.apache.struts2.static</p>
-  </li>
-  <li>
-    <p>template</p>
-  </li>
+  <li><code class="highlighter-rouge">org.apache.struts2.static</code></li>
+  <li><code class="highlighter-rouge">template</code></li>
 </ul>
 
-<p>Additional packages can be specified by providing a comma separated list to the configuration parameter named “packages” (configured in web.xml for the FilterDispatcher filter). When specifying additional static content, you should be careful not to expose sensitive configuration information (such as the password to a database).</p>
+<p>Additional packages can be specified by providing a comma separated list to the configuration parameter named “packages” 
+(configured in <code class="highlighter-rouge">web.xml</code> for the FilterDispatcher filter). When specifying additional static content, you should 
+be careful not to expose sensitive configuration information (such as the password to a database).</p>
 
   </section>
 </article>
