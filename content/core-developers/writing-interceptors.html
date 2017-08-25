@@ -129,111 +129,91 @@
 
 <p>See the <a href="interceptors.html">Interceptors</a> page for an overview of how interceptors work.</p>
 
-<p><strong>Interceptor interface</strong></p>
+<h2 id="interceptor-interface">Interceptor interface</h2>
 
-<p>Interceptors must implement the com.opensymphony.xwork2.interceptor.Interceptor interface.</p>
+<p>Interceptors must implement the <code class="highlighter-rouge">com.opensymphony.xwork2.interceptor.Interceptor</code> interface.</p>
 
 <p><strong>Interceptor.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-public interface Interceptor extends Serializable {
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Interceptor</span> <span class="kd">extends</span> <span class="n">Serializable</span> <span class="o">{</span>
 
-    void destroy();
+    <span class="kt">void</span> <span class="n">destroy</span><span class="o">();</span>
 
-    void init();
+    <span class="kt">void</span> <span class="n">init</span><span class="o">();</span>
 
-    String intercept(ActionInvocation invocation) throws Exception;
-}
-
+    <span class="n">String</span> <span class="n">intercept</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 
-<p>The <em>init</em>  method is called the after interceptor is instantiated and before calling <em>intercept</em> . This is the place to allocate any resources used by the interceptor.</p>
+<p>The <code class="highlighter-rouge">init</code> method is called the after interceptor is instantiated and before calling <code class="highlighter-rouge">intercept</code>. This is the place 
+to allocate any resources used by the interceptor.</p>
 
-<p>The <em>intercept</em>  method is where the interceptor code is written. Just like an action method, <em>intercept</em>  returns a result used by Struts to forward the request to another web resource. Calling <em>invoke</em>  on the parameter of type ActionInvocation will execute the action (if this is the last interceptor on the stack) or another interceptor.</p>
+<p>The <code class="highlighter-rouge">intercept</code> method is where the interceptor code is written. Just like an action method, <code class="highlighter-rouge">intercept</code> returns 
+a result used by Struts to forward the request to another web resource. Calling <code class="highlighter-rouge">invoke</code> on the parameter of type 
+<code class="highlighter-rouge">ActionInvocation</code> will execute the action (if this is the last interceptor on the stack) or another interceptor.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>Keep in mind that <em>invoke</em>  will return <strong>after</strong> the result has been called (eg. after you JSP has been rendered), making it perfect for things like open-session-in-view patterns. If you want to do something before the result gets called, you should implement a PreResultListener.</td>
-    </tr>
-  </tbody>
-</table>
+<blockquote>
+  <p>Keep in mind that <code class="highlighter-rouge">invoke</code> will return <strong>after</strong> the result has been called (eg. after you JSP has been rendered), 
+making it perfect for things like open-session-in-view patterns. If you want to do something before the result gets 
+called, you should implement a <code class="highlighter-rouge">PreResultListener</code>.</p>
+</blockquote>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+<p>Overwrite <code class="highlighter-rouge">destroy</code> to release resources on application shutdown.</p>
 
-<p>Overwrite <em>destroy</em>  to release resources on application shutdown.</p>
-
-<p><strong>Thread Safety</strong></p>
+<h2 id="thread-safety">Thread Safety</h2>
 
 <p><strong>Interceptors must be thread-safe!</strong></p>
 
 <blockquote>
-
+  <p>A Struts 2 Action instance is created for every request and do not need to be thread-safe. Conversely, Interceptors 
+are shared between requests and must be <a href="http://en.wikipedia.org/wiki/Thread-safety">thread-safe</a>.</p>
 </blockquote>
 
-<blockquote>
+<h2 id="abstractinterceptor">AbstractInterceptor</h2>
 
-</blockquote>
+<p>The AbstractInterceptor class provides an empty implementation of <code class="highlighter-rouge">init</code> and <code class="highlighter-rouge">destroy</code>, and can be used if these 
+methods are not going to be implemented.</p>
 
-<blockquote>
-  <p>A Struts 2 Action instance is created for every request and do not need to be thread-safe. Conversely, Interceptors are shared between requests and must be <a href="http://en\.wikipedia\.org/wiki/Thread\-safety">thread-safe</a>^[http://en.wikipedia.org/wiki/Thread-safety].</p>
-</blockquote>
+<h2 id="mapping">Mapping</h2>
 
-<blockquote>
+<p>Interceptors are declared using the <code class="highlighter-rouge">&lt;interceptor/&gt;</code> element, nested inside the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> element. 
+Example from <code class="highlighter-rouge">struts-default.xml</code>:</p>
 
-</blockquote>
-
-<p><strong>AbstractInterceptor</strong></p>
-
-<p>The AbstractInterceptor class provides an empty implementation of <em>init</em>  and <em>destroy</em> , and can be used if these methods are not going to be implemented.</p>
-
-<p><strong>Mapping</strong></p>
-
-<p>Interceptors are declared using the <em>interceptor</em>  element, nested inside the <em>interceptors</em>  element. Example from struts-default.xml:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;struts&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
    ...
 
-   &lt;package name="struts-default"&gt;
-      &lt;interceptors&gt;
-         &lt;interceptor name="alias" class="com.opensymphony.xwork2.interceptor.AliasInterceptor"/&gt;
-         &lt;interceptor name="autowiring" class="com.opensymphony.xwork2.spring.interceptor.ActionAutowiringInterceptor"/&gt;
+   <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;interceptors&gt;</span>
+         <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"alias"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.AliasInterceptor"</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"autowiring"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.spring.interceptor.ActionAutowiringInterceptor"</span><span class="nt">/&gt;</span>
          ...
-      &lt;/interceptors&gt;
-   &lt;/package&gt;
+      <span class="nt">&lt;/interceptors&gt;</span>
+   <span class="nt">&lt;/package&gt;</span>
 
    ...
-&lt;/struts&gt;
-
+<span class="nt">&lt;/struts&gt;</span>
 </code></pre>
 </div>
 
-<p><strong>Example</strong></p>
+<h3 id="example">Example</h3>
 
-<p>Assuming there is an action of type “MyAction”, with a setDate(Date) method, this simple interceptor will set the date of the action to the current date:</p>
+<p>Assuming there is an action of type “MyAction”, with a setDate(Date) method, this simple interceptor will set the date 
+of the action to the current date:</p>
 
 <p><strong>Interceptor Example</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-import com.opensymphony.xwork2.ActionInvocation;
-import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionInvocation</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.interceptor.AbstractInterceptor</span><span class="o">;</span>
 
-public class SimpleInterceptor extends AbstractInterceptor {
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleInterceptor</span> <span class="kd">extends</span> <span class="n">AbstractInterceptor</span> <span class="o">{</span>
 
-    public String intercept(ActionInvocation invocation) throws Exception {
-       MyAction action = (MyAction)invocation.getAction();
-       action.setDate(new Date());
-       return invocation.invoke();
-    }
-}
-
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">intercept</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+       <span class="n">MyAction</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="n">MyAction</span><span class="o">)</span><span class="n">invocation</span><span class="o">.</span><span class="na">getAction</span><span class="o">();</span>
+       <span class="n">action</span><span class="o">.</span><span class="na">setDate</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">());</span>
+       <span class="k">return</span> <span class="n">invocation</span><span class="o">.</span><span class="na">invoke</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 

@@ -127,309 +127,158 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/localization.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="localization">Localization</h1>
 
-<p>####Overview####</p>
+<h2 id="overview">Overview</h2>
 
 <p>The framework supports internationalization (i18n) in the following places:</p>
 
 <ol>
-  <li>
-    <p>the <em>UI Tags</em></p>
-  </li>
-  <li>
-    <p>Messages and Errors from the <a href="http://struts.apache.org/2.0.6/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ValidationAware.html">ValidationAware</a>^[http://struts.apache.org/2.0.6/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ValidationAware.html] interface (implemented by <a href="http://struts.apache.org/2.0.6/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ActionSupport.html">ActionSupport</a>^[http://struts.apache.org/2.0.6/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ActionSupport.html] and <a href="http://struts.apache.org/2.0.6/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ValidationAwareSupport.html">ValidationAwareSupport</a>^[http://struts.apache.org/2.0.6/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ValidationAwareSupport.html])</p>
-  </li>
-  <li>
-    <p>Within action classes that extend <a href="http://struts.apache.org/2.0.6/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ActionSupport.html">ActionSupport</a>^[http://struts.apache.org/2.0.6/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ActionSupport.html] through the getText() method</p>
-  </li>
+  <li>the <em>UI Tags</em></li>
+  <li>Messages and Errors from the <a href="http://struts.apache.org/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ValidationAware.html">ValidationAware</a></li>
+  <li>Within action classes that extend <a href="http://struts.apache.org/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ActionSupport.html">ActionSupport</a> through the <code class="highlighter-rouge">getText()</code> method</li>
 </ol>
 
-<p>####Resource Bundle Search Order####</p>
+<h2 id="resource-bundle-search-order">Resource Bundle Search Order</h2>
 
 <p>Resource bundles are searched in the following order:</p>
 
 <ol>
-  <li></li>
+  <li><code class="highlighter-rouge">ActionClass</code>.properties</li>
+  <li><code class="highlighter-rouge">Interface</code>.properties (every interface and sub-interface)</li>
+  <li><code class="highlighter-rouge">BaseClass</code>.properties (all the way to Object.properties)</li>
+  <li>ModelDriven’s model (if implements ModelDriven), for the model object repeat from 1</li>
+  <li>package.properties (of the directory where class is located and every parent directory all the way to the root directory)</li>
+  <li>search up the i18n message key hierarchy itself</li>
+  <li>global resource properties</li>
 </ol>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ActionClass
-</code></pre>
-</div>
-<p>.properties</p>
+<p>This is how it is implemented in a default implementation of the <code class="highlighter-rouge">LocalizedTextProvider</code> interface. You can provide your 
+own implementation using <code class="highlighter-rouge">TextProvider</code> and <code class="highlighter-rouge">TextProviderFactory</code> interfaces.</p>
 
-<ol>
-  <li></li>
-</ol>
+<p>To clarify #5, while traversing the package hierarchy, Struts 2 will look for a file <code class="highlighter-rouge">package.properties</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Interface
-</code></pre>
-</div>
-<p>.properties (every interface and sub-interface)</p>
-
-<ol>
-  <li></li>
-</ol>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>BaseClass
-</code></pre>
-</div>
-<p>.properties (all the way to Object.properties)</p>
-
-<ol>
-  <li>
-    <p>ModelDriven’s model (if implements ModelDriven), for the model object repeat from 1</p>
-  </li>
-  <li>
-    <p>package.properties (of the directory where class is located and every parent directory all the way to the root directory)</p>
-  </li>
-  <li>
-    <p>search up the i18n message key hierarchy itself</p>
-  </li>
-  <li>
-    <p>global resource properties</p>
-  </li>
-</ol>
-
-<p>This is how it is implemented in a default implementation of the </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>LocalizedTextProvider
-</code></pre>
-</div>
-<p> interface. You can provide your own implementation using</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>TextProvider
-</code></pre>
-</div>
-<p> and</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>TextProviderFactory
-</code></pre>
-</div>
-<p> interfaces.</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>To clarify #5, while traversing the package hierarchy, Struts 2 will look for a file package.properties:</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>| com/
-     acme/
+<div class="highlighter-rouge"><pre class="highlight"><code>com/
+    acme/
          package.properties
          actions/
                  package.properties
                  FooAction.java
-                 FooAction.properties</p>
+                 FooAction.properties
+</code></pre>
+</div>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+<blockquote>
+  <p>If <code class="highlighter-rouge">FooAction.properties</code> does not exist, <code class="highlighter-rouge">com/acme/action/package.properties</code> will be searched for, if not found 
+<code class="highlighter-rouge">com/acme/package.properties</code>, if not found <code class="highlighter-rouge">com/package.properties</code>, etc.</p>
+</blockquote>
 
-<table>
-  <tbody>
-    <tr>
-      <td>If FooAction.properties does not exist, com/acme/action/package.properties will be searched for, if not found com/acme/package.properties, if not found com/package.properties, etc.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>#####Default action’s class#####</p>
+<h2 id="default-actions-class">Default action’s class</h2>
 
 <p>If you configure action as follow</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;action name="index"&gt;
-   &lt;result&gt;/index.jsp&lt;/result&gt;
-&lt;/action&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"index"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;result&gt;</span>/index.jsp<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
 </code></pre>
 </div>
 
-<p>it will use a default class defined with </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>default-class-ref
-</code></pre>
-</div>
-<p> in </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts-default.xml
-</code></pre>
-</div>
-<p>which is </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>com.opensymphony.xwork2.ActionSupport
-</code></pre>
-</div>
-<p>. It means you have two options here to get I18N working in that case:</p>
+<p>it will use a default class defined with <code class="highlighter-rouge">default-class-ref</code> in <code class="highlighter-rouge">struts-default.xml</code> which is 
+<code class="highlighter-rouge">com.opensymphony.xwork2.ActionSupport</code>. It means you have two options here to get I18N working in that case:</p>
 
 <ul>
-  <li>define </li>
+  <li>define <code class="highlighter-rouge">com/opensymphony/xwork2/ActionSupport.properties</code> and put messages there</li>
+  <li>point <code class="highlighter-rouge">default-class-ref</code> to your base class and then defined appropriated <code class="highlighter-rouge">.properties</code> file (corresponding to 
+class’ name or package)</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>com/opensymphony/xwork2/ActionSupport.properties
+<h2 id="examples">Examples</h2>
+
+<p>There are several ways to access the message resources, including <code class="highlighter-rouge">getText</code>, the <code class="highlighter-rouge">text</code> tag, and the <code class="highlighter-rouge">i18n</code> tag.</p>
+
+<h3 id="using-gettext-from-a-tag">Using getText from a Tag</h3>
+
+<p>To display i18n text, use a call to <code class="highlighter-rouge">getText</code> in the <code class="highlighter-rouge">property</code> tag, or any other tag, such as the UI tags. (The <code class="highlighter-rouge">getText</code>
+technique is especially useful for labels of UI tags.)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"getText('some.key')"</span> <span class="nt">/&gt;</span>
 </code></pre>
 </div>
-<p>and put messages there</p>
 
-<ul>
-  <li>point </li>
-</ul>
+<p>The default implementation of <code class="highlighter-rouge">TextProvider</code> which is used in <code class="highlighter-rouge">ActionSupport</code> perform evaluation of value read from 
+bundle base on the provided key, see [Localizing Output] for an example.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>default-class-ref
+<h3 id="using-the-text-tag">Using the text tag</h3>
+
+<p>The <code class="highlighter-rouge">text</code> tag retrieves a message from the default resource bundle.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:text</span> <span class="na">name=</span><span class="s">"some.key"</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;s:text</span> <span class="na">name=</span><span class="s">"some.invalid.key"</span><span class="nt">&gt;</span>
+    The Default Message That Will Be Displayed
+<span class="nt">&lt;/s:text&gt;</span>
 </code></pre>
 </div>
-<p>to your base class and then defined appropriated</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>.properties
+<h3 id="using-the-i18n-tag">Using the I18n tag</h3>
+
+<p>The <code class="highlighter-rouge">i18n</code> tag pushes an arbitrary resource bundle on to the value stack. Other tags within the scope of the i18n tag 
+can display messages from that resource bundle.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:i18n</span> <span class="na">name=</span><span class="s">"some.package.bundle"</span><span class="nt">&gt;&lt;/s:i18n&gt;</span>
+  <span class="nt">&lt;s:text</span> <span class="na">name=</span><span class="s">"some.key"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:i18n&gt;</span>
 </code></pre>
 </div>
-<p> file (corresponding to class’ name or package)</p>
 
-<p>Examples</p>
+<p>Internationalizing SiteMesh decorators is possible, but there are quirks. See <a href="../plugins/sitemesh/">SiteMesh Plugin</a><br />
+for more.</p>
 
-<p>There are several ways to access the message resources, including</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>getText
-</code></pre>
-</div>
-<p>, the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>text
-</code></pre>
-</div>
-<p>tag, and the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>i18n
-</code></pre>
-</div>
-<p>tag.</p>
-
-<p>#####Using getText from a Tag#####</p>
-
-<p>To display i18n text, use a call to</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>getText
-</code></pre>
-</div>
-<p>in the <em>property</em>  tag, or any other tag, such as the UI tags. (The</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>getText
-</code></pre>
-</div>
-<p>technique is especially useful for labels of UI tags.)</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=i18nExample|javadoc=true|lang=xml|url=org.apache.struts2.components.Property</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<p>The default implementation of TextProvider which is used in ActionSupport perform evaluation of value read from bundle base on the provided key, see <em>Localizing Output</em>  for an example.</p>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>#####Using the text tag#####</p>
-
-<p>The <em>text</em>  tag retrieves a message from the default resource bundle.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=i18nExample|javadoc=true|lang=xml|url=org.apache.struts2.components.Text</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<p>#####Using the I18n tag#####</p>
-
-<p>The <em>i18n</em>  tag pushes an arbitrary resource bundle on to the value stack. Other tags within the scope of the i18n tag can display messages from that resource bundle.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=i18nExample|javadoc=true|lang=xml|url=org.apache.struts2.components.I18n</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<p>Internationalizing SiteMesh decorators is possible, but there are quirks. See <em>SiteMesh Plugin</em>  for more.</p>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>#####Using the Key attribute of UI Tags#####</p>
+<h3 id="using-the-key-attribute-of-ui-tags">Using the Key attribute of UI Tags</h3>
 
 <p>The key attribute of most UI tags can be used to retrieve a message from a resource bundle:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;s:textfield key="some.key" name="textfieldName"/&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:textfield</span> <span class="na">key=</span><span class="s">"some.key"</span> <span class="na">name=</span><span class="s">"textfieldName"</span><span class="nt">/&gt;</span>
 </code></pre>
 </div>
 
-<p>####I18n Interceptor####</p>
+<h2 id="i18n-interceptor">I18n Interceptor</h2>
 
-<p>Essentially, the i18n Interceptor pushes a locale into the ActionContext map upon every request. The framework components that support localization all utilize the ActionContext locale. See <a href="i18n-interceptor.html">I18n Interceptor</a> for details.</p>
+<p>Essentially, the i18n Interceptor pushes a locale into the ActionContext map upon every request. The framework 
+components that support localization all utilize the ActionContext locale. See <a href="i18n-interceptor.html">I18n Interceptor</a> f
+or details.</p>
 
-<p>####Global Resources (struts.custom.i18n.resources) in struts.properties####</p>
+<h2 id="global-resources-strutscustomi18nresources-in-strutsproperties">Global Resources (struts.custom.i18n.resources) in struts.properties</h2>
 
 <p>A global resource bundle could be specified programmatically, as well as the locale.</p>
 
-<p>####Formatting Dates and Numbers####</p>
+<h2 id="formatting-dates-and-numbers">Formatting Dates and Numbers</h2>
 
 <p>See <a href="formatting-dates-and-numbers.html">Formatting Dates and Numbers</a> for more details and examples.</p>
 
-<p>####Comparison with Struts 1####</p>
+<h2 id="comparison-with-struts-1">Comparison with Struts 1</h2>
 
-<p>Struts 1 users should be familiar with the application.properties resource bundle, where you can put all the messages in the application that are going to be translated. Struts 2, though, splits the resource bundles per action or model class, and you may end up with duplicated messages in those resource bundles. A quick fix for that is to create a file called ActionSupport.properties in com/opensymphony/xwork2 and put it on your classpath. This will only work well if all your actions subclass XWork2’s ActionSupport.</p>
+<p>Struts 1 users should be familiar with the application.properties resource bundle, where you can put all the messages 
+in the application that are going to be translated. Struts 2, though, splits the resource bundles per action or model 
+class, and you may end up with duplicated messages in those resource bundles. A quick fix for that is to create a file 
+called ActionSupport.properties in com/opensymphony/xwork2 and put it on your classpath. This will only work well if 
+all your actions subclass XWork2’s ActionSupport.</p>
 
-<p>####Using only global bundles####</p>
+<h2 id="using-only-global-bundles">Using only global bundles</h2>
 
-<p>If you don’t need to use the package-scan-functionality and only base on the global bundles (those provided by the framework and via </p>
+<p>If you don’t need to use the package-scan-functionality and only base on the global bundles (those provided by 
+the framework and via <code class="highlighter-rouge">struts.custom.i18n.resources</code>) you can use existing <code class="highlighter-rouge">GlobalLocalizedTextProvider</code>
+implementation. To use this please define the following option in your <code class="highlighter-rouge">struts.xml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.custom.i18n.resources
-</code></pre>
-</div>
-<p>) you can use existing </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>GlobalLocalizedTextProvider
-</code></pre>
-</div>
-<p>implementation. To use this please define the following option in your </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
-</code></pre>
-</div>
-<p>:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;constant name="struts.localizedTextProvider" value="global-only" /&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.localizedTextProvider"</span> <span class="na">value=</span><span class="s">"global-only"</span> <span class="nt">/&gt;</span>
 </code></pre>
 </div>
 
-<p>####Custom TextProvider and TextProviderFactory####</p>
+<h2 id="custom-textprovider-and-textproviderfactory">Custom TextProvider and TextProviderFactory</h2>
 
-<p>If you want use a different logic to search for localized messages, or you want to use a database or just want to search default bundles, you must implement both those interfaces (or subclass the existing implementations). You can check a small <a href="https://github\.com/apache/struts\-examples/tree/master/text\-provider">example app</a>^[https://github.com/apache/struts-examples/tree/master/text-provider] how to use both. Please remember that the </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>TextProvider
-</code></pre>
-</div>
-<p>interface is implemented by the </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>ActioSupport
-</code></pre>
-</div>
-<p>class, that’s why an extra layer - </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>TextProviderFactory
-</code></pre>
-</div>
-<p>- is needed.</p>
+<p>If you want use a different logic to search for localized messages, or you want to use a database or just want to search 
+default bundles, you must implement both those interfaces (or subclass the existing implementations). You can check 
+a small <a href="https://github.com/apache/struts\-examples/tree/master/text\-provider">example app</a> how to use both. 
+Please remember that the <code class="highlighter-rouge">TextProvider</code> interface is implemented by the <code class="highlighter-rouge">ActionSupport</code> class, that’s why 
+an extra layer - <code class="highlighter-rouge">TextProviderFactory</code> - is needed.</p>
 
   </section>
 </article>

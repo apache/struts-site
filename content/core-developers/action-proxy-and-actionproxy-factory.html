@@ -127,72 +127,70 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/action-proxy-and-actionproxy-factory.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="action-proxy--actionproxy-factory">Action Proxy &amp; ActionProxy Factory</h1>
 
-<p>The ActionProxy obtains the Action class and calls the appropriate method. By default, Actions are obtained through local instantiation, but an Action could also be obtained remotely if an alternative ActionProxy were provided.</p>
+<p>The ActionProxy obtains the Action class and calls the appropriate method. By default, Actions are obtained through 
+local instantiation, but an Action could also be obtained remotely if an alternative ActionProxy were provided.</p>
 
-<p>An alternative ActionProxy can be configured through ActionProxyFactory. Typically, an ActionProxy will utilize the ActionInvocation to encapsulate the execution of a particular request.</p>
+<p>An alternative ActionProxy can be configured through ActionProxyFactory. Typically, an ActionProxy will utilize 
+the ActionInvocation to encapsulate the execution of a particular request.</p>
 
-<p>The ActionInvocation determines how an Action is handled: Is it being intercepted?  Is there a PreResultListener acting on it?</p>
+<p>The ActionInvocation determines how an Action is handled: Is it being intercepted?  Is there a PreResultListener 
+acting on it?</p>
 
-<p>Essentially, ActionProxy encapsulates how an Action can be obtained. ActionInvocation encapsulates how the Action is executed when a request is invoked.</p>
+<p>Essentially, ActionProxy encapsulates how an Action can be obtained. ActionInvocation encapsulates how the Action 
+s executed when a request is invoked.</p>
 
-<p>####Customization####</p>
+<h2 id="customization">Customization</h2>
 
-<p>#####ActionProxyFactory#####</p>
+<h3 id="actionproxyfactory">ActionProxyFactory</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- ActionProxyFactory.setFactory(new MyActionProxyFactory() {
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="n">ActionProxyFactory</span><span class="o">.</span><span class="na">setFactory</span><span class="o">(</span><span class="k">new</span> <span class="n">MyActionProxyFactory</span><span class="o">()</span> <span class="o">{</span>
 
-    // Do something interesting...
+    <span class="c1">// Do something interesting...</span>
 
- });
-
+ <span class="o">});</span>
 </code></pre>
 </div>
 
-<p>#####ActionProxy#####</p>
+<h3 id="actionproxy">ActionProxy</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- ActionProxyFactory.getFactory(new MyActionProxyFactory() {
-    ....
-    public ActionProxy createActionProxy(Configuration config,
-           String namespace, String actionName, Map extraContext)
-           throws Exception {
-        createActionProxy(config, namespace, actionName, extraContext, true);
-    }
-    public ActionProxy createActionProxy(Configuration config,
-           String namespace, String actionName, Map extraContext,
-           boolean executeResult, boolean cleanupContext)
-           throws Exception {
-        ....
-   }
-   ....
- });
-
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="n">ActionProxyFactory</span><span class="o">.</span><span class="na">getFactory</span><span class="o">(</span><span class="k">new</span> <span class="n">MyActionProxyFactory</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">....</span>
+    <span class="kd">public</span> <span class="n">ActionProxy</span> <span class="n">createActionProxy</span><span class="o">(</span><span class="n">Configuration</span> <span class="n">config</span><span class="o">,</span>
+           <span class="n">String</span> <span class="n">namespace</span><span class="o">,</span> <span class="n">String</span> <span class="n">actionName</span><span class="o">,</span> <span class="n">Map</span> <span class="n">extraContext</span><span class="o">)</span>
+           <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">createActionProxy</span><span class="o">(</span><span class="n">config</span><span class="o">,</span> <span class="n">namespace</span><span class="o">,</span> <span class="n">actionName</span><span class="o">,</span> <span class="n">extraContext</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">ActionProxy</span> <span class="n">createActionProxy</span><span class="o">(</span><span class="n">Configuration</span> <span class="n">config</span><span class="o">,</span>
+           <span class="n">String</span> <span class="n">namespace</span><span class="o">,</span> <span class="n">String</span> <span class="n">actionName</span><span class="o">,</span> <span class="n">Map</span> <span class="n">extraContext</span><span class="o">,</span>
+           <span class="kt">boolean</span> <span class="n">executeResult</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">cleanupContext</span><span class="o">)</span>
+           <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="o">....</span>
+   <span class="o">}</span>
+   <span class="o">....</span>
+ <span class="o">});</span>
 </code></pre>
 </div>
 
-<p>#####ActionInvocation#####</p>
+<h3 id="actioninvocation">ActionInvocation</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- ActionProxyFactory.getFactory(new MyActionProxyFactory() {
-    ...
-    public ActionInvocation createActionInvocation(ActionProxy actionProxy)
-                            throws Exception {
-          createActionInvocation(actionProxy, new LinkedHashMap());
-    }
-    public ActionInvocation createActionInvocation(ActionProxy actionProxy,
-                            Map extraContext) throws Exception {
-          createActionInvocation(actionProxy, extraContext, true);
-    }
-    public ActionInvocation createActionInvocation(ActionProxy actionProxy,
-                            Map extraContext, boolean pushAction)
-                            throws Exception {
-          // Do implementation of ActionInvocation here
-          .....
-    }
-    ...
- });
-
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="n">ActionProxyFactory</span><span class="o">.</span><span class="na">getFactory</span><span class="o">(</span><span class="k">new</span> <span class="n">MyActionProxyFactory</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">...</span>
+    <span class="kd">public</span> <span class="n">ActionInvocation</span> <span class="n">createActionInvocation</span><span class="o">(</span><span class="n">ActionProxy</span> <span class="n">actionProxy</span><span class="o">)</span>
+                            <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+          <span class="n">createActionInvocation</span><span class="o">(</span><span class="n">actionProxy</span><span class="o">,</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">ActionInvocation</span> <span class="n">createActionInvocation</span><span class="o">(</span><span class="n">ActionProxy</span> <span class="n">actionProxy</span><span class="o">,</span>
+                            <span class="n">Map</span> <span class="n">extraContext</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+          <span class="n">createActionInvocation</span><span class="o">(</span><span class="n">actionProxy</span><span class="o">,</span> <span class="n">extraContext</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">ActionInvocation</span> <span class="n">createActionInvocation</span><span class="o">(</span><span class="n">ActionProxy</span> <span class="n">actionProxy</span><span class="o">,</span>
+                            <span class="n">Map</span> <span class="n">extraContext</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">pushAction</span><span class="o">)</span>
+                            <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+          <span class="c1">// Do implementation of ActionInvocation here</span>
+          <span class="o">.....</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+ <span class="o">});</span>
 </code></pre>
 </div>
 

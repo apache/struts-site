@@ -127,560 +127,441 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/type-conversion.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="type-conversion">Type Conversion</h1>
 
-<p>Routine type conversion in the framework is transparent. Generally, all you need to do is ensure that HTML inputs have names that can be used in <em>OGNL</em>  expressions. (HTML inputs are form elements and other GET/POST parameters.)</p>
+<p>Routine type conversion in the framework is transparent. Generally, all you need to do is ensure that HTML inputs have 
+names that can be used in <a href="ognl.html">OGNL</a> expressions. (HTML inputs are form elements and other GET/POST parameters.)</p>
 
-<p>####Built in Type Conversion Support####</p>
+<h2 id="built-in-type-conversion-support">Built in Type Conversion Support</h2>
 
-<p>Type Conversion is implemented by XWork.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.XWorkBasicConverter</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>Type Conversion is implemented by XWork. XWork will automatically handle the most common type conversion for you. 
+This includes support for converting to and from Strings for each of the following:</p>
 
 <ul>
-  <li>
-    <p>Enumerations</p>
-  </li>
-  <li>
-    <p>BigDecimal and BigInteger</p>
-  </li>
+  <li>String</li>
+  <li>boolean / Boolean</li>
+  <li>char / Character</li>
+  <li>int / Integer, float / Float, long / Long, double / Double</li>
+  <li>dates - uses the SHORT format for the Locale associated with the current request</li>
+  <li>arrays - assuming the individual strings can be coverted to the individual items</li>
+  <li>collections - if not object type can be determined, it is assumed to be a String and a new ArrayList is created
+&gt; Note that with arrays the type conversion will defer to the type of the array elements and try to convert each item 
+&gt; individually. As with any other type conversion, if the conversion can’t be performed the standard type conversion 
+&gt; error reporting is used to indicate a problem occurred while processing the type conversion.</li>
+  <li>Enumerations</li>
+  <li>BigDecimal and BigInteger</li>
 </ul>
 
-<p>####Relationship to Parameter Names####</p>
+<h2 id="relationship-to-parameter-names">Relationship to Parameter Names</h2>
 
-<p>There is no need to capture form values using intermediate Strings and primitives. Instead, the framework can read from and write to properties of objects addressed via OGNL expressions and perform the appropriate type conversion for you.</p>
+<p>There is no need to capture form values using intermediate Strings and primitives. Instead, the framework can read from 
+and write to properties of objects addressed via OGNL expressions and perform the appropriate type conversion for you.</p>
 
 <p>Here are some tips for leveraging the framework’s type conversion capabilities:</p>
 
 <ul>
-  <li>
-    <p>Use OGNL expressions - the framework will automatically take care of creating the actual objects for you.</p>
-  </li>
-  <li>
-    <p>Use JavaBeans! The framework can only create objects that obey the JavaBean specification, provide no-arg constructions and include getters and setters where appropriate.</p>
-  </li>
-  <li>
-    <p>Remember that <em>person.name</em>  will call <strong>getPerson().setName()</strong>.  If the framework creates the Person object for you, it remember that a</p>
-  </li>
+  <li>Use OGNL expressions - the framework will automatically take care of creating the actual objects for you.</li>
+  <li>Use JavaBeans - The framework can only create objects that obey the JavaBean specification, provide no-arg constructions 
+and include getters and setters where appropriate.
+&gt; Remember that <code class="highlighter-rouge">person.name</code>  will call <code class="highlighter-rouge">getPerson().setName()</code>.  If the framework creates the Person object for you, 
+&gt; it remember that a <code class="highlighter-rouge">setPerson</code> method must also exist.</li>
+  <li>The framework will not instantiate an object if an instance already exists. The <code class="highlighter-rouge">PrepareInterceptor</code> or action’s 
+constructor can be used to create target objects before type conversion.</li>
+  <li>For lists and maps, use index notation, such as <code class="highlighter-rouge">people[0].name</code>  or <code class="highlighter-rouge">friends['patrick'].name</code>. Often these HTML form 
+elements are being rendered inside a loop. For <a href="../tags-guide/">JSP Tags</a>, use the iterator tag’s status attribute. 
+For <a href="freemarker-support.html">FreeMarker Tags</a>, use the special property <code class="highlighter-rouge">${foo_index}[]</code>.</li>
+  <li>For multiple select boxes, it isn’t possible to use index notation to name each individual item. Instead, name your 
+element <code class="highlighter-rouge">people.name</code> and the framework will understand that it should create a new Person object for each selected 
+item and set its name accordingly.</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>setPerson
-</code></pre>
-</div>
-<p>method must also exist.</p>
+<h2 id="creating-a-type-converter">Creating a Type Converter</h2>
 
-<ul>
-  <li>
-    <p>The framework will not instantiate an object if an instance already exists.  The PrepareInterceptor or action’s constructor can be used to create target objects before type conversion.</p>
-  </li>
-  <li>
-    <p>For lists and maps, use index notation, such as <em>people[0].name</em>  or <em>friends[‘patrick’].name</em> . Often these HTML form elements are being rendered inside a loop. For <em>JSP Tags</em> , use the iterator tag’s status attribute. For <em>FreeMarker Tags</em> , use the special property ${foo_index}[].</p>
-  </li>
-  <li>
-    <p>For multiple select boxes, it isn’t possible to use index notation to name each individual item. Instead, name your element <em>people.name</em>  and the framework will understand that it should create a new Person object for each selected item and set its name accordingly.</p>
-  </li>
-</ul>
+<p>Create a type converter by extending <code class="highlighter-rouge">StrutsTypeConverter</code>. The Converter’s role is to convert a String to an Object 
+and an Object to a String.</p>
 
-<p>####Creating a Type Converter####</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyConverter</span> <span class="kd">extends</span> <span class="n">StrutsTypeConverter</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="n">convertFromString</span><span class="o">(</span><span class="n">Map</span> <span class="n">context</span><span class="o">,</span> <span class="n">String</span><span class="o">[]</span> <span class="n">values</span><span class="o">,</span> <span class="n">Class</span> <span class="n">toClass</span><span class="o">)</span> <span class="o">{</span>
+       <span class="o">.....</span>
+    <span class="o">}</span>
 
-<p>Create a type converter by extending StrutsTypeConverter.  The Converter’s role is to convert a String to an Object and an Object to a String.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
- public class MyConverter extends StrutsTypeConverter {
-    public Object convertFromString(Map context, String[] values, Class toClass) {
-       .....
-    }
-
-    public String convertToString(Map context, Object o) {
-       .....
-    }
- }
-
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">convertToString</span><span class="o">(</span><span class="n">Map</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+       <span class="o">.....</span>
+    <span class="o">}</span>
+ <span class="o">}</span>
 </code></pre>
 </div>
 
-<table>
-  <tbody>
-    <tr>
-      <td>To allow Struts to recognize that a conversion error has occurred, the converter class needs to throw XWorkException or preferably TypeConversionException.</td>
-    </tr>
-  </tbody>
-</table>
+<blockquote>
+  <p>To allow Struts to recognize that a conversion error has occurred, the converter class needs to throw XWorkException 
+or preferably TypeConversionException.</p>
+</blockquote>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+<h2 id="applying-a-type-converter-to-an-action">Applying a Type Converter to an Action</h2>
 
-<p>####Applying a Type Converter to an Action####</p>
-
-<p>Create a file called ‘ActionClassName-conversion.properties’ in the same location of the classpath as the Action class itself resides.</p>
-
-<p>Eg. if the action class name is MyAction, the action-level conversion properties file should be named ‘MyAction-conversion.properties’.  If the action’s package is com.myapp.actions the conversion file should also be in the classpath at /com/myapp/actions/.</p>
+<p>Create a file called <code class="highlighter-rouge">ActionClassName-conversion.properties</code> in the same location of the classpath as the Action class 
+itself resides. Eg. if the action class name is MyAction, the action-level conversion properties file should be 
+named <code class="highlighter-rouge">MyAction-conversion.properties</code>.  If the action’s package is <code class="highlighter-rouge">com.myapp.actions</code> the conversion file should 
+also be in the classpath at <code class="highlighter-rouge">/com/myapp/actions/</code>.</p>
 
 <p>Within the conversion file, name the action’s property and the Converter to apply to it:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-# syntax: &lt;propertyName&gt; = &lt;converterClassName&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code># syntax: &lt;propertyName&gt; = &lt;converterClassName&gt;
 point = com.acme.PointConverter 
 person.phoneNumber = com.acme.PhoneNumberConverter
-
 </code></pre>
 </div>
 
-<p>Type conversion can also be specified via <a href="#PAGE_14017">Annotations</a> within the action.</p>
+<p>Type conversion can also be specified via <a href="annotations.html">Annotations</a> within the action.</p>
 
-<p>####Applying a Type Converter to a bean or model####</p>
+<h2 id="applying-a-type-converter-to-a-bean-or-model">Applying a Type Converter to a bean or model</h2>
 
-<p>When getting or setting the property of a bean, the framework will look for “classname-conversion.properties” in the same location of the <strong>classpath</strong> as the target bean.  This is the same mechanism as used for actions.</p>
+<p>When getting or setting the property of a bean, the framework will look for <code class="highlighter-rouge">classname-conversion.properties</code> in 
+the same location of the <strong>classpath</strong> as the target bean.  This is the same mechanism as used for actions.</p>
 
-<p><strong>Example:</strong> A custom converter is required for the Amount property of a Measurement bean.  The Measurement class cannot be modified as its located within one of the application’s dependencies.  The action using Measurement implements ModelDriven&lt;Measurement&gt; so it cannot apply converters to the properties directly.
-<strong>Solution:</strong> The conversion file needs to be in the same location of the classpath as Measurement.  Create a directory in your source or resources tree matching the package of Measurement and place the converters file there.</p>
+<p><strong>Example:</strong> 
+A custom converter is required for the Amount property of a Measurement bean. The Measurement class cannot be modified 
+as its located within one of the application’s dependencies.  The action using Measurement implements 
+<code class="highlighter-rouge">ModelDriven&lt;Measurement&gt;</code> so it cannot apply converters to the properties directly.</p>
 
-<p>eg. for com.acme.measurements.Measurement, create a file in the application source/resources at /com/acme/measurements/Measurement-conversion.properties:</p>
+<p><strong>Solution:</strong> 
+The conversion file needs to be in the same location of the classpath as Measurement. Create a directory in your source 
+or resources tree matching the package of Measurement and place the converters file there.
+eg. for <code class="highlighter-rouge">com.acme.measurements.Measurement</code>, create a file in the application source/resources 
+at <code class="highlighter-rouge">/com/acme/measurements/Measurement-conversion.properties</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-# syntax: &lt;propertyName&gt;=&lt;converterClassName&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code># syntax: &lt;propertyName&gt;=&lt;converterClassName&gt;
 amount=com.acme.converters.MyCustomBigDecimalConverter
-
 </code></pre>
 </div>
 
-<p>####Applying a Type Converter for an application####</p>
+<h2 id="applying-a-type-converter-for-an-application">Applying a Type Converter for an application</h2>
 
-<p>Application-wide converters can be specified in a file called xwork-conversion.properties located in the root of the classpath.</p>
+<p>Application-wide converters can be specified in a file called <code class="highlighter-rouge">xwork-conversion.properties</code> located in the root of the classpath.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-# syntax: &lt;type&gt; = &lt;converterClassName&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code># syntax: &lt;type&gt; = &lt;converterClassName&gt;
 java.math.BigDecimal = com.acme.MyBigDecimalConverter 
-
 </code></pre>
 </div>
 
-<p>####A Simple Example####</p>
+<h2 id="a-simple-example">A Simple Example</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.XWorkConverter</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>Type conversion is great for situations where you need to turn a String in to a more complex object. Because the web
+is type-agnostic (everything is a string in HTTP), Struts 2’s type conversion features are very useful. For instance,
+if you were prompting a user to enter in coordinates in the form of a string (such as “3, 22”), you could have
+Struts 2 do the conversion both from String to Point and from Point to String.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>{snippet:id=i18n-note</td>
-      <td>javadoc=true</td>
-      <td>url=com.opensymphony.xwork2.conversion.impl.XWorkConverter}</td>
-    </tr>
-  </tbody>
-</table>
+<p>Using this “point” example, if your action (or another compound object in which you are setting properties on)
+has a corresponding ClassName-conversion.properties file, Struts 2 will use the configured type converters for
+conversion to and from strings. So turning “3, 22” in to new Point(3, 22) is done by merely adding the following
+entry to <b>ClassName-conversion.properties</b> (Note that the PointConverter should impl the TypeConverter
+interface):</p>
 
-<p>The framework ships with a base helper class that simplifies converting to and from Strings,</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>org.apache.struts2.util.StrutsTypeConverter
+<div class="highlighter-rouge"><pre class="highlight"><code>point = com.acme.PointConverter&lt;/b&gt;&lt;/p&gt;
 </code></pre>
 </div>
-<p>. The helper class makes it easy to write type converters that handle converting objects to Strings as well as from Strings.</p>
 
-<p>From the JavaDocs:</p>
+<p>Your type converter should be sure to check what class type it is being requested to convert. Because it is used
+for both to and from strings, you will need to split the conversion method in to two parts: one that turns Strings in
+to Points, and one that turns Points in to Strings.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=org.apache.struts2.util.StrutsTypeConverter</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<p>After this is done, you can now reference your point (using &lt;s:property value=”point”/&gt; in JSP or ${point}
+in FreeMarker) and it will be printed as “3, 22” again. As such, if you submit this back to an action, it will be
+converted back to a Point once again.</p>
+
+<p>In some situations you may wish to apply a type converter globally. This can be done by editing the file
+<code class="highlighter-rouge">xwork-conversion.properties</code> in the root of your class path (typically WEB-INF/classes) and providing a
+property in the form of the class name of the object you wish to convert on the left hand side and the class name of
+the type converter on the right hand side. For example, providing a type converter for all Point objects would mean
+adding the following entry:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>com.acme.Point = com.acme.PointConverter
+</code></pre>
 </div>
 
-<p>####Advanced Type Conversion####</p>
+<p>Type conversion should not be used as a substitute for i18n. It is not recommended to use this feature to print out
+properly formatted dates. Rather, you should use the i18n features of Struts 2 (and consult the JavaDocs for JDK’s
+MessageFormat object) to see how a properly formatted date should be displayed.</p>
 
-<p>The framework also handles advanced type conversion cases, like null property handling and converting values in Maps and Collections, and type conversion error handling.</p>
+<p>The framework ships with a base helper class that simplifies converting to and from Strings,
+<code class="highlighter-rouge">org.apache.struts2.util.StrutsTypeConverter</code>. The helper class makes it easy to write type converters that handle 
+converting objects to Strings as well as from Strings.</p>
 
-<p>#####Null Property Handling#####</p>
+<p>Base class for type converters used in Struts. This class provides two abstract methods that are used to convert
+both to and from strings – the critical functionality that is core to Struts’s type conversion system.</p>
+
+<p>Type converters do not have to use this class. It is merely a helper base class, although it is recommended that
+you use this class as it provides the common type conversion contract required for all web-based type conversion.</p>
+
+<p>There’s a hook (fall back method) called <code class="highlighter-rouge">performFallbackConversion</code> of which could be used to perform some fallback 
+conversion if <code class="highlighter-rouge">convertValue</code> method of this failed. By default it just ask its super class (Ognl’s <code class="highlighter-rouge">DefaultTypeConverter</code>) 
+to do the conversion.</p>
+
+<p>To allow the framework to recognize that a conversion error has occurred, throw an XWorkException or preferable a TypeConversionException.</p>
+
+<h2 id="advanced-type-conversion">Advanced Type Conversion</h2>
+
+<p>The framework also handles advanced type conversion cases, like null property handling and converting values in Maps
+and Collections, and type conversion error handling.</p>
+
+<h3 id="null-property-handling">Null Property Handling</h3>
 
 <p>Null property handling will automatically create objects where null references are found.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.InstantiatingNullHandler</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>Provided that the key <code class="highlighter-rouge">ReflectionContextState#CREATE_NULL_OBJECTS</code> is in the action context with a value of true 
+(this key is set only during the execution of the <code class="highlighter-rouge">com.opensymphony.xwork2.interceptor.ParametersInterceptor</code>), 
+OGNL expressions that have caused a <code class="highlighter-rouge">NullPointerException</code> will be temporarily stopped for evaluation while the system 
+automatically tries to solve the null references by automatically creating the object.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.InstantiatingNullHandler</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>The following rules are used when handling null references:</p>
 
-<p>#####Collection and Map Support#####</p>
+<ul>
+  <li>If the property is declared <em>exactly</em> as a <code class="highlighter-rouge">Collection</code> or <code class="highlighter-rouge">List</code>, then an <code class="highlighter-rouge">ArrayList</code> shall be returned and assigned 
+to the null references</li>
+  <li>If the property is declared as a <code class="highlighter-rouge">Map</code>, then a <code class="highlighter-rouge">HashMap</code> will be returned and assigned to the null references</li>
+  <li>If the null property is a simple bean with a no-arg constructor, it will simply be created using 
+the <code class="highlighter-rouge">ObjectFactory#buildBean(java.lang.Class, java.util.Map)</code> method</li>
+</ul>
+
+<p>For example, if a form element has a text field named <code class="highlighter-rouge">person.name</code> and the expression <code class="highlighter-rouge">person</code> evaluates to null, then 
+this class will be invoked. Because the <code class="highlighter-rouge">person</code> expression evaluates to a <code class="highlighter-rouge">Person</code> class, a new Person is created 
+and assigned to the null reference. Finally, the name is set on that object and the overall effect is that the system 
+automatically created a <code class="highlighter-rouge">Person</code> object for you, set it by calling <code class="highlighter-rouge">setUsers()</code> and then finally called 
+<code class="highlighter-rouge">getUsers().setName()</code> as you would typically expect.</p>
+
+<h2 id="collection-and-map-support">Collection and Map Support</h2>
 
 <p>Collection and Map support provides intelligent null handling and type conversion for Java Collections.</p>
 
-<p>The framework supports ways to discover the object type for elements in a collection. The discover is made via an <em>ObjectTypeDeterminer</em> . A default implementation is provided with the framework. The Javadocs explain how Map and Collection support is discovered in the</p>
+<p>The framework supports ways to discover the object type for elements in a collection. The discover is made via an 
+<code class="highlighter-rouge">ObjectTypeDeterminer</code>. A default implementation is provided with the framework. The Javadocs explain how <code class="highlighter-rouge">Map</code> 
+and <code class="highlighter-rouge">Collection</code> support is discovered in the <code class="highlighter-rouge">DefaultObjectTypeDeterminer</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>DefaultObjectTypeDeterminer
-</code></pre>
-</div>
-<p>.</p>
+<p>The <code class="highlighter-rouge">ObjectTypeDeterminer</code> looks at the <code class="highlighter-rouge">Class-conversion.properties</code> for entries that indicated what objects are 
+contained within Maps and Collections. For Collections, such as Lists, the element is specified using the pattern 
+<code class="highlighter-rouge">Element_xxx</code>, where <code class="highlighter-rouge">xxx</code> is the field name of the collection property in your action or object. For Maps, both the key 
+and the value may be specified by using the pattern <code class="highlighter-rouge">Key_xxx</code> and <code class="highlighter-rouge">Element_xxx</code>, respectively.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.DefaultObjectTypeDeterminer</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>From WebWork 2.1.x, the <code class="highlighter-rouge">Collection_xxx</code> format is still supported and honored, although it is deprecated and will be 
+removed eventually.</p>
 
-<p>Additionally, you can create your own custom</p>
+<p>Additionally, you can create your own custom <code class="highlighter-rouge">ObjectTypeDeterminer</code> by implementing the <code class="highlighter-rouge">ObjectTypeDeterminer</code> interface. 
+There is also an optional <code class="highlighter-rouge">ObjectTypeDeterminer</code> that utilizes Java 5 generics. See the <a href="annotations.html">Annotations</a> 
+page for more information.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ObjectTypeDeterminer
-</code></pre>
-</div>
-<p>by implementing the</p>
+<h3 id="indexing-a-collection-by-a-property-of-that-collection">Indexing a collection by a property of that collection</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ObjectTypeDeterminer
-</code></pre>
-</div>
-<p>interface. There is also an optional ObjectTypeDeterminer that utilizes Java 5 generics. See the <a href="#PAGE_14017">Annotations</a> page for more information.</p>
-
-<p><strong>Indexing a collection by a property of that collection</strong></p>
-
-<p>It is also possible to obtain a unique element of a collection by passing the value of a given property of that element. By default, the property of the element of the collection is determined in <em>Class</em> -conversion.properties using</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>KeyProperty_xxx=yyy
-</code></pre>
-</div>
-<p>, where xxx is the property of the bean <em>Class</em>  that returns the collection and yyy is the property of the collection element that we want to index on.</p>
+<p>It is also possible to obtain a unique element of a collection by passing the value of a given property of that element. 
+By default, the property of the element of the collection is determined in <code class="highlighter-rouge">&lt;Class&gt;-conversion.properties</code> using
+<code class="highlighter-rouge">KeyProperty_xxx=yyy</code>, where xxx is the property of the bean <code class="highlighter-rouge">Class</code> that returns the collection and yyy is the property 
+of the collection element that we want to index on.</p>
 
 <p>For an example, see the following two classes:</p>
 
 <p><strong>MyAction.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-/**
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
  * @return a Collection of Foo objects
- */
-public Collection getFooCollection()
-{
-    return foo;
-}
-
+ */</span>
+<span class="kd">public</span> <span class="n">Collection</span> <span class="nf">getFooCollection</span><span class="p">(</span><span class="o">)</span>
+<span class="o">{</span>
+    <span class="k">return</span> <span class="n">foo</span><span class="o">;</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 
 <p><strong>Foo.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-/**
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
  * @return a unique identifier
- */
-public Long getId()
-{
-    return id;
-}
-
+ */</span>
+<span class="kd">public</span> <span class="n">Long</span> <span class="nf">getId</span><span class="p">(</span><span class="o">)</span>
+<span class="o">{</span>
+    <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 
-<p>To enable type conversion, put the instruction</p>
+<p>To enable type conversion, put the instruction <code class="highlighter-rouge">KeyProperty_fooCollection=id</code> in the <code class="highlighter-rouge">MyAction-conversion.properties</code>
+file. This technique allows use of the idiom <code class="highlighter-rouge">fooCollection(someIdValue)</code> to obtain the Foo object with value 
+<code class="highlighter-rouge">someIdValue</code> in the Set <code class="highlighter-rouge">fooCollection</code>. For example, <code class="highlighter-rouge">fooCollection(22)</code> would return the Foo object 
+in the <code class="highlighter-rouge">fooCollection</code> Collection whose <code class="highlighter-rouge">id</code> property value was 22.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>KeyProperty_fooCollection=id
-</code></pre>
-</div>
-<p>in the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>MyAction-conversion.properties
-</code></pre>
-</div>
-<p>file. This technique allows use of the idiom</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection(someIdValue)
-</code></pre>
-</div>
-<p>to obtain the Foo object with value</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>someIdValue
-</code></pre>
-</div>
-<p>in the Set</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection
-</code></pre>
-</div>
-<p>. For example,</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection(22)
-</code></pre>
-</div>
-<p>would return the Foo object in the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection
-</code></pre>
-</div>
-<p>Collection whose</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>id
-</code></pre>
-</div>
-<p>property value was 22.</p>
-
-<p>This technique is useful, because it ties a collection element directly to its unique identifier. You are not forced to use an index. You can edit the elements of a collection associated to a bean without any additional coding. For example, parameter name</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection(22).name
-</code></pre>
-</div>
-<p>and value</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>Phil
-</code></pre>
-</div>
-<p>would set name the Foo Object in the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection
-</code></pre>
-</div>
-<p>Collection whose</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>id
-</code></pre>
-</div>
-<p>property value was 22 to be Phil.</p>
+<p>This technique is useful, because it ties a collection element directly to its unique identifier. You are not forced 
+to use an index. You can edit the elements of a collection associated to a bean without any additional coding. 
+For example, parameter name <code class="highlighter-rouge">fooCollection(22).name</code> and value <code class="highlighter-rouge">Phil</code> would set name the Foo Object in 
+the <code class="highlighter-rouge">fooCollection</code> Collection whose <code class="highlighter-rouge">id</code> property value was 22 to be Phil.</p>
 
 <p>The framework automatically converts the type of the parameter sent in to the type of the key property using type conversion.</p>
 
-<p>Unlike Map and List element properties, if</p>
+<p>Unlike Map and List element properties, if <code class="highlighter-rouge">fooCollection(22)</code> does not exist, it will not be created. If you would 
+like it created, use the notation <code class="highlighter-rouge">fooCollection.makeNew[index]</code> where <code class="highlighter-rouge">index</code> is an integer 0, 1, and so on. Thus, 
+parameter value pairs <code class="highlighter-rouge">fooCollection.makeNew[0]=Phil</code> and <code class="highlighter-rouge">fooCollection.makeNew[1]=John</code> would add two new Foo Objects 
+to <code class="highlighter-rouge">fooCollection</code> - one with name property value <code class="highlighter-rouge">Phil</code> and the other with name property value <code class="highlighter-rouge">John</code>. However, 
+in the case of a Set, the <code class="highlighter-rouge">equals</code> and <code class="highlighter-rouge">hashCode</code> methods should be defined such that they don’t only include the <code class="highlighter-rouge">id</code>
+property. Otherwise, one element of the null <code class="highlighter-rouge">id</code> properties Foos to be removed from the Set.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection(22)
-</code></pre>
-</div>
-<p>does not exist, it will not be created. If you would like it created, use the notation</p>
+<h3 id="an-advanced-example-for-indexed-lists-and-maps">An advanced example for indexed Lists and Maps</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection.makeNew[index]
-</code></pre>
-</div>
-<p>where <em>index</em>  is an integer 0, 1, and so on. Thus, parameter value pairs</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection.makeNew[0]=Phil
-</code></pre>
-</div>
-<p>and</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection.makeNew[1]=John
-</code></pre>
-</div>
-<p>would add two new Foo Objects to</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>fooCollection --
-</code></pre>
-</div>
-<p>one with name property value</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>Phil
-</code></pre>
-</div>
-<p>and the other with name property value</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>John
-</code></pre>
-</div>
-<p>. However, in the case of a Set, the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>equals
-</code></pre>
-</div>
-<p>and</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>hashCode
-</code></pre>
-</div>
-<p>methods should be defined such that they don’t only include the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>id
-</code></pre>
-</div>
-<p>property. Otherwise, one element of the null</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>id
-</code></pre>
-</div>
-<p>properties Foos to be removed from the Set.</p>
-
-<p>####An advanced example for indexed Lists and Maps####</p>
-
-<p>Here is the model bean used within the list. The KeyProperty for this bean is the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>id
-</code></pre>
-</div>
-<p>attribute.</p>
+<p>Here is the model bean used within the list. The KeyProperty for this bean is the <code class="highlighter-rouge">id</code> attribute.</p>
 
 <p><strong>MyBean.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-public class MyBean implements Serializable {
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyBean</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
 
-    private Long id;
-    private String name;
+    <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
 
-    public Long getId() {
-        return id;
-    }
+    <span class="kd">public</span> <span class="n">Long</span> <span class="n">getId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setId</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public String getName() {
-        return name;
-    }
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
 
 
-    public String toString() {
-        return "MyBean{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
-}
-
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"MyBean{"</span> <span class="o">+</span>
+                <span class="s">"id="</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span>
+                <span class="s">", name='"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>
+                <span class="sc">'}'</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 
-<p>The Action has a</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>beanList
-</code></pre>
-</div>
-<p>attribute initialized with an empty ArrayList.</p>
+<p>The Action has a <code class="highlighter-rouge">beanList</code> attribute initialized with an empty <code class="highlighter-rouge">ArrayList</code>.</p>
 
 <p><strong>MyBeanAction.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-public class MyBeanAction implements Action {
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyBeanAction</span> <span class="kd">implements</span> <span class="n">Action</span> <span class="o">{</span>
 
-    private List beanList = new ArrayList();
-    private Map beanMap = new HashMap();
+    <span class="kd">private</span> <span class="n">List</span> <span class="n">beanList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
+    <span class="kd">private</span> <span class="n">Map</span> <span class="n">beanMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">();</span>
 
-    public List getBeanList() {
-        return beanList;
-    }
+    <span class="kd">public</span> <span class="n">List</span> <span class="n">getBeanList</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">beanList</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public void setBeanList(List beanList) {
-        this.beanList = beanList;
-    }
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setBeanList</span><span class="o">(</span><span class="n">List</span> <span class="n">beanList</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">beanList</span> <span class="o">=</span> <span class="n">beanList</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public Map getBeanMap() {
-        return beanMap;
-    }
+    <span class="kd">public</span> <span class="n">Map</span> <span class="n">getBeanMap</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">beanMap</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public void setBeanMap(Map beanMap) {
-        this.beanMap = beanMap;
-    }
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setBeanMap</span><span class="o">(</span><span class="n">Map</span> <span class="n">beanMap</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">beanMap</span> <span class="o">=</span> <span class="n">beanMap</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public String execute() throws Exception {
-        return SUCCESS;
-    }
-}
-
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 
-<p>These</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>conversion.properties
-</code></pre>
-</div>
-<p>tell the TypeConverter to use MyBean instances as elements of the List.</p>
+<p>These <code class="highlighter-rouge">conversion.properties</code> tell the TypeConverter to use MyBean instances as elements of the List.</p>
 
 <p><strong>MyBeanAction-conversion.properties</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-KeyProperty_beanList=id
+<div class="highlighter-rouge"><pre class="highlight"><code>KeyProperty_beanList=id
 Element_beanList=MyBean
 CreateIfNull_beanList=true
-
 </code></pre>
 </div>
 
 <ul>
-  <li>When submitting this via a form, the</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>id
-</code></pre>
-</div>
-<p>value is used as KeyProperty for the MyBean instances in the beanList.</p>
-
-<ul>
-  <li>
-    <p>Notice the () notation! Do not use [] notation, which is for Maps only!</p>
-  </li>
-  <li>
-    <p>The value for name will be set to the MyBean instance with this special id.</p>
-  </li>
-  <li>
-    <p>The List does not have null values added for unavailable id values. This approach avoids the risk of OutOfMemoryErrors!</p>
-  </li>
+  <li>When submitting this via a form, the <code class="highlighter-rouge">id</code> value is used as KeyProperty for the MyBean instances in the beanList.</li>
+  <li>Notice the <code class="highlighter-rouge">()</code> notation! Do not use <code class="highlighter-rouge">[]</code> notation, which is for Maps only!</li>
+  <li>The value for name will be set to the MyBean instance with this special id.
+0 The List does not have null values added for unavailable id values. This approach avoids the risk of <code class="highlighter-rouge">OutOfMemoryErrors</code>!</li>
 </ul>
 
 <p><strong>MyBeanAction.jsp</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;s:iterator value="beanList" id="bean"&gt;
+<pre><code class="language-jsp">&lt;s:iterator value="beanList" id="bean"&gt;
   &lt;stextfield name="beanList(%{bean.id}).name" /&gt;
 &lt;/s:iterator&gt;
-
 </code></pre>
-</div>
 
-<p>####Type Conversion Error Handling####</p>
+<h2 id="type-conversion-error-handling">Type Conversion Error Handling</h2>
 
-<p>Type conversion error handling provides a simple way to distinguish between an input <em>validation</em>  problem and an input <em>type conversion</em>  problem.</p>
+<p>Type conversion error handling provides a simple way to distinguish between an input <code class="highlighter-rouge">validation</code> problem 
+and an input <code class="highlighter-rouge">type conversion</code> problem.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=error-reporting|javadoc=true|url=com.opensymphony.xwork2.conversion.impl.XWorkConverter</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>Any error that occurs during type conversion may or may not wish to be reported. For example, reporting that the input 
+“abc” could not be converted to a number might be important. On the other hand, reporting that an empty string “””, 
+cannot be converted to a number might not be important - especially in a web environment where it is hard to distinguish 
+between a user not entering a value vs. entering a blank value.</p>
+
+<p>By default, all conversion errors are reported using the generic i18n key <code class="highlighter-rouge">xwork.default.invalid.fieldvalue</code>,
+which you can override (the default text is <em>Invalid field value for field “xxx”</em>, where xxx is the field name)
+in your global i18n resource bundle.</p>
+
+<p>However, sometimes you may wish to override this message on a per-field basis. You can do this by adding an i18n
+key associated with just your action (<code class="highlighter-rouge">Action.properties</code>) using the pattern <code class="highlighter-rouge">invalid.fieldvalue.xxx</code>, where xxx
+is the field name.</p>
+
+<p>It is important to know that none of these errors are actually reported directly. Rather, they are added to a map
+called <em>conversionErrors</em> in the ActionContext. There are several ways this map can then be accessed and the errors 
+can be reported accordingly.</p>
 
 <p>There are two ways the error reporting can occur:</p>
 
 <ol>
-  <li>
-    <p>Globally, using the <a href="conversion-error-interceptor.html">Conversion Error Interceptor</a></p>
-  </li>
-  <li>
-    <p>On a per-field basis, using the <a href="conversion-validator.html">conversion validator</a></p>
-  </li>
+  <li>Globally, using the <a href="conversion-error-interceptor.html">Conversion Error Interceptor</a></li>
+  <li>On a per-field basis, using the <a href="conversion-validator.html">conversion validator</a></li>
 </ol>
 
-<p>By default, the conversion interceptor is included in</p>
+<p>By default, the conversion interceptor is included in <a href="struts-default-xml.html">struts-default.xml</a> in the default stack. 
+To keep conversion errors from reporting globally, change the interceptor stack, and add additional validation rules.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-</code></pre>
-</div>
-<p>in the default stack. To keep conversion errors from reporting globally, change the interceptor stack, and add additional validation rules.</p>
+<h2 id="common-problems">Common Problems</h2>
 
-<p>####Common Problems####</p>
+<h3 id="null-and-blank-values">Null and Blank Values</h3>
 
-<p>#####Null and Blank Values#####</p>
+<p>Some properties cannot be set to null. Primitives like boolean and int cannot be null.  If your action needs to or will 
+accept null or blank values, use the object equivalents Boolean and Integer.  Similarly, a blank string “” cannot be set 
+on a primitive.  At the time of writing, a blank string also cannot be set on a BigDecimal or BigInteger. Use server-side 
+validation to prevent invalid values from being set on your properties (or handle the conversion errors appropriately).</p>
 
-<p>Some properties cannot be set to null. Primitives like boolean and int cannot be null.  If your action needs to or will accept null or blank values, use the object equivalents Boolean and Integer.  Similarly, a blank string “” cannot be set on a primitive.  At the time of writing, a blank string also cannot be set on a BigDecimal or BigInteger.  Use server-side validation to prevent invalid values from being set on your properties (or handle the conversion errors appropriately).</p>
+<h3 id="interfaces">Interfaces</h3>
 
-<p>#####Interfaces#####</p>
+<p>The framework cannot instantiate an object if it can’t determine an appropriate implementation. It recognizes well-known 
+collection interfaces (List, Set, Map, etc) but cannot instantiate MyCustomInterface when all it sees is the interface. 
+In this case, instantiate the target implementation first (eg. in a prepare method) or substitute in an implementation.</p>
 
-<p>The framework cannot instantiate an object if it can’t determine an appropriate implementation.  It recognizes well-known collection interfaces (List, Set, Map, etc) but cannot instantiate MyCustomInterface when all it sees is the interface. In this case, instantiate the target implementation first (eg. in a prepare method) or substitute in an implementation.</p>
+<h3 id="generics-and-erasure">Generics and Erasure</h3>
 
-<p>#####Generics and Erasure#####</p>
-
-<p>The framework will inspect generics to determine the appropriate type for collections and array elements.  However, in some cases Erasure can result in base types that cannot be converted (typically Object or Enum).</p>
+<p>The framework will inspect generics to determine the appropriate type for collections and array elements.  However, in 
+some cases Erasure can result in base types that cannot be converted (typically Object or Enum).</p>
 
 <p>The following is an example of this problem:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-public abstract class Measurement&lt;T extends Enum&gt;
-   public void setUnits(T enumValue) {...}
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Measurement</span><span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Enum</span><span class="o">&gt;</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUnits</span><span class="o">(</span><span class="n">T</span> <span class="n">enumValue</span><span class="o">)</span> <span class="o">{...}</span>
+<span class="o">}</span>
 
-public class Area extends Measurement&lt;UnitsOfArea&gt; {
-  @Override
-  public void setUnits(UnitsOfArea enumValue){...}
-}
-
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Area</span> <span class="kd">extends</span> <span class="n">Measurement</span><span class="o">&lt;</span><span class="n">UnitsOfArea</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUnits</span><span class="o">(</span><span class="n">UnitsOfArea</span> <span class="n">enumValue</span><span class="o">){...}</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 
-<p>Although to the developer the area.setUnits(enumValue) method only accepts a UnitsOfArea enumeration, due to erasure the signature of this method is actually setUnits(java.lang.Enum). The framework does not know that the parameter is a UnitsOfArea and when it attempts to instantiate the Enum an exception is thrown (java.lang.IllegalArgumentException: java.lang.Enum is not an enum type).</p>
+<p>Although to the developer the area.setUnits(enumValue) method only accepts a UnitsOfArea enumeration, due to erasure 
+the signature of this method is actually setUnits(java.lang.Enum). The framework does not know that the parameter is 
+a UnitsOfArea and when it attempts to instantiate the Enum an exception is thrown (java.lang.IllegalArgumentException: 
+java.lang.Enum is not an enum type).</p>
 
   </section>
 </article>

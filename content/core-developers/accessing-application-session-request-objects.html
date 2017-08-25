@@ -131,133 +131,58 @@
 
 <p>The framework provides several access helpers to access Session, Application, Request scopes.</p>
 
-<p>####Accessing from Java####</p>
+<h2 id="accessing-from-java">Accessing from Java</h2>
 
-<p>All the JEE scope attribute maps can be accessed via</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>ActionContext
-</code></pre>
-</div>
-<p>.</p>
+<p>All the JEE scope attribute maps can be accessed via <code class="highlighter-rouge">ActionContext</code>.</p>
 
 <p><strong>Accessing servlet scopes</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-Map attr = (Map) ActionContext.getContext().get("attr");
-attr.put("myId",myProp);
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">Map</span> <span class="n">attr</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"attr"</span><span class="o">);</span>
+<span class="n">attr</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span><span class="n">myProp</span><span class="o">);</span>
 
-Map application = (Map) ActionContext.getContext().get("application");
-application.put("myId",myProp);
+<span class="n">Map</span> <span class="n">application</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"application"</span><span class="o">);</span>
+<span class="n">application</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span><span class="n">myProp</span><span class="o">);</span>
 
-Map session = (Map) ActionContext.getContext().get("session");
-session.put("myId", myProp);
+<span class="n">Map</span> <span class="n">session</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"session"</span><span class="o">);</span>
+<span class="n">session</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>
 
-Map request = (Map) ActionContext.getContext().get("request");
-request.put("myId",myProp);
-
+<span class="n">Map</span> <span class="n">request</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"request"</span><span class="o">);</span>
+<span class="n">request</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span><span class="n">myProp</span><span class="o">);</span>
 </code></pre>
 </div>
 
 <blockquote>
-
+  <p>Do not use <code class="highlighter-rouge">ActionContext.getContext()</code> in the constructor of your Action class. The values may not be set up, and 
+the call may return null for getSession().</p>
 </blockquote>
 
-<blockquote>
-
-</blockquote>
-
-<blockquote>
-  <p>Do not use ActionContext.getContext() in the constructor of your Action class. The values may not be set up, and the call may return null for getSession().</p>
-</blockquote>
-
-<blockquote>
-
-</blockquote>
-
-<p>We can also access the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>HttpServletRequest
-</code></pre>
-</div>
-<p>and</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>HttpServletResponse
-</code></pre>
-</div>
-<p>objects themselves through</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>ServletActionContext
-</code></pre>
-</div>
-<p>. In general this isn’t recommended as it will tie our action to the servlet specification.</p>
+<p>We can also access the <code class="highlighter-rouge">HttpServletRequest</code> and <code class="highlighter-rouge">HttpServletResponse</code> objects themselves through <code class="highlighter-rouge">ServletActionContext</code>. 
+In general this isn’t recommended as it will tie our action to the servlet specification.</p>
 
 <p><strong>Setting session attribute through session object</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-ServletActionContext.getRequest().getSession().put("myId", myProp);
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">ServletActionContext</span><span class="o">.</span><span class="na">getRequest</span><span class="o">().</span><span class="na">getSession</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>
 </code></pre>
 </div>
 
-<p>Implementing</p>
+<p>Implementing <code class="highlighter-rouge">ServletRequestAware</code> or <code class="highlighter-rouge">ServletResponseAware</code>, combined with the <code class="highlighter-rouge">servletConfig</code> interceptor, 
+is an alternative way to access the request and response objects, with the same caveat.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ServletRequestAware
-</code></pre>
-</div>
-<p>or</p>
+<h2 id="accessing-from-the-view-jsp-freemarker-etc">Accessing from the view (JSP, FreeMarker, etc.)</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ServletResponseAware
-</code></pre>
-</div>
-<p>, combined with the</p>
+<p>Request and session attributes are accessed via OGNL using the <code class="highlighter-rouge">#session</code> and <code class="highlighter-rouge">#request</code> stack values.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>"servletConfig" interceptor
-</code></pre>
-</div>
-<p>, is an alternative way to access the request and response objects, with the same caveat.</p>
-
-<p>####Accessing from the view (JSP, FreeMarker, etc.)####</p>
-
-<p>Request and session attributes are accessed via OGNL using the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>#session
-</code></pre>
-</div>
-<p>and</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>#request
-</code></pre>
-</div>
-<p>stack values.</p>
-
-<p>The</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>#attr
-</code></pre>
-</div>
-<p>stack value will search the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>javax.servlet.jsp.PageContext
-</code></pre>
-</div>
-<p>for the specified key. If the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>PageContext
-</code></pre>
-</div>
-<p>doean’t exist, it will search the request, session, and application scopes, in that order.</p>
+<p>The <code class="highlighter-rouge">#attr</code> stack value will search the <code class="highlighter-rouge">javax.servlet.jsp.PageContext</code> for the specified key. If the <code class="highlighter-rouge">PageContext</code>
+doean’t exist, it will search the request, session, and application scopes, in that order.</p>
 
 <p><strong>Accessing the Session or Request from a JSP</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;s:property value="#session.myId" /&gt;
+<pre><code class="language-jsp">&lt;s:property value="#session.myId" /&gt;
 
 &lt;s:property value="#request.myId" /&gt;
 
 &lt;s:property value="#attr.myId" /&gt;
-
 </code></pre>
-</div>
 
   </section>
 </article>

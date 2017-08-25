@@ -127,44 +127,29 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/action-mapper-and-action-mapping.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="action-mapper--action-mapping">Action Mapper &amp; Action Mapping</h1>
 
-<p>The ActionMapper fetches the ActionMapping object corresponding to a given request. Essentially, the ActionMapping is a data transfer object that collects together details such as the Action class and method to execute. The mapping is utilized by the Dispatcher and various user interface components. It is customizable through</p>
+<p>The ActionMapper fetches the ActionMapping object corresponding to a given request. Essentially, the ActionMapping 
+is a data transfer object that collects together details such as the Action class and method to execute. The mapping 
+is utilized by the Dispatcher and various user interface components. It is customizable through <code class="highlighter-rouge">struts.mapper.class</code>
+entry in <code class="highlighter-rouge">struts.properties</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.mapper.class
-</code></pre>
-</div>
-<p>entry in</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.properties
-</code></pre>
-</div>
-<p>.</p>
-
-<p>####Customize####</p>
+<h2 id="customize">Customize</h2>
 
 <p>Custom ActionMapper must implement ActionMapper interface and have a default constructor.</p>
 
-<blockquote>
-
-</blockquote>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-struts.mapper.class=foo.bar.MyCustomActionMapper
-
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.mapper.class=foo.bar.MyCustomActionMapper
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-public class MyCustomActionMapper implements ActionMapper {
-  public ActionMapping getMapping(HttpServletRequest request, 
-                                  ConfigurationManager configManager) {
-    ....
-  }
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyCustomActionMapper</span> <span class="kd">implements</span> <span class="n">ActionMapper</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">ActionMapping</span> <span class="n">getMapping</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> 
+                                  <span class="n">ConfigurationManager</span> <span class="n">configManager</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">....</span>
+  <span class="o">}</span>
 
-  public String getUriFromActionMapping(ActionMapping mapping) { 
-    ....
-  }
-}
-
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">getUriFromActionMapping</span><span class="o">(</span><span class="n">ActionMapping</span> <span class="n">mapping</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="o">....</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 

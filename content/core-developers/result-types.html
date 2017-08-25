@@ -127,25 +127,21 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/result-types.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="result-types">Result Types</h1>
 
-<p>Most use cases can be divided into two phases. First, we need to change or query the application’s state, and then we need to present an updated view of the application. The Action class manages the application’s state, and the Result Type manages the view.</p>
+<p>Most use cases can be divided into two phases. First, we need to change or query the application’s state, and then we need 
+to present an updated view of the application. The Action class manages the application’s state, and the Result Type 
+manages the view.</p>
 
-<p>####Predefined Result Types####</p>
+<h2 id="predefined-result-types">Predefined Result Types</h2>
 
-<p>The framework provides several implementations of the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>com.opensymphony.xwork2.Result
-</code></pre>
-</div>
-<p>interface, ready to use in your own applications.</p>
+<p>The framework provides several implementations of the <code class="highlighter-rouge">com.opensymphony.xwork2.Result</code> interface, ready to use in your 
+own applications.</p>
 
 <table>
-  <thead>
-    <tr>
-      <th><a href="chain-result.html">Chain Result</a></th>
-      <th>Used for <a href="action-chaining.html">Action Chaining</a></th>
-    </tr>
-  </thead>
   <tbody>
+    <tr>
+      <td><a href="chain-result.html">Chain Result</a></td>
+      <td>Used for <a href="action-chaining.html">Action Chaining</a></td>
+    </tr>
     <tr>
       <td><a href="dispatcher-reult.html">Dispatcher Result</a></td>
       <td>Used for web resource integration, including <em>JSP</em>  integration</td>
@@ -183,98 +179,83 @@
       <td>Used to display the raw content of a particular page (i.e jsp, HTML)</td>
     </tr>
     <tr>
-      <td><em>Tiles 2 Result</em></td>
-      <td>Used to provide Tiles 2 integration</td>
-    </tr>
-    <tr>
-      <td><em>Tiles 3 Result</em></td>
-      <td>Used to provide Tiles 3 integration</td>
+      <td><a href="tiles-result.html">Tiles Result</a></td>
+      <td>Used to provide Tiles integration</td>
     </tr>
     <tr>
       <td><a href="postback-result.html">Postback Result</a></td>
       <td>Used to postback request parameters as a form to the specified destination</td>
     </tr>
     <tr>
-      <td><em>JSON Result</em></td>
+      <td><a href="json-result.html">JSON Result</a></td>
       <td>Used to serialize actions into JSON</td>
     </tr>
   </tbody>
 </table>
 
-<p>#####Optional#####</p>
+<h2 id="optional">Optional</h2>
 
-<p>|<em>JasperReports Plugin</em> |Used for <em>JasperReports Tutorial</em>  integration|Optional, third-party plugin|
-|———————–|———————————————-|—————————–|</p>
+<table>
+  <tbody>
+    <tr>
+      <td>[JasperReports Plugin]</td>
+      <td>Used for <em>JasperReports Tutorial</em>  integration</td>
+      <td>Optional, third-party plugin</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Additional Result Types can be created and plugged into an application by implementing the</p>
+<p>Additional Result Types can be created and plugged into an application by implementing the <code class="highlighter-rouge">com.opensymphony.xwork2.Result</code>
+interface. Custom Result Types might include generating an email or JMS message, generating images, and so forth.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>com.opensymphony.xwork2.Result
-</code></pre>
-</div>
-<p>interface. Custom Result Types might include generating an email or JMS message, generating images, and so forth.</p>
+<h2 id="default-parameters">Default Parameters</h2>
 
-<p>####Default Parameters####</p>
+<p>To minimize configuration, Results can be configured with a single value, which will be converted into a parameter, 
+and each Result can specify which parameter this value should be set as. For example, here is a result defined in XML 
+that uses a default parameter:</p>
 
-<p>To minimize configuration, Results can be configured with a single value, which will be converted into a parameter, and each Result can specify which parameter this value should be set as. For example, here is a result defined in XML that uses a default parameter:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;result type="freemarker"&gt;foo.fm&lt;/result&gt;
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"freemarker"</span><span class="nt">&gt;</span>foo.fm<span class="nt">&lt;/result&gt;</span>
 </code></pre>
 </div>
 
 <p>That is the equivalent to this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;result type="freemarker"&gt;
-  &lt;param name="location"&gt;foo.vm&lt;/param&gt;
-&lt;/result&gt;
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"freemarker"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>foo.vm<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/result&gt;</span>
 </code></pre>
 </div>
 
-<p>Since probably 95% of your actions won’t need results that contain multiple parameters, this little shortcut saves you a significant amount of configuration. It also follows that if you have specified the default parameter, you don’t need to set the same parameter as a specifically-named parameter.</p>
+<p>Since probably 95% of your actions won’t need results that contain multiple parameters, this little shortcut saves you 
+a significant amount of configuration. It also follows that if you have specified the default parameter, you don’t need 
+to set the same parameter as a specifically-named parameter.</p>
 
-<p>####Registering Result Types####</p>
+<h2 id="registering-result-types">Registering Result Types</h2>
 
 <p>All Result Types are plugged in via the <a href="result-configuration.html">Result Configuration</a>.</p>
 
-<p>#####Extending#####</p>
+<h2 id="extending">Extending</h2>
 
-<p>You can always extend defined result types and implement whatever logic you need. To simplify process of that, you can define your custom</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>ResultFactory
-</code></pre>
-</div>
-<p>and use it with connection with custom interface which your Result implements. Check <a href="object-factory.html">Define dedicated factory</a> to see how to do it.</p>
+<p>You can always extend defined result types and implement whatever logic you need. To simplify process of that, you can 
+define your custom <code class="highlighter-rouge">ResultFactory</code> and use it with connection with custom interface which your Result implements. 
+Check <a href="object-factory.html">Define dedicated factory</a> to see how to do it.</p>
 
 <p>Struts 2 provides one such extension for you:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ParamNameAwareResult
-</code></pre>
-</div>
-<p>interface when used with</p>
+<p><code class="highlighter-rouge">ParamNameAwareResult</code> interface when used with <code class="highlighter-rouge">StrutsResultBuilder</code> can limit parameters assigned to the result. 
+So you can simple extend existing result with such a functionality as below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>StrutsResultBuilder
-</code></pre>
-</div>
-<p>can limit parameters assigned to the result. So you can simple extend existing result with such a functionality as below:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyResult</span> <span class="kd">extends</span> <span class="n">ServletDispatcherResult</span> <span class="kd">implements</span> <span class="n">ParamNameAwareResult</span> <span class="o">{</span>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public class MyResult extends ServletDispatcherResult implements ParamNameAwareResult {
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">acceptableParamName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"accept"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+    <span class="o">}</span>
 
-    public boolean acceptableParamName(String name, String value) {
-        return "accept".equals(name);
-    }
-
-}
-
+<span class="o">}</span>
 </code></pre>
 </div>
 
-<p>and then register it and use instead of default</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>dispatcher
-</code></pre>
-</div>
-<p>result.</p>
+<p>and then register it and use instead of default <code class="highlighter-rouge">dispatcher</code> result.</p>
 
   </section>
 </article>
