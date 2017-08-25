@@ -3,7 +3,7 @@ layout: default
 title: Core Developers Guide (WIP)
 ---
 
-# Core Developers Guide (WIP)
+# Core Developers Guide
 
 Struts 2 processes requests using three core types: [interceptors](interceptor-configuration.html), [actions](action-configuration.html), and [results](result-configuration.html). 
 Each may be configured via XML or annotations.
