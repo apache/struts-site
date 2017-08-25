@@ -5,25 +5,21 @@ title: ActionEventListener
 
 # ActionEventListener
 
-A ActionEventListener can be used to add some logic when action's instance is created or when exception occurred during processing the action\.
+An `ActionEventListener` can be used to add some logic when action's instance is created or when exception occurred 
+during processing the action.
 
-#####Configuration#####
+## Configuration
 
-Right now there can be only one instance of ActionEventListener for the whole Struts2 application\. You can configure it via struts\.xml by adding bean definition:
+Right now there can be only one instance of `ActionEventListener` for the whole Struts2 application. You can configure 
+it via `struts.xml` by adding bean definition:
 
-
-~~~~~~~
-
+```xml
 <bean type="com.opensymphony.xwork2.ActionEventListener" class="com.demo.MyActionEventListener"/>
+```
 
-~~~~~~~
+## Examples
 
-#####Examples#####
-
-
-
-~~~~~~~
-
+```java
 public class MyActionEventListener implements ActionEventListener {
 
     public Object prepare(Object action, ValueStack stack) {
@@ -39,5 +35,4 @@ public class MyActionEventListener implements ActionEventListener {
         return null;
     }
 }
-
-~~~~~~~
+```

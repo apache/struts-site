@@ -5,14 +5,13 @@ title: DispatcherListener
 
 # DispatcherListener
 
-Use a DispatcherListener object to execute code when a Dispatcher is initalized or destroyed\. A DispatcherListener is an easy way to associate customizable components like a [ConfigurationManager](configuration-provider-and-configuration.html) with a Dispatcher\.
+Use a `DispatcherListener` object to execute code when a Dispatcher is initialized or destroyed. A `DispatcherListener` 
+is an easy way to associate customizable components like a [ConfigurationManager](configuration-provider-and-configuration.html) 
+with a Dispatcher.
 
-####Example####
+## Example
 
-
-
-~~~~~~~
-
+```java
   static {
      Dispatcher.addDispatcherListener(new DispatcherListener() {
          public void dispatcherInitialized(Dispatcher du) {
@@ -25,5 +24,4 @@ Use a DispatcherListener object to execute code when a Dispatcher is initalized 
          }
      });
   }
-
-~~~~~~~
+```

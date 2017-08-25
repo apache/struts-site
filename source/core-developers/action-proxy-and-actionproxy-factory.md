@@ -5,36 +5,34 @@ title: Action Proxy & ActionProxy Factory
 
 # Action Proxy & ActionProxy Factory
 
-The ActionProxy obtains the Action class and calls the appropriate method\. By default, Actions are obtained through local instantiation, but an Action could also be obtained remotely if an alternative ActionProxy were provided\.
+The ActionProxy obtains the Action class and calls the appropriate method. By default, Actions are obtained through 
+local instantiation, but an Action could also be obtained remotely if an alternative ActionProxy were provided.
 
-An alternative ActionProxy can be configured through ActionProxyFactory\. Typically, an ActionProxy will utilize the ActionInvocation to encapsulate the execution of a particular request\.
+An alternative ActionProxy can be configured through ActionProxyFactory. Typically, an ActionProxy will utilize 
+the ActionInvocation to encapsulate the execution of a particular request.
 
-The ActionInvocation determines how an Action is handled: Is it being intercepted?  Is there a PreResultListener acting on it?
+The ActionInvocation determines how an Action is handled: Is it being intercepted?  Is there a PreResultListener 
+acting on it?
 
-Essentially, ActionProxy encapsulates how an Action can be obtained\. ActionInvocation encapsulates how the Action is executed when a request is invoked\.
+Essentially, ActionProxy encapsulates how an Action can be obtained. ActionInvocation encapsulates how the Action 
+s executed when a request is invoked.
 
-####Customization####
+## Customization
 
-#####ActionProxyFactory#####
+### ActionProxyFactory
 
 
-
-~~~~~~~
-
+```java
  ActionProxyFactory.setFactory(new MyActionProxyFactory() {
 
     // Do something interesting...
 
  });
+```
 
-~~~~~~~
+### ActionProxy
 
-#####ActionProxy#####
-
-
-
-~~~~~~~
-
+````java
  ActionProxyFactory.getFactory(new MyActionProxyFactory() {
     ....
     public ActionProxy createActionProxy(Configuration config,
@@ -50,15 +48,11 @@ Essentially, ActionProxy encapsulates how an Action can be obtained\. ActionInvo
    }
    ....
  });
+````
 
-~~~~~~~
+### ActionInvocation
 
-#####ActionInvocation#####
-
-
-
-~~~~~~~
-
+```java
  ActionProxyFactory.getFactory(new MyActionProxyFactory() {
     ...
     public ActionInvocation createActionInvocation(ActionProxy actionProxy)
@@ -77,5 +71,4 @@ Essentially, ActionProxy encapsulates how an Action can be obtained\. ActionInvo
     }
     ...
  });
-
-~~~~~~~
+```

@@ -7,22 +7,15 @@ title: Accessing application, session, request objects
 
 **DEPRECATED???**
 
-The framework provides several access helpers to access Session, Application, Request scopes\.
+The framework provides several access helpers to access Session, Application, Request scopes.
 
-####Accessing from Java####
+## Accessing from Java
 
-All the JEE scope attribute maps can be accessed via 
-
-~~~~~~~
-ActionContext
-~~~~~~~
-\.
+All the JEE scope attribute maps can be accessed via `ActionContext`.
 
 **Accessing servlet scopes**
 
-
-~~~~~~~
-
+```java
 Map attr = (Map) ActionContext.getContext().get("attr");
 attr.put("myId",myProp);
 
@@ -34,101 +27,36 @@ session.put("myId", myProp);
 
 Map request = (Map) ActionContext.getContext().get("request");
 request.put("myId",myProp);
+```
 
-~~~~~~~
+> Do not use `ActionContext.getContext()` in the constructor of your Action class. The values may not be set up, and 
+> the call may return null for getSession().
 
-
-> 
-
-> 
-
-> Do not use ActionContext\.getContext() in the constructor of your Action class\. The values may not be set up, and the call may return null for getSession()\.
-
-> 
-
-We can also access the 
-
-~~~~~~~
-HttpServletRequest
-~~~~~~~
- and 
-
-~~~~~~~
-HttpServletResponse
-~~~~~~~
- objects themselves through 
-
-~~~~~~~
-ServletActionContext
-~~~~~~~
-\. In general this isn't recommended as it will tie our action to the servlet specification\.
+We can also access the `HttpServletRequest` and `HttpServletResponse` objects themselves through `ServletActionContext`. 
+In general this isn't recommended as it will tie our action to the servlet specification.
 
 **Setting session attribute through session object**
 
-
-~~~~~~~
-
+```java
 ServletActionContext.getRequest().getSession().put("myId", myProp);
+```
 
-~~~~~~~
+Implementing `ServletRequestAware` or `ServletResponseAware`, combined with the `servletConfig` interceptor, 
+is an alternative way to access the request and response objects, with the same caveat.
 
-Implementing 
+## Accessing from the view (JSP, FreeMarker, etc.)
 
-~~~~~~~
-ServletRequestAware
-~~~~~~~
- or 
+Request and session attributes are accessed via OGNL using the `#session` and `#request` stack values.
 
-~~~~~~~
-ServletResponseAware
-~~~~~~~
-, combined with the 
-
-~~~~~~~
-"servletConfig" interceptor
-~~~~~~~
-, is an alternative way to access the request and response objects, with the same caveat\.
-
-####Accessing from the view (JSP, FreeMarker, etc\.)####
-
-Request and session attributes are accessed via OGNL using the 
-
-~~~~~~~
-#session
-~~~~~~~
- and 
-
-~~~~~~~
-#request
-~~~~~~~
- stack values\.
-
-The 
-
-~~~~~~~
-#attr
-~~~~~~~
- stack value will search the 
-
-~~~~~~~
-javax.servlet.jsp.PageContext
-~~~~~~~
- for the specified key\. If the 
-
-~~~~~~~
-PageContext
-~~~~~~~
- doean't exist, it will search the request, session, and application scopes, in that order\.
+The `#attr` stack value will search the `javax.servlet.jsp.PageContext` for the specified key. If the `PageContext`
+doean't exist, it will search the request, session, and application scopes, in that order.
 
 **Accessing the Session or Request from a JSP**
 
-
-~~~~~~~
-
+```jsp
 <s:property value="#session.myId" />
 
 <s:property value="#request.myId" />
 
 <s:property value="#attr.myId" />
-
-~~~~~~~
+```

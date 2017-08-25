@@ -61,6 +61,6 @@ Each may be configured via XML or annotations.
 - [Accessing application, session, request objects](accessing-application-session-request-objects.html)
 - [Action Mapper & Action Mapping](action-mapper-and-action-mapping.html)
 - [Action Proxy & ActionProxy Factory](action-proxy-and-actionproxy-factory.html)
-- [FAQs]
-  - [Struts 2 Maven Archetypes](#PAGE_108820)\
+- [FAQs](../faq/)
+  - [Struts 2 Maven Archetypes](../maven-archetypes/)
   - [Cookbook]
