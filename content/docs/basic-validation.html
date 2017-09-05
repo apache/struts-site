@@ -34,20 +34,6 @@ under the License.
             color:                 #666;
         }
     </style>
-    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
-    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
-    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
-    <script type="text/javascript">
-        SyntaxHighlighter.defaults['toolbar'] = false;
-        SyntaxHighlighter.all();
-    </script>
     <script type="text/javascript" language="javascript">
         var hide = null;
         var show = null;
@@ -139,109 +125,12 @@ under the License.
 
     <div class="pagecontent">
         <div class="wiki-content">
-            <div id="ConfluenceContent"><p>Let's configure a basic validation workflow, step by step.</p><h2 id="BasicValidation-Step1">Step 1</h2><p>Create the input form.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-
-&lt;html&gt;
-&lt;head&gt;
-	&lt;title&gt;Struts2 Showcase - Validation - Basic&lt;/title&gt;
-	&lt;s:head/&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-
-&lt;div class=&quot;page-header&quot;&gt;
-	&lt;h1&gt;Basic validation Example&lt;/h1&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;container-fluid&quot;&gt;
-	&lt;div class=&quot;row&quot;&gt;
-		&lt;div class=&quot;col-md-12&quot;&gt;
-
-			&lt;p&gt;
-				&lt;b&gt;What is your favorite color?&lt;/b&gt;
-
-			&lt;p/&gt;
-
-			&lt;s:form method=&quot;post&quot;&gt;
-				&lt;s:textfield label=&quot;Name&quot; name=&quot;name&quot;/&gt;
-				&lt;s:textfield label=&quot;Age&quot; name=&quot;age&quot;/&gt;
-				&lt;s:textfield label=&quot;Favorite color&quot; name=&quot;answer&quot;/&gt;
-				&lt;s:submit cssClass=&quot;btn btn-primary&quot;/&gt;
-			&lt;/s:form&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-]]></script>
-</div></div><h2 id="BasicValidation-Step2">Step 2</h2><p>Create the Action class.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-
-public class QuizAction extends ActionSupport {
-
-	private static final long serialVersionUID = -7505437345373234225L;
-
-	String name;
-	int age;
-	String answer;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-}
-
-]]></script>
-</div></div><h2 id="BasicValidation-Step3">Step 3</h2><p>Create the validators. The <code>validation.xml</code> format is either <code>&lt;ActionClassName&gt;-validation.xml</code> or <code>&lt;ActionClassName&gt;-&lt;ActionAliasName&gt;-validation.xml</code>.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-&lt;!--
-    Add the following DOCTYPE declaration as first line of your XXX-validation.xml file:
-    &lt;!DOCTYPE validators PUBLIC &quot;-//Apache Struts//XWork Validator 1.0.2//EN&quot; &quot;http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd&quot;&gt;
---&gt;
-&lt;validators&gt;
-    &lt;field name=&quot;name&quot;&gt;
-        &lt;field-validator type=&quot;requiredstring&quot;&gt;
-            &lt;message&gt;You must enter a name&lt;/message&gt;
-        &lt;/field-validator&gt;
-    &lt;/field&gt;
-    &lt;field name=&quot;age&quot;&gt;
-        &lt;field-validator type=&quot;int&quot;&gt;
-            &lt;param name=&quot;min&quot;&gt;13&lt;/param&gt;
-            &lt;param name=&quot;max&quot;&gt;19&lt;/param&gt;
-            &lt;message&gt;Only people ages 13 to 19 may take this quiz&lt;/message&gt;
-        &lt;/field-validator&gt;
-    &lt;/field&gt;
-&lt;/validators&gt;
-
-]]></script>
-</div></div><h2 id="BasicValidation-Step4">Step 4</h2><p>Make sure there is a result for "input" listed in the struts.xml for when the validation fails:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;action name="HelloWorld" class="tutorial.HelloWorld"&gt;
+            <div id="ConfluenceContent"><p>Let's configure a basic validation workflow, step by step.</p><h2 id="BasicValidation-Step1">Step 1</h2><p>Create the input form.<plain-text-body>{snippet:id=basicValidation|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/webapp/WEB-INF/validation/quiz-basic.jsp}</plain-text-body></p><h2 id="BasicValidation-Step2">Step 2</h2><p>Create the Action class.<plain-text-body>{snippet:id=quizAction|javadoc=false|lang=java|url=struts2/apps/showcase/src/main/java/org/apache/struts2/showcase/validation/QuizAction.java}</plain-text-body></p><h2 id="BasicValidation-Step3">Step 3</h2><p>Create the validators. The <code>validation.xml</code> format is either <code>&lt;ActionClassName&gt;-validation.xml</code> or <code>&lt;ActionClassName&gt;-&lt;ActionAliasName&gt;-validation.xml</code>.<plain-text-body>{snippet:id=quizValidators|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/QuizAction-validation.xml}</plain-text-body></p><h2 id="BasicValidation-Step4">Step 4</h2><p>Make sure there is a result for "input" listed in the struts.xml for when the validation fails:</p><parameter ac:name="">xml</parameter><plain-text-body>&lt;action name="HelloWorld" class="tutorial.HelloWorld"&gt;
 &lt;result name="success"&gt;/tutorial/createconfirm.jsp&lt;/result&gt;
 &lt;result name="error"&gt;/tutorial/error.jsp&lt;/result&gt;
 &lt;result name="input"&gt;/tutorial/create.jsp&lt;/result&gt;
 &lt;/action&gt;
-</pre>
-</div></div><p>If you don't have this, you'll get a: "No result defined for action xxx.xxx.tutorial.HellowWorld and result input" error</p></div>
+</plain-text-body><p>If you don't have this, you'll get a: "No result defined for action xxx.xxx.tutorial.HellowWorld and result input" error</p></div>
         </div>
 
         

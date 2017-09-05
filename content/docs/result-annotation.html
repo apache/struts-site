@@ -34,20 +34,6 @@ under the License.
             color:                 #666;
         }
     </style>
-    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
-    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
-    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
-    <script type="text/javascript">
-        SyntaxHighlighter.defaults['toolbar'] = false;
-        SyntaxHighlighter.all();
-    </script>
     <script type="text/javascript" language="javascript">
         var hide = null;
         var show = null;
@@ -141,17 +127,18 @@ under the License.
         <div class="wiki-content">
             <div id="ConfluenceContent"><p>The <code>@Result</code> annotation allows the definition of <code>Action</code> results in the <code>Action</code> class rather than an XML file.</p>
 
-<div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
-<p>The <code>@Result</code> annotation lives at the <code>Action</code> <em>class</em> level and not the method level. This matches what is found in an XML-based <code>Action</code> configuration. <strong>Do not be tempted to annotate your <code>Action</code>'s methods; it will not work.</strong></p></div></div>
+<rich-text-body>
+<p>The <code>@Result</code> annotation lives at the <code>Action</code> <em>class</em> level and not the method level. This matches what is found in an XML-based <code>Action</code> configuration. <strong>Do not be tempted to annotate your <code>Action</code>'s methods; it will not work.</strong></p></rich-text-body>
 
 <p>In order for <code>@Result</code> and <code>@Results</code> annotations to be configured correctly you must set the <code>actionPackages</code> filter <code>init-param</code> to a comma-separated list of packages containing the annotated <code>Action</code> classes. See <a shape="rect" href="zero-configuration.html">Zero Configuration</a> for further information; there are <code>Action</code> class naming conventions if you don't implement the <code>Action</code> interface and other tidbits there.</p>
 
 <h2 id="ResultAnnotation-@ResultAnnotationParameters"><code>@Result</code> Annotation Parameters</h2>
 
-<div class="navmenu" style="float:right; width:300px; background:white; margin:3px; padding:3px">
-  <div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
-<p>    See org.apache.struts2.config.Result annotation JavaDocs.</p>
-</div></div></div>
+<plain-text-body>{float:right|width=300px}
+  {info}
+    See org.apache.struts2.config.Result annotation JavaDocs.
+  {info}
+{float}</plain-text-body>
 
 <ul><li>name - Result name; default <code>Action.SUCCESS</code></li><li>value - Value of result (result destination)</li><li>type - Type of result; default <code>NullResult</code>. For example:
 	<ul><li><code>NullResult.class</code></li><li><code>FreemarkerResult.class</code></li><li><code>PlainTextResult.class</code></li><li><code>VelocityResult.class</code></li><li><code>ServletDispatcherResult.class</code></li><li><code>ServletRedirectResult.class</code></li><li><code>ServletActionRedirectResult.class</code> - equivalent to the <code>redirectAction</code> type in XML config</li><li><code>TilesResult.class</code></li><li>.. (for more result, please consult the API docs, and look for implementations of the XWork <code>Result</code> interface)</li></ul>
@@ -162,21 +149,18 @@ under the License.
 
 <p>Map the "success" result (explicitly named) to a Tile definition named "/home.page".</p>
 
-<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Defining a Single Result</b></div><div class="codeContent panelContent pdl">
-<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+<parameter ac:name="title">Defining a Single Result</parameter><plain-text-body>
 @Result(name="success", value="/home.page", type=TilesResult.class)
 public class HomeAction extends ActionSupport {
     // ...
 }
-</pre>
-</div></div>
+</plain-text-body>
 
 <h2 id="ResultAnnotation-@Results&#8211;DefiningMultipleResults"><code>@Results</code> &#8211; Defining Multiple Results</h2>
 
 <p>Defines a set of results for an <code>Action</code>.</p>
 
-<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Defining Multiple Results</b></div><div class="codeContent panelContent pdl">
-<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">
+<parameter ac:name="title">Defining Multiple Results</parameter><plain-text-body>
 @Results({
     @Result(name="success", value="/home.page", type=TilesResult.class),
     @Result(name="homeError", value="/homeError.page", type=TilesResult.class)
@@ -184,8 +168,7 @@ public class HomeAction extends ActionSupport {
 public class HomeAction extends ActionSupport {
     // ....
 }
-</pre>
-</div></div></div>
+</plain-text-body></div>
         </div>
 
         

@@ -34,20 +34,6 @@ under the License.
             color:                 #666;
         }
     </style>
-    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
-    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
-    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
-    <script type="text/javascript">
-        SyntaxHighlighter.defaults['toolbar'] = false;
-        SyntaxHighlighter.all();
-    </script>
     <script type="text/javascript" language="javascript">
         var hide = null;
         var show = null;
@@ -139,8 +125,7 @@ under the License.
 
     <div class="pagecontent">
         <div class="wiki-content">
-            <div id="ConfluenceContent"><h2 id="I18nInterceptor-Description">Description</h2><p>An interceptor that handles setting the locale specified in a session as the locale for the current action request. In addition, this interceptor will look for a specific HTTP request parameter and set the locale to whatever value is provided, it also looks for specific cookie to read locale from. This means that this interceptor can be used to allow for your application to dynamically change the locale for the user's session or, alternatively, only for the current &#160;request. This is very useful for applications that require multi-lingual support and want the user to be able to set his or her language preference at any point. The locale parameter is removed during the execution of this interceptor, ensuring that properties aren't set on an action (such as request_locale) that have no typical corresponding setter in your action.</p><p>For example, using the default parameter name, a request to <strong>foo.action?request_locale=en_US</strong>, then the locale for US English is saved in the user's session and will be used for all future requests. If there is no locale set (for example with the first visit), the interceptor uses the browser locale.</p><h2 id="I18nInterceptor-Parameters">Parameters</h2><ul style="list-style-type: square;"><li><strong>parameterName</strong> (optional) - the name of the HTTP request parameter that dictates the locale to switch to and save in the session. By default this is <strong>request_locale</strong></li><li><strong>requestCookieParameterName</strong> (optional) - the name of the HTTP request parameter that dictates the locale to switch to and save in a cookie. By default this is <strong>request_cookie_locale</strong></li><li><strong>requestOnlyParameterName</strong> (optional) - the name of the HTTP request parameter that dictates the locale to switch to for the current request only, without saving it in the session. By default this is <strong>request_only_locale</strong></li><li><strong>attributeName</strong> (optional) - the name of the session key to store the selected locale. By default this is <strong>WW_TRANS_I18N_LOCALE</strong></li><li><strong>localeStorage</strong> (optional) - the name of storage location, it can be <strong>none</strong>, <strong>session</strong>&#160;or <strong>cookie</strong>. By default this is <strong>session</strong></li></ul><h2 id="I18nInterceptor-Examples">Examples</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;interceptor name="i18nCookie" class="org.apache.struts2.interceptor.I18nInterceptor"/&gt;
+            <div id="ConfluenceContent"><h2 id="I18nInterceptor-Description">Description</h2><p>An interceptor that handles setting the locale specified in a session as the locale for the current action request. In addition, this interceptor will look for a specific HTTP request parameter and set the locale to whatever value is provided, it also looks for specific cookie to read locale from. This means that this interceptor can be used to allow for your application to dynamically change the locale for the user's session or, alternatively, only for the current &#160;request. This is very useful for applications that require multi-lingual support and want the user to be able to set his or her language preference at any point. The locale parameter is removed during the execution of this interceptor, ensuring that properties aren't set on an action (such as request_locale) that have no typical corresponding setter in your action.</p><p>For example, using the default parameter name, a request to <strong>foo.action?request_locale=en_US</strong>, then the locale for US English is saved in the user's session and will be used for all future requests. If there is no locale set (for example with the first visit), the interceptor uses the browser locale.</p><h2 id="I18nInterceptor-Parameters">Parameters</h2><ul style="list-style-type: square;"><li><strong>parameterName</strong> (optional) - the name of the HTTP request parameter that dictates the locale to switch to and save in the session. By default this is <strong>request_locale</strong></li><li><strong>requestCookieParameterName</strong> (optional) - the name of the HTTP request parameter that dictates the locale to switch to and save in a cookie. By default this is <strong>request_cookie_locale</strong></li><li><strong>requestOnlyParameterName</strong> (optional) - the name of the HTTP request parameter that dictates the locale to switch to for the current request only, without saving it in the session. By default this is <strong>request_only_locale</strong></li><li><strong>attributeName</strong> (optional) - the name of the session key to store the selected locale. By default this is <strong>WW_TRANS_I18N_LOCALE</strong></li><li><strong>localeStorage</strong> (optional) - the name of storage location, it can be <strong>none</strong>, <strong>session</strong>&#160;or <strong>cookie</strong>. By default this is <strong>session</strong></li></ul><h2 id="I18nInterceptor-Examples">Examples</h2><parameter ac:name="">xml</parameter><plain-text-body>&lt;interceptor name="i18nCookie" class="org.apache.struts2.interceptor.I18nInterceptor"/&gt;
 
 &lt;action name="someAction" class="com.examples.SomeAction"&gt;
     &lt;interceptor-ref name="i18nCookie"&gt;
@@ -148,8 +133,7 @@ under the License.
     &lt;/interceptor-ref&gt;
     &lt;interceptor-ref name="basicStack"/&gt;
     &lt;result name="success"&gt;good_result.ftl&lt;/result&gt;
-&lt;/action&gt;</pre>
-</div></div><p>&#160;</p><p>&#160;</p></div>
+&lt;/action&gt;</plain-text-body><p>&#160;</p><p>&#160;</p></div>
         </div>
 
         

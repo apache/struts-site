@@ -34,20 +34,6 @@ under the License.
             color:                 #666;
         }
     </style>
-    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
-    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
-    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
-    <script type="text/javascript">
-        SyntaxHighlighter.defaults['toolbar'] = false;
-        SyntaxHighlighter.all();
-    </script>
     <script type="text/javascript" language="javascript">
         var hide = null;
         var show = null;
@@ -139,115 +125,19 @@ under the License.
 
     <div class="pagecontent">
         <div class="wiki-content">
-            <div id="ConfluenceContent"><p>Let's create a Client-Side validation workflow, step by step.</p><p><img class="emoticon emoticon-information" src="https://cwiki.apache.org/confluence/s/en_GB/5997/6f42626d00e36f53fe51440403446ca61552e2a2.1/_/images/icons/emoticons/information.png" data-emoticon-name="information" alt="(info)"> The <code>validate</code> attribute is set to <code>true</code>.</p><p><img class="emoticon emoticon-information" src="https://cwiki.apache.org/confluence/s/en_GB/5997/6f42626d00e36f53fe51440403446ca61552e2a2.1/_/images/icons/emoticons/information.png" data-emoticon-name="information" alt="(info)"> Some themes do not support client-side validation.</p><h2 id="ClientValidation-Step1">Step 1</h2><p>Create the form.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-
-&lt;html&gt;
-&lt;head&gt;
-	&lt;title&gt;Struts2 Showcase - Validation - Basic&lt;/title&gt;
-	&lt;s:head/&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-
-&lt;div class=&quot;page-header&quot;&gt;
-	&lt;h1&gt;Basic validation Example&lt;/h1&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;container-fluid&quot;&gt;
-	&lt;div class=&quot;row&quot;&gt;
-		&lt;div class=&quot;col-md-12&quot;&gt;
-
-
-			&lt;s:form method=&quot;post&quot; validate=&quot;true&quot;&gt;
-				&lt;s:textfield label=&quot;Name&quot; name=&quot;name&quot;/&gt;
-				&lt;s:textfield label=&quot;Age&quot; name=&quot;age&quot;/&gt;
-				&lt;s:textfield label=&quot;Favorite color&quot; name=&quot;answer&quot;/&gt;
-				&lt;s:submit cssClass=&quot;btn btn-primary&quot;/&gt;
-			&lt;/s:form&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-
-]]></script>
-</div></div><img class="emoticon emoticon-information" src="https://cwiki.apache.org/confluence/s/en_GB/5997/6f42626d00e36f53fe51440403446ca61552e2a2.1/_/images/icons/emoticons/information.png" data-emoticon-name="information" alt="(info)"> This case uses the default xhtml theme, so the <code>&lt;s:head &gt;</code> tag is used to link a style sheet.<h2 id="ClientValidation-Step2">Step 2</h2><p>Create the Action class.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-
-public class QuizAction extends ActionSupport {
-
-	private static final long serialVersionUID = -7505437345373234225L;
-
-	String name;
-	int age;
-	String answer;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-}
-
-]]></script>
-</div></div><h3 id="ClientValidation-Step3">Step 3</h3><p>Create the <code>validation.xml</code> to configure the validators to be used.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-&lt;!--
-    Add the following DOCTYPE declaration as first line of your XXX-validation.xml file:
-    &lt;!DOCTYPE validators PUBLIC &quot;-//Apache Struts//XWork Validator 1.0.2//EN&quot; &quot;http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd&quot;&gt;
---&gt;
-&lt;validators&gt;
-    &lt;field name=&quot;name&quot;&gt;
-        &lt;field-validator type=&quot;requiredstring&quot;&gt;
-            &lt;message&gt;You must enter a name&lt;/message&gt;
-        &lt;/field-validator&gt;
-    &lt;/field&gt;
-    &lt;field name=&quot;age&quot;&gt;
-        &lt;field-validator type=&quot;int&quot;&gt;
-            &lt;param name=&quot;min&quot;&gt;13&lt;/param&gt;
-            &lt;param name=&quot;max&quot;&gt;19&lt;/param&gt;
-            &lt;message&gt;Only people ages 13 to 19 may take this quiz&lt;/message&gt;
-        &lt;/field-validator&gt;
-    &lt;/field&gt;
-&lt;/validators&gt;
-
-]]></script>
-</div></div><h3 id="ClientValidation-ActionandNamespace">Action and Namespace</h3><p>A correct action and namespace attributes must be provided to the &lt;s:form&gt; tag. For example, if the action named "quizClient" is defined in the "/validation" namespace, the form must be configured as:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;s:form method="post" validate="true" action="quizClient" namespace="/validation"&gt;
+            <div id="ConfluenceContent"><p>Let's create a Client-Side validation workflow, step by step.</p><p><img class="emoticon emoticon-information" src="https://cwiki.apache.org/confluence/s/en_GB/5997/6f42626d00e36f53fe51440403446ca61552e2a2.1/_/images/icons/emoticons/information.png" data-emoticon-name="information" alt="(info)"> The <code>validate</code> attribute is set to <code>true</code>.</p><p><img class="emoticon emoticon-information" src="https://cwiki.apache.org/confluence/s/en_GB/5997/6f42626d00e36f53fe51440403446ca61552e2a2.1/_/images/icons/emoticons/information.png" data-emoticon-name="information" alt="(info)"> Some themes do not support client-side validation.</p><h2 id="ClientValidation-Step1">Step 1</h2><p>Create the form.<plain-text-body>{snippet:id=clientValidation|lang=xml|javadoc=false|url=struts2/apps/showcase/src/main/webapp/WEB-INF/validation/quiz-client.jsp}</plain-text-body><img class="emoticon emoticon-information" src="https://cwiki.apache.org/confluence/s/en_GB/5997/6f42626d00e36f53fe51440403446ca61552e2a2.1/_/images/icons/emoticons/information.png" data-emoticon-name="information" alt="(info)"> This case uses the default xhtml theme, so the <code>&lt;s:head &gt;</code> tag is used to link a style sheet.</p><h2 id="ClientValidation-Step2">Step 2</h2><p>Create the Action class.<plain-text-body>{snippet:id=quizAction|javadoc=false|lang=java|url=struts2/apps/showcase/src/main/java/org/apache/struts2/showcase/validation/QuizAction.java}</plain-text-body></p><h3 id="ClientValidation-Step3">Step 3</h3><p>Create the <code>validation.xml</code> to configure the validators to be used.<plain-text-body>{snippet:id=quizValidators|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/QuizAction-validation.xml}</plain-text-body></p><h3 id="ClientValidation-ActionandNamespace">Action and Namespace</h3><p>A correct action and namespace attributes must be provided to the &lt;s:form&gt; tag. For example, if the action named "quizClient" is defined in the "/validation" namespace, the form must be configured as:</p><parameter ac:name="">XML</parameter><plain-text-body>&lt;s:form method="post" validate="true" action="quizClient" namespace="/validation"&gt;
    &lt;s:textfield label="Name" name="name"/&gt;
    &lt;s:textfield label="Age" name="age"/&gt;
    &lt;s:textfield label="Favorite color" name="answer"/&gt;
    &lt;s:submit/&gt;
 &lt;/s:form&gt; 
-</pre>
-</div></div><p>While the following will "work" in the sense that the form will function correctly, <strong>client-side validation will not</strong>. That is because Struts must know the exact namespace and action (rather than a URL) to properly support validation.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;s:form method="post" validate="true" action="/validation/quizClient.action"&gt;
+</plain-text-body><p>While the following will "work" in the sense that the form will function correctly, <strong>client-side validation will not</strong>. That is because Struts must know the exact namespace and action (rather than a URL) to properly support validation.</p><parameter ac:name="">XML</parameter><plain-text-body>&lt;s:form method="post" validate="true" action="/validation/quizClient.action"&gt;
    &lt;s:textfield label="Name" name="name"/&gt;
    &lt;s:textfield label="Age" name="age"/&gt;
    &lt;s:textfield label="Favorite color" name="answer"/&gt;
    &lt;s:submit/&gt;
 &lt;/s:form&gt; 
-</pre>
-</div></div></div>
+</plain-text-body></div>
         </div>
 
         

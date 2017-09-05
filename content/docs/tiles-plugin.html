@@ -34,20 +34,6 @@ under the License.
             color:                 #666;
         }
     </style>
-    <link href='https://struts.apache.org/highlighter/style/shCoreStruts.css' rel='stylesheet' type='text/css' />
-    <link href='https://struts.apache.org/highlighter/style/shThemeStruts.css' rel='stylesheet' type='text/css' />
-    <script src='https://struts.apache.org/highlighter/js/shCore.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushPlain.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushXml.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushJava.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushJScript.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushGroovy.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushBash.js' type='text/javascript'></script>
-    <script src='https://struts.apache.org/highlighter/js/shBrushCss.js' type='text/javascript'></script>
-    <script type="text/javascript">
-        SyntaxHighlighter.defaults['toolbar'] = false;
-        SyntaxHighlighter.all();
-    </script>
     <script type="text/javascript" language="javascript">
         var hide = null;
         var show = null;
@@ -139,46 +125,26 @@ under the License.
 
     <div class="pagecontent">
         <div class="wiki-content">
-            <div id="ConfluenceContent"><p><style type="text/css">/*<![CDATA[*/
-div.rbtoc1499928440617 {padding: 0px;}
-div.rbtoc1499928440617 ul {list-style: disc;margin-left: 0px;}
-div.rbtoc1499928440617 li {margin-left: 0px;padding-left: 0px;}
-
-/*]]>*/</style></p><div class="toc-macro rbtoc1499928440617">
-<ul class="toc-indentation"><li><a shape="rect" href="#TilesPlugin-Features">Features</a></li><li><a shape="rect" href="#TilesPlugin-Usage">Usage</a>
-<ul class="toc-indentation"><li><a shape="rect" href="#TilesPlugin-AccessingStrutsattributes">Accessing Struts attributes</a></li><li><a shape="rect" href="#TilesPlugin-I18N">I18N</a></li></ul>
-</li><li><a shape="rect" href="#TilesPlugin-Example">Example</a></li><li><a shape="rect" href="#TilesPlugin-Settings">Settings</a></li><li><a shape="rect" href="#TilesPlugin-Installation">Installation</a></li></ul>
-</div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Tiles is a templating framework designed to easily allow the creation of web application pages with a consistent look and feel. It can be used for both page decorating and componentization.</p></div></div><p>The Tiles pluginallows actions to return Tiles pages</p><h2 id="TilesPlugin-Features">Features</h2><ul><li>Supports Tiles in Freemarker, JSP, and Velocity</li><li>Provides annotations to keep tiles.xml short and put definitons into actions</li></ul><h2 id="TilesPlugin-Usage">Usage</h2><p>The following steps must be taken in order to enable tiles support within your Struts2 application:</p><ol><li><p>Include the struts-tiles-plugin as a dependency in your web application. If you are using maven2, the dependency configuration will be similar to:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;dependency&gt;
+            <div id="ConfluenceContent"><rich-text-body><p>Tiles is a templating framework designed to easily allow the creation of web application pages with a consistent look and feel. It can be used for both page decorating and componentization.</p></rich-text-body><p>The Tiles plugin<parameter ac:name="atlassian-macro-output-type">INLINE</parameter><rich-text-body><p>allows actions to return Tiles pages</p></rich-text-body></p><h2 id="TilesPlugin-Features">Features</h2><ul><li>Supports Tiles in Freemarker, JSP, and Velocity</li><li>Provides annotations to keep tiles.xml short and put definitons into actions</li></ul><h2 id="TilesPlugin-Usage">Usage</h2><p>The following steps must be taken in order to enable tiles support within your Struts2 application:</p><ol><li><p>Include the struts-tiles-plugin as a dependency in your web application. If you are using maven2, the dependency configuration will be similar to:</p><parameter ac:name="">xml</parameter><plain-text-body>&lt;dependency&gt;
   &lt;groupId&gt;org.apache.struts&lt;/groupId&gt;
   &lt;artifactId&gt;struts2-tiles-plugin&lt;/artifactId&gt;
   &lt;version&gt;${version.tiles}&lt;/version&gt;
 &lt;/dependency&gt;
-</pre>
-</div></div></li><li><p>Register the tiles listener. This listener will typically either be the standard tiles listener (org.apache.tiles.listener.TilesListener) or the Struts2 replacement (org.apache.struts2.tiles.TilesListener). The latter provides tighter integration with Struts features such as freemarker integration.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;listener&gt;
+</plain-text-body></li><li><p>Register the tiles listener. This listener will typically either be the standard tiles listener (org.apache.tiles.listener.TilesListener) or the Struts2 replacement (org.apache.struts2.tiles.TilesListener). The latter provides tighter integration with Struts features such as freemarker integration.</p><parameter ac:name="">xml</parameter><plain-text-body>&lt;listener&gt;
   &lt;listener-class&gt;org.apache.struts2.tiles.StrutsTilesListener&lt;/listener-class&gt;
 &lt;/listener&gt;
-</pre>
-</div></div></li><li><p>All package definitions which require tiles support must either extend the tiles-default package or must register the <a shape="rect" class="createlink" href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&amp;title=Tiles+Result&amp;linkCreation=true&amp;fromPageId=27401">Tiles Result</a> type definition.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;result-types&gt;
+</plain-text-body></li><li><p>All package definitions which require tiles support must either extend the tiles-default package or must register the <a shape="rect" class="createlink" href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&amp;title=Tiles+Result&amp;linkCreation=true&amp;fromPageId=27401">Tiles Result</a> type definition.</p><parameter ac:name="">xml</parameter><plain-text-body>&lt;result-types&gt;
   &lt;result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/&gt;
 &lt;/result-types&gt;
-</pre>
-</div></div></li><li><p>Configure your actions to utilize a tiles definition:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;action name="sample" class="org.apache.struts2.tiles.example.SampleAction" &gt;
+</plain-text-body></li><li><p>Configure your actions to utilize a tiles definition:</p><parameter ac:name="">xml</parameter><plain-text-body>&lt;action name="sample" class="org.apache.struts2.tiles.example.SampleAction" &gt;
   &lt;result name="success" type="tiles"&gt;tilesWorks&lt;/result&gt;
 &lt;/action&gt;
-</pre>
-</div></div></li><li><p>Instead of xml configuration you can use annotations</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: java; gutter: false; theme: Default" style="font-size:12px;">@Result(name = "success", type="tiles")
+</plain-text-body></li><li><p>Instead of xml configuration you can use annotations</p><parameter ac:name="language">java</parameter><plain-text-body>@Result(name = "success", type="tiles")
 @TilesDefinition(extend = "fooLayout", putAttributes = {
     @TilesPutAttribute(name = "header", value = "/WEB-INF/tiles/header.jsp"),
     @TilesPutAttribute(name = "body", value = "/WEB-INF/tiles/body.ftl")
 })
-public class FooAction extends ActionSupport {</pre>
-</div></div></li><li><p>You have to define Tiles Definitons in a tiles.xml file. That can be placed in <code>resources</code> or in <code>WEB-INF</code>.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;!DOCTYPE tiles-definitions PUBLIC
+public class FooAction extends ActionSupport {</plain-text-body></li><li><p>You have to define Tiles Definitons in a tiles.xml file. That can be placed in <code>resources</code> or in <code>WEB-INF</code>.</p><parameter ac:name="language">xml</parameter><plain-text-body>&lt;!DOCTYPE tiles-definitions PUBLIC
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd"&gt;
 
@@ -195,34 +161,13 @@ public class FooAction extends ActionSupport {</pre>
         &lt;put-attribute name="body" value="/WEB-INF/tiles/body.jsp"/&gt;
     &lt;/definition&gt;
 
-&lt;/tiles-definitions&gt;</pre>
-</div></div></li></ol><p>&#160;</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>As from Struts 2.3.28, the plugin automatically loads all Tiles definitions matching the following pattern <code>tiles*.xml</code> - you don't have to specify them via <code>org.apache.tiles.definition.DefinitionsFactory.DEFINITIONS_CONFIG</code> in <code>web.xml</code>, but you can use this option if your application is going to work in restricted servlet environment e.g. Google AppEngine. In such case, definitions will be read from provided <code>init-param</code>.</p></div></div><h3 id="TilesPlugin-AccessingStrutsattributes">Accessing Struts attributes</h3><p>As from Struts version 2.5.3 it's possible accessing defined values on a&#160;<code>ValueStack</code> using&#160;<code>S2</code> prefix when defining an expression in tiles definition, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;definition name="home" extends="logged-in"&gt;
+&lt;/tiles-definitions&gt;</plain-text-body></li></ol><p>&#160;</p><rich-text-body><p>As from Struts 2.3.28, the plugin automatically loads all Tiles definitions matching the following pattern <code>tiles*.xml</code> - you don't have to specify them via <code>org.apache.tiles.definition.DefinitionsFactory.DEFINITIONS_CONFIG</code> in <code>web.xml</code>, but you can use this option if your application is going to work in restricted servlet environment e.g. Google AppEngine. In such case, definitions will be read from provided <code>init-param</code>.</p></rich-text-body><h3 id="TilesPlugin-AccessingStrutsattributes">Accessing Struts attributes</h3><p>As from Struts version 2.5.3 it's possible accessing defined values on a&#160;<code>ValueStack</code> using&#160;<code>S2</code> prefix when defining an expression in tiles definition, e.g.:</p><parameter ac:name="">xml</parameter><plain-text-body>&lt;definition name="home" extends="logged-in"&gt;
   &lt;put-attribute name="title" expression="S2:actionProperty"/&gt;
   &lt;put-attribute name="body" value="/WEB-INF/tiles/home.jsp"/&gt;
-&lt;/definition&gt;</pre>
-</div></div><p>In such case Tiles will delegate evaluation of the expression to Struts and&#160;<code>ValueStack</code> will be examined to evaluate the expression.</p><h3 id="TilesPlugin-I18N">I18N</h3><p>Instead of defining new tiles definitions per supported language (i.e.:&#160;<code>tiles.xml</code>,&#160;<code>tiles_de.xml</code>,&#160;<code>tiles_pl.xml</code>) you can use&#160;<code>I18N</code> prefix to evaluate provided expression as a key in Struts resource bundles.&#160;</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<pre class="brush: xml; gutter: false; theme: Default" style="font-size:12px;">&lt;definition name="home" extends="logged-in"&gt;
+&lt;/definition&gt;</plain-text-body><p>In such case Tiles will delegate evaluation of the expression to Struts and&#160;<code>ValueStack</code> will be examined to evaluate the expression.</p><h3 id="TilesPlugin-I18N">I18N</h3><p>Instead of defining new tiles definitions per supported language (i.e.:&#160;<code>tiles.xml</code>,&#160;<code>tiles_de.xml</code>,&#160;<code>tiles_pl.xml</code>) you can use&#160;<code>I18N</code> prefix to evaluate provided expression as a key in Struts resource bundles.&#160;</p><parameter ac:name="">xml</parameter><plain-text-body>&lt;definition name="home" extends="logged-in"&gt;
   &lt;put-attribute name="title" expression="I18N:home.title"/&gt;
   &lt;put-attribute name="body" value="/WEB-INF/tiles/home.jsp"/&gt;
-&lt;/definition&gt;</pre>
-</div></div><h2 id="TilesPlugin-Example">Example</h2><p>This example shows a Tiles layout page using Struts tags:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-&lt;%@ taglib uri=&quot;http://tiles.apache.org/tags-tiles&quot; prefix=&quot;tiles&quot; %&gt;
-&lt;%@ taglib prefix=&quot;s&quot; uri=&quot;/struts-tags&quot; %&gt;
-
-&lt;%-- Show usage; Used in Header --%&gt;
-&lt;tiles:importAttribute name=&quot;title&quot; scope=&quot;request&quot;/&gt;
-&lt;html&gt;
-    &lt;head&gt;&lt;title&gt;Struts2 Showcase - &lt;tiles:getAsString name=&quot;title&quot;/&gt;&lt;/title&gt;&lt;/head&gt;
-&lt;body&gt;
-    &lt;tiles:insertAttribute name=&quot;header&quot;/&gt;
-    &lt;tiles:insertAttribute name=&quot;body&quot;/&gt;
-	&lt;p&gt;Notice that this is a layout made in JSP&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-]]></script>
-</div></div>Please check&#160;<a shape="rect" class="external-link" href="https://github.com/apache/struts-examples/tree/master/tiles" rel="nofollow">tiles</a>&#160;example in&#160;<a shape="rect" class="external-link" href="https://github.com/apache/struts-examples/tree/master/tiles" rel="nofollow">struts-examples</a> project.<h2 id="TilesPlugin-Settings">Settings</h2><p>This plugin does inherits settings from <a shape="rect" class="external-link" href="http://tiles.apache.org/config-reference.html">Tiles configuration</a>.</p><h2 id="TilesPlugin-Installation">Installation</h2><p>This plugin can be installed by copying the plugin jar into your application's <code>/WEB-INF/lib</code> directory. No other files need to be copied or created.</p></div>
+&lt;/definition&gt;</plain-text-body><h2 id="TilesPlugin-Example">Example</h2><p>This example shows a Tiles layout page using Struts tags:<plain-text-body>{snippet:url=struts2/apps/showcase/src/main/webapp/WEB-INF/tiles/layout.jsp|lang=xml}</plain-text-body>Please check&#160;<a shape="rect" class="external-link" href="https://github.com/apache/struts-examples/tree/master/tiles" rel="nofollow">tiles</a>&#160;example in&#160;<a shape="rect" class="external-link" href="https://github.com/apache/struts-examples/tree/master/tiles" rel="nofollow">struts-examples</a> project.</p><h2 id="TilesPlugin-Settings">Settings</h2><p>This plugin does inherits settings from <a shape="rect" class="external-link" href="http://tiles.apache.org/config-reference.html">Tiles configuration</a>.</p><h2 id="TilesPlugin-Installation">Installation</h2><p>This plugin can be installed by copying the plugin jar into your application's <code>/WEB-INF/lib</code> directory. No other files need to be copied or created.</p></div>
         </div>
 
                     <div class="tabletitle">
