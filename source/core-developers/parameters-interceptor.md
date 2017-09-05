@@ -4,6 +4,10 @@ title: Parameters Interceptor
 ---
 
 # Parameters Interceptor
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 This interceptor sets all parameters on the value stack.
 
@@ -116,7 +120,7 @@ Error setting expression 'search' with value ['search', ] - [unknown location]
 
 Thus is expected behaviour to allow developer to spot missing setter or typo in either parameter name or setter.
 
-###Examples
+### Examples
 
 ```xml
 <action name="someAction" class="com.examples.SomeAction">
