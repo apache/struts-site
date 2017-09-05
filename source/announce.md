@@ -12,6 +12,64 @@ title: Announcements
   Skip to: <a href="announce-2016.html">Announcements - 2016</a>
 </p>
 
+#### 05 September 2017 - Struts 2.5.13 General Availability {#a20170905}
+
+The Apache Struts group is pleased to announce that Struts 2.5.13 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release contains fixes for the following potential security vulnerabilities:
+
+ - [S2-050](/docs/s2-050.html)
+    A regular expression Denial of Service when using URLValidator (similar to S2-044 & S2-047)
+ - [S2-051](/docs/s2-051.html)
+   A remote attacker may create a DoS attack by sending crafted xml request when using the Struts REST plugin
+ - [S2-052](/docs/s2-052.html)
+   Possible Remote Code Execution attack when using the Struts REST plugin with XStream handler to handle XML payloads
+
+Except the above this release also contains several improvements just to mention few of them:
+
+ - Struts2 JSON Plugin: Send Map with Strings as Key to JSON Action is ignored, Numeric Keys will work and mapped
+ - NP with TextProvider and wildcardmapping
+ - Threads get blocked due to unnecessary synchronization in OgnlRuntime
+ - Default Multipart validation regex is invalid
+ - Not fully initialized ObjectFactory tries to create beans
+ - http://struts.apache.org/dtds/struts-2.5.dtd missing
+ - Set a global resource bundle in class
+ - Override TextProvider doesnot work in struts 2.5.12
+ - Array-of-null parameters are converted to string "null"
+ - JakartaStreamMultiPartRequest Should Honor "struts.multipart.maxSize"
+ - Build Fails Due to Unused com.sun Import
+ - Struts2.5.12 - NPE in DeligatingValidatorContext
+ - Struts 2 Fails to Initialize with JRebel
+ - Allow define more than one Action suffix
+ - Remove jQuery from debugging interceptor views
+ - update dependencies page on the struts site
+ - Improve RegEx used to validate URLs
+ - Make REST ContentHandlers configurable
+ - expose Freemarker incompatible_improvements into FreemarkerManager and StrutsBeansWrapper
+ - Upgrade Commons Collections to 3.2.2
+ - Upgrade Commons IO to 2.5
+ - Upgrade to ASM version 5.2
+ - Upgrade to OGNL 3.1.15
+ - Upgrade xstream to the latest version
+ - Upgrade to struts-master 11
+
+> Please read the [Version Notes](/docs/version-notes-2513.html) to find more details about performed bug fixes and improvements.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
 #### 09 August 2017 - S2-049 Security Bulletin update {#a20170809}
 
 This is an update of the recently announced Security Bulletin - [S2-049](/docs/s2-049.html).
