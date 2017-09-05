@@ -125,19 +125,33 @@
   <section class="col-md-12">
     <a href="index.html" title="back to Getting Started"><< back to Getting Started</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/getting-started/http-session.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h2 id="http-session">HTTP Session</h2>
+    <h1 class="no_toc" id="http-session">HTTP Session</h1>
 
-<p>The example code for this tutorial, http_session, is available at <a href="https://github.com/apache/struts-examples">https://github.com/apache/struts-examples</a></p>
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#sessionaware-interface" id="markdown-toc-sessionaware-interface">SessionAware Interface</a></li>
+  <li><a href="#using-the-http-session-object-in-the-action-class" id="markdown-toc-using-the-http-session-object-in-the-action-class">Using the HTTP Session Object In The Action Class</a></li>
+  <li><a href="#accessing-http-session-objects-in-the-view" id="markdown-toc-accessing-http-session-objects-in-the-view">Accessing HTTP Session Objects In The View</a></li>
+  <li><a href="#best-practices-when-using-sessionaware" id="markdown-toc-best-practices-when-using-sessionaware">Best Practices When Using SessionAware</a></li>
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+</ul>
 
-<p><strong>Introduction</strong></p>
+<p>The example code for this tutorial, http_session, is available at [https://github.com/apache/struts-examples].</p>
 
-<p>Your Struts 2 application may need to access the HTTP session object. Struts 2 provides an interface, <a href="https://struts.apache.org/maven/struts2-core/apidocs/org/apache/struts2/interceptor/SessionAware.html">SessionAware</a>, that your Action class should implement to obtain a reference to the HTTP session object.</p>
+<h2 id="introduction">Introduction</h2>
 
-<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer to your problem, post a question on the mailing list.</p>
+<p>Your Struts 2 application may need to access the HTTP session object. Struts 2 provides an interface, 
+<a href="/maven/struts2-core/apidocs/org/apache/struts2/interceptor/SessionAware.html">SessionAware</a>, that your Action class 
+should implement to obtain a reference to the HTTP session object.</p>
 
-<p><strong>SessionAware Interface</strong></p>
+<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are 
+having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find 
+an answer to your problem, post a question on the mailing list.</p>
 
-<p>The SessionAware interface has one method, setSession, that your Action class will need to override. In the example application (see above), the HelloWorldAction class implements the SessionAware interface and includes this code:</p>
+<h2 id="sessionaware-interface">SessionAware Interface</h2>
+
+<p>The SessionAware interface has one method, setSession, that your Action class will need to override. In the example 
+application (see above), the HelloWorldAction class implements the SessionAware interface and includes this code:</p>
 
 <p><strong>HelloWorldAction.java setSession Method</strong></p>
 
@@ -149,17 +163,19 @@
 </code></pre>
 </div>
 
-<p>The Struts 2 framework has an interceptor that will inject the HTTP session object into the Action class by calling the setSession method.</p>
+<p>The Struts 2 framework has an interceptor that will inject the HTTP session object into the Action class by calling 
+the <code class="highlighter-rouge">setSession</code> method.</p>
 
-<p><strong>Using the HTTP Session Object In The Action Class</strong></p>
+<h2 id="using-the-http-session-object-in-the-action-class">Using the HTTP Session Object In The Action Class</h2>
 
-<p>The example application keeps track of how many times the user clicks on a Hello link or submits the hello form. It stores this count in the HTTP session object in the increaseHelloCount method.</p>
+<p>The example application keeps track of how many times the user clicks on a Hello link or submits the hello form. 
+It stores this count in the HTTP session object in the increaseHelloCount method.</p>
 
 <p><strong>HelloWorldAction.java increaseHelloCount Method</strong></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">increaseHelloCount</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">Integer</span> <span class="n">helloCount</span> <span class="o">=</span> <span class="o">(</span><span class="n">Integer</span><span class="o">)</span> <span class="n">userSession</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">HELLO_COUNT</span><span class="o">);</span>
-		
+
     <span class="k">if</span> <span class="o">(</span><span class="n">helloCount</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">)</span> <span class="o">{</span>
         <span class="n">helloCount</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
@@ -171,11 +187,14 @@
 </code></pre>
 </div>
 
-<p>When the increaseHelloCount method is called from within the execute method, the userSession object is a reference to the HTTP session object injected by the Struts 2 framework. So any objects stored in the HTTP session can be retrieved using the userSession object and any objects stored in the userSession object will be stored in the HTTP session object.</p>
+<p>When the increaseHelloCount method is called from within the execute method, the userSession object is a reference 
+to the HTTP session object injected by the Struts 2 framework. So any objects stored in the HTTP session can be retrieved 
+using the userSession object and any objects stored in the userSession object will be stored in the HTTP session object.</p>
 
-<p><strong>Accessing HTTP Session Objects In The View</strong></p>
+<h2 id="accessing-http-session-objects-in-the-view">Accessing HTTP Session Objects In The View</h2>
 
-<p>Struts 2 provides an easy way to get an object stored in the HTTP session from within the view page. In the example application is HelloWorld.jsp with this markup:</p>
+<p>Struts 2 provides an easy way to get an object stored in the HTTP session from within the view page. In the example 
+application is <code class="highlighter-rouge">HelloWorld.jsp</code> with this markup:</p>
 
 <p><strong>HelloWorld.jsp Get helloCount Value From HTTP Session</strong></p>
 
@@ -183,19 +202,21 @@
 </code></pre>
 </div>
 
-<p>The s:property tag’s value attribute has a value of #session.helloCount. The “#” before the word session tells the Struts framework to look in the session scope for a key of “helloCount” (which is the value of the String constant HELLO_COUNT referenced in method increaseHelloCount). Struts will get the object mapped to helloCount key and then call that object’s toString method to determine what to display in the view page.</p>
+<p>The <code class="highlighter-rouge">s:property</code> tag’s value attribute has a value of <code class="highlighter-rouge">#session.helloCount</code>. The “#” before the word session tells 
+the Struts framework to look in the session scope for a key of “helloCount” (which is the value of the String constant 
+<code class="highlighter-rouge">HELLO_COUNT</code> referenced in method <code class="highlighter-rouge">increaseHelloCount</code>). Struts will get the object mapped to <code class="highlighter-rouge">helloCount</code> key and 
+then call that object’s toString method to determine what to display in the view page.</p>
 
-<p><strong>Best Practices When Using SessionAware</strong></p>
+<h2 id="best-practices-when-using-sessionaware">Best Practices When Using SessionAware</h2>
 
-<p>Using SessionAware does introduce a potential security vulnerability that you should mitigate by also following these practices in the Action class that implements the SessionAware interface.</p>
+<p>Using SessionAware does introduce a potential security vulnerability that you should mitigate by also following these 
+practices in the Action class that implements the SessionAware interface.</p>
 
 <ol>
-  <li>
-    <p>Do not have a public Map&lt;String, Object) getSession method in the Action class. You only need a public void setSession method to implement the SessionAware interface.</p>
-  </li>
-  <li>
-    <p>Also have the Action class implement the <a href="https://struts.apache.org/maven/struts2-core/apidocs/com/opensymphony/xwork2/interceptor/ParameterNameAware.html">ParameterNameAware interface</a> and override its acceptableParameterName method:</p>
-  </li>
+  <li>Do not have a public <code class="highlighter-rouge">Map&lt;String, Object&gt; getSession</code> method in the Action class. You only need a public void 
+  <code class="highlighter-rouge">setSession</code> method to implement the <code class="highlighter-rouge">SessionAware</code> interface.</li>
+  <li>Also have the Action class implement the <a href="/maven/struts2-core/apidocs/com/opensymphony/xwork2/interceptor/ParameterNameAware.html">ParameterNameAware interface</a> 
+  and override its acceptableParameterName method:</li>
 </ol>
 
 <p><strong>HelloWorldAction.java acceptableParameterName Method</strong></p>
@@ -212,9 +233,13 @@
 </code></pre>
 </div>
 
-<p>This method will be called by the Struts 2 framework for each parameter in the request scope. By returning false if the parameter name contains “session” we are telling the Struts 2 framework to ignore that parameter. This will prevent a malicious user from trying to hack the HTTP session object.</p>
+<p>This method will be called by the Struts 2 framework for each parameter in the request scope. By returning false if 
+the parameter name contains “session” we are telling the Struts 2 framework to ignore that parameter. This will prevent 
+a malicious user from trying to hack the HTTP session object.</p>
 
-<p>Instead of having each action that implements SessionAware also implement the ParameterNameAware interface you can tell the params interceptor to exclude specific request attributes for all actions in a package. In struts.xml configure the struts-default set of interceptors as follows:</p>
+<p>Instead of having each action that implements SessionAware also implement the ParameterNameAware interface you can tell t
+he params interceptor to exclude specific request attributes for all actions in a package. In struts.xml configure 
+the <code class="highlighter-rouge">struts-default</code> set of interceptors as follows:</p>
 
 <p><strong>struts.xml configure params interceptor</strong></p>
 
@@ -235,21 +260,23 @@
 </code></pre>
 </div>
 
-<p>The above code will ensure that every action in the “basicstruts2” package that implements the SessionAware interface will exclude from processing parameters that starts with the strings provided in the params.excludeParams noded.</p>
+<p>The above code will ensure that every action in the “basicstruts2” package that implements the SessionAware interface 
+will exclude from processing parameters that starts with the strings provided in the <code class="highlighter-rouge">params.excludeParams</code> node.</p>
 
 <p>The example project includes both methods for mitigating the SessionAware security vulnerability.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>Note the same issue exists if you implement the ServletRequestAware interface, which is why the above method returns false if the parameter name contains “request”.</td>
-    </tr>
-  </tbody>
-</table>
+<blockquote>
+  <p>Note the same issue exists if you implement the ServletRequestAware interface, which is why the above method returns 
+false if the parameter name contains “request”.</p>
+</blockquote>
 
-<p><strong>Summary</strong></p>
+<h2 id="summary">Summary</h2>
 
-<p>When your Action class needs to access the HTTP session object implement the SessionAware interface and override the setSession method. Be sure to also implement the ParameterNameAware interface and override the acceptableParameterName method to mitigate a potential security vulnerability. If you have multiple actions that implement SessionAware then consider modifying the params interceptor’s excludeParams value as part of your Struts 2 package setup.</p>
+<p>When your Action class needs to access the HTTP session object implement the SessionAware interface and override 
+the <code class="highlighter-rouge">setSession</code> method. Be sure to also implement the <code class="highlighter-rouge">ParameterNameAware</code> interface and override 
+the <code class="highlighter-rouge">acceptableParameterName</code> method to mitigate a potential security vulnerability. If you have multiple actions 
+that implement <code class="highlighter-rouge">SessionAware</code> then consider modifying the params interceptor’s <code class="highlighter-rouge">excludeParams</code> value as part of your 
+Struts 2 package setup.</p>
 
 <table>
   <tbody>
