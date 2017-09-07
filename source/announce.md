@@ -12,6 +12,44 @@ title: Announcements
   Skip to: <a href="announce-2016.html">Announcements - 2016</a>
 </p>
 
+#### 07 September 2017 - Struts 2.3.34 General Availability {#a20170907}
+
+The Apache Struts group is pleased to announce that Struts 2.3.34 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+This release addresses two potential security vulnerabilities:
+
+ - [S2-050](/docs/s2-050.html)
+    A regular expression Denial of Service when using URLValidator (similar to S2-044 & S2-047)
+ - [S2-051](/docs/s2-051.html)
+   A remote attacker may create a DoS attack by sending crafted xml request when using the Struts REST plugin
+ - [S2-052](/docs/s2-052.html)
+   Possible Remote Code Execution attack when using the Struts REST plugin with XStream handler to handle XML payloads
+ - [S2-053](/docs/s2-053.html)
+   A possible Remote Code Execution attack when using an unintentional expression in Freemarker tag instead of string literals
+   
+Also this version resolves the following issues:    
+
+ - Struts2 JSON Plugin: Send Map with Strings as Key to JSON Action is ignored, Numeric Keys will work and mapped
+ - Threads get blocked due to unnecessary synchronization in OgnlRuntime Dependency
+ - Upgrade to OGNL 3.0.21
+ - Upgrade to struts-master 11
+ - Improve RegEx used to validate URLs
+ 
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 6.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-23x) page.
+
 #### 05 September 2017 - Struts 2.5.13 General Availability {#a20170905}
 
 The Apache Struts group is pleased to announce that Struts 2.5.13 is available as a "General Availability"
@@ -82,7 +120,7 @@ Please report any problems back to the [Struts Security](mailto:security@struts.
 
 #### 07 July 2017 - Struts 2.3.33 General Availability {#a20170707}
 
-The Apache Struts group is pleased to announce that Struts 2.3.32 is available as a "General Availability"
+The Apache Struts group is pleased to announce that Struts 2.3.33 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
 
 This release addresses two potential security vulnerabilities:
