@@ -5,26 +5,31 @@ title: required validator
 
 # required validator
 
-####Description####
+### Description
 
+RequiredFieldValidator checks if the specified field is not null.
 
+### Parameters
 
-~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.RequiredFieldValidator}
-~~~~~~~
+- `fieldName` - field name if plain-validator syntax is used, not needed if field-validator syntax is used.
 
-####Parameters####
+### Examples
 
-
-
-~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.RequiredFieldValidator}
-~~~~~~~
-
-####Examples####
-
-
-
-~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.validator.validators.RequiredFieldValidator}
-~~~~~~~
+```
+<validators>
+    <!-- Plain Validator Syntax -->
+    <validator type="required">
+        <param name="fieldName">username</param>
+        <message>username must not be null</message>
+    </validator>
+ 
+ 
+    <!-- Field Validator Syntax -->
+    <field name="username">
+        <field-validator type="required">
+               <message>username must not be null</message>
+        </field-validator>
+    </field>
+ 
+</validators>
+```
