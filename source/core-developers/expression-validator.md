@@ -5,26 +5,21 @@ title: expression validator
 
 # expression validator
 
-####Description####
+### Description
 
+A Non-Field Level validator that validates based on regular expression supplied.
 
+### Parameters
 
-~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.ExpressionValidator}
-~~~~~~~
+- `expression` - the Ognl expression to be evaluated against the stack (Must evaluate to a Boolean).
 
-####Parameters####
+### Examples
 
-
-
-~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.ExpressionValidator}
-~~~~~~~
-
-####Examples####
-
-
-
-~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.validator.validators.ExpressionValidator}
-~~~~~~~
+```
+<validators>
+      <validator type="expression">
+         <param name="expression"> .... </param>
+         <message>Failed to meet Ognl Expression  .... </message>
+      </validator>
+</validators>
+```

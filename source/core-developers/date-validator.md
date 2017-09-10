@@ -13,14 +13,14 @@ Field Validator that checks if the date supplied is within a specific range.
 
 ### Parameters
 
-- `fieldName - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.
+- `fieldName` - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.
 - `min` - the min date range. If not specified will not be checked.
 - `max` - the max date range. If not specified will not be checked.
 - `parse` - if set to true, minExpression and maxExpression will be evaluated to find min/max.
 - `minExpression` - expression to calculate the minimum value (if none is specified, it will not be checked).
 - `maxExpression` - expression to calculate the maximum value (if none is specified, it will not be checked).
 
-You can either use the min / max value or minExpression / maxExpression (when parse is set to true) - using expression can be slightly slower, see the example below.
+You can either use the `min` / `max` value or `minExpression` / `maxExpression` (when `parse` is set to `true`) - using expression can be slightly slower, see the example below.
 
 > Warning
 > Do not use `${minExpression}` and `${maxExpression}` as an expression as this will turn into infinitive loop!

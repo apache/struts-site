@@ -30,6 +30,5 @@ RequiredFieldValidator checks if the specified field is not null.
                <message>username must not be null</message>
         </field-validator>
     </field>
- 
 </validators>
 ```
