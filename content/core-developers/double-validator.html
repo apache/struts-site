@@ -127,36 +127,61 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/double-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="double-validator">double validator</h1>
 
-<p>####Description####</p>
+<h3 id="description">Description</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.DoubleRangeFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>Field Validator that checks if the double specified is within a certain range.</p>
 
-<p>####Parameters####</p>
+<h3 id="parameters">Parameters</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.DoubleRangeFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<ul>
+  <li><code class="highlighter-rouge">fieldName</code> - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.</li>
+  <li><code class="highlighter-rouge">minInclusive</code> - the minimum inclusive value in FloatValue format specified by Java language (if none is specified, it will not be checked).</li>
+  <li><code class="highlighter-rouge">maxInclusive</code> - the maximum inclusive value in FloatValue format specified by Java language (if none is specified, it will not be checked).</li>
+  <li><code class="highlighter-rouge">minExclusive</code> - the minimum exclusive value in FloatValue format specified by Java language (if none is specified, it will not be checked).</li>
+  <li><code class="highlighter-rouge">maxExclusive</code> - the maximum exclusive value in FloatValue format specified by Java language (if none is specified, it will not be checked).</li>
+  <li><code class="highlighter-rouge">minInclusiveExpression</code> - the minimum inclusive value specified as a OGNL expression (if none is specified, it will not be checked).</li>
+  <li><code class="highlighter-rouge">maxInclusiveExpression</code> - the maximum inclusive value specified as a OGNL expression (if none is specified, it will not be checked).</li>
+  <li><code class="highlighter-rouge">minExclusiveExpression</code> - the minimum exclusive value specified as a OGNL expression (if none is specified, it will not be checked).</li>
+  <li><code class="highlighter-rouge">maxExclusiveExpression</code> - the maximum exclusive value specified as a OGNL expression (if none is specified, it will not be checked).</li>
+</ul>
 
-<p><strong>(!) Warning</strong></p>
+<p>You can specify either <code class="highlighter-rouge">minInclusive</code>, <code class="highlighter-rouge">maxInclusive</code>, <code class="highlighter-rouge">minExclusive</code> and <code class="highlighter-rouge">maxExclusive</code> or <code class="highlighter-rouge">minInclusiveExpression</code>, <code class="highlighter-rouge">maxInclusiveExpression</code>, <code class="highlighter-rouge">minExclusiveExpression</code> and <code class="highlighter-rouge">maxExclusiveExpression</code> as a OGNL expression, see example below. You can always try to mix params but be aware that such behaviour was not tested.</p>
 
 <blockquote>
-  <table>
-    <tbody>
-      <tr>
-        <td>{snippet:id=parameters-warning</td>
-        <td>javadoc=true</td>
-        <td>url=com.opensymphony.xwork2.validator.validators.DoubleRangeFieldValidator}</td>
-      </tr>
-    </tbody>
-  </table>
+  <p>Warning
+Do not use <code class="highlighter-rouge">${minInclusiveExpression}</code>, <code class="highlighter-rouge">${maxInclusiveExpression}</code>, <code class="highlighter-rouge">${minExclusiveExpressionExpression}</code> and <code class="highlighter-rouge">${maxExclusive}</code> as an expression as this will turn into infinitive loop!</p>
 </blockquote>
 
-<p>####Examples####</p>
+<h3 id="examples">Examples</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|lang=xml|url=com.opensymphony.xwork2.validator.validators.DoubleRangeFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;validators&gt;
+    &lt;!-- Plain Validator Syntax --&gt;
+    &lt;validator type="double"&gt;
+        &lt;param name="fieldName"&gt;percentage&lt;/param&gt;
+        &lt;param name="minInclusive"&gt;20.1&lt;/param&gt;
+        &lt;param name="maxInclusive"&gt;50.1&lt;/param&gt;
+        &lt;message&gt;Age needs to be between ${minInclusive} and ${maxInclusive} (inclusive)&lt;/message&gt;
+    &lt;/validator&gt;
+ 
+    &lt;!-- Field Validator Syntax --&gt;
+    &lt;field name="percentage"&gt;
+        &lt;field-validator type="double"&gt;
+            &lt;param name="minExclusive"&gt;0.123&lt;/param&gt;
+            &lt;param name="maxExclusive"&gt;99.98&lt;/param&gt;
+            &lt;message&gt;Percentage needs to be between ${minExclusive} and ${maxExclusive} (exclusive)&lt;/message&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+ 
+    &lt;!-- Field Validator Syntax with expression --&gt;
+    &lt;field name="percentage"&gt;
+        &lt;field-validator type="double"&gt;
+            &lt;param name="minExclusiveExpression"&gt;${minExclusiveValue}&lt;/param&gt; &lt;!-- will be evaluated as: Double getMinExclusiveValue() --&gt;
+            &lt;param name="maxExclusiveExpression"&gt;${maxExclusiveValue}&lt;/param&gt; &lt;!-- will be evaluated as: Double getMaxExclusiveValue() --&gt;
+            &lt;message&gt;Percentage needs to be between ${minExclusive} and ${maxExclusive} (exclusive)&lt;/message&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
 </div>
 
   </section>

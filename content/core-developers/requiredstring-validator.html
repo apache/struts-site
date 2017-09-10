@@ -127,22 +127,45 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/requiredstring-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="requiredstring-validator">requiredstring validator</h1>
 
-<p>####Description####</p>
+<h3 id="description">Description</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.RequiredStringValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>RequiredStringValidator checks that a String field is non-null and has a length &gt; 0. (i.e. it isn’t “”). The <code class="highlighter-rouge">trim</code> parameter determines whether it will <code class="highlighter-rouge">String#trim()</code> the String before performing the length check. If unspecified, the String will be trimmed.</p>
 
-<p>####Parameters####</p>
+<h3 id="parameters">Parameters</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.RequiredStringValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<ul>
+  <li><code class="highlighter-rouge">fieldName</code> - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.</li>
+  <li><code class="highlighter-rouge">trim</code> - (Optional) Boolean, default true. Trims the field name value before validating.</li>
+  <li><code class="highlighter-rouge">trimExpression</code> - (Optional) String. Specifies the trim param as an OGNL expression.</li>
+</ul>
 
-<p>####Examples####</p>
+<h3 id="examples">Examples</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=examples|lang=xml|javadoc=true|url=com.opensymphony.xwork2.validator.validators.RequiredStringValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;validators&gt;
+    &lt;!-- Plain-Validator Syntax --&gt;
+    &lt;validator type="requiredstring"&gt;
+        &lt;param name="fieldName"&gt;username&lt;/param&gt;
+        &lt;param name="trim"&gt;true&lt;/param&gt;
+        &lt;message&gt;username is required&lt;/message&gt;
+    &lt;/validator&gt;
+     
+    &lt;!-- Field-Validator Syntax --&gt;
+    &lt;field name="username"&gt;
+        &lt;field-validator type="requiredstring"&gt;
+            &lt;param name="trim"&gt;true&lt;/param&gt;
+            &lt;message&gt;username is required&lt;/message&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+ 
+    &lt;!-- Field-Validator Syntax with expression --&gt;
+    &lt;field name="username"&gt;
+        &lt;field-validator type="requiredstring"&gt;
+            &lt;param name="trimExpression"&gt;${trimValue}&lt;/param&gt; &lt;!-- will be evaluated as: boolean getTrimValue() --&gt;
+            &lt;message&gt;username is required&lt;/message&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
 </div>
 
   </section>
