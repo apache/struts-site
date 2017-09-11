@@ -5,31 +5,52 @@ title: short validator
 
 # short validator
 
-####Description####
+### Description
 
+Field Validator that checks if the short specified is within a certain range.
 
+### Parameters
 
-~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.ShortRangeFieldValidator}
-~~~~~~~
+- `fieldName` - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.
+- `min` - the minimum value (if none is specified, it will not be checked).
+- `max` - the maximum value (if none is specified, it will not be checked).
+- `parse` - if set to true, minExpression and maxExpression will be evaluated to find min/max.
+- `minExpression` - expression to calculate the minimum value (if none is specified, it will not be checked).
+- `maxExpression` - expression to calculate the maximum value (if none is specified, it will not be checked).
 
-####Parameters####
+You can either use the `min` / `max` value or `minExpression` / `maxExpression` (when `parse` is set to `true`) - using expression can be slightly slower, see the example below.
 
+> Warning
+> Do not use `${minExpression}` and `${maxExpression}` as an expression as this will turn into infinitive loop!
 
+### Examples
 
-~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.ShortRangeFieldValidator}
-~~~~~~~
-
-**(\!) Warning**
-
-
-> \{snippet:id=parameters\-warning|javadoc=true|url=com\.opensymphony\.xwork2\.validator\.validators\.ShortRangeFieldValidator\}
-
-####Examples####
-
-
-
-~~~~~~~
-{snippet:id=example|javadoc=true|lang=xml|url=com.opensymphony.xwork2.validator.validators.ShortRangeFieldValidator}
-~~~~~~~
+```
+<validators>
+    <!-- Plain Validator Syntax -->
+    <validator type="short">
+        <param name="fieldName">age</param>
+        <param name="min">20</param>
+        <param name="max">50</param>
+        <message>Age needs to be between ${min} and ${max}</message>
+    </validator>
+ 
+    <!-- Field Validator Syntax -->
+    <field name="age">
+        <field-validator type="short">
+            <param name="min">20</param>
+            <param name="max">50</param>
+            <message>Age needs to be between ${min} and ${max}</message>
+        </field-validator>
+    </field>
+ 
+    <!-- Field Validator Syntax with expression -->
+    <field name="age">
+        <field-validator type="short">
+            <param name="minExpression">${minValue}</param> <!-- will be evaluated as: Short getMinValue() -->
+            <param name="maxExpression">${maxValue}</param> <!-- will be evaluated as: Short getMaxValue() -->
+            <message>Age needs to be between ${min} and ${max}</message>
+        </field-validator>
+    </field>
+</validators>
+```

@@ -5,26 +5,21 @@ title: conditionalvisitor validator
 
 # conditionalvisitor validator
 
-####Description####
+### Description
 
+The ConditionalVisitorFieldValidator will forward validation to the VisitorFieldValidator only if the expression will evaluate to true.
 
+### Parameters
 
-~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.ConditionalVisitorFieldValidator}
-~~~~~~~
+- `expression` - an OGNL expression which should evaluate to true to pass validation to the VisitorFieldValidator.
 
-####Parameters####
+### Examples
 
-
-
-~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.ConditionalVisitorFieldValidator}
-~~~~~~~
-
-####Examples####
-
-
-
-~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.validator.validators.ConditionalVisitorFieldValidator}
-~~~~~~~
+```
+<field name="colleaguePosition">
+    <field-validator type="conditionalvisitor">
+        <param name="expression">reason == 'colleague' and colleaguePositionID == 'OTHER'</param>
+        <message>You must select reason Colleague and position Other</message>
+    </field-validator>
+</field>
+```

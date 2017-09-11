@@ -5,26 +5,33 @@ title: fieldexpression validator
 
 # fieldexpression validator
 
-####Description####
+### Description
 
+Validates a field using an OGNL expression.
 
+### Parameters
 
-~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.FieldExpressionValidator}
-~~~~~~~
+- `fieldName` - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.
+- `expression` - The Ognl expression (must evaluate to a boolean) which is to be validated the stack.
 
-####Parameters####
+### Examples
 
-
-
-~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.FieldExpressionValidator}
-~~~~~~~
-
-####Examples####
-
-
-
-~~~~~~~
-{snippet:id=example|javadoc=true|lang=xml|url=com.opensymphony.xwork2.validator.validators.FieldExpressionValidator}
-~~~~~~~
+```
+<!-- Plain Validator Syntax -->
+<validators>
+    <!-- Plain Validator Syntax -->
+    <validator type="fieldexpression">
+       <param name="fieldName">myField</param>
+       <param name="expression"><![CDATA[#myCreditLimit > #myGirfriendCreditLimit]]></param>
+       <message>My credit limit should be MORE than my girlfriend</message>
+    <validator>
+     
+    <!-- Field Validator Syntax -->
+    <field name="myField">
+        <field-validator type="fieldexpression">
+            <param name="expression"><![CDATA[#myCreditLimit > #myGirfriendCreditLimit]]></param>
+            <message>My credit limit should be MORE than my girlfriend</message>
+        </field-validator>
+    </field>
+</vaidators>
+```
