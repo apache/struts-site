@@ -127,36 +127,58 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/short-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="short-validator">short validator</h1>
 
-<p>####Description####</p>
+<h3 id="description">Description</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.ShortRangeFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>Field Validator that checks if the short specified is within a certain range.</p>
 
-<p>####Parameters####</p>
+<h3 id="parameters">Parameters</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.ShortRangeFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<ul>
+  <li><code class="highlighter-rouge">fieldName</code> - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.</li>
+  <li><code class="highlighter-rouge">min</code> - the minimum value (if none is specified, it will not be checked).</li>
+  <li><code class="highlighter-rouge">max</code> - the maximum value (if none is specified, it will not be checked).</li>
+  <li><code class="highlighter-rouge">parse</code> - if set to true, minExpression and maxExpression will be evaluated to find min/max.</li>
+  <li><code class="highlighter-rouge">minExpression</code> - expression to calculate the minimum value (if none is specified, it will not be checked).</li>
+  <li><code class="highlighter-rouge">maxExpression</code> - expression to calculate the maximum value (if none is specified, it will not be checked).</li>
+</ul>
 
-<p><strong>(!) Warning</strong></p>
+<p>You can either use the <code class="highlighter-rouge">min</code> / <code class="highlighter-rouge">max</code> value or <code class="highlighter-rouge">minExpression</code> / <code class="highlighter-rouge">maxExpression</code> (when <code class="highlighter-rouge">parse</code> is set to <code class="highlighter-rouge">true</code>) - using expression can be slightly slower, see the example below.</p>
 
 <blockquote>
-  <table>
-    <tbody>
-      <tr>
-        <td>{snippet:id=parameters-warning</td>
-        <td>javadoc=true</td>
-        <td>url=com.opensymphony.xwork2.validator.validators.ShortRangeFieldValidator}</td>
-      </tr>
-    </tbody>
-  </table>
+  <p>Warning
+Do not use <code class="highlighter-rouge">${minExpression}</code> and <code class="highlighter-rouge">${maxExpression}</code> as an expression as this will turn into infinitive loop!</p>
 </blockquote>
 
-<p>####Examples####</p>
+<h3 id="examples">Examples</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|lang=xml|url=com.opensymphony.xwork2.validator.validators.ShortRangeFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;validators&gt;
+    &lt;!-- Plain Validator Syntax --&gt;
+    &lt;validator type="short"&gt;
+        &lt;param name="fieldName"&gt;age&lt;/param&gt;
+        &lt;param name="min"&gt;20&lt;/param&gt;
+        &lt;param name="max"&gt;50&lt;/param&gt;
+        &lt;message&gt;Age needs to be between ${min} and ${max}&lt;/message&gt;
+    &lt;/validator&gt;
+ 
+    &lt;!-- Field Validator Syntax --&gt;
+    &lt;field name="age"&gt;
+        &lt;field-validator type="short"&gt;
+            &lt;param name="min"&gt;20&lt;/param&gt;
+            &lt;param name="max"&gt;50&lt;/param&gt;
+            &lt;message&gt;Age needs to be between ${min} and ${max}&lt;/message&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+ 
+    &lt;!-- Field Validator Syntax with expression --&gt;
+    &lt;field name="age"&gt;
+        &lt;field-validator type="short"&gt;
+            &lt;param name="minExpression"&gt;${minValue}&lt;/param&gt; &lt;!-- will be evaluated as: Short getMinValue() --&gt;
+            &lt;param name="maxExpression"&gt;${maxValue}&lt;/param&gt; &lt;!-- will be evaluated as: Short getMaxValue() --&gt;
+            &lt;message&gt;Age needs to be between ${min} and ${max}&lt;/message&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
 </div>
 
   </section>

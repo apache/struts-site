@@ -127,36 +127,55 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/regex-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="regex-validator">regex validator</h1>
 
-<p>####Description####</p>
+<h3 id="description">Description</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.RegexFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>Validates a string field using a regular expression.</p>
 
-<p>####Parameters####</p>
+<h3 id="parameters">Parameters</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.RegexFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<ul>
+  <li><code class="highlighter-rouge">fieldName</code> - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.</li>
+  <li><code class="highlighter-rouge">regexp</code> - The RegExp expression</li>
+  <li><code class="highlighter-rouge">caseSensitive</code> - Boolean (Optional). Sets whether the expression should be matched against in a case-sensitive way. Default is true.</li>
+  <li><code class="highlighter-rouge">trim</code> - Boolean (Optional). Sets whether the expression should be trimmed before matching. Default is true.</li>
+  <li><code class="highlighter-rouge">regexExpression</code> - String (Optional). Defines regExp expression as an OGNL expression - will be evaluated to String.</li>
+  <li><code class="highlighter-rouge">caseSensitiveExpression</code> - String (Optional). Defines <code class="highlighter-rouge">caseSensitive</code> param as an OGNL expression - will be evaluated to Boolean.</li>
+  <li><code class="highlighter-rouge">trimExpression</code> - String (Optional). Defines trim param as an OGNL expression - will be evaluated to Boolean.</li>
+</ul>
 
-<p><strong>(!) Warning</strong></p>
+<p>You can mix normal params with expression aware params but thus was not tested.</p>
 
 <blockquote>
-  <table>
-    <tbody>
-      <tr>
-        <td>{snippet:id=parameters-warning</td>
-        <td>javadoc=true</td>
-        <td>url=com.opensymphony.xwork2.validator.validators.RegexFieldValidator}</td>
-      </tr>
-    </tbody>
-  </table>
+  <p>Warning
+Do not use <code class="highlighter-rouge">${regexExpression}</code>, <code class="highlighter-rouge">${caseSensitiveExpression}</code> and <code class="highlighter-rouge">${trimExpression}</code> as an expression as this will turn into infinitive loop!</p>
 </blockquote>
 
-<p>####Examples####</p>
+<h3 id="examples">Examples</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|lang=xml|url=com.opensymphony.xwork2.validator.validators.RegexFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;validators&gt;
+    &lt;!-- Plain Validator Syntax --&gt;
+    &lt;validator type="regex"&gt;
+        &lt;param name="fieldName"&gt;myStrangePostcode&lt;/param&gt;
+        &lt;param name="regex"&gt;&lt;![CDATA[([aAbBcCdD][123][eEfFgG][456])]]&gt;&lt;/param&gt;
+    &lt;/validator&gt;
+ 
+    &lt;!-- Field Validator Syntax --&gt;
+    &lt;field name="myStrangePostcode"&gt;
+        &lt;field-validator type="regex"&gt;
+            &lt;param name="regex"&gt;&lt;![CDATA[([aAbBcCdD][123][eEfFgG][456])]]&gt;&lt;/param&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+ 
+    &lt;!-- Field Validator Syntax with expressions --&gt;
+    &lt;field name="myStrangePostcode"&gt;
+        &lt;field-validator type="regex"&gt;
+            &lt;param name="regexExpression"&gt;${regexValue}&lt;/param&gt; &lt;!-- will be evaluated as: String getRegexValue() --&gt;
+            &lt;param name="caseSensitiveExpression"&gt;${caseSensitiveValue}&lt;/param&gt; &lt;!-- will be evaluated as: boolean getCaseSensitiveValue() --&gt;
+            &lt;param name="trimExpression"&gt;${trimValue}&lt;/param&gt; &lt;!-- will be evaluated as: boolean getTrimValue() --&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
 </div>
 
   </section>

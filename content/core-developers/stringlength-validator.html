@@ -127,36 +127,60 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/stringlength-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="stringlength-validator">stringlength validator</h1>
 
-<p>####Description####</p>
+<h3 id="description">Description</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.StringLengthFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>StringLengthFieldValidator checks that a String field is of a certain length. If the <code class="highlighter-rouge">minLength</code> parameter is specified, it will make sure that the String has at least that many characters. If the <code class="highlighter-rouge">maxLength</code> parameter is specified, it will make sure that the String has at most that many characters. The <code class="highlighter-rouge">trim</code> parameter determines whether it will <code class="highlighter-rouge">String#trim()</code> the String before performing the length check. If unspecified, the String will be trimmed.</p>
 
-<p>####Parameters####</p>
+<h3 id="parameters">Parameters</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.StringLengthFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<p><strong>(!) Warning</strong></p>
+<ul>
+  <li><code class="highlighter-rouge">fieldName</code> - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.</li>
+  <li><code class="highlighter-rouge">maxLength</code> - Integer. The max length of the field value. Default ignore.</li>
+  <li><code class="highlighter-rouge">minLength</code> - Integer. The min length of the field value. Default ignore.</li>
+  <li><code class="highlighter-rouge">trim</code> - (Optional) Boolean, default true. Trim the field value before evaluating its min/max length. Default true.</li>
+  <li><code class="highlighter-rouge">maxLengthExpression</code> - (Optional) String. Defines the max length param as an OGNL expression.</li>
+  <li><code class="highlighter-rouge">minLengthExpression</code> - (Optional) String. Defines the min length param as an OGNL expression.</li>
+  <li><code class="highlighter-rouge">trimExpression</code> - (Optional) String. Defines th trim param as an OGNL expression.</li>
+</ul>
 
 <blockquote>
-  <table>
-    <tbody>
-      <tr>
-        <td>{snippet:id=parameters-warning</td>
-        <td>javadoc=true</td>
-        <td>url=com.opensymphony.xwork2.validator.validators.StringLengthFieldValidator}</td>
-      </tr>
-    </tbody>
-  </table>
+  <p>Warning
+Do not use <code class="highlighter-rouge">${minLengthExpression}</code>, <code class="highlighter-rouge">${maxLengthExpression}</code> and <code class="highlighter-rouge">${trimExpression}</code> as an expression as this will turn into infinitive loop!</p>
 </blockquote>
 
-<p>####Examples####</p>
+<h3 id="examples">Examples</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|lang=xml|url=com.opensymphony.xwork2.validator.validators.StringLengthFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;validators&gt;
+    &lt;!-- Plain Validator Syntax --&gt;
+    &lt;validator type="stringlength"&gt;
+        &lt;param name="fieldName"&gt;myPurchaseCode&lt;/param&gt;
+        &lt;param name="minLength"&gt;10&lt;/param&gt;
+        &lt;param name="maxLength"&gt;10&lt;/param&gt;
+        &lt;param name="trim"&gt;true&lt;/param&gt;
+        &lt;message&gt;Your purchase code needs to be 10 characters long&lt;/message&gt;
+    &lt;/validator&gt;
+ 
+    &lt;!-- Field Validator Syntax --&gt;
+    &lt;field name="myPurchaseCode"&gt;
+        &lt;field-validator type="stringlength"&gt;
+             &lt;param name="minLength"&gt;10&lt;/param&gt;
+             &lt;param name="maxLength"&gt;10&lt;/param&gt;
+             &lt;param name="trim"&gt;true&lt;/param&gt;
+             &lt;message&gt;Your purchase code needs to be 10 characters long&lt;/message&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+ 
+    &lt;!-- Field Validator Syntax with expression --&gt;
+    &lt;field name="myPurchaseCode"&gt;
+        &lt;field-validator type="stringlength"&gt;
+             &lt;param name="minLengthExpression"&gt;${minLengthValue}&lt;/param&gt; &lt;!-- will be evaluated as: Integer getMinLengthValue() --&gt;
+             &lt;param name="maxLengthExpression"&gt;${maxLengthValue}&lt;/param&gt; &lt;!-- will be evaluated as: Integer getMaxLengthValue() --&gt;
+             &lt;param name="trimExpression"&gt;${trimValue}&lt;/param&gt; &lt;!-- will be evaluated as: boolean getTrimValue() --&gt;
+             &lt;message&gt;Your purchase code needs to be 10 characters long&lt;/message&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
 </div>
 
   </section>

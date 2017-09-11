@@ -127,22 +127,37 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/fieldexpression-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="fieldexpression-validator">fieldexpression validator</h1>
 
-<p>####Description####</p>
+<h3 id="description">Description</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.FieldExpressionValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>Validates a field using an OGNL expression.</p>
 
-<p>####Parameters####</p>
+<h3 id="parameters">Parameters</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.FieldExpressionValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<ul>
+  <li><code class="highlighter-rouge">fieldName</code> - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.</li>
+  <li><code class="highlighter-rouge">expression</code> - The Ognl expression (must evaluate to a boolean) which is to be validated the stack.</li>
+</ul>
 
-<p>####Examples####</p>
+<h3 id="examples">Examples</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|lang=xml|url=com.opensymphony.xwork2.validator.validators.FieldExpressionValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!-- Plain Validator Syntax --&gt;
+&lt;validators&gt;
+    &lt;!-- Plain Validator Syntax --&gt;
+    &lt;validator type="fieldexpression"&gt;
+       &lt;param name="fieldName"&gt;myField&lt;/param&gt;
+       &lt;param name="expression"&gt;&lt;![CDATA[#myCreditLimit &gt; #myGirfriendCreditLimit]]&gt;&lt;/param&gt;
+       &lt;message&gt;My credit limit should be MORE than my girlfriend&lt;/message&gt;
+    &lt;validator&gt;
+     
+    &lt;!-- Field Validator Syntax --&gt;
+    &lt;field name="myField"&gt;
+        &lt;field-validator type="fieldexpression"&gt;
+            &lt;param name="expression"&gt;&lt;![CDATA[#myCreditLimit &gt; #myGirfriendCreditLimit]]&gt;&lt;/param&gt;
+            &lt;message&gt;My credit limit should be MORE than my girlfriend&lt;/message&gt;
+        &lt;/field-validator&gt;
+    &lt;/field&gt;
+&lt;/vaidators&gt;
+</code></pre>
 </div>
 
   </section>

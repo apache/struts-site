@@ -127,26 +127,37 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/visitor-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="visitor-validator">visitor validator</h1>
 
-<p>####Description####</p>
+<h3 id="description">Description</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.VisitorFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>The VisitorFieldValidator allows you to forward validation to object properties of your action using the object’s own validation files. This allows you to use the <code class="highlighter-rouge">ModelDriven</code> development pattern and manage your validations for your models in one place, where they belong, next to your model classes. The VisitorFieldValidator can handle either simple Object properties, Collections of Objects, or Arrays.</p>
 
-<p>####Parameters####</p>
+<h3 id="parameters">Parameters</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.VisitorFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<ul>
+  <li><code class="highlighter-rouge">fieldName</code> - field name if plain-validator syntax is used, not needed if field-validator syntax is used.</li>
+  <li><code class="highlighter-rouge">context</code> - the context of which validation should take place. Optional.</li>
+  <li><code class="highlighter-rouge">appendPrefix</code> - the prefix to be added to field. Optional.</li>
+</ul>
 
-<p>####Examples####</p>
+<h3 id="examples">Examples</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.validator.validators.VisitorFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=explanation|javadoc=true|url=com.opensymphony.xwork2.validator.validators.VisitorFieldValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;validators&gt;
+    &lt;!-- Plain Validator Syntax --&gt;
+    &lt;validator type="visitor"&gt;
+        &lt;param name="fieldName"&gt;user&lt;/param&gt;
+        &lt;param name="context"&gt;myContext&lt;/param&gt;
+        &lt;param name="appendPrefix"&gt;true&lt;/param&gt;
+    &lt;/validator&gt;
+ 
+    &lt;!-- Field Validator Syntax --&gt;
+    &lt;field name="user"&gt;
+       &lt;field-validator type="visitor"&gt;
+          &lt;param name="context"&gt;myContext&lt;/param&gt;
+          &lt;param name="appendPrefix"&gt;true&lt;/param&gt;
+       &lt;/field-validator&gt;
+    &lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
 </div>
 
   </section>

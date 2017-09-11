@@ -127,36 +127,60 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/email-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="email-validator">email validator</h1>
 
-<p>####Description####</p>
+<h3 id="description">Description</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.validator.validators.EmailValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<p>EmailValidator checks that a given String field, if not empty, is a valid email address.</p>
+
+<p>The regular expression used to validate that the string is an email address is:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>\\b^['_a-z0-9-\\+](\\.['_a-z0-9-\\+])@[a-z0-9-](\\.[a-z0-9-])\\.([a-z]{2,6})$\\b
+</code></pre>
 </div>
 
-<p>####Parameters####</p>
+<p>You can also specify <code class="highlighter-rouge">expression</code>, <code class="highlighter-rouge">caseSensitive</code> and <code class="highlighter-rouge">trim</code> params as a OGNL expression, see the example below.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.validators.EmailValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<h3 id="parameters">Parameters</h3>
 
-<p><strong>(!) Warning</strong></p>
+<ul>
+  <li><code class="highlighter-rouge">fieldName</code> - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.</li>
+</ul>
+
+<p>Check also documentation of the <code class="highlighter-rouge">RegexpValidator</code> for more details - the EmailValidator is based on it.</p>
 
 <blockquote>
-  <table>
-    <tbody>
-      <tr>
-        <td>{snippet:id=parameters-warning</td>
-        <td>javadoc=true</td>
-        <td>url=com.opensymphony.xwork2.validator.validators.EmailValidator}</td>
-      </tr>
-    </tbody>
-  </table>
+  <p>Warning
+Do not use <code class="highlighter-rouge">${regexExpression}</code>, <code class="highlighter-rouge">${caseSensitiveExpression}</code> and <code class="highlighter-rouge">${trimExpression}</code> as an expression as this will turn into infinitive loop!</p>
 </blockquote>
 
-<p>####Examples####</p>
+<h3 id="examples">Examples</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.validator.validators.EmailValidator</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!-- Plain Validator Syntax --&gt;
+&lt;validators&gt;
+    &lt;validator type="email"&gt;
+        &lt;param name="fieldName"&gt;myEmail&lt;/param&gt;
+        &lt;message&gt;Must provide a valid email&lt;/message&gt;
+    &lt;/validator&gt;
+&lt;/validators&gt;
+ 
+&lt;!-- Field Validator Syntax --&gt;
+&lt;field name="myEmail"&gt;
+   &lt;field-validator type="email"&gt;
+      &lt;message&gt;Must provide a valid email&lt;/message&gt;
+   &lt;/field-validator&gt;
+&lt;/field&gt;
+ 
+&lt;!-- Field Validator Syntax with expressions --&gt;
+&lt;!-- Only available when used with xml based configuration, if you want to have the same
+        flexibility with annotations use @RegexFieldValidator instead --&gt;
+&lt;field name="myEmail"&gt;
+   &lt;field-validator type="email"&gt;
+      &lt;param name="regexExpression"&gt;${emailPattern}&lt;/param&gt; &lt;!-- will be evaluated as: String getEmailPattern() --&gt;
+      &lt;param name="caseSensitiveExpression"&gt;${emailCaseSensitive}&lt;/param&gt; &lt;!-- will be evaluated as: boolean getEmailCaseSensitive() --&gt;
+      &lt;param name="trimExpression"&gt;${trimEmail}&lt;/param&gt; &lt;!-- will be evaluated as: boolean getTrimEmail() --&gt;
+      &lt;message&gt;Must provide a valid email&lt;/message&gt;
+   &lt;/field-validator&gt;
+&lt;/field&gt;
+</code></pre>
 </div>
 
   </section>
