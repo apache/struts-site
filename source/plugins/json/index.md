@@ -151,6 +151,7 @@ the beginning and `wrapPostfix` to add content at the end. This settings take pr
 and `prefix` which are deprecated from 0.34 on. Examples:
 
 - Wrap with comments:
+
 ```xml
 <result type="json">
   <param name="wrapPrefix">/*</param>
@@ -159,6 +160,7 @@ and `prefix` which are deprecated from 0.34 on. Examples:
 ```
 
 - Add a prefix:
+
 ```xml
 <result type="json">
   <param name="wrapPrefix">{}&&</param>
@@ -166,6 +168,7 @@ and `prefix` which are deprecated from 0.34 on. Examples:
 ```
 
 - Wrap for file upload:
+
 ```xml
 <result type="json">
   <param name="wrapPrefix"><![CDATA[<html><body><textarea>]]></param>
