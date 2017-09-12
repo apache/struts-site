@@ -135,6 +135,7 @@
       <li><a href="#including-properties" id="markdown-toc-including-properties">Including properties</a></li>
       <li><a href="#root-object" id="markdown-toc-root-object">Root Object</a></li>
       <li><a href="#wrapping" id="markdown-toc-wrapping">Wrapping</a></li>
+      <li><a href="#wrap-with-comments" id="markdown-toc-wrap-with-comments">Wrap with Comments</a></li>
       <li><a href="#prefix" id="markdown-toc-prefix">Prefix</a></li>
       <li><a href="#base-classes" id="markdown-toc-base-classes">Base Classes</a></li>
       <li><a href="#enumerations" id="markdown-toc-enumerations">Enumerations</a></li>
@@ -341,55 +342,62 @@ the beginning and <code class="highlighter-rouge">wrapPostfix</code> to add cont
 and <code class="highlighter-rouge">prefix</code> which are deprecated from 0.34 on. Examples:</p>
 
 <ul>
-  <li>Wrap with comments:
-```xml</li>
+  <li>Wrap with comments:</li>
 </ul>
-<result type="json">
-  <param name="wrapPrefix" />/*
-  <param name="wrapSuffix" />*/
-</result>
-<div class="highlighter-rouge"><pre class="highlight"><code>
-- Add a prefix:
-```xml
-&lt;result type="json"&gt;
-  &lt;param name="wrapPrefix"&gt;{}&amp;&amp;&lt;/param&gt;
-&lt;/result&gt;
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"wrapPrefix"</span><span class="nt">&gt;</span>/*<span class="nt">&lt;/param&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"wrapSuffix"</span><span class="nt">&gt;</span>*/<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/result&gt;</span>
 </code></pre>
 </div>
 
 <ul>
-  <li>Wrap for file upload:
-```xml</li>
+  <li>Add a prefix:</li>
 </ul>
-<result type="json">
-  <param name="wrapPrefix" />&lt;![CDATA[<html><body><textarea>]]&gt;
-  <param name="wrapSuffix" />&lt;![CDATA[</textarea></body></html>]]&gt;
-</result>
-<div class="highlighter-rouge"><pre class="highlight"><code>
-### Wrap with Comments
 
-`wrapWithComments` is deprecated from 0.34, use `wrapPrefix` and `wrapSuffix` instead.
-
-&gt; `wrapWithComments` can turn safe JSON text into dangerous text. For example,
-&gt; `"\*/ alert('XSS'); /\*"` 
-&gt; Thanks to Douglas Crockford for the tip! Consider using **prefix** instead.
-
-If the serialized JSON is `{name: 'El Zorro'}`. Then the output will be: `{}&amp;&amp; ({name: 'El Zorro'})`. 
-
-If the `wrapWithComments` (false by default) attribute is set to true, the generated JSON is wrapped with comments like:
-
-```json
-/* {
-   "doubleVal": 10.10,
-   "nestedBean": {
-      "name": "Mr Bean"
-   },
-   "list": ["A", 10, 20.20, {
-      "firstName": "El Zorro"
-   }],
-   "array": [10, 20] 
-} */
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"wrapPrefix"</span><span class="nt">&gt;</span>{}<span class="err">&amp;&amp;</span><span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/result&gt;</span>
 </code></pre>
+</div>
+
+<ul>
+  <li>Wrap for file upload:</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"wrapPrefix"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[&lt;html&gt;&lt;body&gt;&lt;textarea&gt;]]&gt;</span><span class="nt">&lt;/param&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"wrapSuffix"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[&lt;/textarea&gt;&lt;/body&gt;&lt;/html&gt;]]&gt;</span><span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/result&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="wrap-with-comments">Wrap with Comments</h3>
+
+<p><code class="highlighter-rouge">wrapWithComments</code> is deprecated from 0.34, use <code class="highlighter-rouge">wrapPrefix</code> and <code class="highlighter-rouge">wrapSuffix</code> instead.</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">wrapWithComments</code> can turn safe JSON text into dangerous text. For example,
+<code class="highlighter-rouge">"\*/ alert('XSS'); /\*"</code> 
+Thanks to Douglas Crockford for the tip! Consider using <strong>prefix</strong> instead.</p>
+</blockquote>
+
+<p>If the serialized JSON is <code class="highlighter-rouge"><span class="p">{</span><span class="err">name:</span><span class="w"> </span><span class="err">'El</span><span class="w"> </span><span class="err">Zorro'</span><span class="p">}</span></code>. Then the output will be: <code class="highlighter-rouge"><span class="p">{}</span><span class="err">&amp;&amp;</span><span class="w"> </span><span class="err">(</span><span class="p">{</span><span class="err">name:</span><span class="w"> </span><span class="err">'El</span><span class="w"> </span><span class="err">Zorro'</span><span class="p">}</span><span class="err">)</span></code>.</p>
+
+<p>If the <code class="highlighter-rouge">wrapWithComments</code> (false by default) attribute is set to true, the generated JSON is wrapped with comments like:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">/*</span><span class="w"> </span><span class="p">{</span><span class="w">
+   </span><span class="nt">"doubleVal"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.10</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"nestedBean"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mr Bean"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20.20</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"El Zorro"</span><span class="w">
+   </span><span class="p">}],</span><span class="w">
+   </span><span class="nt">"array"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">]</span><span class="w"> 
+</span><span class="p">}</span><span class="w"> </span><span class="err">*/</span><span class="w">
+</span></code></pre>
 </div>
 <p>To strip those comments use:</p>
 
