@@ -35,7 +35,7 @@ title: Helping
   We don't sell Struts for money, but anyone who wants to be our customer can pay us back by donating
   the time and energy that money represents.
 
-  - ### <a class="anchor" name="patches"></a>How do I create a patch?
+  - ### How do I create a patch?<a class="anchor" name="patches"></a>
 
   A patch is a machine-readable script that can automatically recreate a change to a text file,
   including source code and documentation. The patch format is also human-readable. Developers often pass
@@ -65,7 +65,7 @@ title: Helping
   The [NetBeans community](http://www.netbeans.org/community/contribute/patches.html) also has a helpful section on the
   subject of creating patches.
 
-  - ### <a class="anchor" name="issues"></a>How can I report defects or suggest features?
+  - ### How can I report defects or suggest features?<a class="anchor" name="issues"></a>
 
   Tracking of defect reports and enhancement suggestions for Apache Struts products is handled through the
   [Apache Struts JIRA instance](https://issues.apache.org/jira/browse/WW).
@@ -88,7 +88,7 @@ title: Helping
 
   Feature suggestions are also maintained in the [JIRA issue tracker](https://issues.apache.org/jira/browse/WW).
 
-  - ### <a class="anchor" name="contribute"></a>How can I contribute to the Struts source code?
+  - ### How can I contribute to the Struts source code?<a class="anchor" name="contribute"></a>
 
   A very good place to start is by **reviewing the list of open issues** and pending feature suggestions in the
   [issue tracker](#issues).
@@ -111,7 +111,7 @@ title: Helping
   You can try to fake what a JSP container does, but a much more reliable testing regime would actually execute
   the tag in a real container.
 
-  - ### <a class="anchor" name="documentation"></a>How can I contribute to the documentation?
+  - ### How can I contribute to the documentation?<a class="anchor" name="documentation"></a>
 
   The Struts 2 documentation is maintained using the Atlassian Confluence wiki software and automatically
   exported to HTML for viewing on the website. To help with the Struts 2 documentation, you must create
@@ -126,7 +126,7 @@ title: Helping
   in relation to the rest of the documentation.
   Again, someone has to figure that out before it can be added, and that someone might as well be you.
 
-  - ### <a class="anchor" name="release"></a>So when is the next release coming out?
+  - ### So when is the next release coming out?<a class="anchor" name="release"></a>
 
   Here is the truth regarding releases:
 
@@ -158,7 +158,7 @@ title: Helping
   and keep an eye on what is coming down the pipeline.
   This way you are at least forewarned and forearmed.
 
-  - ### <a class="anchor" name="release_help"></a>What can I do to help the next release along?
+  - ### What can I do to help the next release along?<a class="anchor" name="release_help"></a>
 
     - Most importantly, download the latest [nightly build](builds.html#NightlyBuilds) or development release
       and test it against your own applications. Report any and all issues or suspected issues to
@@ -192,7 +192,7 @@ title: Helping
       If Developers are supporting each other on the lists, the Committers have more time to spend on the next
       release.
 
-  - ### <a class="anchor" name="decides_help"></a>How can I help make the decisions?
+  - ### How can I help make the decisions?<a class="anchor" name="decides_help"></a>
 
   A guiding principle of the Apache Software Foundation is "them that do the work, make the decisions".
   This phrase is actually a double-entendre. A project will make some decisions by voting (very few),
