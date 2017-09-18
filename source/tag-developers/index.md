@@ -1,3 +1,8 @@
+---
+layout: default
+title: Tag Developers Guide (WIP)
+---
+
 #Tag Developers Guide# {#PAGE_14324}
 
 

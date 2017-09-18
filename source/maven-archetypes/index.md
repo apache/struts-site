@@ -1,3 +1,8 @@
+---
+layout: default
+title: Maven Archetypes (WIP)
+---
+
 #Struts 2 Maven Archetypes# {#PAGE_108820}
 
 Struts 2 provides several [Maven](http://maven\.apache\.org/)^[http://maven\.apache\.org/] archetypes that create a starting point for our own applications\.
