@@ -35,7 +35,7 @@ title: Helping
   We don't sell Struts for money, but anyone who wants to be our customer can pay us back by donating
   the time and energy that money represents.
 
-  - ### How do I create a patch?
+  - ### How do I create a patch? {#patches}
 
   A patch is a machine-readable script that can automatically recreate a change to a text file,
   including source code and documentation. The patch format is also human-readable. Developers often pass
@@ -65,7 +65,7 @@ title: Helping
   The [NetBeans community](http://www.netbeans.org/community/contribute/patches.html) also has a helpful section on the
   subject of creating patches.
 
-  - ### How can I report defects or suggest features?
+  - ### How can I report defects or suggest features? {#issues}
 
   Tracking of defect reports and enhancement suggestions for Apache Struts products is handled through the
   [Apache Struts JIRA instance](https://issues.apache.org/jira/browse/WW).
@@ -88,7 +88,7 @@ title: Helping
 
   Feature suggestions are also maintained in the [JIRA issue tracker](https://issues.apache.org/jira/browse/WW).
 
-  - ### How can I contribute to the Struts source code?
+  - ### How can I contribute to the Struts source code? {#contribute}
 
   A very good place to start is by **reviewing the list of open issues** and pending feature suggestions in the
   [issue tracker](#issues).
@@ -111,7 +111,7 @@ title: Helping
   You can try to fake what a JSP container does, but a much more reliable testing regime would actually execute
   the tag in a real container.
 
-  - ### How can I contribute to the documentation?
+  - ### How can I contribute to the documentation? {#documentation}
 
   The Struts 2 documentation is maintained using the Atlassian Confluence wiki software and automatically
   exported to HTML for viewing on the website. To help with the Struts 2 documentation, you must create
@@ -126,7 +126,7 @@ title: Helping
   in relation to the rest of the documentation.
   Again, someone has to figure that out before it can be added, and that someone might as well be you.
 
-  - ### So when is the next release coming out?
+  - ### So when is the next release coming out? {#release}
 
   Here is the truth regarding releases:
 
@@ -158,7 +158,7 @@ title: Helping
   and keep an eye on what is coming down the pipeline.
   This way you are at least forewarned and forearmed.
 
-  - ### What can I do to help the next release along?
+  - ### What can I do to help the next release along? {#release_help}
 
     - Most importantly, download the latest [nightly build](builds.html#NightlyBuilds) or development release
       and test it against your own applications. Report any and all issues or suspected issues to
@@ -192,7 +192,7 @@ title: Helping
       If Developers are supporting each other on the lists, the Committers have more time to spend on the next
       release.
 
-  - ### How can I help make the decisions?
+  - ### How can I help make the decisions? {#decides_help}
 
   A guiding principle of the Apache Software Foundation is "them that do the work, make the decisions".
   This phrase is actually a double-entendre. A project will make some decisions by voting (very few),
