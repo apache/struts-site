@@ -153,7 +153,7 @@ after pushing changes, `asfbot` will close the PR at GitHub.
 
  * [Git at Apache](http://wiki.apache.org/general/GitAtApache)
 
-# Google's Patch Reward program {#patch-reward}
+## Google's Patch Reward program
 
 During [SFHTML5](http://www.meetup.com/sfhtml5/) Google announced that they adding the Apache Struts project to
 [the Google's Security Patch Reward Program](https://www.google.com/about/appsecurity/patch-rewards/).
