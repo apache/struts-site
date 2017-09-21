@@ -4,11 +4,11 @@ title: Maven Archetypes (WIP)
 ---
 
 # Struts 2 Maven Archetypes
+{:.no_toc}
 
 Struts 2 provides several [Maven](http://maven.apache.org/) archetypes that create a starting point for our own applications.
 
 **Contents**
-{:.no_toc}
 
 * Will be replaced with the ToC, excluding a header
 {:toc}
