@@ -13,7 +13,7 @@ Struts 2 provides several [Maven](http://maven.apache.org/) archetypes that crea
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-### Quickstart
+## Quickstart
 
 A recommended way to start with Struts2 archetypes is to work with the archetype catalog.
 
@@ -22,11 +22,11 @@ A recommended way to start with Struts2 archetypes is to work with the archetype
 mvn archetype:generate -DarchetypeCatalog=http://struts.apache.org/
 ```
 
-### Available Archetypes
+## Available Archetypes
 
-#### The Blank Convention Archetype (struts2-archetype-convention)
+### The Blank Convention Archetype (struts2-archetype-convention)
 
-##### Features
+#### Features
 
 + Convention-based validation
 
@@ -49,7 +49,7 @@ mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DremoteRepositories=http://struts.apache.org
 ```
 
-#### The Blank Archetype (struts2-archetype-blank)
+### The Blank Archetype (struts2-archetype-blank)
 
 See the [Struts 2 Blank Archetype](struts2-archetype-blank.html) page for more information, including some basic Maven information, how to build and run the app, and basic application information.
 
@@ -63,11 +63,11 @@ mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DremoteRepositories=http://struts.apache.org
 ```
 
-#### The Starter Archetype (struts2-archetype-starter)
+### The Starter Archetype (struts2-archetype-starter)
 
 The Starter archetype creates a more featured application using several common technologies used in production applications.
 
-##### Features
+#### Features
 
 + Sitemesh integration
 
@@ -92,9 +92,9 @@ mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DremoteRepositories=http://struts.apache.org
 ```
 
-#### The AngularJS Archetype (struts2-archetype-angularjs)
+### The AngularJS Archetype (struts2-archetype-angularjs)
 
-##### Features
+#### Features
 
 + Convention-based Action Configuration
 
@@ -113,11 +113,11 @@ mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DremoteRepositories=http://struts.apache.org
 ```
 
-#### The Portlet Blank Archetype (struts2-archetype-portlet)
+### The Portlet Blank Archetype (struts2-archetype-portlet)
 
 The Portlet blank archetype creates a minimally populated JSR 168 portlet.
 
-##### Features
+#### Features
 
 + View, Edit, and Help mode examples
 
@@ -138,11 +138,11 @@ mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DremoteRepositories=http://struts.apache.org
 ```
 
-#### The Portlet Database Archetype (struts2-archetype-dbportlet)
+### The Portlet Database Archetype (struts2-archetype-dbportlet)
 
 The Portlet database archetype creates a simple JSR 168 portlet that displays the contents of a database table.
 
-##### Features
+#### Features
 
 + Uses Spring and Hsql to show a real database query
 
@@ -167,9 +167,9 @@ mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DremoteRepositories=http://struts.apache.org
 ```
 
-#### The Plugin Archetype (struts2-archetype-plugin)
+### The Plugin Archetype (struts2-archetype-plugin)
 
-##### Features
+#### Features
 
 + Example new result type
 
@@ -186,7 +186,7 @@ mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DremoteRepositories=http://struts.apache.org
 ```
 
-### Creating an Application Using a Maven Archetype
+## Creating an Application Using a Maven Archetype
 
 Run the following command from your new project's parent directory. The project will be created in a sub-directory named after the  `artifactId` parameter.
 
@@ -210,7 +210,7 @@ mvn archetype:generate -B \
 
 where \<CURRENT_STRUTS_VERSION\> is archetype's version you want to use, e.g. 2.3.15.1
 
-#### Staging repository
+### Staging repository
 
 If the above command will fail because of missing archetypes in central repository, you can try to use staging repository like below
 
@@ -226,7 +226,7 @@ or this
 mvn archetype:generate -DarchetypeCatalog=http://struts.apache.org/
 ```
 
-#### Archetype Parameters
+### Archetype Parameters
 
 The  `-B` option runs  `archetype:generate` in batch mode; it avoids a prompt to confirm our settings.
 
@@ -240,7 +240,7 @@ The  `-B` option runs  `archetype:generate` in batch mode; it avoids a prompt to
 |package| (Optional) The base Java package to use for generated source code.  Defaults to archetypeGroupId if not specified. |
 |remoteRepositories| (Optional) A list of remote repositories that contain the archetype. |
 
-### Command Quick Reference
+## Command Quick Reference
 
 These commands are used from the directory created by the archetype plugin (the project's sub-directory that was created in the previous step).
 
