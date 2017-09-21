@@ -18,7 +18,7 @@ The framework offers a flexible view layer that supports multiple view technolog
   - [OGNL Basics](ognl-basics.html)
   - [OGNL Expression compilatio](ognl-expression-compilation.html)
 - [Tag Syntax](tag-syntax.html)
-- _Alt Syntax_ 
+- [Alt Syntax](alt-syntax.html) 
 - [JSP](jsp.html)
   + [specific tags](jsp-tags.html)
 + [FreeMarker](freemarker.html)
