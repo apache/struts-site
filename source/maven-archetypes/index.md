@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Maven Archetypes (WIP)
+title: Maven Archetypes
 ---
 
 # Struts 2 Maven Archetypes
