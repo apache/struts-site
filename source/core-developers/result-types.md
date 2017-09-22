@@ -15,7 +15,7 @@ The framework provides several implementations of the `com.opensymphony.xwork2.R
 own applications.
 
 |[Chain Result](chain-result.html)|Used for [Action Chaining](action-chaining.html)|
-|[Dispatcher Result](dispatcher-reult.html)|Used for web resource integration, including _JSP_  integration|
+|[Dispatcher Result](dispatcher-result.html)|Used for web resource integration, including _JSP_  integration|
 |[FreeMarker Result](freemarker-result.html)|Used for _FreeMarker_  integration|
 |[HttpHeader Result](httpheader-result.html)|Used to control special HTTP behaviors|
 |[Redirect Result](redirect-result.html)|Used to redirect to another URL (web resource)|
