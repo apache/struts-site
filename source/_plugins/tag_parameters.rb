@@ -1,4 +1,4 @@
-require 'net/http'
+require 'open-uri'
 require 'uri'
 require 'cgi'
 
@@ -22,14 +22,15 @@ module Jekyll
 
     def render(context)
       if @content
-        @content[/#{Regexp.escape('<!-- START SNIPPET: tagattributes -->')}(.*?)#{Regexp.escape('<!-- END SNIPPET: tagattributes -->')}/m, 1]
+        parameters = @content[/#{Regexp.escape('<!-- START SNIPPET: tagattributes -->')}(.*?)#{Regexp.escape('<!-- END SNIPPET: tagattributes -->')}/m, 1]
+        "<p>" + parameters + "</p>"
       else
         raise 'Something went wrong in TagParameters'
       end
     end
 
     def fetchContent(url)
-      Net::HTTP.get(URI.parse(URI.encode(url.strip)))
+      open(URI.parse(URI.encode(url.strip))).read.chomp
     end
   end
 end

@@ -29,7 +29,7 @@ If you want to use additional parameters in your `s:a` the best practice is to u
 leverage this url into your `s:a` tag. This is done by creating a `s:url` and specifying an `var` attribute. Like `testUrlId` 
 in this example. Then in the `s:a` tag reference this id in the href attribute via `%{testUrlId}`
 
-```jsp
+```html
 <s:url var="testUrlId" namespace="/subscriber" action="customField" method="delete">
     <s:param name="customFieldDefinition.id" value="${id}"/>
 </s:url>
