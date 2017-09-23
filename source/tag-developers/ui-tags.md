@@ -14,7 +14,6 @@ Template support allows UI tags to build a rich set of reusable HTML components 
 requirements. For details, see [Themes and Templates](themes-and-templates.html).
 
 |[Themes and Templates](themes-and-templates.html)| A must-read explanation of how themes and templates are used when rendering UI tags. |
-|-----------------------------------|----------------------------------------------------------------------------------------|
 |[Form Tags](form-tags.html)| provide all form-related UI output, such as _form_ , _textfield_ , and _select_ . |
 | Non Form Tags | provide all non-form-related UI output, such as _a_ , _div_ , and _tabbedPanel_ . |
 
