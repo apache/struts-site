@@ -129,20 +129,41 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/httpheader-result.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="httpheader-result">HttpHeader Result</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=org.apache.struts2.result.HttpHeaderResult</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>A custom Result type for setting HTTP headers and status by optionally evaluating against the ValueStack. This result can also be used to send an error to the client. All the parameters can be evaluated against the ValueStack.</p>
 
-<p>####Parameters####</p>
+<h3 id="parameters">Parameters</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=params|javadoc=true|url=org.apache.struts2.result.HttpHeaderResult</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">status</code> - the http servlet response status code that should be set on a response.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">parse</code> - true by default. If set to false, the headers param will not be parsed for Ognl expressions.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">headers</code> - header values.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">error</code> - the http servlet response error code that should be set on a response.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">errorMessage</code> - error message to be set on response if ‘error’ is set.</p>
+  </li>
+</ul>
 
-<p>####Examples####</p>
+<h3 id="examples">Examples</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.result.HttpHeaderResult</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;result name="success" type="httpheader"&gt;
+  &lt;param name="status"&gt;204&lt;/param&gt;
+  &lt;param name="headers.a"&gt;a custom header value&lt;/param&gt;
+  &lt;param name="headers.b"&gt;another custom header value&lt;/param&gt;
+&lt;/result&gt;
+ 
+&lt;result name="proxyRequired" type="httpheader"&gt;
+  &lt;param name="error"&gt;305&lt;/param&gt;
+  &lt;param name="errorMessage"&gt;this action must be accessed through a proxy&lt;/param&gt;
+&lt;/result&gt;
+</code></pre>
 </div>
 
   </section>

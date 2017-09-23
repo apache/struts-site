@@ -129,72 +129,37 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/freemarker-result.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="freemarker-result">FreeMarker Result</h1>
 
-<p>Renders a view using the Freemarker template engine. The</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>FreemarkarManager
-</code></pre>
-</div>
-<p> class configures the template loaders so that the template location can be either</p>
+<p>Renders a view using the Freemarker template engine. The <code class="highlighter-rouge">FreemarkarManager</code> class configures the template loaders so that the template location can be either</p>
 
 <ul>
-  <li>relative to the web root folder, e.g.: </li>
+  <li>
+    <p>relative to the web root folder, e.g.: <code class="highlighter-rouge">/WEB-INF/views/home.ftl</code></p>
+  </li>
+  <li>
+    <p>a classpath resource, e.g.: <code class="highlighter-rouge">/com/company/web/views/home.ftl</code></p>
+  </li>
 </ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>/WEB-INF/views/home.ftl
-</code></pre>
-</div>
-
-<ul>
-  <li>a classpath resource, e.g.:</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>/com/company/web/views/home.ftl
-</code></pre>
-</div>
-
-<p> </p>
 
 <p>Also see <a href="freemarker-support.html">Freemarker Support</a>.</p>
 
-<p>#####Parameters#####</p>
+<h4 id="parameters">Parameters</h4>
 
 <ul>
   <li>
-    <p><strong>location</strong> (default) - the location of the template to process.</p>
+    <p><code class="highlighter-rouge">location</code> (default) - the location of the template to process.</p>
   </li>
   <li>
-    <p><strong>parse </strong>- true by default. If set to false, the location param will not be parsed for expressions.</p>
+    <p><code class="highlighter-rouge">parse</code>- true by default. If set to false, the location param will not be parsed for expressions.</p>
   </li>
   <li>
-    <p><strong>contentType</strong> - defaults to</p>
+    <p><code class="highlighter-rouge">contentType</code> - defaults to <code class="highlighter-rouge">text/html</code> unless specified.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">writeIfCompleted</code> - <code class="highlighter-rouge">false</code> by default, write to stream only if there isn’t any error processing the template. Setting <code class="highlighter-rouge">template_exception_handler=rethrow</code> in <code class="highlighter-rouge">freemarker.properties</code> will have the same effect.</p>
   </li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>text/html
-</code></pre>
-</div>
-<p> unless specified.</p>
-
-<ul>
-  <li><strong>writeIfCompleted</strong> -</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>false
-</code></pre>
-</div>
-<p> by default, write to stream only if there isn’t any error processing the template. Setting</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>template_exception_handler=rethrow
-</code></pre>
-</div>
-<p> in</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>freemarker.properties
-</code></pre>
-</div>
-<p> will have the same effect.</p>
-
-<p>#####Examples#####</p>
+<h4 id="examples">Examples</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>&lt;result name="success" type="freemarker"&gt;foo.ftl&lt;/result&gt;
 </code></pre>

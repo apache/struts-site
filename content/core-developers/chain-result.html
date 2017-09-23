@@ -129,22 +129,49 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/chain-result.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="chain-result">Chain Result</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.ActionChainResult</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<p>This result invokes an entire other action, complete with it’s own interceptor stack and result.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">actionName</code> (default) - the name of the action that will be chained to.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">namespace</code> - used to determine which namespace the Action is in that we’re chaining. If namespace is null, this defaults to the current namespace.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">method</code> - used to specify another method on target action to be invoked. If null, this defaults to execute method.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">skipActions</code> - (optional) the list of comma separated action names for the actions that could be chained to.</p>
+  </li>
+</ul>
+
+<h3 id="examples">Examples</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;package name="public" extends="struts-default"&gt;
+    &lt;!-- Chain creatAccount to login, using the default parameter --&gt;
+    &lt;action name="createAccount" class="..."&gt;
+        &lt;result type="chain"&gt;login&lt;/result&gt;
+    &lt;/action&gt;
+ 
+    &lt;action name="login" class="..."&gt;
+        &lt;!-- Chain to another namespace --&gt;
+        &lt;result type="chain"&gt;
+            &lt;param name="actionName"&gt;dashboard&lt;/param&gt;
+            &lt;param name="namespace"&gt;/secure&lt;/param&gt;
+        &lt;/result&gt;
+    &lt;/action&gt;
+&lt;/package&gt;
+ 
+&lt;package name="secure" extends="struts-default" namespace="/secure"&gt;
+    &lt;action name="dashboard" class="..."&gt;
+        &lt;result&gt;dashboard.jsp&lt;/result&gt;
+    &lt;/action&gt;
+&lt;/package&gt;
+</code></pre>
 </div>
-
-<p>####Parameters####</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=params|javadoc=true|url=com.opensymphony.xwork2.ActionChainResult</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<p>####Examples####</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.ActionChainResult</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
 
   </section>
 </article>
