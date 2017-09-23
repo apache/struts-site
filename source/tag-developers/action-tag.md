@@ -35,9 +35,7 @@ Is "myAction" null outside the tag? false
 
 ## Parameters
 
-~~~~~~~
-{snippet:id=tagattributes|javadoc=false|url=struts2-tags/action.html}
-~~~~~~~
+{% tag_parameters action.html %}
 
 ## Examples
 
