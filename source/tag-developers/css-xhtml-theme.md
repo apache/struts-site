@@ -5,145 +5,76 @@ title: Tag Developers Guide (WIP)
 
 # css_xhtml theme
 
-The css_xhtml theme provides all the basics that the [simple theme](#PAGE_14291) provides and adds several features.
+The _css_xhtml theme_ provides all the basics that the [simple theme](simple-theme.html) provides and adds several features.
 
-+ Standard two-column CSS-based layout, using 
+_ Standard two-column CSS-based layout, using `<div>` for the HTML [Struts Tags](struts-tags.html) ([form](form-tag.htmk), 
+  [textfield](textfield-tag.html), [select](select-tag.html), etc)
+- Labels for each of the HTML [Struts Tags](struts-tags.html), placed according to the CSS stylesheet
+- [Validation](../core-developers/validation.html) and error reporting
+- [Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation.html) using 100% 
+  JavaScript on the browser
 
-~~~~~~~
-<div>
-~~~~~~~
- for the HTML [Struts Tags](#PAGE_14248) ([form](#PAGE_14201), [textfield](#PAGE_13912), [select](#PAGE_14127), etc)
+## Wrapping the Simple Theme
 
-+ Labels for each of the HTML [Struts Tags](#PAGE_14248), placed according to the CSS stylesheet
+The xhtml theme uses the "wrapping" technique described by [Extending Themes](extending-themes.html). Let's look at how 
+the HTML tags are wrapped by a standard header and footer. For example, in the [textfield](textfield-tag.html) template, 
+`text.ftl`, the `controlheader.ftl` and `controlfooter.ftl` templates are wrapped around the simple template.
 
-+ _Validation_  and error reporting
+{% highlight freemarker %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/simple/text.ftl %}
+{% endhighlight %}
 
-+ _Pure JavaScript Client Side Validation_  using 100% JavaScript on the browser
+## CSS XHTML theme header
 
-__Wrapping the Simple Theme__
+The header used by the HTML tags in the css_xhtml theme is complicated. Unlike the [xhtml theme](xhtml-theme.html), 
+the CSS theme does not use a `labelposition` attribute. Instead, the label position is defined by CSS rules.
 
-The xhtml theme uses the "wrapping" technique described by [Extending Themes](#PAGE_13962). Let's look at how the HTML tags are wrapped by a standard header and footer. For example, in the [textfield](#PAGE_13912) template, 
+{% highlight freemarker %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/css_xhtml/controlheader.ftl %}
+{% endhighlight %}
 
-~~~~~~~
-text.ftl
-~~~~~~~
-, the 
+Note that the `fieldErrors`, usually caused by [Validation](../core-developers/validation.html), are displayed in a `div`
+block before the element is displayed.
 
-~~~~~~~
-controlheader.ftl
-~~~~~~~
- and 
+## CSS XHTML theme footer
 
-~~~~~~~
-controlfooter.ftl
-~~~~~~~
- templates are wrapped around the simple template.
+And the `controlfooter.ftl` contents:
 
+{% highlight freemarker %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/css_xhtml/controlfooter.ftl %}
+{% endhighlight %}
 
-~~~~~~~
-{snippet:id=all|lang=xml|url=struts2/core/src/main/resources/template/simple/text.ftl}
-~~~~~~~
+## Special Interest
 
-__CSS XHTML theme header__
+Two css_xhtml templates of special interest are `head` and `form`.
 
-The header used by the HTML tags in the css_xhtml theme is complicated. Unlike the [xhtml theme](#PAGE_13834), the CSS theme does not use a 
+### Head template
 
-~~~~~~~
-labelposition
-~~~~~~~
- attribute. Instead, the label position is defined by CSS rules.
+The css_xhtml [head](head-tag.html) template is similar to the xhtml head template. The difference is that CSS is used 
+to provide the layout. The contents of **head.ftl** are:
 
+{% highlight freemarker %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/css_xhtml/head.ftl %}
+{% endhighlight %}
 
-~~~~~~~
-{snippet:id=all|lang=xml|url=struts2/core/src/main/resources/template/css_xhtml/controlheader.ftl}
-~~~~~~~
+The head includes a style sheet. The contents of **styles.css** are:
 
-Note that the 
+{% highlight css %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/css_xhtml/styles.css %}
+{% endhighlight %}
 
-~~~~~~~
-fieldErrors
-~~~~~~~
-, usually caused by _Validation_ , are displayed in a 
+### Form template
 
-~~~~~~~
-div
-~~~~~~~
- block before the element is displayed.
+The css_xhtml [form](form-tag.html) template is almost exactly like the _xhtml form template_ , including support for 
+[Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation.html). The difference 
+is that instead of printing out an opening and closing `<table>` element, there are no elements. Instead, the CSS rules 
+for the individual HTML tags are assumed to handle all display logic. However, as noted, client-side validation is still 
+supported.
 
-__CSS XHTML theme footer__
+### css_xhtml form template
 
-And the 
-
-~~~~~~~
-controlfooter.ftl
-~~~~~~~
- contents:
-
-
-~~~~~~~
-{snippet:id=all|lang=xml|url=struts2/core/src/main/resources/template/css_xhtml/controlfooter.ftl}
-~~~~~~~
-
-__Special Interest__
-
-Two css_xhtml templates of special interest are 
-
-~~~~~~~
-head
-~~~~~~~
- and 
-
-~~~~~~~
-form
-~~~~~~~
-.
-
-__Head template__
-
-The css_xhtml [head](#PAGE_13997) template is similar to the xhtml head template. The difference is that CSS is used to provide the layout.
-
-
-~~~~~~~
-{snippet:id=all|lang=xml|url=struts2/core/src/main/resources/template/css_xhtml/head.ftl}
-~~~~~~~
-
-The head includes a style sheet.
-
-
-~~~~~~~
-{snippet:id=all|lang=xml|url=struts2/core/src/main/resources/template/css_xhtml/styles.css}
-~~~~~~~
-
-__Form template__
-
-The css_xhtml [form](#PAGE_14201) template is almost exactly like the _xhtml form template_ , including support for _Pure JavaScript Client Side Validation_ . The difference is that instead of printing out an opening and closing 
-
-~~~~~~~
-<table>
-~~~~~~~
- element, there are no elements. Instead, the CSS rules for the individual HTML tags are assumed to handle all display logic. However, as noted, client-side validation is still supported.
-
-__css_xhtml form template__
-
-The css_xhtml [form](#PAGE_14201) template is almost exactly like the _xhtml form template_ , including support for _Pure JavaScript Client Side Validation_ . The only difference is that instead of printing out an opening and closing 
-
-~~~~~~~
-<table>
-~~~~~~~
- element, there are no elements. Instead, the CSS rules for the individual HTML tags are assumed to handle all dislay logic. However, as noted, client side validation is still supported.
-
-__css_xhtml head template__
-
-The css_xhtml [head](#PAGE_13997) template is very similar to the _xhtml head template_ . The only difference is that CSS that is included is specifically designed to provide the layout for the [css_xhtml theme](#PAGE_14215). The contents of **head.ftl** are:
-
-
-~~~~~~~
-{snippet:id=all|lang=xml|url=struts2/core/src/main/resources/template/css_xhtml/head.ftl}
-~~~~~~~
-
-The contents of **styles.css** are:
-
-
-~~~~~~~
-{snippet:id=all|lang=xml|url=struts2/core/src/main/resources/template/css_xhtml/styles.css}
-~~~~~~~
+The css_xhtml [form](form-tag.html) template is almost exactly like the _xhtml form template_ , including support for 
+[Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation.html). The only 
+difference is that instead of printing out an opening and closing `<table>` element, there are no elements. Instead, 
+the CSS rules for the individual HTML tags are assumed to handle all display logic. However, as noted, client side 
+validation is still supported.
