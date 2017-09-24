@@ -128,76 +128,48 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/tag-developers/ajax-theme.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="ajax-theme">ajax theme</h1>
 
-<p>The ajax theme is deprecated!</p>
+<blockquote>
+  <p>The ajax theme is deprecated!</p>
+</blockquote>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>The ajax theme extends the <a href="#PAGE_13834">xhtml theme</a> with AJAX features. The theme uses the popular DOJO AJAX/JavaScript toolkit. AJAX features include:</p>
+<p>The ajax theme extends the <a href="xhtml-theme.html">xhtml theme</a> with AJAX features. The theme uses the popular DOJO 
+AJAX/JavaScript toolkit. AJAX features include:</p>
 
 <ul>
-  <li>
-    <p><em>AJAX Client Side Validation</em></p>
-  </li>
-  <li>
-    <p>Remote <a href="#PAGE_14201">form</a> submission support (works with the <a href="#PAGE_14054">submit</a> tag as well)</p>
-  </li>
-  <li>
-    <p>An advanced <a href="#PAGE_13908">div</a> template that provides dynamic reloading of partial HTML</p>
-  </li>
-  <li>
-    <p>An advanced <a href="#PAGE_14027">a</a> template that provides the ability to load and evaluate JavaScript remotely</p>
-  </li>
-  <li>
-    <p>An AJAX-only <a href="#PAGE_14222">tabbedPanel</a> implementation</p>
-  </li>
-  <li>
-    <p>A rich pub-sub event model</p>
-  </li>
-  <li>
-    <p>Interactive autocomplete tag</p>
-  </li>
+  <li><a href="../core-developers/ajax-client-side-validation.html">AJAX Client Side Validation</a></li>
+  <li>Remote <a href="form-tag.html">form</a> submission support (works with the <a href="dojo-submit-tag.html">submit</a> tag as well)</li>
+  <li>An advanced <a href="dojo-div-tag.html">div</a> template that provides dynamic reloading of partial HTML</li>
+  <li>An advanced <a href="dojo-a-tag.html">a</a> template that provides the ability to load and evaluate JavaScript remotely</li>
+  <li>An AJAX-only <a href="dojo-tabbedpanel-tag.html">tabbedpanel</a> implementation</li>
+  <li>A rich pub-sub event model</li>
+  <li>Interactive autocomplete tag</li>
 </ul>
 
-<p>(ok)  See also: <em>Ajax tags</em></p>
+<blockquote>
+  <p>See also: <a href="ajax-tags.html">Ajax tags</a></p>
+</blockquote>
 
-<p><strong>Browser Compatibility</strong></p>
+<h2 id="browser-compatibility">Browser Compatibility</h2>
 
-<p>AJAX (as a technology) uses a browser-side scripting component that varies between browers (and sometimes versions). To hide those differences from the developer, we utilize the dojo toolkit (<a href="http://www.dojotoolkit.org">http://www.dojotoolkit.org</a>). Several browsers are supported by dojo, and any UI’s created with the ajax theme should act the same way for supported browsers. The supported browsers are:</p>
+<p>AJAX (as a technology) uses a browser-side scripting component that varies between browsers (and sometimes versions). 
+To hide those differences from the developer, we utilize the dojo toolkit (<a href="http://www.dojotoolkit.org">http://www.dojotoolkit.org</a>). 
+Several browsers are supported by dojo, and any UI’s created with the ajax theme should act the same way for supported 
+browsers. The supported browsers are:</p>
 
 <ul>
-  <li>
-    <p>IE 5.5+</p>
-  </li>
-  <li>
-    <p>FF 1.0+</p>
-  </li>
-  <li>
-    <p>Latest Safari (on up-to-date OS versions)</p>
-  </li>
-  <li>
-    <p>Latest Opera</p>
-  </li>
-  <li>
-    <p>Latest Konqueror</p>
-  </li>
+  <li>IE 5.5+</li>
+  <li>FF 1.0+</li>
+  <li>Latest Safari (on up-to-date OS versions)</li>
+  <li>Latest Opera</li>
+  <li>Latest Konqueror</li>
 </ul>
 
-<p><strong>Extending the AJAX Theme</strong></p>
+<h2 id="extending-the-ajax-theme">Extending the AJAX Theme</h2>
 
-<p>The wrapping technique utilized by the ajax theme is much like <a href="#PAGE_13834">xhtml theme</a>, but the</p>
+<p>The wrapping technique utilized by the ajax theme is much like <a href="xhtml-theme.html">xhtml theme</a>, but the <code class="highlighter-rouge">controlheader.ftl</code>
+is a wee bit different.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>controlheader.ftl
-</code></pre>
-</div>
-<p>is a wee bit different.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;#if parameters.label?if_exists != ""&gt;
+<pre><code class="language-injectedfreemarker">&lt;#if parameters.label?if_exists != ""&gt;
 	&lt;#include "/${parameters.templateDir}/xhtml/controlheader.ftl" /&gt;
 &lt;/#if&gt;
 &lt;#if parameters.form?exists &amp;&amp; parameters.form.validate?default(false) == true&gt;
@@ -208,409 +180,34 @@
         ${tag.addParameter('onblur', "validate(this);")}
     &lt;/#if&gt;
 &lt;/#if&gt;
-
 </code></pre>
-</div>
 
-<p>The header provides for <em>AJAX Client Side Validation</em>  by checking if the</p>
+<p>The header provides for <a href="../core-developers/ajax-client-side-validation.html">AJAX Client Side Validation</a> by checking 
+if the <code class="highlighter-rouge">validate</code> attribute is set to true. If it is, a validation request is made on each <code class="highlighter-rouge">onblur</code> event 
+for a HTML <a href="struts-tags.html">Struts Tags</a>. Some people don’t like the <code class="highlighter-rouge">onblur</code> behavior; they would rather a more 
+advanced timer (say, 200ms) be kicked off after every keystroke. You can override this template and provide that 
+type of behavior if you would like.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>validate
-</code></pre>
-</div>
-<p>attribute is set to true. If it is, a validation request is made on each</p>
+<h2 id="special-interest">Special Interest</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>onblur
-</code></pre>
-</div>
-<p>event for a HTML <a href="#PAGE_14248">Struts Tags</a>. Some people don’t like the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>onblur
-</code></pre>
-</div>
-<p>behavior; they would rather a more advanced timer (say, 200ms) be kicked off after every keystroke. You can override this template and provide that type of behavior if you would like.</p>
-
-<p><strong>Special Interest</strong></p>
-
-<p>Three ajax_xhtml templates of special interest are</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>head
-</code></pre>
-</div>
-<p>,</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>div
-</code></pre>
-</div>
-<p>, and</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>a
-</code></pre>
-</div>
-<p>.</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>Especially with the ajax theme, it is important to use the <a href="#PAGE_13997">head</a> tag. (See the <em>ajax head template</em>  for more information.) Without it, AJAX support may not be set up properly.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<ul>
-  <li>
-    <p><em>ajax head template</em></p>
-  </li>
-  <li>
-    <p><em>ajax div template</em></p>
-  </li>
-  <li>
-    <p><em>ajax a template</em></p>
-  </li>
-</ul>
-
-<p>(ok)  In addition to these templates, be familiar with the <em>ajax event system</em>  provided by the framework and Dojo.</p>
-
-<p><strong>ajax a template</strong></p>
-
-<p>The ajax theme is experimental. Feedback is appreciated.</p>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>The ajax a template is used to make asynchronous calls to the server when the user clicks on the a href link.  It is useful when you need to communicate information back to the application from the UI, without requiring the entire page to be re-rendered.  An example would be removing an item from a list.</p>
-
-<p>The <em>preInvokeJS</em>  attribute is used to determine whether the URL specified should be called or not, and must contain Javascript that returns <em>true</em>  or <em>false</em> .  If you want to call a JavaScript function, use the format preInvokeJS=’yourMethodName(data,type)’. An example would be to show a confirm dialog to the user to double check whether they want to remove a user from a list.</p>
-
-<p><strong>Remember</strong>: the content returned by the <em>href</em>  attribute must be JavaScript. That JavaScript will then be evaluated within the webpage. If you only wish to publish an event to the topic specified, then simply return no result (or NONE) from your action and utilize the <em>notifyTopics</em>  attribute to specific the topic names.</p>
-
-<p>For an example of the interaction between the <a href="#PAGE_13908">div</a> tag and the <a href="#PAGE_14027">a</a> tag using the topic pub/sub model, see the examples in the <em>ajax div template</em> .</p>
-
-<p><strong>ajax div template</strong></p>
-
-<p>The Ajax theme is experimental. Feedback is appreciated.</p>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>The ajax <a href="#PAGE_13908">div</a> template provides a much more interesting div rendering option that the other themes do. Rather than simply rendering a</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;div&gt;
-</code></pre>
-</div>
-<p>tag, this template relies on advanced AJAX features provided by the <a href="http://dojotoolkit.org">Dojo Toolkit</a>^[http://dojotoolkit.org]. While the <a href="#PAGE_13908">div</a> tag could be used outside of the <a href="#PAGE_14205">ajax theme</a>, it is usually not very useful. See the <a href="#PAGE_13908">div</a> tag for more information on what features are provided.</p>
-
-<p><strong>Features</strong></p>
-
-<p>The remote div has a few features, some of which can be combined with the <a href="#PAGE_14027">a</a> tag and the <em>ajax a template</em> . These uses are:</p>
-
-<ul>
-  <li>
-    <p>Retrieve remote data</p>
-  </li>
-  <li>
-    <p>Initialize the div with content before the remote data is retrieved</p>
-  </li>
-  <li>
-    <p>Display appropriate error and loading messages</p>
-  </li>
-  <li>
-    <p>Refresh data on a timed cycle</p>
-  </li>
-  <li>
-    <p>Listen for events and refresh data</p>
-  </li>
-  <li>
-    <p>JavaScript control support</p>
-  </li>
-</ul>
-
-<p><strong>Retrieve Remote Data</strong></p>
-
-<p>The simplest way to use the div tag is to provide an <em>href</em>  attribute. For example:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;saf:div theme="ajax" id="weather" href="http://www.weather.com/weather?zip=97239"/&gt;
-
-</code></pre>
-</div>
-
-<p>What this does after the HTML page is completely loaded, the specified URL will be retrieved asynchronously in the browser. The entire contents returned by that URL will be injected in to the div.</p>
-
-<p><strong>Initializing the Div</strong></p>
-
-<p>Because the remote data isn’t loaded immediately, it is sometimes useful to have some placeholder content that exists before the remote data is retrieved. The content is essentially just the body of the div element. For example:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;saf:div theme="ajax" id="weather" href="http://www.weather.com/weather?zip=97239"&gt;
-    Placeholder...
-&lt;/saf:div&gt;
-
-</code></pre>
-</div>
-
-<p>If you wish to load more complex initial data, you can use the <a href="#PAGE_14034">action</a> tag and the <em>executeResult</em>  attribute:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;saf:div theme="ajax" id="weather" href="http://www.weather.com/weather?zip=97239"&gt;
-    &lt;ww:action id="weather" name="weatherBean" executeResult="true"&gt;
-        &lt;ww:param name="zip" value="97239"/&gt;
-    &lt;/ww:action&gt;
-&lt;/saf:div&gt;
-
-</code></pre>
-</div>
-
-<p><strong>Loading and Error Messages</strong></p>
-
-<p>If you’d like to display special messages when the data is being retrieved or when the data cannot be retrieved, you can use the <em>errorText</em>  and <em>loadingText</em>  attributes:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;saf:div theme="ajax" id="weather" href="http://www.weather.com/weather?zip=97239"
-        loadingText="Loading weather information..."
-        errorText="Unable to contact weather server"&gt;
-    Placeholder...
-&lt;/saf:div&gt;
-
-</code></pre>
-</div>
-
-<p><strong>Refresh Timers</strong></p>
-
-<p>Another feature this div template provides is the ability to refresh data on a timed basis. Using the <em>updateFreq</em>  and the <em>delay</em> attributes, you can specify how often the timer goes off and when the timer starts (times in milliseconds). For example, the following will update every minute after a two second delay:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;saf:div theme="ajax" id="weather" href="http://www.weather.com/weather?zip=97239"
-        loadingText="Loading weather information..."
-        errorText="Unable to contact weather server"&gt;
-        delay="2000"
-        updateFreq="60000"
-    Placeholder...
-&lt;/saf:div&gt;
-
-</code></pre>
-</div>
-
-<p><strong>Listening for Events</strong></p>
-
-<p>The <a href="#PAGE_14027">a</a> tag (specifically the <em>ajax a template</em> ) and the div tag support an <em>ajax event system</em> , providing the ability to broadcast events to topics. You can specify the <strong>topics</strong> to listen to using a comma separated list in the <em>listenTopics</em>  attribute. What this means is that when a topic is published, usually through the <em>ajax a template</em> , the URL specified in the <em>href</em>  attribute will be re-requested.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;saf:div theme="ajax" id="weather" href="http://www.weather.com/weather?zip=97239"
-        loadingText="Loading weather information..."
-        errorText="Unable to contact weather server"
-        listenTopics="weather_topic,some_topic"&gt;
-    Placeholder...
-&lt;/saf:div&gt;
-&lt;saf:a id="link1"
-      theme="ajax"
-      href="refreshWeather.action"
-      notifyTopics="weather_topic,other_topic"
-      errorText="An Error ocurred"&gt;Refresh&lt;/saf:a&gt;
-
-</code></pre>
-</div>
-
-<p><strong>JavaScript Support</strong></p>
-
-<p>There are also javascript functions to refresh the content and stop/start the refreshing of the component. For the remote div with the component id “remotediv1”:</p>
-
-<p>To start refreshing use the javascript:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-remotediv1.startTimer();
-
-</code></pre>
-</div>
-
-<p>To stop refreshing use the javascript:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-remotediv1.stopTimer();
-
-</code></pre>
-</div>
-
-<p>To refresh the content use the javascript:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-remotediv1.refresh();
-
-</code></pre>
-</div>
-
-<p><strong>JavaScript Examples:</strong></p>
-
-<p>To further illustrate these concepts here is an example. Say you want to change the url of a div at runtime via javascript. Here is what you need to do:</p>
-
-<p>What you will need to do is add a JS function that listens to a JS event that publishes the id from the select box that was selected.  It will modify the URL for the div (adding the id so the correct data is obtained) and then bind() the AJAX div so it refreshes.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;saf:head theme="ajax" /&gt;
-
-&lt;script type="text/javascript"&gt;
-    function updateReports(id) {
-       var reportDiv= window['reportDivId'];
-       reportDiv.href = '/../reportListRemote.action?selectedId='+id;
-       reportDiv.refresh();
-    }
-    dojo.event.topic.getTopic("updateReportsListTopic").subscribe(null, "updateReports");
-&lt;/script&gt;
-
-&lt;form ... &gt;
-&lt;saf:select .... onchange="javascript: dojo.event.topic.publish("updateReportsListTopic", this.value); " /&gt;
-
-&lt;saf:div id="reportDivId" theme="ajax" href="/.../reportListRemote.action" &gt;
-  Loading reports...
-&lt;/saf:div&gt;
-&lt;/form&gt;
-
-</code></pre>
-</div>
-
-<p><strong>ajax event system</strong></p>
-
-<p>As you may have seen with the <em>ajax div template</em>  and <em>ajax a template</em> , the framework and Dojo provide a nice way to subscribe and notify of topics from within the browser. A benifit of using Dojo as the basis of many of these components is being able to loosely couple UI components.  There are two attributes of importance:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>listenTopics
-</code></pre>
-</div>
-<p>and</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>notifyTopics
-</code></pre>
-</div>
-<p>.</p>
-
-<ul>
-  <li>If a component has a</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>notifyTopics
-</code></pre>
-</div>
-<p>attribute, then after the processing has been completed a message with be published to the topic names supplied as a value (comma delimited).</p>
-
-<ul>
-  <li>If a component has a</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>listenTopics
-</code></pre>
-</div>
-<p>attribute, then when a message is published to the topic names supplied as a value (comma delimited), the component will perform custom tag-specific logic ( i.e a DIV tag will re-fresh its content).</p>
-
-<p>As well as this, you can publish and subscribe to topic names with javascript code.  To publish to the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>topic_name
-</code></pre>
-</div>
-<p>topic:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-dojo.event.topic.publish("topic_name", "content");
-
-</code></pre>
-</div>
-
-<p>The topic_name attribute is required, the content attribute is not and most elements are triggered without having this attribute. See the <em>ajax div template</em>  for an example of this type of interaction.</p>
-
-<p>To subscribe to the <em>topic_name</em>  topic:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-function doSomethingWithEvent(data) {
-...
-}
-
-dojo.event.topic.getTopic("topic_name").subscribe(null, "doSomethingWithEvent");
-
-</code></pre>
-</div>
-
-<p>The</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>subscribe
-</code></pre>
-</div>
-<p>method takes 2 parameters, the first is the JavaScript object variable (or null if the function is not from an object) and the second is the name of the function to call when an event is recieved on the topic.</p>
-
-<p><strong>ajax head template</strong></p>
-
-<p>The ajax <a href="#PAGE_13997">head</a> template builds upon the <em>xhtml head template</em>  by providing additional JavaScript includes for the <a href="http://dojotoolkit.org">Dojo Toolkit</a>^[http://dojotoolkit.org], which is used by the <em>ajax a template</em> , <em>ajax div template</em>  , and the <em>ajax tabbedPanel template</em> . It is required to use this tag,</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;ww:head theme="ajax"/&gt;
-</code></pre>
-</div>
-<p>, in your HTML</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;head&gt;
-</code></pre>
-</div>
-<p>block if you wish to use AJAX feature. The contents of <strong>head.ftl</strong> are:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=all|lang=xml|url=struts2/plugins/dojo/src/main/resources/template/ajax/head.ftl</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<table>
-  <tbody>
-    <tr>
-      <td>If you are having trouble getting the AJAX theme to work, you should include the above JavaScript in your page manually, changing “isDebug: false” to “isDebug: true”.  This will log out debugging information directly to the screen.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>Note that Dojo is configured to use the same character encoding specified in <em>struts.properties</em> , typically UTF-8. For a simple example of how to use the <a href="#PAGE_13997">head</a> tag with the AJAX theme, simply do the following in your HTML:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=common-include|lang=xml|url=struts2/apps/showcase/src/main/webapp/ajax/commonInclude.jsp</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>Three ajax_xhtml templates of special interest are <code class="highlighter-rouge">head</code>, <code class="highlighter-rouge">div</code> , and <code class="highlighter-rouge">a</code>.</p>
 
 <blockquote>
-
+  <p>Especially with the ajax theme, it is important to use the <a href="dojo-head-tag.html">head</a> tag. 
+(See the <a href="ajax-head-template.html">ajax head template</a> for more information.) Without it, AJAX support may not be set 
+up properly.</p>
 </blockquote>
+
+<ul>
+  <li><a href="ajax-head-template.html">ajax head template</a></li>
+  <li><a href="ajax-div-template.html">ajax div template</a></li>
+  <li><a href="ajax-a-template.html">ajax a template</a></li>
+</ul>
 
 <blockquote>
-
+  <p>In addition to these templates, be familiar with the <a href="ajax-event-system.html">ajax event system</a> provided by 
+the framework and Dojo.</p>
 </blockquote>
-
-<blockquote>
-  <p>The above sample is from Struts trunk; for 2.0.6 you should use <s:head debug="true"></s:head>.</p>
-</blockquote>
-
-<blockquote>
-
-</blockquote>
-
-<p><strong>ajax tabbedPanel template</strong></p>
-
-<p>TODO: Describe the Ajax TabbedPanel template</p>
-
-<p><strong>ajax submit template</strong></p>
-
-<p>TODO: Describe the Ajax Submit template</p>
-
 
   </section>
 </article>

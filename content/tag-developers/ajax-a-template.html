@@ -125,61 +125,26 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/tag-developers/simple-theme.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 class="no_toc" id="simple-theme">simple theme</h1>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/tag-developers/ajax-a-template.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <h1 id="ajax-a-template">ajax a template</h1>
 
-<ul id="markdown-toc">
-  <li><a href="#head-tag" id="markdown-toc-head-tag">Head Tag</a></li>
-  <li><a href="#simple-head-template" id="markdown-toc-simple-head-template">simple head template</a></li>
-</ul>
+<p>The ajax theme is experimental. Feedback is appreciated.</p>
 
-<p>The simple theme renders “bare bones” HTML elements. The simple theme is most often used as a starting point for other 
-themes. (See <a href="extending-themes.html">Extending Themes</a> for more.)</p>
+<p>The ajax a template is used to make asynchronous calls to the server when the user clicks on the a href link. It is 
+useful when you need to communicate information back to the application from the UI, without requiring the entire page 
+to be re-rendered. An example would be removing an item from a list.</p>
 
-<p>For example, the <a href="textfield-tag.html">textfield</a> tag renders the HTML <code class="highlighter-rouge">&lt;input/&gt;</code> tag without a label, validation, error 
-reporting, or any other formatting or functionality.</p>
+<p>The <code class="highlighter-rouge">preInvokeJS</code> attribute is used to determine whether the URL specified should be called or not, and must contain 
+Javascript that returns <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code>. If you want to call a JavaScript function, use the format 
+<code class="highlighter-rouge">preInvokeJS='yourMethodName(data,type)'</code>. An example would be to show a confirm dialog to the user to double check 
+whether they want to remove a user from a list.</p>
 
-<blockquote>
-  <p>Both the <a href="xhtml-theme.html">xhtml theme</a> and <a href="css-xhtml-theme.xhtml">css_xhtml theme</a> extend the simple theme. Look 
-to them for examples of how to build on the foundation laid by the simple theme.</p>
-</blockquote>
+<p><strong>Remember</strong>: the content returned by the <code class="highlighter-rouge">href</code> attribute must be JavaScript. That JavaScript will then be evaluated 
+within the webpage. If you only wish to publish an event to the topic specified, then simply return no result (or <code class="highlighter-rouge">NONE</code>) 
+from your action and utilize the <code class="highlighter-rouge">notifyTopics</code> attribute to specific the topic names.</p>
 
-<h2 id="head-tag">Head Tag</h2>
-
-<p>The simple theme <a href="head-tag.html">head</a> template prints out a javascript include required 
-for the <a href="dojo-datetimepicker-tag.html">datetimepicker</a> tag to render properly.</p>
-
-<h2 id="simple-head-template">simple head template</h2>
-
-<p>The <a href="simple-theme.html">simple theme</a><a href="head-tag.html">head</a> template only does one thing: it loads the minimal 
-Ajax/Dojo support so that tags can import Dojo widgets easily.</p>
-
-<p>The source of the simple <code class="highlighter-rouge">head.ftl</code> template is:</p>
-
-<figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
-/*
- * $Id$
- *
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
---&gt;
-&lt;script src="${base}/struts/utils.js" type="text/javascript"&gt;&lt;/script&gt;</code></pre></figure>
-
+<p>For an example of the interaction between the <a href="dojo-div-tag.html">div</a> tag and the <a href="dojo-a-tag.html">a</a> tag using 
+the topic pub/sub model, see the examples in the <a href="ajax-div-template.html">ajax div template</a>.</p>
 
   </section>
 </article>

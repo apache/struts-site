@@ -125,61 +125,42 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/tag-developers/simple-theme.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 class="no_toc" id="simple-theme">simple theme</h1>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/tag-developers/ajax-event-system.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <h1 id="ajax-event-system">ajax event system</h1>
 
-<ul id="markdown-toc">
-  <li><a href="#head-tag" id="markdown-toc-head-tag">Head Tag</a></li>
-  <li><a href="#simple-head-template" id="markdown-toc-simple-head-template">simple head template</a></li>
+<p>As you may have seen with the <a href="ajax-div-template.html">ajax div template</a> and <a href="ajax-a-template.html">ajax a template</a>, 
+the framework and Dojo provide a nice way to subscribe and notify of topics from within the browser. A benefit of using 
+Dojo as the basis of many of these components is being able to loosely couple UI components. There are two 
+attributes of importance: <code class="highlighter-rouge">listenTopics</code> and <code class="highlighter-rouge">notifyTopics</code>.</p>
+
+<ul>
+  <li>If a component has a <code class="highlighter-rouge">notifyTopics</code> attribute, then after the processing has been completed a message with be published 
+to the topic names supplied as a value (comma delimited).</li>
+  <li>If a component has a <code class="highlighter-rouge">listenTopics</code> attribute, then when a message is published to the topic names supplied as a value 
+(comma delimited), the component will perform custom tag-specific logic ( i.e a DIV tag will re-fresh its content).</li>
 </ul>
 
-<p>The simple theme renders “bare bones” HTML elements. The simple theme is most often used as a starting point for other 
-themes. (See <a href="extending-themes.html">Extending Themes</a> for more.)</p>
+<p>As well as this, you can publish and subscribe to topic names with javascript code. To publish to the <code class="highlighter-rouge">topic_name</code> topic:</p>
 
-<p>For example, the <a href="textfield-tag.html">textfield</a> tag renders the HTML <code class="highlighter-rouge">&lt;input/&gt;</code> tag without a label, validation, error 
-reporting, or any other formatting or functionality.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">dojo</span><span class="o">.</span><span class="na">event</span><span class="o">.</span><span class="na">topic</span><span class="o">.</span><span class="na">publish</span><span class="o">(</span><span class="s">"topic_name"</span><span class="o">,</span> <span class="s">"content"</span><span class="o">);</span>
+</code></pre>
+</div>
 
-<blockquote>
-  <p>Both the <a href="xhtml-theme.html">xhtml theme</a> and <a href="css-xhtml-theme.xhtml">css_xhtml theme</a> extend the simple theme. Look 
-to them for examples of how to build on the foundation laid by the simple theme.</p>
-</blockquote>
+<p>The <code class="highlighter-rouge">topic_name</code> attribute is required, the content attribute is not and most elements are triggered without having this 
+attribute. See the <a href="ajax-div-template.html">ajax div template</a> for an example of this type of interaction.</p>
 
-<h2 id="head-tag">Head Tag</h2>
+<p>To subscribe to the <code class="highlighter-rouge">topic_name</code> topic:</p>
 
-<p>The simple theme <a href="head-tag.html">head</a> template prints out a javascript include required 
-for the <a href="dojo-datetimepicker-tag.html">datetimepicker</a> tag to render properly.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">doSomethingWithEvent</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">...</span>
+<span class="p">}</span>
 
-<h2 id="simple-head-template">simple head template</h2>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">topic</span><span class="p">.</span><span class="nx">getTopic</span><span class="p">(</span><span class="s2">"topic_name"</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s2">"doSomethingWithEvent"</span><span class="p">);</span>
+</code></pre>
+</div>
 
-<p>The <a href="simple-theme.html">simple theme</a><a href="head-tag.html">head</a> template only does one thing: it loads the minimal 
-Ajax/Dojo support so that tags can import Dojo widgets easily.</p>
-
-<p>The source of the simple <code class="highlighter-rouge">head.ftl</code> template is:</p>
-
-<figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
-/*
- * $Id$
- *
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
---&gt;
-&lt;script src="${base}/struts/utils.js" type="text/javascript"&gt;&lt;/script&gt;</code></pre></figure>
-
+<p>The <code class="highlighter-rouge">subscribe</code> method takes 2 parameters, the first is the JavaScript object variable (or null if the function is not 
+from an object) and the second is the name of the function to call when an event is received on the topic.</p>
 
   </section>
 </article>
