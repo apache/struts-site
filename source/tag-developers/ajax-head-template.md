@@ -10,7 +10,11 @@ JavaScript includes for the [Dojo Toolkit](http://dojotoolkit.org), which is use
 [ajax div template](ajax-div-template.html), and the [ajax tabbedPanel template](). It is required to use this tag, 
 `<ww:head theme="ajax"/>` , in your HTML `<head>` block if you wish to use AJAX feature. The contents of **head.ftl** are:
 
-{% tag_attributes ajax/head.ftl %}
+{% tag_parameters  %}
+
+{% highlight html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/support-2-3/plugins/dojo/src/main/resources/template/ajax/head.ftl %}
+{% endhighlight %}
 
 > If you are having trouble getting the AJAX theme to work, you should include the above JavaScript in your page manually, 
 > changing "isDebug: false" to "isDebug: true".  This will log out debugging information directly to the screen.
