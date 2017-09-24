@@ -21,7 +21,7 @@ Note that Dojo is configured to use the same character encoding specified in `st
 example of how to use the [head](dojo-head-tag.html) tag with the AJAX theme, simply do the following in your HTML:
 
 {% highlight html %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/apps/showcase/src/main/webapp/ajax/commonInclude.jsp %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/support-2-3/apps/showcase/src/main/webapp/WEB-INF/ajax/commonInclude.jsp %}
 {% endhighlight %}
 
 > The above sample is from Struts trunk; for 2.0.6 you should use `<s:head debug="true"/>`.
