@@ -1,6 +1,9 @@
 ---
 layout: default
 title: Tag Developers Guide (WIP)
+parent:
+  url: themes-and-templates.html
+  title: Themes and Templates
 ---
 
 # ajax theme
