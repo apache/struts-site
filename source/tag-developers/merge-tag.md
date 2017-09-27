@@ -15,7 +15,7 @@ __Description__
 
 
 ~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.MergeIterator}
+{% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.MergeIterator %}
 ~~~~~~~
 
 __Parameters__
@@ -23,7 +23,7 @@ __Parameters__
 
 
 ~~~~~~~
-{snippet:id=tagattributes|javadoc=false|url=struts2-tags/merge.html}
+{% snippet id=tagattributes|javadoc=false|url=struts2-tags/merge.html %}
 ~~~~~~~
 
 __Examples__
@@ -31,10 +31,10 @@ __Examples__
 
 
 ~~~~~~~
-{snippet:id=javacode|lang=java|javadoc=true|url=org.apache.struts2.components.MergeIterator}
+{% snippet id=javacode|lang=java|javadoc=true|url=org.apache.struts2.components.MergeIterator %}
 ~~~~~~~
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.MergeIterator}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.MergeIterator %}
 ~~~~~~~

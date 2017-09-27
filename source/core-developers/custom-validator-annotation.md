@@ -8,7 +8,7 @@ title: CustomValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator %}
 ~~~~~~~
 
 #####Usage#####
@@ -16,7 +16,7 @@ title: CustomValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator %}
 ~~~~~~~
 
 #####Parameters#####
@@ -24,7 +24,7 @@ title: CustomValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,7 +32,7 @@ title: CustomValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.CustomValidator}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.CustomValidator %}
 ~~~~~~~
 
 #####Adding Parameters#####

@@ -8,7 +8,7 @@ title: DoubleRangeFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator %}
 ~~~~~~~
 
 #####Usage#####
@@ -16,7 +16,7 @@ title: DoubleRangeFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator %}
 ~~~~~~~
 
 #####Parameters#####
@@ -24,7 +24,7 @@ title: DoubleRangeFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: DoubleRangeFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator %}
 ~~~~~~~

@@ -14,7 +14,7 @@ __Description__
 
 
 ~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.Text}
+{% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.Text %}
 ~~~~~~~
 
 For more details on using resource bundles with Struts 2 read the _localization guide_ .
@@ -24,7 +24,7 @@ __Parameters__
 
 
 ~~~~~~~
-{snippet:id=tagattributes|javadoc=false|url=struts2-tags/text.html}
+{% snippet id=tagattributes|javadoc=false|url=struts2-tags/text.html %}
 ~~~~~~~
 
 __Examples__
@@ -32,12 +32,12 @@ __Examples__
 
 
 ~~~~~~~
-{snippet:id=exdescription|lang=none|javadoc=true|url=org.apache.struts2.components.Text}
+{% snippet id=exdescription|lang=none|javadoc=true|url=org.apache.struts2.components.Text %}
 ~~~~~~~
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.Text}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.Text %}
 ~~~~~~~
 
 Other example

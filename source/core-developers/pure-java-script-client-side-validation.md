@@ -12,7 +12,7 @@ some values will be considered acceptable by the JavaScript code but will be mar
 
 
 ~~~~~~~
-{snippet:id=supported-validators|url=struts2/core/src/main/resources/template/xhtml/form-close-validate.ftl}
+{% snippet id=supported-validators|url=struts2/core/src/main/resources/template/xhtml/form-close-validate.ftl %}
 ~~~~~~~
 
 

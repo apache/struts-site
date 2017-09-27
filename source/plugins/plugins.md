@@ -48,7 +48,7 @@ Extension points allow a plugin to override a key class in the Struts framework 
 
 The following extension points are available in Struts 2:
 
-{% snippet id=extensionPoints|lang=html|javadoc=true|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/org/apache/struts2/config/DefaultBeanSelectionProvider.java;hb=HEAD %}
+{% snippet id=extensionPoints|lang=html|javadoc=true|org.apache.struts2.config.DefaultBeanSelectionProvider %}
 
 ## Plugin Examples
 

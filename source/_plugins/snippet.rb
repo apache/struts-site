@@ -9,6 +9,12 @@ module Jekyll
     def initialize(tag_name, markup, tokens)
       parse_params(markup)
 
+      unless @url.start_with?('http')
+        @url = @url.strip.gsub!('.','/')
+        @url = 'https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/' + @url
+        @url = @url + '.java;hb=HEAD'
+      end
+
       puts 'Fetching content of url: ' + @url
 
       if @url =~ URI::regexp

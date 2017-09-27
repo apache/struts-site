@@ -7,7 +7,7 @@ title: ValidationParameter annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ValidationParameter}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ValidationParameter %}
 ~~~~~~~
 
 __Usage__
@@ -15,7 +15,7 @@ __Usage__
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ValidationParameter}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ValidationParameter %}
 ~~~~~~~
 
 __Parameters__
@@ -23,7 +23,7 @@ __Parameters__
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ValidationParameter}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ValidationParameter %}
 ~~~~~~~
 
 __Examples__
@@ -31,5 +31,5 @@ __Examples__
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.ValidationParameter}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.ValidationParameter %}
 ~~~~~~~

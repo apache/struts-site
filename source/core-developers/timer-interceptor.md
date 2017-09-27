@@ -8,7 +8,7 @@ title: Timer Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -16,7 +16,7 @@ title: Timer Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -24,7 +24,7 @@ title: Timer Interceptor
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor}
+{% snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: Timer Interceptor
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor %}
 ~~~~~~~

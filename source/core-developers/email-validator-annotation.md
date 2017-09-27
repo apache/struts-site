@@ -8,7 +8,7 @@ title: EmailValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator %}
 ~~~~~~~
 
 #####Usage#####
@@ -16,7 +16,7 @@ title: EmailValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator %}
 ~~~~~~~
 
 #####Parameters#####
@@ -24,7 +24,7 @@ title: EmailValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: EmailValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.EmailValidator}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.EmailValidator %}
 ~~~~~~~

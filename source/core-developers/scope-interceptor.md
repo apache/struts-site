@@ -8,7 +8,7 @@ title: Scope Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -16,7 +16,7 @@ title: Scope Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor}
+{% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -24,7 +24,7 @@ title: Scope Interceptor
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor}
+{% snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,7 +32,7 @@ title: Scope Interceptor
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor %}
 ~~~~~~~
 
 __Some more examples__

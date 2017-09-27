@@ -7,7 +7,7 @@ title: RequiredFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator %}
 ~~~~~~~
 
 #####Usage#####
@@ -15,7 +15,7 @@ title: RequiredFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator %}
 ~~~~~~~
 
 #####Parameters#####
@@ -23,7 +23,7 @@ title: RequiredFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator %}
 ~~~~~~~
 
 #####Examples#####
@@ -31,5 +31,5 @@ title: RequiredFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator %}
 ~~~~~~~

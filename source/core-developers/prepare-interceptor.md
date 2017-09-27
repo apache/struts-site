@@ -8,12 +8,12 @@ title: Prepare Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor %}
 ~~~~~~~
 
 
 ~~~~~~~
-{snippet:id=javadocPrepareInterceptor|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrefixMethodInvocationUtil}
+{% snippet id=javadocPrepareInterceptor|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrefixMethodInvocationUtil %}
 ~~~~~~~
 
 #####Parameters#####
@@ -21,7 +21,7 @@ title: Prepare Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -29,7 +29,7 @@ title: Prepare Interceptor
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor}
+{% snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -37,5 +37,5 @@ title: Prepare Interceptor
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor %}
 ~~~~~~~

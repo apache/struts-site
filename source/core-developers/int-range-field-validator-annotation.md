@@ -7,7 +7,7 @@ title: IntRangeFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator %}
 ~~~~~~~
 
 #####Usage#####
@@ -15,7 +15,7 @@ title: IntRangeFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator %}
 ~~~~~~~
 
 #####Parameters#####
@@ -23,7 +23,7 @@ title: IntRangeFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator %}
 ~~~~~~~
 
 #####Examples#####
@@ -31,5 +31,5 @@ title: IntRangeFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator %}
 ~~~~~~~

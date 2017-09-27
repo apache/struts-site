@@ -10,7 +10,7 @@ title: After Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.After}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.After %}
 ~~~~~~~
 
 #####Usage#####
@@ -18,7 +18,7 @@ title: After Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.After}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.After %}
 ~~~~~~~
 
 #####Parameters#####
@@ -26,7 +26,7 @@ title: After Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.After}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.After %}
 ~~~~~~~
 
 #####Examples#####
@@ -34,5 +34,5 @@ title: After Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.interceptor.annotations.After}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.interceptor.annotations.After %}
 ~~~~~~~

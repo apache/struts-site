@@ -15,7 +15,7 @@ __Description__
 
 
 ~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.Checkbox}
+{% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.Checkbox %}
 ~~~~~~~
 
 __Parameters__
@@ -23,7 +23,7 @@ __Parameters__
 
 
 ~~~~~~~
-{snippet:id=tagattributes|javadoc=false|url=struts2-tags/checkbox.html}
+{% snippet id=tagattributes|javadoc=false|url=struts2-tags/checkbox.html %}
 ~~~~~~~
 
 __Examples__
@@ -31,5 +31,5 @@ __Examples__
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.Checkbox}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.Checkbox %}
 ~~~~~~~

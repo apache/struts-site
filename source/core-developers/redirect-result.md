@@ -8,7 +8,7 @@ title: Redirect Result
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.result.ServletRedirectResult}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.result.ServletRedirectResult %}
 ~~~~~~~
 
 ####Parameters####
@@ -16,7 +16,7 @@ title: Redirect Result
 
 
 ~~~~~~~
-{snippet:id=params|javadoc=true|url=org.apache.struts2.result.ServletRedirectResult}
+{% snippet id=params|javadoc=true|url=org.apache.struts2.result.ServletRedirectResult %}
 ~~~~~~~
 
 ####Examples####
@@ -24,7 +24,7 @@ title: Redirect Result
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.result.ServletRedirectResult}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.result.ServletRedirectResult %}
 ~~~~~~~
 
 

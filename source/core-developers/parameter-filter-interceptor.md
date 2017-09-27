@@ -8,7 +8,7 @@ title: Parameter Filter Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.ParameterFilterInterceptor}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.ParameterFilterInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -16,7 +16,7 @@ title: Parameter Filter Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.ParameterFilterInterceptor}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.ParameterFilterInterceptor %}
 ~~~~~~~
 
 #####Example#####

@@ -8,7 +8,7 @@ title: KeyProperty Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.util.KeyProperty}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.KeyProperty %}
 ~~~~~~~
 
 #####Usage#####
@@ -16,7 +16,7 @@ title: KeyProperty Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.util.KeyProperty}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.KeyProperty %}
 ~~~~~~~
 
 #####Parameters#####
@@ -24,7 +24,7 @@ title: KeyProperty Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.KeyProperty}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.KeyProperty %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: KeyProperty Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.util.KeyProperty}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.util.KeyProperty %}
 ~~~~~~~

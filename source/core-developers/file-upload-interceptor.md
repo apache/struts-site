@@ -13,7 +13,7 @@ title: File Upload Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -21,7 +21,7 @@ title: File Upload Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor}
+{% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -29,7 +29,7 @@ title: File Upload Interceptor
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor}
+{% snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -38,7 +38,7 @@ title: File Upload Interceptor
 
 
 ~~~~~~~
-{snippet:id=example-configuration|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor}
+{% snippet id=example-configuration|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor %}
 ~~~~~~~
 
 Notice the interceptor configuration in the preceding example\. 
@@ -47,19 +47,19 @@ Notice the interceptor configuration in the preceding example\.
 
 
 ~~~~~~~
-{snippet:id=example-form|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor}
+{% snippet id=example-form|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor %}
 ~~~~~~~
 
 
 ~~~~~~~
-{snippet:id=multipart-note|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor}
+{% snippet id=multipart-note|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor %}
 ~~~~~~~
 
 **Example Action class:**
 
 
 ~~~~~~~
-{snippet:id=example-action|lang=java|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor}
+{% snippet id=example-action|lang=java|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor %}
 ~~~~~~~
 
 **Setting parameters example:**

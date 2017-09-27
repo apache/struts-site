@@ -10,7 +10,7 @@ title: Before Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.Before}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.Before %}
 ~~~~~~~
 
 #####Usage#####
@@ -18,7 +18,7 @@ title: Before Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.Before}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.Before %}
 ~~~~~~~
 
 #####Parameters#####
@@ -26,7 +26,7 @@ title: Before Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.Before}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.Before %}
 ~~~~~~~
 
 #####Examples#####
@@ -34,5 +34,5 @@ title: Before Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.interceptor.annotations.Before}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.interceptor.annotations.Before %}
 ~~~~~~~

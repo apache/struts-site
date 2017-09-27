@@ -7,7 +7,7 @@ title: FieldExpressionValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator %}
 ~~~~~~~
 
 #####Usage#####
@@ -15,7 +15,7 @@ title: FieldExpressionValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator %}
 ~~~~~~~
 
 #####Parameters#####
@@ -23,7 +23,7 @@ title: FieldExpressionValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator %}
 ~~~~~~~
 
 #####Examples#####
@@ -31,5 +31,5 @@ title: FieldExpressionValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator %}
 ~~~~~~~

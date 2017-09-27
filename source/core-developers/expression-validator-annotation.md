@@ -6,7 +6,7 @@ title: ExpressionValidator Annotation
 # ExpressionValidator Annotation
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator %}
 ~~~~~~~
 
 #####Usage#####
@@ -14,7 +14,7 @@ title: ExpressionValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator %}
 ~~~~~~~
 
 #####Parameters#####
@@ -22,7 +22,7 @@ title: ExpressionValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator %}
 ~~~~~~~
 
 #####Examples#####
@@ -30,5 +30,5 @@ title: ExpressionValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator %}
 ~~~~~~~

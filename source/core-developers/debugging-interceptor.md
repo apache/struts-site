@@ -8,12 +8,12 @@ title: DebuggingInterceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.debugging.DebuggingInterceptor}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.debugging.DebuggingInterceptor %}
 ~~~~~~~
 
 
 ~~~~~~~
-{snippet:id=remarks|javadoc=true|url=org.apache.struts2.interceptor.debugging.DebuggingInterceptor}
+{% snippet id=remarks|javadoc=true|url=org.apache.struts2.interceptor.debugging.DebuggingInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -21,7 +21,7 @@ title: DebuggingInterceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.debugging.DebuggingInterceptor}
+{% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.debugging.DebuggingInterceptor %}
 ~~~~~~~
 
 #####Example#####
@@ -29,5 +29,5 @@ title: DebuggingInterceptor
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|url=org.apache.struts2.interceptor.debugging.DebuggingInterceptor}
+{% snippet id=example|javadoc=true|url=org.apache.struts2.interceptor.debugging.DebuggingInterceptor %}
 ~~~~~~~

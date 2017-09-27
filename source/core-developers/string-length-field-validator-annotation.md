@@ -8,7 +8,7 @@ title: StringLengthFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator %}
 ~~~~~~~
 
 #####Usage#####
@@ -16,7 +16,7 @@ title: StringLengthFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator %}
 ~~~~~~~
 
 #####Parameters#####
@@ -24,7 +24,7 @@ title: StringLengthFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: StringLengthFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator %}
 ~~~~~~~

@@ -8,12 +8,12 @@ title: Default Workflow Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor %}
 ~~~~~~~
 
 
 ~~~~~~~
-{snippet:id=javadocDefaultWorkflowInterceptor|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrefixMethodInvocationUtil}
+{% snippet id=javadocDefaultWorkflowInterceptor|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrefixMethodInvocationUtil %}
 ~~~~~~~
 
 #####Parameters#####
@@ -21,7 +21,7 @@ title: Default Workflow Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -29,7 +29,7 @@ title: Default Workflow Interceptor
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor}
+{% snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -37,5 +37,5 @@ title: Default Workflow Interceptor
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor %}
 ~~~~~~~

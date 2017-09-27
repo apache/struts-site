@@ -8,7 +8,7 @@ title: Logger Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -16,7 +16,7 @@ title: Logger Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -24,7 +24,7 @@ title: Logger Interceptor
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor}
+{% snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: Logger Interceptor
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor %}
 ~~~~~~~

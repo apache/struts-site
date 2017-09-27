@@ -12,7 +12,7 @@ Let's configure a basic validation workflow, step by step\.
 Create the input form\.
 
 ~~~~~~~
-{snippet:id=basicValidation|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/webapp/WEB-INF/validation/quiz-basic.jsp}
+{% snippet id=basicValidation|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/webapp/WEB-INF/validation/quiz-basic.jsp %}
 ~~~~~~~
 
 #####Step 2#####
@@ -20,7 +20,7 @@ Create the input form\.
 Create the Action class\.
 
 ~~~~~~~
-{snippet:id=quizAction|javadoc=false|lang=java|url=struts2/apps/showcase/src/main/java/org/apache/struts2/showcase/validation/QuizAction.java}
+{% snippet id=quizAction|javadoc=false|lang=java|url=struts2/apps/showcase/src/main/java/org/apache/struts2/showcase/validation/QuizAction.java %}
 ~~~~~~~
 
 #####Step 3#####
@@ -43,7 +43,7 @@ validation.xml
 \.
 
 ~~~~~~~
-{snippet:id=quizValidators|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/QuizAction-validation.xml}
+{% snippet id=quizValidators|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/QuizAction-validation.xml %}
 ~~~~~~~
 
 #####Step 4#####
