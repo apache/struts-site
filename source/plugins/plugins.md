@@ -1,6 +1,9 @@
 ---
 layout: default
 title: Plugins
+parent:
+  url: index.html
+  title: Plugins
 ---
 
 # Plugins
@@ -60,7 +63,7 @@ Let's look at two similar but different plugins bundled with the core distributi
 
 The `sitemesh-plugin.jar` contains several classes, a standard JAR manifest, and a plugin configuration file.
 
-```text
+````text
  + META-INF/
    + manifest.mf
  + org
@@ -71,7 +74,7 @@ The `sitemesh-plugin.jar` contains several classes, a standard JAR manifest, and
          + TemplatePageFilter.class
          + VelocityPageFilter.class
  + struts-plugin.xml
-```
+````
 
 While the SiteMesh Plugin doesn't provide any new results, interceptors, or actions, or even extend any Struts integration points, it does need to know what settings have been enabled in the Struts framework. Therefore, its `struts-plugin.xml` looks like this:
 
@@ -105,5 +108,3 @@ Since the Tiles Plugin does need to register configuration elements, a result cl
 ## Plugin Registry
 
 > For a list of bundled plugins, see the [Plugin Reference Documentation](plugin-developers.html). For more about bundled and third-party plugins, visit the [Apache Struts Plugin Registry](http://cwiki.apache.org/S2PLUGINS/home.html).
-
-## Back to [Home](/)
