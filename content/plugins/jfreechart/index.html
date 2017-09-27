@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Plugins Developers Guide</title>
+  <title>JFreeChart Plugin</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -126,36 +126,103 @@
 <article class="container">
   <section class="col-md-12">
     <a href="../" title="back to Plugins"><< back to Plugins</a>
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/plugins/plugin-developers.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="plugin-developers-guide">Plugin Developers Guide</h1>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/plugins/jfreechart/index.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <h1 id="jfreechart-plugin">JFreeChart Plugin</h1>
 
-<p>Apache Struts 2 provides a simple <a href="plugins.html">plugin architecture</a> so that developers can extend the framework just by adding a JAR to the application’s classpath. Since plugins are contained in a JAR, they are easy to share with others. Several plugins are bundled with the framework, and others are available from third-party sources.</p>
+<p><a href="http://www.jfree.org/jfreechart/">JFreeChart</a> is a free 100% Java (LGPL) chart library that makes it easy for developers to display professional quality charts in their applications.</p>
+
+<p>The JFreeChart plugin allows Actions to easily return generated charts and graphs.</p>
+
+<p>Instead of streaming a generated chart directly to the HTTP response, this plugin provides a ChartResult, which handles the generation for you.  This allows you to generate the chart in one class, and render it out in another class, effectively decoupling the view from the Actions. You can easily render it out to a file or some view other than a web HTTP response if you wish.</p>
+
+<h2 id="features">Features</h2>
 
 <ul>
   <li>
-    <p><a href="plugins.html">Plugins</a></p>
+    <p>Handles rendering charts to the HTTP response</p>
   </li>
   <li>
-    <p><a href="extending-an-application-with-custom-plugins.html">Extending an Application with Custom Plugins</a></p>
+    <p>Can be used in other non-web contexts</p>
   </li>
 </ul>
 
-<h2 id="bundled-plugins">Bundled Plugins</h2>
+<h3 id="future-work">Future Work</h3>
 
-<table>
-  <tbody>
-    <tr>
-      <td><a href="bean-validation">Bean Validation Plugin</a> (2.5+)<br /><a href="cdi">CDI (JSR 299) Plugin</a> (2.3.1+)<br /><a href="codebehind">Codebehind Plugin</a> (&lt; 2.5)<br /><a href="config-browser">Config Browser Plugin</a><br /><a href="convention">Convention Plugin</a> (2.1.3+)<br /><a href="dwr">DWR Plugin</a><br /><a href="embedded-jsp">Embedded JSP Plugin</a> (2.1.7+)<br /><a href="jasperreports">JasperReports Plugin</a><br /><a href="java-8-support">Java 8 Support Plugin</a> (2.3.21 - 2.5.2)<br /><a href="javatemplates">Javatemplates Plugin</a> (2.1.3+)<br /><a href="jfreechart">JFreeChart Plugin</a><br /><a href="jsf">JSF Plugin</a>( &lt; 2.5)<br /><a href="json">JSON Plugin</a>  (2.1.7+)<br /><a href="junit">JUnit Plugin</a></td>
-      <td><a href="oval">OVal Plugin</a> (2.1.7+)<br /><a href="osgi">OSGi Plugin</a> (2.1.7+)<br /><a href="plexus">Plexus Plugin</a><br /><a href="portlet">Portlet Plugin</a><br /><a href="portlet-tiles">Portlet Tiles Plugin</a> (2.3.5+)<br /><a href="rest">REST Plugin</a> (2.1.1+)<br />Deprecated: <a href="sitegraph">SiteGraph Plugin</a><br /><a href="sitemesh">SiteMesh Plugin</a><br /><a href="spring">Spring Plugin</a><br /><a href="struts-1">Struts 1 Plugin</a>( &lt; 2.5)<br /><a href="testng">TestNG Plugin</a><br /><a href="tiles">Tiles Plugin</a><br /><a href="tiles-3">Tiles 3 Plugin</a>  (&lt; 2.5)</td>
-    </tr>
-  </tbody>
-</table>
+<p>Currently the “chart” property is hardcoded. There should be a better way of transferring data from the Action to the Result, via some externally defined variable or something.</p>
 
-<blockquote>
-  <p>For a complete list of bundled and third-party plugins, visit the <a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin Registry</a>.</p>
-</blockquote>
+<p>As mentioned by John Patterson (mailing list), the Action is still dependant on a JFreeChart Chart class. This can be improved. The seperation between Action and View can be made cleaner. A chart-agonistic List or Array can be used as the data, and the configuration of the chart details (font, axis, etc…) be done via the result properties in the xwork.xml.</p>
 
-<h3 id="next-architects-guidearchitects-guidehtml">Next: <a href="architects-guide.html">Architects Guide</a></h3>
+<p>But hey, the above works for now. Any suggestions are welcome.</p>
+
+<p>You can also create charts via the CeWolf library directly.  See <a href="cewolf-charts-using-velocity-templates.html">CeWolf charts using Velocity templates</a>.</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>To use the plugin, have your Struts configuration package extend the <code class="highlighter-rouge">jfreechart-default</code> package, which provides the <code class="highlighter-rouge">chart</code> result type.  Next, use it as a result in an action:</p>
+
+<p><strong>Chart example in struts.xml</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"viewModerationChart"</span> <span class="na">class=</span><span class="s">"myapp.actions.ViewModerationChartAction"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"chart"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"width"</span><span class="nt">&gt;</span>400<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"height"</span><span class="nt">&gt;</span>300<span class="nt">&lt;/param&gt;</span> 
+  <span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
+</code></pre>
+</div>
+
+<p>In your Action class, provide a <code class="highlighter-rouge">getChart()</code> method that returns the chart to be rendered.  This method will be called by the chart result.</p>
+
+<h3 id="example">Example</h3>
+
+<p><strong>Struts Action that provides a chart</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ViewModerationChartAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="n">JFreeChart</span> <span class="n">chart</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+		<span class="c1">// chart creation logic...</span>
+		<span class="n">XYSeries</span> <span class="n">dataSeries</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XYSeries</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span> <span class="c1">//pass a key for this serie</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">dataSeries</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">RandomUtils</span><span class="o">.</span><span class="na">nextInt</span><span class="o">());</span>
+		<span class="o">}</span>
+		<span class="n">XYSeriesCollection</span> <span class="n">xyDataset</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XYSeriesCollection</span><span class="o">(</span><span class="n">dataSeries</span><span class="o">);</span>
+
+		<span class="n">ValueAxis</span> <span class="n">xAxis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NumberAxis</span><span class="o">(</span><span class="s">"Raw Marks"</span><span class="o">);</span>
+		<span class="n">ValueAxis</span> <span class="n">yAxis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NumberAxis</span><span class="o">(</span><span class="s">"Moderated Marks"</span><span class="o">);</span>
+
+		<span class="c1">// set my chart variable</span>
+		<span class="n">chart</span> <span class="o">=</span>
+			<span class="k">new</span> <span class="n">JFreeChart</span><span class="o">(</span>
+				<span class="s">"Moderation Function"</span><span class="o">,</span>
+				<span class="n">JFreeChart</span><span class="o">.</span><span class="na">DEFAULT_TITLE_FONT</span><span class="o">,</span>
+				<span class="k">new</span> <span class="n">XYPlot</span><span class="o">(</span>
+					<span class="n">xyDataset</span><span class="o">,</span>
+					<span class="n">xAxis</span><span class="o">,</span>
+					<span class="n">yAxis</span><span class="o">,</span>
+					<span class="k">new</span> <span class="n">StandardXYItemRenderer</span><span class="o">(</span><span class="n">StandardXYItemRenderer</span><span class="o">.</span><span class="na">LINES</span><span class="o">)),</span>
+				<span class="kc">false</span><span class="o">);</span>
+		<span class="n">chart</span><span class="o">.</span><span class="na">setBackgroundPaint</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">awt</span><span class="o">.</span><span class="na">Color</span><span class="o">.</span><span class="na">white</span><span class="o">);</span>
+
+		<span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">JFreeChart</span> <span class="n">getChart</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">chart</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h3 id="settings">Settings</h3>
+
+<p>This plugin doesn’t provides any global settings.</p>
+
+<h3 id="installation">Installation</h3>
+
+<p>This plugin can be installed by copying the plugin jar into your application’s <code class="highlighter-rouge">/WEB-INF/lib</code> directory.  The JFreeChart library will need to be downloaded separately, as its LGPL license doesn’t allow it to be distributed with Struts.</p>
 
   </section>
 </article>
