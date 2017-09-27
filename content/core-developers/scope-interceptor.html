@@ -129,26 +129,109 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/scope-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="scope-interceptor">Scope Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+ This is designed to solve a few simple issues related to wizard-like functionality in Struts. One of those issues is
+ that some applications have a application-wide parameters commonly used, such &lt;i&gt;pageLen&lt;/i&gt; (used for records per
+ page). Rather than requiring that each action check if such parameters are supplied, this interceptor can look for
+ specified parameters and pull them out of the session.
+ &lt;/p&gt;
+
+ &lt;p&gt;This works by setting listed properties at action start with values from session/application attributes keyed
+ after the action's class, the action's name, or any supplied key. After action is executed all the listed properties
+ are taken back and put in session or application context.
+ &lt;/p&gt;
+
+ &lt;p&gt;To make sure that each execution of the action is consistent it makes use of session-level locking. This way it
+ guarantees that each action execution is atomic at the session level. It doesn't guarantee application level
+ consistency however there has yet to be enough reasons to do so. Application level consistency would also be a big
+ performance overkill.
+ &lt;/p&gt;
+
+ &lt;p&gt;Note that this interceptor takes a snapshot of action properties just before result is presented (using a {@link
+ PreResultListener}), rather than after action is invoked. There is a reason for that: At this moment we know that
+ action's state is "complete" as it's values may depend on the rest of the stack and specifically - on the values of
+ nested interceptors.
+ &lt;/p&gt;
+
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;ul&gt;
+
+ &lt;li&gt;session - a list of action properties to be bound to session scope&lt;/li&gt;
+
+ &lt;li&gt;application - a list of action properties to be bound to application scope&lt;/li&gt;
+
+ &lt;li&gt;key - a session/application attribute key prefix, can contain following values:
+
+ &lt;ul&gt;
+
+ &lt;li&gt;CLASS - that creates a unique key prefix based on action namespace and action class, it's a default value&lt;/li&gt;
+
+ &lt;li&gt;ACTION - creates a unique key prefix based on action namespace and action name&lt;/li&gt;
+
+ &lt;li&gt;any other value is taken literally as key prefix&lt;/li&gt;
+
+ &lt;/ul&gt;
+ &lt;/li&gt;
+ &lt;li&gt;type - with one of the following
+
+ &lt;ul&gt;
+
+ &lt;li&gt;start - means it's a start action of the wizard-like action sequence and all session scoped properties are reset
+ to their defaults&lt;/li&gt;
+
+ &lt;li&gt;end - means that session scoped properties are removed from session after action is run&lt;/li&gt;
+
+ &lt;li&gt;any other value throws IllegalArgumentException&lt;/li&gt;
+
+ &lt;/ul&gt;
+ &lt;/li&gt;
+
+ &lt;li&gt;sessionReset - name of a parameter (defaults to 'session.reset') which if set, causes all session values to be reset to action's default values or application
+ scope values, note that it is similar to type="start" and in fact it does the same, but in our team it is sometimes
+ semantically preferred. We use session scope in two patterns - sometimes there are wizard-like action sequences that
+ have start and end, and sometimes we just want simply reset current session values.&lt;/li&gt;
+
+ &lt;li&gt;reset - boolean, defaults to false, if set, it has the same effect as setting all session values to be reset to action's default values or application.&lt;/li&gt;
+
+ &lt;li&gt;autoCreateSession - boolean value, sets if the session should be automatically created.&lt;/li&gt;
+ &lt;/ul&gt;
+
+</code></pre>
 </div>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;p&gt;There are no know extension points for this interceptor.&lt;/p&gt;
+
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;!-- As the filter and orderBy parameters are common for all my browse-type actions,
+      you can move control to the scope interceptor. In the session parameter you can list
+      action properties that are going to be automatically managed over session. You can
+      do the same for application-scoped variables--&amp;gt;
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="basicStack"/&amp;gt;
+     &amp;lt;interceptor-ref name="hibernate"/&amp;gt;
+     &amp;lt;interceptor-ref name="scope"&amp;gt;
+         &amp;lt;param name="session"&amp;gt;filter,orderBy&amp;lt;/param&amp;gt;
+         &amp;lt;param name="autoCreateSession"&amp;gt;true&amp;lt;/param&amp;gt;
+     &amp;lt;/interceptor-ref&amp;gt;
+     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+```
+
+</code></pre>
 </div>
 
 <p><strong>Some more examples</strong></p>

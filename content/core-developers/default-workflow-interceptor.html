@@ -129,30 +129,115 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/default-workflow-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="default-workflow-interceptor">Default Workflow Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+ An interceptor that makes sure there are not validation, conversion or action errors before allowing the interceptor chain to continue. 
+ If a single FieldError or ActionError (including the ones replicated by the Message Store Interceptor in a redirection) is found, the INPUT result will be triggered.
+ &lt;b&gt;This interceptor does not perform any validation&lt;/b&gt;.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ This interceptor does nothing if the name of the method being invoked is specified in the &lt;b&gt;excludeMethods&lt;/b&gt;
+ parameter. &lt;b&gt;excludeMethods&lt;/b&gt; accepts a comma-delimited list of method names. For example, requests to
+ &lt;b&gt;foo!input.action&lt;/b&gt; and &lt;b&gt;foo!back.action&lt;/b&gt; will be skipped by this interceptor if you set the
+ &lt;b&gt;excludeMethods&lt;/b&gt; parameter to "input, back".
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; As this method extends off MethodFilterInterceptor, it is capable of
+ deciding if it is applicable only to selective methods in the action class. This is done by adding param tags
+ for the interceptor element, naming either a list of excluded method names and/or a list of included method
+ names, whereby includeMethods overrides excludedMethods. A single * sign is interpreted as wildcard matching
+ all methods for both parameters.
+ See {@link MethodFilterInterceptor} for more info.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ This interceptor also supports the following interfaces which can implemented by actions:
+ &lt;/p&gt;
+
+ &lt;ul&gt;
+     &lt;li&gt;ValidationAware - implemented by ActionSupport class&lt;/li&gt;
+     &lt;li&gt;ValidationWorkflowAware - allows changing result name programmatically&lt;/li&gt;
+     &lt;li&gt;ValidationErrorAware - notifies action about errors and also allow change result name&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;
+ You can also use InputConfig annotation to change result name returned when validation errors occurred.
+ &lt;/p&gt;
+
+</code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadocDefaultWorkflowInterceptor|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrefixMethodInvocationUtil</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> 
+ &lt;b&gt;In DefaultWorkflowInterceptor&lt;/b&gt;
+ &lt;p&gt;applies only when action implements {@link com.opensymphony.xwork2.Validateable}&lt;/p&gt;
+ &lt;ol&gt;
+    &lt;li&gt;if the action class have validate{MethodName}(), it will be invoked&lt;/li&gt;
+    &lt;li&gt;else if the action class have validateDo{MethodName}(), it will be invoked&lt;/li&gt;
+    &lt;li&gt;no matter if 1] or 2] is performed, if alwaysInvokeValidate property of the interceptor is "true" (which is by default "true"), validate() will be invoked.&lt;/li&gt;
+ &lt;/ol&gt;
+ 
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;ul&gt;
+ &lt;li&gt;inputResultName - Default to "input". Determine the result name to be returned when
+ an action / field error is found.&lt;/li&gt;
+ &lt;/ul&gt;
+</code></pre>
 </div>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;p&gt;There are no known extension points for this interceptor.&lt;/p&gt;
+
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="params"/&amp;gt;
+     &amp;lt;interceptor-ref name="validation"/&amp;gt;
+     &amp;lt;interceptor-ref name="workflow"/&amp;gt;
+     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+
+ &amp;lt;-- In this case myMethod as well as mySecondMethod of the action class
+        will not pass through the workflow process --&amp;gt;
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="params"/&amp;gt;
+     &amp;lt;interceptor-ref name="validation"/&amp;gt;
+     &amp;lt;interceptor-ref name="workflow"&amp;gt;
+         &amp;lt;param name="excludeMethods"&amp;gt;myMethod,mySecondMethod&amp;lt;/param&amp;gt;
+     &amp;lt;/interceptor-ref name="workflow"&amp;gt;
+     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+
+ &amp;lt;-- In this case, the result named "error" will be used when
+        an action / field error is found --&amp;gt;
+ &amp;lt;-- The Interceptor will only be applied for myWorkflowMethod method of action
+        classes, since this is the only included method while any others are excluded --&amp;gt;
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="params"/&amp;gt;
+     &amp;lt;interceptor-ref name="validation"/&amp;gt;
+     &amp;lt;interceptor-ref name="workflow"&amp;gt;
+        &amp;lt;param name="inputResultName"&amp;gt;error&amp;lt;/param&amp;gt;
+         &amp;lt;param name="excludeMethods"&amp;gt;*&amp;lt;/param&amp;gt;
+         &amp;lt;param name="includeMethods"&amp;gt;myWorkflowMethod&amp;lt;/param&amp;gt;
+     &amp;lt;/interceptor-ref&amp;gt;
+     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+
+```
+
+</code></pre>
 </div>
 
   </section>

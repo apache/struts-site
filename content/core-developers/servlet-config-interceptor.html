@@ -129,26 +129,72 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/servlet-config-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="servlet-config-interceptor">Servlet Config Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.ServletConfigInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+ An interceptor which sets action properties based on the interfaces an action implements. For example, if the action
+ implements {@link ParameterAware} then the action context's parameter map will be set on it.
+ &lt;/p&gt;
+
+ &lt;p&gt;This interceptor is designed to set all properties an action needs if it's aware of servlet parameters, the
+ servlet context, the session, etc. Interfaces that it supports are:
+ &lt;/p&gt;
+
+ &lt;ul&gt;
+
+ &lt;li&gt;{@link ServletContextAware}&lt;/li&gt;
+
+ &lt;li&gt;{@link ServletRequestAware}&lt;/li&gt;
+
+ &lt;li&gt;{@link ServletResponseAware}&lt;/li&gt;
+
+ &lt;li&gt;{@link ParameterAware} - deprecated since 2.5.4, please use {@link HttpParametersAware}&lt;/li&gt;
+
+ &lt;li&gt;{@link HttpParametersAware}&lt;/li&gt;
+
+ &lt;li&gt;{@link RequestAware}&lt;/li&gt;
+
+ &lt;li&gt;{@link SessionAware}&lt;/li&gt;
+
+ &lt;li&gt;{@link ApplicationAware}&lt;/li&gt;
+
+ &lt;li&gt;{@link PrincipalAware}&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.ServletConfigInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;ul&gt;
+
+ &lt;li&gt;None&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+</code></pre>
 </div>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.ServletConfigInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;p&gt;There are no known extension points for this interceptor.&lt;/p&gt;
+
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.ServletConfigInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="servletConfig"/&amp;gt;
+     &amp;lt;interceptor-ref name="basicStack"/&amp;gt;
+     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+```
+
+</code></pre>
 </div>
 
   </section>

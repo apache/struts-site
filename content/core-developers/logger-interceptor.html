@@ -129,26 +129,46 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/logger-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="logger-interceptor">Logger Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+ This interceptor logs the start and end of the execution an action (in English-only, not internationalized).
+ &lt;br&gt;
+ &lt;b&gt;Note:&lt;/b&gt;: This interceptor will log at &lt;tt&gt;INFO&lt;/tt&gt; level.
+ &lt;/p&gt;
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> There are no parameters for this interceptor.
+</code></pre>
 </div>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> There are no obvious extensions to the existing interceptor.
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;!-- prints out a message before and after the immediate action execution --&amp;gt;
+ &amp;lt;action name=&amp;quot;someAction&amp;quot; class=&amp;quot;com.examples.SomeAction&amp;quot;&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;completeStack&amp;quot;/&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;logger&amp;quot;/&amp;gt;
+     &amp;lt;result name=&amp;quot;success&amp;quot;&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+
+ &amp;lt;!-- prints out a message before any more interceptors continue and after they have finished --&amp;gt;
+ &amp;lt;action name=&amp;quot;someAction&amp;quot; class=&amp;quot;com.examples.SomeAction&amp;quot;&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;logger&amp;quot;/&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;completeStack&amp;quot;/&amp;gt;
+     &amp;lt;result name=&amp;quot;success&amp;quot;&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+```
+
+</code></pre>
 </div>
 
   </section>

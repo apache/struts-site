@@ -133,8 +133,10 @@
 
 <h2 id="description">Description</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.ActionComponent</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;This tag enables developers to call actions directly from a JSP page by specifying the action name and an optional
+ namespace.  The body content of the tag is used to render the results from the Action.  Any result processor defined
+ for this action in struts.xml will be ignored, &lt;i&gt;unless&lt;/i&gt; the executeResult parameter is specified.&lt;/p&gt;
+</code></pre>
 </div>
 
 <p>Parameters can be passed to the action using nested <a href="param-tag.html">param</a> tags.</p>
@@ -235,16 +237,58 @@ the action cannot be accessed, For example:</p>
 
 <h2 id="examples">Examples</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javacode|javadoc=true|lang=java|url=org.apache.struts2.components.ActionComponent</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```java
+ public class ActionTagAction extends ActionSupport {
+
+  public String execute() throws Exception {
+      return "done";
+  }
+
+  public String doDefault() throws Exception {
+      ServletActionContext.getRequest().setAttribute("stringByAction", "This is a String put in by the action's doDefault()");
+      return "done";
+  }
+ }
+```
+
+</code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=strutsxml|javadoc=true|lang=xml|url=org.apache.struts2.components.ActionComponent</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+   &amp;lt;xwork&amp;gt;
+      ....
+     &amp;lt;action name=&amp;quot;actionTagAction1&amp;quot; class=&amp;quot;tmjee.testing.ActionTagAction&amp;quot;&amp;gt;
+         &amp;lt;result name=&amp;quot;done&amp;quot;&amp;gt;success.jsp&amp;lt;/result&amp;gt;
+     &amp;lt;/action&amp;gt;
+      &amp;lt;action name=&amp;quot;actionTagAction2&amp;quot; class=&amp;quot;tmjee.testing.ActionTagAction&amp;quot; method=&amp;quot;default&amp;quot;&amp;gt;
+         &amp;lt;result name=&amp;quot;done&amp;quot;&amp;gt;success.jsp&amp;lt;/result&amp;gt;
+     &amp;lt;/action&amp;gt;
+      ....
+   &amp;lt;/xwork&amp;gt;
+```
+
+</code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|lang=xml|url=org.apache.struts2.components.ActionComponent</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+  &lt;span&gt;The following action tag will execute result and include it in this page&lt;/span&gt;
+  &lt;br&gt;
+  &amp;lt;s:action name=&amp;quot;actionTagAction&amp;quot; executeResult=&amp;quot;true&amp;quot; /&amp;gt;
+  &lt;br&gt;
+  &lt;span&gt;The following action tag will do the same as above, but invokes method specialMethod in action&lt;/span&gt;
+  &lt;br&gt;
+  &amp;lt;s:action name=&amp;quot;actionTagAction!specialMethod&amp;quot; executeResult=&amp;quot;true&amp;quot; /&amp;gt;
+  &lt;br&gt;
+  &lt;span&gt;The following action tag will not execute result, but put a String in request scope
+       under an id "stringByAction" which will be retrieved using property tag&lt;/span&gt;
+  &amp;lt;s:action name=&amp;quot;actionTagAction!default&amp;quot; executeResult=&amp;quot;false&amp;quot; /&amp;gt;
+  &amp;lt;s:property value=&amp;quot;#attr.stringByAction&amp;quot; /&amp;gt;
+```
+
+</code></pre>
 </div>
 
   </section>

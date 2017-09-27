@@ -129,26 +129,81 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/exception-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <p>#Exception Interceptor</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+ This interceptor forms the core functionality of the exception handling feature. Exception handling allows you to map
+ an exception to a result code, just as if the action returned a result code instead of throwing an unexpected
+ exception. When an exception is encountered, it is wrapped with an {@link ExceptionHolder} and pushed on the stack,
+ providing easy access to the exception from within your result.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; While you can configure exception mapping in your configuration file at any point, the configuration
+ will not have any effect if this interceptor is not in the interceptor stack for your actions. It is recommended that
+ you make this interceptor the first interceptor on the stack, ensuring that it has full access to catch any
+ exception, even those caused by other interceptors.
+ &lt;/p&gt;
+
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;ul&gt;
+
+ &lt;li&gt;logEnabled (optional) - Should exceptions also be logged? (boolean true|false)&lt;/li&gt;
+ 
+ &lt;li&gt;logLevel (optional) - what log level should we use (&lt;code&gt;trace, debug, info, warn, error, fatal&lt;/code&gt;)? - defaut is &lt;code&gt;debug&lt;/code&gt;&lt;/li&gt;
+ 
+ &lt;li&gt;logCategory (optional) - If provided we would use this category (eg. &lt;code&gt;com.mycompany.app&lt;/code&gt;).
+ Default is to use &lt;code&gt;com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor&lt;/code&gt;.&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ &lt;p&gt;
+ The parameters above enables us to log all thrown exceptions with stacktace in our own logfile,
+ and present a friendly webpage (with no stacktrace) to the end user.
+ &lt;/p&gt;
+
+</code></pre>
 </div>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+ If you want to add custom handling for publishing the Exception, you may override
+ {@link #publishException(com.opensymphony.xwork2.ActionInvocation, ExceptionHolder)}. The default implementation
+ pushes the given ExceptionHolder on value stack. A custom implementation could add additional logging etc.
+ &lt;/p&gt;
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;xwork&amp;gt;
+     &amp;lt;package name="default" extends="xwork-default"&amp;gt;
+         &amp;lt;global-results&amp;gt;
+             &amp;lt;result name="error" type="freemarker"&amp;gt;error.ftl&amp;lt;/result&amp;gt;
+         &amp;lt;/global-results&amp;gt;
+
+         &amp;lt;global-exception-mappings&amp;gt;
+             &amp;lt;exception-mapping exception="java.lang.Exception" result="error"/&amp;gt;
+         &amp;lt;/global-exception-mappings&amp;gt;
+
+         &amp;lt;action name="test"&amp;gt;
+             &amp;lt;interceptor-ref name="exception"/&amp;gt;
+             &amp;lt;interceptor-ref name="basicStack"/&amp;gt;
+             &amp;lt;exception-mapping exception="com.acme.CustomException" result="custom_error"/&amp;gt;
+             &amp;lt;result name="custom_error"&amp;gt;custom_error.ftl&amp;lt;/result&amp;gt;
+             &amp;lt;result name="success" type="freemarker"&amp;gt;test.ftl&amp;lt;/result&amp;gt;
+         &amp;lt;/action&amp;gt;
+     &amp;lt;/package&amp;gt;
+ &amp;lt;/xwork&amp;gt;
+```
+
+</code></pre>
 </div>
 
   </section>

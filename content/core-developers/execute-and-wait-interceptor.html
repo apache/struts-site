@@ -129,26 +129,142 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/execute-and-wait-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="execute-and-wait-interceptor">Execute and Wait Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+ The ExecuteAndWaitInterceptor is great for running long-lived actions in the background while showing the user a nice
+ progress meter. This also prevents the HTTP request from timing out when the action takes more than 5 or 10 minutes.
+ &lt;/p&gt;
+
+ &lt;p&gt; Using this interceptor is pretty straight forward. Assuming that you are including struts-default.xml, this
+ interceptor is already configured but is not part of any of the default stacks. Because of the nature of this
+ interceptor, it must be the &lt;b&gt;last&lt;/b&gt; interceptor in the stack.
+ &lt;/p&gt;
+
+ &lt;p&gt; This interceptor works on a per-session basis. That means that the same action name (myLongRunningAction, in the
+ above example) cannot be run more than once at a time in a given session. On the initial request or any subsequent
+ requests (before the action has completed), the &lt;b&gt;wait&lt;/b&gt; result will be returned. &lt;b&gt;The wait result is
+ responsible for issuing a subsequent request back to the action, giving the effect of a self-updating progress
+ meter&lt;/b&gt;.
+ &lt;/p&gt;
+
+ &lt;p&gt; If no "wait" result is found, Struts will automatically generate a wait result on the fly. This result is
+ written in FreeMarker and cannot run unless FreeMarker is installed. If you don't wish to deploy with FreeMarker, you
+ must provide your own wait result. This is generally a good thing to do anyway, as the default wait page is very
+ plain.
+ &lt;/p&gt;
+
+ &lt;p&gt;Whenever the wait result is returned, the &lt;b&gt;action that is currently running in the background will be placed on
+ top of the stack&lt;/b&gt;. This allows you to display progress data, such as a count, in the wait page. By making the wait
+ page automatically reload the request to the action (which will be short-circuited by the interceptor), you can give
+ the appearance of an automatic progress meter.
+ &lt;/p&gt;
+
+ &lt;p&gt;This interceptor also supports using an initial wait delay. An initial delay is a time in milliseconds we let the
+ server wait before the wait page is shown to the user. During the wait this interceptor will wake every 100 millis
+ to check if the background process is done premature, thus if the job for some reason doesn't take to long the wait
+ page is not shown to the user.
+ &lt;br&gt; This is useful for e.g. search actions that have a wide span of execution time. Using a delay time of 2000
+ millis we ensure the user is presented fast search results immediately and for the slow results a wait page is used.
+ &lt;/p&gt;
+
+ &lt;p&gt;&lt;b&gt;Important&lt;/b&gt;: Because the action will be running in a separate thread, you can't use ActionContext because it
+ is a ThreadLocal. This means if you need to access, for example, session data, you need to implement SessionAware
+ rather than calling ActionContext.getSession().
+ &lt;/p&gt;
+
+ &lt;p&gt;The thread kicked off by this interceptor will be named in the form &lt;b&gt;&lt;u&gt;actionName&lt;/u&gt;BackgroundProcess&lt;/b&gt;.
+ For example, the &lt;i&gt;search&lt;/i&gt; action would run as a thread named &lt;i&gt;searchBackgroundProcess&lt;/i&gt;.
+ &lt;/p&gt;
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;ul&gt;
+
+ &lt;li&gt;threadPriority (optional) - the priority to assign the thread. Default is &lt;code&gt;Thread.NORM_PRIORITY&lt;/code&gt;.&lt;/li&gt;
+ &lt;li&gt;delay (optional) - an initial delay in millis to wait before the wait page is shown (returning &lt;code&gt;wait&lt;/code&gt; as result code). Default is no initial delay.&lt;/li&gt;
+ &lt;li&gt;delaySleepInterval (optional) - only used with delay. Used for waking up at certain intervals to check if the background process is already done. Default is 100 millis.&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+</code></pre>
 </div>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+ If you wish to make special preparations before and/or after the invocation of the background thread, you can extend
+ the BackgroundProcess class and implement the beforeInvocation() and afterInvocation() methods. This may be useful
+ for obtaining and releasing resources that the background process will need to execute successfully. To use your
+ background process extension, extend ExecuteAndWaitInterceptor and implement the getNewBackgroundProcess() method.
+ &lt;/p&gt;
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="completeStack"/&amp;gt;
+     &amp;lt;interceptor-ref name="execAndWait"/&amp;gt;
+     &amp;lt;result name="wait"&amp;gt;longRunningAction-wait.jsp&amp;lt;/result&amp;gt;
+     &amp;lt;result name="success"&amp;gt;longRunningAction-success.jsp&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+
+ &amp;lt;%@ taglib prefix="s" uri="/struts" %&amp;gt;
+ &amp;lt;html&amp;gt;
+   &amp;lt;head&amp;gt;
+     &amp;lt;title&amp;gt;Please wait&amp;lt;/title&amp;gt;
+     &amp;lt;meta http-equiv="refresh" content="5;url=&amp;lt;s:url includeParams="all" /&amp;gt;"/&amp;gt;
+   &amp;lt;/head&amp;gt;
+   &amp;lt;body&amp;gt;
+     Please wait while we process your request.
+     Click &amp;lt;a href="&amp;lt;s:url includeParams="all" /&amp;gt;"&amp;gt;&amp;lt;/a&amp;gt; if this page does not reload automatically.
+   &amp;lt;/body&amp;gt;
+ &amp;lt;/html&amp;gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;&lt;u&gt;Example code2:&lt;/u&gt;&lt;/p&gt;
+ &lt;p&gt;
+ This example will wait 2 second (2000 millis) before the wait page is shown to the user. Therefore
+ if the long process didn't last long anyway the user isn't shown a wait page.
+ &lt;/p&gt;
+
+ &lt;pre&gt;
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="completeStack"/&amp;gt;
+     &amp;lt;interceptor-ref name="execAndWait"&amp;gt;
+         &amp;lt;param name="delay"&amp;gt;2000&amp;lt;param&amp;gt;
+     &amp;lt;interceptor-ref&amp;gt;
+     &amp;lt;result name="wait"&amp;gt;longRunningAction-wait.jsp&amp;lt;/result&amp;gt;
+     &amp;lt;result name="success"&amp;gt;longRunningAction-success.jsp&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;&lt;u&gt;Example code3:&lt;/u&gt;&lt;/p&gt;
+ &lt;p&gt;
+ This example will wait 1 second (1000 millis) before the wait page is shown to the user.
+ And at every 50 millis this interceptor will check if the background process is done, if so
+ it will return before the 1 second has elapsed, and the user isn't shown a wait page.
+ &lt;/p&gt;
+
+ &lt;pre&gt;
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="completeStack"/&amp;gt;
+     &amp;lt;interceptor-ref name="execAndWait"&amp;gt;
+         &amp;lt;param name="delay"&amp;gt;1000&amp;lt;param&amp;gt;
+         &amp;lt;param name="delaySleepInterval"&amp;gt;50&amp;lt;param&amp;gt;
+     &amp;lt;interceptor-ref&amp;gt;
+     &amp;lt;result name="wait"&amp;gt;longRunningAction-wait.jsp&amp;lt;/result&amp;gt;
+     &amp;lt;result name="success"&amp;gt;longRunningAction-success.jsp&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+ &lt;/pre&gt;
+
+```
+
+</code></pre>
 </div>
 
   </section>

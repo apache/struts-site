@@ -140,20 +140,47 @@
 
 <p><strong>Description</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.Set</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;The set tag assigns a value to a variable in a specified scope. It is useful when you wish to assign a variable to a
+ complex expression and then simply reference that variable each time rather than the complex expression. This is
+ useful in both cases: when the complex expression takes time (performance improvement) or is hard to read (code
+ readability improvement).&lt;/p&gt;
+ &lt;p&gt;If the tag is used with body content, the evaluation of the value parameter is omitted. Instead, the String to
+ which the body evaluates is set as value for the scoped variable.&lt;/p&gt;
+
+ &lt;p&gt;The scopes available are as follows:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;application - the value will be set in application scope according to servlet spec. using the name as its key&lt;/li&gt;
+   &lt;li&gt;session - the value will be set in session scope according to servlet spec. using the name as key &lt;/li&gt;
+   &lt;li&gt;request - the value will be set in request scope according to servlet spec. using the name as key &lt;/li&gt;
+   &lt;li&gt;page - the value will be set in page scope according to servlet spec. using the name as key&lt;/li&gt;
+   &lt;li&gt;action - the value will be set in the request scope and Struts' action context using the name as key&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;
+ NOTE:&lt;br&gt;
+ If no scope is specified, it will default to action scope.
+ &lt;/p&gt;
+</code></pre>
 </div>
 
 <p><strong>Parameters</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=tagattributes|javadoc=false|url=struts2-tags/set.html</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: tagattributes not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2-tags/set/html.java;hb=HEAD
+</code></pre>
 </div>
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.Set</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;s:set var="personName" value="person.name"/&amp;gt;
+ Hello, &amp;lt;s:property value="#personName"/&amp;gt;
+
+ &amp;lt;s:set var="janesName"&amp;gt;Jane Doe&amp;lt;/s:set&amp;gt;
+ &amp;lt;s:property value="#janesName"/&amp;gt;
+```
+
+</code></pre>
 </div>
 
   </section>

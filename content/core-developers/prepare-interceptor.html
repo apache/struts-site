@@ -129,30 +129,86 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/prepare-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="prepare-interceptor">Prepare Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ This interceptor calls &lt;code&gt;prepare()&lt;/code&gt; on actions which implement
+ {@link Preparable}. This interceptor is very useful for any situation where
+ you need to ensure some logic runs before the actual execute method runs.
+
+ &lt;p&gt;
+ A typical use of this is to run some logic to load an object from the
+ database so that when parameters are set they can be set on this object. For
+ example, suppose you have a User object with two properties: &lt;i&gt;id&lt;/i&gt; and
+ &lt;i&gt;name&lt;/i&gt;. Provided that the params interceptor is called twice (once
+ before and once after this interceptor), you can load the User object using
+ the id property, and then when the second params interceptor is called the
+ parameter &lt;i&gt;user.name&lt;/i&gt; will be set, as desired, on the actual object
+ loaded from the database. See the example for more info.
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; Since XWork 2.0.2, this interceptor extends {@link MethodFilterInterceptor}, therefore being
+ able to deal with excludeMethods / includeMethods parameters. See [Workflow Interceptor]
+ (class {@link DefaultWorkflowInterceptor}) for documentation and examples on how to use this feature.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ &lt;b&gt;Update&lt;/b&gt;: Added logic to execute a prepare{MethodName} and conditionally
+ the a general prepare() Method, depending on the 'alwaysInvokePrepare' parameter/property
+ which is by default true. This allows us to run some logic based on the method
+ name we specify in the {@link com.opensymphony.xwork2.ActionProxy}. For example, you can specify a
+ prepareInput() method that will be run before the invocation of the input method.
+ &lt;/p&gt;
+
+</code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadocPrepareInterceptor|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrefixMethodInvocationUtil</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> 
+ &lt;b&gt;In PrepareInterceptor&lt;/b&gt;
+ &lt;p&gt;Applies only when action implements Preparable&lt;/p&gt;
+ &lt;ol&gt;
+    &lt;li&gt;if the action class have prepare{MethodName}(), it will be invoked&lt;/li&gt;
+    &lt;li&gt;else if the action class have prepareDo(MethodName()}(), it will be invoked&lt;/li&gt;
+    &lt;li&gt;no matter if 1] or 2] is performed, if alwaysinvokePrepare property of the interceptor is "true" (which is by default "true"), prepare() will be invoked.&lt;/li&gt;
+ &lt;/ol&gt;
+ 
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;ul&gt;
+
+ &lt;li&gt;alwaysInvokePrepare - Default to true. If true, prepare will always be invoked,
+ otherwise it will not.&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+</code></pre>
 </div>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ There are no known extension points to this interceptor.
+
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;!-- Calls the params interceptor twice, allowing you to
+       pre-load data for the second time parameters are set --&amp;gt;
+  &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+      &amp;lt;interceptor-ref name="params"/&amp;gt;
+      &amp;lt;interceptor-ref name="prepare"/&amp;gt;
+      &amp;lt;interceptor-ref name="basicStack"/&amp;gt;
+      &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+  &amp;lt;/action&amp;gt;
+```
+
+</code></pre>
 </div>
 
   </section>

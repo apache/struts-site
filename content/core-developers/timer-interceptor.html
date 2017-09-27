@@ -129,26 +129,57 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/timer-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="timer-interceptor">Timer Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> This interceptor logs the amount of time in milliseconds. In order for this interceptor to work properly, the
+ logging framework must be set to at least the &lt;tt&gt;INFO&lt;/tt&gt; level.
+ This interceptor relies on the &lt;a href="http://jakarta.apache.org/commons/logging/"&gt;Commons Logging API&lt;/a&gt; to
+ report its execution-time value.
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;ul&gt;
+
+ &lt;li&gt;logLevel (optional) - what log level should we use (&lt;code&gt;trace, debug, info, warn, error, fatal&lt;/code&gt;)? - defaut is &lt;code&gt;info&lt;/code&gt;&lt;/li&gt;
+
+ &lt;li&gt;logCategory (optional) - If provided we would use this category (eg. &lt;code&gt;com.mycompany.app&lt;/code&gt;).
+ Default is to use &lt;code&gt;com.opensymphony.xwork2.interceptor.TimerInterceptor&lt;/code&gt;.&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ The parameters above enables us to log all action execution times in our own logfile.
+
+</code></pre>
 </div>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> This interceptor can be extended to provide custom message format. Users should override the
+ &lt;code&gt;invokeUnderTiming&lt;/code&gt; method.
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;!-- records only the action's execution time --&amp;gt;
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="completeStack"/&amp;gt;
+     &amp;lt;interceptor-ref name="timer"/&amp;gt;
+     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+
+ &amp;lt;!-- records action's execution time as well as other interceptors--&amp;gt;
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="timer"/&amp;gt;
+     &amp;lt;interceptor-ref name="completeStack"/&amp;gt;
+     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+```
+
+</code></pre>
 </div>
 
   </section>

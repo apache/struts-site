@@ -129,8 +129,23 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/redirect-action-result.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="redirect-action-result">Redirect Action Result</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+ This result uses the {@link ActionMapper} provided by the
+ ActionMapperFactory to redirect the browser to a URL that invokes the
+ specified action and (optional) namespace. This is better than the
+ {@link ServletRedirectResult} because it does not require you to encode the
+ URL patterns processed by the {@link ActionMapper} in to your struts.xml
+ configuration files. This means you can change your URL patterns at any point
+ and your application will still work. It is strongly recommended that if you
+ are redirecting to another action, you use this result rather than the
+ standard redirect result.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ See examples below for an example of how request parameters could be passed
+ in.
+ &lt;/p&gt;
+</code></pre>
 </div>
 
 <p>See <a href="action-mapper.html">ActionMapper</a> for more details</p>
@@ -144,14 +159,75 @@
 
 <p>####Parameters####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=params|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;ul&gt;
+ &lt;li&gt;&lt;b&gt;actionName (default)&lt;/b&gt; - The name of the action that will be
+ redirected to.&lt;/li&gt;
+ &lt;li&gt;&lt;b&gt;namespace&lt;/b&gt; - Used to determine which namespace the action is in
+ that we're redirecting to.  If namespace is null, the default will be the
+ current namespace.&lt;/li&gt;
+ &lt;li&gt;&lt;b&gt;suppressEmptyParameters&lt;/b&gt; - Optional boolean (defaults to false) that
+ can prevent parameters with no values from being included in the redirect
+ URL.&lt;/li&gt;
+ &lt;li&gt;&lt;b&gt;parse&lt;/b&gt; - Boolean, true by default.  If set to false, the actionName
+ param will not be parsed for Ognl expressions.&lt;/li&gt;
+ &lt;li&gt;&lt;b&gt;anchor&lt;/b&gt; - Optional.  Also known as "fragment" or colloquially as
+ "hash".  You can specify an anchor for a result.&lt;/li&gt;
+ &lt;/ul&gt;
+
+</code></pre>
 </div>
 
 <p>####Examples####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;package name="public" extends="struts-default"&amp;gt;
+     &amp;lt;action name="login" class="..."&amp;gt;
+         &amp;lt;!-- Redirect to another namespace --&amp;gt;
+         &amp;lt;result type="redirectAction"&amp;gt;
+             &amp;lt;param name="actionName"&amp;gt;dashboard&amp;lt;/param&amp;gt;
+             &amp;lt;param name="namespace"&amp;gt;/secure&amp;lt;/param&amp;gt;
+         &amp;lt;/result&amp;gt;
+     &amp;lt;/action&amp;gt;
+ &amp;lt;/package&amp;gt;
+
+ &amp;lt;package name="secure" extends="struts-default" namespace="/secure"&amp;gt;
+     &amp;lt;-- Redirect to an action in the same namespace --&amp;gt;
+     &amp;lt;action name="dashboard" class="..."&amp;gt;
+         &amp;lt;result&amp;gt;dashboard.jsp&amp;lt;/result&amp;gt;
+         &amp;lt;result name="error" type="redirectAction"&amp;gt;error&amp;lt;/result&amp;gt;
+     &amp;lt;/action&amp;gt;
+
+     &amp;lt;action name="error" class="..."&amp;gt;
+         &amp;lt;result&amp;gt;error.jsp&amp;lt;/result&amp;gt;
+     &amp;lt;/action&amp;gt;
+ &amp;lt;/package&amp;gt;
+
+ &amp;lt;package name="passingRequestParameters" extends="struts-default" namespace="/passingRequestParameters"&amp;gt;
+    &amp;lt;!-- Pass parameters (reportType, width and height) --&amp;gt;
+    &amp;lt;!--
+    The redirectAction url generated will be :
+    /genReport/generateReport.action?reportType=pie&amp;amp;width=100&amp;amp;height=100#summary
+    --&amp;gt;
+    &amp;lt;action name="gatherReportInfo" class="..."&amp;gt;
+       &amp;lt;result name="showReportResult" type="redirectAction"&amp;gt;
+          &amp;lt;param name="actionName"&amp;gt;generateReport&amp;lt;/param&amp;gt;
+          &amp;lt;param name="namespace"&amp;gt;/genReport&amp;lt;/param&amp;gt;
+          &amp;lt;param name="reportType"&amp;gt;pie&amp;lt;/param&amp;gt;
+          &amp;lt;param name="width"&amp;gt;100&amp;lt;/param&amp;gt;
+          &amp;lt;param name="height"&amp;gt;100&amp;lt;/param&amp;gt;
+          &amp;lt;param name="empty"&amp;gt;&amp;lt;/param&amp;gt;
+          &amp;lt;param name="suppressEmptyParameters"&amp;gt;true&amp;lt;/param&amp;gt;
+          &amp;lt;param name="anchor"&amp;gt;summary&amp;lt;/param&amp;gt;
+       &amp;lt;/result&amp;gt;
+    &amp;lt;/action&amp;gt;
+ &amp;lt;/package&amp;gt;
+
+
+```
+
+</code></pre>
 </div>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>&lt;!--

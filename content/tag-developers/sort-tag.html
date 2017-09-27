@@ -140,20 +140,49 @@
 
 <p><strong>Description</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=org.apache.struts2.views.jsp.iterator.SortIteratorTag</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;b&gt;NOTE: JSP-TAG&lt;/b&gt;
+
+ &lt;p&gt;A Tag that sorts a List using a Comparator both passed in as the tag attribute.
+ If 'var' attribute is specified, the sorted list will be placed into the PageContext
+ attribute using the key specified by 'var'. The sorted list will ALWAYS be
+ pushed into the stack and poped at the end of this tag.&lt;/p&gt;
+
+</code></pre>
 </div>
 
 <p><strong>Parameters</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=tagattributes|url=struts2-tags/sort.html</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: tagattributes not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2-tags/sort/html.java;hb=HEAD
+</code></pre>
 </div>
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.views.jsp.iterator.SortIteratorTag</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+
+ USAGE 1:
+ &amp;lt;s:sort comparator="myComparator" source="myList"&amp;gt;
+      &amp;lt;s:iterator&amp;gt;
+      &amp;lt;!-- do something with each sorted elements --&amp;gt;
+      &amp;lt;s:property value="..." /&amp;gt;
+      &amp;lt;/s:iterator&amp;gt;
+ &amp;lt;/s:sort&amp;gt;
+
+ USAGE 2:
+ &amp;lt;s:sort var="mySortedList" comparator="myComparator" source="myList" /&amp;gt;
+
+ &amp;lt;%
+    Iterator sortedIterator = (Iterator) pageContext.getAttribute("mySortedList");
+    for (Iterator i = sortedIterator; i.hasNext(); ) {
+      // do something with each of the sorted elements
+    }
+ %&amp;gt;
+
+```
+
+</code></pre>
 </div>
 
   </section>

@@ -140,48 +140,102 @@
 
 <p><strong>Description</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.Push</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;Push value on stack for simplified usage.&lt;/p&gt;
+</code></pre>
 </div>
 
 <p><strong>Parameters</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=tagattributes|javadoc=false|url=struts2-tags/push.html</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: tagattributes not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2-tags/push/html.java;hb=HEAD
+</code></pre>
 </div>
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example1|lang=xml|javadoc=true|url=org.apache.struts2.components.Push</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;s:push value="user"&amp;gt;
+     &amp;lt;s:propery value="firstName" /&amp;gt;
+     &amp;lt;s:propery value="lastName" /&amp;gt;
+ &amp;lt;/s:push&amp;gt;
+```
+
+</code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example1description|lang=none|javadoc=true|url=org.apache.struts2.components.Push</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```none
+ Pushed user into the stack, and hence property tag could access user's properties
+ (firstName, lastName etc) since user is now at the top of the stack
+```
+
+</code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example2|lang=xml|javadoc=true|url=org.apache.struts2.components.Push</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+  &amp;lt;s:push value="myObject"&amp;gt;                              ----- (1)
+       &amp;lt;s:bean name="jp.SomeBean" var="myBean"/&amp;gt;        ----- (2)
+          &amp;lt;s:param name="myParam" value="top"/&amp;gt;        ----- (3)
+       &amp;lt;/s:bean&amp;gt;
+   &amp;lt;/s:push&amp;gt;
+```
+
+</code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example2description|lang=none|javadoc=true|url=org.apache.struts2.components.Push</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```none
+ when in (1), myObject is at the top of the stack
+ when in (2), jp.SomeBean is in the top of stack, also in stack's context with key myBean
+ when in (3), top will get the jp.SomeBean instance
+```
+
+</code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example3|lang=xml|javadoc=true|url=org.apache.struts2.components.Push</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;s:push value="myObject"&amp;gt;                                       ---(A)
+    &amp;lt;s:bean name="jp.SomeBean" var="myBean"/&amp;gt;                   ---(B)
+       &amp;lt;s:param name="myParam" value="top.mySomeOtherValue"/&amp;gt;  ---(C)
+    &amp;lt;/s:bean&amp;gt;
+ &amp;lt;/s:push&amp;gt;
+```
+
+</code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example3description|lang=none|javadoc=true|url=org.apache.struts2.components.Push</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```none
+ when in (A), myObject is at the top of the stack
+ when in (B), jp.SomeBean is at the top of the stack, also in context with key myBean
+ when in (C), top refers to jp.SomeBean instance. so top.mySomeOtherValue would invoke SomeBean's mySomeOtherValue() method
+```
+
+</code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example4|lang=xml|javadoc=true|url=org.apache.struts2.components.Push</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;s:push value="myObject"&amp;gt;                                 ---- (i)
+    &amp;lt;s:bean name="jp.SomeBean" var="myBean"/&amp;gt;             ---- (ii)
+       &amp;lt;s:param name="myParam" value="[1].top"/&amp;gt;         -----(iii)
+    &amp;lt;/s:bean&amp;gt;
+ &amp;lt;/s:push&amp;gt;
+```
+
+</code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example4description|lang=none|javadoc=true|url=org.apache.struts2.components.Push</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```none
+ when in (i), myObject is at the top of the stack
+ when in (ii), jp.SomeBean is at the top of the stack, followed by myObject
+ when in (iii), [1].top will returned top of the cut of stack starting from myObject, namely myObject itself
+```
+
+</code></pre>
 </div>
 
   </section>

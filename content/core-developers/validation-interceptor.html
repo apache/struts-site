@@ -129,26 +129,101 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/validation-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="validation-interceptor">Validation Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.ValidationInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;p&gt;
+ This interceptor runs the action through the standard validation framework, which in turn checks the action against
+ any validation rules (found in files such as &lt;i&gt;ActionClass-validation.xml&lt;/i&gt;) and adds field-level and action-level
+ error messages (provided that the action implements {@link ValidationAware}). This interceptor
+ is often one of the last (or second to last) interceptors applied in a stack, as it assumes that all values have
+ already been set on the action.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ This interceptor does nothing if the name of the method being invoked is specified in the &lt;b&gt;excludeMethods&lt;/b&gt;
+ parameter. &lt;b&gt;excludeMethods&lt;/b&gt; accepts a comma-delimited list of method names. For example, requests to
+ &lt;b&gt;foo!input.action&lt;/b&gt; and &lt;b&gt;foo!back.action&lt;/b&gt; will be skipped by this interceptor if you set the
+ &lt;b&gt;excludeMethods&lt;/b&gt; parameter to "input, back".
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ The workflow of the action request does not change due to this interceptor. Rather,
+ this interceptor is often used in conjunction with the &lt;b&gt;workflow&lt;/b&gt; interceptor.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ &lt;b&gt;NOTE:&lt;/b&gt; As this method extends off MethodFilterInterceptor, it is capable of
+ deciding if it is applicable only to selective methods in the action class. See
+ &lt;code&gt;MethodFilterInterceptor&lt;/code&gt; for more info.
+ &lt;/p&gt;
+
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.ValidationInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;ul&gt;
+
+ &lt;li&gt;alwaysInvokeValidate - Defaults to true. If true validate() method will always
+ be invoked, otherwise it will not.&lt;/li&gt;
+
+ &lt;li&gt;programmatic - Defaults to true. If true and the action is Validateable call validate(),
+ and any method that starts with "validate".
+ &lt;/li&gt;
+ 
+ &lt;li&gt;declarative - Defaults to true. Perform validation based on xml or annotations.&lt;/li&gt;
+ 
+ &lt;/ul&gt;
+
+</code></pre>
 </div>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=extending|javadoc=true|url=com.opensymphony.xwork2.validator.ValidationInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ There are no known extension points for this interceptor.
+
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.validator.ValidationInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ 
+ &amp;lt;action name=&amp;quot;someAction&amp;quot; class=&amp;quot;com.examples.SomeAction&amp;quot;&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;params&amp;quot;/&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;validation&amp;quot;/&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;workflow&amp;quot;/&amp;gt;
+     &amp;lt;result name=&amp;quot;success&amp;quot;&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+ 
+ &amp;lt;-- in the following case myMethod of the action class will not
+        get validated --&amp;gt;
+ &amp;lt;action name=&amp;quot;someAction&amp;quot; class=&amp;quot;com.examples.SomeAction&amp;quot;&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;params&amp;quot;/&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;validation&amp;quot;&amp;gt;
+         &amp;lt;param name=&amp;quot;excludeMethods&amp;quot;&amp;gt;myMethod&amp;lt;/param&amp;gt;
+     &amp;lt;/interceptor-ref&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;workflow&amp;quot;/&amp;gt;
+     &amp;lt;result name=&amp;quot;success&amp;quot;&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+ 
+ &amp;lt;-- in the following case only annotated methods of the action class will
+        be validated --&amp;gt;
+ &amp;lt;action name=&amp;quot;someAction&amp;quot; class=&amp;quot;com.examples.SomeAction&amp;quot;&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;params&amp;quot;/&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;validation&amp;quot;&amp;gt;
+         &amp;lt;param name=&amp;quot;validateAnnotatedMethodOnly&amp;quot;&amp;gt;true&amp;lt;/param&amp;gt;
+     &amp;lt;/interceptor-ref&amp;gt;
+     &amp;lt;interceptor-ref name=&amp;quot;workflow&amp;quot;/&amp;gt;
+     &amp;lt;result name=&amp;quot;success&amp;quot;&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+
+
+```
+
+</code></pre>
 </div>
 
   </section>

@@ -129,26 +129,53 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/create-session-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="create-session-interceptor">Create Session Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;p&gt;
+ This interceptor creates the HttpSession if it doesn't exist, also SessionMap is recreated and put in ServletActionContext.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ This is particular useful when using the &amp;lt;@s.token&amp;gt; tag in freemarker templates.
+ The tag &lt;b&gt;do&lt;/b&gt; require that a HttpSession is already created since freemarker commits
+ the response to the client immediately.
+ &lt;/p&gt;
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;ul&gt;
+ &lt;li&gt;None&lt;/li&gt;
+ &lt;/ul&gt;
+
+</code></pre>
 </div>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;ul&gt;
+  &lt;li&gt;None&lt;/li&gt;
+ &lt;/ul&gt;
+
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="createSession"/&amp;gt;
+     &amp;lt;interceptor-ref name="defaultStack"/&amp;gt;
+     &amp;lt;result name="input"&amp;gt;input_with_token_tag.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+
+```
+
+</code></pre>
 </div>
 
   </section>

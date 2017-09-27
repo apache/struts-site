@@ -129,26 +129,125 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/type-conversion-annotation.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="typeconversion-annotation">TypeConversion Annotation</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;This annotation is used for class and application wide conversion rules.&lt;/p&gt;
+
+ &lt;p&gt;
+ Class wide conversion:&lt;br&gt;
+ The conversion rules will be assembled in a file called &lt;code&gt;XXXAction-conversion.properties&lt;/code&gt;
+ within the same package as the related action class.
+ Set type to: &lt;code&gt;type = ConversionType.CLASS&lt;/code&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ Application wide conversion:&lt;br&gt;
+ The conversion rules will be assembled within the &lt;code&gt;xwork-conversion.properties&lt;/code&gt; file within the classpath root.
+ Set type to: &lt;code&gt;type = ConversionType.APPLICATION&lt;/code&gt;
+ &lt;/p&gt;
+</code></pre>
 </div>
 
 <p>#####Usage#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;The TypeConversion annotation can be applied at property and method level.&lt;/p&gt;
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;table summary=""&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;Parameter&lt;/th&gt;
+ &lt;th&gt;Required&lt;/th&gt;
+ &lt;th&gt;Default&lt;/th&gt;
+ &lt;th&gt;Description&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;key&lt;/td&gt;
+ &lt;td&gt;no&lt;/td&gt;
+ &lt;td&gt;The annotated property/key name&lt;/td&gt;
+ &lt;td&gt;The optional property name mostly used within TYPE level annotations.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;type&lt;/td&gt;
+ &lt;td&gt;no&lt;/td&gt;
+ &lt;td&gt;ConversionType.CLASS&lt;/td&gt;
+ &lt;td&gt;Enum value of ConversionType.  Determines whether the conversion should be applied at application or class level.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;rule&lt;/td&gt;
+ &lt;td&gt;no&lt;/td&gt;
+ &lt;td&gt;ConversionRule.PROPERTY&lt;/td&gt;
+ &lt;td&gt;Enum value of ConversionRule. The ConversionRule can be a property, a Collection or a Map.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;converter&lt;/td&gt;
+ &lt;td&gt;DEPRECATED: either this or value&lt;/td&gt;
+ &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+ &lt;td&gt;The class name of the TypeConverter to be used as converter.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;converterClass&lt;/td&gt;
+ &lt;td&gt;either this or value&lt;/td&gt;
+ &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+ &lt;td&gt;The class of the TypeConverter to be used as converter. XWorkBasicConverter by default.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;value&lt;/td&gt;
+ &lt;td&gt;either converter or this&lt;/td&gt;
+ &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+ &lt;td&gt;The value to set for ConversionRule.KEY_PROPERTY.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```java
+ &amp;#64;Conversion()
+ public class ConversionAction implements Action {
+
+   private String convertInt;
+
+   private String convertDouble;
+   private List users = null;
+
+   private HashMap keyValues = null;
+
+   &amp;#64;TypeConversion(type = ConversionType.APPLICATION)
+   public void setConvertInt( String convertInt ) {
+       this.convertInt = convertInt;
+   }
+
+   &amp;#64;TypeConversion(converterClass = XWorkBasicConverter.class)
+   public void setConvertDouble( String convertDouble ) {
+       this.convertDouble = convertDouble;
+   }
+
+   &amp;#64;TypeConversion(rule = ConversionRule.COLLECTION, converterClass = String.class)
+   public void setUsers( List users ) {
+       this.users = users;
+   }
+
+   &amp;#64;TypeConversion(rule = ConversionRule.MAP, converterClass = BigInteger.class)
+   public void setKeyValues( HashMap keyValues ) {
+       this.keyValues = keyValues;
+   }
+
+   &amp;#64;TypeConversion(type = ConversionType.APPLICATION, property = "java.util.Date", converterClass = XWorkBasicConverter.class)
+   public String execute() throws Exception {
+       return SUCCESS;
+   }
+ }
+```
+
+</code></pre>
 </div>
 
   </section>

@@ -129,26 +129,65 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/input-config-annotation.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="inputconfig-annotation">InputConfig Annotation</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> Marks a action method that if it's not validated by ValidationInterceptor then execute input method or input result.
+</code></pre>
 </div>
 
 <p>#####Usage#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> The InputConfig annotation can be applied at method level.
+
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;table class='confluenceTable' summary=''&gt;
+ &lt;tr&gt;
+ &lt;th class='confluenceTh'&gt; Parameter &lt;/th&gt;
+ &lt;th class='confluenceTh'&gt; Required &lt;/th&gt;
+ &lt;th class='confluenceTh'&gt; Default &lt;/th&gt;
+ &lt;th class='confluenceTh'&gt; Notes &lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td class='confluenceTd'&gt;methodName&lt;/td&gt;
+ &lt;td class='confluenceTd'&gt;no&lt;/td&gt;
+ &lt;td class='confluenceTd'&gt;&lt;/td&gt;
+ &lt;td class='confluenceTd'&gt;execute this method if specific&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td class='confluenceTd'&gt;resultName&lt;/td&gt;
+ &lt;td class='confluenceTd'&gt;no&lt;/td&gt;
+ &lt;td class='confluenceTd'&gt;&lt;/td&gt;
+ &lt;td class='confluenceTd'&gt;return this result if methodName not specific&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```java
+ public class SampleAction extends ActionSupport {
+
+  public void isValid() throws ValidationException {
+    // validate model object, throw exception if failed
+  }
+
+  &amp;#64;InputConfig(methodName="input")
+  public String execute() {
+     // perform action
+     return SUCCESS;
+  }
+  public String input() {
+     // perform some data filling
+     return INPUT;
+  }
+ }
+```
+
+</code></pre>
 </div>
 
   </section>

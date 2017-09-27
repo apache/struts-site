@@ -133,32 +133,68 @@
 
 <p>From the Javadocs of the XWork 2 interceptor:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.ConversionErrorInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> ConversionErrorInterceptor adds conversion errors from the ActionContext to the Action's field errors.
+
+ &lt;p&gt;
+ This interceptor adds any error found in the {@link ActionContext}'s conversionErrors map as a field error (provided
+ that the action implements {@link ValidationAware}). In addition, any field that contains a validation error has its
+ original value saved such that any subsequent requests for that value return the original value rather than the value
+ in the action. This is important because if the value "abc" is submitted and can't be converted to an int, we want to
+ display the original string ("abc") again rather than the int value (likely 0, which would make very little sense to
+ the user).
+ &lt;/p&gt;
+ 
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; Since 2.5.2, this interceptor extends {@link MethodFilterInterceptor}, therefore being
+ able to deal with excludeMethods / includeMethods parameters. See [Workflow Interceptor]
+ (class {@link DefaultWorkflowInterceptor}) for documentation and examples on how to use this feature.
+ &lt;/p&gt;
+ 
+</code></pre>
 </div>
 
 <p>From the Javadocs of the Struts 2 interceptor:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+ This interceptor extends {@link ConversionErrorInterceptor} but only adds conversion errors from the ActionContext to
+ the field errors of the action if the field value is not null, "", or {""} (a size 1 String array with only an empty
+ String). See {@link ConversionErrorInterceptor} for more information, as well as the Type Conversion documentation.
+ &lt;/p&gt;
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+ &lt;ul&gt;
+
+ &lt;li&gt;None&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+</code></pre>
 </div>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+ There are no known extension points for this interceptor.
+ &lt;/p&gt;
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```xml
+ &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
+     &amp;lt;interceptor-ref name="params"/&amp;gt;
+     &amp;lt;interceptor-ref name="conversionError"/&amp;gt;
+     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
+ &amp;lt;/action&amp;gt;
+```
+
+</code></pre>
 </div>
 
   </section>

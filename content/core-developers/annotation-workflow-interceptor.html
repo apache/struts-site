@@ -129,14 +129,61 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/annotation-workflow-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="annotationworkflowinterceptor">AnnotationWorkflowInterceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;Invokes any annotated methods on the action. Specifically, it supports the following
+ annotations:&lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt; &amp;#64;{@link Before} - will be invoked before the action method. If the returned value is not null, it is
+ returned as the action result code&lt;/li&gt;
+ &lt;li&gt; &amp;#64;{@link BeforeResult} - will be invoked after the action method but before the result execution&lt;/li&gt;
+ &lt;li&gt; &amp;#64;{@link After} - will be invoked after the action method and result execution&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;There can be multiple methods marked with the same annotations, but the order of their execution
+ is not guaranteed. However, the annotated methods on the superclass chain are guaranteed to be invoked before the
+ annotated method in the current class in the case of a {@link Before} annotations and after, if the annotations is
+ {@link After}.&lt;/p&gt;
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=javacode|javadoc=true|lang=java|url=com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```java
+  public class BaseAnnotatedAction {
+  	protected String log = "";
+
+  	&amp;#64;Before
+  	public String baseBefore() {
+  		log = log + "baseBefore-";
+  		return null;
+  	}
+  }
+
+  public class AnnotatedAction extends BaseAnnotatedAction {
+  	&amp;#64;Before
+  	public String before() {
+  		log = log + "before";
+  		return null;
+  	}
+
+  	public String execute() {
+  		log = log + "-execute";
+  		return Action.SUCCESS;
+  	}
+
+  	&amp;#64;BeforeResult
+  	public void beforeResult() throws Exception {
+  		log = log +"-beforeResult";
+  	}
+
+  	&amp;#64;After
+  	public void after() {
+  		log = log + "-after";
+  	}
+  }
+```
+
+</code></pre>
 </div>
 
 <p>Configure a stack in struts.xml that replaces the PrepareInterceptor with the AnnotationWorkflowInterceptor:</p>
@@ -163,8 +210,9 @@
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;With the interceptor applied and the action executed on &lt;code&gt;AnnotatedAction&lt;/code&gt; the log
+ instance variable will contain &lt;code&gt;baseBefore-before-execute-beforeResult-after&lt;/code&gt;.&lt;/p&gt;
+</code></pre>
 </div>
 
   </section>

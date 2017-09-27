@@ -129,26 +129,66 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/conversion-annotation.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="conversion-annotation">Conversion Annotation</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> A marker annotation for type conversions at Type level.
+</code></pre>
 </div>
 
 <p>#####Usage#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> The Conversion annotation must be applied at Type level.
+</code></pre>
 </div>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;table summary=""&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;Parameter&lt;/th&gt;
+ &lt;th&gt;Required&lt;/th&gt;
+ &lt;th&gt;Default&lt;/th&gt;
+ &lt;th&gt;Description&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;conversion&lt;/td&gt;
+ &lt;td&gt;no&lt;/td&gt;
+ &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+ &lt;td&gt;used for Type Conversions applied at Type level.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+</code></pre>
 </div>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.conversion.annotations.Conversion</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```java
+ &amp;#64;Conversion(
+     conversions = {
+          // key must be the name of a property for which converter should be used
+          &amp;#64;TypeConversion(key = "date", converter = "org.demo.converter.DateConverter")
+     }
+ )
+ public class ConversionAction implements Action {
+
+     private Date date;
+
+     public setDate(Date date) {
+         this.date = date;
+     }
+
+     public Date getDate() {
+         return date;
+     }
+
+ }
+
+```
+
+</code></pre>
 </div>
 
 <p>Check also <a href="type-conversion-annotation.html">TypeConversion Annotation</a> for more examples!</p>
