@@ -10,7 +10,7 @@ title: Postback Result
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.dispatcher.PostbackResult}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.dispatcher.PostbackResult %}
 ~~~~~~~
 
 ####Parameters####
@@ -18,7 +18,7 @@ title: Postback Result
 
 
 ~~~~~~~
-{snippet:id=params|javadoc=true|url=org.apache.struts2.dispatcher.PostbackResult}
+{% snippet id=params|javadoc=true|url=org.apache.struts2.dispatcher.PostbackResult %}
 ~~~~~~~
 
 ####Examples####
@@ -26,5 +26,5 @@ title: Postback Result
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.dispatcher.PostbackResult}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.dispatcher.PostbackResult %}
 ~~~~~~~

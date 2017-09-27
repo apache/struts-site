@@ -8,7 +8,7 @@ title: Roles Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.RolesInterceptor}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.RolesInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -16,7 +16,7 @@ title: Roles Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.RolesInterceptor}
+{% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.RolesInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -24,5 +24,5 @@ title: Roles Interceptor
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.RolesInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.RolesInterceptor %}
 ~~~~~~~

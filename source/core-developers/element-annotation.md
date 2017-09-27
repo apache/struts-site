@@ -8,7 +8,7 @@ title: Element Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.util.Element}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.Element %}
 ~~~~~~~
 
 #####Usage#####
@@ -16,7 +16,7 @@ title: Element Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.util.Element}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.Element %}
 ~~~~~~~
 
 #####Parameters#####
@@ -24,7 +24,7 @@ title: Element Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.Element}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.Element %}
 ~~~~~~~
 
 #####Examples#####

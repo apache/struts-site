@@ -26,7 +26,7 @@ true
 Create the form\.
 
 ~~~~~~~
-{snippet:id=clientValidation|lang=xml|javadoc=false|url=struts2/apps/showcase/src/main/webapp/WEB-INF/validation/quiz-client.jsp}
+{% snippet id=clientValidation|lang=xml|javadoc=false|url=struts2/apps/showcase/src/main/webapp/WEB-INF/validation/quiz-client.jsp %}
 ~~~~~~~
 (information) This case uses the default xhtml theme, so the 
 
@@ -40,7 +40,7 @@ Create the form\.
 Create the Action class\.
 
 ~~~~~~~
-{snippet:id=quizAction|javadoc=false|lang=java|url=struts2/apps/showcase/src/main/java/org/apache/struts2/showcase/validation/QuizAction.java}
+{% snippet id=quizAction|javadoc=false|lang=java|url=struts2/apps/showcase/src/main/java/org/apache/struts2/showcase/validation/QuizAction.java %}
 ~~~~~~~
 
 __Step 3__
@@ -53,7 +53,7 @@ validation.xml
  to configure the validators to be used\.
 
 ~~~~~~~
-{snippet:id=quizValidators|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/QuizAction-validation.xml}
+{% snippet id=quizValidators|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/QuizAction-validation.xml %}
 ~~~~~~~
 
 __Action and Namespace__

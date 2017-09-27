@@ -8,7 +8,7 @@ title: Token Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.TokenInterceptor}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.TokenInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -16,7 +16,7 @@ title: Token Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.TokenInterceptor}
+{% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.TokenInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -24,7 +24,7 @@ title: Token Interceptor
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.TokenInterceptor}
+{% snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.TokenInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,6 +32,6 @@ title: Token Interceptor
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.TokenInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.TokenInterceptor %}
 ~~~~~~~
 

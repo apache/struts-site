@@ -8,7 +8,7 @@ title: Velocity Result
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.dispatcher.VelocityResult}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.dispatcher.VelocityResult %}
 ~~~~~~~
 
 ####Parameters####
@@ -16,7 +16,7 @@ title: Velocity Result
 
 
 ~~~~~~~
-{snippet:id=params|javadoc=true|url=org.apache.struts2.dispatcher.VelocityResult}
+{% snippet id=params|javadoc=true|url=org.apache.struts2.dispatcher.VelocityResult %}
 ~~~~~~~
 
 ####Examples####
@@ -24,5 +24,5 @@ title: Velocity Result
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.dispatcher.VelocityResult}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.dispatcher.VelocityResult %}
 ~~~~~~~

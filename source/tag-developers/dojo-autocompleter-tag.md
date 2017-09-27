@@ -10,7 +10,7 @@ __Description__
 
 
 ~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java}
+{% snippet id=javadoc|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 ~~~~~~~
 
 __Parameters__
@@ -18,7 +18,7 @@ __Parameters__
 
 
 ~~~~~~~
-{snippet:id=tagattributes|javadoc=false|url=struts2-tags/ajax/autocompleter.html}
+{% snippet id=tagattributes|javadoc=false|url=struts2-tags/ajax/autocompleter.html %}
 ~~~~~~~
 
 __Examples__
@@ -27,63 +27,63 @@ Get list from an action:
 
 
 ~~~~~~~
-{snippet:id=example1|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java}
+{% snippet id=example1|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 ~~~~~~~
 
 Uses a list:
 
 
 ~~~~~~~
-{snippet:id=example2|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java}
+{% snippet id=example2|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 ~~~~~~~
 
 Autocompleter that reloads its content everytime the text changes (and the length of the text is greater than 3):
 
 
 ~~~~~~~
-{snippet:id=example3|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java}
+{% snippet id=example3|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 ~~~~~~~
 
 Linking two autocompleters:
 
 
 ~~~~~~~
-{snippet:id=example4|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java}
+{% snippet id=example4|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 ~~~~~~~
 
 Set/Get selected values using JavaScript:
 
 
 ~~~~~~~
-{snippet:id=example5|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java}
+{% snippet id=example5|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 ~~~~~~~
 
 Using beforeNotifyTopics:
 
 
 ~~~~~~~
-{snippet:id=example6|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java}
+{% snippet id=example6|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 ~~~~~~~
 
 Using errorNotifyTopics:
 
 
 ~~~~~~~
-{snippet:id=example7|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java}
+{% snippet id=example7|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 ~~~~~~~
 
 Using errorNotifyTopics:
 
 
 ~~~~~~~
-{snippet:id=example8|lang=html|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java}
+{% snippet id=example8|lang=html|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 ~~~~~~~
 
 Using valueNotifyTopics:
 
 
 ~~~~~~~
-{snippet:id=example9|lang=html|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java}
+{% snippet id=example9|lang=html|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 ~~~~~~~
 
 __Caveats__

@@ -11,14 +11,14 @@ Please make sure you have read the [Tag Syntax](#PAGE_13927) document and unders
 | 
 
 
-{snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.DoubleListUIBean}
+{% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.DoubleListUIBean %}
 
 __Description__
 
 
 
 ~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.DoubleSelect}
+{% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.DoubleSelect %}
 ~~~~~~~
 
 __Parameters__
@@ -26,7 +26,7 @@ __Parameters__
 
 
 ~~~~~~~
-{snippet:id=tagattributes|javadoc=false|url=struts2-tags/doubleselect.html}
+{% snippet id=tagattributes|javadoc=false|url=struts2-tags/doubleselect.html %}
 ~~~~~~~
 
 __Examples__
@@ -34,5 +34,5 @@ __Examples__
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.DoubleSelect}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.DoubleSelect %}
 ~~~~~~~

@@ -15,7 +15,7 @@ __Description__
 
 
 ~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.Param}
+{% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.Param %}
 ~~~~~~~
 
 __Parameters__
@@ -23,7 +23,7 @@ __Parameters__
 
 
 ~~~~~~~
-{snippet:id=tagattributes|javadoc=false|url=struts2-tags/param.html}
+{% snippet id=tagattributes|javadoc=false|url=struts2-tags/param.html %}
 ~~~~~~~
 
 __Examples__
@@ -31,10 +31,10 @@ __Examples__
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.Param}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.Param %}
 ~~~~~~~
 
 
 ~~~~~~~
-{snippet:id=exampledescription|javadoc=true|url=org.apache.struts2.components.Param}
+{% snippet id=exampledescription|javadoc=true|url=org.apache.struts2.components.Param %}
 ~~~~~~~

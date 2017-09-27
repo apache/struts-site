@@ -10,7 +10,7 @@ __Description__
 
 
 ~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.Div}
+{% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.Div %}
 ~~~~~~~
 
 
@@ -24,5 +24,5 @@ __Parameters__
 
 
 ~~~~~~~
-{snippet:id=tagattributes|javadoc=false|url=struts2-tags/div.html}
+{% snippet id=tagattributes|javadoc=false|url=struts2-tags/div.html %}
 ~~~~~~~

@@ -8,7 +8,7 @@ title: Execute and Wait Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -16,7 +16,7 @@ title: Execute and Wait Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor}
+{% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -24,7 +24,7 @@ title: Execute and Wait Interceptor
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor}
+{% snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: Execute and Wait Interceptor
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.ExecuteAndWaitInterceptor %}
 ~~~~~~~

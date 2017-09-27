@@ -8,7 +8,7 @@ title: RequiredStringValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator %}
 ~~~~~~~
 
 #####Usage#####
@@ -16,7 +16,7 @@ title: RequiredStringValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator %}
 ~~~~~~~
 
 #####Parameters#####
@@ -24,7 +24,7 @@ title: RequiredStringValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: RequiredStringValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator %}
 ~~~~~~~

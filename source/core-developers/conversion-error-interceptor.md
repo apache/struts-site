@@ -11,14 +11,14 @@ From the Javadocs of the XWork 2 interceptor:
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.ConversionErrorInterceptor}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.ConversionErrorInterceptor %}
 ~~~~~~~
 
 From the Javadocs of the Struts 2 interceptor:
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -26,7 +26,7 @@ From the Javadocs of the Struts 2 interceptor:
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor}
+{% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -34,7 +34,7 @@ From the Javadocs of the Struts 2 interceptor:
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor}
+{% snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -42,5 +42,5 @@ From the Javadocs of the Struts 2 interceptor:
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor %}
 ~~~~~~~

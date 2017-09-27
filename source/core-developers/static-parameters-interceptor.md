@@ -8,7 +8,7 @@ title: Static Parameters Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.StaticParametersInterceptor}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.StaticParametersInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -16,7 +16,7 @@ title: Static Parameters Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.StaticParametersInterceptor}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.StaticParametersInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -24,7 +24,7 @@ title: Static Parameters Interceptor
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.StaticParametersInterceptor}
+{% snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.StaticParametersInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: Static Parameters Interceptor
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.StaticParametersInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.StaticParametersInterceptor %}
 ~~~~~~~

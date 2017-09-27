@@ -8,7 +8,7 @@ title: Conversion Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion %}
 ~~~~~~~
 
 #####Usage#####
@@ -16,7 +16,7 @@ title: Conversion Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion %}
 ~~~~~~~
 
 #####Parameters#####
@@ -24,7 +24,7 @@ title: Conversion Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,7 +32,7 @@ title: Conversion Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.conversion.annotations.Conversion}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.conversion.annotations.Conversion %}
 ~~~~~~~
 
 Check also [TypeConversion Annotation](type-conversion-annotation.html) for more examples!

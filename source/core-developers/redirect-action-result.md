@@ -8,7 +8,7 @@ title: Redirect Action Result
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult %}
 ~~~~~~~
 
 
@@ -21,7 +21,7 @@ See [ActionMapper](action-mapper.html) for more details
 
 
 ~~~~~~~
-{snippet:id=params|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult}
+{% snippet id=params|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult %}
 ~~~~~~~
 
 ####Examples####
@@ -29,7 +29,7 @@ See [ActionMapper](action-mapper.html) for more details
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult %}
 ~~~~~~~
 
 

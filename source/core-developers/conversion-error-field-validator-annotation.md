@@ -8,7 +8,7 @@ title: ConversionErrorFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator %}
 ~~~~~~~
 
 #####Usage#####
@@ -16,7 +16,7 @@ title: ConversionErrorFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator %}
 ~~~~~~~
 
 #####Parameters#####
@@ -24,7 +24,7 @@ title: ConversionErrorFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: ConversionErrorFieldValidator Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator %}
 ~~~~~~~

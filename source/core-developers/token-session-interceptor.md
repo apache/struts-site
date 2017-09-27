@@ -8,7 +8,7 @@ title: Token Session Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.TokenSessionStoreInterceptor}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.TokenSessionStoreInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -16,7 +16,7 @@ title: Token Session Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.TokenSessionStoreInterceptor}
+{% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.TokenSessionStoreInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -24,7 +24,7 @@ title: Token Session Interceptor
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.TokenSessionStoreInterceptor}
+{% snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.TokenSessionStoreInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: Token Session Interceptor
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.TokenSessionStoreInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.TokenSessionStoreInterceptor %}
 ~~~~~~~

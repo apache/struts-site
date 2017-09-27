@@ -7,7 +7,7 @@ title: InputConfig Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig %}
 ~~~~~~~
 
 #####Usage#####
@@ -15,7 +15,7 @@ title: InputConfig Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig %}
 ~~~~~~~
 
 #####Parameters#####
@@ -23,7 +23,7 @@ title: InputConfig Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig %}
 ~~~~~~~
 
 #####Examples#####
@@ -31,5 +31,5 @@ title: InputConfig Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig %}
 ~~~~~~~

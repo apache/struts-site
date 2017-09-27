@@ -8,7 +8,7 @@ title: CreateIfNull Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull %}
 ~~~~~~~
 
 #####Usage#####
@@ -16,7 +16,7 @@ title: CreateIfNull Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull %}
 ~~~~~~~
 
 #####Parameters#####
@@ -24,7 +24,7 @@ title: CreateIfNull Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: CreateIfNull Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.util.CreateIfNull}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.util.CreateIfNull %}
 ~~~~~~~

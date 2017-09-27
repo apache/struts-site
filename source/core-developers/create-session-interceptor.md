@@ -8,7 +8,7 @@ title: Create Session Interceptor
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor}
+{% snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor %}
 ~~~~~~~
 
 #####Parameters#####
@@ -16,7 +16,7 @@ title: Create Session Interceptor
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor}
+{% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor %}
 ~~~~~~~
 
 #####Extending the Interceptor#####
@@ -24,7 +24,7 @@ title: Create Session Interceptor
 
 
 ~~~~~~~
-{snippet:id=extending|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor}
+{% snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: Create Session Interceptor
 
 
 ~~~~~~~
-{snippet:id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor}
+{% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.CreateSessionInterceptor %}
 ~~~~~~~

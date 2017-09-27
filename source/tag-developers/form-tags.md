@@ -63,7 +63,7 @@ __Template-Related Attributes__
 
 
 ~~~~~~~
-{snippet:id=templateRelatedAttributes|javadoc=true|url=org.apache.struts2.components.UIBean}
+{% snippet id=templateRelatedAttributes|javadoc=true|url=org.apache.struts2.components.UIBean %}
 ~~~~~~~
 
 __Javascript-Related Attributes__
@@ -71,7 +71,7 @@ __Javascript-Related Attributes__
 
 
 ~~~~~~~
-{snippet:id=javascriptRelatedAttributes|javadoc=true|url=org.apache.struts2.components.UIBean}
+{% snippet id=javascriptRelatedAttributes|javadoc=true|url=org.apache.struts2.components.UIBean %}
 ~~~~~~~
 
 __Tooltip Related Attributes__
@@ -79,7 +79,7 @@ __Tooltip Related Attributes__
 
 
 ~~~~~~~
-{snippet:id=tooltipattributes|javadoc=true|url=org.apache.struts2.components.UIBean}
+{% snippet id=tooltipattributes|javadoc=true|url=org.apache.struts2.components.UIBean %}
 ~~~~~~~
 
 __General Attributes__
@@ -87,7 +87,7 @@ __General Attributes__
 
 
 ~~~~~~~
-{snippet:id=generalAttributes|javadoc=true|url=org.apache.struts2.components.UIBean}
+{% snippet id=generalAttributes|javadoc=true|url=org.apache.struts2.components.UIBean %}
 ~~~~~~~
 
 
@@ -255,10 +255,10 @@ __Tooltip__
 
 
 ~~~~~~~
-{snippet:id=tooltipdescription|javadoc=true|url=org.apache.struts2.components.UIBean}
+{% snippet id=tooltipdescription|javadoc=true|url=org.apache.struts2.components.UIBean %}
 ~~~~~~~
 
 
 ~~~~~~~
-{snippet:id=tooltipexample|lang=xml|javadoc=true|url=org.apache.struts2.components.UIBean}
+{% snippet id=tooltipexample|lang=xml|javadoc=true|url=org.apache.struts2.components.UIBean %}
 ~~~~~~~

@@ -8,7 +8,7 @@ title: Key Annotation
 
 
 ~~~~~~~
-{snippet:id=description|javadoc=true|url=com.opensymphony.xwork2.util.Key}
+{% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.Key %}
 ~~~~~~~
 
 #####Usage#####
@@ -16,7 +16,7 @@ title: Key Annotation
 
 
 ~~~~~~~
-{snippet:id=usage|javadoc=true|url=com.opensymphony.xwork2.util.Key}
+{% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.Key %}
 ~~~~~~~
 
 #####Parameters#####
@@ -24,7 +24,7 @@ title: Key Annotation
 
 
 ~~~~~~~
-{snippet:id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.Key}
+{% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.Key %}
 ~~~~~~~
 
 #####Examples#####
@@ -32,5 +32,5 @@ title: Key Annotation
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.util.Key}
+{% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.util.Key %}
 ~~~~~~~

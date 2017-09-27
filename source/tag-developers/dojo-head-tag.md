@@ -8,12 +8,12 @@ title: Tag Developers Guide (WIP)
 __Description__
 
 
-{snippet:id=notice|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java}
+{% snippet id=notice|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java %}
 
 
 
 ~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java}
+{% snippet id=javadoc|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java %}
 ~~~~~~~
 
 
@@ -30,7 +30,7 @@ __Parameters__
 
 
 ~~~~~~~
-{snippet:id=tagattributes|javadoc=false|url=struts2-tags/ajax/head.html}
+{% snippet id=tagattributes|javadoc=false|url=struts2-tags/ajax/head.html %}
 ~~~~~~~
 
 __Examples__
@@ -38,10 +38,10 @@ __Examples__
 
 
 ~~~~~~~
-{snippet:id=example1|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java}
+{% snippet id=example1|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java %}
 ~~~~~~~
 
 
 ~~~~~~~
-{snippet:id=example3|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java}
+{% snippet id=example3|lang=xml|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java %}
 ~~~~~~~

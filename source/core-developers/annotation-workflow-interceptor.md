@@ -6,7 +6,7 @@ title: AnnotationWorkflowInterceptor
 # AnnotationWorkflowInterceptor
 
 ~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor}
+{% snippet id=javadoc|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor %}
 ~~~~~~~
 
 #####Examples#####
@@ -14,7 +14,7 @@ title: AnnotationWorkflowInterceptor
 
 
 ~~~~~~~
-{snippet:id=javacode|javadoc=true|lang=java|url=com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor}
+{% snippet id=javacode|javadoc=true|lang=java|url=com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor %}
 ~~~~~~~
 
 Configure a stack in struts\.xml that replaces the PrepareInterceptor with the AnnotationWorkflowInterceptor:
@@ -45,5 +45,5 @@ Given an Action, AnnotatedAction, add a reference to the AnnotationWorkflowInter
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor}
+{% snippet id=example|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor %}
 ~~~~~~~

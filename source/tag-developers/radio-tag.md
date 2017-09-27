@@ -11,14 +11,14 @@ Please make sure you have read the [Tag Syntax](#PAGE_13927) document and unders
 | 
 
 
-{snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.ListUIBean}
+{% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.ListUIBean %}
 
 __Description__
 
 
 
 ~~~~~~~
-{snippet:id=javadoc|javadoc=true|url=org.apache.struts2.components.Radio}
+{% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.Radio %}
 ~~~~~~~
 
 __Parameters__
@@ -26,7 +26,7 @@ __Parameters__
 
 
 ~~~~~~~
-{snippet:id=tagattributes|javadoc=false|url=struts2-tags/radio.html}
+{% snippet id=tagattributes|javadoc=false|url=struts2-tags/radio.html %}
 ~~~~~~~
 
 __Examples__
@@ -34,15 +34,15 @@ __Examples__
 
 
 ~~~~~~~
-{snippet:id=exdescription|javadoc=true|url=org.apache.struts2.components.Radio}
+{% snippet id=exdescription|javadoc=true|url=org.apache.struts2.components.Radio %}
 ~~~~~~~
 
 
 ~~~~~~~
-{snippet:id=example|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio}
+{% snippet id=example|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio %}
 ~~~~~~~
 
 
 ~~~~~~~
-{snippet:id=example_fmt|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio}
+{% snippet id=example_fmt|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio %}
 ~~~~~~~
