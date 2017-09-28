@@ -6,33 +6,25 @@ title: Validations Annotation
 # Validations Annotation
 
 
-~~~~~~~
 {% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations %}
-~~~~~~~
 
 #####Usage#####
 
 
 
-~~~~~~~
 {% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations %}
-~~~~~~~
 
 #####Parameters#####
 
 
 
-~~~~~~~
 {% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations %}
-~~~~~~~
 
 #####Examples#####
 
 
 
-~~~~~~~
 {% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.Validations %}
-~~~~~~~
 
 #####Different validations per method#####
 

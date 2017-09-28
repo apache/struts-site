@@ -7,25 +7,19 @@ title: Validation Annotation
 
 
 
-~~~~~~~
 {% snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation %}
-~~~~~~~
 
 #####Usage#####
 
 
 
-~~~~~~~
 {% snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation %}
-~~~~~~~
 
 #####Parameters#####
 
 
 
-~~~~~~~
 {% snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation %}
-~~~~~~~
 
 #####Examples#####
 
@@ -37,16 +31,12 @@ title: Validation Annotation
 
 
 
-~~~~~~~
 {% snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.Validation %}
-~~~~~~~
 
 **An Annotated Class**
 
 
-~~~~~~~
 {% snippet id=example2|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.Validation %}
-~~~~~~~
 
 
 > 

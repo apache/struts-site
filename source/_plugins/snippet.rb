@@ -1,6 +1,7 @@
 require 'open-uri'
 require 'uri'
 require 'cgi'
+require 'digest'
 
 module Jekyll
 
@@ -10,17 +11,13 @@ module Jekyll
       parse_params(markup)
 
       unless @url.start_with?('http')
-        @url = @url.strip.gsub!('.','/')
-        @url = 'https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/' + @url
-        @url = @url + '.java;hb=HEAD'
+        @url = absolute_url(@url)
       end
-
-      puts 'Fetching content of url: ' + @url
 
       if @url =~ URI::regexp
         @content = fetchContent(@url)
       else
-        raise 'Invalid URL passed to Snippet'
+        STDERR.puts "Invalid URL passed to Snippet: " + @url
       end
 
       super
@@ -30,9 +27,10 @@ module Jekyll
       if @content
         snippet = @content
         if @id
-          snippet = snippet[/#{Regexp.escape("<!-- START SNIPPET: " + @id + " -->")}[^\n]*\n(.*?)\n[^\n]*#{Regexp.escape("<!-- END SNIPPET: " + @id + " -->")}/m, 1]
+          snippet = snippet[/#{Regexp.escape("START SNIPPET: " + @id)}[^\n]*\n(.*?)\n[^\n]*#{Regexp.escape("END SNIPPET: " + @id)}/m, 1]
           unless snippet
             snippet = "START SNIPPET: " + @id + " not found in " + @url
+            STDERR.puts snippet
           end
         end
         if @javadoc
@@ -53,7 +51,15 @@ module Jekyll
     end
 
     def fetchContent(url)
-      Net::HTTP.get(URI.parse(URI.encode(url.strip)))
+      cacheKey = Digest::SHA1.hexdigest(url.strip)
+      cacheFile = "target/snippet_" + cacheKey + ".cache"
+      unless File.exist?(cacheFile)
+        File.open(cacheFile, 'w') { |file| file.write(Net::HTTP.get(URI.parse(URI.encode(url.strip)))) }
+      end
+      file = File.open(cacheFile, "rb")
+      content = file.read
+      file.close
+      return content
     end
 
     def parse_params(markup)
@@ -63,21 +69,38 @@ module Jekyll
     def parse_param(param)
       param_split = param.split("=", 2).reject { |s| s.empty? }
       if param_split[0].casecmp("id")==0
-        @id = param_split[1]
+        @id = param_split[1].strip
       else
         if param_split[0].casecmp("lang")==0
-          @lang = param_split[1]
+          @lang = param_split[1].strip
         else
           if param_split[0].casecmp("javadoc")==0
-            @javadoc = param_split[1]
+            @javadoc = param_split[1].strip
           else
             if param_split[0].casecmp("url")==0
-              @url = param_split[1]
+              @url = param_split[1].strip
             else
-              @url = param
+              @url = param.strip
             end
           end
         end
+      end
+    end
+
+    def absolute_url(url)
+      slashIndex = url.index('/')
+      unless slashIndex
+        url = url.strip.gsub!('.','/')
+        url = 'https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/' + url
+        url = url + '.java;hb=HEAD'
+      else
+        baseUrl = url[0..slashIndex]
+        url = url[slashIndex+1..-1]
+        if baseUrl.casecmp("struts2-tags/") == 0
+          url = "core/src/site/resources/tags/" + url
+        end
+        url = 'https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=' + url
+        url = url + ';hb=HEAD'
       end
     end
 

@@ -14,27 +14,19 @@ __Description__
 
 
 
-~~~~~~~
 {% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.Property %}
-~~~~~~~
 
 __Parameters__
 
 
 
-~~~~~~~
 {% snippet id=tagattributes|javadoc=false|url=struts2-tags/property.html %}
-~~~~~~~
 
 __Examples__
 
 
 
-~~~~~~~
 {% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.Property %}
-~~~~~~~
 
 
-~~~~~~~
 {% snippet id=exampledescription|lang=none|javadoc=true|url=org.apache.struts2.components.Property %}
-~~~~~~~

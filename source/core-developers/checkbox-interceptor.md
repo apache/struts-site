@@ -48,14 +48,10 @@ _checkbox
 
 
 
-~~~~~~~
 {% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.CheckboxInterceptor %}
-~~~~~~~
 
 #####Extending the Interceptor#####
 
 
 
-~~~~~~~
 {% snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.CheckboxInterceptor %}
-~~~~~~~

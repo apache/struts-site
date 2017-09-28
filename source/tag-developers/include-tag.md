@@ -14,9 +14,7 @@ __Description__
 
 
 
-~~~~~~~
 {% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.Include %}
-~~~~~~~
 
 **(!) How To access parameters**
 
@@ -33,19 +31,13 @@ __Parameters__
 
 
 
-~~~~~~~
 {% snippet id=tagattributes|javadoc=false|url=struts2-tags/include.html %}
-~~~~~~~
 
 __Example__
 
 
 
-~~~~~~~
 {% snippet id=example|lang=java|javadoc=true|url=org.apache.struts2.components.Include %}
-~~~~~~~
 
 
-~~~~~~~
 {% snippet id=exampledescription|lang=none|javadoc=true|url=org.apache.struts2.components.Include %}
-~~~~~~~

@@ -14,27 +14,19 @@ __Description__
 
 
 
-~~~~~~~
 {% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.Label %}
-~~~~~~~
 
 __Parameters__
 
 
 
-~~~~~~~
 {% snippet id=tagattributes|javadoc=false|url=struts2-tags/label.html %}
-~~~~~~~
 
 __Examples__
 
 
 
-~~~~~~~
 {% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.Label %}
-~~~~~~~
 
 
-~~~~~~~
 {% snippet id=exdescription|lang=none|javadoc=true|url=org.apache.struts2.components.Label %}
-~~~~~~~

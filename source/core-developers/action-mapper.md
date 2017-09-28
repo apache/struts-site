@@ -313,17 +313,13 @@ CompositeActionMapper
 
 
 
-~~~~~~~
 {% snippet id=description|javadoc=true|url=org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper %}
-~~~~~~~
 
 __PrefixBasedActionProxyFactory__
 
 
 
-~~~~~~~
 {% snippet id=description|javadoc=true|url=org.apache.struts2.factory.PrefixBasedActionProxyFactory %}
-~~~~~~~
 
 ####ActionMapper and ActionMapping objects####
 
