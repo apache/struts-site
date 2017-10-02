@@ -14,9 +14,7 @@ __Description__
 
 
 
-~~~~~~~
 {% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.Submit %}
-~~~~~~~
 
 
 
@@ -33,6 +31,4 @@ __Parameters__
 
 
 
-~~~~~~~
 {% snippet id=tagattributes|javadoc=false|url=struts2-tags/submit.html %}
-~~~~~~~

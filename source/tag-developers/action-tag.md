@@ -9,9 +9,7 @@ Please make sure you have read the [Tag Syntax](tag-syntax.html) document and un
 
 ## Description
 
-~~~~~~~
 {% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.ActionComponent %}
-~~~~~~~
 
 Parameters can be passed to the action using nested [param](param-tag.html) tags.
 
@@ -39,16 +37,10 @@ Is "myAction" null outside the tag? false
 
 ## Examples
 
-~~~~~~~
 {% snippet id=javacode|javadoc=true|lang=java|url=org.apache.struts2.components.ActionComponent %}
-~~~~~~~
 
 
-~~~~~~~
 {% snippet id=strutsxml|javadoc=true|lang=xml|url=org.apache.struts2.components.ActionComponent %}
-~~~~~~~
 
 
-~~~~~~~
 {% snippet id=example|javadoc=true|lang=xml|url=org.apache.struts2.components.ActionComponent %}
-~~~~~~~

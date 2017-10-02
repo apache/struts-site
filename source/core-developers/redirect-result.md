@@ -7,25 +7,19 @@ title: Redirect Result
 
 
 
-~~~~~~~
 {% snippet id=description|javadoc=true|url=org.apache.struts2.result.ServletRedirectResult %}
-~~~~~~~
 
 ####Parameters####
 
 
 
-~~~~~~~
 {% snippet id=params|javadoc=true|url=org.apache.struts2.result.ServletRedirectResult %}
-~~~~~~~
 
 ####Examples####
 
 
 
-~~~~~~~
 {% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.result.ServletRedirectResult %}
-~~~~~~~
 
 
 

@@ -7,9 +7,7 @@ title: Redirect Action Result
 
 
 
-~~~~~~~
 {% snippet id=description|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult %}
-~~~~~~~
 
 
 See [ActionMapper](action-mapper.html) for more details
@@ -20,17 +18,13 @@ See [ActionMapper](action-mapper.html) for more details
 
 
 
-~~~~~~~
 {% snippet id=params|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult %}
-~~~~~~~
 
 ####Examples####
 
 
 
-~~~~~~~
 {% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.result.ServletActionRedirectResult %}
-~~~~~~~
 
 
 

@@ -17,22 +17,16 @@ __Description__
 
 
 
-~~~~~~~
 {% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.CheckboxList %}
-~~~~~~~
 
 __Parameters__
 
 
 
-~~~~~~~
 {% snippet id=tagattributes|javadoc=false|url=struts2-tags/checkboxlist.html %}
-~~~~~~~
 
 __Examples__
 
 
 
-~~~~~~~
 {% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.CheckboxList %}
-~~~~~~~

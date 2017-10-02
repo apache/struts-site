@@ -7,33 +7,25 @@ title: Scope Interceptor
 
 
 
-~~~~~~~
 {% snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor %}
-~~~~~~~
 
 #####Parameters#####
 
 
 
-~~~~~~~
 {% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor %}
-~~~~~~~
 
 #####Extending the Interceptor#####
 
 
 
-~~~~~~~
 {% snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor %}
-~~~~~~~
 
 #####Examples#####
 
 
 
-~~~~~~~
 {% snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor %}
-~~~~~~~
 
 __Some more examples__
 
