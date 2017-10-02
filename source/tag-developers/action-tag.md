@@ -33,7 +33,7 @@ Is "myAction" null outside the tag? false
 
 ## Parameters
 
-{% tag_parameters action.html %}
+{% snippet id=tagattributes|struts2-tags/action.html %}
 
 ## Examples
 

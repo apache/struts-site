@@ -18,7 +18,7 @@ using the `param` tag.
 
 ## Parameters
 
-{% tag_parameters a.html %}
+{% snippet id=tagattributes|struts2-tags/a.html %}
 
 ## Usage
 
