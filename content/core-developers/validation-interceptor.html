@@ -130,6 +130,7 @@
     <h1 id="validation-interceptor">Validation Interceptor</h1>
 
 <p>
+ <p>
  This interceptor runs the action through the standard validation framework, which in turn checks the action against
  any validation rules (found in files such as <i>ActionClass-validation.xml</i>) and adds field-level and action-level
  error messages (provided that the action implements {@link ValidationAware}). This interceptor
@@ -137,27 +138,29 @@
  already been set on the action.
  </p>
 
-<p>
+ <p>
  This interceptor does nothing if the name of the method being invoked is specified in the <b>excludeMethods</b>
  parameter. <b>excludeMethods</b> accepts a comma-delimited list of method names. For example, requests to
  <b>foo!input.action</b> and <b>foo!back.action</b> will be skipped by this interceptor if you set the
  <b>excludeMethods</b> parameter to "input, back".
  </p>
 
-<p>
+ <p>
  The workflow of the action request does not change due to this interceptor. Rather,
  this interceptor is often used in conjunction with the <b>workflow</b> interceptor.
  </p>
 
-<p>
+ <p>
  <b>NOTE:</b> As this method extends off MethodFilterInterceptor, it is capable of
  deciding if it is applicable only to selective methods in the action class. See
  <code>MethodFilterInterceptor</code> for more info.
  </p>
+</p>
 
 <p>#####Parameters#####</p>
 
-<ul>
+<p>
+ <ul>
 
  <li>alwaysInvokeValidate - Defaults to true. If true validate() method will always
  be invoked, otherwise it will not.</li>
@@ -169,10 +172,13 @@
  <li>declarative - Defaults to true. Perform validation based on xml or annotations.</li>
  
  </ul>
+</p>
 
 <p>#####Extending the Interceptor#####</p>
 
-<p>There are no known extension points for this interceptor.</p>
+<p>
+ There are no known extension points for this interceptor.
+</p>
 
 <p>#####Examples#####</p>
 
