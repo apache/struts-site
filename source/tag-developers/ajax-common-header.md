@@ -68,12 +68,12 @@ Using errorNotifyTopics:
 Using errorNotifyTopics:
 
 
-{% snippet id=example8|lang=html|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
+{% snippet id=example8|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 
 Using valueNotifyTopics:
 
 
-{% snippet id=example9|lang=html|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
+{% snippet id=example9|javadoc=true|url=struts2/plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java %}
 
 __Caveats__
 
