@@ -41,7 +41,7 @@ module Jekyll
         if @lang
           snippet = "\r\n" + "```" + @lang + "\r\n" + snippet + "\r\n" + "```" + "\r\n"
         else
-          snippet = escape(snippet)
+          snippet = "<p>" + escape(snippet) + "</p>"
         end
 
         return snippet
