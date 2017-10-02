@@ -137,10 +137,15 @@
 
 <p>Create the jsp page</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
-START SNIPPET: nonFieldValidatorsExample not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2/apps/showcase/src/main/webapp/WEB-INF/validation/nonFieldValidatorsExample/jsp.java;hb=HEAD
-```
+<div class="highlighter-rouge"><pre class="highlight"><code>			<span class="nt">&lt;s:actionerror/&gt;</span>
+
+			<span class="nt">&lt;s:form</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">action=</span><span class="s">"submitNonFieldValidatorsExamples"</span> <span class="na">namespace=</span><span class="s">"/validation"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"someText"</span> <span class="na">label=</span><span class="s">"Some Text"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"someTextRetype"</span> <span class="na">label=</span><span class="s">"Retype Some Text"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"someTextRetypeAgain"</span> <span class="na">label=</span><span class="s">"Retype Some Text Again"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;s:submit</span> <span class="na">label=</span><span class="s">"Submit"</span> <span class="na">cssClass=</span><span class="s">"btn btn-primary"</span><span class="nt">/&gt;</span>
+			<span class="nt">&lt;/s:form&gt;</span>
+
 
 </code></pre>
 </div>
@@ -150,9 +155,39 @@ START SNIPPET: nonFieldValidatorsExample not found in https://gitbox.apache.org/
 <p>Create the action class</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
-```java
-START SNIPPET: nonFieldValidatorsExample not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2/apps/showcase/src/main/java/org/apache/struts2/showcase/validation/NonFieldValidatorsExampleAction/java.java;hb=HEAD
-```
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NonFieldValidatorsExampleAction</span> <span class="kd">extends</span> <span class="n">AbstractValidationActionSupport</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="o">-</span><span class="mi">524460368233581186L</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">someText</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">someTextRetype</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">someTextRetypeAgain</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">getSomeText</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">someText</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="n">setSomeText</span><span class="o">(</span><span class="n">String</span> <span class="n">someText</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">someText</span> <span class="o">=</span> <span class="n">someText</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">getSomeTextRetype</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">someTextRetype</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="n">setSomeTextRetype</span><span class="o">(</span><span class="n">String</span> <span class="n">someTextRetype</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">someTextRetype</span> <span class="o">=</span> <span class="n">someTextRetype</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">getSomeTextRetypeAgain</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">someTextRetypeAgain</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="n">setSomeTextRetypeAgain</span><span class="o">(</span><span class="n">String</span> <span class="n">someTextRetypeAgain</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">someTextRetypeAgain</span> <span class="o">=</span> <span class="n">someTextRetypeAgain</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
 
 </code></pre>
 </div>
@@ -161,13 +196,17 @@ START SNIPPET: nonFieldValidatorsExample not found in https://gitbox.apache.org/
 
 <p>Create the validator.xml.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
-START SNIPPET: nonFieldValidatorsExample not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/NonFieldValidatorsExampleAction-submitNonFieldValidatorsExamples-validation/xml.java;hb=HEAD
-```
+<div class="highlighter-rouge"><pre class="highlight"><code>  		
+<span class="nt">&lt;validators&gt;</span>
+	<span class="nt">&lt;validator</span> <span class="na">type=</span><span class="s">"expression"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"expression"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[ ( (someText == someTextRetype) &amp;&amp; (someTextRetype == someTextRetypeAgain) ) ]]&gt;</span><span class="nt">&lt;/param&gt;</span>
+		<span class="nt">&lt;message&gt;</span><span class="cp">&lt;![CDATA[ all three text must be exactly the same ]]&gt;</span><span class="nt">&lt;/message&gt;</span>
+	<span class="nt">&lt;/validator&gt;</span>
+<span class="nt">&lt;/validators&gt;</span>
 
 </code></pre>
 </div>
+
 
   </section>
 </article>

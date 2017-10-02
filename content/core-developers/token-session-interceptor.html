@@ -129,69 +129,57 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/token-session-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="token-session-interceptor">Token Session Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+<p>
  This interceptor builds off of the {@link TokenInterceptor}, providing advanced logic for handling invalid tokens.
  Unlike the normal token interceptor, this interceptor will attempt to provide intelligent fail-over in the event of
  multiple requests using the same session. That is, it will block subsequent requests until the first request is
- complete, and then instead of returning the &lt;i&gt;invalid.token&lt;/i&gt; code, it will attempt to display the same response
+ complete, and then instead of returning the <i>invalid.token</i> code, it will attempt to display the same response
  that the original, valid action invocation would have displayed if no multiple requests were submitted in the first
  place.
- &lt;/p&gt;
+ </p>
 
- &lt;p&gt;
- &lt;b&gt;NOTE:&lt;/b&gt; As this method extends off MethodFilterInterceptor, it is capable of
+<p>
+ <b>NOTE:</b> As this method extends off MethodFilterInterceptor, it is capable of
  deciding if it is applicable only to selective methods in the action class. See
- &lt;code&gt;MethodFilterInterceptor&lt;/code&gt; for more info.
- &lt;/p&gt;
-
-</code></pre>
-</div>
+ <code>MethodFilterInterceptor</code> for more info.
+ </p>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- &lt;ul&gt;
+<ul>
 
- &lt;li&gt;None&lt;/li&gt;
+ <li>None</li>
 
- &lt;/ul&gt;
-
-</code></pre>
-</div>
+ </ul>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+<p>
  There are no known extension points for this interceptor.
- &lt;/p&gt;
-</code></pre>
-</div>
+ </p>
 
 <p>#####Examples#####</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
+ <span class="ni">&amp;lt;</span>action name="someAction" class="com.examples.SomeAction"<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>interceptor-ref name="tokenSession/<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>interceptor-ref name="basicStack"/<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>result name="success"<span class="ni">&amp;gt;</span>good_result.ftl<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
 
- &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
-     &amp;lt;interceptor-ref name="tokenSession/&amp;gt;
-     &amp;lt;interceptor-ref name="basicStack"/&amp;gt;
-     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
- &amp;lt;/action&amp;gt;
-
- &amp;lt;-- In this case, myMethod of the action class will not
-        get checked for invalidity of token --&amp;gt;
- &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
-     &amp;lt;interceptor-ref name="tokenSession&amp;gt;
-         &amp;lt;param name="excludeMethods"&amp;gt;myMethod&amp;lt;/param&amp;gt;
-     &amp;lt;/interceptor-ref name="tokenSession&amp;gt;
-     &amp;lt;interceptor-ref name="basicStack"/&amp;gt;
-     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
- &amp;lt;/action&amp;gt;
-
-```
+ <span class="ni">&amp;lt;</span>-- In this case, myMethod of the action class will not
+        get checked for invalidity of token --<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>action name="someAction" class="com.examples.SomeAction"<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>interceptor-ref name="tokenSession<span class="ni">&amp;gt;</span>
+         <span class="ni">&amp;lt;</span>param name="excludeMethods"<span class="ni">&amp;gt;</span>myMethod<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>/interceptor-ref name="tokenSession<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>interceptor-ref name="basicStack"/<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>result name="success"<span class="ni">&amp;gt;</span>good_result.ftl<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
 
 </code></pre>
 </div>
+
 
   </section>
 </article>

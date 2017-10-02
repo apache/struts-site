@@ -129,76 +129,67 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/field-expression-validator-annotation.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="fieldexpressionvalidator-annotation">FieldExpressionValidator Annotation</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> This validator uses an OGNL expression to perform its validator.
+<p>This validator uses an OGNL expression to perform its validator.
  The error message will be added to the field if the expression returns
- false when it is evaluated against the value stack.
-</code></pre>
-</div>
+ false when it is evaluated against the value stack.</p>
 
 <p>#####Usage#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;The annotation must be applied at method level.&lt;/p&gt;
-</code></pre>
-</div>
+<p>The annotation must be applied at method level.</p>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;table class='confluenceTable' summary=''&gt;
- &lt;tr&gt;
- &lt;th class='confluenceTh'&gt; Parameter &lt;/th&gt;
- &lt;th class='confluenceTh'&gt; Required &lt;/th&gt;
- &lt;th class='confluenceTh'&gt; Default &lt;/th&gt;
- &lt;th class='confluenceTh'&gt; Notes &lt;/th&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td class='confluenceTd'&gt;message&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;yes&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;&amp;nbsp;&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;field error message&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td class='confluenceTd'&gt;key&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;no&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;&amp;nbsp;&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;i18n key from language specific properties file.&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td class='confluenceTd'&gt;messageParams&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;no&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;&amp;nbsp;&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;Additional params to be used to customize message - will be evaluated against the Value Stack&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td class='confluenceTd'&gt;fieldName&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;no&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;&amp;nbsp;&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;&amp;nbsp;&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td class='confluenceTd'&gt;shortCircuit&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;no&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;false&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;If this validator should be used as shortCircuit.&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td class='confluenceTd'&gt; expression &lt;/td&gt;
- &lt;td class='confluenceTd'&gt; yes &lt;/td&gt;
- &lt;td class='confluenceTd'&gt;&amp;nbsp;&lt;/td&gt;
- &lt;td class='confluenceTd'&gt; An OGNL expression that returns a boolean value.  &lt;/td&gt;
- &lt;/tr&gt;
- &lt;/table&gt;
-</code></pre>
-</div>
+<table class="confluenceTable" summary="">
+ <tr>
+ <th class="confluenceTh"> Parameter </th>
+ <th class="confluenceTh"> Required </th>
+ <th class="confluenceTh"> Default </th>
+ <th class="confluenceTh"> Notes </th>
+ </tr>
+ <tr>
+ <td class="confluenceTd">message</td>
+ <td class="confluenceTd">yes</td>
+ <td class="confluenceTd">&nbsp;</td>
+ <td class="confluenceTd">field error message</td>
+ </tr>
+ <tr>
+ <td class="confluenceTd">key</td>
+ <td class="confluenceTd">no</td>
+ <td class="confluenceTd">&nbsp;</td>
+ <td class="confluenceTd">i18n key from language specific properties file.</td>
+ </tr>
+ <tr>
+ <td class="confluenceTd">messageParams</td>
+ <td class="confluenceTd">no</td>
+ <td class="confluenceTd">&nbsp;</td>
+ <td class="confluenceTd">Additional params to be used to customize message - will be evaluated against the Value Stack</td>
+ </tr>
+ <tr>
+ <td class="confluenceTd">fieldName</td>
+ <td class="confluenceTd">no</td>
+ <td class="confluenceTd">&nbsp;</td>
+ <td class="confluenceTd">&nbsp;</td>
+ </tr>
+ <tr>
+ <td class="confluenceTd">shortCircuit</td>
+ <td class="confluenceTd">no</td>
+ <td class="confluenceTd">false</td>
+ <td class="confluenceTd">If this validator should be used as shortCircuit.</td>
+ </tr>
+ <tr>
+ <td class="confluenceTd"> expression </td>
+ <td class="confluenceTd"> yes </td>
+ <td class="confluenceTd">&nbsp;</td>
+ <td class="confluenceTd"> An OGNL expression that returns a boolean value.  </td>
+ </tr>
+ </table>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```java
- &amp;#64;FieldExpressionValidator(message = "Default message", key = "i18n.key", shortCircuit = true, expression = "an OGNL expression")
-```
-
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">FieldExpressionValidator</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"Default message"</span><span class="o">,</span> <span class="n">key</span> <span class="o">=</span> <span class="s">"i18n.key"</span><span class="o">,</span> <span class="n">shortCircuit</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span> <span class="n">expression</span> <span class="o">=</span> <span class="s">"an OGNL expression"</span><span class="o">)</span>
 </code></pre>
 </div>
+
 
   </section>
 </article>

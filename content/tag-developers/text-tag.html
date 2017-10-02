@@ -140,62 +140,90 @@
 
 <p><strong>Description</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+<p>
  Render a I18n text message.
- &lt;/p&gt;
+ </p>
 
- &lt;p&gt;
+<p>
  The message must be in a resource bundle
  with the same name as the action that it is associated with. In practice
  this means that you should create a properties file in the same package
  as your Java class with the same name as your class, but with .properties
  extension.
- &lt;/p&gt;
+ </p>
 
- &lt;p&gt;
+<p>
  If the named message is not found in a property file, then the body of the
  tag will be used as default message. If no body is used, then the stack can
  be searched, and if a value is returned, it will written to the output.
  If no value is found on the stack, the key of the message will be written out.
- &lt;/p&gt;
-</code></pre>
-</div>
+ </p>
 
 <p>For more details on using resource bundles with Struts 2 read the <em>localization guide</em> .</p>
 
 <p><strong>Parameters</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: tagattributes not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2-tags/text/html.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code>	&lt;table width="100%"&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&lt;h4&gt;Dynamic Attributes Allowed:&lt;/h4&gt; false&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&amp;nbsp;&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Name&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Required&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Default&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Evaluated&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Type&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Description&lt;/h4&gt;&lt;/th&gt;
+		&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;name&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;strong&gt;true&lt;/strong&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Name of resource property to fetch&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;searchValueStack&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Boolean&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Search the stack if property is not found on resources&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;var&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Name used to reference the value pushed into the Value Stack&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/table&gt;
 </code></pre>
 </div>
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```none
- &lt;p&gt;Accessing messages from a given bundle (the i18n Shop example bundle in the first example) and using bundle defined through the framework in the second example.&lt;/p&gt;
-```
-
+<pre><code class="language-none"> &lt;p&gt;Accessing messages from a given bundle (the i18n Shop example bundle in the first example) and using bundle defined through the framework in the second example.&lt;/p&gt;
 </code></pre>
-</div>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
+ <span class="ni">&amp;lt;</span>!-- First Example --<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>s:i18n name="struts.action.test.i18n.Shop"<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>s:text name="main.title"/<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:i18n<span class="ni">&amp;gt;</span>
 
- &amp;lt;!-- First Example --&amp;gt;
- &amp;lt;s:i18n name="struts.action.test.i18n.Shop"&amp;gt;
-     &amp;lt;s:text name="main.title"/&amp;gt;
- &amp;lt;/s:i18n&amp;gt;
+ <span class="ni">&amp;lt;</span>!-- Second Example --<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>s:text name="main.title" /<span class="ni">&amp;gt;</span>
 
- &amp;lt;!-- Second Example --&amp;gt;
- &amp;lt;s:text name="main.title" /&amp;gt;
-
- &amp;lt;!-- Third Examlpe --&amp;gt;
- &amp;lt;s:text name="i18n.label.greetings"&amp;gt;
-    &amp;lt;s:param &amp;gt;Mr Smith&amp;lt;/s:param&amp;gt;
- &amp;lt;/s:text&amp;gt;
-
-```
+ <span class="ni">&amp;lt;</span>!-- Third Examlpe --<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>s:text name="i18n.label.greetings"<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>s:param <span class="ni">&amp;gt;</span>Mr Smith<span class="ni">&amp;lt;</span>/s:param<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:text<span class="ni">&amp;gt;</span>
 
 </code></pre>
 </div>

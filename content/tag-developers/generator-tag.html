@@ -131,72 +131,123 @@
 
 <p><strong>Description</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;b&gt;NOTE: JSP-TAG&lt;/b&gt;
+<p><b>NOTE: JSP-TAG</b></p>
 
- &lt;p&gt;Generate an iterator based on the val attribute supplied.&lt;/P&gt;
+<p>Generate an iterator based on the val attribute supplied.</p>
 
- &lt;b&gt;NOTE:&lt;/b&gt; The generated iterator will &lt;b&gt;ALWAYS&lt;/b&gt; be pushed into the top of the stack, and poped
- at the end of the tag.
-</code></pre>
-</div>
+<p><b>NOTE:</b> The generated iterator will <b>ALWAYS</b> be pushed into the top of the stack, and poped
+ at the end of the tag.</p>
 
 <p><strong>Parameters</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: tagattributes not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2-tags/generator/html.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code>	&lt;table width="100%"&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&lt;h4&gt;Dynamic Attributes Allowed:&lt;/h4&gt; false&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&amp;nbsp;&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Name&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Required&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Default&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Evaluated&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Type&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Description&lt;/h4&gt;&lt;/th&gt;
+		&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;converter&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;org.apache.struts2.util.IteratorGenerator.Converter&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;The converter to convert the String entry parsed from &lt;i&gt;val&lt;/i&gt; into an object&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;count&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Integer&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;The max number entries to be in the iterator&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;separator&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;strong&gt;true&lt;/strong&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;The separator to be used in separating the &lt;i&gt;val&lt;/i&gt; into entries of the iterator&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;val&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;strong&gt;true&lt;/strong&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;The source to be parsed into an iterator&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;var&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;The name to store the resultant iterator into page context, if such name is supplied&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/table&gt;
 </code></pre>
 </div>
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- Example One:
- &lt;pre&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code> Example One:
+ <span class="nt">&lt;pre&gt;</span>
  Generate a simple iterator
- &amp;lt;s:generator val="%{'aaa,bbb,ccc,ddd,eee'}"&amp;gt;
-  &amp;lt;s:iterator&amp;gt;
-      &amp;lt;s:property /&amp;gt;&amp;lt;br/&amp;gt;
-  &amp;lt;/s:iterator&amp;gt;
- &amp;lt;/s:generator&amp;gt;
- &lt;/pre&gt;
+ <span class="ni">&amp;lt;</span>s:generator val="%{'aaa,bbb,ccc,ddd,eee'}"<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>s:iterator<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>s:property /<span class="ni">&amp;gt;&amp;lt;</span>br/<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>/s:iterator<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:generator<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;/pre&gt;</span>
  This generates an iterator and print it out using the iterator tag.
 
  Example Two:
- &lt;pre&gt;
+ <span class="nt">&lt;pre&gt;</span>
  Generate an iterator with count attribute
- &amp;lt;s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" count="3"&amp;gt;
-  &amp;lt;s:iterator&amp;gt;
-      &amp;lt;s:property /&amp;gt;&amp;lt;br/&amp;gt;
-  &amp;lt;/s:iterator&amp;gt;
- &amp;lt;/s:generator&amp;gt;
- &lt;/pre&gt;
+ <span class="ni">&amp;lt;</span>s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" count="3"<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>s:iterator<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>s:property /<span class="ni">&amp;gt;&amp;lt;</span>br/<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>/s:iterator<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:generator<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;/pre&gt;</span>
  This generates an iterator, but only 3 entries will be available in the iterator
  generated, namely aaa, bbb and ccc respectively because count attribute is set to 3
 
  Example Three:
- &lt;pre&gt;
+ <span class="nt">&lt;pre&gt;</span>
  Generate an iterator with var attribute
- &amp;lt;s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" count="4" separator="," var="myAtt" /&amp;gt;
- &amp;lt;%
+ <span class="ni">&amp;lt;</span>s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" count="4" separator="," var="myAtt" /<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>%
   Iterator i = (Iterator) pageContext.getAttribute("myAtt");
   while(i.hasNext()) {
-      String s = (String) i.next(); %&amp;gt;
-      &amp;lt;%=s%&amp;gt; &amp;lt;br/&amp;gt;
- &amp;lt;%    }
- %&amp;gt;
- &lt;/pre&gt;
+      String s = (String) i.next(); %<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>%=s%<span class="ni">&amp;gt;</span> <span class="ni">&amp;lt;</span>br/<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>%    }
+ %<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;/pre&gt;</span>
  This generates an iterator and put it in the PageContext under the key as specified
  by the var attribute.
 
 
  Example Four:
- &lt;pre&gt;
+ <span class="nt">&lt;pre&gt;</span>
  Generate an iterator with comparator attribute
- &amp;lt;s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" converter="%{myConverter}"&amp;gt;
-  &amp;lt;s:iterator&amp;gt;
-      &amp;lt;s:property /&amp;gt;&amp;lt;br/&amp;gt;
-  &amp;lt;/s:iterator&amp;gt;
- &amp;lt;/s:generator&amp;gt;
+ <span class="ni">&amp;lt;</span>s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" converter="%{myConverter}"<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>s:iterator<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>s:property /<span class="ni">&amp;gt;&amp;lt;</span>br/<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>/s:iterator<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:generator<span class="ni">&amp;gt;</span>
 
 
  public class GeneratorTagAction extends ActionSupport {
@@ -214,13 +265,12 @@
    ...
 
  }
- &lt;/pre&gt;
+ <span class="nt">&lt;/pre&gt;</span>
  This will generate an iterator with each entries decided by the converter supplied. With
  this converter, it simply add "converter-" to each entries.
-```
-
 </code></pre>
 </div>
+
 
   </section>
 </article>

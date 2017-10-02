@@ -129,83 +129,70 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/token-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="token-interceptor">Token Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+<p>
  Ensures that only one request per token is processed. This interceptor can make sure that back buttons and double
  clicks don't cause un-intended side affects. For example, you can use this to prevent careless users who might double
  click on a "checkout" button at an online store. This interceptor uses a fairly primitive technique for when an
- invalid token is found: it returns the result &lt;b&gt;invalid.token&lt;/b&gt;, which can be mapped in your action configuration.
+ invalid token is found: it returns the result <b>invalid.token</b>, which can be mapped in your action configuration.
  A more complex implementation, {@link TokenSessionStoreInterceptor}, can provide much better logic for when invalid
  tokens are found.
- &lt;/p&gt;
+ </p>
 
- &lt;p&gt;
- &lt;b&gt;Note:&lt;/b&gt; To set a token in your form, you should use the &lt;b&gt;token tag&lt;/b&gt;. This tag is required and must be used
+<p>
+ <b>Note:</b> To set a token in your form, you should use the <b>token tag</b>. This tag is required and must be used
  in the forms that submit to actions protected by this interceptor. Any request that does not provide a token (using
  the token tag) will be processed as a request with an invalid token.
- &lt;/p&gt;
+ </p>
 
- &lt;p&gt;
- &lt;b&gt;Internationalization Note:&lt;/b&gt; The following key could be used to internationalized the action errors generated
+<p>
+ <b>Internationalization Note:</b> The following key could be used to internationalized the action errors generated
  by this token interceptor
- &lt;/p&gt;
+ </p>
 
- &lt;ul&gt;
-    &lt;li&gt;struts.messages.invalid.token&lt;/li&gt;
- &lt;/ul&gt;
+<ul>
+    <li>struts.messages.invalid.token</li>
+ </ul>
 
- &lt;p&gt;
- &lt;b&gt;NOTE:&lt;/b&gt; As this method extends off MethodFilterInterceptor, it is capable of
+<p>
+ <b>NOTE:</b> As this method extends off MethodFilterInterceptor, it is capable of
  deciding if it is applicable only to selective methods in the action class. See
- &lt;code&gt;MethodFilterInterceptor&lt;/code&gt; for more info.
- &lt;/p&gt;
-
-</code></pre>
-</div>
+ <code>MethodFilterInterceptor</code> for more info.
+ </p>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- &lt;ul&gt;
+<ul>
 
- &lt;li&gt;None&lt;/li&gt;
+ <li>None</li>
 
- &lt;/ul&gt;
-
-</code></pre>
-</div>
+ </ul>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+<p>
  While not very common for users to extend, this interceptor is extended by the {@link TokenSessionStoreInterceptor}.
  The {@link #handleInvalidToken}  and {@link #handleValidToken} methods are protected and available for more
  interesting logic, such as done with the token session interceptor.
- &lt;/p&gt;
-</code></pre>
-</div>
+ </p>
 
 <p>#####Examples#####</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
+ <span class="ni">&amp;lt;</span>action name="someAction" class="com.examples.SomeAction"<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>interceptor-ref name="token"/<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>interceptor-ref name="basicStack"/<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>result name="success"<span class="ni">&amp;gt;</span>good_result.ftl<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
 
- &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
-     &amp;lt;interceptor-ref name="token"/&amp;gt;
-     &amp;lt;interceptor-ref name="basicStack"/&amp;gt;
-     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
- &amp;lt;/action&amp;gt;
-
- &amp;lt;-- In this case, myMethod of the action class will not
-        get checked for invalidity of token --&amp;gt;
- &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
-     &amp;lt;interceptor-ref name="token"&amp;gt;
-        &amp;lt;param name="excludeMethods"&amp;gt;myMethod&amp;lt;/param&amp;gt;
-     &amp;lt;/interceptor-ref name="token"/&amp;gt;
-     &amp;lt;interceptor-ref name="basicStack"/&amp;gt;
-     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
- &amp;lt;/action&amp;gt;
-
-```
+ <span class="ni">&amp;lt;</span>-- In this case, myMethod of the action class will not
+        get checked for invalidity of token --<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>action name="someAction" class="com.examples.SomeAction"<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>interceptor-ref name="token"<span class="ni">&amp;gt;</span>
+        <span class="ni">&amp;lt;</span>param name="excludeMethods"<span class="ni">&amp;gt;</span>myMethod<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>/interceptor-ref name="token"/<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>interceptor-ref name="basicStack"/<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>result name="success"<span class="ni">&amp;gt;</span>good_result.ftl<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
 
 </code></pre>
 </div>

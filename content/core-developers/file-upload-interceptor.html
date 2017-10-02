@@ -138,91 +138,77 @@
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+<p>
  Interceptor that is based off of {@link MultiPartRequestWrapper}, which is automatically applied for any request that
  includes a file. It adds the following parameters, where [File Name] is the name given to the file uploaded by the
  HTML form:
- &lt;/p&gt;
- &lt;ul&gt;
+ </p>
+<ul>
 
- &lt;li&gt;[File Name] : File - the actual File&lt;/li&gt;
+ <li>[File Name] : File - the actual File</li>
 
- &lt;li&gt;[File Name]ContentType : String - the content type of the file&lt;/li&gt;
+ <li>[File Name]ContentType : String - the content type of the file</li>
 
- &lt;li&gt;[File Name]FileName : String - the actual name of the file uploaded (not the HTML name)&lt;/li&gt;
+ <li>[File Name]FileName : String - the actual name of the file uploaded (not the HTML name)</li>
 
- &lt;/ul&gt;
+ </ul>
 
- &lt;p&gt;You can get access to these files by merely providing setters in your action that correspond to any of the three
+<p>You can get access to these files by merely providing setters in your action that correspond to any of the three
  patterns above, such as setDocument(File document), setDocumentContentType(String contentType), etc.
- &lt;br&gt;See the example code section.
- &lt;/p&gt;
+ <br />See the example code section.
+ </p>
 
- &lt;p&gt; This interceptor will add several field errors, assuming that the action implements {@link ValidationAware}.
+<p> This interceptor will add several field errors, assuming that the action implements {@link ValidationAware}.
  These error messages are based on several i18n values stored in struts-messages.properties, a default i18n file
  processed for all i18n requests. You can override the text of these messages by providing text for the following
  keys:
- &lt;/p&gt;
+ </p>
 
- &lt;ul&gt;
+<ul>
 
- &lt;li&gt;struts.messages.error.uploading - a general error that occurs when the file could not be uploaded&lt;/li&gt;
+ <li>struts.messages.error.uploading - a general error that occurs when the file could not be uploaded</li>
 
- &lt;li&gt;struts.messages.error.file.too.large - occurs when the uploaded file is too large&lt;/li&gt;
+ <li>struts.messages.error.file.too.large - occurs when the uploaded file is too large</li>
 
- &lt;li&gt;struts.messages.error.content.type.not.allowed - occurs when the uploaded file does not match the expected
- content types specified&lt;/li&gt;
+ <li>struts.messages.error.content.type.not.allowed - occurs when the uploaded file does not match the expected
+ content types specified</li>
 
- &lt;li&gt;struts.messages.error.file.extension.not.allowed - occurs when the uploaded file does not match the expected
- file extensions specified&lt;/li&gt;
+ <li>struts.messages.error.file.extension.not.allowed - occurs when the uploaded file does not match the expected
+ file extensions specified</li>
 
- &lt;/ul&gt;
-
-</code></pre>
-</div>
+ </ul>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- &lt;ul&gt;
+<ul>
 
- &lt;li&gt;maximumSize (optional) - the maximum size (in bytes) that the interceptor will allow a file reference to be set
- on the action. Note, this is &lt;b&gt;not&lt;/b&gt; related to the various properties found in struts.properties.
- Default to approximately 2MB.&lt;/li&gt;
+ <li>maximumSize (optional) - the maximum size (in bytes) that the interceptor will allow a file reference to be set
+ on the action. Note, this is <b>not</b> related to the various properties found in struts.properties.
+ Default to approximately 2MB.</li>
 
- &lt;li&gt;allowedTypes (optional) - a comma separated list of content types (ie: text/html) that the interceptor will allow
- a file reference to be set on the action. If none is specified allow all types to be uploaded.&lt;/li&gt;
+ <li>allowedTypes (optional) - a comma separated list of content types (ie: text/html) that the interceptor will allow
+ a file reference to be set on the action. If none is specified allow all types to be uploaded.</li>
 
- &lt;li&gt;allowedExtensions (optional) - a comma separated list of file extensions (ie: .html) that the interceptor will allow
- a file reference to be set on the action. If none is specified allow all extensions to be uploaded.&lt;/li&gt;
- &lt;/ul&gt;
-
-
-</code></pre>
-</div>
+ <li>allowedExtensions (optional) - a comma separated list of file extensions (ie: .html) that the interceptor will allow
+ a file reference to be set on the action. If none is specified allow all extensions to be uploaded.</li>
+ </ul>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+<p>
  You can extend this interceptor and override the acceptFile method to provide more control over which files
  are supported and which are not.
- &lt;/p&gt;
-</code></pre>
-</div>
+ </p>
 
 <p>#####Examples#####</p>
 
 <p><strong>Example action mapping:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;action name="doUpload" class="com.example.UploadAction"&amp;gt;
-     &amp;lt;interceptor-ref name="fileUpload"/&amp;gt;
-     &amp;lt;interceptor-ref name="basicStack"/&amp;gt;
-     &amp;lt;result name="success"&amp;gt;good_result.jsp&amp;lt;/result&amp;gt;
- &amp;lt;/action&amp;gt;
-```
-
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>action name="doUpload" class="com.example.UploadAction"<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>interceptor-ref name="fileUpload"/<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>interceptor-ref name="basicStack"/<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>result name="success"<span class="ni">&amp;gt;</span>good_result.jsp<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
@@ -230,56 +216,46 @@
 
 <p><strong>Example JSP form tags:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
-   &amp;lt;s:form action="doUpload" method="post" enctype="multipart/form-data"&amp;gt;
-       &amp;lt;s:file name="upload" label="File"/&amp;gt;
-       &amp;lt;s:submit/&amp;gt;
-   &amp;lt;/s:form&amp;gt;
-```
-
+<div class="highlighter-rouge"><pre class="highlight"><code>   <span class="ni">&amp;lt;</span>s:form action="doUpload" method="post" enctype="multipart/form-data"<span class="ni">&amp;gt;</span>
+       <span class="ni">&amp;lt;</span>s:file name="upload" label="File"/<span class="ni">&amp;gt;</span>
+       <span class="ni">&amp;lt;</span>s:submit/<span class="ni">&amp;gt;</span>
+   <span class="ni">&amp;lt;</span>/s:form<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
- You must set the encoding to &lt;code&gt;multipart/form-data&lt;/code&gt; in the form where the user selects the file to upload.
- &lt;/p&gt;
-</code></pre>
-</div>
+<p>
+ You must set the encoding to <code>multipart/form-data</code> in the form where the user selects the file to upload.
+ </p>
 
 <p><strong>Example Action class:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```java
-    package com.example;
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
 
-    import java.io.File;
-    import com.opensymphony.xwork2.ActionSupport;
+    <span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 
-    public UploadAction extends ActionSupport {
-       private File file;
-       private String contentType;
-       private String filename;
+    <span class="kd">public</span> <span class="n">UploadAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+       <span class="kd">private</span> <span class="n">File</span> <span class="n">file</span><span class="o">;</span>
+       <span class="kd">private</span> <span class="n">String</span> <span class="n">contentType</span><span class="o">;</span>
+       <span class="kd">private</span> <span class="n">String</span> <span class="n">filename</span><span class="o">;</span>
 
-       public void setUpload(File file) {
-          this.file = file;
-       }
+       <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUpload</span><span class="o">(</span><span class="n">File</span> <span class="n">file</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">file</span> <span class="o">=</span> <span class="n">file</span><span class="o">;</span>
+       <span class="o">}</span>
 
-       public void setUploadContentType(String contentType) {
-          this.contentType = contentType;
-       }
+       <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUploadContentType</span><span class="o">(</span><span class="n">String</span> <span class="n">contentType</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">contentType</span> <span class="o">=</span> <span class="n">contentType</span><span class="o">;</span>
+       <span class="o">}</span>
 
-       public void setUploadFileName(String filename) {
-          this.filename = filename;
-       }
+       <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUploadFileName</span><span class="o">(</span><span class="n">String</span> <span class="n">filename</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">;</span>
+       <span class="o">}</span>
 
-       public String execute() {
-          //...
-          return SUCCESS;
-       }
-  }
-```
-
+       <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+          <span class="c1">//...</span>
+          <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+       <span class="o">}</span>
+  <span class="o">}</span>
 </code></pre>
 </div>
 

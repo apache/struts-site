@@ -131,124 +131,154 @@
 
 <p><strong>Description</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;b&gt;NOTE: JSP-TAG&lt;/b&gt;
+<p><b>NOTE: JSP-TAG</b></p>
 
- &lt;p&gt;A tag that takes an iterator and outputs a subset of it. It delegates to
+<p>A tag that takes an iterator and outputs a subset of it. It delegates to
  {@link org.apache.struts2.util.SubsetIteratorFilter} internally to
- perform the subset functionality.&lt;/p&gt;
-</code></pre>
-</div>
+ perform the subset functionality.</p>
 
 <p><strong>Parameters</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: tagattributes not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2-tags/subset/html.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code>	&lt;table width="100%"&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&lt;h4&gt;Dynamic Attributes Allowed:&lt;/h4&gt; false&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&amp;nbsp;&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Name&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Required&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Default&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Evaluated&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Type&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Description&lt;/h4&gt;&lt;/th&gt;
+		&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;count&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Integer&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Indicate the number of entries to be in the resulting subset iterator&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;decider&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;org.apache.struts2.util.SubsetIteratorFilter.Decider&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Extension to plug-in a decider to determine if that particular entry is to be included in the resulting subset iterator&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;source&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Indicate the source of which the resulting subset iterator is to be derived base on&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;start&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Integer&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Indicate the starting index (eg. first entry is 0) of entries in the source to be available as the first entry in the resulting subset iterator&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;var&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;The name to store the resultant iterator into page context, if such name is supplied&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/table&gt;
 </code></pre>
 </div>
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```java
- public class MySubsetTagAction extends ActionSupport {
-      public String execute() throws Exception {
-         l = new ArrayList();
-         l.add(new Integer(1));
-         l.add(new Integer(2));
-         l.add(new Integer(3));
-         l.add(new Integer(4));
-         l.add(new Integer(5));
-         return "done";
-      }
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MySubsetTagAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+         <span class="n">l</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
+         <span class="n">l</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+         <span class="n">l</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">2</span><span class="o">));</span>
+         <span class="n">l</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">3</span><span class="o">));</span>
+         <span class="n">l</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">4</span><span class="o">));</span>
+         <span class="n">l</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
+         <span class="k">return</span> <span class="s">"done"</span><span class="o">;</span>
+      <span class="o">}</span>
 
 
-      public Integer[] getMyArray() {
-         return a;
-      }
+      <span class="kd">public</span> <span class="n">Integer</span><span class="o">[]</span> <span class="n">getMyArray</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="n">a</span><span class="o">;</span>
+      <span class="o">}</span>
 
-      public List getMyList() {
-         return l;
-       }
+      <span class="kd">public</span> <span class="n">List</span> <span class="n">getMyList</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="n">l</span><span class="o">;</span>
+       <span class="o">}</span>
 
-      public Decider getMyDecider() {
-      return new Decider() {
-          public boolean decide(Object element) throws Exception {
-              int i = ((Integer)element).intValue();
-              return (((i % 2) == 0)?true:false);
-          }
-      };
-      }
-  }
-```
-
+      <span class="kd">public</span> <span class="n">Decider</span> <span class="n">getMyDecider</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="n">Decider</span><span class="o">()</span> <span class="o">{</span>
+          <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">decide</span><span class="o">(</span><span class="n">Object</span> <span class="n">element</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+              <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">((</span><span class="n">Integer</span><span class="o">)</span><span class="n">element</span><span class="o">).</span><span class="na">intValue</span><span class="o">();</span>
+              <span class="k">return</span> <span class="o">(((</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)?</span><span class="kc">true</span><span class="o">:</span><span class="kc">false</span><span class="o">);</span>
+          <span class="o">}</span>
+      <span class="o">};</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;!-- s: List basic --&amp;gt;
-    &amp;lt;s:subset source="myList"&amp;gt;
-       &amp;lt;s:iterator&amp;gt;
-          &amp;lt;s:property /&amp;gt;
-       &amp;lt;/s:iterator&amp;gt;
-    &amp;lt;/s:subset&amp;gt;
-```
-
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>!-- s: List basic --<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>s:subset source="myList"<span class="ni">&amp;gt;</span>
+       <span class="ni">&amp;lt;</span>s:iterator<span class="ni">&amp;gt;</span>
+          <span class="ni">&amp;lt;</span>s:property /<span class="ni">&amp;gt;</span>
+       <span class="ni">&amp;lt;</span>/s:iterator<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>/s:subset<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;!-- B: List with count --&amp;gt;
-    &amp;lt;s:subset source="myList" count="3"&amp;gt;
-       &amp;lt;s:iterator&amp;gt;
-           &amp;lt;s:property /&amp;gt;
-       &amp;lt;/s:iterator&amp;gt;
-     &amp;lt;/s:subset&amp;gt;
-```
-
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>!-- B: List with count --<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>s:subset source="myList" count="3"<span class="ni">&amp;gt;</span>
+       <span class="ni">&amp;lt;</span>s:iterator<span class="ni">&amp;gt;</span>
+           <span class="ni">&amp;lt;</span>s:property /<span class="ni">&amp;gt;</span>
+       <span class="ni">&amp;lt;</span>/s:iterator<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>/s:subset<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;!--  C: List with start --&amp;gt;
-      &amp;lt;s:subset source="myList" count="13" start="3"&amp;gt;
-         &amp;lt;s:iterator&amp;gt;
-           &amp;lt;s:property /&amp;gt;
-         &amp;lt;/s:iterator&amp;gt;
-      &amp;lt;/s:subset&amp;gt;
-```
-
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>!--  C: List with start --<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>s:subset source="myList" count="13" start="3"<span class="ni">&amp;gt;</span>
+         <span class="ni">&amp;lt;</span>s:iterator<span class="ni">&amp;gt;</span>
+           <span class="ni">&amp;lt;</span>s:property /<span class="ni">&amp;gt;</span>
+         <span class="ni">&amp;lt;</span>/s:iterator<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>/s:subset<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;!--  D: List with var --&amp;gt;
-      &amp;lt;s:subset var="mySubset" source="myList" count="13" start="3" /&amp;gt;
-      &amp;lt;%
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>!--  D: List with var --<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>s:subset var="mySubset" source="myList" count="13" start="3" /<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>%
           Iterator i = (Iterator) pageContext.getAttribute("mySubset");
           while(i.hasNext()) {
-      %&amp;gt;
-      &amp;lt;%=i.next() %&amp;gt;
-      &amp;lt;%  } %&amp;gt;
-```
-
+      %<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>%=i.next() %<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>%  } %<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
-  &amp;lt;!--  D: List with Decider --&amp;gt;
-      &amp;lt;s:subset source="myList" decider="myDecider"&amp;gt;
-             &amp;lt;s:iterator&amp;gt;
-                  &amp;lt;s:property /&amp;gt;
-             &amp;lt;/s:iterator&amp;gt;
-      &amp;lt;/s:subset&amp;gt;
-```
-
+<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="ni">&amp;lt;</span>!--  D: List with Decider --<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>s:subset source="myList" decider="myDecider"<span class="ni">&amp;gt;</span>
+             <span class="ni">&amp;lt;</span>s:iterator<span class="ni">&amp;gt;</span>
+                  <span class="ni">&amp;lt;</span>s:property /<span class="ni">&amp;gt;</span>
+             <span class="ni">&amp;lt;</span>/s:iterator<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>/s:subset<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
+
 
   </section>
 </article>

@@ -140,80 +140,111 @@
 
 <p><strong>Description</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;This tag can be used to parameterize other tags.&lt;br&gt;
+<p>This tag can be used to parameterize other tags.<br />
  The include tag and bean tag are examples of such tags.
- &lt;/p&gt;
+ </p>
 
- &lt;p&gt;
+<p>
  The parameters can be added with or without a name as key.
  If the tag provides a name attribute the parameters are added using the
  {@link Component#addParameter(String, Object) addParamter} method.
  For unnamed parameters the Tag must implement the {@link UnnamedParametric} interface defined in
  this class (e.g. The TextTag does this).
- &lt;/p&gt;
+ </p>
 
- &lt;p&gt;
+<p>
  This tag has the following two paramters.
- &lt;/p&gt;
- &lt;!-- START SNIPPET: params --&gt;
- &lt;ul&gt;
-      &lt;li&gt;name (String) - the name of the parameter&lt;/li&gt;
-      &lt;li&gt;value (Object) - the value of the parameter&lt;/li&gt;
-      &lt;li&gt;suppressEmptyParameters (boolean) - whether to suppress this parameter if empty&lt;/li&gt;
- &lt;/ul&gt;
- &lt;!-- END SNIPPET: params --&gt;
- &lt;p&gt;
- &lt;b&gt;Note:&lt;/b&gt;
- When you declare the param tag, the value can be defined in either a &lt;tt&gt;value&lt;/tt&gt; attribute or
+ </p>
+<p><!-- START SNIPPET: params --></p>
+<ul>
+      <li>name (String) - the name of the parameter</li>
+      <li>value (Object) - the value of the parameter</li>
+      <li>suppressEmptyParameters (boolean) - whether to suppress this parameter if empty</li>
+ </ul>
+<p><!-- END SNIPPET: params --></p>
+<p>
+ <b>Note:</b>
+ When you declare the param tag, the value can be defined in either a <tt>value</tt> attribute or
  as text between the start and end tag. Struts behaves a bit different according to these two situations.
  This is best illustrated using an example:
- &lt;br&gt;&amp;lt;param name="color"&amp;gt;blue&amp;lt;/param&amp;gt; &amp;lt;-- (A) --&amp;gt;
- &lt;br&gt;&amp;lt;param name="color" value="blue"/&amp;gt; &amp;lt;-- (B) --&amp;gt;
- &lt;br&gt;In the first situation (A) the value would be evaluated to the stack as a &lt;tt&gt;java.lang.String&lt;/tt&gt; object.
- And in situation (B) the value would be evaluated to the stack as a &lt;tt&gt;java.lang.Object&lt;/tt&gt; object.
- &lt;br&gt;For more information see &lt;a href="https://issues.apache.org/jira/browse/WW-808"&gt;WW-808&lt;/a&gt;.
- &lt;/p&gt;
-</code></pre>
-</div>
+ <br />&lt;param name="color"&gt;blue&lt;/param&gt; &lt;-- (A) --&gt;
+ <br />&lt;param name="color" value="blue"/&gt; &lt;-- (B) --&gt;
+ <br />In the first situation (A) the value would be evaluated to the stack as a <tt>java.lang.String</tt> object.
+ And in situation (B) the value would be evaluated to the stack as a <tt>java.lang.Object</tt> object.
+ <br />For more information see <a href="https://issues.apache.org/jira/browse/WW-808">WW-808</a>.
+ </p>
 
 <p><strong>Parameters</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: tagattributes not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2-tags/param/html.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code>	&lt;table width="100%"&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&lt;h4&gt;Dynamic Attributes Allowed:&lt;/h4&gt; false&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&amp;nbsp;&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Name&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Required&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Default&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Evaluated&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Type&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Description&lt;/h4&gt;&lt;/th&gt;
+		&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;name&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Name of Parameter to set&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;suppressEmptyParameters&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Boolean&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Whether to suppress empty parameters&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;value&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;The value of evaluating provided name against stack&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Value expression for Parameter to set&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/table&gt;
 </code></pre>
 </div>
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &lt;pre&gt;
- &amp;lt;ui:component&amp;gt;
-  &amp;lt;ui:param name="key"     value="[0]"/&amp;gt;
-  &amp;lt;ui:param name="value"   value="[1]"/&amp;gt;
-  &amp;lt;ui:param name="context" value="[2]"/&amp;gt;
- &amp;lt;/ui:component&amp;gt;
- &lt;/pre&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;pre&gt;</span>
+ <span class="ni">&amp;lt;</span>ui:component<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>ui:param name="key"     value="[0]"/<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>ui:param name="value"   value="[1]"/<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>ui:param name="context" value="[2]"/<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/ui:component<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;/pre&gt;</span>
 
- &lt;p&gt;
+ <span class="nt">&lt;p&gt;</span>
  Whether to suppress empty parameters:
- &lt;/p&gt;
+ <span class="nt">&lt;/p&gt;</span>
 
- &lt;pre&gt;
- &amp;lt;s:url action="eventAdd"&amp;gt;
-   &amp;lt;s:param name="bean.searchString" value="%{bean.searchString}" /&amp;gt;
-   &amp;lt;s:param name="bean.filter" value="%{bean.filter}" /&amp;gt;
-   &amp;lt;s:param name="bean.pageNum" value="%{pager.pageNumber}" suppressEmptyParameters="true" /&amp;gt;
- &amp;lt;/s:url&amp;gt;
- &lt;/pre&gt;
-```
-
+ <span class="nt">&lt;pre&gt;</span>
+ <span class="ni">&amp;lt;</span>s:url action="eventAdd"<span class="ni">&amp;gt;</span>
+   <span class="ni">&amp;lt;</span>s:param name="bean.searchString" value="%{bean.searchString}" /<span class="ni">&amp;gt;</span>
+   <span class="ni">&amp;lt;</span>s:param name="bean.filter" value="%{bean.filter}" /<span class="ni">&amp;gt;</span>
+   <span class="ni">&amp;lt;</span>s:param name="bean.pageNum" value="%{pager.pageNumber}" suppressEmptyParameters="true" /<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:url<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;/pre&gt;</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> where the key will be the identifier and the value the result of an OGNL expression run against the current
- ValueStack.
-</code></pre>
-</div>
+<p>where the key will be the identifier and the value the result of an OGNL expression run against the current
+ ValueStack.</p>
 
   </section>
 </article>

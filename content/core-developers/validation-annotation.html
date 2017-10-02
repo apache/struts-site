@@ -129,35 +129,29 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/validation-annotation.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="validation-annotation">Validation Annotation</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> This annotation has been deprecated since 2.1 as its previous purpose, to define classes that support annotation validations,
- is no longer necessary.
-</code></pre>
-</div>
+<p>This annotation has been deprecated since 2.1 as its previous purpose, to define classes that support annotation validations,
+ is no longer necessary.</p>
 
 <p>#####Usage#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;The Validation annotation must be applied at Type level.&lt;/p&gt;
-</code></pre>
-</div>
+<p>The Validation annotation must be applied at Type level.</p>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;table class='confluenceTable' summary=''&gt;
- &lt;tr&gt;
- &lt;th class='confluenceTh'&gt; Parameter &lt;/th&gt;
- &lt;th class='confluenceTh'&gt; Required &lt;/th&gt;
- &lt;th class='confluenceTh'&gt; Default &lt;/th&gt;
- &lt;th class='confluenceTh'&gt; Notes &lt;/th&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td class='confluenceTd'&gt;validations&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;yes&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;&amp;nbsp;&lt;/td&gt;
- &lt;td class='confluenceTd'&gt;&lt;/td&gt;
- &lt;/tr&gt;
- &lt;/table&gt;
-</code></pre>
-</div>
+<table class="confluenceTable" summary="">
+ <tr>
+ <th class="confluenceTh"> Parameter </th>
+ <th class="confluenceTh"> Required </th>
+ <th class="confluenceTh"> Default </th>
+ <th class="confluenceTh"> Notes </th>
+ </tr>
+ <tr>
+ <td class="confluenceTd">validations</td>
+ <td class="confluenceTd">yes</td>
+ <td class="confluenceTd">&nbsp;</td>
+ <td class="confluenceTd"></td>
+ </tr>
+ </table>
 
 <p>#####Examples#####</p>
 
@@ -172,72 +166,64 @@
   </li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```java
- &amp;#64;Validation()
- public interface AnnotationDataAware {
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">Validation</span><span class="o">()</span>
+ <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AnnotationDataAware</span> <span class="o">{</span>
 
-     void setBarObj(Bar b);
+     <span class="kt">void</span> <span class="n">setBarObj</span><span class="o">(</span><span class="n">Bar</span> <span class="n">b</span><span class="o">);</span>
 
-     Bar getBarObj();
+     <span class="n">Bar</span> <span class="n">getBarObj</span><span class="o">();</span>
 
-     &amp;#64;RequiredFieldValidator(message = "You must enter a value for data.")
-     &amp;#64;RequiredStringValidator(message = "You must enter a value for data.")
-     void setData(String data);
+     <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">RequiredFieldValidator</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a value for data."</span><span class="o">)</span>
+     <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">RequiredStringValidator</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a value for data."</span><span class="o">)</span>
+     <span class="kt">void</span> <span class="n">setData</span><span class="o">(</span><span class="n">String</span> <span class="n">data</span><span class="o">);</span>
 
-     String getData();
- }
-```
-
+     <span class="n">String</span> <span class="n">getData</span><span class="o">();</span>
+ <span class="o">}</span>
 </code></pre>
 </div>
 
 <p><strong>An Annotated Class</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```java
- &amp;#64;Validation()
- public class SimpleAnnotationAction extends ActionSupport {
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">Validation</span><span class="o">()</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleAnnotationAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
 
-     &amp;#64;RequiredFieldValidator(type = ValidatorType.FIELD, message = "You must enter a value for bar.")
-     &amp;#64;IntRangeFieldValidator(type = ValidatorType.FIELD, min = "6", max = "10", message = "bar must be between ${min} and ${max}, current value is ${bar}.")
-     public void setBar(int bar) {
-         this.bar = bar;
-     }
+     <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">RequiredFieldValidator</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ValidatorType</span><span class="o">.</span><span class="na">FIELD</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a value for bar."</span><span class="o">)</span>
+     <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">IntRangeFieldValidator</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ValidatorType</span><span class="o">.</span><span class="na">FIELD</span><span class="o">,</span> <span class="n">min</span> <span class="o">=</span> <span class="s">"6"</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="s">"10"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"bar must be between ${min} and ${max}, current value is ${bar}."</span><span class="o">)</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="n">setBar</span><span class="o">(</span><span class="kt">int</span> <span class="n">bar</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">bar</span> <span class="o">=</span> <span class="n">bar</span><span class="o">;</span>
+     <span class="o">}</span>
 
-     public int getBar() {
-         return bar;
-     }
+     <span class="kd">public</span> <span class="kt">int</span> <span class="n">getBar</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="n">bar</span><span class="o">;</span>
+     <span class="o">}</span>
 
-     &amp;#64;Validations(
-             requiredFields =
-                     {&amp;#64;RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = "customfield", message = "You must enter a value for field.")},
-             requiredStrings =
-                     {&amp;#64;RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "stringisrequired", message = "You must enter a value for string.")},
-             emails =
-                     { &amp;#64;EmailValidator(type = ValidatorType.SIMPLE, fieldName = "emailaddress", message = "You must enter a value for email.")},
-             urls =
-                     { &amp;#64;UrlValidator(type = ValidatorType.SIMPLE, fieldName = "hreflocation", message = "You must enter a value for email.")},
-             stringLengthFields =
-                     {&amp;#64;StringLengthFieldValidator(type = ValidatorType.SIMPLE, trim = true, minLength="10" , maxLength = "12", fieldName = "needstringlength", message = "You must enter a stringlength.")},
-             intRangeFields =
-                     { @IntRangeFieldValidator(type = ValidatorType.SIMPLE, fieldName = "intfield", min = "6", max = "10", message = "bar must be between ${min} and ${max}, current value is ${bar}.")},
-             dateRangeFields =
-                     {&amp;#64;DateRangeFieldValidator(type = ValidatorType.SIMPLE, fieldName = "datefield", min = "-1", max = "99", message = "bar must be between ${min} and ${max}, current value is ${bar}.")},
-             expressions = {
-                 &amp;#64;ExpressionValidator(expression = "foo &amp;gt; 1", message = "Foo must be greater than Bar 1. Foo = ${foo}, Bar = ${bar}."),
-                 &amp;#64;ExpressionValidator(expression = "foo &amp;gt; 2", message = "Foo must be greater than Bar 2. Foo = ${foo}, Bar = ${bar}."),
-                 &amp;#64;ExpressionValidator(expression = "foo &amp;gt; 3", message = "Foo must be greater than Bar 3. Foo = ${foo}, Bar = ${bar}."),
-                 &amp;#64;ExpressionValidator(expression = "foo &amp;gt; 4", message = "Foo must be greater than Bar 4. Foo = ${foo}, Bar = ${bar}."),
-                 &amp;#64;ExpressionValidator(expression = "foo &amp;gt; 5", message = "Foo must be greater than Bar 5. Foo = ${foo}, Bar = ${bar}.")
-     }
-     )
-     public String execute() throws Exception {
-         return SUCCESS;
-     }
- }
-
-```
+     <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">Validations</span><span class="o">(</span>
+             <span class="n">requiredFields</span> <span class="o">=</span>
+                     <span class="o">{&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">RequiredFieldValidator</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ValidatorType</span><span class="o">.</span><span class="na">SIMPLE</span><span class="o">,</span> <span class="n">fieldName</span> <span class="o">=</span> <span class="s">"customfield"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a value for field."</span><span class="o">)},</span>
+             <span class="n">requiredStrings</span> <span class="o">=</span>
+                     <span class="o">{&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">RequiredStringValidator</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ValidatorType</span><span class="o">.</span><span class="na">SIMPLE</span><span class="o">,</span> <span class="n">fieldName</span> <span class="o">=</span> <span class="s">"stringisrequired"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a value for string."</span><span class="o">)},</span>
+             <span class="n">emails</span> <span class="o">=</span>
+                     <span class="o">{</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">EmailValidator</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ValidatorType</span><span class="o">.</span><span class="na">SIMPLE</span><span class="o">,</span> <span class="n">fieldName</span> <span class="o">=</span> <span class="s">"emailaddress"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a value for email."</span><span class="o">)},</span>
+             <span class="n">urls</span> <span class="o">=</span>
+                     <span class="o">{</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">UrlValidator</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ValidatorType</span><span class="o">.</span><span class="na">SIMPLE</span><span class="o">,</span> <span class="n">fieldName</span> <span class="o">=</span> <span class="s">"hreflocation"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a value for email."</span><span class="o">)},</span>
+             <span class="n">stringLengthFields</span> <span class="o">=</span>
+                     <span class="o">{&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">StringLengthFieldValidator</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ValidatorType</span><span class="o">.</span><span class="na">SIMPLE</span><span class="o">,</span> <span class="n">trim</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span> <span class="n">minLength</span><span class="o">=</span><span class="s">"10"</span> <span class="o">,</span> <span class="n">maxLength</span> <span class="o">=</span> <span class="s">"12"</span><span class="o">,</span> <span class="n">fieldName</span> <span class="o">=</span> <span class="s">"needstringlength"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a stringlength."</span><span class="o">)},</span>
+             <span class="n">intRangeFields</span> <span class="o">=</span>
+                     <span class="o">{</span> <span class="nd">@IntRangeFieldValidator</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ValidatorType</span><span class="o">.</span><span class="na">SIMPLE</span><span class="o">,</span> <span class="n">fieldName</span> <span class="o">=</span> <span class="s">"intfield"</span><span class="o">,</span> <span class="n">min</span> <span class="o">=</span> <span class="s">"6"</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="s">"10"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"bar must be between ${min} and ${max}, current value is ${bar}."</span><span class="o">)},</span>
+             <span class="n">dateRangeFields</span> <span class="o">=</span>
+                     <span class="o">{&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">DateRangeFieldValidator</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ValidatorType</span><span class="o">.</span><span class="na">SIMPLE</span><span class="o">,</span> <span class="n">fieldName</span> <span class="o">=</span> <span class="s">"datefield"</span><span class="o">,</span> <span class="n">min</span> <span class="o">=</span> <span class="s">"-1"</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="s">"99"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"bar must be between ${min} and ${max}, current value is ${bar}."</span><span class="o">)},</span>
+             <span class="n">expressions</span> <span class="o">=</span> <span class="o">{</span>
+                 <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">ExpressionValidator</span><span class="o">(</span><span class="n">expression</span> <span class="o">=</span> <span class="s">"foo &amp;gt; 1"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"Foo must be greater than Bar 1. Foo = ${foo}, Bar = ${bar}."</span><span class="o">),</span>
+                 <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">ExpressionValidator</span><span class="o">(</span><span class="n">expression</span> <span class="o">=</span> <span class="s">"foo &amp;gt; 2"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"Foo must be greater than Bar 2. Foo = ${foo}, Bar = ${bar}."</span><span class="o">),</span>
+                 <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">ExpressionValidator</span><span class="o">(</span><span class="n">expression</span> <span class="o">=</span> <span class="s">"foo &amp;gt; 3"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"Foo must be greater than Bar 3. Foo = ${foo}, Bar = ${bar}."</span><span class="o">),</span>
+                 <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">ExpressionValidator</span><span class="o">(</span><span class="n">expression</span> <span class="o">=</span> <span class="s">"foo &amp;gt; 4"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"Foo must be greater than Bar 4. Foo = ${foo}, Bar = ${bar}."</span><span class="o">),</span>
+                 <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">ExpressionValidator</span><span class="o">(</span><span class="n">expression</span> <span class="o">=</span> <span class="s">"foo &amp;gt; 5"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"Foo must be greater than Bar 5. Foo = ${foo}, Bar = ${bar}."</span><span class="o">)</span>
+     <span class="o">}</span>
+     <span class="o">)</span>
+     <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
 
 </code></pre>
 </div>

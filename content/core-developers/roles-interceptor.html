@@ -129,42 +129,41 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/roles-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="roles-interceptor">Roles Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+<p>
  This interceptor ensures that the action will only be executed if the user has the correct role.
- &lt;/p&gt;
-</code></pre>
-</div>
+ </p>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- &lt;ul&gt;
+<ul>
 
- &lt;li&gt;allowedRoles - a comma-separated list of roles to allow&lt;/li&gt;
+ <li>allowedRoles - a comma-separated list of roles to allow</li>
 
- &lt;li&gt;disallowedRoles - a comma-separated list of roles to disallow&lt;/li&gt;
+ <li>disallowedRoles - a comma-separated list of roles to disallow</li>
 
- &lt;/ul&gt;
+ </ul>
 
- &lt;p&gt;
+<p>
  When both allowedRoles and disallowedRoles are configured, then disallowedRoles
  takes precedence, applying the following logic: 
-  (if ((inRole(role1) || inRole(role2) || ... inRole(roleN)) &amp;amp;&amp;amp;
-       !inRole(roleA) &amp;amp;&amp;amp; !inRole(roleB) &amp;amp;&amp;amp; ... !inRole(roleZ))
+  (if ((inRole(role1) || inRole(role2) || ... inRole(roleN)) &amp;&amp;
+       !inRole(roleA) &amp;&amp; !inRole(roleB) &amp;&amp; ... !inRole(roleZ))
   { //permit ...
- &lt;/p&gt;
-</code></pre>
-</div>
+ </p>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
-START SNIPPET: example not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/org/apache/struts2/interceptor/RolesInterceptor.java;hb=HEAD
-```
-
+<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="ni">&amp;lt;</span>!-- only allows the admin and member roles --<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>action name=<span class="ni">&amp;quot;</span>someAction<span class="ni">&amp;quot;</span> class=<span class="ni">&amp;quot;</span>com.examples.SomeAction<span class="ni">&amp;quot;&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>interceptor-ref name=<span class="ni">&amp;quot;</span>completeStack<span class="ni">&amp;quot;</span>/<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>interceptor-ref name=<span class="ni">&amp;quot;</span>roles<span class="ni">&amp;quot;&amp;gt;</span>
+        <span class="ni">&amp;lt;</span>param name=<span class="ni">&amp;quot;</span>allowedRoles<span class="ni">&amp;quot;&amp;gt;</span>admin,member<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>/interceptor-ref<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>result name=<span class="ni">&amp;quot;</span>success<span class="ni">&amp;quot;&amp;gt;</span>good_result.ftl<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
+
 
   </section>
 </article>

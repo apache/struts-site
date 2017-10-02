@@ -140,103 +140,89 @@
 
 <p><strong>Description</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;Push value on stack for simplified usage.&lt;/p&gt;
-</code></pre>
-</div>
+<p>Push value on stack for simplified usage.</p>
 
 <p><strong>Parameters</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: tagattributes not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2-tags/push/html.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code>	&lt;table width="100%"&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&lt;h4&gt;Dynamic Attributes Allowed:&lt;/h4&gt; false&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&amp;nbsp;&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Name&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Required&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Default&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Evaluated&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Type&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Description&lt;/h4&gt;&lt;/th&gt;
+		&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;value&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;strong&gt;true&lt;/strong&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Value to push on stack&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/table&gt;
 </code></pre>
 </div>
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;s:push value="user"&amp;gt;
-     &amp;lt;s:propery value="firstName" /&amp;gt;
-     &amp;lt;s:propery value="lastName" /&amp;gt;
- &amp;lt;/s:push&amp;gt;
-```
-
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:push value="user"<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>s:propery value="firstName" /<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>s:propery value="lastName" /<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:push<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```none
- Pushed user into the stack, and hence property tag could access user's properties
+<pre><code class="language-none"> Pushed user into the stack, and hence property tag could access user's properties
  (firstName, lastName etc) since user is now at the top of the stack
-```
+</code></pre>
 
+<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="ni">&amp;lt;</span>s:push value="myObject"<span class="ni">&amp;gt;</span>                              ----- (1)
+       <span class="ni">&amp;lt;</span>s:bean name="jp.SomeBean" var="myBean"/<span class="ni">&amp;gt;</span>        ----- (2)
+          <span class="ni">&amp;lt;</span>s:param name="myParam" value="top"/<span class="ni">&amp;gt;</span>        ----- (3)
+       <span class="ni">&amp;lt;</span>/s:bean<span class="ni">&amp;gt;</span>
+   <span class="ni">&amp;lt;</span>/s:push<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
-  &amp;lt;s:push value="myObject"&amp;gt;                              ----- (1)
-       &amp;lt;s:bean name="jp.SomeBean" var="myBean"/&amp;gt;        ----- (2)
-          &amp;lt;s:param name="myParam" value="top"/&amp;gt;        ----- (3)
-       &amp;lt;/s:bean&amp;gt;
-   &amp;lt;/s:push&amp;gt;
-```
-
-</code></pre>
-</div>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```none
- when in (1), myObject is at the top of the stack
+<pre><code class="language-none"> when in (1), myObject is at the top of the stack
  when in (2), jp.SomeBean is in the top of stack, also in stack's context with key myBean
  when in (3), top will get the jp.SomeBean instance
-```
+</code></pre>
 
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:push value="myObject"<span class="ni">&amp;gt;</span>                                       ---(A)
+    <span class="ni">&amp;lt;</span>s:bean name="jp.SomeBean" var="myBean"/<span class="ni">&amp;gt;</span>                   ---(B)
+       <span class="ni">&amp;lt;</span>s:param name="myParam" value="top.mySomeOtherValue"/<span class="ni">&amp;gt;</span>  ---(C)
+    <span class="ni">&amp;lt;</span>/s:bean<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:push<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;s:push value="myObject"&amp;gt;                                       ---(A)
-    &amp;lt;s:bean name="jp.SomeBean" var="myBean"/&amp;gt;                   ---(B)
-       &amp;lt;s:param name="myParam" value="top.mySomeOtherValue"/&amp;gt;  ---(C)
-    &amp;lt;/s:bean&amp;gt;
- &amp;lt;/s:push&amp;gt;
-```
-
-</code></pre>
-</div>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```none
- when in (A), myObject is at the top of the stack
+<pre><code class="language-none"> when in (A), myObject is at the top of the stack
  when in (B), jp.SomeBean is at the top of the stack, also in context with key myBean
  when in (C), top refers to jp.SomeBean instance. so top.mySomeOtherValue would invoke SomeBean's mySomeOtherValue() method
-```
+</code></pre>
 
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:push value="myObject"<span class="ni">&amp;gt;</span>                                 ---- (i)
+    <span class="ni">&amp;lt;</span>s:bean name="jp.SomeBean" var="myBean"/<span class="ni">&amp;gt;</span>             ---- (ii)
+       <span class="ni">&amp;lt;</span>s:param name="myParam" value="[1].top"/<span class="ni">&amp;gt;</span>         -----(iii)
+    <span class="ni">&amp;lt;</span>/s:bean<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:push<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;s:push value="myObject"&amp;gt;                                 ---- (i)
-    &amp;lt;s:bean name="jp.SomeBean" var="myBean"/&amp;gt;             ---- (ii)
-       &amp;lt;s:param name="myParam" value="[1].top"/&amp;gt;         -----(iii)
-    &amp;lt;/s:bean&amp;gt;
- &amp;lt;/s:push&amp;gt;
-```
-
-</code></pre>
-</div>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```none
- when in (i), myObject is at the top of the stack
+<pre><code class="language-none"> when in (i), myObject is at the top of the stack
  when in (ii), jp.SomeBean is at the top of the stack, followed by myObject
  when in (iii), [1].top will returned top of the cut of stack starting from myObject, namely myObject itself
-```
-
 </code></pre>
-</div>
+
 
   </section>
 </article>

@@ -140,98 +140,112 @@
 
 <p><strong>Description</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;Component for MergeIteratorTag, which job is to merge iterators and successive
+<p>Component for MergeIteratorTag, which job is to merge iterators and successive
  call to the merged iterator will cause each merge iterator to have a chance to
  expose its element, subsequently next call will allow the next iterator to expose
  its element. Once the last iterator is done exposing its element, the first iterator
- is allowed to do so again (unless it is exhausted of entries).&lt;/P&gt;
+ is allowed to do so again (unless it is exhausted of entries).</p>
 
- &lt;p&gt;Internally the task are delegated to MergeIteratorFilter&lt;/p&gt;
+<p>Internally the task are delegated to MergeIteratorFilter</p>
 
- &lt;p&gt;Example if there are 3 lists being merged, each list have 3 entries, the following will
- be the logic.&lt;/P&gt;
- &lt;ol&gt;
-      &lt;li&gt;Display first element of the first list&lt;/li&gt;
-      &lt;li&gt;Display first element of the second list&lt;/li&gt;
-      &lt;li&gt;Display first element of the third list&lt;/li&gt;
-      &lt;li&gt;Display second element of the first list&lt;/li&gt;
-      &lt;li&gt;Display second element of the second list&lt;/li&gt;
-      &lt;li&gt;Display second element of the third list&lt;/li&gt;
-      &lt;li&gt;Display third element of the first list&lt;/li&gt;
-      &lt;li&gt;Display thrid element of the second list&lt;/li&gt;
-      &lt;li&gt;Display third element of the thrid list&lt;/li&gt;
- &lt;/ol&gt;
-</code></pre>
-</div>
+<p>Example if there are 3 lists being merged, each list have 3 entries, the following will
+ be the logic.</p>
+<ol>
+      <li>Display first element of the first list</li>
+      <li>Display first element of the second list</li>
+      <li>Display first element of the third list</li>
+      <li>Display second element of the first list</li>
+      <li>Display second element of the second list</li>
+      <li>Display second element of the third list</li>
+      <li>Display third element of the first list</li>
+      <li>Display thrid element of the second list</li>
+      <li>Display third element of the thrid list</li>
+ </ol>
 
 <p><strong>Parameters</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: tagattributes not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2-tags/merge/html.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code>	&lt;table width="100%"&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&lt;h4&gt;Dynamic Attributes Allowed:&lt;/h4&gt; false&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&amp;nbsp;&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Name&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Required&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Default&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Evaluated&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Type&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Description&lt;/h4&gt;&lt;/th&gt;
+		&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;var&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;The name where the resultant merged iterator will be stored in the stack's context&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/table&gt;
 </code></pre>
 </div>
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```java
- public class MergeIteratorTagAction extends ActionSupport {
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MergeIteratorTagAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
 
-  private List myList1;
-  private List myList2;
-  private List myList3;
+  <span class="kd">private</span> <span class="n">List</span> <span class="n">myList1</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">List</span> <span class="n">myList2</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">List</span> <span class="n">myList3</span><span class="o">;</span>
 
-  public List getMyList1() {
-      return myList1;
-  }
+  <span class="kd">public</span> <span class="n">List</span> <span class="n">getMyList1</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">myList1</span><span class="o">;</span>
+  <span class="o">}</span>
 
-  public List getMyList2() {
-      return myList2;
-  }
+  <span class="kd">public</span> <span class="n">List</span> <span class="n">getMyList2</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">myList2</span><span class="o">;</span>
+  <span class="o">}</span>
 
-  public List getMyList3() {
-      return myList3;
-  }
+  <span class="kd">public</span> <span class="n">List</span> <span class="n">getMyList3</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">myList3</span><span class="o">;</span>
+  <span class="o">}</span>
 
 
-  public String execute() throws Exception {
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
 
-      myList1 = new ArrayList();
-      myList1.add("1");
-      myList1.add("2");
-      myList1.add("3");
+      <span class="n">myList1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
+      <span class="n">myList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"1"</span><span class="o">);</span>
+      <span class="n">myList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
+      <span class="n">myList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"3"</span><span class="o">);</span>
 
-      myList2 = new ArrayList();
-      myList2.add("a");
-      myList2.add("b");
-      myList2.add("c");
+      <span class="n">myList2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
+      <span class="n">myList2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"a"</span><span class="o">);</span>
+      <span class="n">myList2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"b"</span><span class="o">);</span>
+      <span class="n">myList2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"c"</span><span class="o">);</span>
 
-      myList3 = new ArrayList();
-      myList3.add("A");
-      myList3.add("B");
-      myList3.add("C");
+      <span class="n">myList3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
+      <span class="n">myList3</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"A"</span><span class="o">);</span>
+      <span class="n">myList3</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"B"</span><span class="o">);</span>
+      <span class="n">myList3</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"C"</span><span class="o">);</span>
 
-      return "done";
-  }
- }
-```
-
+      <span class="k">return</span> <span class="s">"done"</span><span class="o">;</span>
+  <span class="o">}</span>
+ <span class="o">}</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;s:merge var="myMergedIterator1"&amp;gt;
-      &amp;lt;s:param value="%{myList1}" /&amp;gt;
-      &amp;lt;s:param value="%{myList2}" /&amp;gt;
-      &amp;lt;s:param value="%{myList3}" /&amp;gt;
- &amp;lt;/s:merge&amp;gt;
- &amp;lt;s:iterator value="%{#myMergedIterator1}"&amp;gt;
-      &amp;lt;s:property /&amp;gt;
- &amp;lt;/s:iterator&amp;gt;
-```
-
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:merge var="myMergedIterator1"<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>s:param value="%{myList1}" /<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>s:param value="%{myList2}" /<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>s:param value="%{myList3}" /<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:merge<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>s:iterator value="%{#myMergedIterator1}"<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>s:property /<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:iterator<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
+
 
   </section>
 </article>

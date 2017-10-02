@@ -129,56 +129,41 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/alias-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="alias-interceptor">Alias Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- The aim of this Interceptor is to alias a named parameter to a different named parameter. By acting as the glue
- between actions sharing similar parameters (but with different names), it can help greatly with action chaining.
+<p>The aim of this Interceptor is to alias a named parameter to a different named parameter. By acting as the glue
+ between actions sharing similar parameters (but with different names), it can help greatly with action chaining.</p>
 
- &lt;p&gt;Action's alias expressions should be in the form of  &lt;code&gt;#{ "name1" : "alias1", "name2" : "alias2" }&lt;/code&gt;.
- This means that assuming an action (or something else in the stack) has a value for the expression named &lt;i&gt;name1&lt;/i&gt; and the
- action this interceptor is applied to has a setter named &lt;i&gt;alias1&lt;/i&gt;, &lt;i&gt;alias1&lt;/i&gt; will be set with the value from
- &lt;i&gt;name1&lt;/i&gt;.
- &lt;/p&gt;
-
-</code></pre>
-</div>
+<p>Action's alias expressions should be in the form of  <code>#{ "name1" : "alias1", "name2" : "alias2" }</code>.
+ This means that assuming an action (or something else in the stack) has a value for the expression named <i>name1</i> and the
+ action this interceptor is applied to has a setter named <i>alias1</i>, <i>alias1</i> will be set with the value from
+ <i>name1</i>.
+ </p>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- &lt;ul&gt;
+<ul>
 
- &lt;li&gt;aliasesKey (optional) - the name of the action parameter to look for the alias map (by default this is
- &lt;i&gt;aliases&lt;/i&gt;).&lt;/li&gt;
+ <li>aliasesKey (optional) - the name of the action parameter to look for the alias map (by default this is
+ <i>aliases</i>).</li>
 
- &lt;/ul&gt;
-
-</code></pre>
-</div>
+ </ul>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- This interceptor does not have any known extension points.
-
-</code></pre>
-</div>
+<p>This interceptor does not have any known extension points.</p>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;action name="someAction" class="com.examples.SomeAction"&amp;gt;
-     &amp;lt;!-- The value for the foo parameter will be applied as if it were named bar --&amp;gt;
-     &amp;lt;param name="aliases"&amp;gt;#{ 'foo' : 'bar' }&amp;lt;/param&amp;gt;
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>action name="someAction" class="com.examples.SomeAction"<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>!-- The value for the foo parameter will be applied as if it were named bar --<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>param name="aliases"<span class="ni">&amp;gt;</span>#{ 'foo' : 'bar' }<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
 
-     &amp;lt;interceptor-ref name="alias"/&amp;gt;
-     &amp;lt;interceptor-ref name="basicStack"/&amp;gt;
-     &amp;lt;result name="success"&amp;gt;good_result.ftl&amp;lt;/result&amp;gt;
- &amp;lt;/action&amp;gt;
-```
-
+     <span class="ni">&amp;lt;</span>interceptor-ref name="alias"/<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>interceptor-ref name="basicStack"/<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>result name="success"<span class="ni">&amp;gt;</span>good_result.ftl<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
+
 
   </section>
 </article>

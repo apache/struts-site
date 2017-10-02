@@ -129,58 +129,43 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/scoped-model-driven-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="scoped-model-driven-interceptor">Scoped Model Driven Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- An interceptor that enables scoped model-driven actions.
+<p>An interceptor that enables scoped model-driven actions.</p>
 
- &lt;p&gt;This interceptor only activates on actions that implement the {@link ScopedModelDriven} interface.  If
- detected, it will retrieve the model class from the configured scope, then provide it to the Action.&lt;/p&gt;
-  
-</code></pre>
-</div>
+<p>This interceptor only activates on actions that implement the {@link ScopedModelDriven} interface.  If
+ detected, it will retrieve the model class from the configured scope, then provide it to the Action.</p>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- &lt;ul&gt;
+<ul>
 
- &lt;li&gt;className - The model class name.  Defaults to the class name of the object returned by the getModel() method.&lt;/li&gt;
+ <li>className - The model class name.  Defaults to the class name of the object returned by the getModel() method.</li>
             
- &lt;li&gt;name - The key to use when storing or retrieving the instance in a scope.  Defaults to the model
-            class name.&lt;/li&gt;
+ <li>name - The key to use when storing or retrieving the instance in a scope.  Defaults to the model
+            class name.</li>
 
- &lt;li&gt;scope - The scope to store and retrieve the model.  Defaults to 'request' but can also be 'session'.&lt;/li&gt;
- &lt;/ul&gt;
-
-</code></pre>
-</div>
+ <li>scope - The scope to store and retrieve the model.  Defaults to 'request' but can also be 'session'.</li>
+ </ul>
 
 <p>#####Extending the Interceptor#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- There are no known extension points for this interceptor.
-
-</code></pre>
-</div>
+<p>There are no known extension points for this interceptor.</p>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
+<div class="highlighter-rouge"><pre class="highlight"><code> 
+ <span class="ni">&amp;lt;</span>-- Basic usage --<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>interceptor name="scopedModelDriven" class="com.opensymphony.interceptor.ScopedModelDrivenInterceptor" /<span class="ni">&amp;gt;</span>
  
- &amp;lt;-- Basic usage --&amp;gt;
- &amp;lt;interceptor name="scopedModelDriven" class="com.opensymphony.interceptor.ScopedModelDrivenInterceptor" /&amp;gt;
+ <span class="ni">&amp;lt;</span>-- Using all available parameters --<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>interceptor name="gangsterForm" class="com.opensymphony.interceptor.ScopedModelDrivenInterceptor"<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>param name="scope"<span class="ni">&amp;gt;</span>session<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>param name="name"<span class="ni">&amp;gt;</span>gangsterForm<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>param name="className"<span class="ni">&amp;gt;</span>com.opensymphony.example.GangsterForm<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>/interceptor<span class="ni">&amp;gt;</span>
  
- &amp;lt;-- Using all available parameters --&amp;gt;
- &amp;lt;interceptor name="gangsterForm" class="com.opensymphony.interceptor.ScopedModelDrivenInterceptor"&amp;gt;
-      &amp;lt;param name="scope"&amp;gt;session&amp;lt;/param&amp;gt;
-      &amp;lt;param name="name"&amp;gt;gangsterForm&amp;lt;/param&amp;gt;
-      &amp;lt;param name="className"&amp;gt;com.opensymphony.example.GangsterForm&amp;lt;/param&amp;gt;
-  &amp;lt;/interceptor&amp;gt;
- 
-```
-
 </code></pre>
 </div>
+
 
   </section>
 </article>

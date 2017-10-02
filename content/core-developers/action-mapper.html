@@ -430,53 +430,48 @@
 
 <p>####PrefixBasedActionMapper####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
- A prefix based action mapper that is capable of delegating to other {@link ActionMapper}s based on the request's prefix.&lt;br&gt;
- It is configured through struts.xml&lt;br&gt;
+<p>
+ A prefix based action mapper that is capable of delegating to other {@link ActionMapper}s based on the request's prefix.<br />
+ It is configured through struts.xml<br />
  For example, with the following entries in struts.properties
- &lt;/p&gt;
+ </p>
 
- &lt;pre&gt;
- &amp;lt;constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"/&amp;gt;
- &amp;lt;constant name="struts.mapper.prefixMapping" value="/communities:pseudoRestful,/communityTags:pseudoRestful,/events:pseudoRestful,/mediaList:pseudoRestful,/users:pseudoRestful,/community:struts,/communityTag:struts,/event:struts,/media:struts,/user:struts,:struts"/&amp;gt;
- &lt;/pre&gt;
+<pre>
+ &lt;constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"/&gt;
+ &lt;constant name="struts.mapper.prefixMapping" value="/communities:pseudoRestful,/communityTags:pseudoRestful,/events:pseudoRestful,/mediaList:pseudoRestful,/users:pseudoRestful,/community:struts,/communityTag:struts,/event:struts,/media:struts,/user:struts,:struts"/&gt;
+ </pre>
 
- &lt;p&gt;
+<p>
  When {@link PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)} or
  {@link PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)} is invoked,
  {@link PrefixBasedActionMapper} will check each possible prefix (url prefix terminating just before a /) to find the most specific ActionMapper that returns a mapping when asked to map the request.  If none are found, null is returned for both
  {@link PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)} and
  {@link PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)} methods.
- &lt;/p&gt;
-
-</code></pre>
-</div>
+ </p>
 
 <p><strong>PrefixBasedActionProxyFactory</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+<p>
  Prefix based factory should be used with {@link org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper}
  to use appropriate {@link com.opensymphony.xwork2.ActionProxyFactory} connected with given
  {@link org.apache.struts2.dispatcher.mapper.ActionMapper}
- &lt;/p&gt;
+ </p>
 
- &lt;p&gt;
+<p>
  Add below entry to struts.xml to enable the factory:
- &lt;/p&gt;
+ </p>
 
- &lt;pre&gt;
- &amp;lt;constant name="struts.actionProxyFactory" value="prefix"/&amp;gt;
- &lt;/pre&gt;
+<pre>
+ &lt;constant name="struts.actionProxyFactory" value="prefix"/&gt;
+ </pre>
 
- &lt;p&gt;
+<p>
  The factory will use the same set of patterns as defined with:
- &lt;/p&gt;
+ </p>
 
- &lt;pre&gt;
- &amp;lt;constant name="struts.mapper.prefixMapping" value="..."/&amp;gt;
- &lt;/pre&gt;
-</code></pre>
-</div>
+<pre>
+ &lt;constant name="struts.mapper.prefixMapping" value="..."/&gt;
+ </pre>
 
 <p>####ActionMapper and ActionMapping objects####</p>
 

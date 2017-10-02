@@ -129,7 +129,7 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/redirect-action-result.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="redirect-action-result">Redirect Action Result</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;
+<p>
  This result uses the {@link ActionMapper} provided by the
  ActionMapperFactory to redirect the browser to a URL that invokes the
  specified action and (optional) namespace. This is better than the
@@ -139,14 +139,12 @@
  and your application will still work. It is strongly recommended that if you
  are redirecting to another action, you use this result rather than the
  standard redirect result.
- &lt;/p&gt;
+ </p>
 
- &lt;p&gt;
+<p>
  See examples below for an example of how request parameters could be passed
  in.
- &lt;/p&gt;
-</code></pre>
-</div>
+ </p>
 
 <p>See <a href="action-mapper.html">ActionMapper</a> for more details</p>
 
@@ -159,73 +157,65 @@
 
 <p>####Parameters####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- &lt;ul&gt;
- &lt;li&gt;&lt;b&gt;actionName (default)&lt;/b&gt; - The name of the action that will be
- redirected to.&lt;/li&gt;
- &lt;li&gt;&lt;b&gt;namespace&lt;/b&gt; - Used to determine which namespace the action is in
+<ul>
+ <li><b>actionName (default)</b> - The name of the action that will be
+ redirected to.</li>
+ <li><b>namespace</b> - Used to determine which namespace the action is in
  that we're redirecting to.  If namespace is null, the default will be the
- current namespace.&lt;/li&gt;
- &lt;li&gt;&lt;b&gt;suppressEmptyParameters&lt;/b&gt; - Optional boolean (defaults to false) that
+ current namespace.</li>
+ <li><b>suppressEmptyParameters</b> - Optional boolean (defaults to false) that
  can prevent parameters with no values from being included in the redirect
- URL.&lt;/li&gt;
- &lt;li&gt;&lt;b&gt;parse&lt;/b&gt; - Boolean, true by default.  If set to false, the actionName
- param will not be parsed for Ognl expressions.&lt;/li&gt;
- &lt;li&gt;&lt;b&gt;anchor&lt;/b&gt; - Optional.  Also known as "fragment" or colloquially as
- "hash".  You can specify an anchor for a result.&lt;/li&gt;
- &lt;/ul&gt;
-
-</code></pre>
-</div>
+ URL.</li>
+ <li><b>parse</b> - Boolean, true by default.  If set to false, the actionName
+ param will not be parsed for Ognl expressions.</li>
+ <li><b>anchor</b> - Optional.  Also known as "fragment" or colloquially as
+ "hash".  You can specify an anchor for a result.</li>
+ </ul>
 
 <p>####Examples####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;package name="public" extends="struts-default"&amp;gt;
-     &amp;lt;action name="login" class="..."&amp;gt;
-         &amp;lt;!-- Redirect to another namespace --&amp;gt;
-         &amp;lt;result type="redirectAction"&amp;gt;
-             &amp;lt;param name="actionName"&amp;gt;dashboard&amp;lt;/param&amp;gt;
-             &amp;lt;param name="namespace"&amp;gt;/secure&amp;lt;/param&amp;gt;
-         &amp;lt;/result&amp;gt;
-     &amp;lt;/action&amp;gt;
- &amp;lt;/package&amp;gt;
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>package name="public" extends="struts-default"<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>action name="login" class="..."<span class="ni">&amp;gt;</span>
+         <span class="ni">&amp;lt;</span>!-- Redirect to another namespace --<span class="ni">&amp;gt;</span>
+         <span class="ni">&amp;lt;</span>result type="redirectAction"<span class="ni">&amp;gt;</span>
+             <span class="ni">&amp;lt;</span>param name="actionName"<span class="ni">&amp;gt;</span>dashboard<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+             <span class="ni">&amp;lt;</span>param name="namespace"<span class="ni">&amp;gt;</span>/secure<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+         <span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/package<span class="ni">&amp;gt;</span>
 
- &amp;lt;package name="secure" extends="struts-default" namespace="/secure"&amp;gt;
-     &amp;lt;-- Redirect to an action in the same namespace --&amp;gt;
-     &amp;lt;action name="dashboard" class="..."&amp;gt;
-         &amp;lt;result&amp;gt;dashboard.jsp&amp;lt;/result&amp;gt;
-         &amp;lt;result name="error" type="redirectAction"&amp;gt;error&amp;lt;/result&amp;gt;
-     &amp;lt;/action&amp;gt;
+ <span class="ni">&amp;lt;</span>package name="secure" extends="struts-default" namespace="/secure"<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>-- Redirect to an action in the same namespace --<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>action name="dashboard" class="..."<span class="ni">&amp;gt;</span>
+         <span class="ni">&amp;lt;</span>result<span class="ni">&amp;gt;</span>dashboard.jsp<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+         <span class="ni">&amp;lt;</span>result name="error" type="redirectAction"<span class="ni">&amp;gt;</span>error<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
 
-     &amp;lt;action name="error" class="..."&amp;gt;
-         &amp;lt;result&amp;gt;error.jsp&amp;lt;/result&amp;gt;
-     &amp;lt;/action&amp;gt;
- &amp;lt;/package&amp;gt;
+     <span class="ni">&amp;lt;</span>action name="error" class="..."<span class="ni">&amp;gt;</span>
+         <span class="ni">&amp;lt;</span>result<span class="ni">&amp;gt;</span>error.jsp<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/package<span class="ni">&amp;gt;</span>
 
- &amp;lt;package name="passingRequestParameters" extends="struts-default" namespace="/passingRequestParameters"&amp;gt;
-    &amp;lt;!-- Pass parameters (reportType, width and height) --&amp;gt;
-    &amp;lt;!--
+ <span class="ni">&amp;lt;</span>package name="passingRequestParameters" extends="struts-default" namespace="/passingRequestParameters"<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>!-- Pass parameters (reportType, width and height) --<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>!--
     The redirectAction url generated will be :
-    /genReport/generateReport.action?reportType=pie&amp;amp;width=100&amp;amp;height=100#summary
-    --&amp;gt;
-    &amp;lt;action name="gatherReportInfo" class="..."&amp;gt;
-       &amp;lt;result name="showReportResult" type="redirectAction"&amp;gt;
-          &amp;lt;param name="actionName"&amp;gt;generateReport&amp;lt;/param&amp;gt;
-          &amp;lt;param name="namespace"&amp;gt;/genReport&amp;lt;/param&amp;gt;
-          &amp;lt;param name="reportType"&amp;gt;pie&amp;lt;/param&amp;gt;
-          &amp;lt;param name="width"&amp;gt;100&amp;lt;/param&amp;gt;
-          &amp;lt;param name="height"&amp;gt;100&amp;lt;/param&amp;gt;
-          &amp;lt;param name="empty"&amp;gt;&amp;lt;/param&amp;gt;
-          &amp;lt;param name="suppressEmptyParameters"&amp;gt;true&amp;lt;/param&amp;gt;
-          &amp;lt;param name="anchor"&amp;gt;summary&amp;lt;/param&amp;gt;
-       &amp;lt;/result&amp;gt;
-    &amp;lt;/action&amp;gt;
- &amp;lt;/package&amp;gt;
+    /genReport/generateReport.action?reportType=pie<span class="ni">&amp;amp;</span>width=100<span class="ni">&amp;amp;</span>height=100#summary
+    --<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>action name="gatherReportInfo" class="..."<span class="ni">&amp;gt;</span>
+       <span class="ni">&amp;lt;</span>result name="showReportResult" type="redirectAction"<span class="ni">&amp;gt;</span>
+          <span class="ni">&amp;lt;</span>param name="actionName"<span class="ni">&amp;gt;</span>generateReport<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+          <span class="ni">&amp;lt;</span>param name="namespace"<span class="ni">&amp;gt;</span>/genReport<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+          <span class="ni">&amp;lt;</span>param name="reportType"<span class="ni">&amp;gt;</span>pie<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+          <span class="ni">&amp;lt;</span>param name="width"<span class="ni">&amp;gt;</span>100<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+          <span class="ni">&amp;lt;</span>param name="height"<span class="ni">&amp;gt;</span>100<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+          <span class="ni">&amp;lt;</span>param name="empty"<span class="ni">&amp;gt;&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+          <span class="ni">&amp;lt;</span>param name="suppressEmptyParameters"<span class="ni">&amp;gt;</span>true<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+          <span class="ni">&amp;lt;</span>param name="anchor"<span class="ni">&amp;gt;</span>summary<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
+       <span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/package<span class="ni">&amp;gt;</span>
 
-
-```
 
 </code></pre>
 </div>

@@ -129,126 +129,116 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/type-conversion-annotation.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="typeconversion-annotation">TypeConversion Annotation</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;This annotation is used for class and application wide conversion rules.&lt;/p&gt;
+<p>This annotation is used for class and application wide conversion rules.</p>
 
- &lt;p&gt;
- Class wide conversion:&lt;br&gt;
- The conversion rules will be assembled in a file called &lt;code&gt;XXXAction-conversion.properties&lt;/code&gt;
+<p>
+ Class wide conversion:<br />
+ The conversion rules will be assembled in a file called <code>XXXAction-conversion.properties</code>
  within the same package as the related action class.
- Set type to: &lt;code&gt;type = ConversionType.CLASS&lt;/code&gt;
- &lt;/p&gt;
+ Set type to: <code>type = ConversionType.CLASS</code>
+ </p>
 
- &lt;p&gt;
- Application wide conversion:&lt;br&gt;
- The conversion rules will be assembled within the &lt;code&gt;xwork-conversion.properties&lt;/code&gt; file within the classpath root.
- Set type to: &lt;code&gt;type = ConversionType.APPLICATION&lt;/code&gt;
- &lt;/p&gt;
-</code></pre>
-</div>
+<p>
+ Application wide conversion:<br />
+ The conversion rules will be assembled within the <code>xwork-conversion.properties</code> file within the classpath root.
+ Set type to: <code>type = ConversionType.APPLICATION</code>
+ </p>
 
 <p>#####Usage#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;The TypeConversion annotation can be applied at property and method level.&lt;/p&gt;
-</code></pre>
-</div>
+<p>The TypeConversion annotation can be applied at property and method level.</p>
 
 <p>#####Parameters#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;table summary=""&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;Parameter&lt;/th&gt;
- &lt;th&gt;Required&lt;/th&gt;
- &lt;th&gt;Default&lt;/th&gt;
- &lt;th&gt;Description&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- &lt;tr&gt;
- &lt;td&gt;key&lt;/td&gt;
- &lt;td&gt;no&lt;/td&gt;
- &lt;td&gt;The annotated property/key name&lt;/td&gt;
- &lt;td&gt;The optional property name mostly used within TYPE level annotations.&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;type&lt;/td&gt;
- &lt;td&gt;no&lt;/td&gt;
- &lt;td&gt;ConversionType.CLASS&lt;/td&gt;
- &lt;td&gt;Enum value of ConversionType.  Determines whether the conversion should be applied at application or class level.&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;rule&lt;/td&gt;
- &lt;td&gt;no&lt;/td&gt;
- &lt;td&gt;ConversionRule.PROPERTY&lt;/td&gt;
- &lt;td&gt;Enum value of ConversionRule. The ConversionRule can be a property, a Collection or a Map.&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;converter&lt;/td&gt;
- &lt;td&gt;DEPRECATED: either this or value&lt;/td&gt;
- &lt;td&gt;&amp;nbsp;&lt;/td&gt;
- &lt;td&gt;The class name of the TypeConverter to be used as converter.&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;converterClass&lt;/td&gt;
- &lt;td&gt;either this or value&lt;/td&gt;
- &lt;td&gt;&amp;nbsp;&lt;/td&gt;
- &lt;td&gt;The class of the TypeConverter to be used as converter. XWorkBasicConverter by default.&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;value&lt;/td&gt;
- &lt;td&gt;either converter or this&lt;/td&gt;
- &lt;td&gt;&amp;nbsp;&lt;/td&gt;
- &lt;td&gt;The value to set for ConversionRule.KEY_PROPERTY.&lt;/td&gt;
- &lt;/tr&gt;
- &lt;/tbody&gt;
- &lt;/table&gt;
-
-</code></pre>
-</div>
+<table summary="">
+ <thead>
+ <tr>
+ <th>Parameter</th>
+ <th>Required</th>
+ <th>Default</th>
+ <th>Description</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>key</td>
+ <td>no</td>
+ <td>The annotated property/key name</td>
+ <td>The optional property name mostly used within TYPE level annotations.</td>
+ </tr>
+ <tr>
+ <td>type</td>
+ <td>no</td>
+ <td>ConversionType.CLASS</td>
+ <td>Enum value of ConversionType.  Determines whether the conversion should be applied at application or class level.</td>
+ </tr>
+ <tr>
+ <td>rule</td>
+ <td>no</td>
+ <td>ConversionRule.PROPERTY</td>
+ <td>Enum value of ConversionRule. The ConversionRule can be a property, a Collection or a Map.</td>
+ </tr>
+ <tr>
+ <td>converter</td>
+ <td>DEPRECATED: either this or value</td>
+ <td>&nbsp;</td>
+ <td>The class name of the TypeConverter to be used as converter.</td>
+ </tr>
+ <tr>
+ <td>converterClass</td>
+ <td>either this or value</td>
+ <td>&nbsp;</td>
+ <td>The class of the TypeConverter to be used as converter. XWorkBasicConverter by default.</td>
+ </tr>
+ <tr>
+ <td>value</td>
+ <td>either converter or this</td>
+ <td>&nbsp;</td>
+ <td>The value to set for ConversionRule.KEY_PROPERTY.</td>
+ </tr>
+ </tbody>
+ </table>
 
 <p>#####Examples#####</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```java
- &amp;#64;Conversion()
- public class ConversionAction implements Action {
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">Conversion</span><span class="o">()</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConversionAction</span> <span class="kd">implements</span> <span class="n">Action</span> <span class="o">{</span>
 
-   private String convertInt;
+   <span class="kd">private</span> <span class="n">String</span> <span class="n">convertInt</span><span class="o">;</span>
 
-   private String convertDouble;
-   private List users = null;
+   <span class="kd">private</span> <span class="n">String</span> <span class="n">convertDouble</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="n">List</span> <span class="n">users</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
-   private HashMap keyValues = null;
+   <span class="kd">private</span> <span class="n">HashMap</span> <span class="n">keyValues</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
-   &amp;#64;TypeConversion(type = ConversionType.APPLICATION)
-   public void setConvertInt( String convertInt ) {
-       this.convertInt = convertInt;
-   }
+   <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">TypeConversion</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ConversionType</span><span class="o">.</span><span class="na">APPLICATION</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="n">setConvertInt</span><span class="o">(</span> <span class="n">String</span> <span class="n">convertInt</span> <span class="o">)</span> <span class="o">{</span>
+       <span class="k">this</span><span class="o">.</span><span class="na">convertInt</span> <span class="o">=</span> <span class="n">convertInt</span><span class="o">;</span>
+   <span class="o">}</span>
 
-   &amp;#64;TypeConversion(converterClass = XWorkBasicConverter.class)
-   public void setConvertDouble( String convertDouble ) {
-       this.convertDouble = convertDouble;
-   }
+   <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">TypeConversion</span><span class="o">(</span><span class="n">converterClass</span> <span class="o">=</span> <span class="n">XWorkBasicConverter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="n">setConvertDouble</span><span class="o">(</span> <span class="n">String</span> <span class="n">convertDouble</span> <span class="o">)</span> <span class="o">{</span>
+       <span class="k">this</span><span class="o">.</span><span class="na">convertDouble</span> <span class="o">=</span> <span class="n">convertDouble</span><span class="o">;</span>
+   <span class="o">}</span>
 
-   &amp;#64;TypeConversion(rule = ConversionRule.COLLECTION, converterClass = String.class)
-   public void setUsers( List users ) {
-       this.users = users;
-   }
+   <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">TypeConversion</span><span class="o">(</span><span class="n">rule</span> <span class="o">=</span> <span class="n">ConversionRule</span><span class="o">.</span><span class="na">COLLECTION</span><span class="o">,</span> <span class="n">converterClass</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUsers</span><span class="o">(</span> <span class="n">List</span> <span class="n">users</span> <span class="o">)</span> <span class="o">{</span>
+       <span class="k">this</span><span class="o">.</span><span class="na">users</span> <span class="o">=</span> <span class="n">users</span><span class="o">;</span>
+   <span class="o">}</span>
 
-   &amp;#64;TypeConversion(rule = ConversionRule.MAP, converterClass = BigInteger.class)
-   public void setKeyValues( HashMap keyValues ) {
-       this.keyValues = keyValues;
-   }
+   <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">TypeConversion</span><span class="o">(</span><span class="n">rule</span> <span class="o">=</span> <span class="n">ConversionRule</span><span class="o">.</span><span class="na">MAP</span><span class="o">,</span> <span class="n">converterClass</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="n">setKeyValues</span><span class="o">(</span> <span class="n">HashMap</span> <span class="n">keyValues</span> <span class="o">)</span> <span class="o">{</span>
+       <span class="k">this</span><span class="o">.</span><span class="na">keyValues</span> <span class="o">=</span> <span class="n">keyValues</span><span class="o">;</span>
+   <span class="o">}</span>
 
-   &amp;#64;TypeConversion(type = ConversionType.APPLICATION, property = "java.util.Date", converterClass = XWorkBasicConverter.class)
-   public String execute() throws Exception {
-       return SUCCESS;
-   }
- }
-```
-
+   <span class="o">&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;</span><span class="n">TypeConversion</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ConversionType</span><span class="o">.</span><span class="na">APPLICATION</span><span class="o">,</span> <span class="n">property</span> <span class="o">=</span> <span class="s">"java.util.Date"</span><span class="o">,</span> <span class="n">converterClass</span> <span class="o">=</span> <span class="n">XWorkBasicConverter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+       <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+   <span class="o">}</span>
+ <span class="o">}</span>
 </code></pre>
 </div>
+
 
   </section>
 </article>

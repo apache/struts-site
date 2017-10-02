@@ -133,60 +133,82 @@
 
 <h2 id="description">Description</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;Instantiates a class that conforms to the JavaBeans specification. This tag has a body which can contain
- a number of {@link Param} elements to set any mutator methods on that class.&lt;/p&gt;
+<p>Instantiates a class that conforms to the JavaBeans specification. This tag has a body which can contain
+ a number of {@link Param} elements to set any mutator methods on that class.</p>
 
- &lt;p&gt;If the var attribute is set on the BeanTag, it will place the instantiated bean into the
- stack's Context.&lt;/p&gt;
-
-</code></pre>
-</div>
+<p>If the var attribute is set on the BeanTag, it will place the instantiated bean into the
+ stack's Context.</p>
 
 <h2 id="parameters">Parameters</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: tagattributes not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/struts2-tags/bean/html.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code>	&lt;table width="100%"&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&lt;h4&gt;Dynamic Attributes Allowed:&lt;/h4&gt; false&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td colspan="6"&gt;&amp;nbsp;&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Name&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Required&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Default&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Evaluated&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Type&lt;/h4&gt;&lt;/th&gt;
+			&lt;th align="left" valign="top"&gt;&lt;h4&gt;Description&lt;/h4&gt;&lt;/th&gt;
+		&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;name&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;strong&gt;true&lt;/strong&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;The class name of the bean to be instantiated (must respect JavaBean specification)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td align="left" valign="top"&gt;var&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;false&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;String&lt;/td&gt;
+				&lt;td align="left" valign="top"&gt;Name used to reference the value pushed into the Value Stack&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/table&gt;
 </code></pre>
 </div>
 
 <h2 id="examples">Examples</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```xml
- &amp;lt;-- in freemarker form --&amp;gt;
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>-- in freemarker form --<span class="ni">&amp;gt;</span>
  [@s.bean name="org.apache.struts2.example.counter.SimpleCounter" var="counter"]
    [s:param name="foo" value="BAR"/]
    The value of foo is : [s:property value="foo"/], when inside the bean tag.
  [/s:bean]
 
- &amp;lt;-- in jsp form --&amp;gt;
- &amp;lt;s:bean name="org.apache.struts2.example.counter.SimpleCounter" var="counter"&amp;gt;
-   &amp;lt;s:param name="foo" value="BAR" /&amp;gt;
-   The value of foot is : &amp;lt;s:property value="foo"/&amp;gt;, when inside the bean tag &amp;lt;br /&amp;gt;
- &amp;lt;/s:bean&amp;gt;
-```
-
+ <span class="ni">&amp;lt;</span>-- in jsp form --<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>s:bean name="org.apache.struts2.example.counter.SimpleCounter" var="counter"<span class="ni">&amp;gt;</span>
+   <span class="ni">&amp;lt;</span>s:param name="foo" value="BAR" /<span class="ni">&amp;gt;</span>
+   The value of foot is : <span class="ni">&amp;lt;</span>s:property value="foo"/<span class="ni">&amp;gt;</span>, when inside the bean tag <span class="ni">&amp;lt;</span>br /<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:bean<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;p&gt;This example instantiates a bean called SimpleCounter and sets the foo property (setFoo('BAR')). The
+<p>This example instantiates a bean called SimpleCounter and sets the foo property (setFoo('BAR')). The
  SimpleCounter object is then pushed onto the Valuestack, which means that we can call its accessor methods (getFoo())
- with the Property tag and get their values.&lt;/p&gt;
+ with the Property tag and get their values.</p>
 
- &lt;p&gt;In the above example, the id has been set to a value of &lt;i&gt;counter&lt;/i&gt;. This means that the SimpleCounter class
- will be placed into the stack's context. You can access the SimpleCounter class using a Struts tag:&lt;/p&gt;
+<p>In the above example, the id has been set to a value of <i>counter</i>. This means that the SimpleCounter class
+ will be placed into the stack's context. You can access the SimpleCounter class using a Struts tag:</p>
 
- &lt;pre&gt;
- &amp;lt;-- jsp form --&amp;gt;
- &amp;lt;s:property value="#counter" /&amp;gt;
+<pre>
+ &lt;-- jsp form --&gt;
+ &lt;s:property value="#counter" /&gt;
 
- &amp;lt;-- freemarker form --&amp;gt;
+ &lt;-- freemarker form --&gt;
  [s:property value="#counter.foo"/]
- &lt;/pre&gt;
+ </pre>
 
- &lt;p&gt;In the property tag example, the &lt;i&gt;#&lt;/i&gt; tells Ognl to search the context for the SimpleCounter class which has
- an id(key) of &lt;i&gt;counter&lt;/i&gt;&lt;/p&gt;
-</code></pre>
-</div>
+<p>In the property tag example, the <i>#</i> tells Ognl to search the context for the SimpleCounter class which has
+ an id(key) of <i>counter</i></p>
 
   </section>
 </article>
