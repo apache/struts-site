@@ -88,20 +88,33 @@ module Jekyll
     end
 
     def absolute_url(url)
+      p = 'struts'
+      f = ''
+      tail = ''
       slashIndex = url.index('/')
       unless slashIndex
         url = url.strip.gsub!('.','/')
-        url = 'https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/' + url
-        url = url + '.java;hb=HEAD'
+        tail = '.java'
+        if url.start_with?('org/apache/struts2/dojo/')
+          p = 'struts-archive'
+          f = 'plugins/struts2-dojo-plugin/src/main/java/'
+        else
+          f = 'core/src/main/java/'
+        end
       else
         baseUrl = url[0..slashIndex]
         url = url[slashIndex+1..-1]
         if baseUrl.casecmp("struts2-tags/") == 0
-          url = "core/src/site/resources/tags/" + url
+          f = 'core/src/site/resources/tags/'
+        else
+          if url.start_with?('plugins/dojo/')
+            p = 'struts-archive'
+            f = 'plugins/struts2-dojo-plugin/'
+            url = url[13..-1]
+          end
         end
-        url = 'https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=' + url
-        url = url + ';hb=HEAD'
       end
+      url = 'https://gitbox.apache.org/repos/asf?p=' + p + '.git;a=blob_plain;f=' + f + url + tail + ';hb=HEAD'
     end
 
     def escape_brackets(content)
