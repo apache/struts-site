@@ -38,6 +38,8 @@ Please make sure you have read the guidelines on [this page](mail.html)
     </tr>
 </table>
 
+You can use a web interface as well if you want to post a question [https://lists.apache.org/](https://lists.apache.org/list.html?dev@struts.apache.org)
+{:.alert .alert-success}
 
 # Archives
 
