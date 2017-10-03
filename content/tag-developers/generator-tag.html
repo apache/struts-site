@@ -203,22 +203,22 @@
 <div class="highlighter-rouge"><pre class="highlight"><code> Example One:
  <span class="nt">&lt;pre&gt;</span>
  Generate a simple iterator
- <span class="ni">&amp;lt;</span>s:generator val="%{'aaa,bbb,ccc,ddd,eee'}"<span class="ni">&amp;gt;</span>
-  <span class="ni">&amp;lt;</span>s:iterator<span class="ni">&amp;gt;</span>
-      <span class="ni">&amp;lt;</span>s:property /<span class="ni">&amp;gt;&amp;lt;</span>br/<span class="ni">&amp;gt;</span>
-  <span class="ni">&amp;lt;</span>/s:iterator<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/s:generator<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;s:generator</span> <span class="na">val=</span><span class="s">"%{'aaa,bbb,ccc,ddd,eee'}"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;s:iterator&gt;</span>
+      <span class="nt">&lt;s:property</span> <span class="nt">/&gt;&lt;br/&gt;</span>
+  <span class="nt">&lt;/s:iterator&gt;</span>
+ <span class="nt">&lt;/s:generator&gt;</span>
  <span class="nt">&lt;/pre&gt;</span>
  This generates an iterator and print it out using the iterator tag.
 
  Example Two:
  <span class="nt">&lt;pre&gt;</span>
  Generate an iterator with count attribute
- <span class="ni">&amp;lt;</span>s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" count="3"<span class="ni">&amp;gt;</span>
-  <span class="ni">&amp;lt;</span>s:iterator<span class="ni">&amp;gt;</span>
-      <span class="ni">&amp;lt;</span>s:property /<span class="ni">&amp;gt;&amp;lt;</span>br/<span class="ni">&amp;gt;</span>
-  <span class="ni">&amp;lt;</span>/s:iterator<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/s:generator<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;s:generator</span> <span class="na">val=</span><span class="s">"%{'aaa,bbb,ccc,ddd,eee'}"</span> <span class="na">count=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;s:iterator&gt;</span>
+      <span class="nt">&lt;s:property</span> <span class="nt">/&gt;&lt;br/&gt;</span>
+  <span class="nt">&lt;/s:iterator&gt;</span>
+ <span class="nt">&lt;/s:generator&gt;</span>
  <span class="nt">&lt;/pre&gt;</span>
  This generates an iterator, but only 3 entries will be available in the iterator
  generated, namely aaa, bbb and ccc respectively because count attribute is set to 3
@@ -226,14 +226,14 @@
  Example Three:
  <span class="nt">&lt;pre&gt;</span>
  Generate an iterator with var attribute
- <span class="ni">&amp;lt;</span>s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" count="4" separator="," var="myAtt" /<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>%
+ <span class="nt">&lt;s:generator</span> <span class="na">val=</span><span class="s">"%{'aaa,bbb,ccc,ddd,eee'}"</span> <span class="na">count=</span><span class="s">"4"</span> <span class="na">separator=</span><span class="s">","</span> <span class="na">var=</span><span class="s">"myAtt"</span> <span class="nt">/&gt;</span>
+ <span class="err">&lt;</span>%
   Iterator i = (Iterator) pageContext.getAttribute("myAtt");
   while(i.hasNext()) {
-      String s = (String) i.next(); %<span class="ni">&amp;gt;</span>
-      <span class="ni">&amp;lt;</span>%=s%<span class="ni">&amp;gt;</span> <span class="ni">&amp;lt;</span>br/<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>%    }
- %<span class="ni">&amp;gt;</span>
+      String s = (String) i.next(); %&gt;
+      <span class="err">&lt;</span>%=s%&gt; <span class="nt">&lt;br/&gt;</span>
+ <span class="err">&lt;</span>%    }
+ %&gt;
  <span class="nt">&lt;/pre&gt;</span>
  This generates an iterator and put it in the PageContext under the key as specified
  by the var attribute.
@@ -242,11 +242,11 @@
  Example Four:
  <span class="nt">&lt;pre&gt;</span>
  Generate an iterator with comparator attribute
- <span class="ni">&amp;lt;</span>s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" converter="%{myConverter}"<span class="ni">&amp;gt;</span>
-  <span class="ni">&amp;lt;</span>s:iterator<span class="ni">&amp;gt;</span>
-      <span class="ni">&amp;lt;</span>s:property /<span class="ni">&amp;gt;&amp;lt;</span>br/<span class="ni">&amp;gt;</span>
-  <span class="ni">&amp;lt;</span>/s:iterator<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/s:generator<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;s:generator</span> <span class="na">val=</span><span class="s">"%{'aaa,bbb,ccc,ddd,eee'}"</span> <span class="na">converter=</span><span class="s">"%{myConverter}"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;s:iterator&gt;</span>
+      <span class="nt">&lt;s:property</span> <span class="nt">/&gt;&lt;br/&gt;</span>
+  <span class="nt">&lt;/s:iterator&gt;</span>
+ <span class="nt">&lt;/s:generator&gt;</span>
 
 
  public class GeneratorTagAction extends ActionSupport {

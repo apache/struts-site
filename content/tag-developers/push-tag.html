@@ -172,10 +172,10 @@
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:push value="user"<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>s:propery value="firstName" /<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>s:propery value="lastName" /<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/s:push<span class="ni">&amp;gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"user"</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;s:propery</span> <span class="na">value=</span><span class="s">"firstName"</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;s:propery</span> <span class="na">value=</span><span class="s">"lastName"</span> <span class="nt">/&gt;</span>
+ <span class="nt">&lt;/s:push&gt;</span>
 </code></pre>
 </div>
 
@@ -183,11 +183,11 @@
  (firstName, lastName etc) since user is now at the top of the stack
 </code></pre>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="ni">&amp;lt;</span>s:push value="myObject"<span class="ni">&amp;gt;</span>                              ----- (1)
-       <span class="ni">&amp;lt;</span>s:bean name="jp.SomeBean" var="myBean"/<span class="ni">&amp;gt;</span>        ----- (2)
-          <span class="ni">&amp;lt;</span>s:param name="myParam" value="top"/<span class="ni">&amp;gt;</span>        ----- (3)
-       <span class="ni">&amp;lt;</span>/s:bean<span class="ni">&amp;gt;</span>
-   <span class="ni">&amp;lt;</span>/s:push<span class="ni">&amp;gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                              ----- (1)
+       <span class="nt">&lt;s:bean</span> <span class="na">name=</span><span class="s">"jp.SomeBean"</span> <span class="na">var=</span><span class="s">"myBean"</span><span class="nt">/&gt;</span>        ----- (2)
+          <span class="nt">&lt;s:param</span> <span class="na">name=</span><span class="s">"myParam"</span> <span class="na">value=</span><span class="s">"top"</span><span class="nt">/&gt;</span>        ----- (3)
+       <span class="nt">&lt;/s:bean&gt;</span>
+   <span class="nt">&lt;/s:push&gt;</span>
 </code></pre>
 </div>
 
@@ -196,11 +196,11 @@
  when in (3), top will get the jp.SomeBean instance
 </code></pre>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:push value="myObject"<span class="ni">&amp;gt;</span>                                       ---(A)
-    <span class="ni">&amp;lt;</span>s:bean name="jp.SomeBean" var="myBean"/<span class="ni">&amp;gt;</span>                   ---(B)
-       <span class="ni">&amp;lt;</span>s:param name="myParam" value="top.mySomeOtherValue"/<span class="ni">&amp;gt;</span>  ---(C)
-    <span class="ni">&amp;lt;</span>/s:bean<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/s:push<span class="ni">&amp;gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                                       ---(A)
+    <span class="nt">&lt;s:bean</span> <span class="na">name=</span><span class="s">"jp.SomeBean"</span> <span class="na">var=</span><span class="s">"myBean"</span><span class="nt">/&gt;</span>                   ---(B)
+       <span class="nt">&lt;s:param</span> <span class="na">name=</span><span class="s">"myParam"</span> <span class="na">value=</span><span class="s">"top.mySomeOtherValue"</span><span class="nt">/&gt;</span>  ---(C)
+    <span class="nt">&lt;/s:bean&gt;</span>
+ <span class="nt">&lt;/s:push&gt;</span>
 </code></pre>
 </div>
 
@@ -209,11 +209,11 @@
  when in (C), top refers to jp.SomeBean instance. so top.mySomeOtherValue would invoke SomeBean's mySomeOtherValue() method
 </code></pre>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:push value="myObject"<span class="ni">&amp;gt;</span>                                 ---- (i)
-    <span class="ni">&amp;lt;</span>s:bean name="jp.SomeBean" var="myBean"/<span class="ni">&amp;gt;</span>             ---- (ii)
-       <span class="ni">&amp;lt;</span>s:param name="myParam" value="[1].top"/<span class="ni">&amp;gt;</span>         -----(iii)
-    <span class="ni">&amp;lt;</span>/s:bean<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/s:push<span class="ni">&amp;gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                                 ---- (i)
+    <span class="nt">&lt;s:bean</span> <span class="na">name=</span><span class="s">"jp.SomeBean"</span> <span class="na">var=</span><span class="s">"myBean"</span><span class="nt">/&gt;</span>             ---- (ii)
+       <span class="nt">&lt;s:param</span> <span class="na">name=</span><span class="s">"myParam"</span> <span class="na">value=</span><span class="s">"[1].top"</span><span class="nt">/&gt;</span>         -----(iii)
+    <span class="nt">&lt;/s:bean&gt;</span>
+ <span class="nt">&lt;/s:push&gt;</span>
 </code></pre>
 </div>
 

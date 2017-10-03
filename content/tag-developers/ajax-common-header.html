@@ -859,7 +859,7 @@ Get list from an action:
 
 
 ```xml
- &lt;sx:autocompleter name="autocompleter1" href="%{jsonList}"/&gt;
+ <sx:autocompleter name="autocompleter1" href="%{jsonList}" />
 ```
 
 
@@ -868,7 +868,7 @@ Uses a list:
 
 
 ```xml
- &lt;s:autocompleter name="test"  list="{'apple','banana','grape','pear'}" autoComplete="false"/&gt;
+ <s:autocompleter name="test" list="{'apple','banana','grape','pear'}" autocomplete="false" />
 ```
 
 
@@ -877,7 +877,7 @@ Autocompleter that reloads its content everytime the text changes (and the lengt
 
 
 ```xml
- &lt;sx:autocompleter name="mvc" href="%{jsonList}" loadOnTextChange="true" loadMinimumCount="3"/&gt;
+ <sx:autocompleter name="mvc" href="%{jsonList}" loadontextchange="true" loadminimumcount="3" />
  
  The text entered on the autocompleter is passed as a parameter to the url specified in "href", like (text is "struts"):
   
@@ -890,10 +890,10 @@ Linking two autocompleters:
 
 
 ```xml
- &lt;form id="selectForm"&gt;
-      &lt;sx:autocompleter  name="select" list="{'fruits','colors'}"  valueNotifyTopics="/changed" /&gt;
- &lt;/form&gt;  
- &lt;sx:autocompleter  href="%{jsonList}" formId="selectForm" listenTopics="/changed"/&gt;
+ <form id="selectForm">
+      <sx:autocompleter name="select" list="{'fruits','colors'}" valuenotifytopics="/changed" />
+ </form>  
+ <sx:autocompleter href="%{jsonList}" formid="selectForm" listentopics="/changed" />
 ```
 
 
@@ -902,8 +902,8 @@ Set/Get selected values using JavaScript:
 
 
 ```xml
- &lt;sx:autocompleter  href="%{jsonList}" id="auto"/&gt;
- &lt;script type="text/javascript"&gt;
+ <sx:autocompleter href="%{jsonList}" id="auto" />
+ <script type="text/javascript">
    function getValues() {
       var autoCompleter = dojo.widget.byId("auto");
       
@@ -929,7 +929,7 @@ Set/Get selected values using JavaScript:
       //value (key will be set to "AL" and value to "Alabama")
       autoCompleter.setAllValues("AL", "Alabama");
    }
- &lt;/script&gt;
+ </script>
 ```
 
 
@@ -938,13 +938,13 @@ Using beforeNotifyTopics:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/before", function(event, widget){
      alert('inside a topic event. before request');
      //event: set event.cancel = true, to cancel request
      //widget: widget that published the topic
  });
- &lt;/script&gt;         
+ </script>         
  
  &lt;sx:autocompleter beforeNotifyTopics="/before" href="%{#ajaxTest} /&gt;
 ```
@@ -955,37 +955,37 @@ Using errorNotifyTopics:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/after", function(data, request, widget){
      alert('inside a topic event. after request');
      //data : JavaScript object from parsing response
      //request: XMLHttpRequest object
      //widget: widget that published the topic
  });
- &lt;/script&gt;        
+ </script>        
  
- &lt;sx:autocompleter afterNotifyTopics="/after" href="%{#ajaxTest}" /&gt;
+ <sx:autocompleter afternotifytopics="/after" href="%{#ajaxTest}" />
 ```
 
 
 Using errorNotifyTopics:
 
 
-<p> &lt;script type="text/javascript"&gt;
+<p> <script type="text/javascript">
  dojo.event.topic.subscribe("/error", function(error, request, widget){
      alert('inside a topic event. on error');
      //error : error object (error.message has the error message)
      //request: XMLHttpRequest object
      //widget: widget that published the topic
  });
- &lt;/script&gt;
+ </script>
  
- &lt;sx:autocompleter errorNotifyTopics="/error" href="%{#ajaxTest}" /&gt;</p>
+ <sx:autocompleter errornotifytopics="/error" href="%{#ajaxTest}" /></p>
 
 Using valueNotifyTopics:
 
 
-<p> &lt;script type="text/javascript"&gt;
+<p> <script type="text/javascript">
  dojo.event.topic.subscribe("/value", function(value, key, text, widget){
      alert('inside a topic event. after value changed');
      //value : selected value (like "Florida" in example above)
@@ -993,9 +993,9 @@ Using valueNotifyTopics:
      //text: text typed into textbox
      //widget: widget that published the topic
  });
- &lt;/script&gt;   
+ </script>   
  
- &lt;sx:autocompleter valueNotifyTopics="/value" href="%{#ajaxTest}" /&gt;</p>
+ <sx:autocompleter valuenotifytopics="/value" href="%{#ajaxTest}" /></p>
 
 __Caveats__
 
@@ -1265,8 +1265,8 @@ Without attaching to an event, listening to a topic (used to make an Ajax call):
 
 
 ```xml
- &lt;sx:bind href="%{#ajaxTest}" listenTopics="/makecall"/&gt;
- &lt;s:submit onclick="dojo.event.topic.publish('/makecall')"/&gt;
+ <sx:bind href="%{#ajaxTest}" listentopics="/makecall" />
+ <s:submit onclick="dojo.event.topic.publish('/makecall')" />
 ```
 
 
@@ -1275,9 +1275,9 @@ Attached to event 'onclick' on submit button:
 
 
 ```xml
- &lt;img id="indicator" src="${pageContext.request.contextPath}/images/indicator.gif" alt="Loading..." style="display:none"/&gt;
- &lt;sx:bind id="ex1" href="%{#ajaxTest}" sources="button" targets="div1" events="onclick" indicator="indicator" /&gt;
- &lt;s:submit theme="simple" type="submit" value="submit" id="button"/&gt;
+ <img id="indicator" src="${pageContext.request.contextPath}/images/indicator.gif" alt="Loading..." style="display:none" />
+ <sx:bind id="ex1" href="%{#ajaxTest}" sources="button" targets="div1" events="onclick" indicator="indicator" />
+ <s:submit theme="simple" type="submit" value="submit" id="button" />
 ```
 
 
@@ -1286,10 +1286,10 @@ Submit form:
 
 
 ```xml
- &lt;sx:bind id="ex3" href="%{#ajaxTest}" sources="chk1" targets="div1" events="onchange" formId="form1" /&gt;
- &lt;form id="form1"&gt;
-     &lt;s:checkbox name="data" label="Hit me" id="chk1"/&gt;
- &lt;/form&gt;
+ <sx:bind id="ex3" href="%{#ajaxTest}" sources="chk1" targets="div1" events="onchange" formid="form1" />
+ <form id="form1">
+     <s:checkbox name="data" label="Hit me" id="chk1" />
+ </form>
 ```
 
 
@@ -1298,16 +1298,16 @@ Using beforeNotifyTopics:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/before", function(event, widget){
      alert('inside a topic event. before request');
      //event: set event.cancel = true, to cancel request
      //widget: widget that published the topic
  });
- &lt;/script&gt;         
+ </script>         
  
- &lt;input type="button" id="button"&gt; 
- &lt;sx:bind id="ex1" href="%{#ajaxTest}" beforeNotifyTopics="/before" sources="button" events="onclick"/&gt; 
+ <input type="button" id="button" /> 
+ <sx:bind id="ex1" href="%{#ajaxTest}" beforenotifytopics="/before" sources="button" events="onclick" /> 
 ```
 
 
@@ -1316,17 +1316,17 @@ Using afterNotifyTopics and highlight:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/after", function(data, request, widget){
      alert('inside a topic event. after request');
      //data : text returned from request(the html)
      //request: XMLHttpRequest object
      //widget: widget that published the topic
  });
- &lt;/script&gt;        
+ </script>        
  
- &lt;input type="button" id="button"&gt;
- &lt;sx:bind id="ex1" href="%{#ajaxTest}" highlightColor="red" afterNotifyTopics="/after" sources="button" events="onclick"/&gt;
+ <input type="button" id="button" />
+ <sx:bind id="ex1" href="%{#ajaxTest}" highlightcolor="red" afternotifytopics="/after" sources="button" events="onclick" />
 ```
 
 
@@ -1335,18 +1335,18 @@ Using errorNotifyTopics and indicator:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/error", function(error, request, widget){
      alert('inside a topic event. on error');
      //error : error object (error.message has the error message)
      //request: XMLHttpRequest object
      //widget: widget that published the topic
  });
- &lt;/script&gt;         
+ </script>         
  
- &lt;input type="button" id="button"&gt;
- &lt;img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none"/&gt;
- &lt;sx:bind href="%{#ajaxTest}" indicator="ind1" errorNotifyTopics="/error" sources="button" events="onclick"/&gt;
+ <input type="button" id="button" />
+ <img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none" />
+ <sx:bind href="%{#ajaxTest}" indicator="ind1" errornotifytopics="/error" sources="button" events="onclick" />
 ```
 
 
@@ -1744,13 +1744,13 @@ __Examples__
 
 ```xml
  JSP:
- &lt;s:checkbox label="checkbox test" name="checkboxField1" value="aBoolean" fieldValue="true"/&gt;
+ <s:checkbox label="checkbox test" name="checkboxField1" value="aBoolean" fieldvalue="true" />
 
  Velocity:
  #tag( Checkbox "label=checkbox test" "name=checkboxField1" "value=aBoolean" )
 
  Resulting HTML (simple template, aBoolean == true):
- &lt;input type="checkbox" name="checkboxField1" value="true" checked="checked" /&gt;
+ <input type="checkbox" name="checkboxField1" value="true" checked="checked" />
 
 ```
 
@@ -1774,7 +1774,7 @@ __Description__
 
 
 <p>
- Creates a series of checkboxes from a list. Setup is like &lt;s:select /&gt; or &lt;s:radio /&gt;, but creates checkbox tags.
+ Creates a series of checkboxes from a list. Setup is like <s:select /> or <s:radio />, but creates checkbox tags.
 </p>
 
 __Parameters__
@@ -2213,7 +2213,7 @@ __Examples__
 
 
 ```xml
- &lt;s:checkboxlist name="foo" list="bar"/&gt;
+ <s:checkboxlist name="foo" list="bar" />
 ```
 
 
@@ -2237,15 +2237,15 @@ __Description__
  <p>
  In this example, the SELECT will be populated from id=year attribute. Counter is itself an Iterator. It will
  span from first to last. The population is done via javascript, and requires that this tag be surrounded by a
- &lt;form&gt;.
- </p>
+ <form>.
+ 
 
  <p>
- Note that unlike the &lt;s:select/&gt; tag, there is no ability to define the individual &lt;option&gt; tags' id attribute
+ Note that unlike the <s:select /> tag, there is no ability to define the individual <option> tags' id attribute
  or content separately. Each of these is simply populated from the toString() method of the list item. Presumably
  this is because the select box isn't intended to actually submit useful data, but to assist the user in filling
  out the text field.
- </p></p>
+ 
 
 __Parameters__
 
@@ -2709,32 +2709,18 @@ __Examples__
 ```xml
  JSP:
  &lt;-- Example One --&gt;
- &lt;s:bean name="struts.util.Counter" var="year"&gt;
-   &lt;s:param name="first" value="text('firstBirthYear')"/&gt;
-   &lt;s:param name="last" value="2000"/&gt;
+ <s:bean name="struts.util.Counter" var="year">
+   <s:param name="first" value="text('firstBirthYear')" />
+   <s:param name="last" value="2000" />
 
-   &lt;s:combobox label="Birth year" size="6" maxlength="4" name="birthYear" list="#year"/&gt;
- &lt;/s:bean&gt;
-
- &lt;-- Example Two --&gt;
- &lt;s:combobox
-     label="My Favourite Fruit"
-     name="myFavouriteFruit"
-     list="{'apple','banana','grape','pear'}"
-     headerKey="-1"
-     headerValue="--- Please Select ---"
-     emptyOption="true"
-     value="banana" /&gt;
+   <s:combobox label="Birth year" size="6" maxlength="4" name="birthYear" list="#year" />
+ </s:bean>
 
  &lt;-- Example Two --&gt;
- &lt;s:combobox
-    label="My Favourite Color"
-    name="myFavouriteColor"
-    list="#{'red':'red','green':'green','blue':'blue'}"
-    headerKey="-1"
-    headerValue="--- Please Select ---"
-    emptyOption="true"
-    value="green" /&gt;
+ <s:combobox label="My Favourite Fruit" name="myFavouriteFruit" list="{'apple','banana','grape','pear'}" headerkey="-1" headervalue="--- Please Select ---" emptyoption="true" value="banana" />
+
+ &lt;-- Example Two --&gt;
+ <s:combobox label="My Favourite Color" name="myFavouriteColor" list="#{'red':'red','green':'green','blue':'blue'}" headerkey="-1" headervalue="--- Please Select ---" emptyoption="true" value="green" />
 
  Velocity:
  #tag( ComboBox "label=Birth year" "size=6" "maxlength=4" "name=birthYear" "list=#year" )
@@ -2756,7 +2742,7 @@ __Description__
  <pre>Objects provided can be retrieve from within the template via $parameters._paramname_.</pre>
 
  <p><b>JSP:</b></p>
- <pre>Objects provided can be retrieve from within the template via &lt;s:property value="%{parameters._paramname_}" /&gt;</pre>
+ <pre>Objects provided can be retrieve from within the template via <s:property value="%{parameters._paramname_}" /></pre>
 
  <p>
  In the bottom JSP and Velocity samples, two parameters are being passed in to the component. From within the
@@ -2768,8 +2754,8 @@ __Description__
 
  <p><b>JSP:</b></p>
  <pre>
- &lt;s:property value="%{parameters.key1}" /&gt; and &lt;s:property value="%{'parameters.key2'}" /&gt; or
- &lt;s:property value="%{parameters.get('key1')}" /&gt; and &lt;s:property value="%{parameters.get('key2')}" /&gt;
+ <s:property value="%{parameters.key1}" /> and <s:property value="%{'parameters.key2'}" /> or
+ <s:property value="%{parameters.get('key1')}" /> and <s:property value="%{parameters.get('key2')}" />
  </pre>
 
  <p>
@@ -3182,14 +3168,14 @@ __Examples__
  JSP
  </p>
  <pre>
-     &lt;s:component template="/my/custom/component.vm"/&gt;
+     <s:component template="/my/custom/component.vm" />
 
        or
 
-     &lt;s:component template="/my/custom/component.vm"&gt;
-       &lt;s:param name="key1" value="value1"/&gt;
-       &lt;s:param name="key2" value="value2"/&gt;
-     &lt;/s:component&gt;
+     <s:component template="/my/custom/component.vm">
+       <s:param name="key1" value="value1" />
+       <s:param name="key2" value="value2" />
+     </s:component>
  </pre>
 
  <p>
@@ -4182,11 +4168,11 @@ __Examples__
 
 
 ```xml
-   &lt;sx:datetimepicker name="order.date" label="Order Date" /&gt;
-   &lt;sx:datetimepicker name="delivery.date" label="Delivery Date" displayFormat="yyyy-MM-dd"  /&gt;
-   &lt;sx:datetimepicker name="delivery.date" label="Delivery Date" value="%{date}"  /&gt;
-   &lt;sx:datetimepicker name="delivery.date" label="Delivery Date" value="%{'2007-01-01'}"  /&gt;
-   &lt;sx:datetimepicker name="order.date" label="Order Date" value="%{'today'}"/&gt;
+   <sx:datetimepicker name="order.date" label="Order Date" />
+   <sx:datetimepicker name="delivery.date" label="Delivery Date" displayformat="yyyy-MM-dd" />
+   <sx:datetimepicker name="delivery.date" label="Delivery Date" value="%{date}" />
+   <sx:datetimepicker name="delivery.date" label="Delivery Date" value="%{'2007-01-01'}" />
+   <sx:datetimepicker name="order.date" label="Order Date" value="%{'today'}" />
 ```
 
 
@@ -4195,8 +4181,8 @@ Getting and getting the datetimepicker value, from JavaScript:
 
 
 ```xml
- &lt;sx:datetimepicker id="picker" label="Order Date" /&gt;
- &lt;script type="text/javascript"&gt;
+ <sx:datetimepicker id="picker" label="Order Date" />
+ <script type="text/javascript">
    function setValue() {
       var picker = dojo.widget.byId("picker");
       
@@ -4218,7 +4204,7 @@ Getting and getting the datetimepicker value, from JavaScript:
       var dateValue = picker.getDate();
       alert(dateValue);
    }
- &lt;/script&gt;
+ </script>
 ```
 
 
@@ -4227,16 +4213,16 @@ Publish topic when value changes
 
 
 ```xml
- &lt;sx:datetimepicker id="picker" label="Order Date" valueNotifyTopics="/value"/&gt;
+ <sx:datetimepicker id="picker" label="Order Date" valuenotifytopics="/value" />
  
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/value", function(textEntered, date, widget){
      alert('value changed');
      //textEntered: String enetered in the textbox
      //date: JavaScript Date object with the value selected
      //widet: widget that published the topic 
  });
- &lt;/script&gt;  
+ </script>  
 ```
 
 
@@ -5247,7 +5233,7 @@ Simple div that loads its content once:
 
 
 ```xml
- &lt;sx:div href="%{#url}"&gt;Initial Content&lt;/sx:div&gt;
+ <sx:div href="%{#url}">Initial Content</sx:div>
 ```
 
 
@@ -5256,10 +5242,10 @@ div that reloads its content every 2 seconds, and shows an indicator while reloa
 
 
 ```xml
- &lt;img id="indicator" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none"/&gt;
- &lt;sx:div href="%{#url}" updateFreq="2000" indicator="indicator"&gt;
+ <img id="indicator" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none" />
+ <sx:div href="%{#url}" updatefreq="2000" indicator="indicator">
    Initial Content
- &lt;/sx:div&gt;
+ </sx:div>
 ```
 
 
@@ -5268,20 +5254,13 @@ div that uses topics to control the timer, highlights its content in red after r
 
 
 ```xml
- &lt;form id="form"&gt;
-   &lt;label for="textInput"&gt;Text to be submited when div reloads&lt;/label&gt;
+ <form id="form">
+   <label for="textInput">Text to be submited when div reloads</label>
    &lt;input type=textbox id="textInput" name="data"&gt;
- &lt;/form&gt;
- &lt;sx:div 
-      href="%{#url}" 
-      updateFreq="3000"
-      listenTopics="/refresh"
-      startTimerListenTopics="/startTimer"
-      stopTimerListenTopics="/stopTimer"
-      highlightColor="red"
-      formId="form"&gt;
+ </form>
+ <sx:div href="%{#url}" updatefreq="3000" listentopics="/refresh" starttimerlistentopics="/startTimer" stoptimerlistentopics="/stopTimer" highlightcolor="red" formid="form">
   Initial Content
- &lt;/sx:div&gt;
+ </sx:div>
 ```
 
 
@@ -5305,7 +5284,7 @@ __Description__
  </p>
  <p>For troubleshooting javascript problems the following configuration is recommended:</p>
  <pre>
-   &lt;sx:head debug="true" cache="false" compressed="false" /&gt;
+   <sx:head debug="true" cache="false" compressed="false" />
  </pre>
 
  <p>Dojo files are loaded as required by the Dojo loading mechanism. The problem with this
@@ -5443,10 +5422,10 @@ __Examples__
 
 ```xml
  &lt;%@ taglib prefix="sx" uri="/struts-dojo-tags" %&gt;
- &lt;head&gt;
-   &lt;title&gt;My page&lt;/title&gt;
-   &lt;sx:head/&gt;
- &lt;/head&gt;
+ <head>
+   <title>My page</title>
+   <sx:head />
+ </head>
 ```
 
 
@@ -5454,10 +5433,10 @@ __Examples__
 
 ```xml
  &lt;%@ taglib prefix="sx" uri="/struts-dojo-tags" %&gt;
- &lt;head&gt;
-   &lt;title&gt;My page&lt;/title&gt;
-   &lt;sx:head debug="true" extraLocales="en-us,nl-nl,de-de"/&gt;
- &lt;/head&gt;
+ <head>
+   <title>My page</title>
+   <sx:head debug="true" extralocales="en-us,nl-nl,de-de" />
+ </head>
 ```
 
 
@@ -6620,8 +6599,8 @@ __Examples__
 
 
 ```xml
- &lt;s:doubleselect label="doubleselect test1" name="menu" list="{'fruit','other'}" doubleName="dishes" doubleList="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" /&gt;
- &lt;s:doubleselect label="doubleselect test2" name="menu" list="#{'fruit':'Nice Fruits', 'other':'Other Dishes'}" doubleName="dishes" doubleList="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" /&gt;
+ <s:doubleselect label="doubleselect test1" name="menu" list="{'fruit','other'}" doublename="dishes" doublelist="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" />
+ <s:doubleselect label="doubleselect test2" name="menu" list="#{'fruit':'Nice Fruits', 'other':'Other Dishes'}" doublename="dishes" doublelist="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" />
 ```
 
 
@@ -7025,31 +7004,31 @@ __Examples__
 
 ```xml
 
-    &lt;!-- example 1 --&gt;
-    &lt;s:fielderror /&gt;
+    <!-- example 1 -->
+    <s:fielderror />
 
-    &lt;!-- example 2 --&gt;
-    &lt;s:fielderror&gt;
-         &lt;s:param&gt;field1&lt;/s:param&gt;
-         &lt;s:param&gt;field2&lt;/s:param&gt;
-    &lt;/s:fielderror&gt;
+    <!-- example 2 -->
+    <s:fielderror>
+         <s:param>field1</s:param>
+         <s:param>field2</s:param>
+    </s:fielderror>
     &lt;s:form .... &gt;
        ....
-    &lt;/s:form&gt;
+    
 
     OR
 
-    &lt;s:fielderror&gt;
-          &lt;s:param value="%{'field1'}" /&gt;
-          &lt;s:param value="%{'field2'}" /&gt;
-    &lt;/s:fielderror&gt;
+    <s:fielderror>
+          <s:param value="%{'field1'}" />
+          <s:param value="%{'field2'}" />
+    </s:fielderror>
     &lt;s:form .... &gt;
        ....
-    &lt;/s:form&gt;
+    
 
     OR
 
-    &lt;s:fielderror fieldName="field1" /&gt;
+    <s:fielderror fieldname="field1" />
 
 ```
 
@@ -7461,8 +7440,8 @@ __Examples__
 
 
 ```xml
- &lt;s:file name="anUploadFile" accept="text/*" /&gt;
- &lt;s:file name="anohterUploadFIle" accept="text/html,text/plain" /&gt;
+ <s:file name="anUploadFile" accept="text/*" />
+ <s:file name="anohterUploadFIle" accept="text/html,text/plain" />
 ```
 
 
@@ -8387,10 +8366,10 @@ __Examples__
 
 
 ```xml
- &lt;head&gt;
-   &lt;title&gt;My page&lt;/title&gt;
-   &lt;s:head/&gt;
- &lt;/head&gt;
+ <head>
+   <title>My page</title>
+   <s:head />
+ </head>
 ```
 
 
@@ -8780,14 +8759,14 @@ __Examples__
 
 ```xml
  &lt;-- example one --&gt;
- &lt;s:hidden name="foo" /&gt;
+ <s:hidden name="foo" />
  &lt;-- example two --&gt;
- &lt;s:hidden name="foo" value="%{bar}" /&gt;
+ <s:hidden name="foo" value="%{bar}" />
 
  Example One Resulting HTML (if foo evaluates to bar):
- &lt;input type="hidden" name="foo" value="bar" /&gt;
+ <input type="hidden" name="foo" value="bar" />
  Example Two Resulting HTML (if getBar method of the action returns 'bar')
- &lt;input type="hidden" name="foo" value="bar" /&gt;
+ <input type="hidden" name="foo" value="bar" />
 ```
 
 
@@ -8807,9 +8786,9 @@ __Description__
 <p> <p>
  NOTE: The id and doubleId need not be supplied as they will generated provided
  that the inputtransferselect tag is being used in a form tag. The generated id
- and doubleId will be &lt;form_id&gt;_&lt;inputtransferselect_doubleName&gt; and
- &lt;form_id&gt;_&lt;inputtransferselect_doubleName&gt; respectively.
- </p></p>
+ and doubleId will be <form_id>_<inputtransferselect_doublename> and
+ <form_id>_<inputtransferselect_doublename> respectively.
+ 
 
 __Parameters__
 
@@ -9369,11 +9348,7 @@ __Example__
 ```xml
 
  &lt;-- minimum configuration --&gt;
- &lt;s:inputtransferselect
-      label="Favourite Cartoons Characters"
-      name="cartoons"
-      list="{'Popeye', 'He-Man', 'Spiderman'}"
-  /&gt;
+ <s:inputtransferselect label="Favourite Cartoons Characters" name="cartoons" list="{'Popeye', 'He-Man', 'Spiderman'}" />
 
 ```
 
@@ -9772,7 +9747,7 @@ __Examples__
 
 
 ```xml
- &lt;s:label key="userName" /&gt;
+ <s:label key="userName" />
 ```
 
 
@@ -9874,15 +9849,10 @@ __Examples__
 
 ```xml
 
- &lt;s:select label="My Selection"
-            name="mySelection"
-            value="%{'POPEYE'}"
-            list="%{#{'SUPERMAN':'Superman', 'SPIDERMAN':'spiderman'}}"&gt;
-    &lt;s:optgroup label="Adult"
-                 list="%{#{'SOUTH_PARK':'South Park'}}" /&gt;
-    &lt;s:optgroup label="Japanese"
-                 list="%{#{'POKEMON':'pokemon','DIGIMON':'digimon','SAILORMOON':'Sailormoon'}}" /&gt;
- &lt;/s:select&gt;
+ <s:select label="My Selection" name="mySelection" value="%{'POPEYE'}" list="%{#{'SUPERMAN':'Superman', 'SPIDERMAN':'spiderman'}}">
+    <s:optgroup label="Adult" list="%{#{'SOUTH_PARK':'South Park'}}" />
+    <s:optgroup label="Japanese" list="%{#{'POKEMON':'pokemon','DIGIMON':'digimon','SAILORMOON':'Sailormoon'}}" />
+ </s:select>
 
 ```
 
@@ -9917,10 +9887,10 @@ __Description__
 <p> <p>
  NOTE: The id and doubleId need not be supplied as they will generated provided
  that the optiontransferselect tag is being used in a form tag. The generated id
- and doubleId will be &lt;form_id&gt;_&lt;optiontransferselect_nameame&gt; and
- &lt;form_id&gt;_&lt;optiontransferselect_doubleName&gt; respectively.
- </p>
-</p>
+ and doubleId will be <form_id>_<optiontransferselect_nameame> and
+ <form_id>_<optiontransferselect_doublename> respectively.
+ 
+
 
 __Parameters__
 
@@ -10880,32 +10850,10 @@ __Examples__
 ```xml
 
  &lt;-- minimum configuration --&gt;
- &lt;s:optiontransferselect
-      label="Favourite Cartoons Characters"
-      name="leftSideCartoonCharacters"
-      list="{'Popeye', 'He-Man', 'Spiderman'}"
-      doubleName="rightSideCartoonCharacters"
-      doubleList="{'Superman', 'Mickey Mouse', 'Donald Duck'}"
-  /&gt;
+ <s:optiontransferselect label="Favourite Cartoons Characters" name="leftSideCartoonCharacters" list="{'Popeye', 'He-Man', 'Spiderman'}" doublename="rightSideCartoonCharacters" doublelist="{'Superman', 'Mickey Mouse', 'Donald Duck'}" />
 
   &lt;-- possible configuration --&gt;
-  &lt;s:optiontransferselect
-      label="Favourite Cartoons Characters"
-      name="leftSideCartoonCharacters"
-      leftTitle="Left Title"
-      rightTitle="Right Title"
-      list="{'Popeye', 'He-Man', 'Spiderman'}"
-      multiple="true"
-      headerKey="headerKey"
-      headerValue="--- Please Select ---"
-      emptyOption="true"
-      doubleList="{'Superman', 'Mickey Mouse', 'Donald Duck'}"
-      doubleName="rightSideCartoonCharacters"
-      doubleHeaderKey="doubleHeaderKey"
-      doubleHeaderValue="--- Please Select ---"
-      doubleEmptyOption="true"
-      doubleMultiple="true"
-  /&gt;
+  <s:optiontransferselect label="Favourite Cartoons Characters" name="leftSideCartoonCharacters" lefttitle="Left Title" righttitle="Right Title" list="{'Popeye', 'He-Man', 'Spiderman'}" multiple="true" headerkey="headerKey" headervalue="--- Please Select ---" emptyoption="true" doublelist="{'Superman', 'Mickey Mouse', 'Donald Duck'}" doublename="rightSideCartoonCharacters" doubleheaderkey="doubleHeaderKey" doubleheadervalue="--- Please Select ---" doubleemptyoption="true" doublemultiple="true" />
 
 ```
 
@@ -11353,7 +11301,7 @@ __Examples__
 
 
 ```xml
- &lt;s:password label="%{text('password')}" name="password" size="10" maxlength="15" /&gt;
+ <s:password label="%{text('password')}" name="password" size="10" maxlength="15" />
 ```
 
 
@@ -11820,8 +11768,8 @@ __Examples__
 
 
 ```xml
- &lt;s:action name="GenderMap" var="genders"/&gt;
- &lt;s:radio label="Gender" name="male" list="#genders.genders"/&gt;
+ <s:action name="GenderMap" var="genders" />
+ <s:radio label="Gender" name="male" list="#genders.genders" />
 ```
 
 
@@ -12266,7 +12214,7 @@ __Example 1__
 
 
 ```xml
- &lt;s:reset value="Reset" /&gt;
+ <s:reset value="Reset" />
 ```
 
 
@@ -12277,7 +12225,7 @@ __Example 2__
 
 ```xml
  Render a reset button:
- &lt;s:reset type="button" key="reset"/&gt;
+ <s:reset type="button" key="reset" />
 ```
 
 
@@ -12787,24 +12735,9 @@ __Examples__
 
 ```xml
 
- &lt;s:select label="Pets"
-        name="petIds"
-        list="petDao.pets"
-        listKey="id"
-        listValue="name"
-        multiple="true"
-        size="3"
-        required="true"
-        value="%{petDao.pets.{id}}"
- /&gt;
+ <s:select label="Pets" name="petIds" list="petDao.pets" listkey="id" listvalue="name" multiple="true" size="3" required="true" value="%{petDao.pets.{id}}" />
 
- &lt;s:select label="Months"
-        name="months"
-        headerKey="-1" headerValue="Select Month"
-        list="#{'01':'Jan', '02':'Feb', [...]}"
-        value="selectedMonth"
-        required="true"
- /&gt;
+ <s:select label="Months" name="months" headerkey="-1" headervalue="Select Month" list="#{'01':'Jan', '02':'Feb', [...]}" value="selectedMonth" required="true" />
 
  // The month id (01, 02, ...) returned by the getSelectedMonth() call
  // against the stack will be auto-selected
@@ -13813,19 +13746,19 @@ The following is an example of a tabbedpanel and panel tag utilizing local and r
 
 
 ```xml
- &lt;sx:head /&gt;
- &lt;sx:tabbedpanel id="test" &gt;
-    &lt;sx:div id="one" label="one" theme="ajax" labelposition="top" &gt;
-        This is the first pane&lt;br/&gt;
-        &lt;s:form&gt;
-            &lt;s:textfield name="tt" label="Test Text"/&gt;  &lt;br/&gt;
-            &lt;s:textfield name="tt2" label="Test Text2"/&gt;
-        &lt;/s:form&gt;
-    &lt;/sx:div&gt;
-    &lt;sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action" &gt;
+ <sx:head />
+ <sx:tabbedpanel id="test">
+    <sx:div id="one" label="one" theme="ajax" labelposition="top">
+        This is the first pane<br />
+        <s:form>
+            <s:textfield name="tt" label="Test Text" />  <br />
+            <s:textfield name="tt2" label="Test Text2" />
+        </s:form>
+    </sx:div>
+    <sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action">
         This is the remote tab
-    &lt;/sx:div&gt;
- &lt;/sx:tabbedpanel&gt;
+    </sx:div>
+ </sx:tabbedpanel>
 ```
 
 
@@ -13834,21 +13767,21 @@ Use notify topics to prevent a tab from being selected:
 
 
 ```xml
- &lt;sx:head /&gt;
- &lt;script type="text/javascript"&gt;
+ <sx:head />
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/beforeSelect", function(event, tab, tabContainer){
      event.cancel = true;
  });
- &lt;/script&gt;
+ </script>
  
- &lt;sx:tabbedpanel id="test" beforeSelectTabNotifyTopics="/beforeSelect"&gt;
-    &lt;sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action" &gt;
+ <sx:tabbedpanel id="test" beforeselecttabnotifytopics="/beforeSelect">
+    <sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action">
         One Tab
-    &lt;/sx:div&gt;
-    &lt;sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action" &gt;
+    </sx:div>
+    <sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action">
         Another tab
-    &lt;/sx:div&gt;
- &lt;/sx:tabbedpanel&gt;
+    </sx:div>
+ </sx:tabbedpanel>
 ```
 
 
@@ -14269,7 +14202,7 @@ __Example__
 
 
 ```xml
- &lt;s:textarea label="Comments" name="comments" cols="30" rows="8"/&gt;
+ <s:textarea label="Comments" name="comments" cols="30" rows="8" />
 ```
 
 
@@ -14705,7 +14638,7 @@ __Examples__
 
 
 ```xml
- &lt;s:textfield key="user" /&gt;
+ <s:textfield key="user" />
 ```
 
 
@@ -15099,7 +15032,7 @@ __Examples__
 
 
 ```xml
- &lt;s:token /&gt;
+ <s:token />
 ```
 
 
@@ -15706,14 +15639,14 @@ Static tree:
 
 
 ```xml
- &lt;s:tree id="..." label="..."&gt;
-    &lt;s:treenode id="..." label="..." /&gt;
-    &lt;s:treenode id="..." label="..."&gt;
-        &lt;s:treenode id="..." label="..." /&gt;
-        &lt;s:treenode id="..." label="..." /&gt;
-    &lt;/s:treenode&gt;
-    &lt;s:treenode id="..." label="..." /&gt;
- &lt;/s:tree&gt;
+ <s:tree id="..." label="...">
+    <s:treenode id="..." label="..." />
+    <s:treenode id="..." label="...">
+        <s:treenode id="..." label="..." />
+        <s:treenode id="..." label="..." />
+    </s:treenode>
+    <s:treenode id="..." label="..." />
+ </s:tree>
 ```
 
 
@@ -15722,12 +15655,7 @@ Dynamic tree (rendered on the server):
 
 
 ```xml
- &lt;s:tree
-          id="..."
-          rootNode="..."
-          nodeIdProperty="..."
-          nodeTitleProperty="..."
-          childCollectionProperty="..." /&gt;
+ <s:tree id="..." rootnode="..." nodeidproperty="..." nodetitleproperty="..." childcollectionproperty="..." />
 ```
 
 
@@ -15736,10 +15664,10 @@ Dynamic tree loaded with AJAX (one request is made for each node):
 
 
 ```xml
- &lt;s:url id="nodesUrl" namespace="/nodecorate" action="getNodes" /&gt;
- &lt;div style="float:left; margin-right: 50px;"&gt;
-     &lt;sx:tree id="tree" href="%{#nodesUrl}" /&gt;
- &lt;/div&gt;
+ <s:url id="nodesUrl" namespace="/nodecorate" action="getNodes" />
+ <div style="float:left; margin-right: 50px;">
+     <sx:tree id="tree" href="%{#nodesUrl}" />
+ </div>
  
  On this example the url specified on the "href" attibute will be called to load
  the elements on the root. The response is expected to be a JSON array of objects like:
@@ -16164,22 +16092,17 @@ Update target content with html returned from an action:
 ```xml
 
  &lt;-- Creating tree statically using hard-coded data. --&gt;
- &lt;s:tree id="..." label="..."&gt;
-    &lt;s:treenode id="..." label="..." /&gt;
-    &lt;s:treenode id="..." label="..."&gt;
-        &lt;s:treenode id="..." label="..." /&gt;
-        &lt;s:treenode id="..." label="..." /&gt;
-    &lt;/s:treenode&gt;
-    &lt;s:treenode id="..." label="..." /&gt;
- &lt;/s:tree&gt;
+ <s:tree id="..." label="...">
+    <s:treenode id="..." label="..." />
+    <s:treenode id="..." label="...">
+        <s:treenode id="..." label="..." />
+        <s:treenode id="..." label="..." />
+    </s:treenode>
+    <s:treenode id="..." label="..." />
+ </s:tree>
 
  &lt;-- Creating tree dynamically using data from backing action. --&gt;
- &lt;s:tree
-          id="..."
-          rootNode="..."
-          nodeIdProperty="..."
-          nodeTitleProperty="..."
-          childCollectionProperty="..." /&gt;
+ <s:tree id="..." rootnode="..." nodeidproperty="..." nodetitleproperty="..." childcollectionproperty="..." />
 
 ```
 
@@ -16733,27 +16656,11 @@ __Examples__
 
 ```xml
 
- &lt;!-- Example 1: simple example --&gt;
- &lt;s:updownselect
- list="#{'england':'England', 'america':'America', 'germany':'Germany'}"
- name="prioritisedFavouriteCountries"
- headerKey="-1"
- headerValue="--- Please Order Them Accordingly ---"
- emptyOption="true" /&gt;
+ <!-- Example 1: simple example -->
+ <s:updownselect list="#{'england':'England', 'america':'America', 'germany':'Germany'}" name="prioritisedFavouriteCountries" headerkey="-1" headervalue="--- Please Order Them Accordingly ---" emptyoption="true" />
 
- &lt;!-- Example 2: more complex example --&gt;
- &lt;s:updownselect
- list="defaultFavouriteCartoonCharacters"
- name="prioritisedFavouriteCartoonCharacters"
- headerKey="-1"
- headerValue="--- Please Order ---"
- emptyOption="true"
- allowMoveUp="true"
- allowMoveDown="true"
- allowSelectAll="true"
- moveUpLabel="Move Up"
- moveDownLabel="Move Down"
- selectAllLabel="Select All" /&gt;
+ <!-- Example 2: more complex example -->
+ <s:updownselect list="defaultFavouriteCartoonCharacters" name="prioritisedFavouriteCartoonCharacters" headerkey="-1" headervalue="--- Please Order ---" emptyoption="true" allowmoveup="true" allowmovedown="true" allowselectall="true" moveuplabel="Move Up" movedownlabel="Move Down" selectalllabel="Select All" />
 
 ```
 
@@ -16765,8 +16672,8 @@ __Description__
 
 
 <p> <p>
- A tag that creates an HTML &lt;a/&gt; element, that when clicked makes an asynchronous request(XMLHttpRequest). The url
- attribute must be build using the &lt;s:url/&gt; tag. 
+ A tag that creates an HTML <a /> element, that when clicked makes an asynchronous request(XMLHttpRequest). The url
+ attribute must be build using the <s:url /> tag. 
  </p></p>
 
 There's a bug in  IE6/IE7 which makes impossible to use the target's attribute with a parent Div, because such Div's content's are overwritten with the tag's _loadingText_ . Resulting in an "undefined" message in the content's, instead of the result of the request.
@@ -17334,12 +17241,12 @@ Update target content with html returned from an action:
 
 
 ```xml
- &lt;div id="div1"&gt;Div 1&lt;/div&gt;
- &lt;s:url id="ajaxTest" value="/AjaxTest.action"/&gt;
+ <div id="div1">Div 1</div>
+ <s:url id="ajaxTest" value="/AjaxTest.action" />
  
- &lt;sx:a id="link1" href="%{ajaxTest}" target="div1"&gt;
+ <sx:a id="link1" href="%{ajaxTest}" target="div1">
       Update Content
- &lt;/sx:a&gt;
+ </sx:a>
 ```
 
 
@@ -17348,10 +17255,10 @@ Submit form(anchor inside the form):
 
 
 ```xml
- &lt;s:form id="form" action="AjaxTest"&gt;
-      &lt;input type="textbox" name="data"&gt;
-      &lt;sx:a&gt;Submit form&lt;/sx:a&gt;           
- &lt;/s:form&gt;
+ <s:form id="form" action="AjaxTest">
+      <input type="textbox" name="data" />
+      <sx:a>Submit form</sx:a>           
+ </s:form>
 ```
 
 
@@ -17360,11 +17267,11 @@ Submit form(anchor outside the form):
 
 
 ```xml
- &lt;s:form id="form" action="AjaxTest"&gt;
-      &lt;input type="textbox" name="data"&gt;   
- &lt;/s:form&gt;
+ <s:form id="form" action="AjaxTest">
+      <input type="textbox" name="data" />   
+ </s:form>
  
- &lt;sx:a formId="form"&gt;Submit form&lt;/sx:a&gt;
+ <sx:a formid="form">Submit form</sx:a>
 ```
 
 
@@ -17373,15 +17280,15 @@ Using beforeNotifyTopics:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/before", function(event, widget){
      alert('inside a topic event. before request');
      //event: set event.cancel = true, to cancel request
      //widget: widget that published the topic
  });
- &lt;/script&gt;         
+ </script>         
  
- &lt;sx:a beforeNotifyTopics="/before"&gt;Publish topics&lt;/sx:a&gt;
+ <sx:a beforenotifytopics="/before">Publish topics</sx:a>
 ```
 
 
@@ -17390,16 +17297,16 @@ Using afterNotifyTopics and highlights target:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/after", function(data, request, widget){
      alert('inside a topic event. after request');
      //data : text returned from request(the html)
      //request: XMLHttpRequest object
      //widget: widget that published the topic
  });
- &lt;/script&gt;        
+ </script>        
  
- &lt;sx:a afterNotifyTopics="/after" highlightColor="red" href="%{#ajaxTest}"&gt;Publish topics&lt;/sx:a&gt;
+ <sx:a afternotifytopics="/after" highlightcolor="red" href="%{#ajaxTest}">Publish topics</sx:a>
 ```
 
 
@@ -17408,17 +17315,17 @@ Using errorNotifyTopics and indicator:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/error", function(error, request, widget){
      alert('inside a topic event. on error');
      //error : error object (error.message has the error message)
      //request: XMLHttpRequest object
      //widget: widget that published the topic
  });
- &lt;/script&gt;         
+ </script>         
  
- &lt;img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none"/&gt;
- &lt;sx:a errorNotifyTopics="/error" indicator="ind1" href="%{#ajaxTest}"&gt;Publish topics&lt;/sx:a&gt;
+ <img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none" />
+ <sx:a errornotifytopics="/error" indicator="ind1" href="%{#ajaxTest}">Publish topics</sx:a>
 ```
 
 
@@ -18034,7 +17941,7 @@ __Examples__
 
 
 ```xml
- &lt;sx:submit value="%{'Submit'}" /&gt;
+ <sx:submit value="%{'Submit'}" />
 ```
 
 
@@ -18043,7 +17950,7 @@ Render an image submit:
 
 
 ```xml
- &lt;sx:submit type="image" value="%{'Submit'}" label="Submit the form" src="submit.gif"/&gt;
+ <sx:submit type="image" value="%{'Submit'}" label="Submit the form" src="submit.gif" />
 ```
 
 
@@ -18052,7 +17959,7 @@ Render a button submit:
 
 
 ```xml
- &lt;sx:submit type="button" value="%{'Submit'}" label="Submit the form"/&gt;
+ <sx:submit type="button" value="%{'Submit'}" label="Submit the form" />
 ```
 
 
@@ -18061,10 +17968,10 @@ Update target content with html returned from an action:
 
 
 ```xml
- &lt;div id="div1"&gt;Div 1&lt;/div&gt;
- &lt;s:url id="ajaxTest" value="/AjaxTest.action"/&gt;
+ <div id="div1">Div 1</div>
+ <s:url id="ajaxTest" value="/AjaxTest.action" />
 
- &lt;sx:submit id="link1" href="%{ajaxTest}" target="div1" /&gt;
+ <sx:submit id="link1" href="%{ajaxTest}" target="div1" />
 ```
 
 
@@ -18073,10 +17980,10 @@ Submit form(inside the form):
 
 
 ```xml
- &lt;s:form id="form" action="AjaxTest"&gt;
-      &lt;input type="textbox" name="data"&gt;
-      &lt;sx:submit /&gt;
- &lt;/s:form&gt;
+ <s:form id="form" action="AjaxTest">
+      <input type="textbox" name="data" />
+      <sx:submit />
+ </s:form>
 ```
 
 
@@ -18085,11 +17992,11 @@ Submit form(outside the form):
 
 
 ```xml
- &lt;s:form id="form" action="AjaxTest"&gt;
-      &lt;input type="textbox" name="data"&gt;
- &lt;/s:form&gt;
+ <s:form id="form" action="AjaxTest">
+      <input type="textbox" name="data" />
+ </s:form>
 
- &lt;sx:submit formId="form" /&gt;
+ <sx:submit formid="form" />
 ```
 
 
@@ -18098,15 +18005,15 @@ Using beforeNotifyTopics:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/before", function(event, widget){
      alert('inside a topic event. before request');
      //event: set event.cancel = true, to cancel request
      //widget: widget that published the topic
  });
- &lt;/script&gt;
+ </script>
 
- &lt;sx:submit beforeNotifyTopics="/before" /&gt;
+ <sx:submit beforenotifytopics="/before" />
 ```
 
 
@@ -18115,16 +18022,16 @@ Using afterNotifyTopics and highlight target:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/after", function(data, request, widget){
      alert('inside a topic event. after request');
      //data : text returned from request(the html)
      //request: XMLHttpRequest object
      //widget: widget that published the topic
  });
- &lt;/script&gt;
+ </script>
 
- &lt;sx:submit afterNotifyTopics="/after" highlightColor="red" href="%{#ajaxTest}" /&gt;
+ <sx:submit afternotifytopics="/after" highlightcolor="red" href="%{#ajaxTest}" />
 ```
 
 
@@ -18133,21 +18040,21 @@ Using errorNotifyTopics and indicator:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/error", function(error, request, widget){
      alert('inside a topic event. on error');
      //error : error object (error.message has the error message)
      //request: XMLHttpRequest object
      //widget: widget that published the topic
  });
- &lt;/script&gt;
+ </script>
 
- &lt;img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none"/&gt;
- &lt;sx:submit errorNotifyTopics="/error" indicator="ind1" href="%{#ajaxTest}" /&gt;
+ <img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none" />
+ <sx:submit errornotifytopics="/error" indicator="ind1" href="%{#ajaxTest}" />
 ```
 
 
-</li></li></li></li></li></li></li></ul></pre></p></p></p></p></p></p>
+</optiontransferselect_doublename></form_id></optiontransferselect_nameame></form_id></p></p></inputtransferselect_doublename></form_id></inputtransferselect_doublename></form_id></p></p></li></li></li></li></li></li></li></ul></option></p></form></p></p></pre></p></p></p></p></p></p>
 
   </section>
 </article>

@@ -192,38 +192,38 @@
 <p>#####Examples#####</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
- <span class="ni">&amp;lt;</span>action name="someAction" class="com.examples.SomeAction"<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>interceptor-ref name="params"/<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>interceptor-ref name="validation"/<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>interceptor-ref name="workflow"/<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>result name="success"<span class="ni">&amp;gt;</span>good_result.ftl<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"params"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"validation"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"workflow"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
+ <span class="nt">&lt;/action&gt;</span>
 
- <span class="ni">&amp;lt;</span>-- In this case myMethod as well as mySecondMethod of the action class
-        will not pass through the workflow process --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>action name="someAction" class="com.examples.SomeAction"<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>interceptor-ref name="params"/<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>interceptor-ref name="validation"/<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>interceptor-ref name="workflow"<span class="ni">&amp;gt;</span>
-         <span class="ni">&amp;lt;</span>param name="excludeMethods"<span class="ni">&amp;gt;</span>myMethod,mySecondMethod<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>/interceptor-ref name="workflow"<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>result name="success"<span class="ni">&amp;gt;</span>good_result.ftl<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;--</span> <span class="err">In</span> <span class="err">this</span> <span class="err">case</span> <span class="err">myMethod</span> <span class="err">as</span> <span class="err">well</span> <span class="err">as</span> <span class="err">mySecondMethod</span> <span class="err">of</span> <span class="err">the</span> <span class="err">action</span> <span class="err">class</span>
+        <span class="err">will</span> <span class="err">not</span> <span class="err">pass</span> <span class="err">through</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">process</span> <span class="err">--</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"params"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"validation"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"workflow"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeMethods"</span><span class="nt">&gt;</span>myMethod,mySecondMethod<span class="nt">&lt;/param&gt;</span>
+     <span class="err">&lt;</span>/interceptor-ref name="workflow"&gt;
+     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
+ <span class="nt">&lt;/action&gt;</span>
 
- <span class="ni">&amp;lt;</span>-- In this case, the result named "error" will be used when
-        an action / field error is found --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>-- The Interceptor will only be applied for myWorkflowMethod method of action
-        classes, since this is the only included method while any others are excluded --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>action name="someAction" class="com.examples.SomeAction"<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>interceptor-ref name="params"/<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>interceptor-ref name="validation"/<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>interceptor-ref name="workflow"<span class="ni">&amp;gt;</span>
-        <span class="ni">&amp;lt;</span>param name="inputResultName"<span class="ni">&amp;gt;</span>error<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
-         <span class="ni">&amp;lt;</span>param name="excludeMethods"<span class="ni">&amp;gt;</span>*<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
-         <span class="ni">&amp;lt;</span>param name="includeMethods"<span class="ni">&amp;gt;</span>myWorkflowMethod<span class="ni">&amp;lt;</span>/param<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>/interceptor-ref<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>result name="success"<span class="ni">&amp;gt;</span>good_result.ftl<span class="ni">&amp;lt;</span>/result<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/action<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;--</span> <span class="err">In</span> <span class="err">this</span> <span class="err">case,</span> <span class="err">the</span> <span class="err">result</span> <span class="err">named</span> <span class="err">"error"</span> <span class="err">will</span> <span class="err">be</span> <span class="err">used</span> <span class="err">when</span>
+        <span class="err">an</span> <span class="err">action</span> <span class="err">/</span> <span class="err">field</span> <span class="err">error</span> <span class="err">is</span> <span class="err">found</span> <span class="err">--</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;--</span> <span class="err">The</span> <span class="err">Interceptor</span> <span class="err">will</span> <span class="err">only</span> <span class="err">be</span> <span class="err">applied</span> <span class="err">for</span> <span class="err">myWorkflowMethod</span> <span class="err">method</span> <span class="err">of</span> <span class="err">action</span>
+        <span class="err">classes,</span> <span class="err">since</span> <span class="err">this</span> <span class="err">is</span> <span class="err">the</span> <span class="err">only</span> <span class="err">included</span> <span class="err">method</span> <span class="err">while</span> <span class="err">any</span> <span class="err">others</span> <span class="err">are</span> <span class="err">excluded</span> <span class="err">--</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"params"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"validation"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"workflow"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"inputResultName"</span><span class="nt">&gt;</span>error<span class="nt">&lt;/param&gt;</span>
+         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeMethods"</span><span class="nt">&gt;</span>*<span class="nt">&lt;/param&gt;</span>
+         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"includeMethods"</span><span class="nt">&gt;</span>myWorkflowMethod<span class="nt">&lt;/param&gt;</span>
+     <span class="nt">&lt;/interceptor-ref&gt;</span>
+     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
+ <span class="nt">&lt;/action&gt;</span>
 
 </code></pre>
 </div>

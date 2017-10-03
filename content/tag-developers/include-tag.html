@@ -142,30 +142,25 @@
 
 <p> <p>Include a servlet's output (result of servlet or a JSP page).</p>
  <p>Note: Any additional params supplied to the included page are <b>not</b>
- accessible within the rendered page through the &lt;s:property...&gt; tag
+ accessible within the rendered page through the <s:property...> tag
  since no valuestack will be created. You can, however, access them in a
  servlet via the HttpServletRequest object or from a JSP page via
- a scriptlet.</p></p>
+ a scriptlet.
 
-<p><strong>(!) How To access parameters</strong></p>
+**(!) How To access parameters**
 
-<blockquote>
 
-</blockquote>
+&gt; 
 
-<blockquote>
+&gt; 
 
-</blockquote>
+&gt; Parameters are passed as request parameters, so use the \${param.ParamName} notation to access them. Do not use the **property** tag to access parameters in included files.
 
-<blockquote>
-  <p>Parameters are passed as request parameters, so use the ${param.ParamName} notation to access them. Do not use the <strong>property</strong> tag to access parameters in included files.</p>
-</blockquote>
+&gt; 
 
-<blockquote>
+__Parameters__
 
-</blockquote>
 
-<p><strong>Parameters</strong></p>
 
 <p>		<table width="100%">
 			<tr>
@@ -193,30 +188,38 @@
 		</table>
 </p>
 
-<p><strong>Example</strong></p>
+__Example__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="o">&amp;</span><span class="n">lt</span><span class="o">;--</span> <span class="nl">One:</span> <span class="o">--&amp;</span><span class="n">gt</span><span class="o">;</span>
- <span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="nl">s:</span><span class="n">include</span> <span class="n">value</span><span class="o">=</span><span class="s">"myJsp.jsp"</span> <span class="o">/&amp;</span><span class="n">gt</span><span class="o">;</span>
 
- <span class="o">&amp;</span><span class="n">lt</span><span class="o">;--</span> <span class="nl">Two:</span> <span class="o">--&amp;</span><span class="n">gt</span><span class="o">;</span>
- <span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="nl">s:</span><span class="n">include</span> <span class="n">value</span><span class="o">=</span><span class="s">"myJsp.jsp"</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span>
-    <span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="nl">s:</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s">"param1"</span> <span class="n">value</span><span class="o">=</span><span class="s">"value2"</span> <span class="o">/&amp;</span><span class="n">gt</span><span class="o">;</span>
-    <span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="nl">s:</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s">"param2"</span> <span class="n">value</span><span class="o">=</span><span class="s">"value2"</span> <span class="o">/&amp;</span><span class="n">gt</span><span class="o">;</span>
- <span class="o">&amp;</span><span class="n">lt</span><span class="o">;/</span><span class="nl">s:</span><span class="n">include</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span>
 
- <span class="o">&amp;</span><span class="n">lt</span><span class="o">;--</span> <span class="nl">Three:</span> <span class="o">--&amp;</span><span class="n">gt</span><span class="o">;</span>
- <span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="nl">s:</span><span class="n">include</span> <span class="n">value</span><span class="o">=</span><span class="s">"myJsp.jsp"</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span>
-    <span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="nl">s:</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s">"param1"</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span><span class="n">value1</span><span class="o">&amp;</span><span class="n">lt</span><span class="o">;/</span><span class="nl">s:</span><span class="n">param</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span>
-    <span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="nl">s:</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s">"param2"</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span><span class="n">value2</span><span class="o">&amp;</span><span class="n">lt</span><span class="o">;/</span><span class="nl">s:</span><span class="n">param</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span>
- <span class="o">&amp;</span><span class="n">lt</span><span class="o">;/</span><span class="nl">s:</span><span class="n">include</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span>
-</code></pre>
-</div>
 
-<pre><code class="language-none"> Example one - do an include myJsp.jsp page
+```java
+ &lt;-- One: --&gt;
+ <s:include value="myJsp.jsp" />
+
+ &lt;-- Two: --&gt;
+ <s:include value="myJsp.jsp">
+    <s:param name="param1" value="value2" />
+    <s:param name="param2" value="value2" />
+ </s:include>
+
+ &lt;-- Three: --&gt;
+ <s:include value="myJsp.jsp">
+    <s:param name="param1">value1</s:param>
+    <s:param name="param2">value2</s:param>
+ </s:include>
+```
+
+
+
+
+```none
+ Example one - do an include myJsp.jsp page
  Example two - do an include to myJsp.jsp page with parameters param1=value1 and param2=value2
  Example three - do an include to myJsp.jsp page with parameters param1=value1 and param2=value2
-</code></pre>
+```
 
+</s:property...></p></p>
 
   </section>
 </article>

@@ -847,7 +847,7 @@ Get list from an action:
 
 
 ```xml
- &lt;sx:autocompleter name="autocompleter1" href="%{jsonList}"/&gt;
+ <sx:autocompleter name="autocompleter1" href="%{jsonList}" />
 ```
 
 
@@ -856,7 +856,7 @@ Uses a list:
 
 
 ```xml
- &lt;s:autocompleter name="test"  list="{'apple','banana','grape','pear'}" autoComplete="false"/&gt;
+ <s:autocompleter name="test" list="{'apple','banana','grape','pear'}" autocomplete="false" />
 ```
 
 
@@ -865,7 +865,7 @@ Autocompleter that reloads its content everytime the text changes (and the lengt
 
 
 ```xml
- &lt;sx:autocompleter name="mvc" href="%{jsonList}" loadOnTextChange="true" loadMinimumCount="3"/&gt;
+ <sx:autocompleter name="mvc" href="%{jsonList}" loadontextchange="true" loadminimumcount="3" />
  
  The text entered on the autocompleter is passed as a parameter to the url specified in "href", like (text is "struts"):
   
@@ -878,10 +878,10 @@ Linking two autocompleters:
 
 
 ```xml
- &lt;form id="selectForm"&gt;
-      &lt;sx:autocompleter  name="select" list="{'fruits','colors'}"  valueNotifyTopics="/changed" /&gt;
- &lt;/form&gt;  
- &lt;sx:autocompleter  href="%{jsonList}" formId="selectForm" listenTopics="/changed"/&gt;
+ <form id="selectForm">
+      <sx:autocompleter name="select" list="{'fruits','colors'}" valuenotifytopics="/changed" />
+ </form>  
+ <sx:autocompleter href="%{jsonList}" formid="selectForm" listentopics="/changed" />
 ```
 
 
@@ -890,8 +890,8 @@ Set/Get selected values using JavaScript:
 
 
 ```xml
- &lt;sx:autocompleter  href="%{jsonList}" id="auto"/&gt;
- &lt;script type="text/javascript"&gt;
+ <sx:autocompleter href="%{jsonList}" id="auto" />
+ <script type="text/javascript">
    function getValues() {
       var autoCompleter = dojo.widget.byId("auto");
       
@@ -917,7 +917,7 @@ Set/Get selected values using JavaScript:
       //value (key will be set to "AL" and value to "Alabama")
       autoCompleter.setAllValues("AL", "Alabama");
    }
- &lt;/script&gt;
+ </script>
 ```
 
 
@@ -926,13 +926,13 @@ Using beforeNotifyTopics:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/before", function(event, widget){
      alert('inside a topic event. before request');
      //event: set event.cancel = true, to cancel request
      //widget: widget that published the topic
  });
- &lt;/script&gt;         
+ </script>         
  
  &lt;sx:autocompleter beforeNotifyTopics="/before" href="%{#ajaxTest} /&gt;
 ```
@@ -943,37 +943,37 @@ Using errorNotifyTopics:
 
 
 ```xml
- &lt;script type="text/javascript"&gt;
+ <script type="text/javascript">
  dojo.event.topic.subscribe("/after", function(data, request, widget){
      alert('inside a topic event. after request');
      //data : JavaScript object from parsing response
      //request: XMLHttpRequest object
      //widget: widget that published the topic
  });
- &lt;/script&gt;        
+ </script>        
  
- &lt;sx:autocompleter afterNotifyTopics="/after" href="%{#ajaxTest}" /&gt;
+ <sx:autocompleter afternotifytopics="/after" href="%{#ajaxTest}" />
 ```
 
 
 Using errorNotifyTopics:
 
 
-<p> &lt;script type="text/javascript"&gt;
+<p> <script type="text/javascript">
  dojo.event.topic.subscribe("/error", function(error, request, widget){
      alert('inside a topic event. on error');
      //error : error object (error.message has the error message)
      //request: XMLHttpRequest object
      //widget: widget that published the topic
  });
- &lt;/script&gt;
+ </script>
  
- &lt;sx:autocompleter errorNotifyTopics="/error" href="%{#ajaxTest}" /&gt;</p>
+ <sx:autocompleter errornotifytopics="/error" href="%{#ajaxTest}" /></p>
 
 Using valueNotifyTopics:
 
 
-<p> &lt;script type="text/javascript"&gt;
+<p> <script type="text/javascript">
  dojo.event.topic.subscribe("/value", function(value, key, text, widget){
      alert('inside a topic event. after value changed');
      //value : selected value (like "Florida" in example above)
@@ -981,9 +981,9 @@ Using valueNotifyTopics:
      //text: text typed into textbox
      //widget: widget that published the topic
  });
- &lt;/script&gt;   
+ </script>   
  
- &lt;sx:autocompleter valueNotifyTopics="/value" href="%{#ajaxTest}" /&gt;</p>
+ <sx:autocompleter valuenotifytopics="/value" href="%{#ajaxTest}" /></p>
 
 __Caveats__
 

@@ -683,39 +683,39 @@
 
 <p>The following is an example of a tabbedpanel and panel tag utilizing local and remote content:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>sx:head /<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>sx:tabbedpanel id="test" <span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>sx:div id="one" label="one" theme="ajax" labelposition="top" <span class="ni">&amp;gt;</span>
-        This is the first pane<span class="ni">&amp;lt;</span>br/<span class="ni">&amp;gt;</span>
-        <span class="ni">&amp;lt;</span>s:form<span class="ni">&amp;gt;</span>
-            <span class="ni">&amp;lt;</span>s:textfield name="tt" label="Test Text"/<span class="ni">&amp;gt;</span>  <span class="ni">&amp;lt;</span>br/<span class="ni">&amp;gt;</span>
-            <span class="ni">&amp;lt;</span>s:textfield name="tt2" label="Test Text2"/<span class="ni">&amp;gt;</span>
-        <span class="ni">&amp;lt;</span>/s:form<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>/sx:div<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action" <span class="ni">&amp;gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;sx:head</span> <span class="nt">/&gt;</span>
+ <span class="nt">&lt;sx:tabbedpanel</span> <span class="na">id=</span><span class="s">"test"</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;sx:div</span> <span class="na">id=</span><span class="s">"one"</span> <span class="na">label=</span><span class="s">"one"</span> <span class="na">theme=</span><span class="s">"ajax"</span> <span class="na">labelposition=</span><span class="s">"top"</span> <span class="nt">&gt;</span>
+        This is the first pane<span class="nt">&lt;br/&gt;</span>
+        <span class="nt">&lt;s:form&gt;</span>
+            <span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"tt"</span> <span class="na">label=</span><span class="s">"Test Text"</span><span class="nt">/&gt;</span>  <span class="nt">&lt;br/&gt;</span>
+            <span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"tt2"</span> <span class="na">label=</span><span class="s">"Test Text2"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/s:form&gt;</span>
+    <span class="nt">&lt;/sx:div&gt;</span>
+    <span class="nt">&lt;sx:div</span> <span class="na">id=</span><span class="s">"three"</span> <span class="na">label=</span><span class="s">"remote"</span> <span class="na">theme=</span><span class="s">"ajax"</span> <span class="na">href=</span><span class="s">"/AjaxTest.action"</span> <span class="nt">&gt;</span>
         This is the remote tab
-    <span class="ni">&amp;lt;</span>/sx:div<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/sx:tabbedpanel<span class="ni">&amp;gt;</span>
+    <span class="nt">&lt;/sx:div&gt;</span>
+ <span class="nt">&lt;/sx:tabbedpanel&gt;</span>
 </code></pre>
 </div>
 
 <p>Use notify topics to prevent a tab from being selected:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>sx:head /<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>script type="text/javascript"<span class="ni">&amp;gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;sx:head</span> <span class="nt">/&gt;</span>
+ <span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
  dojo.event.topic.subscribe("/beforeSelect", function(event, tab, tabContainer){
      event.cancel = true;
  });
- <span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;/script&gt;</span>
  
- <span class="ni">&amp;lt;</span>sx:tabbedpanel id="test" beforeSelectTabNotifyTopics="/beforeSelect"<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action" <span class="ni">&amp;gt;</span>
+ <span class="nt">&lt;sx:tabbedpanel</span> <span class="na">id=</span><span class="s">"test"</span> <span class="na">beforeSelectTabNotifyTopics=</span><span class="s">"/beforeSelect"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;sx:div</span> <span class="na">id=</span><span class="s">"three"</span> <span class="na">label=</span><span class="s">"remote"</span> <span class="na">theme=</span><span class="s">"ajax"</span> <span class="na">href=</span><span class="s">"/AjaxTest.action"</span> <span class="nt">&gt;</span>
         One Tab
-    <span class="ni">&amp;lt;</span>/sx:div<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action" <span class="ni">&amp;gt;</span>
+    <span class="nt">&lt;/sx:div&gt;</span>
+    <span class="nt">&lt;sx:div</span> <span class="na">id=</span><span class="s">"three"</span> <span class="na">label=</span><span class="s">"remote"</span> <span class="na">theme=</span><span class="s">"ajax"</span> <span class="na">href=</span><span class="s">"/AjaxTest.action"</span> <span class="nt">&gt;</span>
         Another tab
-    <span class="ni">&amp;lt;</span>/sx:div<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/sx:tabbedpanel<span class="ni">&amp;gt;</span>
+    <span class="nt">&lt;/sx:div&gt;</span>
+ <span class="nt">&lt;/sx:tabbedpanel&gt;</span>
 </code></pre>
 </div>
 
