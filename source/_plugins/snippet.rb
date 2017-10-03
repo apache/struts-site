@@ -36,12 +36,13 @@ module Jekyll
         if @javadoc
           unless @javadoc.to_s.strip.casecmp("FALSE") == 0
             snippet = snippet.gsub /^\s*\*/, ''
+            snippet = CGI.unescapeHTML(snippet)
           end
         end
         if @lang
           snippet = "\r\n" + "```" + @lang + "\r\n" + snippet + "\r\n" + "```" + "\r\n"
         else
-          snippet = "<p>" + escape(snippet) + "</p>"
+          snippet = "<p>" + escapeJekyll(snippet) + "</p>"
         end
 
         return snippet
@@ -127,7 +128,7 @@ module Jekyll
       content
     end
 
-    def escape(content)
+    def escapeJekyll(content)
 
       # Escape markdown style code blocks
 
