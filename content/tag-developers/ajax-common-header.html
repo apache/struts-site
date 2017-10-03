@@ -143,9 +143,64 @@
 
 <p><strong>Description</strong></p>
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD</p>
+<p> <p>The autocomplete tag is a combobox that can autocomplete text entered on the input box. If an action
+ is used to populate the autocompleter, the output of the action must be a well formed JSON string. </p>
+ <p>The autocompleter follows this rule to find its datasource:<p>
+ <p>1. If the response is an array, assume that it contains 2-dimension array elements, like:
+ <pre>
+ [
+      ["Alabama", "AL"],
+      ["Alaska", "AK"]
+ ]
+ </pre>
+ <p>2. If a value is specified in the "dataFieldName" attribute, and the response has a field with that
+ name, assume that's the datasource, which can be an array of 2-dimension array elements, or a map, 
+ like (assuming dataFieldName="state"):</p>
+ <pre>
+ {
+      "state" : [
+           ["Alabama","AL"],
+           ["Alaska","AK"]
+      ]
+ }     
+ or
+ {
+      "state" : {
+            "Alabama" : "AL",
+            "Alaska" : "AK"
+      }
+ }
+ </pre>
+ 
+ <p>3. If there is a field that starts with the value specified on the "name" attribute, assume 
+ that's the datasource, like (assuming name="state"):</p>
+ <pre>
+ {
+      "states" : [
+           ["Alabama","AL"],
+           ["Alaska","AK"]
+      ]
+ }
+ </pre>
+ <p>4. Use first array that is found, like:<p>
+ <pre>
+ {
+      "anything" : [
+            ["Alabama", "AL"],
+            ["Alaska", "AK"]
+     ]       
+ }
+ <p>5. If the response is a map, use it (recommended as it is the easiest one to generate):
+ <pre>
+ {
+      "Alabama" : "AL",
+      "Alaska" : "AK"
+ }
+ </pre></p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -797,96 +852,193 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<p>Get list from an action:</p>
+Get list from an action:
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Uses a list:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
+```xml
+ &lt;sx:autocompleter name="autocompleter1" href="%{jsonList}"/&gt;
+```
 
-<p>Autocompleter that reloads its content everytime the text changes (and the length of the text is greater than 3):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example3 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
+Uses a list:
 
-<p>Linking two autocompleters:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example4 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Set/Get selected values using JavaScript:</p>
+```xml
+ &lt;s:autocompleter name="test"  list="{'apple','banana','grape','pear'}" autoComplete="false"/&gt;
+```
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example5 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Using beforeNotifyTopics:</p>
+Autocompleter that reloads its content everytime the text changes (and the length of the text is greater than 3):
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example6 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Using errorNotifyTopics:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example7 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
+```xml
+ &lt;sx:autocompleter name="mvc" href="%{jsonList}" loadOnTextChange="true" loadMinimumCount="3"/&gt;
+ 
+ The text entered on the autocompleter is passed as a parameter to the url specified in "href", like (text is "struts"):
+  
+ http://host/example/myaction.do?mvc=struts
+```
 
-<p>Using errorNotifyTopics:</p>
 
-<p>START SNIPPET: example8 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD</p>
+Linking two autocompleters:
 
-<p>Using valueNotifyTopics:</p>
 
-<p>START SNIPPET: example9 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD</p>
 
-<p><strong>Caveats</strong></p>
+```xml
+ &lt;form id="selectForm"&gt;
+      &lt;sx:autocompleter  name="select" list="{'fruits','colors'}"  valueNotifyTopics="/changed" /&gt;
+ &lt;/form&gt;  
+ &lt;sx:autocompleter  href="%{jsonList}" formId="selectForm" listenTopics="/changed"/&gt;
+```
 
-<ul>
-  <li>The service that is producing the HTTP Response with JSON response to the Autocompleter tag must set the HTTP Header Response Content-Type to</li>
-</ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>text/json
-</code></pre>
-</div>
-<p>. JSON has its own MIME type, which this tag expects.</p>
+Set/Get selected values using JavaScript:
 
-<ul>
-  <li>Since 2.0.9, there is a change in the value:key order. Now, the value <strong>must</strong> come before the key.</li>
-</ul>
 
-<p>#####bind##### {#PAGE_66798}</p>
 
-<p><strong>Description</strong></p>
+```xml
+ &lt;sx:autocompleter  href="%{jsonList}" id="auto"/&gt;
+ &lt;script type="text/javascript"&gt;
+   function getValues() {
+      var autoCompleter = dojo.widget.byId("auto");
+      
+      //key (in the states example above, "AL")
+      var key = autoCompleter.getSelectedKey();
+      alert(key);
+      
+      //value (in the states example above, "Alabama")
+      var value = autoCompleter.getSelectedValue();
+      alert(value);
+      
+      //text currently on the textbox (anything the user typed)
+      var text = autoCompleter.getText();
+      alert(text);
+   }
+ 
+   function setValues() {
+      var autoCompleter = dojo.widget.byId("auto");
+      
+      //key (key will be set to "AL" and value to "Alabama")
+      autoCompleter.setSelectedKey("AL");
+      
+      //value (key will be set to "AL" and value to "Alabama")
+      autoCompleter.setAllValues("AL", "Alabama");
+   }
+ &lt;/script&gt;
+```
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Bind.java;hb=HEAD</p>
 
-<p>There’s a bug in  IE6/IE7 which makes impossible to use the target’s attribute with a parent Div, because such Div’s content’s are overwritten with the tag’s <em>loadingText</em> . Resulting in an “undefined” message in the content’s, instead of the result of the request.</p>
+Using beforeNotifyTopics:
 
-<p>One possible alternative is to set <em>showLoadingText=”false”</em>  and set the indicator attribute to an element showing the desired loading text or image (outside the div).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;img id="loadingImage" src="images/loadingAnimation.gif" style="display:none"/&gt;
-&lt;s:div id="parentDiv"&gt;
-    &lt;s:form action="actionName"&gt;
-        &lt;s:submit id="btn" /&gt;
-        &lt;sx:bind sources="btn" events="onclick" targets="parentDiv" showLoadingText="false" indicator="loadingImage"/&gt;
-    &lt;/s:form&gt;
-&lt;/s:div&gt;
 
-</code></pre>
-</div>
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/before", function(event, widget){
+     alert('inside a topic event. before request');
+     //event: set event.cancel = true, to cancel request
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;         
+ 
+ &lt;sx:autocompleter beforeNotifyTopics="/before" href="%{#ajaxTest} /&gt;
+```
 
-<p><strong>Parameters</strong></p>
+
+Using errorNotifyTopics:
+
+
+
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/after", function(data, request, widget){
+     alert('inside a topic event. after request');
+     //data : JavaScript object from parsing response
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;        
+ 
+ &lt;sx:autocompleter afterNotifyTopics="/after" href="%{#ajaxTest}" /&gt;
+```
+
+
+Using errorNotifyTopics:
+
+
+<p> &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/error", function(error, request, widget){
+     alert('inside a topic event. on error');
+     //error : error object (error.message has the error message)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;
+ 
+ &lt;sx:autocompleter errorNotifyTopics="/error" href="%{#ajaxTest}" /&gt;</p>
+
+Using valueNotifyTopics:
+
+
+<p> &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/value", function(value, key, text, widget){
+     alert('inside a topic event. after value changed');
+     //value : selected value (like "Florida" in example above)
+     //key: selected key (like "FL" in example above)
+     //text: text typed into textbox
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;   
+ 
+ &lt;sx:autocompleter valueNotifyTopics="/value" href="%{#ajaxTest}" /&gt;</p>
+
+__Caveats__
+
++ The service that is producing the HTTP Response with JSON response to the Autocompleter tag must set the HTTP Header Response Content-Type to 
+
+~~~~~~~
+text/json
+~~~~~~~
+. JSON has its own MIME type, which this tag expects.
+
++ Since 2.0.9, there is a change in the value:key order. Now, the value **must** come before the key.
+
+#####bind##### {#PAGE_66798}
+
+__Description__
+
+
+
+<p> <p>
+ This tag will generate event listeners for multiple events on multiple sources,
+ making an asynchronous request to the specified href, and updating multiple targets.
+ </p></p>
+
+There's a bug in  IE6/IE7 which makes impossible to use the target's attribute with a parent Div, because such Div's content's are overwritten with the tag's _loadingText_ . Resulting in an "undefined" message in the content's, instead of the result of the request.
+
+One possible alternative is to set _showLoadingText="false"_  and set the indicator attribute to an element showing the desired loading text or image (outside the div).
+
+
+~~~~~~~
+
+<img id="loadingImage" src="images/loadingAnimation.gif" style="display:none" />
+<s:div id="parentDiv">
+    <s:form action="actionName">
+        <s:submit id="btn" />
+        <sx:bind sources="btn" events="onclick" targets="parentDiv" showloadingtext="false" indicator="loadingImage" />
+    </s:form>
+</s:div>
+
+~~~~~~~
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -1106,60 +1258,114 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<p>Without attaching to an event, listening to a topic (used to make an Ajax call):</p>
+Without attaching to an event, listening to a topic (used to make an Ajax call):
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example0 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Bind.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Attached to event ‘onclick’ on submit button:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Bind.java;hb=HEAD
-</code></pre>
-</div>
+```xml
+ &lt;sx:bind href="%{#ajaxTest}" listenTopics="/makecall"/&gt;
+ &lt;s:submit onclick="dojo.event.topic.publish('/makecall')"/&gt;
+```
 
-<p>Submit form:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Bind.java;hb=HEAD
-</code></pre>
-</div>
+Attached to event 'onclick' on submit button:
 
-<p>Using beforeNotifyTopics:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example4 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Bind.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Using afterNotifyTopics and highlight:</p>
+```xml
+ &lt;img id="indicator" src="${pageContext.request.contextPath}/images/indicator.gif" alt="Loading..." style="display:none"/&gt;
+ &lt;sx:bind id="ex1" href="%{#ajaxTest}" sources="button" targets="div1" events="onclick" indicator="indicator" /&gt;
+ &lt;s:submit theme="simple" type="submit" value="submit" id="button"/&gt;
+```
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example5 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Bind.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Using errorNotifyTopics and indicator:</p>
+Submit form:
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example6 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Bind.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>#####checkbox##### {#PAGE_14029}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+```xml
+ &lt;sx:bind id="ex3" href="%{#ajaxTest}" sources="chk1" targets="div1" events="onchange" formId="form1" /&gt;
+ &lt;form id="form1"&gt;
+     &lt;s:checkbox name="data" label="Hit me" id="chk1"/&gt;
+ &lt;/form&gt;
+```
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p><strong>Description</strong></p>
+Using beforeNotifyTopics:
+
+
+
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/before", function(event, widget){
+     alert('inside a topic event. before request');
+     //event: set event.cancel = true, to cancel request
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;         
+ 
+ &lt;input type="button" id="button"&gt; 
+ &lt;sx:bind id="ex1" href="%{#ajaxTest}" beforeNotifyTopics="/before" sources="button" events="onclick"/&gt; 
+```
+
+
+Using afterNotifyTopics and highlight:
+
+
+
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/after", function(data, request, widget){
+     alert('inside a topic event. after request');
+     //data : text returned from request(the html)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;        
+ 
+ &lt;input type="button" id="button"&gt;
+ &lt;sx:bind id="ex1" href="%{#ajaxTest}" highlightColor="red" afterNotifyTopics="/after" sources="button" events="onclick"/&gt;
+```
+
+
+Using errorNotifyTopics and indicator:
+
+
+
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/error", function(error, request, widget){
+     alert('inside a topic event. on error');
+     //error : error object (error.message has the error message)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;         
+ 
+ &lt;input type="button" id="button"&gt;
+ &lt;img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none"/&gt;
+ &lt;sx:bind href="%{#ajaxTest}" indicator="ind1" errorNotifyTopics="/error" sources="button" events="onclick"/&gt;
+```
+
+
+#####checkbox##### {#PAGE_14029}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> Renders an HTML input element of type checkbox, populated by the specified property from the ValueStack.</p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -1531,30 +1737,31 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> JSP:
- <span class="ni">&amp;lt;</span>s:checkbox label="checkbox test" name="checkboxField1" value="aBoolean" fieldValue="true"/<span class="ni">&amp;gt;</span>
+
+
+
+```xml
+ JSP:
+ &lt;s:checkbox label="checkbox test" name="checkboxField1" value="aBoolean" fieldValue="true"/&gt;
 
  Velocity:
  #tag( Checkbox "label=checkbox test" "name=checkboxField1" "value=aBoolean" )
 
  Resulting HTML (simple template, aBoolean == true):
- <span class="ni">&amp;lt;</span>input type="checkbox" name="checkboxField1" value="true" checked="checked" /<span class="ni">&amp;gt;</span>
+ &lt;input type="checkbox" name="checkboxField1" value="true" checked="checked" /&gt;
 
-</code></pre>
-</div>
+```
 
-<p>#####checkboxlist##### {#PAGE_13969}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+#####checkboxlist##### {#PAGE_13969}
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
 
 <p> <p>
  Note that the listkey and listvalue attribute will default to "key" and "value"
@@ -1562,13 +1769,17 @@
  Everything else will result in listkey and listvalue to be null and not used.
  </p></p>
 
-<p><strong>Description</strong></p>
+__Description__
+
+
 
 <p>
  Creates a series of checkboxes from a list. Setup is like &lt;s:select /&gt; or &lt;s:radio /&gt;, but creates checkbox tags.
 </p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -1996,24 +2207,26 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:checkboxlist name="foo" list="bar"/<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<p>#####combobox##### {#PAGE_14259}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+```xml
+ &lt;s:checkboxlist name="foo" list="bar"/&gt;
+```
 
-<p><strong>Description</strong></p>
+
+#####combobox##### {#PAGE_14259}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> <p>
  The combo box is basically an HTML INPUT of type text and HTML SELECT grouped together to give you a combo box
@@ -2034,7 +2247,9 @@
  out the text field.
  </p></p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -2486,45 +2701,51 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> JSP:
- <span class="ni">&amp;lt;</span>-- Example One --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:bean name="struts.util.Counter" var="year"<span class="ni">&amp;gt;</span>
-   <span class="ni">&amp;lt;</span>s:param name="first" value="text('firstBirthYear')"/<span class="ni">&amp;gt;</span>
-   <span class="ni">&amp;lt;</span>s:param name="last" value="2000"/<span class="ni">&amp;gt;</span>
 
-   <span class="ni">&amp;lt;</span>s:combobox label="Birth year" size="6" maxlength="4" name="birthYear" list="#year"/<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/s:bean<span class="ni">&amp;gt;</span>
 
- <span class="ni">&amp;lt;</span>-- Example Two --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:combobox
+
+```xml
+ JSP:
+ &lt;-- Example One --&gt;
+ &lt;s:bean name="struts.util.Counter" var="year"&gt;
+   &lt;s:param name="first" value="text('firstBirthYear')"/&gt;
+   &lt;s:param name="last" value="2000"/&gt;
+
+   &lt;s:combobox label="Birth year" size="6" maxlength="4" name="birthYear" list="#year"/&gt;
+ &lt;/s:bean&gt;
+
+ &lt;-- Example Two --&gt;
+ &lt;s:combobox
      label="My Favourite Fruit"
      name="myFavouriteFruit"
      list="{'apple','banana','grape','pear'}"
      headerKey="-1"
      headerValue="--- Please Select ---"
      emptyOption="true"
-     value="banana" /<span class="ni">&amp;gt;</span>
+     value="banana" /&gt;
 
- <span class="ni">&amp;lt;</span>-- Example Two --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:combobox
+ &lt;-- Example Two --&gt;
+ &lt;s:combobox
     label="My Favourite Color"
     name="myFavouriteColor"
     list="#{'red':'red','green':'green','blue':'blue'}"
     headerKey="-1"
     headerValue="--- Please Select ---"
     emptyOption="true"
-    value="green" /<span class="ni">&amp;gt;</span>
+    value="green" /&gt;
 
  Velocity:
  #tag( ComboBox "label=Birth year" "size=6" "maxlength=4" "name=birthYear" "list=#year" )
-</code></pre>
-</div>
+```
 
-<p>#####component##### {#PAGE_14033}</p>
 
-<p><strong>Description</strong></p>
+#####component##### {#PAGE_14033}
+
+__Description__
+
+
 
 <p> <p>
  Renders an custom UI widget using the specified templates. Additional objects can be passed in to the template
@@ -2568,37 +2789,26 @@
  could not be picked up from the classpath.
 </p>
 
-<p><strong>(!) templateDir and theme attribute</strong></p>
+**(!) templateDir and theme attribute**
 
-<blockquote>
 
-</blockquote>
+&gt; 
 
-<blockquote>
+&gt; 
 
-</blockquote>
+&gt; The final path to the template will be built using the _templateDir_  and _template_  attributes, like \${templateDir}/\${theme}/\${template}. If for example your component is under /components/html/option.jsp, you would have to set templateDir="components", theme="html" and template="options.jsp". 
 
-<blockquote>
-  <p>The final path to the template will be built using the <em>templateDir</em>  and <em>template</em>  attributes, like ${templateDir}/${theme}/${template}. If for example your component is under /components/html/option.jsp, you would have to set templateDir=”components”, theme=”html” and template=”options.jsp”.</p>
-</blockquote>
+&gt; 
 
-<blockquote>
+&gt; 
 
-</blockquote>
+&gt; For any Struts tag that you use in your component, make sure that you set its templateDir="template"
 
-<blockquote>
+&gt; 
 
-</blockquote>
+__Parameters__
 
-<blockquote>
-  <p>For any Struts tag that you use in your component, make sure that you set its templateDir=”template”</p>
-</blockquote>
 
-<blockquote>
-
-</blockquote>
-
-<p><strong>Parameters</strong></p>
 
 <p>		<table width="100%">
 			<tr>
@@ -2962,26 +3172,30 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;p&gt;</span>
+
+
+
+```xml
+ <p>
  JSP
- <span class="nt">&lt;/p&gt;</span>
- <span class="nt">&lt;pre&gt;</span>
-     <span class="ni">&amp;lt;</span>s:component template="/my/custom/component.vm"/<span class="ni">&amp;gt;</span>
+ </p>
+ <pre>
+     &lt;s:component template="/my/custom/component.vm"/&gt;
 
        or
 
-     <span class="ni">&amp;lt;</span>s:component template="/my/custom/component.vm"<span class="ni">&amp;gt;</span>
-       <span class="ni">&amp;lt;</span>s:param name="key1" value="value1"/<span class="ni">&amp;gt;</span>
-       <span class="ni">&amp;lt;</span>s:param name="key2" value="value2"/<span class="ni">&amp;gt;</span>
-     <span class="ni">&amp;lt;</span>/s:component<span class="ni">&amp;gt;</span>
- <span class="nt">&lt;/pre&gt;</span>
+     &lt;s:component template="/my/custom/component.vm"&gt;
+       &lt;s:param name="key1" value="value1"/&gt;
+       &lt;s:param name="key2" value="value2"/&gt;
+     &lt;/s:component&gt;
+ </pre>
 
- <span class="nt">&lt;p&gt;</span>
+ <p>
  Velocity
- <span class="nt">&lt;/p&gt;</span>
- <span class="nt">&lt;pre&gt;</span>
+ </p>
+ <pre>
      #s-component( "template=/my/custom/component.vm" )
 
        or
@@ -2990,40 +3204,40 @@
        #s-param( "name=key1" "value=value1" )
        #s-param( "name=key2" "value=value2" )
      #end
- <span class="nt">&lt;/pre&gt;</span>
+ </pre>
 
- <span class="nt">&lt;p&gt;</span>
+ <p>
  Freemarker
- <span class="nt">&lt;/p&gt;</span>
- <span class="nt">&lt;pre&gt;</span>
-    <span class="ni">&amp;lt;</span>@s..component template="/my/custom/component.ftl" /<span class="ni">&amp;gt;</span>
+ </p>
+ <pre>
+    &lt;@s..component template="/my/custom/component.ftl" /&gt;
 
       or
 
-    <span class="ni">&amp;lt;</span>@s..component template="/my/custom/component.ftl"<span class="ni">&amp;gt;</span>
-       <span class="ni">&amp;lt;</span>@s..param name="key1" value="%{'value1'}" /<span class="ni">&amp;gt;</span>
-       <span class="ni">&amp;lt;</span>@s..param name="key2" value="%{'value2'}" /<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>/@s..component<span class="ni">&amp;gt;</span>
- <span class="nt">&lt;/pre&gt;</span>
-</code></pre>
-</div>
+    &lt;@s..component template="/my/custom/component.ftl"&gt;
+       &lt;@s..param name="key1" value="%{'value1'}" /&gt;
+       &lt;@s..param name="key2" value="%{'value2'}" /&gt;
+    &lt;/@s..component&gt;
+ </pre>
+```
 
-<p>#####datetextfield##### {#PAGE_40506485}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+#####datetextfield##### {#PAGE_40506485}
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p><strong>Description</strong></p>
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/org/apache/struts2/components/DateTextField.java;hb=HEAD</p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -3395,19 +3609,98 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/org/apache/struts2/components/DateTextField.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>#####datetimepicker##### {#PAGE_14274}</p>
 
-<p><strong>Description</strong></p>
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/DateTimePicker.java;hb=HEAD</p>
+```xml
+START SNIPPET: example not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/org/apache/struts2/components/DateTextField.java;hb=HEAD
+```
 
-<p><strong>Parameters</strong></p>
+
+#####datetimepicker##### {#PAGE_14274}
+
+__Description__
+
+
+
+<p> <p>
+ Renders a date/time picker in a dropdown container.
+ </p>
+ <p>
+ A stand-alone DateTimePicker widget that makes it easy to select a date/time, or increment by week, month,
+ and/or year.
+ </p>
+
+ <p>
+ It is possible to customize the user-visible formatting with either the
+ 'formatLength' (long, short, medium or full) or 'displayFormat' attributes. By defaulty current
+ locale will be used.</p>
+ </p>
+ 
+ Syntax supported by 'displayFormat' is (http://www.unicode.org/reports/tr35/tr35-4.html#Date_Format_Patterns):-
+ <table border="1">
+   <tr>
+      <td>Format</td>
+      <td>Description</td>
+   </tr>
+   <tr>
+      <td>d</td>
+      <td>Day of the month</td>
+   </tr>
+   <tr>
+      <td>D</td>
+      <td>Day of year</td>
+   </tr>
+   <tr>
+      <td>M</td>
+      <td>Month - Use one or two for the numerical month, three for the abbreviation, or four for the full name, or 5 for the narrow name.</td>
+   </tr>
+   <tr>
+      <td>y</td>
+      <td>Year</td>
+   </tr>
+   <tr>
+      <td>h</td>
+      <td>Hour [1-12].</td>
+   </tr>
+   <tr>
+      <td>H</td>
+      <td>Hour [0-23].</td>
+   </tr>
+   <tr>
+      <td>m</td>
+      <td>Minute. Use one or two for zero padding.</td>
+   </tr>
+   <tr>
+      <td>s</td>
+      <td>Second. Use one or two for zero padding.</td>
+   </tr>
+ </table>
+ 
+ <p>
+ The value sent to the server is a locale-independent value, in a hidden field as defined 
+ by the name attribute. The value will be formatted conforming to RFC3 339 
+ (yyyy-MM-dd'T'HH:mm:ss)
+ </p>
+ <p>
+ The following formats(in order) will be used to parse the values of the attributes 'value', 
+ 'startDate' and 'endDate':
+ </p>
+ <ul>
+   <li>SimpleDateFormat built using RFC 3339 (yyyy-MM-dd'T'HH:mm:ss)
+   <li>SimpleDateFormat.getTimeInstance(DateFormat.SHORT)
+   <li>SimpleDateFormat.getDateInstance(DateFormat.SHORT)
+   <li>SimpleDateFormat.getDateInstance(DateFormat.MEDIUM)
+   <li>SimpleDateFormat.getDateInstance(DateFormat.FULL)
+   <li>SimpleDateFormat.getDateInstance(DateFormat.LONG)
+   <li>SimpleDateFormat built using the value of the 'displayFormat' attribute(if any)
+ 
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -3883,46 +4176,87 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/DateTimePicker.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Getting and getting the datetimepicker value, from JavaScript:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/DateTimePicker.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Publish topic when value changes</p>
+```xml
+   &lt;sx:datetimepicker name="order.date" label="Order Date" /&gt;
+   &lt;sx:datetimepicker name="delivery.date" label="Delivery Date" displayFormat="yyyy-MM-dd"  /&gt;
+   &lt;sx:datetimepicker name="delivery.date" label="Delivery Date" value="%{date}"  /&gt;
+   &lt;sx:datetimepicker name="delivery.date" label="Delivery Date" value="%{'2007-01-01'}"  /&gt;
+   &lt;sx:datetimepicker name="order.date" label="Order Date" value="%{'today'}"/&gt;
+```
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example3 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/DateTimePicker.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>#####div##### {#PAGE_13908}</p>
+Getting and getting the datetimepicker value, from JavaScript:
 
-<p><strong>Description</strong></p>
+
+
+```xml
+ &lt;sx:datetimepicker id="picker" label="Order Date" /&gt;
+ &lt;script type="text/javascript"&gt;
+   function setValue() {
+      var picker = dojo.widget.byId("picker");
+      
+      //string value
+      picker.setValue('2007-01-01');
+      
+      //Date value
+      picker.setValue(new Date());
+   }
+   
+   function showValue() {
+      var picker = dojo.widget.byId("picker");
+      
+      //string value
+      var stringValue = picker.getValue();
+      alert(stringValue);
+      
+      //date value
+      var dateValue = picker.getDate();
+      alert(dateValue);
+   }
+ &lt;/script&gt;
+```
+
+
+Publish topic when value changes
+
+
+
+```xml
+ &lt;sx:datetimepicker id="picker" label="Order Date" valueNotifyTopics="/value"/&gt;
+ 
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/value", function(textEntered, date, widget){
+     alert('value changed');
+     //textEntered: String enetered in the textbox
+     //date: JavaScript Date object with the value selected
+     //widet: widget that published the topic 
+ });
+ &lt;/script&gt;  
+```
+
+
+#####div##### {#PAGE_13908}
+
+__Description__
+
+
 
 <p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/org/apache/struts2/components/Div.java;hb=HEAD</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>While this tag can be used with the <a href="#PAGE_14291">simple theme</a>, <a href="#PAGE_13834">xhtml theme</a>, and others, it is really designed to work best with the <a href="#PAGE_14205">ajax theme</a>. We recommend reading the <em>ajax div template</em>  documentation for more details.</td>
-    </tr>
-  </tbody>
-</table>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p><strong>Parameters</strong></p>
+| While this tag can be used with the [simple theme](#PAGE_14291), [xhtml theme](#PAGE_13834), and others, it is really designed to work best with the [ajax theme](#PAGE_14205). We recommend reading the _ajax div template_  documentation for more details.
+
+| 
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -4294,13 +4628,31 @@
 		</table>
 </p>
 
-<p>#####dojo div##### {#PAGE_66929}</p>
+#####dojo div##### {#PAGE_66929}
 
-<p><strong>Description</strong></p>
+__Description__
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Div.java;hb=HEAD</p>
 
-<p><strong>Parameters</strong></p>
+
+<p> <p>
+ This tag generates an HTML div that loads its content using an XMLHttpRequest call, via
+ the dojo framework. When the "updateFreq" is set the built in timer will start automatically and 
+ reload the div content with the value of "updateFreq" as the refresh period(in milliseconds).
+ Topics can be used to stop(stopTimerListenTopics) and start(startTimerListenTopics) this timer.  
+ </p>
+ <p>
+ When used inside a "tabbedpanel" tag, each div becomes a tab. Some attributes are specific
+ to this use case, like:
+ <ul>
+   <li>refreshOnShow: div content is realoded when tab is selected</li>
+   <li>closable: Tab will have close button</li>
+   <li>preload: load div content after page is loaded</li>
+ </ul>
+ </p></p>
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -4888,51 +5240,127 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<p>Simple div that loads its content once:</p>
+Simple div that loads its content once:
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Div.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>div that reloads its content every 2 seconds, and shows an indicator while reloading:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Div.java;hb=HEAD
-</code></pre>
-</div>
+```xml
+ &lt;sx:div href="%{#url}"&gt;Initial Content&lt;/sx:div&gt;
+```
 
-<p>div that uses topics to control the timer, highlights its content in red after reload, and submits a form:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example3 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Div.java;hb=HEAD
-</code></pre>
-</div>
+div that reloads its content every 2 seconds, and shows an indicator while reloading:
 
-<p>#####dojo head##### {#PAGE_66757}</p>
 
-<p><strong>Description</strong></p>
 
-<p>START SNIPPET: notice not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java;hb=HEAD</p>
+```xml
+ &lt;img id="indicator" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none"/&gt;
+ &lt;sx:div href="%{#url}" updateFreq="2000" indicator="indicator"&gt;
+   Initial Content
+ &lt;/sx:div&gt;
+```
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java;hb=HEAD</p>
 
-<blockquote>
+div that uses topics to control the timer, highlights its content in red after reload, and submits a form:
 
-</blockquote>
 
-<blockquote>
 
-</blockquote>
+```xml
+ &lt;form id="form"&gt;
+   &lt;label for="textInput"&gt;Text to be submited when div reloads&lt;/label&gt;
+   &lt;input type=textbox id="textInput" name="data"&gt;
+ &lt;/form&gt;
+ &lt;sx:div 
+      href="%{#url}" 
+      updateFreq="3000"
+      listenTopics="/refresh"
+      startTimerListenTopics="/startTimer"
+      stopTimerListenTopics="/stopTimer"
+      highlightColor="red"
+      formId="form"&gt;
+  Initial Content
+ &lt;/sx:div&gt;
+```
 
-<blockquote>
-  <p>If you are planning to nest tags from the Dojo plugin, make sure you set parseContent=”false”, otherwise each request made by the inner tags will be performed twice.</p>
-</blockquote>
 
-<blockquote>
+#####dojo head##### {#PAGE_66757}
 
-</blockquote>
+__Description__
 
-<p><strong>Parameters</strong></p>
+
+<p> The "head" tag renders required JavaScript code to configure Dojo and is required in order to use
+ any of the tags included in the Dojo plugin.</p>
+
+
+
+<p> <p></p>
+ 
+ <p>To debug javascript errors set the "debug" attribute to true, which will display Dojo 
+ (and Struts) warning and error messages at the bottom of the page. Core Dojo files are by default
+ compressed, to improve loading time, which makes them very hard to read. To debug Dojo and Struts
+ widgets, set the "compressed" attribute to true. Make sure to turn this option off before
+ moving your project into production, as uncompressed files will take longer to download.
+ </p>
+ <p>For troubleshooting javascript problems the following configuration is recommended:</p>
+ <pre>
+   &lt;sx:head debug="true" cache="false" compressed="false" /&gt;
+ </pre>
+
+ <p>Dojo files are loaded as required by the Dojo loading mechanism. The problem with this
+ approach is that the files are not cached by the browser, so reloading a page or navigating
+ to a different page that uses the same widgets will cause the files to be reloaded. To solve 
+ this problem a custom Dojo profile is distributed with the Dojo plugin. This profile contains
+ the files required by the tags in the Dojo plugin, all in one file (524Kb), which is cached 
+ by the browser. This file will take longer to load by the browser but it will be downloaded 
+ only once. By default the "cache" attribute is set to false.</p>
+ 
+ <p>Some tags like the "datetimepicker" can use different locales, to use a locale
+ that is different from the request locale, it must be specified on the "extraLocales" 
+ attribute. This attribute can contain a comma separated list of locale names. From
+ Dojo's documentation:</p>
+ 
+ <p>
+ The locale is a short string, defined by the host environment, which conforms to RFC 3066 
+ (http://www.ietf.org/rfc/rfc3066.txt) used in the HTML specification. 
+ It consists of short identifiers, typically two characters 
+ long which are case-insensitive. Note that Dojo uses dash separators, not underscores like 
+ Java (e.g. "en-us", not "en_US"). Typically country codes are used in the optional second 
+ identifier, and additional variants may be specified. For example, Japanese is "ja"; 
+ Japanese in Japan is "ja-jp". Notice that the lower case is intentional -- while Dojo 
+ will often convert all locales to lowercase to normalize them, it is the lowercase that 
+ must be used when defining your resources.
+ </p>
+ 
+ <p>The "locale" attribute configures Dojo's locale:</p>
+ 
+ <p>"The locale Dojo uses on a page may be overridden by setting djConfig.locale. This may be 
+ done to accomodate applications with a known user profile or server pages which do manual
+ assembly and assume a certain locale. You may also set djConfig.extraLocale to load 
+ localizations in addition to your own, in case you want to specify a particular 
+ translation or have multiple languages appear on your page."</p>
+ 
+ <p>To improve loading time, the property "parseContent" is set to false by default. This property will
+ instruct Dojo to only build widgets using specific element ids. If the property is set to true
+ Dojo will scan the whole document looking for widgets.</p>
+ 
+ <p>Dojo 0.4.3 is distributed with the Dojo plugin, to use a different Dojo version, the 
+ "baseRelativePath" attribute can be set to the URL of the Dojo root folder on your application.
+ </p></p>
+
+
+&gt; 
+
+&gt; 
+
+&gt; If you are planning to nest tags from the Dojo plugin, make sure you set parseContent="false", otherwise each request made by the inner tags will be performed twice.
+
+&gt; 
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -5008,23 +5436,42 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java;hb=HEAD
-</code></pre>
-</div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example3 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Head.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>#####dojo textarea##### {#PAGE_66931}</p>
 
-<p><strong>Description</strong></p>
+```xml
+ &lt;%@ taglib prefix="sx" uri="/struts-dojo-tags" %&gt;
+ &lt;head&gt;
+   &lt;title&gt;My page&lt;/title&gt;
+   &lt;sx:head/&gt;
+ &lt;/head&gt;
+```
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/TextArea.java;hb=HEAD</p>
 
-<p><strong>Parameters</strong></p>
+
+
+```xml
+ &lt;%@ taglib prefix="sx" uri="/struts-dojo-tags" %&gt;
+ &lt;head&gt;
+   &lt;title&gt;My page&lt;/title&gt;
+   &lt;sx:head debug="true" extraLocales="en-us,nl-nl,de-de"/&gt;
+ &lt;/head&gt;
+```
+
+
+#####dojo textarea##### {#PAGE_66931}
+
+__Description__
+
+
+
+<p> Render Dojo Editor2 widget</p>
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -5412,16 +5859,13 @@
 		</table>
 </p>
 
-<p>#####doubleselect##### {#PAGE_14005}</p>
+#####doubleselect##### {#PAGE_14005}
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
 
 <p> <p>
  Note that the doublelistkey and doublelistvalue attribute will default to "key" and "value"
@@ -5430,11 +5874,15 @@
  </p>
 </p>
 
-<p><strong>Description</strong></p>
+__Description__
+
+
 
 <p> Renders two HTML select elements with second one changing displayed values depending on selected entry of first one.</p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -6166,23 +6614,31 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:doubleselect label="doubleselect test1" name="menu" list="{'fruit','other'}" doubleName="dishes" doubleList="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" /<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:doubleselect label="doubleselect test2" name="menu" list="#{'fruit':'Nice Fruits', 'other':'Other Dishes'}" doubleName="dishes" doubleList="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" /<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<p>#####fielderror##### {#PAGE_14151}</p>
 
-<p><strong>Description</strong></p>
+
+```xml
+ &lt;s:doubleselect label="doubleselect test1" name="menu" list="{'fruit','other'}" doubleName="dishes" doubleList="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" /&gt;
+ &lt;s:doubleselect label="doubleselect test2" name="menu" list="#{'fruit':'Nice Fruits', 'other':'Other Dishes'}" doubleName="dishes" doubleList="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" /&gt;
+```
+
+
+#####fielderror##### {#PAGE_14151}
+
+__Description__
+
+
 
 <p>
  Render field errors if they exists. Specific layout depends on the particular theme.
  The field error strings will be html escaped by default.
 </p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -6562,59 +7018,64 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-    <span class="ni">&amp;lt;</span>!-- example 1 --<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>s:fielderror /<span class="ni">&amp;gt;</span>
 
-    <span class="ni">&amp;lt;</span>!-- example 2 --<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>s:fielderror<span class="ni">&amp;gt;</span>
-         <span class="ni">&amp;lt;</span>s:param<span class="ni">&amp;gt;</span>field1<span class="ni">&amp;lt;</span>/s:param<span class="ni">&amp;gt;</span>
-         <span class="ni">&amp;lt;</span>s:param<span class="ni">&amp;gt;</span>field2<span class="ni">&amp;lt;</span>/s:param<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>/s:fielderror<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>s:form .... <span class="ni">&amp;gt;</span>
+
+
+```xml
+
+    &lt;!-- example 1 --&gt;
+    &lt;s:fielderror /&gt;
+
+    &lt;!-- example 2 --&gt;
+    &lt;s:fielderror&gt;
+         &lt;s:param&gt;field1&lt;/s:param&gt;
+         &lt;s:param&gt;field2&lt;/s:param&gt;
+    &lt;/s:fielderror&gt;
+    &lt;s:form .... &gt;
        ....
-    <span class="ni">&amp;lt;</span>/s:form<span class="ni">&amp;gt;</span>
+    &lt;/s:form&gt;
 
     OR
 
-    <span class="ni">&amp;lt;</span>s:fielderror<span class="ni">&amp;gt;</span>
-          <span class="ni">&amp;lt;</span>s:param value="%{'field1'}" /<span class="ni">&amp;gt;</span>
-          <span class="ni">&amp;lt;</span>s:param value="%{'field2'}" /<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>/s:fielderror<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>s:form .... <span class="ni">&amp;gt;</span>
+    &lt;s:fielderror&gt;
+          &lt;s:param value="%{'field1'}" /&gt;
+          &lt;s:param value="%{'field2'}" /&gt;
+    &lt;/s:fielderror&gt;
+    &lt;s:form .... &gt;
        ....
-    <span class="ni">&amp;lt;</span>/s:form<span class="ni">&amp;gt;</span>
+    &lt;/s:form&gt;
 
     OR
 
-    <span class="ni">&amp;lt;</span>s:fielderror fieldName="field1" /<span class="ni">&amp;gt;</span>
+    &lt;s:fielderror fieldName="field1" /&gt;
 
-</code></pre>
-</div>
+```
+
+
 
 <p>
  Example 1: display all field errors<br />
  Example 2: display field errors only for 'field1' and 'field2'<br />
 </p>
 
-<p>#####file##### {#PAGE_14283}</p>
+#####file##### {#PAGE_14283}
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
 
-<p><strong>Description</strong></p>
+| 
+
+__Description__
+
+
 
 <p> Renders an HTML file input element.</p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -6994,25 +7455,27 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:file name="anUploadFile" accept="text/*" /<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:file name="anohterUploadFIle" accept="text/html,text/plain" /<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<p>#####form##### {#PAGE_14201}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+```xml
+ &lt;s:file name="anUploadFile" accept="text/*" /&gt;
+ &lt;s:file name="anohterUploadFIle" accept="text/html,text/plain" /&gt;
+```
 
-<p><strong>Description</strong></p>
+
+#####form##### {#PAGE_14201}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> <p>
  Renders HTML an input form.
@@ -7044,7 +7507,9 @@
  </ol>
 </p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -7520,35 +7985,39 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- <span class="ni">&amp;lt;</span>s:form ... /<span class="ni">&amp;gt;</span>
 
-</code></pre>
-</div>
 
-<p><strong>Validation</strong></p>
 
-<p>There are two flavours <em>Client Side Validation</em> , depending on the theme you are using (xhtml, ajax, etc). If you are using the <a href="#PAGE_13834">xhtml theme</a> or <a href="#PAGE_14215">css_xhtml theme</a>, pure client side validation will be used. If you are using the <a href="#PAGE_14205">ajax theme</a>, a special AJAX-based validation will take place. Read the <em>Client Side Validation</em>  docs for more information.</p>
+```xml
 
-<p>#####head##### {#PAGE_13997}</p>
+ &lt;s:form ... /&gt;
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+```
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p><strong>Description</strong></p>
+__Validation__
+
+There are two flavours _Client Side Validation_ , depending on the theme you are using (xhtml, ajax, etc). If you are using the [xhtml theme](#PAGE_13834) or [css_xhtml theme](#PAGE_14215), pure client side validation will be used. If you are using the [ajax theme](#PAGE_14205), a special AJAX-based validation will take place. Read the _Client Side Validation_  docs for more information.
+
+#####head##### {#PAGE_13997}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p>
  Renders parts of the HEAD section for an HTML file. Encoding can be set using this tag.</p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -7912,31 +8381,35 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>head<span class="ni">&amp;gt;</span>
-   <span class="ni">&amp;lt;</span>title<span class="ni">&amp;gt;</span>My page<span class="ni">&amp;lt;</span>/title<span class="ni">&amp;gt;</span>
-   <span class="ni">&amp;lt;</span>s:head/<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/head<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<p>#####hidden##### {#PAGE_14313}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+```xml
+ &lt;head&gt;
+   &lt;title&gt;My page&lt;/title&gt;
+   &lt;s:head/&gt;
+ &lt;/head&gt;
+```
 
-<p><strong>Description</strong></p>
+
+#####hidden##### {#PAGE_14313}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> Renders an HTML input element of type hidden, populated by the specified property from the ValueStack.</p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -8300,23 +8773,29 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>-- example one --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:hidden name="foo" /<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>-- example two --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:hidden name="foo" value="%{bar}" /<span class="ni">&amp;gt;</span>
+
+
+
+```xml
+ &lt;-- example one --&gt;
+ &lt;s:hidden name="foo" /&gt;
+ &lt;-- example two --&gt;
+ &lt;s:hidden name="foo" value="%{bar}" /&gt;
 
  Example One Resulting HTML (if foo evaluates to bar):
- <span class="ni">&amp;lt;</span>input type="hidden" name="foo" value="bar" /<span class="ni">&amp;gt;</span>
+ &lt;input type="hidden" name="foo" value="bar" /&gt;
  Example Two Resulting HTML (if getBar method of the action returns 'bar')
- <span class="ni">&amp;lt;</span>input type="hidden" name="foo" value="bar" /<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
+ &lt;input type="hidden" name="foo" value="bar" /&gt;
+```
 
-<p>#####inputtransferselect##### {#PAGE_17268774}</p>
 
-<p><strong>Description</strong></p>
+#####inputtransferselect##### {#PAGE_17268774}
+
+__Description__
+
+
 
 <p> <p>
  Create a input transfer select component which is basically an text input
@@ -8332,7 +8811,9 @@
  &lt;form_id&gt;_&lt;inputtransferselect_doubleName&gt; respectively.
  </p></p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -8880,36 +9361,40 @@
 		</table>
 </p>
 
-<p><strong>Example</strong></p>
+__Example__
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- <span class="ni">&amp;lt;</span>-- minimum configuration --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:inputtransferselect
+
+
+
+```xml
+
+ &lt;-- minimum configuration --&gt;
+ &lt;s:inputtransferselect
       label="Favourite Cartoons Characters"
       name="cartoons"
       list="{'Popeye', 'He-Man', 'Spiderman'}"
-  /<span class="ni">&amp;gt;</span>
+  /&gt;
 
-</code></pre>
-</div>
+```
 
-<p>#####label##### {#PAGE_14167}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+#####label##### {#PAGE_14167}
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p><strong>Description</strong></p>
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> <p>Renders an HTML LABEL that will allow you to output label:name combination that has the same format treatment as
  the rest of your UI controls.</p></p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -9281,29 +9766,35 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:label key="userName" /<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<pre><code class="language-none"> &lt;p&gt;In this example, a label is rendered. The label is retrieved from a ResourceBundle via the key attribute
+
+
+```xml
+ &lt;s:label key="userName" /&gt;
+```
+
+
+
+
+```none
+ <p>In this example, a label is rendered. The label is retrieved from a ResourceBundle via the key attribute
  giving you an output of 'User Name: Ford.Prefect'. Assuming that i18n message userName corresponds
- to 'User Name' and the action's getUserName() method returns 'Ford.Prefect'&lt;/p&gt;
-</code></pre>
+ to 'User Name' and the action's getUserName() method returns 'Ford.Prefect'</p>
+```
 
-<p>#####optgroup##### {#PAGE_14170}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+#####optgroup##### {#PAGE_14170}
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p><strong>Description</strong></p>
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> <p>
  Create a optgroup component which needs to resides within a select tag.
@@ -9314,7 +9805,9 @@
  </p>
 </p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -9374,32 +9867,33 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- <span class="ni">&amp;lt;</span>s:select label="My Selection"
+
+
+
+```xml
+
+ &lt;s:select label="My Selection"
             name="mySelection"
             value="%{'POPEYE'}"
-            list="%{#{'SUPERMAN':'Superman', 'SPIDERMAN':'spiderman'}}"<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>s:optgroup label="Adult"
-                 list="%{#{'SOUTH_PARK':'South Park'}}" /<span class="ni">&amp;gt;</span>
-    <span class="ni">&amp;lt;</span>s:optgroup label="Japanese"
-                 list="%{#{'POKEMON':'pokemon','DIGIMON':'digimon','SAILORMOON':'Sailormoon'}}" /<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>/s:select<span class="ni">&amp;gt;</span>
+            list="%{#{'SUPERMAN':'Superman', 'SPIDERMAN':'spiderman'}}"&gt;
+    &lt;s:optgroup label="Adult"
+                 list="%{#{'SOUTH_PARK':'South Park'}}" /&gt;
+    &lt;s:optgroup label="Japanese"
+                 list="%{#{'POKEMON':'pokemon','DIGIMON':'digimon','SAILORMOON':'Sailormoon'}}" /&gt;
+ &lt;/s:select&gt;
 
-</code></pre>
-</div>
+```
 
-<p>#####optiontransferselect##### {#PAGE_13943}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+#####optiontransferselect##### {#PAGE_13943}
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
 
 <p> <p>
  Note that the doublelistkey and doublelistvalue attribute will default to "key" and "value"
@@ -9408,7 +9902,9 @@
  </p>
 </p>
 
-<p><strong>Description</strong></p>
+__Description__
+
+
 
 <p> <p>
  Create a option transfer select component which is basically two &lt;select ...&gt;
@@ -9416,6 +9912,7 @@
  &lt;select ...&gt; to be moved between themselves. Will auto-select all its
  elements upon its containing form submision.
  </p></p>
+
 
 <p> <p>
  NOTE: The id and doubleId need not be supplied as they will generated provided
@@ -9425,7 +9922,9 @@
  </p>
 </p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -10373,20 +10872,24 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- <span class="ni">&amp;lt;</span>-- minimum configuration --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:optiontransferselect
+
+
+
+```xml
+
+ &lt;-- minimum configuration --&gt;
+ &lt;s:optiontransferselect
       label="Favourite Cartoons Characters"
       name="leftSideCartoonCharacters"
       list="{'Popeye', 'He-Man', 'Spiderman'}"
       doubleName="rightSideCartoonCharacters"
       doubleList="{'Superman', 'Mickey Mouse', 'Donald Duck'}"
-  /<span class="ni">&amp;gt;</span>
+  /&gt;
 
-  <span class="ni">&amp;lt;</span>-- possible configuration --<span class="ni">&amp;gt;</span>
-  <span class="ni">&amp;lt;</span>s:optiontransferselect
+  &lt;-- possible configuration --&gt;
+  &lt;s:optiontransferselect
       label="Favourite Cartoons Characters"
       name="leftSideCartoonCharacters"
       leftTitle="Left Title"
@@ -10402,27 +10905,27 @@
       doubleHeaderValue="--- Please Select ---"
       doubleEmptyOption="true"
       doubleMultiple="true"
-  /<span class="ni">&amp;gt;</span>
+  /&gt;
 
-</code></pre>
-</div>
+```
 
-<p>#####password##### {#PAGE_13826}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+#####password##### {#PAGE_13826}
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p><strong>Description</strong></p>
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> <p>Render an HTML input tag of type password.</p></p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -10834,28 +11337,33 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<pre><code class="language-none"> &lt;p&gt;
+
+
+
+```none
+ <p>
  In this example, a password control is displayed. For the label, we are calling ActionSupport's getText() to
  retrieve password label from a resource bundle.
- &lt;/p&gt;
-</code></pre>
+ </p>
+```
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:password label="%{text('password')}" name="password" size="10" maxlength="15" /<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<p>#####radio##### {#PAGE_14226}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+```xml
+ &lt;s:password label="%{text('password')}" name="password" size="10" maxlength="15" /&gt;
+```
+
+
+#####radio##### {#PAGE_14226}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
 
 <p> <p>
  Note that the listkey and listvalue attribute will default to "key" and "value"
@@ -10863,11 +11371,15 @@
  Everything else will result in listkey and listvalue to be null and not used.
  </p></p>
 
-<p><strong>Description</strong></p>
+__Description__
+
+
 
 <p> <p>Render a radio button input field.</p></p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -11295,7 +11807,9 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
+
+
 
 <p> In this example, a radio control is displayed with a list of genders. The gender list is built from attribute
  id=genders. The framework calls getGenders() which will return a Map. For examples using listKey and listValue attributes,
@@ -11303,27 +11817,31 @@
  in the action class which should return a value similar to the key of the getGenders() map if that particular
  gender is to be selected.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:action name="GenderMap" var="genders"/<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:radio label="Gender" name="male" list="#genders.genders"/<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>@s.radio name="car" list={"ford": "Ford Motor Co", "toyota": "Toyota"} listKey="key" listValue="value" /<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<p>#####reset##### {#PAGE_13833}</p>
+```xml
+ &lt;s:action name="GenderMap" var="genders"/&gt;
+ &lt;s:radio label="Gender" name="male" list="#genders.genders"/&gt;
+```
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p><strong>Description</strong></p>
+
+```xml
+ &lt;@s.radio name="car" list={"ford": "Ford Motor Co", "toyota": "Toyota"} listKey="key" listValue="value" /&gt;
+```
+
+
+#####reset##### {#PAGE_13833}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> Render a reset button. The reset tag is used together with the form tag to provide form resetting.
  The reset can have two different types of rendering:
@@ -11334,7 +11852,9 @@
  Please note that the button type has advantages by adding the possibility to separate the submitted value from the
  text shown on the button face, but has issues with Microsoft Internet Explorer at least up to 6.0</p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -11738,39 +12258,47 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<p><strong>Example 1</strong></p>
+__Example 1__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:reset value="Reset" /<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<p><strong>Example 2</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> Render a reset button:
- <span class="ni">&amp;lt;</span>s:reset type="button" key="reset"/<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<p>#####select##### {#PAGE_14127}</p>
+```xml
+ &lt;s:reset value="Reset" /&gt;
+```
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+__Example 2__
 
-<p><strong>Description</strong></p>
+
+
+
+```xml
+ Render a reset button:
+ &lt;s:reset type="button" key="reset"/&gt;
+```
+
+
+#####select##### {#PAGE_14127}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p>
  Render an HTML input tag of type select.
 </p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -12238,9 +12766,13 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<pre><code class="language-none">
+
+
+
+```none
+
  Note: For any of the tags that use lists (select probably being the most ubiquitous), which uses the OGNL list
  notation (see the "months" example above), it should be noted that the map key created (in the months example,
  the '01', '02', etc.) is typed. '1' is a char, '01' is a String, "1" is a String. This is important since if
@@ -12248,10 +12780,14 @@
  WILL NOT MATCH, even though their String values may be equivalent. If they don't match, nothing in your list
  will be auto-selected.
 
-</code></pre>
+```
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- <span class="ni">&amp;lt;</span>s:select label="Pets"
+
+
+
+```xml
+
+ &lt;s:select label="Pets"
         name="petIds"
         list="petDao.pets"
         listKey="id"
@@ -12260,34 +12796,32 @@
         size="3"
         required="true"
         value="%{petDao.pets.{id}}"
- /<span class="ni">&amp;gt;</span>
+ /&gt;
 
- <span class="ni">&amp;lt;</span>s:select label="Months"
+ &lt;s:select label="Months"
         name="months"
         headerKey="-1" headerValue="Select Month"
         list="#{'01':'Jan', '02':'Feb', [...]}"
         value="selectedMonth"
         required="true"
- /<span class="ni">&amp;gt;</span>
+ /&gt;
 
  // The month id (01, 02, ...) returned by the getSelectedMonth() call
  // against the stack will be auto-selected
 
-</code></pre>
-</div>
+```
 
-<p>#####submit##### {#PAGE_14054}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+#####submit##### {#PAGE_14054}
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p><strong>Description</strong></p>
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> Render a submit button. The submit tag is used together with the form tag to provide asynchronous form submissions.
  The submit can have three different types of rendering:
@@ -12299,31 +12833,20 @@
  Please note that the button type has advantages by adding the possibility to seperate the submitted value from the
  text shown on the button face, but has issues with Microsoft Internet Explorer at least up to 6.0</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>To use method attribute (to use multiple submit buttons which direct to different action methods) you must set <strong>struts.enable.DynamicMethodInvocation</strong> to <strong>true</strong> but this can lead to <a href="http://www.brucephillips.name/blog/index.cfm/2011/2/19/Struts-2-Security-Vulnerability--Dynamic-Method-Invocation">security vulnerability</a>^[http://www.brucephillips.name/blog/index.cfm/2011/2/19/Struts-2-Security-Vulnerability–Dynamic-Method-Invocation] - use with care! Instead you can try to use <em>Multiple Submit Buttons</em>  solution.</td>
-    </tr>
-  </tbody>
-</table>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p>This tag works with all themes, but has special importance when combined with the <a href="#PAGE_14201">form</a> tag in the <a href="#PAGE_14205">ajax theme</a>. Please read up on the <a href="#PAGE_14205">ajax theme</a> for more information.</p>
+| To use method attribute (to use multiple submit buttons which direct to different action methods) you must set **struts.enable.DynamicMethodInvocation** to **true** but this can lead to [security vulnerability](http://www.brucephillips.name/blog/index.cfm/2011/2/19/Struts-2-Security-Vulnerability--Dynamic-Method-Invocation)^[http://www.brucephillips.name/blog/index.cfm/2011/2/19/Struts-2-Security-Vulnerability--Dynamic-Method-Invocation] - use with care! Instead you can try to use _Multiple Submit Buttons_  solution.
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+| 
 
-<p><strong>Parameters</strong></p>
+
+This tag works with all themes, but has special importance when combined with the [form](#PAGE_14201) tag in the [ajax theme](#PAGE_14205). Please read up on the [ajax theme](#PAGE_14205) for more information.
+
+| 
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -12727,13 +13250,23 @@
 		</table>
 </p>
 
-<p>#####tabbedPanel##### {#PAGE_14222}</p>
+#####tabbedPanel##### {#PAGE_14222}
 
-<p><strong>Description</strong></p>
+__Description__
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/TabbedPanel.java;hb=HEAD</p>
 
-<p><strong>Parameters</strong></p>
+
+<p> The tabbedpanel widget is primarily an AJAX component, where each tab can either be local content or remote
+ content (refreshed each time the user selects that tab).</p>
+ If the useSelectedTabCookie attribute is set to true, the id of the selected tab is saved in a cookie on activation.
+ When coming back to this view, the cookie is read and the tab will be activated again, unless an actual value for the
+ selectedTab attribute is specified.
+ If you want to use the cookie feature, please be sure that you provide a unique id for your tabbedpanel component,
+ since this will also be the identifying name component of the stored cookie.
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -13273,36 +13806,68 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<p>The following is an example of a tabbedpanel and panel tag utilizing local and remote content:</p>
+The following is an example of a tabbedpanel and panel tag utilizing local and remote content:
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/TabbedPanel.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Use notify topics to prevent a tab from being selected:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/TabbedPanel.java;hb=HEAD
-</code></pre>
-</div>
+```xml
+ &lt;sx:head /&gt;
+ &lt;sx:tabbedpanel id="test" &gt;
+    &lt;sx:div id="one" label="one" theme="ajax" labelposition="top" &gt;
+        This is the first pane&lt;br/&gt;
+        &lt;s:form&gt;
+            &lt;s:textfield name="tt" label="Test Text"/&gt;  &lt;br/&gt;
+            &lt;s:textfield name="tt2" label="Test Text2"/&gt;
+        &lt;/s:form&gt;
+    &lt;/sx:div&gt;
+    &lt;sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action" &gt;
+        This is the remote tab
+    &lt;/sx:div&gt;
+ &lt;/sx:tabbedpanel&gt;
+```
 
-<p>#####textarea##### {#PAGE_13926}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+Use notify topics to prevent a tab from being selected:
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p><strong>Description</strong></p>
+
+```xml
+ &lt;sx:head /&gt;
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/beforeSelect", function(event, tab, tabContainer){
+     event.cancel = true;
+ });
+ &lt;/script&gt;
+ 
+ &lt;sx:tabbedpanel id="test" beforeSelectTabNotifyTopics="/beforeSelect"&gt;
+    &lt;sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action" &gt;
+        One Tab
+    &lt;/sx:div&gt;
+    &lt;sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action" &gt;
+        Another tab
+    &lt;/sx:div&gt;
+ &lt;/sx:tabbedpanel&gt;
+```
+
+
+#####textarea##### {#PAGE_13926}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> <p>Render HTML textarea tag.</p></p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -13698,28 +14263,32 @@
 		</table>
 </p>
 
-<p><strong>Example</strong></p>
+__Example__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:textarea label="Comments" name="comments" cols="30" rows="8"/<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<p>#####textfield##### {#PAGE_13912}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+```xml
+ &lt;s:textarea label="Comments" name="comments" cols="30" rows="8"/&gt;
+```
 
-<p><strong>Description</strong></p>
+
+#####textfield##### {#PAGE_13912}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> <p>Render an HTML input field of type text</p></p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -14123,27 +14692,33 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<pre><code class="language-none"> In this example, a text control for the "user" property is rendered. The label is also retrieved from a ResourceBundle via the key attribute.
-</code></pre>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:textfield key="user" /<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<p>#####token##### {#PAGE_13998}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+```none
+ In this example, a text control for the "user" property is rendered. The label is also retrieved from a ResourceBundle via the key attribute.
+```
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
 
-<p><strong>Description</strong></p>
+
+
+```xml
+ &lt;s:textfield key="user" /&gt;
+```
+
+
+#####token##### {#PAGE_13998}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
+__Description__
+
+
 
 <p> <p>Stop double-submission of forms.</p>
 
@@ -14152,7 +14727,9 @@
  TokenInterceptor or the TokenSessionInterceptor. The s:token tag merely places a hidden element that contains
  the unique token.</p></p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -14516,19 +15093,33 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:token /<span class="ni">&amp;gt;</span>
-</code></pre>
-</div>
 
-<p>#####tree##### {#PAGE_14168}</p>
 
-<p><strong>Description</strong></p>
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Tree.java;hb=HEAD</p>
+```xml
+ &lt;s:token /&gt;
+```
 
-<p><strong>Parameters</strong></p>
+
+#####tree##### {#PAGE_14168}
+
+__Description__
+
+
+
+<p>
+ Renders a tree widget with AJAX support.<p />
+
+ The "id "attribute is normally specified(recommended), such that it could be looked up using
+ javascript if necessary. The "id" attribute is required if the "selectedNotifyTopic" or the 
+ "href" attributes are going to be used.<p />
+</p>
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -15108,33 +15699,107 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<p>Static tree:</p>
+Static tree:
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Tree.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Dynamic tree (rendered on the server):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Tree.java;hb=HEAD
-</code></pre>
-</div>
+```xml
+ &lt;s:tree id="..." label="..."&gt;
+    &lt;s:treenode id="..." label="..." /&gt;
+    &lt;s:treenode id="..." label="..."&gt;
+        &lt;s:treenode id="..." label="..." /&gt;
+        &lt;s:treenode id="..." label="..." /&gt;
+    &lt;/s:treenode&gt;
+    &lt;s:treenode id="..." label="..." /&gt;
+ &lt;/s:tree&gt;
+```
 
-<p>Dynamic tree loaded with AJAX (one request is made for each node):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example3 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Tree.java;hb=HEAD
-</code></pre>
-</div>
+Dynamic tree (rendered on the server):
 
-<p>#####treenode##### {#PAGE_14288}</p>
 
-<p><strong>Description</strong></p>
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/TreeNode.java;hb=HEAD</p>
+```xml
+ &lt;s:tree
+          id="..."
+          rootNode="..."
+          nodeIdProperty="..."
+          nodeTitleProperty="..."
+          childCollectionProperty="..." /&gt;
+```
 
-<p><strong>Parameters</strong></p>
+
+Dynamic tree loaded with AJAX (one request is made for each node):
+
+
+
+```xml
+ &lt;s:url id="nodesUrl" namespace="/nodecorate" action="getNodes" /&gt;
+ &lt;div style="float:left; margin-right: 50px;"&gt;
+     &lt;sx:tree id="tree" href="%{#nodesUrl}" /&gt;
+ &lt;/div&gt;
+ 
+ On this example the url specified on the "href" attibute will be called to load
+ the elements on the root. The response is expected to be a JSON array of objects like:
+ [
+      {
+           label: "Node 1",
+           hasChildren: false,
+           id: "Node1"
+      },
+      {
+           label: "Node 2",
+           hasChildren: true,
+           id: "Node2"
+      },
+ ]
+ 
+ "label" is the text that will be displayed for the node. "hasChildren" marks the node has
+ having children or not (if true, a plus icon will be assigned to the node so it can be
+ expanded). The "id" attribute will be used to load the children of the node, when the node
+ is expanded. When a node is expanded a request will be made to the url in the "href" attribute
+ and the node's "id" will be passed in the parameter "nodeId".
+ 
+ The children collection for a node will be loaded only once, to reload the children of a 
+ node, use the "reload()" function of the treenode widget. To reload the children nodes of "Node1"
+ from the example above use the following javascript:
+ 
+ dojo.widget.byId("Node1").reload();
+```
+
+
+#####treenode##### {#PAGE_14288}
+
+__Description__
+
+
+
+<p>
+ Renders a tree node within a tree widget with AJAX support.<p />
+
+ Either of the following combinations should be used depending on if the tree
+ is to be constructed dynamically or statically. <p />
+
+ <b>Dynamically:</b>
+ <ul>
+      <li>id - id of this tree node</li>
+      <li>title - label to be displayed for this tree node</li>
+ </ul>
+
+ <b>Statically:</b>
+ <ul>
+      <li>rootNode - the parent node of which this tree is derived from</li>
+      <li>nodeIdProperty - property to obtained this current tree node's id</li>
+      <li>nodeTitleProperty - property to obtained this current tree node's title</li>
+      <li>childCollectionProperty - property that returnds this current tree node's children</li>
+ </ul>
+</p>
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -15490,24 +16155,42 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<p>Update target content with html returned from an action:</p>
+Update target content with html returned from an action:
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/TreeNode.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>#####updownselect##### {#PAGE_13884}</p>
 
-<p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+```xml
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+ &lt;-- Creating tree statically using hard-coded data. --&gt;
+ &lt;s:tree id="..." label="..."&gt;
+    &lt;s:treenode id="..." label="..." /&gt;
+    &lt;s:treenode id="..." label="..."&gt;
+        &lt;s:treenode id="..." label="..." /&gt;
+        &lt;s:treenode id="..." label="..." /&gt;
+    &lt;/s:treenode&gt;
+    &lt;s:treenode id="..." label="..." /&gt;
+ &lt;/s:tree&gt;
+
+ &lt;-- Creating tree dynamically using data from backing action. --&gt;
+ &lt;s:tree
+          id="..."
+          rootNode="..."
+          nodeIdProperty="..."
+          nodeTitleProperty="..."
+          childCollectionProperty="..." /&gt;
+
+```
+
+
+#####updownselect##### {#PAGE_13884}
+
+
+Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+
+| 
+
 
 <p> <p>
  Note that the listkey and listvalue attribute will default to "key" and "value"
@@ -15515,7 +16198,9 @@
  Everything else will result in listkey and listvalue to be null and not used.
  </p></p>
 
-<p><strong>Description</strong></p>
+__Description__
+
+
 
 <p> <p>
  Create a Select component with buttons to move the elements in the select component
@@ -15523,7 +16208,9 @@
  the order they are arranged (top to bottom).
  </p></p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -16039,19 +16726,23 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- <span class="ni">&amp;lt;</span>!-- Example 1: simple example --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:updownselect
+
+
+
+```xml
+
+ &lt;!-- Example 1: simple example --&gt;
+ &lt;s:updownselect
  list="#{'england':'England', 'america':'America', 'germany':'Germany'}"
  name="prioritisedFavouriteCountries"
  headerKey="-1"
  headerValue="--- Please Order Them Accordingly ---"
- emptyOption="true" /<span class="ni">&amp;gt;</span>
+ emptyOption="true" /&gt;
 
- <span class="ni">&amp;lt;</span>!-- Example 2: more complex example --<span class="ni">&amp;gt;</span>
- <span class="ni">&amp;lt;</span>s:updownselect
+ &lt;!-- Example 2: more complex example --&gt;
+ &lt;s:updownselect
  list="defaultFavouriteCartoonCharacters"
  name="prioritisedFavouriteCartoonCharacters"
  headerKey="-1"
@@ -16062,33 +16753,41 @@
  allowSelectAll="true"
  moveUpLabel="Move Up"
  moveDownLabel="Move Down"
- selectAllLabel="Select All" /<span class="ni">&amp;gt;</span>
+ selectAllLabel="Select All" /&gt;
 
-</code></pre>
-</div>
+```
 
-<p>####dojo anchor#### {#PAGE_66791}</p>
 
-<p><strong>Description</strong></p>
+####dojo anchor#### {#PAGE_66791}
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Anchor.java;hb=HEAD</p>
+__Description__
 
-<p>There’s a bug in  IE6/IE7 which makes impossible to use the target’s attribute with a parent Div, because such Div’s content’s are overwritten with the tag’s <em>loadingText</em> . Resulting in an “undefined” message in the content’s, instead of the result of the request.</p>
 
-<p>One possible alternative is to set <em>showLoadingText=”false”</em>  and set the indicator attribute to an element showing the desired loading text or image (outside the div).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;img id="loadingImage" src="images/loadingAnimation.gif" style="display:none"/&gt;
-&lt;s:div id="parentDiv"&gt;
-    &lt;s:form action="actionName"&gt;
-        &lt;sx:a targets="parentDiv" showLoadingText="false" indicator="loadingImage"/&gt;
-    &lt;/s:form&gt;
-&lt;/s:div&gt;
+<p> <p>
+ A tag that creates an HTML &lt;a/&gt; element, that when clicked makes an asynchronous request(XMLHttpRequest). The url
+ attribute must be build using the &lt;s:url/&gt; tag. 
+ </p></p>
 
-</code></pre>
-</div>
+There's a bug in  IE6/IE7 which makes impossible to use the target's attribute with a parent Div, because such Div's content's are overwritten with the tag's _loadingText_ . Resulting in an "undefined" message in the content's, instead of the result of the request.
 
-<p><strong>Parameters</strong></p>
+One possible alternative is to set _showLoadingText="false"_  and set the indicator attribute to an element showing the desired loading text or image (outside the div).
+
+
+~~~~~~~
+
+<img id="loadingImage" src="images/loadingAnimation.gif" style="display:none" />
+<s:div id="parentDiv">
+    <s:form action="actionName">
+        <sx:a targets="parentDiv" showloadingtext="false" indicator="loadingImage" />
+    </s:form>
+</s:div>
+
+~~~~~~~
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -16628,66 +17327,136 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<p>Update target content with html returned from an action:</p>
+Update target content with html returned from an action:
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Anchor.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Submit form(anchor inside the form):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Anchor.java;hb=HEAD
-</code></pre>
-</div>
+```xml
+ &lt;div id="div1"&gt;Div 1&lt;/div&gt;
+ &lt;s:url id="ajaxTest" value="/AjaxTest.action"/&gt;
+ 
+ &lt;sx:a id="link1" href="%{ajaxTest}" target="div1"&gt;
+      Update Content
+ &lt;/sx:a&gt;
+```
 
-<p>Submit form(anchor outside the form):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example3 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Anchor.java;hb=HEAD
-</code></pre>
-</div>
+Submit form(anchor inside the form):
 
-<p>Using beforeNotifyTopics:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example4 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Anchor.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Using afterNotifyTopics and highlights target:</p>
+```xml
+ &lt;s:form id="form" action="AjaxTest"&gt;
+      &lt;input type="textbox" name="data"&gt;
+      &lt;sx:a&gt;Submit form&lt;/sx:a&gt;           
+ &lt;/s:form&gt;
+```
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example5 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Anchor.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Using errorNotifyTopics and indicator:</p>
+Submit form(anchor outside the form):
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example6 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Anchor.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>####dojo submit#### {#PAGE_66801}</p>
 
-<p><strong>Description</strong></p>
+```xml
+ &lt;s:form id="form" action="AjaxTest"&gt;
+      &lt;input type="textbox" name="data"&gt;   
+ &lt;/s:form&gt;
+ 
+ &lt;sx:a formId="form"&gt;Submit form&lt;/sx:a&gt;
+```
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD</p>
 
-<p>There’s a bug in  IE6/IE7 which makes impossible to use the target’s attribute with a parent Div, because such Div’s content’s are overwritten with the tag’s <em>loadingText</em> . Resulting in an “undefined” message in the content’s, instead of the result of the request.</p>
+Using beforeNotifyTopics:
 
-<p>One possible alternative is to set <em>showLoadingText=”false”</em> (the default) and set the indicator attribute to an element showing the desired loading text or image (outside the div).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;img id="loadingImage" src="images/loadingAnimation.gif" style="display:none"/&gt;
-&lt;s:div id="parentDiv"&gt;
-    &lt;s:form action="actionName"&gt;
-        &lt;sx:submit  targets="parentDiv" showLoadingText="false" indicator="loadingImage"/&gt;
-    &lt;/s:form&gt;
-&lt;/s:div&gt;
 
-</code></pre>
-</div>
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/before", function(event, widget){
+     alert('inside a topic event. before request');
+     //event: set event.cancel = true, to cancel request
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;         
+ 
+ &lt;sx:a beforeNotifyTopics="/before"&gt;Publish topics&lt;/sx:a&gt;
+```
 
-<p><strong>Parameters</strong></p>
+
+Using afterNotifyTopics and highlights target:
+
+
+
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/after", function(data, request, widget){
+     alert('inside a topic event. after request');
+     //data : text returned from request(the html)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;        
+ 
+ &lt;sx:a afterNotifyTopics="/after" highlightColor="red" href="%{#ajaxTest}"&gt;Publish topics&lt;/sx:a&gt;
+```
+
+
+Using errorNotifyTopics and indicator:
+
+
+
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/error", function(error, request, widget){
+     alert('inside a topic event. on error');
+     //error : error object (error.message has the error message)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;         
+ 
+ &lt;img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none"/&gt;
+ &lt;sx:a errorNotifyTopics="/error" indicator="ind1" href="%{#ajaxTest}"&gt;Publish topics&lt;/sx:a&gt;
+```
+
+
+####dojo submit#### {#PAGE_66801}
+
+__Description__
+
+
+
+<p> Renders a submit button that can submit a form asynchronously.
+ The submit can have three different types of rendering:
+ <ul>
+ <li>input: renders as html &lt;input type="submit"...&gt;</li>
+ <li>image: renders as html &lt;input type="image"...&gt;</li>
+ <li>button: renders as html &lt;button type="submit"...&gt;</li>
+ </ul>
+ Please note that the button type has advantages by adding the possibility to seperate the submitted value from the
+ text shown on the button face, but has issues with Microsoft Internet Explorer at least up to 6.0</p>
+
+There's a bug in  IE6/IE7 which makes impossible to use the target's attribute with a parent Div, because such Div's content's are overwritten with the tag's _loadingText_ . Resulting in an "undefined" message in the content's, instead of the result of the request.
+
+One possible alternative is to set _showLoadingText="false"_ (the default) and set the indicator attribute to an element showing the desired loading text or image (outside the div).
+
+
+~~~~~~~
+
+<img id="loadingImage" src="images/loadingAnimation.gif" style="display:none" />
+<s:div id="parentDiv">
+    <s:form action="actionName">
+        <sx:submit targets="parentDiv" showloadingtext="false" indicator="loadingImage" />
+    </s:form>
+</s:div>
+
+~~~~~~~
+
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -17259,60 +18028,126 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Render an image submit:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Render a button submit:</p>
+```xml
+ &lt;sx:submit value="%{'Submit'}" /&gt;
+```
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example3 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Update target content with html returned from an action:</p>
+Render an image submit:
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example4 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Submit form(inside the form):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example5 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
-</code></pre>
-</div>
+```xml
+ &lt;sx:submit type="image" value="%{'Submit'}" label="Submit the form" src="submit.gif"/&gt;
+```
 
-<p>Submit form(outside the form):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example6 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
-</code></pre>
-</div>
+Render a button submit:
 
-<p>Using beforeNotifyTopics:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example7 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Using afterNotifyTopics and highlight target:</p>
+```xml
+ &lt;sx:submit type="button" value="%{'Submit'}" label="Submit the form"/&gt;
+```
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example8 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Using errorNotifyTopics and indicator:</p>
+Update target content with html returned from an action:
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example9 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
-</code></pre>
-</div>
 
+
+```xml
+ &lt;div id="div1"&gt;Div 1&lt;/div&gt;
+ &lt;s:url id="ajaxTest" value="/AjaxTest.action"/&gt;
+
+ &lt;sx:submit id="link1" href="%{ajaxTest}" target="div1" /&gt;
+```
+
+
+Submit form(inside the form):
+
+
+
+```xml
+ &lt;s:form id="form" action="AjaxTest"&gt;
+      &lt;input type="textbox" name="data"&gt;
+      &lt;sx:submit /&gt;
+ &lt;/s:form&gt;
+```
+
+
+Submit form(outside the form):
+
+
+
+```xml
+ &lt;s:form id="form" action="AjaxTest"&gt;
+      &lt;input type="textbox" name="data"&gt;
+ &lt;/s:form&gt;
+
+ &lt;sx:submit formId="form" /&gt;
+```
+
+
+Using beforeNotifyTopics:
+
+
+
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/before", function(event, widget){
+     alert('inside a topic event. before request');
+     //event: set event.cancel = true, to cancel request
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;
+
+ &lt;sx:submit beforeNotifyTopics="/before" /&gt;
+```
+
+
+Using afterNotifyTopics and highlight target:
+
+
+
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/after", function(data, request, widget){
+     alert('inside a topic event. after request');
+     //data : text returned from request(the html)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;
+
+ &lt;sx:submit afterNotifyTopics="/after" highlightColor="red" href="%{#ajaxTest}" /&gt;
+```
+
+
+Using errorNotifyTopics and indicator:
+
+
+
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/error", function(error, request, widget){
+     alert('inside a topic event. on error');
+     //error : error object (error.message has the error message)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;
+
+ &lt;img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none"/&gt;
+ &lt;sx:submit errorNotifyTopics="/error" indicator="ind1" href="%{#ajaxTest}" /&gt;
+```
+
+
+</li></li></li></li></li></li></li></ul></pre></p></p></p></p></p></p>
 
   </section>
 </article>

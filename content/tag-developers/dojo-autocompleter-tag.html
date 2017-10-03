@@ -131,9 +131,64 @@
 
 <p><strong>Description</strong></p>
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD</p>
+<p> <p>The autocomplete tag is a combobox that can autocomplete text entered on the input box. If an action
+ is used to populate the autocompleter, the output of the action must be a well formed JSON string. </p>
+ <p>The autocompleter follows this rule to find its datasource:<p>
+ <p>1. If the response is an array, assume that it contains 2-dimension array elements, like:
+ <pre>
+ [
+      ["Alabama", "AL"],
+      ["Alaska", "AK"]
+ ]
+ </pre>
+ <p>2. If a value is specified in the "dataFieldName" attribute, and the response has a field with that
+ name, assume that's the datasource, which can be an array of 2-dimension array elements, or a map, 
+ like (assuming dataFieldName="state"):</p>
+ <pre>
+ {
+      "state" : [
+           ["Alabama","AL"],
+           ["Alaska","AK"]
+      ]
+ }     
+ or
+ {
+      "state" : {
+            "Alabama" : "AL",
+            "Alaska" : "AK"
+      }
+ }
+ </pre>
+ 
+ <p>3. If there is a field that starts with the value specified on the "name" attribute, assume 
+ that's the datasource, like (assuming name="state"):</p>
+ <pre>
+ {
+      "states" : [
+           ["Alabama","AL"],
+           ["Alaska","AK"]
+      ]
+ }
+ </pre>
+ <p>4. Use first array that is found, like:<p>
+ <pre>
+ {
+      "anything" : [
+            ["Alabama", "AL"],
+            ["Alaska", "AK"]
+     ]       
+ }
+ <p>5. If the response is a map, use it (recommended as it is the easiest one to generate):
+ <pre>
+ {
+      "Alabama" : "AL",
+      "Alaska" : "AK"
+ }
+ </pre></p>
 
-<p><strong>Parameters</strong></p>
+__Parameters__
+
+
 
 <p>		<table width="100%">
 			<tr>
@@ -785,73 +840,163 @@
 		</table>
 </p>
 
-<p><strong>Examples</strong></p>
+__Examples__
 
-<p>Get list from an action:</p>
+Get list from an action:
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Uses a list:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
+```xml
+ &lt;sx:autocompleter name="autocompleter1" href="%{jsonList}"/&gt;
+```
 
-<p>Autocompleter that reloads its content everytime the text changes (and the length of the text is greater than 3):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example3 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
+Uses a list:
 
-<p>Linking two autocompleters:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example4 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Set/Get selected values using JavaScript:</p>
+```xml
+ &lt;s:autocompleter name="test"  list="{'apple','banana','grape','pear'}" autoComplete="false"/&gt;
+```
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example5 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Using beforeNotifyTopics:</p>
+Autocompleter that reloads its content everytime the text changes (and the length of the text is greater than 3):
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example6 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
 
-<p>Using errorNotifyTopics:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example7 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD
-</code></pre>
-</div>
+```xml
+ &lt;sx:autocompleter name="mvc" href="%{jsonList}" loadOnTextChange="true" loadMinimumCount="3"/&gt;
+ 
+ The text entered on the autocompleter is passed as a parameter to the url specified in "href", like (text is "struts"):
+  
+ http://host/example/myaction.do?mvc=struts
+```
 
-<p>Using errorNotifyTopics:</p>
 
-<p>START SNIPPET: example8 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD</p>
+Linking two autocompleters:
 
-<p>Using valueNotifyTopics:</p>
 
-<p>START SNIPPET: example9 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Autocompleter.java;hb=HEAD</p>
 
-<p><strong>Caveats</strong></p>
+```xml
+ &lt;form id="selectForm"&gt;
+      &lt;sx:autocompleter  name="select" list="{'fruits','colors'}"  valueNotifyTopics="/changed" /&gt;
+ &lt;/form&gt;  
+ &lt;sx:autocompleter  href="%{jsonList}" formId="selectForm" listenTopics="/changed"/&gt;
+```
 
-<ul>
-  <li>The service that is producing the HTTP Response with JSON response to the Autocompleter tag must set the HTTP Header Response Content-Type to</li>
-</ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>text/json
-</code></pre>
-</div>
-<p>. JSON has its own MIME type, which this tag expects.</p>
+Set/Get selected values using JavaScript:
 
-<ul>
-  <li>Since 2.0.9, there is a change in the value:key order. Now, the value <strong>must</strong> come before the key.</li>
-</ul>
 
+
+```xml
+ &lt;sx:autocompleter  href="%{jsonList}" id="auto"/&gt;
+ &lt;script type="text/javascript"&gt;
+   function getValues() {
+      var autoCompleter = dojo.widget.byId("auto");
+      
+      //key (in the states example above, "AL")
+      var key = autoCompleter.getSelectedKey();
+      alert(key);
+      
+      //value (in the states example above, "Alabama")
+      var value = autoCompleter.getSelectedValue();
+      alert(value);
+      
+      //text currently on the textbox (anything the user typed)
+      var text = autoCompleter.getText();
+      alert(text);
+   }
+ 
+   function setValues() {
+      var autoCompleter = dojo.widget.byId("auto");
+      
+      //key (key will be set to "AL" and value to "Alabama")
+      autoCompleter.setSelectedKey("AL");
+      
+      //value (key will be set to "AL" and value to "Alabama")
+      autoCompleter.setAllValues("AL", "Alabama");
+   }
+ &lt;/script&gt;
+```
+
+
+Using beforeNotifyTopics:
+
+
+
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/before", function(event, widget){
+     alert('inside a topic event. before request');
+     //event: set event.cancel = true, to cancel request
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;         
+ 
+ &lt;sx:autocompleter beforeNotifyTopics="/before" href="%{#ajaxTest} /&gt;
+```
+
+
+Using errorNotifyTopics:
+
+
+
+```xml
+ &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/after", function(data, request, widget){
+     alert('inside a topic event. after request');
+     //data : JavaScript object from parsing response
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;        
+ 
+ &lt;sx:autocompleter afterNotifyTopics="/after" href="%{#ajaxTest}" /&gt;
+```
+
+
+Using errorNotifyTopics:
+
+
+<p> &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/error", function(error, request, widget){
+     alert('inside a topic event. on error');
+     //error : error object (error.message has the error message)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;
+ 
+ &lt;sx:autocompleter errorNotifyTopics="/error" href="%{#ajaxTest}" /&gt;</p>
+
+Using valueNotifyTopics:
+
+
+<p> &lt;script type="text/javascript"&gt;
+ dojo.event.topic.subscribe("/value", function(value, key, text, widget){
+     alert('inside a topic event. after value changed');
+     //value : selected value (like "Florida" in example above)
+     //key: selected key (like "FL" in example above)
+     //text: text typed into textbox
+     //widget: widget that published the topic
+ });
+ &lt;/script&gt;   
+ 
+ &lt;sx:autocompleter valueNotifyTopics="/value" href="%{#ajaxTest}" /&gt;</p>
+
+__Caveats__
+
++ The service that is producing the HTTP Response with JSON response to the Autocompleter tag must set the HTTP Header Response Content-Type to 
+
+~~~~~~~
+text/json
+~~~~~~~
+. JSON has its own MIME type, which this tag expects.
+
++ Since 2.0.9, there is a change in the value:key order. Now, the value **must** come before the key.
+
+</pre></p></p></p></p></p></p>
 
   </section>
 </article>

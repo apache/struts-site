@@ -131,7 +131,13 @@
 
 <p><strong>Description</strong></p>
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Tree.java;hb=HEAD</p>
+<p>
+ Renders a tree widget with AJAX support.<p />
+
+ The "id "attribute is normally specified(recommended), such that it could be looked up using
+ javascript if necessary. The "id" attribute is required if the "selectedNotifyTopic" or the 
+ "href" attributes are going to be used.<p />
+</p>
 
 <p><strong>Parameters</strong></p>
 
@@ -717,19 +723,61 @@
 
 <p>Static tree:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Tree.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:tree id="..." label="..."<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>s:treenode id="..." label="..." /<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>s:treenode id="..." label="..."<span class="ni">&amp;gt;</span>
+        <span class="ni">&amp;lt;</span>s:treenode id="..." label="..." /<span class="ni">&amp;gt;</span>
+        <span class="ni">&amp;lt;</span>s:treenode id="..." label="..." /<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>/s:treenode<span class="ni">&amp;gt;</span>
+    <span class="ni">&amp;lt;</span>s:treenode id="..." label="..." /<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:tree<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>Dynamic tree (rendered on the server):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Tree.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:tree
+          id="..."
+          rootNode="..."
+          nodeIdProperty="..."
+          nodeTitleProperty="..."
+          childCollectionProperty="..." /<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>Dynamic tree loaded with AJAX (one request is made for each node):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example3 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Tree.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:url id="nodesUrl" namespace="/nodecorate" action="getNodes" /<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>div style="float:left; margin-right: 50px;"<span class="ni">&amp;gt;</span>
+     <span class="ni">&amp;lt;</span>sx:tree id="tree" href="%{#nodesUrl}" /<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/div<span class="ni">&amp;gt;</span>
+ 
+ On this example the url specified on the "href" attibute will be called to load
+ the elements on the root. The response is expected to be a JSON array of objects like:
+ [
+      {
+           label: "Node 1",
+           hasChildren: false,
+           id: "Node1"
+      },
+      {
+           label: "Node 2",
+           hasChildren: true,
+           id: "Node2"
+      },
+ ]
+ 
+ "label" is the text that will be displayed for the node. "hasChildren" marks the node has
+ having children or not (if true, a plus icon will be assigned to the node so it can be
+ expanded). The "id" attribute will be used to load the children of the node, when the node
+ is expanded. When a node is expanded a request will be made to the url in the "href" attribute
+ and the node's "id" will be passed in the parameter "nodeId".
+ 
+ The children collection for a node will be loaded only once, to reload the children of a 
+ node, use the "reload()" function of the treenode widget. To reload the children nodes of "Node1"
+ from the example above use the following javascript:
+ 
+ dojo.widget.byId("Node1").reload();
 </code></pre>
 </div>
 

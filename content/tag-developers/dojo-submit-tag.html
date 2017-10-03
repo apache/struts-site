@@ -131,7 +131,15 @@
 
 <p><strong>Description</strong></p>
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD</p>
+<p> Renders a submit button that can submit a form asynchronously.
+ The submit can have three different types of rendering:
+ <ul>
+ <li>input: renders as html &lt;input type="submit"...&gt;</li>
+ <li>image: renders as html &lt;input type="image"...&gt;</li>
+ <li>button: renders as html &lt;button type="submit"...&gt;</li>
+ </ul>
+ Please note that the button type has advantages by adding the possibility to seperate the submitted value from the
+ text shown on the button face, but has issues with Microsoft Internet Explorer at least up to 6.0</p>
 
 <p>There’s a bug in  IE6/IE7 which makes impossible to use the target’s attribute with a parent Div, because such Div’s content’s are overwritten with the tag’s <em>loadingText</em> . Resulting in an “undefined” message in the content’s, instead of the result of the request.</p>
 
@@ -722,55 +730,92 @@
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>sx:submit value="%{'Submit'}" /<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>Render an image submit:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>sx:submit type="image" value="%{'Submit'}" label="Submit the form" src="submit.gif"/<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>Render a button submit:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example3 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>sx:submit type="button" value="%{'Submit'}" label="Submit the form"/<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>Update target content with html returned from an action:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example4 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>div id="div1"<span class="ni">&amp;gt;</span>Div 1<span class="ni">&amp;lt;</span>/div<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>s:url id="ajaxTest" value="/AjaxTest.action"/<span class="ni">&amp;gt;</span>
+
+ <span class="ni">&amp;lt;</span>sx:submit id="link1" href="%{ajaxTest}" target="div1" /<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>Submit form(inside the form):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example5 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:form id="form" action="AjaxTest"<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>input type="textbox" name="data"<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>sx:submit /<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:form<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>Submit form(outside the form):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example6 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>s:form id="form" action="AjaxTest"<span class="ni">&amp;gt;</span>
+      <span class="ni">&amp;lt;</span>input type="textbox" name="data"<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/s:form<span class="ni">&amp;gt;</span>
+
+ <span class="ni">&amp;lt;</span>sx:submit formId="form" /<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>Using beforeNotifyTopics:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example7 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>script type="text/javascript"<span class="ni">&amp;gt;</span>
+ dojo.event.topic.subscribe("/before", function(event, widget){
+     alert('inside a topic event. before request');
+     //event: set event.cancel = true, to cancel request
+     //widget: widget that published the topic
+ });
+ <span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
+
+ <span class="ni">&amp;lt;</span>sx:submit beforeNotifyTopics="/before" /<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>Using afterNotifyTopics and highlight target:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example8 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>script type="text/javascript"<span class="ni">&amp;gt;</span>
+ dojo.event.topic.subscribe("/after", function(data, request, widget){
+     alert('inside a topic event. after request');
+     //data : text returned from request(the html)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ <span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
+
+ <span class="ni">&amp;lt;</span>sx:submit afterNotifyTopics="/after" highlightColor="red" href="%{#ajaxTest}" /<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>Using errorNotifyTopics and indicator:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example9 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Submit.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>script type="text/javascript"<span class="ni">&amp;gt;</span>
+ dojo.event.topic.subscribe("/error", function(error, request, widget){
+     alert('inside a topic event. on error');
+     //error : error object (error.message has the error message)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ <span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
+
+ <span class="ni">&amp;lt;</span>img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none"/<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>sx:submit errorNotifyTopics="/error" indicator="ind1" href="%{#ajaxTest}" /<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 

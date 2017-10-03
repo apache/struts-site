@@ -131,7 +131,21 @@
 
 <p><strong>Description</strong></p>
 
-<p>START SNIPPET: javadoc not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Div.java;hb=HEAD</p>
+<p> <p>
+ This tag generates an HTML div that loads its content using an XMLHttpRequest call, via
+ the dojo framework. When the "updateFreq" is set the built in timer will start automatically and 
+ reload the div content with the value of "updateFreq" as the refresh period(in milliseconds).
+ Topics can be used to stop(stopTimerListenTopics) and start(startTimerListenTopics) this timer.  
+ </p>
+ <p>
+ When used inside a "tabbedpanel" tag, each div becomes a tab. Some attributes are specific
+ to this use case, like:
+ <ul>
+   <li>refreshOnShow: div content is realoded when tab is selected</li>
+   <li>closable: Tab will have close button</li>
+   <li>preload: load div content after page is loaded</li>
+ </ul>
+ </p></p>
 
 <p><strong>Parameters</strong></p>
 
@@ -725,19 +739,35 @@
 
 <p>Simple div that loads its content once:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example1 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Div.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>sx:div href="%{#url}"<span class="ni">&amp;gt;</span>Initial Content<span class="ni">&amp;lt;</span>/sx:div<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>div that reloads its content every 2 seconds, and shows an indicator while reloading:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example2 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Div.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>img id="indicator" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none"/<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>sx:div href="%{#url}" updateFreq="2000" indicator="indicator"<span class="ni">&amp;gt;</span>
+   Initial Content
+ <span class="ni">&amp;lt;</span>/sx:div<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
 <p>div that uses topics to control the timer, highlights its content in red after reload, and submits a form:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>START SNIPPET: example3 not found in https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dojo/src/main/java/org/apache/struts2/dojo/components/Div.java;hb=HEAD
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="ni">&amp;lt;</span>form id="form"<span class="ni">&amp;gt;</span>
+   <span class="ni">&amp;lt;</span>label for="textInput"<span class="ni">&amp;gt;</span>Text to be submited when div reloads<span class="ni">&amp;lt;</span>/label<span class="ni">&amp;gt;</span>
+   <span class="ni">&amp;lt;</span>input type=textbox id="textInput" name="data"<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>/form<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>sx:div 
+      href="%{#url}" 
+      updateFreq="3000"
+      listenTopics="/refresh"
+      startTimerListenTopics="/startTimer"
+      stopTimerListenTopics="/stopTimer"
+      highlightColor="red"
+      formId="form"<span class="ni">&amp;gt;</span>
+  Initial Content
+ <span class="ni">&amp;lt;</span>/sx:div<span class="ni">&amp;gt;</span>
 </code></pre>
 </div>
 
