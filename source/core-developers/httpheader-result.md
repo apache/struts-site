@@ -12,7 +12,7 @@ A custom Result type for setting HTTP headers and status by optionally evaluatin
 
 - `status` - the http servlet response status code that should be set on a response.
 
-- `parse` - true by default. If set to false, the headers param will not be parsed for Ognl expressions.
+- `parse` - true by default. If set to false, the headers param will not be parsed for OGNL expressions.
 
 - `headers` - header values.
 
