@@ -13,7 +13,18 @@ SiteGraph works by parsing your configuration files, Action classes, and view fi
 
 Additional information can be found in the JavaDocs:
 
-{% snippet id=javadocs-intro|lang=text|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/java/org/apache/struts2/sitegraph/SiteGraph.java;hb=HEAD %}
+{% comment %}start snippet id=javadocs-intro|lang=text|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/java/org/apache/struts2/sitegraph/SiteGraph.java;hb=HEAD {% endcomment %}
+
+```text
+ * <p>
+ * SiteGraph is a tool that renders out GraphViz-generated images depicting your
+ * Struts-powered web application's flow. SiteGraph requires GraphViz be installed
+ * and that the "dot" executable be in your command path. You can find GraphViz
+ * at http://www.graphviz.org.
+ * </p>
+```
+
+{% comment %}end snippet id=javadocs-intro|lang=text|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/java/org/apache/struts2/sitegraph/SiteGraph.java;hb=HEAD {% endcomment %}
 
 __Understanding the Output__
 
@@ -70,7 +81,17 @@ java -cp ... -jar struts2-sitegraph-plugin-x.x.x.jar
 
 Where:
 
-{% snippet id=sitegraph-usage|lang=text|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/resources/org/apache/struts2/sitegraph/sitegraph-usage.txt;hb=HEAD  %}
+{% comment %}start snippet id=sitegraph-usage|lang=text|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/resources/org/apache/struts2/sitegraph/sitegraph-usage.txt;hb=HEAD  {% endcomment %}
+
+```text
+Usage: -config CONFIG_DIR -views VIEWS_DIRS -output OUTPUT [-ns NAMESPACE]
+       CONFIG_DIR => a directory containing struts.xml
+       VIEWS_DIRS => comma seperated list of dirs containing JSPs, VMs, etc
+       OUPUT      => the directory where the output should go
+       NAMESPACE  => the namespace path restriction (/, /foo, etc)
+```
+
+{% comment %}end snippet id=sitegraph-usage|lang=text|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/resources/org/apache/struts2/sitegraph/sitegraph-usage.txt;hb=HEAD  {% endcomment %}
 
 
 You must either supply the correct classpath when invoking the SiteGraph tool or place the Sitegraph plugin in the same directory as the dependent jars. Specifically, the XWork jar, Struts jar, and their dependencies must be included in the classpath. Futhermore, **you must also include your Action class files referenced in** struts.xml. Without the proper class path entries, SiteGraph will not function properly.
@@ -81,11 +102,30 @@ __Automatic Execution__
 
 Some advanced users may wish to execute SiteGraph from within their application - this could be required if you are developing an application that supports plugin capabilities. This can easily be done. See the JavaDocs for more info:
 
-{% snippet id=javadocs-api|lang=text|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/java/org/apache/struts2/sitegraph/SiteGraph.java;hb=HEAD %}
+{% comment %}start snippet id=javadocs-api|lang=text|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/java/org/apache/struts2/sitegraph/SiteGraph.java;hb=HEAD {% endcomment %}
+
+```text
+ * <p>
+ * If you wish to use SiteGraph through its API rather than through the command line,
+ * you can do that as well. All you need to do is create a new SiteGraph instance,
+ * optionally specify a {@link Writer} to output the dot content to, and then call
+ * {@link #prepare()}.
+ * </p>
+```
+
+{% comment %}end snippet id=javadocs-api|lang=text|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/java/org/apache/struts2/sitegraph/SiteGraph.java;hb=HEAD {% endcomment %}
 
 The command line version of SiteGraph does exactly this (except for overriding the Writer):
 
-{% snippet id=example-api|lang=java|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/java/org/apache/struts2/sitegraph/SiteGraph.java;hb=HEAD %}
+{% comment %}start snippet id=example-api|lang=java|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/java/org/apache/struts2/sitegraph/SiteGraph.java;hb=HEAD {% endcomment %}
+
+```java
+        SiteGraph siteGraph = new SiteGraph(configDir, views, output, namespace);
+        siteGraph.prepare();
+        siteGraph.render();
+```
+
+{% comment %}end snippet id=example-api|lang=java|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/sitegraph/src/main/java/org/apache/struts2/sitegraph/SiteGraph.java;hb=HEAD {% endcomment %}
 
 __Example__
 

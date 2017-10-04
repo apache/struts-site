@@ -133,11 +133,53 @@ and "restful" which is `org.apache.struts2.dispatcher.mapper.RestfulActionMapper
 
 ## PrefixBasedActionMapper
 
-{% snippet id=description|javadoc=true|url=org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper %}
+{% comment %}start snippet id=description|javadoc=true|url=org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper {% endcomment %}
+<p> <p>
+ A prefix based action mapper that is capable of delegating to other {@link ActionMapper}s based on the request's prefix.<br>
+ It is configured through struts.xml<br>
+ For example, with the following entries in struts.properties
+ </p>
+
+ <pre>
+ <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"/>
+ <constant name="struts.mapper.prefixMapping" value="/communities:pseudoRestful,/communityTags:pseudoRestful,/events:pseudoRestful,/mediaList:pseudoRestful,/users:pseudoRestful,/community:struts,/communityTag:struts,/event:struts,/media:struts,/user:struts,:struts"/>
+ </pre>
+
+ <p>
+ When {@link PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)} or
+ {@link PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)} is invoked,
+ {@link PrefixBasedActionMapper} will check each possible prefix (url prefix terminating just before a /) to find the most specific ActionMapper that returns a mapping when asked to map the request.  If none are found, null is returned for both
+ {@link PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)} and
+ {@link PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)} methods.
+ </p>
+</p>
+{% comment %}end snippet id=description|javadoc=true|url=org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper {% endcomment %}
 
 __PrefixBasedActionProxyFactory__
 
-{% snippet id=description|javadoc=true|url=org.apache.struts2.factory.PrefixBasedActionProxyFactory %}
+{% comment %}start snippet id=description|javadoc=true|url=org.apache.struts2.factory.PrefixBasedActionProxyFactory {% endcomment %}
+<p> <p>
+ Prefix based factory should be used with {@link org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper}
+ to use appropriate {@link com.opensymphony.xwork2.ActionProxyFactory} connected with given
+ {@link org.apache.struts2.dispatcher.mapper.ActionMapper}
+ </p>
+
+ <p>
+ Add below entry to struts.xml to enable the factory:
+ </p>
+
+ <pre>
+ <constant name="struts.actionProxyFactory" value="prefix"/>
+ </pre>
+
+ <p>
+ The factory will use the same set of patterns as defined with:
+ </p>
+
+ <pre>
+ <constant name="struts.mapper.prefixMapping" value="..."/>
+ </pre></p>
+{% comment %}end snippet id=description|javadoc=true|url=org.apache.struts2.factory.PrefixBasedActionProxyFactory {% endcomment %}
 
 ## ActionMapper and ActionMapping objects
 

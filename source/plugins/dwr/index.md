@@ -19,7 +19,20 @@ This plugin is only available with Struts 2.1.1 or later.
 
 To expose Struts 2 validations via DWR, add this to your DWR configuration:
 
-{% snippet id=dwrConfiguration|lang=xml|javadoc=true|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dwr/src/main/java/org/apache/struts2/validators/DWRValidator.java;hb=HEAD %}
+{% comment %}start snippet id=dwrConfiguration|lang=xml|javadoc=true|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dwr/src/main/java/org/apache/struts2/validators/DWRValidator.java;hb=HEAD {% endcomment %}
+
+```xml
+
+ <dwr>
+    <allow>
+      <create creator="new" javascript="validator" class="org.apache.struts2.validators.DWRValidator"/>
+      <convert converter="bean" match="com.opensymphony.xwork2.ValidationAwareSupport"/>
+    </allow>
+ </dwr>
+
+```
+
+{% comment %}end snippet id=dwrConfiguration|lang=xml|javadoc=true|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dwr/src/main/java/org/apache/struts2/validators/DWRValidator.java;hb=HEAD {% endcomment %}
 
 ## Settings
 

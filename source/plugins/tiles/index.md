@@ -134,7 +134,26 @@ Instead of defining new tiles definitions per supported language (i.e.: `tiles.
 
 This example shows a Tiles layout page using Struts tags:
 
-{% snippet lang=jsp|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=apps/showcase/src/main/webapp/WEB-INF/tiles/layout.jsp;hb=HEAD %}
+{% comment %}start snippet lang=jsp|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=apps/showcase/src/main/webapp/WEB-INF/tiles/layout.jsp;hb=HEAD {% endcomment %}
+
+```jsp
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
+<%-- Show usage; Used in Header --%>
+<tiles:importAttribute name="title" scope="request"/>
+<html>
+    <head><title>Struts2 Showcase - <tiles:getAsString name="title"/></title></head>
+<body>
+    <tiles:insertAttribute name="header"/>
+    <tiles:insertAttribute name="body"/>
+	<p>Notice that this is a layout made in JSP</p>
+</body>
+</html>
+
+```
+
+{% comment %}end snippet lang=jsp|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=apps/showcase/src/main/webapp/WEB-INF/tiles/layout.jsp;hb=HEAD {% endcomment %}
 
 Please check [tiles](https://github.com/apache/struts-examples/tree/master/tiles) example in [struts-examples](https://github.com/apache/struts-examples/tree/master/tiles) project.
 

@@ -48,10 +48,16 @@ _checkbox
 
 
 
-{% snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.CheckboxInterceptor %}
+{% comment %}start snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.CheckboxInterceptor {% endcomment %}
+<p> <ul>
+ <li>setUncheckedValue - The default value of an unchecked box can be overridden by setting the 'uncheckedValue' property.</li>
+ </ul></p>
+{% comment %}end snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.CheckboxInterceptor {% endcomment %}
 
 #####Extending the Interceptor#####
 
 
 
-{% snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.CheckboxInterceptor %}
+{% comment %}start snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.CheckboxInterceptor {% endcomment %}
+<p></p>
+{% comment %}end snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.CheckboxInterceptor {% endcomment %}
