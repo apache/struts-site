@@ -66,7 +66,91 @@ Most likely, you will have an ActionForm that your Struts 1 Action expects.  To 
 
 This example shows a few Struts 1 Actions, a session-scoped ActionForm, and validation that uses Commons Validator:
 
-{% snippet lang=xml|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=apps/showcase/src/main/resources/struts-conversion.xml;hb=HEAD %}
+{% comment %}start snippet lang=xml|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=apps/showcase/src/main/resources/struts-conversion.xml;hb=HEAD {% endcomment %}
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+	
+<struts>
+	<package name="conversion" namespace="/conversion" extends="struts-default">
+	
+        <action name="index">
+            <result>/WEB-INF/conversion/index.jsp</result>
+        </action>
+        
+		<!-- Example populating a List inside an Action -->
+		<action name="enterPersonsInfo" method="input"
+				class="org.apache.struts2.showcase.conversion.PersonAction">
+			<result>/WEB-INF/conversion/enterPersonInfo.jsp</result>
+		</action>
+		<action name="submitPersonInfo" method="submit"
+				class="org.apache.struts2.showcase.conversion.PersonAction">
+			<result>/WEB-INF/conversion/showPersonInfo.jsp</result>
+			<result name="input">/WEB-INF/conversion/enterPersonInfo.jsp</result>
+		</action>
+		<action name="showPersonJspCode">
+			<result type="plainText">/WEB-INF/conversion/enterPersonInfo.jsp</result>
+		</action>
+		<action name="showPersonActionJavaCode">
+			<result type="plainText">/WEB-INF/conversion/PersonAction.java.txt</result>
+		</action>
+		<action name="showPersonJavaCode">
+			<result type="plainText">/WEB-INF/conversion/Person.java.txt</result>
+		</action>
+		
+		
+		<!-- Example populating a Set inside an Action -->
+		<action name="enterAddressesInfo" class="org.apache.struts2.showcase.conversion.AddressAction" method="input">
+			<result>/WEB-INF/conversion/enterAddressInfo.jsp</result>
+		</action>
+		<action name="submitAddressesInfo" class="org.apache.struts2.showcase.conversion.AddressAction" method="submit">
+			<result>/WEB-INF/conversion/showAddressInfo.jsp</result>
+			<result name="input">/WEB-INF/conversion/enterAddressInfo.jsp</result>
+		</action>
+		<action name="showAddressJspCode">
+			<result type="plainText">/WEB-INF/conversion/enterAddressInfo.jsp</result>
+		</action>
+		<action name="showAddressActionJavaCode">
+			<result type="plainText">/WEB-INF/conversion/AddressAction.java.txt</result>
+		</action>
+		<action name="showAddressJavaCode">
+			<result type="plainText">/WEB-INF/conversion/Address.java.txt</result>
+		</action>
+		
+		
+		<!-- Example populating a List with Tiger 5 Enum  -->		
+		<action name="enterOperationEnumInfo" class="org.apache.struts2.showcase.conversion.OperationsEnumAction" method="input">
+			<result>/WEB-INF/conversion/enterOperations.jsp</result>
+		</action>
+		<action name="submitOperationEnumInfo" class="org.apache.struts2.showcase.conversion.OperationsEnumAction" method="submit">
+			<result>/WEB-INF/conversion/showOperations.jsp</result>
+			<result name="input">/WEB-INF/conversion/enterOperations.jsp</result>
+		</action>
+		<action name="showEnumJspCode">
+			<result type="plainText">/WEB-INF/conversion/enterOperations.jsp</result>
+		</action>
+		<action name="showOperationsEnumJavaCode">
+			<result type="plainText">/WEB-INF/conversion/OperationsEnum.java.txt</result>
+		</action>
+		<action name="showOperationEnumActionJavaCode">
+			<result type="plainText">/WEB-INF/conversion/OperationsEnumAction.java.txt</result>
+		</action>
+		<action name="showEnumTypeConverterJavaCode">
+			<result type="plainText">/WEB-INF/conversion/EnumTypeConverter.java.txt</result>
+		</action>
+		<action name="showOperationsEnumActionConversionProperties">
+			<result type="plainText">/WEB-INF/conversion/OperationsEnumActionConversion.txt</result>
+		</action>
+		
+	</package>
+</struts>	
+
+```
+
+{% comment %}end snippet lang=xml|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=apps/showcase/src/main/resources/struts-conversion.xml;hb=HEAD {% endcomment %}
 
 ## Settings
 

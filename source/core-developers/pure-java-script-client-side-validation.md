@@ -11,7 +11,17 @@ Because the validation logic is actually repeated in the JavaScript code, it is 
 some values will be considered acceptable by the JavaScript code but will be marked as unacceptable by the server\-side [Validation](validation.html).
 
 
-{% snippet id=supported-validators|url=struts2/core/src/main/resources/template/xhtml/form-close-validate.ftl %}
+{% comment %}start snippet id=supported-validators|url=struts2/core/src/main/resources/template/xhtml/form-close-validate.ftl {% endcomment %}
+<p>Only the following validators are supported:
+* required validator
+* requiredstring validator
+* stringlength validator
+* regex validator
+* email validator
+* url validator
+* int validator
+* double validator</p>
+{% comment %}end snippet id=supported-validators|url=struts2/core/src/main/resources/template/xhtml/form-close-validate.ftl {% endcomment %}
 
 
 > 
