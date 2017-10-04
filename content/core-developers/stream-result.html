@@ -129,123 +129,30 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/stream-result.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="stream-result">Stream Result</h1>
 
-<p>A custom Result type for sending raw data (via an InputStream) directly to the HttpServletResponse. Very useful for allowing users to download content.</p>
+<p>A custom Result type for sending raw data (via an InputStream) directly to the HttpServletResponse. Very useful for allowing users to download content.
+If you are running your app server under HTTPS and having issues with PDF’s or other file streams you should take a look at <a href="https-and-ie-issues.html">HTTPS and IE Issues</a></p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>If you are running your app server under HTTPS and having issues with PDF’s or other file streams you should take a look at <a href="https-and-ie-issues.html">HTTPS and IE Issues</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>####Parameters####</p>
+<h3 id="parameters">Parameters</h3>
 
 <ul>
-  <li><strong>contentType</strong> - the stream mime-type as sent to the web browser (default =</li>
+  <li><code class="highlighter-rouge">contentType</code> - the stream mime-type as sent to the web browser (default = text/plain).</li>
+  <li><code class="highlighter-rouge">contentLength</code> - the stream length in bytes (the browser displays a progress bar).</li>
+  <li><code class="highlighter-rouge">contentDisposition</code> - the content disposition header value for specifying the file name (default = inline, values are typically attachment;filename=”document.pdf”.</li>
+  <li><code class="highlighter-rouge">inputName</code> - the name of the InputStream property from the chained action (default = inputStream).</li>
+  <li><code class="highlighter-rouge">bufferSize</code> - the size of the buffer to copy from input to output (default = 1024).</li>
+  <li><code class="highlighter-rouge">allowCaching</code> - if set to ‘false’ it will set the headers <code class="highlighter-rouge">Pragma</code> and <code class="highlighter-rouge">Cache-Control</code> to <code class="highlighter-rouge">no-cahce</code>, and prevent client from caching the content (default = true).</li>
+  <li><code class="highlighter-rouge">contentCharSet</code> - if set to a string, ‘;charset=value’ will be added to the content-type header, where value is the string set. If set to an expression, the result of evaluating the expression will be used. If not set, then no charset will be set on the header</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>text/plain
-</code></pre>
-</div>
-<p>).</p>
+<p>These parameters can also be set by exposing a similarly named getter method on your Action. For example, you can provide <code class="highlighter-rouge">getContentType()</code> to override that parameter for the current action. To do it you you must explicitly define this param as an expression i.e. <code class="highlighter-rouge">&lt;param name="contentType"&gt;${contentType}&lt;/param&gt;</code></p>
 
-<ul>
-  <li>
-    <p><strong>contentLength</strong> - the stream length in bytes (the browser displays a progress bar).</p>
-  </li>
-  <li>
-    <p><strong>contentDisposition</strong> - the content disposition header value for specifying the file name (default =</p>
-  </li>
-</ul>
+<p>Please be aware that this was changed since Struts 2.5.2, previously each parameter was automagically resolved by looking throughout the <code class="highlighter-rouge">ValueStack</code>, now you must explicitly define which parameter must be evaluated, even <code class="highlighter-rouge">inputName</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>inline
-</code></pre>
-</div>
-<p>, values are typically <em>attachment;filename=”document.pdf”</em> .</p>
+<h3 id="examples">Examples</h3>
 
-<ul>
-  <li>
-    <p><strong>inputName </strong>- the name of the InputStream property from the chained action (default = <strong>inputStream</strong>).</p>
-  </li>
-  <li>
-    <p><strong>bufferSize </strong>- the size of the buffer to copy from input to output (default =</p>
-  </li>
-</ul>
+<h4 id="annotation-based-configuration">Annotation based Configuration</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>1024
-</code></pre>
-</div>
-<p>).</p>
-
-<ul>
-  <li><strong>allowCaching</strong> - if set to ‘false’ it will set the headers</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>Pragma
-</code></pre>
-</div>
-<p> and</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>Cache-Control
-</code></pre>
-</div>
-<p> to</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>no-cahce
-</code></pre>
-</div>
-<p>, and prevent client from caching the content (default =</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>true
-</code></pre>
-</div>
-<p>).</p>
-
-<ul>
-  <li><strong>contentCharSet</strong> - if set to a string, ‘;charset=value’ will be added to the content-type header, where value is the string set. If set to an expression, the result of evaluating the expression will be used. If not set, then no charset will be set on the header</li>
-</ul>
-
-<p>These parameters can also be set by exposing a similarly named getter method on your Action. For example, you can provide</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>getContentType()
-</code></pre>
-</div>
-<p> to override that parameter for the current action. To do it you you must explicitly define this param as an expression i.e.</p>
-
-<p><strong>parameter defined as an expression</strong></p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;param name="contentType"&gt;${contentType}&lt;/param&gt;
-</code></pre>
-</div>
-
-<table>
-  <tbody>
-    <tr>
-      <td>Please be aware that this was changed since Struts 2.5.2, previously each parameter was automagically resolved by looking throughout the ValueStack, now you must explicitly define wich parameter must be evaluated, even inputName.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>####Examples####</p>
-
-<p>#####Annotation based Configuration#####</p>
-
-<p>To configure Actions and Results with Annotations you need to activate the Struts2 <em>Convention Plugin</em>  in your Struts2 application.</p>
+<p>To configure Actions and Results with Annotations you need to activate the Struts2 <em>Convention Plugin</em> in your Struts2 application.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>package com.mycompany.webapp.actions;
 
@@ -295,13 +202,10 @@ public class FileDisplay extends ActionSupport {
 		return this.stream;
 	}
 }
-
 </code></pre>
 </div>
 
-<p>#####XML based Configuration#####</p>
-
-<p><strong>Example configuration</strong></p>
+<h4 id="xml-based-configuration">XML based Configuration</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>&lt;result name="success" type="stream"&gt;
   &lt;param name="contentType"&gt;image/jpeg&lt;/param&gt;

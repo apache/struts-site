@@ -129,47 +129,35 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/redirect-result.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="redirect-result">Redirect Result</h1>
 
-<p> <p>
- Calls the {@link HttpServletResponse#sendRedirect(String) sendRedirect}
- method to the location specified. The response is told to redirect the
- browser to the specified location (a new request from the client). The
- consequence of doing this means that the action (action instance, action
- errors, field errors, etc) that was just executed is lost and no longer
- available. This is because actions are built on a single-thread model. The
- only way to pass data is through the session or with web parameters
- (url?name=value) which can be OGNL expressions.
- </p></p>
+<p>Calls the <code class="highlighter-rouge"><span class="p">{</span><span class="err">@link</span><span class="w"> </span><span class="err">HttpServletResponse#sendRedirect(String)</span><span class="w"> </span><span class="err">sendRedirect</span><span class="p">}</span></code> method to the location specified. The response is told to redirect the browser to the specified location (a new request from the client). The consequence of doing this means that the action (action instance, action errors, field errors, etc) that was just executed is lost and no longer available. This is because actions are built on a single-thread model. The only way to pass data is through the session or with web parameters (url?name=value) which can be OGNL expressions.</p>
 
-<p>####Parameters####</p>
+<h3 id="parameters">Parameters</h3>
 
-<p> 
- <ul>
- 
- <li><b>location (default)</b> - the location to go to after execution.</li>
- 
- <li><b>parse</b> - true by default. If set to false, the location param will
- not be parsed for Ognl expressions.</li>
- 
- <li><b>anchor</b> - Optional.  Also known as "fragment" or colloquially as 
- "hash".  You can specify an anchor for a result.</li>
- </ul>
- 
- <p>
- This result follows the same rules from {@link StrutsResultSupport}.
- </p>
- </p>
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">location</code> (default) - the location to go to after execution.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">parse</code> - true by default. If set to false, the location param will not be parsed for OGNL expressions.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">anchor</code> - Optional. Also known as “fragment” or colloquially as “hash”. You can specify an anchor for a result.</p>
+  </li>
+</ul>
 
-<p>####Examples####</p>
+<p>This result follows the same rules from StrutsResultSupport.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="c">&lt;!--
-   The redirect URL generated will be:
-   /foo.jsp#FRAGMENT
- --&gt;</span>
- <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"redirect"</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>foo.jsp<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"parse"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"anchor"</span><span class="nt">&gt;</span>FRAGMENT<span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/result&gt;</span>
+<h3 id="examples">Examples</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!--
+  The redirect URL generated will be:
+  /foo.jsp#FRAGMENT
+--&gt;
+&lt;result name="success" type="redirect"&gt;
+  &lt;param name="location"&gt;foo.jsp&lt;/param&gt;
+  &lt;param name="parse"&gt;false&lt;/param&gt;
+  &lt;param name="anchor"&gt;FRAGMENT&lt;/param&gt;
+&lt;/result&gt;
 </code></pre>
 </div>
 
@@ -190,7 +178,6 @@
       &lt;/result&gt;
    &lt;/action&gt;
 &lt;/package&gt;
-
 </code></pre>
 </div>
 
