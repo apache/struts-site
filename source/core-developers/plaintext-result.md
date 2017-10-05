@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: PlainText Result
+parent:
+    title: Core Developer Guide
+    url: index.html
 ---
 
 # PlainText Result

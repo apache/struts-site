@@ -24,9 +24,10 @@ own applications.
 |[Velocity Result](velocity-result.html)|Used for _Velocity_  integration|
 |[XSL Result](xsl-result.html)|Used for XML/XSLT integration|
 |[PlainText Result](plaintext-result.html)|Used to display the raw content of a particular page (i.e jsp, HTML)|
-|[Tiles Result](tiles-result.html)|Used to provide Tiles integration|
+|[Tiles Result](../plugins/tiles/)|Used to provide Tiles integration|
+|[Tiles 3 Result](../plugins/tiles-3/)|Used to provide Tiles 3 integration|
 |[Postback Result](postback-result.html)|Used to postback request parameters as a form to the specified destination|
-|[JSON Result](json-result.html) |Used to serialize actions into JSON|
+|[JSON Result](../plugins/json/) |Used to serialize actions into JSON|
 
 ## Optional
 

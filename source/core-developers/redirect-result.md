@@ -1,26 +1,30 @@
 ---
-layout: core-developers
+layout: default
 title: Redirect Result
+parent:
+    title: Core Developer Guide
+    url: index.html
 ---
 
 # Redirect Result
 
-Calls the `{@link HttpServletResponse#sendRedirect(String) sendRedirect}` method to the location specified. The response is told to redirect the browser to the specified location (a new request from the client). The consequence of doing this means that the action (action instance, action errors, field errors, etc) that was just executed is lost and no longer available. This is because actions are built on a single-thread model. The only way to pass data is through the session or with web parameters (url?name=value) which can be OGNL expressions. 
+Calls the `{@link HttpServletResponse#sendRedirect(String) sendRedirect}` method to the location specified. The response 
+is told to redirect the browser to the specified location (a new request from the client). The consequence of doing this 
+means that the action (action instance, action errors, field errors, etc) that was just executed is lost and no longer 
+available. This is because actions are built on a single-thread model. The only way to pass data is through the session
+or with web parameters (`url?name=value`) which can be OGNL expressions. 
 
-### Parameters
+## Parameters
 
 - `location` (default) - the location to go to after execution.
-
 - `parse` - true by default. If set to false, the location param will not be parsed for OGNL expressions.
-
 - `anchor` - Optional. Also known as "fragment" or colloquially as "hash". You can specify an anchor for a result.
 
-This result follows the same rules from StrutsResultSupport. 
+This result follows the same rules from `StrutsResultSupport`. 
 
+## Examples
 
-### Examples
-
-```
+```xml
 <!--
   The redirect URL generated will be:
   /foo.jsp#FRAGMENT
@@ -32,7 +36,7 @@ This result follows the same rules from StrutsResultSupport.
 </result>
 ```
 
-```
+```xml
 <package name="passingRequestParameters" extends="struts-default" namespace="/passingRequestParameters">
    <-- Pass parameters (reportType, width and height) -->
    <!--
