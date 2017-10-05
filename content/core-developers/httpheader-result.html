@@ -125,44 +125,37 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/httpheader-result.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="index.html" title="back to Core Developer Guide"><< back to Core Developer Guide</a>
+    
     <h1 id="httpheader-result">HttpHeader Result</h1>
 
-<p>A custom Result type for setting HTTP headers and status by optionally evaluating against the ValueStack. This result can also be used to send an error to the client. All the parameters can be evaluated against the ValueStack.</p>
+<p>A custom Result type for setting HTTP headers and status by optionally evaluating against the ValueStack. This result 
+can also be used to send an error to the client. All the parameters can be evaluated against the ValueStack.</p>
 
-<h3 id="parameters">Parameters</h3>
+<h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li>
-    <p><code class="highlighter-rouge">status</code> - the http servlet response status code that should be set on a response.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">parse</code> - true by default. If set to false, the headers param will not be parsed for OGNL expressions.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">headers</code> - header values.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">error</code> - the http servlet response error code that should be set on a response.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">errorMessage</code> - error message to be set on response if ‘error’ is set.</p>
-  </li>
+  <li><code class="highlighter-rouge">status</code> - the http servlet response status code that should be set on a response.</li>
+  <li><code class="highlighter-rouge">parse</code> - true by default. If set to false, the headers param will not be parsed for OGNL expressions.</li>
+  <li><code class="highlighter-rouge">headers</code> - header values.</li>
+  <li><code class="highlighter-rouge">error</code> - the http servlet response error code that should be set on a response.</li>
+  <li><code class="highlighter-rouge">errorMessage</code> - error message to be set on response if ‘error’ is set.</li>
 </ul>
 
-<h3 id="examples">Examples</h3>
+<h2 id="examples">Examples</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;result name="success" type="httpheader"&gt;
-  &lt;param name="status"&gt;204&lt;/param&gt;
-  &lt;param name="headers.a"&gt;a custom header value&lt;/param&gt;
-  &lt;param name="headers.b"&gt;another custom header value&lt;/param&gt;
-&lt;/result&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"httpheader"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"status"</span><span class="nt">&gt;</span>204<span class="nt">&lt;/param&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"headers.a"</span><span class="nt">&gt;</span>a custom header value<span class="nt">&lt;/param&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"headers.b"</span><span class="nt">&gt;</span>another custom header value<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/result&gt;</span>
  
-&lt;result name="proxyRequired" type="httpheader"&gt;
-  &lt;param name="error"&gt;305&lt;/param&gt;
-  &lt;param name="errorMessage"&gt;this action must be accessed through a proxy&lt;/param&gt;
-&lt;/result&gt;
+<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"proxyRequired"</span> <span class="na">type=</span><span class="s">"httpheader"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"error"</span><span class="nt">&gt;</span>305<span class="nt">&lt;/param&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"errorMessage"</span><span class="nt">&gt;</span>this action must be accessed through a proxy<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/result&gt;</span>
 </code></pre>
 </div>
 
