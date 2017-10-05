@@ -62,3 +62,7 @@ The example projects use Maven to manage the artifact dependencies and to build 
 [Preparable Interface](preperable-interface.html)
 
 [Exclude Parameters](exclude-parameters.html)
+
+## Extra tutorials
+
+[JasperReports Tutorial](jasper-reports-tutorial.html)

@@ -31,7 +31,7 @@ own applications.
 
 ## Optional
 
-|[JasperReports Plugin]|Used for [JasperReports Tutorial](../plugins/jasperreports/) integration|Optional, third-party plugin|
+|[JasperReports Plugin](../plugins/jasperreports/)|Used for [JasperReports Tutorial](../getting-started/jasper-reports-tutorial.html) integration|Optional, third-party plugin|
 
 Additional Result Types can be created and plugged into an application by implementing the `com.opensymphony.xwork2.Result`
 interface. Custom Result Types might include generating an email or JMS message, generating images, and so forth.
