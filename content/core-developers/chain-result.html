@@ -134,42 +134,34 @@
 <h3 id="parameters">Parameters</h3>
 
 <ul>
-  <li>
-    <p><code class="highlighter-rouge">actionName</code> (default) - the name of the action that will be chained to.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">namespace</code> - used to determine which namespace the Action is in that we’re chaining. If namespace is null, this defaults to the current namespace.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">method</code> - used to specify another method on target action to be invoked. If null, this defaults to execute method.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">skipActions</code> - (optional) the list of comma separated action names for the actions that could be chained to.</p>
-  </li>
+  <li><code class="highlighter-rouge">actionName</code> (default) - the name of the action that will be chained to.</li>
+  <li><code class="highlighter-rouge">namespace</code> - used to determine which namespace the Action is in that we’re chaining. If namespace is null, this defaults to the current namespace.</li>
+  <li><code class="highlighter-rouge">method</code> - used to specify another method on target action to be invoked. If null, this defaults to execute method.</li>
+  <li><code class="highlighter-rouge">skipActions</code> - (optional) the list of comma separated action names for the actions that could be chained to.</li>
 </ul>
 
 <h3 id="examples">Examples</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;package name="public" extends="struts-default"&gt;
-    &lt;!-- Chain creatAccount to login, using the default parameter --&gt;
-    &lt;action name="createAccount" class="..."&gt;
-        &lt;result type="chain"&gt;login&lt;/result&gt;
-    &lt;/action&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"public"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- Chain creatAccount to login, using the default parameter --&gt;</span>
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"createAccount"</span> <span class="na">class=</span><span class="s">"..."</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"chain"</span><span class="nt">&gt;</span>login<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
  
-    &lt;action name="login" class="..."&gt;
-        &lt;!-- Chain to another namespace --&gt;
-        &lt;result type="chain"&gt;
-            &lt;param name="actionName"&gt;dashboard&lt;/param&gt;
-            &lt;param name="namespace"&gt;/secure&lt;/param&gt;
-        &lt;/result&gt;
-    &lt;/action&gt;
-&lt;/package&gt;
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"login"</span> <span class="na">class=</span><span class="s">"..."</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- Chain to another namespace --&gt;</span>
+        <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"chain"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"actionName"</span><span class="nt">&gt;</span>dashboard<span class="nt">&lt;/param&gt;</span>
+            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"namespace"</span><span class="nt">&gt;</span>/secure<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+<span class="nt">&lt;/package&gt;</span>
  
-&lt;package name="secure" extends="struts-default" namespace="/secure"&gt;
-    &lt;action name="dashboard" class="..."&gt;
-        &lt;result&gt;dashboard.jsp&lt;/result&gt;
-    &lt;/action&gt;
-&lt;/package&gt;
+<span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"secure"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/secure"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"dashboard"</span> <span class="na">class=</span><span class="s">"..."</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;result&gt;</span>dashboard.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+<span class="nt">&lt;/package&gt;</span>
 </code></pre>
 </div>
 
