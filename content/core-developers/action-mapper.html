@@ -272,23 +272,42 @@ and “restful” which is <code class="highlighter-rouge">org.apache.struts2.di
 <h2 id="prefixbasedactionmapper">PrefixBasedActionMapper</h2>
 
 <p> <p>
+
  A prefix based action mapper that is capable of delegating to other {@link ActionMapper}s based on the request's prefix.<br />
+
  It is configured through struts.xml<br />
+
  For example, with the following entries in struts.properties
+
  </p>
+
+
 
  <pre>
+
  <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper" />
+
  <constant name="struts.mapper.prefixMapping" value="/communities:pseudoRestful,/communityTags:pseudoRestful,/events:pseudoRestful,/mediaList:pseudoRestful,/users:pseudoRestful,/community:struts,/communityTag:struts,/event:struts,/media:struts,/user:struts,:struts" />
+
  </pre>
 
+
+
  <p>
+
  When {@link PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)} or
+
  {@link PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)} is invoked,
+
  {@link PrefixBasedActionMapper} will check each possible prefix (url prefix terminating just before a /) to find the most specific ActionMapper that returns a mapping when asked to map the request.  If none are found, null is returned for both
+
  {@link PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)} and
+
  {@link PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)} methods.
+
  </p>
+
+
 
 </p>
 
@@ -314,7 +333,8 @@ and “restful” which is <code class="highlighter-rouge">org.apache.struts2.di
 
  <pre>
  <constant name="struts.mapper.prefixMapping" value="..." />
- </pre></p>
+ </pre>
+</p>
 
 <h2 id="actionmapper-and-actionmapping-objects">ActionMapper and ActionMapping objects</h2>
 
