@@ -91,7 +91,17 @@ A form must be create with a form field of type file,
 
 **Example JSP form tags:**
 
-{% snippet id=example-form|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor %}
+{% comment %}start snippet id=example-form|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor {% endcomment %}
+
+```xml
+   <s:form action="doUpload" method="post" enctype="multipart/form-data">
+       <s:file name="upload" label="File"/>
+       <s:submit/>
+   </s:form>
+
+```
+
+{% comment %}end snippet id=example-form|lang=xml|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor {% endcomment %}
 The fileUpload interceptor will use setter injection to insert the uploaded file and related data into your Action class\. For a form field named **upload** you would provide the three setter methods shown in the following example:
 
 **Example Action class:**
