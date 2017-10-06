@@ -129,7 +129,7 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/weblogic-6-1.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="weblogic-61">WebLogic 6.1</h1>
 
-<p>####Running on Weblogic Server 6.1####</p>
+<h4 id="running-on-weblogic-server-61">Running on Weblogic Server 6.1</h4>
 
 <p>This document describes why the framework doesn’t work “as-is” on Weblogic Server 6.1 and shows how to build an additional JAR that will fix the problems.</p>
 
@@ -137,11 +137,11 @@
 
 <p>The first part of this document describes the technical problems and the theoretical solution.</p>
 
-<p>#####Why It Doesn’t Just Work#####</p>
+<h5 id="why-it-doesnt-just-work">Why It Doesn’t Just Work</h5>
 
 <p>Weblogic 6.1 was published just prior to the finalization of the Servlet 2.3 specification. The incompatibility is that servlet filters and listeners in Weblogic 6.1 do not work with the 2.3 spec primarily because the servlet context is not retrieved in the same way.  This causes virtually all filter initialization operations to fail with an AbstractMethodError exception.</p>
 
-<p>#####How the Framework is Modified#####</p>
+<h5 id="how-the-framework-is-modified">How the Framework is Modified</h5>
 
 <p>In Servlet 2.3, the servlet context is available from the session object; this is not true for Weblogic Server 6.1. Hence, filters and listeners must be modified to retrieve the servlet context from a different source; this is accomplished by retrieving the servlet context from the FilterConfig passed to the servlet filters during initialzation.</p>
 
@@ -200,7 +200,7 @@
 
 <p>A singleton class whose sole purpose is to hold the servlet context so that listener classes have access to it.</p>
 
-<p>#####Setting Up to Run on Weblogic 6.1#####</p>
+<h5 id="setting-up-to-run-on-weblogic-61">Setting Up to Run on Weblogic 6.1</h5>
 
 <p><strong>Building your own project</strong></p>
 
@@ -229,7 +229,7 @@
   </tbody>
 </table>
 
-<p>#####FAQ#####</p>
+<h5 id="faq">FAQ</h5>
 
 <p><strong>I still get the AbstractMethodError Exception when Weblogic Server starts up.  What am I doing wrong?</strong></p>
 
