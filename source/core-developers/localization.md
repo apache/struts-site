@@ -150,6 +150,6 @@ implementation. To use this please define the following option in your `struts.
 
 If you want use a different logic to search for localized messages, or you want to use a database or just want to search 
 default bundles, you must implement both those interfaces (or subclass the existing implementations). You can check 
-a small [example app](https://github.com/apache/struts\-examples/tree/master/text\-provider) how to use both. 
+a small [example app](https://github.com/apache/struts-examples/tree/master/text-provider) how to use both. 
 Please remember that the `TextProvider` interface is implemented by the `ActionSupport` class, that's why 
 an extra layer - `TextProviderFactory` - is needed.
