@@ -17,11 +17,11 @@ Action
 ~~~~~~~
 's package for an action found via [Zero Configuration](zero-configuration.html)\.
 
-#####Usage#####
+##### Usage
 
 This annotation is placed at the class level\.
 
-#####Parameters#####
+##### Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|

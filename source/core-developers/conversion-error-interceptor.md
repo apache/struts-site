@@ -43,7 +43,7 @@ From the Javadocs of the Struts 2 interceptor:
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -58,7 +58,7 @@ From the Javadocs of the Struts 2 interceptor:
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor {% endcomment %}
 
-#####Extending the Interceptor#####
+##### Extending the Interceptor
 
 
 
@@ -69,7 +69,7 @@ From the Javadocs of the Struts 2 interceptor:
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.StrutsConversionErrorInterceptor {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 

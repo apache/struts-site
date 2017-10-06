@@ -19,7 +19,7 @@ getModel()
 ~~~~~~~
  method\. Struts will then populate the fields of this object with the request parameters, and this object will be placed on top of the stack once the action is executed\. Validation will also be performed on this model object, instead of the action\. Please read about [VisitorFieldValidator Annotation](visitor-field-validator-annotation.html) which can help you validate model's fields\.
 
-####Interceptor####
+#### Interceptor
 
 To use 
 
@@ -33,7 +33,7 @@ defaultStack
 ~~~~~~~
  so it is applied to all actions by default\.
 
-####Example####
+#### Example
 
 Action class:
 

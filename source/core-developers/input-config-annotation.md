@@ -11,7 +11,7 @@ title: InputConfig Annotation
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig {% endcomment %}
 
-#####Usage#####
+##### Usage
 
 
 
@@ -21,7 +21,7 @@ title: InputConfig Annotation
 </p>
 {% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -49,7 +49,7 @@ title: InputConfig Annotation
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.InputConfig {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 

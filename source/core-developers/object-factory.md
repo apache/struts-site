@@ -7,9 +7,9 @@ title: ObjectFactory
 
 All objects created by the framework are instantiated by the ObjectFactory\. The ObjectFactory provides the means of integrating the framework with IoC containers like Spring, Pico, Plexus, and so forth\.
 
-####Customize####
+#### Customize
 
-#####Extend ObjectFactory#####
+##### Extend ObjectFactory
 
 
 Customized ObjectFactory must extend ObjectFactory or any of its descendants and have a default, no\-argument constructor\.
@@ -39,7 +39,7 @@ public class MyObjectFactory extends ObjectFactory {
 
 ~~~~~~~
 
-#####Define dedicated factory#####
+##### Define dedicated factory
 
 If you want to just extend one part of ObjectFactory, ie\. to change how [Result Types](result-types.html) are build, you can implement 
 

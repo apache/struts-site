@@ -61,7 +61,7 @@ title: Default Workflow Interceptor
 </p>
 {% comment %}end snippet id=javadocDefaultWorkflowInterceptor|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrefixMethodInvocationUtil {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -73,7 +73,7 @@ title: Default Workflow Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor {% endcomment %}
 
-#####Extending the Interceptor#####
+##### Extending the Interceptor
 
 
 
@@ -84,7 +84,7 @@ title: Default Workflow Interceptor
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 

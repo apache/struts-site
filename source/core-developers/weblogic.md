@@ -14,7 +14,7 @@ To deploy to WebLogic, the common approach is to create and deploy an unexpanded
 
 > 
 
-#####Adding an struts\-velocity\.properties Configuration File#####
+##### Adding an struts\-velocity\.properties Configuration File
 
 + In the 
 
@@ -92,11 +92,11 @@ class.resource.loader.cache = true
 
 + Redeploy a fresh WAR to WebLogic\.
 
-#####NPE when using Struts 2 Jasper Reports plugin#####
+##### NPE when using Struts 2 Jasper Reports plugin
 
 When using mentioned plugin in Weblogic 11g you can get NullPointerException within Struts 2\. To solve the problem you must enable the "Archived Real Path" global property in Weblogic admin console \> configuration \> Web Applications\. It's because JasperReportsResult determines the report directory base on servletContext\.getRealPath(finalLocation)\.
 
-#####Convention based application doesn't work#####
+##### Convention based application doesn't work
 
 When you deployed an application that base on the Convention Plugin and you get an error messages that says:
 

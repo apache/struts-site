@@ -5,7 +5,7 @@ title: Postback Result
 
 # Postback Result
 
-####Description####
+#### Description
 
 
 
@@ -22,7 +22,7 @@ title: Postback Result
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=org.apache.struts2.result.PostbackResult {% endcomment %}
 
-####Parameters####
+#### Parameters
 
 
 
@@ -47,7 +47,7 @@ title: Postback Result
 </p>
 {% comment %}end snippet id=params|javadoc=true|url=org.apache.struts2.result.PostbackResult {% endcomment %}
 
-####Examples####
+#### Examples
 
 
 

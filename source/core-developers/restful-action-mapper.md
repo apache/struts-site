@@ -36,7 +36,7 @@ http://HOST/article/Id
 
 Your action just needs a setArticleId() method, and requests such as /article/1, /article/2, etc will all map to that URL pattern\.
 
-#####Restful2ActionMapper#####
+##### Restful2ActionMapper
 
 Improved restful action mapper that adds several ReST\-style improvements to action mapping, but supports fully\-customized URL's via XML\. The two primary REST enhancements are:
 

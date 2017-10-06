@@ -12,7 +12,7 @@ title: Element Annotation
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.Element {% endcomment %}
 
-#####Usage#####
+##### Usage
 
 
 
@@ -21,7 +21,7 @@ title: Element Annotation
 </p>
 {% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.Element {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -47,7 +47,7 @@ title: Element Annotation
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.Element {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 

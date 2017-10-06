@@ -44,7 +44,7 @@ _checkbox
 ~~~~~~~
  so that if the checkbox is not checked on the form the action will still receive a value rather than the default HTML action of not providing a value for unchecked checkboxes\.
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -55,7 +55,7 @@ _checkbox
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.CheckboxInterceptor {% endcomment %}
 
-#####Extending the Interceptor#####
+##### Extending the Interceptor
 
 
 

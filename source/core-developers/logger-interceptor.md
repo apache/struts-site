@@ -16,7 +16,7 @@ title: Logger Interceptor
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -25,7 +25,7 @@ title: Logger Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor {% endcomment %}
 
-#####Extending the Interceptor#####
+##### Extending the Interceptor
 
 
 
@@ -34,7 +34,7 @@ title: Logger Interceptor
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 

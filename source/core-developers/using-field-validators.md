@@ -5,7 +5,7 @@ title: Using Field Validators
 
 # Using Field Validators
 
-#####Description#####
+##### Description
 
 The followings show a simple example using Struts' Field Validators
 

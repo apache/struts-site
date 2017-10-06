@@ -7,7 +7,7 @@ title: SunOne 7.0
 
 To use SunOne wkith the framework, you will need to grant the appropriate permissions\. You can simply grant all permissions, or just the specific permissions the framework needs\.
 
-#####Granting All Permissions#####
+##### Granting All Permissions
 
 
 
@@ -19,7 +19,7 @@ grant {
 
 ~~~~~~~
 
-#####Granting Specific Permissions#####
+##### Granting Specific Permissions
 
 + Grant Write Permissions to 
 

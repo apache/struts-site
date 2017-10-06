@@ -41,7 +41,7 @@ title: Token Interceptor
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.TokenInterceptor {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -56,7 +56,7 @@ title: Token Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.TokenInterceptor {% endcomment %}
 
-#####Extending the Interceptor#####
+##### Extending the Interceptor
 
 
 
@@ -69,7 +69,7 @@ title: Token Interceptor
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.TokenInterceptor {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 

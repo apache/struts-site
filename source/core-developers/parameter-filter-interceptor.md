@@ -20,7 +20,7 @@ title: Parameter Filter Interceptor
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.ParameterFilterInterceptor {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -57,7 +57,7 @@ title: Parameter Filter Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.ParameterFilterInterceptor {% endcomment %}
 
-#####Example#####
+##### Example
 
 
 

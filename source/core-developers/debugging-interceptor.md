@@ -24,7 +24,7 @@ title: DebuggingInterceptor
 </p>
 {% comment %}end snippet id=remarks|javadoc=true|url=org.apache.struts2.interceptor.debugging.DebuggingInterceptor {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -45,7 +45,7 @@ title: DebuggingInterceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.debugging.DebuggingInterceptor {% endcomment %}
 
-#####Example#####
+##### Example
 
 
 
