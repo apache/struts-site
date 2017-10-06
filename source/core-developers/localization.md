@@ -4,6 +4,10 @@ title: Localization
 ---
 
 # Localization
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Overview
 
