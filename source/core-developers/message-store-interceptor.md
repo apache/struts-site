@@ -45,7 +45,7 @@ the request will have the operation mode in 'STORE'
 http://localhost:8080/context/submitApplication.action?operationMode=STORE
 ~~~~~~~
 
-#####Parameters#####
+##### Parameters
 
 + 
 
@@ -68,11 +68,11 @@ operationMode
 ~~~~~~~
  \- The operation mode this interceptor should be in (either **STORE**, **RETRIEVE**, **AUTOMATIC**, or **NONE**)\. **NONE **being the default\.
 
-#####Extending the Interceptor#####
+##### Extending the Interceptor
 
 There is no known extensions\.
 
-#####Examples#####
+##### Examples
 
 
 

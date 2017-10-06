@@ -12,7 +12,7 @@ title: CustomValidator Annotation
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
 
-#####Usage#####
+##### Usage
 
 
 
@@ -21,7 +21,7 @@ title: CustomValidator Annotation
 </p>
 {% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -73,7 +73,7 @@ title: CustomValidator Annotation
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 
@@ -86,6 +86,6 @@ title: CustomValidator Annotation
 
 {% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
 
-#####Adding Parameters#####
+##### Adding Parameters
 
 Use the [ValidationParameter annotation](validation-parameter-annotation.html) to add custom parameter values.

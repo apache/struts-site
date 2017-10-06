@@ -5,7 +5,7 @@ title: Tag Developers Guide (WIP)
 
 # CeWolf charts using Velocity templates
 
-#####Setup CeWolf#####
+##### Setup CeWolf
 
 **This currently only works with the most recent CVS version of WebWork but should be available in the upcoming 2.0 beta2**
 
@@ -30,7 +30,7 @@ Lastly add the CeWolf servlet to web.xml:
 
 ~~~~~~~
 
-#####Create a DatasetProducer#####
+##### Create a DatasetProducer
 
 This is the default DatasetProducer from the CeWolf tutorial.
 
@@ -78,7 +78,7 @@ public class PageViewCountData implements DatasetProducer, Serializable {
 
 ~~~~~~~
 
-#####Create the Velocity template#####
+##### Create the Velocity template
 
 With the new WebWork refactorings, nested JSP tags with arbitrary parameters can be used, so we convert the CeWolf tutorial JSP script to Velocity.
 
@@ -121,7 +121,7 @@ $req.session.setAttribute("pageViews", $pageViews )
 
 As you may notice, CeWolf looks up it's DatasetProducer in the request attributes - it has no knowledge of the Velocity context. That's why we call \$req.session.setAttribute(). The other attributes (such as the chartid) will be set by CeWolf, so we don't need to care about them.
 
-#####Setup an action to disply the template#####
+##### Setup an action to disply the template
 
 Now you should be able to fire up an action in the usual way with this template as the result and a nice chart should appear.
 

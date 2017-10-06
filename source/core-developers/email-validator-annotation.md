@@ -12,7 +12,7 @@ title: EmailValidator Annotation
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator {% endcomment %}
 
-#####Usage#####
+##### Usage
 
 
 
@@ -21,7 +21,7 @@ title: EmailValidator Annotation
 </p>
 {% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -73,7 +73,7 @@ title: EmailValidator Annotation
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 

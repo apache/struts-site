@@ -26,7 +26,7 @@ title: Token Session Interceptor
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.TokenSessionStoreInterceptor {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -41,7 +41,7 @@ title: Token Session Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.TokenSessionStoreInterceptor {% endcomment %}
 
-#####Extending the Interceptor#####
+##### Extending the Interceptor
 
 
 
@@ -52,7 +52,7 @@ title: Token Session Interceptor
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.TokenSessionStoreInterceptor {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 

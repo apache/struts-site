@@ -5,7 +5,7 @@ title: Before Annotation
 
 # Before Annotation
 
-####Before Annotation####
+#### Before Annotation
 
 
 
@@ -14,7 +14,7 @@ title: Before Annotation
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.Before {% endcomment %}
 
-#####Usage#####
+##### Usage
 
 
 
@@ -24,7 +24,7 @@ title: Before Annotation
 </p>
 {% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.Before {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -46,7 +46,7 @@ title: Before Annotation
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.Before {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 

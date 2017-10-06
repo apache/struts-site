@@ -65,7 +65,7 @@ Action
 ~~~~~~~
  interface and other tidbits there\.
 
-#####@Result Annotation Parameters#####
+##### @Result Annotation Parameters
 
 
 
@@ -156,7 +156,7 @@ Result
 
 + params \- An Array of the parameters in the form \{key1, value1, key2, value2\}
 
-#####@Result – Defining a Single Result#####
+##### @Result – Defining a Single Result
 
 Map the "success" result (explicitly named) to a Tile definition named "/home\.page"\.
 
@@ -172,7 +172,7 @@ public class HomeAction extends ActionSupport {
 
 ~~~~~~~
 
-#####@Results – Defining Multiple Results#####
+##### @Results – Defining Multiple Results
 
 Defines a set of results for an 
 

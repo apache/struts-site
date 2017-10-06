@@ -41,7 +41,7 @@ getText
 ~~~~~~~
 .
 
-####Non-String Attributes####
+#### Non-String Attributes
 
 The HTTP protocol is text-based, but some tags have non-String attribute types, like 
 
@@ -100,7 +100,7 @@ Since it's easy to forget which attributes are String and which are non-String, 
 
 ~~~~~~~
 
-####value is an Object!####
+#### value is an Object!
 
 Most often, the 
 
@@ -196,7 +196,7 @@ Please remember about _altSyntax_  option that can change when value is evaluate
 
 | 
 
-####Expression Language Notations####
+#### Expression Language Notations
 
 |<p>Username: \${user.username}</p>| A JavaBean object in a standard context in Freemarker, Velocity, or JSTL EL (Not OGNL). |
 |-----------------------------------------|------------------------------------------------------------------------------------------|
@@ -214,7 +214,7 @@ Please remember about _altSyntax_  option that can change when value is evaluate
   list="#{'username':'trillian',\
     'username':'zaphod'}" />|  A static Map, as in put("username","trillian"). |
 
-####Disallowed property names####
+#### Disallowed property names
 
 The following names of property are disallowed:
 

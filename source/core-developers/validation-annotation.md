@@ -13,7 +13,7 @@ title: Validation Annotation
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
 
-#####Usage#####
+##### Usage
 
 
 
@@ -22,7 +22,7 @@ title: Validation Annotation
 </p>
 {% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -44,7 +44,7 @@ title: Validation Annotation
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 **An Annotated Interface**
 

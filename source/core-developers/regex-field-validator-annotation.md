@@ -12,7 +12,7 @@ title: RegexFieldValidator Annotation
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RegexFieldValidator {% endcomment %}
 
-#####Usage#####
+##### Usage
 
 
 
@@ -21,7 +21,7 @@ title: RegexFieldValidator Annotation
 </p>
 {% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RegexFieldValidator {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -79,7 +79,7 @@ title: RegexFieldValidator Annotation
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RegexFieldValidator {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 

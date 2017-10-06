@@ -11,7 +11,7 @@ title: Validations Annotation
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
 
-#####Usage#####
+##### Usage
 
 
 
@@ -20,7 +20,7 @@ title: Validations Annotation
 </p>
 {% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
 
-#####Parameters#####
+##### Parameters
 
 
 
@@ -103,7 +103,7 @@ title: Validations Annotation
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
 
-#####Examples#####
+##### Examples
 
 
 
@@ -145,7 +145,7 @@ title: Validations Annotation
 
 {% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
 
-#####Different validations per method#####
+##### Different validations per method
 
 
 Different validations per method is NOT supported for client\-side validation\!
