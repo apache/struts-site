@@ -64,4 +64,35 @@ __Step 3__
 
 Create the validator\.xml\.
 
-{% snippet id=visitorValidatorsExample|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/VisitorValidatorsExampleAction-submitVisitorValidatorsExamples-validation.xml %}
+{% comment %}start snippet id=visitorValidatorsExample|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/VisitorValidatorsExampleAction-submitVisitorValidatorsExamples-validation.xml {% endcomment %}
+
+
+```xml
+
+
+
+<validators>
+
+	<field name="user">
+
+		<field-validator type="visitor">
+
+			<param name="context">userContext</param>
+
+			<param name="appendPrefix">true</param>
+
+			<message>User:</message>
+
+		</field-validator>
+
+	</field>
+
+</validators>
+
+
+
+
+```
+
+
+{% comment %}end snippet id=visitorValidatorsExample|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/VisitorValidatorsExampleAction-submitVisitorValidatorsExamples-validation.xml {% endcomment %}

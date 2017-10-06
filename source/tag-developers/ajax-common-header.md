@@ -7532,7 +7532,10 @@ __Description__
 
 
 
-{% snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.Div %}
+{% comment %}start snippet id=javadoc|javadoc=true|url=https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/org/apache/struts2/components/Div.java;h=5967686a4283c45d90558a0831e22122df47f35e;hb=974e051bc5e2541261c44cd6fc27717dfcb3267b {% endcomment %}
+<p> Creates an HTML \<div\>
+</p>
+{% comment %}end snippet id=javadoc|javadoc=true|url=https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=core/src/main/java/org/apache/struts2/components/Div.java;h=5967686a4283c45d90558a0831e22122df47f35e;hb=974e051bc5e2541261c44cd6fc27717dfcb3267b {% endcomment %}
 
 
 
