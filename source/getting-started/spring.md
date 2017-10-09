@@ -2,7 +2,7 @@
 layout: getting-started
 title: Spring
 ---
-## Spring and Struts 2
+# Spring and Struts 2
 
 The example code for this tutorial, spring_struts, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)
 

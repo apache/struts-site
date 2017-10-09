@@ -35,7 +35,7 @@ which implements `ognl.enhance.OgnlExpressionCompiler`. Although you can in theo
 is not recommended for more robust integration points - such as being incorporated within a web framework. The majority 
 of examples here are going to be based around the strategy that Tapestry has used to integrate these new features.
 
-### Tapestry OGNL Integration
+## Tapestry OGNL Integration
 
 There are only small handful of classes/services involved in the Tapestry implementation of these features, so hopefully 
 using them as a reference will help anyone trying to get started with this:
@@ -57,7 +57,7 @@ _ [org.apache.tapestry.services.impl.ExpressionEvaluatorImpl](http://svn.apache.
   source code generation methods you will need to implement for your `PropertyAccessor` classes if you want to compile 
   expressions.
 
-### ExpressionEvaluator
+## ExpressionEvaluator
 
 If you look at the `ExpressionEvaluator` source you'll see a block of initialization where the `HiveMindExpressionCompiler`
 and `OgnlContext` pools are setup:
@@ -90,7 +90,7 @@ after a while. How often/when to call this will largely depend on how your frame
 calling it too often will have a big impact on runtime performance of your app if you are doing normal application 
 development sort of things with it.
 
-### HiveMindExpressionCompiler
+## HiveMindExpressionCompiler
 
 Perhaps the most important class to examine is Tapestrys implementation of `OgnlExpressionCompiler`. This class still 
 extends the default `ExpressionCompiler` provided by OGNL - but does a few more things that can't be made generic enough 
@@ -138,7 +138,7 @@ public Object get(OgnlContext context, Object root)
 The `$1, $2` references are Javassist constructs which allow you to specify the first and second argument passed in 
 to the calling method.
 
-### ExpressionBinding
+## ExpressionBinding
 
 As stated previously, this class represents a single OGNL expression in Tapestry when used directly in html templates 
 - such as:
@@ -152,7 +152,7 @@ the local members `_writeFailed, _accessor`.  Looking through the source of this
 documentation available - but keep in mind that in many instances this object also has to deal with the possibility 
 that a write statement may never happen.
 
-### BeanProviderPropertyAccessor / Custom PropertyAccessor implementations
+## BeanProviderPropertyAccessor / Custom PropertyAccessor implementations
 
 Besides the `OgnlExpressionCompiler` logic this will probably be the second most impactual area people will have to deal 
 with in terms of having to write new code.  In this specific instance there are three new `PropertyAccessor` methods 
@@ -300,7 +300,7 @@ integration efforts.
 
 ## Known Issues / Limitations
 
-### Compiler Errors
+## Compiler Errors
 
 Despite the substantially large number of unit tests set up and thorough usage of many different 
 types of expressions Tapestry users are still currently running in to fatal/non caught runtime errors when some of their 
@@ -311,7 +311,7 @@ within a day or two (or sooner) when I can and immediately deploy the fixes to t
 This doesn't mean that the vast majority of expressions won't compile fine, but it is something to keep in mind when 
 you decide how to integrate the compiler logic in to your own framework.
 
-### Compile vs. normal expression evaluation
+## Compile vs. normal expression evaluation
 
 The current Tapestry implementation compiles OGNL expressions in both  development AND production modes.  This has 
 the undesirable side effect of causing needless multiple method invocations on objects when compiling as well as the general 
@@ -331,7 +331,7 @@ has gone way down since this all started but they do still trickle in which is e
 reliable.  I'm sure the plethora of Struts/WebWork/etc users available should be enough to iron out any remaining issues 
 found but it's something to keep in mind.
 
-### Snapshot Repository
+## Snapshot Repository
 
 The current maven2 location of the OGNL development/snapshot release are all made to [http://opencomponentry.com/repository/m2-snapshot-repo/](http://opencomponentry.com/repository/m2-snapshot-repo/), 
 while releases go out to ibiblio as per normal.  If someone has a better place for these release to be made please feel free to contact jesse ( jkuhnert at gmail.com) with accessor information / instructions.

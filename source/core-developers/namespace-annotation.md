@@ -5,7 +5,7 @@ title: Namespace Annotation
 
 # Namespace Annotation
 
-#### Namespace Annotation
+## Namespace Annotation
 
 The 
 
@@ -19,11 +19,11 @@ Action
 ~~~~~~~
  class rather than based on [Zero Configuration](zero-configuration.html)'s conventions\.
 
-##### Usage
+### Usage
 
 This annotation is placed at the class level\.
 
-##### Parameters
+### Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|

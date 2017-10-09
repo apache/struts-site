@@ -2,7 +2,7 @@
 layout: getting-started
 title: Unit testing
 ---
-## Unit Testing
+# Unit Testing
 
 The example code for this tutorial, unit_testing, is available at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)
 

@@ -21,7 +21,7 @@ true
 
 (information) Some themes do not support client\-side validation\.
 
-##### Step 1
+## Step 1
 
 Create the form\.
 
@@ -69,7 +69,7 @@ Create the form\.
 ~~~~~~~
  tag is used to link a style sheet\.
 
-##### Step 2
+## Step 2
 
 Create the Action class\.
 

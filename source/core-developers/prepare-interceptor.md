@@ -54,7 +54,7 @@ title: Prepare Interceptor
 </p>
 {% comment %}end snippet id=javadocPrepareInterceptor|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrefixMethodInvocationUtil {% endcomment %}
 
-##### Parameters
+## Parameters
 
 
 
@@ -70,7 +70,7 @@ title: Prepare Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor {% endcomment %}
 
-##### Extending the Interceptor
+## Extending the Interceptor
 
 
 
@@ -81,7 +81,7 @@ title: Prepare Interceptor
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.PrepareInterceptor {% endcomment %}
 
-##### Examples
+## Examples
 
 
 

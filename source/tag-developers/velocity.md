@@ -18,7 +18,7 @@ For more information on Velocity itself, please visit the [Velocity website](htt
 
 > 
 
-#### Getting Started
+## Getting Started
 
 Getting started with Velocity is as simple as ensuring all the dependencies are included in your project's classpath. Other than that, _struts-default.xml_  already configures the _Velocity Result_ .
 
@@ -60,7 +60,7 @@ name
 
 There are few more details of interest, such as how templates are loaded and variables are resolved.
 
-#### Template Loading
+## Template Loading
 
 The framework looks for Velocity templates in two locations (in this order):
 
@@ -76,7 +76,7 @@ The ordering is designed so that a default set of templates can be placed in a J
 
 | 
 
-#### Variable Resolution
+## Variable Resolution
 
 In Velocity, there are three sources for variables, searched in a specific order.
 
@@ -115,7 +115,7 @@ The Stuts2-Velocity integration layer provides several implicit variables.
 | application | The ServletContext |
 | base | The request's context path |
 
-#### Configuring Velocity
+## Configuring Velocity
 
 You can configure Velocity by placing configuration items in _velocity.properties_ .
 

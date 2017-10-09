@@ -12,7 +12,7 @@ title: Annotations
 In many places, applications can use Java 5 annotations as an alternative to XML and Java properties configuration. 
 This page serves as a reference for all annotations across the framework.
 
-#### Action Annotations
+## Action Annotations
 
 Since 2.1, these annotations are provided by the _Convention Plugin_. Codebehind and Zero Config plugins are 
 deprecated from 2.1 on.
@@ -35,13 +35,13 @@ classpath scanning to allow the use of Action annotations.
 |_ExceptionMappings_ |Group of `@ExceptionMapping` annotations|
 |_ExceptionMapping_ |Defines an exception mapping|
 
-#### Workflow Annotations
+## Workflow Annotations
 
 |Annotation|Description|
 |----------|-----------|
 |[InputConfig Annotation](input-config-annotation.html)|Defines what method to execute, or result to be returned if there are validation errors|
 
-#### Interceptor Annotations
+## Interceptor Annotations
 
 To use these annotations, you have to specify the [AnnotationWorkflowInterceptor](annotation-workflow-interceptor.html) to your interceptor stack.
 
@@ -51,7 +51,7 @@ To use these annotations, you have to specify the [AnnotationWorkflowInterceptor
 |[Before Annotation](before-annotation.html)|Marks a action method that needs to be executed before the main action method.|
 |[BeforeResult Annotation](before-result-annotation.html)|Marks a action method that needs to be executed before the result.|
 
-#### Validation Annotations
+## Validation Annotations
 
 To use annotation-based validation, annotate the class or interface with [Validation Annotation](validation-annotation.html).
 
@@ -74,11 +74,11 @@ To use annotation-based validation, annotate the class or interface with [Valida
 |[VisitorFieldValidator Annotation](visitor-field-validator-annotation.html)|Invokes the validation for a property's object type.|
 |[CustomValidator Annotation](custom-validator-annotation.html)|Use this annotation for your custom validator types.|
 
-##### Resources
+### Resources
 
 - [Validation using Annotations](http://arsenalist.com/2007/05/10/struts-2-validation-using-annotations/)^[http://arsenalist.com/2007/05/10/struts-2-validation-using-annotations/] (arsenalist)
 
-#### Type Conversion Annotations
+## Type Conversion Annotations
 
 By default, type conversion for Maps and Collections using generics is directly supported.
 
@@ -97,7 +97,7 @@ To use annotation-based type conversion, annotate the class or interface with th
 |[KeyProperty Annotation](key-property-annotation.html)|For Generic types: Specify the key property name value.|
 |[TypeConversion Annotation](type-conversion-annotation.html)|Used for class and application wide conversion rules.|
 
-#### Tiles Annotations
+## Tiles Annotations
 
 The _Tiles Plugin_  provides it's own set of Annotations. They can be used to keep `tiles.xml` short. Instead tiles 
 definitions can be created by annotating actions.

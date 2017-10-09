@@ -2,7 +2,7 @@
 layout: getting-started
 title: Using tags
 ---
-## Using Tags
+# Using Tags
 
 This tutorial assumes you've completed the [Hello World](hello-world-using-struts2.html) tutorial and have a working helloworld project. The example code for this tutorial, using_tags, is available for checkout from the Struts 2 GitHub repository at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples). The example projects use Maven to manage the artifact dependencies and to build the .war files.
 
@@ -13,7 +13,7 @@ Web applications differ from conventional websites in that web applications can 
 To use the Struts 2 tags on the view page, you must include a tag library directive. Typically, the taglib directive is `<%@ taglib prefix="s" uri="/struts-tags" %\>`. So the prefix for all the Struts 2 tags will be "s". 
 If you want to actually read the Struts 2 tag TLD file, you'll find it in the `META-INF folder of the Struts 2 core jar.
 
-### Struts 2 url Tag
+## Struts 2 url Tag
 
 One use of the Struts 2 Tags is to create links to other web resources, especially to other resources in the local application.
 
@@ -79,7 +79,7 @@ Examine the anchor tag above. Notice the value of the href attribute is `${hello
 
 In the next tutorial we'll cover how Struts can access the query string parameter value.
 
-### Struts 2 Form Tag
+## Struts 2 Form Tag
 
 Most applications will use several data entry forms. The Struts 2 tags make creating input forms easy. Consult the [Form Tags Reference](https://struts.apache.org/docs/form-tags.html) for all the details about the Struts 2 form tags.
 
@@ -130,7 +130,7 @@ Note how Struts 2 created a table inside the form to position the form elements.
 
 In the next tutorial we'll cover how to use Struts 2 to process this form submission.
 
-### Struts 2 property tag
+## Struts 2 property tag
 
 In the [Hello World](hello-world-using-struts2.html) tutorial's example application on JSP `HelloWorld.jsp` was this code:
 

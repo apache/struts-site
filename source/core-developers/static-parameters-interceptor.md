@@ -18,7 +18,7 @@ title: Static Parameters Interceptor
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.StaticParametersInterceptor {% endcomment %}
 
-##### Parameters
+## Parameters
 
 
 
@@ -33,7 +33,7 @@ title: Static Parameters Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.StaticParametersInterceptor {% endcomment %}
 
-##### Extending the Interceptor
+## Extending the Interceptor
 
 
 
@@ -44,7 +44,7 @@ title: Static Parameters Interceptor
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.StaticParametersInterceptor {% endcomment %}
 
-##### Examples
+## Examples
 
 
 

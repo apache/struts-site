@@ -5,7 +5,7 @@ title: email validator
 
 # email validator
 
-### Description
+## Description
 
 EmailValidator checks that a given String field, if not empty, is a valid email address.
 
@@ -17,7 +17,7 @@ The regular expression used to validate that the string is an email address is:
 
 You can also specify `expression`, `caseSensitive` and `trim` params as a OGNL expression, see the example below.
 
-### Parameters
+## Parameters
 
 - `fieldName` - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.
 
@@ -26,7 +26,7 @@ Check also documentation of the `RegexpValidator` for more details - the EmailVa
 > Warning
 > Do not use `${regexExpression}`, `${caseSensitiveExpression}` and `${trimExpression}` as an expression as this will turn into infinitive loop!
 
-### Examples
+## Examples
 
 ```
 <!-- Plain Validator Syntax -->

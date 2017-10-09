@@ -5,7 +5,7 @@ title: BeforeResult Annotation
 
 # BeforeResult Annotation
 
-#### BeforeResult Annotation
+## BeforeResult Annotation
 
 
 
@@ -14,7 +14,7 @@ title: BeforeResult Annotation
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.BeforeResult {% endcomment %}
 
-##### Usage
+### Usage
 
 
 
@@ -24,7 +24,7 @@ title: BeforeResult Annotation
 </p>
 {% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.BeforeResult {% endcomment %}
 
-##### Parameters
+### Parameters
 
 
 
@@ -46,7 +46,7 @@ title: BeforeResult Annotation
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.annotations.BeforeResult {% endcomment %}
 
-##### Examples
+### Examples
 
 
 

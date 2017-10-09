@@ -5,11 +5,11 @@ title: int validator
 
 # int validator
 
-### Description
+## Description
 
 Field Validator that checks if the integer specified is within a certain range.
 
-### Parameters
+## Parameters
 
 - `fieldName` - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required
 - `min` - the minimum value (if none is specified, it will not be checked)
@@ -23,7 +23,7 @@ You can either use the `min` / `max` value or `minExpression` / `maxExpression` 
 > Warning
 > Do not use `${minExpression}` and `${maxExpression}` as an expression as this will turn into infinitive loop!
 
-### Examples
+## Examples
 
 ```
 <validators>

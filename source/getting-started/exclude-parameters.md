@@ -2,7 +2,7 @@
 layout: getting-started
 title: Exclude parameters
 ---
-## Exclude Parameters
+# Exclude Parameters
 
 The example code for this tutorial, exclude_parameters, is available at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
 

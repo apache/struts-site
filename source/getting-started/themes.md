@@ -2,7 +2,7 @@
 layout: getting-started
 title: Themes
 ---
-## Themes
+# Themes
 
 The example code for this tutorial, themes, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)
 

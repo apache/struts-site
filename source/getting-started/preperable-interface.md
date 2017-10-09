@@ -2,7 +2,7 @@
 layout: getting-started
 title: Preperable Interface
 ---
-## Preparable Interface
+# Preparable Interface
 
 The example code for this tutorial, preparable_interface, is available at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
 

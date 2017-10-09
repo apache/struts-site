@@ -5,11 +5,11 @@ title: stringlength validator
 
 # stringlength validator
 
-### Description
+## Description
 
 StringLengthFieldValidator checks that a String field is of a certain length. If the `minLength` parameter is specified, it will make sure that the String has at least that many characters. If the `maxLength` parameter is specified, it will make sure that the String has at most that many characters. The `trim` parameter determines whether it will `String#trim()` the String before performing the length check. If unspecified, the String will be trimmed.
 
-### Parameters
+## Parameters
 
 - `fieldName` - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.
 - `maxLength` - Integer. The max length of the field value. Default ignore.
@@ -22,7 +22,7 @@ StringLengthFieldValidator checks that a String field is of a certain length. If
 > Warning
 > Do not use `${minLengthExpression}`, `${maxLengthExpression}` and `${trimExpression}` as an expression as this will turn into infinitive loop!
 
-### Examples
+## Examples
 
 ```
 <validators>

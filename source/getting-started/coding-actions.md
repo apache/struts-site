@@ -2,11 +2,11 @@
 layout: getting-started
 title: Coding actions
 ---
-## Coding actions
+# Coding actions
 
 This tutorial assumes you've completed the [Using Struts 2 Tags](using-tags.html) tutorial and have a working using-tags project. The example code for this tutorial, coding-actions, is available for checkout from the Struts 2 GitHub repository: [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
 
-### Introduction
+## Introduction
 
 Coding a Struts 2 Action involves several parts:
 
@@ -28,7 +28,7 @@ The Action mapping above also specified that if the `execute` method of class `H
 
 This tutorial will introduce you to the basics of writing the controller logic in the Action class.
 
-### Struts 2 Action Classes
+## Struts 2 Action Classes
 
 Action classes act as the controller in the MVC pattern. Action classes respond to a user action, execute business logic (or call upon other classes to do that), and then return a result that tells Struts what view to render.
 
@@ -51,7 +51,7 @@ public String execute() throws Exception {
 ```
 > Note that method execute declares it throws an Exception. We'll cover in a later tutorial how to configure Struts to handle any Exceptions thrown from the Action classes methods.
 
-### Processing Form Input In The Action Class
+## Processing Form Input In The Action Class
 
 One of the most common responsibilities of the Action class is to process user input on a form and then make the result of the processing available to the view page. To illustrate this responsibility, let's say that on our view page, `HelloWorld.jsp`, we want to display a personal hello, such as "Hello Struts User Bruce."
 
@@ -110,7 +110,7 @@ Since the query string parameter is `userName`, Struts passed the value of that 
 
 On the view page, `HelloWorld.jsp`, you can also access the `userName` value by using the Struts 2 property tag (see tutorial [Using Struts 2 Tags](using-tags.html)). Try showing just the `userName` value on the view page.
 
-### Summary
+## Summary
 
 This tutorial introduced you to how to code the Action class so it can process user input on a form or values in a query string parameter. If the form had numerous fields, it would be cumbersome to have a set method that matches up with each form field. So our next tutorial will cover how to integrate a model class, form fields in the view and form processing in the Action class.
 

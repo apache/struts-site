@@ -2,13 +2,13 @@
 layout: getting-started
 title: Processing forms
 ---
-## Processing Forms
+# Processing Forms
 
 This tutorial assumes you've completed the [Coding Struts 2 Actions](coding-actions.html) tutorial and have a working 
 coding-actions project. The example code for this tutorial, form-processing, is available for checkout from 
 the Struts 2 GitHub subversion repository: [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
 
-### Introduction
+## Introduction
 
 In this tutorial we'll explore using Struts 2 to do more involved processing of a form submission. We'll cover how to 
 use a Java model class to store the form input and how to create the Struts 2 form to match up with that model class.
@@ -20,7 +20,7 @@ The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excel
 having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find 
 an answer to your problem, post a question on the mailing list.
 
-### Forms and a Java model class
+## Forms and a Java model class
 
 For this tutorial let's say we need to provide a form that a user may submit to register for a prize drawing. Our 
 business rules state the user must provide his/her first name, last name, email address, and age.
@@ -82,7 +82,7 @@ is of type integer. We've defined a public `toString` method that returns a Stri
 Since we haven't specified a constructor, Java will provide a default constructor that will set all instance fields to 
 their null values.
 
-### Form structure
+## Form structure
 
 To collect the above information we'll use a Struts 2 form. When creating this form the key concept we need to employ 
 is to tie each form field to a specific instance field of an object of type Person. Let's look over the form first and 
@@ -130,7 +130,7 @@ Note that we have a Struts 2 textfield for each instance field of the class Pers
 attribute is of type integer. All form field input values are Strings. Struts 2 will automatically convert the String 
 value ("25") the user entered for the age form field to 25 when calling the `setAge` method of object `personBean`.
 
-### Creating the Action class to handle the form submission
+## Creating the Action class to handle the form submission
 
 When the user clicks on the submit button of the above form, the action "register" and the form data will be sent to 
 the Struts 2 framework. We need an Action class to process this form. If you recall from the tutorial 
@@ -192,7 +192,7 @@ for its instance fields that are equal to the values the user entered into the c
 By using a Java model class to encapsulate the data provided by the form we don't have to have a separate attribute 
 (with public set/get methods) in the Action class (Register) for each form field.
 
-### Adding the view for the result
+## Adding the view for the result
 
 When `SUCCESS` is returned by the `execute` method we want to display a simple thank you page that shows the user's 
 registration. Add the `thankyou.jsp` below to `src/main/webapp`.
@@ -220,7 +220,7 @@ registration. Add the `thankyou.jsp` below to `src/main/webapp`.
 
 If you don't recall how the Struts 2 property and url tags work consult the [Using Struts 2 Tags](using-tags.html) tutorial.
 
-### Create action mapping in struts.xml
+## Create action mapping in struts.xml
 
 To specify the relationship between the form submission page, the Struts 2 Action class, and the success view page 
 we need to add an action node to `struts.xml`. Add this action node to `struts.xml` (`src/main/resources`) after 
@@ -241,7 +241,7 @@ Note that we don't need to tell Struts 2 anything about processing the form. The
 to the `personBean` object will happen automatically provided we've followed the convention of naming our form fields 
 to match personBean.attributeName (e.g. `personBean.lastName`).
 
-### Create a link to register.jsp
+## Create a link to register.jsp
 
 So that the user can find the registration page, add this link to index.jsp
 

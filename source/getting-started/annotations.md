@@ -2,7 +2,7 @@
 layout: getting-started
 title: Annotations
 ---
-## Annotations
+# Annotations
 
 The example code for this tutorial, annotations, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)
 
