@@ -3,7 +3,7 @@ layout: core-developers
 title: Pure JavaScript Client Side Validation
 ---
 
-# Pure JavaScript Client Side Validation#### {#PAGE_14262}
+# Pure JavaScript Client Side Validation
 
 Pure JavaScript client side validation is the simplest but least feature\-rich type of [Client Side Validation](client-side-validation.html). 
 This type of validation uses 100% client\-side JavaScript code to try to validate the values entered by the user. 
