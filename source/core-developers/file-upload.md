@@ -1,3 +1,8 @@
+---
+layout: core-developers
+title: File Upload
+---
+
 # File Upload
 
 The Struts 2 framework provides built\-in support for processing file uploads that conform to [RFC 1867](http://www\.ietf\.org/rfc/rfc1867\.txt)^[http://www\.ietf\.org/rfc/rfc1867\.txt], "Form\-based File Upload in HTML"\. When correctly configured the framework will pass uploaded file(s) into your Action class\. Support for individual and multiple file uploads are provided\. When a file is uploaded it will typically be stored in a temporary directory\. Uploaded files should be processed or moved by your Action class to ensure the data is not lost\. Be aware that servers may have a security policy in place that prohibits you from writing to directories other than the temporary directory and the directories that belong to your web application\.
