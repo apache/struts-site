@@ -11,20 +11,28 @@ title: Submitting patches
 
 ## Committers
 
-Struts uses Git so you must install git client locally and then you can clone Struts repository:
+Struts uses Git so you must install a git client locally and then you can clone Struts repository:
 
-    git clone https://git-wip-us.apache.org/repos/asf/struts.git    
+either using Apache GitBox
+
+    git clone https://gitbox.apache.org/repos/asf/struts.git    
+    
+or GitHub
+    
+    git glone https://github.com/apache/struts.git
 
 and done!
 
-Please remember that `master` branch should be used only for small fast commits, if you are working on a large
-change it is better to do it on dedicated branch or even via GitHub (which is preferred).
+Please remember that the `master` branch should be used only for small fast commits, if you are working on a large
+change it is better to do it on a dedicated branch via GitHub. Please remember that pushing other branches to the repo
+will replicate them to all the clones, that's why using GitHub is a preferred way.
 
 ## Non-committers 
 
-If you aren't a committer you must use this link below or mirror at GitHub
+If you aren't a committer you can still the repo from Apache Gitbox but you won't be able push any changes to it.
+That's why it is better to use GitHub
 
-    git clone git://git.apache.org/struts.git struts-copy
+    git clone https://gitbox.apache.org/repos/asf/struts.git
 
 ## Security patches
 
@@ -40,25 +48,26 @@ We don't want to inform hackers before we can protect our users :-)
 ## Contributing with GitHub
 
 Using GitHub mirror is the simplest way to contribute to the Apache Struts if you are not a member
-of Struts Committers group.
+of the Struts Committers group.
 
 First you must have an account created at GitHub to be able perform the next step. If you don't,
 go ahead and create one just right now! Please remember to setup
-[SSH keys](https://help.github.com/articles/generating-ssh-keys) and test them!
+[SSH keys](https://help.github.com/articles/generating-ssh-keys) and test them! You don't have to use SSH Keys 
+and base only on user/password authentication.
 
 When ready go to [https://github.com/apache/struts](https://github.com/apache/struts) and click `Fork` button
 in top right corner. This will fork the Apache Struts' repository and will create your private (but public) repository
 with the source code.
 
-Next step is to clone your the original repo locally
+Next step is to clone the original repo locally
 
-    git git@github.com:apache/struts.git
+    git glone https://github.com/apache/struts.git
     
 This will be an `origin`, you cannot push changes to the `origin` but don't worry, you will use your fork.
 
 Now is time to add your fork as a remote
 
-    git remote add fork git@github.com:myusername/struts.git 
+    git remote add fork https://github.com/my-username/struts.git 
 
 Right now you should have two remotes defined for the repo, `origin` and `fork`, use below command to confirm that
 
@@ -85,7 +94,7 @@ If you still need to change something, please remember to commit and push change
 
     git push
     
-as `my-branch` was already connected with remote branch.
+as `my-branch` was already connected with the remote branch.
 
 The final step is to open a Pull Request (short: PR) against the original Apache Struts repo. Go to the 
 [Apache Struts mirror](https://github.com/apache/struts), then to [Pull request](https://github.com/apache/struts/pulls)
@@ -96,7 +105,7 @@ your fork and branch to compare the differences with the Apache Struts' `master`
 
 Finally hit `Create Pull Request` button and you are done!
 
-After your PR got accepted and merged you must clean up your local repo, please witch branch to `master`
+After your PR got accepted and merged you must clean up your local repo, please switch your current branch to `master`
 
     git checkout master
     
@@ -113,41 +122,11 @@ and you are ready to start working on another feature/issue.
 
 ### How to merge Pull Requests
 
-This section is for committers only who want to merge incoming Pull Requests. Please remember that the repo at GitHub
-is read-only, we (committers) have limited rights to it.
+The Apache Struts is using the Apache [Gitbox](https://gitbox.apache.org/) - a bidirectional service to mirror repos
+between Apache and GitHub.
 
-To merge PR please add GitHub as a new remote to your local copy
-
-    git remote add github git@github.com:apache/struts.git
-
-then you can fetch the PR locally and put it under a branch
-
-    git fetch github pull/28/head:some-branch    
-
-where
-
- - `github` is remote name
- - `28` is Pull Request id (https://github.com/apache/struts/pull/28)
- - `some-branch` local branch name, it can be the same as used to create the PR
- 
-now you can switch to this branch and test, review it
- 
-    git checkout some-branch
-
-after reviewing, switch back to the `master` branch and merge
-
-    git checkout master
-    git merge some-branch -m "WW-XXXX Merges #28 which resolves ..."
-
-using `-m` you can define your own merge message, it's a good way to link merge commit with ticket in JIRA
-
-    git branch -d some-branch
-
-remove the branch as it isn't needed anymore
-
-    git push
-
-after pushing changes, `asfbot` will close the PR at GitHub. 
+First of all you must have an account on GitHub and [link it](https://gitbox.apache.org/setup/) to your Apache account.
+After that you can directly merge PRs using GitHub's UI.
 
 ## Further reading
 
@@ -174,6 +153,10 @@ you can get a bounty :-) You will find more details on
   - keep all information in secret, do not publish any data about the vulnerability nor Proof-of-Concept, etc.
 - we will review the patch and if it's a real great thing then we will merge it into our code base
 - just wait on official release of the Apache Struts and now you can request the reward from Google :-)
+
+Please be aware that the committee is focused on awarding patches that are more significant than individual bug fixes.
+It means that the contribution should have _demonstrable_, _significant_, and _proactive_ impact on security.
+{:.alert .alert-success}
 
 **NOTE**
 
