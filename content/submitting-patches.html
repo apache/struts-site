@@ -143,22 +143,32 @@
 
 <h2 id="committers">Committers</h2>
 
-<p>Struts uses Git so you must install git client locally and then you can clone Struts repository:</p>
+<p>Struts uses Git so you must install a git client locally and then you can clone Struts repository:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://git-wip-us.apache.org/repos/asf/struts.git    
+<p>either using Apache GitBox</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://gitbox.apache.org/repos/asf/struts.git    
+</code></pre>
+</div>
+
+<p>or GitHub</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git glone https://github.com/apache/struts.git
 </code></pre>
 </div>
 
 <p>and done!</p>
 
-<p>Please remember that <code class="highlighter-rouge">master</code> branch should be used only for small fast commits, if you are working on a large
-change it is better to do it on dedicated branch or even via GitHub (which is preferred).</p>
+<p>Please remember that the <code class="highlighter-rouge">master</code> branch should be used only for small fast commits, if you are working on a large
+change it is better to do it on a dedicated branch via GitHub. Please remember that pushing other branches to the repo
+will replicate them to all the clones, that’s why using GitHub is a preferred way.</p>
 
 <h2 id="non-committers">Non-committers</h2>
 
-<p>If you aren’t a committer you must use this link below or mirror at GitHub</p>
+<p>If you aren’t a committer you can still the repo from Apache Gitbox but you won’t be able push any changes to it.
+That’s why it is better to use GitHub</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git clone git://git.apache.org/struts.git struts-copy
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://gitbox.apache.org/repos/asf/struts.git
 </code></pre>
 </div>
 
@@ -176,19 +186,20 @@ We don’t want to inform hackers before we can protect our users :-)</p>
 <h2 id="contributing-with-github">Contributing with GitHub</h2>
 
 <p>Using GitHub mirror is the simplest way to contribute to the Apache Struts if you are not a member
-of Struts Committers group.</p>
+of the Struts Committers group.</p>
 
 <p>First you must have an account created at GitHub to be able perform the next step. If you don’t,
 go ahead and create one just right now! Please remember to setup
-<a href="https://help.github.com/articles/generating-ssh-keys">SSH keys</a> and test them!</p>
+<a href="https://help.github.com/articles/generating-ssh-keys">SSH keys</a> and test them! You don’t have to use SSH Keys 
+and base only on user/password authentication.</p>
 
 <p>When ready go to <a href="https://github.com/apache/struts">https://github.com/apache/struts</a> and click <code class="highlighter-rouge">Fork</code> button
 in top right corner. This will fork the Apache Struts’ repository and will create your private (but public) repository
 with the source code.</p>
 
-<p>Next step is to clone your the original repo locally</p>
+<p>Next step is to clone the original repo locally</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git git@github.com:apache/struts.git
+<div class="highlighter-rouge"><pre class="highlight"><code>git glone https://github.com/apache/struts.git
 </code></pre>
 </div>
 
@@ -196,7 +207,7 @@ with the source code.</p>
 
 <p>Now is time to add your fork as a remote</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git remote add fork git@github.com:myusername/struts.git 
+<div class="highlighter-rouge"><pre class="highlight"><code>git remote add fork https://github.com/my-username/struts.git 
 </code></pre>
 </div>
 
@@ -237,7 +248,7 @@ git pull
 </code></pre>
 </div>
 
-<p>as <code class="highlighter-rouge">my-branch</code> was already connected with remote branch.</p>
+<p>as <code class="highlighter-rouge">my-branch</code> was already connected with the remote branch.</p>
 
 <p>The final step is to open a Pull Request (short: PR) against the original Apache Struts repo. Go to the 
 <a href="https://github.com/apache/struts">Apache Struts mirror</a>, then to <a href="https://github.com/apache/struts/pulls">Pull request</a>
@@ -248,7 +259,7 @@ your fork and branch to compare the differences with the Apache Struts’ <code 
 
 <p>Finally hit <code class="highlighter-rouge">Create Pull Request</code> button and you are done!</p>
 
-<p>After your PR got accepted and merged you must clean up your local repo, please witch branch to <code class="highlighter-rouge">master</code></p>
+<p>After your PR got accepted and merged you must clean up your local repo, please switch your current branch to <code class="highlighter-rouge">master</code></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>git checkout master
 </code></pre>
@@ -271,55 +282,11 @@ git pull
 
 <h3 id="how-to-merge-pull-requests">How to merge Pull Requests</h3>
 
-<p>This section is for committers only who want to merge incoming Pull Requests. Please remember that the repo at GitHub
-is read-only, we (committers) have limited rights to it.</p>
+<p>The Apache Struts is using the Apache <a href="https://gitbox.apache.org/">Gitbox</a> - a bidirectional service to mirror repos
+between Apache and GitHub.</p>
 
-<p>To merge PR please add GitHub as a new remote to your local copy</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>git remote add github git@github.com:apache/struts.git
-</code></pre>
-</div>
-
-<p>then you can fetch the PR locally and put it under a branch</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>git fetch github pull/28/head:some-branch    
-</code></pre>
-</div>
-
-<p>where</p>
-
-<ul>
-  <li><code class="highlighter-rouge">github</code> is remote name</li>
-  <li><code class="highlighter-rouge">28</code> is Pull Request id (https://github.com/apache/struts/pull/28)</li>
-  <li><code class="highlighter-rouge">some-branch</code> local branch name, it can be the same as used to create the PR</li>
-</ul>
-
-<p>now you can switch to this branch and test, review it</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>git checkout some-branch
-</code></pre>
-</div>
-
-<p>after reviewing, switch back to the <code class="highlighter-rouge">master</code> branch and merge</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>git checkout master
-git merge some-branch -m "WW-XXXX Merges #28 which resolves ..."
-</code></pre>
-</div>
-
-<p>using <code class="highlighter-rouge">-m</code> you can define your own merge message, it’s a good way to link merge commit with ticket in JIRA</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>git branch -d some-branch
-</code></pre>
-</div>
-
-<p>remove the branch as it isn’t needed anymore</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>git push
-</code></pre>
-</div>
-
-<p>after pushing changes, <code class="highlighter-rouge">asfbot</code> will close the PR at GitHub.</p>
+<p>First of all you must have an account on GitHub and <a href="https://gitbox.apache.org/setup/">link it</a> to your Apache account.
+After that you can directly merge PRs using GitHub’s UI.</p>
 
 <h2 id="further-reading">Further reading</h2>
 
@@ -356,6 +323,9 @@ it can be a Pull Request on GitHub as well, but must reference the JIRA ticket.<
   <li>we will review the patch and if it’s a real great thing then we will merge it into our code base</li>
   <li>just wait on official release of the Apache Struts and now you can request the reward from Google :-)</li>
 </ul>
+
+<p class="alert alert-success">Please be aware that the committee is focused on awarding patches that are more significant than individual bug fixes.
+It means that the contribution should have <em>demonstrable</em>, <em>significant</em>, and <em>proactive</em> impact on security.</p>
 
 <p><strong>NOTE</strong></p>
 
