@@ -268,8 +268,6 @@ features to return [JSON](http://json.org), which usually fuels AJAX driven webp
 With that it is easily possible to use jQuery or [AngularJS](http://www.angularjs.org)
 as a front end layer and even completely discard JSP.
 
-<a class="anchor" name="view_frameworks"></a>
-
 As mentioned, aside from Java Server Pages, there are several other
 presentation technologies available to Struts:
 

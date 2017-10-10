@@ -29,8 +29,6 @@ You can use a web interface as well if you want to post a question [https://list
 
 You can read the [ASF Mail](http://mail-archives.apache.org/mod_mbox/struts-user) or the [Mark Mail](http://markmail.org/list/org.apache.struts.users)
 Archives if you are looking for older discussions. There are many other archives out there as well.
-{:.anchor name=archives}
-
 
 If you want to **discuss patches or contribute to Struts** you should subscribe to the [developers list](dev-mail.html).
 {:.alert .alert-success}
