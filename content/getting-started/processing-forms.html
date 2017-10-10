@@ -127,13 +127,13 @@
   <section class="col-md-12">
     <a href="index.html" title="back to Getting Started"><< back to Getting Started</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/getting-started/processing-forms.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h2 id="processing-forms">Processing Forms</h2>
+    <h1 id="processing-forms">Processing Forms</h1>
 
 <p>This tutorial assumes you’ve completed the <a href="coding-actions.html">Coding Struts 2 Actions</a> tutorial and have a working 
 coding-actions project. The example code for this tutorial, form-processing, is available for checkout from 
 the Struts 2 GitHub subversion repository: <a href="https://github.com/apache/struts-examples">https://github.com/apache/struts-examples</a>.</p>
 
-<h3 id="introduction">Introduction</h3>
+<h2 id="introduction">Introduction</h2>
 
 <p>In this tutorial we’ll explore using Struts 2 to do more involved processing of a form submission. We’ll cover how to 
 use a Java model class to store the form input and how to create the Struts 2 form to match up with that model class.</p>
@@ -145,7 +145,7 @@ can download this complete example from the github respository - <a href="https:
 having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find 
 an answer to your problem, post a question on the mailing list.</p>
 
-<h3 id="forms-and-a-java-model-class">Forms and a Java model class</h3>
+<h2 id="forms-and-a-java-model-class">Forms and a Java model class</h2>
 
 <p>For this tutorial let’s say we need to provide a form that a user may submit to register for a prize drawing. Our 
 business rules state the user must provide his/her first name, last name, email address, and age.</p>
@@ -207,7 +207,7 @@ is of type integer. We’ve defined a public <code class="highlighter-rouge">toS
 Since we haven’t specified a constructor, Java will provide a default constructor that will set all instance fields to 
 their null values.</p>
 
-<h3 id="form-structure">Form structure</h3>
+<h2 id="form-structure">Form structure</h2>
 
 <p>To collect the above information we’ll use a Struts 2 form. When creating this form the key concept we need to employ 
 is to tie each form field to a specific instance field of an object of type Person. Let’s look over the form first and 
@@ -254,7 +254,7 @@ the label “First name”, the personBean’s <code class="highlighter-rouge">f
 attribute is of type integer. All form field input values are Strings. Struts 2 will automatically convert the String 
 value (“25”) the user entered for the age form field to 25 when calling the <code class="highlighter-rouge">setAge</code> method of object <code class="highlighter-rouge">personBean</code>.</p>
 
-<h3 id="creating-the-action-class-to-handle-the-form-submission">Creating the Action class to handle the form submission</h3>
+<h2 id="creating-the-action-class-to-handle-the-form-submission">Creating the Action class to handle the form submission</h2>
 
 <p>When the user clicks on the submit button of the above form, the action “register” and the form data will be sent to 
 the Struts 2 framework. We need an Action class to process this form. If you recall from the tutorial 
@@ -316,7 +316,7 @@ for its instance fields that are equal to the values the user entered into the c
 <p>By using a Java model class to encapsulate the data provided by the form we don’t have to have a separate attribute 
 (with public set/get methods) in the Action class (Register) for each form field.</p>
 
-<h3 id="adding-the-view-for-the-result">Adding the view for the result</h3>
+<h2 id="adding-the-view-for-the-result">Adding the view for the result</h2>
 
 <p>When <code class="highlighter-rouge">SUCCESS</code> is returned by the <code class="highlighter-rouge">execute</code> method we want to display a simple thank you page that shows the user’s 
 registration. Add the <code class="highlighter-rouge">thankyou.jsp</code> below to <code class="highlighter-rouge">src/main/webapp</code>.</p>
@@ -343,7 +343,7 @@ registration. Add the <code class="highlighter-rouge">thankyou.jsp</code> below 
 
 <p>If you don’t recall how the Struts 2 property and url tags work consult the <a href="using-tags.html">Using Struts 2 Tags</a> tutorial.</p>
 
-<h3 id="create-action-mapping-in-strutsxml">Create action mapping in struts.xml</h3>
+<h2 id="create-action-mapping-in-strutsxml">Create action mapping in struts.xml</h2>
 
 <p>To specify the relationship between the form submission page, the Struts 2 Action class, and the success view page 
 we need to add an action node to <code class="highlighter-rouge">struts.xml</code>. Add this action node to <code class="highlighter-rouge">struts.xml</code> (<code class="highlighter-rouge">src/main/resources</code>) after 
@@ -364,7 +364,7 @@ If that method returns result “success” return to the browser the <code clas
 to the <code class="highlighter-rouge">personBean</code> object will happen automatically provided we’ve followed the convention of naming our form fields 
 to match personBean.attributeName (e.g. <code class="highlighter-rouge">personBean.lastName</code>).</p>
 
-<h3 id="create-a-link-to-registerjsp">Create a link to register.jsp</h3>
+<h2 id="create-a-link-to-registerjsp">Create a link to register.jsp</h2>
 
 <p>So that the user can find the registration page, add this link to index.jsp</p>
 
