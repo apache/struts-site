@@ -3,12 +3,12 @@ layout: core-developers
 title: File Upload
 ---
 
-# File Upload### {#PAGE_86602}
+# File Upload
 
 The Struts 2 framework provides built\-in support for processing file uploads that conform to [RFC 1867](http://www\.ietf\.org/rfc/rfc1867\.txt)^[http://www\.ietf\.org/rfc/rfc1867\.txt], "Form\-based File Upload in HTML"\. When correctly configured the framework will pass uploaded file(s) into your Action class\. Support for individual and multiple file uploads are provided\. When a file is uploaded it will typically be stored in a temporary directory\. Uploaded files should be processed or moved by your Action class to ensure the data is not lost\. Be aware that servers may have a security policy in place that prohibits you from writing to directories other than the temporary directory and the directories that belong to your web application\.
 
 
-##### Dependencies
+## Dependencies
 
 The Struts 2 framework leverages add\-on libraries to handle the parsing of uploaded files\. These libraries are not included in the Struts distribution, you must add them into your project\. The libraries needed are:
 
@@ -53,7 +53,7 @@ If you are using Maven then you can add these libraries as dependencies in your 
 
 ~~~~~~~
 
-##### Basic Usage
+## Basic Usage
 
 The 
 
@@ -146,7 +146,7 @@ The purpose of each one of these methods is described in the table below\. Notic
 |setXContentType(String contentType)|The mime type of the uploaded file|
 |setXFileName(String fileName)|The actual file name of the uploaded file (not the HTML name)|
 
-##### Uploading Multiple Files
+## Uploading Multiple Files
 
 As mentioned in the previous section one technique for uploading multiple files would be to simply have multiple form input elements of type file all with different names\. This would require a number of setter methods that was equal to 3 times the number of files being uploaded\. Another option is to use Arrays or java\.util\.Lists\. The following examples are taken from the Showcase example application that is part sample applications you can download at [http://struts\.apache\.org/download\.cgi](http://struts\.apache\.org/download\.cgi)\. For the Action mapping details see 
 
@@ -284,7 +284,7 @@ public class MultipleFileUploadUsingListAction extends ActionSupport {
 }
 ~~~~~~~
 
-##### Advanced Configuration
+## Advanced Configuration
 
 The Struts 2 
 

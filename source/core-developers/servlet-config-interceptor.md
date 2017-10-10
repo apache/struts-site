@@ -42,7 +42,7 @@ title: Servlet Config Interceptor
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.ServletConfigInterceptor {% endcomment %}
 
-##### Parameters
+## Parameters
 
 
 
@@ -57,7 +57,7 @@ title: Servlet Config Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.ServletConfigInterceptor {% endcomment %}
 
-##### Extending the Interceptor
+## Extending the Interceptor
 
 
 
@@ -68,7 +68,7 @@ title: Servlet Config Interceptor
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.ServletConfigInterceptor {% endcomment %}
 
-##### Examples
+## Examples
 
 
 

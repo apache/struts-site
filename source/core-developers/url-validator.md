@@ -5,17 +5,17 @@ title: url validator
 
 # url validator
 
-### Description
+## Description
 
 URLValidator checks that a given field is a String and a valid URL.
 
-### Parameters
+## Parameters
 
 - `fieldName` - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.
 - `urlRegexExpression` - The regex defined as expression used to validate url. If not defined 'urlRegex' will be used instead.
 - `urlRegex` - The regex used to validate url. If not defined default regex will be used.
 
-### Examples
+## Examples
 
 ```
 <validators>

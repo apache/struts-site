@@ -2,7 +2,7 @@
 layout: getting-started
 title: Exception handling
 ---
-## Exception Handling
+# Exception Handling
 
 The code for this tutorial, exception_handling, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
 

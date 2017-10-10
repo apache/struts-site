@@ -2,7 +2,7 @@
 layout: getting-started
 title: Form Validation
 ---
-## Form Validation
+# Form Validation
 
 This tutorial assumes you've completed the [Processing Forms](processing-forms.html) tutorial and have a working form_processing project. The example code for this tutorial, form_validation, is available for checkout from the Struts 2 GitHub repository: [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
 

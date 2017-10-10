@@ -5,15 +5,15 @@ title: expression validator
 
 # expression validator
 
-### Description
+## Description
 
 A Non-Field Level validator that validates based on regular expression supplied.
 
-### Parameters
+## Parameters
 
 - `expression` - the Ognl expression to be evaluated against the stack (Must evaluate to a Boolean).
 
-### Examples
+## Examples
 
 ```
 <validators>

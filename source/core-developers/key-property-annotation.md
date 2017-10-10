@@ -12,7 +12,7 @@ title: KeyProperty Annotation
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.KeyProperty {% endcomment %}
 
-##### Usage
+## Usage
 
 
 
@@ -22,7 +22,7 @@ title: KeyProperty Annotation
 </p>
 {% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.KeyProperty {% endcomment %}
 
-##### Parameters
+## Parameters
 
 
 
@@ -48,7 +48,7 @@ title: KeyProperty Annotation
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.KeyProperty {% endcomment %}
 
-##### Examples
+## Examples
 
 
 

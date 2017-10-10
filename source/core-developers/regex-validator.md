@@ -5,11 +5,11 @@ title: regex validator
 
 # regex validator
 
-### Description
+## Description
 
 Validates a string field using a regular expression.
 
-### Parameters
+## Parameters
 
 - `fieldName` - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.
 - `regexp` - The RegExp expression
@@ -24,7 +24,7 @@ You can mix normal params with expression aware params but thus was not tested.
 > Warning
 > Do not use `${regexExpression}`, `${caseSensitiveExpression}` and `${trimExpression}` as an expression as this will turn into infinitive loop! 
 
-### Examples
+## Examples
 
 ```
 <validators>

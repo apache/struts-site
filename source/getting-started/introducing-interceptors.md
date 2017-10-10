@@ -2,7 +2,7 @@
 layout: getting-started
 title: Introducing Interceptors
 ---
-## Introducing Interceptors
+# Introducing Interceptors
 
 The example code for this tutorial, interceptors, is available at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)
 

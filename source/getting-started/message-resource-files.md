@@ -2,7 +2,7 @@
 layout: getting-started
 title: Message Resource Files
 ---
-## Message Resource Files
+# Message Resource Files
 
 This tutorial assumes you've completed the [Form Validation](form-validation.html) tutorial and have a working form_validation project. The example code for this tutorial, message_resource, is available for checkout from the 
 

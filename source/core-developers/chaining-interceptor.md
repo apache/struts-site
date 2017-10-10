@@ -5,7 +5,7 @@ title: Chaining Interceptor
 
 # Chaining Interceptor
 
-##### Description
+## Description
 
 An interceptor that copies all the properties of every object in the value stack to the currently executing object, except for any object that implements [Unchainable](http://struts\.apache\.org/maven/xwork\-core/apidocs/com/opensymphony/xwork2/Unchainable\.html)^[http://struts\.apache\.org/maven/xwork\-core/apidocs/com/opensymphony/xwork2/Unchainable\.html]\. A collection of optional 
 
@@ -78,7 +78,7 @@ __Example:__
 <constant name="struts.xwork.chaining.copyErrors" value="true"/>
 ~~~~~~~
 
-##### Parameters
+## Parameters
 
 + 
 
@@ -94,11 +94,11 @@ includes
 ~~~~~~~
  (optional) \- the list of parameter names to include when copying (all others will be excluded)
 
-##### Extending the Interceptor
+## Extending the Interceptor
 
 There are no known extension points to this interceptor\.
 
-##### Examples
+## Examples
 
 Simple example how to chain two actions
 

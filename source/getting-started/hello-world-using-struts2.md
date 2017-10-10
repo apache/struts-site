@@ -2,7 +2,7 @@
 layout: getting-started
 title: Hello World using Struts 2
 ---
-## Hello World Using Struts 2
+# Hello World Using Struts 2
 
 When you click on a hyperlink or submit an HTML form in a Struts 2 web application, the input is not sent to another server page, but to a Java class that you provide. These classes are called Actions. After the Action fires, a Result selects a resource to render the response. The resource is generally a server page, but it can also be a PDF file, an Excel spreadsheet, or a Java applet window.
 
@@ -22,7 +22,7 @@ Let's look at an example model class, Action, server page, and mapping. If you l
 
 > This tutorial assumes you've completed the [How To Create A Struts 2 Web Application](how-to-create-a-struts2-web-application.html) tutorial and have a working basic Struts project. The example code for this tutorial, helloworld, is available for checkout from the Struts 2 GitHub repository at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples). The example projects use Maven to manage the artifact dependencies and to build the .war files.
 
-### The Code
+## The Code
 
 Let's modify the basic-struts project to add the following: 
 
@@ -33,7 +33,7 @@ Let's modify the basic-struts project to add the following:
 
 > The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are having a problem getting this application to work search the Struts 2 mailing list. If you don't find an answer to your problem, post a question on the mailing list.
 
-#### Step 1 - Create The Model Class MessageStore.java
+### Step 1 - Create The Model Class MessageStore.java
 
 Create the `MessageStore` class in `src/main/java`. Be sure to note the package statement below.
 
@@ -59,7 +59,7 @@ public class MessageStore {
 
 Note the use of the public getter method to allow access to the private message String attribute. The Struts 2 framework requires that objects you want to expose to the view (`HelloWorld.jsp`) follow the [JavaBean-style conventions](http://en.wikipedia.org/wiki/JavaBean#JavaBean_conventions).
 
-#### Step 2 - Create The Action Class HelloWorldAction.java
+### Step 2 - Create The Action Class HelloWorldAction.java
 
 We need an Action class to act as the Controller. The Action class responds to a user action (in this example that action will be clicking an HTML hyperlink and sending a specific URL to the Servlet container). One or more of the Action class's methods are executed and a String result is returned. Based on the value of the result, a specific view page (in this example that view page is `HelloWorld.jsp`) is rendered.
 
@@ -95,7 +95,7 @@ In this example, the execute method creates an object of class `MessageStore` an
 
 Note also the public getter method for the private `MessageStore` object. Since we want to make the `MessageStore` object available to the view page, `HelloWorld.jsp`, we need to follow the [JavaBean-style](http://en.wikipedia.org/wiki/JavaBean\#JavaBean_conventions) of providing getter and setter methods where needed.
 
-#### Step 3 - Create The View HelloWorld.jsp
+### Step 3 - Create The View HelloWorld.jsp
 
 We need a server page to present the message that is stored in the model class `MessageStore`. Create the below JSP in the `src/main/webapp` folder.
 
@@ -122,7 +122,7 @@ The `<s:property>` tag displays the value returned by calling the method `getMe
 
 We'll learn more about tags in the next tutorial. See the _Struts Tags_  for more information about tags.
 
-#### Step 4 - Add The Struts Configuration In struts.xml
+### Step 4 - Add The Struts Configuration In struts.xml
 
 We need a mapping to tie the URL, the `HelloWorldAction` class (controller), and the `HelloWorld.jsp` (the view) together. The mapping tells the Struts 2 framework which class will respond to the user's action (the URL), which method of that class will be executed, and what view to render based on the String result that method returns.
 
@@ -150,7 +150,7 @@ Edit the `struts.xml` file (in the Mvn project that file is in the src/main/reso
 </struts>
 ```
 
-#### Step 5 - Create The URL Action
+### Step 5 - Create The URL Action
 
 Let's add an Action URL inside `index.jsp` (see `src/main/webapp` folder) so the user can click on a link to tell the Struts 2 framework to run the execute method of the `HelloWorldAction` class and render the `HelloWorld.jsp` view.
 
@@ -176,7 +176,7 @@ First add the taglib directive at the top of the jsp `<%@ taglib prefix="s" uri=
 
 The Struts url tag creates the URL with an action of hello. The hello action was mapped to the `HelloWorldAction` class and its `execute` method. When the user clicks on the above URL it will cause the Struts 2 framework to run the execute method of the `HelloWorldAction` class. After that method returns the String `success` (constant `SUCCESS`), the view page `HelloWorld.jsp` will be rendered.
 
-#### Step 6 - Build the WAR File and Run The Application
+### Step 6 - Build the WAR File and Run The Application
 
 Execute `mvn jetty:run` to run the application.
 
@@ -188,7 +188,7 @@ Click on the Hello World link and you should get the HelloWorld.jsp page:
 
 ![helloworld_hello_action.png](attachments/helloworld_hello_action.png)
 
-### How the Code Works
+## How the Code Works
 
 Your browser sends to the web server a request for the URL [http://localhost:8080/helloworld/hello.action](http://localhost:8080/helloworld/hello.action).
 
@@ -202,7 +202,7 @@ Your browser sends to the web server a request for the URL [http://localhost:808
 
 5. A pure HTML response is sent back to the browser.
 
-### What to Remember
+## What to Remember
 
 The framework uses Actions to process HTML forms and other requests. The `Action` class returns a result-name such as `SUCCESS`, `ERROR` or `INPUT`. Based on the mappings loaded from the `struts.xml`, a given result-name may select a page (as in this example), another action, or some other web resource (image, PDF).
 

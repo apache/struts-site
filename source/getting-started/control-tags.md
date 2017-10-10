@@ -2,7 +2,7 @@
 layout: getting-started
 title: Control tags
 ---
-## Control Tags
+# Control Tags
 
 The example code for this tutorial, control_tags, is available at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)
 

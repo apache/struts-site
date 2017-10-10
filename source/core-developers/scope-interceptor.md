@@ -35,7 +35,7 @@ title: Scope Interceptor
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor {% endcomment %}
 
-##### Parameters
+## Parameters
 
 
 
@@ -86,7 +86,7 @@ title: Scope Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor {% endcomment %}
 
-##### Extending the Interceptor
+## Extending the Interceptor
 
 
 
@@ -97,7 +97,7 @@ title: Scope Interceptor
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.ScopeInterceptor {% endcomment %}
 
-##### Examples
+## Examples
 
 
 

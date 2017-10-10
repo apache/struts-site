@@ -12,7 +12,7 @@ StrutsXmlConfigurationProvider
 ~~~~~~~
 \. The provider can be configured through a Dispatcher's [DispatcherListener](dispatcher-listener.html)\.
 
-#### Example
+## Example
 
 
 
@@ -30,7 +30,7 @@ StrutsXmlConfigurationProvider
 
 ~~~~~~~
 
-#### Configuration provider
+## Configuration provider
 
 
 

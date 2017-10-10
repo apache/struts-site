@@ -7,7 +7,7 @@ title: Basic Validation
 
 Let's configure a basic validation workflow, step by step\.
 
-##### Step 1
+## Step 1
 
 Create the input form\.
 
@@ -52,7 +52,7 @@ Create the input form\.
 
 {% comment %}end snippet id=basicValidation|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/webapp/WEB-INF/validation/quiz-basic.jsp {% endcomment %}
 
-##### Step 2
+## Step 2
 
 Create the Action class\.
 
@@ -98,7 +98,7 @@ public class QuizAction extends ActionSupport {
 
 {% comment %}end snippet id=quizAction|javadoc=false|lang=java|url=struts2/apps/showcase/src/main/java/org/apache/struts2/showcase/validation/QuizAction.java {% endcomment %}
 
-##### Step 3
+## Step 3
 
 Create the validators\. The 
 
@@ -144,7 +144,7 @@ validation.xml
 
 {% comment %}end snippet id=quizValidators|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/QuizAction-validation.xml {% endcomment %}
 
-##### Step 4
+## Step 4
 
 Make sure there is a result for "input" listed in the struts\.xml for when the validation fails:
 

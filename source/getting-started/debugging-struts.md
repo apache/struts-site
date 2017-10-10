@@ -2,7 +2,7 @@
 layout: getting-started
 title: Debugging Struts
 ---
-## Debugging Struts
+# Debugging Struts
 
 The example code for this tutorial, debugging_struts, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
 

@@ -5,13 +5,13 @@ title: date validator
 
 # date validator
 
-### Description
+## Description
 
 Field Validator that checks if the date supplied is within a specific range.
 
 **NOTE:** If no date converter is specified, `XWorkBasicConverter` will kick in to do the date conversion, which by default using the `Date.SHORT` format using the a problematically specified locale else falling back to the system default locale.
 
-### Parameters
+## Parameters
 
 - `fieldName` - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.
 - `min` - the min date range. If not specified will not be checked.
@@ -25,7 +25,7 @@ You can either use the `min` / `max` value or `minExpression` / `maxExpression` 
 > Warning
 > Do not use `${minExpression}` and `${maxExpression}` as an expression as this will turn into infinitive loop!
 
-### Examples
+## Examples
 
 ```
 <validators>

@@ -14,7 +14,7 @@ title: Roles Interceptor
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.RolesInterceptor {% endcomment %}
 
-##### Parameters
+## Parameters
 
 
 
@@ -38,7 +38,7 @@ title: Roles Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.RolesInterceptor {% endcomment %}
 
-##### Examples
+## Examples
 
 
 

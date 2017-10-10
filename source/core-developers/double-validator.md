@@ -5,11 +5,11 @@ title: double validator
 
 # double validator
 
-### Description
+## Description
 
 Field Validator that checks if the double specified is within a certain range.
 
-### Parameters
+## Parameters
 
 - `fieldName` - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.
 - `minInclusive` - the minimum inclusive value in FloatValue format specified by Java language (if none is specified, it will not be checked).
@@ -26,7 +26,7 @@ You can specify either `minInclusive`, `maxInclusive`, `minExclusive` and `maxEx
 > Warning
 > Do not use `${minInclusiveExpression}`, `${maxInclusiveExpression}`, `${minExclusiveExpressionExpression}` and `${maxExclusive}` as an expression as this will turn into infinitive loop!
 
-### Examples
+## Examples
 
 ```
 <validators>

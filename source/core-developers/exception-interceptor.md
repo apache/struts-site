@@ -3,7 +3,7 @@ layout: core-developers
 title: Exception Interceptor
 ---
 
-#Exception Interceptor
+# Exception Interceptor
 
 
 
@@ -25,7 +25,7 @@ title: Exception Interceptor
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor {% endcomment %}
 
-##### Parameters
+## Parameters
 
 
 
@@ -50,7 +50,7 @@ title: Exception Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor {% endcomment %}
 
-##### Extending the Interceptor
+## Extending the Interceptor
 
 
 
@@ -63,7 +63,7 @@ title: Exception Interceptor
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor {% endcomment %}
 
-##### Examples
+## Examples
 
 
 

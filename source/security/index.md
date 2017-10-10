@@ -10,15 +10,15 @@ title: Security
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-### Security tips
+## Security tips
 
 The Apache Struts 2 doesn't provide any security mechanism - it is just a pure web framework. Below are few tips you should consider during application development with the Apache Struts 2.
 
-#### Restrict access to the Config Browser Plugin
+### Restrict access to the Config Browser Plugin
 
 [Config Browser Plugin](https://struts.apache.org/docs/config-browser-plugin.html) exposes internal configuration and should be used only during development phase. If you must use it on production site, we strictly recommend restricting access to it - you can use  Basic Authentication or any other security mechanism (e.g. [Apache Shiro](https://shiro.apache.org/))
 
-#### Don't mix different access levels in the same namespace
+### Don't mix different access levels in the same namespace
 
 Very often access to different resources is controlled based on URL patterns, see snippet below. Because of that you cannot mix actions with different security levels in the same namespace. Always group actions in one namespace by security level.
 
@@ -35,7 +35,7 @@ Very often access to different resources is controlled based on URL patterns, se
 </security-constraint>
 ```
 
-#### Never expose JSP files directly
+### Never expose JSP files directly
 
 You must always hide JSP file behind an action, you cannot allow for direct access to the JSP files as this can leads to unpredictable security vulnerabilities. You can achieve this by putting all your JSP files under the `WEB-INF` folder - most of the JEE containers restrict access to files placed under the `WEB-INF` folder. Second option is to add security constraint to the `web.xml` file:
 
@@ -61,7 +61,7 @@ You must always hide JSP file behind an action, you cannot allow for direct acce
 
 The best approach is to used the both solutions.
 
-#### Disable devMode
+### Disable devMode
 
 The `devMode` is a very useful option during development time, allowing for deep introspection and debugging into you app.
 
@@ -74,7 +74,7 @@ However, in production it exposes your application to be presenting too many inf
 ```
  
 
-#### Reduce logging level
+### Reduce logging level
 
  It's a good practice to reduce logging level from **DEBUG** to **INFO** or less. Framework's classes can produce a lot of logging entries which will pollute the log file. You can even set logging level to **WARN** for classes that belongs to the framework, see example Log4j2 configuration:
 
@@ -97,7 +97,7 @@ However, in production it exposes your application to be presenting too many inf
 </Configuration>
 ```
 
-#### Use UTF-8 encoding
+### Use UTF-8 encoding
 
 Always use `UTF-8` encoding when building an application with the Apache Struts 2, when using JSPs please add the following header to each JSP file
 
@@ -106,12 +106,12 @@ Always use `UTF-8` encoding when building an application with the Apache Struts
 <%@ page contentType="text/html; charset=UTF-8" %>
 ```
 
-#### Do not define setters when not needed
+### Do not define setters when not needed
 
 You should carefully design your actions without exposing anything via setters and getters, thus can leads to potential security vulnerabilities. Any action's setter can be used to set incoming untrusted user's value which can contain suspicious expression. Some Struts `Result`s automatically populate params based on values in 
 `ValueStack` (action in most cases is the root) which means incoming value will be evaluated as an expression during this process.
 
-#### Do not use incoming values as an input for localisation logic
+### Do not use incoming values as an input for localisation logic
 
 All `TextProvider`'s `getText(...)` methods (e.g. in`ActionSupport`) perform evaluation of parameters included in a message to properly localize the text. This means using incoming request parameters with `getText(...)` methods is potentially dangerous and should be avoided. See example below, assuming that an action implements getter and setter for property `message`, the below code allows inject an OGNL expression:
 
@@ -125,7 +125,7 @@ public String execute() throws Exception {
 
 Never use value of incoming request parameter as part of your localization logic.
 
-### Internal security mechanism
+## Internal security mechanism
 
 The Apache Struts 2 contains internal security manager which blocks access to particular classes and Java packages - it's a OGNL-wide mechanism which means it affects any aspect of the framework ie. incoming parameters, expressions used in JSPs, etc.
 
@@ -164,12 +164,12 @@ In that case `new MyBean()` was used to create a new instance of class (inside 
 It is possible to redefine the above constants in struts.xml but try to avoid this and rather change design of your application!
 
 
-#### Accessing static methods
+### Accessing static methods
 
 Support for accessing static methods from expression will be disabled soon, please consider re-factoring your application to avoid further problems! Please check [WW-4348](https://issues.apache.org/jira/browse/WW-4348).
 
 
-#### OGNL is used to call action's methods
+### OGNL is used to call action's methods
 
 This can impact actions which have large inheritance hierarchy and use the same method's name throughout the hierarchy, this was reported as an issue [WW-4405](https://issues.apache.org/jira/browse/WW-4405). See the example below:
 
@@ -199,10 +199,10 @@ public abstract class AbstractAction extends ActionSupport {
 
 In such case OGNL cannot properly map which method to call when request is coming. This is do the OGNL limitation. To solve the problem don't use the same method's names through the hierarchy, you can simply change the action's method from `save()` to `saveAction()` and leaving annotation as is to allow call this action via  `/save.action` request.
 
-#### Accepted / Excluded patterns
+### Accepted / Excluded patterns
 
  As from version 2.3.20 the framework provides two new interfaces which are used to accept / exclude param names and values - [AcceptedPatternsChecker](https://struts.apache.org/maven/struts2-core/apidocs/com/opensymphony/xwork2/security/AcceptedPatternsChecker.html) and [ExcludedPatternsChecker](https://struts.apache.org/maven/struts2-core/apidocs/com/opensymphony/xwork2/security/ExcludedPatternsChecker.html) with default implementations. These two interfaces are used by [Parameters Interceptor](../core-developers/parameters-interceptor.html) and [Cookie Interceptor](../core-developers/cookie-interceptor.html) to check if param can be accepted or must be excluded. If you were using `excludeParams` previously please compare patterns used by you with these provided by the framework in default implementation.
 
-#### Strict Method Invocation
+### Strict Method Invocation
 
  This mechanism was introduced in version 2.5. It allows control what methods can be accessed with the bang "!" operator via [Dynamic Method Invocation](../core-developers/action-configuration.html#dynamic-method-invocation). Please read more in Strict Method Invocation section of [Action Configuration](../core-developers/action-configuration.html).

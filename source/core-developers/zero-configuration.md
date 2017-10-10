@@ -20,7 +20,7 @@ A "Zero Configuration" Struts application or plugin uses no additional XML or pr
 
 As this is a new feature, and still being field\-tested, the documentation is sketchy\. But, here's what we have so far:
 
-##### Finding Actions
+## Finding Actions
 
 Set the "actionPackages" filter init param to a comma\-separated list of packages containing Action classes in web\.xml\. The packages and their subpackages will be scanned\. All classes in the designated packages that implement Action or end in "Action" are examined\.  The latter is to allow for POJO Actions that don't implement the Action interface\.
 
@@ -42,11 +42,11 @@ Set the "actionPackages" filter init param to a comma\-separated list of package
 
 We should probably add an action annotation, so that POJOs can itall with annotations\.
 
-##### Examples
+## Examples
 
 The only example right now is in the showcase, where the person package uses the classpath scanning configuration\. 
 
-##### Action and Package name
+## Action and Package name
 
 The subpackage name makes the namespace, and the action class name makes the action name\.  If there is an "Action" suffix, it is dropped before creating the action name\. Therefore, if the configured package is _com\.myapp\.actions_  and the Action is _com\.myapp\.actions\._ **member**\.EditAction, you can access it via [http://server/myapp/member/edit\.action](http://server/myapp/member/edit\.action)\.  For multi\-word actions, the first letter is lower\-cased and the rest is left alone, so the Action 
 
@@ -60,15 +60,15 @@ myCustom.action
 ~~~~~~~
 \.
 
-##### Results
+## Results
 
 [Results](#PAGE_43811) are defined with the Result and Results annotations at the **class level**\. 
 
-##### Namespaces
+## Namespaces
 
 The [Namespace Annotation](#PAGE_68488) overrides the namespace\.
 
-##### Parent Package
+## Parent Package
 
 The [ParentPackage Annotation](#PAGE_68490) configures the XWork package (an XWork package is created per Java package) to extend one or more defined packages\. The best place for this annotation is on the package via the 
 
@@ -106,11 +106,11 @@ import org.apache.struts2.config.ParentPackage;
 
 ~~~~~~~
 
-##### Feedback
+## Feedback
 
 Stay tuned to this page for additional details and documentation\. If you have a chance to  try the zero configuration feature, please share any experiences on dev@ and here\.
 
-##### See also
+## See also
 
 + _Zero Configuration Scanning_  Use Case
 

@@ -5,15 +5,15 @@ title: required validator
 
 # required validator
 
-### Description
+## Description
 
 RequiredFieldValidator checks if the specified field is not null.
 
-### Parameters
+## Parameters
 
 - `fieldName` - field name if plain-validator syntax is used, not needed if field-validator syntax is used.
 
-### Examples
+## Examples
 
 ```
 <validators>

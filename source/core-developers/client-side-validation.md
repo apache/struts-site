@@ -79,7 +79,7 @@ All the usual [validation configuration](#PAGE_14292) steps apply to client\-sid
 
 > 
 
-##### Client Side Validation Types
+## Client Side Validation Types
 
 There are two styles of client side validation\.
 

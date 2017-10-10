@@ -2,7 +2,7 @@
 layout: getting-started
 title: Form validation using XML
 ---
-## Form Validation Using XML
+# Form Validation Using XML
 
 The example code for this tutorial, form_xml_validation, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)
 

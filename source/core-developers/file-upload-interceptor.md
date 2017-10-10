@@ -56,7 +56,7 @@ title: File Upload Interceptor
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor {% endcomment %}
 
-##### Parameters
+## Parameters
 
 
 
@@ -79,7 +79,7 @@ title: File Upload Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor {% endcomment %}
 
-##### Extending the Interceptor
+## Extending the Interceptor
 
 
 
@@ -91,7 +91,7 @@ title: File Upload Interceptor
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=org.apache.struts2.interceptor.FileUploadInterceptor {% endcomment %}
 
-##### Examples
+## Examples
 
 **Example action mapping:**
 

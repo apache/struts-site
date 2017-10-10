@@ -5,15 +5,15 @@ title: conditionalvisitor validator
 
 # conditionalvisitor validator
 
-### Description
+## Description
 
 The ConditionalVisitorFieldValidator will forward validation to the VisitorFieldValidator only if the expression will evaluate to true.
 
-### Parameters
+## Parameters
 
 - `expression` - an OGNL expression which should evaluate to true to pass validation to the VisitorFieldValidator.
 
-### Examples
+## Examples
 
 ```
 <field name="colleaguePosition">

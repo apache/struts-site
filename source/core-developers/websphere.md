@@ -5,11 +5,11 @@ title: WebSphere
 
 # WebSphere
 
-##### WebSphere 5\.1
+## WebSphere 5\.1
 
  (ok) [Be sure to install WebSphere's Fix Pack 1](http://forums\.opensymphony\.com/thread\.jspa?threadID=26068)^[http://forums\.opensymphony\.com/thread\.jspa?threadID=26068]\.
 
-##### WebSphere 6
+## WebSphere 6
 
 See forum thread: [http://forums\.opensymphony\.com/message\.jspa?messageID=119574\#119574](http://forums\.opensymphony\.com/message\.jspa?messageID=119574\#119574)
 
@@ -81,7 +81,7 @@ See forum thread: [http://forums\.opensymphony\.com/message\.jspa?messageID=1195
 
 > 
 
-##### WebSphere 6\.5
+## WebSphere 6\.5
 
 To make struts2 work in Websphere, one has to set Websphere specific properties, you may want to add that to the wiki:
 
@@ -136,7 +136,7 @@ if webContainerDetails.find("com.ibm.ws.webcontainer.invokefilterscompatibility"
 
 Thanks to Christoph Nenning (christoph dot nenning at lex\-com at net)
 
-##### JSESSIONID handling
+## JSESSIONID handling
 
 IBM WebSphere Application Server uses the JSESSIONID information to keep track of the client session\. If you have an application where the application client must navigate across multiple WebSphere Application Server nodes residing in same domain, then the JSESSIONID information may be over\-written on the client because multiple JSESSIONID cookies received with the same name and path\.
 

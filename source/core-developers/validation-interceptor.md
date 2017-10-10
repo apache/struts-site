@@ -38,7 +38,7 @@ title: Validation Interceptor
 </p>
 {% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.ValidationInterceptor {% endcomment %}
 
-##### Parameters
+## Parameters
 
 
 
@@ -60,7 +60,7 @@ title: Validation Interceptor
 </p>
 {% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.ValidationInterceptor {% endcomment %}
 
-##### Extending the Interceptor
+## Extending the Interceptor
 
 
 
@@ -71,7 +71,7 @@ title: Validation Interceptor
 </p>
 {% comment %}end snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.validator.ValidationInterceptor {% endcomment %}
 
-##### Examples
+## Examples
 
 
 
