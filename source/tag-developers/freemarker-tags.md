@@ -67,7 +67,7 @@ In FreeMarker, we can pass the arbitrary parameter directly and create the URL i
 **Creating a URL with a query string (FTL)**
 
 ```html
-<@s.url value="somePage" personId="${personId}"/>
+<@s.url value="somePage" personId="%{personId}"/>
 ```
 
 ### Using inline attributes with templates
@@ -98,7 +98,7 @@ to a different type, such as List, int, or boolean. This generally works just fi
 FreeMarker which provides more advanced ways to apply attributes. Suppose the following example:
 
 ```html
-<@s.select label="Foo label - ${foo}" name="${name}" list="%{{1, 2, 3}}"/>
+<@s.select label="Foo label - %{foo}" name="%{name}" list="%{{1, 2, 3}}"/>
 ```
 
 What will happen here is that each attribute will be evaluated to a String as best it can. This may involve calling the
@@ -109,7 +109,7 @@ advanced collection support.
 But suppose you wish to use FreeMarker's list or hash support instead? You can do this:
 
 ```html
-<@s.select label="Foo label - ${foo}" name="${name}" list=[1, 2, 3]/>
+<@s.select label="Foo label - %{foo}" name="%{name}" list=[1, 2, 3]/>
 ```
 
 Notice that the list attribute no longer has quotes around it. Now it will come in to the tag as an object that can't 
