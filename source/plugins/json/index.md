@@ -367,6 +367,19 @@ given result add encoding param as below:
 </result>
 ```
 
+### Customizing the output
+
+Since `2.5.14`, you can implement the `org.apache.struts2.json.JSONWriter` interface to customize the generated json response.
+The implementation should then be defined in `struts.xml` like:
+
+```xml
+<struts>
+    <bean type="org.apache.struts2.json.JSONWriter" name="myJSONWriter" class="com.mycompany.MyJSONWriter"
+          scope="prototype"/>
+    <constant name="struts.json.writer" value="myJSONWriter"/>
+</struts>
+```
+
 ## Example
 
 ### Setup Action
