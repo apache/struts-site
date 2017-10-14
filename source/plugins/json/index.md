@@ -369,7 +369,7 @@ given result add encoding param as below:
 
 ### Customizing the output
 
-Since `2.5.14`, you can implement the `org.apache.struts2.json.JSONWriter` interface to customize the generated json response.
+Since Struts 2.5.14, you can implement the `org.apache.struts2.json.JSONWriter` interface to customize the generated json response.
 The implementation should then be defined in `struts.xml` like:
 
 ```xml
