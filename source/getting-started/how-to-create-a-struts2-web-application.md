@@ -62,9 +62,9 @@ project folder structure. In your `pom.xml` include the following:
     ...   
     <plugins>
         <plugin>
-            <groupId>org.mortbay.jetty</groupId>
+            <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-maven-plugin</artifactId>
-            <version>8.1.16.v20140903</version>
+            <version>9.4.7.20170914</version>
             <configuration>
                 <webApp>
                     <contextPath>/${build.finalName}</contextPath>
@@ -105,7 +105,7 @@ with a title of __Basic Struts 2 Application - Welcome__ and in the body add an 
 
 Run `mvn jetty:run` to run the application.
 
-In a web browser go to [http://localhost:8080/basic-struts/index.jsp]([http://localhost:8080/basic-struts/index.jsp). 
+In a web browser go to [http://localhost:8080/basic-struts/index.jsp](http://localhost:8080/basic-struts/index.jsp).
 You should see the following:
 
 ![basic_struts2_maven_jsp.png](attachments/basic_struts2_maven_jsp.png)
