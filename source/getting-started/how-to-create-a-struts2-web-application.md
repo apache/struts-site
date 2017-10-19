@@ -64,7 +64,7 @@ project folder structure. In your `pom.xml` include the following:
         <plugin>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-maven-plugin</artifactId>
-            <version>9.4.7.20170914</version>
+            <version>9.4.7.v20170914</version>
             <configuration>
                 <webApp>
                     <contextPath>/${build.finalName}</contextPath>
