@@ -2,7 +2,7 @@
 layout: default
 title: HttpHeader Result
 parent:
-    title: Core Developer Guide
+    title: Core Developers Guide
     url: index.html
 ---
 

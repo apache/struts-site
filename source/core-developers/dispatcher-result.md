@@ -2,7 +2,7 @@
 layout: default
 title: Dispatcher Result
 parent:
-    title: Core Developer Guide
+    title: Core Developers Guide
     url: index.html
 ---
 

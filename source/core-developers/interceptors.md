@@ -2,7 +2,7 @@
 layout: core-developers
 title: Interceptors
 parent:
-    title: Core Developer Guide
+    title: Core Developers Guide
     url: index.html
 ---
 
