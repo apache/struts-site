@@ -12,7 +12,7 @@ Invokes any annotated methods on the action. Specifically, it supports the follo
  
  - `@Before` - will be invoked before the action method. If the returned value is not null, it is returned as the action 
    result code
- - @`BeforeResult` - will be invoked after the action method but before the result execution
+ - `@BeforeResult` - will be invoked after the action method but before the result execution
  - `@After` - will be invoked after the action method and result execution
 
 There can be multiple methods marked with the same annotations, but the order of their execution is not guaranteed. 
