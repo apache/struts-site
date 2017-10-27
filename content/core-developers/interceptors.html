@@ -228,8 +228,6 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
 <figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
 <span class="c">&lt;!--
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -450,7 +448,8 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"modelDriven"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ModelDrivenInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"scopedModelDriven"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ScopedModelDrivenInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"params"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ParametersInterceptor"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"actionMappingParams"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ActionMappingParametersInteceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"paramRemover"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ParameterRemoverInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"actionMappingParams"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ActionMappingParametersInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"prepare"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.PrepareInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"staticParams"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.StaticParametersInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"scope"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ScopeInterceptor"</span><span class="nt">/&gt;</span>
@@ -466,6 +465,7 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"profiling"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ProfilingActivationInterceptor"</span> <span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"roles"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.RolesInterceptor"</span> <span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"annotationWorkflow"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"annotationParameterFilter"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.annotations.AnnotationParameterFilterInterceptor"</span> <span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"multiselect"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.MultiselectInterceptor"</span> <span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"noop"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.NoOpInterceptor"</span> <span class="nt">/&gt;</span>
 
@@ -648,6 +648,16 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td>Converts similar parameters that may be named differently between requests.</td>
     </tr>
     <tr>
+      <td><a href="annotation-parameter-filter-interceptor.html">Annotation Parameter Filter Interceptor</a></td>
+      <td>annotationParameterFilter</td>
+      <td>Annotation based version of <a href="parameter-filter-interceptor.html">Parameter Filter Interceptor</a>.</td>
+    </tr>
+    <tr>
+      <td><a href="annotation-workflow-interceptor.html">Annotation Workflow Interceptor</a></td>
+      <td>annotationWorkflow</td>
+      <td>Invokes any annotated methods on the action.</td>
+    </tr>
+    <tr>
       <td><a href="chaining-interceptor.html">Chaining Interceptor</a></td>
       <td>chain</td>
       <td>Makes the previous Action’s properties available to the current Action. Commonly used together with <result type="chain"> (in the previous Action).</result></td>
@@ -656,6 +666,11 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td><a href="checkbox-interceptor.html">Checkbox Interceptor</a></td>
       <td>checkbox</td>
       <td>Adds automatic checkbox handling code that detect an unchecked checkbox and add it as a parameter with a default (usually ‘false’) value. Uses a specially named hidden field to detect unsubmitted checkboxes. The default unchecked value is overridable for non-boolean value’d checkboxes.</td>
+    </tr>
+    <tr>
+      <td><a href="conversion-error-interceptor.html">Conversion Error Interceptor</a></td>
+      <td>conversionError</td>
+      <td>Adds conversion errors from the ActionContext to the Action’s field errors</td>
     </tr>
     <tr>
       <td><a href="cookie-interceptor.html">Cookie Interceptor</a></td>
@@ -668,14 +683,14 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td>Transfer cookies from action to response (Since 2.3.15.)</td>
     </tr>
     <tr>
-      <td><a href="conversion-error-interceptor.html">Conversion Error Interceptor</a></td>
-      <td>conversionError</td>
-      <td>Adds conversion errors from the ActionContext to the Action’s field errors</td>
-    </tr>
-    <tr>
       <td><a href="create-session-interceptor.html">Create Session Interceptor</a></td>
       <td>createSession</td>
       <td>Create an HttpSession automatically, useful with certain Interceptors that require a HttpSession to work properly (like the TokenInterceptor)</td>
+    </tr>
+    <tr>
+      <td><a href="clear-session-interceptor.html">Clear Session Interceptor</a></td>
+      <td>clearSession</td>
+      <td>This interceptor clears the HttpSession.</td>
     </tr>
     <tr>
       <td><a href="debugging-interceptor.html">DebuggingInterceptor</a></td>
@@ -683,14 +698,19 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td>Provides several different debugging screens to provide insight into the data behind the page.</td>
     </tr>
     <tr>
-      <td><a href="execute-and-wait-interceptor.html">Execute and Wait Interceptor</a></td>
-      <td>execAndWait</td>
-      <td>Executes the Action in the background and then sends the user off to an intermediate waiting page.</td>
+      <td><a href="default-workflow-interceptor.html">Default Workflow Interceptor</a></td>
+      <td>workflow</td>
+      <td>Calls the validate method in your Action class. If Action errors are created then it returns the INPUT view.</td>
     </tr>
     <tr>
       <td><a href="exception-interceptor.html">Exception Interceptor</a></td>
       <td>exception</td>
       <td>Maps exceptions to a result.</td>
+    </tr>
+    <tr>
+      <td><a href="execute-and-wait-interceptor.html">Execute and Wait Interceptor</a></td>
+      <td>execAndWait</td>
+      <td>Executes the Action in the background and then sends the user off to an intermediate waiting page.</td>
     </tr>
     <tr>
       <td><a href="file-upload-interceptor.html">File Upload Interceptor</a></td>
@@ -703,7 +723,7 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td>Remembers the locale selected for a user’s session.</td>
     </tr>
     <tr>
-      <td><a href="logger-interceptor.html">Logger Interceptor</a></td>
+      <td><a href="logger-interceptor.html">Logging Interceptor</a></td>
       <td>logger</td>
       <td>Outputs the name of the Action.</td>
     </tr>
@@ -718,9 +738,19 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td>If the Action implements ModelDriven, pushes the getModel Result onto the Value Stack.</td>
     </tr>
     <tr>
-      <td><a href="scoped-model-driven-interceptor.html">Scoped Model Driven Interceptor</a></td>
-      <td>scopedModelDriven</td>
-      <td>If the Action implements ScopedModelDriven, the interceptor retrieves and stores the model from a scope and sets it on the action calling setModel.</td>
+      <td><a href="multiselect-interceptor.html">Multiselect Interceptor</a></td>
+      <td>multiselect</td>
+      <td>Like the checkbox interceptor detects that no value was selected for a field with multiple values (like a select) and adds an empty parameter</td>
+    </tr>
+    <tr>
+      <td><a href="no-op-interceptor.html">NoOp Interceptor</a></td>
+      <td>noop</td>
+      <td>Does nothing, just passes invocation further, used in empty stack</td>
+    </tr>
+    <tr>
+      <td><a href="parameter-filter-interceptor.html">Parameter Filter Interceptor</a></td>
+      <td>N/A</td>
+      <td>Removes parameters from the list of those available to Actions</td>
     </tr>
     <tr>
       <td><a href="parameters-interceptor.html">Parameters Interceptor</a></td>
@@ -728,14 +758,29 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td>Sets the request parameters onto the Action.</td>
     </tr>
     <tr>
+      <td><a href="parameter-remover-interceptor.html">Parameter Remover Interceptor</a></td>
+      <td>paramRemover</td>
+      <td>Removes a parameter from parameters map.</td>
+    </tr>
+    <tr>
       <td><a href="prepare-interceptor.html">Prepare Interceptor</a></td>
       <td>prepare</td>
       <td>If the Action implements Preparable, calls its prepare method.</td>
     </tr>
     <tr>
+      <td><a href="roles-interceptor.html">Roles Interceptor</a></td>
+      <td>roles</td>
+      <td>Action will only be executed if the user has the correct JAAS role.</td>
+    </tr>
+    <tr>
       <td><a href="scope-interceptor.html">Scope Interceptor</a></td>
       <td>scope</td>
       <td>Simple mechanism for storing Action state in the session or application scope.</td>
+    </tr>
+    <tr>
+      <td><a href="scoped-model-driven-interceptor.html">Scoped Model Driven Interceptor</a></td>
+      <td>scopedModelDriven</td>
+      <td>If the Action implements ScopedModelDriven, the interceptor retrieves and stores the model from a scope and sets it on the action calling setModel.</td>
     </tr>
     <tr>
       <td><a href="servlet-config-interceptor.html">Servlet Config Interceptor</a></td>
@@ -746,11 +791,6 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td><a href="static-parameters-interceptor.html">Static Parameters Interceptor</a></td>
       <td>staticParams</td>
       <td>Sets the struts.xml defined parameters onto the action. These are the <param /> tags that are direct children of the <action> tag.</action></td>
-    </tr>
-    <tr>
-      <td><a href="roles-interceptor.html">Roles Interceptor</a></td>
-      <td>roles</td>
-      <td>Action will only be executed if the user has the correct JAAS role.</td>
     </tr>
     <tr>
       <td><a href="timer-interceptor.html">Timer Interceptor</a></td>
@@ -771,26 +811,6 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td><a href="validation-interceptor.html">Validation Interceptor</a></td>
       <td>validation</td>
       <td>Performs validation using the validators defined in <em>action</em> -validation.xml</td>
-    </tr>
-    <tr>
-      <td><a href="default-workflow-interceptor.html">Default Workflow Interceptor</a></td>
-      <td>workflow</td>
-      <td>Calls the validate method in your Action class. If Action errors are created then it returns the INPUT view.</td>
-    </tr>
-    <tr>
-      <td><a href="parameter-filter-interceptor.html">Parameter Filter Interceptor</a></td>
-      <td>N/A</td>
-      <td>Removes parameters from the list of those available to Actions</td>
-    </tr>
-    <tr>
-      <td><a href="multiselect-interceptor.html">Multiselect Interceptor</a></td>
-      <td>multiselect</td>
-      <td>Like the checkbox interceptor detects that no value was selected for a field with multiple values (like a select) and adds an empty parameter</td>
-    </tr>
-    <tr>
-      <td><a href="no-op-interceptor.html">NoOp Interceptor</a></td>
-      <td>noop</td>
-      <td>Does nothing, just passes invocation further, used in empty stack</td>
     </tr>
   </tbody>
 </table>
