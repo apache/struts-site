@@ -1,9 +1,16 @@
 ---
-layout: core-developers
+layout: default
 title: Validation
+parent:
+    title: Core Developers Guide
+    url: index.html
 ---
 
 # Validation
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 Struts 2 validation is configured via XML or annotations. Manual validation in the action is also possible, and may be 
 combined with XML and annotation-driven validation.
