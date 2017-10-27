@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Parameters Interceptor
+parent:
+    title: Interceptors
+    url: interceptors.html
 ---
 
 # Parameters Interceptor

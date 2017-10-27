@@ -1,44 +1,26 @@
 ---
-layout: core-developers
+layout: default
 title: Logger Interceptor
+parent:
+    title: Interceptors
+    url: interceptors.html
 ---
 
-# Logger Interceptor
+# Logging Interceptor
 
+This interceptor logs the start and end of the execution an action (in English-only, not internationalized).
 
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor {% endcomment %}
-<p> <p>
- This interceptor logs the start and end of the execution an action (in English-only, not internationalized).
- <br>
- <b>Note:</b>: This interceptor will log at <tt>INFO</tt> level.
- </p>
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor {% endcomment %}
+> Note: This interceptor will log at _INFO_ level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor {% endcomment %}
-<p> There are no parameters for this interceptor.
-</p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor {% endcomment %}
+There are no parameters for this interceptor.
 
 ## Extending the Interceptor
 
-
-
-{% comment %}start snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor {% endcomment %}
-<p> There are no obvious extensions to the existing interceptor.
-</p>
-{% comment %}end snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor {% endcomment %}
+There are no obvious extensions to the existing interceptor.
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor {% endcomment %}
 
 ```xml
  <!-- prints out a message before and after the immediate action execution -->
@@ -56,5 +38,3 @@ title: Logger Interceptor
  </action>
 
 ```
-
-{% comment %}end snippet id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.LoggingInterceptor {% endcomment %}

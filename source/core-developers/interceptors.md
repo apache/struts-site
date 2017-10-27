@@ -1,6 +1,9 @@
 ---
 layout: core-developers
 title: Interceptors
+parent:
+    title: Core Developer Guide
+    url: index.html
 ---
 
 # Interceptors
@@ -109,35 +112,39 @@ specified in the `<interceptors/>` tag.
 |Interceptor|Name|Description|
 |-----------|----|-----------|
 |[Alias Interceptor](alias-interceptor.html)|alias|Converts similar parameters that may be named differently between requests.|
+|[Annotation Parameter Filter Interceptor](annotation-parameter-filter-interceptor.html)|annotationParameterFilter|Annotation based version of [Parameter Filter Interceptor](parameter-filter-interceptor.html).|
+|[Annotation Workflow Interceptor](annotation-workflow-interceptor.html)|annotationWorkflow|Invokes any annotated methods on the action.|
 |[Chaining Interceptor](chaining-interceptor.html)|chain|Makes the previous Action's properties available to the current Action. Commonly used together with <result type="chain"> (in the previous Action).|
 |[Checkbox Interceptor](checkbox-interceptor.html)|checkbox|Adds automatic checkbox handling code that detect an unchecked checkbox and add it as a parameter with a default (usually 'false') value. Uses a specially named hidden field to detect unsubmitted checkboxes. The default unchecked value is overridable for non-boolean value'd checkboxes.|
+|[Conversion Error Interceptor](conversion-error-interceptor.html)|conversionError|Adds conversion errors from the ActionContext to the Action's field errors|
 |[Cookie Interceptor](cookie-interceptor.html)|cookie|Inject cookie with a certain configurable name / value into action. (Since 2.0.7.)|
 |[CookieProvider Interceptor](cookie-provider-interceptor.html)|cookieProvider|Transfer cookies from action to response (Since 2.3.15.)|
-|[Conversion Error Interceptor](conversion-error-interceptor.html)|conversionError|Adds conversion errors from the ActionContext to the Action's field errors|
 |[Create Session Interceptor](create-session-interceptor.html)|createSession|Create an HttpSession automatically, useful with certain Interceptors that require a HttpSession to work properly (like the TokenInterceptor)|
+|[Clear Session Interceptor](clear-session-interceptor.html)|clearSession|This interceptor clears the HttpSession.|
 |[DebuggingInterceptor](debugging-interceptor.html)|debugging|Provides several different debugging screens to provide insight into the data behind the page.|
-|[Execute and Wait Interceptor](execute-and-wait-interceptor.html)|execAndWait|Executes the Action in the background and then sends the user off to an intermediate waiting page.|
+|[Default Workflow Interceptor](default-workflow-interceptor.html)|workflow|Calls the validate method in your Action class. If Action errors are created then it returns the INPUT view.|
 |[Exception Interceptor](exception-interceptor.html)|exception|Maps exceptions to a result.|
+|[Execute and Wait Interceptor](execute-and-wait-interceptor.html)|execAndWait|Executes the Action in the background and then sends the user off to an intermediate waiting page.|
 |[File Upload Interceptor](file-upload-interceptor.html)|fileUpload|An Interceptor that adds easy access to file upload support.|
 |[I18n Interceptor](i18n-interceptor.html)|i18n|Remembers the locale selected for a user's session.|
-|[Logger Interceptor](logger-interceptor.html)|logger|Outputs the name of the Action.|
+|[Logging Interceptor](logger-interceptor.html)|logger|Outputs the name of the Action.|
 |[Message Store Interceptor](message-store-interceptor.html)|store|Store and retrieve action messages / errors / field errors for action that implements ValidationAware interface into session.|
 |[Model Driven Interceptor](model-driven-interceptor.htm)|modelDriven|If the Action implements ModelDriven, pushes the getModel Result onto the Value Stack.|
-|[Scoped Model Driven Interceptor](scoped-model-driven-interceptor.html)|scopedModelDriven|If the Action implements ScopedModelDriven, the interceptor retrieves and stores the model from a scope and sets it on the action calling setModel.|
+|[Multiselect Interceptor](multiselect-interceptor.html)|multiselect|Like the checkbox interceptor detects that no value was selected for a field with multiple values (like a select) and adds an empty parameter|
+|[NoOp Interceptor](no-op-interceptor.html)|noop|Does nothing, just passes invocation further, used in empty stack|
+|[Parameter Filter Interceptor](parameter-filter-interceptor.html)|N/A|Removes parameters from the list of those available to Actions|
 |[Parameters Interceptor](parameters-interceptor.html)|params|Sets the request parameters onto the Action.|
+|[Parameter Remover Interceptor](parameter-remover-interceptor.html)|paramRemover|Removes a parameter from parameters map.|
 |[Prepare Interceptor](prepare-interceptor.html)|prepare|If the Action implements Preparable, calls its prepare method.|
+|[Roles Interceptor](roles-interceptor.html)|roles|Action will only be executed if the user has the correct JAAS role.|
 |[Scope Interceptor](scope-interceptor.html)|scope|Simple mechanism for storing Action state in the session or application scope.|
+|[Scoped Model Driven Interceptor](scoped-model-driven-interceptor.html)|scopedModelDriven|If the Action implements ScopedModelDriven, the interceptor retrieves and stores the model from a scope and sets it on the action calling setModel.|
 |[Servlet Config Interceptor](servlet-config-interceptor.html)|servletConfig|Provide access to Maps representing HttpServletRequest and HttpServletResponse.|
 |[Static Parameters Interceptor](static-parameters-interceptor.html)|staticParams|Sets the struts.xml defined parameters onto the action. These are the <param> tags that are direct children of the <action> tag.|
-|[Roles Interceptor](roles-interceptor.html)|roles|Action will only be executed if the user has the correct JAAS role.|
 |[Timer Interceptor](timer-interceptor.html)|timer|Outputs how long the Action takes to execute (including nested Interceptors and View)|
 |[Token Interceptor](token-interceptor.html)|token|Checks for valid token presence in Action, prevents duplicate form submission.|
 |[Token Session Interceptor](token-session-interceptor.html)|tokenSession|Same as Token Interceptor, but stores the submitted data in session when handed an invalid token|
 |[Validation Interceptor](validation-interceptor.html)|validation|Performs validation using the validators defined in _action_ -validation.xml|
-|[Default Workflow Interceptor](default-workflow-interceptor.html)|workflow|Calls the validate method in your Action class. If Action errors are created then it returns the INPUT view.|
-|[Parameter Filter Interceptor](parameter-filter-interceptor.html)|N/A|Removes parameters from the list of those available to Actions|
-|[Multiselect Interceptor](multiselect-interceptor.html)|multiselect|Like the checkbox interceptor detects that no value was selected for a field with multiple values (like a select) and adds an empty parameter|
-|[NoOp Interceptor](no-op-interceptor.html)|noop|Does nothing, just passes invocation further, used in empty stack|
 
 Since 2.0.7, Interceptors and Results with hyphenated names were converted to camelCase. (The former model-driven is 
 now modelDriven.) The original hyphenated names are retained as "aliases" until Struts 2.1.0. For clarity, 
