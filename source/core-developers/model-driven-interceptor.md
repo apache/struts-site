@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Model Driven Interceptor
+parent:
+    title: Interceptors
+    url: interceptors.html
 ---
 
 # Model Driven Interceptor

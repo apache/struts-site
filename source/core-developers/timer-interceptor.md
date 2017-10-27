@@ -1,55 +1,32 @@
 ---
-layout: core-developers
+layout: default
 title: Timer Interceptor
+parent:
+    title: Interceptors
+    url: interceptors.html
 ---
 
 # Timer Interceptor
 
+**DEPRECATED**
 
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor {% endcomment %}
-<p> This interceptor logs the amount of time in milliseconds. In order for this interceptor to work properly, the
- logging framework must be set to at least the <tt>INFO</tt> level.
- This interceptor relies on the <a href="http://jakarta.apache.org/commons/logging/">Commons Logging API</a> to
- report its execution-time value.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor {% endcomment %}
+This interceptor logs the amount of time in milliseconds. In order for this interceptor to work properly, the logging 
+framework must be set to at least the `INFO` level.  This interceptor relies on the [Commons Logging API](http://jakarta.apache.org/commons/logging/) 
+to report its execution-time value.
 
 ## Parameters
 
+ - `logLevel` (optional) - what log level should we use (`trace, debug, info, warn, error, fatal`)? - default is `info`
+ - `logCategory` (optional) - If provided we would use this category (eg. `com.mycompany.app`).
+   Default is to use `com.opensymphony.xwork2.interceptor.TimerInterceptor`.
 
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor {% endcomment %}
-<p>
- <ul>
-
- <li>logLevel (optional) - what log level should we use (<code>trace, debug, info, warn, error, fatal</code>)? - defaut is <code>info</code></li>
-
- <li>logCategory (optional) - If provided we would use this category (eg. <code>com.mycompany.app</code>).
- Default is to use <code>com.opensymphony.xwork2.interceptor.TimerInterceptor</code>.</li>
-
- </ul>
-
- The parameters above enables us to log all action execution times in our own logfile.
-
-</p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor {% endcomment %}
+The parameters above enables us to log all action execution times in our own logfile.
 
 ## Extending the Interceptor
 
-
-
-{% comment %}start snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor {% endcomment %}
-<p> This interceptor can be extended to provide custom message format. Users should override the
- <code>invokeUnderTiming</code> method.
-</p>
-{% comment %}end snippet id=extending|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor {% endcomment %}
+This interceptor can be extended to provide custom message format. Users should override the `invokeUnderTiming` method.
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor {% endcomment %}
 
 ```xml
  <!-- records only the action's execution time -->
@@ -65,7 +42,4 @@ title: Timer Interceptor
      <interceptor-ref name="completeStack"/>
      <result name="success">good_result.ftl</result>
  </action>
-
 ```
-
-{% comment %}end snippet id=example|lang=xml|javadoc=true|url=com.opensymphony.xwork2.interceptor.TimerInterceptor {% endcomment %}
