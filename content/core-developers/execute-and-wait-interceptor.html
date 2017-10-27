@@ -125,79 +125,69 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/execute-and-wait-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
+    
     <h1 id="execute-and-wait-interceptor">Execute and Wait Interceptor</h1>
 
-<p> <p>
- The ExecuteAndWaitInterceptor is great for running long-lived actions in the background while showing the user a nice
- progress meter. This also prevents the HTTP request from timing out when the action takes more than 5 or 10 minutes.
- </p>
+<p>The ExecuteAndWaitInterceptor is great for running long-lived actions in the background while showing the user a nice 
+progress meter. This also prevents the HTTP request from timing out when the action takes more than 5 or 10 minutes.</p>
 
- <p> Using this interceptor is pretty straight forward. Assuming that you are including struts-default.xml, this
- interceptor is already configured but is not part of any of the default stacks. Because of the nature of this
- interceptor, it must be the <b>last</b> interceptor in the stack.
- </p>
+<p>Using this interceptor is pretty straight forward. Assuming that you are including struts-default.xml, this interceptor 
+is already configured but is not part of any of the default stacks. Because of the nature of this interceptor, it must 
+be the <code class="highlighter-rouge">last</code> interceptor in the stack.</p>
 
- <p> This interceptor works on a per-session basis. That means that the same action name (myLongRunningAction, in the
- above example) cannot be run more than once at a time in a given session. On the initial request or any subsequent
- requests (before the action has completed), the <b>wait</b> result will be returned. <b>The wait result is
- responsible for issuing a subsequent request back to the action, giving the effect of a self-updating progress
- meter</b>.
- </p>
+<p>This interceptor works on a per-session basis. That means that the same action name (<code class="highlighter-rouge">myLongRunningAction</code>, in 
+the above example) cannot be run more than once at a time in a given session. On the initial request or any subsequent
+requests (before the action has completed), the <code class="highlighter-rouge">wait</code> result will be returned.</p>
 
- <p> If no "wait" result is found, Struts will automatically generate a wait result on the fly. This result is
- written in FreeMarker and cannot run unless FreeMarker is installed. If you don't wish to deploy with FreeMarker, you
- must provide your own wait result. This is generally a good thing to do anyway, as the default wait page is very
- plain.
- </p>
+<blockquote>
+  <p>The wait result is responsible for issuing a subsequent request back to the action, giving the effect 
+of a self-updating progress meter.</p>
+</blockquote>
 
- <p>Whenever the wait result is returned, the <b>action that is currently running in the background will be placed on
- top of the stack</b>. This allows you to display progress data, such as a count, in the wait page. By making the wait
- page automatically reload the request to the action (which will be short-circuited by the interceptor), you can give
- the appearance of an automatic progress meter.
- </p>
+<p>If no <code class="highlighter-rouge">wait</code> result is found, Struts will automatically generate a wait result on the fly. This result is written 
+in FreeMarker and cannot run unless FreeMarker is installed. If you don’t wish to deploy with FreeMarker, you must 
+provide your own wait result. This is generally a good thing to do anyway, as the default wait page is very plain.</p>
 
- <p>This interceptor also supports using an initial wait delay. An initial delay is a time in milliseconds we let the
- server wait before the wait page is shown to the user. During the wait this interceptor will wake every 100 millis
- to check if the background process is done premature, thus if the job for some reason doesn't take to long the wait
- page is not shown to the user.
- <br /> This is useful for e.g. search actions that have a wide span of execution time. Using a delay time of 2000
- millis we ensure the user is presented fast search results immediately and for the slow results a wait page is used.
- </p>
+<p>Whenever the wait result is returned, the action that is currently running in the background will be placed on top 
+of the stack. This allows you to display progress data, such as a count, in the wait page. By making the wait page 
+automatically reload the request to the action (which will be short-circuited by the interceptor), you can give
+the appearance of an automatic progress meter.</p>
 
- <p><b>Important</b>: Because the action will be running in a separate thread, you can't use ActionContext because it
- is a ThreadLocal. This means if you need to access, for example, session data, you need to implement SessionAware
- rather than calling ActionContext.getSession().
- </p>
+<p>This interceptor also supports using an initial wait delay. An initial delay is a time in milliseconds we let the server 
+wait before the wait page is shown to the user. During the wait this interceptor will wake every 100 millis to check 
+if the background process is done premature, thus if the job for some reason doesn’t take to long the wait page is not 
+shown to the user.
+This is useful for e.g. search actions that have a wide span of execution time. Using a delay time of 2000 millis we 
+ensure the user is presented fast search results immediately and for the slow results a wait page is used.</p>
 
- <p>The thread kicked off by this interceptor will be named in the form <b><u>actionName</u>BackgroundProcess</b>.
- For example, the <i>search</i> action would run as a thread named <i>searchBackgroundProcess</i>.
- </p>
-</p>
+<blockquote>
+  <p>Important: Because the action will be running in a separate thread, you can’t use ActionContext because it
+is a ThreadLocal. This means if you need to access, for example, session data, you need to implement <code class="highlighter-rouge">SessionAware</code>
+rather than calling <code class="highlighter-rouge">ActionContext.getSession()</code>.</p>
+</blockquote>
+
+<p>The thread kicked off by this interceptor will be named in the form <code class="highlighter-rouge">&lt;actionName&gt;BackgroundProcess</code>.
+For example, the <code class="highlighter-rouge">search</code> action would run as a thread named <code class="highlighter-rouge">searchBackgroundProcess</code>.</p>
 
 <h2 id="parameters">Parameters</h2>
 
-<p>
- <ul>
-
- <li>threadPriority (optional) - the priority to assign the thread. Default is <code>Thread.NORM_PRIORITY</code>.</li>
- <li>delay (optional) - an initial delay in millis to wait before the wait page is shown (returning <code>wait</code> as result code). Default is no initial delay.</li>
- <li>delaySleepInterval (optional) - only used with delay. Used for waking up at certain intervals to check if the background process is already done. Default is 100 millis.</li>
-
- </ul>
-
-</p>
+<ul>
+  <li><code class="highlighter-rouge">threadPriority</code> (optional) - the priority to assign the thread. Default is <code class="highlighter-rouge">Thread.NORM_PRIORITY</code>.</li>
+  <li><code class="highlighter-rouge">delay</code> (optional) - an initial delay in millis to wait before the wait page is shown (returning <code class="highlighter-rouge">wait</code> as result code). 
+Default is no initial delay.</li>
+  <li><code class="highlighter-rouge">delaySleepInterval</code> (optional) - only used with delay. Used for waking up at certain intervals to check if the background 
+process is already done. Default is 100 millis.</li>
+</ul>
 
 <h2 id="extending-the-interceptor">Extending the Interceptor</h2>
 
-<p> <p>
- If you wish to make special preparations before and/or after the invocation of the background thread, you can extend
- the BackgroundProcess class and implement the beforeInvocation() and afterInvocation() methods. This may be useful
- for obtaining and releasing resources that the background process will need to execute successfully. To use your
- background process extension, extend ExecuteAndWaitInterceptor and implement the getNewBackgroundProcess() method.
- </p>
-</p>
+<p>If you wish to make special preparations before and/or after the invocation of the background thread, you can extend 
+the <code class="highlighter-rouge">BackgroundProcess</code> class and implement the <code class="highlighter-rouge">beforeInvocation()</code> and <code class="highlighter-rouge">afterInvocation()</code> methods. This may be useful 
+for  obtaining and releasing resources that the background process will need to execute successfully. To use your background 
+process extension, extend <code class="highlighter-rouge">ExecuteAndWaitInterceptor</code> and implement the <code class="highlighter-rouge">getNewBackgroundProcess()</code> method.</p>
 
 <h2 id="examples">Examples</h2>
 
@@ -257,10 +247,8 @@
  <span class="nt">&lt;/action&gt;</span>
  <span class="nt">&lt;/pre&gt;</span>
 
-
 </code></pre>
 </div>
-
 
   </section>
 </article>

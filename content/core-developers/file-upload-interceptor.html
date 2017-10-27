@@ -125,87 +125,57 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/file-upload-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
+    
     <h1 id="file-upload-interceptor">File Upload Interceptor</h1>
 
-<p>See <a href="file-upload.html">this page</a> for more examples and advanced configuration</p>
+<p>See <a href="file-upload.html">this page</a> for more examples and advanced configuration.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+<p>Interceptor that is based off of <code class="highlighter-rouge">MultiPartRequestWrapper</code>, which is automatically applied for any request that includes 
+a file. It adds the following parameters, where <code class="highlighter-rouge">&lt;file name&gt;</code> is the name given to the file uploaded by the HTML form:</p>
 
-<p> <p>
- Interceptor that is based off of {@link MultiPartRequestWrapper}, which is automatically applied for any request that
- includes a file. It adds the following parameters, where [File Name] is the name given to the file uploaded by the
- HTML form:
- </p>
- <ul>
+<ul>
+  <li><code class="highlighter-rouge">&lt;file name&gt;</code>: <code class="highlighter-rouge">File</code> - the actual File</li>
+  <li><code class="highlighter-rouge">&lt;file name&gt;ContentType</code>: <code class="highlighter-rouge">String</code> - the content type of the file</li>
+  <li><code class="highlighter-rouge">&lt;file name&gt;FileName</code>: <code class="highlighter-rouge">String</code> - the actual name of the file uploaded (not the HTML name)</li>
+</ul>
 
- <li>[File Name] : File - the actual File</li>
+<p>You can get access to these files by merely providing setters in your action that correspond to any of the three patterns 
+above, such as <code class="highlighter-rouge">setDocument(File document)</code>, <code class="highlighter-rouge">setDocumentContentType(String contentType)</code>, etc.</p>
 
- <li>[File Name]ContentType : String - the content type of the file</li>
+<p>See the example code section.</p>
 
- <li>[File Name]FileName : String - the actual name of the file uploaded (not the HTML name)</li>
+<p>This interceptor will add several field errors, assuming that the action implements <code class="highlighter-rouge">ValidationAware</code>. These error messages 
+are based on several i18n values stored in <code class="highlighter-rouge">struts-messages.properties</code>, a default i18n file processed for all i18n requests. 
+You can override the text of these messages by providing text for the following keys:</p>
 
- </ul>
-
- <p>You can get access to these files by merely providing setters in your action that correspond to any of the three
- patterns above, such as setDocument(File document), setDocumentContentType(String contentType), etc.
- <br />See the example code section.
- </p>
-
- <p> This interceptor will add several field errors, assuming that the action implements {@link ValidationAware}.
- These error messages are based on several i18n values stored in struts-messages.properties, a default i18n file
- processed for all i18n requests. You can override the text of these messages by providing text for the following
- keys:
- </p>
-
- <ul>
-
- <li>struts.messages.error.uploading - a general error that occurs when the file could not be uploaded</li>
-
- <li>struts.messages.error.file.too.large - occurs when the uploaded file is too large</li>
-
- <li>struts.messages.error.content.type.not.allowed - occurs when the uploaded file does not match the expected
- content types specified</li>
-
- <li>struts.messages.error.file.extension.not.allowed - occurs when the uploaded file does not match the expected
- file extensions specified</li>
-
- </ul>
-
-</p>
+<ul>
+  <li><code class="highlighter-rouge">struts.messages.error.uploading</code> - a general error that occurs when the file could not be uploaded</li>
+  <li><code class="highlighter-rouge">struts.messages.error.file.too.large</code> - occurs when the uploaded file is too large</li>
+  <li><code class="highlighter-rouge">struts.messages.error.content.type.not.allowed</code> - occurs when the uploaded file does not match the expected content 
+types specified</li>
+  <li><code class="highlighter-rouge">struts.messages.error.file.extension.not.allowed</code> - occurs when the uploaded file does not match the expected 
+file extensions specified</li>
+</ul>
 
 <h2 id="parameters">Parameters</h2>
 
-<p>
- <ul>
-
- <li>maximumSize (optional) - the maximum size (in bytes) that the interceptor will allow a file reference to be set
- on the action. Note, this is <b>not</b> related to the various properties found in struts.properties.
- Default to approximately 2MB.</li>
-
- <li>allowedTypes (optional) - a comma separated list of content types (ie: text/html) that the interceptor will allow
- a file reference to be set on the action. If none is specified allow all types to be uploaded.</li>
-
- <li>allowedExtensions (optional) - a comma separated list of file extensions (ie: .html) that the interceptor will allow
- a file reference to be set on the action. If none is specified allow all extensions to be uploaded.</li>
- </ul>
-
-
-</p>
+<ul>
+  <li><code class="highlighter-rouge">maximumSize</code> (optional) - the maximum size (in bytes) that the interceptor will allow a file reference to be set
+on the action. Note, this is <b>not</b> related to the various properties found in struts.properties. 
+Default to approximately 2MB.</li>
+  <li><code class="highlighter-rouge">allowedTypes</code> (optional) - a comma separated list of content types (ie: <code class="highlighter-rouge">text/html</code>) that the interceptor will allow
+a file reference to be set on the action. If none is specified allow all types to be uploaded.</li>
+  <li><code class="highlighter-rouge">allowedExtensions</code> (optional) - a comma separated list of file extensions (ie: <code class="highlighter-rouge">.html</code>) that the interceptor will allow
+a file reference to be set on the action. If none is specified allow all extensions to be uploaded.</li>
+</ul>
 
 <h2 id="extending-the-interceptor">Extending the Interceptor</h2>
 
-<p> <p>
- You can extend this interceptor and override the acceptFile method to provide more control over which files
- are supported and which are not.
- </p>
-</p>
+<p>You can extend this interceptor and override the acceptFile method to provide more control over which files are supported 
+and which are not.</p>
 
 <h2 id="examples">Examples</h2>
 
@@ -232,10 +202,7 @@
 </code></pre>
 </div>
 
-<p> <p>
- You must set the encoding to <code>multipart/form-data</code> in the form where the user selects the file to upload.
- </p>
-</p>
+<p>You must set the encoding to <code>multipart/form-data</code> in the form where the user selects the file to upload.</p>
 
 <p><strong>Example Action class:</strong></p>
 
@@ -272,22 +239,16 @@
 
 <p><strong>Setting parameters example:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;interceptor-ref name="fileUpload"&gt;
-  &lt;param name="allowedTypes"&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"fileUpload"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"allowedTypes"</span><span class="nt">&gt;</span>
      image/png,image/gif,image/jpeg
-  &lt;/param&gt;
-&lt;/interceptor-ref&gt;
-
+  <span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/interceptor-ref&gt;</span>
 </code></pre>
 </div>
 
-<p>This part is optional and would be done in place of the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;interceptor-ref name="fileUpload"/&gt;
-</code></pre>
-</div>
-<p>line in the action mapping example above.</p>
+<p>This part is optional and would be done in place of the <code class="highlighter-rouge">&lt;interceptor-ref name="fileUpload"/&gt;</code> line in the action mapping 
+example above.</p>
 
   </section>
 </article>

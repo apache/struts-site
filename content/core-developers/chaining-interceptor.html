@@ -125,147 +125,51 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/chaining-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
+    
     <h1 id="chaining-interceptor">Chaining Interceptor</h1>
 
 <h2 id="description">Description</h2>
 
-<p>An interceptor that copies all the properties of every object in the value stack to the currently executing object, except for any object that implements <a href="http://struts\.apache\.org/maven/xwork\-core/apidocs/com/opensymphony/xwork2/Unchainable\.html">Unchainable</a>^[http://struts.apache.org/maven/xwork-core/apidocs/com/opensymphony/xwork2/Unchainable.html]. A collection of optional</p>
+<p>An interceptor that copies all the properties of every object in the value stack to the currently executing object, 
+except for any object that implements <a href="/maven/struts2-core/apidocs/com/opensymphony/xwork2/Unchainable.html">Unchainable</a>. 
+A collection of optional <code class="highlighter-rouge">includes</code> and <code class="highlighter-rouge">excludes</code> may be provided to control how and which parameters are copied. 
+Only <code class="highlighter-rouge">includes</code> or <code class="highlighter-rouge">excludes</code> may be specified. Specifying both results in undefined behavior. See the JavaDocs 
+for <a href="/maven/struts2-core/apidocs/com/opensymphony/xwork2/util/reflection/ReflectionProvider.html#copy(java.lang.Object, java.lang.Object, java.util.Map, java.util.Collection, java.util.Collection)">ReflectionProvider#copy(Object, Object, java.util.Map, java.util.Collection, java.util.Collection)</a>
+for more information.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>includes
-</code></pre>
-</div>
-<p> and </p>
+<blockquote>
+  <p>It is important to remember that this interceptor does nothing if there are no objects already on the stack. 
+This means two things:
+1. you can safely apply it to all your actions without any worry of adverse affects.
+2. it is up to you to ensure an object exists in the stack prior to invoking this action. The most typical way this 
+  is done is through the use of the <b>chain</b> result type, which combines with this interceptor to make up the action 
+  chaining feature.</p>
+</blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>excludes
-</code></pre>
-</div>
-<p> may be provided to control how and which parameters are copied. Only</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>includes
-</code></pre>
-</div>
-<p> or</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>excludes
-</code></pre>
-</div>
-<p> may be specified. Specifying both results in undefined behavior. See the javadocs for <a href="http://struts\.apache\.org/maven/xwork\-core/apidocs/com/opensymphony/xwork2/util/reflection/ReflectionProvider\.html\#copy(java\.lang\.Object, java\.lang\.Object, java\.util\.Map, java\.util\.Collection, java\.util\.Collection)">ReflectionProvider#copy(Object, Object, java.util.Map, java.util.Collection, java.util.Collection)</a>^[http://struts.apache.org/maven/xwork-core/apidocs/com/opensymphony/xwork2/util/reflection/ReflectionProvider.html#copy(java.lang.Object, java.lang.Object, java.util.Map, java.util.Collection, java.util.Collection)] for more information.</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>It is important to remember that this interceptor does nothing if there are no objects already on the stack. This means two things:</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-      <td>1. you can safely apply it to all your actions without any worry of adverse affects.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-      <td>2. it is up to you to ensure an object exists in the stack prior to invoking this action. The most typical way this is done is through the use of the <b>chain</b> result type, which combines with this interceptor to make up the action chaining feature.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>By default Errors, Field errors and Message aren’t copied during chaining, to change the behaviour you can specify the below three constants in struts.properties or struts.xml:</p>
+<p>By default Errors, Field errors and Message aren’t copied during chaining, to change the behaviour you can specify 
+the below three constants in struts.properties or struts.xml:</p>
 
 <ul>
-  <li></li>
+  <li><code class="highlighter-rouge">struts.xwork.chaining.copyErrors</code> - set to true to copy Action Errors</li>
+  <li><code class="highlighter-rouge">struts.xwork.chaining.copyFieldErrors</code> - set to true to copy Field Errors</li>
+  <li><code class="highlighter-rouge">struts.xwork.chaining.copyMessages</code> - set to true to copy Action Messages</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.xwork.chaining.copyErrors
-</code></pre>
-</div>
-<p>- set to true to copy Action Errors</p>
+<h3 id="example">Example</h3>
 
-<ul>
-  <li></li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.xwork.chaining.copyFieldErrors
-</code></pre>
-</div>
-<p>- set to true to copy Field Errors</p>
-
-<ul>
-  <li></li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.xwork.chaining.copyMessages
-</code></pre>
-</div>
-<p>- set to true to copy Action Messages</p>
-
-<p><strong>Example:</strong></p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;constant name="struts.xwork.chaining.copyErrors" value="true"/&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.xwork.chaining.copyErrors"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 </code></pre>
 </div>
 
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li></li>
+  <li><code class="highlighter-rouge">excludes</code> (optional) - the list of parameter names to exclude from copying (all others will be included)</li>
+  <li><code class="highlighter-rouge">includes</code> (optional) - the list of parameter names to include when copying (all others will be excluded)</li>
 </ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>excludes
-</code></pre>
-</div>
-<p> (optional) - the list of parameter names to exclude from copying (all others will be included)</p>
-
-<ul>
-  <li></li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>includes
-</code></pre>
-</div>
-<p> (optional) - the list of parameter names to include when copying (all others will be excluded)</p>
 
 <h2 id="extending-the-interceptor">Extending the Interceptor</h2>
 
@@ -275,32 +179,32 @@
 
 <p>Simple example how to chain two actions</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;action name="someAction" class="com.examples.SomeAction"&gt;
-    &lt;interceptor-ref name="basicStack"/&gt;
-	&lt;result name="success" type="chain"&gt;otherAction&lt;/result&gt;
-&lt;/action&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"chain"</span><span class="nt">&gt;</span>otherAction<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
 
-&lt;action name="otherAction" class="com.examples.OtherAction"&gt;
-    &lt;interceptor-ref name="chain"/&gt;
-	&lt;interceptor-ref name="basicStack"/&gt;
-	&lt;result name="success"&gt;good_result.ftl&lt;/result&gt;
-&lt;/action&gt;
+<span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"otherAction"</span> <span class="na">class=</span><span class="s">"com.examples.OtherAction"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"chain"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
 </code></pre>
 </div>
 
 <p>This examples chains two actions but only one property from first action is copied to another</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;action name="someAction" class="com.examples.SomeAction"&gt;
-    &lt;interceptor-ref name="basicStack"/&gt;
-	&lt;result name="success" type="chain"&gt;otherAction&lt;/result&gt;
-&lt;/action&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"chain"</span><span class="nt">&gt;</span>otherAction<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
 
-&lt;action name="otherAction" class="com.examples.OtherAction"&gt;
-    &lt;interceptor-ref name="chainStack"&gt;
-		&lt;param name="chain.includes"&gt;prop1&lt;/param&gt;
-	&lt;/interceptor-ref&gt;
-	&lt;result name="success"&gt;good_result.ftl&lt;/result&gt;
-&lt;/action&gt;
+<span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"otherAction"</span> <span class="na">class=</span><span class="s">"com.examples.OtherAction"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"chainStack"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"chain.includes"</span><span class="nt">&gt;</span>prop1<span class="nt">&lt;/param&gt;</span>
+	<span class="nt">&lt;/interceptor-ref&gt;</span>
+	<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
 </code></pre>
 </div>
 

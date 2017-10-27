@@ -125,85 +125,52 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/cookie-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
+    
     <h1 id="cookie-interceptor">Cookie Interceptor</h1>
 
-<p>
- <p>
- The aim of this interceptor is to set values in the stack/action based on cookie name/value
- of interest.
- </p>
+<p>The aim of this interceptor is to set values in the stack/action based on cookie name/value of interest.</p>
 
- <p>
- If an asterisk is present in cookiesName parameter, it will be assume that
- all cookies name are to be injected into struts' action, even though
- cookiesName is comma-separated by other values, e.g. (cookie1,*,cookie2).
- </p>
+<p>If an asterisk is present in <code class="highlighter-rouge">cookiesName</code> parameter, it will be assume that all cookies name are to be injected into 
+struts’ action, even though <code class="highlighter-rouge">cookiesName</code> is comma-separated by other values, e.g. <code class="highlighter-rouge">(cookie1,*,cookie2)</code>.</p>
 
- <p>
- If cookiesName is left empty it will assume that no cookie will be injected
- into Struts' action.
- </p>
+<p>If <code class="highlighter-rouge">cookiesName</code> is left empty it will assume that no cookie will be injected into Struts’ action.</p>
 
- <p>
- If an asterisk is present in cookiesValue parameter, it will assume that all
- cookies name irrespective of its value will be injected into Struts' action so
- long as the cookie name matches those specified in cookiesName parameter.
- </p>
+<p>If an asterisk is present in <code class="highlighter-rouge">cookiesValue</code> parameter, it will assume that all cookies name irrespective of its value 
+will be injected into Struts’ action so long as the cookie name matches those specified in <code class="highlighter-rouge">cookiesName</code> parameter.</p>
 
- <p>
- If cookiesValue is left empty it will assume that all cookie that match the cookieName
- parameter will be injected into Struts' action.
- </p>
+<p>If <code class="highlighter-rouge">cookiesValue</code> is left empty it will assume that all cookie that match the <code class="highlighter-rouge">cookieName</code> parameter will be injected 
+into Struts’ action.</p>
 
- <p>
- The action could implement {@link CookiesAware} in order to have a {@link Map}
- of filtered cookies set into it.
- </p>
+<p>The action could implement <code class="highlighter-rouge">CookiesAware</code> in order to have a <code class="highlighter-rouge">Map</code> of filtered cookies set into it.</p>
 
-</p>
+<h2 id="parameters">Parameters</h2>
 
-<p>Parameters</p>
+<ul>
+  <li><code class="highlighter-rouge">cookiesName</code> (mandatory) - Name of cookies to be injected into the action. If more than one cookie name is desired 
+it could be comma-separated. If all cookies name is desired, it could simply be *, an asterisk. When many cookies 
+name are comma-separated either of the cookie that match the name in the comma-separated list will be qualified.</li>
+  <li><code class="highlighter-rouge">cookiesValue</code> (mandatory) - Value of cookies that if its name matches cookieName attribute and its value matched 
+this, will be injected into Struts’ action. If more than one cookie name is desired it could be comma-separated. 
+If left empty, it will assume any value would be ok. If more than one value is specified (comma-separated) it will 
+assume a match if either value is matched.</li>
+  <li><code class="highlighter-rouge">acceptCookieNames</code> (optional) - Pattern used to check if name of cookie matches the provided pattern.</li>
+</ul>
 
-<p>
- <ul>
-      <li>cookiesName (mandatory) - Name of cookies to be injected into the action. If more
-                                                                 than one cookie name is desired it could be comma-separated.
-                                                                 If all cookies name is desired, it could simply be *, an asterik.
-                                                                 When many cookies name are comma-separated either of the cookie
-                                                        that match the name in the comma-separated list will be qualified.</li>
-     <li>cookiesValue (mandatory) - Value of cookies that if its name matches cookieName attribute
-                                                         and its value matched this, will be injected into Struts'
-                                                         action. If more than one cookie name is desired it could be
-                                                         comma-separated. If left empty, it will assume any value would
-                                                         be ok. If more than one value is specified (comma-separated)
-                                                         it will assume a match if either value is matched.</li>
-     <li>acceptCookieNames (optional) - Pattern used to check if name of cookie matches the provided patter, to </li>
- </ul>
+<h2 id="extending-the-interceptor">Extending the Interceptor</h2>
 
-</p>
+<ul>
+  <li><code class="highlighter-rouge">populateCookieValueIntoStack</code> - this method will decide if this cookie value is qualified to be populated into 
+the value stack (hence into the action itself)</li>
+  <li><code class="highlighter-rouge">injectIntoCookiesAwareAction</code> - this method will inject selected cookies (as a <code class="highlighter-rouge">java.util.Map</code>) into action 
+that implements <code class="highlighter-rouge">CookiesAware</code>.</li>
+</ul>
 
-<p>Extending the Interceptor</p>
+<h2 id="examples">Examples</h2>
 
-<p>
- <ul>
-     <li>
-         populateCookieValueIntoStack - this method will decide if this cookie value is qualified
-         to be populated into the value stack (hence into the action itself)
-     </li>
-     <li>
-         injectIntoCookiesAwareAction - this method will inject selected cookies (as a java.util.Map)
-         into action that implements {@link CookiesAware}.
-     </li>
- </ul>
-
-</p>
-
-<p>Examples</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
- <span class="c">&lt;!--
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="c">&lt;!--
    This example will inject cookies named either 'cookie1' or 'cookie2' whose
    value could be either 'cookie1value' or 'cookie2value' into Struts' action.
  --&gt;</span>
@@ -214,7 +181,6 @@
     <span class="nt">&lt;/interceptor-ref&gt;</span>
     ....
  <span class="nt">&lt;/action&gt;</span>
-
 
  <span class="c">&lt;!--
       This example will inject cookies named either 'cookie1' or 'cookie2'
@@ -227,7 +193,6 @@
    <span class="nt">&lt;interceptor-ref&gt;</span>
    ...
  <span class="nt">&lt;/action&gt;</span>
-
 
  <span class="c">&lt;!--
       This example will inject cookies named either 'cookie1' with value
@@ -258,10 +223,8 @@
     ...
  <span class="nt">&lt;/action&gt;</span>
 
-
 </code></pre>
 </div>
-
 
   </section>
 </article>

@@ -125,34 +125,29 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/roles-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
+    
     <h1 id="roles-interceptor">Roles Interceptor</h1>
 
-<p> <p>
- This interceptor ensures that the action will only be executed if the user has the correct role.
- </p>
-</p>
+<p>This interceptor ensures that the action will only be executed if the user has the correct role.</p>
 
 <h2 id="parameters">Parameters</h2>
 
-<p>
- <ul>
+<ul>
+  <li><code class="highlighter-rouge">allowedRoles</code> - a comma-separated list of roles to allow</li>
+  <li><code class="highlighter-rouge">disallowedRoles</code> - a comma-separated list of roles to disallow</li>
+</ul>
 
- <li>allowedRoles - a comma-separated list of roles to allow</li>
+<p>When both <code class="highlighter-rouge">allowedRoles</code> and <code class="highlighter-rouge">disallowedRoles</code> are configured, then <code class="highlighter-rouge">disallowedRoles</code> takes precedence, applying 
+the following logic:</p>
 
- <li>disallowedRoles - a comma-separated list of roles to disallow</li>
-
- </ul>
-
- <p>
- When both allowedRoles and disallowedRoles are configured, then disallowedRoles
- takes precedence, applying the following logic: 
-  (if ((inRole(role1) || inRole(role2) || ... inRole(roleN)) &amp;&amp;
+<div class="highlighter-rouge"><pre class="highlight"><code>  (if ((inRole(role1) || inRole(role2) || ... inRole(roleN)) &amp;&amp;
        !inRole(roleA) &amp;&amp; !inRole(roleB) &amp;&amp; ... !inRole(roleZ))
   { //permit ...
- </p>
-</p>
+</code></pre>
+</div>
 
 <h2 id="examples">Examples</h2>
 
@@ -164,10 +159,8 @@
       <span class="nt">&lt;/interceptor-ref&gt;</span>
       <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
   <span class="nt">&lt;/action&gt;</span>
-
 </code></pre>
 </div>
-
 
   </section>
 </article>

@@ -125,70 +125,49 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/prepare-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
+    
     <h1 id="prepare-interceptor">Prepare Interceptor</h1>
 
-<p>
- This interceptor calls <code>prepare()</code> on actions which implement
- {@link Preparable}. This interceptor is very useful for any situation where
- you need to ensure some logic runs before the actual execute method runs.
+<p>This interceptor calls <code class="highlighter-rouge">prepare()</code> on actions which implement <code class="highlighter-rouge">Preparable</code>. This interceptor is very useful for any 
+situation where you need to ensure some logic runs before the actual execute method runs.</p>
 
- <p>
- A typical use of this is to run some logic to load an object from the
- database so that when parameters are set they can be set on this object. For
- example, suppose you have a User object with two properties: <i>id</i> and
- <i>name</i>. Provided that the params interceptor is called twice (once
- before and once after this interceptor), you can load the User object using
- the id property, and then when the second params interceptor is called the
- parameter <i>user.name</i> will be set, as desired, on the actual object
- loaded from the database. See the example for more info.
- </p>
- <p>
- <b>Note:</b> Since XWork 2.0.2, this interceptor extends {@link MethodFilterInterceptor}, therefore being
- able to deal with excludeMethods / includeMethods parameters. See [Workflow Interceptor]
- (class {@link DefaultWorkflowInterceptor}) for documentation and examples on how to use this feature.
- </p>
+<p>A typical use of this is to run some logic to load an object from the database so that when parameters are set they can 
+be set on this object. For example, suppose you have a User object with two properties: <code class="highlighter-rouge">id</code> and <code class="highlighter-rouge">name</code>. Provided that 
+the params interceptor is called twice (once before and once after this interceptor), you can load the User object using
+the <code class="highlighter-rouge">id</code> property and then when the second params interceptor is called the parameter <code class="highlighter-rouge">user.name</code> will be set, as desired, 
+on the actual object loaded from the database. See the example for more info.</p>
 
- <p>
- <b>Update</b>: Added logic to execute a prepare{MethodName} and conditionally
- the a general prepare() Method, depending on the 'alwaysInvokePrepare' parameter/property
- which is by default true. This allows us to run some logic based on the method
- name we specify in the {@link com.opensymphony.xwork2.ActionProxy}. For example, you can specify a
- prepareInput() method that will be run before the invocation of the input method.
- </p>
+<blockquote>
+  <p>Note: Since XWork 2.0.2, this interceptor extends <code class="highlighter-rouge">MethodFilterInterceptor</code>, therefore being able to deal with 
+<code class="highlighter-rouge">excludeMethods</code> / <code class="highlighter-rouge">includeMethods</code> parameters. See <a href="default-workflow-interceptor.html">Workflow Interceptor</a>
+for documentation and examples on how to use this feature.</p>
+</blockquote>
 
-</p>
+<blockquote>
+  <p>Update: Added logic to execute a <code class="highlighter-rouge">prepare&lt;MethodName&gt;</code> and conditionally the a general <code class="highlighter-rouge">prepare()</code> Method, depending 
+on the <code class="highlighter-rouge">alwaysInvokePrepare</code> parameter/property which is by default <code class="highlighter-rouge">true</code>. This allows us to run some logic based 
+on the method name we specify in the <code class="highlighter-rouge">com.opensymphony.xwork2.ActionProxy</code>. For example, you can specify a <code class="highlighter-rouge">prepareInput()</code>
+method that will be run before the invocation of the input method.</p>
+</blockquote>
 
-<p> 
- <b>In PrepareInterceptor</b>
- <p>Applies only when action implements Preparable</p>
- <ol>
-    <li>if the action class have prepare{MethodName}(), it will be invoked</li>
-    <li>else if the action class have prepareDo(MethodName()}(), it will be invoked</li>
-    <li>no matter if 1] or 2] is performed, if alwaysinvokePrepare property of the interceptor is "true" (which is by default "true"), prepare() will be invoked.</li>
- </ol>
- 
-</p>
+<p>In <code class="highlighter-rouge">PrepareInterceptor</code> applies only when action implements <code class="highlighter-rouge">Preparable</code>
+ 1. if the action class have <code class="highlighter-rouge">prepare&lt;MethodName&gt;()</code>, it will be invoked
+ 2. else if the action class have <code class="highlighter-rouge">prepareDo&lt;MethodName&gt;()</code>, it will be invoked
+ 3. no matter if 1] or 2] is performed, if <code class="highlighter-rouge">alwaysInvokePrepare</code> property of the interceptor is <code class="highlighter-rouge">true</code> (which is by 
+   default <code class="highlighter-rouge">true</code>), <code class="highlighter-rouge">prepare()</code> will be invoked.</p>
 
 <h2 id="parameters">Parameters</h2>
 
-<p>
- <ul>
-
- <li>alwaysInvokePrepare - Default to true. If true, prepare will always be invoked,
- otherwise it will not.</li>
-
- </ul>
-
-</p>
+<ul>
+  <li><code class="highlighter-rouge">alwaysInvokePrepare</code> - Default to true. If true, prepare will always be invoked, otherwise it will not.</li>
+</ul>
 
 <h2 id="extending-the-interceptor">Extending the Interceptor</h2>
 
-<p>
- There are no known extension points to this interceptor.
-
-</p>
+<p>There are no known extension points to this interceptor.</p>
 
 <h2 id="examples">Examples</h2>
 
@@ -200,10 +179,8 @@
       <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
   <span class="nt">&lt;/action&gt;</span>
-
 </code></pre>
 </div>
-
 
   </section>
 </article>

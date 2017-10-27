@@ -125,36 +125,20 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/multiselect-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
+    
     <h1 id="multiselect-interceptor">Multiselect Interceptor</h1>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>org.apache.struts2.interceptor.MultiselectInterceptor
-</code></pre>
-</div>
-<p>is in the</p>
+<p>Multiselect Interceptor is defined in the <code class="highlighter-rouge">defaultStack</code>. It checks each form parameter submitted to the action and if 
+it finds one with a prefix of <code class="highlighter-rouge">__multiselect_</code> it inserts a value for a parameter whose name is derived from the suffix
+to <code class="highlighter-rouge">__multiselect_</code> if it does not exist. The default value inserted is an empty String array.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>defaultStack
-</code></pre>
-</div>
-<p>. It checks each form parameter submitted to the action and if it finds one with a prefix of</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>__multiselect_
-</code></pre>
-</div>
-<p>it inserts a value for a parameter whose name is derived from the suffix to</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>__multiselect_
-</code></pre>
-</div>
-<p>if it does not exist. The default value inserted is an empty String array.</p>
-
-<p>This means that a a field that can have multiple selected values(select, checkboxlist, etc) can be accompanied by a hidden input with the same name but a prefix of</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>__multiselect_
-</code></pre>
-</div>
-<p>so that if the no value is selected on the form the action will still receive a value(empty collection) rather than the default HTML action of not providing a value for unselected elements,</p>
+<p>This means that a a field that can have multiple selected values(select, checkboxlist, etc) can be accompanied by a hidden 
+input with the same name but a prefix of <code class="highlighter-rouge">__multiselect_</code> so that if the no value is selected on the form the action 
+will still receive a value(empty collection) rather than the default HTML action of not providing a value for unselected 
+elements.</p>
 
 
   </section>

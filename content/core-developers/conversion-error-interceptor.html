@@ -125,59 +125,37 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/conversion-error-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
+    
     <h1 id="conversion-error-interceptor">Conversion Error Interceptor</h1>
 
-<p>The Struts 2 conversion error interceptor is a subclass of the XWork 2 conversion error interceptor.</p>
+<p>Conversion Error Interceptor adds conversion errors from the ActionContext to the Action’s field errors.</p>
 
-<p>From the Javadocs of the XWork 2 interceptor:</p>
+<p>This interceptor adds any error found in the {@link ActionContext}’s conversionErrors map as a field error (provided that 
+the action implements <code class="highlighter-rouge">ValidationAware</code>). In addition, any field that contains a validation error has its original value 
+saved such that any subsequent requests for that value return the original value rather than the value in the action. 
+This is important because if the value “abc” is submitted and can’t be converted to an int, we want to display the original 
+string (“abc”) again rather than the int value (likely 0, which would make very little sense to the user).</p>
 
-<p> ConversionErrorInterceptor adds conversion errors from the ActionContext to the Action's field errors.
+<blockquote>
+  <p>Note: Since 2.5.2, this interceptor extends <code class="highlighter-rouge">MethodFilterInterceptor</code>, therefore being able to deal with <code class="highlighter-rouge">excludeMethods</code> 
+/ <code class="highlighter-rouge">includeMethods</code> parameters. See <a href="default-workflow-interceptor.html">Workflow Interceptor</a> for documentation and 
+examples on how to use this feature.</p>
+</blockquote>
 
- <p>
- This interceptor adds any error found in the {@link ActionContext}'s conversionErrors map as a field error (provided
- that the action implements {@link ValidationAware}). In addition, any field that contains a validation error has its
- original value saved such that any subsequent requests for that value return the original value rather than the value
- in the action. This is important because if the value "abc" is submitted and can't be converted to an int, we want to
- display the original string ("abc") again rather than the int value (likely 0, which would make very little sense to
- the user).
- </p>
- 
- <p>
- <b>Note:</b> Since 2.5.2, this interceptor extends {@link MethodFilterInterceptor}, therefore being
- able to deal with excludeMethods / includeMethods parameters. See [Workflow Interceptor]
- (class {@link DefaultWorkflowInterceptor}) for documentation and examples on how to use this feature.
- </p>
- 
-</p>
-
-<p>From the Javadocs of the Struts 2 interceptor:</p>
-
-<p> <p>
- This interceptor extends {@link ConversionErrorInterceptor} but only adds conversion errors from the ActionContext to
- the field errors of the action if the field value is not null, "", or {""} (a size 1 String array with only an empty
- String). See {@link ConversionErrorInterceptor} for more information, as well as the Type Conversion documentation.
- </p>
-</p>
+<p>This interceptor extends <code class="highlighter-rouge">ConversionErrorInterceptor</code> but only adds conversion errors from the ActionContext to the field 
+errors of the action if the field value is not null, <code class="highlighter-rouge">""</code>, or <code class="highlighter-rouge"><span class="p">{</span><span class="nt">""</span><span class="err">}</span></code> (a size 1 String array with only an empty String). 
+See <code class="highlighter-rouge">ConversionErrorInterceptor</code> for more information, as well as the Type Conversion documentation.</p>
 
 <h2 id="parameters">Parameters</h2>
 
-<p>
- <ul>
-
- <li>None</li>
-
- </ul>
-
-</p>
+<p>There are no parameters for this interceptor.</p>
 
 <h2 id="extending-the-interceptor">Extending the Interceptor</h2>
 
-<p> <p>
- There are no known extension points for this interceptor.
- </p>
-</p>
+<p>There are no known extension points for this interceptor.</p>
 
 <h2 id="examples">Examples</h2>
 
@@ -186,10 +164,8 @@
      <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"conversionError"</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
  <span class="nt">&lt;/action&gt;</span>
-
 </code></pre>
 </div>
-
 
   </section>
 </article>
