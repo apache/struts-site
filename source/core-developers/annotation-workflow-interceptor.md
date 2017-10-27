@@ -17,7 +17,7 @@ Invokes any annotated methods on the action. Specifically, it supports the follo
 
 There can be multiple methods marked with the same annotations, but the order of their execution is not guaranteed. 
 However, the annotated methods on the superclass chain are guaranteed to be invoked before the annotated method in the current 
-class in the case of a {@link Before} annotations and after, if the annotations is `After`
+class in the case of a `@Before` annotations and after, if the annotations is `@After`.
 
 ## Examples
 
