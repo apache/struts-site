@@ -60,7 +60,7 @@ Other (non-root) objects in the ActionContext can be rendered use the `#` notati
 ```
 
 The ActionContext is also exposed to Action classes via a static method but you **should not** use this approach. 
-Safer is to use one of the `*Aware` interafces. 
+Safer is to use one of the `*Aware` interfaces. 
 
 ```java
 ActionContext.getContext().getSession().put("mySessionPropKey", mySessionObject);
@@ -128,10 +128,20 @@ person.relatives.{? #this.gender == 'male'}
 OGNL supports basic lamba expression syntax enabling you to write simple functions.
 (Dedicated to all you math majors who didn't think you would ever see this one again.)
 
-Fibonacci: if n==0 return 0; elseif n==1 return 1; else return fib(n-2)+fib(n-1);
+Fibonacci: 
+```
+if n == 0 
+   return 0;
+ elseif n == 1
+   return 1;
+ else
+   return fib(n-2) + fib(n-1);
+
+
  fib(0) = 0
  fib(1) = 1
  fib(11) = 89
+ ```
 
 **How the expression works**
 
