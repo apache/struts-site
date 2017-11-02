@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Tag Developers Guide (WIP)</title>
+  <title>Tag Developers Guide</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -125,129 +125,78 @@
 
 <p>Please make sure you have read the <a href="#PAGE_13927">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
+<h2 id="description">Description</h2>
+
+<p>Render a I18n text message.</p>
+
+<p>The message must be in a resource bundle with the same name as the action that it is associated with. In practice this 
+means that you should create a properties file in the same package as your Java class with the same name as your class, 
+but with <code class="highlighter-rouge">.properties</code> extension.</p>
+
+<p>If the named message is not found in a property file, then the body of the tag will be used as default message. If no body 
+is used, then the stack can be searched, and if a value is returned, it will written to the output.
+If no value is found on the stack, the key of the message will be written out.</p>
+
+<p>For more details on using resource bundles with Struts 2 read the <a href="../core-developers/localization.html">localization guide</a>.</p>
+
+<h2 id="parameters">Parameters</h2>
+
 <table>
   <tbody>
     <tr>
+      <td><strong>Dynamic Attributes Allowed</strong>:</td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
 
-<p><strong>Description</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Required</th>
+      <th>Default</th>
+      <th>Evaluated</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td><strong>true</strong></td>
+      <td> </td>
+      <td>false</td>
+      <td>String</td>
+      <td>Name of resource property to fetch</td>
+    </tr>
+    <tr>
+      <td>searchValueStack</td>
+      <td>false</td>
+      <td>false</td>
+      <td>false</td>
+      <td>Boolean</td>
+      <td>Search the stack if property is not found on resources</td>
+    </tr>
+    <tr>
+      <td>var</td>
+      <td>false</td>
+      <td> </td>
+      <td>false</td>
+      <td>String</td>
+      <td>Name used to reference the value pushed into the Value Stack</td>
+    </tr>
+  </tbody>
+</table>
 
-<p> <p>
- Render a I18n text message.
- </p>
+<h2 id="examples">Examples</h2>
 
- <p>
- The message must be in a resource bundle
- with the same name as the action that it is associated with. In practice
- this means that you should create a properties file in the same package
- as your Java class with the same name as your class, but with .properties
- extension.
- </p>
+<blockquote>
+  <p>Accessing messages from a given bundle (the i18n Shop example bundle in the first example) and using bundle defined 
+through the framework in the second example.</p>
+</blockquote>
 
- <p>
- If the named message is not found in a property file, then the body of the
- tag will be used as default message. If no body is used, then the stack can
- be searched, and if a value is returned, it will written to the output.
- If no value is found on the stack, the key of the message will be written out.
- </p>
-</p>
-
-<p>For more details on using resource bundles with Struts 2 read the <em>localization guide</em> .</p>
-
-<p><strong>Parameters</strong></p>
-
-<p>		<table width="100%">
-
-			<tr>
-
-				<td colspan="6"><h4>Dynamic Attributes Allowed:</h4> false</td>
-
-			</tr>
-
-			<tr>
-
-				<td colspan="6">&nbsp;</td>
-
-			</tr>
-
-			<tr>
-
-				<th align="left" valign="top"><h4>Name</h4></th>
-
-				<th align="left" valign="top"><h4>Required</h4></th>
-
-				<th align="left" valign="top"><h4>Default</h4></th>
-
-				<th align="left" valign="top"><h4>Evaluated</h4></th>
-
-				<th align="left" valign="top"><h4>Type</h4></th>
-
-				<th align="left" valign="top"><h4>Description</h4></th>
-
-			</tr>
-
-				<tr>
-
-					<td align="left" valign="top">name</td>
-
-					<td align="left" valign="top"><strong>true</strong></td>
-
-					<td align="left" valign="top"></td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">String</td>
-
-					<td align="left" valign="top">Name of resource property to fetch</td>
-
-				</tr>
-
-				<tr>
-
-					<td align="left" valign="top">searchValueStack</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">Boolean</td>
-
-					<td align="left" valign="top">Search the stack if property is not found on resources</td>
-
-				</tr>
-
-				<tr>
-
-					<td align="left" valign="top">var</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top"></td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">String</td>
-
-					<td align="left" valign="top">Name used to reference the value pushed into the Value Stack</td>
-
-				</tr>
-
-		</table>
-
-</p>
-
-<p><strong>Examples</strong></p>
-
-<pre><code class="language-none"> &lt;p&gt;Accessing messages from a given bundle (the i18n Shop example bundle in the first example) and using bundle defined through the framework in the second example.&lt;/p&gt;
-
-</code></pre>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
- <span class="c">&lt;!-- First Example --&gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="c">&lt;!-- First Example --&gt;</span>
  <span class="nt">&lt;s:i18n</span> <span class="na">name=</span><span class="s">"struts.action.test.i18n.Shop"</span><span class="nt">&gt;</span>
      <span class="nt">&lt;s:text</span> <span class="na">name=</span><span class="s">"main.title"</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;/s:i18n&gt;</span>
@@ -260,23 +209,18 @@
     <span class="nt">&lt;s:param</span> <span class="nt">&gt;</span>Mr Smith<span class="nt">&lt;/s:param&gt;</span>
  <span class="nt">&lt;/s:text&gt;</span>
 
-
 </code></pre>
 </div>
 
-<p>Other example</p>
+<h3 id="other-example">Other example</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;s:text name="format.money"&gt;&lt;s:param name="value" value="myMoneyValue"/&gt;&lt;/s:text&gt;
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:text</span> <span class="na">name=</span><span class="s">"format.money"</span><span class="nt">&gt;&lt;s:param</span> <span class="na">name=</span><span class="s">"value"</span> <span class="na">value=</span><span class="s">"myMoneyValue"</span><span class="nt">/&gt;&lt;/s:text&gt;</span>
 </code></pre>
 </div>
 
 <p>where the following is in a regular (possibly locale-specific) properties file:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-format.money={0,number,currency}
-
+<div class="highlighter-rouge"><pre class="highlight"><code>format.money={0,number,currency}
 </code></pre>
 </div>
 
@@ -291,21 +235,17 @@ format.money={0,number,currency}
   </li>
 </ol>
 
-<p><strong>If you wish to use i18n in your tag attributes</strong></p>
+<h3 id="if-you-wish-to-use-i18n-in-your-tag-attributes">If you wish to use i18n in your tag attributes</h3>
 
 <p>This will <strong>not</strong> work:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;s:textfield name="lastName" label="&lt;s:text name="person.lastName"/&gt;" ../&gt;
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"lastName"</span> <span class="na">label=</span><span class="s">"&lt;s:text name="</span><span class="na">person</span><span class="err">.</span><span class="na">lastName</span><span class="err">"</span><span class="nt">/&gt;</span>" ../&gt;
 </code></pre>
 </div>
 
-<p>Instead, you should use the getText() method that you inherit when your Action extends XWork’s ActionSupport:</p>
+<p>Instead, you should use the <code class="highlighter-rouge">getText()</code> method that you inherit when your Action extends <code class="highlighter-rouge">ActionSupport</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;s:textfield name="lastName" label="getText('person.lastName')" ../&gt;
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"lastName"</span> <span class="na">label=</span><span class="s">"getText('person.lastName')"</span> <span class="err">..</span><span class="nt">/&gt;</span>
 </code></pre>
 </div>
 
