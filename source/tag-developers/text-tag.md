@@ -23,11 +23,11 @@ For more details on using resource bundles with Struts 2 read the [localization 
 
 ## Parameters
 
-### Dynamic Attributes Allowed: false
+|__Dynamic Attributes Allowed__:|false|
 
 |Name|Required|Default|Evaluated|Type|Description|
 |----|--------|-------|---------|----|-----------|
-|name|true| |false|String|Name of resource property to fetch|
+|name|__true__| |false|String|Name of resource property to fetch|
 |searchValueStack|false|false|false|Boolean|Search the stack if property is not found on resources|
 |var|false| |false|String|Name used to reference the value pushed into the Value Stack|
 
