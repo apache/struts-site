@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tag Developers Guide (WIP)
+title: Tag Developers Guide
 parent:
   url: themes-and-templates.html
   title: Themes and Templates

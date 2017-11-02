@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tag Developers Guide (WIP)
+title: Tag Developers Guide
 ---
 
 # Access to ValueStack from JSPs
