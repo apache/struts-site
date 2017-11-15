@@ -12,7 +12,7 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-The example code for this tutorial, form_tags, can be checked out from [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
+The example code for this tutorial, **form-tags**, can be checked out from [struts-examples](https://github.com/apache/struts-examples).
 
 ## Introduction
 

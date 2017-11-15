@@ -12,7 +12,7 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-The example code for this tutorial, wildcard_method_selection, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)
+The example code for this tutorial, **wildcard-method-selection**, is available for checkout at [struts-examples](https://github.com/apache/struts-examples)
 
 ## Introduction
 

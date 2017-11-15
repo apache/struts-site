@@ -12,7 +12,7 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-The example code for this tutorial, form_xml_validation, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)
+The example code for this tutorial, **form-xml-validation**, is available for checkout at [struts-examples](https://github.com/apache/struts-examples)
 
 ## Introduction
 

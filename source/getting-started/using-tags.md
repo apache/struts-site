@@ -13,7 +13,7 @@ parent:
 {:toc}
 
 This tutorial assumes you've completed the [Hello World](hello-world-using-struts2.html) tutorial and have a working 
-helloworld project. The example code for this tutorial, **using_tags**, is available for checkout from the Struts 2 GitHub 
+**helloworld** project. The example code for this tutorial, **using-tags**, is available for checkout from the Struts 2 GitHub 
 repository at [struts-examples](https://github.com/apache/struts-examples). The example projects use Maven to manage 
 the artifact dependencies and to build the .war files.
 

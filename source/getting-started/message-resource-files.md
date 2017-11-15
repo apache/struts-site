@@ -13,7 +13,7 @@ parent:
 {:toc}
 
 This tutorial assumes you've completed the [Form Validation](form-validation.html) tutorial and have a working 
-**form_validation** project. The example code for this tutorial, **message_resource**, is available for checkout from the 
+**form-validation** project. The example code for this tutorial, **message-resource**, is available for checkout from the 
 Struts 2 GitHub repository at [struts-examples](https://github.com/apache/struts-examples).
 
 ## Introduction

@@ -13,8 +13,8 @@ parent:
 {:toc}
 
 This tutorial assumes you've completed the [Coding Struts 2 Actions](coding-actions.html) tutorial and have a working 
-coding-actions project. The example code for this tutorial, form-processing, is available for checkout from 
-the Struts 2 GitHub subversion repository: [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
+**coding-actions** project. The example code for this tutorial, **form-processing**, is available for checkout from 
+the Struts 2 GitHub repository [struts-examples](https://github.com/apache/struts-examples).
 
 ## Introduction
 

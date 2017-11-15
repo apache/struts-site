@@ -14,30 +14,23 @@ parent:
 
 This tutorial walks through installing the framework and creating a simple application.
 
-<div class="alert alert-block alert-error">
-
 While the Struts 2 framework is simple to use, creating non-trivial applications assumes a working knowledge 
 of many J2EE technologies, including:
 
-  <ul>
-    <li>Java</li>
-    <li>Filters, JSP, and Tag Libraries</li>
-    <li>JavaBeans</li>
-    <li>HTML and HTTP</li>
-    <li>Web Containers (such as Tomcat)</li>
-    <li>XML</li>
-  </ul> 
+ - Java
+ - Filters, JSP, and Tag Libraries
+ - JavaBeans
+ - HTML and HTTP
+ - Web Containers (such as Tomcat)
+ - XML
 
-</div>
+> For more about supporting technologies, see the [Key Technologies Primer](../primer.html). 
 
-<i class="glyphicon glyphicon-info-sign alert-info" aria-hidden="true"></i> For more about supporting technologies, 
-see the [Key Technologies Primer](/primer.html). 
-
-### Java Requirements
+## Java Requirements
 
 Struts 2 requires Servlet API 2.4 or higher, JSP 2.0 or higher, and Java 7 or higher.
 
-### Our First Application
+## Our First Application
 
 To get started using Struts 2 we will create a web application using Maven to manage the artifact dependencies.
 You can checkout all the example applications from the Struts 2 GitHub repository 

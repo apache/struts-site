@@ -12,6 +12,8 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
+## Description
+
 When you click on a hyperlink or submit an HTML form in a Struts 2 web application, the input is not sent to another 
 server page, but to a Java class that you provide. These classes are called Actions. After the Action fires, a Result 
 selects a resource to render the response. The resource is generally a server page, but it can also be a PDF file, 

@@ -13,7 +13,7 @@ parent:
 {:toc}
 
 This tutorial assumes you've completed the [Processing Forms](processing-forms.html) tutorial and have a working 
-**form_processing** project. The example code for this tutorial, **form_validation**, is available for checkout from 
+**form-processing** project. The example code for this tutorial, **form-validation**, is available for checkout from 
 the Struts 2 GitHub repository [struts-examples](https://github.com/apache/struts-examples).
 
 ## Introduction

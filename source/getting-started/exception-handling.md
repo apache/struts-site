@@ -12,7 +12,7 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-The code for this tutorial, exception_handling, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
+The code for this tutorial, **exception-handling**, is available for checkout at [struts-examples](https://github.com/apache/struts-examples).
 
 ## Introduction
 
