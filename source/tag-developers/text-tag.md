@@ -25,11 +25,15 @@ For more details on using resource bundles with Struts 2 read the [localization 
 
 |__Dynamic Attributes Allowed__:|false|
 
-|Name|Required|Default|Evaluated|Type|Description|
-|----|--------|-------|---------|----|-----------|
+|Name|Required|Default|Evaluated|Type|Description|Since|
+|----|--------|-------|---------|----|-----------|-----|
 |name|__true__| |false|String|Name of resource property to fetch|
-|searchValueStack|false|false|false|Boolean|Search the stack if property is not found on resources|
+|searchValueStack|false|false|false|Boolean|Search the stack if property is not found on resources|Deprecated|
 |var|false| |false|String|Name used to reference the value pushed into the Value Stack|
+|escapeCsv|false|false|false|Boolean|Whether to escape CSV (useful to escape a value for a column)|2.5.14|
+|escapeHtml|false|false|false|Boolean|Whether to escape HTML|2.5.14|
+|escapeJavaScript|false|false|false|Boolean|Whether to escape Javascript|2.5.14|
+|escapeXml|false|false|false|Boolean|Whether to escape XML|2.5.14|
 
 
 ## Examples
