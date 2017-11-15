@@ -7,10 +7,14 @@ parent:
 ---
 
 # Form Tags
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 The example code for this tutorial, form_tags, can be checked out from [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
 
-__Introduction__
+## Introduction
 
 In this tutorial we'll explore some of the other Struts 2 form controls. In our previous tutorials that explained how 
 to use Struts 2 forms ([Processing forms](processing-forms.html), [Form validation](form-validation.html), 
@@ -22,7 +26,7 @@ The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excel
 having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find 
 an answer to your problem, post a question on the mailing list.
 
-__Example Application__
+## Example Application
 
 The example application that supports this tutorial shows how to use Struts 2 form tags so that a user can edit his 
 information. The information that can be edited is encapsulated in an object of class Person. A Person object knows 
@@ -39,7 +43,7 @@ of the Person object.
 The first and last names are shown on the form (see edit.jsp) using the Struts 2 textfield tag, which we've discussed 
 in previous tutorials.
 
-__Struts 2 Select Tag__
+## Struts 2 Select Tag
 
 A user can select one favorite sport from several choices. The example application uses the Struts 2 select tag 
 to provide the list of options for the select box.
@@ -95,7 +99,7 @@ head section.
 
 Since the personBean's getSport method returns "baskeball", the basketball option value is marked as selected.
 
-__Struts 2 Radio Tag__
+## Struts 2 Radio Tag
 
 The Struts 2 radio tag—like its standard HTML counterpart—is used to display 2 or more choices, only one of which can 
 be selected by the user. Here is the code for the Struts 2 radio button from the example application.
@@ -134,7 +138,7 @@ The Array of String objects returned are used to create the individual radio but
 Also just like the Struts 2 select tag the result returned by calling the personBean object's getGender method is used
 to determine which of the radio buttons is checked.
 
-__Struts 2 Select Tag - Object Backed__
+## Struts 2 Select Tag - Object Backed
 
 You may need to create a Struts 2 select tag where the options displayed to the user each have their own value that is
 different then what is displayed. In the example application, the user's residency is stored as a two-letter 
@@ -177,7 +181,7 @@ The value returned by calling the personBean object's getResidency method determ
 tags is marked as selected. In our example, since getResidency returns "KS", the option tag whose value attribute 
 equals "KS" is marked as selected.
 
-__Struts 2 Checkbox Tag__
+## Struts 2 Checkbox Tag
 
 The Struts 2 checkbox tag is used to create the HTML input type equals checkbox tag. The value for the key attribute 
 tells the framework what method to call to determine if the checkbox is checked or not checked. The method called should 
@@ -216,7 +220,7 @@ hidden form field to check if the associated checkbox field exists in the posted
 doesn't exist then the Struts 2 framework will know to update the value of the personBean object's over21 instance 
 variable to false.
 
-__Struts 2 checkboxlist Tag__
+## Struts 2 checkboxlist Tag
 
 The Struts 2 framework provides a unique form field control that creates a series of associated check boxes, one or more
 of which can be checked. In the example application, the Person class has an Array of Strings, which is used to store 
@@ -266,7 +270,7 @@ the checkbox will be checked.
 </tr>
 ```
 
-__Summary__
+## Summary
 
 There are several other Struts 2 form controls you should explore. If you need more information about the Struts 2 form 
 tags consult the Struts 2 documentation at [http://struts.apache.org](http://struts.apache.org).

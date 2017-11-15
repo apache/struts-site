@@ -7,6 +7,10 @@ parent:
 ---
 
 # JasperReports Tutorial
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 The Struts 2 JasperReports plugin is a bridge from Struts 2 to JasperReports and does not include JasperReports itself, 
 which must be downloaded separately.

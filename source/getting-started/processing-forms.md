@@ -7,6 +7,10 @@ parent:
 ---
 
 # Processing Forms
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 This tutorial assumes you've completed the [Coding Struts 2 Actions](coding-actions.html) tutorial and have a working 
 coding-actions project. The example code for this tutorial, form-processing, is available for checkout from 

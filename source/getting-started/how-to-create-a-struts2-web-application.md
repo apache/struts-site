@@ -5,7 +5,12 @@ parent:
     title: Getting started
     url: index.html
 ---
+
 # How To Create A Struts 2 Web Application
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 This tutorial walks through installing the framework and creating a simple application.
 

@@ -7,16 +7,20 @@ parent:
 ---
 
 # Control Tags
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 The example code for this tutorial, control_tags, is available at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)
 
-__Introduction__
+## Introduction
 
 Struts 2 has several control tags that can be used in the view. This tutorial will discuss and show examples of how to use the Struts 2 if and iterator tags. For more information about these and other control tags visit [tags reference](http://cwiki.apache.org/confluence/display/WW/Generic+Tag+Reference).
 
 The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer to your problem, post a question on the mailing list.
 
-__Struts 2 if Tag__
+## Struts 2 if Tag
 
 In the example application's thankyou.jsp is this markup.
 
@@ -48,7 +52,7 @@ The value of the test attribute must be an expression that evaluates to true or 
 
 The purpose of the above markup is to use either "Car model" or "Car models" depending on how many car models the user selected on the edit page. So the value for the test attribute of this iterator tag gets the length of the carModels String array and compares that to 1. If it's greater then 1, the correct grammar is "Car models" else the correct grammar is "Car model".
 
-__Struts iterator Tag__
+## Struts iterator Tag
 
 The Struts iterator tag is used to generate a loop that iterates over each item in a collection. In the thankyou.jsp is this markup.
 
@@ -78,7 +82,7 @@ If the collection contains objects that have multiple fields, then you should us
 
 The value of the iterator tag is states, which causes the Struts 2 framework to call the getStates method of the Action class (`EditAction.java`). The getStates method returns a List of State objects. The State class has two fields stateAbbr and stateName, both having the appropriate get method. The iterator will loop over each State object stored in the collection. Each time through the loop, the Struts 2 framework will have a reference to the current State object and will call getStateAbbr and getStateName methods for that current State object.
 
-__Additional Iterator Attributes__
+## Additional Iterator Attributes
 
 The Struts 2 iterator tag has additional attributes you can use to control the begin and end values for specifying that the iterator tag should only loop over a part of the collection. See the [iterator tag reference](https://cwiki.apache.org/confluence/display/WW/iterator) for more information.
 

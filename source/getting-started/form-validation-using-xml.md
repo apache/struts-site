@@ -7,16 +7,20 @@ parent:
 ---
 
 # Form Validation Using XML
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 The example code for this tutorial, form_xml_validation, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)
 
-__Introduction__
+## Introduction
 
 In this tutorial we'll cover how to validate a user's input in form fields using Struts 2's XML validation methodology. In the [Form Validation](form-validation.html) tutorial we discussed validating a user's input using the validate method in the Action class. Using a separate XML validation file gives you the ability to use validators built-in to the Struts 2 framework.
 
 The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer to your problem, post a question on the mailing list.
 
-__Example Application__
+## Example Application
 
 The example application that supports this tutorial shows how to use Struts 2's XML validation methodology. The information that can be edited is encapsulated in an object of class Person.
 
@@ -26,7 +30,7 @@ To enable the user to edit his information that is stored in the Person object, 
 
 When the user submits the form, we want to validate his entries into the form fields.
 
-__Validation Using XML__
+## Validation Using XML
 
 To validate a user's form field entries you can use a separate XML file that contains your validation rules. The XML file that contains the validation rules must be named as ActionClassName-validation.xml. In the example application, the XML validation file is named EditAction-validation.xml (see src/main/resources/org/apache/struts/edit/action).
 
@@ -34,7 +38,7 @@ Struts 2 provides several different validators that you can use in the XML valid
 
 In the above form, we want to ensure the user enters a first name. To have the Struts 2 framework enforce that rule we can used the Struts 2 [requiredstring validator](../core-developers/requiredstring-validator.html). This validator checks that the user has entered a string value in the form field.
 
-__XML Validator Format__
+## XML Validator Format
 
 In the XML validation file (for this example that is EditAction-validation.xml), is this XML:
 
@@ -59,7 +63,7 @@ For example if the user doesn't enter a value in the first name form field and c
 
 ![form-validation-2.png](attachments/att20873264_form-validation-2.png)
 
-__Validating An Email Address__
+## Validating An Email Address
 
 You can use the Struts 2 [email validator](../core-developers/email-validator.html) to validate the user's input in the email field. Here is the validator node that is in the `EditAction-validation.xml` file.
 
@@ -78,7 +82,7 @@ You can use the Struts 2 [email validator](../core-developers/email-validator.ht
 
 Note that in the example, we are requiring the user to enter an email address and then validating the email address the user entered.
 
-__Validating A User's Input Using A Regular Expression__
+## Validating A User's Input Using A Regular Expression
 
 The Struts 2 framework provides a powerful way to validate a user's form field input by using the [regex validator](../core-developers/regex-validator.html) . In the example application, we want to ensure the user enters the phone number in the format 999-999-9999. We can use a regular expression and the [regex validator](../core-developers/regex-validator.html) to enforce this rule.
 
@@ -98,7 +102,7 @@ The Struts 2 framework provides a powerful way to validate a user's form field i
 
 The param name="expression" node is used to specify the regular expression that will be applied to the user's input. Note how the regular expression is contained within a CDATA section.
 
-__Validating A User's Input Using An OGNL Expression__
+## Validating A User's Input Using An OGNL Expression
 
 In the example application, we want to ensure the user checks at least one of the car model check boxes. To enforce this rule we can use the [fieldexpression validator](../core-developers/fieldexpression-validator.html) . Here's the XML for that validator node.
 
@@ -122,7 +126,7 @@ If the user did not check any of the check boxes, the Array returned by the getC
 
 The fieldexpression validator is useful when doing conditional validation of a user's input. If the OGNL expression doesn't evaluate to true then the user's input won't be allowed.
 
-__Summary__
+## Summary
 
 The Struts 2 framework provides easy-to-use validation methodologies. You can add a validate method to the Action class or have a separate XML file with validation rules or you can use a combination of both methodologies.
 
