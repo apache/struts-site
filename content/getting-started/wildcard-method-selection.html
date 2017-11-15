@@ -119,25 +119,35 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Getting Started"><< back to Getting Started</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/getting-started/wildcard-method-selection.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="wildcard-method-selection">Wildcard Method Selection</h1>
+    
+    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    
+    <h1 class="no_toc" id="wildcard-method-selection">Wildcard Method Selection</h1>
 
-<p>The example code for this tutorial, wildcard_method_selection, is available for checkout at <a href="https://github.com/apache/struts-examples">https://github.com/apache/struts-examples</a></p>
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#example-application" id="markdown-toc-example-application">Example Application</a></li>
+  <li><a href="#wildcard-method-selection-1" id="markdown-toc-wildcard-method-selection-1">Wildcard Method Selection</a></li>
+  <li><a href="#dynamic-method-invocation" id="markdown-toc-dynamic-method-invocation">Dynamic Method Invocation</a></li>
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+</ul>
 
-<p><strong>Introduction</strong></p>
+<p>The example code for this tutorial, <strong>wildcard-method-selection</strong>, is available for checkout at <a href="https://github.com/apache/struts-examples">struts-examples</a></p>
+
+<h2 id="introduction">Introduction</h2>
 
 <p>In this tutorial we’ll cover how to configure an action node in the struts.xml configuration file so that one action node can be used to relate several different Action URLs to specific methods of the Action class. This will reduce the number of action nodes we must write in the struts.xml configuration file.</p>
 
 <p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer to your problem, post a question on the mailing list.</p>
 
-<p><strong>Example Application</strong></p>
+<h2 id="example-application">Example Application</h2>
 
 <p><img src="attachments/att21921805_Screen shot 2010-05-30 at 8.51.40 AM.png" alt="Screen shot 2010-05-30 at 8.51.40 AM.png" /></p>
 
 <p>The example application that supports this tutorial shows how to use Struts 2’s wildcard method selection methodology. The example application is just a simple one that lists some people and lets you edit them, delete them, and add a new person to the list. Everything that the application needs to do with a <code class="highlighter-rouge">Person</code> (the model class) is controlled by the Struts 2 <code class="highlighter-rouge">ActionSupport</code> class <code class="highlighter-rouge">PersonAction</code>. The <code class="highlighter-rouge">PersonAction</code> class has several different methods (e.g. create, edit, delete) that are called depending on what the user wants to do.</p>
 
-<p><strong>Wildcard Method Selection</strong></p>
+<h2 id="wildcard-method-selection-1">Wildcard Method Selection</h2>
 
 <p>Without using the wildcard method selection technique, I’d have to write an action mapping node in the Struts 2 configuration file for each separate action I’d want to call. For example:</p>
 
@@ -184,13 +194,13 @@
 
 <p>If there is no value in front of Person, then the Struts 2 framework will call the execute method of the class <code class="highlighter-rouge">PersonAction</code>.</p>
 
-<p><strong>Dynamic Method Invocation</strong></p>
+<h2 id="dynamic-method-invocation">Dynamic Method Invocation</h2>
 
 <p>The wildcard method selection technique explained above should not be confused with the “Dynamic Method Invocation” technique. The Struts 2 documentation explains this technique (which uses the bang, <code class="highlighter-rouge">!</code>, operator in the action name) and recommends against using the “Dynamic Method Invocation” technique due to security and other reasons related to how this technique is implemented internally.</p>
 
 <p>The Struts 2 documentation also recommends turning off the option to use the dynamic method invocation by setting <code class="highlighter-rouge">struts.enable.DynamicMethodInvocation</code> to <code class="highlighter-rouge">FALSE</code> in the Struts configuration.</p>
 
-<p><strong>Summary</strong></p>
+<h2 id="summary">Summary</h2>
 
 <p>By using the wildcard method selection technique explained above, you can significantly reduce the number of action mapping nodes you need to write and manage in the Struts 2 XML configuration file.</p>
 

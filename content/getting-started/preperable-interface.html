@@ -119,31 +119,58 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Getting Started"><< back to Getting Started</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/getting-started/preperable-interface.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="preparable-interface">Preparable Interface</h1>
+    
+    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    
+    <h1 class="no_toc" id="preparable-interface">Preparable Interface</h1>
 
-<p>The example code for this tutorial, preparable_interface, is available at <a href="https://github.com/apache/struts-examples">https://github.com/apache/struts-examples</a>.</p>
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#preparable-interface-1" id="markdown-toc-preparable-interface-1">Preparable Interface</a></li>
+  <li><a href="#example-application" id="markdown-toc-example-application">Example Application</a></li>
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+</ul>
 
-<p><strong>Introduction</strong></p>
+<p>The example code for this tutorial, <strong>preparable-interface</strong>, is available at <a href="https://github.com/apache/struts-examples">struts-examples</a>.</p>
 
-<p>Often the data used to populate a form control is dynamically generated, perhaps from a database. When the user submits the form, the Struts 2 validation interceptor attempts to validate the user’s form input. If validation fails the Struts 2 framework returns the value “input” but the “input” action is not re-executed. Rather the view associated with the “input” result is rendered to the user. Usually this view is the page that displayed the original form.</p>
+<h2 id="introduction">Introduction</h2>
 
-<p>This work-flow can cause a problem if one or more of the form fields or some other data displayed depends on a dynamic look-up that that is accomplished in the Action class’s input method. Since the Action class’s input method is not re-executed when validation fails, the view page may no longer have access to the correct information to create the form or other display information.</p>
+<p>Often the data used to populate a form control is dynamically generated, perhaps from a database. When the user submits 
+the form, the Struts 2 validation interceptor attempts to validate the user’s form input. If validation fails the Struts 2 
+framework returns the value <code class="highlighter-rouge">input</code> but the <code class="highlighter-rouge">input</code> action is not re-executed. Rather the view associated with the <code class="highlighter-rouge">input</code> 
+result is rendered to the user. Usually this view is the page that displayed the original form.</p>
 
-<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer to your problem, post a question on the mailing list.</p>
+<p>This work-flow can cause a problem if one or more of the form fields or some other data displayed depends on a dynamic 
+look-up that that is accomplished in the Action class’s input method. Since the Action class’s input method is not 
+re-executed when validation fails, the view page may no longer have access to the correct information to create the form 
+or other display information.</p>
 
-<p><strong>Preparable Interface</strong></p>
+<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer 
+to your problem, post a question on the mailing list.</p>
 
-<p>Struts 2 provides the <a href="http://struts.apache.org/2.3.1/xwork-core/apidocs/com/opensymphony/xwork2/Preparable.html">Preparable interface</a>^[http://struts.apache.org/2.3.1/xwork-core/apidocs/com/opensymphony/xwork2/Preparable.html] to overcome this problem. An Action class that implements this interface must override the prepare method. The prepare method will always be called by the Struts 2 framework’s <a href="//struts.apache.org/docs/prepare-interceptor.html">prepare interceptor</a> whenever any method is called for the Action class and also when validation fails before the view is rendered.</p>
+<h2 id="preparable-interface-1">Preparable Interface</h2>
 
-<p>In the prepare method you should put any statements that must be executed no matter what other Action class method will be called and also statements that should be executed if validation fails. Usually statements in the prepare method set the value for Action class instance fields that will be used to populate form controls and get the values that will be used to set the initial form field values.</p>
+<p>Struts 2 provides the <a href="../maven/struts2-core/apidocs/com/opensymphony/xwork2/Preparable.html">Preparable interface</a>
+to overcome this problem. An Action class that implements this interface must override the prepare method. The <code class="highlighter-rouge">prepare</code> 
+method will always be called by the Struts 2 framework’s <a href="../core-developers/prepare-interceptor.html">prepare interceptor</a> 
+whenever any method is called for the Action class and also when validation fails before the view is rendered.</p>
 
-<p>In addition to automatically running the prepare method the <a href="//struts.apache.org/docs/prepare-interceptor.html">prepare interceptor</a> will also call a method named prepare[ActionMethodName]. For example, define a prepare method and a prepareInput method in the Action class that implements preparable. When the Struts 2 framework calls the input method, the prepare interceptor will call the prepareInput and the prepare methods before calling the input method.</p>
+<p>In the <code class="highlighter-rouge">prepare</code> method you should put any statements that must be executed no matter what other Action class method will 
+be called and also statements that should be executed if validation fails. Usually statements in the prepare method set 
+the value for Action class instance fields that will be used to populate form controls and get the values that will be 
+used to set the initial form field values.</p>
 
-<p><strong>Example Application</strong></p>
+<p>In addition to automatically running the prepare method the <a href="../core-developers/prepare-interceptor.html">prepare interceptor</a> 
+will also call a method named <code class="highlighter-rouge">prepare&lt;ActionMethodName&gt;</code>. For example, define a prepare method and a <code class="highlighter-rouge">prepareInput</code> method 
+in the Action class that implements <code class="highlighter-rouge">Preparable</code>. When the Struts 2 framework calls the input method, the prepare interceptor 
+will call the prepareInput and the prepare methods before calling the input method.</p>
 
-<p>If you examine class EditAction in the example application (see above) you’ll see that it implements the Preparable Interface. In the prepare method is this code:</p>
+<h2 id="example-application">Example Application</h2>
+
+<p>If you examine class EditAction in the example application (see above) you’ll see that it implements the <code class="highlighter-rouge">Preparable</code> interface. 
+In the prepare method is this code:</p>
 
 <p><strong>EditAction.java prepare Method</strong></p>
 
@@ -153,13 +180,17 @@
 </code></pre>
 </div>
 
-<p>The above statements get the car model values used to populate the car model check boxes displayed in the form and also get the information about the Person object being edited.</p>
+<p>The above statements get the car model values used to populate the car model check boxes displayed in the form and also 
+get the information about the Person object being edited.</p>
 
-<p>When you run the example application, look in the log to see when the prepare method is called in relation to the input and execute methods. Running the example application and examining the log should help you understand the impact of implementing the Preparable Interface and the prepare method.</p>
+<p>When you run the example application, look in the log to see when the prepare method is called in relation to the input 
+and execute methods. Running the example application and examining the log should help you understand the impact of implementing 
+the <code class="highlighter-rouge">Preparable</code> interface and the prepare method.</p>
 
-<p><strong>Summary</strong></p>
+<h2 id="summary">Summary</h2>
 
-<p>When your application requires specific statements to be executed no matter which method of the Action class is called or when validation fails, you should implement the Preparable interface and override the prepare method.</p>
+<p>When your application requires specific statements to be executed no matter which method of the Action class is called 
+or when validation fails, you should implement the Preparable interface and override the prepare method.</p>
 
 <table>
   <tbody>

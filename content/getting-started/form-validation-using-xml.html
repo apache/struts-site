@@ -119,19 +119,32 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Getting Started"><< back to Getting Started</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/getting-started/form-validation-using-xml.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="form-validation-using-xml">Form Validation Using XML</h1>
+    
+    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    
+    <h1 class="no_toc" id="form-validation-using-xml">Form Validation Using XML</h1>
 
-<p>The example code for this tutorial, form_xml_validation, is available for checkout at <a href="https://github.com/apache/struts-examples">https://github.com/apache/struts-examples</a></p>
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#example-application" id="markdown-toc-example-application">Example Application</a></li>
+  <li><a href="#validation-using-xml" id="markdown-toc-validation-using-xml">Validation Using XML</a></li>
+  <li><a href="#xml-validator-format" id="markdown-toc-xml-validator-format">XML Validator Format</a></li>
+  <li><a href="#validating-an-email-address" id="markdown-toc-validating-an-email-address">Validating An Email Address</a></li>
+  <li><a href="#validating-a-users-input-using-a-regular-expression" id="markdown-toc-validating-a-users-input-using-a-regular-expression">Validating A User’s Input Using A Regular Expression</a></li>
+  <li><a href="#validating-a-users-input-using-an-ognl-expression" id="markdown-toc-validating-a-users-input-using-an-ognl-expression">Validating A User’s Input Using An OGNL Expression</a></li>
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+</ul>
 
-<p><strong>Introduction</strong></p>
+<p>The example code for this tutorial, <strong>form-xml-validation</strong>, is available for checkout at <a href="https://github.com/apache/struts-examples">struts-examples</a></p>
+
+<h2 id="introduction">Introduction</h2>
 
 <p>In this tutorial we’ll cover how to validate a user’s input in form fields using Struts 2’s XML validation methodology. In the <a href="form-validation.html">Form Validation</a> tutorial we discussed validating a user’s input using the validate method in the Action class. Using a separate XML validation file gives you the ability to use validators built-in to the Struts 2 framework.</p>
 
 <p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer to your problem, post a question on the mailing list.</p>
 
-<p><strong>Example Application</strong></p>
+<h2 id="example-application">Example Application</h2>
 
 <p>The example application that supports this tutorial shows how to use Struts 2’s XML validation methodology. The information that can be edited is encapsulated in an object of class Person.</p>
 
@@ -141,7 +154,7 @@
 
 <p>When the user submits the form, we want to validate his entries into the form fields.</p>
 
-<p><strong>Validation Using XML</strong></p>
+<h2 id="validation-using-xml">Validation Using XML</h2>
 
 <p>To validate a user’s form field entries you can use a separate XML file that contains your validation rules. The XML file that contains the validation rules must be named as ActionClassName-validation.xml. In the example application, the XML validation file is named EditAction-validation.xml (see src/main/resources/org/apache/struts/edit/action).</p>
 
@@ -149,7 +162,7 @@
 
 <p>In the above form, we want to ensure the user enters a first name. To have the Struts 2 framework enforce that rule we can used the Struts 2 <a href="../core-developers/requiredstring-validator.html">requiredstring validator</a>. This validator checks that the user has entered a string value in the form field.</p>
 
-<p><strong>XML Validator Format</strong></p>
+<h2 id="xml-validator-format">XML Validator Format</h2>
 
 <p>In the XML validation file (for this example that is EditAction-validation.xml), is this XML:</p>
 
@@ -180,7 +193,7 @@
 
 <p><img src="attachments/att20873264_form-validation-2.png" alt="form-validation-2.png" /></p>
 
-<p><strong>Validating An Email Address</strong></p>
+<h2 id="validating-an-email-address">Validating An Email Address</h2>
 
 <p>You can use the Struts 2 <a href="../core-developers/email-validator.html">email validator</a> to validate the user’s input in the email field. Here is the validator node that is in the <code class="highlighter-rouge">EditAction-validation.xml</code> file.</p>
 
@@ -199,7 +212,7 @@
 
 <p>Note that in the example, we are requiring the user to enter an email address and then validating the email address the user entered.</p>
 
-<p><strong>Validating A User’s Input Using A Regular Expression</strong></p>
+<h2 id="validating-a-users-input-using-a-regular-expression">Validating A User’s Input Using A Regular Expression</h2>
 
 <p>The Struts 2 framework provides a powerful way to validate a user’s form field input by using the <a href="../core-developers/regex-validator.html">regex validator</a> . In the example application, we want to ensure the user enters the phone number in the format 999-999-9999. We can use a regular expression and the <a href="../core-developers/regex-validator.html">regex validator</a> to enforce this rule.</p>
 
@@ -219,7 +232,7 @@
 
 <p>The param name=”expression” node is used to specify the regular expression that will be applied to the user’s input. Note how the regular expression is contained within a CDATA section.</p>
 
-<p><strong>Validating A User’s Input Using An OGNL Expression</strong></p>
+<h2 id="validating-a-users-input-using-an-ognl-expression">Validating A User’s Input Using An OGNL Expression</h2>
 
 <p>In the example application, we want to ensure the user checks at least one of the car model check boxes. To enforce this rule we can use the <a href="../core-developers/fieldexpression-validator.html">fieldexpression validator</a> . Here’s the XML for that validator node.</p>
 
@@ -243,7 +256,7 @@
 
 <p>The fieldexpression validator is useful when doing conditional validation of a user’s input. If the OGNL expression doesn’t evaluate to true then the user’s input won’t be allowed.</p>
 
-<p><strong>Summary</strong></p>
+<h2 id="summary">Summary</h2>
 
 <p>The Struts 2 framework provides easy-to-use validation methodologies. You can add a validate method to the Action class or have a separate XML file with validation rules or you can use a combination of both methodologies.</p>
 

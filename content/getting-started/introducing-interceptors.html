@@ -119,63 +119,76 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Getting Started"><< back to Getting Started</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/getting-started/introducing-interceptors.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="introducing-interceptors">Introducing Interceptors</h1>
+    
+    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    
+    <h1 class="no_toc" id="introducing-interceptors">Introducing Interceptors</h1>
 
-<p>The example code for this tutorial, interceptors, is available at <a href="https://github.com/apache/struts-examples">https://github.com/apache/struts-examples</a></p>
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#introducing-interceptors-1" id="markdown-toc-introducing-interceptors-1">Introducing Interceptors</a></li>
+  <li><a href="#run-the-example" id="markdown-toc-run-the-example">Run The Example</a></li>
+  <li><a href="#create-your-own-interceptor" id="markdown-toc-create-your-own-interceptor">Create Your Own Interceptor</a></li>
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+</ul>
 
-<p><strong>Introduction</strong></p>
+<p>The example code for this tutorial, <strong>interceptors</strong>, is available at <a href="https://github.com/apache/struts-examples">struts-examples</a></p>
 
-<p>So far our tutorials have not delved into the inner workings of the Struts 2 framework. But in this tutorial we’ll introduce a key set of classes the Struts 2 framework relies upon to do most of the work whenever an Action is executed. In this tutorial’s example project there is a register link that is mapped in the Struts XML configuration file (struts.xml) to the execute method of class Register. Before that execute method is called much work is done behind the scenes by the Struts 2 framework. For example:</p>
+<h2 id="introduction">Introduction</h2>
+
+<p>So far our tutorials have not delved into the inner workings of the Struts 2 framework. But in this tutorial we’ll 
+introduce a key set of classes the Struts 2 framework relies upon to do most of the work whenever an Action is executed. 
+In this tutorial’s example project there is a register link that is mapped in the Struts XML configuration file (<code class="highlighter-rouge">struts.xml</code>) 
+to the execute method of class Register. Before that execute method is called much work is done behind the scenes 
+by the Struts 2 framework. For example:</p>
 
 <ol>
-  <li>
-    <p>Handling any exceptions generated</p>
-  </li>
-  <li>
-    <p>Converting the String request parameters to the Register class’s instance fields where the name values match</p>
-  </li>
-  <li>
-    <p>Calling the validate method and/or the external XML validation</p>
-  </li>
+  <li>Handling any exceptions generated</li>
+  <li>Converting the String request parameters to the Register class’s instance fields where the name values match</li>
+  <li>Calling the validate method and/or the external XML validation</li>
 </ol>
 
 <p>After the execute method is completed more work must be done</p>
 
 <ol>
-  <li>
-    <p>Handling any exceptions generated</p>
-  </li>
-  <li>
-    <p>Converting the <code class="highlighter-rouge">Register</code> class’s instance fields to String values for display in the view page</p>
-  </li>
-  <li>
-    <p>Forwarding to the correct view page depending on the result String returned by the execute method</p>
-  </li>
+  <li>Handling any exceptions generated</li>
+  <li>Converting the <code class="highlighter-rouge">Register</code> class’s instance fields to String values for display in the view page</li>
+  <li>Forwarding to the correct view page depending on the result String returned by the execute method</li>
 </ol>
 
 <p>The above list of tasks are not complete - several other tasks are done before and after the execution of the Action.</p>
 
-<p>The benefit of using Struts 2 is all this work happens automatically. You can focus on the logic of the controller (the Struts 2 ActionSupport class), the Service layer, the data access layer, your domain models, etc.</p>
+<p>The benefit of using Struts 2 is all this work happens automatically. You can focus on the logic of the controller 
+(the Struts 2 ActionSupport class), the Service layer, the data access layer, your domain models, etc.</p>
 
-<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer to your problem, post a question on the mailing list.</p>
+<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are 
+having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find 
+an answer to your problem, post a question on the mailing list.</p>
 
-<p><strong>Introducing Interceptors</strong></p>
+<h2 id="introducing-interceptors-1">Introducing Interceptors</h2>
 
-<p>The tasks that are done by the Struts 2 framework before and after an Action is executed are done by Struts 2 interceptors. Interceptors are standard Java classes included in the Struts 2 core jar which are executed in a specific order.</p>
+<p>The tasks that are done by the Struts 2 framework before and after an Action is executed are done by Struts 2 interceptors. 
+Interceptors are standard Java classes included in the Struts 2 core jar which are executed in a specific order.</p>
 
-<p>In our example application there is a package node in struts.xml. The package node has an attribute of extends with a value of “struts-default.” The value “struts-default” identifies to the framework the specific stack of interceptors that will be executed before and after the Actions in that package.</p>
+<p>In our example application there is a package node in struts.xml. The package node has an attribute of extends with 
+a value of “struts-default.” The value “struts-default” identifies to the framework the specific stack of interceptors 
+that will be executed before and after the Actions in that package.</p>
 
-<p>If you want to learn more about the inner workings of interceptors, what interceptors belong to the struts default stack, and what are all the interceptors included with Struts 2, visit <a href="//struts.apache.org/docs/interceptors.html">Understanding Interceptors</a> .</p>
+<p>If you want to learn more about the inner workings of interceptors, what interceptors belong to the struts default stack, 
+and what are all the interceptors included with Struts 2, visit <a href="../core-developers/interceptors.html">Understanding Interceptors</a> .</p>
 
-<p>Sometime the Struts 2 default stack of interceptors are not exactly what you need for a particular action. You may want to use interceptors that are not part of the Struts 2 default stack. For an individual Action or for the entire package of Actions, you can specify a different stack of interceptors that the Action or package should use. Below is how you would specify that the register Action should use both the <a href="//struts.apache.org/docs/logger-interceptor.html">logger</a> and <a href="//struts.apache.org/docs/logger-interceptor.html">timer</a> interceptors in addition to the interceptors provided by the default stack.</p>
+<p>Sometime the Struts 2 default stack of interceptors are not exactly what you need for a particular action. You may want 
+to use interceptors that are not part of the Struts 2 default stack. For an individual Action or for the entire 
+package of Actions, you can specify a different stack of interceptors that the Action or package should use. Below is 
+how you would specify that the register Action should use both the <a href="../core-developers/logging-interceptor.html">logging</a> 
+and <a href="../core-developers/timer-interceptor.html">timer</a> interceptors in addition to the interceptors provided by the default stack.</p>
 
 <p><strong>Specify Specific Interceptors For An Action</strong></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"register"</span> <span class="na">class=</span><span class="s">"org.apache.struts.register.action.Register"</span> <span class="na">method=</span><span class="s">"execute"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"timer"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"logger"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"logging"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"exception.logEnabled"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"exception.logLevel"</span><span class="nt">&gt;</span>ERROR<span class="nt">&lt;/param&gt;</span>
@@ -186,19 +199,31 @@
 </code></pre>
 </div>
 
-<p>The logger interceptor logs the start and end of the execution of an Action. The timer interceptor logs the amount of time (in milliseconds) for execution of the Action. These two interceptors used together can provide developers useful feedback.</p>
+<p>The logger interceptor logs the start and end of the execution of an Action. The timer interceptor logs the amount 
+of time (in milliseconds) for execution of the Action. These two interceptors used together can provide developers 
+useful feedback.</p>
 
-<p>In the code example above note the three interceptor-ref nodes. Each one has a value for the name attribute. For the register Action we are instructing the framework to use the timer, logger, and defaultStack interceptors. The defaultStack are all the interceptors normally executed for an Action.</p>
+<p>In the code example above note the three interceptor-ref nodes. Each one has a value for the name attribute. For the register 
+Action we are instructing the framework to use the <code class="highlighter-rouge">timer</code>, <code class="highlighter-rouge">logging</code>, and <code class="highlighter-rouge">defaultStack</code> interceptors. The <code class="highlighter-rouge">defaultStack</code> 
+are all the interceptors normally executed for an Action.</p>
 
-<p>How did I know to use the value of timer for the name attribute and even that there is a timer interceptor? On the <a href="//struts.apache.org/docs/interceptors.html">Interceptors</a> web page in the Struts 2 documentation are a list of interceptors that come with the Struts 2 framework and what the name value is for each interceptor.</p>
+<p>How did I know to use the value of timer for the name attribute and even that there is a timer interceptor? 
+On the <a href="../core-developers/interceptors.html">Interceptors</a> web page in the Struts 2 documentation are a list of interceptors 
+that come with the Struts 2 framework and what the name value is for each interceptor.</p>
 
-<p>How did I know that the timer interceptor isn’t part of the defaultStack of interceptors already? Again on the Interceptors documentation web page is a list of which interceptors belong to the defaultStack.</p>
+<p>How did I know that the timer interceptor isn’t part of the defaultStack of interceptors already? Again on the Interceptors 
+documentation web page is a list of which interceptors belong to the <code class="highlighter-rouge">defaultStack</code>.</p>
 
-<p>Note the param nodes. These nodes are used to provide a value to the setLogEnabled and setLogLevel methods of the <a href="//struts.apache.org/docs/exception-interceptor.html">Exception Interceptor</a> . Providing the values of true and ERROR will cause the Struts 2 framework to log any exceptions not caught by the application’s code and to log those exceptions at the ERROR level.</p>
+<p>Note the param nodes. These nodes are used to provide a value to the setLogEnabled and setLogLevel methods 
+of the <a href="../core-developers/exception-interceptor.html">Exception Interceptor</a>. Providing the values of true and ERROR 
+will cause the Struts 2 framework to log any exceptions not caught by the application’s code and to log those exceptions 
+at the ERROR level.</p>
 
-<p><strong>Run The Example</strong></p>
+<h2 id="run-the-example">Run The Example</h2>
 
-<p>In the example application follow the README instructions to build, deploy, and run the application. View the output sent to the JVM console to see the log messages generated by the logger and timer interceptors. You should see log messages similar to the following:</p>
+<p>In the example application follow the README instructions to build, deploy, and run the application. View the output 
+sent to the JVM console to see the log messages generated by the logger and timer interceptors. You should see log messages 
+similar to the following:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>INFO: Starting execution stack for action //register
 Nov 20, 2010 9:55:48 AM com.opensymphony.xwork2.util.logging.jdk.JdkLogger info
@@ -208,7 +233,8 @@ INFO: Executed action /register!execute took 177 ms.
 </code></pre>
 </div>
 
-<p>If you wanted to have the logger and timer interceptors executed for all Actions in a package you would use the following in <code class="highlighter-rouge">struts.xml</code>:</p>
+<p>If you wanted to have the logger and timer interceptors executed for all Actions in a package you would use 
+the following in <code class="highlighter-rouge">struts.xml</code>:</p>
 
 <p><strong>Specify Specific Interceptors For A Package</strong></p>
 
@@ -216,7 +242,7 @@ INFO: Executed action /register!execute took 177 ms.
     <span class="nt">&lt;interceptors&gt;</span> 
         <span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"appDefault"</span><span class="nt">&gt;</span> 
             <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"timer"</span> <span class="nt">/&gt;</span> 
-            <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"logger"</span> <span class="nt">/&gt;</span> 
+            <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"logging"</span> <span class="nt">/&gt;</span> 
             <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span> <span class="nt">/&gt;</span> 
         <span class="nt">&lt;/interceptor-stack&gt;</span> 
     <span class="nt">&lt;/interceptors&gt;</span>          
@@ -229,17 +255,26 @@ INFO: Executed action /register!execute took 177 ms.
 </code></pre>
 </div>
 
-<p>In the code above we use the interceptors node to define a new stack of interceptors that includes the timer, logger, and defaultStack interceptors. We give this new interceptor stack a name of appDefault. Then we use the default-interceptor-ref node to specify that for all Actions defined inside this package node the appDefault stack of interceptors are to be used. Thus the timer and logger interceptor will be executed for each Action in this package.</p>
+<p>In the code above we use the interceptors node to define a new stack of interceptors that includes the <code class="highlighter-rouge">timer</code>, logging<code class="highlighter-rouge">, 
+and </code>defaultStack<code class="highlighter-rouge"> interceptors. We give this new interceptor stack a name of appDefault. Then we use the </code>default-interceptor-ref<code class="highlighter-rouge"> 
+node to specify that for all Actions defined inside this package node the </code>appDefault<code class="highlighter-rouge"> stack of interceptors are to be used. 
+Thus the </code>timer<code class="highlighter-rouge"> and </code>logging` interceptor will be executed for each Action in this package.</p>
 
-<p>Note that in both examples we are still executing all the other interceptors by including the defaultStack as one of the interceptor-ref nodes. When you specify what interceptors you want to use for an Action or a package then only those interceptors are executed. So if in the example we had left out the interceptor-ref for defaultStack only the logger and timer interceptors would have executed.</p>
+<p>Note that in both examples we are still executing all the other interceptors by including the defaultStack as one 
+of the <code class="highlighter-rouge">interceptor-ref</code> nodes. When you specify what interceptors you want to use for an Action or a package then only 
+those interceptors are executed. So if in the example we had left out the <code class="highlighter-rouge">interceptor-ref</code> for <code class="highlighter-rouge">defaultStack</code> only 
+the <code class="highlighter-rouge">logging</code> and <code class="highlighter-rouge">timer</code> interceptors would have executed.</p>
 
-<p><strong>Create Your Own Interceptor</strong></p>
+<h2 id="create-your-own-interceptor">Create Your Own Interceptor</h2>
 
-<p>In addition to specifying your own stack of interceptors, you can also write your own new interceptor and add it to the stack that is executed. The Struts <a href="//struts.apache.org/docs/writing-interceptors.html">Writing Interceptors</a> guide explains how to do this. For example, you could create your own interceptor to handle authentication and authorization.</p>
+<p>In addition to specifying your own stack of interceptors, you can also write your own new interceptor and add it to 
+the stack that is executed. The Struts <a href="../core-developers/writing-interceptors.html">Writing Interceptors</a> guide explains 
+how to do this. For example, you could create your own interceptor to handle authentication and authorization.</p>
 
-<p><strong>Summary</strong></p>
+<h2 id="summary">Summary</h2>
 
-<p>Interceptors provide the Struts 2 framework with both power and flexibility. Developers may add additional interceptors (either ones provided by Struts 2 or ones they create) to the stack of interceptors executed when an Action class is called.</p>
+<p>Interceptors provide the Struts 2 framework with both power and flexibility. Developers may add additional interceptors 
+(either ones provided by Struts 2 or ones they create) to the stack of interceptors executed when an Action class is called.</p>
 
 <table>
   <tbody>

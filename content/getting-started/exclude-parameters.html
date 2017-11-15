@@ -119,21 +119,42 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Getting Started"><< back to Getting Started</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/getting-started/exclude-parameters.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="exclude-parameters">Exclude Parameters</h1>
+    
+    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    
+    <h1 class="no_toc" id="exclude-parameters">Exclude Parameters</h1>
 
-<p>The example code for this tutorial, exclude_parameters, is available at <a href="https://github.com/apache/struts-examples">https://github.com/apache/struts-examples</a>.</p>
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#processing-request-parameters" id="markdown-toc-processing-request-parameters">Processing Request Parameters</a></li>
+  <li><a href="#excluding-request-parameters-from-struts-2-processing" id="markdown-toc-excluding-request-parameters-from-struts-2-processing">Excluding Request Parameters From Struts 2 Processing</a></li>
+  <li><a href="#example-application" id="markdown-toc-example-application">Example Application</a></li>
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+</ul>
 
-<p><strong>Introduction</strong></p>
+<p>The example code for this tutorial, <strong>exclude-parameters</strong>, is available at <a href="https://github.com/apache/struts-examples">struts-examples</a>.</p>
 
-<p>When <a href="//struts.apache.org/docs/strutsproperties.html">Struts development mode is set to true</a> (also see <a href="debugging-struts.html">Debugging Struts</a>) the framework writes many informative messages to the log file. These messages include ones that indicate whether or not a specific parameter will be handled by the parameter interceptor and made available to the Action class. These log messages can be helpful in clearly identifying parameters that you do not want the parameter interceptor to process for security or other reasons. This article discusses how to exclude parameters from being handled by the parameter interceptor.</p>
+<h2 id="introduction">Introduction</h2>
 
-<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer to your problem, post a question on the mailing list.</p>
+<p>When <a href="../core-developers/struts-xml.html">Struts development mode is set to true</a> (also see <a href="debugging-struts.html">Debugging Struts</a>) 
+the framework writes many informative messages to the log file. These messages include ones that indicate whether 
+or not a specific parameter will be handled by the parameter interceptor and made available to the Action class. 
+These log messages can be helpful in clearly identifying parameters that you do not want the parameter interceptor 
+to process for security or other reasons. This article discusses how to exclude parameters from being handled by 
+the parameter interceptor.</p>
 
-<p><strong>Processing Request Parameters</strong></p>
+<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer 
+to your problem, post a question on the mailing list.</p>
 
-<p>Most request parameters are by default processed by the parameter interceptor and Struts 2 will attempt to modify the state of those Action class fields that match up to a parameter name by calling a corresponding public set method. For example if the request includes a parameter of lastName with a value of Phillips, Struts 2 will try to call a public method with a signature of setLastName(String lastName). However, there may be request parameters that you do not want Struts 2 to try to set the value of in the Action class.</p>
+<h2 id="processing-request-parameters">Processing Request Parameters</h2>
+
+<p>Most request parameters are by default processed by the parameter interceptor and Struts 2 will attempt to modify the state 
+of those Action class fields that match up to a parameter name by calling a corresponding public set method. For example 
+if the request includes a parameter of lastName with a value of Phillips, Struts 2 will try to call a public method with 
+a signature of setLastName(String lastName). However, there may be request parameters that you do not want Struts 2 
+to try to set the value of in the Action class.</p>
 
 <p>Consider this code which creates a form:</p>
 
@@ -154,7 +175,8 @@
 </code></pre>
 </div>
 
-<p>The s:submit tag will create a submit button with a name of submit. Since the Action class probably doesn’t have a setSubmit(String name) method you will see the following log messages (only if Struts development mode is set to true):</p>
+<p>The s:submit tag will create a submit button with a name of submit. Since the Action class probably doesn’t have 
+a <code class="highlighter-rouge">setSubmit(String name)</code> method you will see the following log messages (only if Struts development mode is set to true):</p>
 
 <p><strong>Log Messages</strong></p>
 
@@ -168,11 +190,14 @@ Unexpected Exception caught setting 'submit' on 'class org.apache.struts.edit.ac
 </code></pre>
 </div>
 
-<p><strong>Excluding Request Parameters From Struts 2 Processing</strong></p>
+<h2 id="excluding-request-parameters-from-struts-2-processing">Excluding Request Parameters From Struts 2 Processing</h2>
 
 <p>If you’re not familiar with setting up a custom interceptor stack for your Struts 2 application review <a href="introducing-interceptors.html">Introducing Interceptors</a>.</p>
 
-<p>To exclude specific parameters from being processed by the Struts 2 framework you need to add those parameter names to the list of excluded parameters. One way to do this is by adding those parameter names to the collection of excludedParams for the Parameters interceptor. You can do this by modifying the Parameters interceptor in setting up the stack of interceptors used by your Struts 2 application. For example:</p>
+<p>To exclude specific parameters from being processed by the Struts 2 framework you need to add those parameter names 
+to the list of excluded parameters. One way to do this is by adding those parameter names to the collection of <code class="highlighter-rouge">excludedParams</code> 
+for the Parameters interceptor. You can do this by modifying the Parameters interceptor in setting up the stack of interceptors 
+used by your Struts 2 application. For example:</p>
 
 <p><strong>Setup Interceptor Stack To Exclude submit Parameter</strong></p>
 
@@ -190,19 +215,29 @@ Unexpected Exception caught setting 'submit' on 'class org.apache.struts.edit.ac
 </code></pre>
 </div>
 
-<p>The value of node <code class="highlighter-rouge">&lt;param name="params.excludeParams"&gt;</code> is a comma-delimited list of regular expressions or simple Strings that identify request parameters that should NOT be processed by the Parameters interceptor. To exclude the submit parameter (which is the name of the submit button in the form code above), I just added submit to the list.</p>
+<p>The value of node <code class="highlighter-rouge">&lt;param name="params.excludeParams"&gt;</code> is a comma-delimited list of regular expressions or simple 
+Strings that identify request parameters that should NOT be processed by the Parameters interceptor. To exclude 
+the <code class="highlighter-rouge">submit</code> parameter (which is the name of the submit button in the form code above), I just added <code class="highlighter-rouge">submit</code> to the list.</p>
 
-<p>See the <a href="//struts.apache.org/docs/struts-defaultxml.html">Basic Stack of Interceptors described here</a> to view the initial set of parameter names/regular expressions to exclude. Be sure to copy over the list of parameters already being excluded and then add your own parameters to the end separated by commas.</p>
+<p>See the <a href="../core-developers/struts-default-xml.html">Basic Stack of Interceptors described here</a> to view the initial 
+set of parameter names/regular expressions to exclude. Be sure to copy over the list of parameters already being excluded 
+and then add your own parameters to the end separated by commas.</p>
 
-<p><strong>Example Application</strong></p>
+<h2 id="example-application">Example Application</h2>
 
-<p>Download the example application, <a href="http://code.google.com/p/struts2-examples/downloads/list">Exclude_Params_Struts2_Mvn</a> that demonstrates excluding a request parameter. The download is a zipped Maven project. You should be able to unzip it and import the project into any Maven-aware Java IDE. See the project’s README.txt file for how to build and run the application.</p>
+<p>Download the example application, <a href="https://github.com/apache/struts-examples/tree/master/exclude-parameters">exclude-params</a> 
+that demonstrates excluding a request parameter. See the project’s README.txt file for how to build and run the application.</p>
 
-<p>To see the log messages written when not excluding the submit parameter remove the “,submit” from the list of excluded parameter values in the struts.xml file. Then rebuild and redeploy the application and view the console when running the application.</p>
+<p>To see the log messages written when not excluding the submit parameter remove the <code class="highlighter-rouge">,submit</code> from the list of excluded 
+parameter values in the struts.xml file. Then rebuild and redeploy the application and view the console when running the application.</p>
 
-<p><strong>Summary</strong></p>
+<h2 id="summary">Summary</h2>
 
-<p>It’s a nice feature of the Struts 2 framework that it logs during development which request parameters will and will not be processed. During development of a Struts 2 web application it’s a good practice to review these log messages to determine if there are any parameters that the framework should not process. For those parameters the Struts 2 framework should not process add the parameter name (or a regular expression that can be used to identify multiple parameter names) to the comma-delimited list that is the value for the <code class="highlighter-rouge">&lt;param name="params.excludeParams"&gt;</code> node.</p>
+<p>It’s a nice feature of the Struts 2 framework that it logs during development which request parameters will and will not 
+be processed. During development of a Struts 2 web application it’s a good practice to review these log messages to determine 
+if there are any parameters that the framework should not process. For those parameters the Struts 2 framework should 
+not process add the parameter name (or a regular expression that can be used to identify multiple parameter names) 
+to the comma-delimited list that is the value for the <code class="highlighter-rouge">&lt;param name="params.excludeParams"&gt;</code> node.</p>
 
 <table>
   <tbody>

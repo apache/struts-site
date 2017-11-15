@@ -119,25 +119,40 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Getting Started"><< back to Getting Started</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/getting-started/form-validation.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="form-validation">Form Validation</h1>
+    
+    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    
+    <h1 class="no_toc" id="form-validation">Form Validation</h1>
 
-<p>This tutorial assumes you’ve completed the <a href="processing-forms.html">Processing Forms</a> tutorial and have a working form_processing project. The example code for this tutorial, form_validation, is available for checkout from the Struts 2 GitHub repository: <a href="https://github.com/apache/struts-examples">https://github.com/apache/struts-examples</a>.</p>
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#add-validate-method" id="markdown-toc-add-validate-method">Add validate Method</a></li>
+  <li><a href="#handle-input-being-returned" id="markdown-toc-handle-input-being-returned">Handle Input Being Returned</a></li>
+  <li><a href="#error-messages" id="markdown-toc-error-messages">Error Messages</a></li>
+  <li><a href="#styling-the-error-messages" id="markdown-toc-styling-the-error-messages">Styling The Error Messages</a></li>
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+  <li><a href="#up-next" id="markdown-toc-up-next">Up Next</a></li>
+</ul>
 
-<blockquote>
+<p>This tutorial assumes you’ve completed the <a href="processing-forms.html">Processing Forms</a> tutorial and have a working 
+<strong>form-processing</strong> project. The example code for this tutorial, <strong>form-validation</strong>, is available for checkout from 
+the Struts 2 GitHub repository <a href="https://github.com/apache/struts-examples">struts-examples</a>.</p>
 
-</blockquote>
+<h2 id="introduction">Introduction</h2>
 
-<p><strong>Introduction</strong></p>
+<p>In this tutorial we’ll explore using Struts 2 to validate the user’s input on a form. There are two ways you can use Struts 2 
+to do form validation. This tutorial will cover the more basic method, where the validation is included in the Struts 2 Action class.</p>
 
-<p>In this tutorial we’ll explore using Struts 2 to validate the user’s input on a form. There are two ways you can use Struts 2 to do form validation. This tutorial will cover the more basic method, where the validation is included in the Struts 2 Action class.</p>
+<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer 
+to your problem, post a question on the mailing list.</p>
 
-<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer to your problem, post a question on the mailing list.</p>
+<h2 id="add-validate-method">Add validate Method</h2>
 
-<p><strong>Add validate Method</strong></p>
-
-<p>To enable the Struts 2 Action class to validate a user’s input on a Struts 2 form, you must define a validate method in your Action class. Using the example from <em>Processing Forms</em>  tutorial, let’s say that we have these business rules:</p>
+<p>To enable the Struts 2 Action class to validate a user’s input on a Struts 2 form, you must define a validate method 
+in your Action class. Using the example from <a href="processing-forms.html">Processing Forms</a> tutorial, let’s say that we have 
+these business rules:</p>
 
 <ol>
   <li>User must provide a first name</li>
@@ -145,11 +160,14 @@
   <li>User younger then 18 cannot register</li>
 </ol>
 
-<p>If you recall from the <a href="processing-forms.html">Processing Forms</a> tutorial the user’s input into the form fields is placed by Struts 2 into the Java model class personBean. So a user’s input into the firstName field would end up as the value for personBean’s firstName instance field (via the personBean.setFirstName method).</p>
+<p>If you recall from the <a href="processing-forms.html">Processing Forms</a> tutorial the user’s input into the form fields is placed 
+by Struts 2 into the Java model class <code class="highlighter-rouge">personBean</code>. So a user’s input into the <code class="highlighter-rouge">firstName</code> field would end up as the value 
+for <code class="highlighter-rouge">personBean</code>’s <code class="highlighter-rouge">firstName</code> instance field (via the <code class="highlighter-rouge">personBean.setFirstName</code> method).</p>
 
-<p>In the validate method we can refer to get the values of personBean’s instance fields by using the appropriate get methods. Once we have the values we can employ logic to enforce our business rules.</p>
+<p>In the validate method we can refer to get the values of personBean’s instance fields by using the appropriate get methods. 
+Once we have the values we can employ logic to enforce our business rules.</p>
 
-<p>Add the following validate method to Register.java (the Action class).</p>
+<p>Add the following validate method to <code class="highlighter-rouge">Register.java</code> (the Action class).</p>
 
 <p><strong>validate method</strong></p>
 
@@ -169,15 +187,19 @@
 </code></pre>
 </div>
 
-<p>When the user presses the submit button on the register form, Struts 2 will transfer the user’s input to the personBean’s instance fields. Then Struts 2 will automatically execute the validate method. If any of the if statements are true, Struts 2 will call its addFieldError method (which our Action class inherited by extending ActionSupport).</p>
+<p>When the user presses the submit button on the register form, Struts 2 will transfer the user’s input to the personBean’s 
+instance fields. Then Struts 2 will automatically execute the validate method. If any of the if statements are true, 
+Struts 2 will call its <code class="highlighter-rouge">addFieldError</code> method (which our Action class inherited by extending ActionSupport).</p>
 
-<p>If any errors have been added then Struts 2 will not proceed to call the execute method. Rather the Struts 2 framework will return “input” as the result of calling the action.</p>
+<p>If any errors have been added then Struts 2 will not proceed to call the execute method. Rather the Struts 2 framework 
+will return <code class="highlighter-rouge">input</code> as the result of calling the action.</p>
 
-<p><strong>Handle Input Being Returned</strong></p>
+<h2 id="handle-input-being-returned">Handle Input Being Returned</h2>
 
-<p>So what should we do if Struts 2 returns “input” indicating that the user’s input in the form is not valid? In most cases we will want to redisplay the web page that has the form and include in the form error messages to inform the user what is wrong.</p>
+<p>So what should we do if Struts 2 returns <code class="highlighter-rouge">input</code> indicating that the user’s input in the form is not valid? In most cases 
+we will want to redisplay the web page that has the form and include in the form error messages to inform the user what is wrong.</p>
 
-<p>To handle the return value of “input” we need to add the following result to our action node in struts.xml.</p>
+<p>To handle the return value of <code class="highlighter-rouge">input</code> we need to add the following result to our action node in <code class="highlighter-rouge">struts.xml</code>.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/register.jsp<span class="nt">&lt;/result&gt;</span>
 </code></pre>
@@ -185,35 +207,44 @@
 
 <p>The above result node goes just after the success result node for the register action and before the closing of the action node.</p>
 
-<p><strong>Error Messages</strong></p>
+<h2 id="error-messages">Error Messages</h2>
 
-<p>So when validation fails and Struts 2 returns input, the Struts 2 framework will redisplay the register.jsp. Since we used Struts 2 form tags, automatically Struts 2 will add the error messages. These error messages are the ones we specified in the addFieldError method call. The addFieldError method takes two arguments. The first is the form field name to which the error applies and the second is the error message to display above that form field.</p>
+<p>So when validation fails and Struts 2 returns input, the Struts 2 framework will redisplay the <code class="highlighter-rouge">register.jsp</code>. Since we 
+used Struts 2 form tags, automatically Struts 2 will add the error messages. These error messages are the ones we specified 
+in the <code class="highlighter-rouge">addFieldError</code> method call. The addFieldError method takes two arguments. The first is the form field name to which 
+the error applies and the second is the error message to display above that form field.</p>
 
-<p>So the following addFieldError method call:</p>
+<p>So the following <code class="highlighter-rouge">addFieldError</code> method call:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">addFieldError</span><span class="o">(</span><span class="s">"personBean.firstName"</span><span class="o">,</span> <span class="s">"First name is required."</span><span class="o">)</span>
 </code></pre>
 </div>
 
-<p>will cause the message “First name is required” to be displayed above the firstName field on the form.</p>
+<p>will cause the message <em>First name is required</em> to be displayed above the <code class="highlighter-rouge">firstName</code> field on the form.</p>
 
-<p>If you have made the above changes to the <em>Processing Forms</em>  tutorial or you have downloaded from <a href="http://code.google.com/p/struts2-examples/downloads/list">Google Code</a> either the Form_Validation_Struts2_Ant or Form_Validation_Struts2_Mvn projects run the application (see the README.txt in the project root folder). Click on the Please register link. On the registration form, just click the submit button and you should see:</p>
+<p>If you have made the above changes to the <a href="processing-forms.html">Processing Forms</a> tutorial or you have downloaded 
+from <a href="https://github.com/apache/struts-examples/tree/master/form-validation">form-validation</a> 
+run the application (see the README.txt in the project root folder). Click on the Please register link. On the registration 
+form, just click the submit button and you should see:</p>
 
 <p><img src="attachments/att14975003_form_errors.png" alt="form_errors.png" /></p>
 
-<p>Struts 2 called the validate method, validation failed, the register.jsp was displayed with the error messages.</p>
+<p>Struts 2 called the validate method, validation failed, the <code class="highlighter-rouge">register.jsp</code> was displayed with the error messages.</p>
 
-<p><strong>Styling The Error Messages</strong></p>
+<h2 id="styling-the-error-messages">Styling The Error Messages</h2>
 
-<p>The Struts 2 s:head tag can be used to provide CSS that includes a style for the error message. Add <code class="highlighter-rouge">&lt;s:head /&gt;</code> to register.jsp before the closing HTML <code class="highlighter-rouge">&lt;/head&gt;</code> tag. Go through the same steps as above and you should see:</p>
+<p>The Struts 2 <code class="highlighter-rouge">s:head</code> tag can be used to provide CSS that includes a style for the error message. Add <code class="highlighter-rouge">&lt;s:head /&gt;</code> 
+to <code class="highlighter-rouge">register.jsp</code> before the closing HTML <code class="highlighter-rouge">&lt;/head&gt;</code> tag. Go through the same steps as above and you should see:</p>
 
 <p><img src="attachments/att14975001_form_errors_styled.png" alt="form_errors_styled.png" /></p>
 
-<p><strong>Summary</strong></p>
+<h2 id="summary">Summary</h2>
 
-<p>This tutorial covered validating a user’s form input by adding a validate method to an Action class. There is another more sophisticated way to validate user input using XML. If you want to learn more about using XML for validation in Struts 2 see <a href="//struts.apache.org/docs/validation.html">Validation</a> .</p>
+<p>This tutorial covered validating a user’s form input by adding a validate method to an Action class. There is another 
+more sophisticated way to validate user input using XML. If you want to learn more about using XML for validation 
+in Struts 2 see <a href="../core-developers/validation.html">Validation</a> .</p>
 
-<p><strong>Up Next</strong></p>
+<h2 id="up-next">Up Next</h2>
 
 <p>In our next tutorial we’ll cover how to use message resource files to separate out the text from the view page.</p>
 
