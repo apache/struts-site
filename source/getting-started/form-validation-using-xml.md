@@ -116,7 +116,7 @@ In the example application, we want to ensure the user checks at least one of th
 </validator>
 ```
 
-The param name="expression" node contains an OGNL expression that evaluates to true or false. We haven't previously discussed OGNL, which stands for Object-Graph Navigation Language (see [https://github.com/jkuhnert/ognl](https://github.com/jkuhnert/ognl) and [OGNL](../core-developers/ognl.html) ). OGNL expressions can be evaluated by the Struts 2 framework as Java statements.
+The param name="expression" node contains an OGNL expression that evaluates to true or false. We haven't previously discussed OGNL, which stands for Object-Graph Navigation Language (see [https://github.com/jkuhnert/ognl](https://github.com/jkuhnert/ognl) and [OGNL](../tag-developers/ognl.html) ). OGNL expressions can be evaluated by the Struts 2 framework as Java statements.
 
 In the above XML the value of the param name="expression" node, personBean.carModels.length \> 0, will be evaluated by the framework as a Java statement. The part personBean.carModels tells the framework to call the getCarModels method of class Person. That method returns an Array. Since class Array has a length attribute, the framework will get the value of the length attribute of the Array returned by the getCarModels method.
 
