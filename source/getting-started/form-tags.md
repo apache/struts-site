@@ -1,7 +1,11 @@
 ---
-layout: getting-started
+layout: default
 title: Form tags
+parent:
+    title: Getting started
+    url: index.html
 ---
+
 # Form Tags
 
 The example code for this tutorial, form_tags, can be checked out from [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).

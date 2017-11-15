@@ -1,6 +1,9 @@
 ---
-layout: getting-started
+layout: default
 title: Http Session
+parent:
+    title: Getting started
+    url: index.html
 ---
 
 # HTTP Session

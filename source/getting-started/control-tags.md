@@ -1,7 +1,11 @@
 ---
-layout: getting-started
+layout: default
 title: Control tags
+parent:
+    title: Getting started
+    url: index.html
 ---
+
 # Control Tags
 
 The example code for this tutorial, control_tags, is available at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)

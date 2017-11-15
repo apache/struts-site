@@ -1,6 +1,9 @@
 ---
-layout: getting-started
+layout: default
 title: How to create a Struts 2 web application
+parent:
+    title: Getting started
+    url: index.html
 ---
 # How To Create A Struts 2 Web Application
 

@@ -1,7 +1,11 @@
 ---
-layout: getting-started
+layout: default
 title: Exception handling
+parent:
+    title: Getting started
+    url: index.html
 ---
+
 # Exception Handling
 
 The code for this tutorial, exception_handling, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).

@@ -1,7 +1,11 @@
 ---
-layout: getting-started
+layout: default
 title: Processing forms
+parent:
+    title: Getting started
+    url: index.html
 ---
+
 # Processing Forms
 
 This tutorial assumes you've completed the [Coding Struts 2 Actions](coding-actions.html) tutorial and have a working 

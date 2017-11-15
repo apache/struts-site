@@ -1,7 +1,11 @@
 ---
-layout: getting-started
+layout: default
 title: Wildcard Method Selection
+parent:
+    title: Getting started
+    url: index.html
 ---
+
 # Wildcard Method Selection
 
 The example code for this tutorial, wildcard_method_selection, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)

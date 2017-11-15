@@ -1,7 +1,11 @@
 ---
-layout: getting-started
+layout: default
 title: Form validation using XML
+parent:
+    title: Getting started
+    url: index.html
 ---
+
 # Form Validation Using XML
 
 The example code for this tutorial, form_xml_validation, is available for checkout at [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples)

@@ -1,7 +1,11 @@
 ---
-layout: getting-started
+layout: default
 title: Coding actions
+parent:
+    title: Getting started
+    url: index.html
 ---
+
 # Coding actions
 
 This tutorial assumes you've completed the [Using Struts 2 Tags](using-tags.html) tutorial and have a working using-tags project. The example code for this tutorial, coding-actions, is available for checkout from the Struts 2 GitHub repository: [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
