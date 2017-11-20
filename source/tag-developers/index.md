@@ -16,7 +16,7 @@ The framework offers a flexible view layer that supports multiple view technolog
     - [Ajax and JavaScript Recipes](ajax-and-javascript-recipes.html)
 - [OGNL](ognl.html)
   - [OGNL Basics](ognl-basics.html)
-  - [OGNL Expression compilatio](ognl-expression-compilation.html)
+  - [OGNL Expression compilation](ognl-expression-compilation.html)
 - [Tag Syntax](tag-syntax.html)
 - [Alt Syntax](alt-syntax.html) 
 - [JSP](jsp.html)
