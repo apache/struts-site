@@ -16,7 +16,7 @@ The Apache Struts 2 doesn't provide any security mechanism - it is just a pure w
 
 ### Restrict access to the Config Browser Plugin
 
-[Config Browser Plugin](https://struts.apache.org/docs/config-browser-plugin.html) exposes internal configuration and should be used only during development phase. If you must use it on production site, we strictly recommend restricting access to it - you can use  Basic Authentication or any other security mechanism (e.g. [Apache Shiro](https://shiro.apache.org/))
+[Config Browser Plugin](../plugins/config-browser/) exposes internal configuration and should be used only during development phase. If you must use it on production site, we strictly recommend restricting access to it - you can use  Basic Authentication or any other security mechanism (e.g. [Apache Shiro](https://shiro.apache.org/))
 
 ### Don't mix different access levels in the same namespace
 

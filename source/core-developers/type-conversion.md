@@ -4,6 +4,10 @@ title: Type Conversion
 ---
 
 # Type Conversion
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 Routine type conversion in the framework is transparent. Generally, all you need to do is ensure that HTML inputs have 
 names that can be used in [OGNL](ognl.html) expressions. (HTML inputs are form elements and other GET/POST parameters.)

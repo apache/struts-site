@@ -5,28 +5,16 @@ title: ConversionErrorFieldValidator Annotation
 
 # ConversionErrorFieldValidator Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator {% endcomment %}
-<p> This validator checks if there are any conversion errors for a field and applies them if they exist.
- See <a href="https://struts.apache.org/docs/type-conversion.html#TypeConversion-TypeConversionErrorHandling">Type Conversion Error Handling</a> for details.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator {% endcomment %}
+This validator checks if there are any conversion errors for a field and applies them if they exist.
+See [Type Conversion Error Handling](type-conversion.html#type-conversion-error-handling) for details.
 
 ## Usage
 
+The `ConversionErrorFieldValidator` annotation must be applied at method level.
 
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator {% endcomment %}
-<p> <p>The ConversionErrorFieldValidator annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator {% endcomment %}
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -72,17 +60,9 @@ title: ConversionErrorFieldValidator Annotation
  </tr>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator {% endcomment %}
 
 ## Examples
 
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator {% endcomment %}
-
 ```java
  @ConversionErrorFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true)
-
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.ConversionErrorFieldValidator {% endcomment %}
