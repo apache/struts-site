@@ -92,7 +92,7 @@ For the Using Tags tutorial add the following to `index.jsp` just after the link
 ...
 ```
 
-Rather then put the url tag as the value for the anchor tag's href attribute, we've separated out the s:url tag into 
+Rather than put the url tag as the value for the anchor tag's href attribute, we've separated out the s:url tag into 
 its own code block. Nested inside the url tag is the Struts 2 param tag. This tag lets you specify a parameter name (
 e.g. userName) and a value for that parameter (e.g. Bruce Phillips).
 
