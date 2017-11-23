@@ -363,12 +363,7 @@ System Property Value: true
 
 <p>If the ActionMapper determines that an Action should be invoked, the FilterDispatcher delegates control to the <strong>ActionProxy</strong>. The ActionProxy consults the framework <a href="#PAGE_14163">Configuration Files</a> manager (initialized from the <a href="#PAGE_13901">struts.xml</a> file). Next, the ActionProxy creates an <strong>ActionInvocation</strong>, which is responsible for the command pattern implementation. This includes invoking any <strong>Interceptors</strong> (the <em>before</em>  clause) in advance of invoking the <strong>Action</strong> itself.</p>
 
-<p>Once the Action returns, the ActionInvocation is responsible for looking up the proper <strong>result</strong> associated with the <strong>Action result code</strong> mapped in</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
-</code></pre>
-</div>
-<p>. The result is then executed, which often (but not always, as is the case for <a href="#PAGE_14214">Action Chaining</a>) involves a template written in <em>JSP</em>  or <em>FreeMarker</em>  to be rendered. While rendering, the templates can use the <em>Struts Tags</em>  provided by the framework. Some of those components will work with the ActionMapper to render proper URLs for additional requests.</p>
+<p>Once the Action returns, the ActionInvocation is responsible for looking up the proper <strong>result</strong> associated with the <strong>Action result code</strong> mapped in <code class="highlighter-rouge">struts.xml</code>. The result is then executed, which often (but not always, as is the case for <a href="#PAGE_14214">Action Chaining</a>) involves a template written in <em>JSP</em>  or <em>FreeMarker</em>  to be rendered. While rendering, the templates can use the <em>Struts Tags</em>  provided by the framework. Some of those components will work with the ActionMapper to render proper URLs for additional requests.</p>
 
 <table>
   <tbody>
@@ -385,12 +380,7 @@ System Property Value: true
   </tbody>
 </table>
 
-<p>Interceptors are executed again (in reverse order, calling the <em>after</em>  clause). Finally, the response returns through the filters configured in the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>web.xml
-</code></pre>
-</div>
-<p>. If the ActionContextCleanUp filter is present, the FilterDispatcher will <em>not</em>  clean up the ThreadLocal <strong>ActionContext</strong>. If the ActionContextCleanUp filter is not present, the FilterDispatcher will cleanup all ThreadLocals.</p>
+<p>Interceptors are executed again (in reverse order, calling the <em>after</em>  clause). Finally, the response returns through the filters configured in the <code class="highlighter-rouge">web.xml</code>. If the ActionContextCleanUp filter is present, the FilterDispatcher will <em>not</em>  clean up the ThreadLocal <strong>ActionContext</strong>. If the ActionContextCleanUp filter is not present, the FilterDispatcher will cleanup all ThreadLocals.</p>
 
   </section>
 </article>
