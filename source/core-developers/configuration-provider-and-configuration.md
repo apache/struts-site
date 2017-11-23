@@ -46,17 +46,7 @@ XmlConfigurationProvider
 ~~~~~~~
 StrutsXmlConfigurationProvider
 ~~~~~~~
- \- primary configuration provider, represents 
-
-~~~~~~~
-struts.xml
-~~~~~~~
- and 
-
-~~~~~~~
-struts-plugin.xml
-~~~~~~~
- files
+ \- primary configuration provider, represents `struts.xml` and `struts-plugin.xml` files
 
 + 
 
@@ -74,12 +64,7 @@ struts.properties
 ~~~~~~~
 ServletContextAwareConfigurationProvider
 ~~~~~~~
- \- marking interface allowing to inject 
-
-~~~~~~~
-ServletContext
-~~~~~~~
- into provider
+ \- marking interface allowing to inject `ServletContext` into provider
 
 To inject your custom configuration provider use 
 

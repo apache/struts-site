@@ -408,12 +408,7 @@ __Alternate Libraries__
 
 The `struts.multipart.parser` used by the fileUpload interceptor to handle HTTP POST requests, encoded using the MIME\-type multipart/form\-data, can be changed out\. Currently there are two choices, jakarta and pell\. The jakarta parser is a standard part of the Struts 2 framework needing only its required libraries added to a project\. The pell parser uses Jason Pell's multipart parser instead of the Commons\-FileUpload library\. The pell parser is a Struts 2 plugin, for more details see: _pell multipart plugin_ \. There was a third alternative, cos, but it was removed due to licensing incompatibilities\.
 
-As from Struts version 2\.3\.18 a new implementation of 
-
-~~~~~~~
-MultiPartRequest
-~~~~~~~
- was added \- 
+As from Struts version 2\.3\.18 a new implementation of `MultiPartRequest` was added \- 
 
 ~~~~~~~
 JakartaStreamMultiPartRequest
@@ -461,11 +456,6 @@ struts.xml
 <constant name="struts.multipart.enabled" value="false"/>
 ~~~~~~~
 
-With this constant in place, Struts will ignore a 
-
-~~~~~~~
-Content-Type
-~~~~~~~
- header and will treat each request as an ordinary http request\. This option is available since Struts 2\.3\.11\.
+With this constant in place, Struts will ignore a `Content-Type` header and will treat each request as an ordinary http request\. This option is available since Struts 2\.3\.11\.
 
  
