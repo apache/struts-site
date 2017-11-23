@@ -423,24 +423,14 @@ in struts\.xml to start using it\.
 
 __Request validation__
 
-The 
-
-~~~~~~~
-struts.multipart.validationRegex
-~~~~~~~
- is used to define a RegEx to be used to validate if the incoming request is a multipart request\. The request must use the `POST` method and match the RegEx, by default the RegEx is defined as follow:
+The `struts.multipart.validationRegex` is used to define a RegEx to be used to validate if the incoming request is a multipart request\. The request must use the `POST` method and match the RegEx, by default the RegEx is defined as follow:
 
 
 ~~~~~~~
 ^multipart\\/form-data(; boundary=[a-zA-Z0-9]{1,70})?
 ~~~~~~~
 
-Please read [RFC1341](https://www\.w3\.org/Protocols/rfc1341/7\_2\_Multipart\.html)^[https://www\.w3\.org/Protocols/rfc1341/7\_2\_Multipart\.html] the **Multipart section** for more details, existing Struts `Multipart` parsers support only 
-
-~~~~~~~
-multipart/form-data
-~~~~~~~
- content type\. This option is available since Struts 2\.3\.11\.
+Please read [RFC1341](https://www\.w3\.org/Protocols/rfc1341/7\_2\_Multipart\.html)^[https://www\.w3\.org/Protocols/rfc1341/7\_2\_Multipart\.html] the **Multipart section** for more details, existing Struts `Multipart` parsers support only `multipart/form-data` content type\. This option is available since Struts 2\.3\.11\.
 
 __Disabling file upload support__
 
