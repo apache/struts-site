@@ -33,7 +33,7 @@ these business rules:
 
 1. User must provide a first name
 2. User must provide an email address
-3. User younger then 18 cannot register
+3. User younger than 18 cannot register
 
 If you recall from the [Processing Forms](processing-forms.html) tutorial the user's input into the form fields is placed 
 by Struts 2 into the Java model class `personBean`. So a user's input into the `firstName` field would end up as the value 
