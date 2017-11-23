@@ -149,22 +149,13 @@
 <p>The framework has already been modified slightly to make the above effort possible:</p>
 
 <ol>
-  <li><strong>RequestLifecycleFilter</strong> is modified to retrieve its servlet context from the method <code class="highlighter-rouge">getServletContext</code>. This method,</li>
+  <li>
+    <p><strong>RequestLifecycleFilter</strong> is modified to retrieve its servlet context from the method <code class="highlighter-rouge">getServletContext</code>. This method, <code class="highlighter-rouge">getServletContext</code>, is then implemented to return the servlet context from where it is available in Servlet 2.3: the session object. The logical operation is unchanged, but now subclasses can override <code class="highlighter-rouge">getServletContext</code> to retrieve the servlet context from a different location as we’ll see below.</p>
+  </li>
+  <li>
+    <p><strong>SessionLifecycleListener</strong> is modified in the same way as RequestLifecycleFilter. The method, <code class="highlighter-rouge">getServletContext</code>, is implemented to return the servlet context, in this case also from the session object. Again, subclasses can override the <code class="highlighter-rouge">getServletContext</code> method to restore the servlet context from a different source. Again, this class’s functionality is unchanged.</p>
+  </li>
 </ol>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>getServletContext
-</code></pre>
-</div>
-<p>, is then implemented to return the servlet context from where it is available in Servlet 2.3: the session object. The logical operation is unchanged, but now subclasses can override <code class="highlighter-rouge">getServletContext</code> to retrieve the servlet context from a different location as we’ll see below.</p>
-
-<ol>
-  <li><strong>SessionLifecycleListener</strong> is modified in the same way as RequestLifecycleFilter. The method,</li>
-</ol>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>getServletContext
-</code></pre>
-</div>
-<p>, is implemented to return the servlet context, in this case also from the session object. Again, subclasses can override the <code class="highlighter-rouge">getServletContext</code> method to restore the servlet context from a different source. Again, this class’s functionality is unchanged.</p>
 
 <p>Now, in a separate project, the following classes are added and compiled into a separate JAR:</p>
 

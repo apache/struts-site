@@ -209,17 +209,8 @@
 </code></pre>
 </div>
 
-<p>A form must be create with a form field of type file,</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;INPUT type="file" name="upload"&gt;
-</code></pre>
-</div>
-<p>. The form used to upload the file must have its encoding type set to multipart/form-data,</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;FORM action="doUpload" enctype="multipart/form-data" method="post"&gt;
-</code></pre>
-</div>
-<p>. The standard procedure for adding these elements is by using the Struts 2 tag libraries as shown in the following example:</p>
+<p>A form must be create with a form field of type file, <code class="highlighter-rouge">&lt;INPUT type="file" name="upload"&gt;</code>. The form used to upload the file must have its encoding type set to multipart/form-data, 
+<code class="highlighter-rouge">&lt;FORM action="doUpload" enctype="multipart/form-data" method="post"&gt;</code>. The standard procedure for adding these elements is by using the Struts 2 tag libraries as shown in the following example:</p>
 
 <p><strong>Example JSP form tags:</strong></p>
 
@@ -478,12 +469,8 @@ struts.multipart.maxSize=2097152
 
 <p><strong>File Size Limits</strong></p>
 
-<p>There are two separate file size limits. First is <code class="highlighter-rouge">struts.multipart.maxSize</code> which comes from the Struts 2 <code class="highlighter-rouge">default.properties</code> file. This setting exists for security reasons to prohibit a malicious user from uploading extremely large files to file up your servers disk space. This setting defaults to approximately 2 megabytes and should be adjusted to the maximum size file (2 gigs max) that your will need the framework to receive. If you are uploading more than one file on a form the <code class="highlighter-rouge">struts.multipart.maxSize</code> applies to the combined total, not the individual file sizes. The other setting,</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>maximumSize
-</code></pre>
-</div>
-<p>, is an interceptor setting that is used to ensure a particular Action does not receive a file that is too large. Notice the locations of both settings in the following example:</p>
+<p>There are two separate file size limits. First is <code class="highlighter-rouge">struts.multipart.maxSize</code> which comes from the Struts 2 <code class="highlighter-rouge">default.properties</code> file. This setting exists for security reasons to prohibit a malicious user from uploading extremely large files to file up your servers disk space. This setting defaults to approximately 2 megabytes and should be adjusted to the maximum size file (2 gigs max) that your will need the framework to receive. If you are uploading more than one file on a form the <code class="highlighter-rouge">struts.multipart.maxSize</code> applies to the combined total, not the individual file sizes. The other setting, 
+<code class="highlighter-rouge">maximumSize</code>, is an interceptor setting that is used to ensure a particular Action does not receive a file that is too large. Notice the locations of both settings in the following example:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE struts PUBLIC 
@@ -574,12 +561,7 @@ struts.multipart.maxSize=2097152
 
 <p>The <code class="highlighter-rouge">struts.multipart.parser</code> used by the fileUpload interceptor to handle HTTP POST requests, encoded using the MIME-type multipart/form-data, can be changed out. Currently there are two choices, jakarta and pell. The jakarta parser is a standard part of the Struts 2 framework needing only its required libraries added to a project. The pell parser uses Jason Pell’s multipart parser instead of the Commons-FileUpload library. The pell parser is a Struts 2 plugin, for more details see: <em>pell multipart plugin</em> . There was a third alternative, cos, but it was removed due to licensing incompatibilities.</p>
 
-<p>As from Struts version 2.3.18 a new implementation of <code class="highlighter-rouge">MultiPartRequest</code> was added - </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>JakartaStreamMultiPartRequest
-</code></pre>
-</div>
-<p>. It can be used to handle large files, see <a href="https://issues\.apache\.org/jira/browse/WW\-3025">WW-3025</a>^[https://issues.apache.org/jira/browse/WW-3025] for more details, but you can simple set</p>
+<p>As from Struts version 2.3.18 a new implementation of <code class="highlighter-rouge">MultiPartRequest</code> was added - <code class="highlighter-rouge">JakartaStreamMultiPartRequest</code>. It can be used to handle large files, see <a href="https://issues\.apache\.org/jira/browse/WW\-3025">WW-3025</a>^[https://issues.apache.org/jira/browse/WW-3025] for more details, but you can simple set</p>
 
 <blockquote>
   <p>&lt;constant name=”struts.multipart.parser” value=”jakarta-stream” /&gt;</p>
@@ -599,12 +581,7 @@ struts.multipart.maxSize=2097152
 
 <p><strong>Disabling file upload support</strong></p>
 
-<p>You can alternatively disable the whole file upload mechanism defining a constant in </p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
-</code></pre>
-</div>
-<p>:</p>
+<p>You can alternatively disable the whole file upload mechanism defining a constant in <code class="highlighter-rouge">struts.xml</code>:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>&lt;constant name="struts.multipart.enabled" value="false"/&gt;
 </code></pre>
