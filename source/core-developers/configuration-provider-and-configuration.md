@@ -5,12 +5,7 @@ title: Configuration Provider & Configuration
 
 # Configuration Provider & Configuration
 
-The ConfigurationProvider interface describes the framework's configuration\. By default, the framework loads its configurations via an XML document by using the 
-
-~~~~~~~
-StrutsXmlConfigurationProvider
-~~~~~~~
-\. The provider can be configured through a Dispatcher's [DispatcherListener](dispatcher-listener.html)\.
+The ConfigurationProvider interface describes the framework's configuration\. By default, the framework loads its configurations via an XML document by using the `StrutsXmlConfigurationProvider`\. The provider can be configured through a Dispatcher's [DispatcherListener](dispatcher-listener.html)\.
 
 ## Example
 
@@ -37,12 +32,7 @@ StrutsXmlConfigurationProvider
 ~~~~~~~
 ConfigurationProvider
 ~~~~~~~
- is the basic piece of configuration used to tie all the options together in 
-
-~~~~~~~
-ConfigurationManager
-~~~~~~~
-\. There is few different implementations that are already used internally by the Apache Struts:
+ is the basic piece of configuration used to tie all the options together in `ConfigurationManager`\. There is few different implementations that are already used internally by the Apache Struts:
 
 + 
 

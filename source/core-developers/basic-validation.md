@@ -100,12 +100,7 @@ public class QuizAction extends ActionSupport {
 
 ## Step 3
 
-Create the validators\. The `validation.xml` format is either `<ActionClassName>-validation.xml` or 
-
-~~~~~~~
-<ActionClassName>-<ActionAliasName>-validation.xml
-~~~~~~~
-\.
+Create the validators\. The `validation.xml` format is either `<ActionClassName>-validation.xml` or `<ActionClassName>-<ActionAliasName>-validation.xml`\.
 
 {% comment %}start snippet id=quizValidators|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/QuizAction-validation.xml {% endcomment %}
 

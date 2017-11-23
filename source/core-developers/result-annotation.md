@@ -27,20 +27,10 @@ In order for `@Result` and `@Results` annotations to be configured correctly you
 {float}
 ~~~~~~~
 
-+ name \- Result name; default 
-
-~~~~~~~
-Action.SUCCESS
-~~~~~~~
-
++ name \- Result name; default `Action.SUCCESS`
 + value \- Value of result (result destination)
 
-+ type \- Type of result; default 
-
-~~~~~~~
-NullResult
-~~~~~~~
-\. For example:
++ type \- Type of result; default `NullResult`\. For example:
 	
 
   + 
@@ -114,12 +104,7 @@ public class HomeAction extends ActionSupport {
 
 ## @Results – Defining Multiple Results
 
-Defines a set of results for an 
-
-~~~~~~~
-Action
-~~~~~~~
-\.
+Defines a set of results for an `Action`\.
 
 **Defining Multiple Results**
 

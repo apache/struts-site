@@ -29,21 +29,11 @@ Sometimes, we want to pass the dynamic data to a tag. For example, we might want
 
 ~~~~~~~
 
-The expression language ([OGNL](#PAGE_14198)) lets us call methods and evaluate properties. The method `getText` is provided by ActionSupport, which is the base class for most Actions. Since the Action is on the stack, we can call any of its methods from an expression, including 
-
-~~~~~~~
-getText
-~~~~~~~
-.
+The expression language ([OGNL](#PAGE_14198)) lets us call methods and evaluate properties. The method `getText` is provided by ActionSupport, which is the base class for most Actions. Since the Action is on the stack, we can call any of its methods from an expression, including `getText`.
 
 ## Non-String Attributes
 
-The HTTP protocol is text-based, but some tags have non-String attribute types, like `bool` or 
-
-~~~~~~~
-int
-~~~~~~~
-. To make using non-String attributes intuitative, the framework evaulates **all** non-String attributes as an expression. In this case, you do not need to use the escape notation. (But, if you do anyway , the framework will just strip it off.)
+The HTTP protocol is text-based, but some tags have non-String attribute types, like `bool` or `int`. To make using non-String attributes intuitative, the framework evaulates **all** non-String attributes as an expression. In this case, you do not need to use the escape notation. (But, if you do anyway , the framework will just strip it off.)
 
 **Evaluating booleans**
 
@@ -87,17 +77,7 @@ Since it's easy to forget which attributes are String and which are non-String, 
 
 ## value is an Object!
 
-Most often, the `value` attribute is set automatically, since `name` attribute usually tells the framework which property to call to set the 
-
-~~~~~~~
-value
-~~~~~~~
-. But, if there is a reason to set the `value` directly, be advised that 
-
-~~~~~~~
-value
-~~~~~~~
-**is an Object****_NOT_ ****a String**.
+Most often, the `value` attribute is set automatically, since `name` attribute usually tells the framework which property to call to set the `value`. But, if there is a reason to set the `value` directly, be advised that `value`**is an Object****_NOT_ ****a String**.
 
  (!)  Since `value` is not a String, whatever is passed to `value` is evaluated as an expression - **NOT** a String literal.
 
@@ -110,17 +90,7 @@ value
 
 ~~~~~~~
 
-If a `textfield` is passed the value attribute 
-
-~~~~~~~
-"ca"
-~~~~~~~
-, the framework will look for a property named 
-
-~~~~~~~
-getCa
-~~~~~~~
-. Generally, this is not what we mean. What we mean to do is pass a literal String. In the expression language, literals are placed within quotes
+If a `textfield` is passed the value attribute `"ca"`, the framework will look for a property named `getCa`. Generally, this is not what we mean. What we mean to do is pass a literal String. In the expression language, literals are placed within quotes
 
 **Passing a literal value the right way**
 
@@ -131,12 +101,7 @@ getCa
 
 ~~~~~~~
 
-Another approach would be to use the idiom 
-
-~~~~~~~
-value="'ca'"
-~~~~~~~
-, but, in this case, using the expression notation is recommended.
+Another approach would be to use the idiom `value="'ca'"`, but, in this case, using the expression notation is recommended.
 
 Boiled down, the tag attributes are evaluated using three rules.
 

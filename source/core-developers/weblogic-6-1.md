@@ -25,12 +25,7 @@ However, the framework code cannot be modifed to do this, because this will brea
 
 The framework has already been modified slightly to make the above effort possible:
 
-1. **RequestLifecycleFilter** is modified to retrieve its servlet context from the method 
-
-~~~~~~~
-getServletContext
-~~~~~~~
-. This method, 
+1. **RequestLifecycleFilter** is modified to retrieve its servlet context from the method `getServletContext`. This method, 
 
 ~~~~~~~
 getServletContext
@@ -88,11 +83,6 @@ Sometimes BEA Weblogic Server doesn't "rebuild" its temporary files\.  Do the fo
 
 1. Stop the server.
 
-2. Delete the .wlnotdelete folder in 
-
-~~~~~~~
-mydomain/applications
-~~~~~~~
-.
+2. Delete the .wlnotdelete folder in `mydomain/applications`.
 
 3. Restart the server.

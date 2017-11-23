@@ -48,12 +48,7 @@ The only example right now is in the showcase, where the person package uses the
 
 ## Action and Package name
 
-The subpackage name makes the namespace, and the action class name makes the action name\.  If there is an "Action" suffix, it is dropped before creating the action name\. Therefore, if the configured package is _com\.myapp\.actions_  and the Action is _com\.myapp\.actions\._ **member**\.EditAction, you can access it via [http://server/myapp/member/edit\.action](http://server/myapp/member/edit\.action)\.  For multi\-word actions, the first letter is lower\-cased and the rest is left alone, so the Action `MyCustomAction` will map to 
-
-~~~~~~~
-myCustom.action
-~~~~~~~
-\.
+The subpackage name makes the namespace, and the action class name makes the action name\.  If there is an "Action" suffix, it is dropped before creating the action name\. Therefore, if the configured package is _com\.myapp\.actions_  and the Action is _com\.myapp\.actions\._ **member**\.EditAction, you can access it via [http://server/myapp/member/edit\.action](http://server/myapp/member/edit\.action)\.  For multi\-word actions, the first letter is lower\-cased and the rest is left alone, so the Action `MyCustomAction` will map to `myCustom.action`\.
 
 ## Results
 

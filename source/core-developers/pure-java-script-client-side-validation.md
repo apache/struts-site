@@ -45,9 +45,4 @@ Because client side validation does not talk to the server, the theme (_xhtml th
 
 __Additional Validator Support__
 
-If you wish to add additional validator support beyond those listed, you may override the _xhtml theme_  teamplte 
-
-~~~~~~~
-form-close-validate.ftl
-~~~~~~~
-\. This file contains the JavaScript that tries to validate each user\-entered value from within the browswer\. The _css\_xhtml theme_  extends the _xhtml theme_  and therefore doesn't have it's own form\-close\-validate\.ftl template\.
+If you wish to add additional validator support beyond those listed, you may override the _xhtml theme_  teamplte `form-close-validate.ftl`\. This file contains the JavaScript that tries to validate each user\-entered value from within the browswer\. The _css\_xhtml theme_  extends the _xhtml theme_  and therefore doesn't have it's own form\-close\-validate\.ftl template\.

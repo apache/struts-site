@@ -5,26 +5,11 @@ title: Freemarker Support
 
 # Freemarker Support
 
-Freemarker views can be rendered using the webwork result type 
-
-~~~~~~~
-freemarker
-~~~~~~~
-\.
+Freemarker views can be rendered using the webwork result type `freemarker`\.
 
 __Configure your action to use the freemarker result type__
 
-The `freemarker` result type is defined in 
-
-~~~~~~~
-struts-default.xml
-~~~~~~~
-, so normally you just include it, and define your resuts to use 
-
-~~~~~~~
-type="freemarker"
-~~~~~~~
-\.
+The `freemarker` result type is defined in `struts-default.xml`, so normally you just include it, and define your resuts to use `type="freemarker"`\.
 
 
 ~~~~~~~
@@ -46,12 +31,7 @@ Your action properties are automatically resolved \- just like in a velocity vie
 ~~~~~~~
 ${name
 ~~~~~~~
-\} will result in 
-
-~~~~~~~
-stack.findValue("name")
-~~~~~~~
-, which _generaly_  results in `action.getName()` being executed\.
+\} will result in `stack.findValue("name")`, which _generaly_  results in `action.getName()` being executed\.
 
 A search process is used to resolve the variable, searching the following scopes in order, until a value is found :
 

@@ -364,24 +364,9 @@ __General Attributes__
 
 __Value/Name Relationship__
 
-In many of the tags (except for the form tag) there is a unique relationship between the `name` and `value` attributes. The `name` attribute provides the name for the tag, which in turn is used as the control attribute when the form is submitted. The value submitted is bound to the 
+In many of the tags (except for the form tag) there is a unique relationship between the `name` and `value` attributes. The `name` attribute provides the name for the tag, which in turn is used as the control attribute when the form is submitted. The value submitted is bound to the `name`. In most cases, the `name` maps to a simple JavaBean property, such as "postalCode". On a submit, the value would be set to the property by calling the `setPostalCode` mutator.
 
-~~~~~~~
-name
-~~~~~~~
-. In most cases, the `name` maps to a simple JavaBean property, such as "postalCode". On a submit, the value would be set to the property by calling the `setPostalCode` mutator.
-
-Likewise, a form control could be populated by calling a JavaBean accessor, like 
-
-~~~~~~~
-getPostalCode
-~~~~~~~
-. In the expression language, we can refer to the JavaBean property by name. An expression like "%{postalCode}" would in turn call 
-
-~~~~~~~
-getPostalCode
-~~~~~~~
-.
+Likewise, a form control could be populated by calling a JavaBean accessor, like `getPostalCode`. In the expression language, we can refer to the JavaBean property by name. An expression like "%{postalCode}" would in turn call `getPostalCode`.
 
 
 ~~~~~~~
@@ -392,12 +377,7 @@ getPostalCode
 
 ~~~~~~~
 
-However, since the tags imply a relationship between the `name` and 
-
-~~~~~~~
-value
-~~~~~~~
-, the `value` attribute is optional. If a `value` is not specified, by default, the JavaBean accessor is used instead.
+However, since the tags imply a relationship between the `name` and `value`, the `value` attribute is optional. If a `value` is not specified, by default, the JavaBean accessor is used instead.
 
 
 ~~~~~~~

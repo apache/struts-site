@@ -55,12 +55,7 @@ If you are using Maven then you can add these libraries as dependencies in your 
 
 ## Basic Usage
 
-The `org.apache.struts2.interceptor.FileUploadInterceptor` class is included as part of the 
-
-~~~~~~~
-defaultStack
-~~~~~~~
-\. As long as the required libraries are added to your project you will be able to take advantage of of the Struts 2 fileUpload capability\. Configure an Action mapping for your Action class as you typically would\.
+The `org.apache.struts2.interceptor.FileUploadInterceptor` class is included as part of the `defaultStack`\. As long as the required libraries are added to your project you will be able to take advantage of of the Struts 2 fileUpload capability\. Configure an Action mapping for your Action class as you typically would\.
 
 **Example action mapping:**
 
@@ -389,12 +384,7 @@ When the uploaded file type does not match one of the MIME types specified a fie
 
 __Error Messages__
 
-If an error occurs several field errors will be added assuming that the action implements `com.opensymphony.xwork2.ValidationAware` or extends 
-
-~~~~~~~
-com.opensymphony.xwork2.ActionSupport
-~~~~~~~
-\. These error messages are based on several i18n values stored in struts\-messages\.properties, a default i18n file processed for all i18n requests\. You can override the text of these messages by providing text for the following keys:
+If an error occurs several field errors will be added assuming that the action implements `com.opensymphony.xwork2.ValidationAware` or extends `com.opensymphony.xwork2.ActionSupport`\. These error messages are based on several i18n values stored in struts\-messages\.properties, a default i18n file processed for all i18n requests\. You can override the text of these messages by providing text for the following keys:
 
 |Error Key|Description|
 |---------|-----------|
@@ -407,12 +397,7 @@ com.opensymphony.xwork2.ActionSupport
 
 __Temporary Directories__
 
-All uploaded files are saved to a temporary directory by the framework before being passed in to an Action\. Depending on the allowed file sizes it may be necessary to have the framework store these temporary files in an alternate location\. To do this change `struts.multipart.saveDir` to the directory where the uploaded files will be placed\. If this property is not set it defaults to 
-
-~~~~~~~
-javax.servlet.context.tempdir
-~~~~~~~
-\. Keep in mind that on some operating systems, like Solaris, 
+All uploaded files are saved to a temporary directory by the framework before being passed in to an Action\. Depending on the allowed file sizes it may be necessary to have the framework store these temporary files in an alternate location\. To do this change `struts.multipart.saveDir` to the directory where the uploaded files will be placed\. If this property is not set it defaults to `javax.servlet.context.tempdir`\. Keep in mind that on some operating systems, like Solaris, 
 
 ~~~~~~~
 /tmp
@@ -448,24 +433,14 @@ The 
 ~~~~~~~
 struts.multipart.validationRegex
 ~~~~~~~
- is used to define a RegEx to be used to validate if the incoming request is a multipart request\. The request must use the 
-
-~~~~~~~
-POST
-~~~~~~~
- method and match the RegEx, by default the RegEx is defined as follow:
+ is used to define a RegEx to be used to validate if the incoming request is a multipart request\. The request must use the `POST` method and match the RegEx, by default the RegEx is defined as follow:
 
 
 ~~~~~~~
 ^multipart\\/form-data(; boundary=[a-zA-Z0-9]{1,70})?
 ~~~~~~~
 
-Please read [RFC1341](https://www\.w3\.org/Protocols/rfc1341/7\_2\_Multipart\.html)^[https://www\.w3\.org/Protocols/rfc1341/7\_2\_Multipart\.html] the **Multipart section** for more details, existing Struts 
-
-~~~~~~~
-Multipart
-~~~~~~~
- parsers support only 
+Please read [RFC1341](https://www\.w3\.org/Protocols/rfc1341/7\_2\_Multipart\.html)^[https://www\.w3\.org/Protocols/rfc1341/7\_2\_Multipart\.html] the **Multipart section** for more details, existing Struts `Multipart` parsers support only 
 
 ~~~~~~~
 multipart/form-data

@@ -184,12 +184,7 @@ In the diagram, an initial request goes to the Servlet container (such as Jetty 
 
 If the ActionMapper determines that an Action should be invoked, the FilterDispatcher delegates control to the **ActionProxy**\. The ActionProxy consults the framework [Configuration Files](#PAGE_14163) manager (initialized from the [struts\.xml](#PAGE_13901) file)\. Next, the ActionProxy creates an **ActionInvocation**, which is responsible for the command pattern implementation\. This includes invoking any **Interceptors** (the _before_  clause) in advance of invoking the **Action** itself\.
 
-Once the Action returns, the ActionInvocation is responsible for looking up the proper **result** associated with the **Action result code** mapped in 
-
-~~~~~~~
-struts.xml
-~~~~~~~
-\. The result is then executed, which often (but not always, as is the case for [Action Chaining](#PAGE_14214)) involves a template written in _JSP_  or _FreeMarker_  to be rendered\. While rendering, the templates can use the _Struts Tags_  provided by the framework\. Some of those components will work with the ActionMapper to render proper URLs for additional requests\.
+Once the Action returns, the ActionInvocation is responsible for looking up the proper **result** associated with the **Action result code** mapped in `struts.xml`\. The result is then executed, which often (but not always, as is the case for [Action Chaining](#PAGE_14214)) involves a template written in _JSP_  or _FreeMarker_  to be rendered\. While rendering, the templates can use the _Struts Tags_  provided by the framework\. Some of those components will work with the ActionMapper to render proper URLs for additional requests\.
 
 
 
@@ -197,9 +192,4 @@ struts.xml
 
 | 
 
-Interceptors are executed again (in reverse order, calling the _after_  clause)\. Finally, the response returns through the filters configured in the 
-
-~~~~~~~
-web.xml
-~~~~~~~
-\. If the ActionContextCleanUp filter is present, the FilterDispatcher will _not_  clean up the ThreadLocal **ActionContext**\. If the ActionContextCleanUp filter is not present, the FilterDispatcher will cleanup all ThreadLocals\.
+Interceptors are executed again (in reverse order, calling the _after_  clause)\. Finally, the response returns through the filters configured in the `web.xml`\. If the ActionContextCleanUp filter is present, the FilterDispatcher will _not_  clean up the ThreadLocal **ActionContext**\. If the ActionContextCleanUp filter is not present, the FilterDispatcher will cleanup all ThreadLocals\.

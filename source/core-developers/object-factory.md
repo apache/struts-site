@@ -16,12 +16,7 @@ Customized ObjectFactory must extend ObjectFactory or any of its descendants and
 
 | 
 
-To register a customized ObjectFactory, add or edit an entry in 
-
-~~~~~~~
-struts.properties
-~~~~~~~
-
+To register a customized ObjectFactory, add or edit an entry in `struts.properties`
 
 
 ~~~~~~~

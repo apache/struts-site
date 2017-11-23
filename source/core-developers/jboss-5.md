@@ -7,17 +7,7 @@ title: JBoss 5
 
 __Convention plugin support__
 
-To have proper support of ﻿﻿the _Convention Plugin_  in JBoss AS 5, especially when you put actions inside a jar (which is embedded in war or ear) and not directly into 
-
-~~~~~~~
-WEB-INF/classes
-~~~~~~~
-, you must add the following line into `$JBOSS_HOME/bin/run.conf` or into 
-
-~~~~~~~
-$JBOSS_HOME\bin\run.conf.bat
-~~~~~~~
-
+To have proper support of ﻿﻿the _Convention Plugin_  in JBoss AS 5, especially when you put actions inside a jar (which is embedded in war or ear) and not directly into `WEB-INF/classes`, you must add the following line into `$JBOSS_HOME/bin/run.conf` or into `$JBOSS_HOME\bin\run.conf.bat`
 **Linux/OSX \- \$JBOSS\_HOME/bin/run\.conf**
 
 

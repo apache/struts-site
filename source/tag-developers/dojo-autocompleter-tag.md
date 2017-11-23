@@ -1545,12 +1545,7 @@ Using valueNotifyTopics:
 
 __Caveats__
 
-+ The service that is producing the HTTP Response with JSON response to the Autocompleter tag must set the HTTP Header Response Content-Type to 
-
-~~~~~~~
-text/json
-~~~~~~~
-. JSON has its own MIME type, which this tag expects.
++ The service that is producing the HTTP Response with JSON response to the Autocompleter tag must set the HTTP Header Response Content-Type to `text/json`. JSON has its own MIME type, which this tag expects.
 
 + Since 2.0.9, there is a change in the value:key order. Now, the value **must** come before the key.
 

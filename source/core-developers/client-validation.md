@@ -7,12 +7,7 @@ title: Client Validation
 
 Let's create a Client\-Side validation workflow, step by step\.
 
-(information) The `validate` attribute is set to 
-
-~~~~~~~
-true
-~~~~~~~
-\.
+(information) The `validate` attribute is set to `true`\.
 
 (information) Some themes do not support client\-side validation\.
 

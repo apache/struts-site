@@ -21,25 +21,10 @@ grant {
 
 ## Granting Specific Permissions
 
-+ Grant Write Permissions to 
++ Grant Write Permissions to `java.util.PropertyPermission`
++ Add `java.lang.reflect.ReflectPermission` "suppressAccessChecks"
 
-~~~~~~~
-java.util.PropertyPermission
-~~~~~~~
-
-+ Add 
-
-~~~~~~~
-java.lang.reflect.ReflectPermission
-~~~~~~~
- "suppressAccessChecks"
-
-+ Grant all permissions to 
-
-~~~~~~~
-OgnlInvokePermission
-~~~~~~~
-
++ Grant all permissions to `OgnlInvokePermission`
 
 
 ~~~~~~~
