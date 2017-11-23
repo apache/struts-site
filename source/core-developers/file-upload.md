@@ -271,12 +271,7 @@ public class MultipleFileUploadUsingListAction extends ActionSupport {
 
 ## Advanced Configuration
 
-The Struts 2 
-
-~~~~~~~
-default.properties
-~~~~~~~
- file defines several settings that affect the behavior of file uploading\. You may find in necessary to change these values\. The names and default values are:
+The Struts 2 `default.properties` file defines several settings that affect the behavior of file uploading\. You may find in necessary to change these values\. The names and default values are:
 
 
 ~~~~~~~
@@ -326,12 +321,7 @@ Additionally the `fileUpload` interceptor has settings that can be put in place 
 
 __File Size Limits__
 
-There are two separate file size limits\. First is `struts.multipart.maxSize` which comes from the Struts 2 
-
-~~~~~~~
-default.properties
-~~~~~~~
- file\. This setting exists for security reasons to prohibit a malicious user from uploading extremely large files to file up your servers disk space\. This setting defaults to approximately 2 megabytes and should be adjusted to the maximum size file (2 gigs max) that your will need the framework to receive\. If you are uploading more than one file on a form the `struts.multipart.maxSize` applies to the combined total, not the individual file sizes\. The other setting, 
+There are two separate file size limits\. First is `struts.multipart.maxSize` which comes from the Struts 2 `default.properties` file\. This setting exists for security reasons to prohibit a malicious user from uploading extremely large files to file up your servers disk space\. This setting defaults to approximately 2 megabytes and should be adjusted to the maximum size file (2 gigs max) that your will need the framework to receive\. If you are uploading more than one file on a form the `struts.multipart.maxSize` applies to the combined total, not the individual file sizes\. The other setting, 
 
 ~~~~~~~
 maximumSize
@@ -397,12 +387,7 @@ If an error occurs several field errors will be added assuming that the action i
 
 __Temporary Directories__
 
-All uploaded files are saved to a temporary directory by the framework before being passed in to an Action\. Depending on the allowed file sizes it may be necessary to have the framework store these temporary files in an alternate location\. To do this change `struts.multipart.saveDir` to the directory where the uploaded files will be placed\. If this property is not set it defaults to `javax.servlet.context.tempdir`\. Keep in mind that on some operating systems, like Solaris, 
-
-~~~~~~~
-/tmp
-~~~~~~~
- is memory based and files stored in that directory would consume an amount of RAM approximately equal to the size of the uploaded file\.
+All uploaded files are saved to a temporary directory by the framework before being passed in to an Action\. Depending on the allowed file sizes it may be necessary to have the framework store these temporary files in an alternate location\. To do this change `struts.multipart.saveDir` to the directory where the uploaded files will be placed\. If this property is not set it defaults to `javax.servlet.context.tempdir`\. Keep in mind that on some operating systems, like Solaris, `/tmp` is memory based and files stored in that directory would consume an amount of RAM approximately equal to the size of the uploaded file\.
 
 __Alternate Libraries__
 

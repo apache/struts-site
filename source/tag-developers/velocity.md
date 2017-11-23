@@ -81,12 +81,7 @@ In Velocity, there are three sources for variables, searched in a specific order
 
 3. Built-in variables
 
-Since the action context is resolved after the value stack, you can reference the variable without the typical preceding marker (#) that has to be used with the JSP 
-
-~~~~~~~
-s:property
-~~~~~~~
- tag. Omitting the marker can be convenient, but it can also trip you up, if used carelessly.
+Since the action context is resolved after the value stack, you can reference the variable without the typical preceding marker (#) that has to be used with the JSP `s:property` tag. Omitting the marker can be convenient, but it can also trip you up, if used carelessly.
 
 
 ~~~~~~~
