@@ -34,37 +34,17 @@ ConfigurationProvider
 ~~~~~~~
  is the basic piece of configuration used to tie all the options together in `ConfigurationManager`\. There is few different implementations that are already used internally by the Apache Struts:
 
-+ 
++ `XmlConfigurationProvider` \- proprietary XWork implementation which are using `xwork.xml` file as source of configuration 
 
-~~~~~~~
-XmlConfigurationProvider
-~~~~~~~
- \- proprietary XWork implementation which are using `xwork.xml` file as source of configuration 
++ `StrutsXmlConfigurationProvider` \- primary configuration provider, represents `struts.xml` and `struts-plugin.xml` files
 
-+ 
-
-~~~~~~~
-StrutsXmlConfigurationProvider
-~~~~~~~
- \- primary configuration provider, represents `struts.xml` and `struts-plugin.xml` files
-
-+ 
-
-~~~~~~~
-PropertiesConfigurationProvider
-~~~~~~~
- \- used to load 
++ `PropertiesConfigurationProvider` \- used to load 
 
 ~~~~~~~
 struts.properties
 ~~~~~~~
 
-+ 
-
-~~~~~~~
-ServletContextAwareConfigurationProvider
-~~~~~~~
- \- marking interface allowing to inject `ServletContext` into provider
++ `ServletContextAwareConfigurationProvider` \- marking interface allowing to inject `ServletContext` into provider
 
 To inject your custom configuration provider use 
 

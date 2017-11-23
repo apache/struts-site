@@ -40,51 +40,16 @@ If you want to just extend one part of ObjectFactory, ie\. to change how [Result
 
 List of Factory interfaces:
 
-+ 
++ `ResultFactory` \- dedicated interfaces used by  to create [Result Types](result-types.html)
 
-~~~~~~~
-ResultFactory
-~~~~~~~
- \- dedicated interfaces used by  to create [Result Types](result-types.html)
+  + `StrutsResultFactory` it's internal implementation which checks if Result implements `ParamNameAwareResult` interface to restrict names of parameters set on the instance of Result, see [Result Types](result-types.html) for more info\.
 
-  + 
++ `ActionFactory` \- dedicated interface used by  to actions
 
-~~~~~~~
-StrutsResultFactory
-~~~~~~~
- it's internal implementation which checks if Result implements `ParamNameAwareResult` interface to restrict names of parameters set on the instance of Result, see [Result Types](result-types.html) for more info\.
++ `InterceptorFactory` \- dedicated interface used by  to create interceptors
 
-+ 
++ `ValidatorFactory` \- dedicated interface used by  to create validators
 
-~~~~~~~
-ActionFactory
-~~~~~~~
- \- dedicated interface used by  to actions
++ `ConverterFactory` \- dedicated interface used by  to create instances of _TypeConverter_ 
 
-+ 
-
-~~~~~~~
-InterceptorFactory
-~~~~~~~
- \- dedicated interface used by  to create interceptors
-
-+ 
-
-~~~~~~~
-ValidatorFactory
-~~~~~~~
- \- dedicated interface used by  to create validators
-
-+ 
-
-~~~~~~~
-ConverterFactory
-~~~~~~~
- \- dedicated interface used by  to create instances of _TypeConverter_ 
-
-+ 
-
-~~~~~~~
-UnknownHandlerFactory
-~~~~~~~
- \- dedicated interfaces used by  to create instances of [Unknown Handlers](unknown-handlers.html) (as from version 2\.3\.18)
++ `UnknownHandlerFactory` \- dedicated interfaces used by  to create instances of [Unknown Handlers](unknown-handlers.html) (as from version 2\.3\.18)

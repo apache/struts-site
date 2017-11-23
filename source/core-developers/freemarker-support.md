@@ -49,56 +49,21 @@ __Objects in the Context__
 
 The following variables exist in the FreeMarker views
 
-+ 
++ `req` \- the current HttpServletRequest
 
-~~~~~~~
-req
-~~~~~~~
- \- the current HttpServletRequest
++ `res` \- the current HttpServletResponse
 
-+ 
++ `stack` \- the current OgnlValueStack
 
-~~~~~~~
-res
-~~~~~~~
- \- the current HttpServletResponse
-
-+ 
-
-~~~~~~~
-stack
-~~~~~~~
- \- the current OgnlValueStack
-
-+ 
-
-~~~~~~~
-ognl
-~~~~~~~
- \- the OgnlTool instance
++ `ognl` \- the OgnlTool instance
 
   + This class contains useful methods to execute OGNL expressions against arbitary objects, and a method to generate a select list using the \<s:select\> pattern\. (i\.e\. taking the name of the list property, a listKey and listValue)
 
-+ 
++ `struts` \- an instance of StrutsBeanWrapper
 
-~~~~~~~
-struts
-~~~~~~~
- \- an instance of StrutsBeanWrapper
++ `action` \- the current Struts action
 
-+ 
-
-~~~~~~~
-action
-~~~~~~~
- \- the current Struts action
-
-+ 
-
-~~~~~~~
-exception
-~~~~~~~
- \- _optional_  the Exception instance, if the view is a JSP exception or Servlet exception view
++ `exception` \- _optional_  the Exception instance, if the view is a JSP exception or Servlet exception view
 
 __FreeMarker configuration with recent releases__
 

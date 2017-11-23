@@ -33,55 +33,15 @@ In order for `@Result` and `@Results` annotations to be configured correctly you
 + type \- Type of result; default `NullResult`\. For example:
 	
 
-  + 
+  + `NullResult.class`
+  + `FreemarkerResult.class`
+  + `PlainTextResult.class`
+  + `VelocityResult.class`
+  + `ServletDispatcherResult.class`
+  + `ServletRedirectResult.class`
+  + `ServletActionRedirectResult.class` \- equivalent to the `redirectAction` type in XML config
 
-~~~~~~~
-NullResult.class
-~~~~~~~
-
-  + 
-
-~~~~~~~
-FreemarkerResult.class
-~~~~~~~
-
-  + 
-
-~~~~~~~
-PlainTextResult.class
-~~~~~~~
-
-  + 
-
-~~~~~~~
-VelocityResult.class
-~~~~~~~
-
-  + 
-
-~~~~~~~
-ServletDispatcherResult.class
-~~~~~~~
-
-  + 
-
-~~~~~~~
-ServletRedirectResult.class
-~~~~~~~
-
-  + 
-
-~~~~~~~
-ServletActionRedirectResult.class
-~~~~~~~
- \- equivalent to the `redirectAction` type in XML config
-
-  + 
-
-~~~~~~~
-TilesResult.class
-~~~~~~~
-
+  + `TilesResult.class`
   + \.\. (for more result, please consult the API docs, and look for implementations of the XWork `Result` interface)
 
 + params \- An Array of the parameters in the form \{key1, value1, key2, value2\}
