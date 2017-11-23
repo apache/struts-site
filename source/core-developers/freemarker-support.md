@@ -27,11 +27,7 @@ __Property Resoloution__
 Your action properties are automatically resolved \- just like in a velocity view\.
 
 **for example**
-
-~~~~~~~
-${name
-~~~~~~~
-\} will result in `stack.findValue("name")`, which _generaly_  results in `action.getName()` being executed\.
+`${name}` will result in `stack.findValue("name")`, which _generaly_  results in `action.getName()` being executed\.
 
 A search process is used to resolve the variable, searching the following scopes in order, until a value is found :
 

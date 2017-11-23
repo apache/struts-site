@@ -34,19 +34,9 @@ The downside of using the simple theme is that it doesn't support as many of the
 
 __Common Attributes__
 
-All the form tags extend the UIBean class. This base class provides a set of common attributes, that can be grouped in to three categories: 
+All the form tags extend the UIBean class. This base class provides a set of common attributes, that can be grouped in to three categories: `templated-related`, javascript-related, and general attributes. The individual attributes are documented on each tag's reference page.
 
-~~~~~~~
-templated-related
-~~~~~~~
-, javascript-related, and general attributes. The individual attributes are documented on each tag's reference page.
-
-In addition to the common attributes, a special attribute exists for all form element tags: 
-
-~~~~~~~
-form
-~~~~~~~
- (\${parameters.form}). The `form` property represents the attributes used to render the form tag, such as the form's id. In a template, the form's ID can be found by calling \${parameters.form.id}.
+In addition to the common attributes, a special attribute exists for all form element tags: `form` (\${parameters.form}). The `form` property represents the attributes used to render the form tag, such as the form's id. In a template, the form's ID can be found by calling \${parameters.form.id}.
 
 __Template-Related Attributes__
 

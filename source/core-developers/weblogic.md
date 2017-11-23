@@ -32,19 +32,9 @@ struts.velocity.configfile = struts-velocity.properties
 
 + Create the corresponding Velocity properties file ("struts\-velocity\.properties"), preferably in the same location as the `struts.properties` file\.
 
-+ Copy into the Velocity properties file the contents of the `velocity.properties` file that is the the SAF 
++ Copy into the Velocity properties file the contents of the `velocity.properties` file that is the the SAF `velocity-dep.jar`\.
 
-~~~~~~~
-velocity-dep.jar
-~~~~~~~
-\.
-
-+ In your new `struts-velocity.properties` file, find he section titled  "
-
-~~~~~~~
-T E M P L A T E  L O A D E R S
-~~~~~~~
-", and change this section as so:
++ In your new `struts-velocity.properties` file, find he section titled  `T E M P L A T E  L O A D E R S`, and change this section as so:
 
 
 

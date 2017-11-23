@@ -25,19 +25,9 @@ However, the framework code cannot be modifed to do this, because this will brea
 
 The framework has already been modified slightly to make the above effort possible:
 
-1. **RequestLifecycleFilter** is modified to retrieve its servlet context from the method `getServletContext`. This method, 
+1. **RequestLifecycleFilter** is modified to retrieve its servlet context from the method `getServletContext`. This method, `getServletContext`, is then implemented to return the servlet context from where it is available in Servlet 2.3: the session object. The logical operation is unchanged, but now subclasses can override `getServletContext` to retrieve the servlet context from a different location as we'll see below.
 
-~~~~~~~
-getServletContext
-~~~~~~~
-, is then implemented to return the servlet context from where it is available in Servlet 2.3: the session object. The logical operation is unchanged, but now subclasses can override `getServletContext` to retrieve the servlet context from a different location as we'll see below.
-
-1. **SessionLifecycleListener** is modified in the same way as RequestLifecycleFilter. The method, 
-
-~~~~~~~
-getServletContext
-~~~~~~~
-, is implemented to return the servlet context, in this case also from the session object. Again, subclasses can override the `getServletContext` method to restore the servlet context from a different source. Again, this class's functionality is unchanged.
+1. **SessionLifecycleListener** is modified in the same way as RequestLifecycleFilter. The method, `getServletContext`, is implemented to return the servlet context, in this case also from the session object. Again, subclasses can override the `getServletContext` method to restore the servlet context from a different source. Again, this class's functionality is unchanged.
 
 Now, in a separate project, the following classes are added and compiled into a separate JAR:
 

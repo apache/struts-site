@@ -67,17 +67,8 @@ The `org.apache.struts2.interceptor.FileUploadInterceptor` class is included as 
 
 ~~~~~~~
 
-A form must be create with a form field of type file, 
-
-~~~~~~~
-<INPUT type="file" name="upload">
-~~~~~~~
-\. The form used to upload the file must have its encoding type set to multipart/form\-data, 
-
-~~~~~~~
-<FORM action="doUpload" enctype="multipart/form-data" method="post">
-~~~~~~~
-\. The standard procedure for adding these elements is by using the Struts 2 tag libraries as shown in the following example:
+A form must be create with a form field of type file, `<INPUT type="file" name="upload">`\. The form used to upload the file must have its encoding type set to multipart/form\-data, 
+`<FORM action="doUpload" enctype="multipart/form-data" method="post">`\. The standard procedure for adding these elements is by using the Struts 2 tag libraries as shown in the following example:
 
 **Example JSP form tags:**
 
@@ -322,11 +313,7 @@ Additionally the `fileUpload` interceptor has settings that can be put in place 
 __File Size Limits__
 
 There are two separate file size limits\. First is `struts.multipart.maxSize` which comes from the Struts 2 `default.properties` file\. This setting exists for security reasons to prohibit a malicious user from uploading extremely large files to file up your servers disk space\. This setting defaults to approximately 2 megabytes and should be adjusted to the maximum size file (2 gigs max) that your will need the framework to receive\. If you are uploading more than one file on a form the `struts.multipart.maxSize` applies to the combined total, not the individual file sizes\. The other setting, 
-
-~~~~~~~
-maximumSize
-~~~~~~~
-, is an interceptor setting that is used to ensure a particular Action does not receive a file that is too large\. Notice the locations of both settings in the following example:
+`maximumSize`, is an interceptor setting that is used to ensure a particular Action does not receive a file that is too large\. Notice the locations of both settings in the following example:
 
 
 ~~~~~~~
@@ -393,12 +380,7 @@ __Alternate Libraries__
 
 The `struts.multipart.parser` used by the fileUpload interceptor to handle HTTP POST requests, encoded using the MIME\-type multipart/form\-data, can be changed out\. Currently there are two choices, jakarta and pell\. The jakarta parser is a standard part of the Struts 2 framework needing only its required libraries added to a project\. The pell parser uses Jason Pell's multipart parser instead of the Commons\-FileUpload library\. The pell parser is a Struts 2 plugin, for more details see: _pell multipart plugin_ \. There was a third alternative, cos, but it was removed due to licensing incompatibilities\.
 
-As from Struts version 2\.3\.18 a new implementation of `MultiPartRequest` was added \- 
-
-~~~~~~~
-JakartaStreamMultiPartRequest
-~~~~~~~
-\. It can be used to handle large files, see [WW\-3025](https://issues\.apache\.org/jira/browse/WW\-3025)^[https://issues\.apache\.org/jira/browse/WW\-3025] for more details, but you can simple set
+As from Struts version 2\.3\.18 a new implementation of `MultiPartRequest` was added \- `JakartaStreamMultiPartRequest`\. It can be used to handle large files, see [WW\-3025](https://issues\.apache\.org/jira/browse/WW\-3025)^[https://issues\.apache\.org/jira/browse/WW\-3025] for more details, but you can simple set
 
 
 
@@ -419,12 +401,7 @@ Please read [RFC1341](https://www\.w3\.org/Protocols/rfc1341/7\_2\_Multipart\.h
 
 __Disabling file upload support__
 
-You can alternatively disable the whole file upload mechanism defining a constant in 
-
-~~~~~~~
-struts.xml
-~~~~~~~
-:
+You can alternatively disable the whole file upload mechanism defining a constant in `struts.xml`:
 
 
 ~~~~~~~
