@@ -198,12 +198,7 @@
 
 <h2 id="basic-usage">Basic Usage</h2>
 
-<p>The</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>org.apache.struts2.interceptor.FileUploadInterceptor
-</code></pre>
-</div>
-<p>class is included as part of the</p>
+<p>The <code class="highlighter-rouge">org.apache.struts2.interceptor.FileUploadInterceptor</code> class is included as part of the</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>defaultStack
 </code></pre>
@@ -303,12 +298,7 @@
 
 <h2 id="uploading-multiple-files">Uploading Multiple Files</h2>
 
-<p>As mentioned in the previous section one technique for uploading multiple files would be to simply have multiple form input elements of type file all with different names. This would require a number of setter methods that was equal to 3 times the number of files being uploaded. Another option is to use Arrays or java.util.Lists. The following examples are taken from the Showcase example application that is part sample applications you can download at <a href="http://struts\.apache\.org/download\.cgi">http://struts.apache.org/download.cgi</a>. For the Action mapping details see</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts-fileupload.xml
-</code></pre>
-</div>
-<p>in the sample application download.</p>
+<p>As mentioned in the previous section one technique for uploading multiple files would be to simply have multiple form input elements of type file all with different names. This would require a number of setter methods that was equal to 3 times the number of files being uploaded. Another option is to use Arrays or java.util.Lists. The following examples are taken from the Showcase example application that is part sample applications you can download at <a href="http://struts\.apache\.org/download\.cgi">http://struts.apache.org/download.cgi</a>. For the Action mapping details see <code class="highlighter-rouge">struts-fileupload.xml</code> in the sample application download.</p>
 
 <p><strong>Uploading Multiple Files using Arrays</strong></p>
 
@@ -466,12 +456,7 @@ struts.multipart.maxSize=2097152
   </tbody>
 </table>
 
-<p>In order to change theses settings you define a constant in your applications</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
-</code></pre>
-</div>
-<p>file like so:</p>
+<p>In order to change theses settings you define a constant in your applications <code class="highlighter-rouge">struts.xml</code> file like so:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE struts PUBLIC 
@@ -485,12 +470,7 @@ struts.multipart.maxSize=2097152
 </code></pre>
 </div>
 
-<p>Additionally the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>fileUpload
-</code></pre>
-</div>
-<p>interceptor has settings that can be put in place for individual action mappings by customizing your interceptor stack.</p>
+<p>Additionally the <code class="highlighter-rouge">fileUpload</code> interceptor has settings that can be put in place for individual action mappings by customizing your interceptor stack.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>&lt;action name="doUpload" class="com.example.UploadAction"&gt;
     &lt;interceptor-ref name="basicStack"/&gt;
@@ -508,22 +488,12 @@ struts.multipart.maxSize=2097152
 
 <p><strong>File Size Limits</strong></p>
 
-<p>There are two separate file size limits. First is</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.multipart.maxSize
-</code></pre>
-</div>
-<p>which comes from the Struts 2</p>
+<p>There are two separate file size limits. First is <code class="highlighter-rouge">struts.multipart.maxSize</code> which comes from the Struts 2</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>default.properties
 </code></pre>
 </div>
-<p>file. This setting exists for security reasons to prohibit a malicious user from uploading extremely large files to file up your servers disk space. This setting defaults to approximately 2 megabytes and should be adjusted to the maximum size file (2 gigs max) that your will need the framework to receive. If you are uploading more than one file on a form the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.multipart.maxSize
-</code></pre>
-</div>
-<p>applies to the combined total, not the individual file sizes. The other setting,</p>
+<p>file. This setting exists for security reasons to prohibit a malicious user from uploading extremely large files to file up your servers disk space. This setting defaults to approximately 2 megabytes and should be adjusted to the maximum size file (2 gigs max) that your will need the framework to receive. If you are uploading more than one file on a form the <code class="highlighter-rouge">struts.multipart.maxSize</code> applies to the combined total, not the individual file sizes. The other setting,</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>maximumSize
 </code></pre>
@@ -570,21 +540,11 @@ struts.multipart.maxSize=2097152
 </code></pre>
 </div>
 
-<p>When the uploaded file type does not match one of the MIME types specified a field error will be created as described in the next section entitled Error Messages. Programmatically limiting the file type means using the information passed in to your Action class via the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>setXContentType(String contentType)
-</code></pre>
-</div>
-<p>method. The benefit to this type of approach would be that it’s more flexible and no interceptor configuration would be needed if file sizes are keep under 2 megs.</p>
+<p>When the uploaded file type does not match one of the MIME types specified a field error will be created as described in the next section entitled Error Messages. Programmatically limiting the file type means using the information passed in to your Action class via the <code class="highlighter-rouge">setXContentType(String contentType)</code> method. The benefit to this type of approach would be that it’s more flexible and no interceptor configuration would be needed if file sizes are keep under 2 megs.</p>
 
 <p><strong>Error Messages</strong></p>
 
-<p>If an error occurs several field errors will be added assuming that the action implements</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>com.opensymphony.xwork2.ValidationAware
-</code></pre>
-</div>
-<p>or extends</p>
+<p>If an error occurs several field errors will be added assuming that the action implements <code class="highlighter-rouge">com.opensymphony.xwork2.ValidationAware</code> or extends</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>com.opensymphony.xwork2.ActionSupport
 </code></pre>
@@ -628,12 +588,7 @@ struts.multipart.maxSize=2097152
 
 <p><strong>Temporary Directories</strong></p>
 
-<p>All uploaded files are saved to a temporary directory by the framework before being passed in to an Action. Depending on the allowed file sizes it may be necessary to have the framework store these temporary files in an alternate location. To do this change</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.multipart.saveDir
-</code></pre>
-</div>
-<p>to the directory where the uploaded files will be placed. If this property is not set it defaults to</p>
+<p>All uploaded files are saved to a temporary directory by the framework before being passed in to an Action. Depending on the allowed file sizes it may be necessary to have the framework store these temporary files in an alternate location. To do this change <code class="highlighter-rouge">struts.multipart.saveDir</code> to the directory where the uploaded files will be placed. If this property is not set it defaults to</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>javax.servlet.context.tempdir
 </code></pre>
@@ -647,12 +602,7 @@ struts.multipart.maxSize=2097152
 
 <p><strong>Alternate Libraries</strong></p>
 
-<p>The</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.multipart.parser
-</code></pre>
-</div>
-<p>used by the fileUpload interceptor to handle HTTP POST requests, encoded using the MIME-type multipart/form-data, can be changed out. Currently there are two choices, jakarta and pell. The jakarta parser is a standard part of the Struts 2 framework needing only its required libraries added to a project. The pell parser uses Jason Pell’s multipart parser instead of the Commons-FileUpload library. The pell parser is a Struts 2 plugin, for more details see: <em>pell multipart plugin</em> . There was a third alternative, cos, but it was removed due to licensing incompatibilities.</p>
+<p>The <code class="highlighter-rouge">struts.multipart.parser</code> used by the fileUpload interceptor to handle HTTP POST requests, encoded using the MIME-type multipart/form-data, can be changed out. Currently there are two choices, jakarta and pell. The jakarta parser is a standard part of the Struts 2 framework needing only its required libraries added to a project. The pell parser uses Jason Pell’s multipart parser instead of the Commons-FileUpload library. The pell parser is a Struts 2 plugin, for more details see: <em>pell multipart plugin</em> . There was a third alternative, cos, but it was removed due to licensing incompatibilities.</p>
 
 <p>As from Struts version 2.3.18 a new implementation of </p>
 

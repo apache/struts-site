@@ -177,12 +177,7 @@
 
 <h2 id="action-and-package-name">Action and Package name</h2>
 
-<p>The subpackage name makes the namespace, and the action class name makes the action name.  If there is an “Action” suffix, it is dropped before creating the action name. Therefore, if the configured package is <em>com.myapp.actions</em>  and the Action is <em>com.myapp.actions.</em> <strong>member</strong>.EditAction, you can access it via <a href="http://server/myapp/member/edit\.action">http://server/myapp/member/edit.action</a>.  For multi-word actions, the first letter is lower-cased and the rest is left alone, so the Action</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>MyCustomAction
-</code></pre>
-</div>
-<p>will map to</p>
+<p>The subpackage name makes the namespace, and the action class name makes the action name.  If there is an “Action” suffix, it is dropped before creating the action name. Therefore, if the configured package is <em>com.myapp.actions</em>  and the Action is <em>com.myapp.actions.</em> <strong>member</strong>.EditAction, you can access it via <a href="http://server/myapp/member/edit\.action">http://server/myapp/member/edit.action</a>.  For multi-word actions, the first letter is lower-cased and the rest is left alone, so the Action <code class="highlighter-rouge">MyCustomAction</code> will map to</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>myCustom.action
 </code></pre>
@@ -199,19 +194,9 @@
 
 <h2 id="parent-package">Parent Package</h2>
 
-<p>The <a href="#PAGE_68490">ParentPackage Annotation</a> configures the XWork package (an XWork package is created per Java package) to extend one or more defined packages. The best place for this annotation is on the package via the</p>
+<p>The <a href="#PAGE_68490">ParentPackage Annotation</a> configures the XWork package (an XWork package is created per Java package) to extend one or more defined packages. The best place for this annotation is on the package via the <code class="highlighter-rouge">package-info.java</code> file, however, for backward-compatibility, they can be specified on one or more Actions in the package.  To determine which parent packages should be set, first, it looks for the package annotation, then adds the action annotations as they are loaded.  Because the load order of Actions is undetermined, it is highly recommended you avoid putting the @ParentPackage annotation on Action classes themselves.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package-info.java
-</code></pre>
-</div>
-<p>file, however, for backward-compatibility, they can be specified on one or more Actions in the package.  To determine which parent packages should be set, first, it looks for the package annotation, then adds the action annotations as they are loaded.  Because the load order of Actions is undetermined, it is highly recommended you avoid putting the @ParentPackage annotation on Action classes themselves.</p>
-
-<p>For example, if you wanted to set the parent package for the</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>com.mycompany.myapp.actions
-</code></pre>
-</div>
-<p>package, create this package-info.java file:</p>
+<p>For example, if you wanted to set the parent package for the <code class="highlighter-rouge">com.mycompany.myapp.actions</code> package, create this package-info.java file:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
 @ParentPackage("my-parent-package")
