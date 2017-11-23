@@ -48,12 +48,7 @@ The only example right now is in the showcase, where the person package uses the
 
 ## Action and Package name
 
-The subpackage name makes the namespace, and the action class name makes the action name\.  If there is an "Action" suffix, it is dropped before creating the action name\. Therefore, if the configured package is _com\.myapp\.actions_  and the Action is _com\.myapp\.actions\._ **member**\.EditAction, you can access it via [http://server/myapp/member/edit\.action](http://server/myapp/member/edit\.action)\.  For multi\-word actions, the first letter is lower\-cased and the rest is left alone, so the Action 
-
-~~~~~~~
-MyCustomAction
-~~~~~~~
- will map to 
+The subpackage name makes the namespace, and the action class name makes the action name\.  If there is an "Action" suffix, it is dropped before creating the action name\. Therefore, if the configured package is _com\.myapp\.actions_  and the Action is _com\.myapp\.actions\._ **member**\.EditAction, you can access it via [http://server/myapp/member/edit\.action](http://server/myapp/member/edit\.action)\.  For multi\-word actions, the first letter is lower\-cased and the rest is left alone, so the Action `MyCustomAction` will map to 
 
 ~~~~~~~
 myCustom.action
@@ -70,19 +65,9 @@ The [Namespace Annotation](#PAGE_68488) overrides the namespace\.
 
 ## Parent Package
 
-The [ParentPackage Annotation](#PAGE_68490) configures the XWork package (an XWork package is created per Java package) to extend one or more defined packages\. The best place for this annotation is on the package via the 
+The [ParentPackage Annotation](#PAGE_68490) configures the XWork package (an XWork package is created per Java package) to extend one or more defined packages\. The best place for this annotation is on the package via the `package-info.java` file, however, for backward\-compatibility, they can be specified on one or more Actions in the package\.  To determine which parent packages should be set, first, it looks for the package annotation, then adds the action annotations as they are loaded\.  Because the load order of Actions is undetermined, it is highly recommended you avoid putting the @ParentPackage annotation on Action classes themselves\.
 
-~~~~~~~
-package-info.java
-~~~~~~~
- file, however, for backward\-compatibility, they can be specified on one or more Actions in the package\.  To determine which parent packages should be set, first, it looks for the package annotation, then adds the action annotations as they are loaded\.  Because the load order of Actions is undetermined, it is highly recommended you avoid putting the @ParentPackage annotation on Action classes themselves\.
-
-For example, if you wanted to set the parent package for the 
-
-~~~~~~~
-com.mycompany.myapp.actions
-~~~~~~~
- package, create this package\-info\.java file:
+For example, if you wanted to set the parent package for the `com.mycompany.myapp.actions` package, create this package\-info\.java file:
 
 
 ~~~~~~~

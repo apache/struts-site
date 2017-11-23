@@ -49,12 +49,7 @@ ConfigurationManager
 ~~~~~~~
 XmlConfigurationProvider
 ~~~~~~~
- \- proprietary XWork implementation which are using 
-
-~~~~~~~
-xwork.xml
-~~~~~~~
- file as source of configuration 
+ \- proprietary XWork implementation which are using `xwork.xml` file as source of configuration 
 
 + 
 

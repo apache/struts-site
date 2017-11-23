@@ -16,17 +16,7 @@ To deploy to WebLogic, the common approach is to create and deploy an unexpanded
 
 ## Adding an struts\-velocity\.properties Configuration File
 
-+ In the 
-
-~~~~~~~
-struts.properties
-~~~~~~~
- file (usually kept in the 
-
-~~~~~~~
-WEB-INF/classes
-~~~~~~~
- directory), add an entry that specifies a Velocity configuation file\.
++ In the `struts.properties` file (usually kept in the `WEB-INF/classes` directory), add an entry that specifies a Velocity configuation file\.
 	
 
   + 
@@ -40,31 +30,16 @@ struts.velocity.configfile = struts-velocity.properties
 
 ~~~~~~~
 
-+ Create the corresponding Velocity properties file ("struts\-velocity\.properties"), preferably in the same location as the 
++ Create the corresponding Velocity properties file ("struts\-velocity\.properties"), preferably in the same location as the `struts.properties` file\.
 
-~~~~~~~
-struts.properties
-~~~~~~~
- file\.
-
-+ Copy into the Velocity properties file the contents of the 
-
-~~~~~~~
-velocity.properties
-~~~~~~~
- file that is the the SAF 
++ Copy into the Velocity properties file the contents of the `velocity.properties` file that is the the SAF 
 
 ~~~~~~~
 velocity-dep.jar
 ~~~~~~~
 \.
 
-+ In your new 
-
-~~~~~~~
-struts-velocity.properties
-~~~~~~~
- file, find he section titled  "
++ In your new `struts-velocity.properties` file, find he section titled  "
 
 ~~~~~~~
 T E M P L A T E  L O A D E R S

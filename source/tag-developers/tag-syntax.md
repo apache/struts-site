@@ -29,12 +29,7 @@ Sometimes, we want to pass the dynamic data to a tag. For example, we might want
 
 ~~~~~~~
 
-The expression language ([OGNL](#PAGE_14198)) lets us call methods and evaluate properties. The method 
-
-~~~~~~~
-getText
-~~~~~~~
- is provided by ActionSupport, which is the base class for most Actions. Since the Action is on the stack, we can call any of its methods from an expression, including 
+The expression language ([OGNL](#PAGE_14198)) lets us call methods and evaluate properties. The method `getText` is provided by ActionSupport, which is the base class for most Actions. Since the Action is on the stack, we can call any of its methods from an expression, including 
 
 ~~~~~~~
 getText
@@ -43,12 +38,7 @@ getText
 
 ## Non-String Attributes
 
-The HTTP protocol is text-based, but some tags have non-String attribute types, like 
-
-~~~~~~~
-bool
-~~~~~~~
- or 
+The HTTP protocol is text-based, but some tags have non-String attribute types, like `bool` or 
 
 ~~~~~~~
 int
@@ -64,12 +54,7 @@ int
 
 ~~~~~~~
 
-Since the attribute 
-
-~~~~~~~
-multiple
-~~~~~~~
- maps to a boolean property, the framework does not interpret the value as a String. The value is evaluated as an expression and automtically converted to a boolean.
+Since the attribute `multiple` maps to a boolean property, the framework does not interpret the value as a String. The value is evaluated as an expression and automtically converted to a boolean.
 
 Since it's easy to forget which attributes are String and which are non-String, you can still use the escape notation.
 
@@ -102,44 +87,19 @@ Since it's easy to forget which attributes are String and which are non-String, 
 
 ## value is an Object!
 
-Most often, the 
+Most often, the `value` attribute is set automatically, since `name` attribute usually tells the framework which property to call to set the 
 
 ~~~~~~~
 value
 ~~~~~~~
- attribute is set automatically, since 
-
-~~~~~~~
-name
-~~~~~~~
- attribute usually tells the framework which property to call to set the 
-
-~~~~~~~
-value
-~~~~~~~
-. But, if there is a reason to set the 
-
-~~~~~~~
-value
-~~~~~~~
- directly, be advised that 
+. But, if there is a reason to set the `value` directly, be advised that 
 
 ~~~~~~~
 value
 ~~~~~~~
 **is an Object****_NOT_ ****a String**.
 
- (!)  Since 
-
-~~~~~~~
-value
-~~~~~~~
- is not a String, whatever is passed to 
-
-~~~~~~~
-value
-~~~~~~~
- is evaluated as an expression - **NOT** a String literal.
+ (!)  Since `value` is not a String, whatever is passed to `value` is evaluated as an expression - **NOT** a String literal.
 
 **Probably wrong!**
 
@@ -150,12 +110,7 @@ value
 
 ~~~~~~~
 
-If a 
-
-~~~~~~~
-textfield
-~~~~~~~
- is passed the value attribute 
+If a `textfield` is passed the value attribute 
 
 ~~~~~~~
 "ca"

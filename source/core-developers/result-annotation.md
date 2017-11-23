@@ -5,22 +5,7 @@ title: Result Annotation
 
 # Result Annotation
 
-The 
-
-~~~~~~~
-@Result
-~~~~~~~
- annotation allows the definition of 
-
-~~~~~~~
-Action
-~~~~~~~
- results in the 
-
-~~~~~~~
-Action
-~~~~~~~
- class rather than an XML file\.
+The `@Result` annotation allows the definition of `Action` results in the `Action` class rather than an XML file\.
 
 
 
@@ -28,42 +13,7 @@ Action
 
 | 
 
-In order for 
-
-~~~~~~~
-@Result
-~~~~~~~
- and 
-
-~~~~~~~
-@Results
-~~~~~~~
- annotations to be configured correctly you must set the 
-
-~~~~~~~
-actionPackages
-~~~~~~~
- filter 
-
-~~~~~~~
-init-param
-~~~~~~~
- to a comma\-separated list of packages containing the annotated 
-
-~~~~~~~
-Action
-~~~~~~~
- classes\. See [Zero Configuration](zero-configuration.html) for further information; there are 
-
-~~~~~~~
-Action
-~~~~~~~
- class naming conventions if you don't implement the 
-
-~~~~~~~
-Action
-~~~~~~~
- interface and other tidbits there\.
+In order for `@Result` and `@Results` annotations to be configured correctly you must set the `actionPackages` filter `init-param` to a comma\-separated list of packages containing the annotated `Action` classes\. See [Zero Configuration](zero-configuration.html) for further information; there are `Action` class naming conventions if you don't implement the `Action` interface and other tidbits there\.
 
 ## @Result Annotation Parameters
 
@@ -134,12 +84,7 @@ ServletRedirectResult.class
 ~~~~~~~
 ServletActionRedirectResult.class
 ~~~~~~~
- \- equivalent to the 
-
-~~~~~~~
-redirectAction
-~~~~~~~
- type in XML config
+ \- equivalent to the `redirectAction` type in XML config
 
   + 
 
@@ -147,12 +92,7 @@ redirectAction
 TilesResult.class
 ~~~~~~~
 
-  + \.\. (for more result, please consult the API docs, and look for implementations of the XWork 
-
-~~~~~~~
-Result
-~~~~~~~
- interface)
+  + \.\. (for more result, please consult the API docs, and look for implementations of the XWork `Result` interface)
 
 + params \- An Array of the parameters in the form \{key1, value1, key2, value2\}
 

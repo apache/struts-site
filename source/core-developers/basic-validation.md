@@ -100,17 +100,7 @@ public class QuizAction extends ActionSupport {
 
 ## Step 3
 
-Create the validators\. The 
-
-~~~~~~~
-validation.xml
-~~~~~~~
- format is either 
-
-~~~~~~~
-<ActionClassName>-validation.xml
-~~~~~~~
- or 
+Create the validators\. The `validation.xml` format is either `<ActionClassName>-validation.xml` or 
 
 ~~~~~~~
 <ActionClassName>-<ActionAliasName>-validation.xml

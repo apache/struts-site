@@ -12,12 +12,7 @@ To have proper support of ﻿﻿the _Convention Plugin_  in JBoss AS 5, especi
 ~~~~~~~
 WEB-INF/classes
 ~~~~~~~
-, you must add the following line into 
-
-~~~~~~~
-$JBOSS_HOME/bin/run.conf
-~~~~~~~
- or into 
+, you must add the following line into `$JBOSS_HOME/bin/run.conf` or into 
 
 ~~~~~~~
 $JBOSS_HOME\bin\run.conf.bat

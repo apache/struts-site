@@ -51,12 +51,7 @@ Hello, ${name}
 
 ~~~~~~~
 
-Where 
-
-~~~~~~~
-name
-~~~~~~~
- is a property on the Action class. That's it!
+Where `name` is a property on the Action class. That's it!
 
 There are few more details of interest, such as how templates are loaded and variables are resolved.
 

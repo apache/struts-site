@@ -14,12 +14,7 @@ freemarker
 
 __Configure your action to use the freemarker result type__
 
-The 
-
-~~~~~~~
-freemarker
-~~~~~~~
- result type is defined in 
+The `freemarker` result type is defined in 
 
 ~~~~~~~
 struts-default.xml
@@ -56,12 +51,7 @@ ${name
 ~~~~~~~
 stack.findValue("name")
 ~~~~~~~
-, which _generaly_  results in 
-
-~~~~~~~
-action.getName()
-~~~~~~~
- being executed\.
+, which _generaly_  results in `action.getName()` being executed\.
 
 A search process is used to resolve the variable, searching the following scopes in order, until a value is found :
 
@@ -132,12 +122,7 @@ exception
 
 __FreeMarker configuration with recent releases__
 
-To configure the freemarker engine that Struts uses, just add a file 
-
-~~~~~~~
-freemarker.properties
-~~~~~~~
- to the classpath\. The supported properties are those that the Freemarker Configuration object expects \- see the [Freemarker documentation](http://freemarker\.org/docs/api/freemarker/template/Configuration\.html\#setSetting(java\.lang\.String,%20java\.lang\.String))^[http://freemarker\.org/docs/api/freemarker/template/Configuration\.html\#setSetting(java\.lang\.String,%20java\.lang\.String)] for these\.
+To configure the freemarker engine that Struts uses, just add a file `freemarker.properties` to the classpath\. The supported properties are those that the Freemarker Configuration object expects \- see the [Freemarker documentation](http://freemarker\.org/docs/api/freemarker/template/Configuration\.html\#setSetting(java\.lang\.String,%20java\.lang\.String))^[http://freemarker\.org/docs/api/freemarker/template/Configuration\.html\#setSetting(java\.lang\.String,%20java\.lang\.String)] for these\.
 
 
 ~~~~~~~

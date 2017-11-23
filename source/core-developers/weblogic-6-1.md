@@ -35,24 +35,14 @@ getServletContext
 ~~~~~~~
 getServletContext
 ~~~~~~~
-, is then implemented to return the servlet context from where it is available in Servlet 2.3: the session object. The logical operation is unchanged, but now subclasses can override 
-
-~~~~~~~
-getServletContext
-~~~~~~~
- to retrieve the servlet context from a different location as we'll see below.
+, is then implemented to return the servlet context from where it is available in Servlet 2.3: the session object. The logical operation is unchanged, but now subclasses can override `getServletContext` to retrieve the servlet context from a different location as we'll see below.
 
 1. **SessionLifecycleListener** is modified in the same way as RequestLifecycleFilter. The method, 
 
 ~~~~~~~
 getServletContext
 ~~~~~~~
-, is implemented to return the servlet context, in this case also from the session object. Again, subclasses can override the 
-
-~~~~~~~
-getServletContext
-~~~~~~~
- method to restore the servlet context from a different source. Again, this class's functionality is unchanged.
+, is implemented to return the servlet context, in this case also from the session object. Again, subclasses can override the `getServletContext` method to restore the servlet context from a different source. Again, this class's functionality is unchanged.
 
 Now, in a separate project, the following classes are added and compiled into a separate JAR:
 
@@ -88,17 +78,7 @@ In the \{\{web\.xml\} file, make the following class name substitutions:
 
 __I still get the AbstractMethodError Exception when Weblogic Server starts up\.  What am I doing wrong?__
 
-1. Check to see if a 
-
-~~~~~~~
-action2-example.war
-~~~~~~~
- is still lingering in your 
-
-~~~~~~~
-mydomain/applications
-~~~~~~~
- folder and delete it if it is there.
+1. Check to see if a `action2-example.war` is still lingering in your `mydomain/applications` folder and delete it if it is there.
 
 2. See next FAQ question.
 

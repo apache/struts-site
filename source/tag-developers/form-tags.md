@@ -30,12 +30,7 @@ The predefined themes can be used "as is" or customized.
 
 __Simple theme caveats__
 
-The downside of using the simple theme is that it doesn't support as many of the attributes that the other themes do. For example, the 
-
-~~~~~~~
-label
-~~~~~~~
- attribute does nothing in the simple theme, and the automatic display of error messages is not supported.
+The downside of using the simple theme is that it doesn't support as many of the attributes that the other themes do. For example, the `label` attribute does nothing in the simple theme, and the automatic display of error messages is not supported.
 
 __Common Attributes__
 
@@ -51,12 +46,7 @@ In addition to the common attributes, a special attribute exists for all form el
 ~~~~~~~
 form
 ~~~~~~~
- (\${parameters.form}). The 
-
-~~~~~~~
-form
-~~~~~~~
- property represents the attributes used to render the form tag, such as the form's id. In a template, the form's ID can be found by calling \${parameters.form.id}.
+ (\${parameters.form}). The `form` property represents the attributes used to render the form tag, such as the form's id. In a template, the form's ID can be found by calling \${parameters.form.id}.
 
 __Template-Related Attributes__
 
@@ -374,37 +364,12 @@ __General Attributes__
 
 __Value/Name Relationship__
 
-In many of the tags (except for the form tag) there is a unique relationship between the 
+In many of the tags (except for the form tag) there is a unique relationship between the `name` and `value` attributes. The `name` attribute provides the name for the tag, which in turn is used as the control attribute when the form is submitted. The value submitted is bound to the 
 
 ~~~~~~~
 name
 ~~~~~~~
- and 
-
-~~~~~~~
-value
-~~~~~~~
- attributes. The 
-
-~~~~~~~
-name
-~~~~~~~
- attribute provides the name for the tag, which in turn is used as the control attribute when the form is submitted. The value submitted is bound to the 
-
-~~~~~~~
-name
-~~~~~~~
-. In most cases, the 
-
-~~~~~~~
-name
-~~~~~~~
- maps to a simple JavaBean property, such as "postalCode". On a submit, the value would be set to the property by calling the 
-
-~~~~~~~
-setPostalCode
-~~~~~~~
- mutator.
+. In most cases, the `name` maps to a simple JavaBean property, such as "postalCode". On a submit, the value would be set to the property by calling the `setPostalCode` mutator.
 
 Likewise, a form control could be populated by calling a JavaBean accessor, like 
 
@@ -427,27 +392,12 @@ getPostalCode
 
 ~~~~~~~
 
-However, since the tags imply a relationship between the 
-
-~~~~~~~
-name
-~~~~~~~
- and 
+However, since the tags imply a relationship between the `name` and 
 
 ~~~~~~~
 value
 ~~~~~~~
-, the 
-
-~~~~~~~
-value
-~~~~~~~
- attribute is optional. If a 
-
-~~~~~~~
-value
-~~~~~~~
- is not specified, by default, the JavaBean accessor is used instead.
+, the `value` attribute is optional. If a `value` is not specified, by default, the JavaBean accessor is used instead.
 
 
 ~~~~~~~
@@ -458,32 +408,7 @@ value
 
 ~~~~~~~
 
-While most attributes are exposed to the underlying templates as the same key as the attribute (\${parameters.label}), the 
-
-~~~~~~~
-value
-~~~~~~~
- attribute is not. Instead, it can be accessed via the 
-
-~~~~~~~
-nameValue
-~~~~~~~
- key (\${parameters.nameValue}). The 
-
-~~~~~~~
-nameValue
-~~~~~~~
- key indicates that the value may have been generated from the 
-
-~~~~~~~
-name
-~~~~~~~
- attribute rather than explicitly defined in the 
-
-~~~~~~~
-value
-~~~~~~~
- attribute.
+While most attributes are exposed to the underlying templates as the same key as the attribute (\${parameters.label}), the `value` attribute is not. Instead, it can be accessed via the `nameValue` key (\${parameters.nameValue}). The `nameValue` key indicates that the value may have been generated from the `name` attribute rather than explicitly defined in the `value` attribute.
 
 __ID Name Assignment__
 
@@ -519,12 +444,7 @@ labelposition
 
 __Required Attribute__
 
-The 
-
-~~~~~~~
-required
-~~~~~~~
- attribute on many UI tags defaults to true only if you have client-side validation enabled, and a validator is associated with that particular field.
+The `required` attribute on many UI tags defaults to true only if you have client-side validation enabled, and a validator is associated with that particular field.
 
 __Tooltip__
 

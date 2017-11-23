@@ -7,12 +7,7 @@ title: Client Validation
 
 Let's create a Client\-Side validation workflow, step by step\.
 
-(information) The 
-
-~~~~~~~
-validate
-~~~~~~~
- attribute is set to 
+(information) The `validate` attribute is set to 
 
 ~~~~~~~
 true
@@ -62,12 +57,7 @@ Create the form\.
 ```
 
 {% comment %}end snippet id=clientValidation|lang=xml|javadoc=false|url=struts2/apps/showcase/src/main/webapp/WEB-INF/validation/quiz-client.jsp {% endcomment %}
-(information) This case uses the default xhtml theme, so the 
-
-~~~~~~~
-<s:head >
-~~~~~~~
- tag is used to link a style sheet\.
+(information) This case uses the default xhtml theme, so the `<s:head >` tag is used to link a style sheet\.
 
 ## Step 2
 
@@ -117,12 +107,7 @@ public class QuizAction extends ActionSupport {
 
 __Step 3__
 
-Create the 
-
-~~~~~~~
-validation.xml
-~~~~~~~
- to configure the validators to be used\.
+Create the `validation.xml` to configure the validators to be used\.
 
 {% comment %}start snippet id=quizValidators|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/QuizAction-validation.xml {% endcomment %}
 

@@ -35,12 +35,7 @@ some values will be considered acceptable by the JavaScript code but will be mar
 
 __Error reporting__
 
-Because client side validation does not talk to the server, the theme (_xhtml theme_  or _css\_xhtml theme_ ) is responsible for properly manipulating the HTML DOM to display the error message inline\. The JavaScript that is responsible for doing this logic is 
-
-~~~~~~~
-validation.js
-~~~~~~~
- and can be found in each theme\.
+Because client side validation does not talk to the server, the theme (_xhtml theme_  or _css\_xhtml theme_ ) is responsible for properly manipulating the HTML DOM to display the error message inline\. The JavaScript that is responsible for doing this logic is `validation.js` and can be found in each theme\.
 
 
 

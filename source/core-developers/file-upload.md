@@ -55,12 +55,7 @@ If you are using Maven then you can add these libraries as dependencies in your 
 
 ## Basic Usage
 
-The 
-
-~~~~~~~
-org.apache.struts2.interceptor.FileUploadInterceptor
-~~~~~~~
- class is included as part of the 
+The `org.apache.struts2.interceptor.FileUploadInterceptor` class is included as part of the 
 
 ~~~~~~~
 defaultStack
@@ -148,12 +143,7 @@ The purpose of each one of these methods is described in the table below\. Notic
 
 ## Uploading Multiple Files
 
-As mentioned in the previous section one technique for uploading multiple files would be to simply have multiple form input elements of type file all with different names\. This would require a number of setter methods that was equal to 3 times the number of files being uploaded\. Another option is to use Arrays or java\.util\.Lists\. The following examples are taken from the Showcase example application that is part sample applications you can download at [http://struts\.apache\.org/download\.cgi](http://struts\.apache\.org/download\.cgi)\. For the Action mapping details see 
-
-~~~~~~~
-struts-fileupload.xml
-~~~~~~~
- in the sample application download\.
+As mentioned in the previous section one technique for uploading multiple files would be to simply have multiple form input elements of type file all with different names\. This would require a number of setter methods that was equal to 3 times the number of files being uploaded\. Another option is to use Arrays or java\.util\.Lists\. The following examples are taken from the Showcase example application that is part sample applications you can download at [http://struts\.apache\.org/download\.cgi](http://struts\.apache\.org/download\.cgi)\. For the Action mapping details see `struts-fileupload.xml` in the sample application download\.
 
 __Uploading Multiple Files using Arrays__
 
@@ -307,12 +297,7 @@ struts.multipart.maxSize=2097152
 
 | 
 
-In order to change theses settings you define a constant in your applications 
-
-~~~~~~~
-struts.xml
-~~~~~~~
- file like so:
+In order to change theses settings you define a constant in your applications `struts.xml` file like so:
 
 
 ~~~~~~~
@@ -327,12 +312,7 @@ struts.xml
 
 ~~~~~~~
 
-Additionally the 
-
-~~~~~~~
-fileUpload
-~~~~~~~
- interceptor has settings that can be put in place for individual action mappings by customizing your interceptor stack\.
+Additionally the `fileUpload` interceptor has settings that can be put in place for individual action mappings by customizing your interceptor stack\.
 
 
 ~~~~~~~
@@ -351,22 +331,12 @@ fileUpload
 
 __File Size Limits__
 
-There are two separate file size limits\. First is 
-
-~~~~~~~
-struts.multipart.maxSize
-~~~~~~~
- which comes from the Struts 2 
+There are two separate file size limits\. First is `struts.multipart.maxSize` which comes from the Struts 2 
 
 ~~~~~~~
 default.properties
 ~~~~~~~
- file\. This setting exists for security reasons to prohibit a malicious user from uploading extremely large files to file up your servers disk space\. This setting defaults to approximately 2 megabytes and should be adjusted to the maximum size file (2 gigs max) that your will need the framework to receive\. If you are uploading more than one file on a form the 
-
-~~~~~~~
-struts.multipart.maxSize
-~~~~~~~
- applies to the combined total, not the individual file sizes\. The other setting, 
+ file\. This setting exists for security reasons to prohibit a malicious user from uploading extremely large files to file up your servers disk space\. This setting defaults to approximately 2 megabytes and should be adjusted to the maximum size file (2 gigs max) that your will need the framework to receive\. If you are uploading more than one file on a form the `struts.multipart.maxSize` applies to the combined total, not the individual file sizes\. The other setting, 
 
 ~~~~~~~
 maximumSize
@@ -415,21 +385,11 @@ There are two ways to limit the uploaded file type, declaratively and programmat
 
 ~~~~~~~
 
-When the uploaded file type does not match one of the MIME types specified a field error will be created as described in the next section entitled Error Messages\. Programmatically limiting the file type means using the information passed in to your Action class via the 
-
-~~~~~~~
-setXContentType(String contentType)
-~~~~~~~
- method\. The benefit to this type of approach would be that it's more flexible and no interceptor configuration would be needed if file sizes are keep under 2 megs\.
+When the uploaded file type does not match one of the MIME types specified a field error will be created as described in the next section entitled Error Messages\. Programmatically limiting the file type means using the information passed in to your Action class via the `setXContentType(String contentType)` method\. The benefit to this type of approach would be that it's more flexible and no interceptor configuration would be needed if file sizes are keep under 2 megs\.
 
 __Error Messages__
 
-If an error occurs several field errors will be added assuming that the action implements 
-
-~~~~~~~
-com.opensymphony.xwork2.ValidationAware
-~~~~~~~
- or extends 
+If an error occurs several field errors will be added assuming that the action implements `com.opensymphony.xwork2.ValidationAware` or extends 
 
 ~~~~~~~
 com.opensymphony.xwork2.ActionSupport
@@ -447,12 +407,7 @@ com.opensymphony.xwork2.ActionSupport
 
 __Temporary Directories__
 
-All uploaded files are saved to a temporary directory by the framework before being passed in to an Action\. Depending on the allowed file sizes it may be necessary to have the framework store these temporary files in an alternate location\. To do this change 
-
-~~~~~~~
-struts.multipart.saveDir
-~~~~~~~
- to the directory where the uploaded files will be placed\. If this property is not set it defaults to 
+All uploaded files are saved to a temporary directory by the framework before being passed in to an Action\. Depending on the allowed file sizes it may be necessary to have the framework store these temporary files in an alternate location\. To do this change `struts.multipart.saveDir` to the directory where the uploaded files will be placed\. If this property is not set it defaults to 
 
 ~~~~~~~
 javax.servlet.context.tempdir
@@ -466,12 +421,7 @@ javax.servlet.context.tempdir
 
 __Alternate Libraries__
 
-The 
-
-~~~~~~~
-struts.multipart.parser
-~~~~~~~
- used by the fileUpload interceptor to handle HTTP POST requests, encoded using the MIME\-type multipart/form\-data, can be changed out\. Currently there are two choices, jakarta and pell\. The jakarta parser is a standard part of the Struts 2 framework needing only its required libraries added to a project\. The pell parser uses Jason Pell's multipart parser instead of the Commons\-FileUpload library\. The pell parser is a Struts 2 plugin, for more details see: _pell multipart plugin_ \. There was a third alternative, cos, but it was removed due to licensing incompatibilities\.
+The `struts.multipart.parser` used by the fileUpload interceptor to handle HTTP POST requests, encoded using the MIME\-type multipart/form\-data, can be changed out\. Currently there are two choices, jakarta and pell\. The jakarta parser is a standard part of the Struts 2 framework needing only its required libraries added to a project\. The pell parser uses Jason Pell's multipart parser instead of the Commons\-FileUpload library\. The pell parser is a Struts 2 plugin, for more details see: _pell multipart plugin_ \. There was a third alternative, cos, but it was removed due to licensing incompatibilities\.
 
 As from Struts version 2\.3\.18 a new implementation of 
 

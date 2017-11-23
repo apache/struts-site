@@ -7,12 +7,7 @@ title: Client Side Validation
 
 The framework adds support for client\-side validation on top of the standard validation framework\.
 
-Client\-side validation can be enabled on a per\-form basis by specifying 
-
-~~~~~~~
-validate="true"
-~~~~~~~
- in the _form_  tag\.
+Client\-side validation can be enabled on a per\-form basis by specifying `validate="true"` in the _form_  tag\.
 
 
 ~~~~~~~
@@ -22,27 +17,7 @@ validate="true"
 
 ~~~~~~~
 
-If a 
-
-~~~~~~~
-name
-~~~~~~~
- for the form is not given, the action mapping name will be used as the form name\. Otherwise, a correct 
-
-~~~~~~~
-action
-~~~~~~~
- and 
-
-~~~~~~~
-namespace
-~~~~~~~
- attributes must be provided to the 
-
-~~~~~~~
-<saf:form>
-~~~~~~~
- tag\.
+If a `name` for the form is not given, the action mapping name will be used as the form name\. Otherwise, a correct `action` and `namespace` attributes must be provided to the `<saf:form>` tag\.
 
 **Referencing "submitProfile" in the "/user" namespace**
 

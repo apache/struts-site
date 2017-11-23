@@ -7,17 +7,7 @@ title: Namespace Annotation
 
 ## Namespace Annotation
 
-The 
-
-~~~~~~~
-@Namespace
-~~~~~~~
- annotation allows the definition of an Action's namespace in the 
-
-~~~~~~~
-Action
-~~~~~~~
- class rather than based on [Zero Configuration](zero-configuration.html)'s conventions\.
+The `@Namespace` annotation allows the definition of an Action's namespace in the `Action` class rather than based on [Zero Configuration](zero-configuration.html)'s conventions\.
 
 ### Usage
 

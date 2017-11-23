@@ -5,12 +5,7 @@ title: ParentPackage Annotation
 
 # ParentPackage Annotation
 
-The 
-
-~~~~~~~
-@ParentPackage
-~~~~~~~
- annotation allows the definition of 
+The `@ParentPackage` annotation allows the definition of 
 
 ~~~~~~~
 Action

@@ -131,12 +131,7 @@ For the Restful2ActionMapper to work we also have to set
 
 __Unit testing__
 
-Below you will find a simple unit test to test how to test actions when 
-
-~~~~~~~
-Restful2ActionMapper
-~~~~~~~
- is used\.
+Below you will find a simple unit test to test how to test actions when `Restful2ActionMapper` is used\.
 
 
 ~~~~~~~
