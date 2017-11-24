@@ -159,7 +159,7 @@ We need a mapping to tie the URL, the `HelloWorldAction` class (controller), an
 The mapping tells the Struts 2 framework which class will respond to the user's action (the URL), which method of that 
 class will be executed, and what view to render based on the String result that method returns.
 
-Edit the `struts.xml` file (in the Mvn project that file is in the src/main/resources folder) to add the action mapping. 
+Edit the `struts.xml` file (in the Mvn project that file is in the `src/main/resources` folder) to add the action mapping. 
 Place the action node (action `name="hello"`) between the opening and closing package node, just after the action mapping 
 with the `name="index"`. Your complete `struts.xml` should look like:
 
