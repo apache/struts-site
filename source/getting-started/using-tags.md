@@ -127,7 +127,7 @@ Add the following markup to `index.jsp` after the Hello Bruce Phillips link.
 </s:form>
 ```
 
-The Struts 2 textfield tag provides a input html tag of tag text and the submit tag creates a submit button. When the index 
+The Struts 2 textfield tag provides an input html tag of tag text and the submit tag creates a submit button. When the index 
 page is return by the server to the browser you should see:
 
 ![Struts Form.png](attachments/using_tags_form.png)
