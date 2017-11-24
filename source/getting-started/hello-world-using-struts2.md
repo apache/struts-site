@@ -233,8 +233,8 @@ Click on the Hello World link and you should get the HelloWorld.jsp page:
 
 Your browser sends to the web server a request for the URL [http://localhost:8080/helloworld/hello.action](http://localhost:8080/helloworld/hello.action).
 
-1. The container receives from the web server a request for the resource `hello.action`. According to the settings loaded f
-  rom the [web.xml](../core-developers/web-xml.html), the container finds that all requests are being routed to 
+1. The container receives from the web server a request for the resource `hello.action`. According to the settings loaded 
+  from the [web.xml](../core-developers/web-xml.html), the container finds that all requests are being routed to 
   `org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter`, including the `*.action` requests. 
   The `StrutsPrepareAndExecuteFilter` is the entry point into the framework.
 2. The framework looks for an action mapping named "hello", and it finds that this mapping corresponds to the class 
