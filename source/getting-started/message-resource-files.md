@@ -36,8 +36,8 @@ into a separate file where we can easily change them and also provide the capabi
 If you're doing this tutorial after completing [Form Validation](form-validation.html) then you can make these changes 
 to that tutorial's example application.
 
-Put the text below in a file named Register.properties in the org.apache.struts.register.action package 
-in the `src/resources/java` folder.
+Put the text below in a file named Register.properties in the `org.apache.struts.register.action` package 
+in the `src/main/resources` folder.
 
 **Register.properties**
 
@@ -166,7 +166,7 @@ What if you want a properties file with keys and values that can be referenced f
 pages are rendered after executing different Action classes? Struts 2 has the ability to use multiple property files 
 provided the property file is found in the package hierarchy.
 
-Place the following in a file named `package.properties` and save that file in package `org.apache.struts in src/main/resources`.
+Place the following in a file named `package.properties` and save that file in package `org.apache.struts` in `src/main/resources`.
 
 **package.properties**
 
