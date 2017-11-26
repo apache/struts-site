@@ -36,7 +36,7 @@ To validate a user's form field entries you can use a separate XML file that con
 
 Struts 2 provides several different validators that you can use in the XML validation file. See [Validation](../core-developers/validation.html) for a list of validators you can employ.
 
-In the above form, we want to ensure the user enters a first name. To have the Struts 2 framework enforce that rule we can used the Struts 2 [requiredstring validator](../core-developers/requiredstring-validator.html). This validator checks that the user has entered a string value in the form field.
+In the above form, we want to ensure the user enters a first name. To have the Struts 2 framework enforce that rule we can use the Struts 2 [requiredstring validator](../core-developers/requiredstring-validator.html). This validator checks that the user has entered a string value in the form field.
 
 ## XML Validator Format
 
