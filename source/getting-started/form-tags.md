@@ -141,7 +141,7 @@ to determine which of the radio buttons is checked.
 ## Struts 2 Select Tag - Object Backed
 
 You may need to create a Struts 2 select tag where the options displayed to the user each have their own value that is
-different then what is displayed. In the example application, the user's residency is stored as a two-letter 
+different from what is displayed. In the example application, the user's residency is stored as a two-letter 
 abbreviation (e.g. KS), but the form select box should display the full state name (e.g. Kansas). To create such 
 a select box in Struts 2, you would use this code
 
