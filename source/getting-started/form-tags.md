@@ -194,7 +194,7 @@ the checkbox will not be checked.
 <s:checkbox key="personBean.over21" />
 ```
 
-Since the method getOver21 returns true, the checkbox is checked.
+Since the method isOver21 returns true, the checkbox is checked.
 
 **HTML Created By Struts 2 Checkbox Tag**
 
