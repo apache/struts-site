@@ -12,6 +12,60 @@ title: Announcements
   Skip to: <a href="announce-2016.html">Announcements - 2016</a>
 </p>
 
+#### 23 November 2017 - Struts 2.5.14 General Availability {#a20171123}
+
+The Apache Struts group is pleased to announce that Struts 2.5.14 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+Below is a full list of all changes:
+
+- A class JSONWriter was converted into an interface with default implementation in DefaultJSONWriter class. If you were 
+  using the class directly, you must update your code in other case it won't compile when using Struts 2.5.14.
+- DefaultUrlHelper().buildUrl() not outputting port when used as parameter
+- Not able to convert Spring object to the JSON response
+- The if test can accidently incorrectly assign a new value to an object
+- ObjectFactory constructor signature change breaks extensions
+- Snippets in Struts documentation are missing
+- I am migrating my struts 2.2.x to 2.5.13 and where all used struts taglibs and tags UI is breaking where i have not used bootstrap there and all working fine
+- Default Multipart validation regex is invalid due to charset encoding
+- Exception starting filter struts-prepare: Unable to load configuration. - interceptor - vfs
+- createInstance method signature change of TextProviderFactory from merged xwork-core code inside struts2-core-2.5.13.jar which was present with xwork-core jar
+- Struts2.5.13 can't run in java9 win10
+- StringConverter from OGNL 3.1.15 in Struts 2.5.13
+- Decimal converters should avoid loss of user's data caused by rounding
+- Struts text tag doesn't print value from Stack
+- No validations happening after upgrading to Struts 2.5.12
+- Allow to use custom JSONwriter
+- Implement Dependency Check in Maven build
+- Fallback to ActionContext if container is null in ActionSupport
+- Upgrade to the latest Jetty plugin in all examples
+- Add missing header with license to all files reported by the Rat plugin
+- Review available interceptors and document the missing ones
+- Fetch docs from new locations
+- Allow define only TextProvider instead of providing the whole TextProviderFactory
+- HTML escaping on the text tag
+- Upgrade FreeMarker to version 2.3.26-incubating
+- Upgrade to Log4j2 2.9.1
+- Upgrade com.fasterxml.jackson to version 2.8.2
+- Upgrade net.sf.json-lib to version 2.4
+- Upgrade Spring to version 4.1.9
+
+> Please read the [Version Notes]({{ site.wiki_url }}Version+Notes+2.5.14) to find more details about performed bug fixes and improvements.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
 #### 07 September 2017 - Struts 2.3.34 General Availability {#a20170907}
 
 The Apache Struts group is pleased to announce that Struts 2.3.34 is available as a "General Availability"
