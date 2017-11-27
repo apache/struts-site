@@ -321,6 +321,7 @@ package org.apache.struts2.convention.actions.allowedmethods;
 ```
 
 Allowed methods can be defined as:
+
 - literals ie. in xml: `execute,cancel` or in annotation: `{"execute", "cancel"}`
 - patterns when using with wildcard mapping, i.e `<action ... method="do{2}"/>`
 - RegExs using `regex:` prefix, ie: `<global-allowed-methods>execute,input,cancel,regex:user([A-Z]*)</global-allowed-methods>`
