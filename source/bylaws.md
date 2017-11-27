@@ -16,7 +16,7 @@ of the [ASF Board of Directors](http://apache.org/foundation/board/). As an ASF 
 [ASF Bylaws](http://apache.org/foundation/bylaws.html) and the direction of the ASF Board.
 
 The Project Charter incorporates by reference the current version
-of [How the ASF works](http://apache.org/foundation/how-it-works.html, with the additional guidelines
+of [How the ASF works](http://apache.org/foundation/how-it-works.html), with the additional guidelines
 and clarifications found herein.
 
 ## Roles and Responsibilities
@@ -136,7 +136,7 @@ Each vote can be made in one of three flavors:
     </tr>
 </table>
 
-An action requiring consensus approval must receive at least **3 binding +1** votes and **no binding vetos**.
+An action requiring consensus approval must receive at least **3 binding +1** votes and **no binding vetoes**.
 An action requiring majority approval must receive at least **3 binding +1** votes and more **+1** votes than
 **-1** votes. All other action items are considered to have lazy approval until somebody votes**-1**, after which
 point they are decided by either consensus or majority vote, depending on the type of action item.
