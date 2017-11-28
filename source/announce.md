@@ -54,7 +54,7 @@ Below is a full list of all changes:
 - Upgrade net.sf.json-lib to version 2.4
 - Upgrade Spring to version 4.1.9
 
-> Please read the [Version Notes]({{ site.wiki_url }}Version+Notes+2.5.14) to find more details about performed bug fixes and improvements.
+> Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+2.5.14) to find more details about performed bug fixes and improvements.
 
 **All developers are strongly advised to perform this action.**
 
