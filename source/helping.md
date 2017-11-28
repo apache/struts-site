@@ -116,7 +116,7 @@ title: Helping
   The Struts 2 documentation is maintained using the Atlassian Confluence wiki software and automatically
   exported to HTML for viewing on the website. To help with the Struts 2 documentation, you must create
   an account at [cwki.apache.org/confluence](http://cwiki.apache.org/confluence), AND you must file a
-  [Contributor License Agreement](http://apache.org/licenses/icla.txt) with the ASF.
+  [Contributor License Agreement](https://www.apache.org/licenses/icla.txt) with the ASF.
 
   Other ways to help out with the documentation is to just leave a comment on a page that needs fixing.
   If you have a cwiki Confluence account, you can also create pages on the
@@ -217,6 +217,6 @@ title: Helping
   or discretely decline.
   If the candidate is able to accept, the PMC will announce the new member on the dev list.
 
-  For more about decision-making, see [How the ASF Works](http://apache.org/foundation/how-it-works.html)
+  For more about decision-making, see [How the ASF Works](https://www.apache.org/foundation/how-it-works.html)
   and the [Apache Struts Charter](bylaws.html). For more about project infrastructure,
   see "Project Maintenance and Resources" in the [Struts 1 wiki](http://wiki.apache.org/struts/).

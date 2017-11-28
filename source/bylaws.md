@@ -11,12 +11,12 @@ title: Project Management Committee Charter
 
 ## Apache Struts PMC Charter
 
-Struts is a Project of the [Apache Software Foundation](http://apache.org/foundation) (ASF), formed by a resolution
-of the [ASF Board of Directors](http://apache.org/foundation/board/). As an ASF Project, Struts is subject to the
-[ASF Bylaws](http://apache.org/foundation/bylaws.html) and the direction of the ASF Board.
+Struts is a Project of the [Apache Software Foundation](https://www.apache.org/foundation) (ASF), formed by a resolution
+of the [ASF Board of Directors](https://www.apache.org/foundation/board/). As an ASF Project, Struts is subject to the
+[ASF Bylaws](https://www.apache.org/foundation/bylaws.html) and the direction of the ASF Board.
 
 The Project Charter incorporates by reference the current version
-of [How the ASF works](http://apache.org/foundation/how-it-works.html), with the additional guidelines
+of [How the ASF works](https://www.apache.org/foundation/how-it-works.html), with the additional guidelines
 and clarifications found herein.
 
 ## Roles and Responsibilities
@@ -63,7 +63,7 @@ other than the member in question. The list of active PMC members can be found o
 
 The PMC is responsible for the day-to-day management of the Struts Project. The PMC oversees all changes
 made to the codebase. The PMC must ensure that all code under a Apache Struts repository is the lawful property
-of the Foundation and may be distributed under the [Apache Software License](http://apache.org/licenses/).
+of the Foundation and may be distributed under the [Apache Software License](https://www.apache.org/licenses/).
 All releases of a Struts subproject must be sanctioned by the Project Management Committee.
 
 ### Subprojects
@@ -83,13 +83,13 @@ vote of the PMC.
 
 ## Decision Making
 
-All [Volunteers](http://apache.org/foundation/how-it-works.html#roles) (Users, Developers, Committers, PMC Members)
+All [Volunteers](https://www.apache.org/foundation/how-it-works.html#roles) (Users, Developers, Committers, PMC Members)
 are encouraged to participate in the decision-making process, but binding decisions are made only
 by the Project Management Committee.
 
 ### Voting
 
-Any subscriber to the list may [vote](http://apache.org/foundation/voting.html) on any issue or action item.
+Any subscriber to the list may [vote](https://www.apache.org/foundation/voting.html) on any issue or action item.
 Votes from Developers and Committers are especially welcome. However, the only binding votes are those cast by a PMC
 Member.
 

@@ -63,7 +63,7 @@ Additional remarks:
 - Any formal release may be submitted for mirroring. All GA releases **must** be mirrored.
 - After announcing a release, remember to update the Downloads and Announcements pages. If the release is
   to be mirrored, wait at least 24 hours after submittal before making public announcements (as stated in the
-  [Apache Mirroring guidelines](http://apache.org/dev/mirrors.html).
+  [Apache Mirroring guidelines](https://www.apache.org/dev/mirrors.html).
 - If a serious flaw if found in a test build or release, it may be withdrawn by a majority vote of the PMC and
   removed from ASF distribution channels.
 
