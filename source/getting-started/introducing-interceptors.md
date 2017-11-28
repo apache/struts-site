@@ -130,7 +130,7 @@ the following in `struts.xml`:
 </package> 
 ```
 
-In the code above we use the interceptors node to define a new stack of interceptors that includes the `timer`, logging`, 
+In the code above we use the interceptors node to define a new stack of interceptors that includes the `timer`, `logging`, 
 and `defaultStack` interceptors. We give this new interceptor stack a name of appDefault. Then we use the `default-interceptor-ref` 
 node to specify that for all Actions defined inside this package node the `appDefault` stack of interceptors are to be used. 
 Thus the `timer` and `logging` interceptor will be executed for each Action in this package.
