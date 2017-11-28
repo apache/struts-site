@@ -7,6 +7,10 @@ parent:
 ---
 
 # Plugins
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 Struts 2 plugins contain classes and configuration that extend, replace, or add to existing Struts framework functionality. A plugin can be installed by adding its JAR file to the application's class path, in addition to the JAR files to fulfill whatever dependencies the plugin itself may have. To configure the plugin, the JAR should contain a `struts-plugin.xml` file, which follows the same format as an ordinary `struts.xml` file.
 
