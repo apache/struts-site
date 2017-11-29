@@ -53,13 +53,13 @@ generates this HTML markup:
 ```
 
 Notice how the HTML generated uses table tags to control the layout of the label and select HTML. There is also a class, 
-`tdLabel`, applied to the table column where the label tag is rendered. Since no theme was specified for the Struts 2 s
-elect tag the default `xhmtl` theme was used.
+`tdLabel`, applied to the table column where the label tag is rendered. Since no theme was specified for the Struts 2 
+select tag the default `xhmtl` theme was used.
 
 ## Specifying The Theme Struts 2 Should Use
 
 The Struts 2 tags have a theme attribute you can use to specify which Struts 2 theme should be used when creating the HTML 
-for that tag. The values for the theme attribute are simple, xhtml, css_xhtml, and ajax. To learn more about these themes 
+for that tag. The values for the theme attribute are `simple`, `xhtml`, `css_xhtml`, and `ajax`. To learn more about these themes 
 visit [Themes and Templates Documentation](../tag-developers/themes-and-templates.html). This tutorial will review 
 the `xhtml`, `css_xhtml`, and the `simple` themes. The `ajax` theme is a special theme used for ajax operations 
 (see [Ajax Theme in the documentation](../tag-developers/ajax-theme.html)).
@@ -81,11 +81,11 @@ In the example application, examine `edit.jsp`. The theme attribute of the form 
 (see the readme.txt file) and view the source for edit.jsp after it is rendered in your browser. You should see the form 
 HTML tags layout controlled by table tags.
 
-Change the theme to simple for the form’s theme attribute and redeploy the application. Examine the source for `edit.jsp`
+Change the theme to `simple` for the form’s theme attribute and redeploy the application. Examine the source for `edit.jsp`
 after it is rendered in the browser. You should see that there are no table tags controlling the layout and also there 
 are no label tags for the text fields.
 
-Change the theme to css_xhtml for the form’s theme attribute and redeploy the application. Examine the source for `edit.jsp`
+Change the theme to `css_xhtml` for the form’s theme attribute and redeploy the application. Examine the source for `edit.jsp`
 after it is rendered in the browser. The layout of the form tags is now controlled by div tags and the label tags are back.
 
 ## Specifying The CSS Used By The Struts 2 Tag
@@ -173,7 +173,7 @@ to `checkboxlist.ftl` that is in `KUTheme_simple` folder, I modified `checkboxli
 of red bold text and I added a break tag after each label so that each check box and label will be on its own line.
 
 Since the XHTML theme is the default theme and I have a `theme.properties` file defined with `parent = xhtml`, 
-the KUTheme will inherit all the themes from xhmtl exempt for the theme for the checkboxlist tag since my KUTheme includes 
+the KUTheme will inherit all the themes from xhmtl except for the theme for the checkboxlist tag since my KUTheme includes 
 a definition for that tag's layout. In the `struts.xml` file (`src/main/resources`) you will see that the I've specified 
 the default theme to be KUTheme.
 
