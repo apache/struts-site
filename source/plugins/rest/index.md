@@ -283,18 +283,22 @@ The default JSON Content Handler is build on top of the [JSON-lib](http://json-l
 
 First you need to add the jackson dependency to your web application by downloading the jar file and put it under WEB-INF/lib or by adding following xml snippet to your dependencies section in the pom.xml when you are using maven as build system.
 
-
 ```xml
 <dependency>
-    <groupId>org.codehaus.jackson</groupId>
-    <artifactId>jackson-jaxrs</artifactId>
-    <version>1.9.13</version>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-core</artifactId>
+    <version>${jackson.version}</version>
 </dependency>
-
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>${jackson.version}</version>
+</dependency>
 ```
 
-Now you can overwrite the Content Handler with the Jackson Content Handler in the struts.xml:
+where `${jackson.version}` is the latest available version of the libs, right now it is `2.9.2`.
 
+Now you can overwrite the Content Handler with the Jackson Content Handler in the struts.xml:
 
 ```xml
 <bean type="org.apache.struts2.rest.handler.ContentTypeHandler" name="jackson" class="org.apache.struts2.rest.handler.JacksonLibHandler"/>
@@ -306,10 +310,7 @@ Now you can overwrite the Content Handler with the Jackson Content Handler in th
 <!-- Set encoding to UTF-8, default is ISO-8859-1 -->
 <constant name="struts.i18n.encoding" value="UTF-8"/> 
 
-
 ```
-
- 
 
 ### Settings
 
