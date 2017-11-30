@@ -50,7 +50,7 @@ The value of the test attribute must be an expression that evaluates to true or 
 </s:else>
 ```
 
-The purpose of the above markup is to use either "Car model" or "Car models" depending on how many car models the user selected on the edit page. So the value for the test attribute of this iterator tag gets the length of the carModels String array and compares that to 1. If it's greater then 1, the correct grammar is "Car models" else the correct grammar is "Car model".
+The purpose of the above markup is to use either "Car model" or "Car models" depending on how many car models the user selected on the edit page. So the value for the test attribute of this iterator tag gets the length of the carModels String array and compares that to 1. If it's greater than 1, the correct grammar is "Car models" else the correct grammar is "Car model".
 
 ## Struts iterator Tag
 
