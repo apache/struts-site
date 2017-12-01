@@ -12,6 +12,34 @@ title: Announcements
   Skip to: <a href="announce-2016.html">Announcements - 2016</a>
 </p>
 
+#### 30 November 2017 - Struts 2.5.14.1 General Availability {#a20171130}
+
+The Apache Struts group is pleased to announce that Struts 2.5.14.1 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This release contains fixes for the following potential security vulnerabilities:
+
+ - [S2-054]({{ site.wiki_url }}/S2-054)
+   A crafted JSON request can be used to perform a DoS attack when using the Struts REST plugin
+ - [S2-055]({{ site.wiki_url }}/S2-055)
+   Vulnerability in the Jackson JSON library
+
+> Please read the [Version Notes](/docs/version-notes-2513.html) to find more details about performed bug fixes and improvements.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
 #### 23 November 2017 - Struts 2.5.14 General Availability {#a20171123}
 
 The Apache Struts group is pleased to announce that Struts 2.5.14 is available as a "General Availability"
