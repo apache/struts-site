@@ -113,7 +113,7 @@ You should see the following:
 
 ### Step 3 - Add Struts 2 Jar Files To Class Path
 
-Now that we know we have a working Java web application, lets add the minimal required Struts 2 framework Jar files 
+Now that we know we have a working Java web application, let's add the minimal required Struts 2 framework Jar files 
 to our web application's class path. In `pom.xml` add the following dependency node:
 
 **pom.xml dependency node**
