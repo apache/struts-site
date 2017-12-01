@@ -34,7 +34,7 @@ application (see above), the HelloWorldAction class implements the SessionAware 
 ```java
 private Map<String, Object> userSession ;
 
-public void setSession(Map<String, Object) session) {
+public void setSession(Map<String, Object> session) {
    userSession = session ;
 }
 ```
