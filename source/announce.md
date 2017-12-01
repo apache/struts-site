@@ -28,7 +28,7 @@ This release contains fixes for the following potential security vulnerabilities
  - [S2-055]({{ site.wiki_url }}/S2-055)
    Vulnerability in the Jackson JSON library
 
-> Please read the [Version Notes](/docs/version-notes-2513.html) to find more details about performed bug fixes and improvements.
+> Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+2.5.14.1) to find more details about performed bug fixes and improvements.
 
 **All developers are strongly advised to perform this action.**
 
