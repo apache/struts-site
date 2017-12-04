@@ -381,7 +381,7 @@ The implementation should then be defined in `struts.xml` like:
 ```
 
 There is an example at [struts-examples/json-customize/FlexJSONWriter.java](https://gitbox.apache.org/repos/asf?p=struts-examples.git;a=blob_plain;f=json-customize/src/main/java/org/demo/FlexJSONWriter.java;hb=HEAD).
-It replaces Strut's default json serializer with [Flexjson](http://flexjson.sourceforge.net/) as below:
+It replaces Struts default json serializer with [Flexjson](http://flexjson.sourceforge.net/) as below:
 
 ```java
 import flexjson.JSONSerializer;
