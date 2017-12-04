@@ -380,6 +380,49 @@ The implementation should then be defined in `struts.xml` like:
 </struts>
 ```
 
+There is an example at [struts-examples/json-customize/FlexJSONWriter.java](https://gitbox.apache.org/repos/asf?p=struts-examples.git;a=blob_plain;f=json-customize/src/main/java/org/demo/FlexJSONWriter.java;hb=HEAD).
+It replaces Strut's default json serializer with [Flexjson](http://flexjson.sourceforge.net/) as below:
+
+```java
+import flexjson.JSONSerializer;
+import flexjson.transformer.DateTransformer;
+import org.apache.struts2.json.JSONException;
+import org.apache.struts2.json.JSONWriter;
+
+public class FlexJSONWriter implements JSONWriter {
+    private String dateFormatter;
+
+    public String write(Object object) throws JSONException {
+        return this.write(object, null, null, false);
+    }
+
+    public String write(Object object, Collection<Pattern> excludeProperties, Collection<Pattern> includeProperties,
+                        boolean excludeNullProperties) throws JSONException {
+
+        JSONSerializer serializer = new JSONSerializer();
+        if (excludeProperties != null) {
+            for (Pattern p : excludeProperties) {
+                serializer = serializer.exclude(p.pattern());
+            }
+        }
+        if (includeProperties != null) {
+            for (Pattern p : includeProperties) {
+                serializer = serializer.include(p.pattern());
+            }
+        }
+        if (excludeNullProperties) {
+            serializer = serializer.transform(new ExcludeTransformer(), void.class);
+        }
+        if (dateFormatter != null) {
+            serializer = serializer.transform(new DateTransformer(dateFormatter), Date.class);
+        }
+        return serializer.serialize(object);
+    }
+    //...
+```
+
+> Flexjson is a lightweight library for serializing and deserializing Java objects into and from JSON.
+
 ## Example
 
 ### Setup Action
