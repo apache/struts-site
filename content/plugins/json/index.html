@@ -583,6 +583,51 @@ The implementation should then be defined in <code class="highlighter-rouge">str
 </code></pre>
 </div>
 
+<p>There is an example at <a href="https://gitbox.apache.org/repos/asf?p=struts-examples.git;a=blob_plain;f=json-customize/src/main/java/org/demo/FlexJSONWriter.java;hb=HEAD">struts-examples/json-customize/FlexJSONWriter.java</a>.
+It replaces Struts default json serializer with <a href="http://flexjson.sourceforge.net/">Flexjson</a> as below:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">flexjson.JSONSerializer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">flexjson.transformer.DateTransformer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.struts2.json.JSONException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.struts2.json.JSONWriter</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FlexJSONWriter</span> <span class="kd">implements</span> <span class="n">JSONWriter</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">dateFormatter</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">write</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JSONException</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">object</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">write</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Pattern</span><span class="o">&gt;</span> <span class="n">excludeProperties</span><span class="o">,</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Pattern</span><span class="o">&gt;</span> <span class="n">includeProperties</span><span class="o">,</span>
+                        <span class="kt">boolean</span> <span class="n">excludeNullProperties</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JSONException</span> <span class="o">{</span>
+
+        <span class="n">JSONSerializer</span> <span class="n">serializer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONSerializer</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">excludeProperties</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">Pattern</span> <span class="n">p</span> <span class="o">:</span> <span class="n">excludeProperties</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">serializer</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="na">exclude</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">pattern</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">includeProperties</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">Pattern</span> <span class="n">p</span> <span class="o">:</span> <span class="n">includeProperties</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">serializer</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="na">include</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">pattern</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">excludeNullProperties</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">serializer</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="na">transform</span><span class="o">(</span><span class="k">new</span> <span class="n">ExcludeTransformer</span><span class="o">(),</span> <span class="kt">void</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">dateFormatter</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">serializer</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="na">transform</span><span class="o">(</span><span class="k">new</span> <span class="n">DateTransformer</span><span class="o">(</span><span class="n">dateFormatter</span><span class="o">),</span> <span class="n">Date</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">serializer</span><span class="o">.</span><span class="na">serialize</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">//...</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>Flexjson is a lightweight library for serializing and deserializing Java objects into and from JSON.</p>
+</blockquote>
+
 <h2 id="example">Example</h2>
 
 <h3 id="setup-action">Setup Action</h3>
