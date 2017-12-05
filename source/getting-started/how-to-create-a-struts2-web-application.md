@@ -207,7 +207,7 @@ mapping to `web.xml`. Below is how the `web.xml` may look after adding the filte
 </web-app>
 ```
 
-For more information about configuring the deployment descriptor for Struts 2 see `web.xml`. Note the url-pattern node 
+For more information about configuring the deployment descriptor for Struts 2 see [Core Developers Guide / web.xml page](/core-developers/web-xml.html). Note the url-pattern node 
 value is `/*` meaning the Struts 2 filter will be applied to all URLs for this web application.
 
 ### Step 6 - Create struts.xml
