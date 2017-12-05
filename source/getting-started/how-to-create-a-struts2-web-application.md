@@ -176,6 +176,52 @@ Using both `log4j-core` and `log4j-api` allows to use [the latest version of Log
 
 Note the above log4j2 configuration specifies the console as the log target.
 
+Optionally, if using maven bom "bill of materials" in `dependencyManagement` section for both Struts and log2j 2,
+`pom.xml` will look like. Note that this way you can omit `version` line for every used module
+
+```xml
+<properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	<java.version>1.8</java.version>
+
+	<struts2.version>2.5.14</struts2.version>
+	<log4j2.version>2.10.0</log4j2.version>
+</properties>
+
+<dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-bom</artifactId>
+			<version>${struts2.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-bom</artifactId>
+			<version>${log4j2.version}</version>
+			<scope>import</scope>
+			<type>pom</type>
+		</dependency>
+	</dependencies>
+</dependencyManagement>
+
+<dependencies>
+	<!-- Struts 2 -->
+	<dependency>
+		<groupId>org.apache.struts</groupId>
+		<artifactId>struts2-core</artifactId>
+	</dependency>
+
+	<dependency>
+		<groupId>org.apache.logging.log4j</groupId>
+		<artifactId>log4j-core</artifactId>
+	</dependency>
+</dependencies>
+```
+
 ### Step 5 - Add Struts 2 Servlet Filter
 
 To enable the Struts 2 framework to work with your web application you need to add a Servlet filter class and filter 
