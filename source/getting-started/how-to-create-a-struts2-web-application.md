@@ -43,7 +43,7 @@ the web application archive (war) file.
 
 ### Step 1 - Create A Java Web Application
 
-In your Java IDE create a Java web application with a project name of basic_struts that follows the standard Maven
+In your Java IDE create a Java web application with a project name of `basic_struts` that follows the standard Maven
 project folder structure. In your `pom.xml` include the following:
 
 **pom.xml build node**
@@ -178,20 +178,32 @@ Note the above log4j2 configuration specifies the console as the log target.
 ### Step 5 - Add Struts 2 Servlet Filter
 
 To enable the Struts 2 framework to work with your web application you need to add a Servlet filter class and filter 
-mapping to `web.xml`. Below is the filter and filter-mapping nodes you should add to `web.xml`.
+mapping to `web.xml`. Below is how the `web.xml` may look after adding the filter and filter-mapping nodes. `web.xml` is to be under `src/main/webapp/WEB-INF` folder.
 
 **web.xml Servlet Filter**
 
 ```xml
-<filter>
-    <filter-name>struts2</filter-name>
-    <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
-</filter>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>Basic Struts2</display-name>
+	<welcome-file-list>
+		<welcome-file>index</welcome-file>
+	</welcome-file-list>
 
-<filter-mapping>
-    <filter-name>struts2</filter-name>
-    <url-pattern>/*</url-pattern>
-</filter-mapping>
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+</web-app>
 ```
 
 For more information about configuring the deployment descriptor for Struts 2 see `web.xml`. Note the url-pattern node 
