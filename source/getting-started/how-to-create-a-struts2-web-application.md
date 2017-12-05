@@ -176,7 +176,7 @@ Using both `log4j-core` and `log4j-api` allows to use [the latest version of Log
 
 Note the above log4j2 configuration specifies the console as the log target.
 
-Optionally, if using maven bom "bill of materials" in `dependencyManagement` section for both Struts and log2j 2,
+Optionally, if using maven bom "bill of materials" in `dependencyManagement` section for both Struts and log4j2,
 `pom.xml` will look like. Note that this way you can omit `version` line for every used module
 
 ```xml
