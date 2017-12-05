@@ -122,11 +122,12 @@ to our web application's class path. In `pom.xml` add the following dependency n
 <dependency>
     <groupId>org.apache.struts</groupId>
     <artifactId>struts2-core</artifactId>
-    <version>X.X.X.X</version>
+    <version>${struts2.version}</version>
 </dependency>
 ```
 
-Of course replace the X.X.X.X with the current Struts 2 version. Maven will get the `struts2-core` jar and the other jar 
+Of course replace the `${struts2.version}` with the current Struts 2 version (or define within pom `properties`). 
+Maven will get the `struts2-core` jar and the other jar 
 files struts2-core requires (transitive dependencies). 
 
 <i class="glyphicon glyphicon-info-sign alert-info" aria-hidden="true"></i> Beginning with Struts version 2.2.3 
@@ -142,16 +143,16 @@ To see what's happening under the hood, the example application for this tutoria
 <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-core</artifactId>
-    <version>2.8.2</version>
+    <version>${log4j2.version}</version>
 </dependency>
 <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-api</artifactId>
-    <version>2.8.2</version>
+    <version>${log4j2.version}</version>
 </dependency>
 ```
 
-Using both `log4j-core` and `log4j-api` allows to use the latest version of Log4j2 without a clash with version provided by the framework. Setup a `log4j2.xml` configuration in the `src/main/resources` folder which contains the following
+Using both `log4j-core` and `log4j-api` allows to use [the latest version of Log4j2](https://logging.apache.org/log4j/2.x/download.html) without a clash with version provided by the framework. Setup a `log4j2.xml` configuration in the `src/main/resources` folder which contains the following
 
 **log4j2.xml**
 
