@@ -186,7 +186,7 @@ the web application archive (war) file.</p>
 
 <h3 id="step-1---create-a-java-web-application">Step 1 - Create A Java Web Application</h3>
 
-<p>In your Java IDE create a Java web application with a project name of basic_struts that follows the standard Maven
+<p>In your Java IDE create a Java web application with a project name of <code class="highlighter-rouge">basic_struts</code> that follows the standard Maven
 project folder structure. In your <code class="highlighter-rouge">pom.xml</code> include the following:</p>
 
 <p><strong>pom.xml build node</strong></p>
@@ -320,19 +320,31 @@ you do not need to specify a separate dependency node for javassist.</p>
 <h3 id="step-5---add-struts-2-servlet-filter">Step 5 - Add Struts 2 Servlet Filter</h3>
 
 <p>To enable the Struts 2 framework to work with your web application you need to add a Servlet filter class and filter 
-mapping to <code class="highlighter-rouge">web.xml</code>. Below is the filter and filter-mapping nodes you should add to <code class="highlighter-rouge">web.xml</code>.</p>
+mapping to <code class="highlighter-rouge">web.xml</code>. Below is how the <code class="highlighter-rouge">web.xml</code> may look after adding the filter and filter-mapping nodes. <code class="highlighter-rouge">web.xml</code> is to be under <code class="highlighter-rouge">src/main/webapp/WEB-INF</code> folder.</p>
 
 <p><strong>web.xml Servlet Filter</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
-    <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
-    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
-<span class="nt">&lt;/filter&gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;web-app</span> <span class="na">id=</span><span class="s">"WebApp_ID"</span> <span class="na">version=</span><span class="s">"2.4"</span>
+	<span class="na">xmlns=</span><span class="s">"http://java.sun.com/xml/ns/j2ee"</span> 
+	<span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">"http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;display-name&gt;</span>Basic Struts2<span class="nt">&lt;/display-name&gt;</span>
+	<span class="nt">&lt;welcome-file-list&gt;</span>
+		<span class="nt">&lt;welcome-file&gt;</span>index<span class="nt">&lt;/welcome-file&gt;</span>
+	<span class="nt">&lt;/welcome-file-list&gt;</span>
 
-<span class="nt">&lt;filter-mapping&gt;</span>
-    <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
-    <span class="nt">&lt;url-pattern&gt;</span>/*<span class="nt">&lt;/url-pattern&gt;</span>
-<span class="nt">&lt;/filter-mapping&gt;</span>
+	<span class="nt">&lt;filter&gt;</span>
+		<span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
+		<span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
+	<span class="nt">&lt;/filter&gt;</span>
+
+	<span class="nt">&lt;filter-mapping&gt;</span>
+		<span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
+		<span class="nt">&lt;url-pattern&gt;</span>/*<span class="nt">&lt;/url-pattern&gt;</span>
+	<span class="nt">&lt;/filter-mapping&gt;</span>
+
+<span class="nt">&lt;/web-app&gt;</span>
 </code></pre>
 </div>
 
