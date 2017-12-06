@@ -47,6 +47,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/download">Download</a></li>
                 <li><a href="/downloads.html">Releases</a></li>
                 <li><a href="/announce.html">Announcements</a></li>
                 <li><a href="http://www.apache.org/licenses/">License</a></li>
@@ -318,6 +319,52 @@ you do not need to specify a separate dependency node for javassist.</p>
 
 <p>Note the above log4j2 configuration specifies the console as the log target.</p>
 
+<p>Optionally, if using maven bom “bill of materials” in <code class="highlighter-rouge">dependencyManagement</code> section for both Struts and log4j2,
+<code class="highlighter-rouge">pom.xml</code> will look like. Note that this way you can omit <code class="highlighter-rouge">version</code> line for every used module</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;properties&gt;</span>
+	<span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+	<span class="nt">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.reporting.outputEncoding&gt;</span>
+	<span class="nt">&lt;java.version&gt;</span>1.8<span class="nt">&lt;/java.version&gt;</span>
+
+	<span class="nt">&lt;struts2.version&gt;</span>2.5.14<span class="nt">&lt;/struts2.version&gt;</span>
+	<span class="nt">&lt;log4j2.version&gt;</span>2.10.0<span class="nt">&lt;/log4j2.version&gt;</span>
+<span class="nt">&lt;/properties&gt;</span>
+
+<span class="nt">&lt;dependencyManagement&gt;</span>
+	<span class="nt">&lt;dependencies&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>struts2-bom<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>${struts2.version}<span class="nt">&lt;/version&gt;</span>
+			<span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+			<span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>log4j-bom<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>${log4j2.version}<span class="nt">&lt;/version&gt;</span>
+			<span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+			<span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+	<span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/dependencyManagement&gt;</span>
+
+<span class="nt">&lt;dependencies&gt;</span>
+	<span class="c">&lt;!-- Struts 2 --&gt;</span>
+	<span class="nt">&lt;dependency&gt;</span>
+		<span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
+		<span class="nt">&lt;artifactId&gt;</span>struts2-core<span class="nt">&lt;/artifactId&gt;</span>
+	<span class="nt">&lt;/dependency&gt;</span>
+
+	<span class="nt">&lt;dependency&gt;</span>
+		<span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
+		<span class="nt">&lt;artifactId&gt;</span>log4j-core<span class="nt">&lt;/artifactId&gt;</span>
+	<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+</code></pre>
+</div>
+
 <h3 id="step-5---add-struts-2-servlet-filter">Step 5 - Add Struts 2 Servlet Filter</h3>
 
 <p>To enable the Struts 2 framework to work with your web application you need to add a Servlet filter class and filter 
@@ -428,7 +475,7 @@ post a question on the mailing list.</p>
 
 <footer class="container">
   <div class="col-md-12">
-    Copyright &copy; 2000-2016 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    Copyright &copy; 2000-2017 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
     All Rights Reserved.
   </div>
   <div class="col-md-12">
