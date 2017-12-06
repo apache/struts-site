@@ -100,7 +100,7 @@ Source code and documentation contributed to the Struts repositories should obse
   Changes which adversely affect compatibility should be slotted for the next major release series (++#.x.x).
 - Our favorite books about programming are
   [Design Patterns](http://www.amazon.com/exec/obidos/ISBN=0201633612/apachesoftwar-20/),
-  [Refactoring](http://www.amazon.com/exec/obidos/ISBN=0201485672/apachesoftwar-20/,
+  [Refactoring](http://www.amazon.com/exec/obidos/ISBN=0201485672/apachesoftwar-20/),
   and [Code Complete](http://www.amazon.com/exec/obidos/ISBN=0735619670/apachesoftwar-20/)
 - Our favorite book about open source development is the
   [The Cathedral and the Bazaar](http://www.amazon.com/exec/obidos/ISBN=1565927249/apachesoftwar-20/)
