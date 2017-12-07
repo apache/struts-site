@@ -135,24 +135,8 @@ you do not need to specify a separate dependency node for javassist.
 
 ### Step 4 - Add Logging
 
-To see what's happening under the hood, the example application for this tutorial uses log4j2. You'll need to add a dependency node for log4j2 to the pom:
-
-**pom.xml log4j dependency node**
-
-```xml
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-core</artifactId>
-    <version>${log4j2.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-api</artifactId>
-    <version>${log4j2.version}</version>
-</dependency>
-```
-
-Using both `log4j-core` and `log4j-api` allows to use [the latest version of Log4j2](//logging.apache.org/log4j/2.x/maven-artifacts.html) without a clash with version provided by the framework. Setup a `log4j2.xml` configuration in the `src/main/resources` folder which contains the following
+To see what's happening under the hood, the example application for this tutorial uses log4j2. 
+Setup a `log4j2.xml` configuration in the `src/main/resources` folder which contains the following
 
 **log4j2.xml**
 
@@ -176,8 +160,29 @@ Using both `log4j-core` and `log4j-api` allows to use [the latest version of Log
 
 Note the above log4j2 configuration specifies the console as the log target.
 
+You'll need to add a dependency node for log4j2 to the pom:
+
+**pom.xml log4j dependency node**
+
+```xml
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+    <version>${log4j2.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>${log4j2.version}</version>
+</dependency>
+```
+
+Using both `log4j-core` and `log4j-api` allows to use [the latest version of Log4j2](//logging.apache.org/log4j/2.x/maven-artifacts.html) without a clash with version provided by the framework. 
+
 Optionally, if using maven bom "bill of materials" in `dependencyManagement` section for both Struts and log4j2,
-`pom.xml` will look like. Note that this way you can omit `version` line for every used module
+`pom.xml` will look like. Note that this way you can omit `version` line for every used module,
+and all `struts2-*` and `log4j-*` modules are managed to be of the same version.
+The `struts2-bom` is available since 2.3.20.
 
 ```xml
 <properties>
@@ -185,7 +190,7 @@ Optionally, if using maven bom "bill of materials" in `dependencyManagement` sec
 	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	<java.version>1.8</java.version>
 
-	<struts2.version>2.5.14</struts2.version>
+	<struts2.version>2.5.14.1</struts2.version>
 	<log4j2.version>2.10.0</log4j2.version>
 </properties>
 
