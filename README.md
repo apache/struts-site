@@ -20,3 +20,5 @@ when running `Bash` or `Sh`.
 All pages are generated into the `content` folder.
 
 There are two scripts used to build the image but this should be used only when `Dockerfile` was modified.
+
+Some redirect rules are configured in `source/.htaccess` file.
