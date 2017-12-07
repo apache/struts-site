@@ -278,24 +278,8 @@ you do not need to specify a separate dependency node for javassist.</p>
 
 <h3 id="step-4---add-logging">Step 4 - Add Logging</h3>
 
-<p>To see what’s happening under the hood, the example application for this tutorial uses log4j2. You’ll need to add a dependency node for log4j2 to the pom:</p>
-
-<p><strong>pom.xml log4j dependency node</strong></p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>log4j-core<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>${log4j2.version}<span class="nt">&lt;/version&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-<span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>log4j-api<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>${log4j2.version}<span class="nt">&lt;/version&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-</code></pre>
-</div>
-
-<p>Using both <code class="highlighter-rouge">log4j-core</code> and <code class="highlighter-rouge">log4j-api</code> allows to use <a href="//logging.apache.org/log4j/2.x/maven-artifacts.html">the latest version of Log4j2</a> without a clash with version provided by the framework. Setup a <code class="highlighter-rouge">log4j2.xml</code> configuration in the <code class="highlighter-rouge">src/main/resources</code> folder which contains the following</p>
+<p>To see what’s happening under the hood, the example application for this tutorial uses log4j2. 
+Setup a <code class="highlighter-rouge">log4j2.xml</code> configuration in the <code class="highlighter-rouge">src/main/resources</code> folder which contains the following</p>
 
 <p><strong>log4j2.xml</strong></p>
 
@@ -319,15 +303,36 @@ you do not need to specify a separate dependency node for javassist.</p>
 
 <p>Note the above log4j2 configuration specifies the console as the log target.</p>
 
+<p>You’ll need to add a dependency node for log4j2 to the pom:</p>
+
+<p><strong>pom.xml log4j dependency node</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>log4j-core<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${log4j2.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>log4j-api<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${log4j2.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+
+<p>Using both <code class="highlighter-rouge">log4j-core</code> and <code class="highlighter-rouge">log4j-api</code> allows to use <a href="//logging.apache.org/log4j/2.x/maven-artifacts.html">the latest version of Log4j2</a> without a clash with version provided by the framework.</p>
+
 <p>Optionally, if using maven bom “bill of materials” in <code class="highlighter-rouge">dependencyManagement</code> section for both Struts and log4j2,
-<code class="highlighter-rouge">pom.xml</code> will look like. Note that this way you can omit <code class="highlighter-rouge">version</code> line for every used module</p>
+<code class="highlighter-rouge">pom.xml</code> will look like. Note that this way you can omit <code class="highlighter-rouge">version</code> line for every used module,
+and all <code class="highlighter-rouge">struts2-*</code> and <code class="highlighter-rouge">log4j-*</code> modules are managed to be of the same version.
+The <code class="highlighter-rouge">struts2-bom</code> is available since 2.3.20.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;properties&gt;</span>
 	<span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
 	<span class="nt">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.reporting.outputEncoding&gt;</span>
 	<span class="nt">&lt;java.version&gt;</span>1.8<span class="nt">&lt;/java.version&gt;</span>
 
-	<span class="nt">&lt;struts2.version&gt;</span>2.5.14<span class="nt">&lt;/struts2.version&gt;</span>
+	<span class="nt">&lt;struts2.version&gt;</span>2.5.14.1<span class="nt">&lt;/struts2.version&gt;</span>
 	<span class="nt">&lt;log4j2.version&gt;</span>2.10.0<span class="nt">&lt;/log4j2.version&gt;</span>
 <span class="nt">&lt;/properties&gt;</span>
 
