@@ -1,44 +1,32 @@
 ---
-layout: core-developers
+layout: default
 title: TypeConversion Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # TypeConversion Annotation
 
+This annotation is used for class and application wide conversion rules.
 
+- Class wide conversion:
 
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion {% endcomment %}
-<p> <p>This annotation is used for class and application wide conversion rules.</p>
+  The conversion rules will be assembled in a file called `XXXAction-conversion.properties` within the same package 
+  as the related action class. 
+  Set type to: `type = ConversionType.CLASS`
 
- <p>
- Class wide conversion:<br>
- The conversion rules will be assembled in a file called <code>XXXAction-conversion.properties</code>
- within the same package as the related action class.
- Set type to: <code>type = ConversionType.CLASS</code>
- </p>
-
- <p>
- Application wide conversion:<br>
- The conversion rules will be assembled within the <code>xwork-conversion.properties</code> file within the classpath root.
- Set type to: <code>type = ConversionType.APPLICATION</code>
- </p>
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion {% endcomment %}
+- Application wide conversion:
+ 
+  The conversion rules will be assembled within the `xwork-conversion.properties` file within the classpath root.
+   Set type to: `type = ConversionType.APPLICATION`
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion {% endcomment %}
-<p> <p>The TypeConversion annotation can be applied at property and method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion {% endcomment %}
+The TypeConversion annotation can be applied at property and method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion {% endcomment %}
 <p> <table summary="">
  <thead>
  <tr>
@@ -89,13 +77,8 @@ title: TypeConversion Annotation
  </table>
 
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion {% endcomment %}
 
 ```java
  @Conversion()
@@ -133,7 +116,4 @@ title: TypeConversion Annotation
        return SUCCESS;
    }
  }
-
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.conversion.annotations.TypeConversion {% endcomment %}

@@ -1,31 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: Conversion Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # Conversion Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion {% endcomment %}
-<p> A marker annotation for type conversions at Type level.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion {% endcomment %}
+A marker annotation for type conversions at Type level.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion {% endcomment %}
-<p> The Conversion annotation must be applied at Type level.
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion {% endcomment %}
+The Conversion annotation must be applied at Type level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion {% endcomment %}
 <p> <table summary="">
  <thead>
  <tr>
@@ -45,13 +35,8 @@ title: Conversion Annotation
  </tbody>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.conversion.annotations.Conversion {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.conversion.annotations.Conversion {% endcomment %}
 
 ```java
  @Conversion(
@@ -73,10 +58,6 @@ title: Conversion Annotation
      }
 
  }
-
-
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.conversion.annotations.Conversion {% endcomment %}
 
 Check also [TypeConversion Annotation](type-conversion-annotation.html) for more examples!

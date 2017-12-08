@@ -1,31 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: Element Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # Element Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.Element {% endcomment %}
-<p> <p>Sets the Element for type conversion.</p>
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.Element {% endcomment %}
+Sets the Element for type conversion.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.Element {% endcomment %}
-<p> <p>The Element annotation must be applied at field or method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.Element {% endcomment %}
+The Element annotation must be applied at field or method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.Element {% endcomment %}
 <p> <table summary="">
  <thead>
  <tr>
@@ -45,19 +35,14 @@ title: Element Annotation
  </tbody>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.Element {% endcomment %}
 
 ## Examples
 
-
-
-~~~~~~~
-
+```java
 // The key property for User objects within the users collection is the <code>userName</code> attribute.
 @Element( value = com.acme.User.class )
 private Map userMap;
 
 @Element( value = com.acme.User.class )
 public List userList;
-
-~~~~~~~
+```
