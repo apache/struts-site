@@ -1,38 +1,28 @@
 ---
-layout: core-developers
+layout: default
 title: VisitorFieldValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # VisitorFieldValidator Annotation
 
+The validator allows you to forward validator to object properties of your action
+using the objects own validator files. This allows you to use the ModelDriven development
+pattern and manage your validations for your models in one place, where they belong, next to
+your model classes.
 
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator {% endcomment %}
-<p> The validator allows you to forward validator to object properties of your action
- using the objects own validator files. This allows you to use the ModelDriven development
- pattern and manage your validations for your models in one place, where they belong, next to
- your model classes.
-
- The VisitorFieldValidator can handle either simple Object properties, Collections of Objects, or Arrays.
- The error message for the VisitorFieldValidator will be appended in front of validator messages added
- by the validations for the Object message.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator {% endcomment %}
+The VisitorFieldValidator can handle either simple Object properties, Collections of Objects, or Arrays.
+The error message for the VisitorFieldValidator will be appended in front of validator messages added
+by the validations for the Object message.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator {% endcomment %}
-<p> <p>The annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator {% endcomment %}
+The annotation must be applied at method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -84,17 +74,10 @@ title: VisitorFieldValidator Annotation
  </tr>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator {% endcomment %}
 
 ```java
  @VisitorFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, context = "action alias", appendPrefix = true)
 
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator {% endcomment %}

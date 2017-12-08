@@ -1,30 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: Validations Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # Validations Annotation
 
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
-<p> <p>If you want to use several annotations of the same type, these annotations must be nested within the @Validations() annotation.</p>
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
+If you want to use several annotations of the same type, these annotations must be nested within the `@Validations()` annotation.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
-<p> <p>Used at METHOD level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
+Used at METHOD level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
 
  <tr>
@@ -101,13 +92,8 @@ title: Validations Annotation
  </tr>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
 
 ```java
  @Validations(
@@ -143,32 +129,22 @@ title: Validations Annotation
 
 ```
 
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.Validations {% endcomment %}
-
 ## Different validations per method
 
+Different validations per method is NOT supported for client-side validation!
 
-Different validations per method is NOT supported for client\-side validation\!
+To use different validations per method, the `validateAnnotatedMethodOnly` property must be set on the validation interceptor.
 
-| 
-
-To use different validations per method, the validateAnnotatedMethodOnly property must be set on the validation interceptor\.
-
-
-~~~~~~~
-
+```xml
 <interceptor-ref name="validation">
   <param name="validateAnnotatedMethodOnly">true</param>                
   <param name="excludeMethods">input,back,cancel,browse</param>
 </interceptor-ref>
-
-~~~~~~~
+```
 
 Here's a complete example of updating the default stack:
 
-
-~~~~~~~
-
+```xml
   <package name="default" extends="struts-default">
     <interceptors>
       <interceptor-stack name="content">
@@ -201,5 +177,4 @@ Here's a complete example of updating the default stack:
     <default-interceptor-ref name="default"/>
   </package>
 </struts>
-
-~~~~~~~
+```

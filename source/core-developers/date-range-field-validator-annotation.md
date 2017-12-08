@@ -1,31 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: DateRangeFieldValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # DateRangeFieldValidator Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DateRangeFieldValidator {% endcomment %}
-<p> This validator checks that a date field has a value within a specified range.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DateRangeFieldValidator {% endcomment %}
+This validator checks that a date field has a value within a specified range.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DateRangeFieldValidator {% endcomment %}
-<p> <p>The annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DateRangeFieldValidator {% endcomment %}
+The annotation must be applied at method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DateRangeFieldValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -107,19 +97,11 @@ title: DateRangeFieldValidator Annotation
  </tr>
  </table>
 
- <p>If neither <em>min</em> nor <em>max</em> is set, nothing will be done.</p>
-</p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DateRangeFieldValidator {% endcomment %}
+If neither `min` nor `max` is set, nothing will be done.
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.DateRangeFieldValidator {% endcomment %}
 
 ```java
  @DateRangeFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, min = "2005/01/01", max = "2005/12/31")
 
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.DateRangeFieldValidator {% endcomment %}

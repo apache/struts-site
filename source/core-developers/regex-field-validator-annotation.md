@@ -1,31 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: RegexFieldValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # RegexFieldValidator Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RegexFieldValidator {% endcomment %}
-<p> Validates a string field using a regular expression.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RegexFieldValidator {% endcomment %}
+Validates a string field using a regular expression.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RegexFieldValidator {% endcomment %}
-<p> <p>The annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RegexFieldValidator {% endcomment %}
+The annotation must be applied at method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RegexFieldValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -77,17 +67,10 @@ title: RegexFieldValidator Annotation
  </tr>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RegexFieldValidator {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.RegexFieldValidator {% endcomment %}
 
 ```java
  @RegexFieldValidator( key = "regex.field", regex = "yourregexp")
 
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.RegexFieldValidator {% endcomment %}

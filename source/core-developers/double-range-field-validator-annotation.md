@@ -1,32 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: DoubleRangeFieldValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # DoubleRangeFieldValidator Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator {% endcomment %}
-<p> This validator checks that a double field has a value within a specified range.
- If neither min nor max is set, nothing will be done.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator {% endcomment %}
+This validator checks that a double field has a value within a specified range. If neither min nor max is set, nothing will be done.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator {% endcomment %}
-<p> <p>The annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator {% endcomment %}
+The annotation must be applied at method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -120,21 +109,13 @@ title: DoubleRangeFieldValidator Annotation
  </tr>
  </table>
 
- <p>If neither <em>min</em> nor <em>max</em> is set, nothing will be done.</p>
+If neither `min` nor `max` is set, nothing will be done.
 
- <p>The values for min and max must be inserted as String values so that "0" can be handled as a possible value.</p>
-</p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator {% endcomment %}
+The values for min and max must be inserted as String values so that "0" can be handled as a possible value.
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator {% endcomment %}
 
 ```java
  @DoubleRangeFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, minInclusive = "0.123", maxInclusive = "99.987")
 
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.DoubleRangeFieldValidator {% endcomment %}

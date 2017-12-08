@@ -1,32 +1,22 @@
 ---
-layout: core-developers
+layout: default
 title: FieldExpressionValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # FieldExpressionValidator Annotation
 
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator {% endcomment %}
-<p> This validator uses an OGNL expression to perform its validator.
- The error message will be added to the field if the expression returns
- false when it is evaluated against the value stack.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator {% endcomment %}
+This validator uses an OGNL expression to perform its validator. The error message will be added to the field if the expression 
+returns false when it is evaluated against the value stack.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator {% endcomment %}
-<p> <p>The annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator {% endcomment %}
+The annotation must be applied at method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -72,17 +62,10 @@ title: FieldExpressionValidator Annotation
  </tr>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator {% endcomment %}
 
 ```java
  @FieldExpressionValidator(message = "Default message", key = "i18n.key", shortCircuit = true, expression = "an OGNL expression")
 
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator {% endcomment %}

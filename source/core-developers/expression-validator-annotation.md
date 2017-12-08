@@ -1,29 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: ExpressionValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # ExpressionValidator Annotation
 
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator {% endcomment %}
-<p> This non-field level validator validates a supplied regular expression.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator {% endcomment %}
+This non-field level validator validates a supplied regular expression.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator {% endcomment %}
-<p> <p>The annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator {% endcomment %}
+The annotation must be applied at method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -63,17 +55,10 @@ title: ExpressionValidator Annotation
  </tr>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator {% endcomment %}
 
 ```java
  @ExpressionValidator(message = "Default message", key = "i18n.key", shortCircuit = true, expression = "an OGNL expression" )
 
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.ExpressionValidator {% endcomment %}

@@ -1,30 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: RequiredFieldValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # RequiredFieldValidator Annotation
 
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator {% endcomment %}
-<p> This validator checks that a field is non-null.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator {% endcomment %}
+This validator checks that a field is non-null.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator {% endcomment %}
-<p> <p>The annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator {% endcomment %}
+The annotation must be applied at method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -70,17 +61,10 @@ title: RequiredFieldValidator Annotation
  </tr>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator {% endcomment %}
 
 ```java
  @RequiredFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true)
 
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator {% endcomment %}

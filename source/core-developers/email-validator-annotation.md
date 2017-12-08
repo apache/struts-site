@@ -1,31 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: EmailValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # EmailValidator Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator {% endcomment %}
-<p> This validator checks that a field is a valid e-mail address if it contains a non-empty String.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator {% endcomment %}
+This validator checks that a field is a valid e-mail address if it contains a non-empty String.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator {% endcomment %}
-<p> <p>The annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator {% endcomment %}
+The annotation must be applied at method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -71,17 +61,10 @@ title: EmailValidator Annotation
  </tr>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.EmailValidator {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.EmailValidator {% endcomment %}
 
 ```java
  @EmailValidator(message = "Default message", key = "i18n.key", shortCircuit = true)
 
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.EmailValidator {% endcomment %}
