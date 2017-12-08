@@ -1,60 +1,30 @@
 ---
-layout: core-developers
+layout: default
 title: Validation Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # Validation Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
-<p> This annotation has been deprecated since 2.1 as its previous purpose, to define classes that support annotation validations,
- is no longer necessary.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
+This annotation has been deprecated since 2.1 as its previous purpose, to define classes that support annotation validations,
+is no longer necessary.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
-<p> <p>The Validation annotation must be applied at Type level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
+Validation annotation must be applied at Type level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
-<p> <table class='confluenceTable' summary=''>
- <tr>
- <th class='confluenceTh'> Parameter </th>
- <th class='confluenceTh'> Required </th>
- <th class='confluenceTh'> Default </th>
- <th class='confluenceTh'> Notes </th>
- </tr>
- <tr>
- <td class='confluenceTd'>validations</td>
- <td class='confluenceTd'>yes</td>
- <td class='confluenceTd'>&nbsp;</td>
- <td class='confluenceTd'></td>
- </tr>
- </table>
-</p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
+- `validations` - list of validations to apply
 
 ## Examples
 
-**An Annotated Interface**
+### An Annotated Interface
 
-+ Mark the interface with @Validation()
-
-+ Apply standard or custom annoations at method level
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
+- Mark the interface with `@Validation()`
+- Apply standard or custom annotations at method level
 
 ```java
  @Validation()
@@ -73,12 +43,7 @@ title: Validation Annotation
 
 ```
 
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
-
-**An Annotated Class**
-
-
-{% comment %}start snippet id=example2|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
+### An Annotated Class
 
 ```java
  @Validation()
@@ -122,22 +87,15 @@ title: Validation Annotation
      }
  }
 
-
 ```
 
-{% comment %}end snippet id=example2|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.Validation {% endcomment %}
+When multiple methods are used to map different actions on the same class, and one of them is annotated with `@Validations`, 
+those validators will be triggered for all the actions, unless they are annotated with `@SkipValidation` or `validateAnnotatedMethodOnly`
+is set to `true` in the `validation` interceptor, like:
 
-
-> 
-
-> 
-
-> When multiple methods are used to map different actions on the same class, and one of them is annotated with _@Validations_ , those validators will be triggered for all the actions, unless they are annotated with @SkipValidation or _validateAnnotatedMethodOnly_  is set to _true_  in the "validation" interceptor, like:
-
-> 
- > \<interceptor\-ref name="validation"\>
- >     \<param name="validateAnnotatedMethodOnly"\>true\</param\>
- >     \<param name="excludeMethods"\>input,back,cancel,browse\</param\>
- > \</interceptor\-ref\>
- > 
- 
+```xml 
+<interceptor-ref name="validation">
+    <param name="validateAnnotatedMethodOnly">true</param>
+    <param name="excludeMethods">input,back,cancel,browse</param>
+</interceptor-ref>
+``` 

@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Annotations
+parent:
+    title: Core Developers Guide
+    url: index.html
 ---
 
 # Annotations
@@ -14,26 +17,26 @@ This page serves as a reference for all annotations across the framework.
 
 ## Action Annotations
 
-Since 2.1, these annotations are provided by the _Convention Plugin_. Codebehind and Zero Config plugins are 
-deprecated from 2.1 on.
+Since 2.1, these annotations are provided by the [Convention Plugin](../plugins/convention/). Codebehind and Zero Config 
+plugins are deprecated from 2.1 on.
 
 Action annotations are available when the framework scans the classpath for Action classes, rather than specifying 
-individual mappings through XML configuration. See the _Convention Plugin_  page for information on how to set up 
-classpath scanning to allow the use of Action annotations.
+individual mappings through XML configuration. See the [Convention Plugin](../plugins/convention/) page for information 
+on how to set up classpath scanning to allow the use of Action annotations.
 
 |Annotation|Description|
 |----------|-----------|
-|_Actions Annotation_ |Group of `@Action` annotations, maps multiple URLs to the same action|
-|_Action Annotation_ |Defines the URL of an action|
-|_InterceptorRefs Annotation_ |Gropup of `@InterceptorRef` annotations|
-|_InterceptorRef Annotation_ |Interceptor, or interceptor stack to be applied to at action|
-|_Results Annotation_ |Group of `@Result` annotations|
-|[Result Annotation](result-annotation.html)|Defines a result for an action|
+|[Actions Annotation](../plugins/convention/#action-annotation) |Group of `@Action` annotations, maps multiple URLs to the same action|
+|[Action Annotation](../plugins/convention/#action-annotation) |Defines the URL of an action|
+|[InterceptorRefs Annotation](../plugins/convention/#interceptorref-annotation) |Group of `@InterceptorRef` annotations|
+|[InterceptorRef Annotation](../plugins/convention/#interceptorref-annotation) |Interceptor, or interceptor stack to be applied to at action|
+|[Results Annotation](../plugins/convention/#result-annotation) |Group of `@Result` annotations|
+|[Result Annotation](../plugins/convention/#result-annotation)|Defines a result for an action|
 |[Namespace Annotation](namespace-annotation.html)|Set the path of the action URL (used to overwrite the default)|
-|_ResultPath Annotation_ |Set where the results are located (used to overwrite the default)|
-|[ParentPackage Annotation](parent-package-annotation.html)|Set the parent package of the actions (used to overwrite the default)|
-|_ExceptionMappings_ |Group of `@ExceptionMapping` annotations|
-|_ExceptionMapping_ |Defines an exception mapping|
+|[ResultPath Annotation](../plugins/convention/#resultpath-annotation) |Set where the results are located (used to overwrite the default)|
+|[ParentPackage Annotation](..//plugins/convention/#parentpackage-annotation)|Set the parent package of the actions (used to overwrite the default)|
+|[ExceptionMappings](../plugins/convention/#exceptionmapping-annotation) |Group of `@ExceptionMapping` annotations|
+|[ExceptionMapping](../plugins/convention/#exceptionmapping-annotation) |Defines an exception mapping|
 
 ## Workflow Annotations
 
@@ -43,7 +46,8 @@ classpath scanning to allow the use of Action annotations.
 
 ## Interceptor Annotations
 
-To use these annotations, you have to specify the [AnnotationWorkflowInterceptor](annotation-workflow-interceptor.html) to your interceptor stack.
+To use these annotations, you have to specify the [AnnotationWorkflowInterceptor](annotation-workflow-interceptor.html) 
+to your interceptor stack.
 
 |Annotation|Description|
 |----------|-----------|
@@ -76,7 +80,7 @@ To use annotation-based validation, annotate the class or interface with [Valida
 
 ### Resources
 
-- [Validation using Annotations](http://arsenalist.com/2007/05/10/struts-2-validation-using-annotations/)^[http://arsenalist.com/2007/05/10/struts-2-validation-using-annotations/] (arsenalist)
+- [Validation using Annotations](http://arsenalist.com/2007/05/10/struts-2-validation-using-annotations/) (arsenalist)
 
 ## Type Conversion Annotations
 
@@ -99,8 +103,8 @@ To use annotation-based type conversion, annotate the class or interface with th
 
 ## Tiles Annotations
 
-The _Tiles Plugin_  provides it's own set of Annotations. They can be used to keep `tiles.xml` short. Instead tiles 
-definitions can be created by annotating actions.
+The [Tiles Plugin](../plugins/tiles/) provides it's own set of Annotations. They can be used to keep `tiles.xml` short. 
+Instead tiles definitions can be created by annotating actions.
 
 |Annotation|Description|
 |----------|-----------|
