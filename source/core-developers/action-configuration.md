@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Action Configuration
+parent:
+    title: Core Developers Guide
+    url: index.html
 ---
 
 # Action Configuration
