@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Source Code
+title: Source Code and Builds
 ---
 
-# Source Code
+# Source Code and Builds
 {:.no_toc}
 
 * Will be replaced with the ToC, excluding a header
@@ -15,7 +15,7 @@ Accordingly, the source may not always compile or be in a release-ready state.
 
 *Access at your own risk!*
 
-NOTE: The full source code is provided with each [release.](downloads.html) If you simply want to build
+NOTE: The full source code is provided with each [release](/download.cgi). If you simply want to build
 your own copy of the product, use the source code provided with an approved release, rather than the development head.
 
 Read-only access to the Apache Struts source repository is available through both
@@ -112,4 +112,4 @@ Unless required by applicable law or agreed to in writing, software distributed 
 "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations under the License.
 
-Next: [Release Guidelines](releases.html)
+Next: [Release Guidelines](release-guidelines.html)
