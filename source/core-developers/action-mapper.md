@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: ActionMapper
+parent:
+    title: Core Developers Guide
+    url: index.html
 ---
 
 # ActionMapper
