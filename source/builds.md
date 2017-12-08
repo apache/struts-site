@@ -15,7 +15,7 @@ Accordingly, the source may not always compile or be in a release-ready state.
 
 *Access at your own risk!*
 
-NOTE: The full source code is provided with each [release](/download). If you simply want to build
+NOTE: The full source code is provided with each [release](/download.cgi). If you simply want to build
 your own copy of the product, use the source code provided with an approved release, rather than the development head.
 
 Read-only access to the Apache Struts source repository is available through both
