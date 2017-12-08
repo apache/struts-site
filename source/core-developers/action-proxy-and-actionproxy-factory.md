@@ -1,9 +1,16 @@
 ---
-layout: core-developers
+layout: default
 title: Action Proxy & ActionProxy Factory
+parent:
+    title: Core Developers Guide
+    url: index.html
 ---
 
 # Action Proxy & ActionProxy Factory
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 The ActionProxy obtains the Action class and calls the appropriate method. By default, Actions are obtained through 
 local instantiation, but an Action could also be obtained remotely if an alternative ActionProxy were provided.
@@ -20,7 +27,6 @@ s executed when a request is invoked.
 ## Customization
 
 ### ActionProxyFactory
-
 
 ```java
  ActionProxyFactory.setFactory(new MyActionProxyFactory() {
