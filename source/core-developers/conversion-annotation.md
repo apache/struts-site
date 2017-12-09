@@ -12,7 +12,7 @@ A marker annotation for type conversions at Type level.
 
 ## Usage
 
-The Conversion annotation must be applied at Type level.
+The `Conversion` annotation must be applied at Type level.
 
 ## Parameters
 
@@ -27,7 +27,7 @@ The Conversion annotation must be applied at Type level.
  </thead>
  <tbody>
  <tr>
- <td>conversion</td>
+ <td>conversions</td>
  <td>no</td>
  <td>&nbsp;</td>
  <td>used for Type Conversions applied at Type level.</td>

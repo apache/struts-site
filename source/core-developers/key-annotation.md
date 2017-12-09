@@ -12,7 +12,7 @@ Sets the Key for type conversion.
 
 ## Usage
 
-The Key annotation must be applied at field or method level.
+The `Key` annotation must be applied at field or method level.
 
 ## Parameters
 
@@ -42,5 +42,4 @@ The Key annotation must be applied at field or method level.
  // The key property for User objects within the users collection is the <code>userName</code> attribute.
  @Key( value = java.lang.Long.class )
  private Map<Long, User> userMap;
-
 ```

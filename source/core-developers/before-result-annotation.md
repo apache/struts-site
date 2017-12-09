@@ -8,11 +8,11 @@ parent:
 
 # BeforeResult Annotation
 
-Marks a action method that needs to be executed before the result. Return value is ignored.
+Marks an action method that needs to be executed before the result. Return value is ignored.
 
 ## Usage
 
-The BeforeResult annotation can be applied at method level.
+The `BeforeResult` annotation can be applied at method level.
 
 ## Parameters
 

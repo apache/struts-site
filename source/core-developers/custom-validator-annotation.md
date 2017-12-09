@@ -8,7 +8,7 @@ parent:
 
 # CustomValidator Annotation
 
-This annotation can be used for custom validators. Use the ValidationParameter annotation to supply additional params.
+This annotation can be used for custom validators. Use the `ValidationParameter` annotation to supply additional params.
 
 ## Usage
 
@@ -66,7 +66,6 @@ The annotation must be applied at method or type level.
 
 ```java
  @CustomValidator(type ="customValidatorName", fieldName = "myField")
-
 ```
 
 ## Adding Parameters

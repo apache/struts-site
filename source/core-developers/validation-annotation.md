@@ -8,7 +8,7 @@ parent:
 
 # Validation Annotation
 
-This annotation has been deprecated since 2.1 as its previous purpose, to define classes that support annotation validations,
+This annotation has been deprecated since Struts 2.1 as its previous purpose, to define classes that support annotation validations,
 is no longer necessary.
 
 ## Usage

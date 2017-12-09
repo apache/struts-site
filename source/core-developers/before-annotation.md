@@ -8,11 +8,11 @@ parent:
 
 # Before Annotation
 
-Marks a action method that needs to be executed before the main action method.
+Marks an action method that needs to be executed before the main action method.
 
 ## Usage
 
-The Before annotation can be applied at method level.
+The `Before` annotation can be applied at method level.
 
 ## Parameters
 

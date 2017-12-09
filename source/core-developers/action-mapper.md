@@ -155,16 +155,16 @@ It is configured through `struts.xml`. For example, with the following entries i
   /user:struts,:struts
 "/>
 ```
-When `PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)}` or `PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)}`
+When `PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)` or `PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)`
 is invoked, `PrefixBasedActionMapper` will check each possible prefix (url prefix terminating just before a `/`) to find 
 the most specific `ActionMapper` that returns a mapping when asked to map the request. If none are found, null is returned 
-for both `PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)}` and
-`PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)}` methods.
+for both `PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)` and
+`PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)` methods.
 
 ### PrefixBasedActionProxyFactory
 
 Prefix based factory should be used with `org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper` to use 
-appropriate {@link com.opensymphony.xwork2.ActionProxyFactory} connected with given `org.apache.struts2.dispatcher.mapper.ActionMapper`.
+appropriate `com.opensymphony.xwork2.ActionProxyFactory` connected with given `org.apache.struts2.dispatcher.mapper.ActionMapper`.
 
 Add below entry to `struts.xml` to enable the factory:
 

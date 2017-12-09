@@ -96,6 +96,7 @@ The annotation must be applied at method level.
  <td class='confluenceTd'>Format used to parse min/max value.</td>
  </tr>
  </table>
+</p>
 
 If neither `min` nor `max` is set, nothing will be done.
 
@@ -103,5 +104,4 @@ If neither `min` nor `max` is set, nothing will be done.
 
 ```java
  @DateRangeFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, min = "2005/01/01", max = "2005/12/31")
-
 ```

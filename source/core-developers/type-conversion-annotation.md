@@ -23,7 +23,7 @@ This annotation is used for class and application wide conversion rules.
 
 ## Usage
 
-The TypeConversion annotation can be applied at property and method level.
+The `TypeConversion` annotation can be applied at property and method level.
 
 ## Parameters
 

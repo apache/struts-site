@@ -8,11 +8,11 @@ parent:
 
 # Element Annotation
 
-Sets the Element for type conversion.
+Sets the `Element` for type conversion.
 
 ## Usage
 
-The Element annotation must be applied at field or method level.
+The `Element` annotation must be applied at field or method level.
 
 ## Parameters
 

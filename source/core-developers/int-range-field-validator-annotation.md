@@ -8,7 +8,7 @@ parent:
 
 # IntRangeFieldValidator Annotation
 
-This validator checks that a numeric field has a value within a specified range. If neither min nor max is set, 
+This validator checks that a numeric field has a value within a specified range. If neither `min` nor `max` is set, 
 nothing will be done.
 
 ## Usage
@@ -91,6 +91,7 @@ The annotation must be applied at method level.
  <td class='confluenceTd'>Enable parsing of min/max value.</td>
  </tr>
  </table>
+</p>
 
 If neither `min` nor `max` is set, nothing will be done.
 
@@ -100,5 +101,4 @@ If neither `min` nor `max` is set, nothing will be done.
  @IntRangeFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, min = "0", max = "42")
 
  @IntRangeFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, minExpression = "${minValue}", maxExpression = "${maxValue}")
-
 ```

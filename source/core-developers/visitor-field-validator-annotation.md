@@ -9,12 +9,12 @@ parent:
 # VisitorFieldValidator Annotation
 
 The validator allows you to forward validator to object properties of your action
-using the objects own validator files. This allows you to use the ModelDriven development
+using the objects own validator files. This allows you to use the `ModelDriven` development
 pattern and manage your validations for your models in one place, where they belong, next to
 your model classes.
 
-The VisitorFieldValidator can handle either simple Object properties, Collections of Objects, or Arrays.
-The error message for the VisitorFieldValidator will be appended in front of validator messages added
+The `VisitorFieldValidator` can handle either simple Object properties, Collections of Objects, or Arrays.
+The error message for the `VisitorFieldValidator` will be appended in front of validator messages added
 by the validations for the Object message.
 
 ## Usage
@@ -79,5 +79,4 @@ The annotation must be applied at method level.
 
 ```java
  @VisitorFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, context = "action alias", appendPrefix = true)
-
 ```

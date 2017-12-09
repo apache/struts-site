@@ -8,11 +8,11 @@ parent:
 
 # KeyProperty Annotation
 
-Sets the KeyProperty for type conversion.
+Sets the `KeyProperty` for type conversion.
 
 ## Usage
 
-The KeyProperty annotation must be applied at field or method level.
+The `KeyProperty` annotation must be applied at field or method level.
 
 This annotation should be used with Generic types, if the key property of the key element needs to be specified.
 
@@ -44,5 +44,4 @@ This annotation should be used with Generic types, if the key property of the ke
  // The key property for User objects within the users collection is the <code>userName</code> attribute.
  @KeyProperty( value = "userName" )
  protected List<User> users = null;
-
 ```

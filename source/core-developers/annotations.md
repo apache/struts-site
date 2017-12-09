@@ -17,8 +17,8 @@ This page serves as a reference for all annotations across the framework.
 
 ## Action Annotations
 
-Since 2.1, these annotations are provided by the [Convention Plugin](../plugins/convention/). Codebehind and Zero Config 
-plugins are deprecated from 2.1 on.
+Since Struts 2.1, these annotations are provided by the [Convention Plugin](../plugins/convention/). Codebehind and Zero Config 
+plugins are deprecated from Struts 2.1 on.
 
 Action annotations are available when the framework scans the classpath for Action classes, rather than specifying 
 individual mappings through XML configuration. See the [Convention Plugin](../plugins/convention/) page for information 

@@ -8,11 +8,11 @@ parent:
 
 # InputConfig Annotation
 
-Marks a action method that if it's not validated by `ValidationInterceptor` then execute `input` method or `input` result.
+Marks an action method that if it's not validated by `ValidationInterceptor` then execute `input` method or `input` result.
 
 ## Usage
 
-The InputConfig annotation can be applied at method level.
+The `InputConfig` annotation can be applied at method level.
 
 ## Parameters
 

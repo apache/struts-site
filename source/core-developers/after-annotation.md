@@ -8,11 +8,11 @@ parent:
 
 # After Annotation
 
-Marks a action method that needs to be called after the main action method and the result was executed. Return value is ignored.
+Marks an action method that needs to be called after the main action method and the result was executed. Return value is ignored.
 
 ## Usage
 
-The After annotation can be applied at method level.
+The `After` annotation can be applied at method level.
 
 ## Parameters
 

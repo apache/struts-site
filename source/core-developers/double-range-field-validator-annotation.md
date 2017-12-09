@@ -8,7 +8,7 @@ parent:
 
 # DoubleRangeFieldValidator Annotation
 
-This validator checks that a double field has a value within a specified range. If neither min nor max is set, nothing will be done.
+This validator checks that a double field has a value within a specified range. If neither `min` nor `max` is set, nothing will be done.
 
 ## Usage
 
@@ -107,15 +107,14 @@ The annotation must be applied at method level.
  <td class='confluenceTd'>&nbsp;</td>
  <td class='confluenceTd'>OGNL expression used to obtain the exclusive maximum number can be. </td>
  </tr>
- </table>
+ </table> </p>
 
 If neither `min` nor `max` is set, nothing will be done.
 
-The values for min and max must be inserted as String values so that "0" can be handled as a possible value.
+The values for `min` and `max` must be inserted as String values so that `"0"` can be handled as a possible value.
 
 ## Examples
 
 ```java
  @DoubleRangeFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, minInclusive = "0.123", maxInclusive = "99.987")
-
 ```

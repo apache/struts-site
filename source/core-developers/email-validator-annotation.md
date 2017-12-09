@@ -66,5 +66,4 @@ The annotation must be applied at method level.
 
 ```java
  @EmailValidator(message = "Default message", key = "i18n.key", shortCircuit = true)
-
 ```

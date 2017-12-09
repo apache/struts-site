@@ -9,7 +9,7 @@ parent:
 # StringLengthFieldValidator Annotation
 
 This validator checks that a String field is of the right length. It assumes that the field is a String.
-If neither minLength nor maxLength is set, nothing will be done.
+If neither `minLength` nor `maxLength` is set, nothing will be done.
 
 ## Usage
 
@@ -91,6 +91,7 @@ The annotation must be applied at method level.
  <td class='confluenceTd'>OGNL expression used to obtain the maximum length the String can be. </td>
  </tr>
  </table>
+</p>
 
 If neither `minLength` nor `maxLength` is set, nothing will be done.
 
@@ -98,5 +99,4 @@ If neither `minLength` nor `maxLength` is set, nothing will be done.
 
 ```java
  @StringLengthFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, trim = true, minLength = "5",  maxLength = "12")
-
 ```
