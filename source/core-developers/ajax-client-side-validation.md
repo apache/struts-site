@@ -155,7 +155,7 @@ __Create the JSP__
 
 
 
-~~~~~~~
+```jsp
 <%@taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
@@ -183,7 +183,7 @@ __Create the JSP__
     </s:form>
 </body>
 </html> 
-~~~~~~~
+```
 
 Things to note on this JSP:
 

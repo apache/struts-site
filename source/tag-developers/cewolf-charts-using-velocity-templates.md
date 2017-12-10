@@ -83,7 +83,7 @@ public class PageViewCountData implements DatasetProducer, Serializable {
 With the new WebWork refactorings, nested JSP tags with arbitrary parameters can be used, so we convert the CeWolf tutorial JSP script to Velocity.
 
 
-~~~~~~~
+```jsp
 
 <jsp:useBean id="pageViews" class="de.laures.cewolf.example.PageViewCountData"/>
 <cewolf:chart 
@@ -99,7 +99,7 @@ With the new WebWork refactorings, nested JSP tags with arbitrary parameters can
 
 <cewolf:img chartid="line" renderer="cewolf" width="400" height="300"/>
 
-~~~~~~~
+```
 
 In Velocity it looks like this:
 

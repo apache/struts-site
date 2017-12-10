@@ -10,11 +10,11 @@ The tags are designed to display dynamic data. To create a input field that disp
 **Creating a dynamic input field**
 
 
-~~~~~~~
+```jsp
 
 <s:textfield name="postalCode"/>
 
-~~~~~~~
+```
 
 If there is a "postalCode" property on the value stack, its value will be set to the input field. When the field is submitted back to the framework, the value of the control will be set back to the "postalCode" property.
 
@@ -23,11 +23,11 @@ Sometimes, we want to pass the dynamic data to a tag. For example, we might want
 **Using an expression to set the label**
 
 
-~~~~~~~
+```jsp
 
 <s:textfield key="postalCode.label" name="postalCode"/>
 
-~~~~~~~
+```
 
 The expression language ([OGNL](#PAGE_14198)) lets us call methods and evaluate properties. The method `getText` is provided by ActionSupport, which is the base class for most Actions. Since the Action is on the stack, we can call any of its methods from an expression, including `getText`.
 
@@ -38,11 +38,11 @@ The HTTP protocol is text-based, but some tags have non-String attribute types, 
 **Evaluating booleans**
 
 
-~~~~~~~
+```jsp
 
 <s:select key="state.label" name="state" multiple="true"/>
 
-~~~~~~~
+```
 
 Since the attribute `multiple` maps to a boolean property, the framework does not interpret the value as a String. The value is evaluated as an expression and automtically converted to a boolean.
 
@@ -51,29 +51,29 @@ Since it's easy to forget which attributes are String and which are non-String, 
 **Evaluating booleans (verbose)**
 
 
-~~~~~~~
+```jsp
 
 <s:select key="state.label" name="state" multiple="%{true}"/>
 
-~~~~~~~
+```
 
 **Evaluating booleans (with property)**
 
 
-~~~~~~~
+```jsp
 
 <s:select key="state.label" name="state" multiple="allowMultiple"/>
 
-~~~~~~~
+```
 
 **Evaluating booleans (verbose with property)**
 
 
-~~~~~~~
+```jsp
 
 <s:select key="state.label" name="state" multiple="%{allowMultiple}"/>
 
-~~~~~~~
+```
 
 ## value is an Object!
 
@@ -84,22 +84,22 @@ Most often, the `value` attribute is set automatically, since `name` attribute u
 **Probably wrong!**
 
 
-~~~~~~~
+```jsp
 
 <s:textfield key="state.label" name="state" value="ca"/>
 
-~~~~~~~
+```
 
 If a `textfield` is passed the value attribute `"ca"`, the framework will look for a property named `getCa`. Generally, this is not what we mean. What we mean to do is pass a literal String. In the expression language, literals are placed within quotes
 
 **Passing a literal value the right way**
 
 
-~~~~~~~
+```jsp
 
 <s:textfield key="state.label" name="state" value="%{'ca'}" />
 
-~~~~~~~
+```
 
 Another approach would be to use the idiom `value="'ca'"`, but, in this case, using the expression notation is recommended.
 
@@ -155,11 +155,11 @@ The following names of property are disallowed:
 The below code will not work:
 
 
-~~~~~~~
+```jsp
 
 <s:iterator value="parameters"/>
 
-~~~~~~~
+```
 
 
 ~~~~~~~

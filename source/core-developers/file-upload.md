@@ -136,14 +136,14 @@ __Uploading Multiple Files using Arrays__
 **multipleUploadUsingArray\.jsp** Notice all file input types have the same name\.
 
 
-~~~~~~~
+```jsp
 <s:form action="doMultipleUploadUsingArray" method="POST" enctype="multipart/form-data">
   <s:file label="File (1)" name="upload" />
   <s:file label="File (2)" name="upload" />
   <s:file label="FIle (3)" name="upload" />
   <s:submit cssClass="btn btn-primary"/>
 </s:form>
-~~~~~~~
+```
 
 **MultipleFileUploadUsingArrayAction\.java**
 
@@ -204,14 +204,14 @@ __Uploading Multiple Files using Lists__
 **multipleUploadUsingList\.jsp** Notice all file input types have the same name\.
 
 
-~~~~~~~
+```jsp
 <s:form action="doMultipleUploadUsingList" method="POST" enctype="multipart/form-data">
   <s:file label="File (1)" name="upload" />
   <s:file label="File (2)" name="upload" />
   <s:file label="FIle (3)" name="upload" />
   <s:submit cssClass="btn btn-primary"/>
 </s:form>
-~~~~~~~
+```
 
 **MultipleFileUploadUsingListAction\.java**
 

@@ -136,7 +136,7 @@ __Action and Namespace__
 A correct action and namespace attributes must be provided to the \<s:form\> tag\. For example, if the action named "quizClient" is defined in the "/validation" namespace, the form must be configured as:
 
 
-~~~~~~~
+```jsp
 <s:form method="post" validate="true" action="quizClient" namespace="/validation">
    <s:textfield label="Name" name="name"/>
    <s:textfield label="Age" name="age"/>
@@ -144,12 +144,12 @@ A correct action and namespace attributes must be provided to the \<s:form\> tag
    <s:submit/>
 </s:form> 
 
-~~~~~~~
+```
 
 While the following will "work" in the sense that the form will function correctly, **client\-side validation will not**\. That is because Struts must know the exact namespace and action (rather than a URL) to properly support validation\.
 
 
-~~~~~~~
+```jsp
 <s:form method="post" validate="true" action="/validation/quizClient.action">
    <s:textfield label="Name" name="name"/>
    <s:textfield label="Age" name="age"/>
@@ -157,4 +157,4 @@ While the following will "work" in the sense that the form will function correct
    <s:submit/>
 </s:form> 
 
-~~~~~~~
+```

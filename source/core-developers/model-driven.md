@@ -72,7 +72,7 @@ public class Gangster implements Serializable {
 JSP for creating a Gangster:
 
 
-~~~~~~~
+```jsp
 <s:form action="modelDrivenResult" method="POST" namespace="/modelDriven">   
     <s:textfield label="Gangster Name" name="name" />
     <s:textfield label="Gangster Age"  name="age" />
@@ -81,4 +81,4 @@ JSP for creating a Gangster:
     <s:submit />
 </s:form>
 
-~~~~~~~
+```
