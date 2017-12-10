@@ -135,7 +135,7 @@ __Map the Action__
 Note that is is not necessary when using _Convention Plugin_ \.
 
 
-~~~~~~~
+```xml
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
 	
 <struts>
@@ -147,7 +147,7 @@ Note that is is not necessary when using _Convention Plugin_ \.
          </action>
     </package>
 
-~~~~~~~
+```
 
 AJAX validation is performed by the _jsonValidation_  interceptor\. This interceptor is included in the _jsonValidationWorkflowStack_ , and is required in order to perform AJAX validation\. Normal results(input, success, etc) should be provided for the action in the case that someone tries to access the action directly, in which case normal validation will be triggered\. So, how does the _jsonValidation_  know that it must perform AJAX validation vs regular validation? We will see that in a minute, but you don't need to know that in order to use AJAX validation\. Same applies for specialized Redirect Result Type _jsonActionRedirect_ \.
 

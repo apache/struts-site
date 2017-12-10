@@ -12,7 +12,7 @@ __Configure your action to use the freemarker result type__
 The `freemarker` result type is defined in `struts-default.xml`, so normally you just include it, and define your resuts to use `type="freemarker"`\.
 
 
-~~~~~~~
+```xml
 <include file="struts-default.xml"/>
 ...
 <action name="test" class="package.Test">
@@ -20,7 +20,7 @@ The `freemarker` result type is defined in `struts-default.xml`, so normally you
 </action>
 ...
 
-~~~~~~~
+```
 
 __Property Resoloution__
 

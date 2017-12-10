@@ -51,7 +51,7 @@ The property _struts.url.includeParams_  can be used to set the default value of
 **Setting the default value of includeParams**
 
 
-~~~~~~~
+```xml
 
 <struts>
    ...
@@ -59,7 +59,7 @@ The property _struts.url.includeParams_  can be used to set the default value of
    ...
 </struts>
 
-~~~~~~~
+```
 
 See _Constant Configuration_  for further information.
 

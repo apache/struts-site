@@ -60,12 +60,12 @@ The `org.apache.struts2.interceptor.FileUploadInterceptor` class is included as 
 **Example action mapping:**
 
 
-~~~~~~~
+```xml
 <action name="doUpload" class="com.example.UploadAction">
     <result name="success">good_result.jsp</result>
 </action>
 
-~~~~~~~
+```
 
 A form must be create with a form field of type file, `<INPUT type="file" name="upload">`\. The form used to upload the file must have its encoding type set to multipart/form\-data, 
 `<FORM action="doUpload" enctype="multipart/form-data" method="post">`\. The standard procedure for adding these elements is by using the Struts 2 tag libraries as shown in the following example:
@@ -281,7 +281,7 @@ struts.multipart.maxSize=2097152
 In order to change theses settings you define a constant in your applications `struts.xml` file like so:
 
 
-~~~~~~~
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC 
 	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
@@ -291,12 +291,12 @@ In order to change theses settings you define a constant in your applications `s
     ...
 </struts>
 
-~~~~~~~
+```
 
 Additionally the `fileUpload` interceptor has settings that can be put in place for individual action mappings by customizing your interceptor stack\.
 
 
-~~~~~~~
+```xml
 <action name="doUpload" class="com.example.UploadAction">
     <interceptor-ref name="basicStack"/>
     <interceptor-ref name="fileUpload">
@@ -308,7 +308,7 @@ Additionally the `fileUpload` interceptor has settings that can be put in place 
     <result name="success">good_result.jsp</result>
 </action>
 
-~~~~~~~
+```
 
 __File Size Limits__
 
@@ -316,7 +316,7 @@ There are two separate file size limits\. First is `struts.multipart.maxSize` wh
 `maximumSize`, is an interceptor setting that is used to ensure a particular Action does not receive a file that is too large\. Notice the locations of both settings in the following example:
 
 
-~~~~~~~
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC 
 	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
@@ -336,14 +336,14 @@ There are two separate file size limits\. First is `struts.multipart.maxSize` wh
     </action>
 </struts>
 
-~~~~~~~
+```
 
 __File Types__
 
 There are two ways to limit the uploaded file type, declaratively and programmatically\. To declaratively limit the file type a comma separated list of allowedTypes can be specified as a fileUpload interceptor param as shown in the following example:
 
 
-~~~~~~~
+```xml
 <action name="doUpload" class="com.example.UploadAction">
     <interceptor-ref name="basicStack"/>
     <interceptor-ref name="fileUpload">
@@ -355,7 +355,7 @@ There are two ways to limit the uploaded file type, declaratively and programmat
     <result name="success">good_result.jsp</result>
 </action>
 
-~~~~~~~
+```
 
 When the uploaded file type does not match one of the MIME types specified a field error will be created as described in the next section entitled Error Messages\. Programmatically limiting the file type means using the information passed in to your Action class via the `setXContentType(String contentType)` method\. The benefit to this type of approach would be that it's more flexible and no interceptor configuration would be needed if file sizes are keep under 2 megs\.
 
@@ -404,9 +404,9 @@ __Disabling file upload support__
 You can alternatively disable the whole file upload mechanism defining a constant in `struts.xml`:
 
 
-~~~~~~~
+```xml
 <constant name="struts.multipart.enabled" value="false"/>
-~~~~~~~
+```
 
 With this constant in place, Struts will ignore a `Content-Type` header and will treat each request as an ordinary http request\. This option is available since Struts 2\.3\.11\.
 
