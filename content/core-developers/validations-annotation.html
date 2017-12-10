@@ -125,17 +125,17 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/validations-annotation.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="annotations.html" title="back to Annotations"><< back to Annotations</a>
+    
     <h1 id="validations-annotation">Validations Annotation</h1>
 
-<p> <p>If you want to use several annotations of the same type, these annotations must be nested within the @Validations() annotation.</p>
-</p>
+<p>If you want to use several annotations of the same type, these annotations must be nested within the <code class="highlighter-rouge">@Validations()</code> annotation.</p>
 
 <h2 id="usage">Usage</h2>
 
-<p> <p>Used at METHOD level.</p>
-</p>
+<p>Used at METHOD level.</p>
 
 <h2 id="parameters">Parameters</h2>
 
@@ -256,60 +256,49 @@
 
 <p>Different validations per method is NOT supported for client-side validation!</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+<p>To use different validations per method, the <code class="highlighter-rouge">validateAnnotatedMethodOnly</code> property must be set on the validation interceptor.</p>
 
-<p>To use different validations per method, the validateAnnotatedMethodOnly property must be set on the validation interceptor.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-&lt;interceptor-ref name="validation"&gt;
-  &lt;param name="validateAnnotatedMethodOnly"&gt;true&lt;/param&gt;                
-  &lt;param name="excludeMethods"&gt;input,back,cancel,browse&lt;/param&gt;
-&lt;/interceptor-ref&gt;
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"validation"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"validateAnnotatedMethodOnly"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>                
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeMethods"</span><span class="nt">&gt;</span>input,back,cancel,browse<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/interceptor-ref&gt;</span>
 </code></pre>
 </div>
 
 <p>Here’s a complete example of updating the default stack:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-  &lt;package name="default" extends="struts-default"&gt;
-    &lt;interceptors&gt;
-      &lt;interceptor-stack name="content"&gt;
-        &lt;interceptor-ref name="exception"/&gt;
-                &lt;interceptor-ref name="alias"/&gt;
-                &lt;interceptor-ref name="servletConfig"/&gt;
-                &lt;interceptor-ref name="prepare"/&gt;
-                &lt;interceptor-ref name="i18n"/&gt;
-                &lt;interceptor-ref name="chain"/&gt;
-                &lt;interceptor-ref name="debugging"/&gt;
-                &lt;interceptor-ref name="profiling"/&gt;
-                &lt;interceptor-ref name="scopedModelDriven"/&gt;
-                &lt;interceptor-ref name="modelDriven"/&gt;
-                &lt;interceptor-ref name="fileUpload"/&gt;
-                &lt;interceptor-ref name="checkbox"/&gt;
-                &lt;interceptor-ref name="staticParams"/&gt;
-                &lt;interceptor-ref name="params"&gt;
-                  &lt;param name="excludeParams"&gt;dojo\..*&lt;/param&gt;
-                &lt;/interceptor-ref&gt;
-                &lt;interceptor-ref name="conversionError"/&gt;
-                &lt;interceptor-ref name="validation"&gt;
-  	            &lt;param name="validateAnnotatedMethodOnly"&gt;true&lt;/param&gt;                
-                    &lt;param name="excludeMethods"&gt;input,back,cancel,browse&lt;/param&gt;
-                &lt;/interceptor-ref&gt;
-                &lt;interceptor-ref name="workflow"&gt;
-                    &lt;param name="excludeMethods"&gt;input,back,cancel,browse&lt;/param&gt;
-                &lt;/interceptor-ref&gt;
-      &lt;/interceptor-stack&gt;
-    &lt;/interceptors&gt;
-    &lt;default-interceptor-ref name="default"/&gt;
-  &lt;/package&gt;
-&lt;/struts&gt;
-
+<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"default"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;interceptors&gt;</span>
+      <span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"exception"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"alias"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"servletConfig"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"prepare"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"i18n"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"chain"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"debugging"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"profiling"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"scopedModelDriven"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"modelDriven"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"fileUpload"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"checkbox"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"staticParams"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"params"</span><span class="nt">&gt;</span>
+                  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeParams"</span><span class="nt">&gt;</span>dojo\..*<span class="nt">&lt;/param&gt;</span>
+                <span class="nt">&lt;/interceptor-ref&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"conversionError"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"validation"</span><span class="nt">&gt;</span>
+  	            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"validateAnnotatedMethodOnly"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>                
+                    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeMethods"</span><span class="nt">&gt;</span>input,back,cancel,browse<span class="nt">&lt;/param&gt;</span>
+                <span class="nt">&lt;/interceptor-ref&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"workflow"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeMethods"</span><span class="nt">&gt;</span>input,back,cancel,browse<span class="nt">&lt;/param&gt;</span>
+                <span class="nt">&lt;/interceptor-ref&gt;</span>
+      <span class="nt">&lt;/interceptor-stack&gt;</span>
+    <span class="nt">&lt;/interceptors&gt;</span>
+    <span class="nt">&lt;default-interceptor-ref</span> <span class="na">name=</span><span class="s">"default"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/package&gt;</span>
+<span class="nt">&lt;/struts&gt;</span>
 </code></pre>
 </div>
 

@@ -125,17 +125,19 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/url-validator-annotation.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="annotations.html" title="back to Annotations"><< back to Annotations</a>
+    
     <h1 id="urlvalidator-annotation">UrlValidator Annotation</h1>
 
 <p>This validator checks that a field is a valid URL.</p>
 
-<p>Usage</p>
+<h2 id="usage">Usage</h2>
 
 <p> The annotation must be applied at method level.</p>
 
-<p>Parameters</p>
+<h2 id="parameters">Parameters</h2>
 
 <table>
   <thead>
@@ -198,60 +200,39 @@
   </tbody>
 </table>
 
-<p>Examples</p>
+<h2 id="examples">Examples</h2>
 
-<p><strong>UrlValidator usage example</strong></p>
+<h3 id="urlvalidator-usage-example">UrlValidator usage example</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@UrlValidator(message = "Default message", key = "i18n.key", shortCircuit = true)
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@UrlValidator</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"Default message"</span><span class="o">,</span> <span class="n">key</span> <span class="o">=</span> <span class="s">"i18n.key"</span><span class="o">,</span> <span class="n">shortCircuit</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
 </code></pre>
 </div>
 
-<p><strong>UrlValidator usage example</strong></p>
+<h3 id="urlvalidator-usage-example-1">UrlValidator usage example</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@UrlValidator(message = "Default message", key = "i18n.key", urlRegexExpression = "${urlRegex}")
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@UrlValidator</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"Default message"</span><span class="o">,</span> <span class="n">key</span> <span class="o">=</span> <span class="s">"i18n.key"</span><span class="o">,</span> <span class="n">urlRegexExpression</span> <span class="o">=</span> <span class="s">"${urlRegex}"</span><span class="o">)</span>
 </code></pre>
 </div>
 
-<table>
-  <tbody>
-    <tr>
-      <td>urlRegex  neither urlRegexExpression are only used on client side to validate URLs - this will be changed with next major release!</td>
-    </tr>
-  </tbody>
-</table>
+<p>If no <code class="highlighter-rouge">urlRegex</code> neither <code class="highlighter-rouge">urlRegexExpression</code> is defined, default regex will be used instead, 
+based on <a href="http://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url">StackOverflow answer</a></p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+<h3 id="default-url-regex">Default URL regex</h3>
 
-<p>If no urlRegex neither urlRegexExpression is defined, default regex will be used instead, based on <a href="http://stackoverflow\.com/questions/161738/what\-is\-the\-best\-regular\-expression\-to\-check\-if\-a\-string\-is\-a\-valid\-url">StackOverflow answer</a>^[http://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url]</p>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Default URL regex</strong></p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>return "^(https?|ftp):\/\/" +
-       "(([a-z0-9$_\\.\\+!\\*\\'\\(\\),;\\?&amp;=-]|%[0-9a-f]{2})+" +
-       "(:([a-z0-9$_\\.\\+!\\*\\'\\(\\),;\\?&amp;=-]|%[0-9a-f]{2})+)?" +
-       "@)?(#?" +
-       ")((([a-z0-9]\\.|[a-z0-9][a-z0-9-]*[a-z0-9]\\.)*" +
-       "[a-z][a-z0-9-]*[a-z0-9]" +
-       "|((\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])\\.){3}" +
-       "(\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])" +
-       ")(:\\d+)?" +
-       ")(((\\/+([a-z0-9$_\\.\\+!\\*\\'\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)*" +
-       "(\\?([a-z0-9$_\\.\\+!\\*\\'\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)" +
-       "?)?)?" +
-       "(#([a-z0-9$_\\.\\+!\\*\\'\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)?" +
-       "$";
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">return</span> <span class="s">"^(https?|ftp):\/\/"</span> <span class="o">+</span>
+       <span class="s">"(([a-z0-9$_\.\\+!\\*\\'\\(\\),;\\?&amp;=-]|%[0-9a-f]{2})+"</span> <span class="o">+</span>
+       <span class="s">"(:([a-z0-9$_\.\\+!\\*\\'\\(\\),;\\?&amp;=-]|%[0-9a-f]{2})+)?"</span> <span class="o">+</span>
+       <span class="s">"@)?(#?"</span> <span class="o">+</span>
+       <span class="s">")((([a-z0-9]\.|[a-z0-9][a-z0-9-]*[a-z0-9]\.)*"</span> <span class="o">+</span>
+       <span class="s">"[a-z][a-z0-9-]*[a-z0-9]"</span> <span class="o">+</span>
+       <span class="s">"|((\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])\.){3}"</span> <span class="o">+</span>
+       <span class="s">"(\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])"</span> <span class="o">+</span>
+       <span class="s">")(:\\d+)?"</span> <span class="o">+</span>
+       <span class="s">")(((\\/+([a-z0-9$_\.\\+!\\*\\'\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)*"</span> <span class="o">+</span>
+       <span class="s">"(\\?([a-z0-9$_\.\\+!\\*\\'\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)"</span> <span class="o">+</span>
+       <span class="s">"?)?)?"</span> <span class="o">+</span>
+       <span class="s">"(#([a-z0-9$_\.\\+!\\*\\'\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)?"</span> <span class="o">+</span>
+       <span class="s">"$"</span><span class="o">;</span>
 </code></pre>
 </div>
 

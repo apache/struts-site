@@ -125,48 +125,32 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/validation-annotation.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="annotations.html" title="back to Annotations"><< back to Annotations</a>
+    
     <h1 id="validation-annotation">Validation Annotation</h1>
 
-<p> This annotation has been deprecated since 2.1 as its previous purpose, to define classes that support annotation validations,
- is no longer necessary.
-</p>
+<p>This annotation has been deprecated since Struts 2.1 as its previous purpose, to define classes that support annotation validations,
+is no longer necessary.</p>
 
 <h2 id="usage">Usage</h2>
 
-<p> <p>The Validation annotation must be applied at Type level.</p>
-</p>
+<p>Validation annotation must be applied at Type level.</p>
 
 <h2 id="parameters">Parameters</h2>
 
-<p> <table class="confluenceTable" summary="">
- <tr>
- <th class="confluenceTh"> Parameter </th>
- <th class="confluenceTh"> Required </th>
- <th class="confluenceTh"> Default </th>
- <th class="confluenceTh"> Notes </th>
- </tr>
- <tr>
- <td class="confluenceTd">validations</td>
- <td class="confluenceTd">yes</td>
- <td class="confluenceTd">&nbsp;</td>
- <td class="confluenceTd"></td>
- </tr>
- </table>
-</p>
+<ul>
+  <li><code class="highlighter-rouge">validations</code> - list of validations to apply</li>
+</ul>
 
 <h2 id="examples">Examples</h2>
 
-<p><strong>An Annotated Interface</strong></p>
+<h3 id="an-annotated-interface">An Annotated Interface</h3>
 
 <ul>
-  <li>
-    <p>Mark the interface with @Validation()</p>
-  </li>
-  <li>
-    <p>Apply standard or custom annoations at method level</p>
-  </li>
+  <li>Mark the interface with <code class="highlighter-rouge">@Validation()</code></li>
+  <li>Apply standard or custom annotations at method level</li>
 </ul>
 
 <div class="highlighter-rouge"><pre class="highlight"><code> <span class="nd">@Validation</span><span class="o">()</span>
@@ -186,7 +170,7 @@
 </code></pre>
 </div>
 
-<p><strong>An Annotated Class</strong></p>
+<h3 id="an-annotated-class">An Annotated Class</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code> <span class="nd">@Validation</span><span class="o">()</span>
  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleAnnotationAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
@@ -229,31 +213,19 @@
      <span class="o">}</span>
  <span class="o">}</span>
 
-
 </code></pre>
 </div>
 
-<blockquote>
+<p>When multiple methods are used to map different actions on the same class, and one of them is annotated with <code class="highlighter-rouge">@Validations</code>, 
+those validators will be triggered for all the actions, unless they are annotated with <code class="highlighter-rouge">@SkipValidation</code> or <code class="highlighter-rouge">validateAnnotatedMethodOnly</code>
+is set to <code class="highlighter-rouge">true</code> in the <code class="highlighter-rouge">validation</code> interceptor, like:</p>
 
-</blockquote>
-
-<blockquote>
-
-</blockquote>
-
-<blockquote>
-  <p>When multiple methods are used to map different actions on the same class, and one of them is annotated with <em>@Validations</em> , those validators will be triggered for all the actions, unless they are annotated with @SkipValidation or <em>validateAnnotatedMethodOnly</em>  is set to <em>true</em>  in the “validation” interceptor, like:</p>
-</blockquote>
-
-<blockquote>
-
-  <p>&lt;interceptor-ref name=”validation”&gt;
-    &lt;param name=”validateAnnotatedMethodOnly”&gt;true&lt;/param&gt;
-    &lt;param name=”excludeMethods”&gt;input,back,cancel,browse&lt;/param&gt;
-&lt;/interceptor-ref&gt;</p>
-
-</blockquote>
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"validation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"validateAnnotatedMethodOnly"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeMethods"</span><span class="nt">&gt;</span>input,back,cancel,browse<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/interceptor-ref&gt;</span>
+</code></pre>
+</div>
 
   </section>
 </article>

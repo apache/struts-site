@@ -125,8 +125,10 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/action-mapper.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    
     <h1 class="no_toc" id="actionmapper">ActionMapper</h1>
 
 <ul id="markdown-toc">
@@ -140,7 +142,10 @@
   </li>
   <li><a href="#custom-actionmapper" id="markdown-toc-custom-actionmapper">Custom ActionMapper</a></li>
   <li><a href="#compositeactionmapper" id="markdown-toc-compositeactionmapper">CompositeActionMapper</a></li>
-  <li><a href="#prefixbasedactionmapper" id="markdown-toc-prefixbasedactionmapper">PrefixBasedActionMapper</a></li>
+  <li><a href="#prefixbasedactionmapper" id="markdown-toc-prefixbasedactionmapper">PrefixBasedActionMapper</a>    <ul>
+      <li><a href="#prefixbasedactionproxyfactory" id="markdown-toc-prefixbasedactionproxyfactory">PrefixBasedActionProxyFactory</a></li>
+    </ul>
+  </li>
   <li><a href="#actionmapper-and-actionmapping-objects" id="markdown-toc-actionmapper-and-actionmapping-objects">ActionMapper and ActionMapping objects</a></li>
   <li><a href="#customize" id="markdown-toc-customize">Customize</a></li>
 </ul>
@@ -271,70 +276,47 @@ and “restful” which is <code class="highlighter-rouge">org.apache.struts2.di
 
 <h2 id="prefixbasedactionmapper">PrefixBasedActionMapper</h2>
 
-<p> <p>
+<p>A prefix based action mapper that is capable of delegating to other <code class="highlighter-rouge">ActionMapper</code>s based on the request’s prefix.
+It is configured through <code class="highlighter-rouge">struts.xml</code>. For example, with the following entries in <code class="highlighter-rouge">struts.xml</code>:</p>
 
- A prefix based action mapper that is capable of delegating to other {@link ActionMapper}s based on the request's prefix.<br />
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"</span><span class="nt">/&gt;</span>
 
- It is configured through struts.xml<br />
+<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.prefixMapping"</span> <span class="na">value=</span><span class="s">"</span>
+  <span class="err">/communities:pseudoRestful,</span>
+  <span class="err">/communityTags:pseudoRestful,</span>
+  <span class="err">/events:pseudoRestful,</span>
+  <span class="err">/mediaList:pseudoRestful,</span>
+  <span class="err">/users:pseudoRestful,</span>
+  <span class="err">/community:struts,</span>
+  <span class="err">/communityTag:struts,</span>
+  <span class="err">/event:struts,</span>
+  <span class="err">/media:struts,</span>
+  <span class="err">/user:struts,:struts</span>
+<span class="err">"</span><span class="nt">/&gt;</span>
+</code></pre>
+</div>
+<p>When <code class="highlighter-rouge">PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)</code> or <code class="highlighter-rouge">PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)</code>
+is invoked, <code class="highlighter-rouge">PrefixBasedActionMapper</code> will check each possible prefix (url prefix terminating just before a <code class="highlighter-rouge">/</code>) to find 
+the most specific <code class="highlighter-rouge">ActionMapper</code> that returns a mapping when asked to map the request. If none are found, null is returned 
+for both <code class="highlighter-rouge">PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)</code> and
+<code class="highlighter-rouge">PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)</code> methods.</p>
 
- For example, with the following entries in struts.properties
+<h3 id="prefixbasedactionproxyfactory">PrefixBasedActionProxyFactory</h3>
 
- </p>
+<p>Prefix based factory should be used with <code class="highlighter-rouge">org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper</code> to use 
+appropriate <code class="highlighter-rouge">com.opensymphony.xwork2.ActionProxyFactory</code> connected with given <code class="highlighter-rouge">org.apache.struts2.dispatcher.mapper.ActionMapper</code>.</p>
 
+<p>Add below entry to <code class="highlighter-rouge">struts.xml</code> to enable the factory:</p>
 
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.actionProxyFactory"</span> <span class="na">value=</span><span class="s">"prefix"</span><span class="nt">/&gt;</span>
+</code></pre>
+</div>
 
- <pre>
+<p>The factory will use the same set of patterns as defined with:</p>
 
- <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper" />
-
- <constant name="struts.mapper.prefixMapping" value="/communities:pseudoRestful,/communityTags:pseudoRestful,/events:pseudoRestful,/mediaList:pseudoRestful,/users:pseudoRestful,/community:struts,/communityTag:struts,/event:struts,/media:struts,/user:struts,:struts" />
-
- </pre>
-
-
-
- <p>
-
- When {@link PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)} or
-
- {@link PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)} is invoked,
-
- {@link PrefixBasedActionMapper} will check each possible prefix (url prefix terminating just before a /) to find the most specific ActionMapper that returns a mapping when asked to map the request.  If none are found, null is returned for both
-
- {@link PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)} and
-
- {@link PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)} methods.
-
- </p>
-
-
-
-</p>
-
-<p><strong>PrefixBasedActionProxyFactory</strong></p>
-
-<p> <p>
- Prefix based factory should be used with {@link org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper}
- to use appropriate {@link com.opensymphony.xwork2.ActionProxyFactory} connected with given
- {@link org.apache.struts2.dispatcher.mapper.ActionMapper}
- </p>
-
- <p>
- Add below entry to struts.xml to enable the factory:
- </p>
-
- <pre>
- <constant name="struts.actionProxyFactory" value="prefix" />
- </pre>
-
- <p>
- The factory will use the same set of patterns as defined with:
- </p>
-
- <pre>
- <constant name="struts.mapper.prefixMapping" value="..." />
- </pre>
-</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.prefixMapping"</span> <span class="na">value=</span><span class="s">"..."</span><span class="nt">/&gt;</span>
+</code></pre>
+</div>
 
 <h2 id="actionmapper-and-actionmapping-objects">ActionMapper and ActionMapping objects</h2>
 
