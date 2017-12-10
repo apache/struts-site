@@ -898,23 +898,12 @@ __Examples__
 </p>
 {% comment %}end snippet id=exdescription|javadoc=true|url=org.apache.struts2.components.Radio {% endcomment %}
 
-
-{% comment %}start snippet id=example|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio {% endcomment %}
-
 ```xml
  <s:action name="GenderMap" var="genders"/>
  <s:radio label="Gender" name="male" list="#genders.genders"/>
 
 ```
 
-{% comment %}end snippet id=example|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio {% endcomment %}
-
-
-{% comment %}start snippet id=example_fmt|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio {% endcomment %}
-
-```xml
+```ftl
  <@s.radio name="car" list={"ford": "Ford Motor Co", "toyota": "Toyota"} listKey="key" listValue="value" />
-
 ```
-
-{% comment %}end snippet id=example_fmt|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio {% endcomment %}

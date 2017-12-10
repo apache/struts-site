@@ -25,18 +25,18 @@ Getting started with Velocity is as simple as ensuring all the dependencies are 
 **struts.xml**
 
 
-~~~~~~~
+```xml
 
 <action name="test" class="com.acme.TestAction">
     <result name="success" type="velocity">test-success.vm</result>
 </action>
 
-~~~~~~~
+```
 
 **test-success.vm**
 
 
-~~~~~~~
+```html
 
 <html>
 <head>
@@ -49,7 +49,7 @@ Hello, ${name}
 </body>
 </html>
 
-~~~~~~~
+```
 
 Where `name` is a property on the Action class. That's it!
 

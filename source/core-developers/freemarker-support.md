@@ -12,7 +12,7 @@ __Configure your action to use the freemarker result type__
 The `freemarker` result type is defined in `struts-default.xml`, so normally you just include it, and define your resuts to use `type="freemarker"`\.
 
 
-~~~~~~~
+```xml
 <include file="struts-default.xml"/>
 ...
 <action name="test" class="package.Test">
@@ -20,7 +20,7 @@ The `freemarker` result type is defined in `struts-default.xml`, so normally you
 </action>
 ...
 
-~~~~~~~
+```
 
 __Property Resoloution__
 
@@ -80,7 +80,7 @@ Freemarker has builtin support for using any JSP taglib\. You can use JSP taglib
  b) you didn't specify the taglib in your web\.xml \- note how in the example below we refer to the taglib by its webapp\-absolute URL, so no configuration in web\.xml is needed\.
 
 
-~~~~~~~
+```ftl
 <#assign s=JspTaglibs["/WEB-INF/struts.tld"] />
 
 <@s.form method="'post'" name="'inputform'" action="'save.action'" >
@@ -89,7 +89,7 @@ Freemarker has builtin support for using any JSP taglib\. You can use JSP taglib
     <@s.submit value="'Save'" align="center" />
 </@s.form>
 
-~~~~~~~
+```
 
 NOTE : numeric properties for tags MUST be numbers, not strings\. as in the rows and cols properties above\. if you use cols="40" you will receive an exception\. Other than that, the freemarker tag container behaves as you would expect\.
 
@@ -98,40 +98,37 @@ __Dynamic attributes support__
 You can specify dynamic attributes with Struts 2 tags like this:
 
 
-~~~~~~~
+```ftl
 <@s.textfield name="test" dynamicAttributes={"placeholder":"input","foo":"bar"}/>
-
-~~~~~~~
+```
 
 or like this:
 
 
-~~~~~~~
+```ftl
 <@s.textfield name="test" placeholder="input" foo="bar"/>
-
-~~~~~~~
+```
 
 and for both case, it will be parsed into:
 
 
-~~~~~~~
+```html
 <input type="text" name="test" value="" id="test" placeholder="input" foo="bar"/>
 
-~~~~~~~
+```
 
 You can also use OGNL expressions with dynamic tags like below:
 
 
-~~~~~~~
+```ftl
 <@s.textfield name="test" placeholder="input" foo="checked: %{bar}"/>
-
-~~~~~~~
+```
 
 When using attributes with hyphens, use the below syntax (you can also leave the single quotes from false if you want)
 
 
-~~~~~~~
+```ftl
 <@s.form dynamicAttributes={'data-ajax':'false'}>
   ...
 </@s.form>
-~~~~~~~
+```

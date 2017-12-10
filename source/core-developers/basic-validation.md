@@ -134,13 +134,13 @@ Create the validators\. The `validation.xml` format is either `<ActionClassName>
 Make sure there is a result for "input" listed in the struts\.xml for when the validation fails:
 
 
-~~~~~~~
+```xml
 <action name="HelloWorld" class="tutorial.HelloWorld">
 <result name="success">/tutorial/createconfirm.jsp</result>
 <result name="error">/tutorial/error.jsp</result>
 <result name="input">/tutorial/create.jsp</result>
 </action>
 
-~~~~~~~
+```
 
 If you don't have this, you'll get a: "No result defined for action xxx\.xxx\.tutorial\.HellowWorld and result input" error

@@ -1579,7 +1579,7 @@ There's a bug in  IE6/IE7 which makes impossible to use the target's attribute w
 One possible alternative is to set _showLoadingText="false"_  and set the indicator attribute to an element showing the desired loading text or image (outside the div).
 
 
-~~~~~~~
+```jsp
 
 <img id="loadingImage" src="images/loadingAnimation.gif" style="display:none"/>
 <s:div id="parentDiv">
@@ -1589,7 +1589,7 @@ One possible alternative is to set _showLoadingText="false"_  and set the indica
     </s:form>
 </s:div>
 
-~~~~~~~
+```
 
 __Parameters__
 
@@ -5602,9 +5602,7 @@ __Examples__
 
 
 
-{% comment %}start snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.GenericUIBean {% endcomment %}
-
-```xml
+```ftl
  <p>
  JSP
  </p>
@@ -5648,8 +5646,6 @@ __Examples__
  </pre>
 
 ```
-
-{% comment %}end snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.GenericUIBean {% endcomment %}
 
 #####datetextfield##### {#PAGE_40506485}
 
@@ -22097,9 +22093,8 @@ __Examples__
 
 {% comment %}start snippet id=example_fmt|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio {% endcomment %}
 
-```xml
+```ftl
  <@s.radio name="car" list={"ford": "Ford Motor Co", "toyota": "Toyota"} listKey="key" listValue="value" />
-
 ```
 
 {% comment %}end snippet id=example_fmt|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio {% endcomment %}
@@ -31539,7 +31534,7 @@ There's a bug in  IE6/IE7 which makes impossible to use the target's attribute w
 One possible alternative is to set _showLoadingText="false"_  and set the indicator attribute to an element showing the desired loading text or image (outside the div).
 
 
-~~~~~~~
+```jsp
 
 <img id="loadingImage" src="images/loadingAnimation.gif" style="display:none"/>
 <s:div id="parentDiv">
@@ -31548,7 +31543,7 @@ One possible alternative is to set _showLoadingText="false"_  and set the indica
     </s:form>
 </s:div>
 
-~~~~~~~
+```
 
 __Parameters__
 
@@ -32767,7 +32762,7 @@ There's a bug in  IE6/IE7 which makes impossible to use the target's attribute w
 One possible alternative is to set _showLoadingText="false"_ (the default) and set the indicator attribute to an element showing the desired loading text or image (outside the div).
 
 
-~~~~~~~
+```jsp
 
 <img id="loadingImage" src="images/loadingAnimation.gif" style="display:none"/>
 <s:div id="parentDiv">
@@ -32776,7 +32771,7 @@ One possible alternative is to set _showLoadingText="false"_ (the default) and s
     </s:form>
 </s:div>
 
-~~~~~~~
+```
 
 __Parameters__
 

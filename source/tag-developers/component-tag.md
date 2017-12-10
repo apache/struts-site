@@ -807,7 +807,7 @@ __Examples__
 
 {% comment %}start snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.GenericUIBean {% endcomment %}
 
-```xml
+```ftl
  <p>
  JSP
  </p>

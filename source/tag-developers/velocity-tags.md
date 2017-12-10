@@ -12,14 +12,14 @@ For example, in JSP you might create a form using Struts tags.
 **JSP Form**
 
 
-~~~~~~~
+```jsp
 
 <s:form action="updatePerson">
     <s:textfield label="First name" name="firstName"/>
     <s:submit value="Update"/>
 </s:form>
 
-~~~~~~~
+```
 
 In Velocity, the same form can also be built using macros.
 

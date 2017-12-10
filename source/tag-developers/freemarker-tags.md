@@ -12,7 +12,7 @@ title: Tag Developers Guide
 FreeMarker tags are extensions of the generic [Struts Tags](struts-tags.html) provided by the framework. You can jump 
 right in just by knowing the generic structure in which the tags can be accessed: 
 
-```html
+```ftl
 <@s.tag> ...</@s.tag>
 ```
 
@@ -33,7 +33,7 @@ In FreeMarker the same form can also be built using Struts tags.
 
 **FTL Form**
 
-```html
+```ftl
 <@s.form action="updatePerson">
     <@s.textfield label="First name" name="firstName"/>
     <@s.submit value="Update"/>
@@ -66,7 +66,7 @@ In FreeMarker, we can pass the arbitrary parameter directly and create the URL i
 
 **Creating a URL with a query string (FTL)**
 
-```html
+```ftl
 <@s.url value="somePage" personId="%{personId}"/>
 ```
 
@@ -78,7 +78,7 @@ attribute into the textfield tag, no fuss, no muss.
 
 **Passing an attribute to the template**
 
-```html
+```ftl
 <@s.form action="updatePerson">
     <@s.textfield label="First name" name="firstName" description="..."/>
     <@s.submit value="Update"/>
@@ -97,7 +97,7 @@ Remember that all tag attributes must first be set as Strings - they are then la
 to a different type, such as List, int, or boolean. This generally works just fine, but it can be limiting when using 
 FreeMarker which provides more advanced ways to apply attributes. Suppose the following example:
 
-```html
+```ftl
 <@s.select label="Foo label - %{foo}" name="%{name}" list="%{{1, 2, 3}}"/>
 ```
 
@@ -108,7 +108,7 @@ advanced collection support.
 
 But suppose you wish to use FreeMarker's list or hash support instead? You can do this:
 
-```html
+```ftl
 <@s.select label="Foo label - %{foo}" name="%{name}" list=[1, 2, 3]/>
 ```
 
@@ -140,7 +140,7 @@ to emulate a JSP taglib container.
 
 Once you've done that, you can simply add something like this in your templates:
 
-```html
+```ftl
 <#assign cewolf=JspTaglibs["/WEB-INF/cewolf.tld"] />
 ...
 <@cewold.xxx ... />

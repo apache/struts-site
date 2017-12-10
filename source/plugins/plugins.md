@@ -40,7 +40,7 @@ Since the `struts.xml` file is always loaded last, it can make use of any resour
 
 To include static resources in your plugins add them under "/static" in your jar. And include them in your page using "/struts" as the path, like in the following example:
 
-```xml
+```ftl
 <!-- Assuming /static/main.css is inside a plugin jar, to add it to the page: -->
 
 <@s.url value="/struts/main.css" var="css" />

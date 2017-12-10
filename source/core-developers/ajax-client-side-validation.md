@@ -33,7 +33,7 @@ __Create the action class__
 
 
 
-~~~~~~~
+```java
 public class AjaxFormSubmitAction extends ActionSupport {
     private String requiredValidatorField = null;
     private String requiredStringValidatorField = null;
@@ -126,7 +126,7 @@ public class AjaxFormSubmitAction extends ActionSupport {
         this.urlValidatorField = urlValidatorField;
     }
 }
-~~~~~~~
+```
 
  
 
@@ -135,7 +135,7 @@ __Map the Action__
 Note that is is not necessary when using _Convention Plugin_ \.
 
 
-~~~~~~~
+```xml
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
 	
 <struts>
@@ -147,7 +147,7 @@ Note that is is not necessary when using _Convention Plugin_ \.
          </action>
     </package>
 
-~~~~~~~
+```
 
 AJAX validation is performed by the _jsonValidation_  interceptor\. This interceptor is included in the _jsonValidationWorkflowStack_ , and is required in order to perform AJAX validation\. Normal results(input, success, etc) should be provided for the action in the case that someone tries to access the action directly, in which case normal validation will be triggered\. So, how does the _jsonValidation_  know that it must perform AJAX validation vs regular validation? We will see that in a minute, but you don't need to know that in order to use AJAX validation\. Same applies for specialized Redirect Result Type _jsonActionRedirect_ \.
 
@@ -155,7 +155,7 @@ __Create the JSP__
 
 
 
-~~~~~~~
+```jsp
 <%@taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
@@ -183,7 +183,7 @@ __Create the JSP__
     </s:form>
 </body>
 </html> 
-~~~~~~~
+```
 
 Things to note on this JSP:
 
@@ -221,7 +221,7 @@ parent = xhtml
 
 
 
-~~~~~~~
+```ftl
 <#--
     Make sure element is always present. To be filled later via JS.
 -->
@@ -246,7 +246,7 @@ parent = xhtml
     </#list>
 </#if>
 </ul>
-~~~~~~~
+```
 
  
 
@@ -256,7 +256,7 @@ parent = xhtml
 
 
 
-~~~~~~~
+```ftl
 ${parameters.after!}<#t/>
     </td><#lt/>
 </tr>
@@ -274,9 +274,7 @@ ${parameters.after!}<#t/>
 </tr>
 </#if>
 </#if>
-
-
-~~~~~~~
+```
 
  
 
@@ -286,7 +284,7 @@ ${parameters.after!}<#t/>
 
 
 
-~~~~~~~
+```ftl
  <#--
     Always include elements to show errors. They may be filled later via AJAX.
 -->
@@ -345,16 +343,14 @@ ${parameters.labelseparator!":"?html}<#t/>
 </tr>
 <tr>
 </#if>
-
-
-~~~~~~~
+```
 
 __CSS__
 
 To show users some nice visual feedback while waiting for AJAX response you can use a little CSS\. Remember to include the referenced _indicator\.gif_ \.
 
 
-~~~~~~~
+```css
 .ajaxVisualFeedback {
     width: 16px;
     height: 16px;
@@ -362,7 +358,7 @@ To show users some nice visual feedback while waiting for AJAX response you can 
     background-repeat: no-repeat;
     float: right;
 }
-~~~~~~~
+```
 
  
 
@@ -371,7 +367,7 @@ __JavaScript__
 Now this is where the magic happens\. Here _jQuery_  is used to register an eventhandler which intercepts form submits\. It takes care of hiding validation errors that might be present, submit the form via AJAX and handle JSON responses\.
 
 
-~~~~~~~
+```javascript
  /**
   * Validates form per AJAX. To be called as onSubmit handler.
   *
@@ -475,7 +471,7 @@ function _handleValidationResult(form, errors) {
 $(window).bind('load', function() {
     $('form').bind('submit', ajaxFormValidation);
 });
-~~~~~~~
+```
 
  
 
@@ -488,7 +484,7 @@ If you just want to use AJAX validation, without knowing the implementation deta
 When the _jsonValidation_  interceptor is invoked, it will look for a parameter named _struts\.enableJSONValidation_ , this parameter **must** be set to _true_ , otherwise the interceptor won't do anything\. Then the interceptor will look for a parameter named _struts\.validateOnly_ , if this parameter exists, is set to _true_ , and there are validation errors (o action errors) they will be serialized into JSON in the form:
 
 
-~~~~~~~
+```json
 {
     "errors": ["Global Error 1", "Global Error 2"],
     "fieldErrors": {
@@ -497,23 +493,23 @@ When the _jsonValidation_  interceptor is invoked, it will look for a parameter 
     }
 }
 
-~~~~~~~
+```
 
 If the action implements the _ModelDrive_  interface, "model\." will be stripped from the field names in the returned JSON\. If validation succeeds (and _struts\.validateOnly_  is true), an empty JSON string will be returned:
 
 
-~~~~~~~
+```json
 {}
 
-~~~~~~~
+```
 
 If _struts\.validateOnly_  is false the action and result are executed\. In this case _jsonActionRedirect_  result is very useful\. It creates a JSON response in the form:
 
 
-~~~~~~~
+```json
 {"location": "<url to be loaded next>"}
 
-~~~~~~~
+```
 
 
 > 

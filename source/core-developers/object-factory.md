@@ -27,12 +27,12 @@ To register a customized ObjectFactory, add or edit an entry in `struts.properti
 where foo\.bar\.MyCustomObjectFactory is the custom object factory\.
 
 
-~~~~~~~
+```java
 public class MyObjectFactory extends ObjectFactory {
     .....
 }
 
-~~~~~~~
+```
 
 ### Define dedicated factory
 

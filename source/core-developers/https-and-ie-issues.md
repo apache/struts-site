@@ -8,7 +8,7 @@ title: HTTPS and IE Issues
  When trying to stream PDF's, TIFF's, and various other types of content over HTTPS to certain versions of Internet Explorer you may trigger a creative (broken) interpretation of the HTTP spec\. The following interceptor should be applied to your actions to set the HTTP headers cache settings to private\. This should avoid the issue\. (You should \*only\* do this if you are running over HTTPS\!)
 
 
-~~~~~~~
+```java
 
 package org.tuxbot.ww.interceptor;
 
@@ -34,4 +34,4 @@ public class HTTPRequestCachePrivateInterceptor extends AroundInterceptor {
     }
 }
 
-~~~~~~~
+```

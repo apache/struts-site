@@ -18,7 +18,7 @@ To use `ModelDriven` actions, make sure that the [Model Driven Interceptor](mode
 Action class:
 
 
-~~~~~~~
+```java
 public class ModelDrivenAction implements ModelDriven { 
     public String execute() throws Exception {
         return SUCCESS;
@@ -29,12 +29,12 @@ public class ModelDrivenAction implements ModelDriven {
     }
 }
 
-~~~~~~~
+```
 
 Gangster class (model):
 
 
-~~~~~~~
+```java
 public class Gangster implements Serializable {
     private String name;
     private int age;
@@ -67,12 +67,12 @@ public class Gangster implements Serializable {
     }
 }
 
-~~~~~~~
+```
 
 JSP for creating a Gangster:
 
 
-~~~~~~~
+```jsp
 <s:form action="modelDrivenResult" method="POST" namespace="/modelDriven">   
     <s:textfield label="Gangster Name" name="name" />
     <s:textfield label="Gangster Age"  name="age" />
@@ -81,4 +81,4 @@ JSP for creating a Gangster:
     <s:submit />
 </s:form>
 
-~~~~~~~
+```

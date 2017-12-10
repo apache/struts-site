@@ -16,7 +16,7 @@ title: Tag Developers Guide
 Lastly add the CeWolf servlet to web.xml:
 
 
-~~~~~~~
+```xml
 
 <servlet>
     <servlet-name>CewolfServlet</servlet-name>
@@ -28,14 +28,14 @@ Lastly add the CeWolf servlet to web.xml:
     <url-pattern>/cewolf/*</url-pattern>
 </servlet-mapping>
 
-~~~~~~~
+```
 
 ## Create a DatasetProducer
 
 This is the default DatasetProducer from the CeWolf tutorial.
 
 
-~~~~~~~
+```java
 
 import java.io.Serializable;
 import java.util.Date;
@@ -76,14 +76,14 @@ public class PageViewCountData implements DatasetProducer, Serializable {
 	}
 }
 
-~~~~~~~
+```
 
 ## Create the Velocity template
 
 With the new WebWork refactorings, nested JSP tags with arbitrary parameters can be used, so we convert the CeWolf tutorial JSP script to Velocity.
 
 
-~~~~~~~
+```jsp
 
 <jsp:useBean id="pageViews" class="de.laures.cewolf.example.PageViewCountData"/>
 <cewolf:chart 
@@ -99,7 +99,7 @@ With the new WebWork refactorings, nested JSP tags with arbitrary parameters can
 
 <cewolf:img chartid="line" renderer="cewolf" width="400" height="300"/>
 
-~~~~~~~
+```
 
 In Velocity it looks like this:
 
