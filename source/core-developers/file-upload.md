@@ -88,7 +88,7 @@ The fileUpload interceptor will use setter injection to insert the uploaded file
 **Example Action class:**
 
 
-~~~~~~~
+```java
 package com.example;
 
    import java.io.File;
@@ -117,7 +117,7 @@ package com.example;
       }
  }
 
-~~~~~~~
+```
 
 The purpose of each one of these methods is described in the table below\. Notice that if you have multiple file form elements with different names you would be required to have another corresponding set of these methods for each file uploaded\.
 
@@ -153,7 +153,7 @@ __Uploading Multiple Files using Arrays__
 **
 
 
-~~~~~~~
+```java
 public class MultipleFileUploadUsingArrayAction extends ActionSupport {
 	private File[] uploads;
 	private String[] uploadFileNames;
@@ -195,7 +195,7 @@ public class MultipleFileUploadUsingArrayAction extends ActionSupport {
 		this.uploadContentTypes = uploadContentType;
 	}
 }
-~~~~~~~
+```
 
  
 
@@ -216,7 +216,7 @@ __Uploading Multiple Files using Lists__
 **MultipleFileUploadUsingListAction\.java**
 
 
-~~~~~~~
+```java
 public class MultipleFileUploadUsingListAction extends ActionSupport {
 	private List<File> uploads = new ArrayList<File>();
 	private List<String> uploadFileNames = new ArrayList<String>();
@@ -258,7 +258,7 @@ public class MultipleFileUploadUsingListAction extends ActionSupport {
 		return SUCCESS;
 	}
 }
-~~~~~~~
+```
 
 ## Advanced Configuration
 

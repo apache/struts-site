@@ -65,26 +65,26 @@ The [ParentPackage Annotation](#PAGE_68490) configures the XWork package (an XWo
 For example, if you wanted to set the parent package for the `com.mycompany.myapp.actions` package, create this package\-info\.java file:
 
 
-~~~~~~~
+```java
 
 @ParentPackage("my-parent-package")
 package com.mycompany.myapp.actions
 
 import org.apache.struts2.config.ParentPackage;
 
-~~~~~~~
+```
 
 To define multiple parent packages, list an array of package names:
 
 
-~~~~~~~
+```java
 
 @ParentPackage({"my-parent-package1, my-parent-package2"})
 package com.mycompany.myapp.actions
 
 import org.apache.struts2.config.ParentPackage;
 
-~~~~~~~
+```
 
 ## Feedback
 

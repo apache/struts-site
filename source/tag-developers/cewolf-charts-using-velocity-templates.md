@@ -35,7 +35,7 @@ Lastly add the CeWolf servlet to web.xml:
 This is the default DatasetProducer from the CeWolf tutorial.
 
 
-~~~~~~~
+```java
 
 import java.io.Serializable;
 import java.util.Date;
@@ -76,7 +76,7 @@ public class PageViewCountData implements DatasetProducer, Serializable {
 	}
 }
 
-~~~~~~~
+```
 
 ## Create the Velocity template
 

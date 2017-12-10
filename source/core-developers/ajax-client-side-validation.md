@@ -33,7 +33,7 @@ __Create the action class__
 
 
 
-~~~~~~~
+```java
 public class AjaxFormSubmitAction extends ActionSupport {
     private String requiredValidatorField = null;
     private String requiredStringValidatorField = null;
@@ -126,7 +126,7 @@ public class AjaxFormSubmitAction extends ActionSupport {
         this.urlValidatorField = urlValidatorField;
     }
 }
-~~~~~~~
+```
 
  
 

@@ -11,7 +11,7 @@ The ConfigurationProvider interface describes the framework's configuration\. By
 
 
 
-~~~~~~~
+```java
  static {
    Dispatcher.addDispatcherListener(new DispatcherListener() {
      ....
@@ -23,7 +23,7 @@ The ConfigurationProvider interface describes the framework's configuration\. By
    });
  }
 
-~~~~~~~
+```
 
 ## Configuration provider
 

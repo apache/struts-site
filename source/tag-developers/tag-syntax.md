@@ -162,7 +162,7 @@ The below code will not work:
 ```
 
 
-~~~~~~~
+```java
 
 public class MyAction {
 
@@ -174,4 +174,4 @@ public class MyAction {
 
 }
 
-~~~~~~~
+```
