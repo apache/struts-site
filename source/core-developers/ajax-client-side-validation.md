@@ -488,7 +488,7 @@ If you just want to use AJAX validation, without knowing the implementation deta
 When the _jsonValidation_  interceptor is invoked, it will look for a parameter named _struts\.enableJSONValidation_ , this parameter **must** be set to _true_ , otherwise the interceptor won't do anything\. Then the interceptor will look for a parameter named _struts\.validateOnly_ , if this parameter exists, is set to _true_ , and there are validation errors (o action errors) they will be serialized into JSON in the form:
 
 
-~~~~~~~
+```json
 {
     "errors": ["Global Error 1", "Global Error 2"],
     "fieldErrors": {
@@ -497,23 +497,23 @@ When the _jsonValidation_  interceptor is invoked, it will look for a parameter 
     }
 }
 
-~~~~~~~
+```
 
 If the action implements the _ModelDrive_  interface, "model\." will be stripped from the field names in the returned JSON\. If validation succeeds (and _struts\.validateOnly_  is true), an empty JSON string will be returned:
 
 
-~~~~~~~
+```json
 {}
 
-~~~~~~~
+```
 
 If _struts\.validateOnly_  is false the action and result are executed\. In this case _jsonActionRedirect_  result is very useful\. It creates a JSON response in the form:
 
 
-~~~~~~~
+```json
 {"location": "<url to be loaded next>"}
 
-~~~~~~~
+```
 
 
 > 
