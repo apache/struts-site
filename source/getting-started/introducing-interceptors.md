@@ -56,7 +56,7 @@ and what are all the interceptors included with Struts 2, visit [Understanding I
 Sometime the Struts 2 default stack of interceptors are not exactly what you need for a particular action. You may want 
 to use interceptors that are not part of the Struts 2 default stack. For an individual Action or for the entire 
 package of Actions, you can specify a different stack of interceptors that the Action or package should use. Below is 
-how you would specify that the register Action should use both the [logging](../core-developers/logging-interceptor.html) 
+how you would specify that the register Action should use both the [logger](../core-developers/logging-interceptor.html) 
 and [timer](../core-developers/timer-interceptor.html) interceptors in addition to the interceptors provided by the default stack.
 
 **Specify Specific Interceptors For An Action**
@@ -64,7 +64,7 @@ and [timer](../core-developers/timer-interceptor.html) interceptors in addition 
 ```xml
 <action name="register" class="org.apache.struts.register.action.Register" method="execute">
     <interceptor-ref name="timer" />
-    <interceptor-ref name="logging" />
+    <interceptor-ref name="logger" />
     <interceptor-ref name="defaultStack">
         <param name="exception.logEnabled">true</param>
         <param name="exception.logLevel">ERROR</param>
@@ -79,7 +79,7 @@ of time (in milliseconds) for execution of the Action. These two interceptors us
 useful feedback.
 
 In the code example above note the three interceptor-ref nodes. Each one has a value for the name attribute. For the register 
-Action we are instructing the framework to use the `timer`, `logging`, and `defaultStack` interceptors. The `defaultStack` 
+Action we are instructing the framework to use the `timer`, `logger`, and `defaultStack` interceptors. The `defaultStack` 
 are all the interceptors normally executed for an Action.
 
 How did I know to use the value of timer for the name attribute and even that there is a timer interceptor? 
@@ -118,7 +118,7 @@ the following in `struts.xml`:
     <interceptors> 
         <interceptor-stack name="appDefault"> 
             <interceptor-ref name="timer" /> 
-            <interceptor-ref name="logging" /> 
+            <interceptor-ref name="logger" /> 
             <interceptor-ref name="defaultStack" /> 
         </interceptor-stack> 
     </interceptors>          
@@ -130,15 +130,15 @@ the following in `struts.xml`:
 </package> 
 ```
 
-In the code above we use the interceptors node to define a new stack of interceptors that includes the `timer`, `logging`, 
+In the code above we use the interceptors node to define a new stack of interceptors that includes the `timer`, `logger`, 
 and `defaultStack` interceptors. We give this new interceptor stack a name of appDefault. Then we use the `default-interceptor-ref` 
 node to specify that for all Actions defined inside this package node the `appDefault` stack of interceptors are to be used. 
-Thus the `timer` and `logging` interceptor will be executed for each Action in this package.
+Thus the `timer` and `logger` interceptor will be executed for each Action in this package.
 
 Note that in both examples we are still executing all the other interceptors by including the defaultStack as one 
 of the `interceptor-ref` nodes. When you specify what interceptors you want to use for an Action or a package then only 
 those interceptors are executed. So if in the example we had left out the `interceptor-ref` for `defaultStack` only 
-the `logging` and `timer` interceptors would have executed.
+the `logger` and `timer` interceptors would have executed.
 
 ## Create Your Own Interceptor
 
