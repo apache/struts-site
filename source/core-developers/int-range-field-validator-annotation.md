@@ -1,31 +1,22 @@
 ---
-layout: core-developers
+layout: default
 title: IntRangeFieldValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # IntRangeFieldValidator Annotation
 
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator {% endcomment %}
-<p> This validator checks that a numeric field has a value within a specified range.
- If neither min nor max is set, nothing will be done.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator {% endcomment %}
+This validator checks that a numeric field has a value within a specified range. If neither `min` nor `max` is set, 
+nothing will be done.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator {% endcomment %}
-<p> <p>The annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator {% endcomment %}
+The annotation must be applied at method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -100,24 +91,14 @@ title: IntRangeFieldValidator Annotation
  <td class='confluenceTd'>Enable parsing of min/max value.</td>
  </tr>
  </table>
-
- <p>If neither <em>min</em> nor <em>max</em> is set, nothing will be done.</p>
-
- <p>The values for min and max must be inserted as String values so that "0" can be handled as a possible value.</p>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator {% endcomment %}
+
+If neither `min` nor `max` is set, nothing will be done.
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator {% endcomment %}
 
 ```java
  @IntRangeFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, min = "0", max = "42")
 
  @IntRangeFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, minExpression = "${minValue}", maxExpression = "${maxValue}")
-
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator {% endcomment %}

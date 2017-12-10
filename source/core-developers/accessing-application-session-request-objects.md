@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: layout
 title: Accessing application, session, request objects
+parent:
+    title: Core Developers Guide
+    url: index.html
 ---
 
 # Accessing application, session, request objects

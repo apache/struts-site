@@ -1,31 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: Key Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # Key Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.Key {% endcomment %}
-<p> <p>Sets the Key for type conversion.</p>
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.Key {% endcomment %}
+Sets the Key for type conversion.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.Key {% endcomment %}
-<p> <p>The Key annotation must be applied at field or method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.Key {% endcomment %}
+The `Key` annotation must be applied at field or method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.Key {% endcomment %}
 <p> <table summary="">
  <thead>
  <tr>
@@ -45,19 +35,11 @@ title: Key Annotation
  </tbody>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.Key {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.util.Key {% endcomment %}
 
 ```java
  // The key property for User objects within the users collection is the <code>userName</code> attribute.
  @Key( value = java.lang.Long.class )
  private Map<Long, User> userMap;
-
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.util.Key {% endcomment %}

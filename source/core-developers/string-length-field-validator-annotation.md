@@ -1,32 +1,22 @@
 ---
-layout: core-developers
+layout: default
 title: StringLengthFieldValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # StringLengthFieldValidator Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator {% endcomment %}
-<p> This validator checks that a String field is of the right length. It assumes that the field is a String.
- If neither minLength nor maxLength is set, nothing will be done.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator {% endcomment %}
+This validator checks that a String field is of the right length. It assumes that the field is a String.
+If neither `minLength` nor `maxLength` is set, nothing will be done.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator {% endcomment %}
-<p> <p>The annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator {% endcomment %}
+The annotation must be applied at method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -101,21 +91,12 @@ title: StringLengthFieldValidator Annotation
  <td class='confluenceTd'>OGNL expression used to obtain the maximum length the String can be. </td>
  </tr>
  </table>
-
- <p>If neither <em>minLength</em> nor <em>maxLength</em> is set, nothing will be done.</p>
-
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator {% endcomment %}
+
+If neither `minLength` nor `maxLength` is set, nothing will be done.
 
 ## Examples
 
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator {% endcomment %}
-
 ```java
  @StringLengthFieldValidator(message = "Default message", key = "i18n.key", shortCircuit = true, trim = true, minLength = "5",  maxLength = "12")
-
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator {% endcomment %}

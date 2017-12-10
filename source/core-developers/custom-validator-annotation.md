@@ -1,31 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: CustomValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # CustomValidator Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
-<p> This annotation can be used for custom validators. Use the ValidationParameter annotation to supply additional params.
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
+This annotation can be used for custom validators. Use the `ValidationParameter` annotation to supply additional params.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
-<p> <p>The annotation must be applied at method or type level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
+The annotation must be applied at method or type level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -71,20 +61,12 @@ title: CustomValidator Annotation
  </tr>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
 
 ## Examples
 
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
-
 ```java
  @CustomValidator(type ="customValidatorName", fieldName = "myField")
-
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.CustomValidator {% endcomment %}
 
 ## Adding Parameters
 

@@ -1,31 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: RequiredStringValidator Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # RequiredStringValidator Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator {% endcomment %}
-<p> This validator checks that a String field is not empty (i.e. non-null with a length > 0).
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator {% endcomment %}
+This validator checks that a String field is not empty (i.e. non-null with a length > 0).
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator {% endcomment %}
-<p> <p>The annotation must be applied at method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator {% endcomment %}
+The annotation must be applied at method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator {% endcomment %}
 <p> <table class='confluenceTable' summary=''>
  <tr>
  <th class='confluenceTh'> Parameter </th>
@@ -77,17 +67,10 @@ title: RequiredStringValidator Annotation
  </tr>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator {% endcomment %}
 
 ```java
  @RequiredStringValidator(message = "Default message", key = "i18n.key", shortCircuit = true, trim = true)
 
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.validator.annotations.RequiredStringValidator {% endcomment %}

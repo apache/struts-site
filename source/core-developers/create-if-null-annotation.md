@@ -1,31 +1,21 @@
 ---
-layout: core-developers
+layout: default
 title: CreateIfNull Annotation
+parent:
+    title: Annotations
+    url: annotations.html
 ---
 
 # CreateIfNull Annotation
 
-
-
-{% comment %}start snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull {% endcomment %}
-<p> <p>Sets the CreateIfNull for type conversion.</p>
-</p>
-{% comment %}end snippet id=description|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull {% endcomment %}
+Sets the `CreateIfNull` for type conversion.
 
 ## Usage
 
-
-
-{% comment %}start snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull {% endcomment %}
-<p> <p>The CreateIfNull annotation must be applied at field or method level.</p>
-</p>
-{% comment %}end snippet id=usage|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull {% endcomment %}
+The `CreateIfNull` annotation must be applied at field or method level.
 
 ## Parameters
 
-
-
-{% comment %}start snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull {% endcomment %}
 <p> <table summary="">
  <thead>
  <tr>
@@ -45,18 +35,11 @@ title: CreateIfNull Annotation
  </tbody>
  </table>
 </p>
-{% comment %}end snippet id=parameters|javadoc=true|url=com.opensymphony.xwork2.util.CreateIfNull {% endcomment %}
 
 ## Examples
-
-
-
-{% comment %}start snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.util.CreateIfNull {% endcomment %}
 
 ```java
  @CreateIfNull( value = true )
  private List<User> users;
 
 ```
-
-{% comment %}end snippet id=example|javadoc=true|lang=java|url=com.opensymphony.xwork2.util.CreateIfNull {% endcomment %}
