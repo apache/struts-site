@@ -359,7 +359,7 @@ In many of the tags (except for the form tag) there is a unique relationship bet
 Likewise, a form control could be populated by calling a JavaBean accessor, like `getPostalCode`. In the expression language, we can refer to the JavaBean property by name. An expression like "%{postalCode}" would in turn call `getPostalCode`.
 
 
-```xml
+```ftl
 <@s.form action="updateAddress">
     <@s.textfield label="Postal Code" name="postalCode" value="%{postalCode}"/>
     ...
@@ -370,7 +370,7 @@ Likewise, a form control could be populated by calling a JavaBean accessor, like
 However, since the tags imply a relationship between the `name` and `value`, the `value` attribute is optional. If a `value` is not specified, by default, the JavaBean accessor is used instead.
 
 
-```xml
+```ftl
 <@s.form action="updateAddress">
     <@s.textfield label="Postal Code" name="postalCode"/>
     ...

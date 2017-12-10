@@ -221,7 +221,7 @@ parent = xhtml
 
 
 
-```xml
+```ftl
 <#--
     Make sure element is always present. To be filled later via JS.
 -->
@@ -256,7 +256,7 @@ parent = xhtml
 
 
 
-~~~~~~~
+```ftl
 ${parameters.after!}<#t/>
     </td><#lt/>
 </tr>
@@ -274,9 +274,7 @@ ${parameters.after!}<#t/>
 </tr>
 </#if>
 </#if>
-
-
-~~~~~~~
+```
 
  
 
@@ -286,7 +284,7 @@ ${parameters.after!}<#t/>
 
 
 
-~~~~~~~
+```ftl
  <#--
     Always include elements to show errors. They may be filled later via AJAX.
 -->
@@ -345,16 +343,14 @@ ${parameters.labelseparator!":"?html}<#t/>
 </tr>
 <tr>
 </#if>
-
-
-~~~~~~~
+```
 
 __CSS__
 
 To show users some nice visual feedback while waiting for AJAX response you can use a little CSS\. Remember to include the referenced _indicator\.gif_ \.
 
 
-~~~~~~~
+```css
 .ajaxVisualFeedback {
     width: 16px;
     height: 16px;
@@ -362,7 +358,7 @@ To show users some nice visual feedback while waiting for AJAX response you can 
     background-repeat: no-repeat;
     float: right;
 }
-~~~~~~~
+```
 
  
 
@@ -371,7 +367,7 @@ __JavaScript__
 Now this is where the magic happens\. Here _jQuery_  is used to register an eventhandler which intercepts form submits\. It takes care of hiding validation errors that might be present, submit the form via AJAX and handle JSON responses\.
 
 
-~~~~~~~
+```javascript
  /**
   * Validates form per AJAX. To be called as onSubmit handler.
   *
@@ -475,7 +471,7 @@ function _handleValidationResult(form, errors) {
 $(window).bind('load', function() {
     $('form').bind('submit', ajaxFormValidation);
 });
-~~~~~~~
+```
 
  
 

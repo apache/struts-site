@@ -77,7 +77,6 @@ public class JdkLoggerFactory extends LoggerFactory {
 **JdkLogger is a wrapper around java.util.logging.Logger and implements Logger interface**
 
 ```java
-~~~~~~~
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerUtils;
 

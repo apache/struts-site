@@ -80,7 +80,7 @@ Freemarker has builtin support for using any JSP taglib\. You can use JSP taglib
  b) you didn't specify the taglib in your web\.xml \- note how in the example below we refer to the taglib by its webapp\-absolute URL, so no configuration in web\.xml is needed\.
 
 
-```xml
+```ftl
 <#assign s=JspTaglibs["/WEB-INF/struts.tld"] />
 
 <@s.form method="'post'" name="'inputform'" action="'save.action'" >
@@ -98,17 +98,15 @@ __Dynamic attributes support__
 You can specify dynamic attributes with Struts 2 tags like this:
 
 
-```xml
+```ftl
 <@s.textfield name="test" dynamicAttributes={"placeholder":"input","foo":"bar"}/>
-
 ```
 
 or like this:
 
 
-```xml
+```ftl
 <@s.textfield name="test" placeholder="input" foo="bar"/>
-
 ```
 
 and for both case, it will be parsed into:
@@ -122,15 +120,14 @@ and for both case, it will be parsed into:
 You can also use OGNL expressions with dynamic tags like below:
 
 
-```xml
+```ftl
 <@s.textfield name="test" placeholder="input" foo="checked: %{bar}"/>
-
 ```
 
 When using attributes with hyphens, use the below syntax (you can also leave the single quotes from false if you want)
 
 
-```xml
+```ftl
 <@s.form dynamicAttributes={'data-ajax':'false'}>
   ...
 </@s.form>

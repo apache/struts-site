@@ -5602,9 +5602,7 @@ __Examples__
 
 
 
-{% comment %}start snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.GenericUIBean {% endcomment %}
-
-```xml
+```ftl
  <p>
  JSP
  </p>
@@ -5648,8 +5646,6 @@ __Examples__
  </pre>
 
 ```
-
-{% comment %}end snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.GenericUIBean {% endcomment %}
 
 #####datetextfield##### {#PAGE_40506485}
 
@@ -22097,9 +22093,8 @@ __Examples__
 
 {% comment %}start snippet id=example_fmt|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio {% endcomment %}
 
-```xml
+```ftl
  <@s.radio name="car" list={"ford": "Ford Motor Co", "toyota": "Toyota"} listKey="key" listValue="value" />
-
 ```
 
 {% comment %}end snippet id=example_fmt|javadoc=true|lang=xml|url=org.apache.struts2.components.Radio {% endcomment %}

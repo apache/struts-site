@@ -35,7 +35,7 @@ by adding a header and footer.
 
 ### Wrapping a control
 
-```html
+```ftl
 <#include "/${parameters.templateDir}/${parameters.expandTheme}/controlheader.ftl" />
 <#include "/${parameters.templateDir}/simple/xxx.ftl" />
 <#include "/${parameters.templateDir}/${parameters.expandTheme}/controlfooter.ftl" />

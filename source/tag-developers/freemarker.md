@@ -61,7 +61,7 @@ Request parameters, and framework Context scope parameters.
 
 Assuming there's an attribute with name `myApplicationAttribute` in the Application scope.
 
-```html
+```ftl
 <#if Application.myApplicationAttribute?exists>
      ${Application.myApplicationAttribute}
 </#if>
@@ -69,7 +69,7 @@ Assuming there's an attribute with name `myApplicationAttribute` in the Applicat
 
 or
 
-```html
+```ftl
 <@s.property value="%{#application.myApplicationAttribute}" />
 ```
 
@@ -77,7 +77,7 @@ or
 
 Assuming there's an attribute with name `mySessionAttribute` in the Session scope.
 
-```html
+```ftl
 <#if Session.mySessionAttribute?exists>
      ${Session.mySessionAttribute}
 </#if>
@@ -85,7 +85,7 @@ Assuming there's an attribute with name `mySessionAttribute` in the Session scop
 
 or
 
-```html
+```ftl
 <@s.property value="%{#session.mySessionAttribute}" />
 ```
 
@@ -93,7 +93,7 @@ or
 
 Assuming there's an attribute with name `myRequestAttribute` in the Request scope.
 
-```html
+```ftl
 <#if Request.myRequestAttribute?exists>
       ${Request.myRequestAttribute}
 </#if>
@@ -101,7 +101,7 @@ Assuming there's an attribute with name `myRequestAttribute` in the Request scop
 
 or
 
-```html
+```ftl
 <@s.property value="%{#request.myRequestAttribute}" />
 ```
 
@@ -109,7 +109,7 @@ or
 
 Assuming there's a request parameter `myParameter` (eg. [http://host/myApp/myAction.action?myParameter=one]).
 
-```html
+```ftl
 <#if Parameters.myParameter?exists>
      ${Parameters.myParameter}
 </#if>
@@ -117,7 +117,7 @@ Assuming there's a request parameter `myParameter` (eg. [http://host/myApp/myAct
 
 or
 
-```html
+```ftl
 <@s.property value="%{#parameters.myParameter}" />
 ```
 
@@ -125,14 +125,13 @@ or
 
 Assuming there's a parameter with the name `myContextParam` in framework context.
 
-```html
-~~~~~~~
+```ftl
 ${stack.findValue('#myContextParam')}
 ```
 
 or
 
-```html
+```ftl
 <@s.property value="%{#myContextParam}" />
 ```
 
@@ -168,7 +167,7 @@ Note that the action context is looked up after the value stack. This means that
 the typical preceding hash marker (`#`) like you would have to when using the JSP `s:property` tag. This is a nice 
 convenience, though be careful because there is a small chance it could trip you up.
 
-```html
+```ftl
 <@s.url id="url" value="http://www.yahoo.com"/>
 Click <a href="${url}">here</a>!
 ```
@@ -193,7 +192,7 @@ FreeMarker includes complete tag support. See the [FreeMarker Tags](freemarker-t
 on how to use the generic [Struts Tags](struts-tags.html) provided by Struts. In addition to this, you can use any JSP tag, 
 like so:
 
-```html
+```ftl
 <#assign mytag=JspTaglibs["/WEB-INF/mytag.tld"]>
 <@mytag.tagx attribute1="some ${value}"/>
 ```

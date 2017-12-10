@@ -41,7 +41,7 @@ browsers. The supported browsers are:
 The wrapping technique utilized by the ajax theme is much like [xhtml theme](xhtml-theme.html), but the `controlheader.ftl`
 is a wee bit different.
 
-```injectedfreemarker
+```ftl
 <#if parameters.label?if_exists != "">
 	<#include "/${parameters.templateDir}/xhtml/controlheader.ftl" />
 </#if>
