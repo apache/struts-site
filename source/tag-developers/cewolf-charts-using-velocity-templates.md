@@ -16,7 +16,7 @@ title: Tag Developers Guide
 Lastly add the CeWolf servlet to web.xml:
 
 
-~~~~~~~
+```xml
 
 <servlet>
     <servlet-name>CewolfServlet</servlet-name>
@@ -28,7 +28,7 @@ Lastly add the CeWolf servlet to web.xml:
     <url-pattern>/cewolf/*</url-pattern>
 </servlet-mapping>
 
-~~~~~~~
+```
 
 ## Create a DatasetProducer
 

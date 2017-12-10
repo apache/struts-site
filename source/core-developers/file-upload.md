@@ -22,7 +22,7 @@ If you are using Maven then you can add these libraries as dependencies in your 
 **Struts 2\.0\.x File Upload Dependencies**
 
 
-~~~~~~~
+```xml
 <dependency>
     <groupId>commons-fileupload</groupId>
     <artifactId>commons-fileupload</artifactId>
@@ -34,12 +34,12 @@ If you are using Maven then you can add these libraries as dependencies in your 
     <version>1.0</version>
 </dependency>
 
-~~~~~~~
+```
 
 **Struts 2\.1\.x File Upload Dependencies**
 
 
-~~~~~~~
+```xml
 <dependency>
     <groupId>commons-fileupload</groupId>
     <artifactId>commons-fileupload</artifactId>
@@ -51,7 +51,7 @@ If you are using Maven then you can add these libraries as dependencies in your 
     <version>1.3.2</version>
 </dependency>
 
-~~~~~~~
+```
 
 ## Basic Usage
 

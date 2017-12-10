@@ -114,10 +114,10 @@ or like this:
 and for both case, it will be parsed into:
 
 
-~~~~~~~
+```html
 <input type="text" name="test" value="" id="test" placeholder="input" foo="bar"/>
 
-~~~~~~~
+```
 
 You can also use OGNL expressions with dynamic tags like below:
 

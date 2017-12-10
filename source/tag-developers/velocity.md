@@ -36,7 +36,7 @@ Getting started with Velocity is as simple as ensuring all the dependencies are 
 **test-success.vm**
 
 
-~~~~~~~
+```html
 
 <html>
 <head>
@@ -49,7 +49,7 @@ Hello, ${name}
 </body>
 </html>
 
-~~~~~~~
+```
 
 Where `name` is a property on the Action class. That's it!
 

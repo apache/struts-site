@@ -27,7 +27,7 @@ Set the "actionPackages" filter init param to a comma\-separated list of package
 **Annotation Initialization actionPackages Filter Parameter in web\.xml**
 
 
-~~~~~~~
+```xml
 
 <filter>
   <filter-name>struts2</filter-name>
@@ -38,7 +38,7 @@ Set the "actionPackages" filter init param to a comma\-separated list of package
   </init-param>
 </filter>
 
-~~~~~~~
+```
 
 We should probably add an action annotation, so that POJOs can itall with annotations\.
 

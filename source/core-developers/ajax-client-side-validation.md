@@ -221,7 +221,7 @@ parent = xhtml
 
 
 
-~~~~~~~
+```xml
 <#--
     Make sure element is always present. To be filled later via JS.
 -->
@@ -246,7 +246,7 @@ parent = xhtml
     </#list>
 </#if>
 </ul>
-~~~~~~~
+```
 
  
 
