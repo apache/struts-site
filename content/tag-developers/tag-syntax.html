@@ -133,11 +133,10 @@
 
 <p><strong>Creating a dynamic input field</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<pre><code class="language-jsp">
 &lt;s:textfield name="postalCode"/&gt;
 
 </code></pre>
-</div>
 
 <p>If there is a “postalCode” property on the value stack, its value will be set to the input field. When the field is submitted back to the framework, the value of the control will be set back to the “postalCode” property.</p>
 
@@ -145,11 +144,10 @@
 
 <p><strong>Using an expression to set the label</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<pre><code class="language-jsp">
 &lt;s:textfield key="postalCode.label" name="postalCode"/&gt;
 
 </code></pre>
-</div>
 
 <p>The expression language (<a href="#PAGE_14198">OGNL</a>) lets us call methods and evaluate properties. The method <code class="highlighter-rouge">getText</code> is provided by ActionSupport, which is the base class for most Actions. Since the Action is on the stack, we can call any of its methods from an expression, including <code class="highlighter-rouge">getText</code>.</p>
 
@@ -159,11 +157,10 @@
 
 <p><strong>Evaluating booleans</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<pre><code class="language-jsp">
 &lt;s:select key="state.label" name="state" multiple="true"/&gt;
 
 </code></pre>
-</div>
 
 <p>Since the attribute <code class="highlighter-rouge">multiple</code> maps to a boolean property, the framework does not interpret the value as a String. The value is evaluated as an expression and automtically converted to a boolean.</p>
 
@@ -171,27 +168,24 @@
 
 <p><strong>Evaluating booleans (verbose)</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<pre><code class="language-jsp">
 &lt;s:select key="state.label" name="state" multiple="%{true}"/&gt;
 
 </code></pre>
-</div>
 
 <p><strong>Evaluating booleans (with property)</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<pre><code class="language-jsp">
 &lt;s:select key="state.label" name="state" multiple="allowMultiple"/&gt;
 
 </code></pre>
-</div>
 
 <p><strong>Evaluating booleans (verbose with property)</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<pre><code class="language-jsp">
 &lt;s:select key="state.label" name="state" multiple="%{allowMultiple}"/&gt;
 
 </code></pre>
-</div>
 
 <h2 id="value-is-an-object">value is an Object!</h2>
 
@@ -201,21 +195,19 @@
 
 <p><strong>Probably wrong!</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<pre><code class="language-jsp">
 &lt;s:textfield key="state.label" name="state" value="ca"/&gt;
 
 </code></pre>
-</div>
 
 <p>If a <code class="highlighter-rouge">textfield</code> is passed the value attribute <code class="highlighter-rouge">"ca"</code>, the framework will look for a property named <code class="highlighter-rouge">getCa</code>. Generally, this is not what we mean. What we mean to do is pass a literal String. In the expression language, literals are placed within quotes</p>
 
 <p><strong>Passing a literal value the right way</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<pre><code class="language-jsp">
 &lt;s:textfield key="state.label" name="state" value="%{'ca'}" /&gt;
 
 </code></pre>
-</div>
 
 <p>Another approach would be to use the idiom <code class="highlighter-rouge">value="'ca'"</code>, but, in this case, using the expression notation is recommended.</p>
 
@@ -292,22 +284,21 @@
 
 <p>The below code will not work:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<pre><code class="language-jsp">
 &lt;s:iterator value="parameters"/&gt;
 
 </code></pre>
-</div>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
-public class MyAction {
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
 
-    private String[] parameters;
+    <span class="kd">private</span> <span class="n">String</span><span class="o">[]</span> <span class="n">parameters</span><span class="o">;</span>
 
-    public String[] getParameters() {
-        return parameters;
-    }
+    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="n">getParameters</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">parameters</span><span class="o">;</span>
+    <span class="o">}</span>
 
-}
+<span class="o">}</span>
 
 </code></pre>
 </div>

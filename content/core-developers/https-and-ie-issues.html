@@ -132,29 +132,29 @@
 <p> When trying to stream PDF’s, TIFF’s, and various other types of content over HTTPS to certain versions of Internet Explorer you may trigger a creative (broken) interpretation of the HTTP spec. The following interceptor should be applied to your actions to set the HTTP headers cache settings to private. This should avoid the issue. (You should *only* do this if you are running over HTTPS!)</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
-package org.tuxbot.ww.interceptor;
+<span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">tuxbot</span><span class="o">.</span><span class="na">ww</span><span class="o">.</span><span class="na">interceptor</span><span class="o">;</span>
 
-import com.opensymphony.xwork.interceptor.AroundInterceptor;
-import com.opensymphony.xwork.ActionInvocation;
-import com.opensymphony.webwork.ServletActionContext;
+<span class="kn">import</span> <span class="nn">com.opensymphony.xwork.interceptor.AroundInterceptor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.opensymphony.xwork.ActionInvocation</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.opensymphony.webwork.ServletActionContext</span><span class="o">;</span>
 
-import javax.servlet.http.HttpServletResponse;
-/**
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+<span class="cm">/**
  * This interceptor sets the the HTTP Header to work around IE SSL weirdness  *
  * @author Eric Molitor &lt;a href="mailto:eric@tuxbot.com"&gt;eric@tuxbot.com&lt;/a&gt;
  * @version 1.0
- */
-public class HTTPRequestCachePrivateInterceptor extends AroundInterceptor {
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HTTPRequestCachePrivateInterceptor</span> <span class="kd">extends</span> <span class="n">AroundInterceptor</span> <span class="o">{</span>
 
-    protected void after(ActionInvocation actionInvocation, String string) throws Exception {
-        // Nothing
-    }
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="n">after</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">actionInvocation</span><span class="o">,</span> <span class="n">String</span> <span class="n">string</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="c1">// Nothing</span>
+    <span class="o">}</span>
 
-    protected void before(ActionInvocation actionInvocation) throws Exception {
-        HttpServletResponse res = (HttpServletResponse) actionInvocation.getInvocationContext().get(ServletActionContext.HTTP_RESPONSE);
-        res.setHeader("CACHE-CONTROL", "PRIVATE");
-    }
-}
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="n">before</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">actionInvocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">HttpServletResponse</span> <span class="n">res</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpServletResponse</span><span class="o">)</span> <span class="n">actionInvocation</span><span class="o">.</span><span class="na">getInvocationContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">ServletActionContext</span><span class="o">.</span><span class="na">HTTP_RESPONSE</span><span class="o">);</span>
+        <span class="n">res</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">"CACHE-CONTROL"</span><span class="o">,</span> <span class="s">"PRIVATE"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
 </code></pre>
 </div>

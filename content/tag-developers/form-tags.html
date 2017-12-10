@@ -503,24 +503,24 @@ In many of the tags (except for the form tag) there is a unique relationship bet
 Likewise, a form control could be populated by calling a JavaBean accessor, like `getPostalCode`. In the expression language, we can refer to the JavaBean property by name. An expression like "%{postalCode}" would in turn call `getPostalCode`.
 
 
-~~~~~~~
+```ftl
 &lt;@s.form action="updateAddress"&gt;
     &lt;@s.textfield label="Postal Code" name="postalCode" value="%{postalCode}"/&gt;
     ...
 &lt;/@s.form&gt;
 
-~~~~~~~
+```
 
 However, since the tags imply a relationship between the `name` and `value`, the `value` attribute is optional. If a `value` is not specified, by default, the JavaBean accessor is used instead.
 
 
-~~~~~~~
+```ftl
 &lt;@s.form action="updateAddress"&gt;
     &lt;@s.textfield label="Postal Code" name="postalCode"/&gt;
     ...
 &lt;/@s.form&gt;
 
-~~~~~~~
+```
 
 While most attributes are exposed to the underlying templates as the same key as the attribute (\${parameters.label}), the `value` attribute is not. Instead, it can be accessed via the `nameValue` key (\${parameters.nameValue}). The `nameValue` key indicates that the value may have been generated from the `name` attribute rather than explicitly defined in the `value` attribute.
 

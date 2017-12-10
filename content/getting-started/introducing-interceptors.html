@@ -187,14 +187,14 @@ and what are all the interceptors included with Struts 2, visit <a href="../core
 <p>Sometime the Struts 2 default stack of interceptors are not exactly what you need for a particular action. You may want 
 to use interceptors that are not part of the Struts 2 default stack. For an individual Action or for the entire 
 package of Actions, you can specify a different stack of interceptors that the Action or package should use. Below is 
-how you would specify that the register Action should use both the <a href="../core-developers/logging-interceptor.html">logging</a> 
+how you would specify that the register Action should use both the <a href="../core-developers/logging-interceptor.html">logger</a> 
 and <a href="../core-developers/timer-interceptor.html">timer</a> interceptors in addition to the interceptors provided by the default stack.</p>
 
 <p><strong>Specify Specific Interceptors For An Action</strong></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"register"</span> <span class="na">class=</span><span class="s">"org.apache.struts.register.action.Register"</span> <span class="na">method=</span><span class="s">"execute"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"timer"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"logging"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"logger"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"exception.logEnabled"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"exception.logLevel"</span><span class="nt">&gt;</span>ERROR<span class="nt">&lt;/param&gt;</span>
@@ -210,7 +210,7 @@ of time (in milliseconds) for execution of the Action. These two interceptors us
 useful feedback.</p>
 
 <p>In the code example above note the three interceptor-ref nodes. Each one has a value for the name attribute. For the register 
-Action we are instructing the framework to use the <code class="highlighter-rouge">timer</code>, <code class="highlighter-rouge">logging</code>, and <code class="highlighter-rouge">defaultStack</code> interceptors. The <code class="highlighter-rouge">defaultStack</code> 
+Action we are instructing the framework to use the <code class="highlighter-rouge">timer</code>, <code class="highlighter-rouge">logger</code>, and <code class="highlighter-rouge">defaultStack</code> interceptors. The <code class="highlighter-rouge">defaultStack</code> 
 are all the interceptors normally executed for an Action.</p>
 
 <p>How did I know to use the value of timer for the name attribute and even that there is a timer interceptor? 
@@ -248,7 +248,7 @@ the following in <code class="highlighter-rouge">struts.xml</code>:</p>
     <span class="nt">&lt;interceptors&gt;</span> 
         <span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"appDefault"</span><span class="nt">&gt;</span> 
             <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"timer"</span> <span class="nt">/&gt;</span> 
-            <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"logging"</span> <span class="nt">/&gt;</span> 
+            <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"logger"</span> <span class="nt">/&gt;</span> 
             <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span> <span class="nt">/&gt;</span> 
         <span class="nt">&lt;/interceptor-stack&gt;</span> 
     <span class="nt">&lt;/interceptors&gt;</span>          
@@ -261,15 +261,15 @@ the following in <code class="highlighter-rouge">struts.xml</code>:</p>
 </code></pre>
 </div>
 
-<p>In the code above we use the interceptors node to define a new stack of interceptors that includes the <code class="highlighter-rouge">timer</code>, <code class="highlighter-rouge">logging</code>, 
+<p>In the code above we use the interceptors node to define a new stack of interceptors that includes the <code class="highlighter-rouge">timer</code>, <code class="highlighter-rouge">logger</code>, 
 and <code class="highlighter-rouge">defaultStack</code> interceptors. We give this new interceptor stack a name of appDefault. Then we use the <code class="highlighter-rouge">default-interceptor-ref</code> 
 node to specify that for all Actions defined inside this package node the <code class="highlighter-rouge">appDefault</code> stack of interceptors are to be used. 
-Thus the <code class="highlighter-rouge">timer</code> and <code class="highlighter-rouge">logging</code> interceptor will be executed for each Action in this package.</p>
+Thus the <code class="highlighter-rouge">timer</code> and <code class="highlighter-rouge">logger</code> interceptor will be executed for each Action in this package.</p>
 
 <p>Note that in both examples we are still executing all the other interceptors by including the defaultStack as one 
 of the <code class="highlighter-rouge">interceptor-ref</code> nodes. When you specify what interceptors you want to use for an Action or a package then only 
 those interceptors are executed. So if in the example we had left out the <code class="highlighter-rouge">interceptor-ref</code> for <code class="highlighter-rouge">defaultStack</code> only 
-the <code class="highlighter-rouge">logging</code> and <code class="highlighter-rouge">timer</code> interceptors would have executed.</p>
+the <code class="highlighter-rouge">logger</code> and <code class="highlighter-rouge">timer</code> interceptors would have executed.</p>
 
 <h2 id="create-your-own-interceptor">Create Your Own Interceptor</h2>
 

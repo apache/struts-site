@@ -135,11 +135,11 @@
 
 <p>The <code class="highlighter-rouge">freemarker</code> result type is defined in <code class="highlighter-rouge">struts-default.xml</code>, so normally you just include it, and define your resuts to use <code class="highlighter-rouge">type="freemarker"</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;include file="struts-default.xml"/&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;include</span> <span class="na">file=</span><span class="s">"struts-default.xml"</span><span class="nt">/&gt;</span>
 ...
-&lt;action name="test" class="package.Test"&gt;
-  &lt;result name="success" type="freemarker"&gt;/WEB-INF/views/testView.ftl&lt;/result&gt;
-&lt;/action&gt;
+<span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"test"</span> <span class="na">class=</span><span class="s">"package.Test"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"freemarker"</span><span class="nt">&gt;</span>/WEB-INF/views/testView.ftl<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
 ...
 
 </code></pre>
@@ -221,7 +221,7 @@ locale=no_NO
  a) your servlet container has no support for JSP, or 
  b) you didn’t specify the taglib in your web.xml - note how in the example below we refer to the taglib by its webapp-absolute URL, so no configuration in web.xml is needed.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;#assign s=JspTaglibs["/WEB-INF/struts.tld"] /&gt;
+<pre><code class="language-ftl">&lt;#assign s=JspTaglibs["/WEB-INF/struts.tld"] /&gt;
 
 &lt;@s.form method="'post'" name="'inputform'" action="'save.action'" &gt;
     &lt;@s.hidden name="'id'" /&gt;
@@ -230,7 +230,6 @@ locale=no_NO
 &lt;/@s.form&gt;
 
 </code></pre>
-</div>
 
 <p>NOTE : numeric properties for tags MUST be numbers, not strings. as in the rows and cols properties above. if you use cols=”40” you will receive an exception. Other than that, the freemarker tag container behaves as you would expect.</p>
 
@@ -238,39 +237,32 @@ locale=no_NO
 
 <p>You can specify dynamic attributes with Struts 2 tags like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;@s.textfield name="test" dynamicAttributes={"placeholder":"input","foo":"bar"}/&gt;
-
+<pre><code class="language-ftl">&lt;@s.textfield name="test" dynamicAttributes={"placeholder":"input","foo":"bar"}/&gt;
 </code></pre>
-</div>
 
 <p>or like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;@s.textfield name="test" placeholder="input" foo="bar"/&gt;
-
+<pre><code class="language-ftl">&lt;@s.textfield name="test" placeholder="input" foo="bar"/&gt;
 </code></pre>
-</div>
 
 <p>and for both case, it will be parsed into:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;input type="text" name="test" value="" id="test" placeholder="input" foo="bar"/&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"test"</span> <span class="na">value=</span><span class="s">""</span> <span class="na">id=</span><span class="s">"test"</span> <span class="na">placeholder=</span><span class="s">"input"</span> <span class="na">foo=</span><span class="s">"bar"</span><span class="nt">/&gt;</span>
 
 </code></pre>
 </div>
 
 <p>You can also use OGNL expressions with dynamic tags like below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;@s.textfield name="test" placeholder="input" foo="checked: %{bar}"/&gt;
-
+<pre><code class="language-ftl">&lt;@s.textfield name="test" placeholder="input" foo="checked: %{bar}"/&gt;
 </code></pre>
-</div>
 
 <p>When using attributes with hyphens, use the below syntax (you can also leave the single quotes from false if you want)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;@s.form dynamicAttributes={'data-ajax':'false'}&gt;
+<pre><code class="language-ftl">&lt;@s.form dynamicAttributes={'data-ajax':'false'}&gt;
   ...
 &lt;/@s.form&gt;
 </code></pre>
-</div>
 
   </section>
 </article>

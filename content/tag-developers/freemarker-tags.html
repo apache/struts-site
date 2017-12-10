@@ -141,9 +141,8 @@
 <p>FreeMarker tags are extensions of the generic <a href="struts-tags.html">Struts Tags</a> provided by the framework. You can jump 
 right in just by knowing the generic structure in which the tags can be accessed:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.tag&gt; ...<span class="err">&lt;</span>/@s.tag&gt;
+<pre><code class="language-ftl">&lt;@s.tag&gt; ...&lt;/@s.tag&gt;
 </code></pre>
-</div>
 
 <p>, where <code class="highlighter-rouge">tag</code> is any of the <a href="tags.html">tags</a> supported by the framework.</p>
 
@@ -161,12 +160,11 @@ right in just by knowing the generic structure in which the tags can be accessed
 
 <p><strong>FTL Form</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.form action="updatePerson"&gt;
-    <span class="err">&lt;</span>@s.textfield label="First name" name="firstName"/&gt;
-    <span class="err">&lt;</span>@s.submit value="Update"/&gt;
-<span class="err">&lt;</span>/@s.form&gt;
+<pre><code class="language-ftl">&lt;@s.form action="updatePerson"&gt;
+    &lt;@s.textfield label="First name" name="firstName"/&gt;
+    &lt;@s.submit value="Update"/&gt;
+&lt;/@s.form&gt;
 </code></pre>
-</div>
 
 <p><strong>But, wait there’s more!</strong></p>
 
@@ -193,9 +191,8 @@ that (being arbitary) isn’t specified on the URL tag. In a JSP, we’d have to
 
 <p><strong>Creating a URL with a query string (FTL)</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.url value="somePage" personId="%{personId}"/&gt;
+<pre><code class="language-ftl">&lt;@s.url value="somePage" personId="%{personId}"/&gt;
 </code></pre>
-</div>
 
 <h3 id="using-inline-attributes-with-templates">Using inline attributes with templates</h3>
 
@@ -205,12 +202,11 @@ attribute into the textfield tag, no fuss, no muss.</p>
 
 <p><strong>Passing an attribute to the template</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.form action="updatePerson"&gt;
-    <span class="err">&lt;</span>@s.textfield label="First name" name="firstName" description="..."/&gt;
-    <span class="err">&lt;</span>@s.submit value="Update"/&gt;
-<span class="err">&lt;</span>/@s.form&gt;
+<pre><code class="language-ftl">&lt;@s.form action="updatePerson"&gt;
+    &lt;@s.textfield label="First name" name="firstName" description="..."/&gt;
+    &lt;@s.submit value="Update"/&gt;
+&lt;/@s.form&gt;
 </code></pre>
-</div>
 
 <p>In the new template, the description is referenced via the parameters Map: <code class="highlighter-rouge">${parameters.description}</code>.</p>
 
@@ -226,9 +222,8 @@ that as the <code class="highlighter-rouge">value</code> attribute.</p>
 to a different type, such as List, int, or boolean. This generally works just fine, but it can be limiting when using 
 FreeMarker which provides more advanced ways to apply attributes. Suppose the following example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.select label="Foo label - %{foo}" name="%{name}" list="%1"/&gt;
+<pre><code class="language-ftl">&lt;@s.select label="Foo label - %{foo}" name="%{name}" list="%1"/&gt;
 </code></pre>
-</div>
 
 <p>What will happen here is that each attribute will be evaluated to a String as best it can. This may involve calling the
 <code class="highlighter-rouge">toString</code> method on the internal FreeMarker objects. In this case, all objects will end up being exactly what you would 
@@ -237,9 +232,8 @@ advanced collection support.</p>
 
 <p>But suppose you wish to use FreeMarker’s list or hash support instead? You can do this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.select label="Foo label - %{foo}" name="%{name}" list=[1, 2, 3]/&gt;
+<pre><code class="language-ftl">&lt;@s.select label="Foo label - %{foo}" name="%{name}" list=[1, 2, 3]/&gt;
 </code></pre>
-</div>
 
 <p>Notice that the list attribute no longer has quotes around it. Now it will come in to the tag as an object that can’t 
 easily be converted to a String. Normally, the tag would just call <code class="highlighter-rouge">toString</code>, which would return <code class="highlighter-rouge">[1, 2, 3]</code> and be 
@@ -269,11 +263,10 @@ to emulate a JSP taglib container.</p>
 
 <p>Once you’ve done that, you can simply add something like this in your templates:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>#assign cewolf=JspTaglibs["/WEB-INF/cewolf.tld"] /&gt;
+<pre><code class="language-ftl">&lt;#assign cewolf=JspTaglibs["/WEB-INF/cewolf.tld"] /&gt;
 ...
-<span class="err">&lt;</span>@cewold.xxx ... /&gt;
+&lt;@cewold.xxx ... /&gt;
 </code></pre>
-</div>
 
   </section>
 </article>

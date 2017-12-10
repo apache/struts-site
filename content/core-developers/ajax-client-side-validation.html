@@ -158,98 +158,98 @@
 
 <p><strong>Create the action class</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public class AjaxFormSubmitAction extends ActionSupport {
-    private String requiredValidatorField = null;
-    private String requiredStringValidatorField = null;
-    private Integer integerValidatorField = null;
-    private Date dateValidatorField = null;
-    private String emailValidatorField = null;
-    private String urlValidatorField = null;
-    private String stringLengthValidatorField = null;
-    private String regexValidatorField = null;
-    private String fieldExpressionValidatorField = null;
-    @Override
-    public void validate() {
-        if (hasFieldErrors()) {
-            addActionError("Errors present!");
-        }
-    }
-    public Date getDateValidatorField() {
-        return dateValidatorField;
-    }
-    @DateRangeFieldValidator(
-        min="01/01/1990", 
-        max="01/01/2000", 
-        message="must be a min 01-01-1990 max 01-01-2000 if supplied")
-    public void setDateValidatorField(Date dateValidatorField) {
-        this.dateValidatorField = dateValidatorField;
-    }
-    public String getEmailValidatorField() {
-        return emailValidatorField;
-    }
-    @EmailValidator(message="must be a valid email if supplied")
-    public void setEmailValidatorField(String emailValidatorField) {
-        this.emailValidatorField = emailValidatorField;
-    }
-    public Integer getIntegerValidatorField() {
-        return integerValidatorField;
-    }
-    @IntRangeFieldValidator(min="1", max="10", message="must be integer min 1 max 10 if supplied")
-    public void setIntegerValidatorField(Integer integerValidatorField) {
-        this.integerValidatorField = integerValidatorField;
-    }
-    public String getRegexValidatorField() {
-        return regexValidatorField;
-    }
-    @RegexFieldValidator(
-        regex="[^&lt;&gt;]+", 
-        message="regexValidatorField must match a regexp (.*\\.txt) if specified")
-    public void setRegexValidatorField(String regexValidatorField) {
-        this.regexValidatorField = regexValidatorField;
-    }
-    public String getRequiredStringValidatorField() {
-        return requiredStringValidatorField;
-    }
-    @RequiredStringValidator(trim=true, message="required and must be string")
-    public void setRequiredStringValidatorField(String requiredStringValidatorField) {
-        this.requiredStringValidatorField = requiredStringValidatorField;
-    }
-    public String getRequiredValidatorField() {
-        return requiredValidatorField;
-    }
-    @RequiredFieldValidator(message="required")
-    public void setRequiredValidatorField(String requiredValidatorField) {
-        this.requiredValidatorField = requiredValidatorField;
-    }
-    public String getStringLengthValidatorField() {
-        return stringLengthValidatorField;
-    }
-    @StringLengthFieldValidator(
-        minLength="2", 
-        maxLength="4", 
-        trim=true, 
-        message="must be a String of a specific greater than 1 less than 5 if specified")
-    public void setStringLengthValidatorField(String stringLengthValidatorField) {
-        this.stringLengthValidatorField = stringLengthValidatorField;
-    }
-    public String getFieldExpressionValidatorField() {
-        return fieldExpressionValidatorField;
-    }
-    @FieldExpressionValidator(
-        expression = "(fieldExpressionValidatorField == requiredValidatorField)", 
-        message = "must be the same as the Required Validator Field if specified")
-    public void setFieldExpressionValidatorField(
-            String fieldExpressionValidatorField) {
-        this.fieldExpressionValidatorField = fieldExpressionValidatorField;
-    }
-    public String getUrlValidatorField() {
-        return urlValidatorField;
-    }
-    @UrlValidator(message="must be a valid url if supplied")
-    public void setUrlValidatorField(String urlValidatorField) {
-        this.urlValidatorField = urlValidatorField;
-    }
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AjaxFormSubmitAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">requiredValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">requiredStringValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">integerValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Date</span> <span class="n">dateValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">emailValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">urlValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">stringLengthValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">regexValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">fieldExpressionValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">validate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">hasFieldErrors</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">addActionError</span><span class="o">(</span><span class="s">"Errors present!"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">Date</span> <span class="n">getDateValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">dateValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@DateRangeFieldValidator</span><span class="o">(</span>
+        <span class="n">min</span><span class="o">=</span><span class="s">"01/01/1990"</span><span class="o">,</span> 
+        <span class="n">max</span><span class="o">=</span><span class="s">"01/01/2000"</span><span class="o">,</span> 
+        <span class="n">message</span><span class="o">=</span><span class="s">"must be a min 01-01-1990 max 01-01-2000 if supplied"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setDateValidatorField</span><span class="o">(</span><span class="n">Date</span> <span class="n">dateValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">dateValidatorField</span> <span class="o">=</span> <span class="n">dateValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getEmailValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">emailValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@EmailValidator</span><span class="o">(</span><span class="n">message</span><span class="o">=</span><span class="s">"must be a valid email if supplied"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setEmailValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">emailValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">emailValidatorField</span> <span class="o">=</span> <span class="n">emailValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">Integer</span> <span class="n">getIntegerValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">integerValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@IntRangeFieldValidator</span><span class="o">(</span><span class="n">min</span><span class="o">=</span><span class="s">"1"</span><span class="o">,</span> <span class="n">max</span><span class="o">=</span><span class="s">"10"</span><span class="o">,</span> <span class="n">message</span><span class="o">=</span><span class="s">"must be integer min 1 max 10 if supplied"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setIntegerValidatorField</span><span class="o">(</span><span class="n">Integer</span> <span class="n">integerValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">integerValidatorField</span> <span class="o">=</span> <span class="n">integerValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getRegexValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">regexValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@RegexFieldValidator</span><span class="o">(</span>
+        <span class="n">regex</span><span class="o">=</span><span class="s">"[^&lt;&gt;]+"</span><span class="o">,</span> 
+        <span class="n">message</span><span class="o">=</span><span class="s">"regexValidatorField must match a regexp (.*\\.txt) if specified"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setRegexValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">regexValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">regexValidatorField</span> <span class="o">=</span> <span class="n">regexValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getRequiredStringValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">requiredStringValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@RequiredStringValidator</span><span class="o">(</span><span class="n">trim</span><span class="o">=</span><span class="kc">true</span><span class="o">,</span> <span class="n">message</span><span class="o">=</span><span class="s">"required and must be string"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setRequiredStringValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">requiredStringValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">requiredStringValidatorField</span> <span class="o">=</span> <span class="n">requiredStringValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getRequiredValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">requiredValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@RequiredFieldValidator</span><span class="o">(</span><span class="n">message</span><span class="o">=</span><span class="s">"required"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setRequiredValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">requiredValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">requiredValidatorField</span> <span class="o">=</span> <span class="n">requiredValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getStringLengthValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">stringLengthValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@StringLengthFieldValidator</span><span class="o">(</span>
+        <span class="n">minLength</span><span class="o">=</span><span class="s">"2"</span><span class="o">,</span> 
+        <span class="n">maxLength</span><span class="o">=</span><span class="s">"4"</span><span class="o">,</span> 
+        <span class="n">trim</span><span class="o">=</span><span class="kc">true</span><span class="o">,</span> 
+        <span class="n">message</span><span class="o">=</span><span class="s">"must be a String of a specific greater than 1 less than 5 if specified"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setStringLengthValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">stringLengthValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">stringLengthValidatorField</span> <span class="o">=</span> <span class="n">stringLengthValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getFieldExpressionValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">fieldExpressionValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@FieldExpressionValidator</span><span class="o">(</span>
+        <span class="n">expression</span> <span class="o">=</span> <span class="s">"(fieldExpressionValidatorField == requiredValidatorField)"</span><span class="o">,</span> 
+        <span class="n">message</span> <span class="o">=</span> <span class="s">"must be the same as the Required Validator Field if specified"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setFieldExpressionValidatorField</span><span class="o">(</span>
+            <span class="n">String</span> <span class="n">fieldExpressionValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">fieldExpressionValidatorField</span> <span class="o">=</span> <span class="n">fieldExpressionValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getUrlValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">urlValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@UrlValidator</span><span class="o">(</span><span class="n">message</span><span class="o">=</span><span class="s">"must be a valid url if supplied"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUrlValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">urlValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">urlValidatorField</span> <span class="o">=</span> <span class="n">urlValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 
@@ -277,35 +277,34 @@
 
 <p><strong>Create the JSP</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>%@taglib prefix="s" uri="/struts-tags" %&gt;
-<span class="nt">&lt;html&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Struts2 Showcase - Validation - AJAX Form Submit<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;s:head</span> <span class="na">theme=</span><span class="s">"xhtml"</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page-header"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>AJAX Form Submit<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;h3&gt;</span>Action Errors Will Appear Here<span class="nt">&lt;/h3&gt;</span>
-    <span class="nt">&lt;s:actionerror</span> <span class="na">theme=</span><span class="s">"ajaxErrorContainers"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;hr/&gt;</span>
-    <span class="nt">&lt;s:form</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">theme=</span><span class="s">"xhtml"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Required Validator Field"</span> <span class="na">name=</span><span class="s">"requiredValidatorField"</span> <span class="na">theme=</span><span class="s">"ajaxErrorContainers"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Required String Validator Field"</span> <span class="na">name=</span><span class="s">"requiredStringValidatorField"</span> <span class="na">theme=</span><span class="s">"ajaxErrorContainers"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Integer Validator Field"</span> <span class="na">name=</span><span class="s">"integerValidatorField"</span> <span class="na">theme=</span><span class="s">"ajaxErrorContainers"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Date Validator Field"</span> <span class="na">name=</span><span class="s">"dateValidatorField"</span> <span class="na">theme=</span><span class="s">"ajaxErrorContainers"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Email Validator Field"</span> <span class="na">name=</span><span class="s">"emailValidatorField"</span> <span class="na">theme=</span><span class="s">"ajaxErrorContainers"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"URL Validator Field"</span> <span class="na">name=</span><span class="s">"urlValidatorField"</span> <span class="na">theme=</span><span class="s">"ajaxErrorContainers"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"String Length Validator Field"</span> <span class="na">name=</span><span class="s">"stringLengthValidatorField"</span> <span class="na">theme=</span><span class="s">"ajaxErrorContainers"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Regex Validator Field"</span> <span class="na">name=</span><span class="s">"regexValidatorField"</span> <span class="na">theme=</span><span class="s">"ajaxErrorContainers"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Field Expression Validator Field"</span> <span class="na">name=</span><span class="s">"fieldExpressionValidatorField"</span> <span class="na">theme=</span><span class="s">"ajaxErrorContainers"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;s:submit</span> <span class="na">label=</span><span class="s">"Submit"</span> <span class="na">cssClass=</span><span class="s">"btn btn-primary"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/s:form&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span> 
+<pre><code class="language-jsp">&lt;%@taglib prefix="s" uri="/struts-tags" %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Struts2 Showcase - Validation - AJAX Form Submit&lt;/title&gt;
+    &lt;s:head theme="xhtml"/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="page-header"&gt;
+    &lt;h1&gt;AJAX Form Submit&lt;/h1&gt;
+&lt;/div&gt;
+    &lt;h3&gt;Action Errors Will Appear Here&lt;/h3&gt;
+    &lt;s:actionerror theme="ajaxErrorContainers"/&gt;
+    &lt;hr/&gt;
+    &lt;s:form method="POST" theme="xhtml"&gt;
+        &lt;s:textfield label="Required Validator Field" name="requiredValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Required String Validator Field" name="requiredStringValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Integer Validator Field" name="integerValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Date Validator Field" name="dateValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Email Validator Field" name="emailValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="URL Validator Field" name="urlValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="String Length Validator Field" name="stringLengthValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Regex Validator Field" name="regexValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Field Expression Validator Field" name="fieldExpressionValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:submit label="Submit" cssClass="btn btn-primary"/&gt;
+    &lt;/s:form&gt;
+&lt;/body&gt;
+&lt;/html&gt; 
 </code></pre>
-</div>
 
 <p>Things to note on this JSP:</p>
 
@@ -353,7 +352,7 @@
   <p>actionerror.ftl</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;#--
+<pre><code class="language-ftl">&lt;#--
     Make sure element is always present. To be filled later via JS.
 --&gt;
 &lt;ul&lt;#rt/&gt;
@@ -378,7 +377,6 @@
 &lt;/#if&gt;
 &lt;/ul&gt;
 </code></pre>
-</div>
 
 <p> </p>
 
@@ -386,7 +384,7 @@
   <p>controlfooter.ftl</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>${parameters.after!}&lt;#t/&gt;
+<pre><code class="language-ftl">${parameters.after!}&lt;#t/&gt;
     &lt;/td&gt;&lt;#lt/&gt;
 &lt;/tr&gt;
 &lt;#if (parameters.errorposition!"top") == 'bottom'&gt;
@@ -403,10 +401,7 @@
 &lt;/tr&gt;
 &lt;/#if&gt;
 &lt;/#if&gt;
-
-
 </code></pre>
-</div>
 
 <p> </p>
 
@@ -414,7 +409,7 @@
   <p>controlheader-core.ftl</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;#--
+<pre><code class="language-ftl"> &lt;#--
     Always include elements to show errors. They may be filled later via AJAX.
 --&gt;
 &lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[parameters.name]??/&gt;
@@ -472,22 +467,19 @@ ${parameters.labelseparator!":"?html}&lt;#t/&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;/#if&gt;
-
-
 </code></pre>
-</div>
 
 <p><strong>CSS</strong></p>
 
 <p>To show users some nice visual feedback while waiting for AJAX response you can use a little CSS. Remember to include the referenced <em>indicator.gif</em> .</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>.ajaxVisualFeedback {
-    width: 16px;
-    height: 16px;
-    background-image: url('../images/indicator.gif');
-    background-repeat: no-repeat;
-    float: right;
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nc">.ajaxVisualFeedback</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+    <span class="nl">background-image</span><span class="p">:</span> <span class="sx">url('../images/indicator.gif')</span><span class="p">;</span>
+    <span class="nl">background-repeat</span><span class="p">:</span> <span class="nb">no-repeat</span><span class="p">;</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre>
 </div>
 
@@ -497,109 +489,109 @@ ${parameters.labelseparator!":"?html}&lt;#t/&gt;
 
 <p>Now this is where the magic happens. Here <em>jQuery</em>  is used to register an eventhandler which intercepts form submits. It takes care of hiding validation errors that might be present, submit the form via AJAX and handle JSON responses.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> /**
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="cm">/**
   * Validates form per AJAX. To be called as onSubmit handler.
   *
   * @param event onSubmit event
-  */
-function ajaxFormValidation(event) {
-    event.preventDefault();
-    _removeValidationErrors();
-    var _form = $(event.target);
-    var _formData = _form.serialize(true);
-    // prepare visual feedback
-    // you may want to use other elements here
-    var originalButton = _form.find('.btn-primary');
-    // note: jQuery returns an array-like object
-    if (originalButton &amp;&amp; originalButton.length &amp;&amp; originalButton.length &gt; 0) {
-        originalButton.hide();
-        var feedbackElement = $('&lt;div class="ajaxVisualFeedback"&gt;&lt;/div&gt;').insertAfter(originalButton);
-        var restoreFunction = function() {
-            originalButton.show();
-            feedbackElement.remove();
-        }
-    }
-    var options = {
-        data: 'struts.enableJSONValidation=true&amp;struts.validateOnly=false&amp;' + _formData,
-        async: true,
-        processData: false,
-        type: 'POST',
-        success: function (response, statusText, xhr) {
-            if (response.location) {
-                // no validation errors
-                // action has been executed and sent a redirect URL wrapped as JSON
-                // cannot use a normal http-redirect (status-code 3xx) as this would be followed by browsers and would not be available here
-                // follow JSON-redirect
-                window.location.href = response.location;
-            } else {
-                if (restoreFunction) {
-                    restoreFunction();
-                }
-                _handleValidationResult(_form, response);
-            }
-        },
-        error: function(xhr, textStatus, errorThrown) {
-            if (restoreFunction) {
-                restoreFunction();
-            }
-            // struts sends status code 400 when validation errors are present
-            if (xhr.status === 400) {
-                _handleValidationResult(_form, JSON.parse(xhr.responseText))
-            } else {
-                // a real error occurred -&gt; show user an error message
-                _handleValidationResult(_form, {errors: ['Network or server error!']})
-            }
-		}
-    }
-    // send request, after delay to make sure everybody notices the visual feedback :)
-    window.setTimeout(function() {
-        var url = _form[0].action;
-        jQuery.ajax(url, options);
-    }, 1000);
-}
-/**
+  */</span>
+<span class="kd">function</span> <span class="nx">ajaxFormValidation</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="nx">_removeValidationErrors</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">_form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">_formData</span> <span class="o">=</span> <span class="nx">_form</span><span class="p">.</span><span class="nx">serialize</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="c1">// prepare visual feedback</span>
+    <span class="c1">// you may want to use other elements here</span>
+    <span class="kd">var</span> <span class="nx">originalButton</span> <span class="o">=</span> <span class="nx">_form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.btn-primary'</span><span class="p">);</span>
+    <span class="c1">// note: jQuery returns an array-like object</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">originalButton</span> <span class="o">&amp;&amp;</span> <span class="nx">originalButton</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">originalButton</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">originalButton</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">feedbackElement</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;div class="ajaxVisualFeedback"&gt;&lt;/div&gt;'</span><span class="p">).</span><span class="nx">insertAfter</span><span class="p">(</span><span class="nx">originalButton</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">restoreFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">originalButton</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+            <span class="nx">feedbackElement</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">data</span><span class="p">:</span> <span class="s1">'struts.enableJSONValidation=true&amp;struts.validateOnly=false&amp;'</span> <span class="o">+</span> <span class="nx">_formData</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">processData</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="nx">statusText</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">location</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// no validation errors</span>
+                <span class="c1">// action has been executed and sent a redirect URL wrapped as JSON</span>
+                <span class="c1">// cannot use a normal http-redirect (status-code 3xx) as this would be followed by browsers and would not be available here</span>
+                <span class="c1">// follow JSON-redirect</span>
+                <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">location</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">restoreFunction</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">restoreFunction</span><span class="p">();</span>
+                <span class="p">}</span>
+                <span class="nx">_handleValidationResult</span><span class="p">(</span><span class="nx">_form</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="na">error</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">errorThrown</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">restoreFunction</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">restoreFunction</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="c1">// struts sends status code 400 when validation errors are present</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">400</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">_handleValidationResult</span><span class="p">(</span><span class="nx">_form</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="p">))</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// a real error occurred -&gt; show user an error message</span>
+                <span class="nx">_handleValidationResult</span><span class="p">(</span><span class="nx">_form</span><span class="p">,</span> <span class="p">{</span><span class="na">errors</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Network or server error!'</span><span class="p">]})</span>
+            <span class="p">}</span>
+		<span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// send request, after delay to make sure everybody notices the visual feedback :)</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">_form</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">action</span><span class="p">;</span>
+        <span class="nx">jQuery</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cm">/**
  * Removes validation errors from HTML DOM.
- */
-function _removeValidationErrors() {
-    // action errors
-    // you might want to use a custom ID here
-    $('ul.errorMessage li').remove();
-    // field errors
-    $('div.errorMessage').remove();
-}
-/**
+ */</span>
+<span class="kd">function</span> <span class="nx">_removeValidationErrors</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// action errors</span>
+    <span class="c1">// you might want to use a custom ID here</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'ul.errorMessage li'</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="c1">// field errors</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'div.errorMessage'</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="cm">/**
  * Incorporates validation errors in HTML DOM.
  *
  * @param form Form containing errors.
  * @param errors Errors from server.
- */
-function _handleValidationResult(form, errors) {
-    // action errors
-    if (errors.errors) {
-        // you might want to use a custom ID here
-        var errorContainer = $('ul.errorMessage');
-        $.each(errors.errors, function(index, errorMsg) {
-            var li = $('&lt;li&gt;&lt;span&gt;&lt;/span&gt;&lt;/li&gt;');
-            li.text(errorMsg); // use text() for security reasons
-            errorContainer.append(li);
-        });
-    }
-    // field errors
-    if (errors.fieldErrors) {
-        $.each(errors.fieldErrors, function(fieldName, errorMsg) {
-            var td = $('td[data-error-for-fieldname="' + fieldName + '"]');
-            if (td) {
-                var div = $('&lt;div class="errorMessage"&gt;&lt;/div&gt;');
-                div.text(errorMsg); // use text() for security reasons
-                td.append(div);
-            }
-        });
-    }
-}
-// register onSubmit handler
-$(window).bind('load', function() {
-    $('form').bind('submit', ajaxFormValidation);
-});
+ */</span>
+<span class="kd">function</span> <span class="nx">_handleValidationResult</span><span class="p">(</span><span class="nx">form</span><span class="p">,</span> <span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// action errors</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// you might want to use a custom ID here</span>
+        <span class="kd">var</span> <span class="nx">errorContainer</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'ul.errorMessage'</span><span class="p">);</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">errors</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">errorMsg</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;li&gt;&lt;span&gt;&lt;/span&gt;&lt;/li&gt;'</span><span class="p">);</span>
+            <span class="nx">li</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">);</span> <span class="c1">// use text() for security reasons</span>
+            <span class="nx">errorContainer</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">li</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="c1">// field errors</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">fieldErrors</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">fieldErrors</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">errorMsg</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">td</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'td[data-error-for-fieldname="'</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="s1">'"]'</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">td</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;div class="errorMessage"&gt;&lt;/div&gt;'</span><span class="p">);</span>
+                <span class="nx">div</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">);</span> <span class="c1">// use text() for security reasons</span>
+                <span class="nx">td</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// register onSubmit handler</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">'submit'</span><span class="p">,</span> <span class="nx">ajaxFormValidation</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre>
 </div>
 

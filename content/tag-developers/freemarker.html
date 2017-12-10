@@ -209,80 +209,69 @@ Request parameters, and framework Context scope parameters.</p>
 
 <p>Assuming there’s an attribute with name <code class="highlighter-rouge">myApplicationAttribute</code> in the Application scope.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>#if Application.myApplicationAttribute?exists&gt;
+<pre><code class="language-ftl">&lt;#if Application.myApplicationAttribute?exists&gt;
      ${Application.myApplicationAttribute}
-<span class="err">&lt;</span>/#if&gt;
+&lt;/#if&gt;
 </code></pre>
-</div>
 
 <p>or</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.property value="%{#application.myApplicationAttribute}" /&gt;
+<pre><code class="language-ftl">&lt;@s.property value="%{#application.myApplicationAttribute}" /&gt;
 </code></pre>
-</div>
 
 <h3 id="session-scope-attribute">Session Scope Attribute</h3>
 
 <p>Assuming there’s an attribute with name <code class="highlighter-rouge">mySessionAttribute</code> in the Session scope.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>#if Session.mySessionAttribute?exists&gt;
+<pre><code class="language-ftl">&lt;#if Session.mySessionAttribute?exists&gt;
      ${Session.mySessionAttribute}
-<span class="err">&lt;</span>/#if&gt;
+&lt;/#if&gt;
 </code></pre>
-</div>
 
 <p>or</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.property value="%{#session.mySessionAttribute}" /&gt;
+<pre><code class="language-ftl">&lt;@s.property value="%{#session.mySessionAttribute}" /&gt;
 </code></pre>
-</div>
 
 <h3 id="request-scope-attribute">Request Scope Attribute</h3>
 
 <p>Assuming there’s an attribute with name <code class="highlighter-rouge">myRequestAttribute</code> in the Request scope.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>#if Request.myRequestAttribute?exists&gt;
+<pre><code class="language-ftl">&lt;#if Request.myRequestAttribute?exists&gt;
       ${Request.myRequestAttribute}
-<span class="err">&lt;</span>/#if&gt;
+&lt;/#if&gt;
 </code></pre>
-</div>
 
 <p>or</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.property value="%{#request.myRequestAttribute}" /&gt;
+<pre><code class="language-ftl">&lt;@s.property value="%{#request.myRequestAttribute}" /&gt;
 </code></pre>
-</div>
 
 <h3 id="request-parameter">Request Parameter</h3>
 
 <p>Assuming there’s a request parameter <code class="highlighter-rouge">myParameter</code> (eg. [http://host/myApp/myAction.action?myParameter=one]).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>#if Parameters.myParameter?exists&gt;
+<pre><code class="language-ftl">&lt;#if Parameters.myParameter?exists&gt;
      ${Parameters.myParameter}
-<span class="err">&lt;</span>/#if&gt;
+&lt;/#if&gt;
 </code></pre>
-</div>
 
 <p>or</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.property value="%{#parameters.myParameter}" /&gt;
+<pre><code class="language-ftl">&lt;@s.property value="%{#parameters.myParameter}" /&gt;
 </code></pre>
-</div>
 
 <h3 id="context-parameter">Context parameter</h3>
 
 <p>Assuming there’s a parameter with the name <code class="highlighter-rouge">myContextParam</code> in framework context.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>~~~~~~~
-${stack.findValue('#myContextParam')}
+<pre><code class="language-ftl">${stack.findValue('#myContextParam')}
 </code></pre>
-</div>
 
 <p>or</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.property value="%{#myContextParam}" /&gt;
+<pre><code class="language-ftl">&lt;@s.property value="%{#myContextParam}" /&gt;
 </code></pre>
-</div>
 
 <h2 id="template-loading">Template Loading</h2>
 
@@ -322,10 +311,9 @@ searched first.</p>
 the typical preceding hash marker (<code class="highlighter-rouge">#</code>) like you would have to when using the JSP <code class="highlighter-rouge">s:property</code> tag. This is a nice 
 convenience, though be careful because there is a small chance it could trip you up.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>@s.url id="url" value="http://www.yahoo.com"/&gt;
-Click <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"${url}"</span><span class="nt">&gt;</span>here<span class="nt">&lt;/a&gt;</span>!
+<pre><code class="language-ftl">&lt;@s.url id="url" value="http://www.yahoo.com"/&gt;
+Click &lt;a href="${url}"&gt;here&lt;/a&gt;!
 </code></pre>
-</div>
 
 <p>The built-in variables that Struts-FreeMarker integration provides are:</p>
 
@@ -382,10 +370,9 @@ Click <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s"
 on how to use the generic <a href="struts-tags.html">Struts Tags</a> provided by Struts. In addition to this, you can use any JSP tag, 
 like so:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;</span>#assign mytag=JspTaglibs["/WEB-INF/mytag.tld"]&gt;
-<span class="err">&lt;</span>@mytag.tagx attribute1="some ${value}"/&gt;
+<pre><code class="language-ftl">&lt;#assign mytag=JspTaglibs["/WEB-INF/mytag.tld"]&gt;
+&lt;@mytag.tagx attribute1="some ${value}"/&gt;
 </code></pre>
-</div>
 
 <p>Where <strong>mytag.tld</strong> is the JSP Tag Library Definition file for your tag library. Note: in order to use this support 
 in FreeMarker, you must enable the <code class="highlighter-rouge">JSPSupportServlet</code> in <code class="highlighter-rouge">web.xml</code>:</p>
