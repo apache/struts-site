@@ -74,7 +74,7 @@ and [timer](../core-developers/timer-interceptor.html) interceptors in addition 
 </action>
 ```
 
-The logger interceptor logs the start and end of the execution of an Action. The timer interceptor logs the amount 
+The logging interceptor logs the start and end of the execution of an Action. The timer interceptor logs the amount 
 of time (in milliseconds) for execution of the Action. These two interceptors used together can provide developers 
 useful feedback.
 
