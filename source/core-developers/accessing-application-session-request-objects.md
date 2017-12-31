@@ -1,5 +1,5 @@
 ---
-layout: layout
+layout: default
 title: Accessing application, session, request objects
 parent:
     title: Core Developers Guide
