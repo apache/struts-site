@@ -84,15 +84,15 @@ To simulate the HTTP methods PUT and DELETE, since they aren't supported by HTML
 
 Or, expressed as a table:
 
-|HTTP method|URI                     |Class.method |parameters    |
-|-----------|------------------------|-------------|--------------|
-|GET        |/movie|Movie.index      |             |              |
-|POST       |/movie|Movie.create     |             |              |
-|PUT        |/movie/Thrillers        |Movie.update |id="Thrillers"|
-|DELETE     |/movie/Thrillers        |Movie.destroy|id="Thrillers"|
-|GET        |/movie/Thrillers        |Movie.show   |id="Thrillers"|
-|GET        |/movie/Thrillers/edit   |Movie.edit   |id="Thrillers"|
-|GET        |/movie/new|Movie.editNew|             |              |
+|HTTP method|URI                     |Class.method |parameters    
+|-----------|------------------------|-------------|--------------
+|GET        |/movie|Movie.index      |             |              
+|POST       |/movie|Movie.create     |             |              
+|PUT        |/movie/Thrillers        |Movie.update |id="Thrillers"
+|DELETE     |/movie/Thrillers        |Movie.destroy|id="Thrillers"
+|GET        |/movie/Thrillers        |Movie.show   |id="Thrillers"
+|GET        |/movie/Thrillers/edit   |Movie.edit   |id="Thrillers"
+|GET        |/movie/new|Movie.editNew|             |              
 
 ### Content Types
 
@@ -113,7 +113,6 @@ http://my.company.com/myapp/movies/superman
 http://my.company.com/myapp/movies/superman.xml
 http://my.company.com/myapp/movies/superman.xhtml
 http://my.company.com/myapp/movies/superman.json
-
 ```
 
 > Note, these content types are supported as incoming data types as well. And, if you need, you can extend 
@@ -152,7 +151,6 @@ Instruct Struts to use the REST action mapper:
 
 ```xml
 <constant name="struts.mapper.class" value="rest" />
-
 ```
 
 At this point, the REST mapper has replaced the DefaultActionMapper so all incoming URL's will be interpreted as RESTful URL's.
@@ -184,7 +182,6 @@ the default `action` extension.
 
 ```xml
   <constant name="struts.action.extension" value="xhtml,,xml,json,action"/>
-
 ```
 
 Next, we will configure the [`PrefixBasedActionMapper`](../../core-developers/action-mapper.html#prefixbasedactionmapper), 
@@ -272,7 +269,6 @@ implementation and define it in your `struts.xml`:
 
 ```xml
 <bean name="yaml" type="org.apache.struts2.rest.handler.ContentTypeHandler" class="com.mycompany.MyYamlContentHandler" />
-
 ```
 
 If the built-in content type handlers don't do what you need, you can override the handling of any extension by providing 
@@ -285,9 +281,8 @@ an alternate handler. First, define your own `ContentTypeHandler` and declare wi
 Then, tell the REST Plugin to override the handler for the desired extension with yours. In `struts.properties`, it would 
 look like this:
 
-```text
-struts.rest.handlerOverride.xml=myXml
-
+```xml
+<constant name="struts.rest.handlerOverride.xml" value="myXml"/>
 ```
 
 ### Settings
