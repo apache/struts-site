@@ -152,7 +152,8 @@ It is configured through `struts.xml`. For example, with the following entries i
   /communityTag:struts,
   /event:struts,
   /media:struts,
-  /user:struts,:struts
+  /user:struts,
+  :struts
 "/>
 ```
 When `PrefixBasedActionMapper#getMapping(HttpServletRequest, ConfigurationManager)` or `PrefixBasedActionMapper#getUriFromActionMapping(ActionMapping)`
