@@ -34,8 +34,8 @@ a complete WAR file, that demonstrates a simple REST web program.
 
 The main functionality of the REST plugin lies in the interpretation of incoming request URL's according the RESTful 
 rules. In the Struts 2 framework, this `mapping` of request URL's to Actions is handled by in implementation of 
-the [`ActionMapper`](/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/ActionMapper.html) interface. 
-Out of the box, Struts 2 uses the [`DefaultActionMapper`](/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/DefaultActionMapper.html) 
+the [ActionMapper](/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/ActionMapper.html) interface. 
+Out of the box, Struts 2 uses the [DefaultActionMapper](/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/DefaultActionMapper.html) 
 to map URL's to Actions via the logic you are probably already familiar with.
 
 ### Actions or Controllers ?
@@ -44,7 +44,7 @@ Most Struts 2 developers are familiar with the Action. They are the things that 
 In the context of the REST plugin, just to keep you on your toes, we'll adopt the RESTful lingo and refer to our 
 Actions as **Controllers**. Don't be confused; it's just a name!
 
-The REST plugin provides an alternative implementation, [`RestActionMapper`](/maven/struts2-plugins/struts2-rest-plugin/apidocs/org/apache/struts2/rest/RestActionMapper.html), 
+The REST plugin provides an alternative implementation, [RestActionMapper](/maven/struts2-plugins/struts2-rest-plugin/apidocs/org/apache/struts2/rest/RestActionMapper.html), 
 that provides the RESTful logic that maps a URL to a give action class ( aka `controller` in RESTful terms ) and, 
 more specifically, to the invocation of a method on that controller class. The following section, which comes from 
 the Javadoc for the class, details this logic.
@@ -184,13 +184,17 @@ the default `action` extension.
   <constant name="struts.action.extension" value="xhtml,,xml,json,action"/>
 ```
 
-Next, we will configure the [`PrefixBasedActionMapper`](../../core-developers/action-mapper.html#prefixbasedactionmapper), 
+Next, we will configure the [PrefixBasedActionMapper](../../core-developers/action-mapper.html#prefixbasedactionmapper), 
 which is part of the core Struts 2 distribution, to have some URL's routed to the Rest mapper and others to the default mapper.
 
 ```xml
   <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper" />
   <constant name="struts.mapper.prefixMapping" value="/rest:rest,:struts"/>
+  <constant name="struts.actionProxyFactory" value="prefix"/>
 ```
+
+> Please be aware that you should also use the `PrefixBasedActionProxyFactory` factory together with the `PrefixBasedActionMapper` 
+> mapper to allow the framework to create proper `ActionProxy`s per given prefix. 
 
 And, again, we're relying on the Convention plugin to find our controllers, so we need to configure the convention plugin a bit:
 
@@ -206,7 +210,7 @@ And, again, we're relying on the Convention plugin to find our controllers, so w
 Once everything is configured, you need to create the controllers. Controllers are simply actions created with 
 the purpose of handling requests for a give RESTful resource. As we saw in the mapping logic above, various REST URL's 
 will hit different methods on the controller. Traditionally, normal Struts 2 actions expose the `execute` method as their 
-target method. Here's a sample controller for a _orders_  resource. Note, this sample doesn't implement all of the methods 
+target method. Here's a sample controller for a `orders` resource. Note, this sample doesn't implement all of the methods 
 that can be hit via the RESTful action mapper's interpretation of URL's.
 
 ```java
