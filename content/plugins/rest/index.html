@@ -135,17 +135,21 @@
   <li><a href="#overview" id="markdown-toc-overview">Overview</a>    <ul>
       <li><a href="#features" id="markdown-toc-features">Features</a></li>
       <li><a href="#mapping-rest-urls-to-struts-2-actions" id="markdown-toc-mapping-rest-urls-to-struts-2-actions">Mapping REST URLs to Struts 2 Actions</a></li>
+      <li><a href="#actions-or-controllers-" id="markdown-toc-actions-or-controllers-">Actions or Controllers ?</a></li>
+      <li><a href="#restful-url-mapping-logic" id="markdown-toc-restful-url-mapping-logic">RESTful URL Mapping Logic</a></li>
       <li><a href="#content-types" id="markdown-toc-content-types">Content Types</a></li>
     </ul>
   </li>
   <li><a href="#usage" id="markdown-toc-usage">Usage</a>    <ul>
       <li><a href="#setting-up" id="markdown-toc-setting-up">Setting Up</a></li>
+      <li><a href="#configuration---strutsxml" id="markdown-toc-configuration---strutsxml">Configuration - struts.xml</a></li>
+      <li><a href="#rest-only-configuration" id="markdown-toc-rest-only-configuration">REST Only Configuration</a></li>
+      <li><a href="#rest-and-non-restful-urls-together-configuration" id="markdown-toc-rest-and-non-restful-urls-together-configuration">REST and non-RESTful URL’s Together Configuration</a></li>
       <li><a href="#write-your-controller-actions" id="markdown-toc-write-your-controller-actions">Write Your Controller Actions</a></li>
     </ul>
   </li>
   <li><a href="#advanced-topics" id="markdown-toc-advanced-topics">Advanced Topics</a>    <ul>
       <li><a href="#custom-contenttypehandlers" id="markdown-toc-custom-contenttypehandlers">Custom ContentTypeHandlers</a></li>
-      <li><a href="#use-jackson-framework-as-json-contenttypehandler" id="markdown-toc-use-jackson-framework-as-json-contenttypehandler">Use Jackson framework as JSON ContentTypeHandler</a></li>
       <li><a href="#settings" id="markdown-toc-settings">Settings</a></li>
     </ul>
   </li>
@@ -158,102 +162,76 @@
 <p>The REST Plugin provides high level support for the implementation of RESTful resource based web applications
 <a href="../convention">Convention Plugin</a>.</p>
 
-<p>If you prefer to see a working code example, instead of reading through an explanation, you can download the <a href="/download.html#struts-ga">struts2 sample apps</a> and check out the <code class="highlighter-rouge">struts2-rest-showcase</code> application, a complete WAR file, that demonstrates a simple REST web program.</p>
+<p>If you prefer to see a working code example, instead of reading through an explanation, you can download 
+the <a href="/download.html#struts-ga">Struts2 Example Applications</a> and check out the <code class="highlighter-rouge">struts2-rest-showcase</code> application, 
+a complete WAR file, that demonstrates a simple REST web program.</p>
 
 <h3 id="features">Features</h3>
 
 <ul>
-  <li>
-    <p>Ruby on Rails REST-style URLs</p>
-  </li>
-  <li>
-    <p>Zero XML config when used with Convention Plugin</p>
-  </li>
-  <li>
-    <p>Built-in serialization and deserialization support for XML and JSON</p>
-  </li>
-  <li>
-    <p>Automatic error handling</p>
-  </li>
-  <li>
-    <p>Type-safe configuration of the HTTP response</p>
-  </li>
-  <li>
-    <p>Automatic conditional GET support</p>
-  </li>
+  <li>Ruby on Rails REST-style URLs</li>
+  <li>Zero XML config when used with Convention Plugin</li>
+  <li>Built-in serialization and deserialization support for XML and JSON</li>
+  <li>Automatic error handling</li>
+  <li>Type-safe configuration of the HTTP response</li>
+  <li>Automatic conditional GET support</li>
 </ul>
 
 <h3 id="mapping-rest-urls-to-struts-2-actions">Mapping REST URLs to Struts 2 Actions</h3>
 
-<p>The main functionality of the REST plugin lies in the interpretation of incoming request URL’s according the RESTful rules. In the Struts 2 framework, this ‘mapping’ of request URL’s to Actions is handled by in implementation of the <a href="http://struts.apache.org/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/ActionMapper.html"><code class="highlighter-rouge">ActionMapper</code></a> interface. Out of the box, Struts 2 uses the <a href="http://struts.apache.org/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/DefaultActionMapper.html"><code class="highlighter-rouge">DefaultActionMapper</code></a> to map URL’s to Actions via the logic you are probably already familiar with.</p>
+<p>The main functionality of the REST plugin lies in the interpretation of incoming request URL’s according the RESTful 
+rules. In the Struts 2 framework, this <code class="highlighter-rouge">mapping</code> of request URL’s to Actions is handled by in implementation of 
+the <a href="/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/ActionMapper.html">ActionMapper</a> interface. 
+Out of the box, Struts 2 uses the <a href="/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/DefaultActionMapper.html">DefaultActionMapper</a> 
+to map URL’s to Actions via the logic you are probably already familiar with.</p>
 
-<p><em>Actions or Controllers</em> ? Most Struts 2 developers are familiar with the Action. They are the things that get executed by the incoming requests. In the context of the REST plugin, just to keep you on your toes, we’ll adopt the RESTful lingo and refer to our Actions as <em>Controllers</em> . Don’t be confused; it’s just a name!</p>
+<h3 id="actions-or-controllers-">Actions or Controllers ?</h3>
 
-<p>The REST plugin provides an alternative implementation, <a href="http://struts.apache.org/maven/struts2-plugins/struts2-rest-plugin/apidocs/org/apache/struts2/rest/RestActionMapper.html"><code class="highlighter-rouge">RestActionMapper</code></a>, that provides the RESTful logic that maps a URL to a give action class ( aka ‘controller’ in RESTful terms ) and, more specifically, to the invocation of a method on that controller class. The following section, which comes from the Javadoc for the class, details this logic.</p>
+<p>Most Struts 2 developers are familiar with the Action. They are the things that get executed by the incoming requests. 
+In the context of the REST plugin, just to keep you on your toes, we’ll adopt the RESTful lingo and refer to our 
+Actions as <strong>Controllers</strong>. Don’t be confused; it’s just a name!</p>
 
-<p><strong>RESTful URL Mapping Logic</strong></p>
+<p>The REST plugin provides an alternative implementation, <a href="/maven/struts2-plugins/struts2-rest-plugin/apidocs/org/apache/struts2/rest/RestActionMapper.html">RestActionMapper</a>, 
+that provides the RESTful logic that maps a URL to a give action class ( aka <code class="highlighter-rouge">controller</code> in RESTful terms ) and, 
+more specifically, to the invocation of a method on that controller class. The following section, which comes from 
+the Javadoc for the class, details this logic.</p>
 
-<p>This Restful action mapper enforces Ruby-On-Rails REST-style mappings. If the method is not specified (via ‘!’ or ‘method:’ prefix), the method is “guessed” at using REST-style conventions that examine the URL and the HTTP method. Special care has been given to ensure this mapper works correctly with the codebehind plugin so that XML configuration is unnecessary.</p>
+<h3 id="restful-url-mapping-logic">RESTful URL Mapping Logic</h3>
+
+<p>This Restful action mapper enforces Ruby-On-Rails REST-style mappings. If the method is not specified (via <code class="highlighter-rouge">!</code> 
+or <code class="highlighter-rouge">method:</code> prefix), the method is “guessed” at using REST-style conventions that examine the URL and the HTTP method. 
+Special care has been given to ensure this mapper works correctly with the codebehind plugin so that XML configuration 
+is unnecessary.</p>
 
 <p>This mapper supports the following parameters:</p>
 
 <ul>
-  <li>
-    <p><code class="highlighter-rouge">struts.mapper.idParameterName</code> - If set, this value will be the name  of the parameter under which the id is stored. The id will then be removed  from the action name. Whether or not the method is specified, the mapper will  try to truncate the identifier from the url and store it as a parameter.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">struts.mapper.indexMethodName</code>  - The method name to call for a GET  request with no id parameter. Defaults to <strong>index</strong>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">struts.mapper.getMethodName</code>  - The method name to call for a GET  request with an id parameter. Defaults to <strong>show</strong>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">struts.mapper.postMethodName</code>  - The method name to call for a POST  request with no id parameter. Defaults to <strong>create</strong>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">struts.mapper.putMethodName</code>  - The method name to call for a PUT  request with an id parameter. Defaults to <strong>update</strong>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">struts.mapper.deleteMethodName</code>  - The method name to call for a DELETE  request with an id parameter. Defaults to <strong>destroy</strong>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">struts.mapper.editMethodName</code>  - The method name to call for a GET  request with an id parameter and the <strong>edit</strong> view specified. Defaults to <strong>edit</strong>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">struts.mapper.newMethodName</code>  - The method name to call for a GET  request with no id parameter and the <strong>new</strong> view specified. Defaults to <strong>editNew</strong>.</p>
-  </li>
+  <li><code class="highlighter-rouge">struts.mapper.idParameterName</code> - If set, this value will be the name  of the parameter under which the id is stored. 
+The id will then be removed  from the action name. Whether or not the method is specified, the mapper will try 
+to truncate the identifier from the url and store it as a parameter.</li>
+  <li><code class="highlighter-rouge">struts.mapper.indexMethodName</code>  - The method name to call for a GET  request with no id parameter. Defaults to <strong>index</strong>.</li>
+  <li><code class="highlighter-rouge">struts.mapper.getMethodName</code>  - The method name to call for a GET  request with an id parameter. Defaults to <strong>show</strong>.</li>
+  <li><code class="highlighter-rouge">struts.mapper.postMethodName</code>  - The method name to call for a POST  request with no id parameter. Defaults to <strong>create</strong>.</li>
+  <li><code class="highlighter-rouge">struts.mapper.putMethodName</code>  - The method name to call for a PUT  request with an id parameter. Defaults to <strong>update</strong>.</li>
+  <li><code class="highlighter-rouge">struts.mapper.deleteMethodName</code>  - The method name to call for a DELETE  request with an id parameter. Defaults to <strong>destroy</strong>.</li>
+  <li><code class="highlighter-rouge">struts.mapper.editMethodName</code>  - The method name to call for a GET  request with an id parameter and the <strong>edit</strong> view specified. Defaults to <strong>edit</strong>.</li>
+  <li><code class="highlighter-rouge">struts.mapper.newMethodName</code>  - The method name to call for a GET  request with no id parameter and the <strong>new</strong> view specified. Defaults to <strong>editNew</strong>.</li>
 </ul>
 
 <p>The following URL’s will invoke its methods:</p>
 
 <ul>
-  <li>
-    <p><code class="highlighter-rouge">GET: /movies</code> =&gt; method=<strong>index</strong></p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">GET: /movies/Thrillers</code> =&gt; method=<strong>show</strong>, id=<strong>Thrillers</strong></p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">GET: /movies/Thrillers;edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">GET: /movies/Thrillers/edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">GET: /movies/new</code>  =&gt; method=<strong>editNew</strong></p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">POST: /movies</code>  =&gt; method=<strong>create</strong></p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">PUT: /movies/Thrillers</code>  =&gt; method=<strong>update</strong>, id=<strong>Thrillers</strong></p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">DELETE: /movies/Thrillers</code>  =&gt; method=<strong>destroy</strong>, id=<strong>Thrillers</strong></p>
-  </li>
+  <li><code class="highlighter-rouge">GET: /movies</code> =&gt; method=<strong>index</strong></li>
+  <li><code class="highlighter-rouge">GET: /movies/Thrillers</code> =&gt; method=<strong>show</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="highlighter-rouge">GET: /movies/Thrillers;edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="highlighter-rouge">GET: /movies/Thrillers/edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="highlighter-rouge">GET: /movies/new</code>  =&gt; method=<strong>editNew</strong></li>
+  <li><code class="highlighter-rouge">POST: /movies</code>  =&gt; method=<strong>create</strong></li>
+  <li><code class="highlighter-rouge">PUT: /movies/Thrillers</code>  =&gt; method=<strong>update</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="highlighter-rouge">DELETE: /movies/Thrillers</code>  =&gt; method=<strong>destroy</strong>, id=<strong>Thrillers</strong></li>
 </ul>
 
-<p>To simulate the HTTP methods PUT and DELETE, since they aren’t supported by HTML, the HTTP parameter “_method” will be used.</p>
+<p>To simulate the HTTP methods PUT and DELETE, since they aren’t supported by HTML, the HTTP parameter <code class="highlighter-rouge">_method</code> will be used.</p>
 
 <p>Or, expressed as a table:</p>
 
@@ -314,32 +292,31 @@
 
 <h3 id="content-types">Content Types</h3>
 
-<p>In addition to providing mapping of RESTful URL’s to Controller ( Action ) invocations, the REST plugin also provides the ability to produce multiple representations of the resource data. By default, the plugin can return the resource in the following content types:</p>
+<p>In addition to providing mapping of RESTful URL’s to Controller ( Action ) invocations, the REST plugin also provides 
+the ability to produce multiple representations of the resource data. By default, the plugin can return the resource 
+in the following content types:</p>
 
 <ul>
-  <li>
-    <p>HTML</p>
-  </li>
-  <li>
-    <p>XML </p>
-  </li>
-  <li>
-    <p>JSON</p>
-  </li>
+  <li>HTML</li>
+  <li>XML </li>
+  <li>JSON</li>
 </ul>
 
-<p>There is nothing configure here, just add the conent type extension to your RESTful URL. The framework will take care of the rest. So, for instance, assuming a Controller called Movies and a movie with the id of superman, the following URL’s will all hit the</p>
+<p>There is nothing configure here, just add the content type extension to your RESTful URL. The framework will take care 
+of the rest. So, for instance, assuming a Controller called Movies and a movie with the id of superman, the following 
+URL’s will all hit the</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>http://my.company.com/myapp/movies/superman
 http://my.company.com/myapp/movies/superman.xml
 http://my.company.com/myapp/movies/superman.xhtml
 http://my.company.com/myapp/movies/superman.json
-
 </code></pre>
 </div>
 
 <blockquote>
-  <p>Note, these content types are supported as incoming data types as well. And, if you need, you can extend the functionality by writing your own implementations of org.apache.struts2.rest.handler.ContentTypeHandler and registering them with the system.</p>
+  <p>Note, these content types are supported as incoming data types as well. And, if you need, you can extend 
+the functionality by writing your own implementations of org.apache.struts2.rest.handler.ContentTypeHandler 
+and registering them with the system.</p>
 </blockquote>
 
 <h2 id="usage">Usage</h2>
@@ -347,15 +324,9 @@ http://my.company.com/myapp/movies/superman.json
 <p>This section will walk you through a quick demo. Here are the steps in the sequence that we will follow.</p>
 
 <ul>
-  <li>
-    <p>Setting Up your Project</p>
-  </li>
-  <li>
-    <p>Configuring your Project</p>
-  </li>
-  <li>
-    <p>Writing your Controllers</p>
-  </li>
+  <li>Setting Up your Project</li>
+  <li>Configuring your Project</li>
+  <li>Writing your Controllers</li>
 </ul>
 
 <h3 id="setting-up">Setting Up</h3>
@@ -363,30 +334,28 @@ http://my.company.com/myapp/movies/superman.json
 <p>Assuming you have a normal Struts 2 application, all you need to do for this REST demo is to add the following two plugins:</p>
 
 <ul>
-  <li>
-    <p>Struts 2 Rest Plugin</p>
-  </li>
-  <li>
-    <p><a href="../convention">Struts 2 Convention Plugin</a></p>
-  </li>
+  <li>Struts 2 Rest Plugin</li>
+  <li><a href="../convention">Struts 2 Convention Plugin</a></li>
 </ul>
 
 <blockquote>
   <p>Note, you can download the jars for these plugins from <a href="http://search.maven.org/#search%7Cga%7C1%7Cstruts2-convention-plugin">Maven Central</a></p>
 </blockquote>
 
-<p><strong>Configuration ( struts.xml )</strong></p>
+<h3 id="configuration---strutsxml">Configuration - struts.xml</h3>
 
-<p>Just dropping the plugin’s into your application may not produce exactly the desired effect. There are a couple of considerations. The first consideration is whether you want to have any non-RESTful URL’s coexisting with your RESTful URL’s. We’ll show two configurations. The first assumes all you want to do is REST. The second assumes you want to keep other non-RESTful URL’s alive in the same Struts 2 application.</p>
+<p>Just dropping the plugin’s into your application may not produce exactly the desired effect. There are a couple of considerations. 
+The first consideration is whether you want to have any non-RESTful URL’s coexisting with your RESTful URL’s. We’ll 
+show two configurations. The first assumes all you want to do is REST. The second assumes you want to keep other 
+non-RESTful URL’s alive in the same Struts 2 application.</p>
 
-<p>As with all configuration of Struts 2, we prefer using &lt;constant/&gt; elements in our struts.xml.</p>
+<p>As with all configuration of Struts 2, we prefer using <code class="highlighter-rouge">&lt;constant/&gt;</code> elements in our <code class="highlighter-rouge">struts.xml</code>.</p>
 
-<p><strong>REST Only Configuration</strong></p>
+<h3 id="rest-only-configuration">REST Only Configuration</h3>
 
 <p>Instruct Struts to use the REST action mapper:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"rest"</span> <span class="nt">/&gt;</span>
-
 </code></pre>
 </div>
 
@@ -398,34 +367,44 @@ http://my.company.com/myapp/movies/superman.json
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.mapAllMatches"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.default.parent.package"</span> <span class="na">value=</span><span class="s">"rest-default"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.package.locators"</span> <span class="na">value=</span><span class="s">"example"</span><span class="nt">/&gt;</span>
-
 </code></pre>
 </div>
 
 <blockquote>
-  <p>Note, you don’t have to use the Convention plugin just to use the REST plugin. The actions of your RESTful application can be defined in XML just as easily as by convention. The REST mapper doesn’t care how the application came to know about your actions when it maps a URL to an invocation of one of it’s methods.</p>
+  <p>Note, you don’t have to use the Convention plugin just to use the REST plugin. The actions of your RESTful application 
+can be defined in XML just as easily as by convention. The REST mapper doesn’t care how the application came to know 
+about your actions when it maps a URL to an invocation of one of it’s methods.</p>
 </blockquote>
 
-<p><strong>REST and non-RESTful URL’s Together Configuration</strong></p>
+<h3 id="rest-and-non-restful-urls-together-configuration">REST and non-RESTful URL’s Together Configuration</h3>
 
-<p>If you want to keep using some non-RESTful URL’s alongside your REST stuff, then you’ll have to provide for a configuration that utilizes to mappers.</p>
+<p>If you want to keep using some non-RESTful URL’s alongside your REST stuff, then you’ll have to provide 
+for a configuration that utilizes to mappers.</p>
 
-<p>Plugins contain their own configuration. If you look in the Rest plugin jar, you’ll see the struts-plugin.xml and in that you’ll see some configuration settings made by the plugin. Often, the plugin just sets things the way it wants them. You may frequently need to override those settings in your own struts.xml.</p>
+<p>Plugins contain their own configuration. If you look in the Rest plugin jar, you’ll see the struts-plugin.xml and in that 
+you’ll see some configuration settings made by the plugin. Often, the plugin just sets things the way it wants them. 
+You may frequently need to override those settings in your own struts.xml.</p>
 
-<p>First, you’ll need to re-assert the extensions that struts knows about because the rest plugin will have thrown out the default <code class="highlighter-rouge">action</code> extension.</p>
+<p>First, you’ll need to re-assert the extensions that struts knows about because the rest plugin will have thrown out 
+the default <code class="highlighter-rouge">action</code> extension.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>  <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.action.extension"</span> <span class="na">value=</span><span class="s">"xhtml,,xml,json,action"</span><span class="nt">/&gt;</span>
-
 </code></pre>
 </div>
 
-<p>Next, we will configure the <code class="highlighter-rouge">PrefixBasedActionMapper</code>, which is part of the core Struts 2 distribution, to have some URL’s routed to the Rest mapper and others to the default mapper.</p>
+<p>Next, we will configure the <a href="../../core-developers/action-mapper.html#prefixbasedactionmapper">PrefixBasedActionMapper</a>, 
+which is part of the core Struts 2 distribution, to have some URL’s routed to the Rest mapper and others to the default mapper.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>  <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.prefixMapping"</span> <span class="na">value=</span><span class="s">"/rest:rest,:struts"</span><span class="nt">/&gt;</span>
-
+  <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.actionProxyFactory"</span> <span class="na">value=</span><span class="s">"prefix"</span><span class="nt">/&gt;</span>
 </code></pre>
 </div>
+
+<blockquote>
+  <p>Please be aware that you should also use the <code class="highlighter-rouge">PrefixBasedActionProxyFactory</code> factory together with the <code class="highlighter-rouge">PrefixBasedActionMapper</code> 
+mapper to allow the framework to create proper <code class="highlighter-rouge">ActionProxy</code>s per given prefix.</p>
+</blockquote>
 
 <p>And, again, we’re relying on the Convention plugin to find our controllers, so we need to configure the convention plugin a bit:</p>
 
@@ -433,13 +412,16 @@ http://my.company.com/myapp/movies/superman.json
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.mapAllMatches"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.default.parent.package"</span> <span class="na">value=</span><span class="s">"rest-default"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.package.locators"</span> <span class="na">value=</span><span class="s">"example"</span><span class="nt">/&gt;</span>
-
 </code></pre>
 </div>
 
 <h3 id="write-your-controller-actions">Write Your Controller Actions</h3>
 
-<p>Once everything is configured, you need to create the controllers. Controllers are simply actions created with the purpose of handling requests for a give RESTful resource. As we saw in the mapping logic above, various REST URL’s will hit different methods on the controller. Traditionally, normal Struts 2 actions expose the <code class="highlighter-rouge">execute</code> method as their target method. Here’s a sample controller for a <em>orders</em>  resource. Note, this sample doesn’t implement all of the methods that can be hit via the RESTful action mapper’s interpretation of URL’s.</p>
+<p>Once everything is configured, you need to create the controllers. Controllers are simply actions created with 
+the purpose of handling requests for a give RESTful resource. As we saw in the mapping logic above, various REST URL’s 
+will hit different methods on the controller. Traditionally, normal Struts 2 actions expose the <code class="highlighter-rouge">execute</code> method as their 
+target method. Here’s a sample controller for a <code class="highlighter-rouge">orders</code> resource. Note, this sample doesn’t implement all of the methods 
+that can be hit via the RESTful action mapper’s interpretation of URL’s.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts2</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
 
@@ -465,84 +447,62 @@ http://my.company.com/myapp/movies/superman.json
 
     <span class="c1">// getters and setters</span>
 <span class="o">}</span>
-
 </code></pre>
 </div>
 
-<p>In this example, the <code class="highlighter-rouge">ModelDriven</code> interface is used to ensure that only my model, the Order object in this case, is returned to the client, otherwise, the whole <code class="highlighter-rouge">OrdersController</code> object would be serialized.</p>
+<p>In this example, the <code class="highlighter-rouge">ModelDriven</code> interface is used to ensure that only my model, the Order object in this case, is 
+returned to the client, otherwise, the whole <code class="highlighter-rouge">OrdersController</code> object would be serialized.</p>
 
-<p>Where’s ActionSupport? Normally, you extend ActionSupport when writing Struts 2 actions. In these case, our controller doesn’t do that. Why, you ask? ActionSupport provides a bunch of important functionality to our actions, including support for i18n and validation. All of this functionality, in the RESTful case, is provided by the default interceptor stack defined in the REST plugin’s struts-plugin.xml file. Unless you willfully break your controller’s membership in the rest-default package in which that stack is defined, then you’ll get all that functionality you are used to inheriting from ActionSupport.</p>
+<p>Where’s ActionSupport? Normally, you extend ActionSupport when writing Struts 2 actions. In these case, our controller 
+doesn’t do that. Why, you ask? ActionSupport provides a bunch of important functionality to our actions, including support 
+for i18n and validation. All of this functionality, in the RESTful case, is provided by the default interceptor stack 
+defined in the REST plugin’s struts-plugin.xml file. Unless you willfully break your controller’s membership 
+in the rest-default package in which that stack is defined, then you’ll get all that functionality you are used 
+to inheriting from ActionSupport.</p>
 
-<p>You may wonder why the <code class="highlighter-rouge">show()</code> method returns a <code class="highlighter-rouge">HttpHeaders</code> object and the <code class="highlighter-rouge">update()</code> method returns the expected result code String. The REST Plugin adds support for action methods that return <code class="highlighter-rouge">HttpHeaders</code> objects as a way for the action to have more control over the response. In this example, we wanted to ensure the response included the ETag header and a last modified date so that the information will be cached properly by the client. The <code class="highlighter-rouge">HttpHeaders</code> object is a convenient way to control the response in a type-safe way.</p>
+<p>You may wonder why the <code class="highlighter-rouge">show()</code> method returns a <code class="highlighter-rouge">HttpHeaders</code> object and the <code class="highlighter-rouge">update()</code> method returns the expected 
+result code String. The REST Plugin adds support for action methods that return <code class="highlighter-rouge">HttpHeaders</code> objects as a way for 
+the action to have more control over the response. In this example, we wanted to ensure the response included the ETag 
+header and a last modified date so that the information will be cached properly by the client. The <code class="highlighter-rouge">HttpHeaders</code> object 
+is a convenient way to control the response in a type-safe way.</p>
 
-<p>Also, notice we aren’t returning the usual “success” result code in either method. This allows us to use the special features of the <a href="../codebehind">Codebehind Plugin</a> to intuitively select the result template to process when this resource is accessed with the <code class="highlighter-rouge">.xhtml</code> extension. In this case, we can provide a customized XHTML view of the resource by creating <code class="highlighter-rouge">/orders-show.jsp</code> and <code class="highlighter-rouge">/orders-update.jsp</code> for the respective methods.</p>
+<p>Also, notice we aren’t returning the usual “success” result code in either method. This allows us to use the special 
+features of the <a href="../codebehind">Codebehind Plugin</a> to intuitively select the result template to process when this 
+resource is accessed with the <code class="highlighter-rouge">.xhtml</code> extension. In this case, we can provide a customized XHTML view of the resource 
+by creating <code class="highlighter-rouge">/orders-show.jsp</code> and <code class="highlighter-rouge">/orders-update.jsp</code> for the respective methods.</p>
 
 <h2 id="advanced-topics">Advanced Topics</h2>
 
-<p>The following sections describe some of the non-standard bells and whistles that you might need to utilize for your application’s more non-standard requirements.</p>
+<p>The following sections describe some of the non-standard bells and whistles that you might need to utilize for your 
+application’s more non-standard requirements.</p>
 
 <h3 id="custom-contenttypehandlers">Custom ContentTypeHandlers</h3>
 
-<p>If you need to handle extensions that aren’t supported by the default handlers, you can create your own <code class="highlighter-rouge">ContentTypeHandler</code> implementation and define it in your <code class="highlighter-rouge">struts.xml</code>:</p>
+<p>If you need to handle extensions that aren’t supported by the default handlers, you can create your own <code class="highlighter-rouge">ContentTypeHandler</code> 
+implementation and define it in your <code class="highlighter-rouge">struts.xml</code>:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">"yaml"</span> <span class="na">type=</span><span class="s">"org.apache.struts2.rest.handler.ContentTypeHandler"</span> <span class="na">class=</span><span class="s">"com.mycompany.MyYamlContentHandler"</span> <span class="nt">/&gt;</span>
-
 </code></pre>
 </div>
 
-<p>If the built-in content type handlers don’t do what you need, you can override the handling of any extension by providing an alternate handler. First, define your own <code class="highlighter-rouge">ContentTypeHandler</code> and declare with its own alias. For example:</p>
+<p>If the built-in content type handlers don’t do what you need, you can override the handling of any extension by providing 
+an alternate handler. First, define your own <code class="highlighter-rouge">ContentTypeHandler</code> and declare with its own alias. For example:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">"myXml"</span> <span class="na">type=</span><span class="s">"org.apache.struts2.rest.handler.ContentTypeHandler"</span> <span class="na">class=</span><span class="s">"com.mycompany.MyXmlContentHandler"</span> <span class="nt">/&gt;</span>
-
 </code></pre>
 </div>
 
-<p>Then, tell the REST Plugin to override the handler for the desired extension with yours. In <code class="highlighter-rouge">struts.properties</code>, it would look like this:</p>
+<p>Then, tell the REST Plugin to override the handler for the desired extension with yours. In <code class="highlighter-rouge">struts.properties</code>, it would 
+look like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.rest.handlerOverride.xml=myXml
-
-</code></pre>
-</div>
-
-<h3 id="use-jackson-framework-as-json-contenttypehandler">Use Jackson framework as JSON ContentTypeHandler</h3>
-
-<p>The default JSON Content Handler is build on top of the <a href="http://json-lib.sourceforge.net/">JSON-lib</a>. If you prefer to use the <a href="http://jackson.codehaus.org/">Jackson framework</a> for JSON serialisation, you can configure the JacksonLibHandler as Content Handler for your json requests. </p>
-
-<p>First you need to add the jackson dependency to your web application by downloading the jar file and put it under WEB-INF/lib or by adding following xml snippet to your dependencies section in the pom.xml when you are using maven as build system.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>jackson-core<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>${jackson.version}<span class="nt">&lt;/version&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-<span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>jackson-databind<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>${jackson.version}<span class="nt">&lt;/version&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-</code></pre>
-</div>
-
-<p>where <code class="highlighter-rouge">${jackson.version}</code> is the latest available version of the libs, right now it is <code class="highlighter-rouge">2.9.2</code>.</p>
-
-<p>Now you can overwrite the Content Handler with the Jackson Content Handler in the struts.xml:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.rest.handler.ContentTypeHandler"</span> <span class="na">name=</span><span class="s">"jackson"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.rest.handler.JacksonLibHandler"</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.rest.handlerOverride.json"</span> <span class="na">value=</span><span class="s">"jackson"</span><span class="nt">/&gt;</span>
-
-<span class="c">&lt;!-- Set to false if the json content can be returned for any kind of http method --&gt;</span>
-<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.rest.content.restrictToGET"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">/&gt;</span> 
-
-<span class="c">&lt;!-- Set encoding to UTF-8, default is ISO-8859-1 --&gt;</span>
-<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.i18n.encoding"</span> <span class="na">value=</span><span class="s">"UTF-8"</span><span class="nt">/&gt;</span> 
-
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.rest.handlerOverride.xml"</span> <span class="na">value=</span><span class="s">"myXml"</span><span class="nt">/&gt;</span>
 </code></pre>
 </div>
 
 <h3 id="settings">Settings</h3>
 
 <p>The following settings can be customized. See the <a href="/core-developers/configuration-files.html">developer guide</a>.
- For more configuration options see the <a href="../convention">Convention Plugin Documentation</a></p>
+For more configuration options see the <a href="../convention">Convention Plugin Documentation</a></p>
 
 <table>
   <thead>
@@ -590,15 +550,9 @@ http://my.company.com/myapp/movies/superman.json
 <h2 id="resources">Resources</h2>
 
 <ul>
-  <li>
-    <p><a href="http://www.b-simple.de/documents">http://www.b-simple.de/documents</a> - Short RESTful Rails tutorial (PDF, multiple languages)</p>
-  </li>
-  <li>
-    <p><a href="http://www.amazon.com/RESTful-Web-Services-Leonard-Richardson/dp/0596529260">RESTful Web Services</a> - Highly recommend book from O’Reilly</p>
-  </li>
-  <li>
-    <p><a href="http://raibledesigns.com/rd/entry/go_light_with_apache_struts">Go Light with Apache Struts 2 and REST</a> - Presentation by Don Brown at ApacheCon US 2008</p>
-  </li>
+  <li><a href="http://www.b-simple.de/documents">http://www.b-simple.de/documents</a> - Short RESTful Rails tutorial (PDF, multiple languages)</li>
+  <li><a href="http://www.amazon.com/RESTful-Web-Services-Leonard-Richardson/dp/0596529260">RESTful Web Services</a> - Highly recommend book from O’Reilly</li>
+  <li><a href="http://raibledesigns.com/rd/entry/go_light_with_apache_struts">Go Light with Apache Struts 2 and REST</a> - Presentation by Don Brown at ApacheCon US 2008</li>
 </ul>
 
 <h2 id="version-history">Version History</h2>
