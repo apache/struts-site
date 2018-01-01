@@ -86,4 +86,4 @@ The value of the iterator tag is states, which causes the Struts 2 framework to 
 
 The Struts 2 iterator tag has additional attributes you can use to control the begin and end values for specifying that the iterator tag should only loop over a part of the collection. See the [iterator tag reference](https://cwiki.apache.org/confluence/display/WW/iterator) for more information.
 
-|Return to [Form validation using XML](form-validation-using-xml.md)|or|onward to [Wildcard method selection](wildcard-method-selection.html)|
+|Return to [Form validation using XML](form-validation-using-xml.html)|or|onward to [Wildcard method selection](wildcard-method-selection.html)|
