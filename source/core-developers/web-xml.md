@@ -77,7 +77,7 @@ In the example above we've mapped the Struts 2 dispatcher to `/*`, so Struts 2 h
 This is because Struts 2 serves static content from its jar files, including Dojo JavaScript files (if using S2.0, 
 or the Dojo plugin in S2.1+) and FreeMarker templates for the Struts 2 tags that produce HTML.
 
-If we change the filter mapping to something else, for example `/*.html`, we must take this in to account and extract 
+If we change the filter mapping to something else, for example `/*.html`, we must take this into account and extract 
 the content that would normally be served from the Struts 2 jar files, or some other solution.
 
 Since Struts 2.1.7, you are able to provide a comma separated list of patterns for which when matching against 
