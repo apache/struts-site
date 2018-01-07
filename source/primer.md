@@ -74,8 +74,8 @@ If you would like to learn HTML, we recommend
 ### The HTTP Request/Response cycle {#cycle}
 
 A very important part of HTTP for the web developer is the request/response cycle. To use HTTP
-you have to make a request. A HTTP server, like a web server, is then obliged to respond. When you
-build your web application, you design it to react to a HTTP request by returning a HTTP response.
+you have to make a request. An HTTP server, like a web server, is then obliged to respond. When you
+build your web application, you design it to react to an HTTP request by returning an HTTP response.
 Frameworks often abstract much of these nuts and bolts, but it is important to understand
 what is happening behind the scenes.
 
@@ -133,7 +133,7 @@ is a plain old Java object which is instanced for each request.
 
 ### JavaScript, AJAX, and SOAP {#javascript}
 
-WIth HTTP and HTML you can already provide static web pages. Today this is much
+With HTTP and HTML you can already provide static web pages. Today this is much
 often not longer enough and your application users might expect a interactive user interface.
 Web developers often resort to [JavaScript](http://en.wikipedia.org/wiki/JavaScript)
 to make web applications more interesting.
