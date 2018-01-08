@@ -25,7 +25,7 @@ easier to reference dynamic data from a page, the Struts 2 framework offers a se
 HTML tag while providing added value. Other tags create non-standard, but useful controls.
 
 To use the Struts 2 tags on the view page, you must include a tag library directive. Typically, the taglib directive 
-is `<%@ taglib prefix="s" uri="/struts-tags" %\>`. So the prefix for all the Struts 2 tags will be `s`. 
+is `<%@ taglib prefix="s" uri="/struts-tags" %>`. So the prefix for all the Struts 2 tags will be `s`. 
 If you want to actually read the Struts 2 tag TLD file, you'll find it in the `META-INF` folder of the Struts 2 core jar.
 
 ## Struts 2 url Tag
