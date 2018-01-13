@@ -51,7 +51,7 @@ link results in this.
 ![debuging-struts-2.png](attachments/att17137673_debuging-struts-2.png)
 
 You may then click on one of the tabs (Results, Exception Mappings, Interceptors, Properties, Validators) to get more 
-information about how the Struts 2 framework is has configured that specific action.
+information about how the Struts 2 framework has configured that specific action.
 
 On the left side of the page is the config browser plugin menu. Clicking on constants will render a view that lists all 
 the Struts 2 constants and their properties for your application. Clicking on beans shows the beans Struts 2 is managing. 
