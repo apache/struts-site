@@ -83,7 +83,7 @@ The ExceptionMappingInterceptor is one of the Struts 2 interceptors that is part
 
 Now when the application throws an uncaught exception, the Struts 2 framework will handle it and will also write an entry to the log that includes the stack trace. In the example above, I've set the level to log these exceptions to be ERROR.
 
-In the example applications, the logging is just to the Servlet container's console (see the `log4j.xml` file for the log settings).
+In the example applications, the logging is just to the Servlet container's console (see the `log4j2.xml` file for the log settings).
 
 ## Display Exception Information In Browser
 

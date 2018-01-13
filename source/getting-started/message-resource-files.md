@@ -19,7 +19,7 @@ Struts 2 GitHub repository at [struts-examples](https://github.com/apache/struts
 ## Introduction
 
 In this tutorial we'll explore using Struts 2 message resource capabilities (also called resource bundles). Message 
-resources provide a simple way to put text in a view page that is the same through out your application, to create form 
+resources provide a simple way to put text in a view page that is the same throughout your application, to create form 
 field labels, and to change text to a specific language based on the user's locale (i18n).
 
 The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are having 
