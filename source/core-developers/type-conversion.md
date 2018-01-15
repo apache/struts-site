@@ -366,6 +366,21 @@ CreateIfNull_beanList=true
 </s:iterator>
 ```
 
+### Auto growth collection limit
+
+There is a special constant that limits auto growth of a collection, by default it is set to **255** which means
+only 256 elements are allowed in the collection. This limitation was introduced to avoid DoS attacks.
+If you know that the collection can have more elements you must define the below constant and set its value
+to desire size of the collection.
+
+```xml
+<constant name="struts.ognl.autoGrowthCollectionLimit" value="1024"/>
+``` 
+
+> NOTE: before this constant was named as `xwork.autoGrowCollectionLimit` but it is deprecated now and will be removed
+> with a next major release.
+
+
 ## Type Conversion Error Handling
 
 Type conversion error handling provides a simple way to distinguish between an input `validation` problem 
