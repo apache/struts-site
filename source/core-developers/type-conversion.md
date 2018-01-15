@@ -132,7 +132,7 @@ entry to <b>ClassName-conversion.properties</b> (Note that the PointConverter sh
 interface):
 
 ```
-point = com.acme.PointConverter</b></p>
+point = com.acme.PointConverter
 ```
 
 Your type converter should be sure to check what class type it is being requested to convert. Because it is used
