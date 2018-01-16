@@ -144,6 +144,7 @@
   <li><a href="#collection-and-map-support" id="markdown-toc-collection-and-map-support">Collection and Map Support</a>    <ul>
       <li><a href="#indexing-a-collection-by-a-property-of-that-collection" id="markdown-toc-indexing-a-collection-by-a-property-of-that-collection">Indexing a collection by a property of that collection</a></li>
       <li><a href="#an-advanced-example-for-indexed-lists-and-maps" id="markdown-toc-an-advanced-example-for-indexed-lists-and-maps">An advanced example for indexed Lists and Maps</a></li>
+      <li><a href="#auto-growth-collection-limit" id="markdown-toc-auto-growth-collection-limit">Auto growth collection limit</a></li>
     </ul>
   </li>
   <li><a href="#type-conversion-error-handling" id="markdown-toc-type-conversion-error-handling">Type Conversion Error Handling</a></li>
@@ -283,7 +284,7 @@ conversion to and from strings. So turning “3, 22” in to new Point(3, 22) is
 entry to <b>ClassName-conversion.properties</b> (Note that the PointConverter should impl the TypeConverter
 interface):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>point = com.acme.PointConverter&lt;/b&gt;&lt;/p&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>point = com.acme.PointConverter
 </code></pre>
 </div>
 
@@ -520,6 +521,22 @@ CreateIfNull_beanList=true
   &lt;stextfield name="beanList(%{bean.id}).name" /&gt;
 &lt;/s:iterator&gt;
 </code></pre>
+
+<h3 id="auto-growth-collection-limit">Auto growth collection limit</h3>
+
+<p>There is a special constant that limits auto growth of a collection, by default it is set to <strong>255</strong> which means
+only 256 elements are allowed in the collection. This limitation was introduced to avoid DoS attacks.
+If you know that the collection can have more elements you must define the below constant and set its value
+to desire size of the collection.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ognl.autoGrowthCollectionLimit"</span> <span class="na">value=</span><span class="s">"1024"</span><span class="nt">/&gt;</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>NOTE: before this constant was named as <code class="highlighter-rouge">xwork.autoGrowCollectionLimit</code> but it is deprecated now and will be removed
+with a next major release.</p>
+</blockquote>
 
 <h2 id="type-conversion-error-handling">Type Conversion Error Handling</h2>
 
