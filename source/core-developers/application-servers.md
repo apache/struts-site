@@ -19,3 +19,4 @@ be some extra steps to obtain full functionality.
 - [WebLogic 6.1](weblogic-6-1.html)
 - [WebSphere](websphere.html)
 - [Glassfish 2.x](glassfish-2-x.html)
+- Wildfly 10.x
