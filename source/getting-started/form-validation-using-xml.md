@@ -100,7 +100,7 @@ The Struts 2 framework provides a powerful way to validate a user's form field i
 </validator>
 ```
 
-The param name="regex" node is used to specify the regular expression that will be applied to the user's input. Note how the regular expression is contained within a CDATA section.
+The `param name="regex"` node is used to specify the regular expression that will be applied to the user's input. Note how the regular expression is contained within a CDATA section.
 
 ## Validating A User's Input Using An OGNL Expression
 
