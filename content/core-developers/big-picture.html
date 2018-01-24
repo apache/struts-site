@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Core Developers Guide (WIP)</title>
+  <title>Big Picture</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -125,106 +125,42 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/index.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    
-    <h1 id="core-developers-guide">Core Developers Guide</h1>
+    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/big-picture.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <h1 id="big-picture">Big Picture</h1>
 
-<p>Struts 2 processes requests using three core types: <a href="interceptor-configuration.html">interceptors</a>, <a href="action-configuration.html">actions</a>, and <a href="result-configuration.html">results</a>. 
-Each may be configured via XML or annotations.</p>
+<p>The diagram describes the framework’s architecture.</p>
 
-<h2 id="developing-applications-with-struts-2">Developing Applications with Struts 2</h2>
+<p><img src="attachments/Struts2-Architecture.png" alt="Struts2-Architecture.png" /></p>
 
-<ul>
-  <li><a href="nutshell.html">Nutshell</a></li>
-  <li><a href="ajax.html">AJAX</a></li>
-  <li><a href="dependency-injection.html">Dependency Injection</a></li>
-  <li><a href="debugging.html">Debugging</a></li>
-  <li><a href="development-mode.html">Development Mode</a></li>
-</ul>
+<p>In the diagram, an initial request goes to the Servlet container (such as Jetty or Resin) which is passed through 
+a standard filter chain. The chain includes the (optional) <strong>ActionContextCleanUp</strong> filter, which is useful when 
+integrating technologies such as <em>SiteMesh Plugin</em> . Next, the required <strong>FilterDispatcher</strong> is called, which in turn 
+consults the <a href="action-mapper">ActionMapper</a> to determine if the request should invoke an action.</p>
 
-<h2 id="configuration">Configuration</h2>
+<p>If the ActionMapper determines that an Action should be invoked, the FilterDispatcher delegates control 
+to the <strong>ActionProxy</strong>.  The ActionProxy consults the framework <a href="configuration-files">Configuration Files</a> manager 
+(initialized from the <a href="struts-xml">struts.xml</a> file). Next, the ActionProxy creates an <strong>ActionInvocation</strong>, which is 
+responsible for the command pattern implementation. This includes invoking any <strong>Interceptors</strong> (the <a href="before-annotation">before</a> 
+clause) in advance of invoking the <strong>Action</strong> itself.</p>
 
-<ul>
-  <li><a href="../plugins/convention/">Configuration by Convention</a></li>
-  <li><a href="annotations.html">Annotations</a></li>
-  <li><a href="configuration-elements.html">Configuration Elements</a>
-    <ul>
-      <li><a href="action-configuration.html">Actions</a>, <a href="wildcard-mappings.html">Wildcard Mappings</a>, <a href="bean-configuration.html">Beans</a>, <a href="constant-configuration.html">Constants</a></li>
-      <li><a href="exception-configuration.html">Exceptions</a>, <a href="include-configuration.html">Includes</a>, <a href="interceptor-configuration.html">Interceptors</a></li>
-      <li><a href="namespace-configuration.html">Namespaces</a>, <a href="package-configuration.html">Packages</a>, <a href="result-configuration.html">Results</a></li>
-      <li><a href="unknown-handlers.html">Unknown Handlers</a>, <a href="dispatcher.html">Dispatcher</a></li>
-    </ul>
-  </li>
-  <li><a href="configuration-files.html">Configuration Files</a>
-    <ul>
-      <li><a href="web-xml.html">web.xml</a></li>
-      <li><a href="struts-xml.html">struts.xml</a></li>
-      <li><a href="default-properties.html">default.properties</a></li>
-      <li><a href="struts-default-xml.html">struts-default.xml</a></li>
-      <li><a href="velocity-properties.html">velocity.properties</a></li>
-      <li><a href="struts-default-vm.html">struts-default.vm</a></li>
-    </ul>
-  </li>
-  <li><a href="application-servers.html">Application Servers</a></li>
-  <li><a href="performance-tuning.html">Performance Tuning</a></li>
-  <li><a href="../security/">Security</a></li>
-  <li><a href="../plugins/junit/">Testing Actions</a>
-    <ul>
-      <li><a href="https://depressedprogrammer.wordpress.com/2007/06/18/unit-testing-struts-2-actions-spring-junit/">(arsenalist)</a></li>
-      <li><a href="http://fassisrosa.blogspot.com/2006/11/unit-testing-struts-20\.html">(rosa)</a></li>
-    </ul>
-  </li>
-  <li><a href="interceptors.html">Interceptors</a>
-    <ul>
-      <li><a href="writing-interceptors.html">Writing Interceptors</a></li>
-      <li><a href="parameters-interceptor.html">Excluding Parameters</a></li>
-    </ul>
-  </li>
-  <li>Actions
-    <ul>
-      <li><a href="model-driven.html">Model Driven</a></li>
-      <li><a href="action-chaining.html">Action Chaining</a></li>
-      <li><a href="action-event-listener.html">ActionEventListener</a></li>
-    </ul>
-  </li>
-  <li>Results
-    <ul>
-      <li><a href="result-types.html">Result Types</a></li>
-      <li><a href="dispatcher-listener.html">DispatcherListener</a></li>
-      <li><a href="pre-result-listener.html">PreResultListener</a></li>
-    </ul>
-  </li>
-  <li><a href="validation.html">Validation</a></li>
-  <li><a href="localization.html">Localization</a>
-    <ul>
-      <li><a href="formatting-dates-and-numbers.html">Formatting Dates and Numbers</a></li>
-    </ul>
-  </li>
-  <li><a href="type-conversion.html">Type Conversion</a></li>
-  <li><a href="static-content.html">Static Content</a></li>
-  <li>Portlets
-    <ul>
-      <li>[Tutorial] - export https://cwiki.apache.org/confluence/display/WW/Struts+2+Portlet+Tutorial</li>
-      <li>[Configuration/Documentation] - export https://cwiki.apache.org/confluence/display/WW/Portlet+Plugin</li>
-    </ul>
-  </li>
-  <li><a href="logging.html">Logging</a></li>
-  <li><a href="accessing-application-session-request-objects.html">Accessing application, session, request objects</a></li>
-  <li><a href="big-picture">Big Picture</a>
-    <ul>
-      <li><a href="object-factory">ObjectFactory</a></li>
-      <li><a href="action-mapper.html">Action Mapper</a></li>
-      <li><a href="action-proxy-and-actionproxy-factory.html">Action Proxy &amp; ActionProxy Factory</a></li>
-      <li><a href="configuration-provider-and-configuration">Configuration Provider &amp; Configuration</a></li>
-    </ul>
-  </li>
-  <li><a href="../faq/">FAQs</a>
-    <ul>
-      <li><a href="../maven-archetypes/">Struts 2 Maven Archetypes</a></li>
-      <li>[Cookbook]</li>
-    </ul>
-  </li>
-</ul>
+<p>Once the Action returns, the ActionInvocation is responsible for looking up the proper <strong>result</strong> associated 
+with the <strong>Action result code</strong> mapped in <code class="highlighter-rouge">struts.xml</code>.</p>
+
+<p>The result is then executed, which often (but not always, as is the case for <a href="action-chaining">Action Chaining</a>) 
+involves a template written in <a href="../tag-developers/jsp">JSP</a> or <a href="../tag-developers/freemarker">FreeMarker</a> to be rendered. 
+While rendering, the templates can use the <a href="../tag-developers/struts-tags">Struts Tags</a> provided by the framework. 
+Some of those components will work with the ActionMapper to render proper URLs for additional requests.</p>
+
+<blockquote>
+  <p>All objects in this architecture (Actions, <a href="result-types">Results</a>, <a href="interceptors">Interceptors</a>, and so forth) are 
+created by an <a href="object-factory">ObjectFactory</a>. This ObjectFactory is pluggable. We can provide our own ObjectFactory 
+for any reason that requires knowing when objects in the framework are created. A popular ObjectFactory implementation 
+uses Spring as provided by the <a href="../plugins/">Spring Plugin</a>.</p>
+</blockquote>
+
+<p>Interceptors are executed again (in reverse order, calling the <a href="after-annotation">after</a> clause). Finally, the response 
+returns through the filters configured in the web.xml.</p>
 
   </section>
 </article>
