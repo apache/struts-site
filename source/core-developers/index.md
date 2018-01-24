@@ -59,8 +59,11 @@ Each may be configured via XML or annotations.
   - [Configuration/Documentation] - export https://cwiki.apache.org/confluence/display/WW/Portlet+Plugin
 - [Logging](logging.html)
 - [Accessing application, session, request objects](accessing-application-session-request-objects.html)
-- [Action Mapper](action-mapper.html)
-- [Action Proxy & ActionProxy Factory](action-proxy-and-actionproxy-factory.html)
+- [Big Picture](big-picture)
+    - [ObjectFactory](object-factory)
+    - [Action Mapper](action-mapper.html)
+    - [Action Proxy & ActionProxy Factory](action-proxy-and-actionproxy-factory.html)
+    - [Configuration Provider & Configuration](configuration-provider-and-configuration)
 - [FAQs](../faq/)
   - [Struts 2 Maven Archetypes](../maven-archetypes/)
   - [Cookbook]
