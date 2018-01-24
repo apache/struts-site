@@ -1,6 +1,6 @@
 ---
 layout: core-developers
-title: ObjectFactory
+title: Big Picture
 ---
 
 # Big Picture
