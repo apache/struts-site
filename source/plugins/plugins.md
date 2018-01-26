@@ -57,7 +57,7 @@ The following extension points are available in Struts 2:
 
 {% comment %}start snippet id=extensionPoints|lang=html|javadoc=true|org.apache.struts2.config.DefaultBeanSelectionProvider {% endcomment %}
 
-```html
+
  <table border="1" summary="">
    <tr>
      <th>Type</th>
@@ -323,7 +323,7 @@ The following extension points are available in Struts 2:
  </table>
 
 
-```
+
 
 {% comment %}end snippet id=extensionPoints|lang=html|javadoc=true|org.apache.struts2.config.DefaultBeanSelectionProvider {% endcomment %}
 
