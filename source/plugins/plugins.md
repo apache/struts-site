@@ -55,277 +55,52 @@ Extension points allow a plugin to override a key class in the Struts framework 
 
 The following extension points are available in Struts 2:
 
-{% comment %}start snippet id=extensionPoints|lang=html|javadoc=true|org.apache.struts2.config.DefaultBeanSelectionProvider {% endcomment %}
+|Type|Property|Scope|Description|
+|----|--------|-----|-----------|
+|ObjectFactory|struts.objectFactory|singleton|Creates actions, results, and interceptors|
+|factory.ActionFactory|struts.objectFactory.actionFactory|singleton|Dedicated factory used to create Actions, you can implement/extend existing one instead of defining new ObjectFactory|
+|factory.ResultFactory|struts.objectFactory.resultFactory|singleton|Dedicated factory used to create Results, you can implement/extend existing one instead of defining new ObjectFactory|
+|factory.InterceptorFactory|struts.objectFactory.interceptorFactory|singleton|Dedicated factory used to create Interceptors, you can implement/extend existing one instead of defining new ObjectFactory|
+|factory.ConverterFactory|struts.objectFactory.converterFactory|singleton|Dedicated factory used to create TypeConverters, you can implement/extend existing one instead of defining new ObjectFactory|
+|factory.ValidatorFactory|struts.objectFactory.validatorFactory|singleton|Dedicated factory used to create Validators, you can implement/extend existing one instead of defining new ObjectFactory|
+|ActionProxyFactory|struts.actionProxyFactory|singleton|Creates the ActionProxy|
+|util.ObjectTypeDeterminer|struts.objectTypeDeterminer|singleton|Determines what the key and element class of a Map or Collection should be|
+|dispatcher.mapper.ActionMapper|struts.mapper.class|singleton|Determines the ActionMapping from a request and a URI from an ActionMapping|
+|dispatcher.multipart.MultiPartRequest|struts.multipart.parser|per request|Parses a multipart request (file upload)|
+|views.freemarker.FreemarkerManager|struts.freemarker.manager.classname|singleton|Loads and processes Freemarker templates|
+|views.velocity.VelocityManager|struts.velocity.manager.classname|singleton|Loads and processes Velocity templates|
+|validator.ActionValidatorManager|struts.actionValidatorManager|singleton|Main interface for validation managers (regular and annotation based).  Handles both the loading of configuration and the actual validation (since 2.1)|
+|util.ValueStackFactory|struts.valueStackFactory|singleton|Creates value stacks (since 2.1)|
+|reflection.ReflectionProvider|struts.reflectionProvider|singleton|Provides reflection services, key place to plug in a custom expression language (since 2.1)|
+|reflection.ReflectionContextFactory|struts.reflectionContextFactory|singleton|Creates reflection context maps used for reflection and expression language operations (since 2.1)|
+|config.PackageProvider|N/A|singleton|All beans registered as PackageProvider implementations will be automatically included in configuration building (since 2.1)|
+|util.PatternMatcher|struts.patternMatcher|singleton|Matches patterns, such as action names, generally used in configuration (since 2.1)|
+|views.dispatcher.DefaultStaticContentLoader|struts.staticContentLoader|singleton|Loads static resources (since 2.1)|
+|conversion.impl.XWorkConverter|struts.xworkConverter|singleton|Handles conversion logic and allows to load custom converters per class or per action|
+|TextProvider|struts.xworkTextProvider|default|Allows provide custom TextProvider for whole application|
+|LocaleProvider|struts.localeProvider|singleton|DEPRECATED! Allows provide custom TextProvider for whole application - instead this endpoint use <b>struts.localeProviderFactory</b>|
+|LocaleProviderFactory|struts.localeProviderFactory|singleton|Allows provide custom LocaleProvider for whole application|
+|components.UrlRenderer|struts.urlRenderer|singleton|Allows provide custom implementation of environment specific URL rendering/creating class|
+|UnknownHandlerManager|struts.unknownHandlerManager|singleton|Implementation of this interface allows handle logic of unknown Actions, Methods or Results|
+|views.util.UrlHelper|struts.view.urlHelper|singleton|Helper class used with URLRenderer to provide exact logic for building URLs|
+|FileManagerFactory|struts.fileManagerFactory|singleton|Used to create FileManager instance to access files on the File System as also to monitor if reload is needed, can be implemented / overwritten to meet specific an application server needs|
+|conversion.impl.CollectionConverter|struts.converter.collection|singleton|Converter used to convert any object to Collection and back|
+|conversion.impl.ArrayConverter|struts.converter.array|singleton|Converter used to convert any object to Array and back|
+|conversion.impl.DateConverter|struts.converter.date|singleton|Converter used to convert any object to Date and back|
+|conversion.impl.NumberConverter|struts.converter.number|singleton|Converter used to convert any object to Number and back|
+|conversion.impl.StringConverter|struts.converter.string|singleton|Converter used to convert any object to String and back|
+|conversion.ConversionPropertiesProcessor|struts.conversion.properties.processor|singleton|Process Properties to create converters|
+|conversion.ConversionPropertiesProcessor|struts.converter.file.processor|singleton|Process \<class\>-conversion.properties file create converters|
+|conversion.ConversionAnnotationProcessor|struts.converter.annotation.processor|singleton|Process TypeConversion annotation to create converters|
+|conversion.TypeConverterCreator|struts.converter.creator|singleton|Creates user converters|
+|conversion.TypeConverterHolder|struts.converter.holder|singleton|Holds user converters' instances|
+|util.TextParser|struts.expression.parser|singleton|Used to parse expressions like ${foo.bar} or %{bar.foo} but it is up tp the TextParser's implementation what kind of opening char to use (#, $, %, etc)|
+|ExcludedPatternsChecker|struts.excludedPatterns.checker|request|Used across different interceptors to check if given string matches one of the excluded patterns|
+|AcceptedPatternsChecker|struts.acceptedPatterns.checker|request|Used across different interceptors to check if given string matches one of the accepted patterns|
+|util.ContentTypeMatcher|struts.contentTypeMatcher|singleton|Matches content type of uploaded files (since 2.3.22)|
+|LocalizedTextProvider|struts.localizedTextProvider|singleton|Provides access to resource bundles used to localise messages (since 2.5.11)|
 
-
- <table border="1" summary="">
-   <tr>
-     <th>Type</th>
-     <th>Property</th>
-     <th>Scope</th>
-     <th>Description</th>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.ObjectFactory</td>
-     <td>struts.objectFactory</td>
-     <td>singleton</td>
-     <td>Creates actions, results, and interceptors</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.factory.ActionFactory</td>
-     <td>struts.objectFactory.actionFactory</td>
-     <td>singleton</td>
-     <td>Dedicated factory used to create Actions, you can implement/extend existing one instead of defining new ObjectFactory</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.factory.ResultFactory</td>
-     <td>struts.objectFactory.resultFactory</td>
-     <td>singleton</td>
-     <td>Dedicated factory used to create Results, you can implement/extend existing one instead of defining new ObjectFactory</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.factory.InterceptorFactory</td>
-     <td>struts.objectFactory.interceptorFactory</td>
-     <td>singleton</td>
-     <td>Dedicated factory used to create Interceptors, you can implement/extend existing one instead of defining new ObjectFactory</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.factory.ConverterFactory</td>
-     <td>struts.objectFactory.converterFactory</td>
-     <td>singleton</td>
-     <td>Dedicated factory used to create TypeConverters, you can implement/extend existing one instead of defining new ObjectFactory</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.factory.ValidatorFactory</td>
-     <td>struts.objectFactory.validatorFactory</td>
-     <td>singleton</td>
-     <td>Dedicated factory used to create Validators, you can implement/extend existing one instead of defining new ObjectFactory</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.ActionProxyFactory</td>
-     <td>struts.actionProxyFactory</td>
-     <td>singleton</td>
-     <td>Creates the ActionProxy</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.util.ObjectTypeDeterminer</td>
-     <td>struts.objectTypeDeterminer</td>
-     <td>singleton</td>
-     <td>Determines what the key and element class of a Map or Collection should be</td>
-   </tr>
-   <tr>
-     <td>org.apache.struts2.dispatcher.mapper.ActionMapper</td>
-     <td>struts.mapper.class</td>
-     <td>singleton</td>
-     <td>Determines the ActionMapping from a request and a URI from an ActionMapping</td>
-   </tr>
-   <tr>
-     <td>org.apache.struts2.dispatcher.multipart.MultiPartRequest</td>
-     <td>struts.multipart.parser</td>
-     <td>per request</td>
-     <td>Parses a multipart request (file upload)</td>
-   </tr>
-   <tr>
-     <td>org.apache.struts2.views.freemarker.FreemarkerManager</td>
-     <td>struts.freemarker.manager.classname</td>
-     <td>singleton</td>
-     <td>Loads and processes Freemarker templates</td>
-   </tr>
-   <tr>
-     <td>org.apache.struts2.views.velocity.VelocityManager</td>
-     <td>struts.velocity.manager.classname</td>
-     <td>singleton</td>
-     <td>Loads and processes Velocity templates</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.validator.ActionValidatorManager</td>
-     <td>struts.actionValidatorManager</td>
-     <td>singleton</td>
-     <td>Main interface for validation managers (regular and annotation based).  Handles both the loading of
-         configuration and the actual validation (since 2.1)</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.util.ValueStackFactory</td>
-     <td>struts.valueStackFactory</td>
-     <td>singleton</td>
-     <td>Creates value stacks (since 2.1)</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.reflection.ReflectionProvider</td>
-     <td>struts.reflectionProvider</td>
-     <td>singleton</td>
-     <td>Provides reflection services, key place to plug in a custom expression language (since 2.1)</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.reflection.ReflectionContextFactory</td>
-     <td>struts.reflectionContextFactory</td>
-     <td>singleton</td>
-     <td>Creates reflection context maps used for reflection and expression language operations (since 2.1)</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.config.PackageProvider</td>
-     <td>N/A</td>
-     <td>singleton</td>
-     <td>All beans registered as PackageProvider implementations will be automatically included in configuration building (since 2.1)</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.util.PatternMatcher</td>
-     <td>struts.patternMatcher</td>
-     <td>singleton</td>
-     <td>Matches patterns, such as action names, generally used in configuration (since 2.1)</td>
-   </tr>
-   <tr>
-     <td>org.apache.struts2.views.dispatcher.DefaultStaticContentLoader</td>
-     <td>struts.staticContentLoader</td>
-     <td>singleton</td>
-     <td>Loads static resources (since 2.1)</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.conversion.impl.XWorkConverter</td>
-     <td>struts.xworkConverter</td>
-     <td>singleton</td>
-     <td>Handles conversion logic and allows to load custom converters per class or per action</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.TextProvider</td>
-     <td>struts.xworkTextProvider</td>
-     <td>default</td>
-     <td>Allows provide custom TextProvider for whole application</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.LocaleProvider</td>
-     <td>struts.localeProvider</td>
-     <td>singleton</td>
-     <td>DEPRECATED! Allows provide custom TextProvider for whole application - instead this endpoint use <b>struts.localeProviderFactory</b></td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.LocaleProviderFactory</td>
-     <td>struts.localeProviderFactory</td>
-     <td>singleton</td>
-     <td>Allows provide custom LocaleProvider for whole application</td>
-   </tr>
-   <tr>
-     <td>org.apache.struts2.components.UrlRenderer</td>
-     <td>struts.urlRenderer</td>
-     <td>singleton</td>
-     <td>Allows provide custom implementation of environment specific URL rendering/creating class</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.UnknownHandlerManager</td>
-     <td>struts.unknownHandlerManager</td>
-     <td>singleton</td>
-     <td>Implementation of this interface allows handle logic of unknown Actions, Methods or Results</td>
-   </tr>
-   <tr>
-     <td>org.apache.struts2.views.util.UrlHelper</td>
-     <td>struts.view.urlHelper</td>
-     <td>singleton</td>
-     <td>Helper class used with URLRenderer to provide exact logic for building URLs</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.FileManagerFactory</td>
-     <td>struts.fileManagerFactory</td>
-     <td>singleton</td>
-     <td>Used to create {@link FileManager} instance to access files on the File System as also to monitor if reload is needed,
-     can be implemented / overwritten to meet specific an application server needs
-     </td>
-   <tr>
-     <td>com.opensymphony.xwork2.conversion.impl.CollectionConverter</td>
-     <td>struts.converter.collection</td>
-     <td>singleton</td>
-     <td>Converter used to convert any object to Collection and back</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.conversion.impl.ArrayConverter</td>
-     <td>struts.converter.array</td>
-     <td>singleton</td>
-     <td>Converter used to convert any object to Array and back</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.conversion.impl.DateConverter</td>
-     <td>struts.converter.date</td>
-     <td>singleton</td>
-     <td>Converter used to convert any object to Date and back</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.conversion.impl.NumberConverter</td>
-     <td>struts.converter.number</td>
-     <td>singleton</td>
-     <td>Converter used to convert any object to Number and back</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.conversion.impl.StringConverter</td>
-     <td>struts.converter.string</td>
-     <td>singleton</td>
-     <td>Converter used to convert any object to String and back</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.conversion.ConversionPropertiesProcessor</td>
-     <td>struts.conversion.properties.processor</td>
-     <td>singleton</td>
-     <td>Process Properties to create converters</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.conversion.ConversionPropertiesProcessor</td>
-     <td>struts.converter.file.processor</td>
-     <td>singleton</td>
-     <td>Process <class>-conversion.properties file create converters</class></td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.conversion.ConversionAnnotationProcessor</td>
-     <td>struts.converter.annotation.processor</td>
-     <td>singleton</td>
-     <td>Process TypeConversion annotation to create converters</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.conversion.TypeConverterCreator</td>
-     <td>struts.converter.creator</td>
-     <td>singleton</td>
-     <td>Creates user converters</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.conversion.TypeConverterHolder</td>
-     <td>struts.converter.holder</td>
-     <td>singleton</td>
-     <td>Holds user converters' instances</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.util.TextParser</td>
-     <td>struts.expression.parser</td>
-     <td>singleton</td>
-     <td>Used to parse expressions like ${foo.bar} or %{bar.foo} but it is up tp the TextParser's
-         implementation what kind of opening char to use (#, $, %, etc)</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.ExcludedPatternsChecker</td>
-     <td>struts.excludedPatterns.checker</td>
-     <td>request</td>
-     <td>Used across different interceptors to check if given string matches one of the excluded patterns</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.AcceptedPatternsChecker</td>
-     <td>struts.acceptedPatterns.checker</td>
-     <td>request</td>
-     <td>Used across different interceptors to check if given string matches one of the accepted patterns</td>
-   </tr>
-   <tr>
-     <td>org.apache.struts2.util.ContentTypeMatcher</td>
-     <td>struts.contentTypeMatcher</td>
-     <td>singleton</td>
-     <td>Matches content type of uploaded files (since 2.3.22)</td>
-   </tr>
-   <tr>
-     <td>com.opensymphony.xwork2.LocalizedTextProvider</td>
-     <td>struts.localizedTextProvider</td>
-     <td>singleton</td>
-     <td>Provides access to resource bundles used to localise messages (since 2.5.11)</td>
-   </tr>
- </table>
-
-
-
-
-{% comment %}end snippet id=extensionPoints|lang=html|javadoc=true|org.apache.struts2.config.DefaultBeanSelectionProvider {% endcomment %}
+> Same packages org.apache.struts2 and com.opensymphony.xwork2 are refactored from Type.
 
 ## Plugin Examples
 
