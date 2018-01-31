@@ -66,7 +66,7 @@ in the namespace `/barspace`, therefore the default will be checked and `/foo.ac
 
 In the Namespace Example, if a request for `moo.action` is made, the root namespace `"/"` is searched for a `moo` 
 action; if a root action is not found, the default namespace is checked. In this case, the `moo` action does exist 
-and will be executed. Upon success, the request would be forwarded to `bar2.jsp`.
+and will be executed. Upon success, the request would be forwarded to `moo.jsp`.
 
 If a request is made for `/foo.action`, the root `"/"` namespace will be checked. If `foo` is found, the root action 
 will be selected. Otherwise, the framework will check the default namespace. In the Namespace Example, the `foo` action 
