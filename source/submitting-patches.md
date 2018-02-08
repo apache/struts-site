@@ -18,8 +18,8 @@ either using Apache GitBox
     git clone https://gitbox.apache.org/repos/asf/struts.git    
     
 or GitHub
-    
-    git glone https://github.com/apache/struts.git
+   
+    git clone https://github.com/apache/struts.git
 
 and done!
 
@@ -61,7 +61,7 @@ with the source code.
 
 Next step is to clone the original repo locally
 
-    git glone https://github.com/apache/struts.git
+    git clone https://github.com/apache/struts.git
     
 This will be an `origin`, you cannot push changes to the `origin` but don't worry, you will use your fork.
 
