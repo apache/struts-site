@@ -11,7 +11,7 @@ title: Release Guidelines
 
 This document describes the Apache Struts release process and our [coding conventions](#Coding),
 which are applicable to all subprojects. Both stable and development releases are
-[available for download.](downloads.html)
+[available for download.](releases.html)
 
 ## Release Process
 
