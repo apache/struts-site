@@ -65,7 +65,7 @@ As part of our continuous integration practice, we also make available each morn
 *Again: Use at your own risk!*
 
 If you do **not** plan to contribute to the development of the framework, then you probably want to download a
-[release](downloads.html)
+[release](releases.html)
 
 NOTE: The Struts 2 nightly build is not fully operational. We suggest that contributors checkout
 the [source code](#SourceCode) instead.
@@ -80,7 +80,7 @@ A test build is made available so that it can be reviewed for quality by the Apa
 When a build is judged "ready for prime time", it is promoted to "General Availability" status and may be
 made the "Best Available" release. If the group feels that a build requires more testing, then it may be marked
 as "Beta" release. When a test build is upgraded to "Beta" or "GA" by a vote of the project members,
-we make the distribution available as a formal [release.](downloads.html)
+we make the distribution available as a formal [release.](releases.html)
 
 ## Maven Snapshots
 
