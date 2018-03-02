@@ -27,9 +27,9 @@ __Description__
 
 {% comment %}start snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.OptionTransferSelect {% endcomment %}
 <p> <p>
- Create a option transfer select component which is basically two <select ...>
+ Create a option transfer select component which is basically two &lt;select ...&gt;
  tag with buttons in the middle of them allowing options in each of the
- <select ...> to be moved between themselves. Will auto-select all its
+ &lt;select ...&gt; to be moved between themselves. Will auto-select all its
  elements upon its containing form submision.
  </p>
 </p>
@@ -40,8 +40,8 @@ __Description__
 <p> <p>
  NOTE: The id and doubleId need not be supplied as they will generated provided
  that the optiontransferselect tag is being used in a form tag. The generated id
- and doubleId will be <form_id>_<optiontransferselect_nameame> and
- <form_id>_<optiontransferselect_doubleName> respectively.
+ and doubleId will be &lt;form_id&gt;_&lt;optiontransferselect_nameame&gt; and
+ &lt;form_id>_&lt;optiontransferselect_doubleName> respectively.
  </p>
 
 </p>
@@ -1951,7 +1951,7 @@ __Examples__
 
 ```xml
 
- <-- minimum configuration -->
+ <!-- minimum configuration -->
  <s:optiontransferselect
       label="Favourite Cartoons Characters"
       name="leftSideCartoonCharacters"
@@ -1960,7 +1960,7 @@ __Examples__
       doubleList="{'Superman', 'Mickey Mouse', 'Donald Duck'}"
   />
 
-  <-- possible configuration -->
+  <!-- possible configuration -->
   <s:optiontransferselect
       label="Favourite Cartoons Characters"
       name="leftSideCartoonCharacters"
