@@ -15,11 +15,11 @@ Struts 2 provides several [Maven](http://maven.apache.org/) archetypes that crea
 
 ## Quickstart
 
-A recommended way to start with Struts2 archetypes is to work with the archetype catalog.
+A recommended way to start with Struts2 archetypes is to use `archetype:generate` goal with `filter` parameter.
 
 
 ```
-mvn archetype:generate -DarchetypeCatalog=http://struts.apache.org/
+mvn archetype:generate -Dfilter=org.apache:struts
 ```
 
 ## Available Archetypes
@@ -44,9 +44,7 @@ mvn archetype:generate -DarchetypeCatalog=http://struts.apache.org/
 mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-convention \
-							-DarchetypeVersion=<CURRENT_STRUTS_VERSION> \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-convention
 ```
 
 ### The Blank Archetype (struts2-archetype-blank)
@@ -58,9 +56,7 @@ See the [Struts 2 Blank Archetype](struts2-archetype-blank.html) page for more i
 mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-blank \
-							-DarchetypeVersion=<CURRENT_STRUTS_VERSION> \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-blank
 ```
 
 ### The Starter Archetype (struts2-archetype-starter)
@@ -87,9 +83,7 @@ The Starter archetype creates a more featured application using several common t
 mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-starter \
-							-DarchetypeVersion=<CURRENT_STRUTS_VERSION> \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-starter
 ```
 
 ### The AngularJS Archetype (struts2-archetype-angularjs)
@@ -108,9 +102,7 @@ mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-angularjs \
-							-DarchetypeVersion=<CURRENT_STRUTS_VERSION> \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-angularjs
 ```
 
 ### The Portlet Blank Archetype (struts2-archetype-portlet)
@@ -133,9 +125,7 @@ The Portlet blank archetype creates a minimally populated JSR 168 portlet.
 mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-portlet \
-							-DarchetypeVersion=<CURRENT_STRUTS_VERSION> \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-portlet
 ```
 
 ### The Portlet Database Archetype (struts2-archetype-dbportlet)
@@ -162,9 +152,7 @@ The Portlet database archetype creates a simple JSR 168 portlet that displays th
 mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-dbportlet \
-							-DarchetypeVersion=<CURRENT_STRUTS_VERSION> \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-dbportlet
 ```
 
 ### The Plugin Archetype (struts2-archetype-plugin)
@@ -181,9 +169,7 @@ mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myPlugin \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-plugin \
-							-DarchetypeVersion=<CURRENT_STRUTS_VERSION> \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-plugin
 ```
 
 ## Creating an Application Using a Maven Archetype
@@ -203,28 +189,50 @@ mvn archetype:generate -B \
                        -DgroupId=tutorial \
                        -DartifactId=tutorial \
                        -DarchetypeGroupId=org.apache.struts \
-                       -DarchetypeArtifactId=struts2-archetype-blank \
-                       -DarchetypeVersion=<CURRENT_STRUTS_VERSION>
-		       -DremoteRepositories=http://struts.apache.org
+                       -DarchetypeArtifactId=struts2-archetype-blank
 ```
-
-where \<CURRENT_STRUTS_VERSION\> is archetype's version you want to use, e.g. 2.3.15.1
 
 ### Staging repository
 
-If the above command will fail because of missing archetypes in central repository, you can try to use staging repository like below
+If the above command will fail because of missing archetypes in central repository, you can try to use staging repository.
 
-
-```
-mvn archetype:generate -DarchetypeCatalog=https://repository.apache.org/content/repositories/snapshots/
-```
-
-or this
-
+Add staging repository to your settings.xml
 
 ```
-mvn archetype:generate -DarchetypeCatalog=http://struts.apache.org/
+<settings>
+  <profiles>
+    <profile>
+      <id>staging</id>
+      <repositories>
+        <repository>
+          <id>archetype</id>
+          <url>https://repository.apache.org/content/repositories/snapshots/</url>
+          <releases>
+            <enabled>true</enabled>
+            <checksumPolicy>fail</checksumPolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <checksumPolicy>warn</checksumPolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+</settings>
 ```
+
+Use `staging` profile in the command.
+
+```
+mvn archetype:generate -B \
+                       -DgroupId=tutorial \
+                       -DartifactId=tutorial \
+                       -DarchetypeGroupId=org.apache.struts \
+                       -DarchetypeArtifactId=struts2-archetype-blank \
+                       -Pstaging
+```
+
 
 ### Archetype Parameters
 
@@ -236,15 +244,12 @@ The  `-B` option runs  `archetype:generate` in batch mode; it avoids a prompt to
 |artifactId| The id for the project. The project will be created a sub-directory named after this parameter. |
 |archetypeGroupId| The group id of the archetype.  Will always be org.apache.struts for Struts archetypes |
 |archetypeArtifactId| The id of the archetype |
-|archetypeVersion| The version of the archetype |
-|package| (Optional) The base Java package to use for generated source code.  Defaults to archetypeGroupId if not specified. |
-|remoteRepositories| (Optional) A list of remote repositories that contain the archetype. |
 
 ## Command Quick Reference
 
 These commands are used from the directory created by the archetype plugin (the project's sub-directory that was created in the previous step).
 
-+ To build
++ To install
 
 
 
@@ -252,21 +257,6 @@ These commands are used from the directory created by the archetype plugin (the 
    mvn install
 ```
 
-+ To create IntelliJ IDEA project files
-
-
-
-```
-   mvn idea:idea
-```
-
-+ To create Eclipse project files
-
-
-
-```
-   mvn eclipse:eclipse -Dwtpversion=1.5
-```
 
 + To run test cases
 

@@ -47,12 +47,38 @@ pom.xml         src/
 ```
 
 Depending on the state of your local system you may see Maven downloading various libraries (known as "downloading the internet", which is what it seems Maven does sometimes). Be patient -- Maven is basically setting up your required libraries automatically.
-**\<version\>** - is the version of Struts 2 you want to use and archetype was released for, e.g. 2.1.8.1 .
 
 ### Staging repository
 
-If the above command will fail because of missing archetypes in central repository, you can try to use staging repository like below
+If the above command will fail because of missing archetypes in central repository, you can try to use staging repository.
 
+Add staging repository to your settings.xml
+
+```
+<settings>
+  <profiles>
+    <profile>
+      <id>staging</id>
+      <repositories>
+        <repository>
+          <id>archetype</id>
+          <url>https://repository.apache.org/content/repositories/snapshots/</url>
+          <releases>
+            <enabled>true</enabled>
+            <checksumPolicy>fail</checksumPolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <checksumPolicy>warn</checksumPolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+</settings>
+```
+
+Use `staging` profile in the command.
 
 ```
 mvn archetype:generate -B \
@@ -60,9 +86,10 @@ mvn archetype:generate -B \
                        -DartifactId=tutorial \
                        -DarchetypeGroupId=org.apache.struts \
                        -DarchetypeArtifactId=struts2-archetype-blank \
-                       -DarchetypeVersion=<version>
-                       -DarchetypeCatalog=http://people.apache.org/builds/struts/<version>/m2-staging-repository/ 
+                       -DarchetypeVersion=<version> \
+                       -Pstaging
 ```
+
 
 ## Project Structure
 
@@ -113,13 +140,13 @@ There are several different ways we can go about building our project, from simp
 
 ### Compilation
 
-
+Running
 
 ```
 $ mvn compile
 ```
 
-will create a  `target` directory containing the compiled classes. By itself this isn't terribly useful.
+will create a `target` directory containing the compiled classes. By itself this isn't terribly useful.
 
 ### Testing
 
@@ -136,9 +163,17 @@ Once we've run the Maven test command we'll notice there's a  `target/surefire-r
 
 ### Assembling (Creating a WAR)
 
+Running
+
+```
+$ mvn package
+```
+
+will create a WAR file in the `target` directory.
+
 ### Running
 
-We can run blank-archetype using the [Jetty](http://www.mortbay.org/jetty/) server via the [Maven Jetty Plugin](http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin) by executing the Jetty plugin's  `run` command:
+We can run blank-archetype using the [Jetty](https://www.eclipse.org/jetty/) server via the [Maven Jetty Plugin](https://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html) by executing the Jetty plugin's  `run` command:
 
 
 ```
