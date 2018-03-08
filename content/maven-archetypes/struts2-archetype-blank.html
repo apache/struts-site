@@ -199,20 +199,47 @@ pom.xml         src/
 </code></pre>
 </div>
 
-<p>Depending on the state of your local system you may see Maven downloading various libraries (known as “downloading the internet”, which is what it seems Maven does sometimes). Be patient – Maven is basically setting up your required libraries automatically.
-<strong>&lt;version&gt;</strong> - is the version of Struts 2 you want to use and archetype was released for, e.g. 2.1.8.1 .</p>
+<p>Depending on the state of your local system you may see Maven downloading various libraries (known as “downloading the internet”, which is what it seems Maven does sometimes). Be patient – Maven is basically setting up your required libraries automatically.</p>
 
 <h3 id="staging-repository">Staging repository</h3>
 
-<p>If the above command will fail because of missing archetypes in central repository, you can try to use staging repository like below</p>
+<p>If the above command will fail because of missing archetypes in central repository, you can try to use staging repository.</p>
+
+<p>Add staging repository to your settings.xml</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;settings&gt;
+  &lt;profiles&gt;
+    &lt;profile&gt;
+      &lt;id&gt;staging&lt;/id&gt;
+      &lt;repositories&gt;
+        &lt;repository&gt;
+          &lt;id&gt;archetype&lt;/id&gt;
+          &lt;url&gt;https://repository.apache.org/content/repositories/snapshots/&lt;/url&gt;
+          &lt;releases&gt;
+            &lt;enabled&gt;true&lt;/enabled&gt;
+            &lt;checksumPolicy&gt;fail&lt;/checksumPolicy&gt;
+          &lt;/releases&gt;
+          &lt;snapshots&gt;
+            &lt;enabled&gt;true&lt;/enabled&gt;
+            &lt;checksumPolicy&gt;warn&lt;/checksumPolicy&gt;
+          &lt;/snapshots&gt;
+        &lt;/repository&gt;
+      &lt;/repositories&gt;
+    &lt;/profile&gt;
+  &lt;/profiles&gt;
+&lt;/settings&gt;
+</code></pre>
+</div>
+
+<p>Use <code class="highlighter-rouge">staging</code> profile in the command.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -B \
                        -DgroupId=tutorial \
                        -DartifactId=tutorial \
                        -DarchetypeGroupId=org.apache.struts \
                        -DarchetypeArtifactId=struts2-archetype-blank \
-                       -DarchetypeVersion=&lt;version&gt;
-                       -DarchetypeCatalog=http://people.apache.org/builds/struts/&lt;version&gt;/m2-staging-repository/ 
+                       -DarchetypeVersion=&lt;version&gt; \
+                       -Pstaging
 </code></pre>
 </div>
 
@@ -356,11 +383,13 @@ pom.xml         src/
 
 <h3 id="compilation">Compilation</h3>
 
+<p>Running</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>$ mvn compile
 </code></pre>
 </div>
 
-<p>will create a  <code class="highlighter-rouge">target</code> directory containing the compiled classes. By itself this isn’t terribly useful.</p>
+<p>will create a <code class="highlighter-rouge">target</code> directory containing the compiled classes. By itself this isn’t terribly useful.</p>
 
 <h3 id="testing">Testing</h3>
 
@@ -376,9 +405,17 @@ pom.xml         src/
 
 <h3 id="assembling-creating-a-war">Assembling (Creating a WAR)</h3>
 
+<p>Running</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mvn package
+</code></pre>
+</div>
+
+<p>will create a WAR file in the <code class="highlighter-rouge">target</code> directory.</p>
+
 <h3 id="running">Running</h3>
 
-<p>We can run blank-archetype using the <a href="http://www.mortbay.org/jetty/">Jetty</a> server via the <a href="http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin">Maven Jetty Plugin</a> by executing the Jetty plugin’s  <code class="highlighter-rouge">run</code> command:</p>
+<p>We can run blank-archetype using the <a href="https://www.eclipse.org/jetty/">Jetty</a> server via the <a href="https://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html">Maven Jetty Plugin</a> by executing the Jetty plugin’s  <code class="highlighter-rouge">run</code> command:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>$ mvn jetty:run
 </code></pre>

@@ -173,9 +173,9 @@
 
 <h2 id="quickstart">Quickstart</h2>
 
-<p>A recommended way to start with Struts2 archetypes is to work with the archetype catalog.</p>
+<p>A recommended way to start with Struts2 archetypes is to use <code class="highlighter-rouge">archetype:generate</code> goal with <code class="highlighter-rouge">filter</code> parameter.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -DarchetypeCatalog=http://struts.apache.org/
+<div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -Dfilter=org.apache:struts
 </code></pre>
 </div>
 
@@ -206,9 +206,7 @@
 <div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-convention \
-							-DarchetypeVersion=&lt;CURRENT_STRUTS_VERSION&gt; \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-convention
 </code></pre>
 </div>
 
@@ -219,9 +217,7 @@
 <div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-blank \
-							-DarchetypeVersion=&lt;CURRENT_STRUTS_VERSION&gt; \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-blank
 </code></pre>
 </div>
 
@@ -255,9 +251,7 @@
 <div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-starter \
-							-DarchetypeVersion=&lt;CURRENT_STRUTS_VERSION&gt; \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-starter
 </code></pre>
 </div>
 
@@ -280,9 +274,7 @@
 <div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-angularjs \
-							-DarchetypeVersion=&lt;CURRENT_STRUTS_VERSION&gt; \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-angularjs
 </code></pre>
 </div>
 
@@ -310,9 +302,7 @@
 <div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-portlet \
-							-DarchetypeVersion=&lt;CURRENT_STRUTS_VERSION&gt; \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-portlet
 </code></pre>
 </div>
 
@@ -346,9 +336,7 @@
 <div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myWebApp \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-dbportlet \
-							-DarchetypeVersion=&lt;CURRENT_STRUTS_VERSION&gt; \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-dbportlet
 </code></pre>
 </div>
 
@@ -368,9 +356,7 @@
 <div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -B -DgroupId=com.mycompany.mysystem \
 							-DartifactId=myPlugin \
 							-DarchetypeGroupId=org.apache.struts \
-							-DarchetypeArtifactId=struts2-archetype-plugin \
-							-DarchetypeVersion=&lt;CURRENT_STRUTS_VERSION&gt; \
-							-DremoteRepositories=http://struts.apache.org
+							-DarchetypeArtifactId=struts2-archetype-plugin
 </code></pre>
 </div>
 
@@ -393,25 +379,48 @@
                        -DgroupId=tutorial \
                        -DartifactId=tutorial \
                        -DarchetypeGroupId=org.apache.struts \
-                       -DarchetypeArtifactId=struts2-archetype-blank \
-                       -DarchetypeVersion=&lt;CURRENT_STRUTS_VERSION&gt;
-		       -DremoteRepositories=http://struts.apache.org
+                       -DarchetypeArtifactId=struts2-archetype-blank
 </code></pre>
 </div>
-
-<p>where &lt;CURRENT_STRUTS_VERSION&gt; is archetype’s version you want to use, e.g. 2.3.15.1</p>
 
 <h3 id="staging-repository">Staging repository</h3>
 
-<p>If the above command will fail because of missing archetypes in central repository, you can try to use staging repository like below</p>
+<p>If the above command will fail because of missing archetypes in central repository, you can try to use staging repository.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -DarchetypeCatalog=https://repository.apache.org/content/repositories/snapshots/
+<p>Add staging repository to your settings.xml</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;settings&gt;
+  &lt;profiles&gt;
+    &lt;profile&gt;
+      &lt;id&gt;staging&lt;/id&gt;
+      &lt;repositories&gt;
+        &lt;repository&gt;
+          &lt;id&gt;archetype&lt;/id&gt;
+          &lt;url&gt;https://repository.apache.org/content/repositories/snapshots/&lt;/url&gt;
+          &lt;releases&gt;
+            &lt;enabled&gt;true&lt;/enabled&gt;
+            &lt;checksumPolicy&gt;fail&lt;/checksumPolicy&gt;
+          &lt;/releases&gt;
+          &lt;snapshots&gt;
+            &lt;enabled&gt;true&lt;/enabled&gt;
+            &lt;checksumPolicy&gt;warn&lt;/checksumPolicy&gt;
+          &lt;/snapshots&gt;
+        &lt;/repository&gt;
+      &lt;/repositories&gt;
+    &lt;/profile&gt;
+  &lt;/profiles&gt;
+&lt;/settings&gt;
 </code></pre>
 </div>
 
-<p>or this</p>
+<p>Use <code class="highlighter-rouge">staging</code> profile in the command.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -DarchetypeCatalog=http://struts.apache.org/
+<div class="highlighter-rouge"><pre class="highlight"><code>mvn archetype:generate -B \
+                       -DgroupId=tutorial \
+                       -DartifactId=tutorial \
+                       -DarchetypeGroupId=org.apache.struts \
+                       -DarchetypeArtifactId=struts2-archetype-blank \
+                       -Pstaging
 </code></pre>
 </div>
 
@@ -443,18 +452,6 @@
       <td>archetypeArtifactId</td>
       <td>The id of the archetype</td>
     </tr>
-    <tr>
-      <td>archetypeVersion</td>
-      <td>The version of the archetype</td>
-    </tr>
-    <tr>
-      <td>package</td>
-      <td>(Optional) The base Java package to use for generated source code.  Defaults to archetypeGroupId if not specified.</td>
-    </tr>
-    <tr>
-      <td>remoteRepositories</td>
-      <td>(Optional) A list of remote repositories that contain the archetype.</td>
-    </tr>
   </tbody>
 </table>
 
@@ -463,26 +460,10 @@
 <p>These commands are used from the directory created by the archetype plugin (the project’s sub-directory that was created in the previous step).</p>
 
 <ul>
-  <li>To build</li>
+  <li>To install</li>
 </ul>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>   mvn install
-</code></pre>
-</div>
-
-<ul>
-  <li>To create IntelliJ IDEA project files</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>   mvn idea:idea
-</code></pre>
-</div>
-
-<ul>
-  <li>To create Eclipse project files</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>   mvn eclipse:eclipse -Dwtpversion=1.5
 </code></pre>
 </div>
 
