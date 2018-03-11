@@ -19,16 +19,16 @@ NOTE: The full source code is provided with each [release](/download.cgi). If yo
 your own copy of the product, use the source code provided with an approved release, rather than the development head.
 
 Read-only access to the Apache Struts source repository is available through both
-[web browser](https://git-wip-us.apache.org/repos/asf/struts/repo?p=struts.git;a=summary) and
+[web browser](https://gitbox.apache.org/repos/asf?p=struts.git;a=summary) and
 [Git client](http://git-scm.com/) interfaces.
 
 With the [Git client](http://git-scm.com/) installed, obtaining a working copy of the Struts codebase is as simple as
 
-    > git clone http://git.apache.org/struts.git
+    > git clone https://gitbox.apache.org/repos/asf/struts.git
 
-(Committers with write access should use the **https** protocol instead)
+or from GitHub
 
-    > git clone https://git-wip-us.apache.org/repos/asf/struts.git
+    > git clone https://github.com/apache/struts.git
 
 
 For more about using version control systems at Apache, see the ASF's
