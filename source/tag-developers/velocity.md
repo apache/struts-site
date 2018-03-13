@@ -14,7 +14,7 @@ For more information on Velocity itself, please visit the [Velocity website](htt
 
 > 
 
-> Velocity is similar to [FreeMarker](#PAGE_14078), as both are template languages that can be used outside of a Servlet container. The framework uses FreeMarker internally since it has better error reporting. Developers may also like that FreeMarker supports JSP taglibs. However, both are good alternatives to JSP.
+> Velocity is similar to [FreeMarker](freemarker.html), as both are template languages that can be used outside of a Servlet container. The framework uses FreeMarker internally since it has better error reporting. Developers may also like that FreeMarker supports JSP taglibs. However, both are good alternatives to JSP.
 
 > 
 

@@ -13699,7 +13699,7 @@ __Examples__
 
 {% comment %}end snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.File {% endcomment %}
 
-#####form##### {#PAGE_14201}
+#####form##### {form-tag.html}
 
 
 Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
@@ -23996,7 +23996,7 @@ __Description__
 | 
 
 
-This tag works with all themes, but has special importance when combined with the [form](#PAGE_14201) tag in the [ajax theme](ajax-theme.html). Please read up on the [ajax theme](ajax-theme.html) for more information.
+This tag works with all themes, but has special importance when combined with the [form](form-tag.html) tag in the [ajax theme](ajax-theme.html). Please read up on the [ajax theme](ajax-theme.html) for more information.
 
 | 
 

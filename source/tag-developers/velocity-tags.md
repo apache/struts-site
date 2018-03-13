@@ -5,7 +5,7 @@ title: Tag Developers Guide
 
 # Velocity Tags
 
-Velocity tags are extensions of the generic [Struts Tags](#PAGE_14248) provided by the framework. You can get jump right in just by knowing the structure in which the tags can be accessed: **#s\*****tag** **\*(...) ... #end**, where **tag**  is any of the [Struts Tags](#PAGE_14248) supported by the framework.
+Velocity tags are extensions of the generic [Struts Tags](struts-tags.html) provided by the framework. You can get jump right in just by knowing the structure in which the tags can be accessed: **#s\*****tag** **\*(...) ... #end**, where **tag**  is any of the [Struts Tags](struts-tags.html) supported by the framework.
 
 For example, in JSP you might create a form using Struts tags.
 
@@ -37,7 +37,7 @@ In Velocity, the same form can also be built using macros.
 
 ## Block and Inline Tags
 
-Some VM tags require an #end statement while others do not. The inconsistency arises from a limitation in Velocity where tags must declare if they are a _block_  or _inline_  tag up front. As such, by default all tags are _inline_  except for a few key ones, such as the [form](#PAGE_14201) tag.
+Some VM tags require an #end statement while others do not. The inconsistency arises from a limitation in Velocity where tags must declare if they are a _block_  or _inline_  tag up front. As such, by default all tags are _inline_  except for a few key ones, such as the [form](form-tag.html) tag.
 
 ## Back To:
 

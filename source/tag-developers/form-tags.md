@@ -13,7 +13,7 @@ Within the form tags, there are two classes of tags: the form tag itself, and al
 
 __Form Tag Themes__
 
-As explained in [Themes and Templates](#PAGE_14247), the HTML Tags (which includes Form Tags) are all driven by templates. Templates are grouped together to create themes. The framework bundles three themes in the distribution.
+As explained in [Themes and Templates](themes-and-templates.html), the HTML Tags (which includes Form Tags) are all driven by templates. Templates are grouped together to create themes. The framework bundles three themes in the distribution.
 
 |simple|Sometimes _too_  simple|
 |------|-----------------------|

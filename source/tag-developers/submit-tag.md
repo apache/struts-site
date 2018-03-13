@@ -34,7 +34,7 @@ __Description__
 | 
 
 
-This tag works with all themes, but has special importance when combined with the [form](#PAGE_14201) tag in the [ajax theme](ajax-theme.html). Please read up on the [ajax theme](ajax-theme.html) for more information.
+This tag works with all themes, but has special importance when combined with the [form](form-tag.html) tag in the [ajax theme](ajax-theme.html). Please read up on the [ajax theme](ajax-theme.html) for more information.
 
 | 
 
