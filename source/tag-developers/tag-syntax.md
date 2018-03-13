@@ -29,7 +29,7 @@ Sometimes, we want to pass the dynamic data to a tag. For example, we might want
 
 ```
 
-The expression language ([OGNL](#PAGE_14198)) lets us call methods and evaluate properties. The method `getText` is provided by ActionSupport, which is the base class for most Actions. Since the Action is on the stack, we can call any of its methods from an expression, including `getText`.
+The expression language ([OGNL](ognl.html)) lets us call methods and evaluate properties. The method `getText` is provided by ActionSupport, which is the base class for most Actions. Since the Action is on the stack, we can call any of its methods from an expression, including `getText`.
 
 ## Non-String Attributes
 
