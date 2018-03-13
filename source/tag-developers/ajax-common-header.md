@@ -7530,7 +7530,7 @@ __Description__
 
 
 
-| While this tag can be used with the [simple theme](#PAGE_14291), [xhtml theme](#PAGE_13834), and others, it is really designed to work best with the [ajax theme](#PAGE_14205). We recommend reading the _ajax div template_  documentation for more details.
+| While this tag can be used with the [simple theme](simple-theme.html), [xhtml theme](xhtml-theme.html), and others, it is really designed to work best with the [ajax theme](ajax-theme.html). We recommend reading the _ajax div template_  documentation for more details.
 
 | 
 
@@ -14712,7 +14712,7 @@ __Examples__
 
 __Validation__
 
-There are two flavours _Client Side Validation_ , depending on the theme you are using (xhtml, ajax, etc). If you are using the [xhtml theme](#PAGE_13834) or [css_xhtml theme](#PAGE_14215), pure client side validation will be used. If you are using the [ajax theme](#PAGE_14205), a special AJAX-based validation will take place. Read the _Client Side Validation_  docs for more information.
+There are two flavours _Client Side Validation_ , depending on the theme you are using (xhtml, ajax, etc). If you are using the [xhtml theme](xhtml-theme.html) or [css_xhtml theme](css-xhtml-theme.html), pure client side validation will be used. If you are using the [ajax theme](ajax-theme.html), a special AJAX-based validation will take place. Read the _Client Side Validation_  docs for more information.
 
 #####head##### {#PAGE_13997}
 
@@ -23996,7 +23996,7 @@ __Description__
 | 
 
 
-This tag works with all themes, but has special importance when combined with the [form](#PAGE_14201) tag in the [ajax theme](#PAGE_14205). Please read up on the [ajax theme](#PAGE_14205) for more information.
+This tag works with all themes, but has special importance when combined with the [form](#PAGE_14201) tag in the [ajax theme](ajax-theme.html). Please read up on the [ajax theme](ajax-theme.html) for more information.
 
 | 
 
