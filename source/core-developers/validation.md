@@ -27,7 +27,7 @@ for the action.
 ## Using Annotations
 
 [Annotations](validation-annotation.html) can be used as an alternative to XML for validation.
- 
+
 ## Bean Validation
 
 With struts 2.5 comes the Bean Validation Plugin. That is an alternative to the classic struts validation described here. 
