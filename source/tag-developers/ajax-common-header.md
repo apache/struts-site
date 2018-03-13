@@ -2144,7 +2144,7 @@ Using errorNotifyTopics and indicator:
 #####checkbox##### {#PAGE_14029}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -2925,7 +2925,7 @@ __Examples__
 #####checkboxlist##### {#PAGE_13969}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -3822,7 +3822,7 @@ __Examples__
 #####combobox##### {#PAGE_14259}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -5650,7 +5650,7 @@ __Examples__
 #####datetextfield##### {#PAGE_40506485}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -10585,7 +10585,7 @@ __Parameters__
 #####doubleselect##### {#PAGE_14005}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -12912,7 +12912,7 @@ __Examples__
 #####file##### {#PAGE_14283}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -13702,7 +13702,7 @@ __Examples__
 #####form##### {#PAGE_14201}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -14717,7 +14717,7 @@ There are two flavours _Client Side Validation_ , depending on the theme you are
 #####head##### {#PAGE_13997}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -15478,7 +15478,7 @@ __Examples__
 #####hidden##### {#PAGE_14313}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -17385,7 +17385,7 @@ __Example__
 #####label##### {#PAGE_14167}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -18171,7 +18171,7 @@ __Examples__
 #####optgroup##### {#PAGE_14170}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -18340,7 +18340,7 @@ __Examples__
 #####optiontransferselect##### {#PAGE_13943}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -20321,7 +20321,7 @@ __Examples__
 #####password##### {#PAGE_13826}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -21187,7 +21187,7 @@ __Examples__
 #####radio##### {#PAGE_14226}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -22102,7 +22102,7 @@ __Examples__
 #####reset##### {#PAGE_13833}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -22962,7 +22962,7 @@ __Example 2__
 #####select##### {#PAGE_14127}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -23968,7 +23968,7 @@ __Examples__
 #####submit##### {#PAGE_14054}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -25960,7 +25960,7 @@ Use notify topics to prevent a tab from being selected:
 #####textarea##### {#PAGE_13926}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -26781,7 +26781,7 @@ __Example__
 #####textfield##### {#PAGE_13912}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -27628,7 +27628,7 @@ __Examples__
 #####token##### {#PAGE_13998}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 
@@ -30421,7 +30421,7 @@ Update target content with html returned from an action:
 #####updownselect##### {#PAGE_13884}
 
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 | 
 

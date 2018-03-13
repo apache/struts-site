@@ -5,7 +5,7 @@ title: Tag Developers Guide
 
 # text
 
-Please make sure you have read the [Tag Syntax](#PAGE_13927) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
 ## Description
 
