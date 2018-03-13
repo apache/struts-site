@@ -44,10 +44,10 @@ Struts UI Tags display data in rich and reusable HTML.
 
 |**Form Tags**|                                                     |**Non-Form UI Tags**    |
 |             |[checkbox](checkbox-tag.html)                        |                        |[actionerror](actionerror-tag.html)    |
-|             |[checkboxlist](checkboxlist-tag.html)                |                        |[actionmessage](actionmessage-tag.html)|         
-|             |[combobox](combobox-tag.html)                        |                        |[component](component-tag.html)        | 
-|             |[datetextfield](datetextfield-tag.html)              |                        |[div](div-tag.html)                    |           
-|             |[doubleselect](doubleselect-tag.html)                |                        |[fielderror](fielderror-tag.html)      |         
+|             |[checkboxlist](checkboxlist-tag.html)                |                        |[actionmessage](actionmessage-tag.html)|
+|             |[combobox](combobox-tag.html)                        |                        |[component](component-tag.html)        |
+|             |[datetextfield](datetextfield-tag.html)              |                        |[fielderror](fielderror-tag.html)      |
+|             |[doubleselect](doubleselect-tag.html)                |                        |                                       |
 |             |[head](head-tag.html)                                |                        |                                       |
 |             |[file](file-tag.html)                                |                        |                                       |
 |             |[form](form-tag.html)                                |                        |                                       |
