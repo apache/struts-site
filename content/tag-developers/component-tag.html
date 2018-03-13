@@ -131,49 +131,39 @@
 
 <p><strong>Description</strong></p>
 
-<p> <p>
- Renders an custom UI widget using the specified templates. Additional objects can be passed in to the template
- using the param tags.
- </p>
+<p>Renders an custom UI widget using the specified templates. Additional objects can be passed in to the template
+ using the <code class="highlighter-rouge">param</code> tags.</p>
 
- <p><b>Freemarker:</b></p>
- <pre>Objects provided can be retrieve from within the template via $parameters._paramname_.</pre>
+<h3 id="freemarker">Freemarker:</h3>
 
- <p><b>JSP:</b></p>
- <pre>Objects provided can be retrieve from within the template via <s:property value="%{parameters._paramname_}" /></pre>
+<p>Objects provided can be retrieve from within the template via <code class="highlighter-rouge">$parameters._paramname_</code>.</p>
 
- <p>
- In the bottom JSP and Velocity samples, two parameters are being passed in to the component. From within the
- component, they can be accessed as:
- </p>
+<h3 id="jsp">JSP:</h3>
 
- <p><b>Freemarker:</b></p>
- <pre>$parameters.get('key1') and $parameters.get('key2') or $parameters.key1 and $parameters.key2</pre>
+<p>Objects provided can be retrieve from within the template via <code class="highlighter-rouge">&lt;s:property value="%{parameters._paramname_}" /&gt;</code></p>
 
- <p><b>JSP:</b></p>
- <pre>
- <s:property value="%{parameters.key1}" /> and <s:property value="%{'parameters.key2'}" /> or
- <s:property value="%{parameters.get('key1')}" /> and <s:property value="%{parameters.get('key2')}" />
- </pre>
+<p>In the bottom JSP and Velocity samples, two parameters are being passed in to the component. From within the
+ component, they can be accessed as:</p>
 
- <p>
- Currently, your custom UI components can be written in Velocity, JSP, or Freemarker, and the correct rendering
- engine will be found based on file extension.
- </p>
+<h3 id="freemarker-1">Freemarker:</h3>
 
- <p>
- <b>Remember:</b> the value params will always be resolved against the ValueStack so if you mean to pass a
- string literal to your component, make sure to wrap it in single quotes i.e. value="'value1'" (note the opening "' and closing '" otherwise, the the value
- stack will search for an Object on the stack with a method of getValue1().
- </p>
-</p>
+<p><code class="highlighter-rouge">$parameters.get('key1')</code> and <code class="highlighter-rouge">$parameters.get('key2')</code> or <code class="highlighter-rouge">$parameters.key1</code> and <code class="highlighter-rouge">$parameters.key2</code></p>
 
-<p>
- If Jsp is used as the template, the jsp template itself must lie within the
+<h3 id="jsp-1">JSP:</h3>
+
+<p><code class="highlighter-rouge">&lt;s:property value="%{parameters.key1}" /&gt;</code> and <code class="highlighter-rouge">&lt;s:property value="%{'parameters.key2'}" /&gt;</code> or
+ <code class="highlighter-rouge">&lt;s:property value="%{parameters.get('key1')}" /&gt;</code> and <code class="highlighter-rouge">&lt;s:property value="%{parameters.get('key2')}" /&gt;</code></p>
+
+<p>Currently, your custom UI components can be written in Velocity, JSP, or Freemarker, and the correct rendering
+ engine will be found based on file extension.</p>
+
+<p><strong>Remember:</strong> the value <code class="highlighter-rouge">params</code> will always be resolved against the ValueStack so if you mean to pass a
+ string literal to your component, make sure to wrap it in single quotes i.e. <code class="highlighter-rouge">value="'value1'"</code> (note the opening <code class="highlighter-rouge">"'</code> and closing <code class="highlighter-rouge">'"</code> otherwise, the value
+ stack will search for an Object on the stack with a method of <code class="highlighter-rouge">getValue1()</code>.</p>
+
+<p>If JSP is used as the template, the JSP template itself must lie within the
  webapp itself and not the classpath. Unlike Freemarker or Velocity, JSP template
- could not be picked up from the classpath.
-
-</p>
+ could not be picked up from the classpath.</p>
 
 <p><strong>(!) templateDir and theme attribute</strong></p>
 
@@ -931,49 +921,47 @@
 
 <p><strong>Examples</strong></p>
 
-<pre><code class="language-ftl"> &lt;p&gt;
- JSP
- &lt;/p&gt;
- &lt;pre&gt;
-     &lt;s:component template="/my/custom/component.vm"/&gt;
+<h3 id="jsp-2">JSP</h3>
 
-       or
-
-     &lt;s:component template="/my/custom/component.vm"&gt;
-       &lt;s:param name="key1" value="value1"/&gt;
-       &lt;s:param name="key2" value="value2"/&gt;
-     &lt;/s:component&gt;
- &lt;/pre&gt;
-
- &lt;p&gt;
- Velocity
- &lt;/p&gt;
- &lt;pre&gt;
-     #s-component( "template=/my/custom/component.vm" )
-
-       or
-
-     #s-component( "template=/my/custom/component.vm" )
-       #s-param( "name=key1" "value=value1" )
-       #s-param( "name=key2" "value=value2" )
-     #end
- &lt;/pre&gt;
-
- &lt;p&gt;
- Freemarker
- &lt;/p&gt;
- &lt;pre&gt;
-    &lt;@s..component template="/my/custom/component.ftl" /&gt;
-
-      or
-
-    &lt;@s..component template="/my/custom/component.ftl"&gt;
-       &lt;@s..param name="key1" value="%{'value1'}" /&gt;
-       &lt;@s..param name="key2" value="%{'value2'}" /&gt;
-    &lt;/@s..component&gt;
- &lt;/pre&gt;
-
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;s:component template="/my/custom/component.vm"/&gt;
 </code></pre>
+</div>
+<p>or</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;s:component template="/my/custom/component.vm"&gt;
+    &lt;s:param name="key1" value="value1"/&gt;
+    &lt;s:param name="key2" value="value2"/&gt;
+&lt;/s:component&gt;
+</code></pre>
+</div>
+
+<h3 id="velocity">Velocity</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#s-component( "template=/my/custom/component.vm" )
+</code></pre>
+</div>
+<p>or</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#s-component( "template=/my/custom/component.vm" )
+    #s-param( "name=key1" "value=value1" )
+    #s-param( "name=key2" "value=value2" )
+#end
+</code></pre>
+</div>
+
+<h3 id="freemarker-2">Freemarker</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;@s..component template="/my/custom/component.ftl" /&gt;
+</code></pre>
+</div>
+<p>or</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;@s..component template="/my/custom/component.ftl"&gt;
+    &lt;@s..param name="key1" value="%{'value1'}" /&gt;
+    &lt;@s..param name="key2" value="%{'value2'}" /&gt;
+&lt;/@s..component&gt;
+</code></pre>
+</div>
 
 
   </section>
