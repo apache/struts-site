@@ -9,51 +9,53 @@ __Description__
 
 
 {% comment %}start snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.GenericUIBean {% endcomment %}
-<p> <p>
+
  Renders an custom UI widget using the specified templates. Additional objects can be passed in to the template
- using the param tags.
- </p>
+ using the `param` tags.
 
- <p><b>Freemarker:</b></p>
- <pre>Objects provided can be retrieve from within the template via $parameters._paramname_.</pre>
 
- <p><b>JSP:</b></p>
- <pre>Objects provided can be retrieve from within the template via <s:property value="%{parameters._paramname_}" /></pre>
+### Freemarker:
 
- <p>
+ Objects provided can be retrieve from within the template via `$parameters._paramname_`.
+
+### JSP:
+
+ Objects provided can be retrieve from within the template via `<s:property value="%{parameters._paramname_}" />`
+
+
  In the bottom JSP and Velocity samples, two parameters are being passed in to the component. From within the
  component, they can be accessed as:
- </p>
 
- <p><b>Freemarker:</b></p>
- <pre>$parameters.get('key1') and $parameters.get('key2') or $parameters.key1 and $parameters.key2</pre>
 
- <p><b>JSP:</b></p>
- <pre>
- <s:property value="%{parameters.key1}" /> and <s:property value="%{'parameters.key2'}" /> or
- <s:property value="%{parameters.get('key1')}" /> and <s:property value="%{parameters.get('key2')}" />
- </pre>
+### Freemarker:
+ 
+ `$parameters.get('key1')` and `$parameters.get('key2')` or `$parameters.key1` and `$parameters.key2`
 
- <p>
+### JSP:
+
+ `<s:property value="%{parameters.key1}" />` and `<s:property value="%{'parameters.key2'}" />` or
+ `<s:property value="%{parameters.get('key1')}" />` and `<s:property value="%{parameters.get('key2')}" />`
+
+
+
  Currently, your custom UI components can be written in Velocity, JSP, or Freemarker, and the correct rendering
  engine will be found based on file extension.
- </p>
 
- <p>
- <b>Remember:</b> the value params will always be resolved against the ValueStack so if you mean to pass a
- string literal to your component, make sure to wrap it in single quotes i.e. value="'value1'" (note the opening "' and closing '" otherwise, the the value
- stack will search for an Object on the stack with a method of getValue1().
- </p>
-</p>
+
+
+ **Remember:** the value `params` will always be resolved against the ValueStack so if you mean to pass a
+ string literal to your component, make sure to wrap it in single quotes i.e. `value="'value1'"` (note the opening `"'` and closing `'"` otherwise, the value
+ stack will search for an Object on the stack with a method of `getValue1()`.
+
 {% comment %}end snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.GenericUIBean {% endcomment %}
 
 {% comment %}start snippet id=note|javadoc=true|url=org.apache.struts2.components.GenericUIBean {% endcomment %}
-<p>
- If Jsp is used as the template, the jsp template itself must lie within the
+
+ If JSP is used as the template, the JSP template itself must lie within the
  webapp itself and not the classpath. Unlike Freemarker or Velocity, JSP template
  could not be picked up from the classpath.
 
-</p>
+
 {% comment %}end snippet id=note|javadoc=true|url=org.apache.struts2.components.GenericUIBean {% endcomment %}
 
 **(!) templateDir and theme attribute**
@@ -807,49 +809,47 @@ __Examples__
 
 {% comment %}start snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.GenericUIBean {% endcomment %}
 
-```ftl
- <p>
- JSP
- </p>
- <pre>
-     <s:component template="/my/custom/component.vm"/>
+### JSP
 
-       or
+```
+<s:component template="/my/custom/component.vm"/>
+```
+or
 
-     <s:component template="/my/custom/component.vm">
-       <s:param name="key1" value="value1"/>
-       <s:param name="key2" value="value2"/>
-     </s:component>
- </pre>
+```
+<s:component template="/my/custom/component.vm">
+    <s:param name="key1" value="value1"/>
+    <s:param name="key2" value="value2"/>
+</s:component>
+```
 
- <p>
- Velocity
- </p>
- <pre>
-     #s-component( "template=/my/custom/component.vm" )
 
-       or
+### Velocity
 
-     #s-component( "template=/my/custom/component.vm" )
-       #s-param( "name=key1" "value=value1" )
-       #s-param( "name=key2" "value=value2" )
-     #end
- </pre>
+```
+#s-component( "template=/my/custom/component.vm" )
+```
+or
 
- <p>
- Freemarker
- </p>
- <pre>
-    <@s..component template="/my/custom/component.ftl" />
+```
+#s-component( "template=/my/custom/component.vm" )
+    #s-param( "name=key1" "value=value1" )
+    #s-param( "name=key2" "value=value2" )
+#end
+```
 
-      or
+### Freemarker
 
-    <@s..component template="/my/custom/component.ftl">
-       <@s..param name="key1" value="%{'value1'}" />
-       <@s..param name="key2" value="%{'value2'}" />
-    </@s..component>
- </pre>
+```
+<@s..component template="/my/custom/component.ftl" />
+```
+or
 
+```
+<@s..component template="/my/custom/component.ftl">
+    <@s..param name="key1" value="%{'value1'}" />
+    <@s..param name="key2" value="%{'value2'}" />
+</@s..component>
 ```
 
 {% comment %}end snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.GenericUIBean {% endcomment %}
