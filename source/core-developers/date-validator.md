@@ -9,7 +9,7 @@ title: date validator
 
 Field Validator that checks if the date supplied is within a specific range.
 
-**NOTE:** If no date converter is specified, `XWorkBasicConverter` will kick in to do the date conversion, which by default using the `Date.SHORT` format using the a problematically specified locale else falling back to the system default locale.
+**NOTE:** If no date converter is specified, `XWorkBasicConverter` will kick in to do the date conversion, which by default using the `Date.SHORT` format using the specified locale else falling back to the system default locale.
 
 ## Parameters
 
