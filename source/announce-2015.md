@@ -2,7 +2,8 @@
 layout: default
 title: Announcements 2015
 ---
-# Announcements
+
+# Announcements 2015
 
 <p class="pull-right">
   Skip to: <a href="announce-2014.html">Announcements - 2014</a>
