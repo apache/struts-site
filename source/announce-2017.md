@@ -1,8 +1,9 @@
 ---
 layout: default
-title: Announcements
+title: Announcements 2017
 ---
-# Announcements
+
+# Announcements 2017
 {:.no_toc}
 
 * Will be replaced with the ToC, excluding a header
