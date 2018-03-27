@@ -13,6 +13,16 @@ title: Announcements 2018
   Skip to: <a href="announce-2017.html">Announcements - 2017</a>
 </p>
 
+#### 27 March 2018 - A crafted XML request can be used to perform a DoS attack when using the Struts REST plugin {#a20180327}
+
+The Apache Security Struts Team recommends to immediately upgrade your Struts 2 based projects to use the latest released 
+version of the Apache Struts. This is necessary to prevent your publicly accessible web site, which is using the Struts 
+REST plugin and performing XML serialisation, from being exposed to possible DoS attack.
+
+You can find more details in a Security Bulletin [S2-056](https://cwiki.apache.org/confluence/display/WW/S2-056)
+
+All developers are strongly advised to perform this action.
+
 #### 23 March 2018 - Immediately upgrade commons-fileupload to version 1.3.3 {#a20180323}
 
 The Apache Struts Team recommends to immediately upgrade your Struts 2
