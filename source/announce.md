@@ -13,6 +13,40 @@ title: Announcements 2018
   Skip to: <a href="announce-2017.html">Announcements - 2017</a>
 </p>
 
+#### 23 March 2018 - Immediately upgrade commons-fileupload to version 1.3.3 {#a20180323}
+
+The Apache Struts Team recommends to immediately upgrade your Struts 2
+based projects to use the latest released version of Commons
+FileUpload library, which is currently 1.3.3. This is necessary to
+prevent your publicly accessible web site from being exposed to
+possible Remote Code Execution attacks (see \[1] \[2]).
+
+This affects any Struts version prior to **2.5.12** \[3].
+
+Your project is affected if it uses the built-in file upload mechanism
+of Struts 2, which defaults to the use of commons-fileupload. The
+updated commons-fileupload library is a drop-in replacement for the
+vulnerable version. Deployed applications can be hardened by replacing
+the commons-fileupload jar file in WEB-INF/lib with the fixed jar. For
+Maven based Struts 2 projects, the following dependency needs to be
+added:
+
+```xml
+<dependency>
+  <groupId>commons-fileupload</groupId>
+  <artifactId>commons-fileupload</artifactId>
+  <version>1.3.3</version>
+</dependency>
+```
+
+More details can be found here:
+
+  1. [https://issues.apache.org/jira/browse/FILEUPLOAD-279](https://issues.apache.org/jira/browse/FILEUPLOAD-279)
+  2. [https://nvd.nist.gov/vuln/detail/CVE-2016-1000031](https://nvd.nist.gov/vuln/detail/CVE-2016-1000031)
+  3. [https://issues.apache.org/jira/browse/WW-4812](https://issues.apache.org/jira/browse/WW-4812)
+
+All developers are strongly advised to perform this action.
+
 #### 16 March 2018 - Struts 2.5.16 General Availability {#a20180316}
 
 The Apache Struts group is pleased to announce that Struts 2.5.16 is available as a "General Availability"
