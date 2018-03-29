@@ -107,7 +107,7 @@ to the user list, and, if appropriate, file a tracking ticket.
 You can download this version from our [download](download.cgi#struts-ga) page.
 
 <p class="pull-right">
-  Skip to: <a href="announce-2016.html">Announcements - 2017</a>
+  Skip to: <a href="announce-2017.html">Announcements - 2017</a>
 </p>
 
 <p class="pull-left">
