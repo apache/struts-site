@@ -577,7 +577,7 @@ defined in the class, that are not fully qualified action URLs. When this annota
 file, it changes the default namespace for all actions defined in the Java package. Here is an example of the annotation 
 on an action class:
 
-**com.example.actions.HelloWorl**
+**com.example.actions.HelloWorld**
 
 ```java
 package com.example.actions;
