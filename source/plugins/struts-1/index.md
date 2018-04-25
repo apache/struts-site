@@ -55,7 +55,7 @@ Most likely, you will have an ActionForm that your Struts 1 Action expects.  To 
     <param name="name">gangsterForm</param>
     <param name="scope">session</param>
   </interceptor-ref>
-  <interceptor-ref name="struts1-default"/>
+  <interceptor-ref name="struts1Stack"/>
 
   <result>myAction.jsp</result>
 </action>
