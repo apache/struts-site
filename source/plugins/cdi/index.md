@@ -89,7 +89,7 @@ whereas `${struts2.version}` should be set either as a property in your pom (rec
 
 ### Manual Integration
 
-Ensure that the struts2-cdi-plugin jar matching your used Struts 2 framework version - it is part of the [Struts 2 distribution](/download.html) - is packed within the application archive that will be delivered. If a CDI implementation is provided within your container, no other dependencies are needed. If the latter is not the case, you may want to install a CDI container into your container (as commmon installation or packed with your app) according to the installation instructions of the CDI provider of choice.
+Ensure that the struts2-cdi-plugin jar matching your used Struts 2 framework version - it is part of the [Struts 2 distribution](/download.cgi) - is packed within the application archive that will be delivered. If a CDI implementation is provided within your container, no other dependencies are needed. If the latter is not the case, you may want to install a CDI container into your container (as commmon installation or packed with your app) according to the installation instructions of the CDI provider of choice.
 
 For IDE integration, be sure to add both the struts2-cdi-plugin-VERSION.jar as well as the cdi-api.jar to your project setup. Remember, the API jar should not be delivered with your application archive since you will have the API provided by the CDI container your application will be running with.
 

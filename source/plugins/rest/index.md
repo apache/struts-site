@@ -18,7 +18,7 @@ The REST Plugin provides high level support for the implementation of RESTful re
 
 
 If you prefer to see a working code example, instead of reading through an explanation, you can download 
-the [Struts2 Example Applications](/download.html#struts-ga) and check out the `struts2-rest-showcase` application, 
+the [Struts2 Example Applications](/download.cgi#struts-ga) and check out the `struts2-rest-showcase` application, 
 a complete WAR file, that demonstrates a simple REST web program.
 
 ### Features
