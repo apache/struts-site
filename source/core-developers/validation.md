@@ -234,6 +234,69 @@ See the following example to get an impression:
 <message>${getText("validation.failednotice")} ! ${getText("reason")}: ${getText("validation.inputrequired")}</message>
 ```
 
+### Customizing validation messages
+
+There is another option to customise validation messages by using parametrized messages. Either you can use them via
+XML or with annotations.
+
+#### XML
+
+To use this new approach you must use a proper header in a `<ActionName>-validation.xml` file, see below:
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+  ...
+</validators>
+```
+
+Now you can define validators that will use parametrized messages as below:
+
+```xml
+<field name="username">
+    <field-validator type="requiredstring">
+        <message key="errors.required">
+            <param name="0">getText('username.field.name')</param>
+        </message>
+    </field-validator>
+</field>
+```
+
+> NOTE: Please be aware that all the parameters will be evaluated against `ValueStack`, please do not reference user
+> controlled values or incoming parameters in request as this can lead to a security vulnerability
+
+Now you can define your properties file with localized messages:
+
+```
+errors.required={0} is required.
+username.field.name=Username
+```
+
+As you can see you defined a `errors.required` key with a placeholder for the param. The names of the params are not important,
+order is important as this mechanism uses `MessageFormat` to format the message.
+
+The final output will be as follow:
+
+```
+Username is required.
+```
+
+#### Annotations
+
+The same mechanism can be used with annotations as follow:
+
+```java
+@RequiredStringValidator(key = "errors.required", messageParams = {
+    "getText('username.field.name')"
+})
+public void setUsername(String username) {
+    this.username = username;
+}
+```
+
 ## Validator Flavor
 
 The validators supplied by the XWork distribution (and any validators you might write yourself) come in two different 
