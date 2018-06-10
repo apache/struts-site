@@ -172,7 +172,7 @@
   <li>global resource properties</li>
 </ol>
 
-<p>This is how it is implemented in a default implementation of the <code class="highlighter-rouge">LocalizedTextProvider</code> interface. You can provide your 
+<p>This is how it is implemented in a default implementation of the <code class="highlighter-rouge">LocalizedTextProvider</code> interface. You can provide your
 own implementation using <code class="highlighter-rouge">TextProvider</code> and <code class="highlighter-rouge">TextProviderFactory</code> interfaces.</p>
 
 <p>To clarify #5, while traversing the package hierarchy, Struts 2 will look for a file <code class="highlighter-rouge">package.properties</code>:</p>
@@ -188,7 +188,7 @@ own implementation using <code class="highlighter-rouge">TextProvider</code> and
 </div>
 
 <blockquote>
-  <p>If <code class="highlighter-rouge">FooAction.properties</code> does not exist, <code class="highlighter-rouge">com/acme/action/package.properties</code> will be searched for, if not found 
+  <p>If <code class="highlighter-rouge">FooAction.properties</code> does not exist, <code class="highlighter-rouge">com/acme/action/package.properties</code> will be searched for, if not found
 <code class="highlighter-rouge">com/acme/package.properties</code>, if not found <code class="highlighter-rouge">com/package.properties</code>, etc.</p>
 </blockquote>
 
@@ -202,12 +202,12 @@ own implementation using <code class="highlighter-rouge">TextProvider</code> and
 </code></pre>
 </div>
 
-<p>it will use a default class defined with <code class="highlighter-rouge">default-class-ref</code> in <code class="highlighter-rouge">struts-default.xml</code> which is 
+<p>it will use a default class defined with <code class="highlighter-rouge">default-class-ref</code> in <code class="highlighter-rouge">struts-default.xml</code> which is
 <code class="highlighter-rouge">com.opensymphony.xwork2.ActionSupport</code>. It means you have two options here to get I18N working in that case:</p>
 
 <ul>
   <li>define <code class="highlighter-rouge">com/opensymphony/xwork2/ActionSupport.properties</code> and put messages there</li>
-  <li>point <code class="highlighter-rouge">default-class-ref</code> to your base class and then defined appropriated <code class="highlighter-rouge">.properties</code> file (corresponding to 
+  <li>point <code class="highlighter-rouge">default-class-ref</code> to your base class and then defined appropriated <code class="highlighter-rouge">.properties</code> file (corresponding to
 class’ name or package)</li>
 </ul>
 
@@ -224,7 +224,7 @@ technique is especially useful for labels of UI tags.)</p>
 </code></pre>
 </div>
 
-<p>The default implementation of <code class="highlighter-rouge">TextProvider</code> which is used in <code class="highlighter-rouge">ActionSupport</code> perform evaluation of value read from 
+<p>The default implementation of <code class="highlighter-rouge">TextProvider</code> which is used in <code class="highlighter-rouge">ActionSupport</code> perform evaluation of value read from
 bundle base on the provided key, see [Localizing Output] for an example.</p>
 
 <h3 id="using-the-text-tag">Using the text tag</h3>
@@ -241,16 +241,16 @@ bundle base on the provided key, see [Localizing Output] for an example.</p>
 
 <h3 id="using-the-i18n-tag">Using the I18n tag</h3>
 
-<p>The <code class="highlighter-rouge">i18n</code> tag pushes an arbitrary resource bundle on to the value stack. Other tags within the scope of the i18n tag 
+<p>The <code class="highlighter-rouge">i18n</code> tag pushes an arbitrary resource bundle on to the value stack. Other tags within the scope of the i18n tag
 can display messages from that resource bundle.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:i18n</span> <span class="na">name=</span><span class="s">"some.package.bundle"</span><span class="nt">&gt;&lt;/s:i18n&gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:i18n</span> <span class="na">name=</span><span class="s">"some.package.bundle"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;s:text</span> <span class="na">name=</span><span class="s">"some.key"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/s:i18n&gt;</span>
 </code></pre>
 </div>
 
-<p>Internationalizing SiteMesh decorators is possible, but there are quirks. See <a href="../plugins/sitemesh/">SiteMesh Plugin</a><br />
+<p>Internationalizing SiteMesh decorators is possible, but there are quirks. See <a href="../plugins/sitemesh/">SiteMesh Plugin</a>
 for more.</p>
 
 <h3 id="using-the-key-attribute-of-ui-tags">Using the Key attribute of UI Tags</h3>
@@ -263,7 +263,7 @@ for more.</p>
 
 <h2 id="i18n-interceptor">I18n Interceptor</h2>
 
-<p>Essentially, the i18n Interceptor pushes a locale into the ActionContext map upon every request. The framework 
+<p>Essentially, the i18n Interceptor pushes a locale into the ActionContext map upon every request. The framework
 components that support localization all utilize the ActionContext locale. See <a href="i18n-interceptor.html">I18n Interceptor</a> f
 or details.</p>
 
@@ -277,15 +277,15 @@ or details.</p>
 
 <h2 id="comparison-with-struts-1">Comparison with Struts 1</h2>
 
-<p>Struts 1 users should be familiar with the application.properties resource bundle, where you can put all the messages 
-in the application that are going to be translated. Struts 2, though, splits the resource bundles per action or model 
-class, and you may end up with duplicated messages in those resource bundles. A quick fix for that is to create a file 
-called ActionSupport.properties in com/opensymphony/xwork2 and put it on your classpath. This will only work well if 
+<p>Struts 1 users should be familiar with the application.properties resource bundle, where you can put all the messages
+in the application that are going to be translated. Struts 2, though, splits the resource bundles per action or model
+class, and you may end up with duplicated messages in those resource bundles. A quick fix for that is to create a file
+called ActionSupport.properties in com/opensymphony/xwork2 and put it on your classpath. This will only work well if
 all your actions subclass XWork2’s ActionSupport.</p>
 
 <h2 id="using-only-global-bundles">Using only global bundles</h2>
 
-<p>If you don’t need to use the package-scan-functionality and only base on the global bundles (those provided by 
+<p>If you don’t need to use the package-scan-functionality and only base on the global bundles (those provided by
 the framework and via <code class="highlighter-rouge">struts.custom.i18n.resources</code>) you can use existing <code class="highlighter-rouge">GlobalLocalizedTextProvider</code>
 implementation. To use this please define the following option in your <code class="highlighter-rouge">struts.xml</code>:</p>
 
@@ -295,10 +295,10 @@ implementation. To use this please define the following option in your <code cl
 
 <h2 id="custom-textprovider-and-textproviderfactory">Custom TextProvider and TextProviderFactory</h2>
 
-<p>If you want use a different logic to search for localized messages, or you want to use a database or just want to search 
-default bundles, you must implement both those interfaces (or subclass the existing implementations). You can check 
-a small <a href="https://github.com/apache/struts-examples/tree/master/text-provider">example app</a> how to use both. 
-Please remember that the <code class="highlighter-rouge">TextProvider</code> interface is implemented by the <code class="highlighter-rouge">ActionSupport</code> class, that’s why 
+<p>If you want use a different logic to search for localized messages, or you want to use a database or just want to search
+default bundles, you must implement both those interfaces (or subclass the existing implementations). You can check
+a small <a href="https://github.com/apache/struts-examples/tree/master/text-provider">example app</a> how to use both.
+Please remember that the <code class="highlighter-rouge">TextProvider</code> interface is implemented by the <code class="highlighter-rouge">ActionSupport</code> class, that’s why
 an extra layer - <code class="highlighter-rouge">TextProviderFactory</code> - is needed.</p>
 
   </section>
