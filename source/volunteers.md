@@ -38,6 +38,7 @@ or committee member.
 - Greg Huber (ghuber at apache.org)
 - Aleksandr Mashchenko (amashchenko at apache.org)
 - Stefaan Dutry (sdutry at apache.org)
+- Yasser Zamani (yasserzamani at apache.org)
 
 ## Committers
 
@@ -53,7 +54,6 @@ Other committers are listed in the chronological order, according to the date ea
 - Mathias Bogaert (pathos at apache.org)
 - John Lindal (jafl at apache.org)
 - Bruce A. Phillips (bphillips at apache.org)
-- Yasser Zamani (yasserzamani at apache.org)
 
 ## Emeritus Volunteers
 
