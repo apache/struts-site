@@ -13,6 +13,71 @@ title: Announcements 2018
   Skip to: <a href="announce-2017.html">Announcements - 2017</a>
 </p>
 
+#### 22 August 2018 - CVE-2018-11776 Apache Struts 2.3 to 2.3.34 and 2.5 to 2.5.16 {#a20180822-0}
+
+CVEID:CVE-2018-11776
+
+PRODUCT:Apache Struts
+
+VERSION:Apache Struts 2.3 to 2.3.34 and 2.5 to 2.5.16
+
+PROBLEMTYPE:Remote Code Execution
+
+REFERENCES:[S2-057]({{ site.wiki_url }}/S2-057)
+
+DESCRIPTION:Man Yue Mo from the Semmle Security Research team was noticed that Apache Struts versions 2.3 to 2.3.34 and
+2.5 to 2.5.16 suffer from possible Remote Code Execution when using results with no namespace and in same time, its 
+upper action(s) have no or wildcard namespace. Same possibility when using url tag which doesn’t have value and action
+set and in same time, its upper action(s) have no or wildcard namespace.
+
+#### 22 August 2018 - Struts 2.5.17 General Availability {#a20180822-1}
+
+The Apache Struts group is pleased to announce that Struts 2.5.17 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+In addition to critical overall proactive security improvements, this release addresses one potential security vulnerability:
+
+- Possible Remote Code Execution when using results with no namespace and in same time, its upper action(s) have no or 
+wildcard namespace. Same possibility when using url tag which doesn’t have value and action set. - [S2-057]({{ site.wiki_url }}/S2-057)
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
+#### 22 August 2018 - Struts 2.3.35 General Availability {#a20180822-2}
+
+The Apache Struts group is pleased to announce that Struts 2.3.35 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+In addition to critical overall proactive security improvements, this release addresses one potential security vulnerability:
+
+- Possible Remote Code Execution when using results with no namespace and in same time, its upper action(s) have no or 
+wildcard namespace. Same possibility when using url tag which doesn’t have value and action set. - [S2-057]({{ site.wiki_url }}/S2-057)
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 6.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-23x) page.
+
 #### 27 March 2018 - A crafted XML request can be used to perform a DoS attack when using the Struts REST plugin {#a20180327}
 
 The Apache Security Struts Team recommends to immediately upgrade your Struts 2 based projects to use the latest released 
