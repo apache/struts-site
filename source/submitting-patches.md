@@ -29,7 +29,7 @@ will replicate them to all the clones, that's why using GitHub is a preferred wa
 
 ## Non-committers 
 
-If you aren't a committer you can still the repo from Apache Gitbox but you won't be able push any changes to it.
+If you aren't a committer you can still clone the repo from Apache Gitbox but you won't be able push any changes to it.
 That's why it is better to use GitHub
 
     git clone https://gitbox.apache.org/repos/asf/struts.git
