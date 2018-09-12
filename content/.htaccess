@@ -2,8 +2,9 @@
 DirectoryIndex index.html
 
 RewriteEngine On
-RewriteCond %{HTTPS} !=on
-RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+RewriteCond %{HTTPS} off
+RewriteCond %{REQUEST_URI} !^/dtds/? [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
 
 RedirectMatch \/docs\/version\-notes\-25([0-9]{1,2})+\.html   https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.5.$1
 RedirectMatch \/docs\/version\-notes\-23([0-9]{1,2})+\.html   https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.3.$1
