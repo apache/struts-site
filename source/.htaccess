@@ -1,6 +1,10 @@
 # This file is maintained at https://gitbox.apache.org/repos/asf?p=struts-site.git
 DirectoryIndex index.html
 
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+
 RedirectMatch \/docs\/version\-notes\-25([0-9]{1,2})+\.html   https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.5.$1
 RedirectMatch \/docs\/version\-notes\-23([0-9]{1,2})+\.html   https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.3.$1
 RedirectMatch \/docs\/version\-notes\-22([0-9]{1,2})+\.html   https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.2.$1
