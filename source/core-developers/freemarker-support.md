@@ -5,12 +5,11 @@ title: Freemarker Support
 
 # Freemarker Support
 
-Freemarker views can be rendered using the webwork result type `freemarker`\.
+Freemarker views can be rendered using a result type `freemarker`.
 
-__Configure your action to use the freemarker result type__
+## Configure your action to use the freemarker result type
 
-The `freemarker` result type is defined in `struts-default.xml`, so normally you just include it, and define your resuts to use `type="freemarker"`\.
-
+The `freemarker` result type is defined in `struts-default.xml`, so normally you just include it, and define your results to use `type="freemarker"`.
 
 ```xml
 <include file="struts-default.xml"/>
@@ -22,62 +21,54 @@ The `freemarker` result type is defined in `struts-default.xml`, so normally you
 
 ```
 
-__Property Resoloution__
+## Property Resolution
 
-Your action properties are automatically resolved \- just like in a velocity view\.
+Your action properties are automatically resolved - just like in a velocity view.
 
 **for example**
-`${name}` will result in `stack.findValue("name")`, which _generaly_  results in `action.getName()` being executed\.
 
-A search process is used to resolve the variable, searching the following scopes in order, until a value is found :
+`${name}` will result in `stack.findValue("name")`, which _generally_  results in `action.getName()` being executed.
 
-+ freemarker variables
+A search process is used to resolve the variable, searching the following scopes in order, until a value is found:
 
-+ value stack
+- freemarker variables
+- value stack
+- request attributes
+- session attributes
+- servlet context attributes
 
-+ request attributes
+## Objects in the Context
 
-+ session attributes
+The following variables exist in the FreeMarker views:
 
-+ servlet context attributes
+- `req` - the current `HttpServletRequest`
+- `res` - the current `HttpServletResponse`
+- `stack` - the current `OgnlValueStack`
+- `ognl` - the `OgnlTool` instance
+  - This class contains useful methods to execute OGNL expressions against arbitary objects, and a method to generate a select list using 
+    the `<s:select/>` pattern. (i.e. taking the name of the list property, a listKey and listValue)
+- `struts` - an instance of `StrutsBeanWrapper`
+- `action` - the current Struts action
+- `exception` - _optional_  the Exception instance, if the view is a JSP exception or Servlet exception view
 
-__Objects in the Context__
+## FreeMarker configuration with recent releases
 
-The following variables exist in the FreeMarker views
+To configure the freemarker engine that Struts uses, just add a file `freemarker.properties` to the classpath. The supported properties 
+are those that the Freemarker Configuration object expects - see the [Freemarker documentation](https://freemarker.apache.org/docs/api/freemarker/template/Configuration.html#setSetting-java.lang.String-java.lang.String-)
+for these.
 
-+ `req` \- the current HttpServletRequest
-
-+ `res` \- the current HttpServletResponse
-
-+ `stack` \- the current OgnlValueStack
-
-+ `ognl` \- the OgnlTool instance
-
-  + This class contains useful methods to execute OGNL expressions against arbitary objects, and a method to generate a select list using the \<s:select\> pattern\. (i\.e\. taking the name of the list property, a listKey and listValue)
-
-+ `struts` \- an instance of StrutsBeanWrapper
-
-+ `action` \- the current Struts action
-
-+ `exception` \- _optional_  the Exception instance, if the view is a JSP exception or Servlet exception view
-
-__FreeMarker configuration with recent releases__
-
-To configure the freemarker engine that Struts uses, just add a file `freemarker.properties` to the classpath\. The supported properties are those that the Freemarker Configuration object expects \- see the [Freemarker documentation](http://freemarker\.org/docs/api/freemarker/template/Configuration\.html\#setSetting(java\.lang\.String,%20java\.lang\.String))^[http://freemarker\.org/docs/api/freemarker/template/Configuration\.html\#setSetting(java\.lang\.String,%20java\.lang\.String)] for these\.
-
-
-~~~~~~~
+```
 default_encoding=ISO-8859-1
 template_update_delay=5
 locale=no_NO
+```
 
-~~~~~~~
+## Using struts UI tags - or any JSP Tag Library
 
-__Using struts UI tags \- or any JSP Tag Library__
-
-Freemarker has builtin support for using any JSP taglib\. You can use JSP taglibs in FreeMarker even if
- a) your servlet container has no support for JSP, or 
- b) you didn't specify the taglib in your web\.xml \- note how in the example below we refer to the taglib by its webapp\-absolute URL, so no configuration in web\.xml is needed\.
+Freemarker has builtin support for using any JSP taglib. You can use JSP taglibs in FreeMarker even if
+ - your servlet container has no support for JSP, or 
+ - you didn't specify the taglib in your web.xml - note how in the example below we refer to the taglib by its webapp-absolute URL, 
+    so no configuration in web.xml is needed.
 
 
 ```ftl
@@ -91,9 +82,10 @@ Freemarker has builtin support for using any JSP taglib\. You can use JSP taglib
 
 ```
 
-NOTE : numeric properties for tags MUST be numbers, not strings\. as in the rows and cols properties above\. if you use cols="40" you will receive an exception\. Other than that, the freemarker tag container behaves as you would expect\.
+*NOTE*: numeric properties for tags MUST be numbers, not strings. as in the rows and cols properties above. if you use `cols="40"` you will 
+receive an exception. Other than that, the freemarker tag container behaves as you would expect.
 
-__Dynamic attributes support__
+## Dynamic attributes support
 
 You can specify dynamic attributes with Struts 2 tags like this:
 
