@@ -13,6 +13,29 @@ title: Announcements 2018
   Skip to: <a href="announce-2017.html">Announcements - 2017</a>
 </p>
 
+#### 15 October 2018 - Struts 2.3.36 General Availability {#a20181015-2}
+
+The Apache Struts group is pleased to announce that Struts 2.3.36 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+This release addresses one backward compatibility issue:
+
+- [xml-validation fails since struts 2.5.17]({{ site.wiki_url }}/Version+Notes+2.3.36)
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.3.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 6.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-23x) page.
+
 #### 15 October 2018 - Struts 2.5.18 General Availability {#a20181015-1}
 
 The Apache Struts group is pleased to announce that Struts 2.5.18 is available as a "General Availability"
