@@ -13,6 +13,41 @@ title: Announcements 2018
   Skip to: <a href="announce-2017.html">Announcements - 2017</a>
 </p>
 
+#### 15 October 2018 - Struts 2.5.18 General Availability {#a20181015-1}
+
+The Apache Struts group is pleased to announce that Struts 2.5.18 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+Below is a full list of all changes:
+
+ - `jar_cache` Some jar_cache******.tmp files are generated into a temporary directory(/tmp) during web service start
+ - Struts 2.5.16 is creating jar_cache files in temp folder
+ - MD5 and SHA1 should no longer be provided on download pages
+ - xml-validation fails since struts 2.5.17
+ 
+Internal Changes:
+
+- XWorkList was moved into a com.opensymphony.xwork2.conversion.impl package as com.opensymphony.xwork2.util package is excluded 
+  by the Internal Security Mechanism.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework is designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
 #### 22 August 2018 - CVE-2018-11776 Apache Struts 2.3 to 2.3.34 and 2.5 to 2.5.16 {#a20180822-0}
 
 CVEID:CVE-2018-11776
