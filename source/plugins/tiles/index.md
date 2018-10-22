@@ -4,23 +4,27 @@ title: Tiles Plugin
 ---
 
 # Tiles Plugin
+{:.no_toc}
 
-Tiles is a templating framework designed to easily allow the creation of web application pages with a consistent look and feel. It can be used for both page decorating and componentization.
+* Will be replaced with the ToC, excluding a header
+{:toc}
+
+Tiles is a templating framework designed to easily allow the creation of web application pages with a consistent look and feel. It can 
+be used for both page decorating and componentization.
 
 The Tiles plugin allows actions to return Tiles pages.
 
-
 ## Features
 
-+ Supports Tiles in Freemarker, JSP, and Velocity
-
-+ Provides annotations to keep tiles.xml short and put definitons into actions
+- Supports Tiles in Freemarker, JSP, and Velocity
+- Provides annotations to keep tiles.xml short and put definitons into actions
 
 ## Usage
 
 The following steps must be taken in order to enable tiles support within your Struts2 application:
 
-1. Include the struts-tiles-plugin as a dependency in your web application. If you are using maven2, the dependency configuration will be similar to:
+1. Include the struts-tiles-plugin as a dependency in your web application. If you are using maven2, the dependency configuration will 
+  be similar to:
 
 
 ```xml
@@ -32,8 +36,9 @@ The following steps must be taken in order to enable tiles support within your S
 
 ```
 
-{:start="2"}
-2. Register the tiles listener. This listener will typically either be the standard tiles listener (org.apache.tiles.listener.TilesListener) or the Struts2 replacement (org.apache.struts2.tiles.TilesListener). The latter provides tighter integration with Struts features such as freemarker integration.
+2. Register the tiles listener. This listener will typically either be the standard tiles listener `org.apache.tiles.listener.TilesListener`
+  or the Struts2 replacement `org.apache.struts2.tiles.TilesListener`. The latter provides tighter integration with Struts features such 
+  as freemarker integration.
 
 
 ```xml
@@ -43,8 +48,8 @@ The following steps must be taken in order to enable tiles support within your S
 
 ```
 
-{:start="3"}
-3. All package definitions which require tiles support must either extend the tiles-default package or must register the [Tiles Result](https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&title=Tiles+Result&linkCreation=true&fromPageId=27401) type definition.
+3. All package definitions which require tiles support must either extend the `tiles-default` package or must register 
+  the [Tiles Result] type definition.
 
 
 ```xml
@@ -54,7 +59,6 @@ The following steps must be taken in order to enable tiles support within your S
 
 ```
 
-{:start="4"}
 4. Configure your actions to utilize a tiles definition:
 
 
@@ -65,7 +69,6 @@ The following steps must be taken in order to enable tiles support within your S
 
 ```
 
-{:start="5"}
 5. Instead of xml configuration you can use annotations
 
 
@@ -78,8 +81,7 @@ The following steps must be taken in order to enable tiles support within your S
 public class FooAction extends ActionSupport {
 ```
 
-{:start="6"}
-6. You have to define Tiles Definitons in a tiles.xml file. That can be placed in `resources` or in `WEB-INF`.
+6. You have to define Tiles Definitons in a `tiles.xml` file. That can be placed in `resources` or in `WEB-INF`.
 
 
 ```xml
@@ -103,11 +105,18 @@ public class FooAction extends ActionSupport {
 </tiles-definitions>
 ```
 
-As from Struts 2.3.28, the plugin automatically loads all Tiles definitions matching the following pattern tiles*.xml - you don't have to specify them via org.apache.tiles.definition.DefinitionsFactory.DEFINITIONS_CONFIG in web.xml, but you can use this option if your application is going to work in restricted servlet environment e.g. Google AppEngine. In such case, definitions will be read from provided init-param.
+As from Struts 2.3.28, the plugin automatically loads all Tiles definitions matching the following pattern `tiles*.xml` - you don't have 
+to specify them via `org.apache.tiles.definition.DefinitionsFactory.DEFINITIONS_CONFIG` in `web.xml`, but you can use this option if your 
+application is going to work in restricted servlet environment e.g. Google AppEngine. In such case, definitions will be read from 
+the provided init-param.
+
+> Note: When using a Tomcat WAR versoning mechanism which uses `##` you must specify all the tiles definition directly using
+> the `init-param`, in other case it won't be loaded. It's due to limitation of `URL` class. 
 
 ### Accessing Struts attributes
 
-As from Struts version 2.5.3 it's possible accessing defined values on a `ValueStack` using `S2` prefix when defining an expression in tiles definition, e.g.:
+As from Struts version 2.5.3 it's possible accessing defined values on a `ValueStack` using `S2` prefix when defining an expression 
+in tiles definition, e.g.:
 
 ```xml
 <definition name="home" extends="logged-in">
@@ -120,7 +129,8 @@ In such case Tiles will delegate evaluation of the expression to Struts and `Va
 
 ### I18N
 
-Instead of defining new tiles definitions per supported language (i.e.: `tiles.xml`, `tiles_de.xml`, `tiles_pl.xml`) you can use `I18N` prefix to evaluate provided expression as a key in Struts resource bundles. 
+Instead of defining new tiles definitions per supported language (i.e.: `tiles.xml`, `tiles_de.xml`, `tiles_pl.xml`) you can use `I18N` 
+prefix to evaluate provided expression as a key in Struts resource bundles. 
 
 
 ```xml
@@ -133,8 +143,6 @@ Instead of defining new tiles definitions per supported language (i.e.: `tiles.
 ## Example
 
 This example shows a Tiles layout page using Struts tags:
-
-{% comment %}start snippet lang=jsp|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=apps/showcase/src/main/webapp/WEB-INF/tiles/layout.jsp;hb=HEAD {% endcomment %}
 
 ```jsp
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
@@ -152,8 +160,6 @@ This example shows a Tiles layout page using Struts tags:
 </html>
 
 ```
-
-{% comment %}end snippet lang=jsp|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=apps/showcase/src/main/webapp/WEB-INF/tiles/layout.jsp;hb=HEAD {% endcomment %}
 
 Please check [tiles](https://github.com/apache/struts-examples/tree/master/tiles) example in [struts-examples](https://github.com/apache/struts-examples/tree/master/tiles) project.
 
