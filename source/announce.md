@@ -13,6 +13,15 @@ title: Announcements 2018
   Skip to: <a href="announce-2017.html">Announcements - 2017</a>
 </p>
 
+#### 14 November 2018 - Apache Struts 2.3.x End-Of-Life (EOL) Announcement {#a20181114}
+
+The Apache Struts Project Team would like to inform you that the Struts 2.3.x web framework will reach 
+its end of life in 6 months and won't be longer officially supported.
+
+Please check the following reading to find more details.
+
+ - [Apache Struts 2.3.x EOL Announcement](struts23-eol-announcement), including a detailed Q/A section
+
 #### 15 October 2018 - Struts 2.3.36 General Availability {#a20181015-2}
 
 The Apache Struts group is pleased to announce that Struts 2.3.36 is available as a "General Availability"

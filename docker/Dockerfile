@@ -6,11 +6,9 @@ RUN \
   apk upgrade && \
   apk add bash sudo curl-dev ruby-dev build-base libffi-dev && \
   apk add ruby ruby-io-console ruby-bundler nodejs && \
-  gem clean && gem install bundler io-console --no-document && \
+  gem clean && gem install bundler io-console --pre --no-document && \
   sudo rm -rf /usr/lib/ruby/gems/*/cache/*.gem && \
-
   rm -rf /var/cache/apk/* && \
-
   addgroup -S -g 1000 jekyll && \
   adduser -S -G jekyll -u 1000 -h /home/jekyll -D jekyll && \
   mkdir -p /srv/jekyll && \
