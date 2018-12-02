@@ -86,7 +86,7 @@ The above plugin will enable you to run the application using `mvn jetty:run`
 ### Step 2 - Add index.jsp
 
 Our next step is to add a simple `index.jsp` to this web application. Create an `index.jsp` under `src/main/webapp`
-with a title of __Basic Struts 2 Application - Welcome__ and in the body add an h1 heading of __Welcome to Struts 2!__
+with a title of __Basic Struts 2 Application - Welcome__ and in the body add an h1 heading of __Welcome To Struts 2!__
 
 **index.jsp**
 
