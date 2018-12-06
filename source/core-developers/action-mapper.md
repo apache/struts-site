@@ -140,7 +140,7 @@ A prefix based action mapper that is capable of delegating to other `ActionMappe
 It is configured through `struts.xml`. For example, with the following entries in `struts.xml`:
 
 ```xml
-<constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"/>
+<constant name="struts.mapper.class" value="prefix"/>
 
 <constant name="struts.mapper.prefixMapping" value="
   /communities:pseudoRestful,
