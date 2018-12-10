@@ -43,7 +43,7 @@ If there is a request that Struts is handling as an action, and you wish to make
 a comma separated list of regular expressions like:
 
 ```xml
-<constant name="struts.action.excludePattern" value="/some/conent/.*?" />
+<constant name="struts.action.excludePattern" value="/some/content/.*?" />
 ```
 
 These regular expression will be evaluated against the request's URI (`HttpServletRequest.getRequestURI()`), and if any 
