@@ -1,6 +1,6 @@
 ---
 layout: plugin
-title: Convention plugin
+title: JUnit plugin
 ---
 
 # JUnit plugin
