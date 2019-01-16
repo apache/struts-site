@@ -218,7 +218,7 @@ the <a href="ajax-theme.html">ajax theme</a>) contents:</p>
 &lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/controlheader-core.ftl" /&gt;
     &lt;td 
         &lt;#if parameters.align?? &gt;
-            class="align-${parameters.align?html}" 
+            class="align-${parameters.align}"
          &lt;#else &gt;
             class="tdInput"            
         &lt;/#if&gt;
@@ -254,7 +254,7 @@ the <a href="ajax-theme.html">ajax theme</a>) contents:</p>
 &lt;#list fieldErrors[parameters.name] as error&gt;
 &lt;tr errorFor="${parameters.id}"&gt;
     &lt;td class="tdErrorMessage" colspan="2"&gt;&lt;#rt/&gt;
-        &lt;span class="errorMessage"&gt;${error?html}&lt;/span&gt;&lt;#t/&gt;
+        &lt;span class="errorMessage"&gt;${error}&lt;/span&gt;&lt;#t/&gt;
     &lt;/td&gt;&lt;#lt/&gt;
 &lt;/tr&gt;
 &lt;/#list&gt;
@@ -278,7 +278,7 @@ the <a href="ajax-theme.html">ajax theme</a>) contents:</p>
 &lt;#if parameters.label??&gt;
     &lt;label &lt;#t/&gt;
 &lt;#if parameters.id??&gt;
-        for="${parameters.id?html}" &lt;#t/&gt;
+        for="${parameters.id}" &lt;#t/&gt;
 &lt;/#if&gt;
 &lt;#if hasFieldErrors&gt;
         class="errorLabel"&lt;#t/&gt;
@@ -289,11 +289,11 @@ the <a href="ajax-theme.html">ajax theme</a>) contents:</p>
 &lt;#if (parameters.required!false) &amp;&amp; ((parameters.requiredPosition!"right") != 'right')&gt;
         &lt;span class="required"&gt;*&lt;/span&gt;&lt;#t/&gt;
 &lt;/#if&gt;
-${parameters.label?html}&lt;#t/&gt;
+${parameters.label}&lt;#t/&gt;
 &lt;#if (parameters.required!false) &amp;&amp; ((parameters.requiredPosition!"right") == 'right')&gt;
  &lt;span class="required"&gt;*&lt;/span&gt;&lt;#t/&gt;
 &lt;/#if&gt;
-${parameters.labelseparator!":"?html}&lt;#t/&gt;
+${parameters.labelseparator!":"}&lt;#t/&gt;
 &lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/tooltip.ftl" /&gt;
 &lt;/label&gt;&lt;#t/&gt;
 &lt;/#if&gt;
@@ -349,7 +349,7 @@ ${parameters.after!}&lt;#t/&gt;
 &lt;#list fieldErrors[parameters.name] as error&gt;
 &lt;tr errorFor="${parameters.id}"&gt;
     &lt;td class="tdErrorMessage" colspan="2"&gt;&lt;#rt/&gt;
-        &lt;span class="errorMessage"&gt;${error?html}&lt;/span&gt;&lt;#t/&gt;
+        &lt;span class="errorMessage"&gt;${error}&lt;/span&gt;&lt;#t/&gt;
     &lt;/td&gt;&lt;#lt/&gt;
 &lt;/tr&gt;
 &lt;/#list&gt;
@@ -469,10 +469,10 @@ wrapping table, the opening and closing templates also, if the <code class="high
 &lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/form-validate.ftl" /&gt;
 &lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/form-common.ftl" /&gt;
 &lt;#if (parameters.validate!false)&gt;
-  onreset="${parameters.onreset!'clearErrorMessages(this);clearErrorLabels(this);'}"
+  onreset="&lt;#outputformat 'JavaScript'&gt;${parameters.onreset!'clearErrorMessages(this);clearErrorLabels(this);'}&lt;/#outputformat&gt;"
 &lt;#else&gt;
   &lt;#if parameters.onreset??&gt;
-  onreset="${parameters.onreset?html}"
+  onreset="&lt;#outputformat 'JavaScript'&gt;${parameters.onreset}&lt;/#outputformat&gt;"
   &lt;/#if&gt;
 &lt;/#if&gt;
 &gt;
@@ -506,7 +506,7 @@ wrapping table, the opening and closing templates also, if the <code class="high
 &lt;#if parameters.focusElement??&gt;
 &lt;script type="text/javascript"&gt;
     StrutsUtils.addOnLoad(function() {
-        var element = document.getElementById("${parameters.focusElement?html}");
+        var element = document.getElementById("${parameters.focusElement}");
         if(element) {
             element.focus();
         }
@@ -545,10 +545,10 @@ to <code class="highlighter-rouge">true</code>, enable <a href="../core-develope
 &lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/form-validate.ftl" /&gt;
 &lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/form-common.ftl" /&gt;
 &lt;#if (parameters.validate!false)&gt;
-  onreset="${parameters.onreset!'clearErrorMessages(this);clearErrorLabels(this);'}"
+  onreset="&lt;#outputformat 'JavaScript'&gt;${parameters.onreset!'clearErrorMessages(this);clearErrorLabels(this);'}&lt;/#outputformat&gt;"
 &lt;#else&gt;
   &lt;#if parameters.onreset??&gt;
-  onreset="${parameters.onreset?html}"
+  onreset="&lt;#outputformat 'JavaScript'&gt;${parameters.onreset}&lt;/#outputformat&gt;"
   &lt;/#if&gt;
 &lt;/#if&gt;
 &gt;
@@ -582,7 +582,7 @@ to <code class="highlighter-rouge">true</code>, enable <a href="../core-develope
 &lt;#if parameters.focusElement??&gt;
 &lt;script type="text/javascript"&gt;
     StrutsUtils.addOnLoad(function() {
-        var element = document.getElementById("${parameters.focusElement?html}");
+        var element = document.getElementById("${parameters.focusElement}");
         if(element) {
             element.focus();
         }
