@@ -26,7 +26,7 @@ __Description__
 
 {% comment %}start snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.CheckboxList {% endcomment %}
 <p>
- Creates a series of checkboxes from a list. Setup is like <s:select /> or <s:radio />, but creates checkbox tags.
+ Creates a series of checkboxes from a list. Setup is like `<s:select />` or `<s:radio />`, but creates checkbox tags.
 
 </p>
 {% comment %}end snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.CheckboxList {% endcomment %}
