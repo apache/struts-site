@@ -8,35 +8,17 @@ title: Tag Developers Guide
 
 Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
 
-| 
-
-
-{% comment %}start snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.ListUIBean {% endcomment %}
-<p> <p>
- Note that the listkey and listvalue attribute will default to "key" and "value"
- respectively only when the list attribute is evaluated to a Map or its descendant.
- Everything else will result in listkey and listvalue to be null and not used.
- </p>
-</p>
-{% comment %}end snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.ListUIBean {% endcomment %}
+Note that the `listkey` and `listvalue` attribute will default to `"key"` and `"value"`
+respectively only when the list attribute is evaluated to a Map or its descendant.
+Everything else will result in `listkey` and `listvalue` to be null and not used.
 
 __Description__
 
-
-
-{% comment %}start snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.CheckboxList {% endcomment %}
-<p>
- Creates a series of checkboxes from a list. Setup is like `<s:select />` or `<s:radio />`, but creates checkbox tags.
-
-</p>
-{% comment %}end snippet id=javadoc|javadoc=true|url=org.apache.struts2.components.CheckboxList {% endcomment %}
+Creates a series of checkboxes from a list. Setup is like `<s:select />` or `<s:radio />`, but creates checkbox tags.
 
 __Parameters__
 
-
-
-{% comment %}start snippet id=tagattributes|javadoc=false|url=struts2-tags/checkboxlist.html {% endcomment %}
-<p>		<table width="100%">
+<table width="100%">
 
 			<tr>
 
@@ -882,20 +864,10 @@ __Parameters__
 
 				</tr>
 
-		</table>
-
-</p>
-{% comment %}end snippet id=tagattributes|javadoc=false|url=struts2-tags/checkboxlist.html {% endcomment %}
+</table>
 
 __Examples__
 
-
-
-{% comment %}start snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.CheckboxList {% endcomment %}
-
 ```xml
  <s:checkboxlist name="foo" list="bar"/>
-
 ```
-
-{% comment %}end snippet id=example|lang=xml|javadoc=true|url=org.apache.struts2.components.CheckboxList {% endcomment %}
