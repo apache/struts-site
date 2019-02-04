@@ -24,12 +24,15 @@ Read-only access to the Apache Struts source repository is available through bot
 
 With the [Git client](http://git-scm.com/) installed, obtaining a working copy of the Struts codebase is as simple as
 
-    > git clone https://gitbox.apache.org/repos/asf/struts.git
+```
+> git clone https://gitbox.apache.org/repos/asf/struts.git
+```
 
 or from GitHub
 
-    > git clone https://github.com/apache/struts.git
-
+```
+> git clone https://github.com/apache/struts.git
+```
 
 For more about using version control systems at Apache, see the ASF's
 [Source Code Repositories](http://www.apache.org/dev/#version-control) page.
@@ -43,11 +46,15 @@ your own applications!)
 
 With Maven installed, building a Struts codebase is as simple as
 
-    > mvn install
+```
+> mvn install
+```
 
 or
 
-    > mvn -DskipAssembly=true install
+```
+> mvn -DskipAssembly=true install
+```
 
 Maven will automatically download any dependencies as needed.
 
@@ -60,7 +67,7 @@ For more about using Maven to build Struts 1, see our [Maven wiki page.](http://
 ## NightlyBuilds
 
 As part of our continuous integration practice, we also make available each morning the
-[latest stable development build.](https://builds.apache.org/view/S-Z/view/Struts/job/Struts2-JDK6/lastStableBuild/org.apache.struts$struts2-assembly/)
+[latest stable development build.](https://repository.apache.org/content/repositories/snapshots/org/apache/struts/struts2-assembly/)
 
 *Again: Use at your own risk!*
 
@@ -89,13 +96,15 @@ of the distribution may be upgraded to "Beta" or "General Availability", based o
 and then made available through ibiblio and other public Maven repositories. To obtain an early distribution via Maven,
 specify the ASF Snapshot repository in the project's POM.
 
-    <repositories>
-        <repository>
-            <id>apache.snapshots</id>
-            <name>ASF Maven 2 Snapshot</name>
-            <url>https://repository.apache.org/content/groups/snapshots/</url>
-        </repository>
-    </repositories>
+```xml
+<repositories>
+    <repository>
+        <id>apache.snapshots</id>
+        <name>ASF Maven 2 Snapshot</name>
+        <url>https://repository.apache.org/content/groups/snapshots/</url>
+    </repository>
+</repositories>
+```
 
 
 ## Licensing of Apache Struts Builds
