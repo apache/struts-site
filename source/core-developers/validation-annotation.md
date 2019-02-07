@@ -23,11 +23,9 @@ Validation annotation must be applied at Type level.
 
 ### An Annotated Interface
 
-- Mark the interface with `@Validation()`
 - Apply standard or custom annotations at method level
 
 ```java
- @Validation()
  public interface AnnotationDataAware {
 
      void setBarObj(Bar b);
@@ -46,7 +44,6 @@ Validation annotation must be applied at Type level.
 ### An Annotated Class
 
 ```java
- @Validation()
  public class SimpleAnnotationAction extends ActionSupport {
 
      @RequiredFieldValidator(type = ValidatorType.FIELD, message = "You must enter a value for bar.")
