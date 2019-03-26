@@ -78,7 +78,7 @@ to set these values in the request scope.
 
 ```java
 @Test
-public void testExecuteValidationPasses() throws Exception() {
+public void testExecuteValidationPasses() throws Exception {
     request.setParameter("personBean.firstName", "Bruce");
     request.setParameter("personBean.lastName", "Phillips");
     request.setParameter("personBean.email", "bphillips@ku.edu");
@@ -127,7 +127,7 @@ for that field.
 
 ```java
 @Test
-public void testExecuteValidationFailsMissingFirstName() throws Exception() {
+public void testExecuteValidationFailsMissingFirstName() throws Exception {
     //request.setParameter("personBean.firstName", "Bruce");
     request.setParameter("personBean.lastName", "Phillips");
     request.setParameter("personBean.email", "bphillips@ku.edu");
