@@ -329,7 +329,7 @@ between the View and Model, which can make applications
 significantly easier to create and maintain.
 
 While MVC is a convenient paradigm, many workers find that
-applcations may utilize more than three layers.
+applications may utilize more than three layers.
 For example, within the Model, there is often distinct business
 logic and data access layers.
 

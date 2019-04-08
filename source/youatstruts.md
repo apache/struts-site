@@ -48,7 +48,7 @@ If you like, you can read Craig R. McClanahans article on
 [Contributing](http://jakarta.apache.org/site/contributing.html).
 
 Here is another comment that was sent to the Jakarta Turbine Mailing
-List about the open source process and the contrastbetween how an
+List about the open source process and the contrast between how an
 open source product and a proprietary product improve through the user
 community: [Understanding Opensource](http://jakarta.apache.org/site/understandingopensource.html).
 
