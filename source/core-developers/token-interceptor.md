@@ -46,12 +46,12 @@ such as done with the token session interceptor.
      <result name="success">good_result.ftl</result>
  </action>
 
- <-- In this case, myMethod of the action class will not
+ <!-- In this case, myMethod of the action class will not
         get checked for invalidity of token -->
  <action name="someAction" class="com.examples.SomeAction">
      <interceptor-ref name="token">
         <param name="excludeMethods">myMethod</param>
-     </interceptor-ref name="token"/>
+     </interceptor-ref>
      <interceptor-ref name="basicStack"/>
      <result name="success">good_result.ftl</result>
  </action>

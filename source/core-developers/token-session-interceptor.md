@@ -30,17 +30,17 @@ There are no known extension points for this interceptor.
 
 ```xml
  <action name="someAction" class="com.examples.SomeAction">
-     <interceptor-ref name="tokenSession/>
+     <interceptor-ref name="tokenSession"/>
      <interceptor-ref name="basicStack"/>
      <result name="success">good_result.ftl</result>
  </action>
 
- <-- In this case, myMethod of the action class will not
+ <!-- In this case, myMethod of the action class will not
         get checked for invalidity of token -->
  <action name="someAction" class="com.examples.SomeAction">
-     <interceptor-ref name="tokenSession>
+     <interceptor-ref name="tokenSession">
          <param name="excludeMethods">myMethod</param>
-     </interceptor-ref name="tokenSession>
+     </interceptor-ref>
      <interceptor-ref name="basicStack"/>
      <result name="success">good_result.ftl</result>
  </action>
