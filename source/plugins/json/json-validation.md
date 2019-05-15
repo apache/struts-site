@@ -1,6 +1,9 @@
 ---
 layout: plugin
-title: JSON plugin
+title: JSON Ajax validation
+parent:
+    title: JSON plugin
+    url: index.html
 ---
 
 # JSON Ajax Validation
