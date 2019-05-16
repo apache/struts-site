@@ -46,7 +46,7 @@ The `setArray` method can take as parameter either a `List`, or any numeric arra
 
 `root` attribute must be set on the `JSONInterceptor` when dealing with JSON array.
 
-This plugin also provides [JSON Validation](json-validation).
+This plugin also provides [JSON Ajax Validation](json-ajax-validation).
 
 ## Installation
 
