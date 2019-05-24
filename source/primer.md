@@ -37,6 +37,7 @@ Before getting started, you should understand the basics of several key technolo
   - [JavaScript, AJAX, and SOAP](#javascript)
   - [Properties Files and ResourceBundles](#resources)
   - [Servlets, Filters and Web Containers](#containers)
+  - [Sessions](#session)
   - [JavaServer Pages and JSP Tag Libraries](#jsp)
   - [Extensible Markup Language (XML)](#xml)
   - [JAAS](#jaas)
