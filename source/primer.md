@@ -37,6 +37,7 @@ Before getting started, you should understand the basics of several key technolo
   - [JavaScript, AJAX, and SOAP](#javascript)
   - [Properties Files and ResourceBundles](#resources)
   - [Servlets, Filters and Web Containers](#containers)
+  - [Sessions](#session)
   - [JavaServer Pages and JSP Tag Libraries](#jsp)
   - [Extensible Markup Language (XML)](#xml)
   - [JAAS](#jaas)
@@ -184,7 +185,7 @@ response. Filters are aggregated into a chain in which each filter
 has a chance to process the request and response before and after
 it is processed by subsequent filters (and the servlet that is ultimately called).
 
-### Sessions #{session}
+### Sessions {#session}
 
 One of the key characteristics of HTTP is that it is
 *stateless*. In other words, there is nothing built in to
