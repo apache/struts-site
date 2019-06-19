@@ -68,7 +68,8 @@ for years and give the huge user base it is unlikely it will go away anytime soo
 in the future. Not only that we have dedicated users and developers on the project.
 Apache Struts is licensed to the Apache License 2.0 and this will not change. We maintain
 a clean IP and you are "safe" to use the project. Sometimes you are not "safe" to use
-a project when a company controls the SCM. Access to Source Code doesn't mean it is free.
+a project when a company controls the SCM (Source Control Management). 
+Access to Source Code doesn't mean it is free.
 With Apache Struts, you are not only free to "do what you want with it", you can even
 contribute (which is not always the case). And best of it: you can become a part of the
 core team too.
