@@ -97,7 +97,7 @@ this markup.
 
 ```html
 <s:url action="registerInput" var="registerInputLink" />
-<p><a href="${registerInputLink}">Please register</a> for our prize drawing.</p>
+<p><s:a href="%{registerInputLink}">Please register</s:a> for our prize drawing.</p>
 ```
 
 We use the Struts 2 url tag to create a link to action registerInput. We then use that link as the value for the `href` 
