@@ -97,7 +97,7 @@ this markup.
 
 ```html
 <s:url action="registerInput" var="registerInputLink" />
-<p><a href="${registerInputLink}">Please register</a> for our prize drawing.</p>
+<p><s:a href="%{registerInputLink}">Please register</s:a> for our prize drawing.</p>
 ```
 
 We use the Struts 2 url tag to create a link to action registerInput. We then use that link as the value for the `href` 
@@ -270,7 +270,7 @@ instead of the default locale value of our location (which is en). Add the follo
 <s:url action="registerInput" var="registerInputLinkES">
     <s:param name="request_locale">es</s:param>
 </s:url>
-<p><a href="${registerInputLinkES}">Por favor, regístrese</a> para nuestro sorteo</p>
+<p><s:a href="%{registerInputLinkES}">Por favor, regístrese</s:a> para nuestro sorteo</p>
 ```
 
 In the above markup we've added a parameter named request_locale to the URL. The value of that parameter is `es`. 
