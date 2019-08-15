@@ -13,6 +13,25 @@ title: Announcements 2019
   Skip to: <a href="announce-2018.html">Announcements - 2018</a>
 </p>
 
+#### 15 August 2019 - Security Advice: Announcing corrected affected version ranges in historic Apache Struts security bulletins and CVE entries {#a20190815}
+
+The Apache Struts Security team would like to announce that a number of historic [Struts Security Bulletins](https://cwiki.apache.org/confluence/display/WW/Security+Bulletin) and related CVE database entries contained incorrect affected release version ranges.
+
+The issue was reported by Christopher Fearon and the Black Duck Research Team within the Synopsys Cybersecurity Research Center. The reporting entity conducted thorough investigations on this matter, leading to a report to the Apache Struts Security Team. The Apache Struts Security Team worked with the reporters to cross-check said issues and map them to affected Apache Struts General Availability (GA) releases.
+
+This effort led to the issue of Struts Security Bulletin S2-058, referencing 15 historic Struts Security Bulletins and [respective CVE entries](https://github.com/CVEProject/cvelist/pull/2423/files) that have been updated to reflect corrections in affected GA version ranges as well as minimum GA versions to contain appropriate fixes for the issues at hand.
+
+The full Security Bulletin can be found here:
+
+[Apache Struts Security Buletin S2-058](https://cwiki.apache.org/confluence/display/WW/S2-058)
+
+The Struts Security Team stresses that while the reporters reference more affected issues and resulting affected version ranges, the Struts Security Bulletins only cover GA versions designated for production use. This led to less corrected Security Bulletins and CVE entries compared to the number of covered issues in the original report.
+ 
+It is very important to understand that while the individual listed bulletins contain updated minimum fix versions, it is strongly recommended to update to the version recommended by the latest Security Bulletin, which is [S2-057](https://cwiki.apache.org/confluence/display/WW/S2-057) by the time of this announcement. Following this advice, the recommended minimum Struts versions to operate in production are Struts 2.3.35 or Struts 2.5.17.
+
+The Apache Struts Security Team would like to thank the reporters for their efforts and their practice of responsible disclosure, as well as their help while investigating the report and coordinating public disclosure.
+
+
 #### 14 January 2019 - Struts 2.5.20 General Availability {#a20190114}
 
 The Apache Struts group is pleased to announce that Struts 2.5.20 is available as a "General Availability"
