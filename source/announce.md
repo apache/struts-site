@@ -13,6 +13,13 @@ title: Announcements 2019
   Skip to: <a href="announce-2018.html">Announcements - 2018</a>
 </p>
 
+#### 12 September 2019 - Struts 2..3.x reached End-Of-Life
+
+As announced over 6 months ago, Apache Struts 2.3.x web framework series reached its end of life and won't be longer 
+officially supported. Please check the following reading to find more details:
+
+[Apache Struts 2.3.x EOL Announcement](struts23-eol-announcement)
+
 #### 15 August 2019 - Security Advice: Announcing corrected affected version ranges in historic Apache Struts security bulletins and CVE entries {#a20190815}
 
 The Apache Struts Security team would like to announce that a number of historic [Struts Security Bulletins](https://cwiki.apache.org/confluence/display/WW/Security+Bulletin) and related CVE database entries contained incorrect affected release version ranges.
@@ -30,7 +37,6 @@ The Struts Security Team stresses that while the reporters reference more affect
 It is very important to understand that while the individual listed bulletins contain updated minimum fix versions, it is strongly recommended to update to the version recommended by the latest Security Bulletin, which is [S2-057](https://cwiki.apache.org/confluence/display/WW/S2-057) by the time of this announcement. Following this advice, the recommended minimum Struts versions to operate in production are Struts 2.3.35 or Struts 2.5.17.
 
 The Apache Struts Security Team would like to thank the reporters for their efforts and their practice of responsible disclosure, as well as their help while investigating the report and coordinating public disclosure.
-
 
 #### 14 January 2019 - Struts 2.5.20 General Availability {#a20190114}
 
