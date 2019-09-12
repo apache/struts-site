@@ -13,7 +13,7 @@ title: Announcements 2019
   Skip to: <a href="announce-2018.html">Announcements - 2018</a>
 </p>
 
-#### 12 September 2019 - Struts 2..3.x reached End-Of-Life
+#### 12 September 2019 - Struts 2..3.x reached End-Of-Life {#a20190912}
 
 As announced over 6 months ago, Apache Struts 2.3.x web framework series reached its end of life and won't be longer 
 officially supported. Please check the following reading to find more details:
