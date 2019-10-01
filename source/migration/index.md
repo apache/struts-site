@@ -4,8 +4,12 @@ title: Migration Guide
 ---
 
 # Migration Guide
+{:.no_toc}
 
 Getting here from there.
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Version Notes
 
@@ -27,8 +31,7 @@ All Version Notes are available on our [Wiki](https://cwiki.apache.org/confluenc
 
 - [Migrating Applications to Struts 2 ](http://www.infoq.com/news/migrating-struts2) - A three-part series by Ian Roughley (Sep 2006)
 
-
-##Comparing Struts 1 and 2## {#PAGE_14048}
+## Comparing Struts 1 and 2
 
 | Feature | Struts 1 | Struts 2 |
 |---------|----------|----------|
@@ -48,31 +51,9 @@ All Version Notes are available on our [Wiki](https://cwiki.apache.org/confluenc
 
 **(i) See Also**
 
-
-> 
-
-> 
-
-> + Matt Raible wrote (mid 2005) an interesting whitepaper where he compared various web frameworks. You can view the PDF here:
- > 	
-
-> 
-
->   + [https://equinox.dev.java.net/framework-comparison/WebFrameworks.pdf](https://equinox.dev.java.net/framework-comparison/WebFrameworks.pdf)
-
-> 
-
->   + [http://www.virtuas.com/files/osl-jwf-01.pdf](http://www.virtuas.com/files/osl-jwf-01.pdf)
-
-> 
-
-> 
-
-> 
-
-> 
-
-####Next:####
+> Matt Raible wrote (mid 2005) an interesting whitepaper where he compared various web frameworks. You can view the PDF here:
+> - [https://equinox.dev.java.net/framework-comparison/WebFrameworks.pdf](https://equinox.dev.java.net/framework-comparison/WebFrameworks.pdf)
+> - [http://www.virtuas.com/files/osl-jwf-01.pdf](http://www.virtuas.com/files/osl-jwf-01.pdf)
 
 ##Key Changes From WebWork 2## {#PAGE_26950}
 
