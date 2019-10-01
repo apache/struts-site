@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Migration Guide</title>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/highlighter/github-theme.css" rel="stylesheet">
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts" class="github-ribbon">
+  <img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/download.cgi">Download</a></li>
+                <li><a href="/releases.html">Releases</a></li>
+                <li><a href="/announce.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li class="divider"></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Version Notes</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins">Security Bulletins</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Maven Project Info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core Dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin Dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/core-developers/">Core Developers Guide</a></li>
+                <li><a href="/tag-developers/">Tag Developers Guide</a></li>
+                <li><a href="/migration/">Migration Guide</a></li>
+                <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
+                <li><a href="/plugins/">Plugins</a></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/tag-developers/tag-reference.html">Tag reference</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/FAQs">FAQs</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code and Builds</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li class="divider"></li>
+                <li><a href="/release-guidelines.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://gitbox.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/migration/index.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <h1 id="migration-guide">Migration Guide</h1>
+
+<p>Getting here from there.</p>
+
+<h2 id="version-notes">Version Notes</h2>
+
+<p>All Version Notes are available on our <a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Wiki</a></p>
+
+<h2 id="struts-23-to-struts-25">Struts 2.3 to Struts 2.5</h2>
+
+<ul>
+  <li><a href="struts-2-3-to-2-5-migration">Struts 2.3 to 2.5 migration</a></li>
+</ul>
+
+<h2 id="struts-1-to-struts-2">Struts 1 to Struts 2</h2>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="#PAGE_14048">Comparing Struts 1 and 2</a></td>
+          <td>How are Struts 1 and Struts 2 alike? How are they different?</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="#PAGE_14240">Struts 1 Solutions</a></td>
+          <td>Various issues (and hopefully their solutions!) encountered during migrations to Struts 2.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="#PAGE_14221">Migration Strategies</a></td>
+          <td>Steps and overall strategies for migrating Struts 1 applications to Struts 2.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="#PAGE_13954">Migration Tools</a></td>
+          <td>Development tools to help aid the migration process.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="tutorials">Tutorials</h2>
+
+<ul>
+  <li><a href="http://www.infoq.com/news/migrating-struts2">Migrating Applications to Struts 2 </a> - A three-part series by Ian Roughley (Sep 2006)</li>
+</ul>
+
+<p>##Comparing Struts 1 and 2## {#PAGE_14048}</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Struts 1</th>
+      <th>Struts 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Action classes</td>
+      <td>Struts 1 requires Action classes to extend an abstract base class. A common problem in Struts 1 is programming to abstract classes instead of interfaces.</td>
+      <td>An Struts 2 Action <em>may</em>  implement an Action interface, along with other interfaces to enable optional and custom services. Struts 2 provides a base ActionSupport class to implement commonly used interfaces. Albeit, the Action interface is <strong>not</strong> required. Any POJO object with a execute signature can be used as an Struts 2 Action object.</td>
+    </tr>
+    <tr>
+      <td>Threading Model</td>
+      <td>Struts 1 Actions are singletons and must be thread-safe since there will only be one instance of a class to handle all requests for that Action. The singleton strategy places restrictions on what can be done with Struts 1 Actions and requires extra care to develop. Action resources must be thread-safe or synchronized.</td>
+      <td>Struts 2 Action objects are instantiated for each request, so there are no thread-safety issues. (In practice, servlet containers generate many throw-away objects per request, and one more object does not impose a performance penalty or impact garbage collection.)</td>
+    </tr>
+    <tr>
+      <td>Servlet Dependency</td>
+      <td>Struts 1 Actions have dependencies on the servlet API since the HttpServletRequest and HttpServletResponse is passed to the execute method when an Action is invoked.</td>
+      <td>Struts 2 Actions are not coupled to a container. Most often the servlet contexts are represented as simple Maps, allowing Actions to be tested in isolation. Struts 2 Actions can still access the original request and response, if required. However, other architectural elements reduce or eliminate the need to access the HttpServetRequest or HttpServletResponse directly.</td>
+    </tr>
+    <tr>
+      <td>Testability</td>
+      <td>A major hurdle to testing Struts 1 Actions is that the execute method exposes the Servlet API. A third-party extension, Struts TestCase, offers a set of mock object for Struts 1.</td>
+      <td>Struts 2 Actions can be tested by instantiating the Action, setting properties, and invoking methods. Dependency Injection support also makes testing simpler.</td>
+    </tr>
+    <tr>
+      <td>Harvesting Input</td>
+      <td>Struts 1 uses an ActionForm object to capture input. Like Actions, all ActionForms must extend a base class. Since  other JavaBeans cannot be used as ActionForms, developers often create redundant classes to capture input. DynaBeans can used as an alternative to creating conventional ActionForm classes, but, here too, developers may be redescribing existing JavaBeans. \</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Struts 2 uses Action properties as input properties, eliminating the need for a second input object. Input properties may be rich object types which may have their own properties. The Action properties can be accessed from the web page via the taglibs. Struts 2 also supports the ActionForm pattern, as well as POJO form objects and POJO Actions. Rich object types, including business or domain objects, can be used as input/output objects. The ModelDriven feature simplifies taglb references to POJO input objects. \</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Expression Language</td>
+      <td>Struts 1 integrates with JSTL, so it uses the JSTL EL. The EL has basic object graph traversal, but relatively weak collection and indexed property support.</td>
+      <td>Struts 2 can use JSTL, but the framework also supports a more powerful and flexible expression language called “Object Graph Notation Language” (OGNL).</td>
+    </tr>
+    <tr>
+      <td>Binding values into views</td>
+      <td>Struts 1 uses the standard JSP mechanism for binding objects into the page context for access.</td>
+      <td>Struts 2 uses a “ValueStack” technology so that the taglibs can access values without coupling your view to the object type it is rendering. The ValueStack strategy allows reuse of views across a range of types which may have the same property name but different property types. \</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Type Conversion</td>
+      <td>Struts 1 ActionForm properties are usually all Strings. Struts 1 uses Commons-Beanutils for type conversion. Converters are per-class, and not configurable per instance.</td>
+      <td>Struts 2 uses OGNL for type conversion. The framework includes converters for basic and common object types and primitives.</td>
+    </tr>
+    <tr>
+      <td>Validation</td>
+      <td>Struts 1 supports manual validation via a validate method on the ActionForm, or through an extension to the Commons Validator. Classes can have different validation contexts for the same class, but cannot chain to validations on sub-objects.</td>
+      <td>Struts 2 supports manual validation via the validate method and the XWork Validation framework. The Xwork Validation Framework supports chaining validation into sub-properties using the validations defined for the properties class type and the validation context.</td>
+    </tr>
+    <tr>
+      <td>Control Of Action Execution</td>
+      <td>Struts 1 supports separate Request Processors (lifecycles) for each module, but all the Actions in the module must share the same lifecycle.</td>
+      <td>Struts 2 supports creating different lifecycles on a per Action basis via Interceptor Stacks. Custom stacks can be created and used with different Actions, as needed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>(i) See Also</strong></p>
+
+<blockquote>
+
+</blockquote>
+
+<blockquote>
+
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>Matt Raible wrote (mid 2005) an interesting whitepaper where he compared various web frameworks. You can view the PDF here:</li>
+  </ul>
+
+</blockquote>
+
+<blockquote>
+
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li><a href="https://equinox.dev.java.net/framework-comparison/WebFrameworks.pdf">https://equinox.dev.java.net/framework-comparison/WebFrameworks.pdf</a></li>
+  </ul>
+</blockquote>
+
+<blockquote>
+
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li><a href="http://www.virtuas.com/files/osl-jwf-01.pdf">http://www.virtuas.com/files/osl-jwf-01.pdf</a></li>
+  </ul>
+</blockquote>
+
+<blockquote>
+
+</blockquote>
+
+<blockquote>
+
+</blockquote>
+
+<blockquote>
+
+</blockquote>
+
+<blockquote>
+
+</blockquote>
+
+<p>####Next:####</p>
+
+<p>##Key Changes From WebWork 2## {#PAGE_26950}</p>
+
+<p>The upgrade path from WebWork 2 to Struts 2 is smooth glide. Here’s the roadmap.</p>
+
+<p>#####System Platform#####</p>
+
+<ul>
+  <li>
+    <p>Struts 2 is dependant on XWork 2 (beta-1).</p>
+  </li>
+  <li>
+    <p>Java 1.5 is required to build Struts 2.</p>
+
+    <ul>
+      <li>For Java 1.4 deployments, RetroTranslater JARS are available with the distribution.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>For other changes from WebWork 2, see the “Members to rename”, “New property settings”, “New features or feature changes”, and “Removed or deprecated” sections.</p>
+
+<p><strong>Members to rename</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>WebWork 2</th>
+      <th>Struts 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>com.opensymphony.xwork.*</td>
+      <td>com.opensymphony.xwork2.*</td>
+    </tr>
+    <tr>
+      <td>com.opensymphony.webwork.*</td>
+      <td>org.apache.struts2.*</td>
+    </tr>
+    <tr>
+      <td>xwork.xml</td>
+      <td>struts.xml</td>
+    </tr>
+    <tr>
+      <td>webwork.properties</td>
+      <td>struts.properties</td>
+    </tr>
+    <tr>
+      <td>DispatcherUtil</td>
+      <td>Dispatcher</td>
+    </tr>
+    <tr>
+      <td>com.opensymphony.webwork.config.Configuration</td>
+      <td>org.apache.struts2.config.Settings</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The tag prefix conventions in the example applications have changed.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>JSP</th>
+      <th>s:</th>
+      <th><em>&lt;s:form …&gt;</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Freemarker</td>
+      <td>s.</td>
+      <td><em>&lt;@s.form …&gt;</em></td>
+    </tr>
+    <tr>
+      <td>Velocity</td>
+      <td>s</td>
+      <td><em>#sform ( … )</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>New property settings</strong></p>
+
+<p>|struts.enable.DynamicMethodInvocation | Enable support for the hardwired action!alias syntax (Default is TRUE)|
+|—————————————-|————————————————————————|</p>
+
+<p>It is recommended that all applications specify the DynamicMethodInvocation setting for now, since the default may change. The recommended approach to action aliasing is to use <em>wildcard aliases</em>  instead of the hardwired bang.</p>
+
+<table>
+  <tbody>
+    <tr>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>New features and feature changes</strong></p>
+
+<ul>
+  <li>
+    <p>Various changes to ConfigurationManager</p>
+
+    <ul>
+      <li>
+        <p>ConfigurationManager is no longer a static factory. It is now an instance created through Dispatcher. Custom configuration could be done through DispatcherListener.</p>
+      </li>
+      <li>
+        <p>Custom configuration to ConfigurationManager and Configuration cannot be done statically anymore, instead use Dispatcher’s DispatcherListener to achieve the same effect.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>The</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>prepare
+</code></pre>
+</div>
+<p>interceptor now uses reflection to call prepare_Method_ where <em>method</em>  is the action method configured for the particular action in</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+<p>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+   &lt;action name="myAction" method="insert" ....&gt;
+     .....
+   &lt;/action&gt;
+
+   // with the above configuration, and PrepareInterceptor in play, 
+   // callsequence will be 
+   1] prepareInsert() (If it exists)
+   2] prepare() (Unless Interceptor's alwaysInvokePrepare parameter is set to false)
+   3] insert()
+
+</code></pre>
+</div>
+
+<ul>
+  <li>DefaultWorkflowInterceptor (named</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>workflow
+</code></pre>
+</div>
+<p>in</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts-default.xml
+</code></pre>
+</div>
+<p>) now uses reflection to call</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>validateMethod
+</code></pre>
+</div>
+<p>on the action class that implements Validateable interface where</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>method
+</code></pre>
+</div>
+<p>is the action method configured for the particular action in</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+<p>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;action name="myAction" method="insert" ...&gt;
+       ...
+    &lt;/action&gt;
+
+    // with the above configuration, and DefaultWorkflowInterceptor in play, 
+    // call sequence for action that implements Validateable interface will be 
+    1] validateInsert()
+    2] validate() (unless Interceptor's alwaysInvokeValidate parameter is set to false)
+    3] insert()
+
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p>The tooltip library used by the xhtml theme was replaced by <a href="http://dojotoolkit.org">Dojo’s</a>^[http://dojotoolkit.org] tooltip component.</p>
+  </li>
+  <li>
+    <p>Datepicker tag has been renamed to datetimepicker and is now using dojo (limited in terms functionality and internationalization)</p>
+  </li>
+  <li>
+    <p><em>Tiles integration</em>  plugin is available.</p>
+  </li>
+  <li>
+    <p><em>Wildcards</em>  can be specified in action mappings.</p>
+  </li>
+  <li>
+    <p><em>MessageStoreInterceptor</em>  is introduced to allow field errors / action errors and messages to be store and retrieve through session, resulting them to be preservable across request.</p>
+  </li>
+</ul>
+
+<p><strong>Removed or deprecated</strong></p>
+
+<p>|AroundInterceptor| The AroundInterceptor has been removed. If your application extends the AroundInterceptor, either import the class into your source code form WebWork 2 (pursuant to the Open Symphony License) and modify it to server as your own base class, or rewrite your interceptor. |
+|—————–|——————————————————————————————————————————————————————————————————————————————————————————–|
+|oldSyntax| Support for the “oldSyntax” is removed. |
+| Rich text editor tag | Rich text editor tag is removed and replaced by Dojo’s <a href="http://dojotoolkit.org/docs/rich\_text.html">rich text editor</a>^[http://dojotoolkit.org/docs/rich_text.html]|
+|doActionMethod| The convention of trying a “do” form of an action method is not supported. \
+\
+  &lt;action name=”…” method=”submit”&gt;\
+    …\
+  &lt;/action&gt;\
+In WebWork,\
+\
++ try to execute submit method in the action, <em>fail</em> \
+\
++ try to execute doSubmit method in the action if Step 1, <em>fail</em> \
+\
++ <em>fail</em> \
+\
+In Struts,\
+\
++ try to execute submit method in the action, <em>fail</em> \
+\
++ <em>fail</em> \
+|
+|
+|default method| Calling the “default” method via “doDefault” is not supported.  |
+| IOC framework | Deprecated in WebWork 2.2, the internal IOC framework is removed in Struts 2. Spring is the <em>ObjectFactory</em>  default. |</p>
+
+<p>##Migration Strategies## {#PAGE_14221}</p>
+
+<p>The migration strategy of Struts 1 developers moving to Struts 2 involves four non-exclusive paths:</p>
+
+<ol>
+  <li><strong>Dual processor, shared resources</strong> - Add the Struts 2.0 JARs to your exisitng Struts 1.3 application. Configure S2 to handle</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>*.action
+</code></pre>
+</div>
+<p>requests s and let S1 handle</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>*.do
+</code></pre>
+</div>
+<p>requests. S1 and S2 can run side by side, within the same web application. Teams can implement new features in the latest version, and migrate older pieces as needed. Optionally, some common resources may be shared between S1 and S2, like messages, validation rules, and Tiles configurations, making for an even smoother migration.</p>
+
+<ol>
+  <li>
+    <p><strong>Study known Struts 1 applications, rewritten for Struts 2</strong> - Familiar applications such as the Struts Mailreader are being rewritten to demonstrate best practices for Struts 2.</p>
+  </li>
+  <li>
+    <p><strong>Use a conversion wizard</strong> - It may be possible to create a tool that reads the</p>
+  </li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>web.xml
+</code></pre>
+</div>
+<p>and S1 configuration files, and generates the corresponding S2 classes, pages, and configuration files.  While 100% compatibility is unlikely,  we could make a strong effort to convert the application, marking areas that need attention. Comparing the converted files with the originals could also serve as a training tool.</p>
+
+<p>####Next:####</p>
+
+<hr />
+
+<p>This page originally adopted from <a href="http://wiki.apache.org/struts/MigrationStrategy">http://wiki.apache.org/struts/MigrationStrategy</a>.</p>
+
+<p>##Migration Tools## {#PAGE_13954}</p>
+
+<p>Struts 2 migration tools include the notions of</p>
+
+<ul>
+  <li>
+    <p>bridge objects to utilize existing s1 resources, and</p>
+  </li>
+  <li>
+    <p>utilities to convert resources to s2 equivalents.</p>
+  </li>
+</ul>
+
+<p>| (!) | This is a whiteboard describing tools that volunteers <em>might</em>  write, given sufficient interest. |
+|——|—————————————————————————————————|</p>
+
+<p>####Dual Processor, Shared Resources####</p>
+
+<ul>
+  <li>
+    <p>A s2 TextProvider that retrieves messages from the s1 MessageResources instance in the servlet context</p>
+  </li>
+  <li>
+    <p>An Interceptor that can apply SAF1 validations to s2 actions, converting error messages to s2 format.</p>
+  </li>
+  <li>
+    <p>An Action and/or Interceptor that executes a Commons Chain instance.</p>
+  </li>
+</ul>
+
+<p>#####Struts 1 Emulation#####</p>
+
+<ul>
+  <li>Implement s2 Action interface on s1 Action; Extend Session-Aware Interceptor to set properties corresponding to s1 execute parameters and populate ActionForm; Action</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>execute()
+</code></pre>
+</div>
+<p>invokes</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>execute(...)
+</code></pre>
+</div>
+<p>using properties; return ActionForward name.</p>
+
+<ul>
+  <li>Extend aforementioned s1 Action Interceptor to load and process PlugIns</li>
+</ul>
+
+<p>####Conversion Wizards####</p>
+
+<ul>
+  <li>Utilize XSLT and other text processing tools to convert</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts-config.xml
+</code></pre>
+</div>
+<p>to</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>struts.xml
+</code></pre>
+</div>
+<p>,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>validations.xml
+</code></pre>
+</div>
+<p>to a global s2</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>validations.xml
+</code></pre>
+</div>
+<p>, and Struts message resources to global s2</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>resource.properties
+</code></pre>
+</div>
+<p>.</p>
+
+<ul>
+  <li>
+    <p>… convert s1 Action classes to session-aware s2 Action classes</p>
+  </li>
+  <li>
+    <p>… convert s1 JSPs to s2 JSPs (non-trivial!)</p>
+  </li>
+</ul>
+
+<p>####Next:####</p>
+
+<hr />
+
+<p>This page adopted from <a href="http://wiki.apache.org/struts/MigrationTools">http://wiki.apache.org/struts/MigrationTools</a>.</p>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    All Rights Reserved.
+  </div>
+  <div class="col-md-12">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>
+<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+</body>
+</html>
