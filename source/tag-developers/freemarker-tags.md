@@ -93,12 +93,12 @@ In the new template, the description is referenced via the parameters Map: `${pa
 
 ## Attribute Types
 
-Remember that all tag attributes must first be set as Strings - they are then later evaluated (using [OGNL](ognl.html)) 
+Remember that all tag attributes must first be set as Strings - they are then later evaluated (using [OGNL](ognl)) 
 to a different type, such as List, int, or boolean. This generally works just fine, but it can be limiting when using 
 FreeMarker which provides more advanced ways to apply attributes. Suppose the following example:
 
 ```ftl
-<@s.select label="Foo label - %{foo}" name="%{name}" list="%{{1, 2, 3}}"/>
+<@s.select label="Foo label - %{foo}" name="%{name}" list="%{1, 2, 3}"/>
 ```
 
 What will happen here is that each attribute will be evaluated to a String as best it can. This may involve calling the
