@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -157,22 +156,21 @@ of <code class="highlighter-rouge">ServletRedirectResult</code>, the action’s 
   <li>Setting the interceptor parameter eg.</li>
 </ol>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"submitApplication"</span> <span class="err">...</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"submitApplication"</span> <span class="err">...</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"store"</span><span class="nt">/&gt;</span>
 	    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"operationMode"</span><span class="nt">&gt;</span>STORE<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;/interceptor-ref&gt;</span>
 	<span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span> <span class="nt">/&gt;</span>
     ....
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ol>
   <li>Through request parameter <code class="highlighter-rouge">allowRequestParameterSwitch</code> must be ‘true’ which is the default, the request will have 
   the operation mode in <code class="highlighter-rouge">STORE</code>
-<code class="highlighter-rouge">
-http://localhost:8080/context/submitApplication.action?operationMode=STORE
-</code></li>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:8080/context/submitApplication.action?operationMode=STORE
+</code></pre></div>    </div>
+  </li>
 </ol>
 
 <h2 id="parameters">Parameters</h2>
@@ -190,7 +188,7 @@ http://localhost:8080/context/submitApplication.action?operationMode=STORE
 
 <h2 id="examples">Examples</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"submitApplication"</span> <span class="err">....</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"submitApplication"</span> <span class="err">....</span><span class="nt">&gt;</span>
 	<span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"store"</span><span class="nt">&gt;</span>
 		<span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"operationMode"</span><span class="nt">&gt;</span>STORE<span class="nt">&lt;/param&gt;</span>
 	<span class="nt">&lt;/interceptor-ref&gt;</span>
@@ -205,8 +203,7 @@ http://localhost:8080/context/submitApplication.action?operationMode=STORE
 	<span class="nt">&lt;/interceptor-ref&gt;</span>
 	<span class="nt">&lt;result&gt;</span>applicationFailed.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>With the example above, <code class="highlighter-rouge">submitApplication.action</code> will have the action messages / errors / field errors stored in 
 the HTTP Session. Later when needed, (in this case, when <code class="highlighter-rouge">applicationFailed.action</code> is fired, it will get the action 

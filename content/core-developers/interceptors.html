@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -180,7 +179,7 @@ on the stack can be very important.</p>
 
 <p><strong>struts.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"default"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"default"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
    <span class="nt">&lt;interceptors&gt;</span>
        <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"timer"</span> <span class="na">class=</span><span class="s">".."</span><span class="nt">/&gt;</span>
        <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"logger"</span> <span class="na">class=</span><span class="s">".."</span><span class="nt">/&gt;</span>
@@ -193,8 +192,7 @@ on the stack can be very important.</p>
       <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"redirectAction"</span><span class="nt">&gt;</span>/secure/home<span class="nt">&lt;/result&gt;</span>
    <span class="nt">&lt;/action&gt;</span>
 <span class="nt">&lt;/package&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="stacking-interceptors">Stacking Interceptors</h2>
 
@@ -203,7 +201,7 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
 
 <p><strong>struts.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"default"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"default"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
    <span class="nt">&lt;interceptors&gt;</span>
         <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"timer"</span> <span class="na">class=</span><span class="s">".."</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"logger"</span> <span class="na">class=</span><span class="s">".."</span><span class="nt">/&gt;</span>
@@ -219,8 +217,7 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
          <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"redirectAction"</span><span class="nt">&gt;</span>/secure/home<span class="nt">&lt;/result&gt;</span>
    <span class="nt">&lt;/action&gt;</span>
 <span class="nt">&lt;/package&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Looking inside <code class="highlighter-rouge">struts-default.xml</code>, we can see how it’s done.</p>
 
@@ -265,15 +262,15 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
 <span class="nt">&lt;struts&gt;</span>
 
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.excludedClasses"</span>
-              <span class="na">value=</span><span class="s">"</span>
-                <span class="err">java.lang.Object,</span>
-                <span class="err">java.lang.Runtime,</span>
-                <span class="err">java.lang.System,</span>
-                <span class="err">java.lang.Class,</span>
-                <span class="err">java.lang.ClassLoader,</span>
-                <span class="err">java.lang.Shutdown,</span>
-                <span class="err">java.lang.ProcessBuilder,</span>
-                <span class="err">com.opensymphony.xwork2.ActionContext"</span> <span class="nt">/&gt;</span>
+              <span class="na">value=</span><span class="s">"
+                java.lang.Object,
+                java.lang.Runtime,
+                java.lang.System,
+                java.lang.Class,
+                java.lang.ClassLoader,
+                java.lang.Shutdown,
+                java.lang.ProcessBuilder,
+                com.opensymphony.xwork2.ActionContext"</span> <span class="nt">/&gt;</span>
 
     <span class="c">&lt;!-- this must be valid regex, each '.' in package name must be escaped! --&gt;</span>
     <span class="c">&lt;!-- it's more flexible but slower than simple string comparison --&gt;</span>
@@ -281,18 +278,18 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
 
     <span class="c">&lt;!-- this is simpler version of the above used with string comparison --&gt;</span>
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.excludedPackageNames"</span>
-              <span class="na">value=</span><span class="s">"</span>
-                <span class="err">ognl.,</span>
-                <span class="err">javax.,</span>
-                <span class="err">freemarker.core.,</span>
-                <span class="err">freemarker.template.,</span>
-                <span class="err">freemarker.ext.rhino.,</span>
-                <span class="err">sun.reflect.,</span>
-                <span class="err">javassist.,</span>
-                <span class="err">org.objectweb.asm.,</span>
-                <span class="err">com.opensymphony.xwork2.ognl.,</span>
-                <span class="err">com.opensymphony.xwork2.security.,</span>
-                <span class="err">com.opensymphony.xwork2.util."</span> <span class="nt">/&gt;</span>
+              <span class="na">value=</span><span class="s">"
+                ognl.,
+                javax.,
+                freemarker.core.,
+                freemarker.template.,
+                freemarker.ext.rhino.,
+                sun.reflect.,
+                javassist.,
+                org.objectweb.asm.,
+                com.opensymphony.xwork2.ognl.,
+                com.opensymphony.xwork2.security.,
+                com.opensymphony.xwork2.util."</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ObjectFactory"</span> <span class="na">name=</span><span class="s">"struts"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.ResultFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.factory.StrutsResultFactory"</span> <span class="nt">/&gt;</span>
@@ -818,20 +815,24 @@ the hyphenated versions are not listed here, but might be referenced in prior ve
 <p><code class="highlighter-rouge">MethodFilterInterceptor</code> is an abstract <code class="highlighter-rouge">Interceptor</code> used as a base class for interceptors that will filter execution 
 based on method names according to specified included/excluded method lists.</p>
 
-<p>Settable parameters are as follows:
-- excludeMethods - method names to be excluded from interceptor processing
-- includeMethods - method names to be included in interceptor processing</p>
+<p>Settable parameters are as follows:</p>
+<ul>
+  <li>excludeMethods - method names to be excluded from interceptor processing</li>
+  <li>includeMethods - method names to be included in interceptor processing</li>
+</ul>
 
 <blockquote>
   <p>If method name are available in both includeMethods and excludeMethods, it will be considered as an included method: 
 includeMethods takes precedence over excludeMethods.</p>
 </blockquote>
 
-<p>Interceptors that extends this capability include:
-- <code class="highlighter-rouge">TokenInterceptor</code>
-- <code class="highlighter-rouge">TokenSessionStoreInterceptor</code>
-- <code class="highlighter-rouge">DefaultWorkflowInterceptor</code>
-- <code class="highlighter-rouge">ValidationInterceptor</code></p>
+<p>Interceptors that extends this capability include:</p>
+<ul>
+  <li><code class="highlighter-rouge">TokenInterceptor</code></li>
+  <li><code class="highlighter-rouge">TokenSessionStoreInterceptor</code></li>
+  <li><code class="highlighter-rouge">DefaultWorkflowInterceptor</code></li>
+  <li><code class="highlighter-rouge">ValidationInterceptor</code></li>
+</ul>
 
 <h2 id="interceptor-parameter-overriding">Interceptor Parameter Overriding</h2>
 
@@ -839,7 +840,7 @@ includeMethods takes precedence over excludeMethods.</p>
 
 <p><strong>Method 1</strong>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"myAction"</span> <span class="na">class=</span><span class="s">"myActionClass"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"myAction"</span> <span class="na">class=</span><span class="s">"myActionClass"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"exception"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"alias"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"params"</span><span class="nt">/&gt;</span>
@@ -859,19 +860,17 @@ includeMethods takes precedence over excludeMethods.</p>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeMethods"</span><span class="nt">&gt;</span>myWorkflowExcludeMethod<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;/interceptor-ref&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Method 2</strong>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"myAction"</span> <span class="na">class=</span><span class="s">"myActionClass"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"myAction"</span> <span class="na">class=</span><span class="s">"myActionClass"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"validation.excludeMethods"</span><span class="nt">&gt;</span>myValidationExcludeMethod<span class="nt">&lt;/param&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"workflow.excludeMethods"</span><span class="nt">&gt;</span>myWorkflowExcludeMethod<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;/interceptor-ref&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In the first method, the whole default stack is copied and the parameter then changed accordingly.</p>
 
@@ -880,16 +879,15 @@ example, and override the <code class="highlighter-rouge">validator</code> and <
 tag, the name attribute contains a dot (.) the word before the dot(.) specifies the interceptor name whose parameter is 
 to be overridden and the word after the dot (.) specifies the parameter itself. The syntax is as follows:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>   &lt;interceptor-name&gt;.&lt;parameter-name&gt;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   &lt;interceptor-name&gt;.&lt;parameter-name&gt;
+</code></pre></div></div>
 
 <p>Note also that in this case the <code class="highlighter-rouge">interceptor-ref</code> name attribute is used to indicate an interceptor stack which makes 
 sense as if it is referring to the interceptor itself it would be just using Method 1 describe above.</p>
 
 <p><strong>Method 3</strong>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;interceptors&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;interceptors&gt;</span>
     <span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"parentStack"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"params.excludeParams"</span><span class="nt">&gt;</span>token<span class="nt">&lt;/param&gt;</span>
@@ -898,33 +896,30 @@ sense as if it is referring to the interceptor itself it would be just using Met
 <span class="nt">&lt;/interceptors&gt;</span>
 
 <span class="nt">&lt;default-interceptor-ref</span> <span class="na">name=</span><span class="s">"parentStack"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="interceptor-parameter-overriding-inheritance">Interceptor Parameter Overriding Inheritance</h2>
 
 <p>Parameters override are not inherited in interceptors, meaning that the last set of overridden parameters will be used. 
 For example, if a stack overrides the parameter “defaultBlock” for the “postPrepareParameterFilter” interceptor as:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"parentStack"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"parentStack"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"postPrepareParameterFilter"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"defaultBlock"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
   <span class="nt">&lt;/interceptor-ref&gt;</span>
 <span class="nt">&lt;/interceptor-stack&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>and an action overrides the “allowed” for “postPrepareParameterFilter”:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"child2"</span> <span class="na">namespace=</span><span class="s">"/child"</span> <span class="na">extends=</span><span class="s">"parentPackage"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"child2"</span> <span class="na">namespace=</span><span class="s">"/child"</span> <span class="na">extends=</span><span class="s">"parentPackage"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"list"</span> <span class="na">class=</span><span class="s">"SomeAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"parentStack"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"postPrepareParameterFilter.allowed"</span><span class="nt">&gt;</span>myObject.name<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;/interceptor-ref&gt;</span>
   <span class="nt">&lt;/action&gt;</span>
 <span class="nt">&lt;/package&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Then, only “allowed” will be overridden for the “postPrepareParameterFilter” interceptor in that action, 
 the other params will be null.</p>
@@ -940,16 +935,15 @@ in normal way.</p>
 
 <p>Params are evaluated as any other expression starting with from action as a top object.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"LazyFoo"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.SimpleAction"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"LazyFoo"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.SimpleAction"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>result.jsp<span class="nt">&lt;/result&gt;</span>
   <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"lazy"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"foo"</span><span class="nt">&gt;</span>${bar}<span class="nt">&lt;/param&gt;</span>
   <span class="nt">&lt;/interceptor-ref&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public class MockLazyInterceptor extends AbstractInterceptor implements WithLazyParams {
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class MockLazyInterceptor extends AbstractInterceptor implements WithLazyParams {
 
     private String foo = "";
 
@@ -962,8 +956,7 @@ in normal way.</p>
         return invocation.invoke();
     }
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Please be aware that order of interceptors can matter when want to access parameters passed via request as those 
 parameters are set by <a href="parameters-interceptor.html">Parameters Interceptor</a>.</p>
@@ -972,14 +965,13 @@ parameters are set by <a href="parameters-interceptor.html">Parameters Intercep
 
 <p>Interceptors provide an excellent means to wrap before/after processing. The concept reduces code duplication (think AOP).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"xaStack"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"xaStack"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"thisWillRunFirstInterceptor"</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"thisWillRunNextInterceptor"</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"followedByThisInterceptor"</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"thisWillRunLastInterceptor"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/interceptor-stack&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>Note that some Interceptors will interrupt the stack/chain/flow … so the order is very important.</p>
@@ -988,7 +980,7 @@ parameters are set by <a href="parameters-interceptor.html">Parameters Intercep
 <p>Interceptors implementing <code class="highlighter-rouge">com.opensymphony.xwork2.interceptor.PreResultListener</code> will run after the Action executes 
 but before the Result executes.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>thisWillRunFirstInterceptor
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thisWillRunFirstInterceptor
   thisWillRunNextInterceptor
     followedByThisInterceptor
       thisWillRunLastInterceptor
@@ -1000,8 +992,7 @@ but before the Result executes.</p>
     followedByThisInterceptor
   thisWillRunNextInterceptor
 thisWillRunFirstInterceptor
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </section>
 </article>

@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -309,12 +308,11 @@ in the following content types:</p>
 of the rest. So, for instance, assuming a Controller called Movies and a movie with the id of superman, the following 
 URL’s will all hit the</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://my.company.com/myapp/movies/superman
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://my.company.com/myapp/movies/superman
 http://my.company.com/myapp/movies/superman.xml
 http://my.company.com/myapp/movies/superman.xhtml
 http://my.company.com/myapp/movies/superman.json
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>Note, these content types are supported as incoming data types as well. And, if you need, you can extend 
@@ -358,20 +356,18 @@ non-RESTful URL’s alive in the same Struts 2 application.</p>
 
 <p>Instruct Struts to use the REST action mapper:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"rest"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"rest"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>At this point, the REST mapper has replaced the DefaultActionMapper so all incoming URL’s will be interpreted as RESTful URL’s.</p>
 
 <p>We’re relying on the Convention plugin to find our controllers, so we need to configure the convention plugin a bit:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.suffix"</span> <span class="na">value=</span><span class="s">"Controller"</span><span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.suffix"</span> <span class="na">value=</span><span class="s">"Controller"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.mapAllMatches"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.default.parent.package"</span> <span class="na">value=</span><span class="s">"rest-default"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.package.locators"</span> <span class="na">value=</span><span class="s">"example"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>Note, you don’t have to use the Convention plugin just to use the REST plugin. The actions of your RESTful application 
@@ -391,18 +387,16 @@ You may frequently need to override those settings in your own struts.xml.</p>
 <p>First, you’ll need to re-assert the extensions that struts knows about because the rest plugin will have thrown out 
 the default <code class="highlighter-rouge">action</code> extension.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.action.extension"</span> <span class="na">value=</span><span class="s">"xhtml,,xml,json,action"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.action.extension"</span> <span class="na">value=</span><span class="s">"xhtml,,xml,json,action"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>Next, we will configure the <a href="../../core-developers/action-mapper.html#prefixbasedactionmapper">PrefixBasedActionMapper</a>, 
 which is part of the core Struts 2 distribution, to have some URL’s routed to the Rest mapper and others to the default mapper.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"</span> <span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.prefixMapping"</span> <span class="na">value=</span><span class="s">"/rest:rest,:struts"</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.actionProxyFactory"</span> <span class="na">value=</span><span class="s">"prefix"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>Please be aware that you should also use the <code class="highlighter-rouge">PrefixBasedActionProxyFactory</code> factory together with the <code class="highlighter-rouge">PrefixBasedActionMapper</code> 
@@ -411,12 +405,11 @@ mapper to allow the framework to create proper <code class="highlighter-rouge">A
 
 <p>And, again, we’re relying on the Convention plugin to find our controllers, so we need to configure the convention plugin a bit:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.suffix"</span> <span class="na">value=</span><span class="s">"Controller"</span><span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.suffix"</span> <span class="na">value=</span><span class="s">"Controller"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.mapAllMatches"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.default.parent.package"</span> <span class="na">value=</span><span class="s">"rest-default"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.package.locators"</span> <span class="na">value=</span><span class="s">"example"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="write-your-controller-actions">Write Your Controller Actions</h3>
 
@@ -426,7 +419,7 @@ will hit different methods on the controller. Traditionally, normal Struts 2 act
 target method. Here’s a sample controller for a <code class="highlighter-rouge">orders</code> resource. Note, this sample doesn’t implement all of the methods 
 that can be hit via the RESTful action mapper’s interpretation of URL’s.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts2</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts2</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrdersController</span> <span class="kd">implements</span> <span class="n">ModelDriven</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span> <span class="o">{</span>
 
@@ -435,23 +428,22 @@ that can be hit via the RESTful action mapper’s interpretation of URL’s.</p>
     <span class="kd">private</span> <span class="n">Order</span> <span class="n">model</span><span class="o">;</span>
 
     <span class="c1">// Handles /orders/{id} GET requests</span>
-    <span class="kd">public</span> <span class="n">HttpHeaders</span> <span class="n">show</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">HttpHeaders</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">orderManager</span><span class="o">.</span><span class="na">findOrder</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">DefaultHttpHeaders</span><span class="o">(</span><span class="s">"show"</span><span class="o">)</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">DefaultHttpHeaders</span><span class="o">(</span><span class="s">"show"</span><span class="o">)</span>
             <span class="o">.</span><span class="na">withETag</span><span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="na">getUniqueStamp</span><span class="o">())</span>
             <span class="o">.</span><span class="na">lastModified</span><span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="na">getLastModified</span><span class="o">());</span>
     <span class="o">}</span>
 
     <span class="c1">// Handles /orders/{id} PUT requests</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">update</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">orderManager</span><span class="o">.</span><span class="na">updateOrder</span><span class="o">(</span><span class="n">model</span><span class="o">);</span>
         <span class="k">return</span> <span class="s">"update"</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="c1">// getters and setters</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In this example, the <code class="highlighter-rouge">ModelDriven</code> interface is used to ensure that only my model, the Order object in this case, is 
 returned to the client, otherwise, the whole <code class="highlighter-rouge">OrdersController</code> object would be serialized.</p>
@@ -484,23 +476,20 @@ application’s more non-standard requirements.</p>
 <p>If you need to handle extensions that aren’t supported by the default handlers, you can create your own <code class="highlighter-rouge">ContentTypeHandler</code> 
 implementation and define it in your <code class="highlighter-rouge">struts.xml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">"yaml"</span> <span class="na">type=</span><span class="s">"org.apache.struts2.rest.handler.ContentTypeHandler"</span> <span class="na">class=</span><span class="s">"com.mycompany.MyYamlContentHandler"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">"yaml"</span> <span class="na">type=</span><span class="s">"org.apache.struts2.rest.handler.ContentTypeHandler"</span> <span class="na">class=</span><span class="s">"com.mycompany.MyYamlContentHandler"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>If the built-in content type handlers don’t do what you need, you can override the handling of any extension by providing 
 an alternate handler. First, define your own <code class="highlighter-rouge">ContentTypeHandler</code> and declare with its own alias. For example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">"myXml"</span> <span class="na">type=</span><span class="s">"org.apache.struts2.rest.handler.ContentTypeHandler"</span> <span class="na">class=</span><span class="s">"com.mycompany.MyXmlContentHandler"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">"myXml"</span> <span class="na">type=</span><span class="s">"org.apache.struts2.rest.handler.ContentTypeHandler"</span> <span class="na">class=</span><span class="s">"com.mycompany.MyXmlContentHandler"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>Then, tell the REST Plugin to override the handler for the desired extension with yours. In <code class="highlighter-rouge">struts.properties</code>, it would 
 look like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.rest.handlerOverride.xml"</span> <span class="na">value=</span><span class="s">"myXml"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.rest.handlerOverride.xml"</span> <span class="na">value=</span><span class="s">"myXml"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <h3 id="settings">Settings</h3>
 

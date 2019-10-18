@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -181,18 +180,17 @@
 
 <p>Given this JSON string:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"doubleValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.10</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"nestedBean"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mr Bean"</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"doubleValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.10</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"nestedBean"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mr Bean"</span><span class="w">
    </span><span class="p">},</span><span class="w">
-   </span><span class="nt">"list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20.20</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"El Zorro"</span><span class="w">
+   </span><span class="s2">"list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20.20</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"El Zorro"</span><span class="w">
    </span><span class="p">}],</span><span class="w">
-   </span><span class="nt">"array"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">]</span><span class="w"> 
+   </span><span class="s2">"array"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">]</span><span class="w"> 
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <p>The action must have a <code class="highlighter-rouge">setDoubleValue</code> method, taking either a <code class="highlighter-rouge">float</code> or a <code class="highlighter-rouge">double</code> argument (the interceptor will 
 convert the value to the right one). There must be a <code class="highlighter-rouge">setNestedBean</code> whose argument type can be any class, that has 
@@ -215,7 +213,7 @@ files need to be copied or created.</p>
 
 <p>To use maven, add this to your pom:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependencies&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependencies&gt;</span>
    ...
    <span class="nt">&lt;dependency&gt;</span>
        <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
@@ -224,8 +222,7 @@ files need to be copied or created.</p>
    <span class="nt">&lt;/dependency&gt;</span>
    ...
 <span class="nt">&lt;/dependencies&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="customizing-serialization-and-deserialization">Customizing Serialization and Deserialization</h2>
 
@@ -278,7 +275,7 @@ files need to be copied or created.</p>
 <p>A comma-delimited list of regular expressions can be passed to the JSON Result and Interceptor, properties matching 
 any of these regular expressions will be ignored on the serialization process:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- Result fragment --&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Result fragment --&gt;</span>
 <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeProperties"</span><span class="nt">&gt;</span>
     login.password,
@@ -294,8 +291,7 @@ any of these regular expressions will be ignored on the serialization process:</
     studentList.*.sin
   <span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/interceptor-ref&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="including-properties">Including properties</h3>
 
@@ -308,7 +304,7 @@ and exclude property expressions on the same result, include property expression
 exclude property expression matches a property first.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- Result fragment --&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Result fragment --&gt;</span>
 <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"includeProperties"</span><span class="nt">&gt;</span>
     ^entries\[\d+\].clientNumber,
@@ -316,29 +312,26 @@ exclude property expression matches a property first.</p>
     ^entries\[\d+\].createUserId
   <span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="root-object">Root Object</h3>
 
 <p>Use the <code class="highlighter-rouge">root</code> attribute (OGNL expression) to specify the root object to be serialized.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"root"</span><span class="nt">&gt;</span>
     person.job
   <span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">root</code> attribute (OGNL expression) can also be used on the interceptor to specify the object that must be 
 populated, <strong>make sure this object is not null</strong>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"root"</span><span class="nt">&gt;</span>bean1.bean2<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/interceptor-ref&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="wrapping">Wrapping</h3>
 
@@ -351,33 +344,30 @@ and <code class="highlighter-rouge">prefix</code> which are deprecated from 0.34
   <li>Wrap with comments:</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"wrapPrefix"</span><span class="nt">&gt;</span>/*<span class="nt">&lt;/param&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"wrapSuffix"</span><span class="nt">&gt;</span>*/<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>Add a prefix:</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"wrapPrefix"</span><span class="nt">&gt;</span>{}<span class="err">&amp;&amp;</span><span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>Wrap for file upload:</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"wrapPrefix"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[&lt;html&gt;&lt;body&gt;&lt;textarea&gt;]]&gt;</span><span class="nt">&lt;/param&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"wrapSuffix"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[&lt;/textarea&gt;&lt;/body&gt;&lt;/html&gt;]]&gt;</span><span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="wrap-with-comments">Wrap with Comments</h3>
 
@@ -389,108 +379,98 @@ and <code class="highlighter-rouge">prefix</code> which are deprecated from 0.34
 Thanks to Douglas Crockford for the tip! Consider using <strong>prefix</strong> instead.</p>
 </blockquote>
 
-<p>If the serialized JSON is <code class="highlighter-rouge"><span class="p">{</span><span class="err">name:</span><span class="w"> </span><span class="err">'El</span><span class="w"> </span><span class="err">Zorro'</span><span class="p">}</span></code>. Then the output will be: <code class="highlighter-rouge"><span class="p">{}</span><span class="err">&amp;&amp;</span><span class="w"> </span><span class="err">(</span><span class="p">{</span><span class="err">name:</span><span class="w"> </span><span class="err">'El</span><span class="w"> </span><span class="err">Zorro'</span><span class="p">}</span><span class="err">)</span></code>.</p>
+<p>If the serialized JSON is <code class="highlighter-rouge">{name: 'El Zorro'}</code>. Then the output will be: <code class="highlighter-rouge">{}&amp;&amp; ({name: 'El Zorro'})</code>.</p>
 
 <p>If the <code class="highlighter-rouge">wrapWithComments</code> (false by default) attribute is set to true, the generated JSON is wrapped with comments like:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">/*</span><span class="w"> </span><span class="p">{</span><span class="w">
-   </span><span class="nt">"doubleVal"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.10</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"nestedBean"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mr Bean"</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">/*</span><span class="w"> </span><span class="p">{</span><span class="w">
+   </span><span class="s2">"doubleVal"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.10</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"nestedBean"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mr Bean"</span><span class="w">
    </span><span class="p">},</span><span class="w">
-   </span><span class="nt">"list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20.20</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"El Zorro"</span><span class="w">
+   </span><span class="s2">"list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20.20</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"El Zorro"</span><span class="w">
    </span><span class="p">}],</span><span class="w">
-   </span><span class="nt">"array"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">]</span><span class="w"> 
+   </span><span class="s2">"array"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">]</span><span class="w"> 
 </span><span class="p">}</span><span class="w"> </span><span class="err">*/</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 <p>To strip those comments use:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">responseObject</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">"("</span><span class="o">+</span><span class="nx">data</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"\/\*"</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="nx">data</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s2">"\*\/"</span><span class="p">))</span><span class="o">+</span><span class="s2">")"</span><span class="p">);</span>
-</code></pre>
-</div>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">responseObject</span> <span class="o">=</span> <span class="kr">eval</span><span class="p">(</span><span class="s2">"("</span><span class="o">+</span><span class="nx">data</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"</span><span class="err">\</span><span class="s2">/</span><span class="err">\</span><span class="s2">*"</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="nx">data</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s2">"</span><span class="err">\</span><span class="s2">*</span><span class="err">\</span><span class="s2">/"</span><span class="p">))</span><span class="o">+</span><span class="s2">")"</span><span class="p">);</span>
+</code></pre></div></div>
 
 <h3 id="prefix">Prefix</h3>
 
 <p><code class="highlighter-rouge">prefix</code> is deprecated from 0.34, use <code class="highlighter-rouge">wrapPrefix</code> and <code class="highlighter-rouge">wrapSuffix</code> instead.</p>
 
-<p>If the parameter <code class="highlighter-rouge">prefix</code> is set to true, the generated JSON will be prefixed with <code class="highlighter-rouge"><span class="p">{}</span><span class="err">&amp;&amp;</span><span class="w"> </span></code>. This will help prevent 
+<p>If the parameter <code class="highlighter-rouge">prefix</code> is set to true, the generated JSON will be prefixed with <code class="highlighter-rouge">{}&amp;&amp; </code>. This will help prevent 
 hijacking. See <a href="http://trac.dojotoolkit.org/ticket/6380">this Dojo Ticket</a> for details:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"prefix"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="base-classes">Base Classes</h3>
 
 <p>By default properties defined on base classes of the <code class="highlighter-rouge">root</code> object won’t be serialized, to serialize properties 
 in all base classes (up to Object) set <code class="highlighter-rouge">ignoreHierarchy</code> to false in the JSON result:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ignoreHierarchy"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="enumerations">Enumerations</h3>
 
 <p>By default, an Enum is serialized as a <code class="highlighter-rouge">name=value</code> pair where <code class="highlighter-rouge">value = name()</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">enum</span> <span class="n">AnEnum</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">enum</span> <span class="n">AnEnum</span> <span class="o">{</span>
      <span class="n">ValueA</span><span class="o">,</span>
      <span class="n">ValueB</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="w">  </span><span class="s2">"myEnum"</span><span class="err">:</span><span class="s2">"ValueA"</span><span class="w">
-</span></code></pre>
-</div>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="s2">"myEnum"</span><span class="p">:</span><span class="s2">"ValueA"</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Use the <code class="highlighter-rouge">enumAsBean</code> result parameter to serialize Enum’s as a bean with a special property <code class="highlighter-rouge">_name</code> with value <code class="highlighter-rouge">name()</code>. 
 All properties of the enum are also serialized.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">enum</span> <span class="n">AnEnum</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">enum</span> <span class="n">AnEnum</span> <span class="o">{</span>
      <span class="n">ValueA</span><span class="o">(</span><span class="s">"A"</span><span class="o">),</span>
      <span class="n">ValueB</span><span class="o">(</span><span class="s">"B"</span><span class="o">);</span>
 
      <span class="kd">private</span> <span class="n">String</span> <span class="n">val</span><span class="o">;</span>
      
-     <span class="kd">public</span> <span class="n">AnEnum</span><span class="o">(</span><span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="nf">AnEnum</span><span class="o">(</span><span class="n">val</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
      <span class="o">}</span>
-     <span class="kd">public</span> <span class="n">getVal</span><span class="o">()</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="nf">getVal</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">val</span><span class="o">;</span>
      <span class="o">}</span>
    <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="w">  </span><span class="err">myEnum:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValueA"</span><span class="p">,</span><span class="w"> </span><span class="nt">"val"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="err">myEnum</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValueA"</span><span class="p">,</span><span class="w"> </span><span class="s2">"val"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Enable this parameter through <code class="highlighter-rouge">struts.xml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"enumAsBean"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="compressing-the-output">Compressing the output</h3>
 
 <p>Set the <code class="highlighter-rouge">enableGZIP</code> attribute to true to gzip the generated json response. The request <strong>must</strong> include <code class="highlighter-rouge">gzip</code> 
 in the <code class="highlighter-rouge">Accept-Encoding</code> header for this to work.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"enableGZIP"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="preventing-the-browser-from-caching-the-response">Preventing the browser from caching the response</h3>
 
@@ -502,40 +482,36 @@ in the <code class="highlighter-rouge">Accept-Encoding</code> header for this to
   <li><code class="highlighter-rouge">Pragma: No-cache</code></li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"noCache"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="excluding-properties-with-null-values">Excluding properties with null values</h3>
 
-<p>By default fields with null values are serialized like <code class="highlighter-rouge"><span class="p">{</span><span class="err">property_name:</span><span class="w"> </span><span class="err">null</span><span class="p">}</span></code>. This can be prevented 
+<p>By default fields with null values are serialized like <code class="highlighter-rouge">{property_name: null}</code>. This can be prevented 
 by setting <code class="highlighter-rouge">excludeNullProperties</code> to true.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeNullProperties"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="status-and-error-code">Status and Error code</h3>
 
 <p>Use <code class="highlighter-rouge">statusCode</code> to set the status of the response:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"statusCode"</span><span class="nt">&gt;</span>304<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>And <code class="highlighter-rouge">errorCode</code> to send an error (the server might end up sending something to the client which is not the serialized JSON):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">&lt;result</span><span class="w"> </span><span class="err">type=</span><span class="s2">"json"</span><span class="err">&gt;</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;result</span><span class="w"> </span><span class="err">type=</span><span class="s2">"json"</span><span class="err">&gt;</span><span class="w">
   </span><span class="err">&lt;param</span><span class="w"> </span><span class="err">name=</span><span class="s2">"errorCode"</span><span class="err">&gt;</span><span class="mi">404</span><span class="err">&lt;/param&gt;</span><span class="w">
 </span><span class="err">&lt;/result&gt;</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <h3 id="jsonp">JSONP</h3>
 
@@ -543,13 +519,12 @@ by setting <code class="highlighter-rouge">excludeNullProperties</code> to true.
 that name will be read from the request, and it value will be used as the JSONP function. Assuming that a request is 
 made with the parameter “callback”=”exec”:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"callbackParameter"</span><span class="nt">&gt;</span>callback<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>And that the serialized JSON is <code class="highlighter-rouge"><span class="p">{</span><span class="err">name:</span><span class="w"> </span><span class="err">'El</span><span class="w"> </span><span class="err">Zorro'</span><span class="p">}</span></code>. Then the output will be: <code class="highlighter-rouge">exec({name: 'El Zorro'})</code>.</p>
+<p>And that the serialized JSON is <code class="highlighter-rouge">{name: 'El Zorro'}</code>. Then the output will be: <code class="highlighter-rouge">exec({name: 'El Zorro'})</code>.</p>
 
 <h3 id="content-type">Content Type</h3>
 
@@ -557,40 +532,37 @@ made with the parameter “callback”=”exec”:</p>
 Sometimes it is necessary to set the content type to something else, like when uploading files with Dojo and YUI. 
 Use the <code class="highlighter-rouge">contentType</code>  parameter in those cases.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"contentType"</span><span class="nt">&gt;</span>text/html<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="encoding">Encoding</h3>
 
 <p>User can define encoding per result or base on default assigned to <code class="highlighter-rouge">struts.i18n.encoding</code>. To define encoding for 
 given result add encoding param as below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"encoding"</span><span class="nt">&gt;</span>UTF-8<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="customizing-the-output">Customizing the output</h3>
 
 <p>Since Struts 2.5.14, you can implement the <code class="highlighter-rouge">org.apache.struts2.json.JSONWriter</code> interface to customize the generated json response.
 The implementation should then be defined in <code class="highlighter-rouge">struts.xml</code> like:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
     <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.json.JSONWriter"</span> <span class="na">name=</span><span class="s">"myJSONWriter"</span> <span class="na">class=</span><span class="s">"com.mycompany.MyJSONWriter"</span>
           <span class="na">scope=</span><span class="s">"prototype"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.json.writer"</span> <span class="na">value=</span><span class="s">"myJSONWriter"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/struts&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>There is an example at <a href="https://gitbox.apache.org/repos/asf?p=struts-examples.git;a=blob_plain;f=json-customize/src/main/java/org/demo/FlexJSONWriter.java;hb=HEAD">struts-examples/json-customize/FlexJSONWriter.java</a>.
 It replaces Struts default json serializer with <a href="http://flexjson.sourceforge.net/">Flexjson</a> as below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">flexjson.JSONSerializer</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">flexjson.JSONSerializer</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">flexjson.transformer.DateTransformer</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.json.JSONException</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.json.JSONWriter</span><span class="o">;</span>
@@ -598,11 +570,11 @@ It replaces Struts default json serializer with <a href="http://flexjson.sourcef
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FlexJSONWriter</span> <span class="kd">implements</span> <span class="n">JSONWriter</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="n">String</span> <span class="n">dateFormatter</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">write</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JSONException</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">write</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JSONException</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">object</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">write</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Pattern</span><span class="o">&gt;</span> <span class="n">excludeProperties</span><span class="o">,</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Pattern</span><span class="o">&gt;</span> <span class="n">includeProperties</span><span class="o">,</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">write</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Pattern</span><span class="o">&gt;</span> <span class="n">excludeProperties</span><span class="o">,</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Pattern</span><span class="o">&gt;</span> <span class="n">includeProperties</span><span class="o">,</span>
                         <span class="kt">boolean</span> <span class="n">excludeNullProperties</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JSONException</span> <span class="o">{</span>
 
         <span class="n">JSONSerializer</span> <span class="n">serializer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONSerializer</span><span class="o">();</span>
@@ -625,8 +597,7 @@ It replaces Struts default json serializer with <a href="http://flexjson.sourcef
         <span class="k">return</span> <span class="n">serializer</span><span class="o">.</span><span class="na">serialize</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
     <span class="o">}</span>
     <span class="c1">//...</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>Flexjson is a lightweight library for serializing and deserializing Java objects into and from JSON.</p>
@@ -640,7 +611,7 @@ It replaces Struts default json serializer with <a href="http://flexjson.sourcef
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.Action</span><span class="o">;</span>
@@ -657,42 +628,41 @@ It replaces Struts default json serializer with <a href="http://flexjson.sourcef
     <span class="c1">//fields without getter method are not serialized</span>
     <span class="kd">private</span> <span class="n">String</span> <span class="n">field3</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"John"</span><span class="o">,</span> <span class="s">"Galt"</span><span class="o">);</span>
         <span class="k">return</span> <span class="n">Action</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getField1</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getField1</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">field1</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setField1</span><span class="o">(</span><span class="n">String</span> <span class="n">field1</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setField1</span><span class="o">(</span><span class="n">String</span> <span class="n">field1</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">field1</span> <span class="o">=</span> <span class="n">field1</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">getInts</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">getInts</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">ints</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setInts</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">ints</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setInts</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">ints</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">ints</span> <span class="o">=</span> <span class="n">ints</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Map</span> <span class="n">getMap</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Map</span> <span class="nf">getMap</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">map</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setMap</span><span class="o">(</span><span class="n">Map</span> <span class="n">map</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMap</span><span class="o">(</span><span class="n">Map</span> <span class="n">map</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">map</span> <span class="o">=</span> <span class="n">map</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@JSON</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"newName"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getCustomName</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getCustomName</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">customName</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="write-the-mapping-for-the-action">Write the mapping for the action</h3>
 
@@ -703,7 +673,7 @@ It replaces Struts default json serializer with <a href="http://flexjson.sourcef
 
 <p>Example with Convention Plugin Configuration:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
@@ -713,12 +683,11 @@ It replaces Struts default json serializer with <a href="http://flexjson.sourcef
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JSONExample</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
 <span class="c1">// action code</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Example with XML Configuration:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE struts PUBLIC
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd"&gt;</span>
@@ -732,21 +701,19 @@ It replaces Struts default json serializer with <a href="http://flexjson.sourcef
   <span class="nt">&lt;/package&gt;</span>
 
 <span class="nt">&lt;/struts&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="json-example-output">JSON example output</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">  
-   </span><span class="nt">"field1"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"str"</span><span class="p">,</span><span class="w"> 
-   </span><span class="nt">"ints"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">],</span><span class="w">
-   </span><span class="nt">"map"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-       </span><span class="nt">"John"</span><span class="p">:</span><span class="s2">"Galt"</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">  
+   </span><span class="s2">"field1"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"str"</span><span class="p">,</span><span class="w"> 
+   </span><span class="s2">"ints"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">],</span><span class="w">
+   </span><span class="s2">"map"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"John"</span><span class="p">:</span><span class="s2">"Galt"</span><span class="w">
    </span><span class="p">},</span><span class="w">
-   </span><span class="nt">"newName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="w">
+   </span><span class="s2">"newName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <h3 id="accepting-json">Accepting JSON</h3>
 
@@ -760,12 +727,11 @@ to it as follow:</p>
 and <code class="highlighter-rouge">application/json-rpc</code> to execute SMD processing. You can override those settings be defining <code class="highlighter-rouge">jsonContentType</code>
 and <code class="highlighter-rouge">jsonRpcContentType</code> params, see example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"json"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"json"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"jsonContentType"</span><span class="nt">&gt;</span>text/json<span class="nt">&lt;/param&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"jsonRpcContentType"</span><span class="nt">&gt;</span>text/json-rpc<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/interceptor-ref&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Please be aware that those are scoped params per stack, which means, once set it will be used by actions in scope of this stack.</p>
 
@@ -777,24 +743,23 @@ to advertise the remote service. Let’s work it out with an example(useless as 
 
 <p>First write the action:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">smd</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">smd</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.googlecode.jsonplugin.annotations.SMDMethod</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.Action</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SMDAction</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">smd</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">smd</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">Action</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">;</span>
     <span class="o">}</span>
     
     <span class="nd">@SMDMethod</span>
-    <span class="kd">public</span> <span class="n">Bean</span> <span class="n">doSomething</span><span class="o">(</span><span class="n">Bean</span> <span class="n">bean</span><span class="o">,</span> <span class="kt">int</span> <span class="n">quantity</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Bean</span> <span class="nf">doSomething</span><span class="o">(</span><span class="n">Bean</span> <span class="n">bean</span><span class="o">,</span> <span class="kt">int</span> <span class="n">quantity</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">bean</span><span class="o">.</span><span class="na">setPrice</span><span class="o">(</span><span class="n">quantity</span> <span class="o">*</span> <span class="mi">10</span><span class="o">);</span>
         <span class="k">return</span> <span class="n">bean</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Methods that will be called remotely <strong>must</strong> be annotated with the <code class="highlighter-rouge">SMDMethod</code> annotation, for security reasons. 
 The method will take a bean object, modify its price and return it. The action can be annotated with the <code class="highlighter-rouge">SMD</code> annotation 
@@ -804,35 +769,34 @@ can see, we have a “dummy”, <code class="highlighter-rouge">smd</code> metho
 
 <p>The bean class:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">smd</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">smd</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bean</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="n">String</span> <span class="n">type</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
     
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getType</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getType</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">type</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setType</span><span class="o">(</span><span class="n">String</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setType</span><span class="o">(</span><span class="n">String</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">type</span> <span class="o">=</span> <span class="n">type</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getPrice</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getPrice</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">price</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setPrice</span><span class="o">(</span><span class="kt">int</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPrice</span><span class="o">(</span><span class="kt">int</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
     <span class="o">}</span>
 
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The mapping:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"RPC"</span> <span class="na">namespace=</span><span class="s">"/nodecorate"</span> <span class="na">extends=</span><span class="s">"json-default"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"RPC"</span> <span class="na">namespace=</span><span class="s">"/nodecorate"</span> <span class="na">extends=</span><span class="s">"json-default"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"SMDAction"</span> <span class="na">class=</span><span class="s">"smd.SMDAction"</span> <span class="na">method=</span><span class="s">"smd"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"json"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"enableSMD"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
@@ -842,8 +806,7 @@ can see, we have a “dummy”, <code class="highlighter-rouge">smd</code> metho
         <span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;/action&gt;</span>
 <span class="nt">&lt;/package&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Nothing special here, except that <strong>both</strong> the interceptor and the result must be applied to the action, and <code class="highlighter-rouge">enableSMD</code> 
 must be enabled for both.</p>
@@ -894,7 +857,7 @@ inspects all interfaces and superclasses of the action for annotations on the ac
 by recursion through the interfaces.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"contact"</span> <span class="na">class=</span><span class="s">"package.ContactAction"</span> <span class="na">method=</span><span class="s">"smd"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"contact"</span> <span class="na">class=</span><span class="s">"package.ContactAction"</span> <span class="na">method=</span><span class="s">"smd"</span><span class="nt">&gt;</span>
    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"json"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"enableSMD"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ignoreSMDMethodInterfaces"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
@@ -905,8 +868,7 @@ by recursion through the interfaces.</p>
    <span class="nt">&lt;/result&gt;</span>
    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"default"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </section>
 </article>

@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -172,7 +171,7 @@
       }
  }
  </pre>
- 
+ &lt;/pre&gt;
  <p>3. If there is a field that starts with the value specified on the "name" attribute, assume 
  that's the datasource, like (assuming name="state"):</p>
  <pre>
@@ -1525,7 +1524,7 @@ Uses a list:
 
 
 ```xml
- <s:autocompleter name="test" list="{'apple','banana','grape','pear'}" autocomplete="false" />
+ <s:autocompleter name="test" list="{'apple','banana','grape','pear'}" autoComplete="false" />
 
 ```
 
@@ -1537,7 +1536,7 @@ Autocompleter that reloads its content everytime the text changes (and the lengt
 
 
 ```xml
- <sx:autocompleter name="mvc" href="%{jsonList}" loadontextchange="true" loadminimumcount="3" />
+ <sx:autocompleter name="mvc" href="%{jsonList}" loadOnTextChange="true" loadMinimumCount="3" />
  
  The text entered on the autocompleter is passed as a parameter to the url specified in "href", like (text is "struts"):
   
@@ -1554,9 +1553,9 @@ Linking two autocompleters:
 
 ```xml
  <form id="selectForm">
-      <sx:autocompleter name="select" list="{'fruits','colors'}" valuenotifytopics="/changed" />
+      <sx:autocompleter name="select" list="{'fruits','colors'}" valueNotifyTopics="/changed" />
  </form>  
- <sx:autocompleter href="%{jsonList}" formid="selectForm" listentopics="/changed" />
+ <sx:autocompleter href="%{jsonList}" formId="selectForm" listenTopics="/changed" />
 
 ```
 
@@ -1636,7 +1635,7 @@ Using errorNotifyTopics:
  });
  </script>        
  
- <sx:autocompleter afternotifytopics="/after" href="%{#ajaxTest}" />
+ <sx:autocompleter afterNotifyTopics="/after" href="%{#ajaxTest}" />
 
 ```
 
@@ -1655,7 +1654,7 @@ Using errorNotifyTopics:
  });
  </script>
  
- <sx:autocompleter errornotifytopics="/error" href="%{#ajaxTest}" />
+ <sx:autocompleter errorNotifyTopics="/error" href="%{#ajaxTest}" />
 </p>
 
 
@@ -1673,7 +1672,7 @@ Using valueNotifyTopics:
  });
  </script>   
  
- <sx:autocompleter valuenotifytopics="/value" href="%{#ajaxTest}" />
+ <sx:autocompleter valueNotifyTopics="/value" href="%{#ajaxTest}" />
 </p>
 
 
@@ -1708,7 +1707,7 @@ One possible alternative is to set _showLoadingText="false"_  and set the indica
 <s:div id="parentDiv">
     <s:form action="actionName">
         <s:submit id="btn" />
-        <sx:bind sources="btn" events="onclick" targets="parentDiv" showloadingtext="false" indicator="loadingImage" />
+        <sx:bind sources="btn" events="onclick" targets="parentDiv" showLoadingText="false" indicator="loadingImage" />
     </s:form>
 </s:div>
 
@@ -2162,7 +2161,7 @@ Without attaching to an event, listening to a topic (used to make an Ajax call):
 
 
 ```xml
- <sx:bind href="%{#ajaxTest}" listentopics="/makecall" />
+ <sx:bind href="%{#ajaxTest}" listenTopics="/makecall" />
  <s:submit onclick="dojo.event.topic.publish('/makecall')" />
 
 ```
@@ -2189,7 +2188,7 @@ Submit form:
 
 
 ```xml
- <sx:bind id="ex3" href="%{#ajaxTest}" sources="chk1" targets="div1" events="onchange" formid="form1" />
+ <sx:bind id="ex3" href="%{#ajaxTest}" sources="chk1" targets="div1" events="onchange" formId="form1" />
  <form id="form1">
      <s:checkbox name="data" label="Hit me" id="chk1" />
  </form>
@@ -2213,7 +2212,7 @@ Using beforeNotifyTopics:
  </script>         
  
  <input type="button" id="button" /> 
- <sx:bind id="ex1" href="%{#ajaxTest}" beforenotifytopics="/before" sources="button" events="onclick" /> 
+ <sx:bind id="ex1" href="%{#ajaxTest}" beforeNotifyTopics="/before" sources="button" events="onclick" /> 
 
 ```
 
@@ -2235,7 +2234,7 @@ Using afterNotifyTopics and highlight:
  </script>        
  
  <input type="button" id="button" />
- <sx:bind id="ex1" href="%{#ajaxTest}" highlightcolor="red" afternotifytopics="/after" sources="button" events="onclick" />
+ <sx:bind id="ex1" href="%{#ajaxTest}" highlightColor="red" afterNotifyTopics="/after" sources="button" events="onclick" />
 
 ```
 
@@ -2258,7 +2257,7 @@ Using errorNotifyTopics and indicator:
  
  <input type="button" id="button" />
  <img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none" />
- <sx:bind href="%{#ajaxTest}" indicator="ind1" errornotifytopics="/error" sources="button" events="onclick" />
+ <sx:bind href="%{#ajaxTest}" indicator="ind1" errorNotifyTopics="/error" sources="button" events="onclick" />
 
 ```
 
@@ -3032,7 +3031,7 @@ __Examples__
 
 ```xml
  JSP:
- <s:checkbox label="checkbox test" name="checkboxField1" value="aBoolean" fieldvalue="true" />
+ <s:checkbox label="checkbox test" name="checkboxField1" value="aBoolean" fieldValue="true" />
 
  Velocity:
  #tag( Checkbox "label=checkbox test" "name=checkboxField1" "value=aBoolean" )
@@ -3964,15 +3963,15 @@ __Description__
  In this example, the SELECT will be populated from id=year attribute. Counter is itself an Iterator. It will
  span from first to last. The population is done via javascript, and requires that this tag be surrounded by a
  <form>.
- 
+ &lt;/p&gt;
 
  <p>
  Note that unlike the <s:select /> tag, there is no ability to define the individual <option> tags' id attribute
  or content separately. Each of these is simply populated from the toString() method of the list item. Presumably
  this is because the select box isn't intended to actually submit useful data, but to assist the user in filling
  out the text field.
- 
-
+ &lt;/p&gt;
+&lt;/p&gt;
 
 
 __Parameters__
@@ -4896,10 +4895,10 @@ __Examples__
  </s:bean>
 
  &lt;-- Example Two --&gt;
- <s:combobox label="My Favourite Fruit" name="myFavouriteFruit" list="{'apple','banana','grape','pear'}" headerkey="-1" headervalue="--- Please Select ---" emptyoption="true" value="banana" />
+ <s:combobox label="My Favourite Fruit" name="myFavouriteFruit" list="{'apple','banana','grape','pear'}" headerKey="-1" headerValue="--- Please Select ---" emptyOption="true" value="banana" />
 
  &lt;-- Example Two --&gt;
- <s:combobox label="My Favourite Color" name="myFavouriteColor" list="#{'red':'red','green':'green','blue':'blue'}" headerkey="-1" headervalue="--- Please Select ---" emptyoption="true" value="green" />
+ <s:combobox label="My Favourite Color" name="myFavouriteColor" list="#{'red':'red','green':'green','blue':'blue'}" headerKey="-1" headerValue="--- Please Select ---" emptyOption="true" value="green" />
 
  Velocity:
  #tag( ComboBox "label=Birth year" "size=6" "maxlength=4" "name=birthYear" "list=#year" )
@@ -6601,8 +6600,8 @@ __Description__
    <li>SimpleDateFormat.getDateInstance(DateFormat.FULL)
    <li>SimpleDateFormat.getDateInstance(DateFormat.LONG)
    <li>SimpleDateFormat built using the value of the 'displayFormat' attribute(if any)
- 
-
+ &lt;/ul&gt;
+&lt;/p&gt;
 
 
 __Parameters__
@@ -7565,7 +7564,7 @@ __Examples__
 
 ```xml
    <sx:datetimepicker name="order.date" label="Order Date" />
-   <sx:datetimepicker name="delivery.date" label="Delivery Date" displayformat="yyyy-MM-dd" />
+   <sx:datetimepicker name="delivery.date" label="Delivery Date" displayFormat="yyyy-MM-dd" />
    <sx:datetimepicker name="delivery.date" label="Delivery Date" value="%{date}" />
    <sx:datetimepicker name="delivery.date" label="Delivery Date" value="%{'2007-01-01'}" />
    <sx:datetimepicker name="order.date" label="Order Date" value="%{'today'}" />
@@ -7615,7 +7614,7 @@ Publish topic when value changes
 
 
 ```xml
- <sx:datetimepicker id="picker" label="Order Date" valuenotifytopics="/value" />
+ <sx:datetimepicker id="picker" label="Order Date" valueNotifyTopics="/value" />
  
  <script type="text/javascript">
  dojo.event.topic.subscribe("/value", function(textEntered, date, widget){
@@ -9613,7 +9612,7 @@ div that reloads its content every 2 seconds, and shows an indicator while reloa
 
 ```xml
  <img id="indicator" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none" />
- <sx:div href="%{#url}" updatefreq="2000" indicator="indicator">
+ <sx:div href="%{#url}" updateFreq="2000" indicator="indicator">
    Initial Content
  </sx:div>
 
@@ -9631,7 +9630,7 @@ div that uses topics to control the timer, highlights its content in red after r
    <label for="textInput">Text to be submited when div reloads</label>
    &lt;input type=textbox id="textInput" name="data"&gt;
  </form>
- <sx:div href="%{#url}" updatefreq="3000" listentopics="/refresh" starttimerlistentopics="/startTimer" stoptimerlistentopics="/stopTimer" highlightcolor="red" formid="form">
+ <sx:div href="%{#url}" updateFreq="3000" listenTopics="/refresh" startTimerListenTopics="/startTimer" stopTimerListenTopics="/stopTimer" highlightColor="red" formId="form">
   Initial Content
  </sx:div>
 
@@ -9647,7 +9646,7 @@ __Description__
 
 <p> The "head" tag renders required JavaScript code to configure Dojo and is required in order to use
  any of the tags included in the Dojo plugin.</p>
-
+&lt;/p&gt;
 
 
 
@@ -9894,7 +9893,7 @@ __Examples__
  &lt;%@ taglib prefix="sx" uri="/struts-dojo-tags" %&gt;
  <head>
    <title>My page</title>
-   <sx:head debug="true" extralocales="en-us,nl-nl,de-de" />
+   <sx:head debug="true" extraLocales="en-us,nl-nl,de-de" />
  </head>
 
 ```
@@ -12186,8 +12185,8 @@ __Examples__
 
 
 ```xml
- <s:doubleselect label="doubleselect test1" name="menu" list="{'fruit','other'}" doublename="dishes" doublelist="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" />
- <s:doubleselect label="doubleselect test2" name="menu" list="#{'fruit':'Nice Fruits', 'other':'Other Dishes'}" doublename="dishes" doublelist="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" />
+ <s:doubleselect label="doubleselect test1" name="menu" list="{'fruit','other'}" doubleName="dishes" doubleList="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" />
+ <s:doubleselect label="doubleselect test2" name="menu" list="#{'fruit':'Nice Fruits', 'other':'Other Dishes'}" doubleName="dishes" doubleList="top == 'fruit' ? {'apple', 'orange'} : {'monkey', 'chicken'}" />
 
 ```
 
@@ -12985,7 +12984,7 @@ __Examples__
     </s:fielderror>
     &lt;s:form .... &gt;
        ....
-    
+    &lt;/s:form&gt;
 
     OR
 
@@ -12995,11 +12994,11 @@ __Examples__
     </s:fielderror>
     &lt;s:form .... &gt;
        ....
-    
+    &lt;/s:form&gt;
 
     OR
 
-    <s:fielderror fieldname="field1" />
+    <s:fielderror fieldName="field1" />
 
 
 ```
@@ -16366,10 +16365,10 @@ __Description__
 <p> <p>
  NOTE: The id and doubleId need not be supplied as they will generated provided
  that the inputtransferselect tag is being used in a form tag. The generated id
- and doubleId will be <form_id>_<inputtransferselect_doublename> and
- <form_id>_<inputtransferselect_doublename> respectively.
- 
-
+ and doubleId will be <form_id>_<inputtransferselect_doubleName> and
+ <form_id>_<inputtransferselect_doubleName> respectively.
+ &lt;/p&gt;
+&lt;/p&gt;
 
 
 __Parameters__
@@ -18472,10 +18471,10 @@ __Description__
  NOTE: The id and doubleId need not be supplied as they will generated provided
  that the optiontransferselect tag is being used in a form tag. The generated id
  and doubleId will be <form_id>_<optiontransferselect_nameame> and
- <form_id>_<optiontransferselect_doublename> respectively.
- 
+ <form_id>_<optiontransferselect_doubleName> respectively.
+ &lt;/p&gt;
 
-
+&lt;/p&gt;
 
 
 __Parameters__
@@ -20383,10 +20382,10 @@ __Examples__
 ```xml
 
  &lt;-- minimum configuration --&gt;
- <s:optiontransferselect label="Favourite Cartoons Characters" name="leftSideCartoonCharacters" list="{'Popeye', 'He-Man', 'Spiderman'}" doublename="rightSideCartoonCharacters" doublelist="{'Superman', 'Mickey Mouse', 'Donald Duck'}" />
+ <s:optiontransferselect label="Favourite Cartoons Characters" name="leftSideCartoonCharacters" list="{'Popeye', 'He-Man', 'Spiderman'}" doubleName="rightSideCartoonCharacters" doubleList="{'Superman', 'Mickey Mouse', 'Donald Duck'}" />
 
   &lt;-- possible configuration --&gt;
-  <s:optiontransferselect label="Favourite Cartoons Characters" name="leftSideCartoonCharacters" lefttitle="Left Title" righttitle="Right Title" list="{'Popeye', 'He-Man', 'Spiderman'}" multiple="true" headerkey="headerKey" headervalue="--- Please Select ---" emptyoption="true" doublelist="{'Superman', 'Mickey Mouse', 'Donald Duck'}" doublename="rightSideCartoonCharacters" doubleheaderkey="doubleHeaderKey" doubleheadervalue="--- Please Select ---" doubleemptyoption="true" doublemultiple="true" />
+  <s:optiontransferselect label="Favourite Cartoons Characters" name="leftSideCartoonCharacters" leftTitle="Left Title" rightTitle="Right Title" list="{'Popeye', 'He-Man', 'Spiderman'}" multiple="true" headerKey="headerKey" headerValue="--- Please Select ---" emptyOption="true" doubleList="{'Superman', 'Mickey Mouse', 'Donald Duck'}" doubleName="rightSideCartoonCharacters" doubleHeaderKey="doubleHeaderKey" doubleHeaderValue="--- Please Select ---" doubleEmptyOption="true" doubleMultiple="true" />
 
 
 ```
@@ -24013,9 +24012,9 @@ __Examples__
 
 ```xml
 
- <s:select label="Pets" name="petIds" list="petDao.pets" listkey="id" listvalue="name" multiple="true" size="3" required="true" value="%{petDao.pets.{id}}" />
+ <s:select label="Pets" name="petIds" list="petDao.pets" listKey="id" listValue="name" multiple="true" size="3" required="true" value="%{petDao.pets.{id}}" />
 
- <s:select label="Months" name="months" headerkey="-1" headervalue="Select Month" list="#{'01':'Jan', '02':'Feb', [...]}" value="selectedMonth" required="true" />
+ <s:select label="Months" name="months" headerKey="-1" headerValue="Select Month" list="#{'01':'Jan', '02':'Feb', [...]}" value="selectedMonth" required="true" />
 
  // The month id (01, 02, ...) returned by the getSelectedMonth() call
  // against the stack will be auto-selected
@@ -24879,10 +24878,10 @@ __Description__
  content (refreshed each time the user selects that tab).</p>
  If the useSelectedTabCookie attribute is set to true, the id of the selected tab is saved in a cookie on activation.
  When coming back to this view, the cookie is read and the tab will be activated again, unless an actual value for the
- selectedTab attribute is specified.
+ selectedTab attribute is specified.&lt;/p&gt;
  If you want to use the cookie feature, please be sure that you provide a unique id for your tabbedpanel component,
- since this will also be the identifying name component of the stored cookie.
-
+ since this will also be the identifying name component of the stored cookie.&lt;/p&gt;
+&lt;/p&gt;
 
 
 __Parameters__
@@ -26004,7 +26003,7 @@ Use notify topics to prevent a tab from being selected:
  });
  </script>
  
- <sx:tabbedpanel id="test" beforeselecttabnotifytopics="/beforeSelect">
+ <sx:tabbedpanel id="test" beforeSelectTabNotifyTopics="/beforeSelect">
     <sx:div id="three" label="remote" theme="ajax" href="/AjaxTest.action">
         One Tab
     </sx:div>
@@ -29651,7 +29650,7 @@ Dynamic tree (rendered on the server):
 
 
 ```xml
- <s:tree id="..." rootnode="..." nodeidproperty="..." nodetitleproperty="..." childcollectionproperty="..." />
+ <s:tree id="..." rootNode="..." nodeIdProperty="..." nodeTitleProperty="..." childCollectionProperty="..." />
 
 ```
 
@@ -30461,7 +30460,7 @@ Update target content with html returned from an action:
  </s:tree>
 
  &lt;-- Creating tree dynamically using data from backing action. --&gt;
- <s:tree id="..." rootnode="..." nodeidproperty="..." nodetitleproperty="..." childcollectionproperty="..." />
+ <s:tree id="..." rootNode="..." nodeIdProperty="..." nodeTitleProperty="..." childCollectionProperty="..." />
 
 
 ```
@@ -31539,10 +31538,10 @@ __Examples__
 ```xml
 
  <!-- Example 1: simple example -->
- <s:updownselect list="#{'england':'England', 'america':'America', 'germany':'Germany'}" name="prioritisedFavouriteCountries" headerkey="-1" headervalue="--- Please Order Them Accordingly ---" emptyoption="true" />
+ <s:updownselect list="#{'england':'England', 'america':'America', 'germany':'Germany'}" name="prioritisedFavouriteCountries" headerKey="-1" headerValue="--- Please Order Them Accordingly ---" emptyOption="true" />
 
  <!-- Example 2: more complex example -->
- <s:updownselect list="defaultFavouriteCartoonCharacters" name="prioritisedFavouriteCartoonCharacters" headerkey="-1" headervalue="--- Please Order ---" emptyoption="true" allowmoveup="true" allowmovedown="true" allowselectall="true" moveuplabel="Move Up" movedownlabel="Move Down" selectalllabel="Select All" />
+ <s:updownselect list="defaultFavouriteCartoonCharacters" name="prioritisedFavouriteCartoonCharacters" headerKey="-1" headerValue="--- Please Order ---" emptyOption="true" allowMoveUp="true" allowMoveDown="true" allowSelectAll="true" moveUpLabel="Move Up" moveDownLabel="Move Down" selectAllLabel="Select All" />
 
 
 ```
@@ -31573,7 +31572,7 @@ One possible alternative is to set _showLoadingText="false"_  and set the indica
 <img id="loadingImage" src="images/loadingAnimation.gif" style="display:none" />
 <s:div id="parentDiv">
     <s:form action="actionName">
-        <sx:a targets="parentDiv" showloadingtext="false" indicator="loadingImage" />
+        <sx:a targets="parentDiv" showLoadingText="false" indicator="loadingImage" />
     </s:form>
 </s:div>
 
@@ -32703,7 +32702,7 @@ Submit form(anchor outside the form):
       <input type="textbox" name="data" />   
  </s:form>
  
- <sx:a formid="form">Submit form</sx:a>
+ <sx:a formId="form">Submit form</sx:a>
 
 ```
 
@@ -32723,7 +32722,7 @@ Using beforeNotifyTopics:
  });
  </script>         
  
- <sx:a beforenotifytopics="/before">Publish topics</sx:a>
+ <sx:a beforeNotifyTopics="/before">Publish topics</sx:a>
 
 ```
 
@@ -32744,7 +32743,7 @@ Using afterNotifyTopics and highlights target:
  });
  </script>        
  
- <sx:a afternotifytopics="/after" highlightcolor="red" href="%{#ajaxTest}">Publish topics</sx:a>
+ <sx:a afterNotifyTopics="/after" highlightColor="red" href="%{#ajaxTest}">Publish topics</sx:a>
 
 ```
 
@@ -32766,7 +32765,7 @@ Using errorNotifyTopics and indicator:
  </script>         
  
  <img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none" />
- <sx:a errornotifytopics="/error" indicator="ind1" href="%{#ajaxTest}">Publish topics</sx:a>
+ <sx:a errorNotifyTopics="/error" indicator="ind1" href="%{#ajaxTest}">Publish topics</sx:a>
 
 ```
 
@@ -32801,7 +32800,7 @@ One possible alternative is to set _showLoadingText="false"_ (the default) and s
 <img id="loadingImage" src="images/loadingAnimation.gif" style="display:none" />
 <s:div id="parentDiv">
     <s:form action="actionName">
-        <sx:submit targets="parentDiv" showloadingtext="false" indicator="loadingImage" />
+        <sx:submit targets="parentDiv" showLoadingText="false" indicator="loadingImage" />
     </s:form>
 </s:div>
 
@@ -34028,7 +34027,7 @@ Submit form(outside the form):
       <input type="textbox" name="data" />
  </s:form>
 
- <sx:submit formid="form" />
+ <sx:submit formId="form" />
 
 ```
 
@@ -34048,7 +34047,7 @@ Using beforeNotifyTopics:
  });
  </script>
 
- <sx:submit beforenotifytopics="/before" />
+ <sx:submit beforeNotifyTopics="/before" />
 
 ```
 
@@ -34069,7 +34068,7 @@ Using afterNotifyTopics and highlight target:
  });
  </script>
 
- <sx:submit afternotifytopics="/after" highlightcolor="red" href="%{#ajaxTest}" />
+ <sx:submit afterNotifyTopics="/after" highlightColor="red" href="%{#ajaxTest}" />
 
 ```
 
@@ -34091,13 +34090,13 @@ Using errorNotifyTopics and indicator:
  </script>
 
  <img id="ind1" src="${pageContext.request.contextPath}/images/indicator.gif" style="display:none" />
- <sx:submit errornotifytopics="/error" indicator="ind1" href="%{#ajaxTest}" />
+ <sx:submit errorNotifyTopics="/error" indicator="ind1" href="%{#ajaxTest}" />
 
 ```
 
 
 
-</optiontransferselect_doublename></form_id></optiontransferselect_nameame></form_id></p></p></inputtransferselect_doublename></form_id></inputtransferselect_doublename></form_id></p></p></li></li></li></li></li></li></li></ul></option></p></form></p></p></pre></p></p></p></p></p></p>
+</optiontransferselect_doubleName></form_id></optiontransferselect_nameame></form_id></p></p></inputtransferselect_doubleName></form_id></inputtransferselect_doubleName></form_id></p></p></li></li></li></li></li></li></li></ul></option></p></form></p></p></pre></p></p></p></p></p></p>
 
   </section>
 </article>

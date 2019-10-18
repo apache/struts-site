@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -160,7 +159,7 @@
 
 <p><strong>Struts.xml Action Configuration</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"createPerson"</span> <span class="na">class=</span><span class="s">"org.apache.struts.tutorials.wildcardmethod.action.PersonAction"</span> <span class="na">method=</span><span class="s">"create"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"createPerson"</span> <span class="na">class=</span><span class="s">"org.apache.struts.tutorials.wildcardmethod.action.PersonAction"</span> <span class="na">method=</span><span class="s">"create"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>input.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>view.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
@@ -169,23 +168,21 @@
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>input.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>view.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>So even for this simple application, I’d have to write four separate action mapping nodes (create, edit, delete, saveOrUpdate) in the configuration file. So you can easily see that a more complex application can have dozens of action mapping nodes.</p>
 
-<p>To implement the wildcard method selection technique to enable the Struts 2 framework to dynamically select the correct method to call at runtime you just need to use the wildcard character, *, in your name value and an attribute value place holder ( <code class="highlighter-rouge"><span class="p">{</span><span class="err">1</span><span class="p">}</span></code> ) for the method value. For example:</p>
+<p>To implement the wildcard method selection technique to enable the Struts 2 framework to dynamically select the correct method to call at runtime you just need to use the wildcard character, *, in your name value and an attribute value place holder ( <code class="highlighter-rouge">{1}</code> ) for the method value. For example:</p>
 
 <p><strong>Struts.xml Action Configuration Using Wildcard Method Selection</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"*Person"</span> <span class="na">class=</span><span class="s">"org.apache.struts.tutorials.wildcardmethod.action.PersonAction"</span> <span class="na">method=</span><span class="s">"{1}"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"*Person"</span> <span class="na">class=</span><span class="s">"org.apache.struts.tutorials.wildcardmethod.action.PersonAction"</span> <span class="na">method=</span><span class="s">"{1}"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>view.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>input.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">*</code> is the wildcard character. Any action name values that end in “Person” will be handled by this action mapping. Whatever value is before “Person” will be the value used for the method attribute (the <code class="highlighter-rouge"><span class="p">{</span><span class="err">1</span><span class="p">}</span></code> place holder will be replaced with that value). For example this URL:</p>
+<p>The <code class="highlighter-rouge">*</code> is the wildcard character. Any action name values that end in “Person” will be handled by this action mapping. Whatever value is before “Person” will be the value used for the method attribute (the <code class="highlighter-rouge">{1}</code> place holder will be replaced with that value). For example this URL:</p>
 
 <p><a href="http://localhost:8080/wildcard-method-selection/createPerson.action">http://localhost:8080/wildcard-method-selection/createPerson.action</a></p>
 

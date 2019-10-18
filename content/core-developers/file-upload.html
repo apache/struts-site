@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -203,7 +202,7 @@ distribution, you must add them into your project. The libraries needed are:</p>
 
 <h3 id="struts-20x-file-upload-dependencies">Struts 2.0.x File Upload Dependencies</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>commons-fileupload<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>commons-fileupload<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>1.1.1<span class="nt">&lt;/version&gt;</span>
@@ -213,12 +212,11 @@ distribution, you must add them into your project. The libraries needed are:</p>
     <span class="nt">&lt;artifactId&gt;</span>commons-io<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="struts-21x-file-upload-dependencies">Struts 2.1.x File Upload Dependencies</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>commons-fileupload<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>commons-fileupload<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>1.2.1<span class="nt">&lt;/version&gt;</span>
@@ -228,8 +226,7 @@ distribution, you must add them into your project. The libraries needed are:</p>
     <span class="nt">&lt;artifactId&gt;</span>commons-io<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>1.3.2<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="basic-usage">Basic Usage</h2>
 
@@ -239,12 +236,11 @@ Action class as you typically would.</p>
 
 <h3 id="example-action-mapping">Example action mapping:</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"doUpload"</span> <span class="na">class=</span><span class="s">"com.example.UploadAction"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"doUpload"</span> <span class="na">class=</span><span class="s">"com.example.UploadAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>A form must be create with a form field of type file, <code class="highlighter-rouge">&lt;INPUT type="file" name="upload"&gt;</code>. The form used to upload the file must have its 
 encoding type set to <code class="highlighter-rouge">multipart/form-data</code>, <code class="highlighter-rouge">&lt;form action="doUpload" enctype="multipart/form-data" method="post"&gt;</code>. The standard procedure 
@@ -252,19 +248,18 @@ for adding these elements is by using the Struts 2 tag libraries as shown in the
 
 <h3 id="example-jsp-form-tags">Example JSP form tags:</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>   <span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"doUpload"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">enctype=</span><span class="s">"multipart/form-data"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"doUpload"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">enctype=</span><span class="s">"multipart/form-data"</span><span class="nt">&gt;</span>
        <span class="nt">&lt;s:file</span> <span class="na">name=</span><span class="s">"upload"</span> <span class="na">label=</span><span class="s">"File"</span><span class="nt">/&gt;</span>
        <span class="nt">&lt;s:submit/&gt;</span>
    <span class="nt">&lt;/s:form&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The fileUpload interceptor will use setter injection to insert the uploaded file and related data into your Action class. For a form field 
 named <code class="highlighter-rouge">upload</code> you would provide the three setter methods shown in the following example:</p>
 
 <h3 id="example-action-class">Example Action class:</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
 
    <span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
    <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
@@ -274,26 +269,25 @@ named <code class="highlighter-rouge">upload</code> you would provide the three 
       <span class="kd">private</span> <span class="n">String</span> <span class="n">contentType</span><span class="o">;</span>
       <span class="kd">private</span> <span class="n">String</span> <span class="n">filename</span><span class="o">;</span>
 
-      <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUpload</span><span class="o">(</span><span class="n">File</span> <span class="n">file</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUpload</span><span class="o">(</span><span class="n">File</span> <span class="n">file</span><span class="o">)</span> <span class="o">{</span>
          <span class="k">this</span><span class="o">.</span><span class="na">file</span> <span class="o">=</span> <span class="n">file</span><span class="o">;</span>
       <span class="o">}</span>
 
-      <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUploadContentType</span><span class="o">(</span><span class="n">String</span> <span class="n">contentType</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUploadContentType</span><span class="o">(</span><span class="n">String</span> <span class="n">contentType</span><span class="o">)</span> <span class="o">{</span>
          <span class="k">this</span><span class="o">.</span><span class="na">contentType</span> <span class="o">=</span> <span class="n">contentType</span><span class="o">;</span>
       <span class="o">}</span>
 
-      <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUploadFileName</span><span class="o">(</span><span class="n">String</span> <span class="n">filename</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUploadFileName</span><span class="o">(</span><span class="n">String</span> <span class="n">filename</span><span class="o">)</span> <span class="o">{</span>
          <span class="k">this</span><span class="o">.</span><span class="na">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">;</span>
       <span class="o">}</span>
 
-      <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
          <span class="c1">//...</span>
          <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
       <span class="o">}</span>
  <span class="o">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The purpose of each one of these methods is described in the table below. Notice that if you have multiple file form elements with different 
 names you would be required to have another corresponding set of these methods for each file uploaded.</p>
@@ -343,12 +337,12 @@ details see <code class="highlighter-rouge">struts-fileupload.xml</code> in the 
 
 <p><code class="highlighter-rouge">MultipleFileUploadUsingArrayAction.java</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MultipleFileUploadUsingArrayAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MultipleFileUploadUsingArrayAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">File</span><span class="o">[]</span> <span class="n">uploads</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="n">String</span><span class="o">[]</span> <span class="n">uploadFileNames</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="n">String</span><span class="o">[]</span> <span class="n">uploadContentTypes</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="n">upload</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">upload</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
 		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n\n upload2"</span><span class="o">);</span>
 		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"files:"</span><span class="o">);</span>
 		<span class="k">for</span> <span class="o">(</span><span class="n">File</span> <span class="n">u</span> <span class="o">:</span> <span class="n">uploads</span><span class="o">)</span> <span class="o">{</span>
@@ -365,27 +359,26 @@ details see <code class="highlighter-rouge">struts-fileupload.xml</code> in the 
 		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n\n"</span><span class="o">);</span>
 		<span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="n">File</span><span class="o">[]</span> <span class="n">getUpload</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">File</span><span class="o">[]</span> <span class="nf">getUpload</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">uploads</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="n">setUpload</span><span class="o">(</span><span class="n">File</span><span class="o">[]</span> <span class="n">upload</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUpload</span><span class="o">(</span><span class="n">File</span><span class="o">[]</span> <span class="n">upload</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">uploads</span> <span class="o">=</span> <span class="n">upload</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="n">getUploadFileName</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getUploadFileName</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">uploadFileNames</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="n">setUploadFileName</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">uploadFileName</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUploadFileName</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">uploadFileName</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">uploadFileNames</span> <span class="o">=</span> <span class="n">uploadFileName</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="n">getUploadContentType</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getUploadContentType</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">uploadContentTypes</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="n">setUploadContentType</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">uploadContentType</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUploadContentType</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">uploadContentType</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">uploadContentTypes</span> <span class="o">=</span> <span class="n">uploadContentType</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="uploading-multiple-files-using-lists">Uploading Multiple Files using Lists</h3>
 
@@ -401,30 +394,30 @@ details see <code class="highlighter-rouge">struts-fileupload.xml</code> in the 
 
 <p><code class="highlighter-rouge">MultipleFileUploadUsingListAction.java</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MultipleFileUploadUsingListAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MultipleFileUploadUsingListAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span> <span class="n">uploads</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;();</span>
 	<span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">uploadFileNames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
 	<span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">uploadContentTypes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
 
-	<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span> <span class="n">getUpload</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span> <span class="nf">getUpload</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">uploads</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="n">setUpload</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span> <span class="n">uploads</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUpload</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span> <span class="n">uploads</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">uploads</span> <span class="o">=</span> <span class="n">uploads</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">getUploadFileName</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getUploadFileName</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">uploadFileNames</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="n">setUploadFileName</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">uploadFileNames</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUploadFileName</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">uploadFileNames</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">uploadFileNames</span> <span class="o">=</span> <span class="n">uploadFileNames</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">getUploadContentType</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getUploadContentType</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">uploadContentTypes</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="n">setUploadContentType</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">contentTypes</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUploadContentType</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">contentTypes</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">uploadContentTypes</span> <span class="o">=</span> <span class="n">contentTypes</span><span class="o">;</span>
 	<span class="o">}</span>
-	<span class="kd">public</span> <span class="n">String</span> <span class="n">upload</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">upload</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
 		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n\n upload1"</span><span class="o">);</span>
 		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"files:"</span><span class="o">);</span>
 		<span class="k">for</span> <span class="o">(</span><span class="n">File</span> <span class="n">u</span> <span class="o">:</span> <span class="n">uploads</span><span class="o">)</span> <span class="o">{</span>
@@ -442,19 +435,17 @@ details see <code class="highlighter-rouge">struts-fileupload.xml</code> in the 
 		<span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="advanced-configuration">Advanced Configuration</h2>
 
 <p>The Struts 2 <code class="highlighter-rouge">default.properties</code> file defines several settings that affect the behavior of file uploading. You may find in necessary 
 to change these values. The names and default values are:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>struts.multipart.parser=jakarta
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struts.multipart.parser=jakarta
 struts.multipart.saveDir=
 struts.multipart.maxSize=2097152
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>Please remember that the <code class="highlighter-rouge">struts.multipart.maxSize</code> is the size limit of the whole request, which means when you uploading multiple files, 
@@ -463,7 +454,7 @@ the sum of their size must be below the <code class="highlighter-rouge">struts.m
 
 <p>In order to change theses settings you define a constant in your applications <code class="highlighter-rouge">struts.xml</code> file like so:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE struts PUBLIC 
 	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
 	"http://struts.apache.org/dtds/struts-2.0.dtd"&gt;</span>
@@ -471,12 +462,11 @@ the sum of their size must be below the <code class="highlighter-rouge">struts.m
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.maxSize"</span> <span class="na">value=</span><span class="s">"1000000"</span> <span class="nt">/&gt;</span>
     ...
 <span class="nt">&lt;/struts&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Additionally the <code class="highlighter-rouge">fileUpload</code> interceptor has settings that can be put in place for individual action mappings by customizing your interceptor stack.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"doUpload"</span> <span class="na">class=</span><span class="s">"com.example.UploadAction"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"doUpload"</span> <span class="na">class=</span><span class="s">"com.example.UploadAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"fileUpload"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"allowedTypes"</span><span class="nt">&gt;</span>text/plain<span class="nt">&lt;/param&gt;</span>
@@ -486,8 +476,7 @@ the sum of their size must be below the <code class="highlighter-rouge">struts.m
 
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="file-size-limits">File Size Limits</h3>
 
@@ -498,7 +487,7 @@ to receive. If you are uploading more than one file on a form the <code class="h
 file sizes. The other setting, <code class="highlighter-rouge">maximumSize</code>, is an interceptor setting that is used to ensure a particular Action does not receive a file 
 that is too large. Notice the locations of both settings in the following example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE struts PUBLIC 
 	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
 	"http://struts.apache.org/dtds/struts-2.0.dtd"&gt;</span>
@@ -517,15 +506,14 @@ that is too large. Notice the locations of both settings in the following exampl
     <span class="nt">&lt;/action&gt;</span>
 <span class="nt">&lt;/struts&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="file-types">File Types</h3>
 
 <p>There are two ways to limit the uploaded file type, decoratively and programmatically. To decoratively limit the file type a comma separated 
 list of allowedTypes can be specified as a fileUpload interceptor param as shown in the following example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"doUpload"</span> <span class="na">class=</span><span class="s">"com.example.UploadAction"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"doUpload"</span> <span class="na">class=</span><span class="s">"com.example.UploadAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"fileUpload"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"allowedTypes"</span><span class="nt">&gt;</span>image/jpeg,image/gif<span class="nt">&lt;/param&gt;</span>
@@ -535,8 +523,7 @@ list of allowedTypes can be specified as a fileUpload interceptor param as shown
 
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>When the uploaded file type does not match one of the MIME types specified a field error will be created as described in the next section 
 entitled Error Messages. Programmatically limiting the file type means using the information passed in to your Action class via 
@@ -603,9 +590,8 @@ due to licensing incompatibilities.</p>
 <p>As from Struts version 2.3.18 a new implementation of <code class="highlighter-rouge">MultiPartRequest</code> was added - <code class="highlighter-rouge">JakartaStreamMultiPartRequest</code>. It can be used to handle 
 large files, see <a href="https://issues.apache.org/jira/browse/WW-3025">WW-3025</a> for more details, but you can simple set</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;constant name="struts.multipart.parser" value="jakarta-stream" /&gt;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;constant name="struts.multipart.parser" value="jakarta-stream" /&gt;
+</code></pre></div></div>
 
 <p>in struts.xml to start using it.</p>
 
@@ -614,9 +600,8 @@ large files, see <a href="https://issues.apache.org/jira/browse/WW-3025">WW-302
 <p>The <code class="highlighter-rouge">struts.multipart.validationRegex</code> is used to define a RegEx to be used to validate if the incoming request is a multipart request. 
 The request must use the <code class="highlighter-rouge">POST</code> method and match the RegEx, by default the RegEx is defined as follow:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>^multipart\\/form-data(; boundary=[a-zA-Z0-9]{1,70})?
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>^multipart\\/form-data(; boundary=[a-zA-Z0-9]{1,70})?
+</code></pre></div></div>
 
 <p>Please read <a href="https://www.w3.org/Protocols/rfc1341/7\_2\_Multipart.html">RFC1341</a> the <strong>Multipart section</strong> for more details, existing 
 Struts <code class="highlighter-rouge">Multipart</code> parsers support only <code class="highlighter-rouge">multipart/form-data</code> content type. This option is available since Struts 2.3.11.</p>
@@ -625,9 +610,8 @@ Struts <code class="highlighter-rouge">Multipart</code> parsers support only <c
 
 <p>You can alternatively disable the whole file upload mechanism defining a constant in <code class="highlighter-rouge">struts.xml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.enabled"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.enabled"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>With this constant in place, Struts will ignore a <code class="highlighter-rouge">Content-Type</code> header and will treat each request as an ordinary http request. 
 This option is available since Struts 2.3.11. </p>

@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -173,9 +172,12 @@ This includes support for converting to and from Strings for each of the followi
   <li>dates - uses the SHORT format for the Locale associated with the current request</li>
   <li>arrays - assuming the individual strings can be coverted to the individual items</li>
   <li>collections - if not object type can be determined, it is assumed to be a String and a new ArrayList is created
-&gt; Note that with arrays the type conversion will defer to the type of the array elements and try to convert each item 
-&gt; individually. As with any other type conversion, if the conversion can’t be performed the standard type conversion 
-&gt; error reporting is used to indicate a problem occurred while processing the type conversion.</li>
+    <blockquote>
+      <p>Note that with arrays the type conversion will defer to the type of the array elements and try to convert each item 
+individually. As with any other type conversion, if the conversion can’t be performed the standard type conversion 
+error reporting is used to indicate a problem occurred while processing the type conversion.</p>
+    </blockquote>
+  </li>
   <li>Enumerations</li>
   <li>BigDecimal and BigInteger</li>
 </ul>
@@ -191,8 +193,11 @@ and write to properties of objects addressed via OGNL expressions and perform th
   <li>Use OGNL expressions - the framework will automatically take care of creating the actual objects for you.</li>
   <li>Use JavaBeans - The framework can only create objects that obey the JavaBean specification, provide no-arg constructions 
 and include getters and setters where appropriate.
-&gt; Remember that <code class="highlighter-rouge">person.name</code>  will call <code class="highlighter-rouge">getPerson().setName()</code>.  If the framework creates the Person object for you, 
-&gt; it remember that a <code class="highlighter-rouge">setPerson</code> method must also exist.</li>
+    <blockquote>
+      <p>Remember that <code class="highlighter-rouge">person.name</code>  will call <code class="highlighter-rouge">getPerson().setName()</code>.  If the framework creates the Person object for you, 
+it remember that a <code class="highlighter-rouge">setPerson</code> method must also exist.</p>
+    </blockquote>
+  </li>
   <li>The framework will not instantiate an object if an instance already exists. The <code class="highlighter-rouge">PrepareInterceptor</code> or action’s 
 constructor can be used to create target objects before type conversion.</li>
   <li>For lists and maps, use index notation, such as <code class="highlighter-rouge">people[0].name</code>  or <code class="highlighter-rouge">friends['patrick'].name</code>. Often these HTML form 
@@ -208,17 +213,16 @@ item and set its name accordingly.</li>
 <p>Create a type converter by extending <code class="highlighter-rouge">StrutsTypeConverter</code>. The Converter’s role is to convert a String to an Object 
 and an Object to a String.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyConverter</span> <span class="kd">extends</span> <span class="n">StrutsTypeConverter</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">Object</span> <span class="n">convertFromString</span><span class="o">(</span><span class="n">Map</span> <span class="n">context</span><span class="o">,</span> <span class="n">String</span><span class="o">[]</span> <span class="n">values</span><span class="o">,</span> <span class="n">Class</span> <span class="n">toClass</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyConverter</span> <span class="kd">extends</span> <span class="n">StrutsTypeConverter</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">convertFromString</span><span class="o">(</span><span class="n">Map</span> <span class="n">context</span><span class="o">,</span> <span class="n">String</span><span class="o">[]</span> <span class="n">values</span><span class="o">,</span> <span class="n">Class</span> <span class="n">toClass</span><span class="o">)</span> <span class="o">{</span>
        <span class="o">.....</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">convertToString</span><span class="o">(</span><span class="n">Map</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">convertToString</span><span class="o">(</span><span class="n">Map</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
        <span class="o">.....</span>
     <span class="o">}</span>
  <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>To allow Struts to recognize that a conversion error has occurred, the converter class needs to throw XWorkException 
@@ -234,11 +238,10 @@ also be in the classpath at <code class="highlighter-rouge">/com/myapp/actions/<
 
 <p>Within the conversion file, name the action’s property and the Converter to apply to it:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># syntax: &lt;propertyName&gt; = &lt;converterClassName&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># syntax: &lt;propertyName&gt; = &lt;converterClassName&gt;
 point = com.acme.PointConverter 
 person.phoneNumber = com.acme.PhoneNumberConverter
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Type conversion can also be specified via <a href="annotations.html">Annotations</a> within the action.</p>
 
@@ -258,19 +261,17 @@ or resources tree matching the package of Measurement and place the converters f
 eg. for <code class="highlighter-rouge">com.acme.measurements.Measurement</code>, create a file in the application source/resources 
 at <code class="highlighter-rouge">/com/acme/measurements/Measurement-conversion.properties</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># syntax: &lt;propertyName&gt;=&lt;converterClassName&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># syntax: &lt;propertyName&gt;=&lt;converterClassName&gt;
 amount=com.acme.converters.MyCustomBigDecimalConverter
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="applying-a-type-converter-for-an-application">Applying a Type Converter for an application</h2>
 
 <p>Application-wide converters can be specified in a file called <code class="highlighter-rouge">xwork-conversion.properties</code> located in the root of the classpath.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># syntax: &lt;type&gt; = &lt;converterClassName&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># syntax: &lt;type&gt; = &lt;converterClassName&gt;
 java.math.BigDecimal = com.acme.MyBigDecimalConverter 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="a-simple-example">A Simple Example</h2>
 
@@ -285,9 +286,8 @@ conversion to and from strings. So turning “3, 22” in to new Point(3, 22) is
 entry to <b>ClassName-conversion.properties</b> (Note that the PointConverter should impl the TypeConverter
 interface):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>point = com.acme.PointConverter
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>point = com.acme.PointConverter
+</code></pre></div></div>
 
 <p>Your type converter should be sure to check what class type it is being requested to convert. Because it is used
 for both to and from strings, you will need to split the conversion method in to two parts: one that turns Strings in
@@ -303,9 +303,8 @@ property in the form of the class name of the object you wish to convert on the 
 the type converter on the right hand side. For example, providing a type converter for all Point objects would mean
 adding the following entry:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>com.acme.Point = com.acme.PointConverter
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com.acme.Point = com.acme.PointConverter
+</code></pre></div></div>
 
 <p>Type conversion should not be used as a substitute for i18n. It is not recommended to use this feature to print out
 properly formatted dates. Rather, you should use the i18n features of Struts 2 (and consult the JavaDocs for JDK’s
@@ -388,27 +387,25 @@ of the collection element that we want to index on.</p>
 
 <p><strong>MyAction.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
  * @return a Collection of Foo objects
  */</span>
-<span class="kd">public</span> <span class="n">Collection</span> <span class="nf">getFooCollection</span><span class="p">(</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">Collection</span> <span class="nf">getFooCollection</span><span class="o">()</span>
 <span class="o">{</span>
     <span class="k">return</span> <span class="n">foo</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Foo.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
  * @return a unique identifier
  */</span>
-<span class="kd">public</span> <span class="n">Long</span> <span class="nf">getId</span><span class="p">(</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">Long</span> <span class="nf">getId</span><span class="o">()</span>
 <span class="o">{</span>
     <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>To enable type conversion, put the instruction <code class="highlighter-rouge">KeyProperty_fooCollection=id</code> in the <code class="highlighter-rouge">MyAction-conversion.properties</code>
 file. This technique allows use of the idiom <code class="highlighter-rouge">fooCollection(someIdValue)</code> to obtain the Foo object with value 
@@ -435,79 +432,76 @@ property. Otherwise, one element of the null <code class="highlighter-rouge">id<
 
 <p><strong>MyBean.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyBean</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyBean</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="o">;</span>
     <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">Long</span> <span class="n">getId</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Long</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setId</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getName</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
     <span class="o">}</span>
 
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">toString</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"MyBean{"</span> <span class="o">+</span>
                 <span class="s">"id="</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span>
                 <span class="s">", name='"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>
                 <span class="sc">'}'</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The Action has a <code class="highlighter-rouge">beanList</code> attribute initialized with an empty <code class="highlighter-rouge">ArrayList</code>.</p>
 
 <p><strong>MyBeanAction.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyBeanAction</span> <span class="kd">implements</span> <span class="n">Action</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyBeanAction</span> <span class="kd">implements</span> <span class="n">Action</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="n">List</span> <span class="n">beanList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
     <span class="kd">private</span> <span class="n">Map</span> <span class="n">beanMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">();</span>
 
-    <span class="kd">public</span> <span class="n">List</span> <span class="n">getBeanList</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">List</span> <span class="nf">getBeanList</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">beanList</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setBeanList</span><span class="o">(</span><span class="n">List</span> <span class="n">beanList</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBeanList</span><span class="o">(</span><span class="n">List</span> <span class="n">beanList</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">beanList</span> <span class="o">=</span> <span class="n">beanList</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Map</span> <span class="n">getBeanMap</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Map</span> <span class="nf">getBeanMap</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">beanMap</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setBeanMap</span><span class="o">(</span><span class="n">Map</span> <span class="n">beanMap</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBeanMap</span><span class="o">(</span><span class="n">Map</span> <span class="n">beanMap</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">beanMap</span> <span class="o">=</span> <span class="n">beanMap</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>These <code class="highlighter-rouge">conversion.properties</code> tell the TypeConverter to use MyBean instances as elements of the List.</p>
 
 <p><strong>MyBeanAction-conversion.properties</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>KeyProperty_beanList=id
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>KeyProperty_beanList=id
 Element_beanList=MyBean
 CreateIfNull_beanList=true
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>When submitting this via a form, the <code class="highlighter-rouge">id</code> value is used as KeyProperty for the MyBean instances in the beanList.</li>
@@ -530,9 +524,8 @@ only 256 elements are allowed in the collection. This limitation was introduced 
 If you know that the collection can have more elements you must define the below constant and set its value
 to desire size of the collection.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ognl.autoGrowthCollectionLimit"</span> <span class="na">value=</span><span class="s">"1024"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ognl.autoGrowthCollectionLimit"</span> <span class="na">value=</span><span class="s">"1024"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <blockquote>
   <p>NOTE: before this constant was named as <code class="highlighter-rouge">xwork.autoGrowCollectionLimit</code> but it is deprecated now and will be removed
@@ -593,16 +586,15 @@ some cases Erasure can result in base types that cannot be converted (typically 
 
 <p>The following is an example of this problem:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Measurement</span><span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Enum</span><span class="o">&gt;</span>
-   <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUnits</span><span class="o">(</span><span class="n">T</span> <span class="n">enumValue</span><span class="o">)</span> <span class="o">{...}</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Measurement</span><span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Enum</span><span class="o">&gt;</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUnits</span><span class="o">(</span><span class="n">T</span> <span class="n">enumValue</span><span class="o">)</span> <span class="o">{...}</span>
 <span class="o">}</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Area</span> <span class="kd">extends</span> <span class="n">Measurement</span><span class="o">&lt;</span><span class="n">UnitsOfArea</span><span class="o">&gt;</span> <span class="o">{</span>
   <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUnits</span><span class="o">(</span><span class="n">UnitsOfArea</span> <span class="n">enumValue</span><span class="o">){...}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUnits</span><span class="o">(</span><span class="n">UnitsOfArea</span> <span class="n">enumValue</span><span class="o">){...}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Although to the developer the area.setUnits(enumValue) method only accepts a UnitsOfArea enumeration, due to erasure 
 the signature of this method is actually setUnits(java.lang.Enum). The framework does not know that the parameter is 

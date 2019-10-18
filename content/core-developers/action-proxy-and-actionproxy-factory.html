@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -157,24 +156,23 @@ s executed when a request is invoked.</p>
 
 <h3 id="actionproxyfactory">ActionProxyFactory</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="n">ActionProxyFactory</span><span class="o">.</span><span class="na">setFactory</span><span class="o">(</span><span class="k">new</span> <span class="n">MyActionProxyFactory</span><span class="o">()</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">ActionProxyFactory</span><span class="o">.</span><span class="na">setFactory</span><span class="o">(</span><span class="k">new</span> <span class="n">MyActionProxyFactory</span><span class="o">()</span> <span class="o">{</span>
 
     <span class="c1">// Do something interesting...</span>
 
  <span class="o">});</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="actionproxy">ActionProxy</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="n">ActionProxyFactory</span><span class="o">.</span><span class="na">getFactory</span><span class="o">(</span><span class="k">new</span> <span class="n">MyActionProxyFactory</span><span class="o">()</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">ActionProxyFactory</span><span class="o">.</span><span class="na">getFactory</span><span class="o">(</span><span class="k">new</span> <span class="n">MyActionProxyFactory</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">....</span>
-    <span class="kd">public</span> <span class="n">ActionProxy</span> <span class="n">createActionProxy</span><span class="o">(</span><span class="n">Configuration</span> <span class="n">config</span><span class="o">,</span>
+    <span class="kd">public</span> <span class="n">ActionProxy</span> <span class="nf">createActionProxy</span><span class="o">(</span><span class="n">Configuration</span> <span class="n">config</span><span class="o">,</span>
            <span class="n">String</span> <span class="n">namespace</span><span class="o">,</span> <span class="n">String</span> <span class="n">actionName</span><span class="o">,</span> <span class="n">Map</span> <span class="n">extraContext</span><span class="o">)</span>
            <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="n">createActionProxy</span><span class="o">(</span><span class="n">config</span><span class="o">,</span> <span class="n">namespace</span><span class="o">,</span> <span class="n">actionName</span><span class="o">,</span> <span class="n">extraContext</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">ActionProxy</span> <span class="n">createActionProxy</span><span class="o">(</span><span class="n">Configuration</span> <span class="n">config</span><span class="o">,</span>
+    <span class="kd">public</span> <span class="n">ActionProxy</span> <span class="nf">createActionProxy</span><span class="o">(</span><span class="n">Configuration</span> <span class="n">config</span><span class="o">,</span>
            <span class="n">String</span> <span class="n">namespace</span><span class="o">,</span> <span class="n">String</span> <span class="n">actionName</span><span class="o">,</span> <span class="n">Map</span> <span class="n">extraContext</span><span class="o">,</span>
            <span class="kt">boolean</span> <span class="n">executeResult</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">cleanupContext</span><span class="o">)</span>
            <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
@@ -182,22 +180,21 @@ s executed when a request is invoked.</p>
    <span class="o">}</span>
    <span class="o">....</span>
  <span class="o">});</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="actioninvocation">ActionInvocation</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="n">ActionProxyFactory</span><span class="o">.</span><span class="na">getFactory</span><span class="o">(</span><span class="k">new</span> <span class="n">MyActionProxyFactory</span><span class="o">()</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">ActionProxyFactory</span><span class="o">.</span><span class="na">getFactory</span><span class="o">(</span><span class="k">new</span> <span class="n">MyActionProxyFactory</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">...</span>
-    <span class="kd">public</span> <span class="n">ActionInvocation</span> <span class="n">createActionInvocation</span><span class="o">(</span><span class="n">ActionProxy</span> <span class="n">actionProxy</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">ActionInvocation</span> <span class="nf">createActionInvocation</span><span class="o">(</span><span class="n">ActionProxy</span> <span class="n">actionProxy</span><span class="o">)</span>
                             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
           <span class="n">createActionInvocation</span><span class="o">(</span><span class="n">actionProxy</span><span class="o">,</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">());</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">ActionInvocation</span> <span class="n">createActionInvocation</span><span class="o">(</span><span class="n">ActionProxy</span> <span class="n">actionProxy</span><span class="o">,</span>
+    <span class="kd">public</span> <span class="n">ActionInvocation</span> <span class="nf">createActionInvocation</span><span class="o">(</span><span class="n">ActionProxy</span> <span class="n">actionProxy</span><span class="o">,</span>
                             <span class="n">Map</span> <span class="n">extraContext</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
           <span class="n">createActionInvocation</span><span class="o">(</span><span class="n">actionProxy</span><span class="o">,</span> <span class="n">extraContext</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">ActionInvocation</span> <span class="n">createActionInvocation</span><span class="o">(</span><span class="n">ActionProxy</span> <span class="n">actionProxy</span><span class="o">,</span>
+    <span class="kd">public</span> <span class="n">ActionInvocation</span> <span class="nf">createActionInvocation</span><span class="o">(</span><span class="n">ActionProxy</span> <span class="n">actionProxy</span><span class="o">,</span>
                             <span class="n">Map</span> <span class="n">extraContext</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">pushAction</span><span class="o">)</span>
                             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
           <span class="c1">// Do implementation of ActionInvocation here</span>
@@ -205,8 +202,7 @@ s executed when a request is invoked.</p>
     <span class="o">}</span>
     <span class="o">...</span>
  <span class="o">});</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </section>
 </article>

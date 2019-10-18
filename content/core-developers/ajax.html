@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -145,13 +144,12 @@ or HTML, or plain text, another script, or whatever else the calling script may 
 <p>Both Struts 1 and Struts 2 can return any type of response. We are not limited to forwarding to a server page. 
 In Struts 1, you can just do something like:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html"</span><span class="o">);</span>
 <span class="n">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">();</span>
 <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World!  This is an AJAX response from a Struts Action."</span><span class="o">);</span>
 <span class="n">out</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
 <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In Struts 2, we can do the same thing with a Stream result.</p>
 
@@ -162,7 +160,7 @@ directly from within an action. See sections following this for further details.
 
 <p><strong>Struts 2 Stream result Action</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.StringBufferInputStream</span><span class="o">;</span>
@@ -170,28 +168,26 @@ directly from within an action. See sections following this for further details.
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TextResult</span> <span class="kd">extends</span> <span class="n">ActionSupport</span>  <span class="o">{</span>
     <span class="kd">private</span> <span class="n">InputStream</span> <span class="n">inputStream</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="n">InputStream</span> <span class="n">getInputStream</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">InputStream</span> <span class="nf">getInputStream</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">inputStream</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="s">"Hello World! This is a text string response from a Struts 2 Action."</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">"UTF-8"</span><span class="o">));</span>
         <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Struts 2 Configuring the TextResult Action</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"text-result"</span> <span class="na">class=</span><span class="s">"actions.TextResult"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"text-result"</span> <span class="na">class=</span><span class="s">"actions.TextResult"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"stream"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"contentType"</span><span class="nt">&gt;</span>text/html<span class="nt">&lt;/param&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"inputName"</span><span class="nt">&gt;</span>inputStream<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>Struts 2 can also return a JSON (JavaScript Object Notation) response, using a <a href="http://cwiki.apache.org/S2PLUGINS/json-plugin.html">plugin</a>.</p>

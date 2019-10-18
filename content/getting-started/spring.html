@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -164,9 +163,8 @@ to your problem, post a question on the mailing list.</p>
 
 <p><strong>EditAction Class Hard-Coded Dependency</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">EditService</span> <span class="n">editService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EditServiceInMemory</span><span class="o">();</span>
-</code></pre>
-</div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">EditService</span> <span class="n">editService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EditServiceInMemory</span><span class="o">();</span>
+</code></pre></div></div>
 
 <p>The above statement hard-codes a dependency between the <code class="highlighter-rouge">EditAction</code> class and the <code class="highlighter-rouge">EditServiceInMemory</code> class. This is 
 poor design for two reasons.</p>
@@ -184,9 +182,8 @@ I would have this statement in <code class="highlighter-rouge">EditAction</code>
 
 <p><strong>EditAction Class No Hard-Coded Dependency</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">EditService</span> <span class="n">editService</span><span class="o">;</span>
-</code></pre>
-</div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">EditService</span> <span class="n">editService</span><span class="o">;</span>
+</code></pre></div></div>
 
 <p>At run time the Spring framework will provide an object of a class that implements the EditService interface.</p>
 
@@ -210,11 +207,10 @@ of the Spring jar files.</p>
 <p>In your <code class="highlighter-rouge">ActionSupport</code> class you must have a set method for the dependent object that follows standard Java bean naming 
 conventions. If you examine the <code class="highlighter-rouge">EditAction</code> class for this tutorial’s application you’ll see this set method.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEditService</span><span class="p">(</span><span class="n">EditService</span> <span class="n">editService</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEditService</span><span class="o">(</span><span class="n">EditService</span> <span class="n">editService</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">this</span><span class="o">.</span><span class="na">editService</span> <span class="o">=</span> <span class="n">editService</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Spring will use that set method to provide an object of type <code class="highlighter-rouge">EditService</code> to the <code class="highlighter-rouge">EditAction</code> class at run time.</p>
 
@@ -222,11 +218,10 @@ conventions. If you examine the <code class="highlighter-rouge">EditAction</code
 
 <p><strong>Spring Listener In web.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;listener&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;listener&gt;</span>
     <span class="nt">&lt;listener-class&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="nt">&lt;/listener-class&gt;</span>
 <span class="nt">&lt;/listener&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The above code will activate the Spring framework when the application is started up by the Servlet container. By default 
 Spring will look for a configuration file name applicationContext.xml in WEB-INF (consult the Spring documentation for 
@@ -239,18 +234,17 @@ into our ActionSupport class. In the example application is this <code class="hi
 
 <p><strong>Spring Configuration File</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span>
        <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
-       <span class="na">xsi:schemaLocation=</span><span class="s">"</span>
-            <span class="err">http://www.springframework.org/schema/beans</span>
-            <span class="err">http://www.springframework.org/schema/beans/spring-beans.xsd"</span><span class="nt">&gt;</span>
+       <span class="na">xsi:schemaLocation=</span><span class="s">"
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd"</span><span class="nt">&gt;</span>
 
     <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"editService"</span> <span class="na">class=</span><span class="s">"org.apache.struts.edit.service.EditServiceInMemory"</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/beans&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Note the id value above. By default the Spring plugin works with Spring to autowire the dependencies of the ActionClass 
 by <code class="highlighter-rouge">name</code>. Spring will create an object of class EditServiceMemory and provide that object to any ActionSupport class 
@@ -269,12 +263,12 @@ you need to add a bean node to the Spring configuration file for the ActionSuppo
 
 <p><strong>Spring Configuration For ActionSupport Class Managed By Spring</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span>
        <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
-       <span class="na">xsi:schemaLocation=</span><span class="s">"</span>
-            <span class="err">http://www.springframework.org/schema/beans</span>
-            <span class="err">http://www.springframework.org/schema/beans/spring-beans.xsd"</span><span class="nt">&gt;</span>
+       <span class="na">xsi:schemaLocation=</span><span class="s">"
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd"</span><span class="nt">&gt;</span>
             
     <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"editService"</span> <span class="na">class=</span><span class="s">"org.apache.struts.edit.service.EditServiceInMemory"</span> <span class="nt">/&gt;</span>
 
@@ -283,8 +277,7 @@ you need to add a bean node to the Spring configuration file for the ActionSuppo
     <span class="nt">&lt;/bean&gt;</span>
 
 <span class="nt">&lt;/beans&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Note in the above that there is an <code class="highlighter-rouge">editAction</code> bean and its <code class="highlighter-rouge">editService</code> property is set to the <code class="highlighter-rouge">editService</code> bean. 
 Since we are having Spring manage the <code class="highlighter-rouge">EditAction</code> class we must specify any properties of <code class="highlighter-rouge">EditAction</code> that we want Spring 
@@ -296,11 +289,10 @@ This tells Struts to get a bean with that id value from Spring for the Action cl
 
 <p><strong>Struts Configuration For Spring Managed ActionSupport Class</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"edit"</span> <span class="na">class=</span><span class="s">"editAction"</span> <span class="na">method=</span><span class="s">"input"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"edit"</span> <span class="na">class=</span><span class="s">"editAction"</span> <span class="na">method=</span><span class="s">"input"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/edit.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="summary">Summary</h2>
 

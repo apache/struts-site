@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -139,13 +138,12 @@ are mostly internal API development concerns.</p>
 <p>By default there isn’t much you have to do to use the new compilation abilities in OGNL.  Following is an example of compiling 
 a simple property expression and invoking it.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">SimpleObject</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleObject</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SimpleObject</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleObject</span><span class="o">();</span>
 <span class="n">OgnlContext</span> <span class="n">context</span> <span class="o">=</span>  <span class="o">(</span><span class="n">OgnlContext</span><span class="o">)</span> <span class="n">Ognl</span><span class="o">.</span><span class="na">createDefaultContext</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
 
 <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span>  <span class="o">(</span><span class="n">Node</span><span class="o">)</span> <span class="n">Ognl</span><span class="o">.</span><span class="na">compileExpression</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">root</span><span class="o">,</span> <span class="s">"user.name"</span><span class="o">);</span>
 <span class="n">String</span> <span class="n">userName</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">getAccessor</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">root</span><span class="o">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>You’ll notice that this example references the new <code class="highlighter-rouge">ognl.enhance.ExpressionAccessor</code> class.  This is the interface used 
 to create the enhanced expression versions of any given expression via javassist and should be used to set/get expression 
@@ -189,7 +187,7 @@ expressions.</li>
 <p>If you look at the <code class="highlighter-rouge">ExpressionEvaluator</code> source you’ll see a block of initialization where the <code class="highlighter-rouge">HiveMindExpressionCompiler</code>
 and <code class="highlighter-rouge">OgnlContext</code> pools are setup:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">OgnlRuntime</span><span class="o">.</span><span class="na">setCompiler</span><span class="o">(</span><span class="k">new</span> <span class="n">HiveMindExpressionCompiler</span><span class="o">(</span><span class="n">_classFactory</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">OgnlRuntime</span><span class="o">.</span><span class="na">setCompiler</span><span class="o">(</span><span class="k">new</span> <span class="n">HiveMindExpressionCompiler</span><span class="o">(</span><span class="n">_classFactory</span><span class="o">));</span>
 
 <span class="n">_contextPool</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GenericObjectPool</span><span class="o">(</span><span class="k">new</span> <span class="n">PoolableOgnlContextFactory</span><span class="o">(</span><span class="n">_ognlResolver</span><span class="o">,</span> <span class="n">_typeConverter</span><span class="o">));</span>
 
@@ -197,8 +195,7 @@ and <code class="highlighter-rouge">OgnlContext</code> pools are setup:</p>
 <span class="n">_contextPool</span><span class="o">.</span><span class="na">setMaxIdle</span><span class="o">(-</span><span class="mi">1</span><span class="o">);</span>
 <span class="n">_contextPool</span><span class="o">.</span><span class="na">setMinEvictableIdleTimeMillis</span><span class="o">(</span><span class="n">POOL_MIN_IDLE_TIME</span><span class="o">);</span>
 <span class="n">_contextPool</span><span class="o">.</span><span class="na">setTimeBetweenEvictionRunsMillis</span><span class="o">(</span><span class="n">POOL_SLEEP_TIME</span><span class="o">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Some things like null handlers/property accessor configuration has been left out but you should have enough there to get 
 a good idea of what is going on.  Because creating new OgnlContext objects for every expression evaluation can be needlessly 
@@ -206,10 +203,9 @@ expensive Tapestry uses the Apache commons-pool library to manage pooling of the
 you do the same where you can. You will also notice in other portions of the source some new method calls made on 
 <code class="highlighter-rouge">OgnlRuntime</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">OgnlRuntime</span><span class="o">.</span><span class="na">clearCache</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">OgnlRuntime</span><span class="o">.</span><span class="na">clearCache</span><span class="o">();</span>
 <span class="n">Introspector</span><span class="o">.</span><span class="na">flushCaches</span><span class="o">();</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The OgnlRuntime class stores static <code class="highlighter-rouge">Map</code>-like instances of reflection meta cache information for all objects evaluated 
 in OGNL expressions.  The new <code class="highlighter-rouge">clearCache</code> method clears these caches out as the memory footprint can get quite large 
@@ -242,9 +238,8 @@ kinds of expressions until it either gets a fatal exception thrown or the full e
 For example, the following expression would throw a <code class="highlighter-rouge">UnsupportedCompilationException</code> if the “user” object returned 
 was null - resulting in no direct compilation being done at all:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>"user.firstName"
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"user.firstName"
+</code></pre></div></div>
 
 <p>That doesn’t mean that the user object might not be resolvable the next time this expression is invoked though, 
 so the next time the compiler tries it may succeed in which case the whole expression is enhanced and the new <code class="highlighter-rouge">ExpressionAccessor</code>
@@ -255,24 +250,24 @@ instances a <code class="highlighter-rouge">ExpressionAccessor</code> class inst
 java object expressions being compiled the get/set methods on the instance just call back to the standard OGNL 
 getValue/setValue methods:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Object</span> <span class="nf">get</span><span class="p">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">root</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Object</span> <span class="nf">get</span><span class="o">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">root</span><span class="o">)</span>
 <span class="o">{</span>
   <span class="k">return</span> <span class="n">_node</span><span class="o">.</span><span class="na">getValue</span><span class="o">(</span><span class="err">$</span><span class="mi">1</span><span class="o">,</span> <span class="err">$</span><span class="mi">2</span><span class="o">);</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">$1, $2</code> references are Javassist constructs which allow you to specify the first and second argument passed in 
 to the calling method.</p>
 
 <h2 id="expressionbinding">ExpressionBinding</h2>
 
-<p>As stated previously, this class represents a single OGNL expression in Tapestry when used directly in html templates 
-- such as:</p>
+<p>As stated previously, this class represents a single OGNL expression in Tapestry when used directly in html templates</p>
+<ul>
+  <li>such as:</li>
+</ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">jwcid=</span><span class="s">"@Input"</span> <span class="na">value=</span><span class="s">"ognl:user.firstName"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">jwcid=</span><span class="s">"@Input"</span> <span class="na">value=</span><span class="s">"ognl:user.firstName"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>What you will want to examine in this class is how it deals with incrementally attempting expression evaluations using 
 the local members <code class="highlighter-rouge">_writeFailed, _accessor</code>.  Looking through the source of this implementation will probably be the best 
@@ -285,7 +280,7 @@ that a write statement may never happen.</p>
 with in terms of having to write new code.  In this specific instance there are three new <code class="highlighter-rouge">PropertyAccessor</code> methods 
 you must implement in order to compile your expressions:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Class</span> <span class="nf">getPropertyClass</span><span class="p">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Object</span> <span class="n">name</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Class</span> <span class="nf">getPropertyClass</span><span class="o">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Object</span> <span class="n">name</span><span class="o">)</span>
 <span class="o">{</span>
   <span class="n">IBeanProvider</span> <span class="n">provider</span> <span class="o">=</span> <span class="o">(</span><span class="n">IBeanProvider</span><span class="o">)</span><span class="n">target</span><span class="o">;</span>
   <span class="n">String</span> <span class="n">beanName</span> <span class="o">=</span> <span class="o">((</span><span class="n">String</span><span class="o">)</span><span class="n">name</span><span class="o">).</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"\""</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
@@ -296,7 +291,7 @@ you must implement in order to compile your expressions:</p>
   <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getPropertyClass</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSourceAccessor</span><span class="p">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Object</span> <span class="n">name</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSourceAccessor</span><span class="o">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Object</span> <span class="n">name</span><span class="o">)</span>
 <span class="o">{</span>
    <span class="n">IBeanProvider</span> <span class="n">provider</span> <span class="o">=</span> <span class="o">(</span><span class="n">IBeanProvider</span><span class="o">)</span><span class="n">target</span><span class="o">;</span>
    <span class="n">String</span> <span class="n">beanName</span> <span class="o">=</span> <span class="o">((</span><span class="n">String</span><span class="o">)</span><span class="n">name</span><span class="o">).</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"\""</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
@@ -316,12 +311,11 @@ you must implement in order to compile your expressions:</p>
    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getSourceAccessor</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSourceSetter</span><span class="p">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Object</span> <span class="n">name</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSourceSetter</span><span class="o">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Object</span> <span class="n">name</span><span class="o">)</span>
 <span class="o">{</span>
-  <span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedCompilationException</span><span class="o">(</span><span class="s">"Can't set beans on IBeanProvider."</span><span class="o">);</span>
+  <span class="k">throw</span> <span class="k">new</span> <span class="nf">UnsupportedCompilationException</span><span class="o">(</span><span class="s">"Can't set beans on IBeanProvider."</span><span class="o">);</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Although this example may not provide with all of the possible use cases you may need to learn to properly implement 
 these methods in your own <code class="highlighter-rouge">PropertyAccessor</code> implementations - the built in OGNL versions like <code class="highlighter-rouge">ObjectPropertyAccessor</code>, 
@@ -330,10 +324,9 @@ these methods in your own <code class="highlighter-rouge">PropertyAccessor</code
 <p>The most important part of the above logic you will want to look at is in how the new <code class="highlighter-rouge">OgnlContext</code> methods for setting 
 object/accessor types are being set:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="na">setCurrentAccessor</span><span class="o">(</span><span class="n">IBeanProvider</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="na">setCurrentAccessor</span><span class="o">(</span><span class="n">IBeanProvider</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 <span class="n">context</span><span class="o">.</span><span class="na">setCurrentType</span><span class="o">(</span><span class="n">type</span><span class="o">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This meta information is used by the <code class="highlighter-rouge">OgnlExpressionCompiler</code> to correctly cast your specific expression object types 
 during compilation. This process of casting/converting in to and out of native types is the most complicated part of this 
@@ -342,17 +335,15 @@ new logic and also the source of the greatest number of bugs reported in the OGN
 <p>In this property accessor example the goal is to turn general statements like <code class="highlighter-rouge">beans.emailValidator</code> in to their pure 
 source form - which would look something like this when all is said and done:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">((</span><span class="n">ValidatingBean</span><span class="o">)</span><span class="n">beanProvider</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"emailValidator"</span><span class="o">))</span>
-</code></pre>
-</div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">((</span><span class="n">ValidatingBean</span><span class="o">)</span><span class="n">beanProvider</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"emailValidator"</span><span class="o">))</span>
+</code></pre></div></div>
 
 <p>There is also the ever important cast handling which you must do:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">Class</span> <span class="n">type</span> <span class="o">=</span> <span class="n">OgnlRuntime</span><span class="o">.</span><span class="na">getCompiler</span><span class="o">().</span><span class="na">getInterfaceClass</span><span class="o">(</span><span class="n">provider</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="n">beanName</span><span class="o">).</span><span class="na">getClass</span><span class="o">());</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Class</span> <span class="n">type</span> <span class="o">=</span> <span class="n">OgnlRuntime</span><span class="o">.</span><span class="na">getCompiler</span><span class="o">().</span><span class="na">getInterfaceClass</span><span class="o">(</span><span class="n">provider</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="n">beanName</span><span class="o">).</span><span class="na">getClass</span><span class="o">());</span>
 
 <span class="n">ExpressionCompiler</span><span class="o">.</span><span class="na">addCastString</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="s">"(("</span> <span class="o">+</span> <span class="n">type</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">")"</span><span class="o">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In this example the <code class="highlighter-rouge">PropertyAccessor</code> is trying to determine the class type and manually adding the cast string for 
 the specific type to the overall statement by invoking the utility method <code class="highlighter-rouge">addCastString(OgnlContext, String)</code> on 
@@ -360,12 +351,11 @@ the specific type to the overall statement by invoking the utility method <code 
 where the more preferred way to do this kind of logic would be something like this: (taken from the OGNL 
 <code class="highlighter-rouge">ObjectPropertyAccessor</code> implementation)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">Method</span> <span class="n">m</span> <span class="o">=</span> <span class="o">...(</span><span class="n">various</span> <span class="n">reflection</span> <span class="n">gynamistics</span> <span class="n">used</span> <span class="n">to</span> <span class="n">find</span> <span class="n">a</span> <span class="n">java</span><span class="o">.</span><span class="na">reflect</span><span class="o">.</span><span class="na">Method</span> <span class="n">instance</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Method</span> <span class="n">m</span> <span class="o">=</span> <span class="o">...(</span><span class="n">various</span> <span class="n">reflection</span> <span class="n">gynamistics</span> <span class="n">used</span> <span class="n">to</span> <span class="n">find</span> <span class="n">a</span> <span class="n">java</span><span class="o">.</span><span class="na">reflect</span><span class="o">.</span><span class="na">Method</span> <span class="n">instance</span><span class="o">)</span>
 
 <span class="n">context</span><span class="o">.</span><span class="na">setCurrentType</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getReturnType</span><span class="o">());</span>
 <span class="n">context</span><span class="o">.</span><span class="na">setCurrentAccessor</span><span class="o">(</span><span class="n">OgnlRuntime</span><span class="o">.</span><span class="na">getCompiler</span><span class="o">().</span><span class="na">getSuperOrInterfaceClass</span><span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">m</span><span class="o">.</span><span class="na">getDeclaringClass</span><span class="o">()));</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>When dealing with method calls it is very important that you do this specific kind of type setting on the <code class="highlighter-rouge">OgnlContext</code> 
 class so that the casting done on your statements (which happens outside of the <code class="highlighter-rouge">ObjectPropertyAccessor</code> in this instance) 
@@ -373,15 +363,14 @@ can be done on the highest level interface defining that method.  This becomes i
 that you would like to re-use against different object instances.  For example, suppose we had an ognl expression like 
 this (for Tapestry):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>user.firstName
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user.firstName
+</code></pre></div></div>
 
 <p>and the object it was compiled against was an instance of something looking like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="n">LoginPage</span> <span class="kd">extends</span> <span class="n">BasePage</span> <span class="kd">implements</span> <span class="n">UserPermissions</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="n">LoginPage</span> <span class="kd">extends</span> <span class="n">BasePage</span> <span class="kd">implements</span> <span class="n">UserPermissions</span> <span class="o">{</span>
 
-  <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">User</span> <span class="n">getUser</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">User</span> <span class="nf">getUser</span><span class="o">();</span>
 
 <span class="o">}</span>
 
@@ -391,36 +380,32 @@ this (for Tapestry):</p>
  * User.
  */</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserPermissions</span> <span class="o">{</span>
-   <span class="n">User</span> <span class="n">getUser</span><span class="o">();</span>
+   <span class="n">User</span> <span class="nf">getUser</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><code class="highlighter-rouge">BasePage</code> is a Tapestry specific class which is unimportant in this example.  What is important to know is that if we 
 had done something like this in the previous context setting example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="na">setCurrentType</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getReturnType</span><span class="o">());</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="na">setCurrentType</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getReturnType</span><span class="o">());</span>
 <span class="n">context</span><span class="o">.</span><span class="na">setCurrentAccessor</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getDeclaringClass</span><span class="o">());</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>It would have resulted in a compiled expression of:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">get</span><span class="p">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">get</span><span class="o">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">return</span> <span class="o">((</span><span class="n">LoginPage</span><span class="o">)</span><span class="n">root</span><span class="o">).</span><span class="na">getUser</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This is undesirable in situations where you would like to re-use OGNL expressions across many different class instances 
 (which is what Tapestry does via the <code class="highlighter-rouge">ExpressionCacheImpl</code> listed above).  The better/more re-usable compiled version 
 should really look like:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">get</span><span class="p">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">get</span><span class="o">(</span><span class="n">OgnlContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Object</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">return</span> <span class="o">((</span><span class="n">UserPermissions</span><span class="o">)</span><span class="n">root</span><span class="o">).</span><span class="na">getUser</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>These are the more delicate parts of the compiler API that the majority of people will need to worry about during any 
 integration efforts.</p>
@@ -448,9 +433,8 @@ expression evaluation during development and save compilation for production env
 worried about giving people false positives when testing their applications.  Meaning - something may evaluate just fine 
 when using</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">Ognl</span><span class="o">.</span><span class="na">getValue</span><span class="o">(</span><span class="n">OgnlContext</span><span class="o">,</span> <span class="n">Object</span> <span class="n">root</span><span class="o">,</span> <span class="n">String</span> <span class="n">expression</span>
-</code></pre>
-</div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Ognl</span><span class="o">.</span><span class="na">getValue</span><span class="o">(</span><span class="n">OgnlContext</span><span class="o">,</span> <span class="n">Object</span> <span class="n">root</span><span class="o">,</span> <span class="n">String</span> <span class="n">expression</span>
+</code></pre></div></div>
 
 <p>but fail completely when they deploy their app to production and the compiler kicks in.  If you framework doesn’t handle 
 separate modes or have this kind of state set up it is something to keep in mind.  The number of JIRA issues reported 

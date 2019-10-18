@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -148,51 +147,47 @@
   <li>Include the struts-portlet-tiles-plugin as a dependency in your web application.  If you are using maven2, the dependency configuration will be similar to:</li>
 </ol>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nt">&lt;dependency&gt;</span>
   <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>struts2-portlet-tiles-plugin<span class="nt">&lt;/artifactId&gt;</span>
   <span class="nt">&lt;version&gt;</span>${struts2.version}<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ol start="2">
   <li>All package definitions which require tiles support must either extend the struts-portlet-tiles-default package or must register the <em>Tiles Result</em>  type definition dedicated for Portlets.</li>
 </ol>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nt">&lt;result-types&gt;</span>
   <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"tiles"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.tiles.PortletTilesResult"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/result-types&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ol start="3">
   <li>and dedicated action to support Tiles in portlet environment</li>
 </ol>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"tilesDirect"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.portlet.dispatcher.DirectRenderFromEventAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"tiles"</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>${location}<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ol start="4">
   <li>Configure your actions to utilize a tiles definition:</li>
 </ol>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"sample"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.tiles.example.SamplePortletAction"</span> <span class="nt">&gt;</span>
   <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"tiles"</span><span class="nt">&gt;</span>tilesWorks<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="installation">Installation</h2>
 

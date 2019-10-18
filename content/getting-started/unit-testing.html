@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -179,12 +178,11 @@ methods to be run. In the example application this action is register.</p>
 
 <p><strong>struts.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"register"</span> <span class="na">class=</span><span class="s">"org.apache.struts.register.action.Register"</span> <span class="na">method=</span><span class="s">"execute"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"register"</span> <span class="na">class=</span><span class="s">"org.apache.struts.register.action.Register"</span> <span class="na">method=</span><span class="s">"execute"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>/thankyou.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/register.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Remember the validate method will be called automatically by the framework before calling the execute method. If validation 
 fails the Struts framework will return <code class="highlighter-rouge">input</code>. If there are no validation errors then the framework will call the execute 
@@ -205,8 +203,8 @@ to set these values in the request scope.</p>
 
 <p><strong>testExecuteValidationPasses method from RegisterTest class</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteValidationPasses</span><span class="p">(</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteValidationPasses</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.firstName"</span><span class="o">,</span> <span class="s">"Bruce"</span><span class="o">);</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.lastName"</span><span class="o">,</span> <span class="s">"Phillips"</span><span class="o">);</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.email"</span><span class="o">,</span> <span class="s">"bphillips@ku.edu"</span><span class="o">);</span>
@@ -221,8 +219,7 @@ to set these values in the request scope.</p>
 
     <span class="n">assertEquals</span><span class="o">(</span><span class="s">"The execute method did not return "</span> <span class="o">+</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">SUCCESS</span> <span class="o">+</span> <span class="s">" but should have."</span><span class="o">,</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The first statements in the test method use the request object to set the values of any request parameters. These simulate 
 the values the user would enter into the form fields. Note how the first argument to setParameter is the same as the value 
@@ -254,8 +251,8 @@ for that field.</p>
 
 <p><strong>testExecuteValidationFailsMissingFirstName method from RegisterTest class</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteValidationFailsMissingFirstName</span><span class="p">(</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteValidationFailsMissingFirstName</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
     <span class="c1">//request.setParameter("personBean.firstName", "Bruce");</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.lastName"</span><span class="o">,</span> <span class="s">"Phillips"</span><span class="o">);</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.email"</span><span class="o">,</span> <span class="s">"bphillips@ku.edu"</span><span class="o">);</span>
@@ -270,8 +267,7 @@ for that field.</p>
     
     <span class="n">assertEquals</span><span class="o">(</span><span class="s">"The execute method did not return "</span> <span class="o">+</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">INPUT</span> <span class="o">+</span> <span class="s">" but should have."</span><span class="o">,</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">INPUT</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In the last assertEquals statement my test checks that the Struts 2 framework returned <code class="highlighter-rouge">input</code> as that is what the Struts 2 
 framework will return if the validation adds a field or action error.</p>

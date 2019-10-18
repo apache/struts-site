@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -139,13 +138,13 @@
   <li><a href="#jsp-tag-support" id="markdown-toc-jsp-tag-support">JSP Tag Support</a></li>
 </ul>
 
-<p>FreeMarker tags are extensions of the generic <a href="struts-tags.html">Struts Tags</a> provided by the framework. You can jump 
+<p>FreeMarker tags are extensions of the generic <a href="struts-tags">Struts Tags</a> provided by the framework. You can jump 
 right in just by knowing the generic structure in which the tags can be accessed:</p>
 
 <pre><code class="language-ftl">&lt;@s.tag&gt; ...&lt;/@s.tag&gt;
 </code></pre>
 
-<p>, where <code class="highlighter-rouge">tag</code> is any of the <a href="tags.html">tags</a> supported by the framework.</p>
+<p>, where <code class="highlighter-rouge">tag</code> is any of the <a href="tags">tags</a> supported by the framework.</p>
 
 <p>For example, in JSP you might create a form using Struts tags.</p>
 
@@ -174,7 +173,7 @@ pages even easier to code. You can even invoke third-party JSP taglibs as if the
 
 <h2 id="attributes-and-parameters">Attributes and Parameters</h2>
 
-<p>Unlike older versions of JSP (in which the <a href="jsp-tags.html">JSP Tags</a> are based), FreeMarker allows for <em>dynamic attributes</em>, 
+<p>Unlike older versions of JSP (in which the <a href="jsp-tags">JSP Tags</a> are based), FreeMarker allows for <em>dynamic attributes</em>, 
 much like JSP 2.0. You can supply attributes to the tags that the tag doesn’t explicitedly support. Those attributes 
 that cannot be applied directly to the tag object will be set to the tag’s general-purpose <code class="highlighter-rouge">parameters</code> Map.</p>
 
@@ -219,16 +218,16 @@ that as the <code class="highlighter-rouge">value</code> attribute.</p>
 
 <h2 id="attribute-types">Attribute Types</h2>
 
-<p>Remember that all tag attributes must first be set as Strings - they are then later evaluated (using <a href="ognl.html">OGNL</a>) 
+<p>Remember that all tag attributes must first be set as Strings - they are then later evaluated (using <a href="ognl">OGNL</a>) 
 to a different type, such as List, int, or boolean. This generally works just fine, but it can be limiting when using 
 FreeMarker which provides more advanced ways to apply attributes. Suppose the following example:</p>
 
-<pre><code class="language-ftl">&lt;@s.select label="Foo label - %{foo}" name="%{name}" list="%1"/&gt;
+<pre><code class="language-ftl">&lt;@s.select label="Foo label - %{foo}" name="%{name}" list="%{1, 2, 3}"/&gt;
 </code></pre>
 
 <p>What will happen here is that each attribute will be evaluated to a String as best it can. This may involve calling the
 <code class="highlighter-rouge">toString</code> method on the internal FreeMarker objects. In this case, all objects will end up being exactly what you would 
-expect. Then, when the tag runs, the <code class="highlighter-rouge">list</code> attribute will be converted from a String to a List using <a href="ogn.html">OGNL</a>’s 
+expect. Then, when the tag runs, the <code class="highlighter-rouge">list</code> attribute will be converted from a String to a List using <a href="ognl">OGNL</a>’s 
 advanced collection support.</p>
 
 <p>But suppose you wish to use FreeMarker’s list or hash support instead? You can do this:</p>
@@ -254,13 +253,12 @@ to emulate a JSP taglib container.</p>
 
 <p><strong>Adding JspSupportSerlvet to web.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;servlet&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;servlet&gt;</span>
     <span class="nt">&lt;servlet-name&gt;</span>JspSupportServlet<span class="nt">&lt;/servlet-name&gt;</span>
     <span class="nt">&lt;servlet-class&gt;</span>org.apache.struts2.views.JspSupportServlet<span class="nt">&lt;/servlet-class&gt;</span>
     <span class="nt">&lt;load-on-startup&gt;</span>1<span class="nt">&lt;/load-on-startup&gt;</span>
 <span class="nt">&lt;/servlet&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Once you’ve done that, you can simply add something like this in your templates:</p>
 

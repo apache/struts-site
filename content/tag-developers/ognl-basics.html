@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -148,11 +147,10 @@ the assumption there is only one “root”, Struts’s ValueStack concept requi
 “foo” -&gt; foo and “bar” -&gt; bar and that the foo object is also configured to be the single <strong>root</strong> object. 
 The following code illustrates how OGNL deals with these three situations:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>#foo.blah // returns foo.getBlah()
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#foo.blah // returns foo.getBlah()
 #bar.blah // returns bar.getBlah()
 blah      // returns foo.getBlah() because foo is the root
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>What this means is that OGNL allows many objects in the context, but unless the object you are trying to access is the root, 
 it must be prepended with a namespaces such as @bar. Now let’s talk about how Struts is a little different…</p>
@@ -168,20 +166,18 @@ you are looking for.</p>
 a “species” property, and Person has a “salary” property. Animal is on the top of the stack, and Person is below it. 
 The follow code fragments help you get an idea of what is going on here:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>species    // call to animal.getSpecies()
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>species    // call to animal.getSpecies()
 salary     // call to person.getSalary()
 name       // call to animal.getName() because animal is on the top
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In the last example, there was a tie and so the animal’s name was returned. Usually this is the desired effect, but 
 sometimes you want the property of a lower-level object. To do this, XWork has added support for indexes on the ValueStack. 
 All you have to do is:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[0].name   // call to animal.getName()
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0].name   // call to animal.getName()
 [1].name   // call to person.getName()
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>With expression like <code class="highlighter-rouge">[0] ... [3]</code> etc. Struts will cut the stack and still return back a CompoundRoot object. To get 
 the top of that particular stack cut, use <code class="highlighter-rouge">[0].top</code></p>
@@ -214,15 +210,14 @@ the top of that particular stack cut, use <code class="highlighter-rouge">[0].to
 
 <p>OGNL’s static access looks like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@some.package.ClassName@FOO_PROPERTY
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@some.package.ClassName@FOO_PROPERTY
 @some.package.ClassName@someMethod()
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>However, Struts allows you to avoid having to specify the full package name and call static properties and methods of your 
 action classes using the “vs” prefix:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;at:var at:name="vs" /&gt;FOO_PROPERTY
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;at:var at:name="vs" /&gt;FOO_PROPERTY
 &lt;at:var at:name="vs" /&gt;someMethod()
 
 &lt;at:var at:name="vs1" /&gt;FOO_PROPERTY
@@ -230,8 +225,7 @@ action classes using the “vs” prefix:</p>
 
 &lt;at:var at:name="vs2" /&gt;BAR_PROPERTY
 &lt;at:var at:name="vs2" /&gt;someOtherMethod()
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>“vs” stands for “value stack”. The important thing to note here is that if the class name you specify is just “vs”, 
 the class for the object on the top of the stack is used. If you specify a number after the “vs” string, an object’s 

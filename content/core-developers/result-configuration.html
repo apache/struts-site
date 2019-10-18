@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -144,13 +143,12 @@ tokens are defined by the <code class="highlighter-rouge">ActionSupport</code> b
 
 <p><strong>Predefined result names</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>String SUCCESS = "success";
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String SUCCESS = "success";
 String NONE    = "none";
 String ERROR   = "error";
 String INPUT   = "input";
 String LOGIN   = "login";
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Of course, applications can define other result tokens to match specific cases.</p>
 
@@ -174,11 +172,10 @@ another, the “child” package can set its own default result, or inherit one 
 
 <p><strong>Setting a default Result Type</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result-types&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result-types&gt;</span>
    <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"dispatcher"</span> <span class="na">default=</span><span class="s">"true"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.ServletDispatcherResult"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/result-types&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If a <code class="highlighter-rouge">type</code> attribute is not specified, the framework will use the default <code class="highlighter-rouge">dispatcher</code> type, which forwards to another 
 web resource. If the resource is a JavaServer Page, then the container will render it, using its JSP engine.</p>
@@ -189,54 +186,49 @@ web resource. If the resource is a JavaServer Page, then the container will rend
 
 <p><strong>Result element without defaults</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>/ThankYou.jsp<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>A Result element using some defaults</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>/ThankYou.jsp<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">param</code> tag sets a property on the Result object. The most commonly-set property is <code class="highlighter-rouge">location</code>, which usually 
 specifies the path to a web resources. The <code class="highlighter-rouge">param</code> attribute is another intelligent default.</p>
 
 <p><strong>Result element using more defaults</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result&gt;</span>/ThankYou.jsp<span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result&gt;</span>/ThankYou.jsp<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
 
 <p>Mixing results with intelligent defaults with other results makes it easier to see the “critical path”.</p>
 
 <p><strong>Multiple Results</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"Hello"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"Hello"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result&gt;</span>/hello/Result.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"error"</span><span class="nt">&gt;</span>/hello/Error.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/hello/Input.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>A special “other” result can be configured by adding a result with <code class="highlighter-rouge">name="*"</code>. This result will only be selected if no 
 result is found with a matching name.</p>
 
 <p><strong>‘*’ Other Result</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"Hello"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"Hello"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result&gt;</span>/hello/Result.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"error"</span><span class="nt">&gt;</span>/hello/Error.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/hello/Input.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"*"</span><span class="nt">&gt;</span>/hello/Other.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>The <code class="highlighter-rouge">name="*"</code> is <strong>not</strong> a wildcard pattern, it is a special name that is only selected if an exact match is not found.</p>
@@ -250,12 +242,11 @@ result is found with a matching name.</p>
 
 <p>It is possible to define multiple names for the same result:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"save"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"save"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result&gt;</span>success.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"error, input"</span><span class="nt">&gt;</span>input-form.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Such functionality was added in Struts 2.5</p>
 
@@ -270,13 +261,12 @@ look for a local result nested in the action. If a local match is not found, the
 
 <p><strong>Defining global results</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;global-results&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;global-results&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"error"</span><span class="nt">&gt;</span>/Error.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"invalid.token"</span><span class="nt">&gt;</span>/Error.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"login"</span> <span class="na">type=</span><span class="s">"redirectAction"</span><span class="nt">&gt;</span>Logon!input<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/global-results&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>For more about results, see <a href="result-types.html">Result Types</a>.</p>
@@ -293,23 +283,21 @@ the Action’s properties, just like the Struts 2 tag libraries. So given the fo
 
 <p><strong>FragmentAction implementation</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">String</span> <span class="n">nextAction</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">String</span> <span class="n">nextAction</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">getNextAction</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">getNextAction</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">nextAction</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>you might define a result like this:</p>
 
 <p><strong>FragmentAction configuration</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"fragment"</span> <span class="na">class=</span><span class="s">"FragmentAction"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"fragment"</span> <span class="na">class=</span><span class="s">"FragmentAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"next"</span> <span class="na">type=</span><span class="s">"redirectAction"</span><span class="nt">&gt;</span>${nextAction}<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If a <code class="highlighter-rouge">FragmentAction</code> method returns <code class="highlighter-rouge">next</code> the actual <em>value</em> of that result will be whatever is in <code class="highlighter-rouge">FragmentAction</code>’s 
 <code class="highlighter-rouge">nextAction</code> property. So <code class="highlighter-rouge">nextAction</code> may be computed based on whatever state information necessary then passed 
@@ -321,13 +309,12 @@ at runtime to <code class="highlighter-rouge">next</code>’s <code class="highl
 
 <p>Instead of configuring results and returning the name, it is possible to return a result object:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Result</span> <span class="nf">runAction</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Result</span> <span class="nf">runAction</span><span class="o">()</span> <span class="o">{</span>
 	<span class="n">ServletDispatcherResult</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServletDispatcherResult</span><span class="o">();</span>
 	<span class="n">result</span><span class="o">.</span><span class="na">setLocation</span><span class="o">(</span><span class="s">"input-form.jsp"</span><span class="o">);</span>
 	<span class="k">return</span> <span class="n">result</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </section>
 </article>

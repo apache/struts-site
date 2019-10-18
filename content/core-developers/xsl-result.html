@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -137,11 +136,10 @@
 <p>XSLTResult uses XSLT to transform an action object to XML. The recent version has been specifically modified to deal 
 with Xalan flaws. When using Xalan you may notice that even though you have a very minimal stylesheet like this one</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">"/result"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">"/result"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;result/&gt;</span>
 <span class="nt">&lt;/xsl:template&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Xalan would still iterate through every property of your action and all its descendants.</p>
 
@@ -153,22 +151,20 @@ to its internal DTM model before further processing.</p>
 If it notices that some object’s property was already walked through, it doesn’t go any deeper. Say you have two objects, 
 x and y, with the following properties set (pseudocode):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>x.y = y;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x.y = y;
 and
 y.x = x;
 action.x=x;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Due to that modification, the resulting XML document based on x would be:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result&gt;</span>
 <span class="nt">&lt;x&gt;</span>
 <span class="nt">&lt;y/&gt;</span>
 <span class="nt">&lt;/x&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Without it there would be endless <code class="highlighter-rouge">x/y/x/y/x/y/...</code> elements. The <code class="highlighter-rouge">XSLTResult</code> code tries also to deal with the fact 
 that DTM model is built in a manner that children are processed before siblings. The result is that if there is object 
@@ -191,7 +187,7 @@ to elements paths (xpath).</p>
     </body>
   </html>
 </xsl:template>
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 In the following example the XSLT result would only walk through action's properties without their childs. It would also 
 skip every property that has `hugeCollection` in their name. Element's path is first compared to `excludingPattern` - 
 if it matches it's no longer processed. Then it is compared to `matchingPattern` and processed only if there's a match.
@@ -202,18 +198,16 @@ if it matches it's no longer processed. Then it is compared to `matchingPattern`
   &lt;param name="matchingPattern"&gt;^/result/[^/*]$&lt;/param&gt;
   &lt;param name="excludingPattern"&gt;.*(hugeCollection).*&lt;/param&gt;
 &lt;/result&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In the following example the XSLT result would use the action’s user property instead of the action as it’s base document 
 and walk through it’s properties. The <code class="highlighter-rouge">exposedValue</code> uses an OGNL expression to derive it’s value.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"xslt"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"xslt"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"stylesheetLocation"</span><span class="nt">&gt;</span>foo.xslt<span class="nt">&lt;/param&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"exposedValue"</span><span class="nt">&gt;</span>${user}<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="parameters">Parameters</h2>
 
@@ -236,9 +230,8 @@ and walk through it’s properties. The <code class="highlighter-rouge">exposedV
 
 <h2 id="examples">Examples</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"xslt"</span><span class="nt">&gt;</span>foo.xslt<span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"xslt"</span><span class="nt">&gt;</span>foo.xslt<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
 
   </section>
 </article>

@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -138,16 +137,15 @@
 
 <p><strong>Interceptor.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Interceptor</span> <span class="kd">extends</span> <span class="n">Serializable</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Interceptor</span> <span class="kd">extends</span> <span class="n">Serializable</span> <span class="o">{</span>
 
-    <span class="kt">void</span> <span class="n">destroy</span><span class="o">();</span>
+    <span class="kt">void</span> <span class="nf">destroy</span><span class="o">();</span>
 
-    <span class="kt">void</span> <span class="n">init</span><span class="o">();</span>
+    <span class="kt">void</span> <span class="nf">init</span><span class="o">();</span>
 
-    <span class="n">String</span> <span class="n">intercept</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>
+    <span class="n">String</span> <span class="nf">intercept</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">init</code> method is called the after interceptor is instantiated and before calling <code class="highlighter-rouge">intercept</code>. This is the place 
 to allocate any resources used by the interceptor.</p>
@@ -183,7 +181,7 @@ methods are not going to be implemented.</p>
 <p>Interceptors are declared using the <code class="highlighter-rouge">&lt;interceptor/&gt;</code> element, nested inside the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> element. 
 Example from <code class="highlighter-rouge">struts-default.xml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
    ...
 
    <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
@@ -196,8 +194,7 @@ Example from <code class="highlighter-rouge">struts-default.xml</code>:</p>
 
    ...
 <span class="nt">&lt;/struts&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="example">Example</h3>
 
@@ -206,19 +203,18 @@ of the action to the current date:</p>
 
 <p><strong>Interceptor Example</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionInvocation</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionInvocation</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.interceptor.AbstractInterceptor</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleInterceptor</span> <span class="kd">extends</span> <span class="n">AbstractInterceptor</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">intercept</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">intercept</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
        <span class="n">MyAction</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="n">MyAction</span><span class="o">)</span><span class="n">invocation</span><span class="o">.</span><span class="na">getAction</span><span class="o">();</span>
        <span class="n">action</span><span class="o">.</span><span class="na">setDate</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">());</span>
        <span class="k">return</span> <span class="n">invocation</span><span class="o">.</span><span class="na">invoke</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </section>
 </article>

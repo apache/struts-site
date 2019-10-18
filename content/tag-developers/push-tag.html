@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -198,27 +197,25 @@
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"user"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"user"</span><span class="nt">&gt;</span>
      <span class="nt">&lt;s:propery</span> <span class="na">value=</span><span class="s">"firstName"</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;s:propery</span> <span class="na">value=</span><span class="s">"lastName"</span> <span class="nt">/&gt;</span>
  <span class="nt">&lt;/s:push&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <pre><code class="language-none"> Pushed user into the stack, and hence property tag could access user's properties
  (firstName, lastName etc) since user is now at the top of the stack
 
 </code></pre>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                              ----- (1)
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                              ----- (1)
        <span class="nt">&lt;s:bean</span> <span class="na">name=</span><span class="s">"jp.SomeBean"</span> <span class="na">var=</span><span class="s">"myBean"</span><span class="nt">/&gt;</span>        ----- (2)
           <span class="nt">&lt;s:param</span> <span class="na">name=</span><span class="s">"myParam"</span> <span class="na">value=</span><span class="s">"top"</span><span class="nt">/&gt;</span>        ----- (3)
        <span class="nt">&lt;/s:bean&gt;</span>
    <span class="nt">&lt;/s:push&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <pre><code class="language-none"> when in (1), myObject is at the top of the stack
  when in (2), jp.SomeBean is in the top of stack, also in stack's context with key myBean
@@ -226,14 +223,13 @@
 
 </code></pre>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                                       ---(A)
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                                       ---(A)
     <span class="nt">&lt;s:bean</span> <span class="na">name=</span><span class="s">"jp.SomeBean"</span> <span class="na">var=</span><span class="s">"myBean"</span><span class="nt">/&gt;</span>                   ---(B)
        <span class="nt">&lt;s:param</span> <span class="na">name=</span><span class="s">"myParam"</span> <span class="na">value=</span><span class="s">"top.mySomeOtherValue"</span><span class="nt">/&gt;</span>  ---(C)
     <span class="nt">&lt;/s:bean&gt;</span>
  <span class="nt">&lt;/s:push&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <pre><code class="language-none"> when in (A), myObject is at the top of the stack
  when in (B), jp.SomeBean is at the top of the stack, also in context with key myBean
@@ -241,14 +237,13 @@
 
 </code></pre>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                                 ---- (i)
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                                 ---- (i)
     <span class="nt">&lt;s:bean</span> <span class="na">name=</span><span class="s">"jp.SomeBean"</span> <span class="na">var=</span><span class="s">"myBean"</span><span class="nt">/&gt;</span>             ---- (ii)
        <span class="nt">&lt;s:param</span> <span class="na">name=</span><span class="s">"myParam"</span> <span class="na">value=</span><span class="s">"[1].top"</span><span class="nt">/&gt;</span>         -----(iii)
     <span class="nt">&lt;/s:bean&gt;</span>
  <span class="nt">&lt;/s:push&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <pre><code class="language-none"> when in (i), myObject is at the top of the stack
  when in (ii), jp.SomeBean is at the top of the stack, followed by myObject

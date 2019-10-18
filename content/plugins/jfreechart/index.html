@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -165,14 +164,13 @@
 
 <p><strong>Chart example in struts.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"viewModerationChart"</span> <span class="na">class=</span><span class="s">"myapp.actions.ViewModerationChartAction"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"viewModerationChart"</span> <span class="na">class=</span><span class="s">"myapp.actions.ViewModerationChartAction"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"chart"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"width"</span><span class="nt">&gt;</span>400<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"height"</span><span class="nt">&gt;</span>300<span class="nt">&lt;/param&gt;</span> 
   <span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In your Action class, provide a <code class="highlighter-rouge">getChart()</code> method that returns the chart to be rendered.  This method will be called by the chart result.</p>
 
@@ -180,11 +178,11 @@
 
 <p><strong>Struts Action that provides a chart</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ViewModerationChartAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ViewModerationChartAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
 
 	<span class="kd">private</span> <span class="n">JFreeChart</span> <span class="n">chart</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
 		<span class="c1">// chart creation logic...</span>
 		<span class="n">XYSeries</span> <span class="n">dataSeries</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XYSeries</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span> <span class="c1">//pass a key for this serie</span>
 		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
@@ -197,27 +195,26 @@
 
 		<span class="c1">// set my chart variable</span>
 		<span class="n">chart</span> <span class="o">=</span>
-			<span class="k">new</span> <span class="n">JFreeChart</span><span class="o">(</span>
+			<span class="k">new</span> <span class="nf">JFreeChart</span><span class="o">(</span>
 				<span class="s">"Moderation Function"</span><span class="o">,</span>
 				<span class="n">JFreeChart</span><span class="o">.</span><span class="na">DEFAULT_TITLE_FONT</span><span class="o">,</span>
-				<span class="k">new</span> <span class="n">XYPlot</span><span class="o">(</span>
+				<span class="k">new</span> <span class="nf">XYPlot</span><span class="o">(</span>
 					<span class="n">xyDataset</span><span class="o">,</span>
 					<span class="n">xAxis</span><span class="o">,</span>
 					<span class="n">yAxis</span><span class="o">,</span>
-					<span class="k">new</span> <span class="n">StandardXYItemRenderer</span><span class="o">(</span><span class="n">StandardXYItemRenderer</span><span class="o">.</span><span class="na">LINES</span><span class="o">)),</span>
+					<span class="k">new</span> <span class="nf">StandardXYItemRenderer</span><span class="o">(</span><span class="n">StandardXYItemRenderer</span><span class="o">.</span><span class="na">LINES</span><span class="o">)),</span>
 				<span class="kc">false</span><span class="o">);</span>
 		<span class="n">chart</span><span class="o">.</span><span class="na">setBackgroundPaint</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">awt</span><span class="o">.</span><span class="na">Color</span><span class="o">.</span><span class="na">white</span><span class="o">);</span>
 
 		<span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">JFreeChart</span> <span class="n">getChart</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">JFreeChart</span> <span class="nf">getChart</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">chart</span><span class="o">;</span>
 	<span class="o">}</span>
 
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="settings">Settings</h3>
 

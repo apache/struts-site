@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -593,34 +592,31 @@
 
 <p>Without attaching to an event, listening to a topic (used to make an Ajax call):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;sx:bind</span> <span class="na">href=</span><span class="s">"%{#ajaxTest}"</span> <span class="na">listenTopics=</span><span class="s">"/makecall"</span><span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;sx:bind</span> <span class="na">href=</span><span class="s">"%{#ajaxTest}"</span> <span class="na">listenTopics=</span><span class="s">"/makecall"</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;s:submit</span> <span class="na">onclick=</span><span class="s">"dojo.event.topic.publish('/makecall')"</span><span class="nt">/&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Attached to event ‘onclick’ on submit button:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">"indicator"</span> <span class="na">src=</span><span class="s">"${pageContext.request.contextPath}/images/indicator.gif"</span> <span class="na">alt=</span><span class="s">"Loading..."</span> <span class="na">style=</span><span class="s">"display:none"</span><span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">"indicator"</span> <span class="na">src=</span><span class="s">"${pageContext.request.contextPath}/images/indicator.gif"</span> <span class="na">alt=</span><span class="s">"Loading..."</span> <span class="na">style=</span><span class="s">"display:none"</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;sx:bind</span> <span class="na">id=</span><span class="s">"ex1"</span> <span class="na">href=</span><span class="s">"%{#ajaxTest}"</span> <span class="na">sources=</span><span class="s">"button"</span> <span class="na">targets=</span><span class="s">"div1"</span> <span class="na">events=</span><span class="s">"onclick"</span> <span class="na">indicator=</span><span class="s">"indicator"</span> <span class="nt">/&gt;</span>
  <span class="nt">&lt;s:submit</span> <span class="na">theme=</span><span class="s">"simple"</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"submit"</span> <span class="na">id=</span><span class="s">"button"</span><span class="nt">/&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Submit form:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;sx:bind</span> <span class="na">id=</span><span class="s">"ex3"</span> <span class="na">href=</span><span class="s">"%{#ajaxTest}"</span> <span class="na">sources=</span><span class="s">"chk1"</span> <span class="na">targets=</span><span class="s">"div1"</span> <span class="na">events=</span><span class="s">"onchange"</span> <span class="na">formId=</span><span class="s">"form1"</span> <span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;sx:bind</span> <span class="na">id=</span><span class="s">"ex3"</span> <span class="na">href=</span><span class="s">"%{#ajaxTest}"</span> <span class="na">sources=</span><span class="s">"chk1"</span> <span class="na">targets=</span><span class="s">"div1"</span> <span class="na">events=</span><span class="s">"onchange"</span> <span class="na">formId=</span><span class="s">"form1"</span> <span class="nt">/&gt;</span>
  <span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">"form1"</span><span class="nt">&gt;</span>
      <span class="nt">&lt;s:checkbox</span> <span class="na">name=</span><span class="s">"data"</span> <span class="na">label=</span><span class="s">"Hit me"</span> <span class="na">id=</span><span class="s">"chk1"</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;/form&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Using beforeNotifyTopics:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
  dojo.event.topic.subscribe("/before", function(event, widget){
      alert('inside a topic event. before request');
      //event: set event.cancel = true, to cancel request
@@ -631,12 +627,11 @@
  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">id=</span><span class="s">"button"</span><span class="nt">&gt;</span> 
  <span class="nt">&lt;sx:bind</span> <span class="na">id=</span><span class="s">"ex1"</span> <span class="na">href=</span><span class="s">"%{#ajaxTest}"</span> <span class="na">beforeNotifyTopics=</span><span class="s">"/before"</span> <span class="na">sources=</span><span class="s">"button"</span> <span class="na">events=</span><span class="s">"onclick"</span><span class="nt">/&gt;</span> 
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Using afterNotifyTopics and highlight:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
  dojo.event.topic.subscribe("/after", function(data, request, widget){
      alert('inside a topic event. after request');
      //data : text returned from request(the html)
@@ -648,12 +643,11 @@
  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">id=</span><span class="s">"button"</span><span class="nt">&gt;</span>
  <span class="nt">&lt;sx:bind</span> <span class="na">id=</span><span class="s">"ex1"</span> <span class="na">href=</span><span class="s">"%{#ajaxTest}"</span> <span class="na">highlightColor=</span><span class="s">"red"</span> <span class="na">afterNotifyTopics=</span><span class="s">"/after"</span> <span class="na">sources=</span><span class="s">"button"</span> <span class="na">events=</span><span class="s">"onclick"</span><span class="nt">/&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Using errorNotifyTopics and indicator:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
  dojo.event.topic.subscribe("/error", function(error, request, widget){
      alert('inside a topic event. on error');
      //error : error object (error.message has the error message)
@@ -666,8 +660,7 @@
  <span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">"ind1"</span> <span class="na">src=</span><span class="s">"${pageContext.request.contextPath}/images/indicator.gif"</span> <span class="na">style=</span><span class="s">"display:none"</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;sx:bind</span> <span class="na">href=</span><span class="s">"%{#ajaxTest}"</span> <span class="na">indicator=</span><span class="s">"ind1"</span> <span class="na">errorNotifyTopics=</span><span class="s">"/error"</span> <span class="na">sources=</span><span class="s">"button"</span> <span class="na">events=</span><span class="s">"onclick"</span><span class="nt">/&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
   </section>

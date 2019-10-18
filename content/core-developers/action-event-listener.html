@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -140,29 +139,27 @@ during processing the action.</p>
 <p>Right now there can be only one instance of <code class="highlighter-rouge">ActionEventListener</code> for the whole Struts2 application. You can configure 
 it via <code class="highlighter-rouge">struts.xml</code> by adding bean definition:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.ActionEventListener"</span> <span class="na">class=</span><span class="s">"com.demo.MyActionEventListener"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.ActionEventListener"</span> <span class="na">class=</span><span class="s">"com.demo.MyActionEventListener"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <h2 id="examples">Examples</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyActionEventListener</span> <span class="kd">implements</span> <span class="n">ActionEventListener</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyActionEventListener</span> <span class="kd">implements</span> <span class="n">ActionEventListener</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="n">Object</span> <span class="n">prepare</span><span class="o">(</span><span class="n">Object</span> <span class="n">action</span><span class="o">,</span> <span class="n">ValueStack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">prepare</span><span class="o">(</span><span class="n">Object</span> <span class="n">action</span><span class="o">,</span> <span class="n">ValueStack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">action</span> <span class="k">instanceof</span> <span class="n">MyBaseAction</span><span class="o">)</span> <span class="o">{</span>
             <span class="o">((</span><span class="n">MyBaseAction</span><span class="o">)</span><span class="n">action</span><span class="o">).</span><span class="na">setUserService</span><span class="o">(</span><span class="n">stack</span><span class="o">.</span><span class="na">findValue</span><span class="o">(</span><span class="s">"userService"</span><span class="o">));</span>
         <span class="o">}</span>
     <span class="o">}</span>
     
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">handleException</span><span class="o">(</span><span class="n">Throwable</span> <span class="n">t</span><span class="o">,</span> <span class="n">ValueStack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">handleException</span><span class="o">(</span><span class="n">Throwable</span> <span class="n">t</span><span class="o">,</span> <span class="n">ValueStack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">t</span> <span class="k">instanceof</span> <span class="n">MyBusinessException</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">stack</span><span class="o">.</span><span class="na">findString</span><span class="o">(</span><span class="s">"defaultBusinesResult"</span><span class="o">);</span>
         <span class="o">}</span>
         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </section>
 </article>

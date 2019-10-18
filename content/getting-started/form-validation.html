@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -178,7 +177,7 @@ Once we have the values we can employ logic to enforce our business rules.</p>
 
 <p><strong>validate method</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">validate</span><span class="p">(</span><span class="o">){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">validate</span><span class="o">(){</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">personBean</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">().</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">addFieldError</span><span class="o">(</span><span class="s">"personBean.firstName"</span><span class="o">,</span> <span class="s">"First name is required."</span><span class="o">);</span>
     <span class="o">}</span>
@@ -191,8 +190,7 @@ Once we have the values we can employ logic to enforce our business rules.</p>
         <span class="n">addFieldError</span><span class="o">(</span><span class="s">"personBean.age"</span><span class="o">,</span> <span class="s">"Age is required and must be 18 or older"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>When the user presses the submit button on the register form, Struts 2 will transfer the user’s input to the personBean’s 
 instance fields. Then Struts 2 will automatically execute the validate method. If any of the if statements are true, 
@@ -208,9 +206,8 @@ we will want to redisplay the web page that has the form and include in the form
 
 <p>To handle the return value of <code class="highlighter-rouge">input</code> we need to add the following result to our action node in <code class="highlighter-rouge">struts.xml</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/register.jsp<span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/register.jsp<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
 
 <p>The above result node goes just after the success result node for the register action and before the closing of the action node.</p>
 
@@ -223,9 +220,8 @@ the error applies and the second is the error message to display above that form
 
 <p>So the following <code class="highlighter-rouge">addFieldError</code> method call:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">addFieldError</span><span class="o">(</span><span class="s">"personBean.firstName"</span><span class="o">,</span> <span class="s">"First name is required."</span><span class="o">)</span>
-</code></pre>
-</div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">addFieldError</span><span class="o">(</span><span class="s">"personBean.firstName"</span><span class="o">,</span> <span class="s">"First name is required."</span><span class="o">)</span>
+</code></pre></div></div>
 
 <p>will cause the message <em>First name is required</em> to be displayed above the <code class="highlighter-rouge">firstName</code> field on the form.</p>
 

@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -142,7 +141,7 @@
 
 <p><strong>portlet.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 
 <span class="nt">&lt;portlet-app</span> <span class="na">id=</span><span class="s">"my-portlet-app"</span>
 	<span class="na">xmlns=</span><span class="s">"http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"</span>
@@ -160,8 +159,7 @@
 
     <span class="nt">&lt;/portlet&gt;</span>
 <span class="nt">&lt;/portlet-app&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="portlet-init-parameters">Portlet Init Parameters</h3>
 
@@ -218,7 +216,7 @@
 
 <p><strong>portlet.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;init-param&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;init-param&gt;</span>
     <span class="c">&lt;!-- Portlet namespace --&gt;</span>
     <span class="nt">&lt;name&gt;</span>portletNamespace<span class="nt">&lt;/name&gt;</span>
     <span class="nt">&lt;value&gt;</span>/portletA<span class="nt">&lt;/value&gt;</span>
@@ -233,8 +231,7 @@
     <span class="nt">&lt;name&gt;</span>defaultViewAction<span class="nt">&lt;/name&gt;</span>
     <span class="nt">&lt;value&gt;</span>index<span class="nt">&lt;/value&gt;</span>
 <span class="nt">&lt;/init-param&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This snippet from <code class="highlighter-rouge">portlet.xml</code> will set up the portlet with a namespace of <em>/portletA/</em>. This means that all requests to this portlet will get the namespace prepended when looking up the action. In addition, the _view_  portlet mode will map to the <em>/view</em>  namespace, so a request for action <code class="highlighter-rouge">myAction</code> will resolve to the namespace and action <em>/portletA/view/myAction</em> . It also means that if no action is requested, the default action of <code class="highlighter-rouge">index</code> will be used for the request.</p>
 
@@ -244,12 +241,11 @@
 
 <p><strong>web.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;servlet</span> <span class="na">id=</span><span class="s">"Struts2PortletDispatcherServlet"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;servlet</span> <span class="na">id=</span><span class="s">"Struts2PortletDispatcherServlet"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;servlet-name&gt;</span>Struts2PortletDispatcherServlet<span class="nt">&lt;/servlet-name&gt;</span>
     <span class="nt">&lt;servlet-class&gt;</span>org.apache.struts2.portlet.dispatcher.DispatcherServlet<span class="nt">&lt;/servlet-class&gt;</span>
 <span class="nt">&lt;/servlet&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>If you’re only using Struts 2 tags, configuring the dispatcher servlet is optional</strong></p>
 
@@ -281,15 +277,14 @@
 
 <p><strong>struts.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"redirectAction"</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"redirectAction"</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"actionName"</span><span class="nt">&gt;</span>displayCart<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"userId"</span><span class="nt">&gt;</span>${userId}<span class="nt">&lt;/param&gt;</span>  
     <span class="c">&lt;!-- If you want to redirect to a different portlet mode, use the portletMode parameter 
     &lt;param name="portletMode"&gt;view&lt;/param&gt;
     --&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This will set up a <em>render parameter</em>  called <em>userId</em>  with the value of the <em>userId</em>  property on the value stack.</p>
 

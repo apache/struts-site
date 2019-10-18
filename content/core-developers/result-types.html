@@ -86,7 +86,6 @@
                 <li><a href="/security/">Security Guide</a></li>
                 <li><a href="/core-developers/">Core Developers Guide</a></li>
                 <li><a href="/tag-developers/">Tag Developers Guide</a></li>
-                <li><a href="/migration/">Migration Guide</a></li>
                 <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
                 <li><a href="/plugins/">Plugins</a></li>
                 <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
@@ -221,17 +220,15 @@ interface. Custom Result Types might include generating an email or JMS message,
 and each Result can specify which parameter this value should be set as. For example, here is a result defined in XML 
 that uses a default parameter:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"freemarker"</span><span class="nt">&gt;</span>foo.fm<span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"freemarker"</span><span class="nt">&gt;</span>foo.fm<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
 
 <p>That is the equivalent to this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"freemarker"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"freemarker"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>foo.vm<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Since probably 95% of your actions won’t need results that contain multiple parameters, this little shortcut saves you 
 a significant amount of configuration. It also follows that if you have specified the default parameter, you don’t need 
@@ -252,15 +249,14 @@ Check <a href="object-factory.html">Define dedicated factory</a> to see how to d
 <p><code class="highlighter-rouge">ParamNameAwareResult</code> interface when used with <code class="highlighter-rouge">StrutsResultBuilder</code> can limit parameters assigned to the result. 
 So you can simple extend existing result with such a functionality as below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyResult</span> <span class="kd">extends</span> <span class="n">ServletDispatcherResult</span> <span class="kd">implements</span> <span class="n">ParamNameAwareResult</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyResult</span> <span class="kd">extends</span> <span class="n">ServletDispatcherResult</span> <span class="kd">implements</span> <span class="n">ParamNameAwareResult</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">acceptableParamName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">acceptableParamName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"accept"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
     <span class="o">}</span>
 
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>and then register it and use instead of default <code class="highlighter-rouge">dispatcher</code> result.</p>
 
