@@ -9,14 +9,14 @@ title: Tag Developers Guide
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-FreeMarker tags are extensions of the generic [Struts Tags](struts-tags.html) provided by the framework. You can jump 
+FreeMarker tags are extensions of the generic [Struts Tags](struts-tags) provided by the framework. You can jump 
 right in just by knowing the generic structure in which the tags can be accessed: 
 
 ```ftl
 <@s.tag> ...</@s.tag>
 ```
 
-, where `tag` is any of the [tags](tags.html) supported by the framework.
+, where `tag` is any of the [tags](tags) supported by the framework.
 
 For example, in JSP you might create a form using Struts tags.
 
@@ -47,7 +47,7 @@ pages even easier to code. You can even invoke third-party JSP taglibs as if the
 
 ## Attributes and Parameters
 
-Unlike older versions of JSP (in which the [JSP Tags](jsp-tags.html) are based), FreeMarker allows for _dynamic attributes_, 
+Unlike older versions of JSP (in which the [JSP Tags](jsp-tags) are based), FreeMarker allows for _dynamic attributes_, 
 much like JSP 2.0. You can supply attributes to the tags that the tag doesn't explicitedly support. Those attributes 
 that cannot be applied directly to the tag object will be set to the tag's general-purpose `parameters` Map.
 
@@ -103,7 +103,7 @@ FreeMarker which provides more advanced ways to apply attributes. Suppose the fo
 
 What will happen here is that each attribute will be evaluated to a String as best it can. This may involve calling the
 `toString` method on the internal FreeMarker objects. In this case, all objects will end up being exactly what you would 
-expect. Then, when the tag runs, the `list` attribute will be converted from a String to a List using [OGNL](ogn.html)'s 
+expect. Then, when the tag runs, the `list` attribute will be converted from a String to a List using [OGNL](ognl)'s 
 advanced collection support.
 
 But suppose you wish to use FreeMarker's list or hash support instead? You can do this:
