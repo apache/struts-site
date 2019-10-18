@@ -154,7 +154,7 @@ use given logging provider if available.</p>
 
 <p>To add logging to your application simply declare a Logger as follow:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.Logger</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.Logger</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.LoggerFactory</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
@@ -163,7 +163,7 @@ use given logging provider if available.</p>
 
     <span class="kd">private</span> <span class="n">String</span> <span class="n">userName</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">LOG</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"MyAction executed with UserName [#0]"</span><span class="o">,</span> <span class="n">userName</span><span class="o">);</span>
         <span class="k">return</span> <span class="s">"success"</span><span class="o">;</span>
     <span class="o">}</span>
@@ -171,8 +171,7 @@ use given logging provider if available.</p>
     <span class="c1">// getter / setter</span>
 
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="implementing-my-own-factory">Implementing my own factory</h2>
 
@@ -181,7 +180,7 @@ interface, like below:</p>
 
 <p><strong>JdkLoggerFactory which adds support for JDK logging</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.Logger</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.Logger</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.LoggerFactory</span><span class="o">;</span>
 
 <span class="cm">/**
@@ -190,21 +189,20 @@ interface, like below:</p>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JdkLoggerFactory</span> <span class="kd">extends</span> <span class="n">LoggerFactory</span> <span class="o">{</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="n">Logger</span> <span class="n">getLoggerImpl</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">cls</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">JdkLogger</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">cls</span><span class="o">.</span><span class="na">getName</span><span class="o">()));</span>
+    <span class="kd">protected</span> <span class="n">Logger</span> <span class="nf">getLoggerImpl</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">cls</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">JdkLogger</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">cls</span><span class="o">.</span><span class="na">getName</span><span class="o">()));</span>
     <span class="o">}</span>
     
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="n">Logger</span> <span class="n">getLoggerImpl</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">JdkLogger</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">name</span><span class="o">));</span>
+    <span class="kd">protected</span> <span class="n">Logger</span> <span class="nf">getLoggerImpl</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">JdkLogger</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">name</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>JdkLogger is a wrapper around java.util.logging.Logger and implements Logger interface</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.Logger</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.Logger</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.LoggerUtils</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.logging.Level</span><span class="o">;</span>
@@ -216,22 +214,21 @@ interface, like below:</p>
     
     <span class="kd">private</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span> <span class="n">log</span><span class="o">;</span>
     
-    <span class="kd">public</span> <span class="n">JdkLogger</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span> <span class="n">log</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">JdkLogger</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span> <span class="n">log</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">log</span> <span class="o">=</span> <span class="n">log</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">error</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">,</span> <span class="n">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">error</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">,</span> <span class="n">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">log</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="n">LoggerUtils</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">msg</span><span class="o">,</span> <span class="n">args</span><span class="o">));</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">error</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">ex</span><span class="o">,</span> <span class="n">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">error</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">ex</span><span class="o">,</span> <span class="n">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">log</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="n">LoggerUtils</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">msg</span><span class="o">,</span> <span class="n">args</span><span class="o">),</span> <span class="n">ex</span><span class="o">);</span>
     <span class="o">}</span>
     
     <span class="o">...</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Check <a href="http://struts.apache.org/struts-core/apidocs/com/opensymphony/xwork2/util/logging/package-summary.html">the source code</a>
 to see more details.</p>
@@ -240,21 +237,18 @@ to see more details.</p>
 
 <p>Now you must tell XWork/Struts2 to use your implementation, just define system property like below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-Dxwork.loggerFactory=com.demo.MyLoggerFactory
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-Dxwork.loggerFactory=com.demo.MyLoggerFactory
+</code></pre></div></div>
 
 <p>you can use the same to explicit tell the framework which implementation to use and don’t depend on class discovery, eg.:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-Dxwork.loggerFactory=com.opensymphony.xwork2.util.logging.slf4j.Slf4jLoggerFactory
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-Dxwork.loggerFactory=com.opensymphony.xwork2.util.logging.slf4j.Slf4jLoggerFactory
+</code></pre></div></div>
 
 <p>or</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-Dxwork.loggerFactory=com.opensymphony.xwork2.util.logging.log4j2.Log4j2LoggerFactory
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-Dxwork.loggerFactory=com.opensymphony.xwork2.util.logging.log4j2.Log4j2LoggerFactory
+</code></pre></div></div>
 
 <p>will enable Slf4j or Log4j2 even if there is commons-logging on classpath available (commons-logging is the first 
 LoggerFactory to look for).</p>

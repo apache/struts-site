@@ -159,7 +159,7 @@ new feature implementation with code reformatting. Thus only confuses people rev
 <p>If something isn’t clear, you have doubts and anything else - ask! Maybe during materialising your thoughts as text
 you will gain the answer - Rubber Duck effect :-) Anyway, instead spending time on looking for solution - ask.</p>
 
-<p>The best place to ask question is Struts Developers List <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#064;&#115;&#116;&#114;&#117;&#116;&#115;&#046;&#097;&#112;&#097;&#099;&#104;&#101;&#046;&#111;&#114;&#103;">&#100;&#101;&#118;&#064;&#115;&#116;&#114;&#117;&#116;&#115;&#046;&#097;&#112;&#097;&#099;&#104;&#101;&#046;&#111;&#114;&#103;</a></p>
+<p>The best place to ask question is Struts Developers List <a href="mailto:dev@struts.apache.org">dev@struts.apache.org</a></p>
 
 <h2 id="wip">WIP</h2>
 
@@ -174,7 +174,7 @@ or improving.</p>
 
 <p>The original source code:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Hidden input section
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Hidden input section
 a = new Attributes();
 a.add("type", "hidden")
     .add("id", "__multiselect_" + StringUtils.defaultString(StringEscapeUtils.escapeHtml4(id)))
@@ -182,12 +182,11 @@ a.add("type", "hidden")
     .add("value", "").addIfTrue("disabled", disabled);
 start("input", a);
 end("input");
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>After applying default reformatting (80 columns margin):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Hidden input section
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Hidden input section
 a = new Attributes();
 a.add("type", "hidden")
     .add("id",
@@ -203,8 +202,7 @@ a.add("type", "hidden")
     .add("value", "").addIfTrue("disabled", disabled);
 start("input", a);
 end("input");
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Some suggestions how to improve the code:</p>
 
@@ -212,26 +210,23 @@ end("input");
   <li>
     <p>use static imports</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  a.add("type", "hidden")
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  a.add("type", "hidden")
    .add("id", "__multiselect_" + defaultString(escapeHtml4(id)));
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>use dedicated method</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  a.add("type", "hidden")
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  a.add("type", "hidden")
    .add("id", "__multiselect_" + safeId(id));
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>use builder</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  a.add("type", "hidden")
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  a.add("type", "hidden")
    .add("id", HtmlID.with("__multiselect_").withSafeId(id).create());
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 

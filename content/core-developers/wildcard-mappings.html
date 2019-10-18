@@ -144,17 +144,16 @@ mappings into one more generic mapping.</p>
 <p>The best way to explain wildcards is to show an example and walk through how it works. This example modifies 
 a conventional mapping to use wildcards to match all pages that start with <code class="highlighter-rouge">/edit</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/edit*"</span> <span class="na">class=</span><span class="s">"org.apache.struts.webapp.example.Edit{1}Action"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/edit*"</span> <span class="na">class=</span><span class="s">"org.apache.struts.webapp.example.Edit{1}Action"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"failure"</span><span class="nt">&gt;</span>/mainMenu.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result&gt;</span>{1}.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The “*” in the name attribute allows the mapping to match the request URIs <code class="highlighter-rouge">/editSubscription</code>, <code class="highlighter-rouge">editRegistration</code>, 
 or any other URI that starts with <code class="highlighter-rouge">/edit</code>, however <code class="highlighter-rouge">/editSubscription/add</code> would not be matched. The part of the URI 
 matched by the wildcard will then be substituted into various attributes of the action mapping and its action results 
-replacing <code class="highlighter-rouge"><span class="p">{</span><span class="err">1</span><span class="p">}</span></code>. For the rest of the request, the framework will see the action mapping and its action results containing 
+replacing <code class="highlighter-rouge">{1}</code>. For the rest of the request, the framework will see the action mapping and its action results containing 
 the new values.</p>
 
 <p>Mappings are matched against the request in the order they appear in the framework’s configuration file. If more than 
@@ -163,20 +162,18 @@ if the request URL can be matched against a path without any wildcards in it, no
 and order is not important. Also, note that wildcards are not greedy, meaning they only match until the first 
 occurrence of the following string pattern.  For example, consider the following mapping:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"List*s"</span> <span class="na">class=</span><span class="s">"actions.List{1}s"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"List*s"</span> <span class="na">class=</span><span class="s">"actions.List{1}s"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;result&gt;</span>list{1}s.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This mapping would work correctly for the URI <code class="highlighter-rouge">ListAccounts</code> but not <code class="highlighter-rouge">ListSponsors</code>, because the latter would turn into 
 this configuration:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"ListSpons"</span> <span class="na">class=</span><span class="s">"actions.ListSpons"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"ListSpons"</span> <span class="na">class=</span><span class="s">"actions.ListSpons"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;result&gt;</span>listSpons.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Wildcard patterns can contain one or more of the following special tokens:</p>
 
@@ -203,21 +200,20 @@ this configuration:</p>
 wildcard), if the pattern fails, it is also matched as if the last two characters didn’t exist. The goal is to support 
 the legacy <code class="highlighter-rouge">*!*</code> syntax, where the <code class="highlighter-rouge">!*</code> is optional.</p>
 
-<p>In the action mapping and action results, the wildcard-matched values can be accessed with the token <code class="highlighter-rouge"><span class="p">{</span><span class="err">N</span><span class="p">}</span></code> where N is 
+<p>In the action mapping and action results, the wildcard-matched values can be accessed with the token <code class="highlighter-rouge">{N}</code> where N is 
 a number from 1 to 9 indicating which wildcard-matched value to substitute. The whole request URI can be accessed with 
-the <code class="highlighter-rouge"><span class="p">{</span><span class="err">0</span><span class="p">}</span></code> token.</p>
+the <code class="highlighter-rouge">{0}</code> token.</p>
 
 <p>Also, the action mapping and action result properties will accept wildcard-matched strings in their value attribute, like:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/edit/*"</span> <span class="na">class=</span><span class="s">"org.apache.struts.webapp.example.Edit{1}Action"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/edit/*"</span> <span class="na">class=</span><span class="s">"org.apache.struts.webapp.example.Edit{1}Action"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"id"</span><span class="nt">&gt;</span>{1}<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;result&gt;</span>
       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>/mainMenu.jsp<span class="nt">&lt;/param&gt;</span>
       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"id"</span><span class="nt">&gt;</span>{1}<span class="nt">&lt;/param&gt;</span> 
     <span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>See also <a href="../getting-started/wildcard-method-selection.html">Wildcard Method</a></p>
@@ -228,20 +224,18 @@ the <code class="highlighter-rouge"><span class="p">{</span><span class="err">0<
 <p>From Struts 2.1+ namespace patterns can be extracted as request parameters and bound to the action. To enable this 
 feature, set the following constant in struts.xml:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.patternMatcher"</span> <span class="na">value=</span><span class="s">"namedVariable"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.patternMatcher"</span> <span class="na">value=</span><span class="s">"namedVariable"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>With that in place, namespace definitions can contain {PARAM_NAME} patterns which will be evaluated against the request 
 URL and extracted as parameters, for example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Namespace</span><span class="o">{</span><span class="s">"/users/{userID}"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Namespace</span><span class="o">{</span><span class="s">"/users/{userID}"</span><span class="o">);</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DetailsAction</span> <span class="n">exends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
   <span class="kd">private</span> <span class="n">Long</span> <span class="n">userID</span><span class="o">;</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUserID</span><span class="o">(</span><span class="n">Long</span> <span class="n">userID</span><span class="o">)</span> <span class="o">{...}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUserID</span><span class="o">(</span><span class="n">Long</span> <span class="n">userID</span><span class="o">)</span> <span class="o">{...}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If the request URL is <code class="highlighter-rouge">/users/10/detail</code>, then the <code class="highlighter-rouge">DetailsAction</code> will be executed and its userID field will be set 
 to <em>10</em>.</p>
@@ -267,21 +261,19 @@ for invoking the <code class="highlighter-rouge">PatternMatcher</code>.</p>
 
 <p>To use parameters in the URL, after the action name, make sure this is set:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.enable.SlashesInActionNames"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.enable.SlashesInActionNames"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.alwaysSelectFullNamespace"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Then the action mapping will look like:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"edit"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/edit"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"edit"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/edit"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/person/*"</span> <span class="na">class=</span><span class="s">"org.apache.struts.webapp.example.EditAction"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"id"</span><span class="nt">&gt;</span>{1}<span class="nt">&lt;/param&gt;</span>
         <span class="nt">&lt;result&gt;</span>/mainMenu.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;/action&gt;</span>   
 <span class="nt">&lt;/package&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>When a URL like <code class="highlighter-rouge">/edit/person/123</code> is requested, <code class="highlighter-rouge">EditAction</code> will be called, and its “id” field will be set to 123.</p>
 
@@ -290,49 +282,45 @@ for invoking the <code class="highlighter-rouge">PatternMatcher</code>.</p>
 <p>From 2.1.9+ regular expressions can be defined defined in the action name. To use this form of wild card, the following 
 constants must be set:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.enable.SlashesInActionNames"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.enable.SlashesInActionNames"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.alwaysSelectFullNamespace"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.patternMatcher"</span> <span class="na">value=</span><span class="s">"regex"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>The regular expressions can be in two forms, the simplest one is <code class="highlighter-rouge"><span class="p">{</span><span class="err">FIELD_NAME</span><span class="p">}</span></code>, in which case the field with 
+<p>The regular expressions can be in two forms, the simplest one is <code class="highlighter-rouge">{FIELD_NAME}</code>, in which case the field with 
 the <code class="highlighter-rouge">FIELD_NAME</code> in the action will be populated with the matched text, for example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"books"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"books"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/{type}/content/{title}"</span> <span class="na">class=</span><span class="s">"example.BookAction"</span><span class="nt">&gt;</span>
 	<span class="nt">&lt;result&gt;</span>/books/content.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;/action&gt;</span>
 <span class="nt">&lt;/package&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In this example, if the url <code class="highlighter-rouge">/fiction/content/Frankenstein</code> is requested, BookAction’s field “type” will be set to 
 “fiction”, and the field “title” will be set to “Frankenstein”.</p>
 
-<p>The regular expression can also be in the form <code class="highlighter-rouge"><span class="p">{</span><span class="err">FIELD_NAME:REGULAR_EXPRESSION</span><span class="p">}</span></code>. The regular expression is a normal 
+<p>The regular expression can also be in the form <code class="highlighter-rouge">{FIELD_NAME:REGULAR_EXPRESSION}</code>. The regular expression is a normal 
 Java regular expression. For example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"books"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"books"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/{type}/{author:.+}/list"</span> <span class="na">class=</span><span class="s">"example.ListBooksAction"</span><span class="nt">&gt;</span>
 	<span class="nt">&lt;result&gt;</span>/books/list.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;/action&gt;</span>
 <span class="nt">&lt;/package&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In this example, if the url <code class="highlighter-rouge">/philosophy/AynRand/list</code> is requested, ListBooksAction’s field “type” will be set to 
 “philosophy” and “author” to “AynRand”.</p>
 
-<p>The matched groups can still be accessed using the <code class="highlighter-rouge"><span class="p">{</span><span class="err">X</span><span class="p">}</span></code> notation, like:</p>
+<p>The matched groups can still be accessed using the <code class="highlighter-rouge">{X}</code> notation, like:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"books"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"books"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/books/{ISBN}/content"</span> <span class="na">class=</span><span class="s">"example.BookAction"</span><span class="nt">&gt;</span>
 	<span class="nt">&lt;result&gt;</span>/books/{1}.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;/action&gt;</span>
 <span class="nt">&lt;/package&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </section>
 </article>

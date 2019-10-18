@@ -157,18 +157,17 @@ the request.</p>
 
 <p><strong>A Logon Action</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"Logon"</span> <span class="na">class=</span><span class="s">"tutorial.Logon"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"Logon"</span> <span class="na">class=</span><span class="s">"tutorial.Logon"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"redirectAction"</span><span class="nt">&gt;</span>Menu<span class="nt">&lt;/result&gt;</span>
   <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/Logon.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span> 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>When using <em>Convention Plugin</em> the action mapping can be configured with annotations:</p>
 
 <p><strong>A Logon Action with annotations</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">tutorial</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">tutorial</span>
 
 <span class="nd">@Action</span><span class="o">(</span><span class="s">"Logon"</span><span class="o">)</span> <span class="c1">// actually that is not necessary as it is added by convention</span>
 <span class="nd">@Results</span><span class="o">(</span>
@@ -176,8 +175,7 @@ the request.</p>
 	<span class="nd">@Result</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"input"</span><span class="o">,</span> <span class="n">location</span><span class="o">=</span><span class="s">"/Logon.jsp"</span><span class="o">)</span>
 <span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Logon</span> <span class="o">{</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="action-names">Action Names</h2>
 
@@ -192,21 +190,19 @@ to a Struts Action name (rather than a “raw” URI).</p>
 
 <p><strong>A Hello Form</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"Hello"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"Hello"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Please enter your name"</span> <span class="na">name=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;s:submit/&gt;</span>
 <span class="nt">&lt;/s:form&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Action Names With Slashes</strong></p>
 
 <p>If your action names have slashes in them (for example, <code class="highlighter-rouge">&lt;action name="admin/home" class="tutorial.Admin"/&gt;</code>) you need 
 to specifically allow slashes in your action names via a constant in the <code class="highlighter-rouge">struts.xml</code> file by specifying</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.enable.SlashesInActionNames"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.enable.SlashesInActionNames"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>See <a href="https://issues.apache.org/jira/browse/WW-1383">JIRA Issue WW-1383</a> for discussion as there are side effects 
 to setting this property to <code class="highlighter-rouge">true</code>.</p>
@@ -224,12 +220,11 @@ names (eg. createUser) or underscores (eg. my-action).</p>
 defined as follow: <code class="highlighter-rouge">[a-zA-Z0-9._!/-]*</code> - if at some point this doesn’t match your action naming schema you can define 
 your own RegEx and override the default using constant named <code class="highlighter-rouge">struts.allowed.action.names</code>, e.g.:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
   <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.allowed.action.names"</span> <span class="na">value=</span><span class="s">"[a-z{}]"</span><span class="err">*</span><span class="nt">/&gt;</span>
   ...
 <span class="nt">&lt;/struts&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>NOTE</strong>: Please be aware that action names not matching the RegEx will rise an exception.</p>
 
@@ -239,11 +234,10 @@ your own RegEx and override the default using constant named <code class="highl
 
 <p><strong>Action interface</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Action</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Action</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>Implementing the Action interface is optional. If Action is not implemented, the framework will use reflection to 
@@ -254,11 +248,10 @@ look for an<code class="highlighter-rouge">execute</code> method.</p>
 Action, a developer might want separate entry-points for <code class="highlighter-rouge">create</code>, <code class="highlighter-rouge">retrieve</code>, <code class="highlighter-rouge">update</code>, and <code class="highlighter-rouge">delete</code>. A different 
 entry point can be specified by the <code class="highlighter-rouge">method</code> attribute.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"delete"</span> <span class="na">class=</span><span class="s">"example.CrudAction"</span> <span class="na">method=</span><span class="s">"delete"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"delete"</span> <span class="na">class=</span><span class="s">"example.CrudAction"</span> <span class="na">method=</span><span class="s">"delete"</span><span class="nt">&gt;</span>
     ...
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>If there is no <code class="highlighter-rouge">execute</code> method and no other method specified in the configuration the framework will throw an exception.</p>
@@ -268,13 +261,12 @@ entry point can be specified by the <code class="highlighter-rouge">method</code
 
 <p><strong>Annotated action method</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Action</span><span class="o">(</span><span class="s">"crud"</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Action</span><span class="o">(</span><span class="s">"crud"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CrudAction</span> <span class="o">{</span>
     <span class="nd">@Action</span><span class="o">(</span><span class="s">"delete"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">delete</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">delete</span><span class="o">()</span> <span class="o">{</span>
         <span class="o">...</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="wildcard-method">Wildcard Method</h2>
 
@@ -284,10 +276,9 @@ but call the <code class="highlighter-rouge">delete</code> method instead.</p>
 
 <p>Rather than code a separate mapping for each action class that uses this pattern, you can write it once as a wildcard mapping.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"*Crud"</span> <span class="na">class=</span><span class="s">"example.Crud"</span> <span class="na">method=</span><span class="s">"{1}"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"*Crud"</span> <span class="na">class=</span><span class="s">"example.Crud"</span> <span class="na">method=</span><span class="s">"{1}"</span><span class="nt">&gt;</span>
     ...
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Here, a reference to “editCrud” will call the <code class="highlighter-rouge">edit</code> method on an instance of the Crud Action class. Likewise, 
 a reference to “deleteCrud” will call the <code class="highlighter-rouge">delete</code> method instead.</p>
@@ -302,9 +293,8 @@ or other special character.</p>
 
 <p>To use a postfix wildcard, just move the asterisk and add an underscore.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"Crud_*"</span> <span class="na">class=</span><span class="s">"example.Crud"</span> <span class="na">method=</span><span class="s">"{1}"</span><span class="nt">&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"Crud_*"</span> <span class="na">class=</span><span class="s">"example.Crud"</span> <span class="na">method=</span><span class="s">"{1}"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
 <p>From the framework’s perspective, a wildcard mapping creates a new “virtual” mapping with all the same attributes as 
 a conventional, static mapping. As a result, you can use the expanded wildcard name as the name of validation, type 
@@ -361,7 +351,7 @@ the specific actions that have <code class="highlighter-rouge">&lt;allowed-metho
 
 <p><strong>Example struts.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE struts PUBLIC
     "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
     "http://struts.apache.org/dtds/struts-2.3.dtd"&gt;</span>
@@ -383,8 +373,7 @@ the specific actions that have <code class="highlighter-rouge">&lt;allowed-metho
 
   <span class="nt">&lt;/package&gt;</span>
 <span class="nt">&lt;/struts&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="strict-method-invocation">Strict Method Invocation</h3>
 
@@ -396,15 +385,14 @@ of the new configuration option please use the latest DTD definition:</p>
 
 <p><strong>Struts 2.5 DTD</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE struts PUBLIC
         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
         "http://struts.apache.org/dtds/struts-2.5.dtd"&gt;</span>
 <span class="nt">&lt;struts&gt;</span>
 ...
 <span class="nt">&lt;/struts&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>SMI works in the following way:</p>
 
@@ -418,9 +406,8 @@ actions (plus adding <code class="highlighter-rouge">&lt;global-allowed-methods/
 
 <p>You can redefine the default RegEx by using a constant as follow </p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.strictMethodInvocation.methodRegex"</span> <span class="na">value=</span><span class="s">"([a-zA-Z]*)"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.strictMethodInvocation.methodRegex"</span> <span class="na">value=</span><span class="s">"([a-zA-Z]*)"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>When using wildcard mapping in actions’ definitions SMI works in two ways:</p>
 
@@ -436,7 +423,7 @@ by annotations or <code class="highlighter-rouge">&lt;allowed-method/&gt;</code>
 
 <p><strong>SMI via struts.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="err">...</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="err">...</span><span class="nt">&gt;</span>
   ...
   <span class="nt">&lt;global-allowed-methods&gt;</span>execute,input,back,cancel,browse<span class="nt">&lt;/global-allowed-methods&gt;</span>
   ...
@@ -447,31 +434,28 @@ by annotations or <code class="highlighter-rouge">&lt;allowed-method/&gt;</code>
  
   ...
 <span class="nt">&lt;/package&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>SMI via annotation on action class level</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@AllowedMethods</span><span class="o">(</span><span class="s">"end"</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@AllowedMethods</span><span class="o">(</span><span class="s">"end"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClassLevelAllowedMethodsAction</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span> 
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span> 
         <span class="k">return</span> <span class="o">...</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>SMI via annotation on package level (in package-info.java)</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts2</span><span class="o">.</span><span class="na">convention</span><span class="o">.</span><span class="na">annotation</span><span class="o">.</span><span class="na">AllowedMethods</span><span class="o">({</span><span class="s">"home"</span><span class="o">,</span> <span class="s">"start"</span><span class="o">})</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts2</span><span class="o">.</span><span class="na">convention</span><span class="o">.</span><span class="na">annotation</span><span class="o">.</span><span class="na">AllowedMethods</span><span class="o">({</span><span class="s">"home"</span><span class="o">,</span> <span class="s">"start"</span><span class="o">})</span>
 <span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts2</span><span class="o">.</span><span class="na">convention</span><span class="o">.</span><span class="na">actions</span><span class="o">.</span><span class="na">allowedmethods</span><span class="o">;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Allowed methods can be defined as:</p>
 
 <ul>
-  <li>literals ie. in xml: <code class="highlighter-rouge">execute,cancel</code> or in annotation: <code class="highlighter-rouge"><span class="p">{</span><span class="nt">"execute"</span><span class="err">,</span><span class="w"> </span><span class="nt">"cancel"</span><span class="err">}</span></code></li>
+  <li>literals ie. in xml: <code class="highlighter-rouge">execute,cancel</code> or in annotation: <code class="highlighter-rouge">{"execute", "cancel"}</code></li>
   <li>patterns when using with wildcard mapping, i.e <code class="highlighter-rouge">&lt;action ... method="do{2}"/&gt;</code></li>
   <li>RegExs using <code class="highlighter-rouge">regex:</code> prefix, ie: <code class="highlighter-rouge">&lt;global-allowed-methods&gt;execute,input,cancel,regex:user([A-Z]*)&lt;/global-allowed-methods&gt;</code></li>
 </ul>
@@ -485,11 +469,10 @@ code as by default only execute method is allowed, even when SMI is disabled.</p
 <p>If the class attribute in an action mapping is left blank, the <code class="highlighter-rouge">com.opensymphony.xwork2.ActionSupport</code> class is used 
 as a default.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"Hello"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"Hello"</span><span class="nt">&gt;</span>
    // ...
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>The ActionSupport class has an <code class="highlighter-rouge">execute</code> method that returns “success” and an <code class="highlighter-rouge">input</code> method that returns “input”.</p>
@@ -514,12 +497,11 @@ The form simply submits back to the action that created it.</p>
 
 <p><strong>Posting Back</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:form&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form&gt;</span>
     <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Please enter your name"</span> <span class="na">name=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;s:submit/&gt;</span>
 <span class="nt">&lt;/s:form&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="action-default">Action Default</h2>
 
@@ -527,7 +509,7 @@ The form simply submits back to the action that created it.</p>
 the usual “404 - Page not found” error. But, if you would prefer that an omnibus action handle any unmatched requests, 
 you can specify a default action. If no other action matches, the default action is used instead.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"Hello"</span> <span class="na">extends=</span><span class="s">"action-default"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"Hello"</span> <span class="na">extends=</span><span class="s">"action-default"</span><span class="nt">&gt;</span>
 
     <span class="nt">&lt;default-action-ref</span> <span class="na">name=</span><span class="s">"UnderConstruction"</span><span class="nt">/&gt;</span>
 
@@ -536,8 +518,7 @@ you can specify a default action. If no other action matches, the default action
     <span class="nt">&lt;/action&gt;</span>
 
     ...
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>There are no special requirements for the default action. Each package can have its own default action, but there should 
 only be one default action per namespace.</p>
@@ -553,11 +534,10 @@ multiple packages declaring a default action with the same namespace, there is n
 
 <p>Using wildcards is another approach to default actions. A wildcard action at the end of the configuration can be used to catch unmatched references.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"*"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"*"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;result&gt;</span>/{1}.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>When a new action is needed, just add a stub page.</p>
 

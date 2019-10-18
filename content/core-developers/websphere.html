@@ -208,7 +208,7 @@
 
   <p>public class LaunchServlet extends HttpServlet implements Servlet {</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>public LaunchServlet() \{
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public LaunchServlet() \{
 	super();
 \}
  
@@ -219,8 +219,7 @@ public void init(ServletConfig arg0) throws ServletException \{
 	Dispatcher d = new Dispatcher(getServletContext(), new HashMap\&lt;String, String\&gt;());	
 	
 \}
-</code></pre>
-  </div>
+</code></pre></div>  </div>
 
   <p>}</p>
 
@@ -232,13 +231,12 @@ public void init(ServletConfig arg0) throws ServletException \{
 
 <blockquote>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>\&lt;servlet\&gt;
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\&lt;servlet\&gt;
   \&lt;servlet\-name\&gt;dummyaction\&lt;/servlet\-name\&gt;
   \&lt;servlet\-class\&gt;com\.xxx\.yyyyyy\.service\.LaunchServlet\&lt;/servlet\-class\&gt;
   \&lt;load\-on\-startup\&gt;1\&lt;/load\-on\-startup\&gt;
 \&lt;/servlet\&gt;
-</code></pre>
-  </div>
+</code></pre></div>  </div>
 
 </blockquote>
 
@@ -256,26 +254,24 @@ public void init(ServletConfig arg0) throws ServletException \{
 
 <p>The properties are:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 com.ibm.ws.webcontainer.assumefiltersuccessonsecurityerror = true
 com.ibm.ws.webcontainer.invokefilterscompatibility = true
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>At least that is necessary when using StrutsPrepareAndExecuteFilter.</p>
 
 <p>In Websphre admin console one has to add those properties here:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 Servers &gt; Application servers &gt; {server name} &gt; Web container &gt; Custom Properties
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>A wsadmin jython script to set those properties could look like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 
 def findObjectName(objectId):
         index = objectId.find('(')
@@ -297,8 +293,7 @@ if webContainerDetails.find("com.ibm.ws.webcontainer.invokefilterscompatibility"
         print "creating prop: com.ibm.ws.webcontainer.invokefilterscompatibility"
         AdminServerManagement.configureCustomProperty(nodeName, serverName, "WebContainer", "com.ibm.ws.webcontainer.invokefilterscompatibility", "true")
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Thanks to Christoph Nenning (christoph dot nenning at lex-com at net)</p>
 
@@ -324,12 +319,11 @@ if webContainerDetails.find("com.ibm.ws.webcontainer.invokefilterscompatibility"
   </li>
 </ol>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 System Property Name: HttpSessionIdReuse
 System Property Value: true
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ol>
   <li>Save your changes and restart the Application Server.</li>

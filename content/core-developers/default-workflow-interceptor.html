@@ -148,18 +148,22 @@ method names and/or a list of included method names, whereby <code class="highli
 sign is interpreted as wildcard matching all methods for both parameters. <code class="highlighter-rouge">MethodFilterInterceptor</code> for more info.</p>
 </blockquote>
 
-<p>This interceptor also supports the following interfaces which can implemented by actions:
- - <code class="highlighter-rouge">ValidationAware</code> - implemented by ActionSupport class
- - <code class="highlighter-rouge">ValidationWorkflowAware</code> - allows changing result name programmatically
- - <code class="highlighter-rouge">ValidationErrorAware</code> - notifies action about errors and also allow change result name</p>
+<p>This interceptor also supports the following interfaces which can implemented by actions:</p>
+<ul>
+  <li><code class="highlighter-rouge">ValidationAware</code> - implemented by ActionSupport class</li>
+  <li><code class="highlighter-rouge">ValidationWorkflowAware</code> - allows changing result name programmatically</li>
+  <li><code class="highlighter-rouge">ValidationErrorAware</code> - notifies action about errors and also allow change result name</li>
+</ul>
 
 <p>You can also use <code class="highlighter-rouge">InputConfig</code> annotation to change result name returned when validation errors occurred.</p>
 
-<p>In <code class="highlighter-rouge">DefaultWorkflowInterceptor</code> applies only when action implements <code class="highlighter-rouge">com.opensymphony.xwork2.Validateable</code>
- 1. if the action class have <code class="highlighter-rouge">validate{MethodName}()</code>, it will be invoked
- 2. else if the action class have <code class="highlighter-rouge">validateDo{MethodName}()</code>, it will be invoked
- 3. no matter if 1] or 2] is performed, if <code class="highlighter-rouge">alwaysInvokeValidate</code> property of the interceptor is <code class="highlighter-rouge">true</code> (which is by 
-   default <code class="highlighter-rouge">true</code>), <code class="highlighter-rouge">validate()</code> will be invoked.</p>
+<p>In <code class="highlighter-rouge">DefaultWorkflowInterceptor</code> applies only when action implements <code class="highlighter-rouge">com.opensymphony.xwork2.Validateable</code></p>
+<ol>
+  <li>if the action class have <code class="highlighter-rouge">validate{MethodName}()</code>, it will be invoked</li>
+  <li>else if the action class have <code class="highlighter-rouge">validateDo{MethodName}()</code>, it will be invoked</li>
+  <li>no matter if 1] or 2] is performed, if <code class="highlighter-rouge">alwaysInvokeValidate</code> property of the interceptor is <code class="highlighter-rouge">true</code> (which is by 
+   default <code class="highlighter-rouge">true</code>), <code class="highlighter-rouge">validate()</code> will be invoked.</li>
+</ol>
 
 <h2 id="parameters">Parameters</h2>
 
@@ -173,7 +177,7 @@ sign is interpreted as wildcard matching all methods for both parameters. <code 
 
 <h2 id="examples">Examples</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
      <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"params"</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"validation"</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"workflow"</span><span class="nt">/&gt;</span>
@@ -205,8 +209,7 @@ sign is interpreted as wildcard matching all methods for both parameters. <code 
      <span class="nt">&lt;/interceptor-ref&gt;</span>
      <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
  <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </section>
 </article>

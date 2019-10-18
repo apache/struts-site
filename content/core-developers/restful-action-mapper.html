@@ -141,27 +141,23 @@
 
 <p>A custom action mapper using the following format:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://HOST/ACTION_NAME/PARAM_NAME1/PARAM_VALUE1/PARAM_NAME2/PARAM_VALUE2
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://HOST/ACTION_NAME/PARAM_NAME1/PARAM_VALUE1/PARAM_NAME2/PARAM_VALUE2
+</code></pre></div></div>
 
 <p>You can have as many parameters you’d like to use. Alternatively the URL can be shortened to the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://HOST/ACTION_NAME/PARAM_VALUE1/PARAM_NAME2/PARAM_VALUE2
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://HOST/ACTION_NAME/PARAM_VALUE1/PARAM_NAME2/PARAM_VALUE2
+</code></pre></div></div>
 
 <p>This is the same as:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://HOST/ACTION_NAME/ACTION_NAME + "Id"/PARAM_VALUE1/PARAM_NAME2/PARAM_VALUE2
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://HOST/ACTION_NAME/ACTION_NAME + "Id"/PARAM_VALUE1/PARAM_NAME2/PARAM_VALUE2
+</code></pre></div></div>
 
 <p>Suppose for example we would like to display some articles by id at using the following URL sheme:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://HOST/article/Id
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://HOST/article/Id
+</code></pre></div></div>
 
 <p>Your action just needs a <code class="highlighter-rouge">setArticleId()</code> method, and requests such as <code class="highlighter-rouge">/article/1</code>, <code class="highlighter-rouge">/article/2</code>, etc will all map 
 to that URL pattern.</p>
@@ -181,12 +177,11 @@ that examine the URL and the HTTP method.</li>
 name <code class="highlighter-rouge">movie</code> with an id of <code class="highlighter-rouge">Thrillers</code> with an extra parameter named <code class="highlighter-rouge">category</code> with a value of <code class="highlighter-rouge">action</code>.  A single action 
 mapping can then handle all CRUD operations using wildcards, e.g.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"movie/*"</span> <span class="na">className=</span><span class="s">"app.MovieAction"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"movie/*"</span> <span class="na">className=</span><span class="s">"app.MovieAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"id"</span><span class="nt">&gt;</span>{1}<span class="nt">&lt;/param&gt;</span>
     ...
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This mapper supports the following parameters:</p>
 
@@ -247,9 +242,8 @@ See <a href="http://ryandaigle.com/articles/2006/08/01/whats-new-in-edge-rails-s
 <p>To use the <code class="highlighter-rouge">Restful2ActionMapper</code> in an existing struts application we have to change the <code class="highlighter-rouge">struts.mapper.class</code> constant 
 and let it point to the <code class="highlighter-rouge">Restful2ActionMapper</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"org.apache.struts2.dispatcher.mapper.Restful2ActionMapper"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"org.apache.struts2.dispatcher.mapper.Restful2ActionMapper"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>The problem with the above approach is that we may break existing actions because the <code class="highlighter-rouge">Restful2ActionMapper</code> tries 
 to guess the method name using conventions that aren’t applicable to normal action classes.</p>
@@ -262,7 +256,7 @@ to use for a particular url based on a prefix (the action namespace).</p>
 
 <p>To put everything together, we create a package for our rest actions</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"rest"</span> <span class="na">namespace=</span><span class="s">"/rest"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"rest"</span> <span class="na">namespace=</span><span class="s">"/rest"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
     ....interceptor config
     <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"movie/*"</span> <span class="na">class=</span><span class="s">"app.MovieAction"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"id"</span><span class="nt">&gt;</span>{1}<span class="nt">&lt;/param&gt;</span>
@@ -270,32 +264,29 @@ to use for a particular url based on a prefix (the action namespace).</p>
     <span class="nt">&lt;/action&gt;</span>
     ....
 <span class="nt">&lt;/package&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>All other actions remain in their existing packages and namespaces we use the <code class="highlighter-rouge">PrefixBasedActionMapper</code> telling it to use 
 the <code class="highlighter-rouge">Restful2ActionMapper</code> for actions in the <code class="highlighter-rouge">/rest</code> namespace and the <code class="highlighter-rouge">DefaultActionMapper</code> for all other actions.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"</span> <span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.prefixMapping"</span> <span class="na">value=</span><span class="s">"/rest:restful2,:struts"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>For the <code class="highlighter-rouge">Restful2ActionMapper</code> to work we also have to set</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.enable.SlashesInActionNames"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.enable.SlashesInActionNames"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.alwaysSelectFullNamespace"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="unit-testing">Unit testing</h3>
 
 <p>Below you will find a simple unit test to test how to test actions when <code class="highlighter-rouge">Restful2ActionMapper</code> is used.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MovieActionTest</span> <span class="kd">extends</span> <span class="n">StrutsJUnit4TestCase</span><span class="o">&lt;</span><span class="n">MovieActionTest</span><span class="o">&gt;{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MovieActionTest</span> <span class="kd">extends</span> <span class="n">StrutsJUnit4TestCase</span><span class="o">&lt;</span><span class="n">MovieActionTest</span><span class="o">&gt;{</span>
     
     <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUp</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="c1">//assumes Basic authentication</span>
         <span class="kd">super</span><span class="o">.</span><span class="na">setUp</span><span class="o">();</span>
         <span class="n">String</span> <span class="n">credentials</span> <span class="o">=</span> <span class="s">"username:password"</span><span class="o">;</span>
@@ -303,7 +294,7 @@ the <code class="highlighter-rouge">Restful2ActionMapper</code> for actions in t
     <span class="o">}</span>
         
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">testIndex</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testIndex</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="n">request</span><span class="o">.</span><span class="na">setMethod</span><span class="o">(</span><span class="s">"get"</span><span class="o">);</span> <span class="c1">//Http method should be set</span>
         
         <span class="n">ActionProxy</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">getActionProxy</span><span class="o">(</span><span class="s">"/rest/movie/"</span><span class="o">);</span>                        
@@ -315,7 +306,7 @@ the <code class="highlighter-rouge">Restful2ActionMapper</code> for actions in t
     <span class="o">}</span>
     
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">testView</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testView</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="n">request</span><span class="o">.</span><span class="na">setMethod</span><span class="o">(</span><span class="s">"get"</span><span class="o">);</span> <span class="c1">//Http method should be set</span>
               
         <span class="n">ActionProxy</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">getActionProxy</span><span class="o">(</span><span class="s">"/rest/movie/1"</span><span class="o">);</span>                        
@@ -328,8 +319,7 @@ the <code class="highlighter-rouge">Restful2ActionMapper</code> for actions in t
         <span class="n">assertEquals</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="n">movieAction</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>         
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Thanks to Antonios Gkogkakis for the examples!</p>
 

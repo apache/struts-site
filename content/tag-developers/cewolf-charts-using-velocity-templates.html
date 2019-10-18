@@ -144,7 +144,7 @@
 
 <p>Lastly add the CeWolf servlet to web.xml:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nt">&lt;servlet&gt;</span>
     <span class="nt">&lt;servlet-name&gt;</span>CewolfServlet<span class="nt">&lt;/servlet-name&gt;</span>
     <span class="nt">&lt;servlet-class&gt;</span>de.laures.cewolf.CewolfRenderer<span class="nt">&lt;/servlet-class&gt;</span>
@@ -155,14 +155,13 @@
     <span class="nt">&lt;url-pattern&gt;</span>/cewolf/*<span class="nt">&lt;/url-pattern&gt;</span>
 <span class="nt">&lt;/servlet-mapping&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="create-a-datasetproducer">Create a DatasetProducer</h2>
 
 <p>This is the default DatasetProducer from the CeWolf tutorial.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
@@ -180,7 +179,7 @@
 	<span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span><span class="o">[]</span> <span class="n">seriesNames</span> <span class="o">=</span>    <span class="o">{</span><span class="s">"cewolfset.jsp"</span><span class="o">,</span> <span class="s">"tutorial.jsp"</span><span class="o">,</span> <span class="s">"testpage.jsp"</span><span class="o">,</span> <span class="s">"performancetest.jsp"</span><span class="o">};</span>
 	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Integer</span><span class="o">[]</span> <span class="o">[]</span> <span class="n">values</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">[</span><span class="nl">OS:</span><span class="n">seriesNames</span><span class="o">.</span><span class="na">length</span><span class="o">]</span> <span class="o">[</span><span class="nl">OS:</span><span class="n">categories</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
 
-	<span class="kd">public</span> <span class="n">Object</span> <span class="n">produceDataset</span><span class="o">(</span><span class="n">Map</span> <span class="n">params</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">DatasetProduceException</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">Object</span> <span class="nf">produceDataset</span><span class="o">(</span><span class="n">Map</span> <span class="n">params</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">DatasetProduceException</span> <span class="o">{</span>
 		<span class="n">DefaultCategoryDataset</span> <span class="n">dataset</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DefaultCategoryDataset</span><span class="o">();</span>
 		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">series</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">series</span> <span class="o">&lt;</span> <span class="n">seriesNames</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">series</span> <span class="o">++)</span> <span class="o">{</span>
 			<span class="kt">int</span> <span class="n">lastY</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">+</span> <span class="mi">1000</span><span class="o">);</span>
@@ -193,17 +192,16 @@
 		<span class="k">return</span> <span class="n">dataset</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="n">hasExpired</span><span class="o">(</span><span class="n">Map</span> <span class="n">params</span><span class="o">,</span> <span class="n">Date</span> <span class="n">since</span><span class="o">)</span> <span class="o">{</span>		
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasExpired</span><span class="o">(</span><span class="n">Map</span> <span class="n">params</span><span class="o">,</span> <span class="n">Date</span> <span class="n">since</span><span class="o">)</span> <span class="o">{</span>		
 		<span class="k">return</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">since</span><span class="o">.</span><span class="na">getTime</span><span class="o">())</span>  <span class="o">&gt;</span> <span class="mi">5000</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="n">getProducerId</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getProducerId</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="s">"PageViewCountData DatasetProducer"</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="create-the-velocity-template">Create the Velocity template</h2>
 
@@ -228,7 +226,7 @@
 
 <p>In Velocity it looks like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 #set( $pageViews = $stack.findValue("new com.PageViewCountData()") )
 $req.session.setAttribute("pageViews", $pageViews ) 
 
@@ -240,8 +238,7 @@ $req.session.setAttribute("pageViews", $pageViews )
 
 #tag( ChartImg "chartid=line" "renderer=cewolf" "width=400" "height=300" ) 
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>As you may notice, CeWolf looks up it’s DatasetProducer in the request attributes - it has no knowledge of the Velocity context. That’s why we call $req.session.setAttribute(). The other attributes (such as the chartid) will be set by CeWolf, so we don’t need to care about them.</p>
 

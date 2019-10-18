@@ -177,15 +177,14 @@ own implementation using <code class="highlighter-rouge">TextProvider</code> and
 
 <p>To clarify #5, while traversing the package hierarchy, Struts 2 will look for a file <code class="highlighter-rouge">package.properties</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>com/
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com/
     acme/
          package.properties
          actions/
                  package.properties
                  FooAction.java
                  FooAction.properties
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>If <code class="highlighter-rouge">FooAction.properties</code> does not exist, <code class="highlighter-rouge">com/acme/action/package.properties</code> will be searched for, if not found
@@ -196,11 +195,10 @@ own implementation using <code class="highlighter-rouge">TextProvider</code> and
 
 <p>If you configure action as follow</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"index"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"index"</span><span class="nt">&gt;</span>
    <span class="nt">&lt;result&gt;</span>/index.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>it will use a default class defined with <code class="highlighter-rouge">default-class-ref</code> in <code class="highlighter-rouge">struts-default.xml</code> which is
 <code class="highlighter-rouge">com.opensymphony.xwork2.ActionSupport</code>. It means you have two options here to get I18N working in that case:</p>
@@ -220,9 +218,8 @@ class’ name or package)</li>
 <p>To display i18n text, use a call to <code class="highlighter-rouge">getText</code> in the <code class="highlighter-rouge">property</code> tag, or any other tag, such as the UI tags. (The <code class="highlighter-rouge">getText</code>
 technique is especially useful for labels of UI tags.)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"getText('some.key')"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"getText('some.key')"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>The default implementation of <code class="highlighter-rouge">TextProvider</code> which is used in <code class="highlighter-rouge">ActionSupport</code> perform evaluation of value read from
 bundle base on the provided key, see [Localizing Output] for an example.</p>
@@ -231,24 +228,22 @@ bundle base on the provided key, see [Localizing Output] for an example.</p>
 
 <p>The <code class="highlighter-rouge">text</code> tag retrieves a message from the default resource bundle.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:text</span> <span class="na">name=</span><span class="s">"some.key"</span> <span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:text</span> <span class="na">name=</span><span class="s">"some.key"</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;s:text</span> <span class="na">name=</span><span class="s">"some.invalid.key"</span><span class="nt">&gt;</span>
     The Default Message That Will Be Displayed
 <span class="nt">&lt;/s:text&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="using-the-i18n-tag">Using the I18n tag</h3>
 
 <p>The <code class="highlighter-rouge">i18n</code> tag pushes an arbitrary resource bundle on to the value stack. Other tags within the scope of the i18n tag
 can display messages from that resource bundle.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:i18n</span> <span class="na">name=</span><span class="s">"some.package.bundle"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:i18n</span> <span class="na">name=</span><span class="s">"some.package.bundle"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;s:text</span> <span class="na">name=</span><span class="s">"some.key"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/s:i18n&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Internationalizing SiteMesh decorators is possible, but there are quirks. See <a href="../plugins/sitemesh/">SiteMesh Plugin</a>
 for more.</p>
@@ -257,9 +252,8 @@ for more.</p>
 
 <p>The key attribute of most UI tags can be used to retrieve a message from a resource bundle:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:textfield</span> <span class="na">key=</span><span class="s">"some.key"</span> <span class="na">name=</span><span class="s">"textfieldName"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:textfield</span> <span class="na">key=</span><span class="s">"some.key"</span> <span class="na">name=</span><span class="s">"textfieldName"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <h2 id="i18n-interceptor">I18n Interceptor</h2>
 
@@ -289,9 +283,8 @@ all your actions subclass XWork2’s ActionSupport.</p>
 the framework and via <code class="highlighter-rouge">struts.custom.i18n.resources</code>) you can use existing <code class="highlighter-rouge">GlobalLocalizedTextProvider</code>
 implementation. To use this please define the following option in your <code class="highlighter-rouge">struts.xml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.localizedTextProvider"</span> <span class="na">value=</span><span class="s">"global-only"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.localizedTextProvider"</span> <span class="na">value=</span><span class="s">"global-only"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <h2 id="custom-textprovider-and-textproviderfactory">Custom TextProvider and TextProviderFactory</h2>
 

@@ -192,17 +192,16 @@ project folder structure. In your <code class="highlighter-rouge">pom.xml</code>
 
 <p><strong>pom.xml build node</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;build&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build&gt;</span>
     <span class="nt">&lt;finalName&gt;</span>basic-struts<span class="nt">&lt;/finalName&gt;</span>
 <span class="nt">&lt;/build&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h5 id="to-run-the-application-using-maven-add-the-jetty-maven-plugin-to-your-pomxml">to run the application using maven, add the jetty maven-plugin to your pom.xml</h5>
 
 <p><strong>pom.xml jetty plugin</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;build&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build&gt;</span>
     ...   
     <span class="nt">&lt;plugins&gt;</span>
         <span class="nt">&lt;plugin&gt;</span>
@@ -223,8 +222,7 @@ project folder structure. In your <code class="highlighter-rouge">pom.xml</code>
         <span class="nt">&lt;/plugin&gt;</span>
     <span class="nt">&lt;/plugins&gt;</span>
 <span class="nt">&lt;/build&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>The above plugin will enable you to run the application using <code class="highlighter-rouge">mvn jetty:run</code></p>
 
 <h3 id="step-2---add-indexjsp">Step 2 - Add index.jsp</h3>
@@ -261,13 +259,12 @@ to our web application’s class path. In <code class="highlighter-rouge">pom.xm
 
 <p><strong>pom.xml dependency node</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>struts2-core<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>${struts2.version}<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Of course replace the <code class="highlighter-rouge">${struts2.version}</code> with the current Struts 2 version (or define within pom <code class="highlighter-rouge">properties</code>). 
 Maven will get the <code class="highlighter-rouge">struts2-core</code> jar and the other jar 
@@ -283,7 +280,7 @@ Setup a <code class="highlighter-rouge">log4j2.xml</code> configuration in the <
 
 <p><strong>log4j2.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;Configuration&gt;</span>
     <span class="nt">&lt;Appenders&gt;</span>
         <span class="nt">&lt;Console</span> <span class="na">name=</span><span class="s">"STDOUT"</span> <span class="na">target=</span><span class="s">"SYSTEM_OUT"</span><span class="nt">&gt;</span>
@@ -298,8 +295,7 @@ Setup a <code class="highlighter-rouge">log4j2.xml</code> configuration in the <
         <span class="nt">&lt;/Root&gt;</span>
     <span class="nt">&lt;/Loggers&gt;</span>
 <span class="nt">&lt;/Configuration&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Note the above log4j2 configuration specifies the console as the log target.</p>
 
@@ -307,7 +303,7 @@ Setup a <code class="highlighter-rouge">log4j2.xml</code> configuration in the <
 
 <p><strong>pom.xml log4j dependency node</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>log4j-core<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>${log4j2.version}<span class="nt">&lt;/version&gt;</span>
@@ -317,8 +313,7 @@ Setup a <code class="highlighter-rouge">log4j2.xml</code> configuration in the <
     <span class="nt">&lt;artifactId&gt;</span>log4j-api<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>${log4j2.version}<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Using both <code class="highlighter-rouge">log4j-core</code> and <code class="highlighter-rouge">log4j-api</code> allows to use <a href="//logging.apache.org/log4j/2.x/maven-artifacts.html">the latest version of Log4j2</a> without a clash with version provided by the framework.</p>
 
@@ -327,7 +322,7 @@ Setup a <code class="highlighter-rouge">log4j2.xml</code> configuration in the <
 and all <code class="highlighter-rouge">struts2-*</code> and <code class="highlighter-rouge">log4j-*</code> modules are managed to be of the same version.
 The <code class="highlighter-rouge">struts2-bom</code> is available since 2.3.20.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;properties&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;properties&gt;</span>
 	<span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
 	<span class="nt">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.reporting.outputEncoding&gt;</span>
 	<span class="nt">&lt;java.version&gt;</span>1.8<span class="nt">&lt;/java.version&gt;</span>
@@ -367,8 +362,7 @@ The <code class="highlighter-rouge">struts2-bom</code> is available since 2.3.20
 		<span class="nt">&lt;artifactId&gt;</span>log4j-core<span class="nt">&lt;/artifactId&gt;</span>
 	<span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;/dependencies&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="step-5---add-struts-2-servlet-filter">Step 5 - Add Struts 2 Servlet Filter</h3>
 
@@ -377,7 +371,7 @@ mapping to <code class="highlighter-rouge">web.xml</code>. Below is how the <cod
 
 <p><strong>web.xml Servlet Filter</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;web-app</span> <span class="na">id=</span><span class="s">"WebApp_ID"</span> <span class="na">version=</span><span class="s">"2.4"</span>
 	<span class="na">xmlns=</span><span class="s">"http://java.sun.com/xml/ns/j2ee"</span> 
 	<span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
@@ -398,8 +392,7 @@ mapping to <code class="highlighter-rouge">web.xml</code>. Below is how the <cod
 	<span class="nt">&lt;/filter-mapping&gt;</span>
 
 <span class="nt">&lt;/web-app&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>For more information about configuring the deployment descriptor for Struts 2 see <a href="/core-developers/web-xml.html">Core Developers Guide / web.xml page</a>. Note the url-pattern node 
 value is <code class="highlighter-rouge">/*</code> meaning the Struts 2 filter will be applied to all URLs for this web application.</p>
@@ -413,7 +406,7 @@ must be on the web application’s root class path).</p>
 
 <p><strong>struts.xml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE struts PUBLIC
     "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
     "http://struts.apache.org/dtds/struts-2.5.dtd"&gt;</span>
@@ -429,8 +422,7 @@ must be on the web application’s root class path).</p>
     <span class="nt">&lt;/package&gt;</span>
 
 <span class="nt">&lt;/struts&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This minimal Struts 2 configuration file tells the framework that if the URL ends in <code class="highlighter-rouge">index.action</code> to redirect 
 the browser to <code class="highlighter-rouge">index.jsp</code>.</p>
@@ -450,13 +442,12 @@ messages written to the console and you should find several that discuss <code c
 
 <p><strong>Struts 2 Log Messages</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>...
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 2017-04-17 11:16:01,084 DEBUG [qtp1723848804-22] xwork2.DefaultActionProxy (DefaultActionProxy.java:89) - Creating an DefaultActionProxy for namespace [/] and action name [index]
 ...
 2017-04-17 11:16:01,172 DEBUG [qtp1723848804-22] result.ServletDispatcherResult (ServletDispatcherResult.java:131) - Forwarding to location: /index.jsp
 ...
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="getting-help">Getting Help</h2>
 

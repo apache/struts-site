@@ -256,8 +256,8 @@
 
 <p><strong>Examples</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MySubsetTagAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
-      <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MySubsetTagAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
          <span class="n">l</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
          <span class="n">l</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
          <span class="n">l</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">2</span><span class="o">));</span>
@@ -268,17 +268,17 @@
       <span class="o">}</span>
 
 
-      <span class="kd">public</span> <span class="n">Integer</span><span class="o">[]</span> <span class="n">getMyArray</span><span class="o">()</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="n">Integer</span><span class="o">[]</span> <span class="nf">getMyArray</span><span class="o">()</span> <span class="o">{</span>
          <span class="k">return</span> <span class="n">a</span><span class="o">;</span>
       <span class="o">}</span>
 
-      <span class="kd">public</span> <span class="n">List</span> <span class="n">getMyList</span><span class="o">()</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="n">List</span> <span class="nf">getMyList</span><span class="o">()</span> <span class="o">{</span>
          <span class="k">return</span> <span class="n">l</span><span class="o">;</span>
        <span class="o">}</span>
 
-      <span class="kd">public</span> <span class="n">Decider</span> <span class="n">getMyDecider</span><span class="o">()</span> <span class="o">{</span>
-      <span class="k">return</span> <span class="k">new</span> <span class="n">Decider</span><span class="o">()</span> <span class="o">{</span>
-          <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">decide</span><span class="o">(</span><span class="n">Object</span> <span class="n">element</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="n">Decider</span> <span class="nf">getMyDecider</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nf">Decider</span><span class="o">()</span> <span class="o">{</span>
+          <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">decide</span><span class="o">(</span><span class="n">Object</span> <span class="n">element</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
               <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">((</span><span class="n">Integer</span><span class="o">)</span><span class="n">element</span><span class="o">).</span><span class="na">intValue</span><span class="o">();</span>
               <span class="k">return</span> <span class="o">(((</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)?</span><span class="kc">true</span><span class="o">:</span><span class="kc">false</span><span class="o">);</span>
           <span class="o">}</span>
@@ -286,40 +286,36 @@
       <span class="o">}</span>
   <span class="o">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="c">&lt;!-- s: List basic --&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c">&lt;!-- s: List basic --&gt;</span>
     <span class="nt">&lt;s:subset</span> <span class="na">source=</span><span class="s">"myList"</span><span class="nt">&gt;</span>
        <span class="nt">&lt;s:iterator&gt;</span>
           <span class="nt">&lt;s:property</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;/s:iterator&gt;</span>
     <span class="nt">&lt;/s:subset&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="c">&lt;!-- B: List with count --&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c">&lt;!-- B: List with count --&gt;</span>
     <span class="nt">&lt;s:subset</span> <span class="na">source=</span><span class="s">"myList"</span> <span class="na">count=</span><span class="s">"3"</span><span class="nt">&gt;</span>
        <span class="nt">&lt;s:iterator&gt;</span>
            <span class="nt">&lt;s:property</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;/s:iterator&gt;</span>
      <span class="nt">&lt;/s:subset&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="c">&lt;!--  C: List with start --&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c">&lt;!--  C: List with start --&gt;</span>
       <span class="nt">&lt;s:subset</span> <span class="na">source=</span><span class="s">"myList"</span> <span class="na">count=</span><span class="s">"13"</span> <span class="na">start=</span><span class="s">"3"</span><span class="nt">&gt;</span>
          <span class="nt">&lt;s:iterator&gt;</span>
            <span class="nt">&lt;s:property</span> <span class="nt">/&gt;</span>
          <span class="nt">&lt;/s:iterator&gt;</span>
       <span class="nt">&lt;/s:subset&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="c">&lt;!--  D: List with var --&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c">&lt;!--  D: List with var --&gt;</span>
       <span class="nt">&lt;s:subset</span> <span class="na">var=</span><span class="s">"mySubset"</span> <span class="na">source=</span><span class="s">"myList"</span> <span class="na">count=</span><span class="s">"13"</span> <span class="na">start=</span><span class="s">"3"</span> <span class="nt">/&gt;</span>
       <span class="err">&lt;</span>%
           Iterator i = (Iterator) pageContext.getAttribute("mySubset");
@@ -328,18 +324,16 @@
       <span class="err">&lt;</span>%=i.next() %&gt;
       <span class="err">&lt;</span>%  } %&gt;
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="c">&lt;!--  D: List with Decider --&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c">&lt;!--  D: List with Decider --&gt;</span>
       <span class="nt">&lt;s:subset</span> <span class="na">source=</span><span class="s">"myList"</span> <span class="na">decider=</span><span class="s">"myDecider"</span><span class="nt">&gt;</span>
              <span class="nt">&lt;s:iterator&gt;</span>
                   <span class="nt">&lt;s:property</span> <span class="nt">/&gt;</span>
              <span class="nt">&lt;/s:iterator&gt;</span>
       <span class="nt">&lt;/s:subset&gt;</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
   </section>

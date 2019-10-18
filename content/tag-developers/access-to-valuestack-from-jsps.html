@@ -139,11 +139,10 @@
 <p>After setting parameters, third-party JSP taglibs can access variables or use JSP 2.0 EL (Expression Language). 
 This is convenient as short hand EL expression syntax <code class="highlighter-rouge">${expression}</code> can be used in a text or inside of tag attributes:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>a[0] = ${a[0]}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a[0] = ${a[0]}
 
 &lt;sample:tag value="${a[1]}"/&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In practice, several variables must be exposed to make effective use of third party taglibs like <a href="http://displaytag.sourceforge.net/11/">DisplayTag</a>. 
 Unfortunately, this approach leads to a lot of <code class="highlighter-rouge">&lt;s:set/&gt;</code> tags.</p>
@@ -190,7 +189,7 @@ include in a future release of the framework.</p>
 
 <p><strong>wwel.tld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;taglib</span> <span class="na">xmlns=</span><span class="s">"http://java.sun.com/xml/ns/j2ee"</span>
 	<span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
 	<span class="na">xsi:schemaLocation=</span><span class="s">"http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"</span>
@@ -230,12 +229,11 @@ from JSP 2.0 Expression Language
 <span class="nt">&lt;/function&gt;</span>
 
 <span class="nt">&lt;/taglib&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Functions.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">nmote</span><span class="o">.</span><span class="na">wwel</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">nmote</span><span class="o">.</span><span class="na">wwel</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork.ActionContext</span><span class="o">;</span>
 
@@ -245,26 +243,25 @@ from JSP 2.0 Expression Language
  */</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Functions</span> <span class="o">{</span>
 
-	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Object</span> <span class="n">findOnValueStack</span><span class="o">(</span><span class="n">String</span> <span class="n">expr</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Object</span> <span class="nf">findOnValueStack</span><span class="o">(</span><span class="n">String</span> <span class="n">expr</span><span class="o">)</span> <span class="o">{</span>
 		<span class="n">ActionContext</span> <span class="n">a</span> <span class="o">=</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">();</span>
 		<span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">getValueStack</span><span class="o">().</span><span class="na">findValue</span><span class="o">(</span><span class="n">expr</span><span class="o">);</span>
 		<span class="k">return</span> <span class="n">value</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Object</span> <span class="n">getTopOfValueStack</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Object</span> <span class="nf">getTopOfValueStack</span><span class="o">()</span> <span class="o">{</span>
 		<span class="n">ActionContext</span> <span class="n">a</span> <span class="o">=</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">();</span>
 		<span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">getValueStack</span><span class="o">().</span><span class="na">peek</span><span class="o">();</span>
 		<span class="k">return</span> <span class="n">value</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Object</span> <span class="n">getActionName</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Object</span> <span class="nf">getActionName</span><span class="o">()</span> <span class="o">{</span>
 		<span class="n">ActionContext</span> <span class="n">a</span> <span class="o">=</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">();</span>
 		<span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
 		<span class="k">return</span> <span class="n">value</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </section>
 </article>

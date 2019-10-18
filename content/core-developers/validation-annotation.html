@@ -152,33 +152,32 @@ is no longer necessary.</p>
   <li>Apply standard or custom annotations at method level</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AnnotationDataAware</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AnnotationDataAware</span> <span class="o">{</span>
 
-     <span class="kt">void</span> <span class="n">setBarObj</span><span class="o">(</span><span class="n">Bar</span> <span class="n">b</span><span class="o">);</span>
+     <span class="kt">void</span> <span class="nf">setBarObj</span><span class="o">(</span><span class="n">Bar</span> <span class="n">b</span><span class="o">);</span>
 
-     <span class="n">Bar</span> <span class="n">getBarObj</span><span class="o">();</span>
+     <span class="n">Bar</span> <span class="nf">getBarObj</span><span class="o">();</span>
 
      <span class="nd">@RequiredFieldValidator</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a value for data."</span><span class="o">)</span>
      <span class="nd">@RequiredStringValidator</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a value for data."</span><span class="o">)</span>
-     <span class="kt">void</span> <span class="n">setData</span><span class="o">(</span><span class="n">String</span> <span class="n">data</span><span class="o">);</span>
+     <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="n">String</span> <span class="n">data</span><span class="o">);</span>
 
-     <span class="n">String</span> <span class="n">getData</span><span class="o">();</span>
+     <span class="n">String</span> <span class="nf">getData</span><span class="o">();</span>
  <span class="o">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="an-annotated-class">An Annotated Class</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleAnnotationAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleAnnotationAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
 
      <span class="nd">@RequiredFieldValidator</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ValidatorType</span><span class="o">.</span><span class="na">FIELD</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a value for bar."</span><span class="o">)</span>
      <span class="nd">@IntRangeFieldValidator</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ValidatorType</span><span class="o">.</span><span class="na">FIELD</span><span class="o">,</span> <span class="n">min</span> <span class="o">=</span> <span class="s">"6"</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="s">"10"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"bar must be between ${min} and ${max}, current value is ${bar}."</span><span class="o">)</span>
-     <span class="kd">public</span> <span class="kt">void</span> <span class="n">setBar</span><span class="o">(</span><span class="kt">int</span> <span class="n">bar</span><span class="o">)</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBar</span><span class="o">(</span><span class="kt">int</span> <span class="n">bar</span><span class="o">)</span> <span class="o">{</span>
          <span class="k">this</span><span class="o">.</span><span class="na">bar</span> <span class="o">=</span> <span class="n">bar</span><span class="o">;</span>
      <span class="o">}</span>
 
-     <span class="kd">public</span> <span class="kt">int</span> <span class="n">getBar</span><span class="o">()</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getBar</span><span class="o">()</span> <span class="o">{</span>
          <span class="k">return</span> <span class="n">bar</span><span class="o">;</span>
      <span class="o">}</span>
 
@@ -205,24 +204,22 @@ is no longer necessary.</p>
                  <span class="nd">@ExpressionValidator</span><span class="o">(</span><span class="n">expression</span> <span class="o">=</span> <span class="s">"foo &gt; 5"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"Foo must be greater than Bar 5. Foo = ${foo}, Bar = ${bar}."</span><span class="o">)</span>
      <span class="o">}</span>
      <span class="o">)</span>
-     <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
          <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
      <span class="o">}</span>
  <span class="o">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>When multiple methods are used to map different actions on the same class, and one of them is annotated with <code class="highlighter-rouge">@Validations</code>, 
 those validators will be triggered for all the actions, unless they are annotated with <code class="highlighter-rouge">@SkipValidation</code> or <code class="highlighter-rouge">validateAnnotatedMethodOnly</code>
 is set to <code class="highlighter-rouge">true</code> in the <code class="highlighter-rouge">validation</code> interceptor, like:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"validation"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"validation"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"validateAnnotatedMethodOnly"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeMethods"</span><span class="nt">&gt;</span>input,back,cancel,browse<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/interceptor-ref&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </section>
 </article>

@@ -148,7 +148,7 @@ References to other objects are marked with a pound sign (<code class="highlight
 the framework places other objects in the ActionContext, including Maps representing the application, session, 
 and request contexts. These objects coexist in the ActionContext, alongside the value stack (our OGNL root).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>                     |
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                     |
                      |--application
                      |
                      |--session
@@ -163,8 +163,7 @@ and request contexts. These objects coexist in the ActionContext, alongside the 
                      |
                      |--attr (searches page, request, session, then application scopes)
                      |
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The Action instance is always pushed onto the value stack. Because the Action is on the stack, and the stack is 
 the OGNL root, references to Action properties can omit the <code class="highlighter-rouge">#</code> marker. But, to access other objects in the ActionContext, 
@@ -185,9 +184,8 @@ we must use the <code class="highlighter-rouge">#</code> notation so OGNL knows 
 <p>The ActionContext is also exposed to Action classes via a static method but you <strong>should not</strong> use this approach. 
 Safer is to use one of the <code class="highlighter-rouge">*Aware</code> interfaces.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getSession</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"mySessionPropKey"</span><span class="o">,</span> <span class="n">mySessionObject</span><span class="o">);</span>
-</code></pre>
-</div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getSession</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"mySessionPropKey"</span><span class="o">,</span> <span class="n">mySessionObject</span><span class="o">);</span>
+</code></pre></div></div>
 
 <p>You can also put expression for attributes that don’t support dynamic content, like below:</p>
 
@@ -201,7 +199,7 @@ Safer is to use one of the <code class="highlighter-rouge">*Aware</code> interfa
 using the select tag. The <a href="http://commons.apache.org/proper/commons-ognl/language-guide.html#Collection_Construction">OGNL documentation</a>
 also includes some examples.</p>
 
-<p>Syntax for list: <code class="highlighter-rouge"><span class="p">{</span><span class="err">e1,e2,e3</span><span class="p">}</span></code>. This idiom creates a List containing the String “name1”, “name2” and “name3”. It also 
+<p>Syntax for list: <code class="highlighter-rouge">{e1,e2,e3}</code>. This idiom creates a List containing the String “name1”, “name2” and “name3”. It also 
 selects “name2” as the default value.</p>
 
 <pre><code class="language-jsp">&lt;s:select label="label" name="name" list="{'name1','name2','name3'}" value="%{'name2'}" /&gt;
@@ -240,28 +238,27 @@ selects “name2” as the default value.</p>
 
 <p>To obtain a subset of just male relatives from the object person:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>person.relatives.{? #this.gender == 'male'}
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>person.relatives.{? #this.gender == 'male'}
+</code></pre></div></div>
 
 <h2 id="lambda-expressions">Lambda Expressions</h2>
 
 <p>OGNL supports basic lamba expression syntax enabling you to write simple functions.
 (Dedicated to all you math majors who didn’t think you would ever see this one again.)</p>
 
-<p>Fibonacci: 
-```
-if n == 0 
+<p>Fibonacci:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if n == 0 
    return 0;
  elseif n == 1
    return 1;
  else
-   return fib(n-2) + fib(n-1);</p>
+   return fib(n-2) + fib(n-1);
 
-<p>fib(0) = 0
+
+ fib(0) = 0
  fib(1) = 1
  fib(11) = 89
- ```</p>
+</code></pre></div></div>
 
 <p><strong>How the expression works</strong></p>
 

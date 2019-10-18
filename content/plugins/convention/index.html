@@ -193,13 +193,12 @@ configuration properties and many of the classes can be extended or overridden.<
 <p>In order to use the Convention plugin, you first need to add the JAR file to the <code class="highlighter-rouge">WEB-INF/lib</code> directory of your 
 application or include the dependency in your project’s Maven POM file.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>struts2-convention-plugin<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>X.X.X<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Where <code class="highlighter-rouge">X.X.X</code> is the current version of Struts 2. Please remember that the Convention Plugin is available from 
 version 2.1.6.</p>
@@ -210,11 +209,10 @@ version 2.1.6.</p>
 
 <p>If you are using REST with the Convention plugin, make sure you set these constants in <code class="highlighter-rouge">struts.xml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.suffix"</span> <span class="na">value=</span><span class="s">"Controller"</span><span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.suffix"</span> <span class="na">value=</span><span class="s">"Controller"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.mapAllMatches"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.default.parent.package"</span> <span class="na">value=</span><span class="s">"rest-default"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="hello-world">Hello world</h2>
 
@@ -237,9 +235,8 @@ ie. starting application from Eclipse) into your browser you should get this res
 
 <p><strong>WEB-INF/content/hello-world.jsp</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Hello world!
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello world!
+</code></pre></div></div>
 
 <p>This illustrates that the Convention plugin will find results even when no action exists and it is all based on the URL 
 passed to Struts.</p>
@@ -258,11 +255,10 @@ as sub-packages and determines if the classes implement <code class="highlighter
 
 <p><strong>Classes</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>com.example.actions.MainAction
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com.example.actions.MainAction
 com.example.actions.products.Display (implements com.opensymphony.xwork2.Action)
 com.example.struts.company.details.ShowCompanyDetailsAction
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Each of the action classes that the plugin finds will be configured to respond to specific URLs. The URL is based on 
 the package name that the class is defined in and the class name itself. First the plugin determines the namespace of 
@@ -271,21 +267,19 @@ the namespaces would be:</p>
 
 <p><strong>Namespaces</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>com.example.actions.MainAction -&gt; /
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com.example.actions.MainAction -&gt; /
 com.example.actions.products.Display -&gt; /products
 com.example.struts.company.details.ShowCompanyDetailsAction -&gt; /company/details
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Next, the plugin determines the URL of the resource using the class name. It first removes the word <strong>Action</strong> from the end of the class name and then converts camel case names to dashes. In our example the full URLs would be:</p>
 
 <p><strong>Full URLs</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>com.example.actions.MainAction -&gt; /main
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com.example.actions.MainAction -&gt; /main
 com.example.actions.products.Display -&gt; /products/display
 com.example.struts.company.details.ShowCompanyDetailsAction -&gt; /company/details/show-company-details
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>You can tell the Convention plugin to ignore certain packages using the property <code class="highlighter-rouge">struts.convention.exclude.packages</code>. 
 You can also tell the plugin to use different strings to locate root packages using the property 
@@ -296,24 +290,23 @@ the property <code class="highlighter-rouge">struts.convention.action.packages</
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
   <span class="kd">private</span> <span class="n">String</span> <span class="n">message</span><span class="o">;</span>
 
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">getMessage</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">message</span><span class="o">;</span>
   <span class="o">}</span>
 
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="n">message</span> <span class="o">=</span> <span class="s">"Hello World!"</span><span class="o">;</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If you compile this class and place it into your application in the WEB-INF/classes, the Convention plugin will find 
 the class and map the URL <strong>/hello-world</strong> to it. Next, we need to update our JSP to print out the message we setup in 
@@ -337,9 +330,8 @@ in our browser, we should get this result:</p>
 
 <p><strong>Result</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>The message is Hello World!
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The message is Hello World!
+</code></pre></div></div>
 
 <h2 id="results-and-result-codes">Results and result codes</h2>
 
@@ -354,18 +346,18 @@ is the String <code class="highlighter-rouge">zero</code> rather than <code clas
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
   <span class="kd">private</span> <span class="n">String</span> <span class="n">message</span><span class="o">;</span>
 
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">getMessage</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">message</span><span class="o">;</span>
   <span class="o">}</span>
 
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">message</span> <span class="o">=</span> <span class="s">"It's 0"</span><span class="o">;</span>
       <span class="k">return</span> <span class="s">"zero"</span><span class="o">;</span>
@@ -375,8 +367,7 @@ is the String <code class="highlighter-rouge">zero</code> rather than <code clas
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Next, we add a new JSP to the application named <code class="highlighter-rouge">WEB-INF/content/hello-world-zero.jsp</code>. Notice that the first part 
 of the file name is the same as the URL of the action and the last part of the name is the result code. This is 
@@ -444,12 +435,11 @@ Examples of Action and Result to Template mapping:</p>
 
 <p>It is possible to define multiple names for the same result:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Action</span><span class="o">(</span><span class="n">results</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Action</span><span class="o">(</span><span class="n">results</span> <span class="o">=</span> <span class="o">{</span>
     <span class="nd">@Result</span><span class="o">(</span><span class="n">name</span><span class="o">={</span><span class="s">"error"</span><span class="o">,</span> <span class="s">"input"</span><span class="o">},</span> <span class="n">location</span><span class="o">=</span><span class="s">"input-form.jsp"</span><span class="o">),</span>
     <span class="nd">@Result</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"success"</span><span class="o">,</span> <span class="n">location</span><span class="o">=</span><span class="s">"success.jsp"</span><span class="o">)</span>
 <span class="o">})</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Such functionality was added in Struts version 2.5.</p>
 
@@ -460,24 +450,23 @@ doesn’t have any result defined for that code. In the following example:</p>
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.Action</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
     <span class="nd">@Action</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">foo</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">foo</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"bar"</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Action</span><span class="o">(</span><span class="s">"foo-bar"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">bar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">bar</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The “foo” action will be executed, because no result is found, the Convention plugin tries to find an action named 
 “foo-bar” on the same package where “foo” is defined. If such an action is found, it will be invoked using 
@@ -494,17 +483,15 @@ the action. The parent XWork package is determined based on the property named <
 
 <p><strong>XWork package naming</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;java-package&gt;#&lt;namespace&gt;#&lt;parent-package&gt;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;java-package&gt;#&lt;namespace&gt;#&lt;parent-package&gt;
+</code></pre></div></div>
 
 <p>Using our example from above, the XWork package for our action would be:</p>
 
 <p><strong>XWork package naming</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>com.example.actions#/#conventionDefault
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com.example.actions#/#conventionDefault
+</code></pre></div></div>
 
 <h2 id="annotation-reference">Annotation reference</h2>
 
@@ -519,19 +506,18 @@ class. This annotation must be defined on action methods like this:</p>
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.convention.annotation.Action</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
   <span class="nd">@Action</span><span class="o">(</span><span class="s">"/different/url"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Our action class will now map to the URL <code class="highlighter-rouge">/different/url</code> rather than <code class="highlighter-rouge">/hello-world</code>. If no <code class="highlighter-rouge">@Result</code> (see next section) 
 is specified, then the namespace of the action will be used as the path to the result, on our last example it would be 
@@ -541,7 +527,7 @@ is specified, then the namespace of the action will be used as the path to the r
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.convention.annotation.Action</span><span class="o">;</span>
@@ -552,19 +538,18 @@ is specified, then the namespace of the action will be used as the path to the r
     <span class="nd">@Action</span><span class="o">(</span><span class="s">"/different/url"</span><span class="o">),</span>
     <span class="nd">@Action</span><span class="o">(</span><span class="s">"/another/url"</span><span class="o">)</span>
   <span class="o">})</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Another usage of the <strong>Action</strong> or <strong>Actions</strong> annotation is to define multiple action methods within a single action 
 class, each of which respond to a different URL. Here is an example of multiple action methods:</p>
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.convention.annotation.Action</span><span class="o">;</span>
@@ -572,19 +557,18 @@ class, each of which respond to a different URL. Here is an example of multiple 
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
   <span class="nd">@Action</span><span class="o">(</span><span class="s">"/different/url"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
 
 
   <span class="o">}</span>
 
   <span class="nd">@Action</span><span class="o">(</span><span class="s">"url"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">doSomething</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The previous example defines a second URL that is not fully qualified. This means that the namespace for the URL 
 is determined using the Java package name rather than the Action annotation.</p>
@@ -594,7 +578,7 @@ the <code class="highlighter-rouge">validation</code> interceptor and the <code 
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.convention.annotation.Action</span><span class="o">;</span>
@@ -602,24 +586,23 @@ the <code class="highlighter-rouge">validation</code> interceptor and the <code 
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
   <span class="nd">@Action</span><span class="o">(</span><span class="n">interceptorRefs</span><span class="o">={</span><span class="nd">@InterceptorRef</span><span class="o">(</span><span class="s">"validation"</span><span class="o">),</span> <span class="nd">@InterceptorRef</span><span class="o">(</span><span class="s">"defaultStack"</span><span class="o">)})</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 
   <span class="nd">@Action</span><span class="o">(</span><span class="s">"url"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">doSomething</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Parameters can be passed to results using the <strong>params</strong> attribute. The value of this attribute is a string array with 
-an even number of elements in the form <code class="highlighter-rouge"><span class="p">{</span><span class="nt">"key0"</span><span class="err">,</span><span class="w"> </span><span class="nt">"value0, "</span><span class="err">key1</span><span class="nt">", "</span><span class="err">value1</span><span class="nt">" ... "</span><span class="err">keyN</span><span class="nt">", "</span><span class="err">valueN"}</span></code>. For example:</p>
+an even number of elements in the form <code class="highlighter-rouge">{"key0", "value0, "key1", "value1" ... "keyN", "valueN"}</code>. For example:</p>
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.convention.annotation.Action</span><span class="o">;</span>
@@ -632,12 +615,11 @@ an even number of elements in the form <code class="highlighter-rouge"><span cla
   }
 
   @Action("</span><span class="n">url</span><span class="err">"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">doSomething</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If interceptors are not specified, the default stack is applied.</p>
 
@@ -659,7 +641,7 @@ on that class. In the following example:</p>
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.convention.annotation.Action</span><span class="o">;</span>
@@ -671,17 +653,16 @@ on that class. In the following example:</p>
 <span class="o">})</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
   <span class="nd">@Action</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">"action1"</span><span class="o">,</span> <span class="n">interceptorRefs</span><span class="o">=</span><span class="nd">@InterceptorRef</span><span class="o">(</span><span class="s">"validation"</span><span class="o">))</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 
   <span class="nd">@Action</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">"action2"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">doSomething</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The following interceptors will be applied to “action1”: <code class="highlighter-rouge">interceptor-1</code>, all interceptors from <code class="highlighter-rouge">defaultStack</code>, 
 and <code class="highlighter-rouge">validation</code>. For “action2”, <code class="highlighter-rouge">interceptor-1</code> and all interceptors from <code class="highlighter-rouge">defaultStack</code> will be applied to “action2”.</p>
@@ -703,7 +684,7 @@ an example of the different types of result annotations:</p>
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.convention.annotation.Action</span><span class="o">;</span>
@@ -718,25 +699,24 @@ an example of the different types of result annotations:</p>
   <span class="nd">@Action</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">"/different/url"</span><span class="o">,</span>
     <span class="n">results</span><span class="o">={</span><span class="nd">@Result</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"success"</span><span class="o">,</span> <span class="n">location</span><span class="o">=</span><span class="s">"http://struts.apache.org"</span><span class="o">,</span> <span class="n">type</span><span class="o">=</span><span class="s">"redirect"</span><span class="o">)}</span>
   <span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 
   <span class="nd">@Action</span><span class="o">(</span><span class="s">"/another/url"</span><span class="o">)</span>
 
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">doSomething</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Parameters can be passed to results using the <strong>params</strong> attribute. The value of this attribute is a string array with 
-an even number of elements in the form <code class="highlighter-rouge"><span class="p">{</span><span class="nt">"key0"</span><span class="err">,</span><span class="w"> </span><span class="nt">"value0, "</span><span class="err">key1</span><span class="nt">", "</span><span class="err">value1</span><span class="nt">" ... "</span><span class="err">keyN</span><span class="nt">", "</span><span class="err">valueN"}</span></code>. For example:</p>
+an even number of elements in the form <code class="highlighter-rouge">{"key0", "value0, "key1", "value1" ... "keyN", "valueN"}</code>. For example:</p>
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.convention.annotation.Action</span><span class="o">;</span>
@@ -748,17 +728,16 @@ an even number of elements in the form <code class="highlighter-rouge"><span cla
   <span class="nd">@Action</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">"/different/url"</span><span class="o">,</span>
     <span class="n">results</span><span class="o">={</span><span class="nd">@Result</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"success"</span><span class="o">,</span> <span class="n">type</span><span class="o">=</span><span class="s">"httpheader"</span><span class="o">,</span> <span class="n">params</span><span class="o">={</span><span class="s">"status"</span><span class="o">,</span> <span class="s">"500"</span><span class="o">,</span> <span class="s">"errorMessage"</span><span class="o">,</span> <span class="s">"Internal Error"</span><span class="o">})}</span>
   <span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 
   <span class="nd">@Action</span><span class="o">(</span><span class="s">"/another/url"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">doSomething</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>From 2.1.7 on, global results (defined on the class level) defined using annotations will be inherited. Child classes 
 can override the inherited result(s) by redefining it. Also, results defined at the method level take precedence 
@@ -775,7 +754,7 @@ on an action class:</p>
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.convention.annotation.Action</span><span class="o">;</span>
@@ -784,27 +763,25 @@ on an action class:</p>
 <span class="nd">@Namespace</span><span class="o">(</span><span class="s">"/custom"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
   <span class="nd">@Action</span><span class="o">(</span><span class="s">"/different/url"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 
   <span class="nd">@Action</span><span class="o">(</span><span class="s">"url"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">doSomething</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In this example, the action will respond to two different URLs <code class="highlighter-rouge">/different/url</code> and <code class="highlighter-rouge">/custom/url</code>. Here is an example 
 of using this annotation in the package-info.java file:</p>
 
 <p><strong>com/example/actions/package-info.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts2</span><span class="o">.</span><span class="na">convention</span><span class="o">.</span><span class="na">annotation</span><span class="o">.</span><span class="na">Namespace</span><span class="o">(</span><span class="s">"/custom"</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts2</span><span class="o">.</span><span class="na">convention</span><span class="o">.</span><span class="na">annotation</span><span class="o">.</span><span class="na">Namespace</span><span class="o">(</span><span class="s">"/custom"</span><span class="o">)</span>
 <span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This changes the default namespace for all actions defined in the package <code class="highlighter-rouge">com.example.actions</code>. This annotation however 
 doesn’t apply to sub-packages.</p>
@@ -816,7 +793,7 @@ placed on an action class and also in the package-info.java file. Here is an exa
 
 <p><strong>com.example.actions.HelloWorl</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.convention.annotation.Action</span><span class="o">;</span>
@@ -824,12 +801,11 @@ placed on an action class and also in the package-info.java file. Here is an exa
 
 <span class="nd">@ResultPath</span><span class="o">(</span><span class="s">"/WEB-INF/jsps"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The result for this class will be located in <code class="highlighter-rouge">WEB-INF/jsps</code> rather than the default of <code class="highlighter-rouge">WEB-INF/content</code>.</p>
 
@@ -840,7 +816,7 @@ or Java packages. Here is an example of using the annotation on an action class:
 
 <p><strong>com.example.actions.HelloWorld</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts2.convention.annotation.Action</span><span class="o">;</span>
@@ -848,12 +824,11 @@ or Java packages. Here is an example of using the annotation on an action class:
 
 <span class="nd">@ParentPackage</span><span class="o">(</span><span class="s">"customXWorkPackage"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>To apply this annotation to all actions in a package (and subpackages), add it to package-info.java. An alternative 
 to this annotation is to set <code class="highlighter-rouge">struts.convention.default.parent.package</code> in XML.</p>
@@ -866,30 +841,28 @@ on that class:</p>
 
 <p><strong>ExceptionsActionLevelAction.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@ExceptionMappings</span><span class="o">({</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionMappings</span><span class="o">({</span>
     <span class="nd">@ExceptionMapping</span><span class="o">(</span><span class="n">exception</span> <span class="o">=</span> <span class="s">"java.lang.NullPointerException"</span><span class="o">,</span> <span class="n">result</span> <span class="o">=</span> <span class="s">"success"</span><span class="o">,</span> <span class="n">params</span> <span class="o">=</span> <span class="o">{</span><span class="s">"param1"</span><span class="o">,</span> <span class="s">"val1"</span><span class="o">})</span>
 <span class="o">})</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionsActionLevelAction</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The parameters defined by <code class="highlighter-rouge">params</code> are passed to the result. Exception mappings can also be applied to the action level:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionsMethodLevelAction</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionsMethodLevelAction</span> <span class="o">{</span>
     <span class="nd">@Action</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"exception1"</span><span class="o">,</span> <span class="n">exceptionMappings</span> <span class="o">=</span> <span class="o">{</span>
             <span class="nd">@ExceptionMapping</span><span class="o">(</span><span class="n">exception</span> <span class="o">=</span> <span class="s">"java.lang.NullPointerException"</span><span class="o">,</span> <span class="n">result</span> <span class="o">=</span> <span class="s">"success"</span><span class="o">,</span> <span class="n">params</span> <span class="o">=</span> <span class="o">{</span><span class="s">"param1"</span><span class="o">,</span> <span class="s">"val1"</span><span class="o">})</span>
     <span class="o">})</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">run1</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">run1</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="actions-in-jar-files">Actions in jar files</h2>
 
@@ -897,9 +870,8 @@ on that class:</p>
 to match at least one of the regular expressions in <code class="highlighter-rouge">struts.convention.action.includeJars</code> . In this example
 <code class="highlighter-rouge">myjar1.jar</code> and <code class="highlighter-rouge">myjar2.jar</code> will be scanned:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.includeJars"</span> <span class="na">value=</span><span class="s">".*?/myjar1.*?jar(!/)?,.*?/myjar2*?jar(!/)?"</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.includeJars"</span> <span class="na">value=</span><span class="s">".*?/myjar1.*?jar(!/)?,.*?/myjar2*?jar(!/)?"</span>
+</code></pre></div></div>
 
 <p>Note that <strong>the regular expression will be evaluated against the URL of the jar, and not the file name</strong>, the jar URL 
 can contain a path to the jar file and a trailing <code class="highlighter-rouge">!/</code>.</p>
@@ -910,10 +882,9 @@ can contain a path to the jar file and a trailing <code class="highlighter-rouge
 restarting the container. This is a similar behavior to the automatic xml configuration reloading. To enable this 
 feature, add this to your <code class="highlighter-rouge">struts.xml</code> file:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.devMode"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.devMode"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.classes.reload"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This feature is experimental and has not been tested on all container, and it is <strong>strongly</strong> advised not to use it 
 in production environments.</p>
@@ -922,10 +893,9 @@ in production environments.</p>
 
 <p>When using this plugin with JBoss, you need to set the following constants:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.exclude.parentClassLoader"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.exclude.parentClassLoader"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.fileProtocols"</span> <span class="na">value=</span><span class="s">"jar,vfsfile,vfszip"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>You can also check the <em>JBoss 5</em>  page for more details.</p>
 
@@ -933,10 +903,9 @@ in production environments.</p>
 
 <p>When using this plugin with Jetty in embedded mode, you need to set the following constants:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.exclude.parentClassLoader"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.exclude.parentClassLoader"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.action.fileProtocols"</span> <span class="na">value=</span><span class="s">"jar,code-source"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="troubleshooting">Troubleshooting</h2>
 
@@ -990,7 +959,7 @@ log4j.logger.org.apache.struts2.convention=DEBUG</p>
 
 <p>The Convention plugin can be extended in the same fashion that Struts does. The following beans are defined by default:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.convention.ActionConfigBuilder"</span> <span class="na">name=</span><span class="s">"convention"</span> 
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.convention.ActionConfigBuilder"</span> <span class="na">name=</span><span class="s">"convention"</span> 
   <span class="na">class=</span><span class="s">"org.apache.struts2.convention.PackageBasedActionConfigBuilder"</span><span class="nt">/&gt;</span>
 <span class="c">&lt;!--
 This interface defines how the action configurations for the current web application can be constructed. This must 
@@ -1030,24 +999,21 @@ are part of the plugin.
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.resultMapBuilder"</span> <span class="na">value=</span><span class="s">"convention"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.interceptorMapBuilder"</span> <span class="na">value=</span><span class="s">"convention"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.conventionsService"</span> <span class="na">value=</span><span class="s">"convention"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>To plugin a different implementation for one of these classes, implement the interface, define a bean for it, and set 
 the appropriate constant’s value with the name of the new bean, for example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.convention.ActionNameBuilder"</span> <span class="na">name=</span><span class="s">"MyActionNameBuilder"</span> <span class="na">class=</span><span class="s">"example.SultansOfSwingNameBuilder"</span><span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.convention.ActionNameBuilder"</span> <span class="na">name=</span><span class="s">"MyActionNameBuilder"</span> <span class="na">class=</span><span class="s">"example.SultansOfSwingNameBuilder"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.actionNameBuilder"</span> <span class="na">value=</span><span class="s">"MyActionNameBuilder"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="configuration-reference">Configuration reference</h2>
 
 <p>Add a <strong>constant</strong> element to your struts config file to change the value of a configuration setting, like:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.result.path"</span> <span class="na">value=</span><span class="s">"/WEB-INF/mytemplates/"</span><span class="nt">/&gt;</span>
-</code></pre>
-</div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.convention.result.path"</span> <span class="na">value=</span><span class="s">"/WEB-INF/mytemplates/"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <table>
   <thead>

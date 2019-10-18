@@ -166,7 +166,7 @@ to try to set the value of in the Action class.</p>
 
 <p><strong>Struts 2 Form Tags</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"save"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"save"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;s:textfield</span> <span class="na">key=</span><span class="s">"personBean.firstName"</span> <span class="nt">/&gt;</span> 
     <span class="nt">&lt;s:textfield</span> <span class="na">key=</span><span class="s">"personBean.lastName"</span> <span class="nt">/&gt;</span> 
     <span class="nt">&lt;s:textfield</span> <span class="na">key=</span><span class="s">"personBean.email"</span> <span class="nt">/&gt;</span>
@@ -178,23 +178,21 @@ to try to set the value of in the Action class.</p>
     <span class="nt">&lt;s:checkboxlist</span> <span class="na">key=</span><span class="s">"personBean.carModels"</span> <span class="na">list=</span><span class="s">"carModelsAvailable"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;s:submit</span> <span class="na">key=</span><span class="s">"submit"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/s:form&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The s:submit tag will create a submit button with a name of submit. Since the Action class probably doesn’t have 
 a <code class="highlighter-rouge">setSubmit(String name)</code> method you will see the following log messages (only if Struts development mode is set to true):</p>
 
 <p><strong>Log Messages</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Dec 31, 2012 3:43:53 PM 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dec 31, 2012 3:43:53 PM 
 com.opensymphony.xwork2.util.logging.commons.CommonsLogger warn
 WARNING: Parameter [submit] is not on the excludeParams list of patterns and will be appended to action!
 
 Dec 31, 2012 3:43:53 PM com.opensymphony.xwork2.util.logging.commons.CommonsLogger error
 SEVERE: Developer Notification (set struts.devMode to false to disable this message):
 Unexpected Exception caught setting 'submit' on 'class org.apache.struts.edit.action.EditAction: Error setting expression 'submit' with value ['Save Changes', ]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="excluding-request-parameters-from-struts-2-processing">Excluding Request Parameters From Struts 2 Processing</h2>
 
@@ -207,7 +205,7 @@ used by your Struts 2 application. For example:</p>
 
 <p><strong>Setup Interceptor Stack To Exclude submit Parameter</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;interceptors&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;interceptors&gt;</span>
     <span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"appDefault"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"exception.logEnabled"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
@@ -218,8 +216,7 @@ used by your Struts 2 application. For example:</p>
 <span class="nt">&lt;/interceptors&gt;</span>
 		
 <span class="nt">&lt;default-interceptor-ref</span> <span class="na">name=</span><span class="s">"appDefault"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The value of node <code class="highlighter-rouge">&lt;param name="params.excludeParams"&gt;</code> is a comma-delimited list of regular expressions or simple 
 Strings that identify request parameters that should NOT be processed by the Parameters interceptor. To exclude 

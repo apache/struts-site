@@ -141,7 +141,7 @@
 
 <p><strong>Accessing servlet scopes</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">Map</span> <span class="n">attr</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"attr"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span> <span class="n">attr</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"attr"</span><span class="o">);</span>
 <span class="n">attr</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span><span class="n">myProp</span><span class="o">);</span>
 
 <span class="n">Map</span> <span class="n">application</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"application"</span><span class="o">);</span>
@@ -152,8 +152,7 @@
 
 <span class="n">Map</span> <span class="n">request</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"request"</span><span class="o">);</span>
 <span class="n">request</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span><span class="n">myProp</span><span class="o">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>Do not use <code class="highlighter-rouge">ActionContext.getContext()</code> in the constructor of your Action class. The values may not be set up, and 
@@ -165,9 +164,8 @@ In general this isn’t recommended as it will tie our action to the servlet spe
 
 <p><strong>Setting session attribute through session object</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">ServletActionContext</span><span class="o">.</span><span class="na">getRequest</span><span class="o">().</span><span class="na">getSession</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>
-</code></pre>
-</div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ServletActionContext</span><span class="o">.</span><span class="na">getRequest</span><span class="o">().</span><span class="na">getSession</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>
+</code></pre></div></div>
 
 <p>Implementing <code class="highlighter-rouge">ServletRequestAware</code> or <code class="highlighter-rouge">ServletResponseAware</code>, combined with the <code class="highlighter-rouge">servletConfig</code> interceptor, 
 is an alternative way to access the request and response objects, with the same caveat.</p>

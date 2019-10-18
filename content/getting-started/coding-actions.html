@@ -156,11 +156,10 @@ project. The example code for this tutorial, <strong>coding-actions</strong>, is
 
 <p><strong>Action Mapping</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"hello"</span> <span class="na">class=</span><span class="s">"org.apache.struts.helloworld.action.HelloWorldAction"</span> <span class="na">method=</span><span class="s">"execute"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"hello"</span> <span class="na">class=</span><span class="s">"org.apache.struts.helloworld.action.HelloWorldAction"</span> <span class="na">method=</span><span class="s">"execute"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>/HelloWorld.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The Action mapping above also specified that if the <code class="highlighter-rouge">execute</code> method of class <code class="highlighter-rouge">HelloWorldAction</code> returns <code class="highlighter-rouge">success</code> then the view <code class="highlighter-rouge">HelloWorld.jsp</code> will be returned to the browser.</p>
 
@@ -178,15 +177,14 @@ project. The example code for this tutorial, <strong>coding-actions</strong>, is
 
 <p><strong>Method execute of HelloWorldAction</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="p">(</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
     <span class="n">messageStore</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MessageStore</span><span class="o">()</span> <span class="o">;</span>
 
     <span class="n">helloCount</span><span class="o">++;</span>
 
     <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>Note that method execute declares it throws an Exception. We’ll cover in a later tutorial how to configure Struts to handle any Exceptions thrown from the Action classes methods.</p>
 </blockquote>
@@ -199,12 +197,11 @@ project. The example code for this tutorial, <strong>coding-actions</strong>, is
 
 <p><strong>Struts 2 Form Tags</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"hello"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"hello"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"userName"</span> <span class="na">label=</span><span class="s">"Your name"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;s:submit</span> <span class="na">value=</span><span class="s">"Submit"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/s:form&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Make a note of the value of the name attribute for the Struts 2 textfield tag, which is userName. When the user clicks on the submit button for the above form, the action hello will be executed (<code class="highlighter-rouge">hello.action</code>). The form field values will be posted to the Struts 2 Action class (<code class="highlighter-rouge">HelloWorldAction</code>). The Action class may automatically receive those form field values provided it has a public set method that matches the form field name value.</p>
 
@@ -214,27 +211,25 @@ project. The example code for this tutorial, <strong>coding-actions</strong>, is
 
 <p><strong>Add userName to HelloWorldAction</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">String</span> <span class="n">userName</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">String</span> <span class="n">userName</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">getUserName</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">getUserName</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">userName</span><span class="o">;</span>
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUserName</span><span class="p">(</span><span class="n">String</span> <span class="n">userName</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUserName</span><span class="o">(</span><span class="n">String</span> <span class="n">userName</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">this</span><span class="o">.</span><span class="na">userName</span> <span class="o">=</span> <span class="n">userName</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>To personalize the MessageStore message (recall that class MessageStore is storing the message to display) add the following Java code to the HelloWorldAction’s execute method after the statement that instantiates the MessageStore object.</p>
 
 <p><strong>Add userName value to message</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">userName</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">userName</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">messageStore</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span> <span class="n">messageStore</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">userName</span><span class="o">);</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now build and run (<code class="highlighter-rouge">mvn jetty:run</code>) the application. Enter your name in the form and click the submit button. You should see the following page.</p>
 
