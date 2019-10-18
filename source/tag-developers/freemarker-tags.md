@@ -16,7 +16,7 @@ right in just by knowing the generic structure in which the tags can be accessed
 <@s.tag> ...</@s.tag>
 ```
 
-, where `tag` is any of the [tags](tags) supported by the framework.
+, where `tag` is any of the [tags](tag-reference) supported by the framework.
 
 For example, in JSP you might create a form using Struts tags.
 
