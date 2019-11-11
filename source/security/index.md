@@ -150,6 +150,30 @@ Never use a raw `${}` EL expression on incoming values as this can lead to injec
 
 The safest option is to use Struts Tags instead.
 
+### Define custom error pages
+
+As mentioned in [S2-006](https://cwiki.apache.org/confluence/display/WW/S2-006) it's a good practicse to define your own 
+error pages. This avoids exposing users to XSS attacks as Struts does not escape action's names in automatically 
+generated error pages.
+
+You can eaither disable [DMI](../core-developers/action-configuration#dynamic-method-invocation)
+
+```xml
+<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+``` 
+
+or define an error page
+
+```xml
+<global-results>
+  <result name="error">/error_page.jsp</result>
+</global-results>
+ 
+<global-exception-mappings>
+  <exception-mapping exception="java.lang.Exception" result="error"/>
+</global-exception-mappings>
+```
+
 ## Internal security mechanism
 
 The Apache Struts 2 contains internal security manager which blocks access to particular classes and Java packages - 
