@@ -141,6 +141,7 @@
       <li><a href="#do-not-define-setters-when-not-needed" id="markdown-toc-do-not-define-setters-when-not-needed">Do not define setters when not needed</a></li>
       <li><a href="#do-not-use-incoming-values-as-an-input-for-localisation-logic" id="markdown-toc-do-not-use-incoming-values-as-an-input-for-localisation-logic">Do not use incoming values as an input for localisation logic</a></li>
       <li><a href="#use-struts-tags-instead-of-raw-el-expressions" id="markdown-toc-use-struts-tags-instead-of-raw-el-expressions">Use Struts tags instead of raw EL expressions</a></li>
+      <li><a href="#define-custom-error-pages" id="markdown-toc-define-custom-error-pages">Define custom error pages</a></li>
     </ul>
   </li>
   <li><a href="#internal-security-mechanism" id="markdown-toc-internal-security-mechanism">Internal security mechanism</a>    <ul>
@@ -282,6 +283,28 @@ dangerous and should be avoided. See example below, assuming that an action impl
 Never use a raw <code class="highlighter-rouge">${}</code> EL expression on incoming values as this can lead to injecting a malicious code into the page.</p>
 
 <p>The safest option is to use Struts Tags instead.</p>
+
+<h3 id="define-custom-error-pages">Define custom error pages</h3>
+
+<p>As mentioned in <a href="https://cwiki.apache.org/confluence/display/WW/S2-006">S2-006</a> it’s a good practicse to define your own 
+error pages. This avoids exposing users to XSS attacks as Struts does not escape action’s names in automatically 
+generated error pages.</p>
+
+<p>You can eaither disable <a href="../core-developers/action-configuration#dynamic-method-invocation">DMI</a></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.enable.DynamicMethodInvocation"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>or define an error page</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;global-results&gt;</span>
+  <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"error"</span><span class="nt">&gt;</span>/error_page.jsp<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/global-results&gt;</span>
+ 
+<span class="nt">&lt;global-exception-mappings&gt;</span>
+  <span class="nt">&lt;exception-mapping</span> <span class="na">exception=</span><span class="s">"java.lang.Exception"</span> <span class="na">result=</span><span class="s">"error"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/global-exception-mappings&gt;</span>
+</code></pre></div></div>
 
 <h2 id="internal-security-mechanism">Internal security mechanism</h2>
 
