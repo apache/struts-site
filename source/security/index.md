@@ -182,7 +182,7 @@ Multiple Struts 2 versions have been vulnerable to OGNL security flaws. Conseque
 framework with following proactive optional possibilities since OGNL 3.1.24 and Struts 2.5.22. They're disabled by 
 default but via enabling them, you can proactively protect from potential still unknown OGNL Expression Injections flaws:
 
-NOTE: These might break your current app functionality. Before using in production environment, you're recommended to 
+> **NOTE**: These might break your current app functionality. Before using in production environment, you're recommended to 
 comprehensively test your app UI and functionalities with these enabled.
 
 #### Run OGNL expressions inside sandbox
