@@ -174,6 +174,31 @@ or define an error page
 </global-exception-mappings>
 ```
 
+### Proactively protect from OGNL Expression Injections attacks if easily applicable
+
+The framework has a history of critical security bugs, many tied to its use of OGNL technology; Due to its ability to 
+create or change executable code, OGNL is capable of introducing critical security flaws to any framework that uses it. 
+Multiple Struts 2 versions have been vulnerable to OGNL security flaws. Consequently, we've equipped OGNL and the 
+framework with following proactive optional possibilities since OGNL 3.1.24 and Struts 2.5.22. They're disabled by 
+default but via enabling them, you can proactively protect from potential still unknown OGNL Expression Injections flaws:
+
+NOTE: These might break your current app functionality. Before using in production environment, you're recommended to 
+comprehensively test your app UI and functionalities with these enabled.
+
+#### Run OGNL expressions inside sandbox
+
+You can do this simply via adding `-Dognl.security.manager` to JVM arguments. OGNL thereupon utilizes Java Security
+Manager to run OGNL expressions (which includes your actions either!) inside a sandbox with no permission. It is worth 
+noting that it affects only OGNL expression execution and thereafter OGNL reverts Java Security Manager to its previous 
+state.
+
+#### Apply a maximum allowed length on OGNL expressions
+
+You can enable this via Struts configuration key `struts.ognl.expressionMaxLength`. OGNL thereupon doesn't evaluate any 
+expression longer than specified value. You would choose a value large enough to permit ALL valid OGNL expressions used 
+within the application. Values larger than the 200-400 range have diminishing security value (at which point it is 
+really only a "style guard" for long OGNL expressions in an application).
+
 ## Internal security mechanism
 
 The Apache Struts 2 contains internal security manager which blocks access to particular classes and Java packages - 
