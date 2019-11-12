@@ -142,6 +142,11 @@
       <li><a href="#do-not-use-incoming-values-as-an-input-for-localisation-logic" id="markdown-toc-do-not-use-incoming-values-as-an-input-for-localisation-logic">Do not use incoming values as an input for localisation logic</a></li>
       <li><a href="#use-struts-tags-instead-of-raw-el-expressions" id="markdown-toc-use-struts-tags-instead-of-raw-el-expressions">Use Struts tags instead of raw EL expressions</a></li>
       <li><a href="#define-custom-error-pages" id="markdown-toc-define-custom-error-pages">Define custom error pages</a></li>
+      <li><a href="#proactively-protect-from-ognl-expression-injections-attacks-if-easily-applicable" id="markdown-toc-proactively-protect-from-ognl-expression-injections-attacks-if-easily-applicable">Proactively protect from OGNL Expression Injections attacks if easily applicable</a>        <ul>
+          <li><a href="#run-ognl-expressions-inside-sandbox" id="markdown-toc-run-ognl-expressions-inside-sandbox">Run OGNL expressions inside sandbox</a></li>
+          <li><a href="#apply-a-maximum-allowed-length-on-ognl-expressions" id="markdown-toc-apply-a-maximum-allowed-length-on-ognl-expressions">Apply a maximum allowed length on OGNL expressions</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li><a href="#internal-security-mechanism" id="markdown-toc-internal-security-mechanism">Internal security mechanism</a>    <ul>
@@ -305,6 +310,31 @@ generated error pages.</p>
   <span class="nt">&lt;exception-mapping</span> <span class="na">exception=</span><span class="s">"java.lang.Exception"</span> <span class="na">result=</span><span class="s">"error"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/global-exception-mappings&gt;</span>
 </code></pre></div></div>
+
+<h3 id="proactively-protect-from-ognl-expression-injections-attacks-if-easily-applicable">Proactively protect from OGNL Expression Injections attacks if easily applicable</h3>
+
+<p>The framework has a history of critical security bugs, many tied to its use of OGNL technology; Due to its ability to 
+create or change executable code, OGNL is capable of introducing critical security flaws to any framework that uses it. 
+Multiple Struts 2 versions have been vulnerable to OGNL security flaws. Consequently, we’ve equipped OGNL and the 
+framework with following proactive optional possibilities since OGNL 3.1.24 and Struts 2.5.22. They’re disabled by 
+default but via enabling them, you can proactively protect from potential still unknown OGNL Expression Injections flaws:</p>
+
+<p>NOTE: These might break your current app functionality. Before using in production environment, you’re recommended to 
+comprehensively test your app UI and functionalities with these enabled.</p>
+
+<h4 id="run-ognl-expressions-inside-sandbox">Run OGNL expressions inside sandbox</h4>
+
+<p>You can do this simply via adding <code class="highlighter-rouge">-Dognl.security.manager</code> to JVM arguments. OGNL thereupon utilizes Java Security
+Manager to run OGNL expressions (which includes your actions either!) inside a sandbox with no permission. It is worth 
+noting that it affects only OGNL expression execution and thereafter OGNL reverts Java Security Manager to its previous 
+state.</p>
+
+<h4 id="apply-a-maximum-allowed-length-on-ognl-expressions">Apply a maximum allowed length on OGNL expressions</h4>
+
+<p>You can enable this via Struts configuration key <code class="highlighter-rouge">struts.ognl.expressionMaxLength</code>. OGNL thereupon doesn’t evaluate any 
+expression longer than specified value. You would choose a value large enough to permit ALL valid OGNL expressions used 
+within the application. Values larger than the 200-400 range have diminishing security value (at which point it is 
+really only a “style guard” for long OGNL expressions in an application).</p>
 
 <h2 id="internal-security-mechanism">Internal security mechanism</h2>
 
