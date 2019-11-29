@@ -1,2 +1,5 @@
 #!/usr/local/bin/fish
-docker build -t theapachestruts/struts-site-jekyll --pull docker/
+set -x JEKYLL_VERSION 3.8
+
+docker run --rm -v $PWD:/srv/jekyll -it jekyll/jekyll:$JEKYLL_VERSION jekyll build
+
