@@ -412,7 +412,7 @@ __Parameters__
 
 					<td align="left" valign="top">String</td>
 
-					<td align="left" valign="top">The name to set for element</td>
+					<td align="left" valign="top">Set element name. Set Struts Action field to populate with selected list keys.</td>
 
 				</tr>
 
