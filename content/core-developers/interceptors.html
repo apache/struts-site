@@ -248,8 +248,8 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
 <span class="c">&lt;!--
     When declaring beans in this file you must either use name="struts" or don't name the bean at all.
 
-    The name="struts" must be used when alias was defined in {@link org.apache.struts2.config.DefaultBeanSelectionProvider} -
-    it is then the default bean's name and {@link org.apache.struts2.config.DefaultBeanSelectionProvider} links name "struts"
+    The name="struts" must be used when alias was defined in {@link org.apache.struts2.config.StrutsBeanSelectionProvider} -
+    it is then the default bean's name and {@link org.apache.struts2.config.StrutsBeanSelectionProvider} links name "struts"
     with "default" (aliasing it)
 
     If name won't be defined then the "default" value will be used {@link com.opensymphony.xwork2.inject.Container#DEFAULT_NAME}
@@ -270,6 +270,7 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
                 java.lang.ClassLoader,
                 java.lang.Shutdown,
                 java.lang.ProcessBuilder,
+                sun.misc.Unsafe,
                 com.opensymphony.xwork2.ActionContext"</span> <span class="nt">/&gt;</span>
 
     <span class="c">&lt;!-- this must be valid regex, each '.' in package name must be escaped! --&gt;</span>
@@ -280,13 +281,21 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.excludedPackageNames"</span>
               <span class="na">value=</span><span class="s">"
                 ognl.,
+                java.io.,
+                java.net.,
+                java.nio.,
                 javax.,
                 freemarker.core.,
                 freemarker.template.,
+                freemarker.ext.jsp.,
                 freemarker.ext.rhino.,
+                sun.misc.,
                 sun.reflect.,
                 javassist.,
+                org.apache.velocity.,
                 org.objectweb.asm.,
+                org.springframework.context.,
+                com.opensymphony.xwork2.inject.,
                 com.opensymphony.xwork2.ognl.,
                 com.opensymphony.xwork2.security.,
                 com.opensymphony.xwork2.util."</span> <span class="nt">/&gt;</span>
@@ -322,16 +331,13 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
     <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.multipart.MultiPartRequest"</span> <span class="na">name=</span><span class="s">"jakarta"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.multipart.JakartaMultiPartRequest"</span> <span class="na">scope=</span><span class="s">"prototype"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.multipart.MultiPartRequest"</span> <span class="na">name=</span><span class="s">"jakarta-stream"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.multipart.JakartaStreamMultiPartRequest"</span> <span class="na">scope=</span><span class="s">"prototype"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.views.TagLibraryDirectiveProvider"</span> <span class="na">name=</span><span class="s">"s"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.DefaultTagLibrary"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.views.TagLibraryModelProvider"</span> <span class="na">name=</span><span class="s">"s"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.DefaultTagLibrary"</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.freemarker.FreemarkerThemeTemplateLoader"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.freemarker.FreemarkerManager"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.velocity.VelocityManager"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">optional=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.components.template.TemplateEngineManager"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.template.TemplateEngine"</span> <span class="na">name=</span><span class="s">"ftl"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.components.template.FreemarkerTemplateEngine"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.template.TemplateEngine"</span> <span class="na">name=</span><span class="s">"vm"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.components.template.VelocityTemplateEngine"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.template.TemplateEngine"</span> <span class="na">name=</span><span class="s">"jsp"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.components.template.JspTemplateEngine"</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.XWorkConverter"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.XWorkConverter"</span> <span class="nt">/&gt;</span>
@@ -417,7 +423,6 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
             <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"redirect"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.ServletRedirectResult"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"redirectAction"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.ServletActionRedirectResult"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"stream"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.StreamResult"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"velocity"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.VelocityResult"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"xslt"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.xslt.XSLTResult"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"plainText"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.PlainTextResult"</span> <span class="nt">/&gt;</span>
             <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"postback"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.PostbackResult"</span> <span class="nt">/&gt;</span>
