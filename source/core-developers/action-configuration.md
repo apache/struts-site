@@ -82,7 +82,7 @@ __Action Names with Dots and Dashes__
 Although action naming is pretty flexible, one should pay attention when using dots (eg. create.user) and/or dashes 
 (eg. my-action). While the dot notation has no known side effects at this time, the dash notation will cause problems 
 with the generated JavaScript for certain tags and themes. Use with caution, and always try to use camelcase action 
-names (eg. createUser) or underscores (eg. my-action).
+names (eg. createUser) or underscores (eg. my_action).
 
 __Allowed action names__
 
