@@ -127,86 +127,105 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/tag-developers/tag-syntax.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <h1 id="tag-syntax">Tag Syntax</h1>
+    <h1 class="no_toc" id="tag-syntax">Tag Syntax</h1>
 
-<p>The tags are designed to display dynamic data. To create a input field that displays the property “postalCode”, we’d pass the String “postalCode” to the textfield tag.</p>
+<ul id="markdown-toc">
+  <li><a href="#creating-a-dynamic-input-field" id="markdown-toc-creating-a-dynamic-input-field">Creating a dynamic input field</a>    <ul>
+      <li><a href="#using-an-expression-to-set-the-label" id="markdown-toc-using-an-expression-to-set-the-label">Using an expression to set the label</a></li>
+    </ul>
+  </li>
+  <li><a href="#non-string-attributes" id="markdown-toc-non-string-attributes">Non-String Attributes</a>    <ul>
+      <li><a href="#evaluating-booleans" id="markdown-toc-evaluating-booleans">Evaluating booleans</a></li>
+      <li><a href="#evaluating-booleans-verbose" id="markdown-toc-evaluating-booleans-verbose">Evaluating booleans (verbose)</a></li>
+      <li><a href="#evaluating-booleans-with-property" id="markdown-toc-evaluating-booleans-with-property">Evaluating booleans (with property)</a></li>
+      <li><a href="#evaluating-booleans-verbose-with-property" id="markdown-toc-evaluating-booleans-verbose-with-property">Evaluating booleans (verbose with property)</a></li>
+    </ul>
+  </li>
+  <li><a href="#value-is-an-object" id="markdown-toc-value-is-an-object">value is an Object!</a></li>
+  <li><a href="#probably-wrong" id="markdown-toc-probably-wrong">Probably wrong!</a></li>
+  <li><a href="#passing-a-literal-value-the-right-way" id="markdown-toc-passing-a-literal-value-the-right-way">Passing a literal value the right way</a></li>
+  <li><a href="#expression-language-notations" id="markdown-toc-expression-language-notations">Expression Language Notations</a></li>
+  <li><a href="#disallowed-property-names" id="markdown-toc-disallowed-property-names">Disallowed property names</a></li>
+</ul>
 
-<p><strong>Creating a dynamic input field</strong></p>
+<p>The tags are designed to display dynamic data. To create a input field that displays the property “postalCode”, 
+we’d pass the String “postalCode” to the textfield tag.</p>
 
-<pre><code class="language-jsp">
-&lt;s:textfield name="postalCode"/&gt;
+<h2 id="creating-a-dynamic-input-field">Creating a dynamic input field</h2>
 
+<pre><code class="language-jsp">&lt;s:textfield name="postalCode"/&gt;
 </code></pre>
 
-<p>If there is a “postalCode” property on the value stack, its value will be set to the input field. When the field is submitted back to the framework, the value of the control will be set back to the “postalCode” property.</p>
+<p>If there is a “postalCode” property on the value stack, its value will be set to the input field. When the field is 
+submitted back to the framework, the value of the control will be set back to the “postalCode” property.</p>
 
-<p>Sometimes, we want to pass the dynamic data to a tag. For example, we might want to display a label with the input field, and we might want to obtain the label from the application’s messages resources. Accordingly, the framework will parse expressions found in the tag attributes, so that we can merge dynamic data into the tag attributes at runtime. The expression escape sequence is “%{ … }”.  Any text embedded in the escape sequence is evalulated as an expression.</p>
+<p>Sometimes, we want to pass the dynamic data to a tag. For example, we might want to display a label with the input 
+field, and we might want to obtain the label from the application’s messages resources. Accordingly, the framework will 
+parse expressions found in the tag attributes, so that we can merge dynamic data into the tag attributes at runtime. 
+The expression escape sequence is <code class="highlighter-rouge">%{ ... }</code>.  Any text embedded in the escape sequence is evalulated as an expression.</p>
 
-<p><strong>Using an expression to set the label</strong></p>
+<h3 id="using-an-expression-to-set-the-label">Using an expression to set the label</h3>
 
-<pre><code class="language-jsp">
-&lt;s:textfield key="postalCode.label" name="postalCode"/&gt;
-
+<pre><code class="language-jsp">&lt;s:textfield key="postalCode.label" name="postalCode"/&gt;
 </code></pre>
 
-<p>The expression language (<a href="ognl.html">OGNL</a>) lets us call methods and evaluate properties. The method <code class="highlighter-rouge">getText</code> is provided by ActionSupport, which is the base class for most Actions. Since the Action is on the stack, we can call any of its methods from an expression, including <code class="highlighter-rouge">getText</code>.</p>
+<p>The expression language (<a href="ognl">OGNL</a>) lets us call methods and evaluate properties. The method <code class="highlighter-rouge">getText</code> is provided 
+by <code class="highlighter-rouge">ActionSupport</code>, which is the base class for most Actions. Since the Action is on the stack, we can call any of its 
+methods from an expression, including <code class="highlighter-rouge">getText</code>.</p>
 
 <h2 id="non-string-attributes">Non-String Attributes</h2>
 
-<p>The HTTP protocol is text-based, but some tags have non-String attribute types, like <code class="highlighter-rouge">bool</code> or <code class="highlighter-rouge">int</code>. To make using non-String attributes intuitative, the framework evaulates <strong>all</strong> non-String attributes as an expression. In this case, you do not need to use the escape notation. (But, if you do anyway , the framework will just strip it off.)</p>
+<p>The HTTP protocol is text-based, but some tags have non-String attribute types, like <code class="highlighter-rouge">bool</code> or <code class="highlighter-rouge">int</code>. To make using 
+non-String attributes intuitative, the framework evaulates <strong>all</strong> non-String attributes as an expression. 
+In this case, you do not need to use the escape notation. (But, if you do anyway , the framework will just strip it off.)</p>
 
-<p><strong>Evaluating booleans</strong></p>
+<h3 id="evaluating-booleans">Evaluating booleans</h3>
 
-<pre><code class="language-jsp">
-&lt;s:select key="state.label" name="state" multiple="true"/&gt;
-
+<pre><code class="language-jsp">&lt;s:select key="state.label" name="state" multiple="true"/&gt;
 </code></pre>
 
-<p>Since the attribute <code class="highlighter-rouge">multiple</code> maps to a boolean property, the framework does not interpret the value as a String. The value is evaluated as an expression and automtically converted to a boolean.</p>
+<p>Since the attribute <code class="highlighter-rouge">multiple</code> maps to a boolean property, the framework does not interpret the value as a String. 
+The value is evaluated as an expression and automtically converted to a boolean.</p>
 
 <p>Since it’s easy to forget which attributes are String and which are non-String, you can still use the escape notation.</p>
 
-<p><strong>Evaluating booleans (verbose)</strong></p>
+<h3 id="evaluating-booleans-verbose">Evaluating booleans (verbose)</h3>
 
-<pre><code class="language-jsp">
-&lt;s:select key="state.label" name="state" multiple="%{true}"/&gt;
-
+<pre><code class="language-jsp">&lt;s:select key="state.label" name="state" multiple="%{true}"/&gt;
 </code></pre>
 
-<p><strong>Evaluating booleans (with property)</strong></p>
+<h3 id="evaluating-booleans-with-property">Evaluating booleans (with property)</h3>
 
-<pre><code class="language-jsp">
-&lt;s:select key="state.label" name="state" multiple="allowMultiple"/&gt;
-
+<pre><code class="language-jsp">&lt;s:select key="state.label" name="state" multiple="allowMultiple"/&gt;
 </code></pre>
 
-<p><strong>Evaluating booleans (verbose with property)</strong></p>
+<h3 id="evaluating-booleans-verbose-with-property">Evaluating booleans (verbose with property)</h3>
 
-<pre><code class="language-jsp">
-&lt;s:select key="state.label" name="state" multiple="%{allowMultiple}"/&gt;
-
+<pre><code class="language-jsp">&lt;s:select key="state.label" name="state" multiple="%{allowMultiple}"/&gt;
 </code></pre>
 
 <h2 id="value-is-an-object">value is an Object!</h2>
 
-<p>Most often, the <code class="highlighter-rouge">value</code> attribute is set automatically, since <code class="highlighter-rouge">name</code> attribute usually tells the framework which property to call to set the <code class="highlighter-rouge">value</code>. But, if there is a reason to set the <code class="highlighter-rouge">value</code> directly, be advised that <code class="highlighter-rouge">value</code><strong>is an Object</strong><strong><em>NOT</em> **</strong>a String**.</p>
+<p>Most often, the <code class="highlighter-rouge">value</code> attribute is set automatically, since <code class="highlighter-rouge">name</code> attribute usually tells the framework which 
+property to call to set the <code class="highlighter-rouge">value</code>. But, if there is a reason to set the <code class="highlighter-rouge">value</code> directly, be advised that <code class="highlighter-rouge">value</code>
+<strong>is an Object</strong><strong><em>NOT</em> **</strong>a String**.</p>
 
-<p>(!)  Since <code class="highlighter-rouge">value</code> is not a String, whatever is passed to <code class="highlighter-rouge">value</code> is evaluated as an expression - <strong>NOT</strong> a String literal.</p>
+<blockquote>
+  <p>NOTE: Since <code class="highlighter-rouge">value</code> is not a String, whatever is passed to <code class="highlighter-rouge">value</code> is evaluated as an expression - <strong>NOT</strong> a String literal.</p>
+</blockquote>
 
-<p><strong>Probably wrong!</strong></p>
+<h2 id="probably-wrong">Probably wrong!</h2>
 
-<pre><code class="language-jsp">
-&lt;s:textfield key="state.label" name="state" value="ca"/&gt;
-
+<pre><code class="language-jsp">&lt;s:textfield key="state.label" name="state" value="ca"/&gt;
 </code></pre>
 
-<p>If a <code class="highlighter-rouge">textfield</code> is passed the value attribute <code class="highlighter-rouge">"ca"</code>, the framework will look for a property named <code class="highlighter-rouge">getCa</code>. Generally, this is not what we mean. What we mean to do is pass a literal String. In the expression language, literals are placed within quotes</p>
+<p>If a <code class="highlighter-rouge">textfield</code> is passed the value attribute <code class="highlighter-rouge">ca</code>, the framework will look for a property named <code class="highlighter-rouge">getCa</code>. Generally, 
+this is not what we mean. What we mean to do is pass a literal String. In the expression language, literals are placed 
+within quotes</p>
 
-<p><strong>Passing a literal value the right way</strong></p>
+<h2 id="passing-a-literal-value-the-right-way">Passing a literal value the right way</h2>
 
-<pre><code class="language-jsp">
-&lt;s:textfield key="state.label" name="state" value="%{'ca'}" /&gt;
-
+<pre><code class="language-jsp">&lt;s:textfield key="state.label" name="state" value="%{'ca'}" /&gt;
 </code></pre>
 
 <p>Another approach would be to use the idiom <code class="highlighter-rouge">value="'ca'"</code>, but, in this case, using the expression notation is recommended.</p>
@@ -214,79 +233,56 @@
 <p>Boiled down, the tag attributes are evaluated using three rules.</p>
 
 <ol>
-  <li>
-    <p>All <em>String</em>  attribute types are <em>parsed</em>  for the “%{ … }” notation.</p>
-  </li>
-  <li>
-    <p>All <em>non-String</em>  attribute  types are <strong>not</strong> parsed, but evaluated directly as an expression</p>
-  </li>
-  <li>
-    <p>The exception to rule #2 is that if the <em>non-String</em>  attribute uses the escape notion “%{}”, the notation is ignored as redundant, and the content evaluated.</p>
-  </li>
+  <li>All <em>String</em> attribute types are <em>parsed</em> for the <code class="highlighter-rouge">%{ ... }</code> notation.</li>
+  <li>All <em>non-String</em> attribute types are <strong>not</strong> parsed, but evaluated directly as an expression</li>
+  <li>The exception to rule #2 is that if the <em>non-String</em> attribute uses the escape notion <code class="highlighter-rouge">%{}</code>, the notation is ignored 
+  as redundant, and the content evaluated.</li>
 </ol>
 
-<p>Please remember about <em>altSyntax</em>  option that can change when value is evaluated as an expression - <em>Alt Syntax</em></p>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+<p>Please remember about <em>altSyntax</em> option that can change when value is evaluated as an expression - <a href="alt-syntax">Alt Syntax</a></p>
 
 <h2 id="expression-language-notations">Expression Language Notations</h2>
 
-<p>|&lt;p&gt;Username: ${user.username}&lt;/p&gt;| A JavaBean object in a standard context in Freemarker, Velocity, or JSTL EL (Not OGNL). |
-|—————————————–|——————————————————————————————|
-|<s:textfield name="username"></s:textfield>| A username property on the Value Stack. |
-|<s:url id="es" action="Hello">\</s:url></p>
-<s:param name="request_locale">\
-    es\
-  </s:param>
-<p>\
-&lt;/s:url&gt;\</p>
-<s:a href="%{es}">Espanol</s:a>
-<p>|  Another way to refer to a property placed on the Value Stack. |
-|&lt;s:property\
-  value=”#session.user.username” /&gt;| The username property of the User object in the Session context. |
-|&lt;s:select\
-  label=”FooBar” name=”foo”\
-  list=”#{‘username’:’trillian’,\
-    ‘username’:’zaphod’}” /&gt;|  A static Map, as in put(“username”,”trillian”). |</p>
+<table>
+  <thead>
+    <tr>
+      <th>Username: <code class="highlighter-rouge">${user.username}</code></th>
+      <th>A JavaBean object in a standard context in Freemarker, Velocity, or JSTL EL (Not OGNL).</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">&lt;s:textfield name="username"/&gt;</code></td>
+      <td>A username property on the Value Stack.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">&lt;s:url id="es" action="Hello"&gt;&lt;s:param name="request_locale"&gt;es&lt;/s:param&gt;&lt;/s:url&gt;&lt;s:a href="%{es}"&gt;Espanol&lt;/s:a&gt;</code></td>
+      <td>Another way to refer to a property placed on the Value Stack.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">&lt;s:property value="#session.user.username" /&gt;&lt;s:select label="FooBar" name="foo" list="#{'username':'trillian', 'username':'zaphod'}" /&gt;</code></td>
+      <td>A static Map, as in <code class="highlighter-rouge">put("username","trillian")</code>.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="disallowed-property-names">Disallowed property names</h2>
 
 <p>The following names of property are disallowed:</p>
 
 <ul>
-  <li>
-    <p>parameters</p>
-  </li>
-  <li>
-    <p>application</p>
-  </li>
-  <li>
-    <p>session</p>
-  </li>
-  <li>
-    <p>struts</p>
-  </li>
-  <li>
-    <p>request</p>
-  </li>
-  <li>
-    <p>servletRequest</p>
-  </li>
-  <li>
-    <p>servletResponse</p>
-  </li>
+  <li>parameters</li>
+  <li>application</li>
+  <li>session</li>
+  <li>struts</li>
+  <li>request</li>
+  <li>servletRequest</li>
+  <li>servletResponse</li>
 </ul>
 
 <p>The below code will not work:</p>
 
-<pre><code class="language-jsp">
-&lt;s:iterator value="parameters"/&gt;
-
+<pre><code class="language-jsp">&lt;s:iterator value="parameters"/&gt;
 </code></pre>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
