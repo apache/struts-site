@@ -108,8 +108,10 @@ Please remember about _altSyntax_ option that can change when value is evaluated
 
 ## Expression Language Notations
 
-- A JavaBean object in a standard context in Freemarker, Velocity, or JSTL EL (Not OGNL).|
-  Username: `${user.username}`
+- A JavaBean object in a standard context in Freemarker, Velocity, or JSTL EL (Not OGNL).
+  ```jsp
+  Username: ${user.username}
+  ```
 - A username property on the Value Stack.
   ```jsp
   <s:textfield name="username"/>
