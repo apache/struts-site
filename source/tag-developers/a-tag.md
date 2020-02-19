@@ -2,7 +2,7 @@
 layout: tag-developers
 title: a tag
 parent:
-  title: Tag Developers Guide
+  title: Tag Reference
   url: tag-reference.html
 ---
 
