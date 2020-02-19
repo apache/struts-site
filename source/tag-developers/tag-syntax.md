@@ -110,9 +110,9 @@ Please remember about _altSyntax_ option that can change when value is evaluated
 
 |Username: `${user.username}`|A JavaBean object in a standard context in Freemarker, Velocity, or JSTL EL (Not OGNL).|
 |----------------------------|---------------------------------------------------------------------------------------|
-|```<s:textfield name="username"/>```|A username property on the Value Stack.|
-|```<s:url id="es" action="Hello"><s:param name="request_locale">es</s:param></s:url><s:a href="%{es}">Espanol</s:a>```|Another way to refer to a property placed on the Value Stack.|
-|```<s:property value="#session.user.username" /><s:select label="FooBar" name="foo" list="#{'username':'trillian', 'username':'zaphod'}" />```|  A static Map, as in `put("username","trillian")`. |
+|<s:textfield name="username"/>|A username property on the Value Stack.|
+|<s:url id="es" action="Hello"><br/><s:param name="request_locale">es</s:param><br/></s:url><br/><s:a href="%{es}">Espanol</s:a>```|Another way to refer to a property placed on the Value Stack.|
+|<s:property value="#session.user.username" /><br/><s:select label="FooBar" name="foo" list="#{'username':'trillian', 'username':'zaphod'}" />|  A static Map, as in `put("username","trillian")`. |
 
 ## Disallowed property names
 
