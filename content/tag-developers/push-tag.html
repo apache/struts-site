@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Tag Developers Guide</title>
+  <title>push tag</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -127,130 +127,66 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/tag-developers/push-tag.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
+    <a href="tag-reference.html" title="back to Tag Reference"><< back to Tag Reference</a>
+    
     <h1 id="push">push</h1>
 
-<p>Please make sure you have read the <a href="tag-syntax.html">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+<p>Please make sure you have read the <a href="tag-syntax">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+<h2 id="description">Description</h2>
 
-<p><strong>Description</strong></p>
+<p>Push value on stack for simplified usage.</p>
 
-<p> <p>Push value on stack for simplified usage.</p>
-</p>
+<p>404: Not Found</p>
 
-<p><strong>Parameters</strong></p>
+<h2 id="attributes">Attributes</h2>
 
-<p>		<table width="100%">
+<p>404: Not Found</p>
 
-			<tr>
+<h2 id="examples">Examples</h2>
 
-				<td colspan="6"><h4>Dynamic Attributes Allowed:</h4> false</td>
-
-			</tr>
-
-			<tr>
-
-				<td colspan="6">&nbsp;</td>
-
-			</tr>
-
-			<tr>
-
-				<th align="left" valign="top"><h4>Name</h4></th>
-
-				<th align="left" valign="top"><h4>Required</h4></th>
-
-				<th align="left" valign="top"><h4>Default</h4></th>
-
-				<th align="left" valign="top"><h4>Evaluated</h4></th>
-
-				<th align="left" valign="top"><h4>Type</h4></th>
-
-				<th align="left" valign="top"><h4>Description</h4></th>
-
-			</tr>
-
-				<tr>
-
-					<td align="left" valign="top">value</td>
-
-					<td align="left" valign="top"><strong>true</strong></td>
-
-					<td align="left" valign="top"></td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">String</td>
-
-					<td align="left" valign="top">Value to push on stack</td>
-
-				</tr>
-
-		</table>
-
-</p>
-
-<p><strong>Examples</strong></p>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"user"</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;s:propery</span> <span class="na">value=</span><span class="s">"firstName"</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;s:propery</span> <span class="na">value=</span><span class="s">"lastName"</span> <span class="nt">/&gt;</span>
- <span class="nt">&lt;/s:push&gt;</span>
-
-</code></pre></div></div>
-
-<pre><code class="language-none"> Pushed user into the stack, and hence property tag could access user's properties
- (firstName, lastName etc) since user is now at the top of the stack
-
+<pre><code class="language-jsp">&lt;s:push value="user"&gt;
+    &lt;s:propery value="firstName" /&gt;
+    &lt;s:propery value="lastName" /&gt;
+&lt;/s:push&gt;
 </code></pre>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                              ----- (1)
-       <span class="nt">&lt;s:bean</span> <span class="na">name=</span><span class="s">"jp.SomeBean"</span> <span class="na">var=</span><span class="s">"myBean"</span><span class="nt">/&gt;</span>        ----- (2)
-          <span class="nt">&lt;s:param</span> <span class="na">name=</span><span class="s">"myParam"</span> <span class="na">value=</span><span class="s">"top"</span><span class="nt">/&gt;</span>        ----- (3)
-       <span class="nt">&lt;/s:bean&gt;</span>
-   <span class="nt">&lt;/s:push&gt;</span>
+<p>Pushed user into the stack and hence property tag could access user’s properties (<code class="highlighter-rouge">firstName</code>, <code class="highlighter-rouge">lastName</code>, etc.) since
+user is now at the top of the stack.</p>
 
-</code></pre></div></div>
-
-<pre><code class="language-none"> when in (1), myObject is at the top of the stack
- when in (2), jp.SomeBean is in the top of stack, also in stack's context with key myBean
- when in (3), top will get the jp.SomeBean instance
-
+<pre><code class="language-jsp">&lt;s:push value="myObject"&gt;                            ----- (1)
+     &lt;s:bean name="jp.SomeBean" var="myBean"/&gt;       ----- (2)
+        &lt;s:param name="myParam" value="top"/&gt;        ----- (3)
+     &lt;/s:bean&gt;
+&lt;/s:push&gt;
 </code></pre>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                                       ---(A)
-    <span class="nt">&lt;s:bean</span> <span class="na">name=</span><span class="s">"jp.SomeBean"</span> <span class="na">var=</span><span class="s">"myBean"</span><span class="nt">/&gt;</span>                   ---(B)
-       <span class="nt">&lt;s:param</span> <span class="na">name=</span><span class="s">"myParam"</span> <span class="na">value=</span><span class="s">"top.mySomeOtherValue"</span><span class="nt">/&gt;</span>  ---(C)
-    <span class="nt">&lt;/s:bean&gt;</span>
- <span class="nt">&lt;/s:push&gt;</span>
+<p>when in (1), <code class="highlighter-rouge">myObject</code> is at the top of the stack
+when in (2), <code class="highlighter-rouge">jp.SomeBean</code> is in the top of stack, also in stack’s context with key <code class="highlighter-rouge">myBean</code>
+when in (3), top will get the <code class="highlighter-rouge">jp.SomeBean</code> instance</p>
 
-</code></pre></div></div>
-
-<pre><code class="language-none"> when in (A), myObject is at the top of the stack
- when in (B), jp.SomeBean is at the top of the stack, also in context with key myBean
- when in (C), top refers to jp.SomeBean instance. so top.mySomeOtherValue would invoke SomeBean's mySomeOtherValue() method
-
+<pre><code class="language-jsp">&lt;s:push value="myObject"&gt;                                     ---(A)
+   &lt;s:bean name="jp.SomeBean" var="myBean"/&gt;                  ---(B)
+      &lt;s:param name="myParam" value="top.mySomeOtherValue"/&gt;  ---(C)
+   &lt;/s:bean&gt;
+&lt;/s:push&gt;
 </code></pre>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myObject"</span><span class="nt">&gt;</span>                                 ---- (i)
-    <span class="nt">&lt;s:bean</span> <span class="na">name=</span><span class="s">"jp.SomeBean"</span> <span class="na">var=</span><span class="s">"myBean"</span><span class="nt">/&gt;</span>             ---- (ii)
-       <span class="nt">&lt;s:param</span> <span class="na">name=</span><span class="s">"myParam"</span> <span class="na">value=</span><span class="s">"[1].top"</span><span class="nt">/&gt;</span>         -----(iii)
-    <span class="nt">&lt;/s:bean&gt;</span>
- <span class="nt">&lt;/s:push&gt;</span>
+<p>when in (A), <code class="highlighter-rouge">myObject</code> is at the top of the stack
+when in (B), <code class="highlighter-rouge">jp.SomeBean</code> is at the top of the stack, also in context with key <code class="highlighter-rouge">myBean</code>
+when in (C), top refers to <code class="highlighter-rouge">jp.SomeBean</code> instance. so <code class="highlighter-rouge">top.mySomeOtherValue</code> would invoke SomeBean’s <code class="highlighter-rouge">mySomeOtherValue()</code>
+method</p>
 
-</code></pre></div></div>
-
-<pre><code class="language-none"> when in (i), myObject is at the top of the stack
- when in (ii), jp.SomeBean is at the top of the stack, followed by myObject
- when in (iii), [1].top will returned top of the cut of stack starting from myObject, namely myObject itself
-
+<pre><code class="language-jsp">&lt;s:push value="myObject"&gt;                               ---- (i)
+   &lt;s:bean name="jp.SomeBean" var="myBean"/&gt;            ---- (ii)
+      &lt;s:param name="myParam" value="[1].top"/&gt;         -----(iii)
+   &lt;/s:bean&gt;
+&lt;/s:push&gt;
 </code></pre>
 
+<p>when in (i), <code class="highlighter-rouge">myObject</code> is at the top of the stack
+when in (ii), <code class="highlighter-rouge">jp.SomeBean</code> is at the top of the stack, followed by <code class="highlighter-rouge">myObject</code>
+when in (iii), <code class="highlighter-rouge">[1].top</code> will returned top of the cut of stack starting from <code class="highlighter-rouge">myObject</code>, namely <code class="highlighter-rouge">myObject</code> itself</p>
 
   </section>
 </article>
