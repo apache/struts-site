@@ -24,21 +24,21 @@ the framework places other objects in the ActionContext, including Maps represen
 and request contexts. These objects coexist in the ActionContext, alongside the value stack (our OGNL root).
 
 ```
-                     |
-                     |--application
-                     |
-                     |--session
-       context map---|
-                     |--value stack(root)
-                     |
-                     |--action (the current action)
-                     |
-                     |--request
-                     |
-                     |--parameters
-                     |
-                     |--attr (searches page, request, session, then application scopes)
-                     |
+context map---|
+              |--application
+              |
+              |--session
+              |
+              |--value stack(root)
+              |
+              |--action (the current action)
+              |
+              |--request
+              |
+              |--parameters
+              |
+              |--attr (searches page, request, session, then application scopes)
+              |
 ```
 
 The Action instance is always pushed onto the value stack. Because the Action is on the stack, and the stack is 
