@@ -1,109 +1,62 @@
 ---
-layout: default
-title: Tag Developers Guide
+layout: tag-developers
+title: include tag
+parent:
+  title: Tag Reference
+  url: tag-reference.html
 ---
 
 # include
 
-Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax) document and understand how tag attribute syntax works.
 
-__Description__
+## Description
 
 Include a servlet's output (result of servlet or a JSP page).
 
-**Note:** Any additional params supplied to the included page are **not**
- accessible within the rendered page through the \<s:property...\> tag
- since no valuestack will be created. You can, however, access them in a
- servlet via the HttpServletRequest object or from a JSP page via
- a scriptlet.
+> **Note:** Any additional params supplied to the included page are **not** accessible within the rendered page 
+> through the `<s:property.../>` tag since no ValueStack will be created. You can, however, access them in a servlet
+> via the HttpServletRequest object or from a JSP page via a scriptlet.
 
 **How To access parameters**
 
-Parameters are passed as request parameters, so use the `${param.ParamName}` notation to access them. Do not use the **property** tag to access parameters in included files.
+Parameters are passed as request parameters, so use the `${param.ParamName}` notation to access them. Do not use 
+the **property** tag to access parameters in included files.
 
-__Parameters__
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/include-description.html %}
 
-{% comment %}start snippet id=tagattributes|javadoc=false|url=struts2-tags/include.html {% endcomment %}
-<table width="100%">
+## Attributes
 
-			<tr>
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/include-attributes.html %}
 
-				<td colspan="6"><h4>Dynamic Attributes Allowed:</h4> false</td>
+## Example
 
-			</tr>
+**Example 1**
 
-			<tr>
-
-				<td colspan="6">&nbsp;</td>
-
-			</tr>
-
-			<tr>
-
-				<th align="left" valign="top"><h4>Name</h4></th>
-
-				<th align="left" valign="top"><h4>Required</h4></th>
-
-				<th align="left" valign="top"><h4>Default</h4></th>
-
-				<th align="left" valign="top"><h4>Evaluated</h4></th>
-
-				<th align="left" valign="top"><h4>Type</h4></th>
-
-				<th align="left" valign="top"><h4>Description</h4></th>
-
-			</tr>
-
-				<tr>
-
-					<td align="left" valign="top">value</td>
-
-					<td align="left" valign="top"><strong>true</strong></td>
-
-					<td align="left" valign="top"></td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">String</td>
-
-					<td align="left" valign="top">The jsp/servlet output to include</td>
-
-				</tr>
-
-</table>
-{% comment %}end snippet id=tagattributes|javadoc=false|url=struts2-tags/include.html {% endcomment %}
-
-__Example__
-
-{% comment %}start snippet id=example|lang=java|javadoc=true|url=org.apache.struts2.components.Include {% endcomment %}
-
-```xml
- <!-- One: -->
- <s:include value="myJsp.jsp" />
-
- <!-- Two: -->
- <s:include value="myJsp.jsp">
-    <s:param name="param1" value="value2" />
-    <s:param name="param2" value="value2" />
- </s:include>
-
- <!-- Three: -->
- <s:include value="myJsp.jsp">
-    <s:param name="param1">value1</s:param>
-    <s:param name="param2">value2</s:param>
- </s:include>
+```jsp
+<s:include value="myJsp.jsp" />
 ```
 
-{% comment %}end snippet id=example|lang=java|javadoc=true|url=org.apache.struts2.components.Include {% endcomment %}
+do an include myJsp.jsp page
+ 
+**Example 2**
 
-
-{% comment %}start snippet id=exampledescription|lang=none|javadoc=true|url=org.apache.struts2.components.Include {% endcomment %}
-
-```none
- Example one - do an include myJsp.jsp page
- Example two - do an include to myJsp.jsp page with parameters param1=value1 and param2=value2
- Example three - do an include to myJsp.jsp page with parameters param1=value1 and param2=value2
-
+```jsp
+<s:include value="myJsp.jsp">
+   <s:param name="param1" value="value2" />
+   <s:param name="param2" value="value2" />
+</s:include>
 ```
 
-{% comment %}end snippet id=exampledescription|lang=none|javadoc=true|url=org.apache.struts2.components.Include {% endcomment %}
+do an include to myJsp.jsp page with parameters `param1=value1` and `param2=value2`
+
+**Example 3**
+
+```jsp
+<s:include value="myJsp.jsp">
+   <s:param name="param1">value1</s:param>
+   <s:param name="param2">value2</s:param>
+</s:include>
+```
+
+do an include to myJsp.jsp page with parameters `param1=value1` and `param2=value2`

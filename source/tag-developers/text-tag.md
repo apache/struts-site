@@ -1,11 +1,14 @@
 ---
-layout: default
-title: Tag Developers Guide
+layout: tag-developers
+title: text tag
+parent:
+  title: Tag Reference
+  url: tag-reference.html
 ---
 
 # text
 
-Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
+Please make sure you have read the [Tag Syntax](tag-syntax) document and understand how tag attribute syntax works.
 
 ## Description
 
@@ -21,27 +24,18 @@ If no value is found on the stack, the key of the message will be written out.
 
 For more details on using resource bundles with Struts 2 read the [localization guide](../core-developers/localization.html).
 
-## Parameters
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/text-description.html %}
 
-|__Dynamic Attributes Allowed__:|false|
+## Attributes
 
-|Name|Required|Default|Evaluated|Type|Description|Since|
-|----|--------|-------|---------|----|-----------|-----|
-|name|__true__| |false|String|Name of resource property to fetch|
-|searchValueStack|false|false|false|Boolean|Search the stack if property is not found on resources|Deprecated|
-|var|false| |false|String|Name used to reference the value pushed into the Value Stack|
-|escapeCsv|false|false|false|Boolean|Whether to escape CSV (useful to escape a value for a column)|2.5.14|
-|escapeHtml|false|false|false|Boolean|Whether to escape HTML|2.5.14|
-|escapeJavaScript|false|false|false|Boolean|Whether to escape Javascript|2.5.14|
-|escapeXml|false|false|false|Boolean|Whether to escape XML|2.5.14|
-
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/text-attributes.html %}
 
 ## Examples
 
 > Accessing messages from a given bundle (the i18n Shop example bundle in the first example) and using bundle defined 
 > through the framework in the second example.
 
-```html
+```jsp
  <!-- First Example -->
  <s:i18n name="struts.action.test.i18n.Shop">
      <s:text name="main.title"/>
@@ -54,12 +48,11 @@ For more details on using resource bundles with Struts 2 read the [localization 
  <s:text name="i18n.label.greetings">
     <s:param >Mr Smith</s:param>
  </s:text>
-
 ```
 
 ### Other example
 
-```html
+```jsp
 <s:text name="format.money"><s:param name="value" value="myMoneyValue"/></s:text>
 ```
 
@@ -79,12 +72,12 @@ For more about formatting text, see
 
 This will **not** work:
 
-```html
+```jsp
 <s:textfield name="lastName" label="<s:text name="person.lastName"/>" ../>
 ```
 
 Instead, you should use the `getText()` method that you inherit when your Action extends `ActionSupport`:
 
-```html
+```jsp
 <s:textfield name="lastName" label="getText('person.lastName')" ../>
 ```
