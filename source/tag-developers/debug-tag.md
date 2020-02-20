@@ -1,8 +1,11 @@
 ---
-layout: default
-title: Tag Developers Guide
+layout: tag-developers
+title: debug tag
+parent:
+  title: Tag Reference
+  url: tag-reference.html
 ---
 
 # debug
 
-Outputs the content of the Value Stack.
+Outputs the content of the Value Stack only if `struts.devMode` is enabled.
