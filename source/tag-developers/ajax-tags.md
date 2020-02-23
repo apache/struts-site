@@ -1,12 +1,11 @@
 ---
-layout: default
+layout: tag-developers
 title: Tag Developers Guide
 ---
 
 # Ajax Tags
 
-**Dojo plugin is deprecated and was removed since Struts 2.5**
-
+> NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
 > **Please** check that documentation and the Dojo tag examples in the showcase app of the appropriate Struts 2 version 
 > before asking questions on the struts-user mailing list!

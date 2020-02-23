@@ -1,9 +1,11 @@
 ---
-layout: default
+layout: tag-developers
 title: Tag Developers Guide
 ---
 
 # tree
+
+> NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
 __Description__
 

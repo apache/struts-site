@@ -1,9 +1,11 @@
 ---
-layout: default
-title: Tag Developers Guide
+layout: tag-developers
+title: Ajax a template
 ---
 
 # ajax a template
+
+> NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
 The ajax theme is experimental. Feedback is appreciated.
 

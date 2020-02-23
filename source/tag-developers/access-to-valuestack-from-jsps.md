@@ -1,6 +1,6 @@
 ---
-layout: default
-title: Tag Developers Guide
+layout: tag-developers
+title: Access to ValueStack from JSPs
 ---
 
 # Access to ValueStack from JSPs

@@ -1,11 +1,11 @@
 ---
-layout: default
+layout: tag-developers
 title: Tag Developers Guide
 ---
 
 # ajax div template
 
-> The Ajax theme is experimental. Feedback is appreciated.
+> NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
 The ajax [div](dojo-div-tag.html) template provides a much more interesting div rendering option that the other themes 
 do. Rather than simply rendering a `<div>` tag, this template relies on advanced AJAX features provided 

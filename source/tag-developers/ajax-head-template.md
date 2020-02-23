@@ -1,9 +1,11 @@
 ---
-layout: default
+layout: tag-developers
 title: Tag Developers Guide
 ---
 
 # ajax head template
+
+> NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
 The ajax [head](dojo-head-tag.html) template builds upon the [xhtml head template](head-tag.html) by providing additional 
 JavaScript includes for the [Dojo Toolkit](http://dojotoolkit.org), which is used by the [ajax a template](ajax-a-template.html),

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: tag-developers
 title: Tag Developers Guide
 parent:
   url: themes-and-templates.html
@@ -8,7 +8,7 @@ parent:
 
 # ajax theme
 
-> The ajax theme is deprecated!
+> NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
 The ajax theme extends the [xhtml theme](xhtml-theme.html) with AJAX features. The theme uses the popular DOJO 
 AJAX/JavaScript toolkit. AJAX features include:
