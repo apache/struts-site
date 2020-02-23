@@ -74,8 +74,8 @@ Since it's easy to forget which attributes are String and which are non-String, 
 ## value is an Object!
 
 Most often, the `value` attribute is set automatically, since `name` attribute usually tells the framework which 
-property to call to set the `value`. But, if there is a reason to set the `value` directly, be advised that `value`
-**is an Object****_NOT_ ****a String**.
+property to call to set the `value`. But, if there is a reason to set the `value` directly, be advised that `value` 
+**is an Object _NOT_ a String**.
 
 > NOTE: Since `value` is not a String, whatever is passed to `value` is evaluated as an expression - **NOT** a String literal.
 
