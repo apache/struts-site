@@ -14,7 +14,9 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 A tag that creates a HTML `<a>.` This tag supports the same attributes as the `url` tag, including nested parameters 
 using the `param` tag.
- 
+
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/a-description.html %} 
+
 ## Attributes
 
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/a-attributes.html %}

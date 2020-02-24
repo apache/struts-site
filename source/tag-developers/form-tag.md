@@ -12,7 +12,7 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 ## Description
 
-Renders HTML an input form.
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/form-description.html %}
 
 The remote form allows the form to be submitted without the page being refreshed. The results from the form can be 
 inserted into any HTML element on the page.
@@ -24,8 +24,6 @@ inserted into any HTML element on the page.
   is a valid action alias defined struts.xml.
 3. If the action is given and is not an action alias defined in struts.xml, Struts will used the action attribute 
   as if it is the posting url, separting the namespace from it and using UrlHelper to generate the final url.
-
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/form-description.html %}
 
 ## Attributes
 

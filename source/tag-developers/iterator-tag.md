@@ -10,7 +10,7 @@ parent:
 
 Please make sure you have read the [Tag Syntax](tag-syntax) document and understand how tag attribute syntax works.
 
-> **NOTE**: The id attribute is deprecated in Struts 2.1.x, and has been replaced by the var attribute.
+> **NOTE**: The `id` attribute is deprecated in Struts 2.1.x, and has been replaced by the `var` attribute.
 > The `begin`, `end` and `step` attributes are only available from 2.1.7+
 
 ## Description

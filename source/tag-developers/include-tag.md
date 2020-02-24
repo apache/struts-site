@@ -12,7 +12,7 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 ## Description
 
-Include a servlet's output (result of servlet or a JSP page).
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/include-description.html %}
 
 > **Note:** Any additional params supplied to the included page are **not** accessible within the rendered page 
 > through the `<s:property.../>` tag since no ValueStack will be created. You can, however, access them in a servlet
@@ -22,8 +22,6 @@ Include a servlet's output (result of servlet or a JSP page).
 
 Parameters are passed as request parameters, so use the `${param.ParamName}` notation to access them. Do not use 
 the **property** tag to access parameters in included files.
-
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/include-description.html %}
 
 ## Attributes
 

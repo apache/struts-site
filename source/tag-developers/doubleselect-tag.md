@@ -16,8 +16,6 @@ and `doublelistvalue` to be null and not used.
 
 ## Description
 
-Renders two HTML select elements with second one changing displayed values depending on selected entry of first one.
-
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/doubleselect-description.html %}
 
 ## Attributes

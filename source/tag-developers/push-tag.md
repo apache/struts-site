@@ -12,8 +12,6 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 ## Description
 
-Push value on stack for simplified usage.
-
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/push-description.html %}
 
 ## Attributes

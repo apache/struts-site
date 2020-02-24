@@ -16,8 +16,6 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 ## Description
 
-Render a radio button input field.
-
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/radio-description.html %}
 
 ## Attributes

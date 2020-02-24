@@ -35,6 +35,8 @@ Is "myAction" null inside the tag? true
 Is "myAction" null outside the tag? false
 ```
 
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/action-description.html %}
+
 ## Attributes
 
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/action-attributes.html %}
