@@ -118,7 +118,7 @@ Please remember about _altSyntax_ option that can change when value is evaluated
   ```
 - Another way to refer to a property placed on the Value Stack.
   ```jsp
-  <s:url id="es" action="Hello">
+  <s:url var="es" action="Hello">
     <s:param name="request_locale">es</s:param>
   </s:url>
   <s:a href="%{es}">Espanol</s:a>
