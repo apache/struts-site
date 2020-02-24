@@ -10,7 +10,7 @@ parent:
 
 Please make sure you have read the [Tag Syntax](tag-syntax) document and understand how tag attribute syntax works.
 
-## Description__
+## Description
 
 Perform basic condition flow. `if` tag could be used by itself or can be followed by zero or more `elseif` tags 
 followed by zero or one `else` tag.
