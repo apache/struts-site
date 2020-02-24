@@ -18,7 +18,7 @@ Render HTML textarea tag.
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/textarrea-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/textarea-attributes.html %}
 
 ## Example
 
