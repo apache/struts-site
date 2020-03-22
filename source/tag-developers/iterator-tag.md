@@ -125,3 +125,18 @@ A loop that iterates over a partial list
    <s:property value="top" />
 </s:iterator>
 ```
+
+Another example when we can access a variable out of the current loop context and where name clashes with the current
+
+```jsp
+<s:select name="location" size="1" list="locations" listKey="key"
+  listValue="value" emptyOption="false" />
+
+<s:iterator var="item" value="items" status="rowstatus">
+    <s:url var="myUrl" action="itemDelete">
+        <s:param name="id" value="#item.id" />
+        <%-- Outer loop variable name [1]. as clash with item.location --%>
+        <s:param name="location" value="[1].location" />
+    </s:url>
+</s:iterator>
+```
