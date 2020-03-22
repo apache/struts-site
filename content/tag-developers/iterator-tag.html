@@ -307,6 +307,20 @@ magic, which provides some under-the-covers magic to make 0-n loops trivial. Thi
 &lt;/s:iterator&gt;
 </code></pre>
 
+<p>Another example when we can access a variable out of the current loop context and where name clashes with the current</p>
+
+<pre><code class="language-jsp">&lt;s:select name="location" size="1" list="locations" listKey="key"
+  listValue="value" emptyOption="false" /&gt;
+
+&lt;s:iterator var="item" value="items" status="rowstatus"&gt;
+    &lt;s:url var="myUrl" action="itemDelete"&gt;
+        &lt;s:param name="id" value="#item.id" /&gt;
+        &lt;%-- Outer loop variable name [1]. as clash with item.location --%&gt;
+        &lt;s:param name="location" value="[1].location" /&gt;
+    &lt;/s:url&gt;
+&lt;/s:iterator&gt;
+</code></pre>
+
   </section>
 </article>
 
