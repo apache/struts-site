@@ -4,6 +4,10 @@ title: Plugins
 ---
 
 # Extending an Application with Custom Plugins
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 In this tutorial, we will show how easily our application can be made extensible using the Struts 2 plugin mechanism. 
 To keep the demonstration simple, our plugin will expose a JavaBean that writes a message. Plugins may include any 
