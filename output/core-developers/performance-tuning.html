@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Performance Tuning</title>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/highlighter/github-theme.css" rel="stylesheet">
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts" class="github-ribbon">
+  <img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/download.cgi">Download</a></li>
+                <li><a href="/releases.html">Releases</a></li>
+                <li><a href="/announce.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li class="divider"></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Version Notes</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins">Security Bulletins</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Maven Project Info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core Dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin Dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/core-developers/">Core Developers Guide</a></li>
+                <li><a href="/tag-developers/">Tag Developers Guide</a></li>
+                <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
+                <li><a href="/plugins/">Plugins</a></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/tag-developers/tag-reference.html">Tag reference</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/FAQs">FAQs</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code and Builds</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li class="divider"></li>
+                <li><a href="/release-guidelines.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://gitbox.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/performance-tuning.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <h1 id="performance-tuning">Performance Tuning</h1>
+
+<h2 id="performance-tuning-1">Performance tuning</h2>
+
+<p>The following are some tips and tricks to squeeze the most performance out of Struts 2.</p>
+
+<blockquote>
+  <p>For Struts 2 versions before 2.3: the OGNL version 3.0.3 library is a drop-in replacement for older OGNL jars,
+and provides <strong>much</strong> better performance. See the following JIRA issue for more information: 
+<a href="https://issues.apache.org/jira/browse/WW-3580">https://issues.apache.org/jira/browse/WW-3580</a></p>
+</blockquote>
+
+<h2 id="turn-off-logging-and-devmode">Turn off logging and devMode</h2>
+
+<p>The <a href="development-mode.html">devMode</a> allows reloading of configuration and validation related files, but because they 
+happen on each request, this setting will totally kill your performance.
+When using logging, make sure to turn off logging (esp. Freemarker generates a LOT of logging), and check if a level is 
+enabled before printing it, or you will get the cost of the String parsing/concatenation anyways.</p>
+
+<h2 id="use-the-java-templates">Use the Java Templates</h2>
+
+<p>If you use the simple theme, and do not overwrite any of the FreeMarker templates, consider using the <a href="../plugins/javatemplates-plugin/">java templates</a>,
+which provide a drop in replacement for most tags, and are a lot faster than the regular tags.</p>
+
+<h2 id="do-not-use-interceptors-you-do-not-need">Do not use interceptors you do not need</h2>
+
+<p>If you do not require a full stack of interceptors for an Action, then try using a different one (basicStack), 
+or remove interceptors you do not need. Remove the I18nInterceptor interceptor if you don’t need it, as it can cause 
+a session to be created.</p>
+
+<h2 id="use-the-correct-http-headers-cache-control--expires">Use the correct HTTP headers (Cache-Control &amp; Expires)</h2>
+
+<p>When returning HTML views, make sure to add the correct headers so browsers know how to cache them.</p>
+
+<h2 id="copy-the-static-content-from-the-struts-2-jar-when-using-the-ajax-theme-dojo-or-the-calendar-tag">Copy the static content from the Struts 2 jar when using the Ajax theme (Dojo) or the Calendar tag</h2>
+
+<p>Struts 2 uses some external javascript libraries and cascading stylesheets for certain themes and tags. These by default 
+are located inside the Struts 2 jar, and a special filter returns them when requesting a special path (<code class="highlighter-rouge">/struts</code>). 
+Although Struts 2 can handle these requests, an application/servlet container is not optimized for these kind of requests. 
+Consider moving these .js and .css files to a seperated server (Lighttpd, Apache HTTPD, ..).</p>
+
+<h2 id="create-a-freemarkerproperties-file-in-your-web-infclasses-directory">Create a freemarker.properties file in your WEB-INF/classes directory</h2>
+
+<p>Create the freemarker.properties file and add the following setting (or whatever value you deem fitting):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>template_update_delay=60000
+</code></pre></div></div>
+
+<p>This value determines how often Freemarker checks if it needs to reloads the templates from disk. The default value 
+is 500 ms. Since there is no reason to check if a template needs reloading, it is best to set this to a very large value. 
+Note that this value is in seconds and freemarker will convert this value to milliseconds.</p>
+
+<p>You can also use <code class="highlighter-rouge">struts.freemarker.templatesCache.updateDelay</code> constant to achieve the same effect.</p>
+
+<p>See also: <a href="http://freemarker.sourceforge.net/docs/api/freemarker/template/Configuration.html\#setSetting(java.lang.String,%20java.lang.String)">Freemarker configuration properties</a></p>
+
+<h2 id="enable-freemarker-template-caching">Enable Freemarker template caching</h2>
+
+<p>As of Struts 2.0.10, setting the property <code class="highlighter-rouge">struts.freemarker.templatesCache</code> to true will enable the Struts internal 
+caching of Freemarker templates. This property is set to false by default.</p>
+
+<p>In Struts versions prior to 2.0.10, you had to copy the <code class="highlighter-rouge">/template</code> directory from the Struts 2 jar in your <code class="highlighter-rouge">WEB_APP</code> 
+root to utilize Freemarker’s built in caching mechanism in order to achieve similar results.</p>
+
+<p>The built in Freemarker caching mechanism fails to properly cache templates when they are retrieved from the classpath. 
+Copying them to the WEB_APP root allows Freemarker to cache them correctly. Freemarker looks at the last modified time 
+of the template to determine if it needs to reload the templates. Resources retrieved from the classpath have no last 
+modified time, so Freemarker will reload them on every request.</p>
+
+<h2 id="when-overriding-a-theme-copy-all-necessary-templates-to-the-theme-directory">When overriding a theme, copy all necessary templates to the theme directory</h2>
+
+<p>There’s a performance cost when a template cannot be found in the current directory. The reason for this is that 
+Struts 2 must check for a template in the current theme first before falling back to the parent theme. In the future, 
+this penalty could be eliminated by implementing a missing template cache in Struts 2.</p>
+
+<h2 id="do-not-create-sessions-unless-you-need-them">Do not create sessions unless you need them</h2>
+
+<p>Struts 2 does not create sessions unless asked to (for example, by having the createSession interceptor in your 
+interceptor stack). Note that when you use SiteMesh however, a session will <strong>always</strong> be created. 
+The I18nInterceptor interceptor can create sessions, so make sure you remove it, if you don’t need it.</p>
+
+<h2 id="when-using-freemarker-try-to-use-the-freemarker-equivalent-rather-than-using-the-jsp-tags">When using Freemarker, try to use the Freemarker equivalent rather than using the JSP tags</h2>
+
+<p>Freemarker has support for iterating lists, displaying properties, including other templates, macro’s, and so on. 
+There is a small performance cost when using the S2 tags instead of the Freemarker equivalent 
+(eg. <code class="highlighter-rouge">&lt;s:property value="foo"/&gt;</code> should be replaced by <code class="highlighter-rouge">${foo}</code>).</p>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    All Rights Reserved.
+  </div>
+  <div class="col-md-12">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>
+<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+</body>
+</html>

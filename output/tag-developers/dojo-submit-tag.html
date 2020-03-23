@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Tag Developers Guide</title>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/highlighter/github-theme.css" rel="stylesheet">
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts" class="github-ribbon">
+  <img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/download.cgi">Download</a></li>
+                <li><a href="/releases.html">Releases</a></li>
+                <li><a href="/announce.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li class="divider"></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Version Notes</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins">Security Bulletins</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Maven Project Info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core Dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin Dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/core-developers/">Core Developers Guide</a></li>
+                <li><a href="/tag-developers/">Tag Developers Guide</a></li>
+                <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
+                <li><a href="/plugins/">Plugins</a></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/tag-developers/tag-reference.html">Tag reference</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/FAQs">FAQs</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code and Builds</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li class="divider"></li>
+                <li><a href="/release-guidelines.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://gitbox.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/tag-developers/dojo-submit-tag.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="index.html" title="back to Tag Developers Guide"><< back to Tag Developers Guide</a>
+    
+    <h1 id="dojo-submit">dojo submit</h1>
+
+<blockquote>
+  <p>NOTE: Ajax template (Dojo plugin) is deprecated and won’t be supported any longer.</p>
+</blockquote>
+
+<p><strong>Description</strong></p>
+
+<p> Renders a submit button that can submit a form asynchronously.
+ The submit can have three different types of rendering:
+ <ul>
+ <li>input: renders as html &lt;input type="submit"...&gt;</li>
+ <li>image: renders as html &lt;input type="image"...&gt;</li>
+ <li>button: renders as html &lt;button type="submit"...&gt;</li>
+ </ul>
+ Please note that the button type has advantages by adding the possibility to seperate the submitted value from the
+ text shown on the button face, but has issues with Microsoft Internet Explorer at least up to 6.0
+</p>
+
+<p>There’s a bug in  IE6/IE7 which makes impossible to use the target’s attribute with a parent Div, because such Div’s content’s are overwritten with the tag’s <em>loadingText</em> . Resulting in an “undefined” message in the content’s, instead of the result of the request.</p>
+
+<p>One possible alternative is to set <em>showLoadingText=”false”</em> (the default) and set the indicator attribute to an element showing the desired loading text or image (outside the div).</p>
+
+<pre><code class="language-jsp">
+&lt;img id="loadingImage" src="images/loadingAnimation.gif" style="display:none"/&gt;
+&lt;s:div id="parentDiv"&gt;
+    &lt;s:form action="actionName"&gt;
+        &lt;sx:submit  targets="parentDiv" showLoadingText="false" indicator="loadingImage"/&gt;
+    &lt;/s:form&gt;
+&lt;/s:div&gt;
+
+</code></pre>
+
+<p><strong>Parameters</strong></p>
+
+<p>		<table width="100%">
+
+			<tr>
+
+				<td colspan="6"><h4>Dynamic Attributes Allowed:</h4> false</td>
+
+			</tr>
+
+			<tr>
+
+				<td colspan="6">&nbsp;</td>
+
+			</tr>
+
+			<tr>
+
+				<th align="left" valign="top"><h4>Name</h4></th>
+
+				<th align="left" valign="top"><h4>Required</h4></th>
+
+				<th align="left" valign="top"><h4>Default</h4></th>
+
+				<th align="left" valign="top"><h4>Evaluated</h4></th>
+
+				<th align="left" valign="top"><h4>Type</h4></th>
+
+				<th align="left" valign="top"><h4>Description</h4></th>
+
+			</tr>
+
+				<tr>
+
+					<td align="left" valign="top">accesskey</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html accesskey attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">afterNotifyTopics</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Comma delimmited list of topics that will published after the request(if the request succeeds)</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">ajaxAfterValidation</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">Boolean</td>
+
+					<td align="left" valign="top">Make an asynchronous request if validation succeeds. Only valid if 'validate' is 'true'</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">align</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">HTML align attribute.</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">beforeNotifyTopics</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Comma delimmited list of topics that will published before the request</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">cssClass</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The css class to use for element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">cssErrorClass</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The css error class to use for element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">cssErrorStyle</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The css error style definitions for element to use</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">cssStyle</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The css style to use for element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">disabled</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html disabled attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">errorNotifyTopics</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Comma delimmited list of topics that will published after the request(if the request fails)</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">errorPosition</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Define error position of form element (top|bottom)</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">errorText</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The text to display to the user if the is an error fetching the content</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">executeScripts</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">Boolean</td>
+
+					<td align="left" valign="top">Javascript code in the fetched content will be executed</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">formFilter</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Function name used to filter the fields of the form.</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">formId</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Form id whose fields will be serialized and passed as parameters</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">handler</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Javascript function name that will make the request</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">highlightColor</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">none</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Color used to perform a highlight effect on the elements specified in the 'targets' attribute</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">highlightDuration</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">1000</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Duration of highlight effect in milliseconds. Only valid if 'highlightColor' attribute is set</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">href</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The URL to call to obtain the content. Note: If used with ajax context, the value must be set as an url tag value.</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">id</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The id to use for the element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">indicator</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set indicator</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">javascriptTooltip</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">Boolean</td>
+
+					<td align="left" valign="top">Use JavaScript to generate tooltips</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">key</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the key (name, value, label) for this particular component</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">label</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Label expression used for rendering a element specific label</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">labelSeparator</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">:</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">String that will be appended to the label</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">labelposition</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Define label position of form element (top/left)</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">listenTopics</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Topic that will trigger the remote call</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">loadingText</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">Loading...</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Text to be shown while content is being fetched</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">method</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set method attribute.</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">name</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The name to set for element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">notifyTopics</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Comma delimmited list of topics that will published before and after the request, and on errors</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onblur</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top"> Set the html onblur attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onchange</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onchange attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onclick</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onclick attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">ondblclick</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html ondblclick attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onfocus</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onfocus attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onkeydown</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onkeydown attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onkeypress</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onkeypress attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onkeyup</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onkeyup attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onmousedown</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onmousedown attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onmousemove</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onmousemove attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onmouseout</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onmouseout attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onmouseover</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onmouseover attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onmouseup</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onmouseup attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">onselect</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html onselect attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">openTemplate</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set template to use for opening the rendered html.</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">parseContent</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">true</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">Boolean</td>
+
+					<td align="left" valign="top">Parse returned HTML for Dojo widgets</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">requiredLabel</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">Boolean</td>
+
+					<td align="left" valign="top">If set to true, the rendered element will indicate that input is required</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">requiredPosition</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Define required position of required form element (left|right)</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">separateScripts</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">true</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Run scripts in a separate scope, unique for each tag</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">showErrorTransportText</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">true</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">Boolean</td>
+
+					<td align="left" valign="top">Set whether errors will be shown or not</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">showLoadingText</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">Boolean</td>
+
+					<td align="left" valign="top">Show loading text on targets</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">src</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Supply an image src for <i>image</i> type submit button. Will have no effect for types <i>input</i> and <i>button</i>.</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">style</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The css style definitions for element to use - it's an alias of cssStyle attribute.</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">tabindex</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html tabindex attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">targets</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Comma delimited list of ids of the elements whose content will be updated</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">template</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The template (other than default) to use for rendering the element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">templateDir</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The template directory.</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">title</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the html title attribute on rendered html element</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">tooltip</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Set the tooltip of this particular component</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">tooltipConfig</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Deprecated. Use individual tooltip configuration attributes instead.</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">tooltipCssClass</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">StrutsTTClassic</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">CSS class applied to JavaScrip tooltips</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">tooltipDelay</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">Classic</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Delay in milliseconds, before showing JavaScript tooltips </td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">tooltipIconPath</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Icon path used for image that will have the tooltip</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">transport</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">XMLHTTPTransport</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Transport used by Dojo to make the request</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">type</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">input</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">The type of submit to use. Valid values are <i>input</i>, <i>button</i> and <i>image</i>.</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">validate</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">Boolean</td>
+
+					<td align="left" valign="top">Perform Ajax validation. 'ajaxValidation' interceptor must be applied to action</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="left" valign="top">value</td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top"></td>
+
+					<td align="left" valign="top">false</td>
+
+					<td align="left" valign="top">String</td>
+
+					<td align="left" valign="top">Preset the value of input element.</td>
+
+				</tr>
+
+		</table>
+
+</p>
+
+<p><strong>Examples</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;sx:submit</span> <span class="na">value=</span><span class="s">"%{'Submit'}"</span> <span class="nt">/&gt;</span>
+
+</code></pre></div></div>
+
+<p>Render an image submit:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;sx:submit</span> <span class="na">type=</span><span class="s">"image"</span> <span class="na">value=</span><span class="s">"%{'Submit'}"</span> <span class="na">label=</span><span class="s">"Submit the form"</span> <span class="na">src=</span><span class="s">"submit.gif"</span><span class="nt">/&gt;</span>
+
+</code></pre></div></div>
+
+<p>Render a button submit:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;sx:submit</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"%{'Submit'}"</span> <span class="na">label=</span><span class="s">"Submit the form"</span><span class="nt">/&gt;</span>
+
+</code></pre></div></div>
+
+<p>Update target content with html returned from an action:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"div1"</span><span class="nt">&gt;</span>Div 1<span class="nt">&lt;/div&gt;</span>
+ <span class="nt">&lt;s:url</span> <span class="na">id=</span><span class="s">"ajaxTest"</span> <span class="na">value=</span><span class="s">"/AjaxTest.action"</span><span class="nt">/&gt;</span>
+
+ <span class="nt">&lt;sx:submit</span> <span class="na">id=</span><span class="s">"link1"</span> <span class="na">href=</span><span class="s">"%{ajaxTest}"</span> <span class="na">target=</span><span class="s">"div1"</span> <span class="nt">/&gt;</span>
+
+</code></pre></div></div>
+
+<p>Submit form(inside the form):</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;s:form</span> <span class="na">id=</span><span class="s">"form"</span> <span class="na">action=</span><span class="s">"AjaxTest"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"textbox"</span> <span class="na">name=</span><span class="s">"data"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;sx:submit</span> <span class="nt">/&gt;</span>
+ <span class="nt">&lt;/s:form&gt;</span>
+
+</code></pre></div></div>
+
+<p>Submit form(outside the form):</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;s:form</span> <span class="na">id=</span><span class="s">"form"</span> <span class="na">action=</span><span class="s">"AjaxTest"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"textbox"</span> <span class="na">name=</span><span class="s">"data"</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;/s:form&gt;</span>
+
+ <span class="nt">&lt;sx:submit</span> <span class="na">formId=</span><span class="s">"form"</span> <span class="nt">/&gt;</span>
+
+</code></pre></div></div>
+
+<p>Using beforeNotifyTopics:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+ dojo.event.topic.subscribe("/before", function(event, widget){
+     alert('inside a topic event. before request');
+     //event: set event.cancel = true, to cancel request
+     //widget: widget that published the topic
+ });
+ <span class="nt">&lt;/script&gt;</span>
+
+ <span class="nt">&lt;sx:submit</span> <span class="na">beforeNotifyTopics=</span><span class="s">"/before"</span> <span class="nt">/&gt;</span>
+
+</code></pre></div></div>
+
+<p>Using afterNotifyTopics and highlight target:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+ dojo.event.topic.subscribe("/after", function(data, request, widget){
+     alert('inside a topic event. after request');
+     //data : text returned from request(the html)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ <span class="nt">&lt;/script&gt;</span>
+
+ <span class="nt">&lt;sx:submit</span> <span class="na">afterNotifyTopics=</span><span class="s">"/after"</span> <span class="na">highlightColor=</span><span class="s">"red"</span> <span class="na">href=</span><span class="s">"%{#ajaxTest}"</span> <span class="nt">/&gt;</span>
+
+</code></pre></div></div>
+
+<p>Using errorNotifyTopics and indicator:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+ dojo.event.topic.subscribe("/error", function(error, request, widget){
+     alert('inside a topic event. on error');
+     //error : error object (error.message has the error message)
+     //request: XMLHttpRequest object
+     //widget: widget that published the topic
+ });
+ <span class="nt">&lt;/script&gt;</span>
+
+ <span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">"ind1"</span> <span class="na">src=</span><span class="s">"${pageContext.request.contextPath}/images/indicator.gif"</span> <span class="na">style=</span><span class="s">"display:none"</span><span class="nt">/&gt;</span>
+ <span class="nt">&lt;sx:submit</span> <span class="na">errorNotifyTopics=</span><span class="s">"/error"</span> <span class="na">indicator=</span><span class="s">"ind1"</span> <span class="na">href=</span><span class="s">"%{#ajaxTest}"</span> <span class="nt">/&gt;</span>
+
+</code></pre></div></div>
+
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    All Rights Reserved.
+  </div>
+  <div class="col-md-12">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>
+<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+</body>
+</html>

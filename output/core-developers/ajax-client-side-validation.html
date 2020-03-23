@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>AJAX Client Side Validation</title>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/highlighter/github-theme.css" rel="stylesheet">
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts" class="github-ribbon">
+  <img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/download.cgi">Download</a></li>
+                <li><a href="/releases.html">Releases</a></li>
+                <li><a href="/announce.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li class="divider"></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Version Notes</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins">Security Bulletins</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Maven Project Info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core Dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin Dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/core-developers/">Core Developers Guide</a></li>
+                <li><a href="/tag-developers/">Tag Developers Guide</a></li>
+                <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
+                <li><a href="/plugins/">Plugins</a></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/tag-developers/tag-reference.html">Tag reference</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/FAQs">FAQs</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code and Builds</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li class="divider"></li>
+                <li><a href="/release-guidelines.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://gitbox.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/ajax-client-side-validation.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <h1 id="ajax-client-side-validation">AJAX Client Side Validation</h1>
+
+<p>This validation mode only works with the <em>ajax theme</em></p>
+
+<table>
+  <tbody>
+    <tr>
+    </tr>
+  </tbody>
+</table>
+
+<p>AJAX-based client side validation improves upon <a href="#PAGE_14262">Pure JavaScript Client Side Validation</a> by using a combination of JavaScript, DOM manipulation, and remote server communication. Unlike the pure client side implementation, AJAX-based validation communicates with the server. This means all your validation rules that worked when submitting a form will still work within the browser.</p>
+
+<p>The validation occurs on each <strong>onblur</strong> event for each form element. As each user types in some values and moves to the next form element, the value (and all other values previously entered) will be sent to the server for validation. The entire validation stack is run, including visitor validators and your action’s validate() method.</p>
+
+<p>If there is an error, like the pure implementation, the HTML and DOM will be updated immediately.</p>
+
+<p>For an example of this, see <em>AJAX Validation</em> .</p>
+
+<p><strong>AJAX Validation</strong></p>
+
+<p><strong>Description</strong></p>
+
+<p>Struts provides <a href="client-side-validation.html">client side validation</a>(using JavaScript) for a few validators. Using AJAX validation, all <a href="#PAGE_14292">validators</a> available to the application on the server side can be used without forcing the page to reload, just to show validation errors. AJAX validation has a server side, which is in included in <em>JSON Plugin</em>  (an interceptor and a result). Client side must be handled by applictions themself. One reason for that is there are too many JavaScript frameworks and libraries. Struts has no preference which of them you use. Previous versions of Struts included a client side which was relying on the Dojo JS framework and was located in Struts Dojo plugin. That has been deprecated for a long time and was eventually removed.</p>
+
+<p><strong>Example</strong></p>
+
+<p>This example is taken from the Struts showcase application.</p>
+
+<p><strong>Create the action class</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AjaxFormSubmitAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">requiredValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">requiredStringValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">integerValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Date</span> <span class="n">dateValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">emailValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">urlValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">stringLengthValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">regexValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">fieldExpressionValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">validate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">hasFieldErrors</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">addActionError</span><span class="o">(</span><span class="s">"Errors present!"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">Date</span> <span class="nf">getDateValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">dateValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@DateRangeFieldValidator</span><span class="o">(</span>
+        <span class="n">min</span><span class="o">=</span><span class="s">"01/01/1990"</span><span class="o">,</span> 
+        <span class="n">max</span><span class="o">=</span><span class="s">"01/01/2000"</span><span class="o">,</span> 
+        <span class="n">message</span><span class="o">=</span><span class="s">"must be a min 01-01-1990 max 01-01-2000 if supplied"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDateValidatorField</span><span class="o">(</span><span class="n">Date</span> <span class="n">dateValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">dateValidatorField</span> <span class="o">=</span> <span class="n">dateValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEmailValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">emailValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@EmailValidator</span><span class="o">(</span><span class="n">message</span><span class="o">=</span><span class="s">"must be a valid email if supplied"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmailValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">emailValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">emailValidatorField</span> <span class="o">=</span> <span class="n">emailValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">getIntegerValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">integerValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@IntRangeFieldValidator</span><span class="o">(</span><span class="n">min</span><span class="o">=</span><span class="s">"1"</span><span class="o">,</span> <span class="n">max</span><span class="o">=</span><span class="s">"10"</span><span class="o">,</span> <span class="n">message</span><span class="o">=</span><span class="s">"must be integer min 1 max 10 if supplied"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIntegerValidatorField</span><span class="o">(</span><span class="n">Integer</span> <span class="n">integerValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">integerValidatorField</span> <span class="o">=</span> <span class="n">integerValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getRegexValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">regexValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@RegexFieldValidator</span><span class="o">(</span>
+        <span class="n">regex</span><span class="o">=</span><span class="s">"[^&lt;&gt;]+"</span><span class="o">,</span> 
+        <span class="n">message</span><span class="o">=</span><span class="s">"regexValidatorField must match a regexp (.*\\.txt) if specified"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRegexValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">regexValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">regexValidatorField</span> <span class="o">=</span> <span class="n">regexValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getRequiredStringValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">requiredStringValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@RequiredStringValidator</span><span class="o">(</span><span class="n">trim</span><span class="o">=</span><span class="kc">true</span><span class="o">,</span> <span class="n">message</span><span class="o">=</span><span class="s">"required and must be string"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRequiredStringValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">requiredStringValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">requiredStringValidatorField</span> <span class="o">=</span> <span class="n">requiredStringValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getRequiredValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">requiredValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@RequiredFieldValidator</span><span class="o">(</span><span class="n">message</span><span class="o">=</span><span class="s">"required"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRequiredValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">requiredValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">requiredValidatorField</span> <span class="o">=</span> <span class="n">requiredValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getStringLengthValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">stringLengthValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@StringLengthFieldValidator</span><span class="o">(</span>
+        <span class="n">minLength</span><span class="o">=</span><span class="s">"2"</span><span class="o">,</span> 
+        <span class="n">maxLength</span><span class="o">=</span><span class="s">"4"</span><span class="o">,</span> 
+        <span class="n">trim</span><span class="o">=</span><span class="kc">true</span><span class="o">,</span> 
+        <span class="n">message</span><span class="o">=</span><span class="s">"must be a String of a specific greater than 1 less than 5 if specified"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setStringLengthValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">stringLengthValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">stringLengthValidatorField</span> <span class="o">=</span> <span class="n">stringLengthValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getFieldExpressionValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">fieldExpressionValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@FieldExpressionValidator</span><span class="o">(</span>
+        <span class="n">expression</span> <span class="o">=</span> <span class="s">"(fieldExpressionValidatorField == requiredValidatorField)"</span><span class="o">,</span> 
+        <span class="n">message</span> <span class="o">=</span> <span class="s">"must be the same as the Required Validator Field if specified"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFieldExpressionValidatorField</span><span class="o">(</span>
+            <span class="n">String</span> <span class="n">fieldExpressionValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">fieldExpressionValidatorField</span> <span class="o">=</span> <span class="n">fieldExpressionValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getUrlValidatorField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">urlValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@UrlValidator</span><span class="o">(</span><span class="n">message</span><span class="o">=</span><span class="s">"must be a valid url if supplied"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUrlValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">urlValidatorField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">urlValidatorField</span> <span class="o">=</span> <span class="n">urlValidatorField</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p> </p>
+
+<p><strong>Map the Action</strong></p>
+
+<p>Note that is is not necessary when using <em>Convention Plugin</em> .</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd"&gt;</span>
+	
+<span class="nt">&lt;struts&gt;</span>
+    <span class="nt">&lt;package&gt;</span>
+         <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"ajaxFormSubmit"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.showcase.validation.AjaxFormSubmitAction"</span><span class="nt">&gt;</span>
+             <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"jsonValidationWorkflowStack"</span><span class="nt">/&gt;</span>
+             <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/WEB-INF/validation/ajaxFormSubmit.jsp<span class="nt">&lt;/result&gt;</span>
+             <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"jsonActionRedirect"</span><span class="nt">&gt;</span>ajaxFormSubmitSuccess<span class="nt">&lt;/result&gt;</span>
+         <span class="nt">&lt;/action&gt;</span>
+    <span class="nt">&lt;/package&gt;</span>
+
+</code></pre></div></div>
+
+<p>AJAX validation is performed by the <em>jsonValidation</em>  interceptor. This interceptor is included in the <em>jsonValidationWorkflowStack</em> , and is required in order to perform AJAX validation. Normal results(input, success, etc) should be provided for the action in the case that someone tries to access the action directly, in which case normal validation will be triggered. So, how does the <em>jsonValidation</em>  know that it must perform AJAX validation vs regular validation? We will see that in a minute, but you don’t need to know that in order to use AJAX validation. Same applies for specialized Redirect Result Type <em>jsonActionRedirect</em> .</p>
+
+<p><strong>Create the JSP</strong></p>
+
+<pre><code class="language-jsp">&lt;%@taglib prefix="s" uri="/struts-tags" %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Struts2 Showcase - Validation - AJAX Form Submit&lt;/title&gt;
+    &lt;s:head theme="xhtml"/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="page-header"&gt;
+    &lt;h1&gt;AJAX Form Submit&lt;/h1&gt;
+&lt;/div&gt;
+    &lt;h3&gt;Action Errors Will Appear Here&lt;/h3&gt;
+    &lt;s:actionerror theme="ajaxErrorContainers"/&gt;
+    &lt;hr/&gt;
+    &lt;s:form method="POST" theme="xhtml"&gt;
+        &lt;s:textfield label="Required Validator Field" name="requiredValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Required String Validator Field" name="requiredStringValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Integer Validator Field" name="integerValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Date Validator Field" name="dateValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Email Validator Field" name="emailValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="URL Validator Field" name="urlValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="String Length Validator Field" name="stringLengthValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Regex Validator Field" name="regexValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:textfield label="Field Expression Validator Field" name="fieldExpressionValidatorField" theme="ajaxErrorContainers"/&gt;
+        &lt;s:submit label="Submit" cssClass="btn btn-primary"/&gt;
+    &lt;/s:form&gt;
+&lt;/body&gt;
+&lt;/html&gt; 
+</code></pre>
+
+<p>Things to note on this JSP:</p>
+
+<ul>
+  <li>
+    <p>The <em>form</em>  tag <strong>does not</strong> have <em>validate</em>  set to <em>true</em> , which would perform client validation before the AJAX validation.</p>
+  </li>
+  <li>
+    <p>It uses a customized theme <em>ajaxErrorContainers</em> . The default Struts themes generate HTML-Elements to show validation errors only if errors are present when page is created on server side. But in order to show validation errors that arrive later via AJAX it is necessary to have error-container elements in DOM always.</p>
+  </li>
+</ul>
+
+<p>What happens if validation succeeds? That depends on your request parameters and action configuration. If you are using <em>jsonActionRedirect</em>  result mentioned above the action will be executed while AJAX request is active and respond with JSON providing a new URL to load. Otherwise the AJAX response will be empty and the form must be submitted a 2nd time but as usual request, not AJAX.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Setting <em>validate</em>  to <em>true</em>  in the <em>form</em>  tag will enable client side, JavaScript validation, which can be used along with AJAX validation (runs before the AJAX validation).</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Custom Theme</strong></p>
+
+<p>In this sample the <em>custom theme</em>  is based on <em>xhtml</em>  theme. It is required to override 3 FTL files.</p>
+
+<blockquote>
+  <p>theme.properties</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>parent = xhtml
+</code></pre></div></div>
+
+<p> </p>
+
+<blockquote>
+  <p>actionerror.ftl</p>
+</blockquote>
+
+<pre><code class="language-ftl">&lt;#--
+    Make sure element is always present. To be filled later via JS.
+--&gt;
+&lt;ul&lt;#rt/&gt;
+&lt;#if parameters.id??&gt;
+ id="${parameters.id?html}"&lt;#rt/&gt;
+&lt;/#if&gt;            
+&lt;#if parameters.cssClass??&gt;
+ class="${parameters.cssClass?html}"&lt;#rt/&gt;
+&lt;#else&gt;
+ class="errorMessage"&lt;#rt/&gt;
+&lt;/#if&gt;
+&lt;#if parameters.cssStyle??&gt;
+ style="${parameters.cssStyle?html}"&lt;#rt/&gt;
+&lt;/#if&gt;
+&gt;
+&lt;#if (actionErrors?? &amp;&amp; actionErrors?size &gt; 0)&gt;
+    &lt;#list actionErrors as error&gt;
+        &lt;#if error??&gt;
+            &lt;li&gt;&lt;span&gt;&lt;#if parameters.escape&gt;${error!?html}&lt;#else&gt;${error!}&lt;/#if&gt;&lt;/span&gt;&lt;#rt/&gt;&lt;/li&gt;&lt;#rt/&gt;
+        &lt;/#if&gt;
+    &lt;/#list&gt;
+&lt;/#if&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p> </p>
+
+<blockquote>
+  <p>controlfooter.ftl</p>
+</blockquote>
+
+<pre><code class="language-ftl">${parameters.after!}&lt;#t/&gt;
+    &lt;/td&gt;&lt;#lt/&gt;
+&lt;/tr&gt;
+&lt;#if (parameters.errorposition!"top") == 'bottom'&gt;
+&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[parameters.name]??/&gt;
+&lt;#if hasFieldErrors&gt;
+&lt;tr errorFor="${parameters.id}"&gt;
+    &lt;td class="tdErrorMessage" colspan="2"&gt;&lt;#rt/&gt;
+        &lt;#if hasFieldErrors&gt;
+            &lt;#list fieldErrors[parameters.name] as error&gt;
+                &lt;div class="errorMessage"&gt;${error?html}&lt;/div&gt;&lt;#t/&gt;
+            &lt;/#list&gt;
+        &lt;/#if&gt;
+    &lt;/td&gt;&lt;#lt/&gt;
+&lt;/tr&gt;
+&lt;/#if&gt;
+&lt;/#if&gt;
+</code></pre>
+
+<p> </p>
+
+<blockquote>
+  <p>controlheader-core.ftl</p>
+</blockquote>
+
+<pre><code class="language-ftl"> &lt;#--
+    Always include elements to show errors. They may be filled later via AJAX.
+--&gt;
+&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[parameters.name]??/&gt;
+&lt;#if (parameters.errorposition!"top") == 'top'&gt;
+&lt;tr errorFor="${parameters.id}"&gt;
+    &lt;td class="tdErrorMessage" colspan="2" data-error-for-fieldname="${parameters.name}"&gt;&lt;#rt/&gt;
+        &lt;#if hasFieldErrors&gt;
+            &lt;#list fieldErrors[parameters.name] as error&gt;
+                &lt;div class="errorMessage"&gt;${error?html}&lt;/div&gt;&lt;#t/&gt;
+            &lt;/#list&gt;
+        &lt;/#if&gt;
+    &lt;/td&gt;&lt;#lt/&gt;
+&lt;/tr&gt;
+&lt;/#if&gt;
+&lt;#if !parameters.labelposition?? &amp;&amp; (parameters.form.labelposition)??&gt;
+&lt;#assign labelpos = parameters.form.labelposition/&gt;
+&lt;#elseif parameters.labelposition??&gt;
+&lt;#assign labelpos = parameters.labelposition/&gt;
+&lt;/#if&gt;
+&lt;#--
+    if the label position is top,
+    then give the label it's own row in the table
+--&gt;
+&lt;tr&gt;
+&lt;#if (labelpos!"") == 'top'&gt;
+    &lt;td class="tdLabelTop" colspan="2"&gt;&lt;#rt/&gt;
+&lt;#else&gt;
+    &lt;td class="tdLabel"&gt;&lt;#rt/&gt;
+&lt;/#if&gt;
+&lt;#if parameters.label??&gt;
+    &lt;label &lt;#t/&gt;
+&lt;#if parameters.id??&gt;
+        for="${parameters.id?html}" &lt;#t/&gt;
+&lt;/#if&gt;
+&lt;#if hasFieldErrors&gt;
+        class="errorLabel"&lt;#t/&gt;
+&lt;#else&gt;
+        class="label"&lt;#t/&gt;
+&lt;/#if&gt;
+    &gt;&lt;#t/&gt;
+&lt;#if parameters.required!false &amp;&amp; parameters.requiredPosition!"right" != 'right'&gt;
+        &lt;span class="required"&gt;*&lt;/span&gt;&lt;#t/&gt;
+&lt;/#if&gt;
+${parameters.label?html}&lt;#t/&gt;
+&lt;#if parameters.required!false &amp;&amp; parameters.requiredPosition!"right" == 'right'&gt;
+ &lt;span class="required"&gt;*&lt;/span&gt;&lt;#t/&gt;
+&lt;/#if&gt;
+${parameters.labelseparator!":"?html}&lt;#t/&gt;
+&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/tooltip.ftl" /&gt;
+&lt;/label&gt;&lt;#t/&gt;
+&lt;/#if&gt;
+    &lt;/td&gt;&lt;#lt/&gt;
+&lt;#-- add the extra row --&gt;
+&lt;#if (labelpos!"") == 'top'&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;/#if&gt;
+</code></pre>
+
+<p><strong>CSS</strong></p>
+
+<p>To show users some nice visual feedback while waiting for AJAX response you can use a little CSS. Remember to include the referenced <em>indicator.gif</em> .</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.ajaxVisualFeedback</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+    <span class="nl">background-image</span><span class="p">:</span> <span class="sx">url('../images/indicator.gif')</span><span class="p">;</span>
+    <span class="nl">background-repeat</span><span class="p">:</span> <span class="nb">no-repeat</span><span class="p">;</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p> </p>
+
+<p><strong>JavaScript</strong></p>
+
+<p>Now this is where the magic happens. Here <em>jQuery</em>  is used to register an eventhandler which intercepts form submits. It takes care of hiding validation errors that might be present, submit the form via AJAX and handle JSON responses.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cm">/**
+  * Validates form per AJAX. To be called as onSubmit handler.
+  *
+  * @param event onSubmit event
+  */</span>
+<span class="kd">function</span> <span class="nx">ajaxFormValidation</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="nx">_removeValidationErrors</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">_form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">_formData</span> <span class="o">=</span> <span class="nx">_form</span><span class="p">.</span><span class="nx">serialize</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="c1">// prepare visual feedback</span>
+    <span class="c1">// you may want to use other elements here</span>
+    <span class="kd">var</span> <span class="nx">originalButton</span> <span class="o">=</span> <span class="nx">_form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.btn-primary'</span><span class="p">);</span>
+    <span class="c1">// note: jQuery returns an array-like object</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">originalButton</span> <span class="o">&amp;&amp;</span> <span class="nx">originalButton</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">originalButton</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">originalButton</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">feedbackElement</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;div class="ajaxVisualFeedback"&gt;&lt;/div&gt;'</span><span class="p">).</span><span class="nx">insertAfter</span><span class="p">(</span><span class="nx">originalButton</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">restoreFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">originalButton</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+            <span class="nx">feedbackElement</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">data</span><span class="p">:</span> <span class="s1">'struts.enableJSONValidation=true&amp;struts.validateOnly=false&amp;'</span> <span class="o">+</span> <span class="nx">_formData</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">processData</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="nx">statusText</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">location</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// no validation errors</span>
+                <span class="c1">// action has been executed and sent a redirect URL wrapped as JSON</span>
+                <span class="c1">// cannot use a normal http-redirect (status-code 3xx) as this would be followed by browsers and would not be available here</span>
+                <span class="c1">// follow JSON-redirect</span>
+                <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">location</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">restoreFunction</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">restoreFunction</span><span class="p">();</span>
+                <span class="p">}</span>
+                <span class="nx">_handleValidationResult</span><span class="p">(</span><span class="nx">_form</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="na">error</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">errorThrown</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">restoreFunction</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">restoreFunction</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="c1">// struts sends status code 400 when validation errors are present</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">400</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">_handleValidationResult</span><span class="p">(</span><span class="nx">_form</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="p">))</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// a real error occurred -&gt; show user an error message</span>
+                <span class="nx">_handleValidationResult</span><span class="p">(</span><span class="nx">_form</span><span class="p">,</span> <span class="p">{</span><span class="na">errors</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Network or server error!'</span><span class="p">]})</span>
+            <span class="p">}</span>
+		<span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// send request, after delay to make sure everybody notices the visual feedback :)</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">_form</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">action</span><span class="p">;</span>
+        <span class="nx">jQuery</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cm">/**
+ * Removes validation errors from HTML DOM.
+ */</span>
+<span class="kd">function</span> <span class="nx">_removeValidationErrors</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// action errors</span>
+    <span class="c1">// you might want to use a custom ID here</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'ul.errorMessage li'</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="c1">// field errors</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'div.errorMessage'</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="cm">/**
+ * Incorporates validation errors in HTML DOM.
+ *
+ * @param form Form containing errors.
+ * @param errors Errors from server.
+ */</span>
+<span class="kd">function</span> <span class="nx">_handleValidationResult</span><span class="p">(</span><span class="nx">form</span><span class="p">,</span> <span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// action errors</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// you might want to use a custom ID here</span>
+        <span class="kd">var</span> <span class="nx">errorContainer</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'ul.errorMessage'</span><span class="p">);</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">errors</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">errorMsg</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;li&gt;&lt;span&gt;&lt;/span&gt;&lt;/li&gt;'</span><span class="p">);</span>
+            <span class="nx">li</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">);</span> <span class="c1">// use text() for security reasons</span>
+            <span class="nx">errorContainer</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">li</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="c1">// field errors</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">fieldErrors</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">fieldErrors</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">errorMsg</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">td</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'td[data-error-for-fieldname="'</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="s1">'"]'</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">td</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;div class="errorMessage"&gt;&lt;/div&gt;'</span><span class="p">);</span>
+                <span class="nx">div</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">);</span> <span class="c1">// use text() for security reasons</span>
+                <span class="nx">td</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// register onSubmit handler</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">'submit'</span><span class="p">,</span> <span class="nx">ajaxFormValidation</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p> </p>
+
+<p><strong>How it works</strong></p>
+
+<p><em>jsonValidation</em>  interceptor must be placed on a stack, following the <em>validation</em>  interceptor. The interceptor itself won’t perform any validation, but will check for validation errors on the action being invoked (assuming that the action is ValidationAware).</p>
+
+<p>If you just want to use AJAX validation, without knowing the implementation details, you can skip this section.</p>
+
+<p>When the <em>jsonValidation</em>  interceptor is invoked, it will look for a parameter named <em>struts.enableJSONValidation</em> , this parameter <strong>must</strong> be set to <em>true</em> , otherwise the interceptor won’t do anything. Then the interceptor will look for a parameter named <em>struts.validateOnly</em> , if this parameter exists, is set to <em>true</em> , and there are validation errors (o action errors) they will be serialized into JSON in the form:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Global Error 1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Global Error 2"</span><span class="p">],</span><span class="w">
+    </span><span class="s2">"fieldErrors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"field1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Field 1 Error 1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Field 1 Error 2"</span><span class="p">],</span><span class="w">
+        </span><span class="s2">"field1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Field 2 Error 1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Field 2 Error 2"</span><span class="p">]</span><span class="w">  
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>If the action implements the <em>ModelDrive</em>  interface, “model.” will be stripped from the field names in the returned JSON. If validation succeeds (and <em>struts.validateOnly</em>  is true), an empty JSON string will be returned:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{}</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>If <em>struts.validateOnly</em>  is false the action and result are executed. In this case <em>jsonActionRedirect</em>  result is very useful. It creates a JSON response in the form:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;url to be loaded next&gt;"</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div></div>
+
+<blockquote>
+
+</blockquote>
+
+<blockquote>
+
+</blockquote>
+
+<blockquote>
+  <p>Remember to set struts.enableJSONValidation=true in the request to enable AJAX validation</p>
+</blockquote>
+
+<blockquote>
+
+</blockquote>
+
+<p><strong>JSONValidationInterceptor parameters</strong></p>
+
+<p>The following request parameters can be used to enable exposing validation errors:</p>
+
+<ul>
+  <li>
+    <p><strong>struts.enableJSONValidation</strong> - a request parameter must be set to <strong>true</strong> to use this interceptor</p>
+  </li>
+  <li>
+    <p><strong>struts.validateOnly</strong> - If the request has this parameter, execution will return after validation (action won’t be executed). If <strong>struts.validateOnly</strong> is set to false you may want to use <em>JSONActionRedirectResult</em></p>
+  </li>
+  <li>
+    <p><strong>struts.JSONValidation.no.encoding</strong> - If the request has this parameter set to <strong>true,</strong> the character encoding will <strong>NOT</strong> be set on the response - is needed in portlet environment</p>
+  </li>
+</ul>
+
+<p>You can override names of these parameters by specifying the following parameters when setting up a stack:</p>
+
+<ul>
+  <li>
+    <p><strong>validateJsonParam</strong> - to override name of <strong>struts.enableJSONValidation</strong>**
+**</p>
+  </li>
+  <li>
+    <p><strong>validateOnlyParam</strong> - to override name of <strong>struts.validateOnly</strong></p>
+  </li>
+  <li>
+    <p><strong>noEncodingSetParam</strong> - to override name of <strong>struts.JSONValidation.no.encoding</strong></p>
+  </li>
+  <li>
+    <p><strong>validationFailedStatus</strong> - status to be set on response when there are validation errors, by default <strong>400</strong></p>
+  </li>
+</ul>
+
+<p>**
+**</p>
+
+<p> Parameters overriding is available since Struts 2.5.9</p>
+
+<p><strong>Flow chart of AJAX validation</strong></p>
+
+<p>Some details are omitted, like results used.</p>
+
+<table>
+  <tbody>
+    <tr>
+    </tr>
+  </tbody>
+</table>
+
+<p>As explained above: there is a case where form is submitted twice, one time as AJAX with validation only and another time as usual submit.</p>
+
+<table>
+  <tbody>
+    <tr>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>struts2-ajax-vali-flow.png</em></p>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    All Rights Reserved.
+  </div>
+  <div class="col-md-12">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>
+<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+</body>
+</html>

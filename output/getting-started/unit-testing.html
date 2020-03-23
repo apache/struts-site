@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Unit testing</title>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/highlighter/github-theme.css" rel="stylesheet">
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts" class="github-ribbon">
+  <img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/download.cgi">Download</a></li>
+                <li><a href="/releases.html">Releases</a></li>
+                <li><a href="/announce.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li class="divider"></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Version Notes</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins">Security Bulletins</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Maven Project Info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core Dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin Dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/core-developers/">Core Developers Guide</a></li>
+                <li><a href="/tag-developers/">Tag Developers Guide</a></li>
+                <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
+                <li><a href="/plugins/">Plugins</a></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/tag-developers/tag-reference.html">Tag reference</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/FAQs">FAQs</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code and Builds</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li class="divider"></li>
+                <li><a href="/release-guidelines.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://gitbox.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/getting-started/unit-testing.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    
+    <h1 class="no_toc" id="unit-testing">Unit Testing</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#setup" id="markdown-toc-setup">Setup</a></li>
+  <li><a href="#writing-a-unit-test" id="markdown-toc-writing-a-unit-test">Writing A Unit Test</a></li>
+  <li><a href="#test-validation-should-pass" id="markdown-toc-test-validation-should-pass">Test Validation Should Pass</a></li>
+  <li><a href="#test-validation-should-fail" id="markdown-toc-test-validation-should-fail">Test Validation Should Fail</a></li>
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+</ul>
+
+<p>The example code for this tutorial, <strong>unit-testing</strong>, is available at <a href="https://github.com/apache/struts-examples">struts-examples</a></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Struts 2 supports running unit tests of methods in the Struts Action class with the <a href="../plugins/junit/">Struts 2 JUnit plugin</a>. 
+The JUnit plugin allows you to test methods of an Action class from within the Struts 2 framework. The Struts Servlet 
+-filter and interceptors fire just as if your application was running on a Servlet container.</p>
+
+<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer 
+to your problem, post a question on the mailing list.</p>
+
+<h2 id="setup">Setup</h2>
+
+<p>The Struts 2 JUnit plugin jar file must be on your application’s class path. In the example application (see info above) 
+the <code class="highlighter-rouge">pom.xml</code> includes a dependency for the <code class="highlighter-rouge">struts2-junit-plugin</code>. There are numerous transitive dependencies, including 
+to JUnit and the Spring framework.</p>
+
+<h2 id="writing-a-unit-test">Writing A Unit Test</h2>
+
+<p>In the example application, the Register Action class includes using the validate method. This method is automatically 
+executed by the Struts 2 framework prior to the execute method. Additionally, this method needs the values from the user’s 
+input on the form to already have been provided to the instance fields of the Action class (this work is done by another 
+Struts 2 interceptor). So it would be difficult to test the validate method without the overall Struts 2 framework running.</p>
+
+<p>To use the Struts 2 plugin to ensure the Strut 2 framework runs as part of the test, you need to have your JUnit test 
+class extend StrutsTestCase (see RegisterTest class in the example application).</p>
+
+<p>Note that the Struts 2 JUnit plugin can be used to design unit tests of other Action class methods such as the input method 
+and also to test methods of a custom interceptor you add to the interceptor stack. Also in this example, the test is 
+for validation performed in the <a href="form-validation.html">validate method</a> . But the same type of test would work if the validation 
+was done using <a href="form-validation-using-xml.html">XML file validation</a>.</p>
+
+<p>To test the validate method we want Struts to call the Struts action that will cause the Action class’s validate and execute 
+methods to be run. In the example application this action is register.</p>
+
+<p><strong>struts.xml</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"register"</span> <span class="na">class=</span><span class="s">"org.apache.struts.register.action.Register"</span> <span class="na">method=</span><span class="s">"execute"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>/thankyou.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/register.jsp<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
+</code></pre></div></div>
+
+<p>Remember the validate method will be called automatically by the framework before calling the execute method. If validation 
+fails the Struts framework will return <code class="highlighter-rouge">input</code>. If there are no validation errors then the framework will call the execute 
+method and return whatever String the execute method returns.</p>
+
+<h2 id="test-validation-should-pass">Test Validation Should Pass</h2>
+
+<p>For our first test we’ll test that there should be no validation errors. In the normal flow of this application the user 
+would first enter the form data shown on the register.jsp page.</p>
+
+<p><img src="attachments/att28017281_Screen shot 2012-02-17 at 2.46.54 PM.png" alt="Screen shot 2012-02-17 at 2.46.54 PM.png" /></p>
+
+<p>The input fields for the form have the following name values: <code class="highlighter-rouge">personBean.firstName</code>, <code class="highlighter-rouge">personBean.lastName</code>, 
+<code class="highlighter-rouge">personBean.email</code>, and <code class="highlighter-rouge">personBean.age</code>. When the user fills out those fields Struts will take the values and provide 
+them to the appropriate set methods of the <code class="highlighter-rouge">personBean</code> object. So as part of the test I need to simulate the user filling 
+out these form fields. The StrutsTestCase provides a request object (of type <code class="highlighter-rouge">MockHttpServletRequest</code>) that I can use 
+to set these values in the request scope.</p>
+
+<p><strong>testExecuteValidationPasses method from RegisterTest class</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteValidationPasses</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.firstName"</span><span class="o">,</span> <span class="s">"Bruce"</span><span class="o">);</span>
+    <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.lastName"</span><span class="o">,</span> <span class="s">"Phillips"</span><span class="o">);</span>
+    <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.email"</span><span class="o">,</span> <span class="s">"bphillips@ku.edu"</span><span class="o">);</span>
+    <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.age"</span><span class="o">,</span> <span class="s">"19"</span><span class="o">);</span>
+
+    <span class="n">ActionProxy</span> <span class="n">actionProxy</span> <span class="o">=</span> <span class="n">getActionProxy</span><span class="o">(</span><span class="s">"/register.action"</span><span class="o">);</span>
+    <span class="n">Register</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="n">Register</span><span class="o">)</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">;</span>
+
+    <span class="n">assertNotNull</span><span class="o">(</span><span class="s">"The action is null but should not be."</span><span class="o">,</span> <span class="n">action</span><span class="o">);</span>
+
+    <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
+
+    <span class="n">assertEquals</span><span class="o">(</span><span class="s">"The execute method did not return "</span> <span class="o">+</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">SUCCESS</span> <span class="o">+</span> <span class="s">" but should have."</span><span class="o">,</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The first statements in the test method use the request object to set the values of any request parameters. These simulate 
+the values the user would enter into the form fields. Note how the first argument to setParameter is the same as the value 
+of the name attribute in the Struts textfield tag in the register.jsp page.</p>
+
+<p>In this test I’m providing good data for each form field as I want to ensure my validation doesn’t register an error if 
+the user provides correct information.</p>
+
+<p>I then call the getActionProxy method with the argument of “/register.action” and then the getAction method to get a reference 
+to the Struts action class for this test. This will ensure that the Struts 2 JUnit plugin will know which Action class 
+should  be used–the class associated with the register action in the struts.xml. In this case that class is the Register class.</p>
+
+<p>The assertNotNull test ensures that argument to getActionProxy reference an Action class identified in struts.xml. It’s 
+a way of checking that you’ve correctly setup struts.xml for this action.</p>
+
+<p>After that I can call actionProxy.execute(). This causes the Struts 2 framework to go through its normal process of Servlet 
+filter and interceptors for the action identified by the actionProxy (in this case that is the register.action). The validate 
+method of class Register will get called and if it doesn’t create any field or action errors then Struts 2 will call 
+the <code class="highlighter-rouge">execute</code> method. In this example, the execute method should return <code class="highlighter-rouge">success</code>.</p>
+
+<p>So in the next statement, I check that success was returned.</p>
+
+<h2 id="test-validation-should-fail">Test Validation Should Fail</h2>
+
+<p>To test that validation should fail, I just need to have a test method that doesn’t provide input for a form field. 
+For example, in the validate method of the Register Action class, is a test to ensure the user has entered some information 
+for the personBean.firstName input field. In the test method I would just not use the request object to set a parameter 
+for that field.</p>
+
+<p><strong>testExecuteValidationFailsMissingFirstName method from RegisterTest class</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteValidationFailsMissingFirstName</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="c1">//request.setParameter("personBean.firstName", "Bruce");</span>
+    <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.lastName"</span><span class="o">,</span> <span class="s">"Phillips"</span><span class="o">);</span>
+    <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.email"</span><span class="o">,</span> <span class="s">"bphillips@ku.edu"</span><span class="o">);</span>
+    <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.age"</span><span class="o">,</span> <span class="s">"19"</span><span class="o">);</span>
+    
+    <span class="n">ActionProxy</span> <span class="n">actionProxy</span> <span class="o">=</span> <span class="n">getActionProxy</span><span class="o">(</span><span class="s">"/register.action"</span><span class="o">);</span>
+    <span class="n">Register</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="n">Register</span><span class="o">)</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">;</span>
+    
+    <span class="n">assertNotNull</span><span class="o">(</span><span class="s">"The action is null but should not be."</span><span class="o">,</span> <span class="n">action</span><span class="o">);</span>
+    
+    <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
+    
+    <span class="n">assertEquals</span><span class="o">(</span><span class="s">"The execute method did not return "</span> <span class="o">+</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">INPUT</span> <span class="o">+</span> <span class="s">" but should have."</span><span class="o">,</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">INPUT</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>In the last assertEquals statement my test checks that the Struts 2 framework returned <code class="highlighter-rouge">input</code> as that is what the Struts 2 
+framework will return if the validation adds a field or action error.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>There is much more you can do with the Struts 2 JUnit plugin to help you test the methods of your Action class in conjunction 
+with the Struts 2 framework. If your Struts 2 application uses Spring to inject dependencies into the Action class then 
+the Struts 2 JUnit Plugin has a StrutsSpringTestCase that your test class should extend. Please read <a href="../plugins/junit/">Testing Actions</a> 
+to learn more.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Return to <a href="introducing-interceptors.html">Introducing Interceptors</a></td>
+      <td>or</td>
+      <td>onward to <a href="http-session.html">HTTP Session</a></td>
+    </tr>
+  </tbody>
+</table>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    All Rights Reserved.
+  </div>
+  <div class="col-md-12">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>
+<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+</body>
+</html>

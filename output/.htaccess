@@ -1,0 +1,27 @@
+# This file is maintained at https://gitbox.apache.org/repos/asf?p=struts-site.git
+DirectoryIndex index.html
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteCond %{REQUEST_URI} !^/dtds/? [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
+RedirectMatch \/docs\/version\-notes\-25([0-9]{1,2})+\.html   https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.5.$1
+RedirectMatch \/docs\/version\-notes\-23([0-9]{1,2})+\.html   https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.3.$1
+RedirectMatch \/docs\/version\-notes\-22([0-9]{1,2})+\.html   https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.2.$1
+RedirectMatch \/docs\/version\-notes\-21([0-9]{1,2})+\.html   https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.1.$1
+RedirectMatch \/docs\/version\-notes\-20([0-9]{1,2})+\.html   https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.0.$1
+
+RedirectMatch \/docs\/s2-0([0-9]{2})\.html                    https://cwiki.apache.org/confluence/display/WW/S2-0$1
+RedirectMatch \/docs\/security\-bulletins.html                https://cwiki.apache.org/confluence/display/WW/Security+Bulletins
+
+RedirectMatch \/docs\/([a-zA-Z]+)-plugin\.html                http://struts.apache.org/plugins/$1/
+
+RedirectMatch \/2.*\/docs\/(.*)?                    http://struts.apache.org/docs/$1
+RedirectMatch \/release\/2.*\/(.*)?                 http://struts.apache.org/$1
+RedirectMatch \/2.*\/(.*)?                          http://struts.apache.org/$1
+
+# page downloads.html was renamed to releases.html
+RedirectMatch \/downloads /releases
+
+ErrorDocument 404 /404
