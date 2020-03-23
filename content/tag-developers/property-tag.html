@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Tag Developers Guide</title>
+  <title>property tag</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -127,176 +127,98 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/tag-developers/property-tag.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
+    <a href="tag-reference.html" title="back to Tag Reference"><< back to Tag Reference</a>
+    
     <h1 id="property">property</h1>
 
-<p>Please make sure you have read the <a href="tag-syntax.html">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
+<p>Please make sure you have read the <a href="tag-syntax">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<table>
-  <tbody>
+<h2 id="description">Description</h2>
+
+<p>Used to get the property of a <code class="highlighter-rouge">value</code>, which will default to the top of the stack if none is specified.</p>
+
+<p>Print out expression which evaluates against the stack</p>
+
+<h2 id="attributes">Attributes</h2>
+
+<table width="100%">
     <tr>
+        <td colspan="6"><h4>Dynamic Attributes Allowed:</h4> false</td>
     </tr>
-  </tbody>
+    <tr>
+        <td colspan="6">&nbsp;</td>
+    </tr>
+    <tr>
+        <th align="left" valign="top"><h4>Name</h4></th>
+        <th align="left" valign="top"><h4>Required</h4></th>
+        <th align="left" valign="top"><h4>Default</h4></th>
+        <th align="left" valign="top"><h4>Evaluated</h4></th>
+        <th align="left" valign="top"><h4>Type</h4></th>
+        <th align="left" valign="top"><h4>Description</h4></th>
+    </tr>
+        <tr>
+            <td align="left" valign="top">default</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top"></td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">String</td>
+            <td align="left" valign="top">The default value to be used if <u>value</u> attribute is null</td>
+        </tr>
+        <tr>
+            <td align="left" valign="top">escapeCsv</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">Boolean</td>
+            <td align="left" valign="top">Whether to escape CSV (useful to escape a value for a column)</td>
+        </tr>
+        <tr>
+            <td align="left" valign="top">escapeHtml</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">true</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">Boolean</td>
+            <td align="left" valign="top">Whether to escape HTML</td>
+        </tr>
+        <tr>
+            <td align="left" valign="top">escapeJavaScript</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">Boolean</td>
+            <td align="left" valign="top">Whether to escape Javascript</td>
+        </tr>
+        <tr>
+            <td align="left" valign="top">escapeXml</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">Boolean</td>
+            <td align="left" valign="top">Whether to escape XML</td>
+        </tr>
+        <tr>
+            <td align="left" valign="top">value</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">&lt;top of stack&gt;</td>
+            <td align="left" valign="top">false</td>
+            <td align="left" valign="top">Object</td>
+            <td align="left" valign="top">Value to be displayed</td>
+        </tr>
 </table>
 
-<p><strong>Description</strong></p>
-
-<p> <p>
- Used to get the property of a <i>value</i>, which will default to the top of
- the stack if none is specified.
- </p>
-</p>
-
-<p><strong>Parameters</strong></p>
-
-<p>		<table width="100%">
-
-			<tr>
-
-				<td colspan="6"><h4>Dynamic Attributes Allowed:</h4> false</td>
-
-			</tr>
-
-			<tr>
-
-				<td colspan="6">&nbsp;</td>
-
-			</tr>
-
-			<tr>
-
-				<th align="left" valign="top"><h4>Name</h4></th>
-
-				<th align="left" valign="top"><h4>Required</h4></th>
-
-				<th align="left" valign="top"><h4>Default</h4></th>
-
-				<th align="left" valign="top"><h4>Evaluated</h4></th>
-
-				<th align="left" valign="top"><h4>Type</h4></th>
-
-				<th align="left" valign="top"><h4>Description</h4></th>
-
-			</tr>
-
-				<tr>
-
-					<td align="left" valign="top">default</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top"></td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">String</td>
-
-					<td align="left" valign="top">The default value to be used if <u>value</u> attribute is null</td>
-
-				</tr>
-
-				<tr>
-
-					<td align="left" valign="top">escapeCsv</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">Boolean</td>
-
-					<td align="left" valign="top">Whether to escape CSV (useful to escape a value for a column)</td>
-
-				</tr>
-
-				<tr>
-
-					<td align="left" valign="top">escapeHtml</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">true</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">Boolean</td>
-
-					<td align="left" valign="top">Whether to escape HTML</td>
-
-				</tr>
-
-				<tr>
-
-					<td align="left" valign="top">escapeJavaScript</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">Boolean</td>
-
-					<td align="left" valign="top">Whether to escape Javascript</td>
-
-				</tr>
-
-				<tr>
-
-					<td align="left" valign="top">escapeXml</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">Boolean</td>
-
-					<td align="left" valign="top">Whether to escape XML</td>
-
-				</tr>
-
-				<tr>
-
-					<td align="left" valign="top">value</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">&lt;top of stack&gt;</td>
-
-					<td align="left" valign="top">false</td>
-
-					<td align="left" valign="top">Object</td>
-
-					<td align="left" valign="top">Value to be displayed</td>
-
-				</tr>
-
-		</table>
-
-</p>
-
-<p><strong>Examples</strong></p>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
- <span class="nt">&lt;s:push</span> <span class="na">value=</span><span class="s">"myBean"</span><span class="nt">&gt;</span>
-     <span class="c">&lt;!-- Example 1: --&gt;</span>
-     <span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"myBeanProperty"</span> <span class="nt">/&gt;</span>
-
-     <span class="c">&lt;!-- Example 2: --&gt;</span>TextUtils
-     <span class="nt">&lt;s:property</span> <span class="na">value=</span><span class="s">"myBeanProperty"</span> <span class="na">default=</span><span class="s">"a default value"</span> <span class="nt">/&gt;</span>
- <span class="nt">&lt;/s:push&gt;</span>
-
-
-</code></pre></div></div>
-
-<pre><code class="language-none"> Example 1 prints the result of myBean's getMyBeanProperty() method.
- Example 2 prints the result of myBean's getMyBeanProperty() method and if it is null, print 'a default value' instead.
-
+<h2 id="examples">Examples</h2>
+
+<pre><code class="language-jsp">&lt;s:push value="myBean"&gt;
+    &lt;!-- Example 1: --&gt;
+    &lt;s:property value="myBeanProperty" /&gt;
+
+    &lt;!-- Example 2: --&gt;
+    &lt;s:property value="myBeanProperty" default="a default value" /&gt;
+&lt;/s:push&gt;
 </code></pre>
 
+<p>Example 1 prints the result of myBean’s <code class="highlighter-rouge">getMyBeanProperty()</code> method.
+Example 2 prints the result of myBean’s <code class="highlighter-rouge">getMyBeanProperty()</code> method and if it is null, print <code class="highlighter-rouge">a default value</code> instead.</p>
 
   </section>
 </article>
