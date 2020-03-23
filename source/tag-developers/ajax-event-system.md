@@ -1,9 +1,11 @@
 ---
-layout: default
+layout: tag-developers
 title: Tag Developers Guide
 ---
 
 # ajax event system
+
+> NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
 As you may have seen with the [ajax div template](ajax-div-template.html) and [ajax a template](ajax-a-template.html), 
 the framework and Dojo provide a nice way to subscribe and notify of topics from within the browser. A benefit of using 

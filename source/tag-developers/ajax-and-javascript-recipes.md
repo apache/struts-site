@@ -1,6 +1,6 @@
 ---
-layout: default
-title: Tag Developers Guide
+layout: tag-developers
+title: Ajax and JavaScript Recipes
 ---
 
 # Ajax and JavaScript Recipes
@@ -9,7 +9,7 @@ title: Tag Developers Guide
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-**Dojo plugin is deprecated**
+> NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
 ## Common
 

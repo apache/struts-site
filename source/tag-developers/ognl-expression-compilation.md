@@ -1,9 +1,13 @@
 ---
-layout: default
+layout: tag-developers
 title: Tag Developers Guide
 ---
 
 # OGNL Expression Compilation
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 This document is meant as a development/integration guide for anyone wanting to use the new OGNL 2.7 features for doing 
 byte code runtime enhancements on OGNL statements.  This is _not_  meant for general user reference as it covers what 

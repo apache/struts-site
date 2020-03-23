@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: tag-developers
 title: Tag Developers Guide
 ---
 
