@@ -5,12 +5,12 @@ title: Plugins
 
 # Plugin Developers Guide
 
-Apache Struts 2 provides a simple [plugin architecture](plugins.html) so that developers can extend the framework just 
+Apache Struts 2 provides a simple [plugin architecture](plugins) so that developers can extend the framework just 
 by adding a JAR to the application's classpath. Since plugins are contained in a JAR, they are easy to share with others. 
 Several plugins are bundled with the framework, and others are available from third-party sources.
 
-- [Plugins](plugins.html)
-- [Extending an Application with Custom Plugins](extending-an-application-with-custom-plugins.html)
+- [Plugins](plugins)
+- [Extending an Application with Custom Plugins](extending-an-application-with-custom-plugins)
 
 ## Bundled Plugins
 
