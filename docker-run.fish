@@ -1,4 +1,3 @@
 #!/usr/local/bin/fish
-set -x JEKYLL_VERSION 3.8
 
-docker run --rm -v $PWD:/srv/jekyll -it jekyll/jekyll:$JEKYLL_VERSION jekyll serve --watch --trace --host=0.0.0.0 --force_polling --incremental
+docker run --rm -v $PWD:/srv/jekyll -it jekyll/jekyll:3.8 jekyll serve --watch --trace --force_polling --incremental
