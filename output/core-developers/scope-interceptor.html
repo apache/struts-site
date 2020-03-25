@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Scope Interceptor</title>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/highlighter/github-theme.css" rel="stylesheet">
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts" class="github-ribbon">
+  <img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/download.cgi">Download</a></li>
+                <li><a href="/releases.html">Releases</a></li>
+                <li><a href="/announce.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li class="divider"></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Version Notes</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins">Security Bulletins</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Maven Project Info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core Dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin Dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/core-developers/">Core Developers Guide</a></li>
+                <li><a href="/tag-developers/">Tag Developers Guide</a></li>
+                <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
+                <li><a href="/plugins/">Plugins</a></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/tag-developers/tag-reference.html">Tag reference</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/FAQs">FAQs</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code and Builds</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li class="divider"></li>
+                <li><a href="/release-guidelines.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://gitbox.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/scope-interceptor.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
+    
+    <h1 id="scope-interceptor">Scope Interceptor</h1>
+
+<p>This is designed to solve a few simple issues related to wizard-like functionality in Struts. One of those issues is that 
+some applications have a application-wide parameters commonly used, such <code class="highlighter-rouge">pageLen</code> (used for records per page). Rather 
+than requiring that each action check if such parameters are supplied, this interceptor can look for specified parameters 
+and pull them out of the session.</p>
+
+<p>This works by setting listed properties at action start with values from session/application attributes keyed after 
+the action’s class, the action’s name, or any supplied key. After action is executed all the listed properties are taken 
+back and put in session or application context.</p>
+
+<p>To make sure that each execution of the action is consistent it makes use of session-level locking. This way it guarantees 
+that each action execution is atomic at the session level. It doesn’t guarantee application level consistency however 
+there has yet to be enough reasons to do so. Application level consistency would also be a big performance overkill.</p>
+
+<p>Note that this interceptor takes a snapshot of action properties just before result is presented (using a <code class="highlighter-rouge">PreResultListener</code>),
+rather than after action is invoked. There is a reason for that: At this moment we know that action’s state is <code class="highlighter-rouge">complete</code> 
+as its values may depend on the rest of the stack and specifically - on the values of nested interceptors.</p>
+
+<h2 id="parameters">Parameters</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">session</code> - a list of action properties to be bound to session scope</li>
+  <li><code class="highlighter-rouge">application</code> - a list of action properties to be bound to application scope</li>
+  <li><code class="highlighter-rouge">key</code> - a session/application attribute key prefix, can contain following values:
+    <ul>
+      <li><code class="highlighter-rouge">CLASS</code> - that creates a unique key prefix based on action namespace and action class, it’s a default value</li>
+      <li><code class="highlighter-rouge">ACTION</code> - creates a unique key prefix based on action namespace and action name</li>
+      <li>any other value is taken literally as key prefix</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">type</code> - with one of the following
+    <ul>
+      <li><code class="highlighter-rouge">start</code> - means it’s a start action of the wizard-like action sequence and all session scoped properties are reset
+to their defaults</li>
+      <li><code class="highlighter-rouge">end</code> - means that session scoped properties are removed from session after action is run</li>
+      <li>any other value throws <code class="highlighter-rouge">IllegalArgumentException</code></li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">sessionReset</code> - name of a parameter (defaults to <code class="highlighter-rouge">session.reset</code>) which if set, causes all session values to be 
+reset to action’s default values or application scope values, note that it is similar to <code class="highlighter-rouge">type="start"</code> and in fact 
+it does the same, but in our team it is sometimes semantically preferred. We use session scope in two patterns - 
+sometimes there are wizard-like action sequences that have start and end, and sometimes we just want simply reset 
+current session values.</li>
+  <li><code class="highlighter-rouge">reset</code> - boolean, defaults to <code class="highlighter-rouge">false</code>, if set, it has the same effect as setting all session values to be reset 
+to action’s default values or application.</li>
+  <li><code class="highlighter-rouge">autoCreateSession</code> - boolean value, sets if the session should be automatically created.</li>
+</ul>
+
+<h2 id="extending-the-interceptor">Extending the Interceptor</h2>
+
+<p>There are no know extension points for this interceptor.</p>
+
+<h2 id="examples">Examples</h2>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c">&lt;!-- As the filter and orderBy parameters are common for all my browse-type actions,
+      you can move control to the scope interceptor. In the session parameter you can list
+      action properties that are going to be automatically managed over session. You can
+      do the same for application-scoped variables--&gt;</span>
+ <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"hibernate"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"scope"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"session"</span><span class="nt">&gt;</span>filter,orderBy<span class="nt">&lt;/param&gt;</span>
+         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"autoCreateSession"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+     <span class="nt">&lt;/interceptor-ref&gt;</span>
+     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
+ <span class="nt">&lt;/action&gt;</span>
+
+</code></pre></div></div>
+
+<p><strong>Some more examples</strong></p>
+
+<p>The scope interceptor can be used to pass arbitrary objects from one action ActionA to another other ActionB, provided 
+you have a getter in ActionA and and a similar setter in actionB. Also, you should use a key parameter to make sure you 
+tell ASF/WW which action gets which objects. This allows you to mix several actions with several scopes, without running 
+the risk of getting wrong objects.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"scopea"</span> <span class="na">class=</span><span class="s">"com.mevipro.test.action.ScopeActionA"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>/jsp/test.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"scope"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"key"</span><span class="nt">&gt;</span>funky<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"session"</span><span class="nt">&gt;</span>person<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"autoCreateSession"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;/interceptor-ref&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
+<span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"scopeb"</span> <span class="na">class=</span><span class="s">"com.mevipro.test.action.ScopeActionB"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>/jsp/test.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"scope"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"key"</span><span class="nt">&gt;</span>funky<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"session"</span><span class="nt">&gt;</span>person<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"autoCreateSession"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;/interceptor-ref&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
+</code></pre></div></div>
+
+<p>Don’t forget: you’ll need at least a <code class="highlighter-rouge">getPerson()</code> getter in <code class="highlighter-rouge">ScopeActionA</code> and a <code class="highlighter-rouge">setPerson(Person person)</code> setter 
+in <code class="highlighter-rouge">ScopeActionB</code> and you need to make sure you specify the key (you don’t need this if you only use one action, as in 
+the example above). Without the key, the scope interceptor will store your variables, but won’t set them on the other action.</p>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    All Rights Reserved.
+  </div>
+  <div class="col-md-12">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>
+<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+</body>
+</html>

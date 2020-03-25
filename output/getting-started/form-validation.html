@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Form Validation</title>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/highlighter/github-theme.css" rel="stylesheet">
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts" class="github-ribbon">
+  <img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/download.cgi">Download</a></li>
+                <li><a href="/releases.html">Releases</a></li>
+                <li><a href="/announce.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li class="divider"></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Version Notes</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins">Security Bulletins</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Maven Project Info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core Dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin Dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/core-developers/">Core Developers Guide</a></li>
+                <li><a href="/tag-developers/">Tag Developers Guide</a></li>
+                <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
+                <li><a href="/plugins/">Plugins</a></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/tag-developers/tag-reference.html">Tag reference</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/FAQs">FAQs</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code and Builds</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li class="divider"></li>
+                <li><a href="/release-guidelines.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://gitbox.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/getting-started/form-validation.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    
+    <h1 class="no_toc" id="form-validation">Form Validation</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#add-validate-method" id="markdown-toc-add-validate-method">Add validate Method</a></li>
+  <li><a href="#handle-input-being-returned" id="markdown-toc-handle-input-being-returned">Handle Input Being Returned</a></li>
+  <li><a href="#error-messages" id="markdown-toc-error-messages">Error Messages</a></li>
+  <li><a href="#styling-the-error-messages" id="markdown-toc-styling-the-error-messages">Styling The Error Messages</a></li>
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+  <li><a href="#up-next" id="markdown-toc-up-next">Up Next</a></li>
+</ul>
+
+<p>This tutorial assumes you’ve completed the <a href="processing-forms.html">Processing Forms</a> tutorial and have a working 
+<strong>form-processing</strong> project. The example code for this tutorial, <strong>form-validation</strong>, is available for checkout from 
+the Struts 2 GitHub repository <a href="https://github.com/apache/struts-examples">struts-examples</a>.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In this tutorial we’ll explore using Struts 2 to validate the user’s input on a form. There are two ways you can use Struts 2 
+to do form validation. This tutorial will cover the more basic method, where the validation is included in the Struts 2 Action class.</p>
+
+<p>The <a href="http://struts.apache.org/mail.html">Struts 2 user mailing list</a> is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer 
+to your problem, post a question on the mailing list.</p>
+
+<h2 id="add-validate-method">Add validate Method</h2>
+
+<p>To enable the Struts 2 Action class to validate a user’s input on a Struts 2 form, you must define a validate method 
+in your Action class. Using the example from <a href="processing-forms.html">Processing Forms</a> tutorial, let’s say that we have 
+these business rules:</p>
+
+<ol>
+  <li>User must provide a first name</li>
+  <li>User must provide an email address</li>
+  <li>User younger than 18 cannot register</li>
+</ol>
+
+<p>If you recall from the <a href="processing-forms.html">Processing Forms</a> tutorial the user’s input into the form fields is placed 
+by Struts 2 into the Java model class <code class="highlighter-rouge">personBean</code>. So a user’s input into the <code class="highlighter-rouge">firstName</code> field would end up as the value 
+for <code class="highlighter-rouge">personBean</code>’s <code class="highlighter-rouge">firstName</code> instance field (via the <code class="highlighter-rouge">personBean.setFirstName</code> method).</p>
+
+<p>In the validate method we can refer to get the values of personBean’s instance fields by using the appropriate get methods. 
+Once we have the values we can employ logic to enforce our business rules.</p>
+
+<p>Add the following validate method to <code class="highlighter-rouge">Register.java</code> (the Action class).</p>
+
+<p><strong>validate method</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">validate</span><span class="o">(){</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">personBean</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">().</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">addFieldError</span><span class="o">(</span><span class="s">"personBean.firstName"</span><span class="o">,</span> <span class="s">"First name is required."</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">personBean</span><span class="o">.</span><span class="na">getEmail</span><span class="o">().</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">addFieldError</span><span class="o">(</span><span class="s">"personBean.email"</span><span class="o">,</span> <span class="s">"Email is required."</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">personBean</span><span class="o">.</span><span class="na">getAge</span><span class="o">()</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">addFieldError</span><span class="o">(</span><span class="s">"personBean.age"</span><span class="o">,</span> <span class="s">"Age is required and must be 18 or older"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>When the user presses the submit button on the register form, Struts 2 will transfer the user’s input to the personBean’s 
+instance fields. Then Struts 2 will automatically execute the validate method. If any of the if statements are true, 
+Struts 2 will call its <code class="highlighter-rouge">addFieldError</code> method (which our Action class inherited by extending ActionSupport).</p>
+
+<p>If any errors have been added then Struts 2 will not proceed to call the execute method. Rather the Struts 2 framework 
+will return <code class="highlighter-rouge">input</code> as the result of calling the action.</p>
+
+<h2 id="handle-input-being-returned">Handle Input Being Returned</h2>
+
+<p>So what should we do if Struts 2 returns <code class="highlighter-rouge">input</code> indicating that the user’s input in the form is not valid? In most cases 
+we will want to redisplay the web page that has the form and include in the form error messages to inform the user what is wrong.</p>
+
+<p>To handle the return value of <code class="highlighter-rouge">input</code> we need to add the following result to our action node in <code class="highlighter-rouge">struts.xml</code>.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/register.jsp<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
+
+<p>The above result node goes just after the success result node for the register action and before the closing of the action node.</p>
+
+<h2 id="error-messages">Error Messages</h2>
+
+<p>So when validation fails and Struts 2 returns input, the Struts 2 framework will redisplay the <code class="highlighter-rouge">register.jsp</code>. Since we 
+used Struts 2 form tags, automatically Struts 2 will add the error messages. These error messages are the ones we specified 
+in the <code class="highlighter-rouge">addFieldError</code> method call. The addFieldError method takes two arguments. The first is the form field name to which 
+the error applies and the second is the error message to display above that form field.</p>
+
+<p>So the following <code class="highlighter-rouge">addFieldError</code> method call:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">addFieldError</span><span class="o">(</span><span class="s">"personBean.firstName"</span><span class="o">,</span> <span class="s">"First name is required."</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>will cause the message <em>First name is required</em> to be displayed above the <code class="highlighter-rouge">firstName</code> field on the form.</p>
+
+<p>If you have made the above changes to the <a href="processing-forms.html">Processing Forms</a> tutorial or you have downloaded 
+from <a href="https://github.com/apache/struts-examples/tree/master/form-validation">form-validation</a> 
+run the application (see the README.txt in the project root folder). Click on the Please register link. On the registration 
+form, just click the submit button and you should see:</p>
+
+<p><img src="attachments/att14975003_form_errors.png" alt="form_errors.png" /></p>
+
+<p>Struts 2 called the validate method, validation failed, the <code class="highlighter-rouge">register.jsp</code> was displayed with the error messages.</p>
+
+<h2 id="styling-the-error-messages">Styling The Error Messages</h2>
+
+<p>The Struts 2 <code class="highlighter-rouge">s:head</code> tag can be used to provide CSS that includes a style for the error message. Add <code class="highlighter-rouge">&lt;s:head /&gt;</code> 
+to <code class="highlighter-rouge">register.jsp</code> before the closing HTML <code class="highlighter-rouge">&lt;/head&gt;</code> tag. Go through the same steps as above and you should see:</p>
+
+<p><img src="attachments/att14975001_form_errors_styled.png" alt="form_errors_styled.png" /></p>
+
+<h2 id="summary">Summary</h2>
+
+<p>This tutorial covered validating a user’s form input by adding a validate method to an Action class. There is another 
+more sophisticated way to validate user input using XML. If you want to learn more about using XML for validation 
+in Struts 2 see <a href="../core-developers/validation.html">Validation</a> .</p>
+
+<h2 id="up-next">Up Next</h2>
+
+<p>In our next tutorial we’ll cover how to use message resource files to separate out the text from the view page.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Return to <a href="processing-forms.html">Processing Forms</a></td>
+      <td>or</td>
+      <td>onward to <a href="message-resource-files.html">Message resource files</a></td>
+    </tr>
+  </tbody>
+</table>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    All Rights Reserved.
+  </div>
+  <div class="col-md-12">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>
+<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+</body>
+</html>
