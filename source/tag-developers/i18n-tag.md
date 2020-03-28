@@ -1,5 +1,5 @@
 ---
-layout: tag-developers
+layout: default
 title: i18n tag
 parent:
   title: Tag Reference

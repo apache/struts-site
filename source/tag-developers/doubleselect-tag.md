@@ -1,5 +1,5 @@
 ---
-layout: tag-developers
+layout: default
 title: doubleselect tag
 parent:
   title: Tag Reference

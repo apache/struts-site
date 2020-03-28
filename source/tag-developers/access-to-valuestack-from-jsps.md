@@ -1,5 +1,5 @@
 ---
-layout: tag-developers
+layout: default
 title: Access to ValueStack from JSPs
 ---
 

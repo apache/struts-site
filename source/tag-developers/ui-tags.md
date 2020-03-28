@@ -1,6 +1,9 @@
 ---
-layout: tag-developers
-title: Tag Developers Guide
+layout: default
+title: UI Tags
+parent:
+  title: Tag Developers Guide
+  url: index
 ---
 
 # UI Tags

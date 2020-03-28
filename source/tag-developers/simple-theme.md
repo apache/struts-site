@@ -1,5 +1,5 @@
 ---
-layout: tag-developers
+layout: default
 title: Tag Developers Guide
 parent:
   url: themes-and-templates.html

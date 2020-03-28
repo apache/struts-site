@@ -1,5 +1,5 @@
 ---
-layout: tag-developers
+layout: default
 title: actionmessage tag
 parent:
   title: Tag Reference

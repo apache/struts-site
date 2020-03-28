@@ -1,5 +1,5 @@
 ---
-layout: tag-developers
+layout: default
 title: component tag
 parent:
   title: Tag Reference
