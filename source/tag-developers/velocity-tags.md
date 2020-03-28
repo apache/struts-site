@@ -1,6 +1,9 @@
 ---
-layout: tag-developers
-title: Tag Developers Guide
+layout: default
+title: Velocity Tags
+parent:
+  title: Tag Developers Guide
+  url: index
 ---
 
 # Velocity Tags
@@ -35,4 +38,4 @@ In Velocity, the same form can also be built using macros.
 
 Some VM tags require an #end statement while others do not. The inconsistency arises from a limitation in Velocity 
 where tags must declare if they are a _block_ or _inline_ tag up front. As such, by default all tags are _inline_ 
-except for a few key ones, such as the [form](form-tag.html) tag.
+except for a few key ones, such as the [form](form-tag) tag.

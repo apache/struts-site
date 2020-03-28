@@ -1,5 +1,5 @@
 ---
-layout: tag-developers
+layout: default
 title: hidden tag
 parent:
   title: Tag Reference

@@ -1,6 +1,9 @@
 ---
-layout: tag-developers
-title: Tag Developers Guide
+layout: default
+title: Themes and Templates
+parent:
+  title: Tag Developers Guide
+  url: index
 ---
 
 # Themes and Templates

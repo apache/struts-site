@@ -1,5 +1,5 @@
 ---
-layout: tag-developers
+layout: default
 title: push tag
 parent:
   title: Tag Reference

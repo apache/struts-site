@@ -1,6 +1,9 @@
 ---
-layout: tag-developers
-title: Tag Developers Guide
+layout: default
+title: Alt Syntax
+parent:
+  title: Tag Developers Guide
+  url: index
 ---
 
 # Alt Syntax

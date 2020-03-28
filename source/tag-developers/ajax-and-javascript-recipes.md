@@ -1,6 +1,9 @@
 ---
-layout: tag-developers
+layout: default
 title: Ajax and JavaScript Recipes
+parent:
+  title: Tag Developers Guide
+  url: index
 ---
 
 # Ajax and JavaScript Recipes

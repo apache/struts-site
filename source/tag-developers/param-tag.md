@@ -1,5 +1,5 @@
 ---
-layout: tag-developers
+layout: default
 title: param tag
 parent:
   title: Tag Reference

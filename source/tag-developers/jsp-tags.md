@@ -1,6 +1,9 @@
 ---
-layout: tag-developers
-title: Tag Developers Guide
+layout: default
+title: JSP Tags
+parent:
+  title: Tag Developers Guide
+  url: index
 ---
 
 # JSP Tags

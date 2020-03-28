@@ -1,5 +1,5 @@
 ---
-layout: tag-developers
+layout: default
 title: bean tag
 parent:
   title: Tag Reference
