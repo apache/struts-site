@@ -166,4 +166,4 @@ or **\[s2]** in the subject line of your post.
 [user-unsubscribe@struts.apache.org](mailto:user-unsubscribe@struts.apache.org).
 
 If you are receiving the digest, you must send a blank email to
-[user-unsubscribe@struts.apache.org](mailto:user-digest-unsubscribe@struts.apache.org) instead.
+[user-digest-unsubscribe@struts.apache.org](mailto:user-digest-unsubscribe@struts.apache.org) instead.
