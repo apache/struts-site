@@ -22,6 +22,11 @@ We are using Jekyll and mix of Markdown pages with raw Html pages, where Markdow
 > WARN: do not manually change the `asf-site` or `ast-staging` branches, they will be automatically updated
 > by CI server. 
 
+The whole build of the website is orchestrated by [.asf.yaml](http://s.apache.org/asfyaml), please refer to the docs
+for more details. The main build of the website is performed by [a buildbot job](https://ci2.apache.org/#/builders/7),
+the staging site is build and deployed by [a Jenkins job](https://builds.apache.org/view/S-Z/view/Struts/job/Struts-staged-site/)
+- buildbot doesn't support staging site deployment yet.  
+
 ## Applying a change
 
 If you are a contributor, and the change is small you can push it directly to the `master` branch. In any other case
