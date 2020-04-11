@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>PlainText Result</title>
+  <title>Updating the website</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -126,39 +126,45 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/plaintext-result.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/updating-website.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
-    
-    <h1 id="plaintext-result">PlainText Result</h1>
+    <h1 class="no_toc" id="updating-the-website">Updating the website</h1>
 
-<h2 id="description">Description</h2>
-
-<p>A result that send the content out as plain text. Useful typically when needed
-to display the raw content of a JSP or Html file for example.</p>
-
-<h2 id="parameters">Parameters</h2>
-
-<ul>
-  <li><code class="highlighter-rouge">location</code> (default) - location of the file (jsp/html) to be displayed as plain text.</li>
-  <li><code class="highlighter-rouge">charSet</code> (optional) - character set to be used. This character set will be used to set the response type 
-(eg. <code class="highlighter-rouge">Content-Type=text/plain; charset=UTF-8</code>) and when reading using a <code class="highlighter-rouge">Reader</code>. Some example of charSet would be 
-UTF-8, ISO-8859-1 etc.</li>
+<ul id="markdown-toc">
+  <li><a href="#the-setup" id="markdown-toc-the-setup">The setup</a></li>
+  <li><a href="#applying-a-change" id="markdown-toc-applying-a-change">Applying a change</a></li>
+  <li><a href="#deploying-javadocs" id="markdown-toc-deploying-javadocs">Deploying JavaDocs</a></li>
 </ul>
 
-<h2 id="examples">Examples</h2>
+<h2 id="the-setup">The setup</h2>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"displayJspRawContent"</span> <span class="nt">&gt;</span>
-  <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"plainText"</span><span class="nt">&gt;</span>/myJspFile.jsp<span class="nt">&lt;/result&gt;</span>
-<span class="nt">&lt;/action&gt;</span>
+<p>The whole website is available in a dedicated Git <a href="https://gitbox.apache.org/repos/asf?p=struts-site.git">repository</a>, 
+you can also use a Github <a href="https://github.com/apache/struts-site">mirror</a>.</p>
 
-<span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"displayJspRawContent"</span> <span class="nt">&gt;</span>
-  <span class="nt">&lt;result</span> <span class="na">type=</span><span class="s">"plainText"</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>/myJspFile.jsp<span class="nt">&lt;/param&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"charSet"</span><span class="nt">&gt;</span>UTF-8<span class="nt">&lt;/param&gt;</span>
-  <span class="nt">&lt;/result&gt;</span>
-<span class="nt">&lt;/action&gt;</span>
-</code></pre></div></div>
+<p>The <code class="highlighter-rouge">master</code> branch contains the current source code of the website, any changes should be applied to this branch, 
+also any Pull Request should be opened against this branch as well.</p>
+
+<p>We are using Jekyll and mix of Markdown pages with raw Html pages, where Markdown is a preferred option.</p>
+
+<blockquote>
+  <p>WARN: do not manually change the <code class="highlighter-rouge">asf-site</code> or <code class="highlighter-rouge">ast-staging</code> branches, they will be automatically updated
+by CI server.</p>
+</blockquote>
+
+<h2 id="applying-a-change">Applying a change</h2>
+
+<p>If you are a contributor, and the change is small you can push it directly to the <code class="highlighter-rouge">master</code> branch. In any other case
+please open a Pull Request. The Pull Request will be automatically build and deployed to the <a href="https://struts.staged.apache.org/">staging site</a>.</p>
+
+<p>You can then review your changes before applying them to the <code class="highlighter-rouge">master</code> branch.</p>
+
+<h2 id="deploying-javadocs">Deploying JavaDocs</h2>
+
+<p>There is a dedicated <a href="https://builds.apache.org/view/S-Z/view/Struts/job/Struts-site-javadocs/">Jenkins job</a> which is
+used to update the JavaDocs based on the latest release. If you have a proper privileges you can start the job
+and provide a Git tag of the latest release, eg. <code class="highlighter-rouge">STRUTS_2_5_22</code>. Based on the tag Jenkins will generate a proper
+JavaDocs and deploy them directly into the website. You can verify them by using this <a href="https://struts.staged.apache.org/maven/struts2-core/apidocs/index.html">link</a>.</p>
+
 
   </section>
 </article>
