@@ -20,12 +20,12 @@ also any Pull Request should be opened against this branch as well.
 We are using Jekyll and mix of Markdown pages with raw Html pages, where Markdown is a preferred option.
 
 > WARN: do not manually change the `asf-site` or `ast-staging` branches, they will be automatically updated
-> by CI server. 
+> by a CI server. 
 
 The whole build of the website is orchestrated by [.asf.yaml](http://s.apache.org/asfyaml), please refer to the docs
 for more details. The main build of the website is performed by [a buildbot job](https://ci2.apache.org/#/builders/7),
-the staging site is build and deployed by [a Jenkins job](https://builds.apache.org/view/S-Z/view/Struts/job/Struts-staged-site/)
-- buildbot doesn't support staging site deployment yet.  
+the staging site is build and deployed by 
+[a Jenkins job](https://builds.apache.org/view/S-Z/view/Struts/job/Struts-staged-site/) - buildbot doesn't support staging site deployment yet.  
 
 ## Applying a change
 
