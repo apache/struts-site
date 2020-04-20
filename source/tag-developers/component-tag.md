@@ -64,13 +64,13 @@ Unlike Freemarker or Velocity, JSP template could not be picked up from the clas
 ### JSP
 
 ```jsp
-<s:component template="/my/custom/component.vm"/>
+<s:component template="/my/custom/component.jsp"/>
 ```
 
 or
 
 ```jsp
-<s:component template="/my/custom/component.vm">
+<s:component template="/my/custom/component.jsp">
     <s:param name="key1" value="value1"/>
     <s:param name="key2" value="value2"/>
 </s:component>
