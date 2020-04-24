@@ -242,8 +242,7 @@ Pragmatic security can be used to fine-tune security make authorization decision
 the parameters of a call, or the internal state of a Web component.
 It can also be used to restrict authentication based on information in a database.
 
-For more about security, you should read the
-[Java EE tutorial](http://docs.oracle.com/javaee/6/tutorial/doc/gijrp.html).
+For more about security, you should read the [Java EE tutorial](http://docs.oracle.com/javaee/6/tutorial/doc/gijrp.html).
 Other projects, like [Apache Shiro](http://shiro.apache.org/) or [Spring Security](https://spring.io/projects/spring-security/) 
 might also help you to secure your web application.
 
