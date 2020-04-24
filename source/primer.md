@@ -244,9 +244,8 @@ It can also be used to restrict authentication based on information in a databas
 
 For more about security, you should read the
 [Java EE tutorial](http://docs.oracle.com/javaee/6/tutorial/doc/gijrp.html).
-Other projects, like [Apache Shiro](http://shiro.apache.org/) or
-[Spring Security](https://spring.io/projects/spring-security/) might also help
-you to secure your web application.
+Other projects, like [Apache Shiro](http://shiro.apache.org/) or [Spring Security](https://spring.io/projects/spring-security/) 
+might also help you to secure your web application.
 
 ### JavaServer Pages, JSP Tag Libraries, and JavaServer Faces {#jsp}
 
