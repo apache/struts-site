@@ -43,6 +43,19 @@ In addition to these four prefixes, this mapper also understands the action nam
 the extension form (eg: `foo!bar.action`) or in the prefix form (eg: `action:foo!bar`). This syntax tells this mapper 
 to map to the action named `foo` and the method `bar`.
 
+> NOTE: By default support for the `action:` prefix has been disabled since Struts 2.3.15.3, please use the below 
+> constant to enable it:
+> - using `struts.properties`:
+>   ```
+>   struts.mapper.action.prefix.enabled=true
+>   ```
+> - or using `struts.xml`:
+>   ```
+>   <constant name="struts.mapper.action.prefix.enabled" value="true"/>
+>   ```
+>
+> See [S2-018](https://cwiki.apache.org/confluence/display/WW/S2-018) for more details. 
+
 ### Method prefix
 
 With method-prefix, instead of calling baz action's `execute()` method (by default if it isn't overridden in `struts.xml`
