@@ -37,7 +37,6 @@ or committee member.
 - Christoph Nenning (cnenning at apache.org)
 - Greg Huber (ghuber at apache.org)
 - Aleksandr Mashchenko (amashchenko at apache.org)
-- Stefaan Dutry (sdutry at apache.org)
 - Yasser Zamani (yasserzamani at apache.org)
 
 ## Committers
@@ -92,3 +91,4 @@ Emeritus volunteers are no longer active in the project. An emeritus volunteer c
 - Nils-Helge Garli Hegvik (PMC) (nilsga at apache.org)
 - Martin Cooper (PMC) (martinc at apache.org)
 - Niall Pemberton (PMC) (niallp at apache.org)
+- Stefaan Dutry (sdutry at apache.org)
