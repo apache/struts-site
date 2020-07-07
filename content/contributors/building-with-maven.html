@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Building with Maven</title>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/highlighter/github-theme.css" rel="stylesheet">
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+</head>
+<body>
+
+<a href="http://github.com/apache/struts" class="github-ribbon">
+  <img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/download.cgi">Download</a></li>
+                <li><a href="/releases.html">Releases</a></li>
+                <li><a href="/announce.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li class="divider"></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Version Notes</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins">Security Bulletins</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Maven Project Info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core Dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin Dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/core-developers/">Core Developers Guide</a></li>
+                <li><a href="/tag-developers/">Tag Developers Guide</a></li>
+                <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
+                <li><a href="/plugins/">Plugins</a></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/tag-developers/tag-reference.html">Tag reference</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/FAQs">FAQs</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code and Builds</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li class="divider"></li>
+                <li><a href="/release-guidelines.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://gitbox.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+                <li><a href="/updating-website.html">Updating the website</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/contributors/building-with-maven.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="index.html" title="back to Contributors Guide"><< back to Contributors Guide</a>
+    
+    <h1 class="no_toc" id="building-with-maven">Building with Maven</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#installing" id="markdown-toc-installing">Installing</a></li>
+  <li><a href="#other-phases" id="markdown-toc-other-phases">Other phases</a></li>
+  <li><a href="#maven-tips" id="markdown-toc-maven-tips">Maven Tips</a>    <ul>
+      <li><a href="#skip-exporting-pages-from-confluence" id="markdown-toc-skip-exporting-pages-from-confluence">Skip exporting pages from Confluence</a></li>
+      <li><a href="#skip-creating-assemblies" id="markdown-toc-skip-creating-assemblies">Skip creating assemblies</a></li>
+      <li><a href="#offline-mode" id="markdown-toc-offline-mode">Offline mode</a></li>
+      <li><a href="#outofmemoryerror" id="markdown-toc-outofmemoryerror">OutOfMemoryError</a></li>
+      <li><a href="#skipping-test-execution" id="markdown-toc-skipping-test-execution">Skipping test execution</a></li>
+      <li><a href="#debugging-build-failures" id="markdown-toc-debugging-build-failures">Debugging build failures</a></li>
+    </ul>
+  </li>
+  <li><a href="#first-time-building" id="markdown-toc-first-time-building">First time building</a></li>
+</ul>
+
+<p><a href="http://maven.apache.org">Maven 3.0.0 or later</a> is required to build Struts 2</p>
+
+<p>First, let’s review some Maven basics. Maven uses the notion of a build <em>life-cycle</em> to which plugins can attach. 
+Plugins are similar to Ant tasks. When a Maven build is invoked, we specify a point in the life-cycle up to which 
+the build <em>should</em> proceed. The <em>compile</em> phase comes before <em>test</em> , and <em>test</em> comes before <em>package</em> , and <em>package</em> 
+comes before <em>install</em> . Once we have Maven setup, we can invoke the Struts build, and specify which phase the build should use.</p>
+
+<h2 id="installing">Installing</h2>
+
+<p>The <em>install</em> phase builds up the project (“package”), and installs any JARs it needs into your local repository, e.g.:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.m2/repository
+</code></pre></div></div>
+
+<p>Once installed, the JARs can be used by any other Maven project you build.  The <em>install</em> phase is the <strong>default</strong> phase 
+if none is specified.</p>
+
+<p>To run a basic install, change to the root of the source distribution, and enter</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn
+</code></pre></div></div>
+
+<p>That’s it! Maven will download any dependencies the build needs; run all unit tests; package up the JARs; then install th
+e new JARs locally. For your convenience, copies of the JARs can be found in the <em>target</em> directories of each module. 
+For example, after the build, the main JAR can found at</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>core/target/struts2-core-2.0-SNAPSHOT.jar
+</code></pre></div></div>
+
+<blockquote>
+  <p>Sometimes, licensing restrictions prevent Maven from downloading all the JARs that a build might need. For example, 
+JavaMail and Activation, can only be downloaded from Sun. When this happens, Maven will display a helpful message 
+that explains how to install these JARs manually. After downloading the required JAR, follow the instructions 
+to install it to the your local repository. Once installed, the JAR is available to all your Maven builds, not just Struts.</p>
+</blockquote>
+
+<p><strong>Initial Build Successful</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[INFO] Reactor Summary:
+[INFO]
+[INFO] Struts 2 .......................................... SUCCESS [6.016s]
+[INFO] XWork: Core ....................................... SUCCESS [1:08.086s]
+[INFO] Struts 2 Core ..................................... SUCCESS [2:42.604s]
+[INFO] Struts Plugins .................................... SUCCESS [0.944s]
+[INFO] Struts 2 Spring Plugin ............................ SUCCESS [13.523s]
+[INFO] Struts 2 Convention Plugin ........................ SUCCESS [16.473s]
+[INFO] Struts 2 JUnit Plugin ............................. SUCCESS [13.325s]
+[INFO] Webapps ........................................... SUCCESS [1.027s]
+[INFO] Blank Webapp ...................................... SUCCESS [9.572s]
+[INFO] JBoss Blank Webapp ................................ SUCCESS [7.814s]
+[INFO] Mail Reader Webapp ................................ SUCCESS [7.028s]
+[INFO] Struts 2 Portlet Plugin ........................... SUCCESS [20.995s]
+[INFO] Struts 2 DWR Plugin ............................... SUCCESS [4.432s]
+[INFO] Struts 2 Tiles Plugin ............................. SUCCESS [4.451s]
+[INFO] Struts 2 Portlet Tiles Plugin ..................... SUCCESS [3.741s]
+[INFO] Portlet Webapp .................................... SUCCESS [28.480s]
+[INFO] Struts 2 Struts 1 Plugin .......................... SUCCESS [8.353s]
+[INFO] Struts 2 Dojo Plugin .............................. SUCCESS [30.181s]
+[INFO] Struts 2 JSF Plugin ............................... SUCCESS [6.000s]
+[INFO] Struts 2 Configuration Browser Plugin ............. SUCCESS [7.531s]
+[INFO] Struts 2 Sitemesh Plugin .......................... SUCCESS [6.159s]
+[INFO] Struts 2 JSON Plugin .............................. SUCCESS [16.944s]
+[INFO] Showcase Webapp ................................... SUCCESS [20.303s]
+[INFO] Struts 2 REST Plugin .............................. SUCCESS [10.015s]
+[INFO] Struts 2 Rest Showcase Example .................... SUCCESS [6.928s]
+[INFO] Struts 2 Codebehind Plugin ........................ SUCCESS [10.394s]
+[INFO] Struts 2 Java Templates Plugin .................... SUCCESS [9.633s]
+[INFO] Struts 2 Jasper Reports Plugin .................... SUCCESS [5.920s]
+[INFO] Struts 2 JFreeChart Plugin ........................ SUCCESS [18.296s]
+[INFO] Struts 2 Pell Multipart Plugin .................... SUCCESS [3.891s]
+[INFO] Struts 2 Plexus Plugin ............................ SUCCESS [4.715s]
+[INFO] Struts 2 Sitegraph Plugin ......................... SUCCESS [8.009s]
+[INFO] Struts 2 TestNG Plugin ............................ SUCCESS [6.012s]
+[INFO] Struts 2 OVal Plugin .............................. SUCCESS [9.629s]
+[INFO] Struts 2 OSGi Plugin .............................. SUCCESS [8.118s]
+[INFO] Struts 2 Embedded JSP Plugin ...................... SUCCESS [30.524s]
+[INFO] Struts 2 GXP Plugin ............................... SUCCESS [4.878s]
+[INFO] Struts 2 CDI Plugin ............................... SUCCESS [7.620s]
+[INFO] Struts 2 Tiles 3 Plugin ........................... SUCCESS [5.132s]
+[INFO] Struts OSGi Bundles ............................... SUCCESS [0.254s]
+[INFO] Struts 2 OSGi Admin Bundle ........................ SUCCESS [5.204s]
+[INFO] Struts 2 OSGi Demo Bundle ......................... SUCCESS [4.582s]
+[INFO] Struts 2 Maven Archetypes ......................... SUCCESS [0.198s]
+[INFO] Struts 2 Archetypes - Angular JS .................. SUCCESS [10.509s]
+[INFO] Struts 2 Archetypes - Blank ....................... SUCCESS [1.440s]
+[INFO] Struts 2 Archetypes - Blank Convention ............ SUCCESS [1.324s]
+[INFO] Struts 2 Archetypes - Database Portlet ............ SUCCESS [0.990s]
+[INFO] Struts 2 Archetypes - Plugin ...................... SUCCESS [0.923s]
+[INFO] Struts 2 Archetypes - Portlet ..................... SUCCESS [0.888s]
+[INFO] Struts 2 Archetypes - Starter ..................... SUCCESS [1.992s]
+[INFO] Struts 2 Assembly ................................. SUCCESS [1:37.556s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 12:23.728s
+[INFO] Finished at: Wed Oct 30 17:26:27 CET 2013
+[INFO] Final Memory: 57M/945M
+[INFO] ------------------------------------------------------------------------
+</code></pre></div></div>
+
+<h2 id="other-phases">Other phases</h2>
+
+<p>There are other phases that can be useful when working with Maven. The <em>package</em> phase will just JAR (or WAR) the modules. 
+The <em>test</em> phase will only execute unit-tests. The <em>compile</em> phase will only build the source-code (but not the test sources). 
+And the <em>clean</em> phase will remove all artifacts, typically the entire <em>target</em> directory.</p>
+
+<h2 id="maven-tips">Maven Tips</h2>
+
+<p>A few helpful tips for using Maven are provided:</p>
+
+<h3 id="skip-exporting-pages-from-confluence">Skip exporting pages from Confluence</h3>
+
+<p>The whole Struts2 documentation resists on Confluence and during normal build process is exported with SiteExporter tool 
+locally to html files. To perform that, you must have an account on Confluence. In most cases you don’t need to export 
+the whole Confluence, so you can skip this, just type command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn clean install -DskipWiki
+</code></pre></div></div>
+
+<h3 id="skip-creating-assemblies">Skip creating assemblies</h3>
+
+<p>During normal development cycle you don’t need to create assembly packages which consist of all the libraries, 
+example apps and docs - you can skip them as well:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn clean install -DskipAssembly
+</code></pre></div></div>
+
+<h3 id="offline-mode">Offline mode</h3>
+
+<p>If you are disconnected from the Internet or simply wish to make your build faster, pass in the <strong>-o</strong> argument 
+and Maven won’t check for new modules to download.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn -o
+</code></pre></div></div>
+
+<h3 id="outofmemoryerror">OutOfMemoryError</h3>
+
+<p>If you get an OutOfMemoryError while running the tests:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Bash
+export MAVEN_OPTS=-Xmx512m
+
+// Windows
+set MAVEN_OPTS=-Xmx512m
+</code></pre></div></div>
+
+<h3 id="skipping-test-execution">Skipping test execution</h3>
+
+<p>Although this shouldn’t ever happen, sometimes tests do fail and you need to build the framework anyway. 
+If there’s a problem, you can pass in the skip tests parameter.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn -Dmaven.test.skip=true
+</code></pre></div></div>
+
+<p>Of course, if you find tests are failing, please submit a patch to fix them!</p>
+
+<h3 id="debugging-build-failures">Debugging build failures</h3>
+
+<p>Struts 2 depends on the current snapshot artifact of XWork 2. Unfortunately, if XWork 2 is modified in a significant way, 
+the Struts build doesn’t check for and retrieve a new version of the XWork snapshot jar, resulting in compilation or unit test failures.</p>
+
+<p>The solution is to clear out any stale XWork 2 jars in your local Maven repository, usually by removing the directory</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.m2/repository
+</code></pre></div></div>
+
+<p>This will force the Struts Maven build to pull down a fresh copy of XWork and hopefully resolve your problem.</p>
+
+<h2 id="first-time-building">First time building</h2>
+
+<p>In some cases it has been seen that Maven will complain if a module doesn’t exist, even though it is part of the current 
+build. Often, the missing module turns up when executing</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn package
+</code></pre></div></div>
+
+<p>A simple fix for this is to run</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn install
+</code></pre></div></div>
+
+<p>instead. If you have to do this, it will probably only be a one time thing.</p>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    All Rights Reserved.
+  </div>
+  <div class="col-md-12">
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>
+<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+</body>
+</html>
