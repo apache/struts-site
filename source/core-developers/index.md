@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Core Developers Guide (WIP)
+title: Core Developers Guide
 ---
 
 # Core Developers Guide
