@@ -7,8 +7,8 @@ title: Contributors Guide
 
 ## Source
 
-- [Building the Framework from Source](#PAGE_13829)
-  - [Building with Maven](#PAGE_14147)
+- [Building the Framework from Source](building-the-framework-from-source)
+  - [Building with Maven](building-with-maven)
 - [Creating and Signing a Distribution](#PAGE_26375)
 - [Requirements](#PAGE_29362) and [Use Cases](#PAGE_29364) - _under construction_ 
 - [Precise Error Reporting](#PAGE_29826)
