@@ -26,7 +26,7 @@ Both issues affect Apache Struts in the version range 2.0.0 - 2.5.20. The curren
 By design, Struts 2 allows developers to utilize forced double evaluation for certain tag attributes.
 When used with unvalidated, user modifiable input, malicious OGNL expressions may be injected.
 In an ongoing effort, the Struts framework includes mitigations for limiting the impact of injected expressions, but Struts before 2.5.22 left an attack vector open which is addressed by this report.
-**However, we continue to urge developers building upon Struts 2 to [not use `%{...}` syntax referencing unvalidated user modifiable input in tag attributes ](https://struts.apache.org/security/#use-struts-tags-instead-of-raw-el-expressions), since this is the ultimate fix for this class of vulnerabilities.**
+**However, we continue to urge developers building upon Struts 2 to [not use `%{...}` or `${...}` syntax referencing unvalidated user modifiable input in tag attributes ](https://struts.apache.org/security/#use-struts-tags-instead-of-raw-el-expressions), since this is the ultimate fix for this class of vulnerabilities.**
 
 [CVE-2019-0233](https://cwiki.apache.org/confluence/display/ww/s2-060) has been reported by Takeshi Terada of Mitsui Bussan Secure Directions, Inc.
 In Struts before 2.5.22, when a file upload is performed to an Action that exposes the file with a getter, an attacker may manipulate the request such that the working copy of the uploaded file or even the container temporary upload directory may be set to read-only access. As a result, subsequent actions on the file or file uploads in general will fail with an error.
