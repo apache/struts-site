@@ -19,6 +19,8 @@ when running `fish-shell`, or:
 
 when running `Bash` or `Sh`.
 
+The continuously generated website can then be accessed at http://localhost:4000
+
 All pages are generated into the `content` folder.
 
 There are two scripts used to build the image but this should be used only when `Dockerfile` was modified.
