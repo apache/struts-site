@@ -29,7 +29,7 @@ parent:
 
 Depends on what you want to achieve, please select topic from the list below:
 
-- [One time steps](#PAGE_27832952) - before you start preparing a distribution
+- [One time steps](one-time-steps) - before you start preparing a distribution
 - [Sample announcements](#PAGE_27832957) - announcements used to communicate the achievement
 - [Building Struts Master](#PAGE_27839549) - how to release Struts Master
 - [Building Struts Annotations](#PAGE_27832965) - when you want to prepare a new distribution of Struts Annotations (if something changed)
