@@ -29,15 +29,12 @@ COEP is now supported by all major browsers.
 ## Examples
 
 ```xml
-<interceptor name="coep" class="org.apache.struts2.interceptor.CoepInterceptor"/>
-
 <action  name="someAction" class="com.examples.SomeAction">
     <interceptor-ref name="defaultStack">
-    <interceptor-ref name="coep">
-            <param name="exemptedPaths">/path1,/path2,/path3 <param>
-            <param name="enforcingMode">false<param>
-            <param name="disabled">false</param>
-    <interceptor-ref>
+        <param name="coepInterceptor.exemptedPaths">/path1,/path2,/path3</param>
+        <param name="coepInterceptor.enforcingMode">false</param>
+        <param name="coepInterceptor.disabled">false</param>
+    </interceptor-ref>
     <result name="success">good_result.ftl</result>
 </action>
 ```

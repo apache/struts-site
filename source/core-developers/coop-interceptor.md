@@ -32,14 +32,11 @@ COOP is now supported by all major browsers.
 ## Examples
 
 ```xml
-<interceptor name="coop" class="org.apache.struts2.interceptor.CoopInterceptor"/>
-
 <action  name="someAction" class="com.examples.SomeAction">
     <interceptor-ref name="defaultStack">
-    <interceptor-ref name="coop">
-            <param name="exemptedPaths">/path1,/path2,/path3 <param>
-            <param name="mode">same-origin<param>
-    <interceptor-ref>
+        <param name="coopInterceptor.exemptedPaths">/path1,/path2,/path3</param>
+        <param name="coopInterceptor.mode">same-origin</param>
+    </interceptor-ref>
     <result name="success">good_result.ftl</result>
 </action>
 ```

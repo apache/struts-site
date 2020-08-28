@@ -30,13 +30,10 @@ Fetch Metadata is supported in all major browsers
 ## Examples
 
 ```xml
-<interceptor name="fetchMetadata" class="org.apache.struts2.interceptor.FetchMetadataInterceptor"/>
-
 <action  name="someAction" class="com.examples.SomeAction">
     <interceptor-ref name="defaultStack">
-    <interceptor-ref name="fetchMetadata">
-            <param name="exemptedPaths">/path1,/path2,/path3 <param>
-    <interceptor-ref>
+            <param name="fetchMetadata.exemptedPaths">/path1,/path2,/path3</param>
+    </interceptor-ref>
     <result name="success">good_result.ftl</result>
 </action>
 ```
