@@ -289,3 +289,27 @@ If you were using `excludeParams` previously please compare patterns used by yo
 This mechanism was introduced in version 2.5. It allows control what methods can be accessed with the bang "!" operator 
 via [Dynamic Method Invocation](../core-developers/action-configuration.html#dynamic-method-invocation). Please read 
 more in the Strict Method Invocation section of [Action Configuration](../core-developers/action-configuration.html).
+
+### Resource Isolation Using Fetch Metadata
+
+Fetch Metadata is a mitigation against common cross origin attacks such as Cross-Site Request Forgery (CSRF).  It is a web platform security feature designed to help servers defend themselves against cross-origin attacks based on the preferred resource isolation policy. The browser provides information about the context of an HTTP request in a set of `Sec-Fetch-*` headers. This allows the server processing the request to make decisions on whether the request should be accepted or rejected based on the available resource isolation policies.
+
+A Resource Isolation  Policy prevents the resources on a server from being requested by external websites. This policy can be enabled for all endpoints of the application or the endpoints that are meant to be loaded in a cross-site context can be exempted from applying the policy. Read more about Fetch Metadata and resource isolation [here](https://web.dev/fetch-metadata/).
+
+This mechanism is implemented in Struts using the [FetchMetadata Interceptor](../core-developers/fetch-metadata-interceptor.html). Refer to the documentation for [FetchMetadata Interceptor](../core-developers/fetch-metadata-interceptor.html) instructions on how to enable Fetch Metadata. 
+
+### Cross Origin Isolation with COOP and COEP
+
+[Cross-Origin Opener Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy) is a security mitigation that lets developers isolate their resources against side-channel attacks and information leaks. The COOP response header allows a document to request a new browsing context group to better isolate itself from other untrustworthy origins.
+
+[Cross-Origin Embedder Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy) prevents a document from loading any cross-origin resources which don't explicitly grant the document permission to be loaded. 
+
+COOP and COEP are independent mechanisms that can be enabled, tested and deployed separately. While enabling one doesn’t require developers to enable the other, when set together COOP and COEP allows developers to use powerful features (such as `SharedArrayBuffer`, `performance.measureMemory()` and the JS Self-Profiling API) securely, without worrying about side channel attacks like [Spectre](https://meltdownattack.com/). Further reading on [COOP/COEP](https://docs.google.com/document/d/1zDlfvfTJ_9e8Jdc8ehuV4zMEu9ySMCiTGMS9y0GU92k/edit#bookmark=id.uo6kivyh0ge2) and [why you need cross-origin isolation](https://web.dev/why-coop-coep/).
+
+The recommended configuration for the policies are:
+```
+Cross-Origin-Embedder-Policy: require-corp;
+Cross-Origin-Opener-Policy: same-origin;
+```
+
+COOP and COEP are implemented in Struts using [CoopInterceptor](../core-developers/coop-interceptor.html) and [CoepInterceptor](../core-developers/coep-interceptor.html).
