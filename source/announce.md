@@ -13,6 +13,37 @@ title: Announcements 2020
   Skip to: <a href="announce-2019.html">Announcements - 2019</a>
 </p>
 
+#### 28 September 2020 - Struts 2.5.25 General Availability {#a20200928}
+
+The Apache Struts group is pleased to announce that Struts 2.5.25 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework has been designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+Below is a full list of all changes:
+
+ - Package Level Properties in Global Results
+ - AbstractMatcher adds values to the map passed into replaceParameters
+ - Minor bug in single file upload example of the Showcase application
+ - Unable to set long pathname variables
+ - s:set with empty body
+ - AliasInterceptor doesn't properly handle Parameter.Empty
+ - Improve build behaviour on JDK9+
+ - Update multiple Struts 2.5.x libraries / Maven build plugin versions
+ - Upgrade OSGi to the latest version
+ 
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments
+to the user list, and, if appropriate, file a tracking ticket.
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
 #### 13 August 2020 - Security Advice: Announcing CVE-2019-0230 (Possible RCE) and CVE-2019-0233 (DoS) security issues {#a20200813}
 
 Two new [Struts Security Bulletins](https://cwiki.apache.org/confluence/display/WW/Security+Bulletin) have been issued for Struts 2 by the Apache Struts Security Team:
