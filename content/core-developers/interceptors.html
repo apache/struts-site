@@ -474,6 +474,7 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"clearSession"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ClearSessionInterceptor"</span> <span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"coopInterceptor"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.CoopInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"createSession"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.CreateSessionInterceptor"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"cspInterceptor"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.csp.CspInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"debugging"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.debugging.DebuggingInterceptor"</span> <span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"execAndWait"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ExecuteAndWaitInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"exception"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor"</span><span class="nt">/&gt;</span>
@@ -605,6 +606,9 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
                 <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"alias"</span><span class="nt">/&gt;</span>
                 <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"servletConfig"</span><span class="nt">/&gt;</span>
                 <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"i18n"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"cspInterceptor"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"enforcingMode"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+                <span class="nt">&lt;/interceptor-ref&gt;</span>
                 <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"prepare"</span><span class="nt">/&gt;</span>
                 <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"chain"</span><span class="nt">/&gt;</span>
                 <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"scopedModelDriven"</span><span class="nt">/&gt;</span>
@@ -712,6 +716,11 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td>Adds automatic checkbox handling code that detect an unchecked checkbox and add it as a parameter with a default (usually ‘false’) value. Uses a specially named hidden field to detect unsubmitted checkboxes. The default unchecked value is overridable for non-boolean value’d checkboxes.</td>
     </tr>
     <tr>
+      <td><a href="coep-interceptor.html">COEP Interceptor</a></td>
+      <td>coep</td>
+      <td>Implements the Cross-Origin Embedder Policy on incoming requests used to protect a document from loading any non-same-origin resources which don’t explicitly grant the document permission to be loaded.</td>
+    </tr>
+    <tr>
       <td><a href="conversion-error-interceptor.html">Conversion Error Interceptor</a></td>
       <td>conversionError</td>
       <td>Adds conversion errors from the ActionContext to the Action’s field errors</td>
@@ -725,6 +734,11 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td><a href="cookie-provider-interceptor.html">Cookie Provider Interceptor</a></td>
       <td>cookieProvider</td>
       <td>Transfer cookies from action to response (Since 2.3.15.)</td>
+    </tr>
+    <tr>
+      <td><a href="coop-interceptor.html">COOP Interceptor</a></td>
+      <td>coop</td>
+      <td>Implements the Cross-Origin Opener Policy on incoming requests used to isolate resources against side-channel attacks and information leaks.</td>
     </tr>
     <tr>
       <td><a href="create-session-interceptor.html">Create Session Interceptor</a></td>
@@ -755,6 +769,11 @@ specified in the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> ta
       <td><a href="execute-and-wait-interceptor.html">Execute and Wait Interceptor</a></td>
       <td>execAndWait</td>
       <td>Executes the Action in the background and then sends the user off to an intermediate waiting page.</td>
+    </tr>
+    <tr>
+      <td><a href="fetch-metadata-interceptor.html">Fetch Metadata Interceptor</a></td>
+      <td>fetchMetadata</td>
+      <td>Implements the Resource Isolation Policies on incoming requests used to protect against CSRF, XSSI, and cross-origin information leaks.</td>
     </tr>
     <tr>
       <td><a href="file-upload-interceptor.html">File Upload Interceptor</a></td>
