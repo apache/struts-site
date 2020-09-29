@@ -2,8 +2,8 @@
 layout: default
 title: Building Struts Master
 parent:
-  title: Contributors Guide
-  url: index.html
+  title: Creating and Signing a Distribution
+  url: creating-and-signing-a-distribution
 ---
 
 # Building Struts Master

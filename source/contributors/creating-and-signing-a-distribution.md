@@ -6,7 +6,7 @@ parent:
   url: index.html
 ---
 
-#Creating and Signing a Distribution
+# Creating and Signing a Distribution
 {:.no_toc}
 
 * Will be replaced with the ToC, excluding a header

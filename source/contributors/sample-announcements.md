@@ -2,8 +2,8 @@
 layout: default
 title: Sample announcements
 parent:
-  title: Contributors Guide
-  url: index.html
+  title: Creating and Signing a Distribution
+  url: creating-and-signing-a-distribution
 ---
 
 # Sample announcements

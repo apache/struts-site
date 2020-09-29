@@ -2,8 +2,8 @@
 layout: default
 title: One time steps
 parent:
-  title: Contributors Guide
-  url: index.html
+  title: Creating and Signing a Distribution
+  url: creating-and-signing-a-distribution
 ---
 
 # One time steps
