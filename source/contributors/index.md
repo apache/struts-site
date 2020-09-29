@@ -9,10 +9,9 @@ title: Contributors Guide
 
 - [Building the Framework from Source](building-the-framework-from-source)
   - [Building with Maven](building-with-maven)
-- [Creating and Signing a Distribution](creating-and-signing-a-distribution)
-- [Requirements](#PAGE_29362) and [Use Cases](#PAGE_29364) - _under construction_ 
-- [Precise Error Reporting](#PAGE_29826)
-- [Obtaining an IDEA license](#PAGE_29381)
+- [Creating and Signing a Distribution](creating-and-signing-a-distribution) 
+- [Precise Error Reporting](precise-error-reporting)
+- [Obtaining an IDEA license](obtaining-an-idea-license)
 - [How to Write Doc Comments for the Javadoc Tool](http://java.sun.com/j2se/javadoc/writingdoccomments/) (Sun)
 
 ## Documentation

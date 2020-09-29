@@ -16,7 +16,7 @@ parent:
 
 ### Create and install a SSH key
 
-| See [OpenSSH Public Key Authentication](http://sial.org/howto/openssh/publickey-auth/)
+> See [OpenSSH Public Key Authentication](http://sial.org/howto/openssh/publickey-auth/)
 
 If you get hung up during release:perform because Maven can't verify the authenticity of a host, then there could be 
 one of two  different problems. The first problem, which is an easy fix, is to go to the command line and use SSH 
