@@ -25,7 +25,7 @@ We are using Jekyll and mix of Markdown pages with raw Html pages, where Markdow
 The whole build of the website is orchestrated by [.asf.yaml](http://s.apache.org/asfyaml), please refer to the docs
 for more details. The main build of the website is performed by [a buildbot job](https://ci2.apache.org/#/builders/7),
 the staging site is build and deployed by 
-[a Jenkins job](https://builds.apache.org/view/S-Z/view/Struts/job/Struts-staged-site/) - buildbot doesn't support staging site deployment yet.  
+[a Jenkins job](https://ci-builds.apache.org/job/Struts/job/Struts-staged-site/) - buildbot doesn't support staging site deployment yet.  
 
 ## Applying a change
 
@@ -36,8 +36,8 @@ You can then review your changes before applying them to the `master` branch.
 
 ## Deploying JavaDocs
 
-There is a dedicated [Jenkins job](https://builds.apache.org/view/S-Z/view/Struts/job/Struts-site-javadocs/) which is
+There is a dedicated [Jenkins job](https://ci-builds.apache.org/job/Struts/job/Struts-site-javadocs/) which is
 used to update the JavaDocs based on the latest release. If you have a proper privileges you can start the job
-and provide a Git tag of the latest release, eg. `STRUTS_2_5_22`. Based on the tag Jenkins will generate a proper
+and provide a Git tag of the latest release, eg. `STRUTS_2_5_22`. Based on the tag, Jenkins will generate a proper
 JavaDocs and deploy them directly into the website. You can verify them by using this [link](https://struts.staged.apache.org/maven/struts2-core/apidocs/index.html).
   

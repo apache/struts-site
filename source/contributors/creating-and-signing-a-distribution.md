@@ -32,6 +32,6 @@ Depends on what you want to achieve, please select topic from the list below:
 - [One time steps](one-time-steps) - before you start preparing a distribution
 - [Sample announcements](sample-announcements) - announcements used to communicate the achievement
 - [Building Struts Master](building-struts-master) - how to release Struts Master
-- [Building Struts Annotations](#PAGE_27832965) - when you want to prepare a new distribution of Struts Annotations (if something changed)
-- [Building Struts 2 - Normal release](#PAGE_27832970) - the most common used path
-- [Building Struts 2 - Fast track release](#PAGE_27834014) - how to prepare a fast track release with important security patch
+- [Building Struts Annotations](building-struts-annotations) - when you want to prepare a new distribution of Struts Annotations (if something changed)
+- [Building Struts 2 - Normal release](building-normal-release) - the most common used path
+- [Building Struts 2 - Fast track release](building-fast-track-release) - how to prepare a fast track release with important security patch
