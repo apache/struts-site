@@ -12,7 +12,7 @@ title: Contributors Guide
 - [Creating and Signing a Distribution](creating-and-signing-a-distribution) 
 - [Precise Error Reporting](precise-error-reporting)
 - [Obtaining an IDEA license](obtaining-an-idea-license)
-- [How to Write Doc Comments for the Javadoc Tool](http://java.sun.com/j2se/javadoc/writingdoccomments/) (Sun)
+- [How to Write Doc Comments for the Javadoc Tool](https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html) (Oracle)
 
 ## Documentation
 
@@ -24,7 +24,7 @@ title: Contributors Guide
 
 - [Third Party Licensing Policy RFC](http://people.apache.org/~cliffs/3party.html)
 - [ASF Source Header and Copyright Notice Policy](http://www.apache.org/legal/src-headers.html)
-- [Author Tags](http://tinyurl.com/mw7t6)^[http://tinyurl.com/mw7t6]
+- [Author Tags](http://tinyurl.com/mw7t6)
 
 ## Quick Links
 
