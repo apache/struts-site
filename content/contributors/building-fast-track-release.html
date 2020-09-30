@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Updating the website</title>
+  <title>Building Fast Track Release</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -127,49 +127,54 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/updating-website.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/contributors/building-fast-track-release.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <h1 class="no_toc" id="updating-the-website">Updating the website</h1>
+    <a href="creating-and-signing-a-distribution" title="back to Creating and Signing a Distribution"><< back to Creating and Signing a Distribution</a>
+    
+    <h1 class="no_toc" id="building-fast-track-release">Building fast track release</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#the-setup" id="markdown-toc-the-setup">The setup</a></li>
-  <li><a href="#applying-a-change" id="markdown-toc-applying-a-change">Applying a change</a></li>
-  <li><a href="#deploying-javadocs" id="markdown-toc-deploying-javadocs">Deploying JavaDocs</a></li>
+  <li><a href="#getting-ready" id="markdown-toc-getting-ready">Getting ready</a></li>
+  <li><a href="#apply-security-patch" id="markdown-toc-apply-security-patch">Apply security patch</a></li>
+  <li><a href="#next-steps" id="markdown-toc-next-steps">Next steps</a></li>
 </ul>
 
-<h2 id="the-setup">The setup</h2>
+<h2 id="getting-ready">Getting ready</h2>
 
-<p>The whole website is available in a dedicated Git <a href="https://gitbox.apache.org/repos/asf?p=struts-site.git">repository</a>, 
-you can also use a Github <a href="https://github.com/apache/struts-site">mirror</a>.</p>
+<p>Follow the same steps as for <a href="building-normal-release">Normal Release</a></p>
 
-<p>The <code class="highlighter-rouge">master</code> branch contains the current source code of the website, any changes should be applied to this branch, 
-also any Pull Request should be opened against this branch as well.</p>
+<p>Please be aware you should create a new Security Bulletin in secret, you should assign only <code class="highlighter-rouge">struts-committers</code> group 
+to be visible for. If the release will fix a - hopefully yet undisclosed - security issue, you must update 
+the <a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins">Security Bulletins</a> page. It also needs to be 
+accessible only by members of the <code class="highlighter-rouge">struts-committers</code> group.</p>
 
-<p>We are using Jekyll and mix of Markdown pages with raw Html pages, where Markdown is a preferred option.</p>
+<h2 id="apply-security-patch">Apply security patch</h2>
 
-<blockquote>
-  <p>WARN: do not manually change the <code class="highlighter-rouge">asf-site</code> or <code class="highlighter-rouge">ast-staging</code> branches, they will be automatically updated
-by a CI server.</p>
-</blockquote>
+<p>Apply and commit security patch.</p>
 
-<p>The whole build of the website is orchestrated by <a href="http://s.apache.org/asfyaml">.asf.yaml</a>, please refer to the docs
-for more details. The main build of the website is performed by <a href="https://ci2.apache.org/#/builders/7">a buildbot job</a>,
-the staging site is build and deployed by 
-<a href="https://ci-builds.apache.org/job/Struts/job/Struts-staged-site/">a Jenkins job</a> - buildbot doesn’t support staging site deployment yet.</p>
+<h2 id="next-steps">Next steps</h2>
 
-<h2 id="applying-a-change">Applying a change</h2>
+<p>Follow the same steps as for <a href="building-normal-release">Normal Release</a></p>
 
-<p>If you are a contributor, and the change is small you can push it directly to the <code class="highlighter-rouge">master</code> branch. In any other case
-please open a Pull Request. The Pull Request will be automatically build and deployed to the <a href="https://struts.staged.apache.org/">staging site</a>.</p>
-
-<p>You can then review your changes before applying them to the <code class="highlighter-rouge">master</code> branch.</p>
-
-<h2 id="deploying-javadocs">Deploying JavaDocs</h2>
-
-<p>There is a dedicated <a href="https://ci-builds.apache.org/job/Struts/job/Struts-site-javadocs/">Jenkins job</a> which is
-used to update the JavaDocs based on the latest release. If you have a proper privileges you can start the job
-and provide a Git tag of the latest release, eg. <code class="highlighter-rouge">STRUTS_2_5_22</code>. Based on the tag, Jenkins will generate a proper
-JavaDocs and deploy them directly into the website. You can verify them by using this <a href="https://struts.staged.apache.org/maven/struts2-core/apidocs/index.html">link</a>.</p>
+<ul>
+  <li>Prepare release</li>
+  <li>Perform the release</li>
+  <li>Jira stuff</li>
+  <li>Vote on it
+Post a release/quality vote to the dev list (and <strong>only</strong> the dev list). The example mail is on <a href="sample-announcements">Sample announcements</a>
+page. Include the term “fast-track” in the subject, as: [VOTE] Struts 2.0.9.1 quality (fast track).
+Please be aware this vote should be open only 24h!</li>
+  <li>Copy files</li>
+  <li>Promote release</li>
+  <li>Clean up old releases</li>
+  <li>Wait for rsync</li>
+  <li>Update site</li>
+  <li>Post announcements
+Announce the release and the vulnerability. Typically, this will be sent to the reporter, the project’s users list 
+(user@struts.a.o), the project’s dev list (dev@struts.a.o), the project’s announce list (announcements@struts.a.o), 
+security@apache.org, full-disclosure@lists.grok.org.uk and bugtraq@securityfocus.com.
+Samples are available at <a href="sample-announcements">Sample announcements</a> page.</li>
+</ul>
 
 
   </section>
