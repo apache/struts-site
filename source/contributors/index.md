@@ -16,9 +16,8 @@ title: Contributors Guide
 
 ## Documentation
 
-- [Editing the Documentation](#PAGE_27087)
-- [Documentation Colophon](#PAGE_13822)
-- [Documentation Style Guide](#PAGE_14055)
+- [Editing the Documentation](editing-the-documentation)
+- [Documentation Style Guide](editing-the-documentation)
 
 ## Licensing and Copyright
 
@@ -35,8 +34,3 @@ title: Contributors Guide
 - [Javadocs](http://people.apache.org/~mrdon/action2-api/)
 - [Source code repository](https://svn.apache.org/repos/asf/struts/action2)
 - [Our WebWork roots](http://today.java.net/pub/a//today/2005/02/25/opensymphony.html)
-
-## Bleeding Edge
-
-- [Struts 2.0.2 Release Plan](http://wiki.apache.org/struts/StrutsActionRelease202)
-- [Struts Ti Proposal](http://wiki.apache.org/struts/StrutsTi)
