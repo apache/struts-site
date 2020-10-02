@@ -34,13 +34,16 @@ Below is a full list of all changes:
  - Update multiple Struts 2.5.x libraries / Maven build plugin versions
  - Upgrade OSGi to the latest version
  
+> Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+2.5.25) to find more details about performed 
+> bug fixes and improvements.
+ 
 **All developers are strongly advised to perform this action.**
 
 The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
 Servlet API 2.4, JSP API 2.0, and Java 7.
 
-Should any issues arise with your use of any version of the Struts framework, please post your comments
-to the user list, and, if appropriate, file a tracking ticket.
+Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list, 
+and, if appropriate, file [a tracking ticket]({{ site.jira_url }}).
 
 You can download this version from our [download](download.cgi#struts-ga) page.
 
