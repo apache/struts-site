@@ -1,20 +1,24 @@
 ---
 layout: core-developers
 title: Basic Validation
+parent:
+    title: Validation
+    url: validation.html
 ---
 
 # Basic Validation
+{:.no_toc}
 
-Let's configure a basic validation workflow, step by step\.
+* Will be replaced with the ToC, excluding a header
+{:toc}
+
+Let's configure a basic validation workflow, step by step.
 
 ## Step 1
 
-Create the input form\.
+Create the input form.
 
-{% comment %}start snippet id=basicValidation|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/webapp/WEB-INF/validation/quiz-basic.jsp {% endcomment %}
-
-```xml
-
+```html
 <html>
 <head>
 	<title>Struts2 Showcase - Validation - Basic</title>
@@ -47,19 +51,13 @@ Create the input form\.
 </div>
 </body>
 </html>
-
 ```
-
-{% comment %}end snippet id=basicValidation|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/webapp/WEB-INF/validation/quiz-basic.jsp {% endcomment %}
 
 ## Step 2
 
-Create the Action class\.
-
-{% comment %}start snippet id=quizAction|javadoc=false|lang=java|url=struts2/apps/showcase/src/main/java/org/apache/struts2/showcase/validation/QuizAction.java {% endcomment %}
+Create the Action class.
 
 ```java
-
 public class QuizAction extends ActionSupport {
 
 	private static final long serialVersionUID = -7505437345373234225L;
@@ -92,17 +90,12 @@ public class QuizAction extends ActionSupport {
 		this.answer = answer;
 	}
 }
-
-
 ```
-
-{% comment %}end snippet id=quizAction|javadoc=false|lang=java|url=struts2/apps/showcase/src/main/java/org/apache/struts2/showcase/validation/QuizAction.java {% endcomment %}
 
 ## Step 3
 
-Create the validators\. The `validation.xml` format is either `<ActionClassName>-validation.xml` or `<ActionClassName>-<ActionAliasName>-validation.xml`\.
-
-{% comment %}start snippet id=quizValidators|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/QuizAction-validation.xml {% endcomment %}
+Create the validators. The `validation.xml` format is either `<ActionClassName>-validation.xml`
+or `<ActionClassName>-<ActionAliasName>-validation.xml`.
 
 ```xml
 <!--
@@ -123,16 +116,11 @@ Create the validators\. The `validation.xml` format is either `<ActionClassName>
         </field-validator>
     </field>
 </validators>
-
-
 ```
-
-{% comment %}end snippet id=quizValidators|javadoc=false|lang=xml|url=struts2/apps/showcase/src/main/resources/org/apache/struts2/showcase/validation/QuizAction-validation.xml {% endcomment %}
 
 ## Step 4
 
-Make sure there is a result for "input" listed in the struts\.xml for when the validation fails:
-
+Make sure there is a result for "input" listed in the struts.xml for when the validation fails:
 
 ```xml
 <action name="HelloWorld" class="tutorial.HelloWorld">
@@ -143,4 +131,4 @@ Make sure there is a result for "input" listed in the struts\.xml for when the v
 
 ```
 
-If you don't have this, you'll get a: "No result defined for action xxx\.xxx\.tutorial\.HellowWorld and result input" error
+If you don't have this, you'll get a: "No result defined for action xxx.xxx.tutorial.HellowWorld and result input" error.

@@ -1,9 +1,16 @@
 ---
 layout: core-developers
 title: fieldexpression validator
+parent:
+    title: Validation
+    url: validation.html
 ---
 
 # fieldexpression validator
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Description
 
@@ -16,7 +23,7 @@ Validates a field using an OGNL expression.
 
 ## Examples
 
-```
+```xml
 <!-- Plain Validator Syntax -->
 <validators>
     <!-- Plain Validator Syntax -->
@@ -33,5 +40,5 @@ Validates a field using an OGNL expression.
             <message>My credit limit should be MORE than my girlfriend</message>
         </field-validator>
     </field>
-</vaidators>
+</validators>
 ```

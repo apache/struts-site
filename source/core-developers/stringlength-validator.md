@@ -1,13 +1,23 @@
 ---
 layout: core-developers
 title: stringlength validator
+parent:
+    title: Validation
+    url: validation.html
 ---
 
 # stringlength validator
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Description
 
-StringLengthFieldValidator checks that a String field is of a certain length. If the `minLength` parameter is specified, it will make sure that the String has at least that many characters. If the `maxLength` parameter is specified, it will make sure that the String has at most that many characters. The `trim` parameter determines whether it will `String#trim()` the String before performing the length check. If unspecified, the String will be trimmed.
+StringLengthFieldValidator checks that a String field is of a certain length. If the `minLength` parameter is specified, 
+it will make sure that the String has at least that many characters. If the `maxLength` parameter is specified, it will 
+make sure that the String has at most that many characters. The `trim` parameter determines whether it will `String#trim()` 
+the String before performing the length check. If unspecified, the String will be trimmed.
 
 ## Parameters
 
@@ -19,12 +29,12 @@ StringLengthFieldValidator checks that a String field is of a certain length. If
 - `minLengthExpression` - (Optional) String. Defines the min length param as an OGNL expression.
 - `trimExpression` - (Optional) String. Defines th trim param as an OGNL expression.
 
-> Warning
-> Do not use `${minLengthExpression}`, `${maxLengthExpression}` and `${trimExpression}` as an expression as this will turn into infinitive loop!
+> Warning: do not use `${minLengthExpression}`, `${maxLengthExpression}` and `${trimExpression}` as an expression 
+> as this will turn into infinitive loop!
 
 ## Examples
 
-```
+```xml
 <validators>
     <!-- Plain Validator Syntax -->
     <validator type="stringlength">

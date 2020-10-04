@@ -1,9 +1,16 @@
 ---
 layout: core-developers
 title: email validator
+parent:
+    title: Validation
+    url: validation.html
 ---
 
 # email validator
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Description
 
@@ -12,8 +19,10 @@ EmailValidator checks that a given String field, if not empty, is a valid email 
 The regular expression used to validate that the string is an email address is:
 
 ```
-\\b^['_a-z0-9-\\+](\\.['_a-z0-9-\\+])@[a-z0-9-](\\.[a-z0-9-])\\.([a-z]{2,6})$\\b
+\\b^['_a-z0-9-\\+]+(\\.['_a-z0-9-\\+]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*\\.([a-z]{2,6})$\\b
 ```
+
+> This Regex can change, please always check in the [source code](https://github.com/apache/struts/blob/master/core/src/main/java/com/opensymphony/xwork2/validator/validators/EmailValidator.java#L83)
 
 You can also specify `expression`, `caseSensitive` and `trim` params as a OGNL expression, see the example below.
 
@@ -23,12 +32,12 @@ You can also specify `expression`, `caseSensitive` and `trim` params as a OGNL e
 
 Check also documentation of the `RegexpValidator` for more details - the EmailValidator is based on it.
 
-> Warning
-> Do not use `${regexExpression}`, `${caseSensitiveExpression}` and `${trimExpression}` as an expression as this will turn into infinitive loop!
+> Warning: do not use `${regexExpression}`, `${caseSensitiveExpression}` and `${trimExpression}` as an expression 
+> as this will turn into infinitive loop!
 
 ## Examples
 
-```
+```xml
 <!-- Plain Validator Syntax -->
 <validators>
     <validator type="email">

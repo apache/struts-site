@@ -1,9 +1,16 @@
 ---
 layout: core-developers
 title: url validator
+parent:
+    title: Validation
+    url: validation.html
 ---
 
 # url validator
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Description
 
@@ -17,7 +24,7 @@ URLValidator checks that a given field is a String and a valid URL.
 
 ## Examples
 
-```
+```xml
 <validators>
     <!-- Plain Validator Syntax -->
     <validator type="url">
@@ -34,4 +41,4 @@ URLValidator checks that a given field is a String and a valid URL.
 </validators>
 ```
 
-See more details in [UrlValidator Annotation](url-validator-annotation.html)
+See more details in [UrlValidator Annotation](url-validator-annotation)

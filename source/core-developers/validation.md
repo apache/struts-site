@@ -26,7 +26,7 @@ for the action.
 
 ## Using Annotations
 
-[Annotations](validation-annotation.html) can be used as an alternative to XML for validation.
+[Annotations](validation-annotation) can be used as an alternative to XML for validation.
 
 ## Bean Validation
 
@@ -37,14 +37,14 @@ See the [Plugin Page](../plugins/) for details.
 
 In all examples given here, the validation message displayed is given in plain English - to internationalize the message, 
 put the string in a properties file and use a property key instead, specified by the 'key' attribute. It will be looked 
-up by the framework (see [Localization](localization.html)).
+up by the framework (see [Localization](localization)).
 
-1. [Basic Validation](basic-validation.html)
-2. [Client-side Validation](client-side-validation.html)
+1. [Basic Validation](basic-validation)
+2. [Client-side Validation](client-side-validation)
 3. _AJAX Validation_ 
-4. [Using Field Validators](using-field-validators.html)
-5. [Using Non Field Validators](using-non-field-validators.html)
-6. [Using Visitor Field Validator](using-visitor-field-validator.html)
+4. [Using Field Validators](using-field-validators)
+5. [Using Non Field Validators](using-non-field-validators)
+6. [Using Visitor Field Validator](using-visitor-field-validator)
 7. _How do we repopulate controls when validation fails_  (FAQ entry)
 
 ## Bundled Validators
@@ -53,21 +53,21 @@ When using a Field Validator, Field Validator Syntax is **ALWAYS** preferable th
 as it facilitates grouping of field-validators according to fields. This is very handy especially if a field needs 
 to have many field-validators which is almost always the case.
 
-1. [conversion validator](conversion-validator.html)
-2. [date validator](date-validator.html)
-3. [double validator](double-validator.html)
-4. [email validator](email-validator.html)
-5. [expression validator](expression-validator.html)
-6. [fieldexpression validator](fieldexpression-validator.html)
-7. [int validator](int-validator.html)
-8. [regex validator](regex-validator.html)
-9. [required validator](required-validator.html)
-10. [requiredstring validator](requiredstring-validator.html)
-11. [short validator](short-validator.html)
-12. [stringlength validator](stringlength-validator.html)
-13. [url validator](url-validator.html)
-14. [visitor validator](visitor-validator.html)
-15. [conditionalvisitor validator](conditionalvisitor-validator.html)
+1. [conversion validator](conversion-validator)
+2. [date validator](date-validator)
+3. [double validator](double-validator)
+4. [email validator](email-validator)
+5. [expression validator](expression-validator)
+6. [fieldexpression validator](fieldexpression-validator)
+7. [int validator](int-validator)
+8. [regex validator](regex-validator)
+9. [required validator](required-validator)
+10. [requiredstring validator](requiredstring-validator)
+11. [short validator](short-validator)
+12. [stringlength validator](stringlength-validator)
+13. [url validator](url-validator)
+14. [visitor validator](visitor-validator)
+15. [conditionalvisitor validator](conditionalvisitor-validator)
 
 ## Registering Validators
 
@@ -89,7 +89,7 @@ our own validators.
 
 > **Struts 2.0.7 and Prior**
 > The `validators.xml` containing custom validators needs to contain a copy of the default validators. No DTD was used 
-> in `validators.xml`. See: [http://struts.apache.org/docs/release-notes-208.html#ReleaseNotes2.0.8-MigrationfrompreviousReleases](http://struts.apache.org/docs/release-notes-208.html#ReleaseNotes2.0.8-MigrationfrompreviousReleases)
+> in `validators.xml`. See: [Release Notes 2.0.8](https://cwiki.apache.org/confluence/display/WW/Release+Notes+2.0.8#ReleaseNotes2.0.8-MigrationfrompreviousReleases)
 
 ## Turning on Validation
 
@@ -335,7 +335,7 @@ Non-Field-Validator: The `<validator>` element allows you to declare both types 
 a field-specific FieldValidator).
 
 ```xml
-<validator type="expression> 
+<validator type="expression"> 
     <param name="expression">foo gt bar</param> 
     <message>foo must be great than bar.</message> 
 </validator> 

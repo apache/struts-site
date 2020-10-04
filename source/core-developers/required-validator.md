@@ -1,9 +1,16 @@
 ---
 layout: core-developers
 title: required validator
+parent:
+    title: Validation
+    url: validation.html
 ---
 
 # required validator
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Description
 
@@ -15,7 +22,7 @@ RequiredFieldValidator checks if the specified field is not null.
 
 ## Examples
 
-```
+```xml
 <validators>
     <!-- Plain Validator Syntax -->
     <validator type="required">

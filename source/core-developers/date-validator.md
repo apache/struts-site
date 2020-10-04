@@ -1,15 +1,23 @@
 ---
 layout: core-developers
 title: date validator
+parent:
+    title: Validation
+    url: validation.html
 ---
 
 # date validator
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Description
 
 Field Validator that checks if the date supplied is within a specific range.
 
-**NOTE:** If no date converter is specified, `XWorkBasicConverter` will kick in to do the date conversion, which by default using the `Date.SHORT` format using the specified locale else falling back to the system default locale.
+> NOTE: If no date converter is specified, `XWorkBasicConverter` will kick in to do the date conversion, which 
+> by default using the `Date.SHORT` format using the specified locale else falling back to the system default locale.
 
 ## Parameters
 
@@ -20,14 +28,14 @@ Field Validator that checks if the date supplied is within a specific range.
 - `minExpression` - expression to calculate the minimum value (if none is specified, it will not be checked).
 - `maxExpression` - expression to calculate the maximum value (if none is specified, it will not be checked).
 
-You can either use the `min` / `max` value or `minExpression` / `maxExpression` (when `parse` is set to `true`) - using expression can be slightly slower, see the example below.
+You can either use the `min` / `max` value or `minExpression` / `maxExpression` (when `parse` is set to `true`) - 
+using expression can be slightly slower, see the example below.
 
-> Warning
-> Do not use `${minExpression}` and `${maxExpression}` as an expression as this will turn into infinitive loop!
+> Warning: Do not use `${minExpression}` and `${maxExpression}` as an expression as this will turn into infinitive loop!
 
 ## Examples
 
-```
+```xml
 <validators>
     <!-- Plain Validator syntax -->
     <validator type="date">

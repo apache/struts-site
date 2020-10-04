@@ -1,9 +1,16 @@
 ---
 layout: core-developers
 title: double validator
+parent:
+    title: Validation
+    url: validation.html
 ---
 
 # double validator
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Description
 
@@ -21,14 +28,16 @@ Field Validator that checks if the double specified is within a certain range.
 - `minExclusiveExpression` - the minimum exclusive value specified as a OGNL expression (if none is specified, it will not be checked).
 - `maxExclusiveExpression` - the maximum exclusive value specified as a OGNL expression (if none is specified, it will not be checked).
 
-You can specify either `minInclusive`, `maxInclusive`, `minExclusive` and `maxExclusive` or `minInclusiveExpression`, `maxInclusiveExpression`, `minExclusiveExpression` and `maxExclusiveExpression` as a OGNL expression, see example below. You can always try to mix params but be aware that such behaviour was not tested.
+You can specify either `minInclusive`, `maxInclusive`, `minExclusive` and `maxExclusive` or `minInclusiveExpression`, 
+`maxInclusiveExpression`, `minExclusiveExpression` and `maxExclusiveExpression` as a OGNL expression, see example below. 
+You can always try to mix params but be aware that such behaviour was not tested.
 
-> Warning
-> Do not use `${minInclusiveExpression}`, `${maxInclusiveExpression}`, `${minExclusiveExpressionExpression}` and `${maxExclusive}` as an expression as this will turn into infinitive loop!
+> Warning: do not use `${minInclusiveExpression}`, `${maxInclusiveExpression}`, `${minExclusiveExpressionExpression}` 
+> and `${maxExclusive}` as an expression as this will turn into infinitive loop!
 
 ## Examples
 
-```
+```xml
 <validators>
     <!-- Plain Validator Syntax -->
     <validator type="double">

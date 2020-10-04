@@ -1,13 +1,21 @@
 ---
 layout: core-developers
 title: requiredstring validator
+parent:
+    title: Validation
+    url: validation.html
 ---
 
 # requiredstring validator
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Description
 
-RequiredStringValidator checks that a String field is non-null and has a length > 0. (i.e. it isn't ""). The `trim` parameter determines whether it will `String#trim()` the String before performing the length check. If unspecified, the String will be trimmed.
+RequiredStringValidator checks that a String field is non-null and has a length > 0. (i.e. it isn't ""). The `trim` parameter 
+determines whether it will `String#trim()` the String before performing the length check. If unspecified, the String will be trimmed.
 
 ## Parameters
 
@@ -17,7 +25,7 @@ RequiredStringValidator checks that a String field is non-null and has a length 
 
 ## Examples
 
-```
+```xml
 <validators>
     <!-- Plain-Validator Syntax -->
     <validator type="requiredstring">

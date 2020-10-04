@@ -1,13 +1,23 @@
 ---
 layout: core-developers
 title: visitor validator
+parent:
+    title: Validation
+    url: validation.html
 ---
 
 # visitor validator
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Description
 
-The VisitorFieldValidator allows you to forward validation to object properties of your action using the object's own validation files. This allows you to use the `ModelDriven` development pattern and manage your validations for your models in one place, where they belong, next to your model classes. The VisitorFieldValidator can handle either simple Object properties, Collections of Objects, or Arrays.
+The VisitorFieldValidator allows you to forward validation to object properties of your action using the object's own 
+validation files. This allows you to use the `ModelDriven` development pattern and manage your validations for your models 
+in one place, where they belong, next to your model classes. The VisitorFieldValidator can handle either simple Object 
+properties, Collections of Objects, or Arrays.
 
 ## Parameters
 
@@ -17,7 +27,7 @@ The VisitorFieldValidator allows you to forward validation to object properties 
 
 ## Examples
 
-```
+```xml
 <validators>
     <!-- Plain Validator Syntax -->
     <validator type="visitor">
