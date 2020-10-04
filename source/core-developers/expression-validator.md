@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: expression validator
 parent:
     title: Validation

@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: Using Visitor Field Validator
 parent:
     title: Validation

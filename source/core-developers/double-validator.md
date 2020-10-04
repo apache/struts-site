@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: double validator
 parent:
     title: Validation

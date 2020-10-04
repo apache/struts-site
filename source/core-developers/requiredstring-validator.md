@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: requiredstring validator
 parent:
     title: Validation

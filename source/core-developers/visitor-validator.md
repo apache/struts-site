@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: visitor validator
 parent:
     title: Validation

@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: date validator
 parent:
     title: Validation

@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: email validator
 parent:
     title: Validation

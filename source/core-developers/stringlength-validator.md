@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: stringlength validator
 parent:
     title: Validation

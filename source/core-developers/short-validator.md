@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: short validator
 parent:
     title: Validation

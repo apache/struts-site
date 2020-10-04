@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: Basic Validation
 parent:
     title: Validation
@@ -9,10 +9,10 @@ parent:
 # Basic Validation
 {:.no_toc}
 
+Let's configure a basic validation workflow, step by step.
+
 * Will be replaced with the ToC, excluding a header
 {:toc}
-
-Let's configure a basic validation workflow, step by step.
 
 ## Step 1
 

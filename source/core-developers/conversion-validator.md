@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: conversion validator
 parent:
     title: Validation

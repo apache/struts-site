@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: Using Field Validators
 parent:
     title: Validation

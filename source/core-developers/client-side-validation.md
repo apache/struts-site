@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: Client Side Validation
 parent:
     title: Validation

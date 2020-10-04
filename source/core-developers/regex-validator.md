@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: regex validator
 parent:
     title: Validation

@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: url validator
 parent:
     title: Validation
