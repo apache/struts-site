@@ -129,7 +129,13 @@
   <section class="col-md-12">
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/double-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="double-validator">double validator</h1>
+    <h1 class="no_toc" id="double-validator">double validator</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#description" id="markdown-toc-description">Description</a></li>
+  <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
+  <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
+</ul>
 
 <h2 id="description">Description</h2>
 
@@ -149,42 +155,44 @@
   <li><code class="highlighter-rouge">maxExclusiveExpression</code> - the maximum exclusive value specified as a OGNL expression (if none is specified, it will not be checked).</li>
 </ul>
 
-<p>You can specify either <code class="highlighter-rouge">minInclusive</code>, <code class="highlighter-rouge">maxInclusive</code>, <code class="highlighter-rouge">minExclusive</code> and <code class="highlighter-rouge">maxExclusive</code> or <code class="highlighter-rouge">minInclusiveExpression</code>, <code class="highlighter-rouge">maxInclusiveExpression</code>, <code class="highlighter-rouge">minExclusiveExpression</code> and <code class="highlighter-rouge">maxExclusiveExpression</code> as a OGNL expression, see example below. You can always try to mix params but be aware that such behaviour was not tested.</p>
+<p>You can specify either <code class="highlighter-rouge">minInclusive</code>, <code class="highlighter-rouge">maxInclusive</code>, <code class="highlighter-rouge">minExclusive</code> and <code class="highlighter-rouge">maxExclusive</code> or <code class="highlighter-rouge">minInclusiveExpression</code>, 
+<code class="highlighter-rouge">maxInclusiveExpression</code>, <code class="highlighter-rouge">minExclusiveExpression</code> and <code class="highlighter-rouge">maxExclusiveExpression</code> as a OGNL expression, see example below. 
+You can always try to mix params but be aware that such behaviour was not tested.</p>
 
 <blockquote>
-  <p>Warning
-Do not use <code class="highlighter-rouge">${minInclusiveExpression}</code>, <code class="highlighter-rouge">${maxInclusiveExpression}</code>, <code class="highlighter-rouge">${minExclusiveExpressionExpression}</code> and <code class="highlighter-rouge">${maxExclusive}</code> as an expression as this will turn into infinitive loop!</p>
+  <p>Warning: do not use <code class="highlighter-rouge">${minInclusiveExpression}</code>, <code class="highlighter-rouge">${maxInclusiveExpression}</code>, <code class="highlighter-rouge">${minExclusiveExpressionExpression}</code> 
+and <code class="highlighter-rouge">${maxExclusive}</code> as an expression as this will turn into infinitive loop!</p>
 </blockquote>
 
 <h2 id="examples">Examples</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;validators&gt;
-    &lt;!-- Plain Validator Syntax --&gt;
-    &lt;validator type="double"&gt;
-        &lt;param name="fieldName"&gt;percentage&lt;/param&gt;
-        &lt;param name="minInclusive"&gt;20.1&lt;/param&gt;
-        &lt;param name="maxInclusive"&gt;50.1&lt;/param&gt;
-        &lt;message&gt;Age needs to be between ${minInclusive} and ${maxInclusive} (inclusive)&lt;/message&gt;
-    &lt;/validator&gt;
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;validators&gt;</span>
+    <span class="c">&lt;!-- Plain Validator Syntax --&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">type=</span><span class="s">"double"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"fieldName"</span><span class="nt">&gt;</span>percentage<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"minInclusive"</span><span class="nt">&gt;</span>20.1<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"maxInclusive"</span><span class="nt">&gt;</span>50.1<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;message&gt;</span>Age needs to be between ${minInclusive} and ${maxInclusive} (inclusive)<span class="nt">&lt;/message&gt;</span>
+    <span class="nt">&lt;/validator&gt;</span>
  
-    &lt;!-- Field Validator Syntax --&gt;
-    &lt;field name="percentage"&gt;
-        &lt;field-validator type="double"&gt;
-            &lt;param name="minExclusive"&gt;0.123&lt;/param&gt;
-            &lt;param name="maxExclusive"&gt;99.98&lt;/param&gt;
-            &lt;message&gt;Percentage needs to be between ${minExclusive} and ${maxExclusive} (exclusive)&lt;/message&gt;
-        &lt;/field-validator&gt;
-    &lt;/field&gt;
+    <span class="c">&lt;!-- Field Validator Syntax --&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"percentage"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;field-validator</span> <span class="na">type=</span><span class="s">"double"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"minExclusive"</span><span class="nt">&gt;</span>0.123<span class="nt">&lt;/param&gt;</span>
+            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"maxExclusive"</span><span class="nt">&gt;</span>99.98<span class="nt">&lt;/param&gt;</span>
+            <span class="nt">&lt;message&gt;</span>Percentage needs to be between ${minExclusive} and ${maxExclusive} (exclusive)<span class="nt">&lt;/message&gt;</span>
+        <span class="nt">&lt;/field-validator&gt;</span>
+    <span class="nt">&lt;/field&gt;</span>
  
-    &lt;!-- Field Validator Syntax with expression --&gt;
-    &lt;field name="percentage"&gt;
-        &lt;field-validator type="double"&gt;
-            &lt;param name="minExclusiveExpression"&gt;${minExclusiveValue}&lt;/param&gt; &lt;!-- will be evaluated as: Double getMinExclusiveValue() --&gt;
-            &lt;param name="maxExclusiveExpression"&gt;${maxExclusiveValue}&lt;/param&gt; &lt;!-- will be evaluated as: Double getMaxExclusiveValue() --&gt;
-            &lt;message&gt;Percentage needs to be between ${minExclusive} and ${maxExclusive} (exclusive)&lt;/message&gt;
-        &lt;/field-validator&gt;
-    &lt;/field&gt;
-&lt;/validators&gt;
+    <span class="c">&lt;!-- Field Validator Syntax with expression --&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"percentage"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;field-validator</span> <span class="na">type=</span><span class="s">"double"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"minExclusiveExpression"</span><span class="nt">&gt;</span>${minExclusiveValue}<span class="nt">&lt;/param&gt;</span> <span class="c">&lt;!-- will be evaluated as: Double getMinExclusiveValue() --&gt;</span>
+            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"maxExclusiveExpression"</span><span class="nt">&gt;</span>${maxExclusiveValue}<span class="nt">&lt;/param&gt;</span> <span class="c">&lt;!-- will be evaluated as: Double getMaxExclusiveValue() --&gt;</span>
+            <span class="nt">&lt;message&gt;</span>Percentage needs to be between ${minExclusive} and ${maxExclusive} (exclusive)<span class="nt">&lt;/message&gt;</span>
+        <span class="nt">&lt;/field-validator&gt;</span>
+    <span class="nt">&lt;/field&gt;</span>
+<span class="nt">&lt;/validators&gt;</span>
 </code></pre></div></div>
 
   </section>

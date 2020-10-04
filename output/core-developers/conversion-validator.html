@@ -129,7 +129,14 @@
   <section class="col-md-12">
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/conversion-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="conversion-validator">conversion validator</h1>
+    <h1 class="no_toc" id="conversion-validator">conversion validator</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#description" id="markdown-toc-description">Description</a></li>
+  <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
+  <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
+  <li><a href="#repopulating-field-upon-conversion-error" id="markdown-toc-repopulating-field-upon-conversion-error">Repopulating Field upon conversion Error</a></li>
+</ul>
 
 <h2 id="description">Description</h2>
 
@@ -143,73 +150,81 @@
 
 <h2 id="examples">Examples</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- Plain Validator Syntax --&gt;
-&lt;validator type="conversion"&gt;
-        &lt;param name="fieldName"&gt;myField&lt;/param&gt;
-     &lt;message&gt;Conversion Error Occurred&lt;/message&gt;
-&lt;/validator&gt;
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Plain Validator Syntax --&gt;</span>
+<span class="nt">&lt;validator</span> <span class="na">type=</span><span class="s">"conversion"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"fieldName"</span><span class="nt">&gt;</span>myField<span class="nt">&lt;/param&gt;</span>
+     <span class="nt">&lt;message&gt;</span>Conversion Error Occurred<span class="nt">&lt;/message&gt;</span>
+<span class="nt">&lt;/validator&gt;</span>
   
-&lt;!-- Field Validator Syntax --&gt;
-&lt;field name="myField"&gt;
-   &lt;field-validator type="conversion"&gt;
-      &lt;message&gt;Conversion Error Occurred&lt;/message&gt;
-   &lt;/field-validator&gt;
-&lt;/field&gt;
+<span class="c">&lt;!-- Field Validator Syntax --&gt;</span>
+<span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"myField"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;field-validator</span> <span class="na">type=</span><span class="s">"conversion"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;message&gt;</span>Conversion Error Occurred<span class="nt">&lt;/message&gt;</span>
+   <span class="nt">&lt;/field-validator&gt;</span>
+<span class="nt">&lt;/field&gt;</span>
 </code></pre></div></div>
 
 <h2 id="repopulating-field-upon-conversion-error">Repopulating Field upon conversion Error</h2>
 
-<p>The capability of auto-repopulating the stack with a fake parameter map when a conversion error has occurred can be done with <code class="highlighter-rouge">repopulateField</code> property set to <code class="highlighter-rouge">true</code>.</p>
+<blockquote>
+  <p>The capability of auto-repopulating the stack with a fake parameter map when a conversion error has occurred can be 
+done with <code class="highlighter-rouge">repopulateField</code> property set to <code class="highlighter-rouge">true</code>.</p>
+</blockquote>
 
-<p>This is typically useful when one wants to repopulate the field with the original value when a conversion error occurred. Eg. with a textfield that only allows an Integer (the action class have an Integer field declared), upon conversion error, the incorrectly entered integer (maybe a text ‘one’) will not appear when dispatched back. With <code class="highlighter-rouge">repopulateField</code> property set to true, it will, meaning the textfield will have ‘one’ as its value upon conversion error.</p>
+<p>This is typically useful when one wants to repopulate the field with the original value when a conversion error occurred. 
+Eg. with a textfield that only allows an Integer (the action class have an Integer field declared), upon conversion error, 
+the incorrectly entered integer (maybe a text ‘one’) will not appear when dispatched back. With <code class="highlighter-rouge">repopulateField</code> 
+property set to true, it will, meaning the textfield will have ‘one’ as its value upon conversion error.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- myJspPage.jsp --&gt;
-&lt;s:form action="someAction" method="POST"&gt;
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- myJspPage.jsp --&gt;</span>
+<span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"someAction"</span> <span class="na">method=</span><span class="s">"POST"</span><span class="nt">&gt;</span>
   ....
-  &lt;s:textfield label="My Integer Field" name="myIntegerField" /&gt;
+  <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"My Integer Field"</span> <span class="na">name=</span><span class="s">"myIntegerField"</span> <span class="nt">/&gt;</span>
   ....
-  &lt;s:submit /&gt;
-&lt;/s:form&gt;
+  <span class="nt">&lt;s:submit</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:form&gt;</span>
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- xwork.xml --&gt;
-&lt;xwork&gt;
-&lt;include file="xwork-default.xml" /&gt;
+<pre><code class="language-xmls">&lt;struts&gt;
 ....
-&lt;package name="myPackage" extends="xwork-default"&gt;
-  ....
-  &lt;action name="someAction" class="example.MyActionSupport.java"&gt;
-     &lt;result name="input"&gt;myJspPage.jsp&lt;/result&gt;
-     &lt;result&gt;success.jsp&lt;/result&gt;
-  &lt;/action&gt;
-  ....
-&lt;/package&gt;
+    &lt;package name="myPackage" extends="struts-default"&gt;
+      ....
+      &lt;action name="someAction" class="example.MyActionSupport.java"&gt;
+         &lt;result name="input"&gt;myJspPage.jsp&lt;/result&gt;
+         &lt;result&gt;success.jsp&lt;/result&gt;
+      &lt;/action&gt;
+      ....
+    &lt;/package&gt;
 ....
-&lt;/xwork&gt;
+&lt;/struts&gt;
+</code></pre>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/** MyActionSupport.java **/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyActionSupport</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+    
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">myIntegerField</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">getMyIntegerField</span><span class="o">()</span> <span class="o">{</span> 
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">myIntegerField</span><span class="o">;</span> 
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMyIntegerField</span><span class="o">(</span><span class="n">Integer</span> <span class="n">myIntegerField</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">myIntegerField</span> <span class="o">=</span> <span class="n">myIntegerField</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- MyActionSupport.java --&gt;
-public class MyActionSupport extends ActionSupport {
-   private Integer myIntegerField;
- 
-   public Integer getMyIntegerField() { return this.myIntegerField; }
-   public void setMyIntegerField(Integer myIntegerField) {
-      this.myIntegerField = myIntegerField;
-   }
-}
-</code></pre></div></div>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- MyActionSupport-someAction-validation.xml --&gt;
-&lt;validators&gt;
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- MyActionSupport-someAction-validation.xml --&gt;</span>
+<span class="nt">&lt;validators&gt;</span>
   ...
-  &lt;field name="myIntegerField"&gt;
-     &lt;field-validator type="conversion"&gt;
-        &lt;param name="repopulateField"&gt;true&lt;/param&gt;
-        &lt;message&gt;Conversion Error (Integer Wanted)&lt;/message&gt;
-     &lt;/field-validator&gt;
-  &lt;/field&gt;
+  <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"myIntegerField"</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;field-validator</span> <span class="na">type=</span><span class="s">"conversion"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"repopulateField"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;message&gt;</span>Conversion Error (Integer Wanted)<span class="nt">&lt;/message&gt;</span>
+     <span class="nt">&lt;/field-validator&gt;</span>
+  <span class="nt">&lt;/field&gt;</span>
   ...
-&lt;/validators&gt;
+<span class="nt">&lt;/validators&gt;</span>
 </code></pre></div></div>
 
   </section>

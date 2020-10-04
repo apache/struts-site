@@ -129,31 +129,41 @@
   <section class="col-md-12">
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/client-side-validation.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="client-side-validation">Client Side Validation</h1>
+    <h1 class="no_toc" id="client-side-validation">Client Side Validation</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#basics" id="markdown-toc-basics">Basics</a></li>
+  <li><a href="#referencing-submitprofile-in-the-user-namespace" id="markdown-toc-referencing-submitprofile-in-the-user-namespace">Referencing “submitProfile” in the “/user” namespace</a></li>
+  <li><a href="#wont-work-with-client-side-validation" id="markdown-toc-wont-work-with-client-side-validation">Won’t work with client-side validation!</a></li>
+  <li><a href="#the-left-hand-doesnt-know-" id="markdown-toc-the-left-hand-doesnt-know-">The left hand doesn’t know …</a></li>
+  <li><a href="#client-side-validation-types" id="markdown-toc-client-side-validation-types">Client Side Validation Types</a></li>
+</ul>
+
+<h2 id="basics">Basics</h2>
 
 <p>The framework adds support for client-side validation on top of the standard validation framework.</p>
 
-<p>Client-side validation can be enabled on a per-form basis by specifying <code class="highlighter-rouge">validate="true"</code> in the <em>form</em>  tag.</p>
+<p>Client-side validation can be enabled on a per-form basis by specifying <code class="highlighter-rouge">validate="true"</code> in the <em>form</em> tag.</p>
 
 <pre><code class="language-jsp">&lt;s:form name="test" action="javascriptValidation" validate="true"&gt;
   ...
 &lt;/s:form&gt;
-
 </code></pre>
 
-<p>If a <code class="highlighter-rouge">name</code> for the form is not given, the action mapping name will be used as the form name. Otherwise, a correct <code class="highlighter-rouge">action</code> and <code class="highlighter-rouge">namespace</code> attributes must be provided to the <code class="highlighter-rouge">&lt;saf:form&gt;</code> tag.</p>
+<p>If a <code class="highlighter-rouge">name</code> for the form is not given, the action mapping name will be used as the form name. Otherwise, a correct 
+<code class="highlighter-rouge">action</code> and <code class="highlighter-rouge">namespace</code> attributes must be provided to the <code class="highlighter-rouge">&lt;saf:form&gt;</code> tag.</p>
 
-<p><strong>Referencing “submitProfile” in the “/user” namespace</strong></p>
+<h2 id="referencing-submitprofile-in-the-user-namespace">Referencing “submitProfile” in the “/user” namespace</h2>
 
 <pre><code class="language-jsp">&lt;s:form namespace="/user" action="submitProfile" validate="true"&gt;
   ...
 &lt;/s:form&gt;
-
 </code></pre>
 
-<p>Technically, the form’s action attribute can refer to a “path” that includes the namespace and action as a URI. But, client-side validation <strong>requires</strong> that the action name and namespeact to be set separately.</p>
+<p>Technically, the form’s action attribute can refer to a “path” that includes the namespace and action as a URI. 
+But, client-side validation <strong>requires</strong> that the action name and namespeact to be set separately.</p>
 
-<p><strong>Won’t work with client-side validation!</strong></p>
+<h2 id="wont-work-with-client-side-validation">Won’t work with client-side validation!</h2>
 
 <pre><code class="language-jsp">&lt;s:form action="/user/submitProfile.action" validate="true"&gt;
   ...
@@ -161,24 +171,16 @@
 
 </code></pre>
 
-<p>All the usual <a href="#PAGE_14292">validation configuration</a> steps apply to client-side validation. Client-side validation uses the same validation rules as server-side validation. If server-side validation doesn’t work, then client-side validation won’t work either.</p>
+<p>All the usual <a href="validation">validation configuration</a> steps apply to client-side validation. Client-side validation 
+uses the same validation rules as server-side validation. If server-side validation doesn’t work, then client-side 
+validation won’t work either.</p>
 
-<p><strong>(i) The left hand doesn’t know ...</strong></p>
-
-<blockquote>
-
-</blockquote>
+<h2 id="the-left-hand-doesnt-know-">The left hand doesn’t know …</h2>
 
 <blockquote>
-
-</blockquote>
-
-<blockquote>
-  <p>The required attribute on many <em>Struts Tags</em>  is not integrated with client-side validation! The tag attribute is used by certain themes (like xhtml) to put a visual marker (usually ‘*’) next to the field. The tag doesn’t know if the validation system actually “requires” the field or not.</p>
-</blockquote>
-
-<blockquote>
-
+  <p>The required attribute on many <em>Struts Tags</em> is not integrated with client-side validation! The tag attribute is used 
+by certain themes (like xhtml) to put a visual marker (usually ‘*’) next to the field. The tag doesn’t know 
+if the validation system actually “requires” the field or not.</p>
 </blockquote>
 
 <h2 id="client-side-validation-types">Client Side Validation Types</h2>
@@ -188,13 +190,13 @@
 <table>
   <thead>
     <tr>
-      <th><a href="pure-java-script-client-side-validation.html">Pure JavaScript Client Side Validation</a></th>
-      <th>Used by the <em>xhtml theme</em>  and <em>css_xhtml theme</em></th>
+      <th><a href="pure-java-script-client-side-validation">Pure JavaScript Client Side Validation</a></th>
+      <th>Used by the <em>xhtml theme</em> and <em>css_xhtml theme</em></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><a href="ajax-client-side-validation.html">AJAX Client Side Validation</a></td>
+      <td><a href="ajax-client-side-validation">AJAX Client Side Validation</a></td>
       <td>Used by the <em>ajax theme</em></td>
     </tr>
   </tbody>
