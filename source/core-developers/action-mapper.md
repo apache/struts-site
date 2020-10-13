@@ -143,7 +143,7 @@ For example with the following in struts.xml:
 ```
 
 `CompositeActionMapper` will be configured with 2 ActionMapper, namely "struts" which is `org.apache.struts2.dispatcher.mapper.DefaultActionMapper`
-and "restful" which is `org.apache.struts2.dispatcher.mapper.RestfulActionMapperRestfulActionMapper`. 
+and "restful" which is `org.apache.struts2.dispatcher.mapper.RestfulActionMapper`. 
 
 `CompositeActionMapper` would consult each of them in order described above.
 
