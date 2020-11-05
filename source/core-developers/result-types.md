@@ -23,7 +23,8 @@ own applications.
 |[Stream Result](stream-result.html)|Used to stream an InputStream back to the browser (usually for file downloads)|
 |[Velocity Result](velocity-result.html)|Used for _Velocity_  integration|
 |[XSL Result](xsl-result.html)|Used for XML/XSLT integration|
-|[PlainText Result](plaintext-result.html)|Used to display the raw content of a particular page (i.e jsp, HTML)|
+|[Plain Result](plain-result)|A plain result which all you to write directly to a HttpResponse using a simplified API (since Struts 2.6)|
+|[PlainText Result](plaintext-result.html)|Used to display the raw content of a particular file/page (i.e jsp, HTML)|
 |[Tiles Result](../plugins/tiles/)|Used to provide Tiles integration|
 |[Tiles 3 Result](../plugins/tiles-3/)|Used to provide Tiles 3 integration|
 |[Postback Result](postback-result.html)|Used to postback request parameters as a form to the specified destination|
