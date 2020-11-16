@@ -38,6 +38,7 @@ or committee member.
 - Greg Huber (ghuber at apache.org)
 - Aleksandr Mashchenko (amashchenko at apache.org)
 - Yasser Zamani (yasserzamani at apache.org)
+- James Chaplin (jchaplin at apache.org)
 
 ## Committers
 
