@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>required validator</title>
+  <title>Plain Result</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -127,46 +127,43 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/required-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/plain-result.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="validation.html" title="back to Validation"><< back to Validation</a>
+    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     
-    <h1 class="no_toc" id="required-validator">required validator</h1>
-
-<ul id="markdown-toc">
-  <li><a href="#description" id="markdown-toc-description">Description</a></li>
-  <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
-  <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
-</ul>
+    <h1 id="plain-result">Plain Result</h1>
 
 <h2 id="description">Description</h2>
 
-<p>RequiredFieldValidator checks if the specified field is not null.</p>
+<p>You create this result programmatically in an action and return it as a result of the action. No result definition
+is needed in <code class="highlighter-rouge">struts.xml</code>. See the examples below how to use it. Please notice that the method result type is <code class="highlighter-rouge">PlainResult</code>
+instead of <code class="highlighter-rouge">String</code>. Please explore the API for more methods - if any is missing you can either extends the interface
+or report it in <a href="https://issues.apache.org/jira/projects/WW/">JIRA</a>.</p>
+
+<blockquote>
+  <p>NOTE: This result is available since Struts 2.6 and it requires Java 8</p>
+</blockquote>
 
 <h2 id="parameters">Parameters</h2>
 
-<ul>
-  <li><code class="highlighter-rouge">fieldName</code> - field name if plain-validator syntax is used, not needed if field-validator syntax is used.</li>
-</ul>
+<p>no parameters</p>
 
 <h2 id="examples">Examples</h2>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;validators&gt;</span>
-    <span class="c">&lt;!-- Plain Validator Syntax --&gt;</span>
-    <span class="nt">&lt;validator</span> <span class="na">type=</span><span class="s">"required"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"fieldName"</span><span class="nt">&gt;</span>username<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;message&gt;</span>username must not be null<span class="nt">&lt;/message&gt;</span>
-    <span class="nt">&lt;/validator&gt;</span>
- 
- 
-    <span class="c">&lt;!-- Field Validator Syntax --&gt;</span>
-    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"username"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;field-validator</span> <span class="na">type=</span><span class="s">"required"</span><span class="nt">&gt;</span>
-               <span class="nt">&lt;message&gt;</span>username must not be null<span class="nt">&lt;/message&gt;</span>
-        <span class="nt">&lt;/field-validator&gt;</span>
-    <span class="nt">&lt;/field&gt;</span>
-<span class="nt">&lt;/validators&gt;</span>
-</code></pre></div></div>
+<pre><code class="language-Java">public class UserAction {
+
+    private String id;
+
+    public PlainResult execute() {
+        return response -&gt; response.write("User Id: " + id);
+    }
+
+    public PlainResult html() {
+        return response -&gt; response.write("&lt;b&gt;test&lt;/b&gt;").withContentTypeTextHtml();
+    }
+
+}
+</code></pre>
 
   </section>
 </article>

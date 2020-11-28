@@ -127,9 +127,17 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/email-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="email-validator">email validator</h1>
+    
+    <a href="validation.html" title="back to Validation"><< back to Validation</a>
+    
+    <h1 class="no_toc" id="email-validator">email validator</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#description" id="markdown-toc-description">Description</a></li>
+  <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
+  <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
+</ul>
 
 <h2 id="description">Description</h2>
 
@@ -137,8 +145,12 @@
 
 <p>The regular expression used to validate that the string is an email address is:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\\b^['_a-z0-9-\\+](\\.['_a-z0-9-\\+])@[a-z0-9-](\\.[a-z0-9-])\\.([a-z]{2,6})$\\b
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\\b^['_a-z0-9-\\+]+(\\.['_a-z0-9-\\+]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*\\.([a-z]{2,6})$\\b
 </code></pre></div></div>
+
+<blockquote>
+  <p>This Regex can change, please always check in the <a href="https://github.com/apache/struts/blob/master/core/src/main/java/com/opensymphony/xwork2/validator/validators/EmailValidator.java#L83">source code</a></p>
+</blockquote>
 
 <p>You can also specify <code class="highlighter-rouge">expression</code>, <code class="highlighter-rouge">caseSensitive</code> and <code class="highlighter-rouge">trim</code> params as a OGNL expression, see the example below.</p>
 
@@ -151,38 +163,38 @@
 <p>Check also documentation of the <code class="highlighter-rouge">RegexpValidator</code> for more details - the EmailValidator is based on it.</p>
 
 <blockquote>
-  <p>Warning
-Do not use <code class="highlighter-rouge">${regexExpression}</code>, <code class="highlighter-rouge">${caseSensitiveExpression}</code> and <code class="highlighter-rouge">${trimExpression}</code> as an expression as this will turn into infinitive loop!</p>
+  <p>Warning: do not use <code class="highlighter-rouge">${regexExpression}</code>, <code class="highlighter-rouge">${caseSensitiveExpression}</code> and <code class="highlighter-rouge">${trimExpression}</code> as an expression 
+as this will turn into infinitive loop!</p>
 </blockquote>
 
 <h2 id="examples">Examples</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- Plain Validator Syntax --&gt;
-&lt;validators&gt;
-    &lt;validator type="email"&gt;
-        &lt;param name="fieldName"&gt;myEmail&lt;/param&gt;
-        &lt;message&gt;Must provide a valid email&lt;/message&gt;
-    &lt;/validator&gt;
-&lt;/validators&gt;
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Plain Validator Syntax --&gt;</span>
+<span class="nt">&lt;validators&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">type=</span><span class="s">"email"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"fieldName"</span><span class="nt">&gt;</span>myEmail<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;message&gt;</span>Must provide a valid email<span class="nt">&lt;/message&gt;</span>
+    <span class="nt">&lt;/validator&gt;</span>
+<span class="nt">&lt;/validators&gt;</span>
  
-&lt;!-- Field Validator Syntax --&gt;
-&lt;field name="myEmail"&gt;
-   &lt;field-validator type="email"&gt;
-      &lt;message&gt;Must provide a valid email&lt;/message&gt;
-   &lt;/field-validator&gt;
-&lt;/field&gt;
+<span class="c">&lt;!-- Field Validator Syntax --&gt;</span>
+<span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"myEmail"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;field-validator</span> <span class="na">type=</span><span class="s">"email"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;message&gt;</span>Must provide a valid email<span class="nt">&lt;/message&gt;</span>
+   <span class="nt">&lt;/field-validator&gt;</span>
+<span class="nt">&lt;/field&gt;</span>
  
-&lt;!-- Field Validator Syntax with expressions --&gt;
-&lt;!-- Only available when used with xml based configuration, if you want to have the same
-        flexibility with annotations use @RegexFieldValidator instead --&gt;
-&lt;field name="myEmail"&gt;
-   &lt;field-validator type="email"&gt;
-      &lt;param name="regexExpression"&gt;${emailPattern}&lt;/param&gt; &lt;!-- will be evaluated as: String getEmailPattern() --&gt;
-      &lt;param name="caseSensitiveExpression"&gt;${emailCaseSensitive}&lt;/param&gt; &lt;!-- will be evaluated as: boolean getEmailCaseSensitive() --&gt;
-      &lt;param name="trimExpression"&gt;${trimEmail}&lt;/param&gt; &lt;!-- will be evaluated as: boolean getTrimEmail() --&gt;
-      &lt;message&gt;Must provide a valid email&lt;/message&gt;
-   &lt;/field-validator&gt;
-&lt;/field&gt;
+<span class="c">&lt;!-- Field Validator Syntax with expressions --&gt;</span>
+<span class="c">&lt;!-- Only available when used with xml based configuration, if you want to have the same
+        flexibility with annotations use @RegexFieldValidator instead --&gt;</span>
+<span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"myEmail"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;field-validator</span> <span class="na">type=</span><span class="s">"email"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"regexExpression"</span><span class="nt">&gt;</span>${emailPattern}<span class="nt">&lt;/param&gt;</span> <span class="c">&lt;!-- will be evaluated as: String getEmailPattern() --&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"caseSensitiveExpression"</span><span class="nt">&gt;</span>${emailCaseSensitive}<span class="nt">&lt;/param&gt;</span> <span class="c">&lt;!-- will be evaluated as: boolean getEmailCaseSensitive() --&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"trimExpression"</span><span class="nt">&gt;</span>${trimEmail}<span class="nt">&lt;/param&gt;</span> <span class="c">&lt;!-- will be evaluated as: boolean getTrimEmail() --&gt;</span>
+      <span class="nt">&lt;message&gt;</span>Must provide a valid email<span class="nt">&lt;/message&gt;</span>
+   <span class="nt">&lt;/field-validator&gt;</span>
+<span class="nt">&lt;/field&gt;</span>
 </code></pre></div></div>
 
   </section>
