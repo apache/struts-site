@@ -36,7 +36,8 @@ US English is saved in the user's session and will be used for all future reques
    by default this is `session`.
  - `supportedLocale` (optional) - a set of comma separated locale supported by the application, once `storage` is set
    to `accept_language`, interceptor will try to match `supportedLocale` with locale provided in `Accept-Language` header.
-   (since Struts 2.6). 
+   Also in case of using `session` or `cookie`, interceptor will try to first match with `Accept-Language` header 
+   once `supportedLocale` has been defined. Since Struts 2.6. 
 
 ## Examples
 
