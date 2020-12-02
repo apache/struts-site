@@ -4,6 +4,10 @@ title: web.xml
 ---
 
 # web.xml
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 The `web.xml` web application descriptor file represents the core of the Java web application, so it is appropriate 
 that it is also part of the core of the Struts framework. In the `web.xml` file, Struts defines its FilterDispatcher, 
