@@ -18,7 +18,7 @@ you should consider during application development with the Apache Struts 2.
 ### Restrict access to the Config Browser Plugin
 
 [Config Browser Plugin](../plugins/config-browser/) exposes internal configuration and should be used only during 
-development phase. If you must use it on production site, we strictly recommend restricting access to it - you can use  
+development phase. If you must use it on production site, we strictly recommend restricting access to it - you can use  
 Basic Authentication or any other security mechanism (e.g. [Apache Shiro](https://shiro.apache.org/))
 
 ### Don't mix different access levels in the same namespace
@@ -42,10 +42,9 @@ by security level.
 ### Never expose JSP files directly
 
 You must always hide JSP file behind an action, you cannot allow for direct access to the JSP files as this can leads 
-to unpredictable security vulnerabilities. You can achieve this by putting all your JSP files under the `WEB-INF` folder 
-- most of the JEE containers restrict access to files placed under the `WEB-INF` folder. Second option is to add security 
-constraint to the `web.xml` file:
-
+to unpredictable security vulnerabilities. You can achieve this by putting all your JSP files under the `WEB-INF` folder 
+- most of the JEE containers restrict access to files placed under the `WEB-INF` folder. Second option is to add security 
+constraint to the `web.xml` file:
 
 ```xml
 <!-- Restricts access to pure JSP files - access available only via Struts action -->
@@ -70,26 +69,23 @@ The best approach is to used the both solutions.
 
 ### Disable devMode
 
-The `devMode` is a very useful option during development time, allowing for deep introspection and debugging into you app.
+The `devMode` is a very useful option during development time, allowing for deep introspection and debugging into you app.
 
 However, in production it exposes your application to be presenting too many informations on application's internals 
-or to evaluating risky parameter expressions. Please **always disable** `devMode` before deploying your application 
+or to evaluating risky parameter expressions. Please **always disable** `devMode` before deploying your application 
 to a production environment. While it is disabled by default, your 
-`struts.xml` might include a line setting it to `true`. The best way is to ensure the following setting is applied 
-to our `struts.xml` for production deployment:
-
+`struts.xml` might include a line setting it to `true`. The best way is to ensure the following setting is applied 
+to our `struts.xml` for production deployment:
 
 ```xml
 <constant name ="struts.devMode" value="false" />
 ```
- 
 
 ### Reduce logging level
 
  It's a good practice to reduce logging level from **DEBUG** to **INFO** or less. Framework's classes can produce 
  a lot of logging entries which will pollute the log file. You can even set logging level to **WARN** for classes that 
  belongs to the framework, see example Log4j2 configuration:
-
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -111,9 +107,8 @@ to our `struts.xml` for production deployment:
 
 ### Use UTF-8 encoding
 
-Always use `UTF-8` encoding when building an application with the Apache Struts 2, when using JSPs please add the following 
+Always use `UTF-8` encoding when building an application with the Apache Struts 2, when using JSPs please add the following 
 header to each JSP file
-
 
 ```jsp
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -123,25 +118,33 @@ header to each JSP file
 
 You should carefully design your actions without exposing anything via setters and getters, thus can leads to potential 
 security vulnerabilities. Any action's setter can be used to set incoming untrusted user's value which can contain 
-suspicious expression. Some Struts `Result`s automatically populate params based on values in 
+suspicious expression. Some Struts `Result`s automatically populate params based on values in 
 `ValueStack` (action in most cases is the root) which means incoming value will be evaluated as an expression during 
 this process.
 
 ### Do not use incoming values as an input for localisation logic
 
-All `TextProvider`'s `getText(...)` methods (e.g. in`ActionSupport`) perform evaluation of parameters included in a message 
-to properly localize the text. This means using incoming request parameters with `getText(...)` methods is potentially 
-dangerous and should be avoided. See example below, assuming that an action implements getter and setter for property 
+All `TextProvider`'s `getText(...)` methods (e.g. in`ActionSupport`) perform evaluation of parameters included in a message 
+to properly localize the text. This means using incoming request parameters with `getText(...)` methods is potentially 
+dangerous and should be avoided. See example below, assuming that an action implements getter and setter for property 
 `message`, the below code allows inject an OGNL expression:
 
 ```java
 public String execute() throws Exception {
-    setMessage(getText(getMessage()));
+    message = getText(getMessage());
     return SUCCESS;
 }
 ```
 
-Never use value of incoming request parameter as part of your localization logic.
+**Never use value of incoming request parameter as part of your localization logic.**
+
+### Do not use incoming, untrusted user input in forced expression evaluation
+
+You can use a forced expression evalaution in many tags' attributes by using `%{...}` syntax. This is a very powerful option
+but used with wrong data can lead to the Remote Code Execution. Never use forced expression evalaution if you didn't verify
+the input or it can be passed in by a user.
+
+**Never use value of incoming request parameter as input for forced expression evalaution.**
 
 ### Use Struts tags instead of raw EL expressions
 
@@ -187,7 +190,7 @@ comprehensively test your app UI and functionalities with these enabled.
 
 #### Run OGNL expressions inside sandbox
 
-You can do this simply via adding `-Dognl.security.manager` to JVM arguments. OGNL thereupon utilizes Java Security
+You can do this simply via adding `-Dognl.security.manager` to JVM arguments. OGNL thereupon utilizes Java Security
 Manager to run OGNL expressions (which includes your actions either!) inside a sandbox with no permission. It is worth 
 noting that it affects only OGNL expression execution and thereafter OGNL reverts Java Security Manager to its previous 
 state.
@@ -211,7 +214,7 @@ There are three options that can be used to configure excluded packages and clas
  - `struts.excludedPackageNamePatterns` - patterns used to exclude packages based on RegEx - this option is slower than 
    simple string comparison but it's more flexible
  - `struts.excludedPackageNames` - comma-separated list of excluded packages, it is used with simple string comparison 
-   via `startWith` and `equals`
+   via `startWith` and `equals`
 
 The defaults are as follow:
 
@@ -233,8 +236,8 @@ Any expression or target which evaluates to one of these will be blocked and you
 [WARNING] Target class [class example.MyBean] or declaring class of member type [public example.MyBean()] are excluded!
 ```
 
-In that case `new MyBean()` was used to create a new instance of class (inside JSP) - it's blocked because `target` 
-of such expression is evaluated to `java.lang.Class`
+In that case `new MyBean()` was used to create a new instance of class (inside JSP) - it's blocked because `target` 
+of such expression is evaluated to `java.lang.Class`
 
 It is possible to redefine the above constants in struts.xml but try to avoid this and rather change design of your application!
 
@@ -273,43 +276,64 @@ public abstract class AbstractAction extends ActionSupport {
 
 In such case OGNL cannot properly map which method to call when request is coming. This is do the OGNL limitation. 
 To solve the problem don't use the same method's names through the hierarchy, you can simply change the action's method 
-from `save()` to `saveAction()` and leaving annotation as is to allow call this action via  `/save.action` request.
+from `save()` to `saveAction()` and leaving annotation as is to allow call this action via  `/save.action` request.
 
 ### Accepted / Excluded patterns
 
 As from version 2.3.20 the framework provides two new interfaces which are used to accept / exclude param names 
-and values - [AcceptedPatternsChecker](../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/AcceptedPatternsChecker.html) 
-and [ExcludedPatternsChecker](../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/ExcludedPatternsChecker.html) 
-with default implementations. These two interfaces are used by [Parameters Interceptor](../core-developers/parameters-interceptor.html) 
-and [Cookie Interceptor](../core-developers/cookie-interceptor.html) to check if param can be accepted or must be excluded. 
-If you were using `excludeParams` previously please compare patterns used by you with these provided by the framework in default implementation.
+and values - [AcceptedPatternsChecker](../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/AcceptedPatternsChecker.html) 
+and [ExcludedPatternsChecker](../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/ExcludedPatternsChecker.html) 
+with default implementations. These two interfaces are used by [Parameters Interceptor](../core-developers/parameters-interceptor.html) 
+and [Cookie Interceptor](../core-developers/cookie-interceptor.html) to check if param can be accepted or must be excluded. 
+If you were using `excludeParams` previously please compare patterns used by you with these provided by the framework in default implementation.
 
 ### Strict Method Invocation
 
 This mechanism was introduced in version 2.5. It allows control what methods can be accessed with the bang "!" operator 
 via [Dynamic Method Invocation](../core-developers/action-configuration.html#dynamic-method-invocation). Please read 
-more in the Strict Method Invocation section of [Action Configuration](../core-developers/action-configuration.html).
+more in the Strict Method Invocation section of [Action Configuration](../core-developers/action-configuration.html).
 
 ### Resource Isolation Using Fetch Metadata
 
-Fetch Metadata is a mitigation against common cross origin attacks such as Cross-Site Request Forgery (CSRF).  It is a web platform security feature designed to help servers defend themselves against cross-origin attacks based on the preferred resource isolation policy. The browser provides information about the context of an HTTP request in a set of `Sec-Fetch-*` headers. This allows the server processing the request to make decisions on whether the request should be accepted or rejected based on the available resource isolation policies.
+Fetch Metadata is a mitigation against common cross origin attacks such as Cross-Site Request Forgery (CSRF). It is 
+a web platform security feature designed to help servers defend themselves against cross-origin attacks based 
+on the preferred resource isolation policy. The browser provides information about the context of an HTTP request 
+in a set of `Sec-Fetch-*` headers. This allows the server processing the request to make decisions on whether the request 
+should be accepted or rejected based on the available resource isolation policies.
 
-A Resource Isolation  Policy prevents the resources on a server from being requested by external websites. This policy can be enabled for all endpoints of the application or the endpoints that are meant to be loaded in a cross-site context can be exempted from applying the policy. Read more about Fetch Metadata and resource isolation [here](https://web.dev/fetch-metadata/).
+A Resource Isolation  Policy prevents the resources on a server from being requested by external websites. This policy 
+can be enabled for all endpoints of the application or the endpoints that are meant to be loaded in a cross-site context 
+can be exempted from applying the policy. Read more about Fetch Metadata and resource isolation [here](https://web.dev/fetch-metadata/).
 
-This mechanism is implemented in Struts using the [FetchMetadata Interceptor](../core-developers/fetch-metadata-interceptor.html). Refer to the documentation for [FetchMetadata Interceptor](../core-developers/fetch-metadata-interceptor.html) instructions on how to enable Fetch Metadata. 
+This mechanism is implemented in Struts using the [FetchMetadata Interceptor](../core-developers/fetch-metadata-interceptor.html).
+ Refer to the documentation for [FetchMetadata Interceptor](../core-developers/fetch-metadata-interceptor.html) 
+ instructions on how to enable Fetch Metadata. 
 
 ### Cross Origin Isolation with COOP and COEP
 
-[Cross-Origin Opener Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy) is a security mitigation that lets developers isolate their resources against side-channel attacks and information leaks. The COOP response header allows a document to request a new browsing context group to better isolate itself from other untrustworthy origins.
+> Note: since Struts 2.6.
 
-[Cross-Origin Embedder Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy) prevents a document from loading any cross-origin resources which don't explicitly grant the document permission to be loaded. 
+[Cross-Origin Opener Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy) is 
+a security mitigation that lets developers isolate their resources against side-channel attacks and information leaks. 
+The COOP response header allows a document to request a new browsing context group to better isolate itself from other 
+untrustworthy origins.
 
-COOP and COEP are independent mechanisms that can be enabled, tested and deployed separately. While enabling one doesn’t require developers to enable the other, when set together COOP and COEP allows developers to use powerful features (such as `SharedArrayBuffer`, `performance.measureMemory()` and the JS Self-Profiling API) securely, without worrying about side channel attacks like [Spectre](https://meltdownattack.com/). Further reading on [COOP/COEP](https://docs.google.com/document/d/1zDlfvfTJ_9e8Jdc8ehuV4zMEu9ySMCiTGMS9y0GU92k/edit#bookmark=id.uo6kivyh0ge2) and [why you need cross-origin isolation](https://web.dev/why-coop-coep/).
+[Cross-Origin Embedder Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy) 
+prevents a document from loading any cross-origin resources which don't explicitly grant the document permission to be loaded. 
+
+COOP and COEP are independent mechanisms that can be enabled, tested and deployed separately. While enabling one doesn’t 
+require developers to enable the other, when set together COOP and COEP allows developers to use powerful features (such 
+as `SharedArrayBuffer`, `performance.measureMemory()` and the JS Self-Profiling API) securely, without worrying about 
+side channel attacks like [Spectre](https://meltdownattack.com/). 
+Further reading on [COOP/COEP](https://docs.google.com/document/d/1zDlfvfTJ_9e8Jdc8ehuV4zMEu9ySMCiTGMS9y0GU92k/edit#bookmark=id.uo6kivyh0ge2) 
+and [why you need cross-origin isolation](https://web.dev/why-coop-coep/).
 
 The recommended configuration for the policies are:
+
 ```
 Cross-Origin-Embedder-Policy: require-corp;
 Cross-Origin-Opener-Policy: same-origin;
 ```
 
-COOP and COEP are implemented in Struts using [CoopInterceptor](../core-developers/coop-interceptor.html) and [CoepInterceptor](../core-developers/coep-interceptor.html).
+COOP and COEP are implemented in Struts using [CoopInterceptor](../core-developers/coop-interceptor.html) 
+and [CoepInterceptor](../core-developers/coep-interceptor.html).

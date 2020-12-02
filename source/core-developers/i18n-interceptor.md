@@ -32,7 +32,12 @@ US English is saved in the user's session and will be used for all future reques
  - `requestOnlyParameterName` (optional) - the name of the HTTP request parameter that dictates the locale to switch to 
    for the current request only, without saving it in the session. By default this is `request_only_locale`
  - `attributeName` (optional) - the name of the session key to store the selected locale. By default this is `WW_TRANS_I18N_LOCALE`
- - `localeStorage` (optional) - the name of storage location, it can be `none`, `session` or `cookie`. By default this is `session`
+ - `localeStorage` (optional) - the name of storage location, it can be `accept_language`, `request`, `session` or `cookie`,
+   by default this is `session`.
+ - `supportedLocale` (optional) - a set of comma separated locale supported by the application, once `storage` is set
+   to `accept_language`, interceptor will try to match `supportedLocale` with locale provided in `Accept-Language` header.
+   Also in case of using `session` or `cookie`, interceptor will try to first match with `Accept-Language` header 
+   once `supportedLocale` has been defined. Since Struts 2.6. 
 
 ## Examples
 
