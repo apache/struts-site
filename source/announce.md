@@ -13,6 +13,33 @@ title: Announcements 2020
   Skip to: <a href="announce-2019.html">Announcements - 2019</a>
 </p>
 
+#### 06 December 2020 - Struts 2.5.26 General Availability {#a20201206}
+
+The Apache Struts group is pleased to announce that Struts 2.5.26 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework has been designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+Below is a full list of all changes:
+
+ - Junit plugin does not push ACTION_MAPPING into the context resulting in NPE
+ - Struts2 StaticParametersInterceptor's addParametersToContext method is not working as expected
+ 
+> Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+2.5.26) to find more details about performed 
+> bug fixes and improvements.
+ 
+**All developers are strongly advised to perform this action.**
+
+The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list, 
+and, if appropriate, file [a tracking ticket]({{ site.jira_url }}).
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
 #### 28 September 2020 - Struts 2.5.25 General Availability {#a20200928}
 
 The Apache Struts group is pleased to announce that Struts 2.5.25 is available as a "General Availability"
