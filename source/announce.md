@@ -13,6 +13,30 @@ title: Announcements 2020
   Skip to: <a href="announce-2019.html">Announcements - 2019</a>
 </p>
 
+#### 08 December 2020 - Potential RCE when using forced evaluation - CVE-2020-17530 {#a20201208}
+
+The Apache Struts Security team would like to announce that forced OGNL evaluation, when evaluated on raw user input 
+in tag attributes, may lead to remote code execution.
+
+**Problem**
+
+Some of the tag's attributes could perform a double evaluation if a developer applied forced OGNL evaluation 
+by using the `%{...}` syntax. Using forced OGNL evaluation on untrusted user input can lead to a Remote Code Execution 
+and security degradation.
+
+**Solution**
+
+Avoid using forced OGNL evaluation on untrusted user input, and/or upgrade to Struts 2.5.26 which checks if expression 
+evaluation won't lead to the double evaluation.
+
+Please read our Security Bulletin [S2-061](https://cwiki.apache.org/confluence/display/WW/S2-061) for more details.
+
+This vulnerability was identified by:
+- Alvaro Munoz - pwntester at github dot com
+- Masato Anzai of Aeye Security Lab, inc.
+
+**All developers are strongly advised to perform this action.**
+
 #### 06 December 2020 - Struts 2.5.26 General Availability {#a20201206}
 
 The Apache Struts group is pleased to announce that Struts 2.5.26 is available as a "General Availability"
