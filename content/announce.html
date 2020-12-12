@@ -132,6 +132,7 @@
     <h1 class="no_toc" id="announcements-2020">Announcements 2020</h1>
 
 <ul id="markdown-toc">
+  <li><a href="#a20201208" id="markdown-toc-a20201208">08 December 2020 - Potential RCE when using forced evaluation - CVE-2020-17530</a></li>
   <li><a href="#a20201206" id="markdown-toc-a20201206">06 December 2020 - Struts 2.5.26 General Availability</a></li>
   <li><a href="#a20200928" id="markdown-toc-a20200928">28 September 2020 - Struts 2.5.25 General Availability</a></li>
   <li><a href="#a20200813" id="markdown-toc-a20200813">13 August 2020 - Security Advice: Announcing CVE-2019-0230 (Possible RCE) and CVE-2019-0233 (DoS) security issues</a></li>
@@ -140,6 +141,32 @@
 <p class="pull-right">
   Skip to: <a href="announce-2019.html">Announcements - 2019</a>
 </p>
+
+<h4 id="a20201208">08 December 2020 - Potential RCE when using forced evaluation - CVE-2020-17530</h4>
+
+<p>The Apache Struts Security team would like to announce that forced OGNL evaluation, when evaluated on raw user input 
+in tag attributes, may lead to remote code execution.</p>
+
+<p><strong>Problem</strong></p>
+
+<p>Some of the tag’s attributes could perform a double evaluation if a developer applied forced OGNL evaluation 
+by using the <code class="highlighter-rouge">%{...}</code> syntax. Using forced OGNL evaluation on untrusted user input can lead to a Remote Code Execution 
+and security degradation.</p>
+
+<p><strong>Solution</strong></p>
+
+<p>Avoid using forced OGNL evaluation on untrusted user input, and/or upgrade to Struts 2.5.26 which checks if expression 
+evaluation won’t lead to the double evaluation.</p>
+
+<p>Please read our Security Bulletin <a href="https://cwiki.apache.org/confluence/display/WW/S2-061">S2-061</a> for more details.</p>
+
+<p>This vulnerability was identified by:</p>
+<ul>
+  <li>Alvaro Munoz - pwntester at github dot com</li>
+  <li>Masato Anzai of Aeye Security Lab, inc.</li>
+</ul>
+
+<p><strong>All developers are strongly advised to perform this action.</strong></p>
 
 <h4 id="a20201206">06 December 2020 - Struts 2.5.26 General Availability</h4>
 
