@@ -20,16 +20,16 @@ All the JEE scope attribute maps can be accessed via `ActionContext`.
 
 ```java
 Map attr = (Map) ActionContext.getContext().get("attr");
-attr.put("myId",myProp);
+attr.put("myId", myProp);  // Page scope.
 
 Map application = (Map) ActionContext.getContext().get("application");
-application.put("myId",myProp);
+application.put("myId", myProp);
 
 Map session = (Map) ActionContext.getContext().get("session");
 session.put("myId", myProp);
 
 Map request = (Map) ActionContext.getContext().get("request");
-request.put("myId",myProp);
+request.put("myId", myProp);
 ```
 
 > Do not use `ActionContext.getContext()` in the constructor of your Action class. The values may not be set up, and 
@@ -50,16 +50,24 @@ is an alternative way to access the request and response objects, with the same 
 ## Accessing from the view (JSP, FreeMarker, etc.)
 
 Request and session attributes are accessed via OGNL using the `#session` and `#request` stack values.
+Page attributes are accessed via OGNL using the `#attr` stack value, and Application attributes via
+the `#application` stack value.
 
 The `#attr` stack value will search the `javax.servlet.jsp.PageContext` for the specified key. If the `PageContext`
-doean't exist, it will search the request, session, and application scopes, in that order.
+doesn't exist, it will search the request, session, and application scopes, in that order.
 
-**Accessing the Session or Request from a JSP**
+**Accessing attributes in the Application, Session, Request, or Page scope from a JSP**
 
 ```jsp
+Retrieve the attribute (property), with key myId, from the specified scope:
+
+<s:property value="#application.myId" />
+
 <s:property value="#session.myId" />
 
 <s:property value="#request.myId" />
 
 <s:property value="#attr.myId" />
+
+Reminder: attr is for Page scope attributes first, but will search the remaining scopes, in order, seeking a match.
 ```

@@ -25,9 +25,10 @@ The scopes available are as follows:
 - `session` - the value will be set in session scope according to servlet spec. using the name as key
 - `request` - the value will be set in request scope according to servlet spec. using the name as key
 - `page` - the value will be set in page scope according to servlet spec. using the name as key
-- `action` - the value will be set in the request scope and Struts' action context using the name as key
+- `action` - the value will be set in the page scope and Struts' action context using the name as key
 
-> **NOTE**: If no scope is specified, it will default to `action` scope.
+> **NOTE**: If no scope is specified, it will default to `action` scope.  For the `set` tag **specifically**, this also
+> places (sets) the generated value into the `page` scope as well.
 
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/set-description.html %}
 

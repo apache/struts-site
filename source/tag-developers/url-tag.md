@@ -54,6 +54,9 @@ See [Constant Configuration](../core-developers/constant-configuration) for furt
 
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/url-attributes.html %}
 
+> **NOTE**: When the `var` attribute is used with the `url` tag, the tag's generated URL value will be placed into the request scope
+> **in addition to** the action scope.
+
 ## Examples
 
 ```jsp
