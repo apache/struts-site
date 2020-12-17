@@ -8,6 +8,9 @@ parent:
 
 # Alt Syntax
 
+> Note: As from Struts 2.6 option to disable the AltSyntax has been removed and now using %{...} is the only way 
+> to create an expression as stated below.
+
 The _altSyntax_ is an option that can be defined in `struts.xml`. By default it is set to true and it is **strongly** 
 recommend you do not change that unless you are upgrading from WebWork 2.1.7 or previous versions.
 
