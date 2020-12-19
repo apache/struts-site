@@ -59,7 +59,7 @@ doesn't exist, it will search the request, session, and application scopes, in t
 **Accessing attributes in the Application, Session, Request, or Page scope from a JSP**
 
 ```jsp
-Retrieve the attribute (property), with key myId, from the specified scope:
+<p>Retrieve the attribute (property), with key myId, from the specified scope:</p>
 
 <s:property value="#application.myId" />
 
@@ -69,5 +69,5 @@ Retrieve the attribute (property), with key myId, from the specified scope:
 
 <s:property value="#attr.myId" />
 
-Reminder: attr is for Page scope attributes first, but will search the remaining scopes, in order, seeking a match.
+<p>Reminder: #attr is for Page scope attributes first, but will search the remaining scopes, in order, seeking a match.</p>
 ```
