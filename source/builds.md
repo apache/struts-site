@@ -67,7 +67,7 @@ For more about using Maven to build Struts 1, see our [Maven wiki page.](http://
 ## NightlyBuilds
 
 As part of our continuous integration practice, we also make available each morning the
-[latest stable development build.](https://repository.apache.org/content/repositories/snapshots/org/apache/struts/struts2-assembly/)
+[latest stable development build.](https://nightlies.apache.org/x1/dist/struts/)
 
 *Again: Use at your own risk!*
 
@@ -80,14 +80,14 @@ the [source code](#SourceCode) instead.
 ## Test Builds
             
 As we prepare for a new release, the project group may create interim *test builds*. When test builds are available,
-we post them [here](http://people.apache.org/builds/struts/) in binary, source and library distributions.
+we post them [here](https://dist.apache.org/repos/dist/dev/struts/) in binary, source and library distributions.
 Library distributions include any external dependencies needed to use a product with your application.
 
 A test build is made available so that it can be reviewed for quality by the Apache Struts development group.
 When a build is judged "ready for prime time", it is promoted to "General Availability" status and may be
 made the "Best Available" release. If the group feels that a build requires more testing, then it may be marked
 as "Beta" release. When a test build is upgraded to "Beta" or "GA" by a vote of the project members,
-we make the distribution available as a formal [release.](releases.html)
+we make the distribution available as a formal [release](releases.html).
 
 ## Maven Snapshots
 
