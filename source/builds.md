@@ -64,7 +64,7 @@ For more about using Maven to build Struts 2, see
 
 For more about using Maven to build Struts 1, see our [Maven wiki page.](http://wiki.apache.org/struts/StrutsMaintenanceMaven)
 
-## NightlyBuilds
+## Nightly Builds
 
 As part of our continuous integration practice, we also make available each morning the
 [latest stable development build.](https://nightlies.apache.org/x1/dist/struts/)
