@@ -63,4 +63,4 @@ There are two styles of client side validation.
 
 |[Pure JavaScript Client Side Validation](pure-java-script-client-side-validation)|Used by the _xhtml theme_ and _css_xhtml theme_|
 |-----------------------------------------------------|--------------------------------------------------|
-|[AJAX Client Side Validation](ajax-client-side-validation)|Used by the _ajax theme_ |
+|[AJAX Client Side Validation](ajax-client-side-validation)|Use to used by the _ajax theme_ |

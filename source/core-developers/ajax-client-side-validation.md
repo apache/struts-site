@@ -1,37 +1,45 @@
 ---
 layout: core-developers
 title: AJAX Client Side Validation
+parent:
+  title: Client Side Validation
+  url: client-side-validation
 ---
 
 # AJAX Client Side Validation
+{:.no_toc}
 
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
-This validation mode only works with the _ajax theme_ 
+## Description 
 
-| 
+AJAX-based client side validation improves upon [Pure JavaScript Client Side Validation](pure-java-script-client-side-validation) 
+by using a combination of JavaScript, DOM manipulation, and remote server communication. Unlike the pure client side 
+implementation, AJAX-based validation communicates with the server. This means all your validation rules that worked 
+when submitting a form will still work within the browser.
 
-AJAX\-based client side validation improves upon [Pure JavaScript Client Side Validation](#PAGE_14262) by using a combination of JavaScript, DOM manipulation, and remote server communication\. Unlike the pure client side implementation, AJAX\-based validation communicates with the server\. This means all your validation rules that worked when submitting a form will still work within the browser\.
+The validation occurs on each **onblur** event for each form element. As each user types in some values and moves to 
+the next form element, the value (and all other values previously entered) will be sent to the server for validation. 
+The entire validation stack is run, including visitor validators and your action's `validate()` method.
 
-The validation occurs on each **onblur** event for each form element\. As each user types in some values and moves to the next form element, the value (and all other values previously entered) will be sent to the server for validation\. The entire validation stack is run, including visitor validators and your action's validate() method\.
+If there is an error, like the pure implementation, the HTML and DOM will be updated immediately.
 
-If there is an error, like the pure implementation, the HTML and DOM will be updated immediately\.
+## AJAX Validation
 
-For an example of this, see _AJAX Validation_ \.
+Struts provides [client side validation](client-side-validation)(using JavaScript) for a few validators. Using AJAX 
+validation, all [validators](validation#bundled-validators) available to the application on the server side can be used 
+without forcing the page to reload, just to show validation errors. AJAX validation has a server side, which is in included 
+in [JSON Plugin](../plugins/json/) (an interceptor and a result). Client side must be handled by applications themself. 
+One reason for that is there are too many JavaScript frameworks and libraries. Struts has no preference which of them 
+you use. Previous versions of Struts included a client side which was relying on the Dojo JS framework and was located 
+in Struts Dojo plugin. That has been deprecated for a long time and was eventually removed.
 
-__AJAX Validation__
+## Example
 
+This example is taken from the Struts Showcase Application.
 
-__Description__
-
-Struts provides [client side validation](client-side-validation.html)(using JavaScript) for a few validators\. Using AJAX validation, all [validators](#PAGE_14292) available to the application on the server side can be used without forcing the page to reload, just to show validation errors\. AJAX validation has a server side, which is in included in _JSON Plugin_  (an interceptor and a result)\. Client side must be handled by applictions themself\. One reason for that is there are too many JavaScript frameworks and libraries\. Struts has no preference which of them you use\. Previous versions of Struts included a client side which was relying on the Dojo JS framework and was located in Struts Dojo plugin\. That has been deprecated for a long time and was eventually removed\.
-
-__Example__
-
-This example is taken from the Struts showcase application\.
-
-__Create the action class__
-
-
+### Create the action class
 
 ```java
 public class AjaxFormSubmitAction extends ActionSupport {
@@ -128,16 +136,13 @@ public class AjaxFormSubmitAction extends ActionSupport {
 }
 ```
 
- 
+### Map the Action
 
-__Map the Action__
-
-Note that is is not necessary when using _Convention Plugin_ \.
-
+Note that is is not necessary when using [Convention Plugin](../plugins/convention/).
 
 ```xml
-<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
-	
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+
 <struts>
     <package>
          <action name="ajaxFormSubmit" class="org.apache.struts2.showcase.validation.AjaxFormSubmitAction">
@@ -146,14 +151,16 @@ Note that is is not necessary when using _Convention Plugin_ \.
              <result type="jsonActionRedirect">ajaxFormSubmitSuccess</result>
          </action>
     </package>
-
 ```
 
-AJAX validation is performed by the _jsonValidation_  interceptor\. This interceptor is included in the _jsonValidationWorkflowStack_ , and is required in order to perform AJAX validation\. Normal results(input, success, etc) should be provided for the action in the case that someone tries to access the action directly, in which case normal validation will be triggered\. So, how does the _jsonValidation_  know that it must perform AJAX validation vs regular validation? We will see that in a minute, but you don't need to know that in order to use AJAX validation\. Same applies for specialized Redirect Result Type _jsonActionRedirect_ \.
+AJAX validation is performed by the [jsonValidation](../plugins/json/) interceptor. This interceptor is included in 
+the _jsonValidationWorkflowStack_, and is required in order to perform AJAX validation. Normal results (input, success, etc) 
+should be provided for the action in the case that someone tries to access the action directly, in which case normal v
+alidation will be triggered. So, how does the _jsonValidation_  know that it must perform AJAX validation vs regular validation? 
+We will see that in a minute, but you don't need to know that in order to use AJAX validation. Same applies for specialized
+ Redirect Result Type _jsonActionRedirect_.
 
-__Create the JSP__
-
-
+### Create the JSP
 
 ```jsp
 <%@taglib prefix="s" uri="/struts-tags" %>
@@ -182,44 +189,35 @@ __Create the JSP__
         <s:submit label="Submit" cssClass="btn btn-primary"/>
     </s:form>
 </body>
-</html> 
+</html>
 ```
 
 Things to note on this JSP:
 
-+ The _form_  tag **does not** have _validate_  set to _true_ , which would perform client validation before the AJAX validation\.
+- The _form_ tag **does not** have _validate_ set to _true_, which would perform client validation before the AJAX validation.
+- It uses a customized theme _ajaxErrorContainers_. The default Struts themes generate HTML-Elements to show validation 
+  errors only if errors are present when page is created on server side. But in order to show validation errors that 
+  arrive later via AJAX it is necessary to have error-container elements in DOM always.
 
-+ It uses a customized theme _ajaxErrorContainers_ \. The default Struts themes generate HTML\-Elements to show validation errors only if errors are present when page is created on server side\. But in order to show validation errors that arrive later via AJAX it is necessary to have error\-container elements in DOM always\.
+What happens if validation succeeds? That depends on your request parameters and action configuration. If you are using 
+_jsonActionRedirect_ result mentioned above the action will be executed while AJAX request is active and respond with 
+JSON providing a new URL to load. Otherwise the AJAX response will be empty and the form must be submitted a 2nd time 
+but as usual request, not AJAX.
 
-What happens if validation succeeds? That depends on your request parameters and action configuration\. If you are using _jsonActionRedirect_  result mentioned above the action will be executed while AJAX request is active and respond with JSON providing a new URL to load\. Otherwise the AJAX response will be empty and the form must be submitted a 2nd time but as usual request, not AJAX\.
+| Setting _validate_ to _true_ in the _form_ tag will enable client side, JavaScript validation, which can be used along 
+  with AJAX validation (runs before the AJAX validation).
 
+### Custom Theme
 
+In this sample the _custom theme_ is based on _xhtml_ theme. It is required to override 3 FTL files.
 
-| Setting _validate_  to _true_  in the _form_  tag will enable client side, JavaScript validation, which can be used along with AJAX validation (runs before the AJAX validation)\.
+**theme.properties**
 
-| 
-
-__Custom Theme__
-
-In this sample the _custom theme_  is based on _xhtml_  theme\. It is required to override 3 FTL files\.
-
-
-
-> theme\.properties
-
-
-
-~~~~~~~
+```
 parent = xhtml
-~~~~~~~
+```
 
- 
-
-
-
-> actionerror\.ftl
-
-
+**actionerror.ftl**
 
 ```ftl
 <#--
@@ -248,13 +246,7 @@ parent = xhtml
 </ul>
 ```
 
- 
-
-
-
-> controlfooter\.ftl
-
-
+**controlfooter.ftl**
 
 ```ftl
 ${parameters.after!}<#t/>
@@ -276,16 +268,10 @@ ${parameters.after!}<#t/>
 </#if>
 ```
 
- 
-
-
-
-> controlheader\-core\.ftl
-
-
+**controlheader-core.ftl**
 
 ```ftl
- <#--
+<#--
     Always include elements to show errors. They may be filled later via AJAX.
 -->
 <#assign hasFieldErrors = parameters.name?? && fieldErrors?? && fieldErrors[parameters.name]??/>
@@ -345,10 +331,10 @@ ${parameters.labelseparator!":"?html}<#t/>
 </#if>
 ```
 
-__CSS__
+### CSS
 
-To show users some nice visual feedback while waiting for AJAX response you can use a little CSS\. Remember to include the referenced _indicator\.gif_ \.
-
+To show users some nice visual feedback while waiting for AJAX response you can use a little CSS. Remember to include 
+the referenced _indicator.gif_.
 
 ```css
 .ajaxVisualFeedback {
@@ -360,11 +346,10 @@ To show users some nice visual feedback while waiting for AJAX response you can 
 }
 ```
 
- 
+### JavaScript
 
-__JavaScript__
-
-Now this is where the magic happens\. Here _jQuery_  is used to register an eventhandler which intercepts form submits\. It takes care of hiding validation errors that might be present, submit the form via AJAX and handle JSON responses\.
+Now this is where the magic happens. Here _jQuery_  is used to register an eventhandler which intercepts form submits. 
+It takes care of hiding validation errors that might be present, submit the form via AJAX and handle JSON responses.
 
 
 ```javascript
@@ -420,7 +405,7 @@ function ajaxFormValidation(event) {
                 // a real error occurred -> show user an error message
                 _handleValidationResult(_form, {errors: ['Network or server error!']})
             }
-		}
+        }
     }
     // send request, after delay to make sure everybody notices the visual feedback :)
     window.setTimeout(function() {
@@ -473,16 +458,18 @@ $(window).bind('load', function() {
 });
 ```
 
- 
+### How it works
 
-__How it works__
+_jsonValidation_ interceptor must be placed on a stack, following the _validation_ interceptor. The interceptor itself 
+won't perform any validation, but will check for validation errors on the action being invoked (assuming that the action 
+is `ValidationAware`).
 
-_jsonValidation_  interceptor must be placed on a stack, following the _validation_  interceptor\. The interceptor itself won't perform any validation, but will check for validation errors on the action being invoked (assuming that the action is ValidationAware)\.
+If you just want to use AJAX validation, without knowing the implementation details, you can skip this section.
 
-If you just want to use AJAX validation, without knowing the implementation details, you can skip this section\.
-
-When the _jsonValidation_  interceptor is invoked, it will look for a parameter named _struts\.enableJSONValidation_ , this parameter **must** be set to _true_ , otherwise the interceptor won't do anything\. Then the interceptor will look for a parameter named _struts\.validateOnly_ , if this parameter exists, is set to _true_ , and there are validation errors (o action errors) they will be serialized into JSON in the form:
-
+When the _jsonValidation_ interceptor is invoked, it will look for a parameter named _struts.enableJSONValidation_, 
+this parameter **must** be set to _true_, otherwise the interceptor won't do anything. Then the interceptor will look 
+for a parameter named _struts.validateOnly_, if this parameter exists, is set to _true_, and there are validation 
+errors (action errors) they will be serialized into JSON in the form:
 
 ```json
 {
@@ -492,70 +479,47 @@ When the _jsonValidation_  interceptor is invoked, it will look for a parameter 
         "field1": ["Field 2 Error 1", "Field 2 Error 2"]  
     }
 }
-
 ```
 
-If the action implements the _ModelDrive_  interface, "model\." will be stripped from the field names in the returned JSON\. If validation succeeds (and _struts\.validateOnly_  is true), an empty JSON string will be returned:
-
+If the action implements the _ModelDrive_ interface, "model." will be stripped from the field names in the returned JSON. 
+If validation succeeds (and _struts.validateOnly_  is true), an empty JSON string will be returned:
 
 ```json
 {}
-
 ```
 
-If _struts\.validateOnly_  is false the action and result are executed\. In this case _jsonActionRedirect_  result is very useful\. It creates a JSON response in the form:
-
+If _struts.validateOnly_ is false the action and result are executed. In this case _jsonActionRedirect_ result is very 
+useful. It creates a JSON response in the form:
 
 ```json
 {"location": "<url to be loaded next>"}
-
 ```
 
+> Remember to set `struts.enableJSONValidation=true` in the request to enable AJAX validation
 
-> 
-
-> 
-
-> Remember to set struts\.enableJSONValidation=true in the request to enable AJAX validation
-
-> 
-
-__JSONValidationInterceptor parameters__
+### JSONValidationInterceptor parameters
 
 The following request parameters can be used to enable exposing validation errors:
 
-+ **struts\.enableJSONValidation** \- a request parameter must be set to **true** to use this interceptor
-
-+ **struts\.validateOnly** \- If the request has this parameter, execution will return after validation (action won't be executed)\. If **struts\.validateOnly** is set to false you may want to use _JSONActionRedirectResult_ 
-
-+ **struts\.JSONValidation\.no\.encoding** \- If the request has this parameter set to **true,** the character encoding will **NOT** be set on the response \- is needed in portlet environment
+- **struts.enableJSONValidation** - a request parameter must be set to **true** to use this interceptor
+- **struts.validateOnly** - If the request has this parameter, execution will return after validation (action won't be executed). 
+  If **struts.validateOnly** is set to false you may want to use _JSONActionRedirectResult_ 
+- **struts.JSONValidation.no.encoding** - If the request has this parameter set to **true,** the character encoding 
+  will **NOT** be set on the response - is needed in portlet environment
 
 You can override names of these parameters by specifying the following parameters when setting up a stack:
 
-+ **validateJsonParam** \- to override name of **struts\.enableJSONValidation****
-**
+- **validateJsonParam** to override name of **struts.enableJSONValidation**
+- **validateOnlyParam** to override name of **struts.validateOnly**
+- **noEncodingSetParam** to override name of **struts.JSONValidation.no.encoding**
+- **validationFailedStatus** status to be set on response when there are validation errors, by default **400**
 
-+ **validateOnlyParam** \- to override name of **struts\.validateOnly**
+Parameters overriding is available since Struts 2.5.9
 
-+ **noEncodingSetParam** \- to override name of **struts\.JSONValidation\.no\.encoding**
+### Flow chart of AJAX validation
 
-+ **validationFailedStatus** \- status to be set on response when there are validation errors, by default **400**
+Some details are omitted, like results used.
 
-**
-**
+As explained above: there is a case where form is submitted twice, one time as AJAX with validation only and another time as usual submit.
 
- Parameters overriding is available since Struts 2\.5\.9
-
-__Flow chart of AJAX validation__
-
-
-Some details are omitted, like results used\.
-
-| 
-
-
-As explained above: there is a case where form is submitted twice, one time as AJAX with validation only and another time as usual submit\.
-
-| 
-
-_struts2\-ajax\-vali\-flow\.png_ 
+![](attachments/struts2-ajax-vali-flow.png) 

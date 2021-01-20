@@ -1,6 +1,9 @@
 ---
 layout: core-developers
 title: Pure JavaScript Client Side Validation
+parent:
+  title: Client Side Validation
+  url: client-side-validation
 ---
 
 # Pure JavaScript Client Side Validation
@@ -35,9 +38,9 @@ Because client side validation does not talk to the server, the theme (_xhtml th
 for properly manipulating the HTML DOM to display the error message inline. The JavaScript that is responsible for doing 
 this logic is `validation.js` and can be found in each theme.
 
-| Errors are reported using the default validation message, not the internationalized version that the server-side might 
-| be aware of. This is a known issue. You may want to try the [AJAX Client Side Validation](ajax-client-side-validation) 
-| for messages that are fully internationalized.
+| Errors are reported using the default validation message, not the internationalized version that the server-side might
+  be aware of. This is a known issue. You may want to try the [AJAX Client Side Validation](ajax-client-side-validation) 
+  for messages that are fully internationalized.
 
 ## Additional Validator Support
 
