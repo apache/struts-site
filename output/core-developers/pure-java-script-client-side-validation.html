@@ -129,62 +129,56 @@
   <section class="col-md-12">
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/pure-java-script-client-side-validation.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="pure-javascript-client-side-validation">Pure JavaScript Client Side Validation</h1>
+    <h1 class="no_toc" id="pure-javascript-client-side-validation">Pure JavaScript Client Side Validation</h1>
 
-<p>Pure JavaScript client side validation is the simplest but least feature-rich type of <a href="client-side-validation.html">Client Side Validation</a>. 
+<ul id="markdown-toc">
+  <li><a href="#description" id="markdown-toc-description">Description</a></li>
+  <li><a href="#error-reporting" id="markdown-toc-error-reporting">Error reporting</a></li>
+  <li><a href="#additional-validator-support" id="markdown-toc-additional-validator-support">Additional Validator Support</a></li>
+</ul>
+
+<h2 id="description">Description</h2>
+
+<p>Pure JavaScript client side validation is the simplest but least feature-rich type of <a href="client-side-validation">Client Side Validation</a>. 
 This type of validation uses 100% client-side JavaScript code to try to validate the values entered by the user. 
 Because the validation logic is actually repeated in the JavaScript code, it is important to understand that 
-some values will be considered acceptable by the JavaScript code but will be marked as unacceptable by the server-side <a href="validation.html">Validation</a>.</p>
+some values will be considered acceptable by the JavaScript code but will be marked as unacceptable by the server-side <a href="validation">Validation</a>.</p>
 
-<p>Only the following validators are supported:
-* required validator
-* requiredstring validator
-* stringlength validator
-* regex validator
-* email validator
-* url validator
-* int validator
-* double validator
-</p>
+<p>Only the following validators are supported:</p>
 
-<blockquote>
-
-</blockquote>
-
-<blockquote>
-
-</blockquote>
+<ul>
+  <li>required validator</li>
+  <li>requiredstring validator</li>
+  <li>stringlength validator</li>
+  <li>regex validator</li>
+  <li>email validator</li>
+  <li>url validator</li>
+  <li>int validator</li>
+  <li>double validator</li>
+</ul>
 
 <blockquote>
   <p>JavaScript client validation is not available for visitor validations.</p>
 </blockquote>
 
-<blockquote>
+<h2 id="error-reporting">Error reporting</h2>
 
+<p>Because client side validation does not talk to the server, the theme (<em>xhtml theme</em>  or <em>css_xhtml theme</em> ) is responsible 
+for properly manipulating the HTML DOM to display the error message inline. The JavaScript that is responsible for doing 
+this logic is <code class="highlighter-rouge">validation.js</code> and can be found in each theme.</p>
+
+<blockquote>
+  <p>Errors are reported using the default validation message, not the internationalized version that the server-side might 
+be aware of. This is a known issue. You may want to try the <a href="ajax-client-side-validation">AJAX Client Side Validation</a> 
+for messages that are fully internationalized.</p>
 </blockquote>
 
-<p><strong>Error reporting</strong></p>
+<h2 id="additional-validator-support">Additional Validator Support</h2>
 
-<p>Because client side validation does not talk to the server, the theme (<em>xhtml theme</em>  or <em>css_xhtml theme</em> ) is responsible for properly manipulating the HTML DOM to display the error message inline. The JavaScript that is responsible for doing this logic is <code class="highlighter-rouge">validation.js</code> and can be found in each theme.</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>Errors are reported using the default validation message, not the internationalized version that the server-side might be aware of. This is a known issue. You may want to try the <a href="ajax-client-side-validation.html">AJAX Client Side Validation</a> for messages that are fully internationalized.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Additional Validator Support</strong></p>
-
-<p>If you wish to add additional validator support beyond those listed, you may override the <em>xhtml theme</em>  teamplte <code class="highlighter-rouge">form-close-validate.ftl</code>. This file contains the JavaScript that tries to validate each user-entered value from within the browswer. The <em>css_xhtml theme</em>  extends the <em>xhtml theme</em>  and therefore doesn’t have it’s own form-close-validate.ftl template.</p>
+<p>If you wish to add additional validator support beyond those listed, you may override the <em>xhtml theme</em>  template 
+<code class="highlighter-rouge">form-close-validate.ftl</code>. This file contains the JavaScript that tries to validate each user-entered value from within 
+the browser. The <em>css_xhtml theme</em>  extends the <em>xhtml theme</em>  and therefore doesn’t have its own <code class="highlighter-rouge">form-close-validate.ftl</code>
+template.</p>
 
   </section>
 </article>
