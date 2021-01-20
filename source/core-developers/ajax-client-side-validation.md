@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: AJAX Client Side Validation
 parent:
   title: Client Side Validation
@@ -204,8 +204,8 @@ _jsonActionRedirect_ result mentioned above the action will be executed while AJ
 JSON providing a new URL to load. Otherwise the AJAX response will be empty and the form must be submitted a 2nd time 
 but as usual request, not AJAX.
 
-| Setting _validate_ to _true_ in the _form_ tag will enable client side, JavaScript validation, which can be used along 
-  with AJAX validation (runs before the AJAX validation).
+> Setting _validate_ to _true_ in the _form_ tag will enable client side, JavaScript validation, which can be used along 
+>  with AJAX validation (runs before the AJAX validation).
 
 ### Custom Theme
 

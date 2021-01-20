@@ -2,8 +2,8 @@
 layout: default
 title: Client Side Validation
 parent:
-    title: Validation
-    url: validation.html
+  title: Validation
+  url: validation
 ---
 
 # Client Side Validation
