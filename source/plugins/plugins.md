@@ -77,8 +77,6 @@ The following extension points are available in Struts 2:
 |struts.patternMatcher|Matches patterns, such as action names, generally used in configuration (since 2.1)|singleton|com.opensymphony.xwork2.util.PatternMatcher|
 |struts.staticContentLoader|Loads static resources (since 2.1)|singleton|org.apache.struts2.views.dispatcher.DefaultStaticContentLoader|
 |struts.xworkConverter|Handles conversion logic and allows to load custom converters per class or per action|singleton|com.opensymphony.xwork2.conversion.impl.XWorkConverter|
-|struts.xworkTextProvider|Allows provide custom TextProvider for whole application|default|com.opensymphony.xwork2.TextProvider|
-|struts.localeProvider|DEPRECATED! Allows provide custom TextProvider for whole application - instead this endpoint use **struts.localeProviderFactory**|singleton|com.opensymphony.xwork2.LocaleProvider|
 |struts.localeProviderFactory|Allows provide custom LocaleProvider for whole application|singleton|com.opensymphony.xwork2.LocaleProviderFactory|
 |struts.urlRenderer|Allows provide custom implementation of environment specific URL rendering/creating class|singleton|org.apache.struts2.components.UrlRenderer|
 |struts.unknownHandlerManager|Implementation of this interface allows handle logic of unknown Actions, Methods or Results|singleton|com.opensymphony.xwork2.UnknownHandlerManager|
