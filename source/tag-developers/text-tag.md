@@ -30,6 +30,9 @@ For more details on using resource bundles with Struts 2 read the [localization 
 
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/text-attributes.html %}
 
+> **NOTE**: When the `var` attribute is used with the `text` tag, the tag's generated value **will not** be written out to the
+> visible page (it will only be placed into the action scope).
+
 ## Examples
 
 > Accessing messages from a given bundle (the i18n Shop example bundle in the first example) and using bundle defined 
