@@ -144,16 +144,16 @@
 <p><strong>Accessing servlet scopes</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span> <span class="n">attr</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"attr"</span><span class="o">);</span>
-<span class="n">attr</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span><span class="n">myProp</span><span class="o">);</span>
+<span class="n">attr</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>  <span class="c1">// Page scope.</span>
 
 <span class="n">Map</span> <span class="n">application</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"application"</span><span class="o">);</span>
-<span class="n">application</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span><span class="n">myProp</span><span class="o">);</span>
+<span class="n">application</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>
 
 <span class="n">Map</span> <span class="n">session</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"session"</span><span class="o">);</span>
 <span class="n">session</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>
 
 <span class="n">Map</span> <span class="n">request</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">)</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"request"</span><span class="o">);</span>
-<span class="n">request</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span><span class="n">myProp</span><span class="o">);</span>
+<span class="n">request</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -174,18 +174,26 @@ is an alternative way to access the request and response objects, with the same 
 
 <h2 id="accessing-from-the-view-jsp-freemarker-etc">Accessing from the view (JSP, FreeMarker, etc.)</h2>
 
-<p>Request and session attributes are accessed via OGNL using the <code class="highlighter-rouge">#session</code> and <code class="highlighter-rouge">#request</code> stack values.</p>
+<p>Request and session attributes are accessed via OGNL using the <code class="highlighter-rouge">#session</code> and <code class="highlighter-rouge">#request</code> stack values.
+Page attributes are accessed via OGNL using the <code class="highlighter-rouge">#attr</code> stack value, and Application attributes via
+the <code class="highlighter-rouge">#application</code> stack value.</p>
 
 <p>The <code class="highlighter-rouge">#attr</code> stack value will search the <code class="highlighter-rouge">javax.servlet.jsp.PageContext</code> for the specified key. If the <code class="highlighter-rouge">PageContext</code>
-doean’t exist, it will search the request, session, and application scopes, in that order.</p>
+doesn’t exist, it will search the request, session, and application scopes, in that order.</p>
 
-<p><strong>Accessing the Session or Request from a JSP</strong></p>
+<p><strong>Accessing attributes in the Application, Session, Request, or Page scope from a JSP</strong></p>
 
-<pre><code class="language-jsp">&lt;s:property value="#session.myId" /&gt;
+<pre><code class="language-jsp">&lt;p&gt;Retrieve the attribute (property), with key myId, from the specified scope:&lt;/p&gt;
+
+&lt;s:property value="#application.myId" /&gt;
+
+&lt;s:property value="#session.myId" /&gt;
 
 &lt;s:property value="#request.myId" /&gt;
 
 &lt;s:property value="#attr.myId" /&gt;
+
+&lt;p&gt;Reminder: #attr is for Page scope attributes first, but will search the remaining scopes, in order, seeking a match.&lt;/p&gt;
 </code></pre>
 
   </section>
