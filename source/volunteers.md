@@ -87,7 +87,6 @@ Emeritus volunteers are no longer active in the project. An emeritus volunteer c
 - Jason Carreira (PMC) (jcarreira at apache.org)
 - Cedric Dumoulin (PMC) (cedric at apache.org)
 - James Mitchell (PMC) (jmitchell at apache.org)
-- Antonio Petrelli (PMC) (apetrelli at apache.org)
 - Ted Husted (PMC) (husted at apache.org)
 - Nils-Helge Garli Hegvik (PMC) (nilsga at apache.org)
 - Martin Cooper (PMC) (martinc at apache.org)
