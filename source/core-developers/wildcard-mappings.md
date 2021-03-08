@@ -145,9 +145,9 @@ constants must be set:
 
 ```xml
 <constant name="struts.enable.SlashesInActionNames" value="true"/>
-
 <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
 <constant name="struts.patternMatcher" value="regex" />
+
 <constant name="struts.matcher.appendNamedParameters" value="true"/>   <!-- Required from 2.5.25+ -->
 ```
 
