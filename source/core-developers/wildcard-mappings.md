@@ -148,7 +148,7 @@ constants must be set:
 
 <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
 <constant name="struts.patternMatcher" value="regex" />
-<constant name="struts.matcher.appendNamedParameters" value="true"/>
+<constant name="struts.matcher.appendNamedParameters" value="true"/>   <!-- Required from 2.5.25+ -->
 ```
 
 The regular expressions can be in two forms, the simplest one is `{FIELD_NAME}`, in which case the field with 
