@@ -229,18 +229,17 @@ the CSS theme does not use a <code class="highlighter-rouge">labelposition</code
  */
 --&gt;
 &lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/controlheader-core.ftl"&gt;
-&lt;#if !parameters.labelposition?? &amp;&amp; (parameters.form.labelposition)??&gt;
-&lt;#assign labelpos = parameters.form.labelposition/&gt;
-&lt;#elseif parameters.labelposition??&gt;
-&lt;#assign labelpos = parameters.labelposition/&gt;
+&lt;#if !parameters.labelPosition?? &amp;&amp; (parameters.form.labelPosition)??&gt;
+&lt;#assign labelPos = parameters.form.labelPosition/&gt;
+&lt;#elseif parameters.labelPosition??&gt;
+&lt;#assign labelPos = parameters.labelPosition/&gt;
 &lt;/#if&gt;
-&lt;#if (labelpos!"top") == 'top'&gt;
+&lt;#if (labelPos!"top") == 'top'&gt;
 &lt;div &lt;#rt/&gt;
 &lt;#else&gt;
 &lt;span &lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#if parameters.id??&gt;id="wwctrl_${parameters.id}"&lt;#rt/&gt;&lt;/#if&gt; class="wwctrl"&gt;
-    </code></pre></figure>
+&lt;#if parameters.id??&gt;id="wwctrl_${parameters.id}"&lt;#rt/&gt;&lt;/#if&gt; class="wwctrl"&gt;</code></pre></figure>
 
 <p>Note that the <code class="highlighter-rouge">fieldErrors</code>, usually caused by <a href="../core-developers/validation.html">Validation</a>, are displayed in a <code class="highlighter-rouge">div</code>
 block before the element is displayed.</p>
@@ -271,21 +270,21 @@ block before the element is displayed.</p>
 --&gt;
 ${parameters.after!}&lt;#t/&gt;
     &lt;#lt/&gt;
-&lt;#if !parameters.labelposition?? &amp;&amp; (parameters.form.labelposition)??&gt;
-&lt;#assign labelpos = parameters.form.labelposition/&gt;
-&lt;#elseif parameters.labelposition??&gt;
-&lt;#assign labelpos = parameters.labelposition/&gt;
+&lt;#if !parameters.labelPosition?? &amp;&amp; (parameters.form.labelPosition)??&gt;
+&lt;#assign labelPos = parameters.form.labelPosition/&gt;
+&lt;#elseif parameters.labelPosition??&gt;
+&lt;#assign labelPos = parameters.labelPosition/&gt;
 &lt;/#if&gt;
-&lt;#if (labelpos!"top") == 'top'&gt;
+&lt;#if (labelPos!"top") == 'top'&gt;
 &lt;/div&gt; &lt;#rt/&gt;
 &lt;#else&gt;
 &lt;/span&gt; &lt;#rt/&gt;
 &lt;/#if&gt;
 &lt;#if (parameters.errorposition!"top") == 'bottom'&gt;
-&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[parameters.name]??/&gt;
+&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(parameters.name)??/&gt;
 &lt;#if hasFieldErrors&gt;
 &lt;div &lt;#rt/&gt;&lt;#if parameters.id??&gt;id="wwerr_${parameters.id}"&lt;#rt/&gt;&lt;/#if&gt; class="wwerr"&gt;
-&lt;#list fieldErrors[parameters.name] as error&gt;
+&lt;#list fieldErrors.get(parameters.name) as error&gt;
     &lt;div&lt;#rt/&gt;
     &lt;#if parameters.id??&gt;
      errorFor="${parameters.id}"&lt;#rt/&gt;

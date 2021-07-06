@@ -250,10 +250,10 @@ the <a href="ajax-theme.html">ajax theme</a>) contents:</p>
 	Only show message if errors are available.
 	This will be done if ActionSupport is used.
 --&gt;
-&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[parameters.name]??/&gt;
+&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(parameters.name)??/&gt;
 &lt;#if (parameters.errorposition!"top") == 'top'&gt;
 &lt;#if hasFieldErrors&gt;
-&lt;#list fieldErrors[parameters.name] as error&gt;
+&lt;#list fieldErrors.get(parameters.name) as error&gt;
 &lt;tr errorFor="${parameters.id}"&gt;
     &lt;td class="tdErrorMessage" colspan="2"&gt;&lt;#rt/&gt;
         &lt;span class="errorMessage"&gt;${error}&lt;/span&gt;&lt;#t/&gt;
@@ -262,17 +262,17 @@ the <a href="ajax-theme.html">ajax theme</a>) contents:</p>
 &lt;/#list&gt;
 &lt;/#if&gt;
 &lt;/#if&gt;
-&lt;#if !parameters.labelposition?? &amp;&amp; (parameters.form.labelposition)??&gt;
-&lt;#assign labelpos = parameters.form.labelposition/&gt;
-&lt;#elseif parameters.labelposition??&gt;
-&lt;#assign labelpos = parameters.labelposition/&gt;
+&lt;#if !parameters.labelPosition?? &amp;&amp; (parameters.form.labelPosition)??&gt;
+&lt;#assign labelPos = parameters.form.labelPosition/&gt;
+&lt;#elseif parameters.labelPosition??&gt;
+&lt;#assign labelPos = parameters.labelPosition/&gt;
 &lt;/#if&gt;
 &lt;#--
 	if the label position is top,
 	then give the label it's own row in the table
 --&gt;
 &lt;tr&gt;
-&lt;#if (labelpos!"") == 'top'&gt;
+&lt;#if (labelPos!"") == 'top'&gt;
     &lt;td class="tdLabelTop" colspan="2"&gt;&lt;#rt/&gt;
 &lt;#else&gt;
     &lt;td class="tdLabel"&gt;&lt;#rt/&gt;
@@ -301,7 +301,7 @@ ${parameters.labelseparator!":"}&lt;#t/&gt;
 &lt;/#if&gt;
     &lt;/td&gt;&lt;#lt/&gt;
 &lt;#-- add the extra row --&gt;
-&lt;#if (labelpos!"") == 'top'&gt;
+&lt;#if (labelPos!"") == 'top'&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;/#if&gt;</code></pre></figure>
@@ -346,9 +346,9 @@ ${parameters.after!}&lt;#t/&gt;
     &lt;/td&gt;&lt;#lt/&gt;
 &lt;/tr&gt;
 &lt;#if (parameters.errorposition!"top") == 'bottom'&gt;
-&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[parameters.name]??/&gt;
+&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(parameters.name)??/&gt;
 &lt;#if hasFieldErrors&gt;
-&lt;#list fieldErrors[parameters.name] as error&gt;
+&lt;#list fieldErrors.get(parameters.name) as error&gt;
 &lt;tr errorFor="${parameters.id}"&gt;
     &lt;td class="tdErrorMessage" colspan="2"&gt;&lt;#rt/&gt;
         &lt;span class="errorMessage"&gt;${error}&lt;/span&gt;&lt;#t/&gt;
