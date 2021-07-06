@@ -46,10 +46,10 @@ Due to that modification, the resulting XML document based on x would be:
 </result>
 ```
 
-Without it there would be endless `x/y/x/y/x/y/...` elements. The `XSLTResult` code tries also to deal with the fact 
+Without it there would be endless `x/y/x/y/x/y/...` elements. The `XSLTResult` code tries also to deal with the fact 
 that DTM model is built in a manner that children are processed before siblings. The result is that if there is object 
 `x` that is both set in action's `x` property, and very deeply under action's a property then it would only appear under 
-`a`, not under `x`. That's not what we expect, and that's why `XSLTResult` allows objects to repeat in various places 
+`a`, not under `x`. That's not what we expect, and that's why `XSLTResult` allows objects to repeat in various places 
 to some extent.
 
 Sometimes the object mesh is still very dense and you may notice that even though you have a relatively simple stylesheet, 
@@ -57,6 +57,7 @@ execution takes a tremendous amount of time. To help you to deal with that obsta
 to elements paths (xpath).
 
 > In your .xsl file the root match must be named `result`. This example will output the username by using `getUsername` on your action class:
+
 ```xml
 <xsl:template match="result">
   <html>
@@ -67,9 +68,9 @@ to elements paths (xpath).
 </xsl:template>
 ```
 
-In the following example the XSLT result would only walk through action's properties without their childs. It would also 
-skip every property that has `hugeCollection` in their name. Element's path is first compared to `excludingPattern` - 
-if it matches it's no longer processed. Then it is compared to `matchingPattern` and processed only if there's a match.
+In the following example the XSLT result would only walk through action's properties without their children. It would also 
+skip every property that has `hugeCollection` in their name. Element's path is first compared to `excludingPattern` - 
+if it matches it's no longer processed. Then it is compared to `matchingPattern` and processed only if there's a match.
 
 ```xml
 <result name="success" type="xslt">
@@ -96,13 +97,13 @@ This result type takes the following parameters:
 - `stylesheetLocation` (default) - the location to go to after execution.
 - `location` (deprecated) - the same as `stylesheetLocation` but it was dropped since Struts 2.5.
 - `encoding` - character encoding used in XML, default UTF-8.
-- `parse` - `true` by default. If set to false, the location param will not be parsed for Ognl expressions.
-- `matchingPattern` - a `Pattern` that matches only desired elements, by default it matches everything.
-- `excludingPattern` - a `Pattern` that eliminates unwanted elements, by default it matches none.
+- `parse` - `true` by default. If set to false, the location param will not be parsed for Ognl expressions.
+- `matchingPattern` - a `Pattern` that matches only desired elements, by default it matches everything.
+- `excludingPattern` - a `Pattern` that eliminates unwanted elements, by default it matches none.
 
-`struts.xml` related configuration:
+`struts.xml` related configuration:
 
-- `struts.xslt.nocache` - Defaults to `false`. If set to true, disables stylesheet caching. Good for development, bad for production.
+- `struts.xslt.nocache` - defaults to `false`. If set to true, disables stylesheet caching. Good for development, bad for production.
 
 ## Examples
 
