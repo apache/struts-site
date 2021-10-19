@@ -209,6 +209,40 @@ the <a href="#SourceCode">source code</a> instead.</p>
 we post them <a href="https://dist.apache.org/repos/dist/dev/struts/">here</a> in binary, source and library distributions.
 Library distributions include any external dependencies needed to use a product with your application.</p>
 
+<p>You can also use Maven to test the builds, all you have to do is to configure a Staging repository in <code class="highlighter-rouge">~/.m2/settings.xml</code>
+file like this:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;settings&gt;</span>
+    ...
+    <span class="nt">&lt;profiles&gt;</span>
+        <span class="nt">&lt;profile&gt;</span>
+            <span class="nt">&lt;id&gt;</span>local<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;activation&gt;</span>
+                <span class="nt">&lt;activeByDefault&gt;</span>true<span class="nt">&lt;/activeByDefault&gt;</span>
+            <span class="nt">&lt;/activation&gt;</span>
+            <span class="nt">&lt;repositories&gt;</span>
+                <span class="nt">&lt;repository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>apache-pre-release<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>https://repository.apache.org/content/repositories/staging/<span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;layout&gt;</span>default<span class="nt">&lt;/layout&gt;</span>
+                <span class="nt">&lt;/repository&gt;</span>
+            <span class="nt">&lt;/repositories&gt;</span>
+        <span class="nt">&lt;/profile&gt;</span>
+    <span class="nt">&lt;/profiles&gt;</span>
+<span class="nt">&lt;/settings&gt;</span>
+</code></pre></div></div>
+
+<p>or add the Staging repository in the project’s POM:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;repositories&gt;</span>
+    <span class="nt">&lt;repository&gt;</span>
+        <span class="nt">&lt;id&gt;</span>apache-pre-release<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;url&gt;</span>https://repository.apache.org/content/repositories/staging/<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;layout&gt;</span>default<span class="nt">&lt;/layout&gt;</span>
+    <span class="nt">&lt;/repository&gt;</span>
+<span class="nt">&lt;/repositories&gt;</span>
+</code></pre></div></div>
+
 <p>A test build is made available so that it can be reviewed for quality by the Apache Struts development group.
 When a build is judged “ready for prime time”, it is promoted to “General Availability” status and may be
 made the “Best Available” release. If the group feels that a build requires more testing, then it may be marked
@@ -219,8 +253,8 @@ we make the distribution available as a formal <a href="releases.html">release</
 
 <p>When a distribution is first made available, it is rated as a development build or “snapshot”. Later, the quality
 of the distribution may be upgraded to “Beta” or “General Availability”, based on feedback from the community,
-and then made available through ibiblio and other public Maven repositories. To obtain an early distribution via Maven,
-specify the ASF Snapshot repository in the project’s POM.</p>
+and then made available through the Maven Central and other public Maven repositories. To obtain an early distribution 
+via Maven, specify the ASF Snapshot repository in the project’s POM.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;repositories&gt;</span>
     <span class="nt">&lt;repository&gt;</span>
