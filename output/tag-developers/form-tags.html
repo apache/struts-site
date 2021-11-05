@@ -138,6 +138,12 @@
   <li><a href="#template-related-attributes" id="markdown-toc-template-related-attributes">Template-Related Attributes</a></li>
   <li><a href="#javascript-related-attributes" id="markdown-toc-javascript-related-attributes">Javascript-Related Attributes</a></li>
   <li><a href="#tooltip-related-attributes" id="markdown-toc-tooltip-related-attributes">Tooltip Related Attributes</a></li>
+  <li><a href="#general-attributes" id="markdown-toc-general-attributes">General Attributes</a></li>
+  <li><a href="#valuename-relationship" id="markdown-toc-valuename-relationship">Value/Name Relationship</a></li>
+  <li><a href="#id-name-assignment" id="markdown-toc-id-name-assignment">ID Name Assignment</a></li>
+  <li><a href="#form-labelposition-propagation" id="markdown-toc-form-labelposition-propagation">Form labelposition propagation</a></li>
+  <li><a href="#required-attribute" id="markdown-toc-required-attribute">Required Attribute</a></li>
+  <li><a href="#tooltip" id="markdown-toc-tooltip">Tooltip</a></li>
 </ul>
 
 <p>Please make sure you have read the <a href="tag-syntax">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
@@ -198,395 +204,443 @@ the form’s ID can be found by calling <code class="highlighter-rouge">${parame
 <h2 id="template-related-attributes">Template-Related Attributes</h2>
 
 <table>
-   <thead>
-      <tr>
-         <td>Attribute</td>
-         <td>Theme</td>
-         <td>Data Types</td>
-         <td>Description</td>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-         <td>templateDir</td>
-         <td>n/a</td>
-         <td>String</td>
-         <td>define the template directory</td>
-      </tr>
-      <tr>
-         <td>theme</td>
-         <td>n/a</td>
-         <td>String</td>
-         <td>define the theme name</td>
-      </tr>
-      <tr>
-         <td>template</td>
-         <td>n/a</td>
-         <td>String</td>
-         <td>define the template name</td>
-      </tr>
-      <tr>
-         <td>themeExpansionToken</td>
-         <td>n/a</td>
-         <td>String</td>
-         <td>special token (defined with struts.ui.theme.expansion.token) used to search for template in parent theme
-         (don't use it separately!)</td>
-      </tr>
-      <tr>
-         <td>expandTheme</td>
-         <td>n/a</td>
-         <td>String</td>
-         <td>concatenation of themeExpansionToken and theme which tells internal template loader mechanism
-         to try load template from current theme and then from parent theme (and parent theme, and so on)
-         when used with &lt;#include/&gt; directive</td>
-      </tr>
-   </tbody>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Theme</th>
+      <th>Data Types</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>templateDir</td>
+      <td>n/a</td>
+      <td>String</td>
+      <td>define the template directory</td>
+    </tr>
+    <tr>
+      <td>theme</td>
+      <td>n/a</td>
+      <td>String</td>
+      <td>define the theme name</td>
+    </tr>
+    <tr>
+      <td>template</td>
+      <td>n/a</td>
+      <td>String</td>
+      <td>define the template name</td>
+    </tr>
+    <tr>
+      <td>themeExpansionToken</td>
+      <td>n/a</td>
+      <td>String</td>
+      <td>special token (defined with struts.ui.theme.expansion.token) used to search for template in parent theme</td>
+    </tr>
+    <tr>
+      <td>(don’t use it separately!)</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>expandTheme</td>
+      <td>n/a</td>
+      <td>String</td>
+      <td>concatenation of themeExpansionToken and theme which tells internal template loader mechanism to try load template from current theme and then from parent theme (and parent theme, and so on) when used with &lt;#include/&gt; directive</td>
+    </tr>
+  </tbody>
 </table>
 
 <h2 id="javascript-related-attributes">Javascript-Related Attributes</h2>
 
 <table>
-   <thead>
-      <tr>
-         <td>Attribute</td>
-         <td>Theme</td>
-         <td>Data Types</td>
-         <td>Description</td>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-         <td>onclick</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onclick attribute</td>
-      </tr>
-      <tr>
-         <td>ondblclick</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript ondbclick attribute</td>
-      </tr>
-      <tr>
-         <td>onmousedown</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onmousedown attribute</td>
-      </tr>
-      <tr>
-         <td>onmouseup</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onmouseup attribute</td>
-      </tr>
-      <tr>
-         <td>onmouseover</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onmouseover attribute</td>
-      </tr>
-      <tr>
-         <td>onmouseout</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onmouseout attribute</td>
-      </tr>
-      <tr>
-         <td>onfocus</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onfocus attribute</td>
-      </tr>
-      <tr>
-         <td>onblur</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onblur attribute</td>
-      </tr>
-      <tr>
-         <td>onkeypress</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onkeypress attribute</td>
-      </tr>
-      <tr>
-         <td>onkeyup</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onkeyup attribute</td>
-      </tr>
-      <tr>
-         <td>onkeydown</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onkeydown attribute</td>
-      </tr>
-      <tr>
-         <td>onselect</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onselect attribute</td>
-      </tr>
-      <tr>
-         <td>onchange</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onchange attribute</td>
-      </tr>
-   </tbody>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Theme</th>
+      <th>Data Types</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>onclick</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onclick attribute</td>
+    </tr>
+    <tr>
+      <td>ondblclick</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript ondbclick attribute</td>
+    </tr>
+    <tr>
+      <td>onmousedown</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onmousedown attribute</td>
+    </tr>
+    <tr>
+      <td>onmouseup</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onmouseup attribute</td>
+    </tr>
+    <tr>
+      <td>onmouseover</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onmouseover attribute</td>
+    </tr>
+    <tr>
+      <td>onmouseout</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onmouseout attribute</td>
+    </tr>
+    <tr>
+      <td>onfocus</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onfocus attribute</td>
+    </tr>
+    <tr>
+      <td>onblur</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onblur attribute</td>
+    </tr>
+    <tr>
+      <td>onkeypress</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onkeypress attribute</td>
+    </tr>
+    <tr>
+      <td>onkeyup</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onkeyup attribute</td>
+    </tr>
+    <tr>
+      <td>onkeydown</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onkeydown attribute</td>
+    </tr>
+    <tr>
+      <td>onselect</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onselect attribute</td>
+    </tr>
+    <tr>
+      <td>onchange</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>html javascript onchange attribute</td>
+    </tr>
+  </tbody>
 </table>
 
 <h2 id="tooltip-related-attributes">Tooltip Related Attributes</h2>
 
 <table>
- <tr>
-    <td>Attribute</td>
-    <td>Data Type</td>
-    <td>Default</td>
-    <td>Description</td>
- </tr>
- <tr>
-     <td>tooltip</td>
-     <td>String</td>
-     <td>none</td>
-     <td>Set the tooltip of this particular component</td>
- </tr>
- <tr>
-     <td>jsTooltipEnabled</td>
-     <td>String</td>
-     <td>false</td>
-     <td>Enable js tooltip rendering</td>
- </tr>
-   <tr>
-     <td>tooltipIcon</td>
-     <td>String</td>
-     <td>/struts/static/tooltip/tooltip.gif</td>
-     <td>The url to the tooltip icon</td>
-  <tr>
-     <td>tooltipDelay</td>
-     <td>String</td>
-     <td>500</td>
-     <td>Tooltip shows up after the specified timeout (milliseconds). A behavior similar to that of OS based tooltips.</td>
-  </tr>
-  <tr>
-     <td>key</td>
-     <td>simple</td>
-     <td>String</td>
-     <td>The name of the property this input field represents.  This will auto populate the name, label, and value</td>
-  </tr>
-&lt;/table&gt;
-
-## General Attributes
-
-<table>
-   <thead>
-      <tr>
-         <td>Attribute</td>
-         <td>Theme</td>
-         <td>Data Types</td>
-         <td>Description</td>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-         <td>cssClass</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>define html class attribute</td>
-      </tr>
-      <tr>
-         <td>cssStyle</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>define html style attribute</td>
-      </tr>
-      <tr>
-         <td>cssErrorClass</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>error class attribute</td>
-      </tr>
-      <tr>
-         <td>cssErrorStyle</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>error style attribute</td>
-      </tr>
-      <tr>
-         <td>title</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>define html title attribute</td>
-      </tr>
-      <tr>
-         <td>disabled</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>define html disabled attribute</td>
-      </tr>
-      <tr>
-         <td>label</td>
-         <td>xhtml</td>
-         <td>String</td>
-         <td>define label of form element</td>
-      </tr>
-      <tr>
-         <td>labelPosition</td>
-         <td>xhtml</td>
-         <td>String</td>
-         <td>define label position of form element (top/left), default to left</td>
-      </tr>
-      <tr>
-         <td>requiredPosition</td>
-         <td>xhtml</td>
-         <td>String</td>
-         <td>define required label position of form element (left/right), default to right</td>
-      </tr>
-      <tr>
-         <td>errorPosition</td>
-         <td>xhtml</td>
-         <td>String</td>
-         <td>define error position of form element (top|bottom), default to top</td>
-      </tr>
-      <tr>
-         <td>name</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>Form Element's field name mapping</td>
-      </tr>
-      <tr>
-         <td>requiredLabel</td>
-         <td>xhtml</td>
-         <td>Boolean</td>
-         <td>add * to label (true to add false otherwise)</td>
-      </tr>
-      <tr>
-         <td>tabIndex</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>define html tabindex attribute</td>
-      </tr>
-      <tr>
-         <td>value</td>
-         <td>simple</td>
-         <td>Object</td>
-         <td>define value of form element</td>
-      </tr>
-   </tbody>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Data Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>tooltip</td>
+      <td>String</td>
+      <td>none</td>
+      <td>Set the tooltip of this particular component</td>
+    </tr>
+    <tr>
+      <td>jsTooltipEnabled</td>
+      <td>String</td>
+      <td>false</td>
+      <td>Enable js tooltip rendering</td>
+    </tr>
+    <tr>
+      <td>tooltipIcon</td>
+      <td>String</td>
+      <td>/struts/static/tooltip/tooltip.gif</td>
+      <td>The url to the tooltip icon</td>
+    </tr>
+    <tr>
+      <td>tooltipDelay</td>
+      <td>String</td>
+      <td>500</td>
+      <td>Tooltip shows up after the specified timeout (milliseconds). A behavior similar to that of OS based tooltips.</td>
+    </tr>
+    <tr>
+      <td>key</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>The name of the property this input field represents.  This will auto populate the name, label, and value</td>
+    </tr>
+  </tbody>
 </table>
 
-&gt; Some tag attributes may not be utilized by all, or any, of the templates. For example, the form tag supports
-&gt; the tabindex attribute, but none of the themes render the tabindex.
+<h2 id="general-attributes">General Attributes</h2>
 
-## Value/Name Relationship
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Theme</th>
+      <th>Data Types</th>
+      <th>Description</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>cssClass</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>define html class attribute</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>cssStyle</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>define html style attribute</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>cssErrorClass</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>error class attribute</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>cssErrorStyle</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>error style attribute</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>define html title attribute</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>define html disabled attribute</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>label</td>
+      <td>xhtml</td>
+      <td>String</td>
+      <td>define label of form element</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>labelPosition</td>
+      <td>xhtml</td>
+      <td>String</td>
+      <td>define label position of form element (top/left), default to left</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>requiredPosition</td>
+      <td>xhtml</td>
+      <td>String</td>
+      <td>define required label position of form element (left/right), default to right</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>errorPosition</td>
+      <td>xhtml</td>
+      <td>String</td>
+      <td>define error position of form element (top</td>
+      <td>bottom), default to top</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>Form Element’s field name mapping</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>requiredLabel</td>
+      <td>xhtml</td>
+      <td>Boolean</td>
+      <td>add * to label (true to add false otherwise)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>tabIndex</td>
+      <td>simple</td>
+      <td>String</td>
+      <td>define html tabindex attribute</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>simple</td>
+      <td>Object</td>
+      <td>define value of form element</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
-In many of the tags (except for the form tag) there is a unique relationship between the `name` and `value` attributes.
-The `name` attribute provides the name for the tag, which in turn is used as the control attribute when the form 
-is submitted. The value submitted is bound to the `name`. In most cases, the `name` maps to a simple JavaBean property, 
-such as "postalCode". On submit, the value would be set to the property by calling the `setPostalCode` mutator.
+<blockquote>
+  <p>Some tag attributes may not be utilized by all, or any, of the templates. For example, the form tag supports
+the tabindex attribute, but none of the themes render the tabindex.</p>
+</blockquote>
 
-Likewise, a form control could be populated by calling a JavaBean accessor, like `getPostalCode`. In the expression 
-language, we can refer to the JavaBean property by name. An expression like "%{postalCode}" would in turn call `getPostalCode`.
+<h2 id="valuename-relationship">Value/Name Relationship</h2>
 
-```ftl
-&lt;@s.form action="updateAddress"&gt;
+<p>In many of the tags (except for the form tag) there is a unique relationship between the <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">value</code> attributes.
+The <code class="highlighter-rouge">name</code> attribute provides the name for the tag, which in turn is used as the control attribute when the form 
+is submitted. The value submitted is bound to the <code class="highlighter-rouge">name</code>. In most cases, the <code class="highlighter-rouge">name</code> maps to a simple JavaBean property, 
+such as “postalCode”. On submit, the value would be set to the property by calling the <code class="highlighter-rouge">setPostalCode</code> mutator.</p>
+
+<p>Likewise, a form control could be populated by calling a JavaBean accessor, like <code class="highlighter-rouge">getPostalCode</code>. In the expression 
+language, we can refer to the JavaBean property by name. An expression like “%{postalCode}” would in turn call <code class="highlighter-rouge">getPostalCode</code>.</p>
+
+<pre><code class="language-ftl">&lt;@s.form action="updateAddress"&gt;
     &lt;@s.textfield label="Postal Code" name="postalCode" value="%{postalCode}"/&gt;
     ...
 &lt;/@s.form&gt;
-```
+</code></pre>
 
-However, since the tags imply a relationship between the `name` and `value`, the `value` attribute is optional. 
-If a `value` is not specified, by default, the JavaBean accessor is used instead.
+<p>However, since the tags imply a relationship between the <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">value</code>, the <code class="highlighter-rouge">value</code> attribute is optional. 
+If a <code class="highlighter-rouge">value</code> is not specified, by default, the JavaBean accessor is used instead.</p>
 
-```ftl
-&lt;@s.form action="updateAddress"&gt;
+<pre><code class="language-ftl">&lt;@s.form action="updateAddress"&gt;
     &lt;@s.textfield label="Postal Code" name="postalCode"/&gt;
     ...
 &lt;/@s.form&gt;
-```
+</code></pre>
 
-While most attributes are exposed to the underlying templates as the same key as the attribute (`${parameters.label}`), 
-the `value` attribute is not. Instead, it can be accessed via the `nameValue` key (`${parameters.nameValue}`).
-The `nameValue` key indicates that the value may have been generated from the `name` attribute rather than explicitly
-defined in the `value` attribute.
+<p>While most attributes are exposed to the underlying templates as the same key as the attribute (<code class="highlighter-rouge">${parameters.label}</code>), 
+the <code class="highlighter-rouge">value</code> attribute is not. Instead, it can be accessed via the <code class="highlighter-rouge">nameValue</code> key (<code class="highlighter-rouge">${parameters.nameValue}</code>).
+The <code class="highlighter-rouge">nameValue</code> key indicates that the value may have been generated from the <code class="highlighter-rouge">name</code> attribute rather than explicitly
+defined in the <code class="highlighter-rouge">value</code> attribute.</p>
 
-## ID Name Assignment
+<h2 id="id-name-assignment">ID Name Assignment</h2>
 
-All form tags automatically assign an ID to the control, but the ID can be overridden if needed.
+<p>All form tags automatically assign an ID to the control, but the ID can be overridden if needed.</p>
 
-|Forms|The default ID is the action name. For example, "updateAddress".|
-|-----|------------------------------------------------------------------|
-|Controls|The default ID is the form's name concatenated with the tag name. For example, "updateAddress_postalCode".|
+<table>
+  <thead>
+    <tr>
+      <th>Forms</th>
+      <th>The default ID is the action name. For example, “updateAddress”.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Controls</td>
+      <td>The default ID is the form’s name concatenated with the tag name. For example, “updateAddress_postalCode”.</td>
+    </tr>
+  </tbody>
+</table>
 
-## Form labelposition propagation
+<h2 id="form-labelposition-propagation">Form labelposition propagation</h2>
 
-When `labelposition` attribute was defined for `<s:form>` tag it will be propagated to all form elements, but if form 
-element defines its own `labelposition` it will take precedence over `<s:form>`'s attribute. Since 2.3.17.
+<p>When <code class="highlighter-rouge">labelposition</code> attribute was defined for <code class="highlighter-rouge">&lt;s:form&gt;</code> tag it will be propagated to all form elements, but if form 
+element defines its own <code class="highlighter-rouge">labelposition</code> it will take precedence over <code class="highlighter-rouge">&lt;s:form&gt;</code>’s attribute. Since 2.3.17.</p>
 
-## Required Attribute
+<h2 id="required-attribute">Required Attribute</h2>
 
-The `required` attribute on many UI tags defaults to true only if you have client-side validation enabled,
-and a validator is associated with that particular field.
+<p>The <code class="highlighter-rouge">required</code> attribute on many UI tags defaults to true only if you have client-side validation enabled,
+and a validator is associated with that particular field.</p>
 
-## Tooltip
+<h2 id="tooltip">Tooltip</h2>
 
-&gt; **NOTE**: tooltipConfig is deprecated, use individual tooltip configuration attributes instead
+<blockquote>
+  <p><strong>NOTE</strong>: tooltipConfig is deprecated, use individual tooltip configuration attributes instead</p>
+</blockquote>
 
-Every Form UI component (in `xhtml` / `css_xhtml` or any other which extends them) can have tooltips assigned to them.
-The Form component's tooltip related attribute, once defined, will be applied to all form UI components that are created 
-under it unless explicitly overridden by having the Form UI component itself defined with their own tooltip attribute.
+<p>Every Form UI component (in <code class="highlighter-rouge">xhtml</code> / <code class="highlighter-rouge">css_xhtml</code> or any other which extends them) can have tooltips assigned to them.
+The Form component’s tooltip related attribute, once defined, will be applied to all form UI components that are created 
+under it unless explicitly overridden by having the Form UI component itself defined with their own tooltip attribute.</p>
 
-In Example 1, the textfield will inherit the tooltipDelay and tooltipIconPath attribute from its containing form. 
-In other words, although it doesn't define a tooltipIconPath attribute, it will have that attribute inherited from its
-containing form.
+<p>In Example 1, the textfield will inherit the tooltipDelay and tooltipIconPath attribute from its containing form. 
+In other words, although it doesn’t define a tooltipIconPath attribute, it will have that attribute inherited from its
+containing form.</p>
 
-In Example 2, the  textfield will inherit both the tooltipDelay and tooltipIconPath attribute from its containing form,
+<p>In Example 2, the  textfield will inherit both the tooltipDelay and tooltipIconPath attribute from its containing form,
 but the tooltipDelay attribute is overridden at the textfield itself. Hence, the textfield actually will have its 
-tooltipIcon defined as /myImages/myIcon.gif, inherited from its containing form, and tooltipDelay defined as 5000.
+tooltipIcon defined as /myImages/myIcon.gif, inherited from its containing form, and tooltipDelay defined as 5000.</p>
 
-Example 3, 4 and 5 show different ways of setting the tooltip configuration attribute.
-- Example 3: Set tooltip config through the body of the param tag
-- Example 4: Set tooltip config through the value attribute of the param tag
-- Example 5: Set tooltip config through the tooltip attributes of the component tag
+<p>Example 3, 4 and 5 show different ways of setting the tooltip configuration attribute.</p>
+<ul>
+  <li>Example 3: Set tooltip config through the body of the param tag</li>
+  <li>Example 4: Set tooltip config through the value attribute of the param tag</li>
+  <li>Example 5: Set tooltip config through the tooltip attributes of the component tag</li>
+</ul>
 
-```jsp
-<!-- Example 1: -->
+<pre><code class="language-jsp">&lt;!-- Example 1: --&gt;
 &lt;s:form
          tooltipDelay="500"
          tooltipIconPath="/myImages/myIcon.gif" .... &gt;
   ....
     &lt;s:textfield label="Customer Name" tooltip="Enter the customer name" .... /&gt;
   ....
-</s:form>
+&lt;/s:form&gt;
 
-<!-- Example 2: -->
+&lt;!-- Example 2: --&gt;
 &lt;s:form
          tooltipDelay="500"
          tooltipIconPath="/myImages/myIcon.gif" .... &gt;
   ....
-    <s:textfield label="Address" tooltip="Enter your address" tooltipDelay="5000" />
+    &lt;s:textfield label="Address"
+         tooltip="Enter your address"
+         tooltipDelay="5000" /&gt;
   ....
-</s:form>
+&lt;/s:form&gt;
 
 &lt;-- Example 3: --&gt;
-<s:textfield label="Customer Name" tooltip="One of our customer Details">
-       <s:param name="tooltipDelay">
+&lt;s:textfield
+       label="Customer Name"
+       tooltip="One of our customer Details"&gt;
+       &lt;s:param name="tooltipDelay"&gt;
             500
-       </s:param>
-       <s:param name="tooltipIconPath">
+       &lt;/s:param&gt;
+       &lt;s:param name="tooltipIconPath"&gt;
             /myImages/myIcon.gif
-       </s:param>
-</s:textfield>
+       &lt;/s:param&gt;
+&lt;/s:textfield&gt;
 
 &lt;-- Example 4: --&gt;
-<s:textfield label="Customer Address" tooltip="Enter The Customer Address">
-         <s:param name="tooltipDelay" value="500" />
-</s:textfield>
+&lt;s:textfield
+         label="Customer Address"
+         tooltip="Enter The Customer Address" &gt;
+         &lt;s:param
+             name="tooltipDelay"
+             value="500" /&gt;
+&lt;/s:textfield&gt;
 
 &lt;-- Example 5: --&gt;
-<s:textfield label="Customer Telephone Number" tooltip="Enter customer Telephone Number" tooltipDelay="500" tooltipIconPath="/myImages/myIcon.gif" />
-```
-</tr></table>
+&lt;s:textfield
+         label="Customer Telephone Number"
+         tooltip="Enter customer Telephone Number"
+         tooltipDelay="500"
+         tooltipIconPath="/myImages/myIcon.gif" /&gt;
+</code></pre>
 
   </section>
 </article>
