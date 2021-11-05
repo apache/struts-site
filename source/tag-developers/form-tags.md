@@ -47,7 +47,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 
 ## Template-Related Attributes
 
-<table style="border: black 1px solid">
+<table>
    <thead>
       <tr>
          <td>Attribute</td>
@@ -95,7 +95,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 
 ## Javascript-Related Attributes
 
-<table style="border: black 1px solid">
+<table>
    <thead>
       <tr>
          <td>Attribute</td>
@@ -188,7 +188,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 
 ## Tooltip Related Attributes
 
-<table style="border: black 1px solid">
+<table>
  <tr>
     <td>Attribute</td>
     <td>Data Type</td>
@@ -228,7 +228,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 
 ## General Attributes
 
-<table style="border: black 1px solid">
+<table>
    <thead>
       <tr>
          <td>Attribute</td>
