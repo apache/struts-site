@@ -47,283 +47,61 @@ the form's ID can be found by calling `${parameters.form.id}`.
 
 ## Template-Related Attributes
 
-<table>
-   <thead>
-      <tr>
-         <td>Attribute</td>
-         <td>Theme</td>
-         <td>Data Types</td>
-         <td>Description</td>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-         <td>templateDir</td>
-         <td>n/a</td>
-         <td>String</td>
-         <td>define the template directory</td>
-      </tr>
-      <tr>
-         <td>theme</td>
-         <td>n/a</td>
-         <td>String</td>
-         <td>define the theme name</td>
-      </tr>
-      <tr>
-         <td>template</td>
-         <td>n/a</td>
-         <td>String</td>
-         <td>define the template name</td>
-      </tr>
-      <tr>
-         <td>themeExpansionToken</td>
-         <td>n/a</td>
-         <td>String</td>
-         <td>special token (defined with struts.ui.theme.expansion.token) used to search for template in parent theme
-         (don't use it separately!)</td>
-      </tr>
-      <tr>
-         <td>expandTheme</td>
-         <td>n/a</td>
-         <td>String</td>
-         <td>concatenation of themeExpansionToken and theme which tells internal template loader mechanism
-         to try load template from current theme and then from parent theme (and parent theme, and so on)
-         when used with <#include/> directive</td>
-      </tr>
-   </tbody>
-</table>
+|Attribute|Theme|Data Types|Description|
+|--- |--- |--- |--- |
+|templateDir|n/a|String|define the template directory|
+|theme|n/a|String|define the theme name|
+|template|n/a|String|define the template name|
+|themeExpansionToken|n/a|String|special token (defined with struts.ui.theme.expansion.token) used to search for template in parent theme
+(don't use it separately!)|
+|expandTheme|n/a|String|concatenation of themeExpansionToken and theme which tells internal template loader mechanism to try load template from current theme and then from parent theme (and parent theme, and so on) when used with <#include/> directive|
 
 ## Javascript-Related Attributes
 
-<table>
-   <thead>
-      <tr>
-         <td>Attribute</td>
-         <td>Theme</td>
-         <td>Data Types</td>
-         <td>Description</td>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-         <td>onclick</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onclick attribute</td>
-      </tr>
-      <tr>
-         <td>ondblclick</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript ondbclick attribute</td>
-      </tr>
-      <tr>
-         <td>onmousedown</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onmousedown attribute</td>
-      </tr>
-      <tr>
-         <td>onmouseup</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onmouseup attribute</td>
-      </tr>
-      <tr>
-         <td>onmouseover</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onmouseover attribute</td>
-      </tr>
-      <tr>
-         <td>onmouseout</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onmouseout attribute</td>
-      </tr>
-      <tr>
-         <td>onfocus</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onfocus attribute</td>
-      </tr>
-      <tr>
-         <td>onblur</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onblur attribute</td>
-      </tr>
-      <tr>
-         <td>onkeypress</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onkeypress attribute</td>
-      </tr>
-      <tr>
-         <td>onkeyup</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onkeyup attribute</td>
-      </tr>
-      <tr>
-         <td>onkeydown</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onkeydown attribute</td>
-      </tr>
-      <tr>
-         <td>onselect</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onselect attribute</td>
-      </tr>
-      <tr>
-         <td>onchange</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>html javascript onchange attribute</td>
-      </tr>
-   </tbody>
-</table>
+|Attribute|Theme|Data Types|Description|
+|--- |--- |--- |--- |
+|onclick|simple|String|html javascript onclick attribute|
+|ondblclick|simple|String|html javascript ondbclick attribute|
+|onmousedown|simple|String|html javascript onmousedown attribute|
+|onmouseup|simple|String|html javascript onmouseup attribute|
+|onmouseover|simple|String|html javascript onmouseover attribute|
+|onmouseout|simple|String|html javascript onmouseout attribute|
+|onfocus|simple|String|html javascript onfocus attribute|
+|onblur|simple|String|html javascript onblur attribute|
+|onkeypress|simple|String|html javascript onkeypress attribute|
+|onkeyup|simple|String|html javascript onkeyup attribute|
+|onkeydown|simple|String|html javascript onkeydown attribute|
+|onselect|simple|String|html javascript onselect attribute|
+|onchange|simple|String|html javascript onchange attribute|
 
 ## Tooltip Related Attributes
 
-<table>
- <tr>
-    <td>Attribute</td>
-    <td>Data Type</td>
-    <td>Default</td>
-    <td>Description</td>
- </tr>
- <tr>
-     <td>tooltip</td>
-     <td>String</td>
-     <td>none</td>
-     <td>Set the tooltip of this particular component</td>
- </tr>
- <tr>
-     <td>jsTooltipEnabled</td>
-     <td>String</td>
-     <td>false</td>
-     <td>Enable js tooltip rendering</td>
- </tr>
-   <tr>
-     <td>tooltipIcon</td>
-     <td>String</td>
-     <td>/struts/static/tooltip/tooltip.gif</td>
-     <td>The url to the tooltip icon</td>
-  <tr>
-     <td>tooltipDelay</td>
-     <td>String</td>
-     <td>500</td>
-     <td>Tooltip shows up after the specified timeout (milliseconds). A behavior similar to that of OS based tooltips.</td>
-  </tr>
-  <tr>
-     <td>key</td>
-     <td>simple</td>
-     <td>String</td>
-     <td>The name of the property this input field represents.  This will auto populate the name, label, and value</td>
-  </tr>
-</table>
+|Attribute|Data Type|Default|Description|
+|--- |--- |--- |--- |
+|tooltip|String|none|Set the tooltip of this particular component|
+|jsTooltipEnabled|String|false|Enable js tooltip rendering|
+|tooltipIcon|String|/struts/static/tooltip/tooltip.gif|The url to the tooltip icon|
+|tooltipDelay|String|500|Tooltip shows up after the specified timeout (milliseconds). A behavior similar to that of OS based tooltips.|
+|key|simple|String|The name of the property this input field represents.  This will auto populate the name, label, and value|
 
 ## General Attributes
 
-<table>
-   <thead>
-      <tr>
-         <td>Attribute</td>
-         <td>Theme</td>
-         <td>Data Types</td>
-         <td>Description</td>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-         <td>cssClass</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>define html class attribute</td>
-      </tr>
-      <tr>
-         <td>cssStyle</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>define html style attribute</td>
-      </tr>
-      <tr>
-         <td>cssErrorClass</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>error class attribute</td>
-      </tr>
-      <tr>
-         <td>cssErrorStyle</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>error style attribute</td>
-      </tr>
-      <tr>
-         <td>title</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>define html title attribute</td>
-      </tr>
-      <tr>
-         <td>disabled</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>define html disabled attribute</td>
-      </tr>
-      <tr>
-         <td>label</td>
-         <td>xhtml</td>
-         <td>String</td>
-         <td>define label of form element</td>
-      </tr>
-      <tr>
-         <td>labelPosition</td>
-         <td>xhtml</td>
-         <td>String</td>
-         <td>define label position of form element (top/left), default to left</td>
-      </tr>
-      <tr>
-         <td>requiredPosition</td>
-         <td>xhtml</td>
-         <td>String</td>
-         <td>define required label position of form element (left/right), default to right</td>
-      </tr>
-      <tr>
-         <td>errorPosition</td>
-         <td>xhtml</td>
-         <td>String</td>
-         <td>define error position of form element (top|bottom), default to top</td>
-      </tr>
-      <tr>
-         <td>name</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>Form Element's field name mapping</td>
-      </tr>
-      <tr>
-         <td>requiredLabel</td>
-         <td>xhtml</td>
-         <td>Boolean</td>
-         <td>add * to label (true to add false otherwise)</td>
-      </tr>
-      <tr>
-         <td>tabIndex</td>
-         <td>simple</td>
-         <td>String</td>
-         <td>define html tabindex attribute</td>
-      </tr>
-      <tr>
-         <td>value</td>
-         <td>simple</td>
-         <td>Object</td>
-         <td>define value of form element</td>
-      </tr>
-   </tbody>
-</table>
+|Attribute|Theme|Data Types|Description|
+|--- |--- |--- |--- |
+|cssClass|simple|String|define html class attribute|
+|cssStyle|simple|String|define html style attribute|
+|cssErrorClass|simple|String|error class attribute|
+|cssErrorStyle|simple|String|error style attribute|
+|title|simple|String|define html title attribute|
+|disabled|simple|String|define html disabled attribute|
+|label|xhtml|String|define label of form element|
+|labelPosition|xhtml|String|define label position of form element (top/left), default to left|
+|requiredPosition|xhtml|String|define required label position of form element (left/right), default to right|
+|errorPosition|xhtml|String|define error position of form element (top|bottom), default to top|
+|name|simple|String|Form Element's field name mapping|
+|requiredLabel|xhtml|Boolean|add * to label (true to add false otherwise)|
+|tabIndex|simple|String|define html tabindex attribute|
+|value|simple|Object|define value of form element|
 
 > Some tag attributes may not be utilized by all, or any, of the templates. For example, the form tag supports
 > the tabindex attribute, but none of the themes render the tabindex.
