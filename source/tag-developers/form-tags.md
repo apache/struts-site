@@ -19,10 +19,11 @@ the individual form elements. The behavior of the form tag is different from the
 As explained in [Themes and Templates](themes-and-templates), the HTML Tags (which includes Form Tags) are all driven
 by templates. Templates are grouped together to create themes. The framework bundles three themes in the distribution.
 
-|simple|Sometimes _too_  simple|
-|------|-----------------------|
-|xhtml|Extends simple|(default)|
-|ajax|Extends xhtml|
+|Name|Description||
+|---|---|---|
+|simple|Sometimes _too_ simple|
+|xhtml|Extends simple, layout base on `<table>`s|(default)
+|css_xhtml|Extends simple, layout base on `<div>`s and CSS|
 
 The predefined themes can be used "as is" or customized.
 
@@ -48,7 +49,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 ## Template-Related Attributes
 
 |Attribute|Theme|Data Types|Description|
-|--- |--- |--- |--- |
+|---|---|---|---|
 |templateDir|n/a|String|define the template directory|
 |theme|n/a|String|define the theme name|
 |template|n/a|String|define the template name|
@@ -59,7 +60,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 ## Javascript-Related Attributes
 
 |Attribute|Theme|Data Types|Description|
-|--- |--- |--- |--- |
+|---|---|---|---|
 |onclick|simple|String|html javascript onclick attribute|
 |ondblclick|simple|String|html javascript ondbclick attribute|
 |onmousedown|simple|String|html javascript onmousedown attribute|
@@ -77,7 +78,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 ## Tooltip Related Attributes
 
 |Attribute|Data Type|Default|Description|
-|--- |--- |--- |--- |
+|---|---|---|---|
 |tooltip|String|none|Set the tooltip of this particular component|
 |jsTooltipEnabled|String|false|Enable js tooltip rendering|
 |tooltipIcon|String|/struts/static/tooltip/tooltip.gif|The url to the tooltip icon|
@@ -87,7 +88,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 ## General Attributes
 
 |Attribute|Theme|Data Types|Description|
-|--- |--- |--- |--- |
+|---|---|---|---|
 |cssClass|simple|String|define html class attribute|
 |cssStyle|simple|String|define html style attribute|
 |cssErrorClass|simple|String|error class attribute|
