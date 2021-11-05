@@ -12,7 +12,7 @@ title: Tag Developers Guide
 Please make sure you have read the [Tag Syntax](tag-syntax) document and understand how tag attribute syntax works.
 
 Within the form tags, there are two classes of tags: the form tag itself, and all other tags, which make up
-the individual form elements. The behavior of the form tag is different than the elements enclosed within it.
+the individual form elements. The behavior of the form tag is different from the elements enclosed within it.
 
 ## Form Tag Themes
 
@@ -47,7 +47,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 
 ## Template-Related Attributes
 
-<table border="1" summary="">
+<table style="border: black 1px solid">
    <thead>
       <tr>
          <td>Attribute</td>
@@ -95,7 +95,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 
 ## Javascript-Related Attributes
 
-<table border="1" summary="">
+<table style="border: black 1px solid">
    <thead>
       <tr>
          <td>Attribute</td>
@@ -188,7 +188,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 
 ## Tooltip Related Attributes
 
-<table border="1" summary="">
+<table style="border: black 1px solid">
  <tr>
     <td>Attribute</td>
     <td>Data Type</td>
@@ -216,7 +216,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
      <td>tooltipDelay</td>
      <td>String</td>
      <td>500</td>
-     <td>Tooltip shows up after the specified timeout (miliseconds). A behavior similar to that of OS based tooltips.</td>
+     <td>Tooltip shows up after the specified timeout (milliseconds). A behavior similar to that of OS based tooltips.</td>
   </tr>
   <tr>
      <td>key</td>
@@ -228,7 +228,7 @@ the form's ID can be found by calling `${parameters.form.id}`.
 
 ## General Attributes
 
-<table border="1" summary="">
+<table style="border: black 1px solid">
    <thead>
       <tr>
          <td>Attribute</td>
@@ -333,10 +333,10 @@ the form's ID can be found by calling `${parameters.form.id}`.
 In many of the tags (except for the form tag) there is a unique relationship between the `name` and `value` attributes.
 The `name` attribute provides the name for the tag, which in turn is used as the control attribute when the form 
 is submitted. The value submitted is bound to the `name`. In most cases, the `name` maps to a simple JavaBean property, 
-such as "postalCode". On a submit, the value would be set to the property by calling the `setPostalCode` mutator.
+such as "postalCode". On submit, the value would be set to the property by calling the `setPostalCode` mutator.
 
-Likewise, a form control could be populated by calling a JavaBean accessor, like `getPostalCode`. In the expression l
-anguage, we can refer to the JavaBean property by name. An expression like "%{postalCode}" would in turn call `getPostalCode`.
+Likewise, a form control could be populated by calling a JavaBean accessor, like `getPostalCode`. In the expression 
+language, we can refer to the JavaBean property by name. An expression like "%{postalCode}" would in turn call `getPostalCode`.
 
 ```ftl
 <@s.form action="updateAddress">
@@ -382,7 +382,7 @@ and a validator is associated with that particular field.
 
 > **NOTE**: tooltipConfig is deprecated, use individual tooltip configuration attributes instead
 
-Every Form UI component (in xhtml / css_xhtml or any other that extends them) can have tooltips assigned to them.
+Every Form UI component (in `xhtml` / `css_xhtml` or any other which extends them) can have tooltips assigned to them.
 The Form component's tooltip related attribute, once defined, will be applied to all form UI components that are created 
 under it unless explicitly overridden by having the Form UI component itself defined with their own tooltip attribute.
 
