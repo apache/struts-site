@@ -13,7 +13,7 @@ title: Announcements 2021
   Skip to: <a href="announce-2020">Announcements - 2020</a>
 </p>
 
-#### 12 December 2021 - Security Advice on Log4j 2.15.0 {#a20211212-1}
+#### 12 December 2021 - Security Advice on Log4j 2.15.0 {#a20211212-2}
 
 The Apache Struts Security team would like to announce that all the users using the latest Struts 2.5.x series 
 should upgrade [Log4j](https://logging.apache.org/log4j/2.x/) library to the  latest **2.15.0** version which addresses 
