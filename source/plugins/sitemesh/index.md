@@ -5,9 +5,12 @@ title: SiteMesh Plugin
 
 # SiteMesh Plugin
 
-> About SiteMesh
-> 
-> [SiteMesh](http://www.sitemesh.org/) is a web-page layout and decoration framework and web application integration framework to aid in creating large sites consisting of many pages for which a consistent look/feel, navigation and layout scheme is required.
+> This plugin got marked as deprecated since Struts 2.6!
+
+## About SiteMesh
+
+> [SiteMesh](http://www.sitemesh.org/) is a web-page layout and decoration framework and web application integration 
+> framework to aid in creating large sites consisting of many pages for which a consistent look/feel, navigation and layout scheme is required.
 
 The Sitemesh plugin allows Sitemesh templates to access framework resources.
 
