@@ -153,7 +153,7 @@ shipped inside the core jar are extracted to your web application directory.</p>
 <h2 id="default-content-loader">Default Content Loader</h2>
 
 <p>Struts provides a default implementation of <code class="highlighter-rouge">StaticContentLoader</code> which is <code class="highlighter-rouge">org.apache.struts2.dispatcher.DefaultStaticContentLoader</code>. 
-This loader will handle urls that start with “/static/”.</p>
+This loader will handle urls that start with “/static/” by default.</p>
 
 <p>This content loader can serve static content from the classpath, so when writing a plugin, you can put a file inside 
 your plugin’s jar like “/static/image/banner.jpg” and it will be served when the url “/static/image/banner.jpg” is 
@@ -163,6 +163,16 @@ requested.</p>
   <p>This loader is not optimized to handle static content, and to improve performance, it is recommended that you extract 
 your static content to the web application directory, and let the container handle them.</p>
 </blockquote>
+
+<h2 id="default-path">Default path</h2>
+
+<p>If needed you can change the default path at which static content is served. Just define a new <code class="highlighter-rouge">constant</code> in your
+<code class="highlighter-rouge">struts.xml</code> with a path as below:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ui.staticContentPath"</span> <span class="na">value=</span><span class="s">"/my-static-content"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>This value is also used by the Default Content Loader.</p>
 
 <h2 id="preventing-struts-from-handling-a-request">Preventing Struts from Handling a Request</h2>
 
