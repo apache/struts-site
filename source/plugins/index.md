@@ -1,5 +1,6 @@
 ---
-layout: default title: Plugins
+layout: default
+title: Plugins
 ---
 
 # Plugin Developers Guide
