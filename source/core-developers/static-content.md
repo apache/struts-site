@@ -4,6 +4,10 @@ title: Static Content
 ---
 
 # Static Content
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 Struts can serve static content like css and javascript files. This feature is enabled by default, but can be disabled 
 by setting:
