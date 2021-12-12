@@ -5,6 +5,8 @@ title: Portlet Plugin
 
 # Portlet Plugin
 
+> This plugin got marked as deprecated since Struts 2.6!
+
 ## Documentation
 
 The Portlet Plugin is used for developing JSR286 portlets using Struts 2.

@@ -5,6 +5,8 @@ title: Portlet Tiles Plugin
 
 # Portlet Tiles Plugin
 
+> This plugin got marked as deprecated since Struts 2.6!
+
 Tiles is a templating framework designed to easily allow the creation of web application pages with a consistent look and feel. It can be used for both page decorating and componentization.
 
 ## Features
