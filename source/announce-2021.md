@@ -15,8 +15,8 @@ title: Announcements 2021
 
 #### 12 December 2021 - Security Advice on Log4j 2.15.0 {#a20211212-1}
 
-The Apache Struts team would like to announce that all the users using the latest Struts 2.5.x series should upgrade 
-[Log4j](https://logging.apache.org/log4j/2.x/) library to the  latest **2.15.0** version which addresses 
+The Apache Struts Security team would like to announce that all the users using the latest Struts 2.5.x series 
+should upgrade [Log4j](https://logging.apache.org/log4j/2.x/) library to the  latest **2.15.0** version which addresses 
 the Remote-Code-Execution vulnerability **CVE-2021-44228**. 
 
 This version of Log4j requires Java 8, while Apache Struts 2.5.x series is still using Java 1.7 and because
