@@ -5,6 +5,8 @@ title: OVal Plugin
 
 # OVal Plugin
 
+> This plugin got marked as deprecated since Struts 2.6!
+
 ## Overview
 
 [OVal](http://oval.sourceforge.net/) is a pragmatic and extensible validation framework for any kind of Java objects (not only JavaBeans). Constraints can be declared with annotations (@NotNull, @MaxLength), POJOs or XML. Custom constraints can be expressed as custom Java classes or by using scripting languages such as JavaScript, Groovy, BeanShell, OGNL or MVEL.
