@@ -5,7 +5,7 @@ title: Plexus Plugin
 
 # Plexus Plugin
 
-> The Plexus Plugin is experimental. Feedback is appreciated!
+> This plugin got marked as deprecated since Struts 2.6!
 
 While [Plexus](http://plexus.codehaus.org/) is similar to other inversion-of-control (IoC) or dependency injection frameworks such as the Spring Framework, it's fully-fledged container supports many more features.
 
