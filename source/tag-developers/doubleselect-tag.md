@@ -22,6 +22,17 @@ and `doublelistvalue` to be null and not used.
 
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/doubleselect-attributes.html %}
 
+## Dynamic attributes
+
+The tag supports dynamic attributes but if you want to add the attributes to the second control which is generated
+by the tag use the `second-` prefix as below:
+
+```jsp
+<s:doubleselect ... second-control-id="id2"/>
+```
+
+The prefix will be stripped while generating the second control. 
+
 ## Examples
 
 ```jsp

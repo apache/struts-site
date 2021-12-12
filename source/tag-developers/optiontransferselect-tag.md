@@ -30,6 +30,17 @@ its containing form submission.
 
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/optiontransferselect-attributes.html %}
 
+## Dynamic attributes
+
+The tag supports dynamic attributes but if you want to add the attributes to the right control which is generated
+by the tag use the `right-` prefix as below:
+
+```jsp
+<s:ioptiontransferselect ... right-control-id="id2"/>
+```
+
+The prefix will be stripped while generating the second control.
+
 ## Examples
 
 **Minimum example**
