@@ -5,6 +5,8 @@ title: OSGi Plugin
 
 # OSGi Plugin
 
+> This plugin got marked as deprecated since Struts 2.6!
+
 ## Overview
 
 This plugin is only experimental and can change in the future.
