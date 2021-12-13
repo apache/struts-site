@@ -37,7 +37,7 @@ to maintaining applications over time.
 
 Below is a full list of all changes:
 
-- [WW-5149] - labelposition and 2.5.27
+- [WW-5149] - labelposition attribute broken in Struts 2.5.27
 
 > Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+2.5.28) to find more details about performed
 > bug fixes and improvements.
