@@ -26,6 +26,8 @@ to upgrade Log4j, please use one of  the described mitigations.
 
 More information can be found [here](https://logging.apache.org/log4j/2.x/#News).
 
+**All developers are strongly advised to perform this action.**
+
 #### 12 December 2021 - Struts 2.5.28 General Availability {#a20211212}
 
 The Apache Struts group is pleased to announce that Struts 2.5.28 is available as a "General Availability"
@@ -42,7 +44,7 @@ Below is a full list of all changes:
 > Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+2.5.28) to find more details about performed
 > bug fixes and improvements.
 
-**All developers are strongly advised to perform this action.**
+**All developers are strongly advised to perform this upgrade.**
 
 The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
 Servlet API 2.4, JSP API 2.0, and Java 7.
