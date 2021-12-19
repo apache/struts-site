@@ -143,7 +143,10 @@
   <li><a href="#plugin-registry" id="markdown-toc-plugin-registry">Plugin Registry</a></li>
 </ul>
 
-<p>Struts 2 plugins contain classes and configuration that extend, replace, or add to existing Struts framework functionality. A plugin can be installed by adding its JAR file to the application’s class path, in addition to the JAR files to fulfill whatever dependencies the plugin itself may have. To configure the plugin, the JAR should contain a <code class="highlighter-rouge">struts-plugin.xml</code> file, which follows the same format as an ordinary <code class="highlighter-rouge">struts.xml</code> file.</p>
+<p>Struts 2 plugins contain classes and configuration that extend, replace, or add to existing Struts framework functionality. 
+A plugin can be installed by adding its JAR file to the application’s class path, in addition to the JAR files to fulfill
+whatever dependencies the plugin itself may have. To configure the plugin, the JAR should contain a <code class="highlighter-rouge">struts-plugin.xml</code> 
+file, which follows the same format as an ordinary <code class="highlighter-rouge">struts.xml</code> file.</p>
 
 <p>Since a plugin can contain the <code class="highlighter-rouge">struts-plugin.xml</code> file, it has the ability to:</p>
 
@@ -159,29 +162,30 @@
   </li>
 </ul>
 
-<p>Many popular but optional features of the framework are distributed as plugins. An application can retain all the plugins provided with the distribution, or just include the ones it uses. Plugins can be used to organize application code or to distribute code to third-parties.</p>
+<p>Many popular but optional features of the framework are distributed as plugins. An application can retain all the plugins 
+provided with the distribution, or just include the ones it uses. Plugins can be used to organize application code 
+or to distribute code to third-parties.</p>
 
-<p>Packages defined in a plugin can have parent packages that are defined in another plugin. Plugins may define configuration elements with classes not contained in the plugin. Any classes not included in the plugin’s JAR must be on the application’s classpath at runtime. As from Struts 2.3.5</p>
+<p>Packages defined in a plugin can have parent packages that are defined in another plugin. Plugins may define 
+configuration elements with classes not contained in the plugin. Any classes not included in the plugin’s JAR must be 
+on the application’s classpath at runtime. As from Struts 2.3.5</p>
 
-<p>The framework loads its default configuration first, then any plugin configuration files found in others JARs on the classpath, and finally the “bootstrap” <code class="highlighter-rouge">struts.xml</code>.</p>
+<p>The framework loads its default configuration first, then any plugin configuration files found in others JARs
+on the classpath, and finally the “bootstrap” <code class="highlighter-rouge">struts.xml</code>.</p>
 
 <ol>
-  <li>
-    <p><code class="highlighter-rouge">struts-default.xml</code> (bundled in the Core JAR)</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">struts-plugin.xml</code> (as many as can be found in other JARs)</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">struts.xml</code> (provided by your application)</p>
-  </li>
+  <li><code class="highlighter-rouge">struts-default.xml</code> (bundled in the Core JAR)</li>
+  <li><code class="highlighter-rouge">struts-plugin.xml</code> (as many as can be found in other JARs)</li>
+  <li><code class="highlighter-rouge">struts.xml</code> (provided by your application)</li>
 </ol>
 
-<p>Since the <code class="highlighter-rouge">struts.xml</code> file is always loaded last, it can make use of any resources provided by the plugins bundled with the distribution, or any other plugins available to an application.</p>
+<p>Since the <code class="highlighter-rouge">struts.xml</code> file is always loaded last, it can make use of any resources provided by the plugins bundled
+with the distribution, or any other plugins available to an application.</p>
 
 <h2 id="static-resources">Static resources</h2>
 
-<p>To include static resources in your plugins add them under “/static” in your jar. And include them in your page using “/struts” as the path, like in the following example:</p>
+<p>To include static resources in your plugins add them under “/static” in your jar. And include them in your page using 
+“/struts” as the path, like in the following example:</p>
 
 <pre><code class="language-ftl">&lt;!-- Assuming /static/main.css is inside a plugin jar, to add it to the page: --&gt;
 
@@ -189,11 +193,12 @@
 &lt;link rel="stylesheet" type="text/css" href="%{#css}" /&gt;
 </code></pre>
 
-<p>Read also <a href="https://struts.apache.org/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/StaticContentLoader.html">StaticContentLoader JavaDoc</a>.</p>
+<p>Read also <a href="https://struts.apache.org/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/StaticContentLoader">StaticContentLoader JavaDoc</a>.</p>
 
 <h2 id="extension-points">Extension Points</h2>
 
-<p>Extension points allow a plugin to override a key class in the Struts framework with an alternate implementation. For example, a plugin could provide a new class to create Action classes or map requests to Actions.</p>
+<p>Extension points allow a plugin to override a key class in the Struts framework with an alternate implementation. 
+For example, a plugin could provide a new class to create Action classes or map requests to Actions.</p>
 
 <p>The following extension points are available in Struts 2:</p>
 
@@ -456,7 +461,8 @@
 
 <h3 id="sitemesh-plugin">Sitemesh plugin</h3>
 
-<p><a href="http://opensymphony.com/sitemesh/">SiteMesh</a> is a popular alternative to Tiles. SiteMesh provides a common look-and-feel to an application’s pages by automatically wrapping a plain page with common elements like headers and menubars.</p>
+<p><a href="http://opensymphony.com/sitemesh/">SiteMesh</a> is a popular alternative to Tiles. SiteMesh provides a common look-and-feel
+to an application’s pages by automatically wrapping a plain page with common elements like headers and menubars.</p>
 
 <p>The <code class="highlighter-rouge">sitemesh-plugin.jar</code> contains several classes, a standard JAR manifest, and a plugin configuration file.</p>
 
@@ -472,7 +478,8 @@
  + struts-plugin.xml
 </code></pre></div></div>
 
-<p>While the SiteMesh Plugin doesn’t provide any new results, interceptors, or actions, or even extend any Struts integration points, it does need to know what settings have been enabled in the Struts framework. Therefore, its <code class="highlighter-rouge">struts-plugin.xml</code> looks like this:</p>
+<p>While the SiteMesh Plugin doesn’t provide any new results, interceptors, or actions, or even extend any Struts integration 
+points, it does need to know what settings have been enabled in the Struts framework. Therefore, its <code class="highlighter-rouge">struts-plugin.xml</code> looks like this:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
 <span class="c">&lt;!--
@@ -508,11 +515,14 @@
 
 </code></pre></div></div>
 
-<p>The two bean elements, with the “static” flag enabled, tell Struts to inject the current settings and framework objects into static property setters on startup. This allows, for example, the FreeMarkerPageFilter class to get an instance of the Struts FreemarkerManager and the current encoding setting.</p>
+<p>The two bean elements, with the “static” flag enabled, tell Struts to inject the current settings and framework objects 
+into static property setters on startup. This allows, for example, the FreeMarkerPageFilter class to get an instance 
+of the Struts FreemarkerManager and the current encoding setting.</p>
 
 <h3 id="tiles-plugin">Tiles plugin</h3>
 
-<p><a href="http://struts.apache.org/struts-sandbox/tiles/index.html">Tiles</a> is a popular alternative to SiteMesh. Tiles provides a common look-and-feel to an application’s pages by breaking the page down into common fragments or “tiles”.</p>
+<p><a href="http://struts.apache.org/struts-sandbox/tiles/index">Tiles</a> is a popular alternative to SiteMesh. Tiles provides 
+a common look-and-feel to an application’s pages by breaking the page down into common fragments or “tiles”.</p>
 
 <p>The <code class="highlighter-rouge">tiles-plugin.jar</code> contains several classes, a standard JAR manifest, and a configuration file.</p>
 
@@ -535,7 +545,8 @@
 <h2 id="plugin-registry">Plugin Registry</h2>
 
 <blockquote>
-  <p>For a list of bundled plugins, see the <a href="plugin-developers.html">Plugin Reference Documentation</a>. For more about bundled and third-party plugins, visit the <a href="http://cwiki.apache.org/S2PLUGINS/home.html">Apache Struts Plugin Registry</a>.</p>
+  <p>For a list of bundled plugins, see the <a href="index">Plugin Reference Documentation</a>. For more about bundled and third-party 
+plugins, visit the <a href="http://cwiki.apache.org/S2PLUGINS/home">Apache Struts Plugin Registry</a>.</p>
 </blockquote>
 
   </section>

@@ -130,50 +130,27 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/weblogic.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="weblogic">WebLogic</h1>
 
-<p>When deploying to WebLogic, some developers report problems with the framework locating resources, especially with Velocity. For more about WebLogic and Velocity, see the <a href="http://wiki\.apache\.org/jakarta\-velocity/VelocityAndWeblogic">Velocity website</a>^[http://wiki.apache.org/jakarta-velocity/VelocityAndWeblogic].</p>
+<p>When deploying to WebLogic, some developers report problems with the framework locating resources, especially with Velocity. 
+For more about WebLogic and Velocity, see the <a href="http://wiki.apache.org/jakarta-velocity/VelocityAndWeblogic">Velocity website</a>.</p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
+<p>To deploy to WebLogic, the common approach is to create and deploy an unexpanded WAR to the WebLogic deployment directory. 
+With WL 8.x, the deployment directory is typically at <code class="highlighter-rouge">&lt;bea_home&gt;/user_projects/domains/mydomain/</code>.</p>
 
-<p>To deploy to WebLogic, the common approach is to create and deploy an unexpanded WAR to the WebLogic deployment directory. With WL 8.x, the deployment directory is typically at &lt;bea_home&gt;/user_projects/domains/mydomain/.</p>
+<h2 id="adding-a-struts-velocityproperties-configuration-file">Adding a struts-velocity.properties Configuration File</h2>
 
-<blockquote>
-
-</blockquote>
-
-<h2 id="adding-an-struts-velocityproperties-configuration-file">Adding an struts-velocity.properties Configuration File</h2>
-
-<ul>
-  <li>
-    <p>In the <code class="highlighter-rouge">struts.properties</code> file (usually kept in the <code class="highlighter-rouge">WEB-INF/classes</code> directory), add an entry that specifies a Velocity configuation file.</p>
-
-    <ul>
-      <li></li>
-    </ul>
-  </li>
-</ul>
+<p>In the <code class="highlighter-rouge">struts.properties</code> file (usually kept in the <code class="highlighter-rouge">WEB-INF/classes</code> directory), add an entry that specifies 
+a Velocity configuration file.</p>
 
 <p><strong>struts.properties</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-struts.velocity.configfile = struts-velocity.properties
-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struts.velocity.configfile = struts-velocity.properties
 </code></pre></div></div>
 
 <ul>
-  <li>
-    <p>Create the corresponding Velocity properties file (“struts-velocity.properties”), preferably in the same location as the <code class="highlighter-rouge">struts.properties</code> file.</p>
-  </li>
-  <li>
-    <p>Copy into the Velocity properties file the contents of the <code class="highlighter-rouge">velocity.properties</code> file that is the the SAF <code class="highlighter-rouge">velocity-dep.jar</code>.</p>
-  </li>
-  <li>
-    <p>In your new <code class="highlighter-rouge">struts-velocity.properties</code> file, find he section titled  <code class="highlighter-rouge">T E M P L A T E  L O A D E R S</code>, and change this section as so:</p>
-  </li>
+  <li>Create the corresponding Velocity properties file (“struts-velocity.properties”), preferably in the same location 
+as the <code class="highlighter-rouge">struts.properties</code> file.</li>
+  <li>Copy into the Velocity properties file the contents of the <code class="highlighter-rouge">velocity.properties</code> file that is the the SAF <code class="highlighter-rouge">velocity-dep.jar</code>.</li>
+  <li>In your new <code class="highlighter-rouge">struts-velocity.properties</code> file, find he section titled  <code class="highlighter-rouge">T E M P L A T E  L O A D E R S</code>, and change this section as so:</li>
 </ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -198,27 +175,25 @@ class.resource.loader.cache = true
 
 <h2 id="npe-when-using-struts-2-jasper-reports-plugin">NPE when using Struts 2 Jasper Reports plugin</h2>
 
-<p>When using mentioned plugin in Weblogic 11g you can get NullPointerException within Struts 2. To solve the problem you must enable the “Archived Real Path” global property in Weblogic admin console &gt; configuration &gt; Web Applications. It’s because JasperReportsResult determines the report directory base on servletContext.getRealPath(finalLocation).</p>
+<p>When using mentioned plugin in Weblogic 11g you can get NullPointerException within Struts 2. To solve the problem you 
+must enable the “Archived Real Path” global property in Weblogic admin console &gt; configuration &gt; Web Applications. 
+It’s because JasperReportsResult determines the report directory base on servletContext.getRealPath(finalLocation).</p>
 
 <h2 id="convention-based-application-doesnt-work">Convention based application doesn’t work</h2>
 
 <p>When you deployed an application that base on the Convention Plugin and you get an error messages that says:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-There is no Action mapped for namespace / and action name xxxxxx
-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>There is no Action mapped for namespace / and action name xxxxxx
 </code></pre></div></div>
 
 <p>create struts.properties file in WEB-INF/classes folder (in the expanded application’s folder or in the source code) with below statements:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-#struts convention property modifications for Weblogic
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#struts convention property modifications for Weblogic
 struts.convention.action.includeJars=.*?/yourwebapp.*?jar(!/)?
 struts.convention.action.fileProtocols=jar,zip
-
 </code></pre></div></div>
 
-<p>Thanks to Amit who the first published solution on his <a href="http://tech\-architecture\.blogspot\.com/2009/02/getting\-struts\-21\-to\-work\-in\-weblogic\.html">blog</a>^[http://tech-architecture.blogspot.com/2009/02/getting-struts-21-to-work-in-weblogic.html]</p>
+<p>Thanks to Amit who the first published solution on his <a href="http://tech-architecture.blogspot.com/2009/02/getting-struts-21-to-work-in-weblogic\">blog</a>.</p>
 
   </section>
 </article>

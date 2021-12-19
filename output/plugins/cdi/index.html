@@ -148,25 +148,42 @@
 
 <h2 id="overview">Overview</h2>
 
-<p>CDI - short for Contexts and Dependency Injection - is the new standard for Java EE (though not limited to it) dependency injection frameworks. It was introduced as <a href="http://jcp.org/en/jsr/summary?id=299">JSR 299</a>, being a part of the <a href="http://jcp.org/en/jsr/detail?id=316">Java EE 6</a> umbrella specification. It is also important to note that it builds on top of JSR 330 (Dependency Injection for Java SE), often referenced as <a href="http://jcp.org/en/jsr/summary?id=330">@Inject</a>.</p>
+<p>CDI - short for Contexts and Dependency Injection - is the new standard for Java EE (though not limited to it) 
+dependency injection frameworks. It was introduced as <a href="http://jcp.org/en/jsr/summary?id=299">JSR 299</a>, being 
+a part of the <a href="http://jcp.org/en/jsr/detail?id=316">Java EE 6</a> umbrella specification. It is also important to note 
+that it builds on top of JSR 330 (Dependency Injection for Java SE), often referenced as <a href="http://jcp.org/en/jsr/summary?id=330">@Inject</a>.</p>
 
-<p>It can be used as standalone solution packed with your web applications to run in lightweight servlet containers such as Apache Tomcat or Jetty, utilizing standalone CDI implementations such as <a href="http://seamframework.org/Weld">JBoss Weld</a> (the JSR 299 reference implementation) or <a href="http://openwebbeans.apache.org/">Apache OpenWebBeans</a>. On the other hand, each JEE 6 compliant application server such as <a href="http://glassfish.java.net/">Glassfish</a>, <a href="http://www.jboss.org/jbossas">JBoss AS</a> or <a href="http://openejb.apache.org/apache-tomee.html">Apache TomEE</a> is required to have a CDI container on board, making it easy for developers to pack lightweight web or enterprise archives while being able to use a compelling dependency injection feature set.</p>
+<p>It can be used as standalone solution packed with your web applications to run in lightweight servlet containers such 
+as Apache Tomcat or Jetty, utilizing standalone CDI implementations such as <a href="http://seamframework.org/Weld">JBoss Weld</a> 
+(the JSR 299 reference implementation) or <a href="http://openwebbeans.apache.org/">Apache OpenWebBeans</a>. On the other hand, 
+each JEE 6 compliant application server such as <a href="http://glassfish.java.net/">Glassfish</a>, <a href="http://www.jboss.org/jbossas">JBoss AS</a> 
+or <a href="http://openejb.apache.org/apache-tomee">Apache TomEE</a> is required to have a CDI container on board, making it easy 
+for developers to pack lightweight web or enterprise archives while being able to use a compelling dependency injection 
+feature set.</p>
 
-<p>With the Struts 2 CDI plugin, your application is open to be embedded into this modern, comprehensive and type safe framework and take full use of it.</p>
+<p>With the Struts 2 CDI plugin, your application is open to be embedded into this modern, comprehensive and type safe 
+framework and take full use of it.</p>
 
 <h2 id="setup">Setup</h2>
 
-<p>As with all Struts 2 plugins, usage of the CDI plugin is as easy as delivering the right jars with your web application. The plugin then registers itself as the standard ObjectFactory for your Struts 2 application.</p>
+<p>As with all Struts 2 plugins, usage of the CDI plugin is as easy as delivering the right jars with your web application.
+The plugin then registers itself as the standard ObjectFactory for your Struts 2 application.</p>
 
 <blockquote>
   <p>Don’t mess up Object Factory Providers</p>
 </blockquote>
 
-<p>Struts 2 delivers integration into all relevant dependency injection containers via plugins, such as the <a href="../spring">Spring Plugin</a> or the externally provided <a href="http://code.google.com/p/google-guice/wiki/Struts2Integration">Guice Struts 2 Plugin</a>. Be aware that the central feature of all those, as well as the CDI plugin, is to register itself as Struts 2 Object factory. Usually you will want to use <strong>exactly one of those plugins</strong> in your application, since there will only be <strong>one ObjectFactory</strong> implementation for Struts 2 to chose. If you pack more than one of those plugins, the factory to be chosen will be undetermined. One will win in the end, but who knows which …</p>
+<p>Struts 2 delivers integration into all relevant dependency injection containers via plugins, such as the <a href="../spring">Spring Plugin</a> 
+or the externally provided <a href="http://code.google.com/p/google-guice/wiki/Struts2Integration">Guice Struts 2 Plugin</a>. 
+Be aware that the central feature of all those, as well as the CDI plugin, is to register itself as Struts 2 Object 
+factory. Usually you will want to use <strong>exactly one of those plugins</strong> in your application, since there will only 
+be <strong>one ObjectFactory</strong> implementation for Struts 2 to chose. If you pack more than one of those plugins, the factory 
+to be chosen will be undetermined. One will win in the end, but who knows which …</p>
 
 <h3 id="maven-setup">Maven Setup</h3>
 
-<p>The most easy and recommended way use is to simply add a maven dependency for it, along with a dependency to the CDI API for development time usage:</p>
+<p>The most easy and recommended way use is to simply add a maven dependency for it, along with a dependency to the CDI API
+for development time usage:</p>
 
 <p><strong>pom.xml</strong></p>
 
@@ -189,7 +206,9 @@
 
 </code></pre></div></div>
 
-<p>whereas <code class="highlighter-rouge">${struts2.version}</code> should be set either as a property in your pom (recommended) or substituted by a concrete version information, such as 2.3.2 by the time of writing of this document. If you want to use CDI without an application server providing it, you may also want to add a dependency to a CDI implementation of your choice, for example Weld:</p>
+<p>whereas <code class="highlighter-rouge">${struts2.version}</code> should be set either as a property in your pom (recommended) or substituted by a concrete 
+version information, such as 2.3.2 by the time of writing of this document. If you want to use CDI without an application 
+server providing it, you may also want to add a dependency to a CDI implementation of your choice, for example Weld:</p>
 
 <p><strong>pom.xml with CDI implementation</strong></p>
 
@@ -224,13 +243,20 @@
 
 <h3 id="manual-integration">Manual Integration</h3>
 
-<p>Ensure that the struts2-cdi-plugin jar matching your used Struts 2 framework version - it is part of the <a href="/download.cgi">Struts 2 distribution</a> - is packed within the application archive that will be delivered. If a CDI implementation is provided within your container, no other dependencies are needed. If the latter is not the case, you may want to install a CDI container into your container (as commmon installation or packed with your app) according to the installation instructions of the CDI provider of choice.</p>
+<p>Ensure that the struts2-cdi-plugin jar matching your used Struts 2 framework version - it is part of the <a href="../download.cgi">Struts 2 distribution</a> - 
+is packed within the application archive that will be delivered. If a CDI implementation is provided within your container, 
+no other dependencies are needed. If the latter is not the case, you may want to install a CDI container into your container 
+(as commmon installation or packed with your app) according to the installation instructions of the CDI provider of choice.</p>
 
-<p>For IDE integration, be sure to add both the struts2-cdi-plugin-VERSION.jar as well as the cdi-api.jar to your project setup. Remember, the API jar should not be delivered with your application archive since you will have the API provided by the CDI container your application will be running with.</p>
+<p>For IDE integration, be sure to add both the struts2-cdi-plugin-VERSION.jar as well as the cdi-api.jar to your project setup. 
+Remember, the API jar should not be delivered with your application archive since you will have the API provided
+by the CDI container your application will be running with.</p>
 
 <h3 id="configuration">Configuration</h3>
 
-<p>Not much to see here. The CDI specification requires the CDI container to be exposed via JNDI context, and the CDI plugin will pick it up just there. Nevertheless, since there are different JNDI namespaces in use, the plugin will try to automatically find the right one among known references, that is</p>
+<p>Not much to see here. The CDI specification requires the CDI container to be exposed via JNDI context, and the CDI plugin
+will pick it up just there. Nevertheless, since there are different JNDI namespaces in use, the plugin will try 
+to automatically find the right one among known references, that is</p>
 
 <ul>
   <li>
@@ -244,7 +270,8 @@
   </li>
 </ul>
 
-<p>If your container of choice uses other naming references, the plugin has a single configuration option to point to the right name. Just add a constant like this to your struts.xml to be on the happy path again:</p>
+<p>If your container of choice uses other naming references, the plugin has a single configuration option to point to 
+the right name. Just add a constant like this to your struts.xml to be on the happy path again:</p>
 
 <p><strong>struts.xml</strong></p>
 
@@ -255,13 +282,18 @@
 
 <h2 id="usage">Usage</h2>
 
-<p>CDI has an extremely rich feature set, and this section is not intended as a replacement for the CDI reference documentation or the excellent documentation found on the <a href="http://seamframework.org/Weld">JBoss Weld</a> homepage. The whole Struts 2 CDI integration works just as you would think it works, using JSR-299 and JSR-330 Annotations in your Struts 2 actions or interceptors. Be aware of the following, though:</p>
+<p>CDI has an extremely rich feature set, and this section is not intended as a replacement for the CDI reference 
+documentation or the excellent documentation found on the <a href="http://seamframework.org/Weld">JBoss Weld</a> homepage. 
+The whole Struts 2 CDI integration works just as you would think it works, using JSR-299 and JSR-330 Annotations 
+in your Struts 2 actions or interceptors. Be aware of the following, though:</p>
 
 <blockquote>
   <p>Remember to provide beans.xml</p>
 </blockquote>
 
-<p>CDI is designed to act in a type safe and modern way, thus using annotations for all aspects of the framework. Nevertheless, you are allowed to eternalize configuration into a XML file called beans.xml to be placed in your WEB-INF directory. Even if you don’t intend to use such external configuration, it is an <strong>inevitable requirement to provide at least an empty beans.xml in WEB-INF !</strong></p>
+<p>CDI is designed to act in a type safe and modern way, thus using annotations for all aspects of the framework. 
+Nevertheless, you are allowed to eternalize configuration into a XML file called beans.xml to be placed in your WEB-INF 
+directory. Even if you don’t intend to use such external configuration, it is an <strong>inevitable requirement to provide at least an empty beans.xml in WEB-INF !</strong></p>
 
 <h3 id="example-usage">Example Usage</h3>
 
@@ -309,17 +341,27 @@
 
 </code></pre></div></div>
 
-<p>See the @Inject annotation from javax.inject.Inject? While you could use all the other nice stuff, we usually would - following the separation of concerns principle - use @Inject most of the time only in our actions, keeping the more fancy stuff in the business layer as shown below. Using @Inject brings us to the most common pitfall when using Struts 2 together with JSR-330 / CDI:</p>
+<p>See the @Inject annotation from javax.inject.Inject? While you could use all the other nice stuff, we usually would -
+following the separation of concerns principle - use @Inject most of the time only in our actions, keeping the more 
+fancy stuff in the business layer as shown below. Using @Inject brings us to the most common pitfall when using 
+Struts 2 together with JSR-330 / CDI:</p>
 
 <blockquote>
   <p>Use the right @Inject</p>
 </blockquote>
 
-<p>Struts 2 and it’s core component XWork use it’s own internal dependency injection container. Interestingly, you could name it JSR-330’s grandma, since it is an early pre-release version of <a href="http://code.google.com/p/google-guice/">Google Guice</a> once developed by <a href="http://blog.crazybob.org/">Crazybob Lee</a> - the same Bob Lee that, together with SpringSource’s Rod Johnson, lead the JSR-330 specification.</p>
+<p>Struts 2 and it’s core component XWork use it’s own internal dependency injection container. Interestingly, you could 
+name it JSR-330’s grandma, since it is an early pre-release version of <a href="http://code.google.com/p/google-guice/">Google Guice</a>
+once developed by <a href="http://blog.crazybob.org/">Crazybob Lee</a> - the same Bob Lee that, together with SpringSource’s Rod Johnson,
+lead the JSR-330 specification.</p>
 
-<p>That said, you will find the @Inject annotation both as com.opensymphony.xwork2.inject.Inject and javax.inject.Inject. <strong>Don’t mix up those two - javax.inject.Inject is the one you want to use with your Struts 2 CDI plugin and CDI integration in general!</strong> While you could use Struts’ internal annotation as well, the effect may be strange to undefined - so check your imports!</p>
+<p>That said, you will find the @Inject annotation both as com.opensymphony.xwork2.inject.Inject and javax.inject.Inject.
+<strong>Don’t mix up those two - javax.inject.Inject is the one you want to use with your Struts 2 CDI plugin and CDI 
+integration in general!</strong> While you could use Struts’ internal annotation as well, the effect may be strange 
+to undefined - so check your imports!</p>
 
-<p>Now that you are aware of that, here is the rest of the inevitable NumberGuess CDI example in Struts 2 flavour. Add a JSP view similar to this:</p>
+<p>Now that you are aware of that, here is the rest of the inevitable NumberGuess CDI example in Struts 2 flavour. 
+Add a JSP view similar to this:</p>
 
 <pre><code class="language-jsp">
 &lt;%@ page contentType="text/html; charset=UTF-8" %&gt;
@@ -530,7 +572,9 @@
 
 </code></pre></div></div>
 
-<p>If you understand that code at a glance, you are either already an CDI expert or profit from the readable, natural language oriented way the CDI stack works. If neither of this is the case, now it’s time to check the CDI and Weld documentation. Remember, this is a trivial example - there is much more to know about CDI.</p>
+<p>If you understand that code at a glance, you are either already an CDI expert or profit from the readable, natural
+language oriented way the CDI stack works. If neither of this is the case, now it’s time to check the CDI and Weld 
+documentation. Remember, this is a trivial example - there is much more to know about CDI.</p>
 
 <p>Ready you are now - use the Force!</p>
 
