@@ -13,10 +13,10 @@ be some extra steps to obtain full functionality.
 - OC4J
 - Orion
 - Resin
-- [SunOne 7.0](sunone-7-0.html)
-- [JBoss 5](jboss-5.html)
-- [WebLogic](weblogic.html)
-- [WebLogic 6.1](weblogic-6-1.html)
-- [WebSphere](websphere.html)
-- [Glassfish 2.x](glassfish-2-x.html)
+- [SunOne 7.0](sunone-7-0)
+- [JBoss 5](jboss-5)
+- [WebLogic](weblogic)
+- [WebLogic 6.1](weblogic-6-1)
+- [WebSphere](websphere)
+- [Glassfish 2.x](glassfish-2-x)
 - Wildfly 10.x

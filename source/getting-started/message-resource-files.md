@@ -12,7 +12,7 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-This tutorial assumes you've completed the [Form Validation](form-validation.html) tutorial and have a working 
+This tutorial assumes you've completed the [Form Validation](form-validation) tutorial and have a working 
 **form-validation** project. The example code for this tutorial, **message-resource**, is available for checkout from the 
 Struts 2 GitHub repository at [struts-examples](https://github.com/apache/struts-examples).
 
@@ -22,7 +22,7 @@ In this tutorial we'll explore using Struts 2 message resource capabilities (als
 resources provide a simple way to put text in a view page that is the same throughout your application, to create form 
 field labels, and to change text to a specific language based on the user's locale (i18n).
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are having 
+The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
 a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer 
 to your problem, post a question on the mailing list.
 
@@ -33,7 +33,7 @@ a properties file with the same name as the Action class and having the .propert
 go in the same package as the Action class. For our tutorial example, let's say we want to place the form field labels 
 into a separate file where we can easily change them and also provide the capability to display the labels in other languages.
 
-If you're doing this tutorial after completing [Form Validation](form-validation.html) then you can make these changes 
+If you're doing this tutorial after completing [Form Validation](form-validation) then you can make these changes 
 to that tutorial's example application.
 
 Put the text below in a file named Register.properties in the `org.apache.struts.register.action` package 
@@ -55,11 +55,11 @@ the key name.
 
 ## Struts 2 Key Attribute
 
-The Struts 2 key attribute can be used in the [textfield](../tag-developers/textfield-tag.html) tag to instruct 
+The Struts 2 key attribute can be used in the [textfield](../tag-developers/textfield-tag) tag to instruct 
 the framework what value to use for the textfield's name and label attributes. Instead of providing those attributes 
 and their values directly, you can just use the key attribute.
 
-If you open register.jsp from the [Form Validation](form-validation.html) tutorial you'll see this Struts 2 textfield tag:
+If you open register.jsp from the [Form Validation](form-validation) tutorial you'll see this Struts 2 textfield tag:
 
 **textfield tag**
 
@@ -81,7 +81,7 @@ to find a key in a properties file with the same value. So in our example, Strut
 for a key with a value of `personBean.firstName`. The value of that key (`First name`) will be used as the label attribute's value.
 
 To enable the key attribute to find the properties file, the display of the view page must be the result of executing 
-a Struts 2 Action class. Right now if you examine index.jsp from the [Form Validation](form-validation.html) tutorial 
+a Struts 2 Action class. Right now if you examine index.jsp from the [Form Validation](form-validation) tutorial 
 the link to the `register.jsp` page is a standard URL.
 
 **link to register.jsp**
@@ -293,4 +293,4 @@ We've covered how to use message resources (resource bundles) in Struts 2 and al
 internationalization (i18n) in this tutorial. To fully understand these concepts and learn more about Struts 2 consult 
 the main Struts 2 documentation available at [http://struts.apache.org](http://struts.apache.org).
 
-|Return to [Form validation](form-validation.html)|or|onward to [Exception handling](exception-handling.html)|
+|Return to [Form validation](form-validation)|or|onward to [Exception handling](exception-handling)|

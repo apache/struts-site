@@ -141,13 +141,13 @@ What does it mean?
 
 If you prepared a patch that eliminates a security vulnerability or improves existing security mechanism
 you can get a bounty :-) You will find more details on
-[the Google's blog](http://googleonlinesecurity.blogspot.com/2013/10/going-beyond-vulnerability-rewards.html)
+[the Google's blog](http://googleonlinesecurity.blogspot.com/2013/10/going-beyond-vulnerability-rewards)
  or under the link above, just to give you a quick guideline how does it work:
 
 - if you found a way to improve security of the framework but this isn't a vulnerability: 
   - prepare a patch and submit it to our [JIRA](https://issues.apache.org/jira/browse/WW),
     it can be a Pull Request on GitHub as well, but must reference the JIRA ticket.
-  - let us know that you did something great, post a message to [Struts Dev mailing list](dev-mail.html)
+  - let us know that you did something great, post a message to [Struts Dev mailing list](dev-mail)
 - if you found a vulnerability and prepared a patch that fixes the vulnerability:
   - please contact us using the Security Mailing list [security@struts.apache.org](mailto:security@struts.apache.org)
   - keep all information in secret, do not publish any data about the vulnerability nor Proof-of-Concept, etc.

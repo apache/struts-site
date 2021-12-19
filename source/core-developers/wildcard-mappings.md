@@ -78,7 +78,7 @@ Also, the action mapping and action result properties will accept wildcard-match
 </action>
 ```
 
-> See also [Wildcard Method](../getting-started/wildcard-method-selection.html)
+> See also [Wildcard Method](../getting-started/wildcard-method-selection)
 
 ## Parameters in namespaces
 

@@ -11,7 +11,7 @@ While [Plexus](http://plexus.codehaus.org/) is similar to other inversion-of-con
 
 The Plexus plugin enables Struts Actions, Interceptors, and Results to be created and injected by [Plexus](http://plexus.codehaus.org/).
 
-This plugin provides an [ObjectFactory](/core-developers/object-factory.html) implementation that tries to create Struts Action, Interceptor, and Result classes as Plexus objects.
+This plugin provides an [ObjectFactory](/core-developers/object-factory) implementation that tries to create Struts Action, Interceptor, and Result classes as Plexus objects.
 
 ## Features
 
@@ -33,7 +33,7 @@ To use the plugin, when configuring Struts Actions, Interceptors, or Results in 
 
 ### Settings
 
-The following settings can be customized.  See the [developer guide](/core-developers/configuration-files.html).
+The following settings can be customized.  See the [developer guide](/core-developers/configuration-files).
 
 |Setting|Description|Default|Possible Values|
 |-------|-----------|-------|---------------|

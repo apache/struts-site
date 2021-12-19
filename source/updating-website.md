@@ -39,5 +39,4 @@ You can then review your changes before applying them to the `master` branch.
 There is a dedicated [Jenkins job](https://builds.apache.org/job/Struts/job/Struts-site-javadocs/) which is
 used to update the JavaDocs based on the latest release. If you have a proper privileges you can start the job
 and provide a Git tag of the latest release, eg. `STRUTS_2_5_22`. Based on the tag, Jenkins will generate a proper
-JavaDocs and deploy them directly into the website. You can verify them by using this [link](https://struts.staged.apache.org/maven/struts2-core/apidocs/index.html).
-  
+JavaDocs and deploy them directly into the website. You can verify them by using this [link](https://struts.staged.apache.org/maven/struts2-core/apidocs/index).

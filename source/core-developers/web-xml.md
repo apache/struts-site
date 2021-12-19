@@ -72,7 +72,7 @@ versions, you need to use
     ...
 ```
 
-See [SiteMesh Plugin](../plugins/sitemesh-plugin.html) for an example on when to use seperate Filters for prepare 
+See [SiteMesh Plugin](../plugins/sitemesh-plugin) for an example on when to use seperate Filters for prepare 
 and execution phase
 
 ## Exclude specific URLs
@@ -164,4 +164,4 @@ It is possible to use your custom `ConfigurationProvider` to programmatically c
 </filter>
 ```
 
-See [Configuration Provider & Configuration](configuration-provider-and-configuration.html) for more details.
+See [Configuration Provider & Configuration](configuration-provider-and-configuration) for more details.

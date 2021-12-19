@@ -19,7 +19,7 @@ To use the AJAX tags from 2.1 on you must:
 
 - Include the Dojo Plugin distributed with Struts 2 in your /WEB-INF/lib folder.
 - Add `<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>` to your page.
-- Include the [head](head-tag.html) tag on the page, which can be configured for performance or debugging purposes.
+- Include the [head](head-tag) tag on the page, which can be configured for performance or debugging purposes.
 
 ## Handling AJAX Responses
 
@@ -58,20 +58,20 @@ Most of the AJAX tags use Dojo topics for event notification and communication b
 
 ## Examples
 
-Examples can be found on the documentation for each tag in the [UI Tag Reference](ui-tag-reference.html) page, 
-for additional examples see [Ajax and JavaScript Recipes](ajax-and-javascript-recipes.html) and the Showcase application 
+Examples can be found on the documentation for each tag in the [UI Tag Reference](tag-reference) page, 
+for additional examples see [Ajax and JavaScript Recipes](ajax-and-javascript-recipes) and the Showcase application 
 distributed with Struts 2.
 
 ## Tags
 
-- [a](dojo-href-tag.html)
-- [autocompleter](dojo-autocompleter-tag.html)
-- [bind](dojo-bind-tag.html)
-- [datetimepicker](dojo-datetimepicker-tag.html)
-- [div](dojo-div-tag.html)
-- [head](dojo-head-tag.html)
-- [submit](dojo-submit-tag.html)
-- [tabbedpanel](dojo-tabbedpanel-tag.html) 
-- [textarea](dojo-textarea-tag.html)
-- [tree](dojo-tree-tag.html)
-- [treenode](dojo-treenode-tag.html)
+- [a](dojo-a-tag)
+- [autocompleter](dojo-autocompleter-tag)
+- [bind](dojo-bind-tag)
+- [datetimepicker](dojo-datetimepicker-tag)
+- [div](dojo-div-tag)
+- [head](dojo-head-tag)
+- [submit](dojo-submit-tag)
+- [tabbedpanel](dojo-tabbedpanel-tag) 
+- [textarea](dojo-textarea-tag)
+- [tree](dojo-tree-tag)
+- [treenode](dojo-treenode-tag)

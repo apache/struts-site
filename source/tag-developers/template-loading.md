@@ -19,7 +19,7 @@ overridden, an edited copy can be placed in the application, so that is found fi
 
 ## Template and Themes
 
-Templates are loaded based the template directory and theme name (see [Selecting Themes](selecting-themes.html)). 
+Templates are loaded based the template directory and theme name (see [Selecting Themes](selecting-themes)). 
 The template directory is defined by the `struts.ui.templateDir` property in `struts.xml` (defaults to `template`). 
 If a tag is using the `xhtml` theme, the following two locations will be searched (in this order):
 
@@ -27,7 +27,7 @@ If a tag is using the `xhtml` theme, the following two locations will be searche
 |In the classpath|`/template/xhtml/template.ftl`|
 
 > For performance reasons, you may want to prefer the first location, although the second one is more flexible. 
-> See [Performance Tuning](../core-developers/performance-tuning.html) for a discussion on this topic.
+> See [Performance Tuning](../core-developers/performance-tuning) for a discussion on this topic.
 
 ## Overriding Templates
 
@@ -42,7 +42,7 @@ If you are using the `xhtml` theme and need to change how the select tags render
 ## Altering Template Loading Behaviour
 
 It is possible to load template from other locations, like the file system or a URL. Loading templates from alternate 
-locations can be useful not only for tags, but for custom results. For details, see the [FreeMarker](freemarker.html) 
+locations can be useful not only for tags, but for custom results. For details, see the [FreeMarker](freemarker) 
 documentation and consult the section on extending the FreeMarkerManager.
 
 ## Alternative Template Engines
@@ -57,9 +57,9 @@ another system!)
 The framework supports three template engines, which can be controlled by the `struts.ui.templateSuffix` in 
 `struts.xml`.
 
-|ftl (default)|[FreeMarker](freemarker.html)-based template engine|
-|vm|[Velocity](velocity.html)-based template engine|
-|jsp|[JSP](jsp.html)-based template engine|
+|ftl (default)|[FreeMarker](freemarker)-based template engine|
+|vm|[Velocity](velocity)-based template engine|
+|jsp|[JSP](jsp)-based template engine|
 
 The only set of templates and themes provided in the distribution is for FreeMarker. In order to use another template 
 engine, you must provide your own template and theme for that engine.

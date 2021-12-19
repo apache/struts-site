@@ -147,7 +147,7 @@ When that action is validated, the field errors would be:
 
 + "title value is too long, allowed length is 3"
 
-The current OVal "context" object is pushed into the stack for each validator, so it can be accessed from the property file to build the error message. See the [OVal javadoc](http://oval.sourceforge.net/api/net/sf/oval/context/FieldContext.html) for more properties available in the FieldContext class.
+The current OVal "context" object is pushed into the stack for each validator, so it can be accessed from the property file to build the error message. See the [OVal javadoc](http://oval.sourceforge.net/api/net/sf/oval/context/FieldContext) for more properties available in the FieldContext class.
 
 ## The OVal Validation Interceptor
 
@@ -189,8 +189,8 @@ Add a _constant_  element to your struts config file to change the value of a co
 
 ## Resources
 
-+ [OVal User Guide](http://oval.sourceforge.net/userguide.html)
++ [OVal User Guide](http://oval.sourceforge.net/userguide)
 
-+ [OVal Javadoc](http://oval.sourceforge.net/userguide.html)
++ [OVal Javadoc](http://oval.sourceforge.net/userguide)
 
 + [OVal Tutorials](http://oval.sourceforge.net/userguide.html#d0e1138)

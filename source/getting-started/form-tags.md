@@ -17,12 +17,12 @@ The example code for this tutorial, **form-tags**, can be checked out from [stru
 ## Introduction
 
 In this tutorial we'll explore some of the other Struts 2 form controls. In our previous tutorials that explained how 
-to use Struts 2 forms ([Processing forms](processing-forms.html), [Form validation](form-validation.html), 
-and [Message resource files](message-resource-files.html) ) we covered how to use the Struts 2 head, form, textfield 
+to use Struts 2 forms ([Processing forms](processing-forms), [Form validation](form-validation), 
+and [Message resource files](message-resource-files) ) we covered how to use the Struts 2 head, form, textfield 
 controls and the key attribute. This tutorial will explore using the Struts 2 select, radio, checkbox, and checkboxlist 
 form controls.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are 
+The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are 
 having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find 
 an answer to your problem, post a question on the mailing list.
 
@@ -54,10 +54,10 @@ to provide the list of options for the select box.
 <s:select key="personBean.sport" list="sports" />
 ```
 
-In these form tags, we are using the key attribute as discussed in the [Message resource files](message-resource-files.html)
+In these form tags, we are using the key attribute as discussed in the [Message resource files](message-resource-files)
 tutorial. The key attribute is used by the Struts 2 framework to determine values for the other attributes (e.g. label 
 and value). We are also using a property file associated with the EditAction class to provide the label values based on 
-the key attribute value (see the [Message Resource Files](message-resource-files.html) tutorial for information on using 
+the key attribute value (see the [Message Resource Files](message-resource-files) tutorial for information on using 
 Struts 2 property files).
 
 > Note that there are many attributes for the Struts 2 form tags, most of which mirror the HTML attributes associated 
@@ -275,5 +275,5 @@ the checkbox will be checked.
 There are several other Struts 2 form controls you should explore. If you need more information about the Struts 2 form 
 tags consult the Struts 2 documentation at [http://struts.apache.org](http://struts.apache.org).
 
-|Return to [Debugging Struts](debugging-struts.html)|or|onward to [Form validation using XML](form-validation-using-xml.html)|
+|Return to [Debugging Struts](debugging-struts)|or|onward to [Form validation using XML](form-validation-using-xml)|
 

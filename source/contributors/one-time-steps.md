@@ -65,7 +65,7 @@ svn commit KEYS -m "Add public key"
 
 Create a `settings.xml` under `~/.m2` and follow below instructions:
 - create profile - [Releasing a Maven-based](http://maven.apache.org/developers/release/apache-release.html\#Prerequisites)
-- enable Apache servers [Committer Settings](http://maven.apache.org/developers/committer-settings.html)
+- enable Apache servers [Committer Settings](http://maven.apache.org/developers/committer-settings)
 
 ```xml
 <settings xmlns="http://maven.apache.org/POM/4.0.0"
@@ -115,9 +115,9 @@ MAVEN_OPTS=-Xmx1024m
 
 - Apache Struts [Release Guidelines](http://struts.apache.org/releases.html\#Releases)
 - [Struts Maintenance Guide for Maven ](http://wiki.apache.org/struts/StrutsMaintenanceMaven)
-- [Signing Releases](http://apache.org/dev/release-signing.html)
+- [Signing Releases](http://apache.org/dev/release-signing)
 - [Wendy's notes on Release Signing](http://wiki.wsmoak.net/cgi-bin/wiki.pl?ReleaseSigning)
-- Apache [Mirroring Guidelines](http://apache.org/dev/mirrors.html)
+- Apache [Mirroring Guidelines](http://apache.org/dev/mirrors)
 
 ## Retagging
 

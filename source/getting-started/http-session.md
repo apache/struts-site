@@ -17,10 +17,10 @@ The example code for this tutorial, **http-session**, is available at [struts-ex
 ## Introduction
 
 Your Struts 2 application may need to access the HTTP session object. Struts 2 provides an interface, 
-[SessionAware]({{ site.apidocs }}/org/apache/struts2/interceptor/SessionAware.html), that your Action class 
+[SessionAware]({{ site.apidocs }}/org/apache/struts2/interceptor/SessionAware), that your Action class 
 should implement to obtain a reference to the HTTP session object.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are 
+The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are 
 having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find 
 an answer to your problem, post a question on the mailing list.
 
@@ -90,7 +90,7 @@ practices in the Action class that implements the SessionAware interface.
 
 1. Do not have a public `Map<String, Object> getSession` method in the Action class. You only need a public void 
   `setSession` method to implement the `SessionAware` interface.
-2. Also have the Action class implement the [ParameterNameAware interface]({{ site.apidocs }}/com/opensymphony/xwork2/interceptor/ParameterNameAware.html) 
+2. Also have the Action class implement the [ParameterNameAware interface]({{ site.apidocs }}/com/opensymphony/xwork2/interceptor/ParameterNameAware) 
   and override its acceptableParameterName method:
 
 **HelloWorldAction.java acceptableParameterName Method**
@@ -150,4 +150,4 @@ the `acceptableParameterName` method to mitigate a potential security vulnerabil
 that implement `SessionAware` then consider modifying the params interceptor's `excludeParams` value as part of your 
 Struts 2 package setup.
 
-|Return to [Unit Testing](unit-testing.html)|or|onward to [Preparable Interface](preperable-interface.html)|
+|Return to [Unit Testing](unit-testing)|or|onward to [Preparable Interface](preperable-interface)|

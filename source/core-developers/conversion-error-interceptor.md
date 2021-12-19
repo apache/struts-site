@@ -17,7 +17,7 @@ This is important because if the value "abc" is submitted and can't be converted
 string ("abc") again rather than the int value (likely 0, which would make very little sense to the user).
  
 > Note: Since 2.5.2, this interceptor extends `MethodFilterInterceptor`, therefore being able to deal with `excludeMethods` 
-> / `includeMethods` parameters. See [Workflow Interceptor](default-workflow-interceptor.html) for documentation and 
+> / `includeMethods` parameters. See [Workflow Interceptor](default-workflow-interceptor) for documentation and 
 > examples on how to use this feature.
 
 This interceptor extends `ConversionErrorInterceptor` but only adds conversion errors from the ActionContext to the field 

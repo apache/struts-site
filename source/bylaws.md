@@ -13,10 +13,10 @@ title: Project Management Committee Charter
 
 Struts is a Project of the [Apache Software Foundation](https://www.apache.org/foundation) (ASF), formed by a resolution
 of the [ASF Board of Directors](https://www.apache.org/foundation/board/). As an ASF Project, Struts is subject to the
-[ASF Bylaws](https://www.apache.org/foundation/bylaws.html) and the direction of the ASF Board.
+[ASF Bylaws](https://www.apache.org/foundation/bylaws) and the direction of the ASF Board.
 
 The Project Charter incorporates by reference the current version
-of [How the ASF works](https://www.apache.org/foundation/how-it-works.html), with the additional guidelines
+of [How the ASF works](https://www.apache.org/foundation/how-it-works), with the additional guidelines
 and clarifications found herein.
 
 ## Roles and Responsibilities
@@ -57,7 +57,7 @@ of the Project.
 The Vice President is appointed by the ASF Board. The Vice President is assisted by the Project Management Committee
 (PMC) and also serves as the PMC chair. The PMC may nominate new members. Nominees may then be approved
 with a 3/4 majority vote of the PMC. Membership can be revoked by a unanimous vote of all the active PMC members
-other than the member in question. The list of active PMC members can be found on our [Volunteers page](volunteers.html).
+other than the member in question. The list of active PMC members can be found on our [Volunteers page](volunteers).
 
 ### PMC Duties
 
@@ -89,7 +89,7 @@ by the Project Management Committee.
 
 ### Voting
 
-Any subscriber to the list may [vote](https://www.apache.org/foundation/voting.html) on any issue or action item.
+Any subscriber to the list may [vote](https://www.apache.org/foundation/voting) on any issue or action item.
 Votes from Developers and Committers are especially welcome. However, the only binding votes are those cast by a PMC
 Member.
 
@@ -193,7 +193,7 @@ Distributions may be reclassified or withdrawn by majority vote, but the release
 
 ## Sandbox
 
-Pursuant to the ["Rules for Revolutionaries"](http://incubator.apache.org/learn/rules-for-revolutionaries.html),
+Pursuant to the ["Rules for Revolutionaries"](http://incubator.apache.org/learn/rules-for-revolutionaries),
 any committer may submit experimental material to the Sandbox area of the repository at his or her own discretion.
 
 Material must be moved from the sandbox to the main repository before it can be released. If a sandbox whiteboard 
@@ -202,4 +202,4 @@ becomes dormant for six or more months, it may be moved to the archive section o
 Experimental material that is outside the scope of the Struts project may also be  submitted to the
 [Apache Labs](http://labs.apache.org/)
 
-Next: [Volunteers](volunteers.html)
+Next: [Volunteers](volunteers)

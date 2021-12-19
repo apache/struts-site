@@ -20,7 +20,7 @@ Struts 2 supports running unit tests of methods in the Struts Action class with 
 The JUnit plugin allows you to test methods of an Action class from within the Struts 2 framework. The Struts Servlet 
 -filter and interceptors fire just as if your application was running on a Servlet container.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are having 
+The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
 a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer 
 to your problem, post a question on the mailing list.
 
@@ -42,8 +42,8 @@ class extend StrutsTestCase (see RegisterTest class in the example application).
 
 Note that the Struts 2 JUnit plugin can be used to design unit tests of other Action class methods such as the input method 
 and also to test methods of a custom interceptor you add to the interceptor stack. Also in this example, the test is 
-for validation performed in the [validate method](form-validation.html) . But the same type of test would work if the validation 
-was done using [XML file validation](form-validation-using-xml.html).
+for validation performed in the [validate method](form-validation) . But the same type of test would work if the validation 
+was done using [XML file validation](form-validation-using-xml).
 
 To test the validate method we want Struts to call the Struts action that will cause the Action class's validate and execute 
 methods to be run. In the example application this action is register.
@@ -154,4 +154,4 @@ with the Struts 2 framework. If your Struts 2 application uses Spring to inject 
 the Struts 2 JUnit Plugin has a StrutsSpringTestCase that your test class should extend. Please read [Testing Actions](../plugins/junit/) 
 to learn more.
 
-|Return to [Introducing Interceptors](introducing-interceptors.html)|or|onward to [HTTP Session](http-session.html)|
+|Return to [Introducing Interceptors](introducing-interceptors)|or|onward to [HTTP Session](http-session)|

@@ -71,7 +71,7 @@ TBD
 
 ## Settings
 
-This plugin does inherits settings from [Tiles configuration](http://tiles.apache.org/config-reference.html).
+This plugin does inherits settings from [Tiles configuration](http://tiles.apache.org/config-reference).
 
 ## Installation
 

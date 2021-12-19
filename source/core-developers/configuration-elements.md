@@ -17,24 +17,24 @@ At runtime, there is a single configuration for an application. Prior to runtime
 one or more XML documents, including the default `struts.xml` document. There are several elements that can be configured, 
 including packages, namespaces, includes, actions, results, interceptors, and exceptions.
 
-> See [struts.xml](struts-xml.html) for a working example.
+> See [struts.xml](struts-xml) for a working example.
 
 ## Administrative Elements
 
-- [Bean Configuration](bean-configuration.html)
-- [Constant Configuration](constant-configuration.html)
-- [Package Configuration](package-configuration.html)
-- [Namespace Configuration](namespace-configuration.html)
-- [Include Configuration](include-configuration.html)
+- [Bean Configuration](bean-configuration)
+- [Constant Configuration](constant-configuration)
+- [Package Configuration](package-configuration)
+- [Namespace Configuration](namespace-configuration)
+- [Include Configuration](include-configuration)
 
 ## Request Handling Elements
 
-- [Interceptor Configuration](include-configuration.html)
-- [Action Configuration](action-configuration.html)
-  - [Wildcard Mappings](wildcard-mappings.html)
-- [Result Configuration](result-configuration.html)
-- [Unknown Handlers](unknown-handlers.html)
+- [Interceptor Configuration](include-configuration)
+- [Action Configuration](action-configuration)
+  - [Wildcard Mappings](wildcard-mappings)
+- [Result Configuration](result-configuration)
+- [Unknown Handlers](unknown-handlers)
 
 ## Error Handling
 
-- [Exception Configuration](exceptio-configuration.html)
+- [Exception Configuration](exceptio-configuration)

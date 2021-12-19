@@ -8,7 +8,7 @@ title: Dependency Injection
 Dependency injection removes the responsibility for object creation and object linking from the objects themselves 
 to a factory.  The factory is often provided by an Inversion of Control (IoC) container. For an overview 
 of Inversion of Control containers and the Dependency Injection pattern, please see 
-[Martin Fowler's article](http://www.martinfowler.com/articles/injection.html).
+[Martin Fowler's article](http://www.martinfowler.com/articles/injection).
 
 
 Internally, the framework uses its own dependency injection container that is very similar to Google Guice.  Both were 

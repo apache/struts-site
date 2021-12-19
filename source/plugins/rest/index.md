@@ -34,8 +34,8 @@ a complete WAR file, that demonstrates a simple REST web program.
 
 The main functionality of the REST plugin lies in the interpretation of incoming request URL's according the RESTful 
 rules. In the Struts 2 framework, this `mapping` of request URL's to Actions is handled by in implementation of 
-the [ActionMapper](/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/ActionMapper.html) interface. 
-Out of the box, Struts 2 uses the [DefaultActionMapper](/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/DefaultActionMapper.html) 
+the [ActionMapper](/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/ActionMapper) interface. 
+Out of the box, Struts 2 uses the [DefaultActionMapper](/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/DefaultActionMapper) 
 to map URL's to Actions via the logic you are probably already familiar with.
 
 ### Actions or Controllers ?
@@ -44,7 +44,7 @@ Most Struts 2 developers are familiar with the Action. They are the things that 
 In the context of the REST plugin, just to keep you on your toes, we'll adopt the RESTful lingo and refer to our 
 Actions as **Controllers**. Don't be confused; it's just a name!
 
-The REST plugin provides an alternative implementation, [RestActionMapper](/maven/struts2-plugins/struts2-rest-plugin/apidocs/org/apache/struts2/rest/RestActionMapper.html), 
+The REST plugin provides an alternative implementation, [RestActionMapper](/maven/struts2-plugins/struts2-rest-plugin/apidocs/org/apache/struts2/rest/RestActionMapper), 
 that provides the RESTful logic that maps a URL to a give action class ( aka `controller` in RESTful terms ) and, 
 more specifically, to the invocation of a method on that controller class. The following section, which comes from 
 the Javadoc for the class, details this logic.
@@ -291,7 +291,7 @@ look like this:
 
 ### Settings
 
-The following settings can be customized. See the [developer guide](/core-developers/configuration-files.html).
+The following settings can be customized. See the [developer guide](/core-developers/configuration-files).
 For more configuration options see the [Convention Plugin Documentation](../convention)
 
 |Setting|Description|Default|Possible Values|

@@ -8,7 +8,7 @@ title: Tag Developers Guide
 Themes can be selected using several different rules, in this order:
 
 1. The `theme` attribute on the specific tag
-2. The `theme` attribute on a tag's surrounding [form](form-tag.html) tag
+2. The `theme` attribute on a tag's surrounding [form](form-tag) tag
 3. The page-scoped attribute named `theme`
 4. The request-scoped attribute named `theme`
 5. The session-scoped attribute named `theme`
@@ -20,6 +20,6 @@ See [Can I change theme on a per-page basis]() page for using scoped `theme` att
 ## Tips
 
 - To override an entire form's theme, change the "theme" attribute of the form. (Convenient for using 
-  the [ajax theme](ajax-theme.html) for specific forms, for example.)
+  the [ajax theme](ajax-theme) for specific forms, for example.)
 - To support user-selected themes, set the theme in the user's session.
 - To change the theme for the entire application, modify the `struts.xml`.

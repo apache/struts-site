@@ -26,7 +26,7 @@ order is to enable a "factory" pattern. For example, let's assume that one has a
 property is set before any model properties are set, it's possible to choose model implementation during 
 `action.setModelClass()` call. Similarly it's possible to use `action.setPrimaryKey()` property set call to actually 
 load the model class from persistent storage. Without any assumption on parameter order you have to use patterns 
-like [Preparable Interface](prepare-interceptor.html).
+like [Preparable Interface](prepare-interceptor).
 
 Because parameter names are effectively OGNL statements, it is important that security be taken in to account. This 
 interceptor will not apply any values in the parameters map if the expression contains an assignment (=), multiple 
@@ -51,7 +51,7 @@ If you are looking for detailed logging information about your parameters, turn 
 interceptor. A detailed log of all the parameter keys and values will be reported.
 
 Since XWork 2.0.2, this interceptor extends `MethodFilterInterceptor`, therefore being able to deal with 
-excludeMethods/includeMethods parameters. See [Default Workflow Interceptor](default-workflow-interceptor.html) 
+excludeMethods/includeMethods parameters. See [Default Workflow Interceptor](default-workflow-interceptor) 
 for documentation and examples on how to use this feature.
 
 For more information on ways to restrict the parameter names allowed, see the `ParameterNameAware` javadocs.

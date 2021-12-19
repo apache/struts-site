@@ -67,7 +67,7 @@ the top of that particular stack cut, use `[0].top`
 OGNL supports accessing static properties as well as static methods.
 
 By default, Struts 2 is configured to disallow this - to enable OGNL's static member support you must set the
-`struts.ognl.allowStaticMethodAccess` constant to `true` via any of the [Constant Configuration](../core-developers/constant-configuration.html) methods.
+`struts.ognl.allowStaticMethodAccess` constant to `true` via any of the [Constant Configuration](../core-developers/constant-configuration) methods.
 
 OGNL's static access looks like this:
 

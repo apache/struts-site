@@ -7,7 +7,7 @@ title: Tag Developers Guide
 
 > NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
-As you may have seen with the [ajax div template](ajax-div-template.html) and [ajax a template](ajax-a-template.html), 
+As you may have seen with the [ajax div template](ajax-div-template) and [ajax a template](ajax-a-template), 
 the framework and Dojo provide a nice way to subscribe and notify of topics from within the browser. A benefit of using 
 Dojo as the basis of many of these components is being able to loosely couple UI components. There are two 
 attributes of importance: `listenTopics` and `notifyTopics`.
@@ -24,7 +24,7 @@ dojo.event.topic.publish("topic_name", "content");
 ```
 
 The `topic_name` attribute is required, the content attribute is not and most elements are triggered without having this 
-attribute. See the [ajax div template](ajax-div-template.html) for an example of this type of interaction.
+attribute. See the [ajax div template](ajax-div-template) for an example of this type of interaction.
 
 To subscribe to the `topic_name` topic:
 

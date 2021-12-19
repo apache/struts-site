@@ -21,7 +21,7 @@ the appearance and controls the layout of the select control. The style and layo
 is set for the tag. Struts 2 comes with three built-in themes: `simple`, `xhtml`, and `css_xhtml`. If you don’t specify 
 a theme, then Struts 2 will use the `xhtml` theme by default.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are having 
+The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
 a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer 
 to your problem, post a question on the mailing list.
 
@@ -60,9 +60,9 @@ select tag the default `xhmtl` theme was used.
 
 The Struts 2 tags have a theme attribute you can use to specify which Struts 2 theme should be used when creating the HTML 
 for that tag. The values for the theme attribute are `simple`, `xhtml`, `css_xhtml`, and `ajax`. To learn more about these themes 
-visit [Themes and Templates Documentation](../tag-developers/themes-and-templates.html). This tutorial will review 
+visit [Themes and Templates Documentation](../tag-developers/themes-and-templates). This tutorial will review 
 the `xhtml`, `css_xhtml`, and the `simple` themes. The `ajax` theme is a special theme used for ajax operations 
-(see [Ajax Theme in the documentation](../tag-developers/ajax-theme.html)).
+(see [Ajax Theme in the documentation](../tag-developers/ajax-theme)).
 
 You can specify the theme on a per Struts 2 tag basis or you can use one of the following methods to specify what theme 
 Struts 2 should use:
@@ -75,7 +75,7 @@ Struts 2 should use:
 6. The application-scoped attribute named `theme`
 7. The `struts.ui.theme` constant in `struts.xml` (defaults to `xhtml`)
 
-Consult [Selecting Themes](../tag-developers/selecting-themes.html) for how to set the theme using the above approaches.
+Consult [Selecting Themes](../tag-developers/selecting-themes) for how to set the theme using the above approaches.
 
 In the example application, examine `edit.jsp`. The theme attribute of the form tag is set to `xhtml`. Run the application 
 (see the readme.txt file) and view the source for edit.jsp after it is rendered in your browser. You should see the form 
@@ -196,6 +196,6 @@ if you include your own theme folder (e.g. KUTheme) under webapp/template (or We
 and specify that folder name (e.g. KUTheme) as the value for the theme attribute, then the Struts 2 framework will look 
 in that theme folder for the tag's template.
 
-To learn more about how to use the Struts 2 themes and how you can override them, visit [Themes and Templates Documentation](../tag-developers/themes-and-templates.html) .
+To learn more about how to use the Struts 2 themes and how you can override them, visit [Themes and Templates Documentation](../tag-developers/themes-and-templates) .
 
-|Return to [Wildcard method selection](wildcard-method-selection.html)|or|onward to [Spring and Struts 2](spring.html)|
+|Return to [Wildcard method selection](wildcard-method-selection)|or|onward to [Spring and Struts 2](spring)|

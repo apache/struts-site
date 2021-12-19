@@ -10,7 +10,7 @@ title: Type Conversion
 {:toc}
 
 Routine type conversion in the framework is transparent. Generally, all you need to do is ensure that HTML inputs have 
-names that can be used in [OGNL](ognl.html) expressions. (HTML inputs are form elements and other GET/POST parameters.)
+names that can be used in [OGNL](../tag-developers/ognl) expressions. (HTML inputs are form elements and other GET/POST parameters.)
 
 ## Built in Type Conversion Support
 
@@ -46,7 +46,7 @@ Here are some tips for leveraging the framework's type conversion capabilities:
   constructor can be used to create target objects before type conversion.
 - For lists and maps, use index notation, such as `people[0].name`  or `friends['patrick'].name`. Often these HTML form 
   elements are being rendered inside a loop. For [JSP Tags](../tags-guide/), use the iterator tag's status attribute. 
-  For [FreeMarker Tags](freemarker-support.html), use the special property `${foo_index}[]`.
+  For [FreeMarker Tags](freemarker-support), use the special property `${foo_index}[]`.
 - For multiple select boxes, it isn't possible to use index notation to name each individual item. Instead, name your 
   element `people.name` and the framework will understand that it should create a new Person object for each selected 
   item and set its name accordingly.
@@ -86,7 +86,7 @@ point = com.acme.PointConverter
 person.phoneNumber = com.acme.PhoneNumberConverter
 ```
 
-Type conversion can also be specified via [Annotations](annotations.html) within the action.
+Type conversion can also be specified via [Annotations](annotations) within the action.
 
 ## Applying a Type Converter to a bean or model
 
@@ -218,7 +218,7 @@ From WebWork 2.1.x, the `Collection_xxx` format is still supported and honored, 
 removed eventually.
 
 Additionally, you can create your own custom `ObjectTypeDeterminer` by implementing the `ObjectTypeDeterminer` interface. 
-There is also an optional `ObjectTypeDeterminer` that utilizes Java 5 generics. See the [Annotations](annotations.html) 
+There is also an optional `ObjectTypeDeterminer` that utilizes Java 5 generics. See the [Annotations](annotations) 
 page for more information.
 
 ### Indexing a collection by a property of that collection
@@ -405,10 +405,10 @@ can be reported accordingly.
 
 There are two ways the error reporting can occur:
 
-1. Globally, using the [Conversion Error Interceptor](conversion-error-interceptor.html)
-2. On a per-field basis, using the [conversion validator](conversion-validator.html)
+1. Globally, using the [Conversion Error Interceptor](conversion-error-interceptor)
+2. On a per-field basis, using the [conversion validator](conversion-validator)
 
-By default, the conversion interceptor is included in [struts-default.xml](struts-default-xml.html) in the default stack. 
+By default, the conversion interceptor is included in [struts-default.xml](struts-default-xml) in the default stack. 
 To keep conversion errors from reporting globally, change the interceptor stack, and add additional validation rules.
 
 ## Common Problems

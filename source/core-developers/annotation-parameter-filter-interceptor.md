@@ -8,9 +8,9 @@ parent:
 
 # Annotation Parameter Filter Interceptor
 
-Annotation based version of [Parameter Filter Interceptor](parameter-filter-interceptor.html).
+Annotation based version of [Parameter Filter Interceptor](parameter-filter-interceptor).
 
-This interceptor must be placed in the stack before the [Parameters Interceptor](parameters-interceptor.html). 
+This interceptor must be placed in the stack before the [Parameters Interceptor](parameters-interceptor). 
 When a parameter matches a field that is marked {@link Blocked} then it is removed from the parameter map.
 
 If an action class is marked with `BlockByDefault` then all parameters are removed unless a field on the Action exists 

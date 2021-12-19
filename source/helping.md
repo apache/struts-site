@@ -25,7 +25,7 @@ title: Helping
   If an Apache Struts product doesn't do what *you* want, it's up to **you** to step up and propose the patch.
   If an Apache Struts product doesn't ship as often as you would like, it's up to you to step up with
   the tests and fixes that get a release out the door.
-  [(Like Craig McClanahan did for Tomcat)](http://jakarta.apache.org/site/contributing.html).
+  [(Like Craig McClanahan did for Tomcat)](http://jakarta.apache.org/site/contributing).
 
   If Struts does do what you want, help others become involved by turning your war stories into FAQs
   and how-tos that we can make part of the [documentation](#documentation).
@@ -48,7 +48,7 @@ title: Helping
   the official Java coding conventions plus the rule to favor spaces over tabs for indenting. See more
   details at [Struts 2 Coding Conventions (Wiki)](https://cwiki.apache.org/confluence/display/S2WIKI/Struts+2+Coding+Conventions)
 
-  To create a patch, you first have to [checkout](git-for-struts.html) a copy of the source code
+  To create a patch, you first have to [checkout](git-for-struts) a copy of the source code
   or documentation from the main repository. You can then change your copy, and create the patch using a simple
   [Git](http://git-scm.com/) command, like this:
 
@@ -62,7 +62,7 @@ title: Helping
   losing things, and helps to ensure that your patch will be attended.
 
 
-  The [NetBeans community](http://www.netbeans.org/community/contribute/patches.html) also has a helpful section on the
+  The [NetBeans community](http://www.netbeans.org/community/contribute/patches) also has a helpful section on the
   subject of creating patches.
 
   - ### How can I report defects or suggest features? {#issues}
@@ -72,7 +72,7 @@ title: Helping
   Please select the appropriate Apache Struts product from the list, and then select the component to which
   you feel this report relates. You will automatically be notified by email as the status of your defect or
   enhancement report changes. Please be sure to read
-  [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html)
+  [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs)
   before posting a report.
 
   If you can't write a [patch](#patches) to address your issue, a unit test that demonstrates the problem is also welcome.
@@ -120,7 +120,7 @@ title: Helping
 
   Other ways to help out with the documentation is to just leave a comment on a page that needs fixing.
   If you have a cwiki Confluence account, you can also create pages on the
-  [Struts 2 Wiki](http://cwiki.apache.org/S2WIKI/home.html) without filing a CLA.
+  [Struts 2 Wiki](http://cwiki.apache.org/S2WIKI/home) without filing a CLA.
 
   If you are submitting new material, it is important to decide exactly where you would put this
   in relation to the rest of the documentation.
@@ -217,6 +217,6 @@ title: Helping
   or discretely decline.
   If the candidate is able to accept, the PMC will announce the new member on the dev list.
 
-  For more about decision-making, see [How the ASF Works](https://www.apache.org/foundation/how-it-works.html)
-  and the [Apache Struts Charter](bylaws.html). For more about project infrastructure,
+  For more about decision-making, see [How the ASF Works](https://www.apache.org/foundation/how-it-works)
+  and the [Apache Struts Charter](bylaws). For more about project infrastructure,
   see "Project Maintenance and Resources" in the [Struts 1 wiki](http://wiki.apache.org/struts/).

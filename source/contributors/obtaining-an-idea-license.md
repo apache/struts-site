@@ -23,7 +23,7 @@ and welcome contributions to a project. For more, see:
 
 - [http://apache.org/foundation/faq.html#joining](http://apache.org/foundation/faq.html#joining)
 - [http://apache.org/foundation/how-it-works.html#meritocracy](http://apache.org/foundation/how-it-works.html#meritocracy)
-- [http://struts.apache.org/helping.html](http://struts.apache.org/helping.html)
+- [http://struts.apache.org/helping.html](http://struts.apache.org/helping)
 
 The reason JetBrains (among others) give committers licenses is because we have earned them by helping to create open 
 source products, many of which JetBrains uses internally.

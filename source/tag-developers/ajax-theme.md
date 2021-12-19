@@ -10,18 +10,18 @@ parent:
 
 > NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
-The ajax theme extends the [xhtml theme](xhtml-theme.html) with AJAX features. The theme uses the popular DOJO 
+The ajax theme extends the [xhtml theme](xhtml-theme) with AJAX features. The theme uses the popular DOJO 
 AJAX/JavaScript toolkit. AJAX features include:
 
-- [AJAX Client Side Validation](../core-developers/ajax-client-side-validation.html) 
-- Remote [form](form-tag.html) submission support (works with the [submit](dojo-submit-tag.html) tag as well)
-- An advanced [div](dojo-div-tag.html) template that provides dynamic reloading of partial HTML
-- An advanced [a](dojo-a-tag.html) template that provides the ability to load and evaluate JavaScript remotely
-- An AJAX-only [tabbedpanel](dojo-tabbedpanel-tag.html) implementation
+- [AJAX Client Side Validation](../core-developers/ajax-client-side-validation) 
+- Remote [form](form-tag) submission support (works with the [submit](dojo-submit-tag) tag as well)
+- An advanced [div](dojo-div-tag) template that provides dynamic reloading of partial HTML
+- An advanced [a](dojo-a-tag) template that provides the ability to load and evaluate JavaScript remotely
+- An AJAX-only [tabbedpanel](dojo-tabbedpanel-tag) implementation
 - A rich pub-sub event model
 - Interactive autocomplete tag
 
-> See also: [Ajax tags](ajax-tags.html) 
+> See also: [Ajax tags](ajax-tags) 
 
 ## Browser Compatibility
 
@@ -38,7 +38,7 @@ browsers. The supported browsers are:
 
 ## Extending the AJAX Theme
 
-The wrapping technique utilized by the ajax theme is much like [xhtml theme](xhtml-theme.html), but the `controlheader.ftl`
+The wrapping technique utilized by the ajax theme is much like [xhtml theme](xhtml-theme), but the `controlheader.ftl`
 is a wee bit different.
 
 ```ftl
@@ -55,9 +55,9 @@ is a wee bit different.
 </#if>
 ```
 
-The header provides for [AJAX Client Side Validation](../core-developers/ajax-client-side-validation.html) by checking 
+The header provides for [AJAX Client Side Validation](../core-developers/ajax-client-side-validation) by checking 
 if the `validate` attribute is set to true. If it is, a validation request is made on each `onblur` event 
-for a HTML [Struts Tags](struts-tags.html). Some people don't like the `onblur` behavior; they would rather a more 
+for a HTML [Struts Tags](struts-tags). Some people don't like the `onblur` behavior; they would rather a more 
 advanced timer (say, 200ms) be kicked off after every keystroke. You can override this template and provide that 
 type of behavior if you would like.
 
@@ -65,13 +65,13 @@ type of behavior if you would like.
 
 Three ajax_xhtml templates of special interest are `head`, `div` , and `a`.
 
-> Especially with the ajax theme, it is important to use the [head](dojo-head-tag.html) tag. 
-> (See the [ajax head template](ajax-head-template.html) for more information.) Without it, AJAX support may not be set 
+> Especially with the ajax theme, it is important to use the [head](dojo-head-tag) tag. 
+> (See the [ajax head template](ajax-head-template) for more information.) Without it, AJAX support may not be set 
 > up properly.
 
-- [ajax head template](ajax-head-template.html) 
-- [ajax div template](ajax-div-template.html) 
-- [ajax a template](ajax-a-template.html) 
+- [ajax head template](ajax-head-template) 
+- [ajax div template](ajax-div-template) 
+- [ajax a template](ajax-a-template) 
 
-> In addition to these templates, be familiar with the [ajax event system](ajax-event-system.html) provided by 
+> In addition to these templates, be familiar with the [ajax event system](ajax-event-system) provided by 
 > the framework and Dojo.

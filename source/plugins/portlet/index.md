@@ -154,6 +154,6 @@ Basically the Struts2 Portlet Plugin doesn't support different auth level in th
 
 ### Other resources
 
-+ [Struts 2 Portlet Tutorial](struts-2-portlet-tutorial.html)
-+ [JSR168 Specification](http://jcp.org/aboutJava/communityprocess/final/jsr168/index.html)
-+ [JSR286 Specification](http://jcp.org/aboutJava/communityprocess/final/jsr286/index.html)
++ [Struts 2 Portlet Tutorial](struts-2-portlet-tutorial)
++ [JSR168 Specification](http://jcp.org/aboutJava/communityprocess/final/jsr168/index)
++ [JSR286 Specification](http://jcp.org/aboutJava/communityprocess/final/jsr286/index)

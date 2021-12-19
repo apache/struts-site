@@ -12,12 +12,12 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-This tutorial assumes you've completed the [Hello World](hello-world-using-struts2.html) tutorial and have a working 
+This tutorial assumes you've completed the [Hello World](hello-world-using-struts2) tutorial and have a working 
 **helloworld** project. The example code for this tutorial, **using-tags**, is available for checkout from the Struts 2 GitHub 
 repository at [struts-examples](https://github.com/apache/struts-examples). The example projects use Maven to manage 
 the artifact dependencies and to build the .war files.
 
-In the [Hello World](hello-world-using-struts2.html) lesson, we added a Struts 2 url tag to the `index.jsp` to create 
+In the [Hello World](hello-world-using-struts2) lesson, we added a Struts 2 url tag to the `index.jsp` to create 
 a hyperlink to the `hello.action`. This tutorial will explore the url and other Struts 2 tags further.
 
 Web applications differ from conventional websites in that web applications can create a dynamic response. To make it 
@@ -35,9 +35,9 @@ One use of the Struts 2 Tags is to create links to other web resources, especial
 While HTML provides a simple a tag for creating hyperlinks, the HTML tag often requires us to include redundant information. 
 Also the HTML tag cannot easily access dynamic data provided by the framework.
 
-A very common use case in web applications is linking to other pages. In the [Hello World](hello-world-using-struts2.html) 
+A very common use case in web applications is linking to other pages. In the [Hello World](hello-world-using-struts2) 
 tutorial we added a link to `hello.action` inside the `index.jsp` using the Struts 2 url tag. Please refer 
-to the [url documentation](../tag-developers/url-tag.html) for more information about the url tag.
+to the [url documentation](../tag-developers/url-tag) for more information about the url tag.
 
 **index.jsp**
 
@@ -108,7 +108,7 @@ In the next tutorial we'll cover how Struts can access the query string paramete
 ## Struts 2 Form Tag
 
 Most applications will use several data entry forms. The Struts 2 tags make creating input forms easy. 
-Consult the [Form Tags Reference](../tag-developers/form-tags.html) for all the details about the Struts 2 form tags.
+Consult the [Form Tags Reference](../tag-developers/form-tags) for all the details about the Struts 2 form tags.
 
 Each of the Struts 2 form tags has numerous attributes to mimic the normal HTML form tag attributes.
 
@@ -163,7 +163,7 @@ In the next tutorial we'll cover how to use Struts 2 to process this form submis
 
 ## Struts 2 property tag
 
-In the [Hello World](hello-world-using-struts2.html) tutorial's example application on JSP `HelloWorld.jsp` was this code:
+In the [Hello World](hello-world-using-struts2) tutorial's example application on JSP `HelloWorld.jsp` was this code:
 
 **Struts Property Tag**
 
@@ -174,7 +174,7 @@ In the [Hello World](hello-world-using-struts2.html) tutorial's example applicat
 The most common use of the property tag is to "get" the value returned by calling a public get method (of the Action class) 
 and then to include that value in the HTML returned to the browser.
 
-As discussed in the [Hello World](hello-world-using-struts2.html) tutorial, the value of `messageStore.message` instructs 
+As discussed in the [Hello World](hello-world-using-struts2) tutorial, the value of `messageStore.message` instructs 
 Struts 2 to first call method `getMessageStore` of the Action class. That method call returns a `MessageStore` object. 
 The `.message` part instructs Struts 2 to call the `getMessage` method of the `MessageStore` object. The `getMessage` 
 method returns a String which will be included in the HTML returned to the browser.
@@ -246,6 +246,6 @@ method of class `MessageStore`. The string returned by that `toString` method wi
 ![using_tags_hello.png](attachments/using_tags_hello.png)
 
 We covered a lot in this tutorial, but we've really only scratched the surface of how to use the Struts 2 tags. 
-Consult the [Struts 2 Tag Reference](../tag-developers/tag-reference.html) for much more information about all the Struts 2 tags.
+Consult the [Struts 2 Tag Reference](../tag-developers/tag-reference) for much more information about all the Struts 2 tags.
 
-|Return to [Hello World using Struts 2](hello-world-using-struts2.html)|or|onward to [Coding Struts 2 Actions](coding-actions.html)|
+|Return to [Hello World using Struts 2](hello-world-using-struts2)|or|onward to [Coding Struts 2 Actions](coding-actions)|

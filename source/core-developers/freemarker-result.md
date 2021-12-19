@@ -14,7 +14,7 @@ so that the template location can be either
 - relative to the web root folder, e.g.: `/WEB-INF/views/home.ftl`
 - a classpath resource, e.g.: `/com/company/web/views/home.ftl`
 
-Also see [Freemarker Support](freemarker-support.html).
+Also see [Freemarker Support](freemarker-support).
 
 ## Parameters
 

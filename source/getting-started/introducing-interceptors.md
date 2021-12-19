@@ -37,7 +37,7 @@ The above list of tasks are not complete - several other tasks are done before a
 The benefit of using Struts 2 is all this work happens automatically. You can focus on the logic of the controller 
 (the Struts 2 ActionSupport class), the Service layer, the data access layer, your domain models, etc.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are 
+The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are 
 having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find 
 an answer to your problem, post a question on the mailing list.
 
@@ -51,13 +51,13 @@ a value of "struts-default." The value "struts-default" identifies to the framew
 that will be executed before and after the Actions in that package.
 
 If you want to learn more about the inner workings of interceptors, what interceptors belong to the struts default stack, 
-and what are all the interceptors included with Struts 2, visit [Understanding Interceptors](../core-developers/interceptors.html) .
+and what are all the interceptors included with Struts 2, visit [Understanding Interceptors](../core-developers/interceptors) .
 
 Sometime the Struts 2 default stack of interceptors are not exactly what you need for a particular action. You may want 
 to use interceptors that are not part of the Struts 2 default stack. For an individual Action or for the entire 
 package of Actions, you can specify a different stack of interceptors that the Action or package should use. Below is 
-how you would specify that the register Action should use both the [logger](../core-developers/logging-interceptor.html) 
-and [timer](../core-developers/timer-interceptor.html) interceptors in addition to the interceptors provided by the default stack.
+how you would specify that the register Action should use both the [logger](../core-developers/logging-interceptor) 
+and [timer](../core-developers/timer-interceptor) interceptors in addition to the interceptors provided by the default stack.
 
 **Specify Specific Interceptors For An Action**
 
@@ -83,14 +83,14 @@ Action we are instructing the framework to use the `timer`, `logger`, and `defau
 are all the interceptors normally executed for an Action.
 
 How did I know to use the value of timer for the name attribute and even that there is a timer interceptor? 
-On the [Interceptors](../core-developers/interceptors.html) web page in the Struts 2 documentation are a list of interceptors 
+On the [Interceptors](../core-developers/interceptors) web page in the Struts 2 documentation are a list of interceptors 
 that come with the Struts 2 framework and what the name value is for each interceptor.
 
 How did I know that the timer interceptor isn't part of the defaultStack of interceptors already? Again on the Interceptors 
 documentation web page is a list of which interceptors belong to the `defaultStack`.
 
 Note the param nodes. These nodes are used to provide a value to the setLogEnabled and setLogLevel methods 
-of the [Exception Interceptor](../core-developers/exception-interceptor.html). Providing the values of true and ERROR 
+of the [Exception Interceptor](../core-developers/exception-interceptor). Providing the values of true and ERROR 
 will cause the Struts 2 framework to log any exceptions not caught by the application's code and to log those exceptions 
 at the ERROR level.
 
@@ -143,7 +143,7 @@ the `logger` and `timer` interceptors would have executed.
 ## Create Your Own Interceptor
 
 In addition to specifying your own stack of interceptors, you can also write your own new interceptor and add it to 
-the stack that is executed. The Struts [Writing Interceptors](../core-developers/writing-interceptors.html) guide explains 
+the stack that is executed. The Struts [Writing Interceptors](../core-developers/writing-interceptors) guide explains 
 how to do this. For example, you could create your own interceptor to handle authentication and authorization.
 
 ## Summary
@@ -151,4 +151,4 @@ how to do this. For example, you could create your own interceptor to handle aut
 Interceptors provide the Struts 2 framework with both power and flexibility. Developers may add additional interceptors 
 (either ones provided by Struts 2 or ones they create) to the stack of interceptors executed when an Action class is called.
 
-|Return to [Annotations](annotations.html)|or|onward to [Unit Testing](unit-testing.html)|
+|Return to [Annotations](annotations)|or|onward to [Unit Testing](unit-testing)|

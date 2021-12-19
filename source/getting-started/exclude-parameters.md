@@ -16,14 +16,14 @@ The example code for this tutorial, **exclude-parameters**, is available at [str
 
 ## Introduction
 
-When [Struts development mode is set to true](../core-developers/struts-xml.html) (also see [Debugging Struts](debugging-struts.html)) 
+When [Struts development mode is set to true](../core-developers/struts-xml) (also see [Debugging Struts](debugging-struts)) 
 the framework writes many informative messages to the log file. These messages include ones that indicate whether 
 or not a specific parameter will be handled by the parameter interceptor and made available to the Action class. 
 These log messages can be helpful in clearly identifying parameters that you do not want the parameter interceptor 
 to process for security or other reasons. This article discusses how to exclude parameters from being handled by 
 the parameter interceptor.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are having 
+The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
 a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer 
 to your problem, post a question on the mailing list.
 
@@ -71,7 +71,7 @@ Unexpected Exception caught setting 'submit' on 'class org.apache.struts.edit.ac
 
 ## Excluding Request Parameters From Struts 2 Processing
 
-If you're not familiar with setting up a custom interceptor stack for your Struts 2 application review [Introducing Interceptors](introducing-interceptors.html).
+If you're not familiar with setting up a custom interceptor stack for your Struts 2 application review [Introducing Interceptors](introducing-interceptors).
 
 To exclude specific parameters from being processed by the Struts 2 framework you need to add those parameter names 
 to the list of excluded parameters. One way to do this is by adding those parameter names to the collection of `excludedParams` 
@@ -98,7 +98,7 @@ The value of node `<param name="params.excludeParams">` is a comma-delimited lis
 Strings that identify request parameters that should NOT be processed by the Parameters interceptor. To exclude 
 the `submit` parameter (which is the name of the submit button in the form code above), I just added `submit` to the list.
 
-See the [Basic Stack of Interceptors described here](../core-developers/struts-default-xml.html) to view the initial 
+See the [Basic Stack of Interceptors described here](../core-developers/struts-default-xml) to view the initial 
 set of parameter names/regular expressions to exclude. Be sure to copy over the list of parameters already being excluded 
 and then add your own parameters to the end separated by commas.
 
@@ -118,4 +118,4 @@ if there are any parameters that the framework should not process. For those par
 not process add the parameter name (or a regular expression that can be used to identify multiple parameter names) 
 to the comma-delimited list that is the value for the `<param name="params.excludeParams">` node.
 
-|Return to [Preparable Interface](preperable-interface.html)|or|back to [Getting started](index.html)|
+|Return to [Preparable Interface](preperable-interface)|or|back to [Getting started](index)|

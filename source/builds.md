@@ -59,8 +59,8 @@ or
 Maven will automatically download any dependencies as needed.
 
 For more about using Maven to build Struts 2, see
-[Building the framework from source](/docs/building-the-framework-from-source.html) in the
-[Struts 2 Contributors Guide.](/docs/contributors-guide.html)
+[Building the framework from source](/docs/building-the-framework-from-source) in the
+[Struts 2 Contributors Guide.](/docs/contributors-guide)
 
 For more about using Maven to build Struts 1, see our [Maven wiki page.](http://wiki.apache.org/struts/StrutsMaintenanceMaven)
 
@@ -72,7 +72,7 @@ As part of our continuous integration practice, we also make available each morn
 *Again: Use at your own risk!*
 
 If you do **not** plan to contribute to the development of the framework, then you probably want to download a
-[release](releases.html)
+[release](releases)
 
 NOTE: The Struts 2 nightly build is not fully operational. We suggest that contributors checkout
 the [source code](#SourceCode) instead.
@@ -123,7 +123,7 @@ A test build is made available so that it can be reviewed for quality by the Apa
 When a build is judged "ready for prime time", it is promoted to "General Availability" status and may be
 made the "Best Available" release. If the group feels that a build requires more testing, then it may be marked
 as "Beta" release. When a test build is upgraded to "Beta" or "GA" by a vote of the project members,
-we make the distribution available as a formal [release](releases.html).
+we make the distribution available as a formal [release](releases).
 
 ## Maven Snapshots
 
@@ -157,4 +157,4 @@ Unless required by applicable law or agreed to in writing, software distributed 
 "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations under the License.
 
-Next: [Release Guidelines](release-guidelines.html)
+Next: [Release Guidelines](release-guidelines)

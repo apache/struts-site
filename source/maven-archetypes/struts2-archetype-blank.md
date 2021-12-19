@@ -93,7 +93,7 @@ mvn archetype:generate -B \
 
 ## Project Structure
 
-The source code structure follows the normal [Maven directory structure](http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html). The blank-archetype does not include all of the directories listed in the Maven structure reference page.
+The source code structure follows the normal [Maven directory structure](http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout). The blank-archetype does not include all of the directories listed in the Maven structure reference page.
 
 Our project's structure looks like this:
 
@@ -173,7 +173,7 @@ will create a WAR file in the `target` directory.
 
 ### Running
 
-We can run blank-archetype using the [Jetty](https://www.eclipse.org/jetty/) server via the [Maven Jetty Plugin](https://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html) by executing the Jetty plugin's  `run` command:
+We can run blank-archetype using the [Jetty](https://www.eclipse.org/jetty/) server via the [Maven Jetty Plugin](https://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin) by executing the Jetty plugin's  `run` command:
 
 
 ```
@@ -196,7 +196,7 @@ The application consists of a few test actions demonstrating simple validation a
 
 The default Struts 2 configuration file is contained in  `src/main/resources/struts.xml`. It includes an additional configuration file,  `src/main/resources/example.xml`. The application's mappings are contained in the  `example.xml` file. The  `struts.xml` file sets some constants.
 
-See the [struts.xml page](/core-developers/struts-xml.html) for more information about the  `struts.xml` file. For more information regarding what's contained in typical  `struts.xml` files start at the [Configuration Elements page](/core-developers/configuration-elements.html), which contains links to a bunch of information. See the [Configuration Files](/core-developers/configuration-files.html) page for more information regarding additional Struts 2 configuration files, including links to the files that set all the Struts 2 default configurations.
+See the [struts.xml page](/core-developers/struts-xml) for more information about the  `struts.xml` file. For more information regarding what's contained in typical  `struts.xml` files start at the [Configuration Elements page](/core-developers/configuration-elements), which contains links to a bunch of information. See the [Configuration Files](/core-developers/configuration-files) page for more information regarding additional Struts 2 configuration files, including links to the files that set all the Struts 2 default configurations.
 
 ### Welcome.action
 
@@ -209,11 +209,11 @@ The mapping for this action is handled by a "catch-all" mapping in  `example.xml
 </action>
 ```
 
-This mapping is the last mapping contained in  `example.xml` -- anything not handled by mappings appearing before it in  `example.xml` will be caught by this mapping. This mapping will look for JSP files in  `src/main/webapp/example/*.jsp`. Since there's a  `Welcome.jsp` in that directory, we're all set. See the [Wildcard Mappings page](/core-developers/wildcard-mappings.html) for more information on how Struts 2 can use wildcard mappings.
+This mapping is the last mapping contained in  `example.xml` -- anything not handled by mappings appearing before it in  `example.xml` will be caught by this mapping. This mapping will look for JSP files in  `src/main/webapp/example/*.jsp`. Since there's a  `Welcome.jsp` in that directory, we're all set. See the [Wildcard Mappings page](/core-developers/wildcard-mappings) for more information on how Struts 2 can use wildcard mappings.
 
 ### HelloWorld.action
 
-The mapping executes the HelloWorld action, contained in  `src/main/java/tutorial/example/HelloWorld.action`. This action retrieves a message from a package-level properties file, contained in  `src/main/resources/tutorial/package.properties`. See the [Localization page](/core-developers/localization.html) for more information about how Struts 2 handles message resources (it's pretty cool).
+The mapping executes the HelloWorld action, contained in  `src/main/java/tutorial/example/HelloWorld.action`. This action retrieves a message from a package-level properties file, contained in  `src/main/resources/tutorial/package.properties`. See the [Localization page](/core-developers/localization) for more information about how Struts 2 handles message resources (it's pretty cool).
 
 ### Login.action
 
@@ -229,4 +229,4 @@ This is another wildcard mapping:
 
 In the application the Login action is reached via a link, but not directly to  `/tutorial/example/Login.action`. The link is actually  `/tutorial/example/Login_input.action`. Reaching the Login action this way bypasses validation: if we hit the Login action directly we'll get a validation error.
 
-The validation configuration is contained in `/src/main/resources/tutorial/example/Login-validation.xml`. It checks for the presence of the  `username` and  `password` properties (form values). It uses messages stored in the  `package.properties` file (in the same directory). See the [Validation page](/core-developers/validation.html) for more information regarding Struts 2 validation.
+The validation configuration is contained in `/src/main/resources/tutorial/example/Login-validation.xml`. It checks for the presence of the  `username` and  `password` properties (form values). It uses messages stored in the  `package.properties` file (in the same directory). See the [Validation page](/core-developers/validation) for more information regarding Struts 2 validation.

@@ -14,7 +14,7 @@ parent:
 
 OGNL is the Object Graph Navigation Language (see [http://commons.apache.org/proper/commons-ognl/] for the full 
 documentation of OGNL). Here, we will cover a few examples of OGNL features that co-exist with the framework. To review 
-basic concepts, refer to [OGNL Basics](ognl-basics.html).
+basic concepts, refer to [OGNL Basics](ognl-basics).
 
 The framework uses a standard naming context to evaluate OGNL expressions. The top level object dealing with OGNL is 
 a Map (usually referred as a context map or context). OGNL has a notion of there being a root (or default) object within 

@@ -14,25 +14,25 @@ manages the view.
 The framework provides several implementations of the `com.opensymphony.xwork2.Result` interface, ready to use in your 
 own applications.
 
-|[Chain Result](chain-result.html)|Used for [Action Chaining](action-chaining.html)|
-|[Dispatcher Result](dispatcher-result.html)|Used for web resource integration, including _JSP_  integration|
-|[FreeMarker Result](freemarker-result.html)|Used for _FreeMarker_  integration|
-|[HttpHeader Result](httpheader-result.html)|Used to control special HTTP behaviors|
-|[Redirect Result](redirect-result.html)|Used to redirect to another URL (web resource)|
-|[Redirect Action Result](redirect-action-result.html)|Used to redirect to another action mapping|
-|[Stream Result](stream-result.html)|Used to stream an InputStream back to the browser (usually for file downloads)|
-|[Velocity Result](velocity-result.html)|Used for _Velocity_  integration|
-|[XSL Result](xsl-result.html)|Used for XML/XSLT integration|
+|[Chain Result](chain-result)|Used for [Action Chaining](action-chaining)|
+|[Dispatcher Result](dispatcher-result)|Used for web resource integration, including _JSP_  integration|
+|[FreeMarker Result](freemarker-result)|Used for _FreeMarker_  integration|
+|[HttpHeader Result](httpheader-result)|Used to control special HTTP behaviors|
+|[Redirect Result](redirect-result)|Used to redirect to another URL (web resource)|
+|[Redirect Action Result](redirect-action-result)|Used to redirect to another action mapping|
+|[Stream Result](stream-result)|Used to stream an InputStream back to the browser (usually for file downloads)|
+|[Velocity Result](velocity-result)|Used for _Velocity_  integration|
+|[XSL Result](xsl-result)|Used for XML/XSLT integration|
 |[Plain Result](plain-result)|A plain result which all you to write directly to a HttpResponse using a simplified API (since Struts 2.6)|
-|[PlainText Result](plaintext-result.html)|Used to display the raw content of a particular file/page (i.e jsp, HTML)|
+|[PlainText Result](plaintext-result)|Used to display the raw content of a particular file/page (i.e jsp, HTML)|
 |[Tiles Result](../plugins/tiles/)|Used to provide Tiles integration|
 |[Tiles 3 Result](../plugins/tiles-3/)|Used to provide Tiles 3 integration|
-|[Postback Result](postback-result.html)|Used to postback request parameters as a form to the specified destination|
+|[Postback Result](postback-result)|Used to postback request parameters as a form to the specified destination|
 |[JSON Result](../plugins/json/) |Used to serialize actions into JSON|
 
 ## Optional
 
-|[JasperReports Plugin](../plugins/jasperreports/)|Used for [JasperReports Tutorial](../getting-started/jasper-reports-tutorial.html) integration|Optional, third-party plugin|
+|[JasperReports Plugin](../plugins/jasperreports/)|Used for [JasperReports Tutorial](../getting-started/jasper-reports-tutorial) integration|Optional, third-party plugin|
 
 Additional Result Types can be created and plugged into an application by implementing the `com.opensymphony.xwork2.Result`
 interface. Custom Result Types might include generating an email or JMS message, generating images, and so forth.
@@ -61,13 +61,13 @@ to set the same parameter as a specifically-named parameter.
 
 ## Registering Result Types
 
-All Result Types are plugged in via the [Result Configuration](result-configuration.html).
+All Result Types are plugged in via the [Result Configuration](result-configuration).
 
 ## Extending
 
 You can always extend defined result types and implement whatever logic you need. To simplify process of that, you can 
 define your custom `ResultFactory` and use it with connection with custom interface which your Result implements. 
-Check [Define dedicated factory](object-factory.html) to see how to do it.
+Check [Define dedicated factory](object-factory) to see how to do it.
 
 Struts 2 provides one such extension for you: 
 

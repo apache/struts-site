@@ -8,7 +8,7 @@ parent:
 
 # Token Session Interceptor
 
-This interceptor builds off of the [Token Interceptor](token-interceptor.html), providing advanced logic for handling 
+This interceptor builds off of the [Token Interceptor](token-interceptor), providing advanced logic for handling 
 invalid tokens. Unlike the normal token interceptor, this interceptor will attempt to provide intelligent fail-over 
 in the event of multiple requests using the same session. That is, it will block subsequent requests until the first 
 request is complete, and then instead of returning the <i>invalid.token</i> code, it will attempt to display the same 

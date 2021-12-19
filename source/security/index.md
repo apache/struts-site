@@ -281,17 +281,17 @@ from `save()` to `saveAction()` and leaving annotation as is to allow call this 
 ### Accepted / Excluded patterns
 
 As from version 2.3.20 the framework provides two new interfaces which are used to accept / exclude param names 
-and values - [AcceptedPatternsChecker](../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/AcceptedPatternsChecker.html) 
-and [ExcludedPatternsChecker](../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/ExcludedPatternsChecker.html) 
-with default implementations. These two interfaces are used by [Parameters Interceptor](../core-developers/parameters-interceptor.html) 
-and [Cookie Interceptor](../core-developers/cookie-interceptor.html) to check if param can be accepted or must be excluded. 
+and values - [AcceptedPatternsChecker](../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/AcceptedPatternsChecker) 
+and [ExcludedPatternsChecker](../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/ExcludedPatternsChecker) 
+with default implementations. These two interfaces are used by [Parameters Interceptor](../core-developers/parameters-interceptor) 
+and [Cookie Interceptor](../core-developers/cookie-interceptor) to check if param can be accepted or must be excluded. 
 If you were using `excludeParams` previously please compare patterns used by you with these provided by the framework in default implementation.
 
 ### Strict Method Invocation
 
 This mechanism was introduced in version 2.5. It allows control what methods can be accessed with the bang "!" operator 
 via [Dynamic Method Invocation](../core-developers/action-configuration.html#dynamic-method-invocation). Please read 
-more in the Strict Method Invocation section of [Action Configuration](../core-developers/action-configuration.html).
+more in the Strict Method Invocation section of [Action Configuration](../core-developers/action-configuration).
 
 ### Resource Isolation Using Fetch Metadata
 
@@ -305,8 +305,8 @@ A Resource Isolation  Policy prevents the resources on a server from being reque
 can be enabled for all endpoints of the application or the endpoints that are meant to be loaded in a cross-site context 
 can be exempted from applying the policy. Read more about Fetch Metadata and resource isolation [here](https://web.dev/fetch-metadata/).
 
-This mechanism is implemented in Struts using the [FetchMetadata Interceptor](../core-developers/fetch-metadata-interceptor.html).
- Refer to the documentation for [FetchMetadata Interceptor](../core-developers/fetch-metadata-interceptor.html) 
+This mechanism is implemented in Struts using the [FetchMetadata Interceptor](../core-developers/fetch-metadata-interceptor).
+ Refer to the documentation for [FetchMetadata Interceptor](../core-developers/fetch-metadata-interceptor) 
  instructions on how to enable Fetch Metadata. 
 
 ### Cross Origin Isolation with COOP and COEP
@@ -335,5 +335,5 @@ Cross-Origin-Embedder-Policy: require-corp;
 Cross-Origin-Opener-Policy: same-origin;
 ```
 
-COOP and COEP are implemented in Struts using [CoopInterceptor](../core-developers/coop-interceptor.html) 
-and [CoepInterceptor](../core-developers/coep-interceptor.html).
+COOP and COEP are implemented in Struts using [CoopInterceptor](../core-developers/coop-interceptor) 
+and [CoepInterceptor](../core-developers/coep-interceptor).

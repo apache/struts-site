@@ -11,11 +11,11 @@ title: Release Guidelines
 
 This document describes the Apache Struts release process and our [coding conventions](#Coding),
 which are applicable to all subprojects. Both stable and development releases are
-[available for download.](releases.html)
+[available for download.](releases)
 
 ## Release Process
 
-A [point release](http://commons.apache.org/releases/versioning.html) should be made before and after
+A [point release](http://commons.apache.org/releases/versioning) should be made before and after
 any product change that is not a "fully-compatible change" (see link). This includes moving a dependency from
 an internal package to an external product, including products distributed through the Apache Commons.
 We should place any fully-compatible changes in the hands of the community before starting on a change that
@@ -63,14 +63,14 @@ Additional remarks:
 - Any formal release may be submitted for mirroring. All GA releases **must** be mirrored.
 - After announcing a release, remember to update the Downloads and Announcements pages. If the release is
   to be mirrored, wait at least 24 hours after submittal before making public announcements (as stated in the
-  [Apache Mirroring guidelines](https://www.apache.org/dev/mirrors.html).
+  [Apache Mirroring guidelines](https://www.apache.org/dev/mirrors).
 - If a serious flaw if found in a test build or release, it may be withdrawn by a majority vote of the PMC and
   removed from ASF distribution channels.
 
 ## Coding Conventions and Guidelines
 
 Source code and documentation contributed to the Struts repositories should observe the:
-- The ["Code Conventions for the Java Programming Language"](http://www.oracle.com/technetwork/java/codeconvtoc-136057.html),
+- The ["Code Conventions for the Java Programming Language"](http://www.oracle.com/technetwork/java/codeconvtoc-136057),
   as published by Oracle.
 
 ## Clarifications
@@ -106,7 +106,7 @@ Source code and documentation contributed to the Struts repositories should obse
   [The Cathedral and the Bazaar](http://www.amazon.com/exec/obidos/ISBN=1565927249/apachesoftwar-20/)
 - Our favorite science fiction author is
   [Robert Heinlein](http://www.nitrosyncretic.com/rah/),
-  [TANSTAAFL](http://jargon.net/jargonfile/t/TANSTAAFL.html),
+  [TANSTAAFL](http://jargon.net/jargonfile/t/TANSTAAFL),
   (Except on Friday, when we favor [Douglas Adams](http://news.bbc.co.uk/1/hi/uk/1326657.stm)).
 
-Next: [PMC Charter](bylaws.html)
+Next: [PMC Charter](bylaws)

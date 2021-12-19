@@ -22,7 +22,7 @@ If the named message is not found in a property file, then the body of the tag w
 is used, then the stack can be searched, and if a value is returned, it will written to the output.
 If no value is found on the stack, the key of the message will be written out.
 
-For more details on using resource bundles with Struts 2 read the [localization guide](../core-developers/localization.html).
+For more details on using resource bundles with Struts 2 read the [localization guide](../core-developers/localization).
 
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/text-description.html %}
 
@@ -67,9 +67,9 @@ format.money={0,number,currency}
 
 For more about formatting text, see
 
-1. [http://java.sun.com/j2se/1.4.2/docs/api/java/text/MessageFormat.html](http://java.sun.com/j2se/1.4.2/docs/api/java/text/MessageFormat.html)
+1. [http://java.sun.com/j2se/1.4.2/docs/api/java/text/MessageFormat.html](http://java.sun.com/j2se/1.4.2/docs/api/java/text/MessageFormat)
 
-2. [http://java.sun.com/docs/books/tutorial/i18n/format/decimalFormat.html](http://java.sun.com/docs/books/tutorial/i18n/format/decimalFormat.html)
+2. [http://java.sun.com/docs/books/tutorial/i18n/format/decimalFormat.html](http://java.sun.com/docs/books/tutorial/i18n/format/decimalFormat)
 
 ### If you wish to use i18n in your tag attributes
 

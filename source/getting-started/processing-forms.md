@@ -12,7 +12,7 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-This tutorial assumes you've completed the [Coding Struts 2 Actions](coding-actions.html) tutorial and have a working 
+This tutorial assumes you've completed the [Coding Struts 2 Actions](coding-actions) tutorial and have a working 
 **coding-actions** project. The example code for this tutorial, **form-processing**, is available for checkout from 
 the Struts 2 GitHub repository [struts-examples](https://github.com/apache/struts-examples).
 
@@ -21,10 +21,10 @@ the Struts 2 GitHub repository [struts-examples](https://github.com/apache/strut
 In this tutorial we'll explore using Struts 2 to do more involved processing of a form submission. We'll cover how to 
 use a Java model class to store the form input and how to create the Struts 2 form to match up with that model class.
 
-The code provided in this tutorial may be added to the [Coding Struts 2 Actions](coding-actions.html) example or you 
+The code provided in this tutorial may be added to the [Coding Struts 2 Actions](coding-actions) example or you 
 can download this complete example from the github respository - [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are 
+The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are 
 having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find 
 an answer to your problem, post a question on the mailing list.
 
@@ -35,7 +35,7 @@ business rules state the user must provide his/her first name, last name, email 
 
 To encapsulate this data, we'll use a simple Java class that follows the basic Java Bean specifications (public set/get 
 methods for each instance field). If you're following along add this class to the package `org.apache.struts.register.model` 
-in the [Coding Struts 2 Actions](coding-actions.html) example.
+in the [Coding Struts 2 Actions](coding-actions) example.
 
 **Person.java**
 
@@ -142,7 +142,7 @@ value ("25") the user entered for the age form field to 25 when calling the `set
 
 When the user clicks on the submit button of the above form, the action "register" and the form data will be sent to 
 the Struts 2 framework. We need an Action class to process this form. If you recall from the tutorial 
-[Coding Struts 2 Actions](coding-actions.html) our Action class should extend the Struts 2 ActionSupport class.
+[Coding Struts 2 Actions](coding-actions) our Action class should extend the Struts 2 ActionSupport class.
 
 Here is the Action class used for this example. Place it in package org.apache.struts.register.action.
 
@@ -226,7 +226,7 @@ registration. Add the `thankyou.jsp` below to `src/main/webapp`.
 </html>
 ```
 
-If you don't recall how the Struts 2 property and url tags work consult the [Using Struts 2 Tags](using-tags.html) tutorial.
+If you don't recall how the Struts 2 property and url tags work consult the [Using Struts 2 Tags](using-tags) tutorial.
 
 ## Create action mapping in struts.xml
 
@@ -273,4 +273,4 @@ Fill out the form and click the submit button. You should then see the `thankyou
 
 ![thanyoujsp.png](attachments/att14975000_thanyoujsp.png)
 
-|Return to [Coding Struts 2 Actions](coding-actions.html)|or|onward to [Form validation](form-validation.html)|
+|Return to [Coding Struts 2 Actions](coding-actions)|or|onward to [Form validation](form-validation)|

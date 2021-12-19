@@ -5,11 +5,15 @@ title: JFreeChart Plugin
 
 # JFreeChart Plugin
 
-[JFreeChart](http://www.jfree.org/jfreechart/) is a free 100% Java (LGPL) chart library that makes it easy for developers to display professional quality charts in their applications.
+[JFreeChart](http://www.jfree.org/jfreechart/) is a free 100% Java (LGPL) chart library that makes it easy for 
+developers to display professional quality charts in their applications.
 
 The JFreeChart plugin allows Actions to easily return generated charts and graphs.
 
-Instead of streaming a generated chart directly to the HTTP response, this plugin provides a ChartResult, which handles the generation for you.  This allows you to generate the chart in one class, and render it out in another class, effectively decoupling the view from the Actions. You can easily render it out to a file or some view other than a web HTTP response if you wish.
+Instead of streaming a generated chart directly to the HTTP response, this plugin provides a ChartResult, which 
+handles the generation for you.  This allows you to generate the chart in one class, and render it out in another 
+class, effectively decoupling the view from the Actions. You can easily render it out to a file or some view other 
+than a web HTTP response if you wish.
 
 ## Features
 
@@ -19,17 +23,22 @@ Instead of streaming a generated chart directly to the HTTP response, this plugi
 
 ### Future Work
 
-Currently the "chart" property is hardcoded. There should be a better way of transferring data from the Action to the Result, via some externally defined variable or something.
+Currently the "chart" property is hardcoded. There should be a better way of transferring data from the Action to 
+the Result, via some externally defined variable or something.
 
-As mentioned by John Patterson (mailing list), the Action is still dependant on a JFreeChart Chart class. This can be improved. The seperation between Action and View can be made cleaner. A chart-agonistic List or Array can be used as the data, and the configuration of the chart details (font, axis, etc...) be done via the result properties in the xwork.xml.
+As mentioned by John Patterson (mailing list), the Action is still dependant on a JFreeChart Chart class. This can 
+be improved. The seperation between Action and View can be made cleaner. A chart-agonistic List or Array can be used
+as the data, and the configuration of the chart details (font, axis, etc...) be done via the result properties 
+in the xwork.xml.
 
 But hey, the above works for now. Any suggestions are welcome.
 
-You can also create charts via the CeWolf library directly.  See [CeWolf charts using Velocity templates](cewolf-charts-using-velocity-templates.html).
+You can also create charts via the CeWolf library directly.  See [CeWolf charts using Velocity templates](cewolf-charts-using-velocity-templates).
 
 ## Usage
 
-To use the plugin, have your Struts configuration package extend the `jfreechart-default` package, which provides the `chart` result type.  Next, use it as a result in an action:
+To use the plugin, have your Struts configuration package extend the `jfreechart-default` package, which provides
+the `chart` result type.  Next, use it as a result in an action:
 
 **Chart example in struts.xml**
 
@@ -42,7 +51,8 @@ To use the plugin, have your Struts configuration package extend the `jfreechart
 </action>
 ```
 
-In your Action class, provide a `getChart()` method that returns the chart to be rendered.  This method will be called by the chart result.
+In your Action class, provide a `getChart()` method that returns the chart to be rendered.  This method will be 
+called by the chart result.
 
 ### Example
 
@@ -93,4 +103,6 @@ This plugin doesn't provides any global settings.
 
 ### Installation
 
-This plugin can be installed by copying the plugin jar into your application's `/WEB-INF/lib` directory.  The JFreeChart library will need to be downloaded separately, as its LGPL license doesn't allow it to be distributed with Struts.
+This plugin can be installed by copying the plugin jar into your application's `/WEB-INF/lib` directory.  
+he JFreeChart library will need to be downloaded separately, as its LGPL license doesn't allow it to be distributed 
+with Struts.

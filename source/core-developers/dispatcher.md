@@ -6,7 +6,7 @@ title: Dispatcher
 # Dispatcher
 
 Dispatcher is the main point of control which dispatch request execution to given actions. It is used 
-by [filters](web-xml.html) / servlet / listener / portlet to set up and run Struts environment.
+by [filters](web-xml) / servlet / listener / portlet to set up and run Struts environment.
 
 ## Error handling
 

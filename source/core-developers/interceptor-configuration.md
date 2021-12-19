@@ -50,7 +50,7 @@ but any action may also define its own local stack.
 </action>
 ```
 
-The default configuration - [struts-default.xml](struts-default-xml.html); sets up a default Interceptor Stack that 
+The default configuration - [struts-default.xml](struts-default-xml); sets up a default Interceptor Stack that 
 will work well for most applications.
 
-> For more, see [Interceptors](interceptors.html).
+> For more, see [Interceptors](interceptors).

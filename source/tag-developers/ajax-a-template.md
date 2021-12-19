@@ -22,5 +22,5 @@ whether they want to remove a user from a list.
 within the webpage. If you only wish to publish an event to the topic specified, then simply return no result (or `NONE`) 
 from your action and utilize the `notifyTopics` attribute to specific the topic names.
 
-For an example of the interaction between the [div](dojo-div-tag.html) tag and the [a](dojo-a-tag.html) tag using 
-the topic pub/sub model, see the examples in the [ajax div template](ajax-div-template.html).
+For an example of the interaction between the [div](dojo-div-tag) tag and the [a](dojo-a-tag) tag using 
+the topic pub/sub model, see the examples in the [ajax div template](ajax-div-template).

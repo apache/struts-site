@@ -10,7 +10,7 @@ parent:
 
 A custom Result type for sending raw data (via an InputStream) directly to the HttpServletResponse. Very useful for 
 allowing users to download content. If you are running your app server under HTTPS and having issues with PDF's or other 
-file streams you should take a look at [HTTPS and IE Issues](https-and-ie-issues.html)
+file streams you should take a look at [HTTPS and IE Issues](https-and-ie-issues)
 
 ## Parameters
 

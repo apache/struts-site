@@ -70,4 +70,4 @@ The annotation must be applied at method or type level.
 
 ## Adding Parameters
 
-Use the [ValidationParameter annotation](validation-parameter-annotation.html) to add custom parameter values.
+Use the [ValidationParameter annotation](validation-parameter-annotation) to add custom parameter values.

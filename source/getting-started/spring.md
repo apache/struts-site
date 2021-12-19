@@ -25,11 +25,11 @@ and Spring together to manage the dependencies between your ActionSupport classe
 > This tutorial assumes you understand how to use the Spring framework to manage dependencies between classes. You can 
 > learn more about Spring by reading the documentation at [https://spring.io/docs](https://spring.io/docs)
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are having 
+The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
 a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer 
 to your problem, post a question on the mailing list.
 
-If you examine the example application for the [Struts 2 Themes](themes.html) tutorial you'll see this code in the 
+If you examine the example application for the [Struts 2 Themes](themes) tutorial you'll see this code in the 
 `EditAction` class
 
 **EditAction Class Hard-Coded Dependency**
@@ -174,4 +174,4 @@ In this tutorial we reviewed how to use the Struts 2 Spring plugin to integrate 
 Spring plugin you can have Spring manage the dependencies of your ActionSupport classes. Of course you can also take 
 advantage of the many other benefits (AOP, Spring JDBC) that the Spring framework provides.
 
-|Return to [Themes](themes.html)|or|onward to [Annotations](annotations.html)|
+|Return to [Themes](themes)|or|onward to [Annotations](annotations)|

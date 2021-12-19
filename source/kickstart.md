@@ -13,17 +13,17 @@ title: Kickstart FAQ
 
 ### I'm new to Apache Struts. How do I get started?
 
-The best place to start is with the "best available" [release](releases.html).
+The best place to start is with the "best available" [release](releases).
 If you are new to Java or web development, as well as Apache Struts, be sure to review the
-[Key Technologies Primer](primer.html).
+[Key Technologies Primer](primer).
 
 The main Struts web site includes documentation for the latest "General Availability" release
 in each major release series. The development section of the site inclues draft documentation
 for upcoming releases. If you are just getting started, focus on the latest General
-Availability release, Documentation for past [releases](releases.html) is also available.
+Availability release, Documentation for past [releases](releases) is also available.
 
 If you have questions, you can search the [User Mailing List archives](mail.html#archives),
-or [post your own question to the list](mail.html). (Plain old Google usually works too!)
+or [post your own question to the list](mail). (Plain old Google usually works too!)
 
 ### Looking at the releases page, some versions seem to be missing. What happened to them?
 {:#releases}
@@ -72,14 +72,14 @@ Required if you've used the source code to create your own server that you are r
 
 ### Are there ISPs that will host my Java web application?
 
-For a listing of some Java and Struts ISPs, visit the [Struts Community Resources](http://struts.sf.net/community/index.html)
+For a listing of some Java and Struts ISPs, visit the [Struts Community Resources](http://struts.sf.net/community/index)
 area on SourceForge.
 
 ### Is there a particularly good IDE to use?
 
 The frameworks should work well with any development environment that you would like to use, as well as with any
 programmers editor. The members of the Apache Struts development group each use their own tools such as
-[Emacs](http://www.gnu.org/software/emacs/emacs.html), [IntelliJ IDEA](http://www.jetbrains.com/idea/),
+[Emacs](http://www.gnu.org/software/emacs/emacs), [IntelliJ IDEA](http://www.jetbrains.com/idea/),
 [Eclipse](http://www.eclipse.org/), and [NetBeans](http://www.netbeans.org/).
 
 For more, see the [IDE discussion page](http://wiki.apache.org/struts/StrutsMyFavoriteIDE) in the Struts wiki.
@@ -92,10 +92,10 @@ Each release of Struts comes with a User Guide or set of Tutorials to introduce 
 and its underlying technologies. Various components also have their own in-depth Developers Guide, to cover
 more advanced topics. Comprehensive Javadocs are provided for each release, along with the **full source code**.
 
-The [Struts user mailing list](mail.html) is also very active, and welcomes posts from new users. Before
+The [Struts user mailing list](mail) is also very active, and welcomes posts from new users. Before
 posting a new question, be sure to consult the **[MAILING LIST ARCHIVE](mail.html#Archives)**
-and the very excellent [How To Ask Questions The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html)
-by Eric Raymond. Please do be sure to [turn off HTML](http://expita.com/nomime.html) in your
+and the very excellent [How To Ask Questions The Smart Way](http://www.catb.org/~esr/faqs/smart-questions)
+by Eric Raymond. Please do be sure to [turn off HTML](http://expita.com/nomime) in your
 email client before posting.
 
 ### Is commercial support available?
@@ -108,7 +108,7 @@ including Apache Struts. However, third parties may offer different degrees of s
 First, it's important to remember that Apache Struts is an all-volunteer project. We don't charge anyone
 anything to use Apache Struts products. Committers and other developers work on Apache Struts products because
 they need to use it with their own applications. If others can use it too, that's "icing on the cake".
-If you [submit a patch](helping.html) for a feature that a Committer finds useful, then that
+If you [submit a patch](helping) for a feature that a Committer finds useful, then that
 Committer may choose to volunteer his or her time to apply the patch.
 If you just submit an idea without a patch, it is much less likely to be added (since first someone else has to
 volunteer their time to write the patch).
@@ -120,7 +120,7 @@ Worst case, you can apply the patch to your copy of the framework and still use 
 
 ### Is there a press kit for Apache Struts?
 
-Except for our [announcements page](announce.html), there is not a formal press or media kit for Apache Struts.
+Except for our [announcements page](announce), there is not a formal press or media kit for Apache Struts.
 Queries from the press (and ONLY queries from the press, NOT support questions or anything else!)
 should go to our media relations address: [press@apache.org](mailto:press@apache.org).
 

@@ -19,26 +19,26 @@ or action executions.
 - Control Tags provide control flow, such as `if`, `else`, and `iterator`
 - Data Tags allow for data manipulation or creation, such as `bean`, `push`, and `i18n`
 
-> Please make sure you have read the [Tag Syntax](tag-syntax.html) document and understand how tag attribute syntax works.
+> Please make sure you have read the [Tag Syntax](tag-syntax) document and understand how tag attribute syntax works.
 
 ## Generic Tags
 
 Struts Generic Tags control the execution flow as pages render.
 
 |**Control Tags**|                               |**Data Tags**|                 
-|                |[if](if-tag.html)              |             |[a](a-tag.html)              |   
-|                |[elseif](elseif-tag.html)      |             |[action](action-tag.html)    |
-|                |[else](else-tag.html)          |             |[bean](bean-tag.html)        |
-|                |[append](append-tag.html)      |             |[date](date-tag.html)        |
-|                |[generator](generator-tag.html)|             |[debug](debug-tag.html)      |
-|                |[iterator](iterator-tag.html)  |             |[i18n](i18n-tag.html)        |
-|                |[merge](merge-tag.html)        |             |[include](include-tag.html)  |
-|                |[sort](sort-tag.html)          |             |[param](param-tag.html)      |   
-|                |[subset](subset-tag.html)      |             |[property](property-tag.html)|
-|                |                               |             |[push](push-tag.html)        |
-|                |                               |             |[set](set-tag.html)          |
-|                |                               |             |[text](text-tag.html)        |
-|                |                               |             |[url](url-tag.html)          |
+|                |[if](if-tag)              |             |[a](a-tag)              |   
+|                |[elseif](elseif-tag)      |             |[action](action-tag)    |
+|                |[else](else-tag)          |             |[bean](bean-tag)        |
+|                |[append](append-tag)      |             |[date](date-tag)        |
+|                |[generator](generator-tag)|             |[debug](debug-tag)      |
+|                |[iterator](iterator-tag)  |             |[i18n](i18n-tag)        |
+|                |[merge](merge-tag)        |             |[include](include-tag)  |
+|                |[sort](sort-tag)          |             |[param](param-tag)      |   
+|                |[subset](subset-tag)      |             |[property](property-tag)|
+|                |                               |             |[push](push-tag)        |
+|                |                               |             |[set](set-tag)          |
+|                |                               |             |[text](text-tag)        |
+|                |                               |             |[url](url-tag)          |
 
 
 ## UI Tag Reference
@@ -46,25 +46,25 @@ Struts Generic Tags control the execution flow as pages render.
 Struts UI Tags display data in rich and reusable HTML.
 
 |**Form Tags**|                                                     |**Non-Form UI Tags**    |
-|             |[checkbox](checkbox-tag.html)                        |                        |[actionerror](actionerror-tag.html)    |
-|             |[checkboxlist](checkboxlist-tag.html)                |                        |[actionmessage](actionmessage-tag.html)|
-|             |[combobox](combobox-tag.html)                        |                        |[component](component-tag.html)        |
-|             |[datetextfield](datetextfield-tag.html)              |                        |[fielderror](fielderror-tag.html)      |
-|             |[doubleselect](doubleselect-tag.html)                |                        |                                       |
-|             |[head](head-tag.html)                                |                        |                                       |
-|             |[file](file-tag.html)                                |                        |                                       |
-|             |[form](form-tag.html)                                |                        |                                       |
-|             |[hidden](hidden-tag.html)                            |                        |                                       |
-|             |[inputtransferselect](inputtransferselect-tag.html)  |                        |                                       |
-|             |[label](label-tag.html)                              |                        |                                       |
-|             |[optiontransferselect](optiontransferselect-tag.html)|                        |                                       |
-|             |[optgroup](optgroup-tag.html)                        |                        |                                       |
-|             |[password](password-tag.html)                        |                        |                                       |
-|             |[radio](radio-tag.html)                              |                        |                                       |
-|             |[reset](reset-tag.html)                              |                        |                                       |
-|             |[select](select-tag.html)                            |                        |                                       |
-|             |[submit](submit-tag.html)                            |                        |                                       |
-|             |[textarea](textarea-tag.html)                        |                        |                                       |
-|             |[textfield](textfield-tag.html)                      |                        |                                       |
-|             |[token](token-tag.html)                              |                        |                                       |
-|             |[updownselect](updownselect-tag.html)                |                        |                                       |
+|             |[checkbox](checkbox-tag)                        |                        |[actionerror](actionerror-tag)    |
+|             |[checkboxlist](checkboxlist-tag)                |                        |[actionmessage](actionmessage-tag)|
+|             |[combobox](combobox-tag)                        |                        |[component](component-tag)        |
+|             |[datetextfield](datetextfield-tag)              |                        |[fielderror](fielderror-tag)      |
+|             |[doubleselect](doubleselect-tag)                |                        |                                       |
+|             |[head](head-tag)                                |                        |                                       |
+|             |[file](file-tag)                                |                        |                                       |
+|             |[form](form-tag)                                |                        |                                       |
+|             |[hidden](hidden-tag)                            |                        |                                       |
+|             |[inputtransferselect](inputtransferselect-tag)  |                        |                                       |
+|             |[label](label-tag)                              |                        |                                       |
+|             |[optiontransferselect](optiontransferselect-tag)|                        |                                       |
+|             |[optgroup](optgroup-tag)                        |                        |                                       |
+|             |[password](password-tag)                        |                        |                                       |
+|             |[radio](radio-tag)                              |                        |                                       |
+|             |[reset](reset-tag)                              |                        |                                       |
+|             |[select](select-tag)                            |                        |                                       |
+|             |[submit](submit-tag)                            |                        |                                       |
+|             |[textarea](textarea-tag)                        |                        |                                       |
+|             |[textfield](textfield-tag)                      |                        |                                       |
+|             |[token](token-tag)                              |                        |                                       |
+|             |[updownselect](updownselect-tag)                |                        |                                       |

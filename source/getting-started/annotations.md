@@ -22,9 +22,9 @@ to the browser (`register.jsp`). Struts 2 provides an alternative to using XML t
 standard naming conventions and annotations for your action names, `ActionSupport` classes, and results.
 
 This tutorial assumes you understand how to apply annotations to Java classes and methods. If you're not familiar with 
-annotations, consult the [Java online tutorial](http://download.oracle.com/javase/tutorial/java/javaOO/annotations.html).
+annotations, consult the [Java online tutorial](http://download.oracle.com/javase/tutorial/java/javaOO/annotations).
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are having 
+The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
 a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer 
 to your problem, post a question on the mailing list.
 
@@ -69,7 +69,7 @@ in this location). If the execute method returns "input" or "error" then the vie
 
 ## Struts 2 Configuration Plugin
 
-In a [previous tutorial](debugging-struts.html) we reviewed how to use the Struts 2 Configuration plugin to view the details 
+In a [previous tutorial](debugging-struts) we reviewed how to use the Struts 2 Configuration plugin to view the details 
 of how Struts 2 has configured your application. When using the Convention plugin, it's very handy to also use 
 the Configuration plugin during development. On the example application's home page is a link to the application's configuration. 
 Click on that link and then the hello link on the left menu (under Actions in default). You'll see the configuration 
@@ -139,4 +139,4 @@ an XML file to configure your Struts 2 application. The Struts 2 Convention plug
 to the same method, map results to different view pages, map errors to view pages, and much more. Be sure to read through 
 the [Convention Plugin](../plugins/convention/) documentation for alternative ways to configure your Struts 2 application.
 
-|Return to [Spring and Struts 2](spring.html)|or|onward to [Introducing Interceptors](introducing-interceptors.html)|
+|Return to [Spring and Struts 2](spring)|or|onward to [Introducing Interceptors](introducing-interceptors)|

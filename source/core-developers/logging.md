@@ -105,7 +105,7 @@ public class JdkLogger implements Logger {
 }
 ```
 
-Check [the source code](http://struts.apache.org/struts-core/apidocs/com/opensymphony/xwork2/util/logging/package-summary.html)
+Check [the source code](http://struts.apache.org/struts-core/apidocs/com/opensymphony/xwork2/util/logging/package-summary)
 to see more details.
 
 ## Defining which factory to use

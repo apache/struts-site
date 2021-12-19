@@ -12,7 +12,7 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-This tutorial assumes you've completed the [Processing Forms](processing-forms.html) tutorial and have a working 
+This tutorial assumes you've completed the [Processing Forms](processing-forms) tutorial and have a working 
 **form-processing** project. The example code for this tutorial, **form-validation**, is available for checkout from 
 the Struts 2 GitHub repository [struts-examples](https://github.com/apache/struts-examples).
 
@@ -21,21 +21,21 @@ the Struts 2 GitHub repository [struts-examples](https://github.com/apache/strut
 In this tutorial we'll explore using Struts 2 to validate the user's input on a form. There are two ways you can use Struts 2 
 to do form validation. This tutorial will cover the more basic method, where the validation is included in the Struts 2 Action class.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are having 
+The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
 a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer 
 to your problem, post a question on the mailing list.
 
 ## Add validate Method
 
 To enable the Struts 2 Action class to validate a user's input on a Struts 2 form, you must define a validate method 
-in your Action class. Using the example from [Processing Forms](processing-forms.html) tutorial, let's say that we have 
+in your Action class. Using the example from [Processing Forms](processing-forms) tutorial, let's say that we have 
 these business rules:
 
 1. User must provide a first name
 2. User must provide an email address
 3. User younger than 18 cannot register
 
-If you recall from the [Processing Forms](processing-forms.html) tutorial the user's input into the form fields is placed 
+If you recall from the [Processing Forms](processing-forms) tutorial the user's input into the form fields is placed 
 by Struts 2 into the Java model class `personBean`. So a user's input into the `firstName` field would end up as the value 
 for `personBean`'s `firstName` instance field (via the `personBean.setFirstName` method).
 
@@ -97,7 +97,7 @@ addFieldError("personBean.firstName", "First name is required.")
 
 will cause the message _First name is required_ to be displayed above the `firstName` field on the form.
 
-If you have made the above changes to the [Processing Forms](processing-forms.html) tutorial or you have downloaded 
+If you have made the above changes to the [Processing Forms](processing-forms) tutorial or you have downloaded 
 from [form-validation](https://github.com/apache/struts-examples/tree/master/form-validation) 
 run the application (see the README.txt in the project root folder). Click on the Please register link. On the registration 
 form, just click the submit button and you should see:
@@ -117,10 +117,10 @@ to `register.jsp` before the closing HTML `</head>` tag. Go through the same ste
 
 This tutorial covered validating a user's form input by adding a validate method to an Action class. There is another 
 more sophisticated way to validate user input using XML. If you want to learn more about using XML for validation 
-in Struts 2 see [Validation](../core-developers/validation.html) .
+in Struts 2 see [Validation](../core-developers/validation) .
 
 ## Up Next
 
 In our next tutorial we'll cover how to use message resource files to separate out the text from the view page.
 
-|Return to [Processing Forms](processing-forms.html)|or|onward to [Message resource files](message-resource-files.html)|
+|Return to [Processing Forms](processing-forms)|or|onward to [Message resource files](message-resource-files)|

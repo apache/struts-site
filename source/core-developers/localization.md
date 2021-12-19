@@ -14,8 +14,8 @@ title: Localization
 The framework supports internationalization (i18n) in the following places:
 
 1. the _UI Tags_
-2. Messages and Errors from the [ValidationAware](http://struts.apache.org/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ValidationAware.html)
-3. Within action classes that extend [ActionSupport](http://struts.apache.org/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ActionSupport.html) through the `getText()` method
+2. Messages and Errors from the [ValidationAware](http://struts.apache.org/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ValidationAware)
+3. Within action classes that extend [ActionSupport](http://struts.apache.org/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ActionSupport) through the `getText()` method
 
 ## Resource Bundle Search Order
 
@@ -117,7 +117,7 @@ The key attribute of most UI tags can be used to retrieve a message from a resou
 ## I18n Interceptor
 
 Essentially, the i18n Interceptor pushes a locale into the ActionContext map upon every request. The framework
-components that support localization all utilize the ActionContext locale. See [I18n Interceptor](i18n-interceptor.html) f
+components that support localization all utilize the ActionContext locale. See [I18n Interceptor](i18n-interceptor) f
 or details.
 
 ## Global Resources (struts.custom.i18n.resources) in struts.properties
@@ -126,7 +126,7 @@ A global resource bundle could be specified programmatically, as well as the loc
 
 ## Formatting Dates and Numbers
 
-See [Formatting Dates and Numbers](formatting-dates-and-numbers.html) for more details and examples.
+See [Formatting Dates and Numbers](formatting-dates-and-numbers) for more details and examples.
 
 ## Comparison with Struts 1
 

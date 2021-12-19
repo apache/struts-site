@@ -30,7 +30,7 @@ You can use a web interface as well if you want to post a question [https://list
 You can read the [ASF Mail](http://mail-archives.apache.org/mod_mbox/struts-user) or the [Mark Mail](http://markmail.org/list/org.apache.struts.users)
 Archives if you are looking for older discussions. There are many other archives out there as well.
 
-If you want to **discuss patches or contribute to Struts** you should subscribe to the [developers list](dev-mail.html).
+If you want to **discuss patches or contribute to Struts** you should subscribe to the [developers list](dev-mail).
 {:.alert .alert-success}
 
 ## Guidelines
@@ -104,5 +104,5 @@ is to withhold from the troll what he or she wants most: A response.
 Every volunteer project obtains its strength from the people involved in it. You are welcome to join any of our mailing 
 lists. You can choose to lurk, or actively participate; it's up to you. The level of community responsiveness to specific 
 questions is generally directly proportional to the amount of effort you spend formulating your question. Eric Raymond 
-and Rick Moen have even written an essay entitled [Asking Smart Questions](http://www.catb.org/~esr/faqs/smart-questions.html)
+and Rick Moen have even written an essay entitled [Asking Smart Questions](http://www.catb.org/~esr/faqs/smart-questions)
 precisely on this topic. Please read the essay, follow its advice, and then post your smart questions to the appropriate list.

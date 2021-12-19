@@ -8,16 +8,16 @@ title: Constant Configuration
 Constants provide a simple way to customize a Struts application by defining key settings that modify framework and 
 plugin behavior. There are two key roles for constants. First, they are used to override settings like the maximum file 
 upload size or whether the Struts framework should be in "devMode" or not, and so on. Second, they specify which 
-[Bean](bean-configuration.html) implementation, among multiple implementations of a given type, should be chosen.
+[Bean](bean-configuration) implementation, among multiple implementations of a given type, should be chosen.
 
 Constants can be declared in multiple files. By default, constants are searched for in the following order, allowing 
 for subsequent files to override previous ones:
 
-1. [struts-default.xml](struts-default-xml.html)
+1. [struts-default.xml](struts-default-xml)
 2. struts-plugin.xml
-3. [struts.xml](struts-xml.html)
-4. [struts.properties](struts-properties.html)
-5. [web.xml](web-xml.html)
+3. [struts.xml](struts-xml)
+4. [default.properties](default-properties)
+5. [web.xml](web-xml)
 
 > The `struts.properties` file is provided for backward-compatibility with WebWork.
 
@@ -30,9 +30,9 @@ In the various XML variants, the constant element has two required attributes: `
 |name|**yes**|the name of the constant|
 |value|**yes**|the value of the constant|
 
-In the [struts.properties](struts-properties.html) file, each entry is treated as a constant.
+In the [default.properties](default-properties) file, each entry is treated as a constant.
 
-In the [web.xml](web-xml.html) file, any FilterDispatcher initialization parameters are loaded as constants.
+In the [web.xml](web-xml) file, any FilterDispatcher initialization parameters are loaded as constants.
 
 ### Value substitution
 

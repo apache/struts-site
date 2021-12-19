@@ -7,16 +7,16 @@ title: Tag Developers Guide
 
 > NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
-The ajax [div](dojo-div-tag.html) template provides a much more interesting div rendering option that the other themes 
+The ajax [div](dojo-div-tag) template provides a much more interesting div rendering option that the other themes 
 do. Rather than simply rendering a `<div>` tag, this template relies on advanced AJAX features provided 
-by the [Dojo Toolkit](http://dojotoolkit.org). While the [div](dojo-div-tag.html) tag could be used outside 
-of the [ajax theme](), it is usually not very useful. See the [div](dojo-div-tag.html) tag for more information on what 
+by the [Dojo Toolkit](http://dojotoolkit.org). While the [div](dojo-div-tag) tag could be used outside 
+of the [ajax theme](), it is usually not very useful. See the [div](dojo-div-tag) tag for more information on what 
 features are provided.
 
 ## Features
 
-The remote div has a few features, some of which can be combined with the [a](dojo-a-tag.html) tag and 
-the [ajax a template](ajax-a-template.html). These uses are:
+The remote div has a few features, some of which can be combined with the [a](dojo-a-tag) tag and 
+the [ajax a template](ajax-a-template). These uses are:
 
 - Retrieve remote data
 - Initialize the div with content before the remote data is retrieved
@@ -47,7 +47,7 @@ before the remote data is retrieved. The content is essentially just the body of
 </saf:div>
 ```
 
-If you wish to load more complex initial data, you can use the [action](action-tag.html) tag and the `executeResult` 
+If you wish to load more complex initial data, you can use the [action](action-tag) tag and the `executeResult` 
 attribute:
 
 ```html
@@ -89,10 +89,10 @@ For example, the following will update every minute after a two second delay:
 
 ## Listening for Events
 
-The [a](dojo-a-tag.html) tag (specifically the [ajax a template](ajax-a-template.html)) and the div tag support 
-an [ajax event system](ajax-event-system.html), providing the ability to broadcast events to topics. You can specify 
+The [a](dojo-a-tag) tag (specifically the [ajax a template](ajax-a-template)) and the div tag support 
+an [ajax event system](ajax-event-system), providing the ability to broadcast events to topics. You can specify 
 the **topics** to listen to using a comma separated list in the `listenTopics` attribute. What this means is that when 
-a topic is published, usually through the [ajax a template](ajax-a-template.html), the URL specified in the `href` 
+a topic is published, usually through the [ajax a template](ajax-a-template), the URL specified in the `href` 
 attribute will be re-requested.
 
 ```html

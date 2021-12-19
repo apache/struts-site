@@ -102,13 +102,13 @@ release. The GA designation is our highest quality grade.
 
 This release addresses two potential security vulnerabilities:
 
- - [S2-050](/docs/s2-050.html)
+ - [S2-050](/docs/s2-050)
     A regular expression Denial of Service when using URLValidator (similar to S2-044 & S2-047)
- - [S2-051](/docs/s2-051.html)
+ - [S2-051](/docs/s2-051)
    A remote attacker may create a DoS attack by sending crafted xml request when using the Struts REST plugin
- - [S2-052](/docs/s2-052.html)
+ - [S2-052](/docs/s2-052)
    Possible Remote Code Execution attack when using the Struts REST plugin with XStream handler to handle XML payloads
- - [S2-053](/docs/s2-053.html)
+ - [S2-053](/docs/s2-053)
    A possible Remote Code Execution attack when using an unintentional expression in Freemarker tag instead of string literals
    
 Also this version resolves the following issues:    
@@ -144,11 +144,11 @@ to maintaining applications over time.
 
 This release contains fixes for the following potential security vulnerabilities:
 
- - [S2-050](/docs/s2-050.html)
+ - [S2-050](/docs/s2-050)
     A regular expression Denial of Service when using URLValidator (similar to S2-044 & S2-047)
- - [S2-051](/docs/s2-051.html)
+ - [S2-051](/docs/s2-051)
    A remote attacker may create a DoS attack by sending crafted xml request when using the Struts REST plugin
- - [S2-052](/docs/s2-052.html)
+ - [S2-052](/docs/s2-052)
    Possible Remote Code Execution attack when using the Struts REST plugin with XStream handler to handle XML payloads
 
 Except the above this release also contains several improvements just to mention few of them:
@@ -179,7 +179,7 @@ Except the above this release also contains several improvements just to mention
  - Upgrade xstream to the latest version
  - Upgrade to struts-master 11
 
-> Please read the [Version Notes](/docs/version-notes-2513.html) to find more details about performed bug fixes and improvements.
+> Please read the [Version Notes](/docs/version-notes-2513) to find more details about performed bug fixes and improvements.
 
 **All developers are strongly advised to perform this action.**
 
@@ -193,7 +193,7 @@ You can download this version from our [download](download.cgi#struts-ga) page.
 
 #### 09 August 2017 - S2-049 Security Bulletin update {#a20170809}
 
-This is an update of the recently announced Security Bulletin - [S2-049](/docs/s2-049.html).
+This is an update of the recently announced Security Bulletin - [S2-049](/docs/s2-049).
 
 The bulletin was extended with an additional information when the potential vulnerability
 can be present in your application. Please re-read the mentioned bulletin and apply required
@@ -208,9 +208,9 @@ release. The GA designation is our highest quality grade.
 
 This release addresses two potential security vulnerabilities:
 
- - [S2-049](/docs/s2-049.html)
+ - [S2-049](/docs/s2-049)
    A DoS attack is available for Spring secured actions
- - [S2-048](/docs/s2-048.html)
+ - [S2-048](/docs/s2-048)
    Possible RCE in the Struts Showcase app in the Struts 1 plugin example in Struts 2.3.x series
    
 Also this version resolves the following issues:    
@@ -244,9 +244,9 @@ to maintaining applications over time.
 
 This release contains fixes for the following potential security vulnerabilities:
 
- - [S2-047](/docs/s2-047.html)
+ - [S2-047](/docs/s2-047)
    Possible DoS attack when using URLValidator
- - [S2-049](/docs/s2-049.html)
+ - [S2-049](/docs/s2-049)
    A DoS attack is available for Spring secured actions
 
 Except the above this release also contains several improvements just to mention few of them:
@@ -294,7 +294,7 @@ Except the above this release also contains several improvements just to mention
  - Upgrade to commons-lang 3.6
  - Update commons-fileupload
 
-> Please read the [Version Notes](/docs/version-notes-2512.html) to find more details about performed bug fixes and improvements.
+> Please read the [Version Notes](/docs/version-notes-2512) to find more details about performed bug fixes and improvements.
 
 **All developers are strongly advised to perform this action.**
 
@@ -312,7 +312,7 @@ A potential security vulnerability was reported in the Struts 1 plugin used in t
 It is possible to perform a Remote Code Execution attack if given construction exists in the vulnerable
 application. Please read the security bulletin for more details and inspect your application.
 
- - [S2-048](/docs/s2-048.html)
+ - [S2-048](/docs/s2-048)
    Possible RCE in the Struts Showcase app in the Struts 1 plugin example in Struts 2.3.x series
 
 NOTE: Please notice that this vulnerability does not affect applications using Struts 2.5.x series 
@@ -328,7 +328,7 @@ release. The GA designation is our highest quality grade.
 These releases address one critical security vulnerability:
 
 - Possible Remote Code Execution when performing file upload based on Jakarta Multipart parser
-  [S2-045](/docs/s2-045.html), [S2-046](/docs/s2-046.html)
+  [S2-045](/docs/s2-045), [S2-046](/docs/s2-046)
 
 Those plugins were released to allow users running older versions of the Apache Struts secure their applications
 in an easy way. You don't have to migrate to the latest version (which is still preferable) but by applying one of those 
@@ -352,7 +352,7 @@ release. The GA designation is our highest quality grade.
 These releases address one critical security vulnerability:
 
 - Possible Remote Code Execution when performing file upload based on Jakarta Multipart parser
-  [S2-045](/docs/s2-045.html), [S2-046](/docs/s2-046.html)
+  [S2-045](/docs/s2-045), [S2-046](/docs/s2-046)
 
 Those plugins were released to allow users running older versions of the Apache Struts secure their applications in easy way.
 You don't have to migrate to the latest version (which is still preferable) but by applying one of those plugins, 
@@ -375,7 +375,7 @@ release. The GA designation is our highest quality grade.
 
 This release addresses one potential security vulnerability:
 
-- Possible Remote Code Execution when performing file upload based on Jakarta Multipart parser - [S2-045](/docs/s2-045.html)
+- Possible Remote Code Execution when performing file upload based on Jakarta Multipart parser - [S2-045](/docs/s2-045)
 
 Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
 The framework is designed to streamline the full development cycle, from building, to deploying,
@@ -398,7 +398,7 @@ release. The GA designation is our highest quality grade.
 
 This release addresses one potential security vulnerability:
 
-- Possible Remote Code Execution when performing file upload based on Jakarta Multipart parser - [S2-045](/docs/s2-045.html)
+- Possible Remote Code Execution when performing file upload based on Jakarta Multipart parser - [S2-045](/docs/s2-045)
 
 Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
 The framework is designed to streamline the full development cycle, from building, to deploying,

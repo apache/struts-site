@@ -12,7 +12,7 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-FreeMarker is a Java-based template engine that is a great alternative to [JSP](jsp.html). FreeMarker is ideal for situations 
+FreeMarker is a Java-based template engine that is a great alternative to [JSP](jsp). FreeMarker is ideal for situations 
 where your action results can possibly be loaded from outside a Servlet container. For example, if you  wished to support 
 plugins in your application, you might wish to use FreeMarker so that the plugins could provide the entire action class 
 and view in a single jar that is loaded from the classloader.
@@ -22,8 +22,8 @@ For more information on FreeMarker itself, please visit the [FreeMarker website]
 > The framework utilizes FreeMarker because the engine includes strong error reporting, built-in internationalization 
 > and powerful macro libraries.
 
-> Support is also included for [Velocity](velocity.html) templates. For a comparison of Velocity vs FreeMarker 
-> see [here](http://freemarker.org/fmVsVel.html).
+> Support is also included for [Velocity](velocity) templates. For a comparison of Velocity vs FreeMarker 
+> see [here](http://freemarker.org/fmVsVel).
 
 ## Getting Started
 
@@ -147,7 +147,7 @@ The framework looks for FreeMarker templates in two locations (in this order):
 
 This ordering makes it ideal for providing templates inside a fully-built jar, but allowing for overrides of those 
 templates to be defined in your web application. In fact, this is how you can override the default UI tags 
-and [Form Tags](form-tags.html) included with the framework.
+and [Form Tags](form-tags) included with the framework.
 
 In addition, you can specify a location (directory on your file system) through the `templatePath` or `TemplatePath`
 context variable (in the `web.xml`). If a variable is specified, the content of the directory it points to will be 
@@ -191,8 +191,8 @@ The built-in variables that Struts-FreeMarker integration provides are:
 
 ## Tag Support
 
-FreeMarker includes complete tag support. See the [FreeMarker Tags](freemarker-tags.html) documentation for information 
-on how to use the generic [Struts Tags](struts-tags.html) provided by Struts. In addition to this, you can use any JSP tag, 
+FreeMarker includes complete tag support. See the [FreeMarker Tags](freemarker-tags) documentation for information 
+on how to use the generic [Struts Tags](struts-tags) provided by Struts. In addition to this, you can use any JSP tag, 
 like so:
 
 ```ftl
@@ -223,8 +223,8 @@ This is normally perfect for your needs, but it is important to remember that th
 by FreeMarker and not by the framework's _Type Conversion_ support.
 
 If you want the framework to handle the formatting according to the _Type Conversion_  you have specified, you shouldn't
-use the normal `${...}` syntax. Instead, you should use the [property](property-tag.html) tag. The difference is that 
-the `property` tag is specifically designed to take an [OGNL](ognl.html) expression, evaluate it, and then convert it 
+use the normal `${...}` syntax. Instead, you should use the [property](property-tag) tag. The difference is that 
+the `property` tag is specifically designed to take an [OGNL](ognl) expression, evaluate it, and then convert it 
 to a String using any _Type Conversion_ rules you have specified. The normal `${...}` syntax will use a FreeMarker 
 expression language, evaluate it, and then convert it to a String using the built in formatting rules.
 
@@ -262,20 +262,20 @@ logic to take place instead.
 
 As of FreeMarker 2.3.4, an alternative syntax is supported. This alternative syntax is great if you find that your IDE 
 (especially IntelliJ IDEA) makes it difficult to work with the default syntax. You can read more about this syntax
- [here](http://freemarker.org/docs/dgui_misc_alternativesyntax.html).
+ [here](http://freemarker.org/docs/dgui_misc_alternativesyntax).
 
 ### Cache
 
 You can enable FreeMarker cache mechanism by specifying below options in `struts.xml`:
 
 - `<constant name="struts.freemarker.mru.max.strong.size" value="250" />` - this option will be used 
-  by [freemarker.cache.MruCacheStorage](http://freemarker.org/docs/api/freemarker/cache/MruCacheStorage.html)
+  by [freemarker.cache.MruCacheStorage](http://freemarker.org/docs/api/freemarker/cache/MruCacheStorage)
 - `<constant name="struts.freemarker.templatesCache.updateDelay" value="1800" />` - default update cache interval (5 seconds)
 -`<constant name="struts.freemarker.templatesCache" value="true" />` - \***DEPRECATED**\* this option will use a internal 
   ConcurrentHashMap in FreemarkerTemplateEngine but not freemarker native cache
    
 Setting `devMode` to `true` will disable cache and updateDelay immediately, but you can explicit specify these constants 
-to enable cache even in `devMode`, see [devMode](../core-developers/development-mode.html). 
+to enable cache even in `devMode`, see [devMode](../core-developers/development-mode). 
 
 ### Incompatible Improvements
 

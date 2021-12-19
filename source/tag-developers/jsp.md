@@ -92,9 +92,9 @@ Assuming there's a parameter with the name `myContextParam` in our context.
 
 ## Tag Support
 
-See the [JSP Tags](jsp-tags.html) documentation for information on how to use the generic [Struts Tags](struts-tags.html) 
+See the [JSP Tags](jsp-tags) documentation for information on how to use the generic [Struts Tags](struts-tags) 
 provided by the framework. 
 
 ## Exposing the ValueStack
 
-There are a couple of ways to obtain [Access to ValueStack from JSPs](access-to-valuestack-from-jsps.html).
+There are a couple of ways to obtain [Access to ValueStack from JSPs](access-to-valuestack-from-jsps).

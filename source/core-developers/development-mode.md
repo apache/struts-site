@@ -7,20 +7,20 @@ title: Development Mode
 
 Please turn this option off before deploying application to a production environment - it can expose sensitive data of your application!
 
-Struts 2 has a setting (which can be set to `true` or `false` in [struts.properties](struts-properties.html)) 
+Struts 2 has a setting (which can be set to `true` or `false` in [default.properties](default-properties)) 
 called devMode (= development mode). When this setting is enabled, Struts 2 will provide additional logging and debug 
 information, which can significantly speed up development.
 
 You can also set this constant in your struts.xml file: `<constant name="struts.devMode" value="true" />`.
 
-This is the preferred method. See [Constant Configuration](constant-configuration.html) for more information.
+This is the preferred method. See [Constant Configuration](constant-configuration) for more information.
 
 ## What does it do?
 
 - When enabled, Struts 2 will reload your **resource bundles on every request** (meaning you can change your .properties 
   files, save them, and see the changes reflected on the next request). 
   **Note**: this option can also be set standalone via `struts.i18n.reload = true`
-- It will also **reload your xml configuration files** ([struts.xml](struts-xml.html)), your **validation files**, 
+- It will also **reload your xml configuration files** ([struts.xml](struts-xml)), your **validation files**, 
   and so on, on every request. This is useful for testing or fine-tuning your configuration without having to redeploy 
   your application every time.
   **Note**: this option can also be set standalone via `struts.configuration.xml.reload = true`
@@ -34,7 +34,7 @@ This is the preferred method. See [Constant Configuration](constant-configuratio
 
 ## Don't forget...
 
-By default, the development mode is disabled, because it has a significant impact on [performance](performance-tuning.html), 
+By default, the development mode is disabled, because it has a significant impact on [performance](performance-tuning), 
 since the entire configuration will be reloaded on every request.
 
 ## Page rendering is slow

@@ -25,11 +25,11 @@ on request. But if we start to believe you have grown into the project
 and would make a great addition to our committer community we'll
 held a private discussion and eventually invite you to join officially.
 
-You can read more about this on the page ["How the ASF works"](http://www.apache.org/foundation/how-it-works.html).
+You can read more about this on the page ["How the ASF works"](http://www.apache.org/foundation/how-it-works).
 
 Now as you have understood that you don't need to ask for anything to start,
 you can simply start. It is always a good idea to first subscribe to the
-[Developers Mailinglist](dev-mail.html). We are discussing everything
+[Developers Mailinglist](dev-mail). We are discussing everything
 around Struts in public (except a few things, like discussions on persons).
 With reading the developers list you'll get a good idea what we are planning
 and maybe even how you can help.
@@ -45,17 +45,17 @@ or help a lot on the user mailing lists. For us, "Community is over Code".
 And a good community does not reduce itself to people who write code.
 
 If you like, you can read Craig R. McClanahans article on
-[Contributing](http://jakarta.apache.org/site/contributing.html).
+[Contributing](http://jakarta.apache.org/site/contributing).
 
 Here is another comment that was sent to the Jakarta Turbine Mailing
 List about the open source process and the contrast between how an
 open source product and a proprietary product improve through the user
-community: [Understanding Opensource](http://jakarta.apache.org/site/understandingopensource.html).
+community: [Understanding Opensource](http://jakarta.apache.org/site/understandingopensource).
 
 While written for ASF developers, the Rules for Revolutionaries provides insight into how
 the collaborative process works, and how our process differs from working on a hierarchical
-team: [Rules for Revolutionaries](http://incubator.apache.org/learn/rules-for-revolutionaries.html)
+team: [Rules for Revolutionaries](http://incubator.apache.org/learn/rules-for-revolutionaries)
 
-Feel free to ping us on the [Developers Mailinglist](dev-mail.html) if you have
-any questions. Also make sure you read the [FAQ](helping.html) which provides
+Feel free to ping us on the [Developers Mailinglist](dev-mail) if you have
+any questions. Also make sure you read the [FAQ](helping) which provides
 more information how you can help us.

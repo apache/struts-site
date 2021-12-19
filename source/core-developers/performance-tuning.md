@@ -15,7 +15,7 @@ The following are some tips and tricks to squeeze the most performance out of St
 
 ## Turn off logging and devMode
 
-The [devMode](development-mode.html) allows reloading of configuration and validation related files, but because they 
+The [devMode](development-mode) allows reloading of configuration and validation related files, but because they 
 happen on each request, this setting will totally kill your performance.
 When using logging, make sure to turn off logging (esp. Freemarker generates a LOT of logging), and check if a level is 
 enabled before printing it, or you will get the cost of the String parsing/concatenation anyways.

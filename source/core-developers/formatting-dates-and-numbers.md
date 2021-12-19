@@ -10,7 +10,7 @@ title: Formatting Dates and Numbers
 Struts2 supports localization (l10n) aware formatting of dates, times and numbers very easily, utilizing Java's 
 built-in date formatting features.
 
-As seen in the [Localization](localization.html) chapter, it is quite easy to define hierarchical resource bundles 
+As seen in the [Localization](localization) chapter, it is quite easy to define hierarchical resource bundles 
 with Struts2, giving the developer the opportunity to define locale dependent message formats. This is the entry point 
 to define the needed date, time and number formats. Your default properties could contain the following generic formats:
 
@@ -33,7 +33,7 @@ In parallel, you could add the following to your de_DE bundle:
 format.date = {0,date,dd.MM.yyyy}
 ```
 
-Read more on how to define message formats in Sun's Java API docs for [MessageFormat](http://java.sun.com/j2se/1.5.0/docs/api/java/text/MessageFormat.html).
+Read more on how to define message formats in Sun's Java API docs for [MessageFormat](http://java.sun.com/j2se/1.5.0/docs/api/java/text/MessageFormat).
 
 Now that we have our formats set up, it is quite easy to use them in our views.
 

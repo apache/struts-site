@@ -24,7 +24,7 @@ The optional `abstract` attribute creates a base package that can omit the actio
 |-----------|----------|-------------|
 | name |**yes**| key to for other packages to reference |
 | extends | no | inherits package behavior of the package it extends |
-| namespace | no | see [Namespace Configuration](namespace-configuration.html)|
+| namespace | no | see [Namespace Configuration](namespace-configuration)|
 | abstract | no | declares package to be abstract (no action configurations required in package) |
 
 ### Simple usage

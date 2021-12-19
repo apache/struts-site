@@ -13,7 +13,7 @@ title: Spring Plugin
 
 [Spring](http://www.springframework.org) is a lightweight container, providing centralized, automated configuration and wiring of your application objects, using a technique called "Dependency Injection".
 
-The Spring Plugin works by overriding the Struts [ObjectFactory](/core-developers/object-factory.html) to enhance the creation of core framework objects. When an object is to be created, it uses the `class` attribute in the Struts configuration to correspond to the `id` attribute in the Spring configuration. If not found, the class will try to be created as usual, then be autowired by Spring. In the case of Actions, Spring 2's [bean scope feature](http://www.springframework.org/docs/reference/beans.html#beans-factory-scopes) can be used to scope an Action instance to the session, application, or a custom scope, providing advanced customization above the default per-request scoping.
+The Spring Plugin works by overriding the Struts [ObjectFactory](/core-developers/object-factory) to enhance the creation of core framework objects. When an object is to be created, it uses the `class` attribute in the Struts configuration to correspond to the `id` attribute in the Spring configuration. If not found, the class will try to be created as usual, then be autowired by Spring. In the case of Actions, Spring 2's [bean scope feature](http://www.springframework.org/docs/reference/beans.html#beans-factory-scopes) can be used to scope an Action instance to the session, application, or a custom scope, providing advanced customization above the default per-request scoping.
 
 > Remember: 
 > 
@@ -31,7 +31,7 @@ __Features__
 
 To enable Spring integration, simply include struts2-spring-plugin-x-x-x.jar in your application.
 
-If you are using more than one object factory, (for example, by including both the Spring and Plexus plugins in your application,) you will need to set the struts.objectFactory property in [default.properties](/core-developers/default-properties.html)  or in one of several XML files via [Constant Configuration](/core-developers/constant-configuration.html):
+If you are using more than one object factory, (for example, by including both the Spring and Plexus plugins in your application,) you will need to set the struts.objectFactory property in [default.properties](/core-developers/default-properties)  or in one of several XML files via [Constant Configuration](/core-developers/constant-configuration):
 
 **struts.properties**
 
@@ -167,7 +167,7 @@ A typical spring configuration for bar could look as following.
 
 ```
 
-To use session-scoped components with Spring and Struts, see the [Spring Session Components Workarounds](spring-session-components-workarounds.html) analysis.
+To use session-scoped components with Spring and Struts, see the [Spring Session Components Workarounds](spring-session-components-workarounds) analysis.
 
 __Class Reloading__
 
@@ -213,7 +213,7 @@ Letting the reloading class loader handle all the classes can lead to ClassCastE
 
 __Settings__
 
-The following settings can be customized. See the [developer guide](/core-developers/configuration-files.html).
+The following settings can be customized. See the [developer guide](/core-developers/configuration-files).
 
 |Setting|Description|Default|Possible Values|
 |-------|-----------|-------|---------------|

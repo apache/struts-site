@@ -50,7 +50,7 @@ are often provided where it makes sense.
 ### General starting points
 
 If you are not familiar with the Java language generally,then the best starting point is the
-[Java Tutorial](http://docs.oracle.com/javase/tutorial/index.html).
+[Java Tutorial](http://docs.oracle.com/javase/tutorial/index).
 
 If you are familiar with Java, but not the mentioned technologies,
 the best overall starting point is the [Java EE Tutorial](https://docs.oracle.com/javaee/7/tutorial/).
@@ -87,7 +87,7 @@ There is a lot of help available in the internet, like
 ### The Java Language and Application Frameworks
 
 Struts is written in the
-[Java programming language](http://www.oracle.com/us/technologies/java/overview/index.html).
+[Java programming language](http://www.oracle.com/us/technologies/java/overview/index).
 Java is an object-orientated language, and the framework makes good use of many
 object-orientated techniques. A good understanding of Java, and especially
 object-orientated programming (OOP) and threading, will help
@@ -110,20 +110,20 @@ Struts, it will help you when your application grows and becomes more complex.
 #### Properties Files and ResourceBundles {#resources}
 
 Java applications, including web applications, are often
-configured using [Properties](http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html)
+configured using [Properties](http://docs.oracle.com/javase/6/docs/api/java/util/Properties)
 files. Properties files are the basis for the
-[ResourceBundles](http://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle.html)
+[ResourceBundles](http://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle)
 that the framework uses to provide message resources to an application.
 
 The Java Tutorials provide a
-[great introduction to Properties](http://docs.oracle.com/javase/tutorial/essential/environment/properties.html).
+[great introduction to Properties](http://docs.oracle.com/javase/tutorial/essential/environment/properties).
 
 Java ResourceBundles use one or more Properties files to provide internationalized messages
-to users based their [Locale](http://docs.oracle.com/javase/6/docs/api/java/util/Locale.html).
+to users based their [Locale](http://docs.oracle.com/javase/6/docs/api/java/util/Locale).
 Support for localizing an application was built into the framework from the ground-up.
 
 Again the Java Tutorials provide
-[more information](http://docs.oracle.com/javase/tutorial/i18n/resbundle/concept.html).
+[more information](http://docs.oracle.com/javase/tutorial/i18n/resbundle/concept).
 
 #### Threads {#threads}
 
@@ -157,7 +157,7 @@ for you to learn about SOAP.
 ### Servlets, Filters, and Web Containers {#containers}
 
 Since Java is an object-orientated language, the
-[Java Servlet](http://docs.oracle.com/javaee/6/tutorial/doc/bnafd.html)
+[Java Servlet](http://docs.oracle.com/javaee/6/tutorial/doc/bnafd)
 platform strives to cast HTTP into an object-orientated form.
 This strategy makes it easier for Java developers to concentrate on what they need their
 application to do -- rather than the mechanics of HTTP.
@@ -242,14 +242,14 @@ Pragmatic security can be used to fine-tune security make authorization decision
 the parameters of a call, or the internal state of a Web component.
 It can also be used to restrict authentication based on information in a database.
 
-For more about security you should read the [Java EE tutorial](http://docs.oracle.com/javaee/6/tutorial/doc/gijrp.html).
+For more about security you should read the [Java EE tutorial](http://docs.oracle.com/javaee/6/tutorial/doc/gijrp).
 Other projects, like [Apache Shiro](http://shiro.apache.org/) or [Spring Security](https://spring.io/projects/spring-security/) 
 might also help you to secure your web application.
 
 ### JavaServer Pages, JSP Tag Libraries, and JavaServer Faces {#jsp}
 
 If you write a classic web app, you might need a view component.
-One of the first of its kind was [JSP](http://www.oracle.com/technetwork/java/javaee/jsp/index.html).
+One of the first of its kind was [JSP](http://www.oracle.com/technetwork/java/javaee/jsp/index).
 
 While still powerful and fully supported by Struts, people might prefer other technologies
 like Velocity and Freemarker. Both are also first class citizens for Struts.
@@ -257,8 +257,8 @@ like Velocity and Freemarker. Both are also first class citizens for Struts.
 All have in common that you would start writing HTML markup and add dynamic features using
 JSP tags (same goes for Velocity and Freemarker). While it is not recommended, JSP even supports
 adding plain Java to the markup. Reading about the
-[JSTL](http://www.oracle.com/technetwork/java/index-jsp-135995.html) or, even better,
-the [Unified expression language](http://docs.oracle.com/javaee/5/tutorial/doc/bnahq.html)
+[JSTL](http://www.oracle.com/technetwork/java/index-jsp-135995) or, even better,
+the [Unified expression language](http://docs.oracle.com/javaee/5/tutorial/doc/bnahq)
 is recommended.
 
 That said, you can easily access your data model from the view. And render it appropriate.
@@ -287,7 +287,7 @@ familiar approach.
 Luckily Struts 2 reduces the need for XML to almost zero. While a basic knowledge on XML is always good,
 it is no longer crucial to write long XML documents to create a Struts
 application. If you would like to read more about it, please visit the page of the
-[Convention plugin](http://struts.apache.org/release/2.1.x/docs/convention-plugin.html).
+[Convention plugin](http://struts.apache.org/release/2.1.x/docs/convention-plugin).
 
 ### Model View Controller (MVC) {#mvc}
 
@@ -338,7 +338,7 @@ technologies to build the business, data access, and presentation layers.
 
 For more about MVC, see
 
-  - [Smalltalk MVC framework](http://st-www.cs.uiuc.edu/users/smarch/st-docs/mvc.html).
+  - [Smalltalk MVC framework](http://st-www.cs.uiuc.edu/users/smarch/st-docs/mvc).
   - [Wikipedia - MVC](http://en.wikipedia.org/wiki/Model_view_controller)
 
 ## Business Logic Frameworks {#logic-frameworks}
@@ -360,6 +360,6 @@ but more and more teams are turning to one of the many
 data access frameworks. Some popular data access frameworks include:
 
   - [Apache Cayenne](http://cayenne.apache.org/)
-  - [Enterprise Java Beans](http://docs.oracle.com/javaee/5/tutorial/doc/bnblr.html)
+  - [Enterprise Java Beans](http://docs.oracle.com/javaee/5/tutorial/doc/bnblr)
   - [Hibernate](http://www.hibernate.org/)
   - [myBATIS](http://code.google.com/p/mybatis)

@@ -12,19 +12,19 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-The xhtml provides all the basics that the [simple theme](simple-theme.html) provides and adds several features.
+The xhtml provides all the basics that the [simple theme](simple-theme) provides and adds several features.
 
-- Standard two-column table layout for the HTML [Struts Tags](struts-tags.html) ([form](form-tag.html), 
-  [textfield](textfield-tag.html), [select](select-tag.html), and so forth)
-- Labels for each of the HTML [Struts Tags](struts-tags.html) on the left hand side (or top, depending on 
+- Standard two-column table layout for the HTML [Struts Tags](struts-tags) ([form](form-tag), 
+  [textfield](textfield-tag), [select](select-tag), and so forth)
+- Labels for each of the HTML [Struts Tags](struts-tags) on the left hand side (or top, depending on 
   the `labelposition` attribute)
-- [Validation](../core-developers/validation.html) and error reporting
-- [Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation.html) using 
+- [Validation](../core-developers/validation) and error reporting
+- [Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation) using 
   100% JavaScript on the browser
 
 ## Wrapping the Simple Theme
 
-The xhtml theme uses the "wrapping" technique described by [Extending Themes](extending-themes.html). Let's look at how 
+The xhtml theme uses the "wrapping" technique described by [Extending Themes](extending-themes). Let's look at how 
 the HTML tags are wrapped by a standard header and footer. For example, in the `text.ftl` template, the `controlheader.ftl`
 and `controlfooter.ftl` templates are wrapped around the simple template.
 
@@ -33,12 +33,12 @@ and `controlfooter.ftl` templates are wrapped around the simple template.
 {% endhighlight %}
 
 > The `controlheader.ftl` is referenced using `${parameters.theme}` so that the code can be reused 
-> by the [ajax theme](ajax-theme.html).
+> by the [ajax theme](ajax-theme).
 
 ## XHTML Theme Header
 
 Now let's look at the `controlheader.ftl` and `controlheader-core.ftl`. Again, these are split up for easy re-use with 
-the [ajax theme](ajax-theme.html)) contents:
+the [ajax theme](ajax-theme)) contents:
 
 {% highlight freemarker %}
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/controlheader.ftl %}
@@ -52,10 +52,10 @@ The header used by the HTML tags in the xhtml theme is complicated. However, a c
 two behaviors: either a two-column format or a two-row format. Generally the two-column approach is what we want, so that 
 is the default option. To use the two-row approach, change the `labelposition` parameter to `top`.
 
-> The `fieldErrors`, usually caused by [Validation](../core-developers/validation.html), are printed out as a row above 
+> The `fieldErrors`, usually caused by [Validation](../core-developers/validation), are printed out as a row above 
 > the HTML form element. Some people prefer that the errors display elsewhere, such as in a third column. If you wish 
 > to place these elsehwere, overriding the headers is easy, allowing you to continue to use the other features provided 
-> by this theme. See [Template Loading](template-loading.html) for more information on how to do this.
+> by this theme. See [Template Loading](template-loading) for more information on how to do this.
 
 ## XHTML Theme Footer
 
@@ -66,9 +66,9 @@ for an `after` parameter.
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/controlfooter.ftl %}
 {% endhighlight %}
 
-While `after` isn't an attribute supported by any of the [Struts Tags](struts-tags.html), if you are using 
-[FreeMarker Tags](freemarker-tags.html), [Velocity Tags](velocity-tags.html), or the [param](param-tag.html) tag in any 
-template language, you can add an `after` parameter to place any content you like after the [simple theme](simple-theme.html) 
+While `after` isn't an attribute supported by any of the [Struts Tags](struts-tags), if you are using 
+[FreeMarker Tags](freemarker-tags), [Velocity Tags](velocity-tags), or the [param](param-tag) tag in any 
+template language, you can add an `after` parameter to place any content you like after the [simple theme](simple-theme) 
 template renders. The `after` attribute makes it easier to fine-tune HTML forms for your specific environment.
 
 ## Special Interest
@@ -77,7 +77,7 @@ Two xhtml templates of special interest are `head` and `form`.
 
 ### xhtml head template
 
-The xhtml [head](head-tag.html) template extends the _simple head template_ and provides an additional CSS that helps 
+The xhtml [head](head-tag) template extends the _simple head template_ and provides an additional CSS that helps 
 render the form elements.
 
 {% highlight freemarker %}
@@ -94,7 +94,7 @@ The head template imports a style sheet. The contents of **styles.css** are:
 
 The xhtml form template sets up the wrapping table around all the other  form elements. In addition to creating this 
 wrapping table, the opening and closing templates also, if the `validate` parameter is set to true, enable 
-[Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation.html).
+[Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation).
 
 {% highlight freemarker %}
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/form.ftl %}
@@ -108,7 +108,7 @@ The closing template, `form-close.ftl`:
 
 ### xhtml form template
 
-The xhtml form template sets up the wrapping table around all the other [xhtml theme](xhtml-theme.html) form elements. 
+The xhtml form template sets up the wrapping table around all the other [xhtml theme](xhtml-theme) form elements. 
 In addition to creating this wrapping table, the opening and closing templates also, if the `validate` parameter is set 
 to `true`, enable [Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation.htmk). 
 

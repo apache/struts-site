@@ -39,7 +39,7 @@ Tag the release by using the "release:prepare" goal of Maven:
 mvn release:prepare -DautoVersionSubmodules=true
 ```
 
-For a [dry run](http://maven.apache.org/plugins/maven-release-plugin/usage.html), add `-DdryRun=true`. If you do a dry 
+For a [dry run](http://maven.apache.org/plugins/maven-release-plugin/usage), add `-DdryRun=true`. If you do a dry 
 run, use `mvn release:clean` to clean up after you have looked at the output.
 
 When prompted for the SCM tag name, follow this pattern: `STRUTS_2_5_[PATCH_VERSION]`
@@ -47,7 +47,7 @@ When prompted for the SCM tag name, follow this pattern: `STRUTS_2_5_[PATCH_VERS
 > If you get an error message, try to re-run `mvn release:prepare -DautoVersionSubmodules=true` command again,
 > -Dresume flag is set to true by default and the plugin will resume the release process from where it failed before.
 
-Follow the link to get [more information](http://maven.apache.org/plugins/maven-release-plugin/examples/prepare-release.html)
+Follow the link to get [more information](http://maven.apache.org/plugins/maven-release-plugin/examples/prepare-release)
 about performed operation by release plugin.
 
 ## Perform the release
@@ -56,7 +56,7 @@ about performed operation by release plugin.
 mvn release:perform -DretryFailedDeploymentCount=10
 ```
 
-Follow the link to get [more information](http://maven.apache.org/plugins/maven-release-plugin/examples/perform-release.html)
+Follow the link to get [more information](http://maven.apache.org/plugins/maven-release-plugin/examples/perform-release)
 about performed operation by release plugin. After this step the artifacts will be hosted by [Nexus](http://repository.apache.org/).
  
 The `-DretryFailedDeploymentCount=10` is needed when there are problems with network connection (used just in case).
@@ -175,7 +175,7 @@ svn mv https://dist.apache.org/repos/dist/dev/struts/$VERSION/ https://dist.apac
 ## Promote release
 
 Log in again to [Nexus](http://repository.apache.org/) and **release** the repository, it will be automatically 
-replicated across Maven Repositories. See [Releasing a Maven-based project](http://maven.apache.org/developers/release/apache-release.html)
+replicated across Maven Repositories. See [Releasing a Maven-based project](http://maven.apache.org/developers/release/apache-release)
 for further details.
 
 ## Clean up old releases

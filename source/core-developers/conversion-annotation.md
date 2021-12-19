@@ -60,4 +60,4 @@ The `Conversion` annotation must be applied at Type level.
  }
 ```
 
-Check also [TypeConversion Annotation](type-conversion-annotation.html) for more examples!
+Check also [TypeConversion Annotation](type-conversion-annotation) for more examples!

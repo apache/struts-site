@@ -68,7 +68,7 @@ public class TextResult extends ActionSupport  {
 </action>
 ```
 
-> Struts 2 can also return a JSON (JavaScript Object Notation) response, using a [plugin](http://cwiki.apache.org/S2PLUGINS/json-plugin.html).
+> Struts 2 can also return a JSON (JavaScript Object Notation) response, using a [plugin](http://cwiki.apache.org/S2PLUGINS/json-plugin).
 
 On the client side, there are two basic strategies, which can be mixed and matched.
 
@@ -78,13 +78,13 @@ includes several _Ajax JSP tags_ , and many third-party libraries are available,
 
 - [Ajax Tags](http://ajaxtags.sourceforge.net/)
 - [AjaxParts Taglib](http://javawebparts.sourceforge.net/)
-- [ColdTags Suite](http://servletsuite.blogspot.com/2006/06/coldtags-suite-ajax-edition.html)
+- [ColdTags Suite](http://servletsuite.blogspot.com/2006/06/coldtags-suite-ajax-edition)
 - [Prize Tags](http://www.jenkov.com/prizetags/introduction.tmpl)
 - [JSON-taglib](http://json-taglib.sourceforge.net/)
 
 Alternatively, you can use a plain-old Ajax widget on a plain-old HTML page, using libraries like 
 [Dojo](http://dojotoolkit.org/), [JQuery](http://jquery.com/), or [YUI](http://developer.yahoo.com/yui/), 
-and the StreamResult or the [JSON Plugin](http://cwiki.apache.org/S2PLUGINS/json-plugin.html). 
+and the StreamResult or the [JSON Plugin](http://cwiki.apache.org/S2PLUGINS/json-plugin). 
 Here, the sky's the limit, but you actually have to learn something about JavaScript as a language.
 
 ## Ajax Plugins
@@ -111,7 +111,7 @@ While Struts works fine with Ajax out-of-the-box, for added value, several Ajax-
   the GWT RPC mechanism.
 - **JSON** - The _JSON Plugin_  serializes Actions properties into JSON, making it easy to respond to JavaScript requests.
 
-See the [Struts Plugin Repository](http://cwiki.apache.org/S2PLUGINS/home.html) for a complete list of Struts 2 plugins.
+See the [Struts Plugin Repository](http://cwiki.apache.org/S2PLUGINS/home) for a complete list of Struts 2 plugins.
 
 ## Ajax Results with JSP
 
@@ -138,4 +138,4 @@ Here's an example:
 ```
 
 In the code example, we use `System.out.println` to return a JSON data stream as the response. For more about this 
-technique, see the article [Using Dojo and JSON to Build Ajax Applications](http://today.java.net/pub/a/today/2006/04/27/building-ajax-with-dojo-and-json.html).
+technique, see the article [Using Dojo and JSON to Build Ajax Applications](http://today.java.net/pub/a/today/2006/04/27/building-ajax-with-dojo-and-json).

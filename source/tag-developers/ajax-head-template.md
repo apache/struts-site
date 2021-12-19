@@ -7,9 +7,9 @@ title: Tag Developers Guide
 
 > NOTE: Ajax template (Dojo plugin) is deprecated and won't be supported any longer.
 
-The ajax [head](dojo-head-tag.html) template builds upon the [xhtml head template](head-tag.html) by providing additional 
-JavaScript includes for the [Dojo Toolkit](http://dojotoolkit.org), which is used by the [ajax a template](ajax-a-template.html),
-[ajax div template](ajax-div-template.html), and the [ajax tabbedPanel template](). It is required to use this tag, 
+The ajax [head](dojo-head-tag) template builds upon the [xhtml head template](head-tag) by providing additional 
+JavaScript includes for the [Dojo Toolkit](http://dojotoolkit.org), which is used by the [ajax a template](ajax-a-template),
+[ajax div template](ajax-div-template), and the [ajax tabbedPanel template](). It is required to use this tag, 
 `<ww:head theme="ajax"/>` , in your HTML `<head>` block if you wish to use AJAX feature. The contents of **head.ftl** are:
 
 {% highlight html %}
@@ -20,7 +20,7 @@ JavaScript includes for the [Dojo Toolkit](http://dojotoolkit.org), which is use
 > changing "isDebug: false" to "isDebug: true".  This will log out debugging information directly to the screen.
 
 Note that Dojo is configured to use the same character encoding specified in `struts.xml` , typically UTF-8. For a simple 
-example of how to use the [head](dojo-head-tag.html) tag with the AJAX theme, simply do the following in your HTML:
+example of how to use the [head](dojo-head-tag) tag with the AJAX theme, simply do the following in your HTML:
 
 {% highlight html %}
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/support-2-3/apps/showcase/src/main/webapp/WEB-INF/ajax/commonInclude.jsp %}

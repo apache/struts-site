@@ -10,7 +10,7 @@ parent:
 
 The framework provides a tag library decoupled from the view technology. In this section, we describe each tag in general 
 terms, such as the attributes it supports, what the behaviors are, and so forth. Most tags are supported in all template 
-languages (see [JSP Tags](jsp-tags.html), [Velocity Tags](velocity-tags.html), and [FreeMarker Tags](freemarker-tags.html)), 
+languages (see [JSP Tags](jsp-tags), [Velocity Tags](velocity-tags), and [FreeMarker Tags](freemarker-tags)), 
 but some are currently only specific to one language. Whenever a tag doesn't have complete support for every language, 
 it is noted on the tag's reference page.
 
@@ -18,7 +18,7 @@ The types of tags can be broken in to two types: generic and UI. Besides functio
 difference between the two is that the HTML tags support _templates_  and _themes_ . In addition to the general tag 
 reference, we also provide examples for using these generic tags in each of the support languages.
 
-> Be sure to read the [Tag Syntax](tag-syntax.html) document to learn how tag attribute syntax works.
+> Be sure to read the [Tag Syntax](tag-syntax) document to learn how tag attribute syntax works.
 
 ## FAQs
 

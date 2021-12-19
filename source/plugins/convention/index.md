@@ -47,7 +47,7 @@ version 2.1.6.
 
 ## Converting a Codebehind based application to Convention
 
-See [this page](converting.html) for the required changes and tips.
+See [this page](converting) for the required changes and tips.
 
 If you are using REST with the Convention plugin, make sure you set these constants in `struts.xml`:
 

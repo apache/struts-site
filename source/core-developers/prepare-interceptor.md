@@ -18,7 +18,7 @@ the `id` property and then when the second params interceptor is called the para
 on the actual object loaded from the database. See the example for more info.
 
 > Note: Since XWork 2.0.2, this interceptor extends `MethodFilterInterceptor`, therefore being able to deal with 
-> `excludeMethods` / `includeMethods` parameters. See [Workflow Interceptor](default-workflow-interceptor.html)
+> `excludeMethods` / `includeMethods` parameters. See [Workflow Interceptor](default-workflow-interceptor)
 > for documentation and examples on how to use this feature.
  
 > Update: Added logic to execute a `prepare<MethodName>` and conditionally the a general `prepare()` Method, depending 

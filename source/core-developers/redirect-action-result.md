@@ -16,7 +16,7 @@ are redirecting to another action, you use this result rather than the standard 
 
 See examples below for an example of how request parameters could be passed in.
 
-See [ActionMapper](action-mapper.html) for more details
+See [ActionMapper](action-mapper) for more details
 
 ## Parameters
 

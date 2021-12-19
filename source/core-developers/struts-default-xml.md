@@ -10,7 +10,7 @@ automatically included into `struts.xml` file to provide the standard configurat
 to copy them.
 
 > To exclude the `struts-default.xml` or to provide your own version, see the `struts.configuration.files`
-> setting in [struts.properties](struts-properties.html).
+> setting in [default.properties](default-properties).
 
 The content of `struts-default.xml` is here:
 

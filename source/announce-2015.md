@@ -41,7 +41,7 @@ to maintaining applications over time.
 
 One medium security issue was solved with this release:
 
-  - [S2-026](/docs/s2-026.html)
+  - [S2-026](/docs/s2-026)
     Special `top` object can be used to access Struts' internals
 
 **All developers are strongly advised to perform this action.**
@@ -55,11 +55,11 @@ please post your comments to the user list, and, if appropriate, file a tracking
 #### 26 August 2015 - Security Bulletin S2-025 {#a20150826}
 
 The Apache Struts group is pleased to announce that a new security bulletin was published - 
-[S2-025](/docs/s2-025.html)
+[S2-025](/docs/s2-025)
 
 Thanks to Taki Uchiyama from JPCERT/CC who reported two potential XSS vulnerabilities available 
 in older versions of The Apache Struts 2. Please read the mentioned security bulletin for more details
-and also reading our [Security guideline](/docs/security.html) will help you secure your application 
+and also reading our [Security guideline](/docs/security) will help you secure your application 
 
 #### 31 July 2015 - Struts 2.5-BETA1 (BETA) {#a20150731}
 
@@ -138,7 +138,7 @@ to maintaining applications over time.
 
 One medium security issue was solved with this release:
 
-  - [S2-024](/docs/s2-024.html)
+  - [S2-024](/docs/s2-024)
     Wrong `excludeParams` overrides those defined in `DefaultExcludedPatternsChecker`
 
 **All developers are strongly advised to perform this action.**

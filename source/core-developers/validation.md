@@ -517,4 +517,4 @@ If you want to write custom validator use on of these classes as a starting poin
 
 ## Resources
 
-[WebWork Validation](http://today.java.net/pub/a/today/2006/01/19/webwork-validation.html)
+[WebWork Validation](http://today.java.net/pub/a/today/2006/01/19/webwork-validation)

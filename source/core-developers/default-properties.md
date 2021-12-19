@@ -5,7 +5,7 @@ title: default.properties
 
 # default.properties
 
-> All properties can also be set using [Constant Configuration](constant-configuration.html) in an XML configuration file.
+> All properties can also be set using [Constant Configuration](constant-configuration) in an XML configuration file.
 
 The framework uses a number of properties that can be changed to fit your needs\. To change any of these properties, 
 specify the property key and value in an `default.properties` file. The properties file can be locate anywhere 

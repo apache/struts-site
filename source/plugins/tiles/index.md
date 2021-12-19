@@ -165,7 +165,7 @@ Please check [tiles](https://github.com/apache/struts-examples/tree/master/tile
 
 ## Settings
 
-This plugin does inherits settings from [Tiles configuration](http://tiles.apache.org/config-reference.html).
+This plugin does inherits settings from [Tiles configuration](http://tiles.apache.org/config-reference).
 
 ## Installation
 

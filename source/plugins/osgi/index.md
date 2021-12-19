@@ -11,7 +11,10 @@ title: OSGi Plugin
 
 This plugin is only experimental and can change in the future.
 
-This plugin provides support for starting an instance of Apache Felix inside a web application, and scanning installed bundles for Struts configuration. An admin bundle is also provided. It can be used with Glassfish 3 as well (Glassfish 3 based on Apache Felix as well), but in such a way `struts.osgi.host` must be defined.
+This plugin provides support for starting an instance of Apache Felix inside a web application, 
+and scanning installed bundles for Struts configuration. An admin bundle is also provided. It can be used 
+with Glassfish 3 as well (Glassfish 3 based on Apache Felix as well), but in such a way `struts.osgi.host` 
+must be defined.
 
 ## Features
 
@@ -31,11 +34,18 @@ This plugin provides support for starting an instance of Apache Felix inside a w
 
 + Probably can't access application classes from bundles, including Spring classes
 
-+ _constant_  declarations in the bundled XML config files are ignored, these constants need to be set in the application XML config files (struts.xml)
++ _constant_  declarations in the bundled XML config files are ignored, these constants need to be set
++ in the application XML config files (struts.xml)
 
 ## About Run levels
 
-There are two ways of organizing bundles. If third party bundles will not be used, then the application bundles can just be placed under `/WEB-INF/classes/bundles`. Bundles in this dir will be started in run level 2, the Apache Felix framework's bundles will be loaded in run level 1. If third parties bundles will be used, or you need to start bundles on different run level, create sub dirs under `/WEB-INF/classes/bundles` with numeric names (starting from "2" because "1" is reserved for Felix), which correspond to the run level number. For example bundles under `/WEB-INF/classes/bundles/2` will be started in run level 2, and bundles under `/WEB-INF/classes/bundles/3` will be started in run level 3.
+There are two ways of organizing bundles. If third party bundles will not be used, then the application 
+bundles can just be placed under `/WEB-INF/classes/bundles`. Bundles in this dir will be started in run level 2, 
+the Apache Felix framework's bundles will be loaded in run level 1. If third parties bundles will be used, 
+or you need to start bundles on different run level, create sub dirs under `/WEB-INF/classes/bundles` with numeric 
+names (starting from "2" because "1" is reserved for Felix), which correspond to the run level number. For example 
+bundles under `/WEB-INF/classes/bundles/2` will be started in run level 2, and bundles under `/WEB-INF/classes/bundles/3` 
+will be started in run level 3.
 
 ## Simple Usage
 
@@ -49,11 +59,13 @@ Bundle-SymbolicName: foo.actions
 Import-Package: com.opensymphony.xwork2
 ```
 
-Now the jar is ready to be deployed.  Drop the jar into the `/WEB-INF/classes/bundles` directory and it will automatically be installed when the application starts up.
+Now the jar is ready to be deployed.  Drop the jar into the `/WEB-INF/classes/bundles` directory and it will
+automatically be installed when the application starts up.
 
 ## Using Spring
 
-By default Spring OSGi loads its xml config files asynchronously, which causes the OSGi plugin to fail while starting. To fix this add this line to MANIFEST.MF:
+By default Spring OSGi loads its xml config files asynchronously, which causes the OSGi plugin to fail while starting. 
+To fix this add this line to MANIFEST.MF:
 
 ```text
 Spring-Context:*;create-asynchronously:=false
@@ -65,17 +77,19 @@ Or if using The Apache Felix maven plugin (see below for details):
 <Spring-Context>*;create-asynchronously:=false</Spring-Context>
 ``` 
 
-Please note that you **do not** need to have the Struts Spring plugin in your application, in order to use Spring with the OSGi plugin.
+Please note that you **do not** need to have the Struts Spring plugin in your application, in order to use Spring 
+with the OSGi plugin.
 
 If you want to use the Spring as the object factory for your actions, then follow these steps:
 
 1. Place your Spring xml files under `/META-INF/spring` in the **bundle** jar file
 
-2. Place your Spring xml files under `/spring` (they must be in the classpath, if you are using maven, put thme under /src/resources/spring) in the **application**
+2. Place your Spring xml files under `/spring` (they must be in the classpath, if you are using maven, put them
+3. under /src/resources/spring) in the **application**
 
-3. Copy all the bundle jar files into `/WEB-INF/classes/bundles` in your **application**
+4. Copy all the bundle jar files into `/WEB-INF/classes/bundles` in your **application**
 
-4. Make sure that the following properties are set in struts.xml or struts.properties in your **application**:
+5. Make sure that the following properties are set in struts.xml or struts.properties in your **application**:
 
 ```xml
 <struts>
@@ -211,7 +225,10 @@ If you are going to use Velocity results, then add Velocity and Common Digester 
 
 ## Using The Convention Plugin
 
-The Convention plugin will discover actions in bundles in the same way that it discovers them in normal applications. The Convention plugin expects result templates to be (by default) stored under _/WEB-INF/content_ . When packaging actions inside bundles, there won't be a _WEB-INF_  folder, so you must let Convention know where the templates are located. There are two ways of doing so(assuming the templates are under _/content_ ):
+The Convention plugin will discover actions in bundles in the same way that it discovers them in normal applications. 
+The Convention plugin expects result templates to be (by default) stored under _/WEB-INF/content_ . When packaging 
+actions inside bundles, there won't be a _WEB-INF_  folder, so you must let Convention know where the templates are
+located. There are two ways of doing so(assuming the templates are under _/content_ ):
 
 1. Set the templates location constant in struts.xml (in the application struts.xml, not a bundled struts.xml)
 
@@ -233,7 +250,13 @@ public class HelloWorldAction extends ActionSupport {
 
 ## The OSGi interceptor
 
-The OSGi plugins defines the `osgi` interceptor and `osgiStack`(`defaultStack` plus the `osgi` interceptor) in the package `osgi-default`. This interceptor will check the action and if it implements `org.apache.struts2.osgi.interceptor.BundleContextAware`, it will invoke setBundleContext(BundleContext bundleContext) on the action, passing the BundleContext of the OSGi container. The interceptor also checks if the class implements `org.apache.struts2.osgi.interceptor.ServiceAware<T>`, if it does, setServices(List\<T\> services) will be called, where T is the type of a service published in the OSGi container. For example, lets assume an installed bundle publishes a service with the interface `BookPriceLookup`, to get all the instances of this service, an action would look like:
+The OSGi plugins defines the `osgi` interceptor and `osgiStack`(`defaultStack` plus the `osgi` interceptor) 
+in the package `osgi-default`. This interceptor will check the action and if it implements `org.apache.struts2.osgi.interceptor.BundleContextAware`, 
+it will invoke setBundleContext(BundleContext bundleContext) on the action, passing the BundleContext of the OSGi container. 
+The interceptor also checks if the class implements `org.apache.struts2.osgi.interceptor.ServiceAware<T>`, if it does, 
+setServices(List\<T\> services) will be called, where T is the type of a service published in the OSGi container. 
+For example, lets assume an installed bundle publishes a service with the interface `BookPriceLookup`, to get all 
+the instances of this service, an action would look like:
 
 ```java
 public class BookPriceAction extends ActionSupport implements ServiceAware<BookPriceLookup> {
@@ -245,7 +268,9 @@ public class BookPriceAction extends ActionSupport implements ServiceAware<BookP
 }
 ```
 
-Keep in mind that the interceptor is not defined in the default struts package, so when using Convention, you need to specify the parent package as "osgi-default", either using annotations (@ParentPackage), or XML(**this XML fragment must be in the struts XML config file in the application, not the bundle's**, this is a current limitation of the OSGi plugin):
+Keep in mind that the interceptor is not defined in the default struts package, so when using Convention, you need 
+to specify the parent package as "osgi-default", either using annotations (@ParentPackage), or XML(**this XML fragment 
+must be in the struts XML config file in the application, not the bundle's**, this is a current limitation of the OSGi plugin):
 
 ```xml
 <constant name="struts.convention.default.parent.package" value="osgi-default" />
@@ -253,21 +278,29 @@ Keep in mind that the interceptor is not defined in the default struts package, 
 
 ## Admin bundle
 
-An admin bundle is distributed with struts, which provides a simple interface to list the installed bundles. Using this interface the bundles can be stopped, started and updated (reloaded from the file system). This interface also provides information on the installed bundles, like OSGi metadata, and a list of packages and actions loaded from each bundle. An interactive AJAX shell is also available, which is just a web interface to the Apache Felix Shell. To use this bundle, just copy the jar file to /bundles (same place where the application bundles are installed) and open http://localhost:PORT/CONTEXT/osgi/admin/ (replace _PORT_  and _context_ )
+An admin bundle is distributed with struts, which provides a simple interface to list the installed bundles. 
+Using this interface the bundles can be stopped, started and updated (reloaded from the file system). 
+This interface also provides information on the installed bundles, like OSGi metadata, and a list of packages 
+and actions loaded from each bundle. An interactive AJAX shell is also available, which is just a web interface
+to the Apache Felix Shell. To use this bundle, just copy the jar file to /bundles (same place where the application 
+bundles are installed) and open http://localhost:PORT/CONTEXT/osgi/admin/ (replace _PORT_  and _context_ )
 
 ## About stopping/starting bundles
 
-When a bundle is started, the OSGi plugin will check for the header `Struts2-Enabled` in it. If it is set to "true", the bundle will be scanned for XML config and Convention config. When a bundle is stopped, any actions that were loaded from it will be removed from the runtime configuration.
+When a bundle is started, the OSGi plugin will check for the header `Struts2-Enabled` in it. If it is set to "true",
+the bundle will be scanned for XML config and Convention config. When a bundle is stopped, any actions that were 
+loaded from it will be removed from the runtime configuration.
 
 ## Settings
 
-The following settings can be customized.  See the [developer guide](/core-developers/configuration-files.html).
+The following settings can be customized.  See the [developer guide](/core-developers/configuration-files).
 
 | Setting | Description | Default | Possible Values |
 |---------|-------------|---------|-----------------|
 |struts.objectFactory.delegate| The alias of the ObjectFactory to wrap |struts| Any configured alias |
 
-The following setting must be set as context parameters in _web.xml_ , because they are used by the StrutsOsgiListener, for example:
+The following setting must be set as context parameters in _web.xml_ , because they are used by the StrutsOsgiListener, 
+for example:
 
 ```xml
 <context-param>
@@ -276,7 +309,8 @@ The following setting must be set as context parameters in _web.xml_ , because t
 </context-param>
 ```
 
-If you are running your application on Glassfish 3 (which already contains Apache Felix) you must specify `struts.osgi.host`, like below:
+If you are running your application on Glassfish 3 (which already contains Apache Felix) you must specify `struts.osgi.host`,
+like below:
 
 ```xml
 <context-param>
@@ -293,7 +327,7 @@ If you are running your application on Glassfish 3 (which already contains Apach
 
 ## Building bundles with Maven
 
-Jar files can be turned into bundles using the [Maven Bundle Plugin](http://cwiki.apache.org/FELIX/bundle-plugin-for-maven-bnd.html) like:
+Jar files can be turned into bundles using the [Maven Bundle Plugin](http://cwiki.apache.org/FELIX/bundle-plugin-for-maven-bnd) like:
 
 **Maven Bundle Plugin Example**
 

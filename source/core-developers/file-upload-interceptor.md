@@ -8,7 +8,7 @@ parent:
 
 # File Upload Interceptor
 
-See [this page](file-upload.html) for more examples and advanced configuration.
+See [this page](file-upload) for more examples and advanced configuration.
 
 Interceptor that is based off of `MultiPartRequestWrapper`, which is automatically applied for any request that includes 
 a file. It adds the following parameters, where `<file name>` is the name given to the file uploaded by the HTML form:

@@ -348,7 +348,7 @@ as a default.
 
 To specify a different class as the default Action class, set the `default-class-ref` package attribute.
 
-> For more about using wildcards, see [Wildcard Mappings](wildcard-mappings.html).
+> For more about using wildcards, see [Wildcard Mappings](wildcard-mappings).
 
 ## Post-Back Default
 

@@ -20,7 +20,7 @@ to maintaining applications over time.
 
 This release addresses one potential security vulnerability:
 
-- Possible DoS attack when using URLValidator - [S2-044](/docs/s2-044.html)
+- Possible DoS attack when using URLValidator - [S2-044](/docs/s2-044)
 
 Also this release contains several breaking changes and improvements just to mention few of them:
 
@@ -121,8 +121,8 @@ to maintaining applications over time.
 
 This release addresses two potential security vulnerabilities:
 
-- Possible path traversal in the Convention plugin [S2-042](/docs/s2-042.html)
-- Using the Config Browser plugin in production [S2-043](/docs/s2-043.html)
+- Possible path traversal in the Convention plugin [S2-042](/docs/s2-042)
+- Using the Config Browser plugin in production [S2-043](/docs/s2-043)
 
 Also this release contains several breaking changes and improvements just to mention few of them:
 
@@ -209,7 +209,7 @@ to maintaining applications over time.
 
 This release addresses one potential security vulnerability:
 
-  - [S2-041](/docs/s2-041.html)
+  - [S2-041](/docs/s2-041)
     Possible DoS attack when using URLValidator
 
 Also all security patches applied to version Struts 2.3.29 were also applied to this version (just in case).
@@ -247,26 +247,26 @@ to maintaining applications over time.
 
 This release addresses these potential security vulnerabilities:
 
-  - [S2-035](/docs/s2-035.html)
+  - [S2-035](/docs/s2-035)
     Action name clean up is error prone
 
-  - [S2-036](/docs/s2-036.html)
+  - [S2-036](/docs/s2-036)
     Forced double OGNL evaluation, when evaluated on raw user input in tag attributes,
     may lead to remote code execution (similar to S2-029)
 
-  - [S2-037](/docs/s2-037.html)
+  - [S2-037](/docs/s2-037)
     Remote Code Execution can be performed when using REST Plugin.
 
-  - [S2-038](/docs/s2-038.html)
+  - [S2-038](/docs/s2-038)
     It is possible to bypass token validation and perform a CSRF attack
 
-  - [S2-039](/docs/s2-039.html)
+  - [S2-039](/docs/s2-039)
     Getter as action method leads to security bypass
 
-  - [S2-040](/docs/s2-040.html)
+  - [S2-040](/docs/s2-040)
     Input validation bypass using existing default action method.
 
-  - [S2-041](/docs/s2-041.html)
+  - [S2-041](/docs/s2-041)
     Possible DoS attack when using URLValidator
 
 This release contains several breaking changes and improvements just to mention few of them:
@@ -296,10 +296,10 @@ You can download this version from our [download](download.cgi#struts-ga) page.
 Two potential security vulnerabilities were reported which were already addressed in the latest Apache Struts 2 versions.
 Those reports just added other vectors of attack.
 
- - [S2-033](/docs/s2-033.html)
+ - [S2-033](/docs/s2-033)
    Remote Code Execution can be performed when using REST Plugin with ! operator when Dynamic Method Invocation is enabled
 
- - [S2-034](/docs/s2-034.html)
+ - [S2-034](/docs/s2-034)
    OGNL cache poisoning can lead to DoS vulnerability
 
 Please read carefully the Security Bulletins and take suggested actions. The simplest way to avoid those vulnerabilities
@@ -361,10 +361,10 @@ to maintaining applications over time.
 
 This release addresses two potential security vulnerabilities:
 
-  - [S2-031](/docs/s2-031.html)
+  - [S2-031](/docs/s2-031)
     Possible RCE vulnerability in `XSLTResult` was fixed.
 
-  - [S2-032](/docs/s2-032.html)
+  - [S2-032](/docs/s2-032)
     Prevents execution of chained expressions based on new `isSequence` flag introduce in appropriated OGNL versions.
 
 **All developers are strongly advised to perform this action.**
@@ -388,13 +388,13 @@ to maintaining applications over time.
 
 These releases address three potential security vulnerabilities:
 
-  - [S2-029](/docs/s2-029.html)
+  - [S2-029](/docs/s2-029)
     Forced double OGNL evaluation, when evaluated on raw user input in tag attributes, may lead to remote code execution.
 
-  - [S2-031](/docs/s2-031.html)
+  - [S2-031](/docs/s2-031)
     Possible RCE vulnerability in `XSLTResult` was fixed.
 
-  - [S2-032](/docs/s2-032.html)
+  - [S2-032](/docs/s2-032)
     Prevents execution of chained expressions based on new `isSequence` flag introduce in appropriated OGNL versions.
 
 **All developers are strongly advised to perform this action.**
@@ -418,13 +418,13 @@ to maintaining applications over time.
 
 This release addresses three potential security vulnerabilities:
 
-  - [S2-028](/docs/s2-028.html)
+  - [S2-028](/docs/s2-028)
     Possible XSS vulnerability in pages not using UTF-8 was fixed.
 
-  - [S2-029](/docs/s2-029.html)
+  - [S2-029](/docs/s2-029)
     Forced double OGNL evaluation, when evaluated on raw user input in tag attributes, may lead to remote code execution.
 
-  - [S2-030](/docs/s2-030.html)
+  - [S2-030](/docs/s2-030)
     I18NInterceptor narrows selected locale to those available in JVM to reduce possibility of another XSS vulnerability.
 
 **All developers are strongly advised to perform this action.**

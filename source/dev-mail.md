@@ -7,9 +7,9 @@ title: Dev Mailing List
 
 The following mailing lists are meant for people who want to contribute to Struts itself. Patches, Documentation
 improvements and discussion on future Struts are welcome. **For questions on using Struts, please subscribe to the
-[user list](mail.html)**.
+[user list](mail)**.
 
-Please make sure you have read the guidelines on [this page](mail.html)
+Please make sure you have read the guidelines on [this page](mail)
 
 <table>
     <tr>

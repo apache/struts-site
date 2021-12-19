@@ -7,7 +7,7 @@ title: Nutshell
 
 The framework documentation is written for active web developers and assumes a working knowledge about how 
 Java web applications are built. For more about the underlying nuts and bolts, see 
-the [Key Technologies Primer](../primer.html).
+the [Key Technologies Primer](../primer).
 
 ## Apache Struts 2 Architecture in a Nutshell
 
@@ -128,7 +128,7 @@ then you might consider a "Model 1" solution that uses only server pages.
 
 But, if you are writing a more complicated application, with dozens of pages, that need to be maintained over time, 
 then Struts can help. For more about whether Model 1 or MVC/Model 2 is right for you, 
-see [Understanding JavaServer Pages Model 2 architecture](http://www.javaworld.com/javaworld/jw-12-1999/jw-12-ssj-jspmvc.html). 
+see [Understanding JavaServer Pages Model 2 architecture](http://www.javaworld.com/javaworld/jw-12-1999/jw-12-ssj-jspmvc). 
 
 ## Platform Requirements
 
@@ -138,4 +138,4 @@ Struts 2 requires
 - JSP API 2.0
 - Java 7
 
-For a full list of requirements, including dependencies used by optional plugins, see [Project Dependencies](../maven/dependencies.html).
+For a full list of requirements, including dependencies used by optional plugins, see [Project Dependencies](../maven/dependencies).

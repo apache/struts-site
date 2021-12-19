@@ -13,7 +13,7 @@ Taking this into account, announcing Struts 1 EOL is just the official statement
 support for some time now and that users should not rely on a properly maintained framework state when utilizing
 Struts 1 in projects. See the following Q/A section for more details.
 
-See also: [Apache Struts 1 EOL Press Release](struts1eol-press.html)
+See also: [Apache Struts 1 EOL Press Release](struts1eol-press)
 
 ## Questions and Answers
 

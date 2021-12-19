@@ -24,6 +24,6 @@ to consume resources in a non-linear relationship to the size of inputs.
 
 The mailing address is: [security@struts.apache.org](mailto:security@struts.apache.org)
 
-[General network server security tips](https://httpd.apache.org/docs/trunk/misc/security_tips.html)
+[General network server security tips](https://httpd.apache.org/docs/trunk/misc/security_tips)
 
 [The Apache Security Team](https://www.apache.org/security/)

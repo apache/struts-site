@@ -33,7 +33,7 @@ Tag the release by using the "release:prepare" goal of Maven:
 mvn release:prepare -DautoVersionSubmodules=true
 ```
 
-For a [dry run](http://maven.apache.org/plugins/maven-release-plugin/usage.html), add `-DdryRun=true`. If you do a dry run,
+For a [dry run](http://maven.apache.org/plugins/maven-release-plugin/usage), add `-DdryRun=true`. If you do a dry run,
 use `mvn release:clean` to clean up after you have looked at the output. 
 
 When prompted for the SCM tag name, follow this pattern: `STRUTS_MASTER_[PATCH_VERSION]`
@@ -44,7 +44,7 @@ If for some reason, the release plugin might fail to tag the release, if it fail
 mvn release:prepare -Dresume 
 ```
 
-This step will ([more information](http://maven.apache.org/plugins/maven-release-plugin/examples/prepare-release.html)):
+This step will ([more information](http://maven.apache.org/plugins/maven-release-plugin/examples/prepare-release)):
 
 - Check that there are no uncommitted changes in the sources
 - Check that there are no SNAPSHOT dependencies
@@ -62,7 +62,7 @@ This step will ([more information](http://maven.apache.org/plugins/maven-release
 mvn release:perform
 ```
 
-This step will ([more information](http://maven.apache.org/plugins/maven-release-plugin/examples/perform-release.html)):
+This step will ([more information](http://maven.apache.org/plugins/maven-release-plugin/examples/perform-release)):
 
 - Checkout from an SCM URL with optional tag
 - Run the predefined Maven goals to release the project (by default, deploy site-deploy)
@@ -96,7 +96,7 @@ If the vote result is for an ASF release (i.e. not test build), update site, ann
 
 Log in again to [Nexus](http://repository.apache.org/) and **release** the repository, it will be automatically replicated across Maven Repositories
 
-See [Releasing a Maven-based project](http://maven.apache.org/developers/release/apache-release.html) for further details.
+See [Releasing a Maven-based project](http://maven.apache.org/developers/release/apache-release) for further details.
 
 ### Wait for rsync
 

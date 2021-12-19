@@ -33,7 +33,7 @@ Of course, applications can define other result tokens to match specific cases.
 
 The result element has two jobs. First, it provides a logical name. An `Action` can pass back a token like `success` 
 or `error` without knowing any other implementation details. Second, the result element provides a result type. Most 
-results simply forward to a server page or template, but other [Result Types](result-types.html) can be used to do more 
+results simply forward to a server page or template, but other [Result Types](result-types) can be used to do more 
 interesting things.
 
 __Intelligent Defaults__
@@ -143,7 +143,7 @@ look for a local result nested in the action. If a local match is not found, the
 </global-results>
 ```
 
-> For more about results, see [Result Types](result-types.html).
+> For more about results, see [Result Types](result-types).
 
 ## Dynamic Results
 
@@ -178,7 +178,7 @@ If a `FragmentAction` method returns `next` the actual _value_ of that result wi
 `nextAction` property. So `nextAction` may be computed based on whatever state information necessary then passed 
 at runtime to `next`'s `redirectAction`.
 
-See [Parameters in configuration results](../faq/parameters-in-configuration-results.html) for an expanded discussion. 
+See [Parameters in configuration results](../faq/parameters-in-configuration-results) for an expanded discussion. 
 
 ## Returning Result Objects
 

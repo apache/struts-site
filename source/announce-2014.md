@@ -19,7 +19,7 @@ to maintaining applications over time.
 
 One medium security issue was solved with this release:
 
-  - [S2-023](http://struts.apache.org/docs/s2-023.html)
+  - [S2-023](http://struts.apache.org/docs/s2-023)
     Generated value of token can be predictable
 
 Besides that, this release contains several fixes and improvements just to mention few of them:
@@ -45,7 +45,7 @@ Besides that, this release contains several fixes and improvements just to menti
   - `struts_dojo.js` was fixed
   - interface `org/apache/struts2/views/TagLibrary` was restored and marked as `@Depreacted`
 
-and many other small improvements, please careful read the [version notes](http://struts.apache.org/docs/version-notes-2320.html).
+and many other small improvements, please careful read the [version notes](http://struts.apache.org/docs/version-notes-2320).
 
 **All developers are strongly advised to perform this action.**
 
@@ -66,7 +66,7 @@ to maintaining applications over time.
 
 One medium security issue was solved with this release:
 
-  - [S2-022](http://struts.apache.org/docs/s2-022.html)
+  - [S2-022](http://struts.apache.org/docs/s2-022)
     Extends excluded params in CookieInterceptor to avoid manipulation of Struts' internals
 
 All developers are strongly advised to perform this action.
@@ -82,9 +82,9 @@ to maintaining applications over time.
 
 Two security issues were solved with this release:
 
-  - [S2-021](http://struts.apache.org/docs/s2-021.html)
+  - [S2-021](http://struts.apache.org/docs/s2-021)
     Improves excluded params to avoid ClassLoader manipulation via ParametersInterceptor
-  - [S2-021](http://struts.apache.org/docs/s2-021.html)
+  - [S2-021](http://struts.apache.org/docs/s2-021)
     Adds excluded params to CookieInterceptor to avoid ClassLoader manipulation when the interceptors is configured
     to accept all cookie names (wildcard matching via "*")
 
@@ -146,9 +146,9 @@ to maintaining applications over time.
 
 Two security issues were solved with this release:
 
-  - [S2-020](http://struts.apache.org/docs/s2-020.html) ClassLoader manipulation
+  - [S2-020](http://struts.apache.org/docs/s2-020) ClassLoader manipulation
     via request parameters
-  - [S2-020](http://struts.apache.org/docs/s2-020.html) Commons FileUpload library was upgraded
+  - [S2-020](http://struts.apache.org/docs/s2-020) Commons FileUpload library was upgraded
     to version 1.3.1 to prevent DoS attacks
 
 All developers are strongly advised to perform this action.

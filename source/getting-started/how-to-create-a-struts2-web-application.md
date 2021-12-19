@@ -24,7 +24,7 @@ of many J2EE technologies, including:
  - Web Containers (such as Tomcat)
  - XML
 
-> For more about supporting technologies, see the [Key Technologies Primer](../primer.html). 
+> For more about supporting technologies, see the [Key Technologies Primer](../primer). 
 
 ## Java Requirements
 
@@ -177,7 +177,7 @@ You'll need to add a dependency node for log4j2 to the pom:
 </dependency>
 ```
 
-Using both `log4j-core` and `log4j-api` allows to use [the latest version of Log4j2](//logging.apache.org/log4j/2.x/maven-artifacts.html) without a clash with version provided by the framework. 
+Using both `log4j-core` and `log4j-api` allows to use [the latest version of Log4j2](//logging.apache.org/log4j/2.x/maven-artifacts) without a clash with version provided by the framework. 
 
 Optionally, if using maven bom "bill of materials" in `dependencyManagement` section for both Struts and log4j2,
 `pom.xml` will look like. Note that this way you can omit `version` line for every used module,
@@ -258,7 +258,7 @@ mapping to `web.xml`. Below is how the `web.xml` may look after adding the filte
 </web-app>
 ```
 
-For more information about configuring the deployment descriptor for Struts 2 see [Core Developers Guide / web.xml page](/core-developers/web-xml.html). Note the url-pattern node 
+For more information about configuring the deployment descriptor for Struts 2 see [Core Developers Guide / web.xml page](/core-developers/web-xml). Note the url-pattern node 
 value is `/*` meaning the Struts 2 filter will be applied to all URLs for this web application.
 
 ### Step 6 - Create struts.xml
@@ -317,8 +317,8 @@ messages written to the console and you should find several that discuss `index.
 
 ## Getting Help
 
-The [Struts 2 user mailing list](/mail.html) is an excellent place to get help.  If you are having a problem getting 
+The [Struts 2 user mailing list](/mail) is an excellent place to get help.  If you are having a problem getting 
 this Basic Struts 2 application to work search the Struts 2 mailing list. If you don't find an answer to your problem, 
 post a question on the mailing list.  
 
-|Return to [Getting started](index.html)|or|onward to [Hello World using Struts 2](hello-world-using-struts2.html)|
+|Return to [Getting started](index)|or|onward to [Hello World using Struts 2](hello-world-using-struts2)|

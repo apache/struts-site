@@ -403,7 +403,7 @@ The request must use the `POST` method and match the RegEx, by default the RegE
 ^multipart\\/form-data(; boundary=[a-zA-Z0-9]{1,70})?
 ```
 
-Please read [RFC1341](https://www.w3.org/Protocols/rfc1341/7\_2\_Multipart.html) the **Multipart section** for more details, existing 
+Please read [RFC1341](https://www.w3.org/Protocols/rfc1341/7\_2\_Multipart) the **Multipart section** for more details, existing 
 Struts `Multipart` parsers support only `multipart/form-data` content type. This option is available since Struts 2.3.11.
 
 ### Disabling file upload support

@@ -65,4 +65,4 @@ These regular expression will be evaluated against the request's URI (`HttpServl
 of them matches, then Struts will not handle the request.
 
 To evaluate each pattern Pattern class from JDK will be used, you can find more about what kind of pattern you can use 
-in the [Pattern class JavaDoc](http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html).
+in the [Pattern class JavaDoc](http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern).

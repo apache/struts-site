@@ -635,7 +635,7 @@ Instead of using the Maven 2 Jetty plugin to run the tutorial, you can check out
 ### Links
 
 + _S2PLUGINS:Source code for the tutorial_ 
-+ [JSR168 Specification](http://jcp.org/aboutJava/communityprocess/final/jsr168/index.html)
-+ [Struts 2 Portlet Configuration options](http://struts.apache.org/2.x/docs/portlet-configuration.html)
++ [JSR168 Specification](http://jcp.org/aboutJava/communityprocess/final/jsr168/index)
++ [Struts 2 Portlet Configuration options](http://struts.apache.org/2.x/docs/portlet-configuration)
 + [Author's blog about portlet related development](http://portletwork.blogspot.com)
-+ [Old tutorial for WebWork 2](http://struts.apache.org/2.x/docs/portlet-tutorial-webwork-22.html)
++ [Old tutorial for WebWork 2](http://struts.apache.org/2.x/docs/portlet-tutorial-webwork-22)

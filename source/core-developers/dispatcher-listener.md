@@ -6,7 +6,7 @@ title: DispatcherListener
 # DispatcherListener
 
 Use a `DispatcherListener` object to execute code when a Dispatcher is initialized or destroyed. A `DispatcherListener` 
-is an easy way to associate customizable components like a [ConfigurationManager](configuration-provider-and-configuration.html) 
+is an easy way to associate customizable components like a [ConfigurationManager](configuration-provider-and-configuration) 
 with a Dispatcher.
 
 ## Example

@@ -20,7 +20,7 @@ selects a resource to render the response. The resource is generally a server pa
 an Excel spreadsheet, or a Java applet window.
 
 Suppose you want to create a simple "Hello World" example that displays a welcome message. After setting up an empty 
-basic Struts 2 web application (see [How To Create A Struts 2 Web Application](how-to-create-a-struts2-web-application.html)), 
+basic Struts 2 web application (see [How To Create A Struts 2 Web Application](how-to-create-a-struts2-web-application)), 
 to create a "Hello World" example, you need to do four things:
 
 1. Create a class to store the welcome message (the model)
@@ -34,7 +34,7 @@ and the Controller. Separating concerns makes it easier to manage applications a
 Let's look at an example model class, Action, server page, and mapping. If you like, fire up your Java IDE, and enter 
 the code as we go.
 
-> This tutorial assumes you've completed the [How To Create A Struts 2 Web Application](how-to-create-a-struts2-web-application.html) 
+> This tutorial assumes you've completed the [How To Create A Struts 2 Web Application](how-to-create-a-struts2-web-application) 
 > tutorial and have a working basic Struts project. The example code for this tutorial, helloworld, is available for checkout 
 > from the Struts 2 GitHub repository at [struts-examples](https://github.com/apache/struts-examples). The example projects 
 > use Maven to manage the artifact dependencies and to build the .war files.
@@ -48,7 +48,7 @@ Let's modify the basic-struts project to add the following:
 - an Action class to act as the controller
 - a configuration that ties everything together
 
-> The [Struts 2 user mailing list](http://struts.apache.org/mail.html) is an excellent place to get help. If you are 
+> The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are 
 > having a problem getting this application to work search the Struts 2 mailing list. If you don't find an answer 
 > to your problem, post a question on the mailing list.
 
@@ -234,7 +234,7 @@ Click on the Hello World link and you should get the HelloWorld.jsp page:
 Your browser sends to the web server a request for the URL [http://localhost:8080/helloworld/hello.action](http://localhost:8080/helloworld/hello.action).
 
 1. The container receives from the web server a request for the resource `hello.action`. According to the settings loaded 
-  from the [web.xml](../core-developers/web-xml.html), the container finds that all requests are being routed to 
+  from the [web.xml](../core-developers/web-xml), the container finds that all requests are being routed to 
   `org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter`, including the `*.action` requests. 
   The `StrutsPrepareAndExecuteFilter` is the entry point into the framework.
 2. The framework looks for an action mapping named "hello", and it finds that this mapping corresponds to the class 
@@ -256,4 +256,4 @@ a page (as in this example), another action, or some other web resource (image, 
 When a server page is rendered, most often it will include dynamic data provided by the Action. To make it easy to display 
 dynamic data, the framework provides a set of tags that can be used along with HTML markup to create a server page.
 
-|Return to [How to create a Struts 2 web application](how-to-create-a-struts2-web-application.html)|or|onward to [Using Struts 2 Tags](using-tags.html)|
+|Return to [How to create a Struts 2 web application](how-to-create-a-struts2-web-application)|or|onward to [Using Struts 2 Tags](using-tags)|

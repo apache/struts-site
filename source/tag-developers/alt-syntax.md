@@ -22,7 +22,7 @@ the value stack and needing single quotes to mark string literals, only marked e
 
 Example:
 
-the following code uses the [Tag Syntax](tag-syntax.html):
+the following code uses the [Tag Syntax](tag-syntax):
 
 ```jsp
 <s:iterator value="cart.items">
@@ -52,7 +52,7 @@ In order to fully understand why this option exists and what the differences are
 about WebWork.
 
 > If you are _not_ upgrading from WebWork 2.1.7 or previous versions and you don't care about the history of WebWork's 
-> evolution, you can skip this section. See the [Tag Syntax](tag-syntax.html) section for more information 
+> evolution, you can skip this section. See the [Tag Syntax](tag-syntax) section for more information 
 > on the standard tag syntax support
 
 

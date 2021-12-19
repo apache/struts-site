@@ -5,7 +5,7 @@ title: Writing Interceptors
 
 # Writing Interceptors
 
-See the [Interceptors](interceptors.html) page for an overview of how interceptors work.
+See the [Interceptors](interceptors) page for an overview of how interceptors work.
 
 ## Interceptor interface
 
