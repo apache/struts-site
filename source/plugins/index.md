@@ -14,8 +14,8 @@ Several plugins are bundled with the framework, and others are available from th
 
 ## Bundled Plugins
 
-|Name| Versions | Note             |
-|---|------|------------------|
+|Name| Versions | Note|
+|---|------|-----|
 |[Bean Validation Plugin](bean-validation)| 2.5+ |
 |[CDI (JSR 299) Plugin](cdi)| 2.3.1+ |
 |[Codebehind Plugin](codebehind)| < 2.5 | removed since 2.5, use [Convention Plugin](convention) |
@@ -30,7 +30,7 @@ Several plugins are bundled with the framework, and others are available from th
 |[JSF Plugin](jsf)| < 2.5 | removed since 2.5 |
 |[JSON Plugin](json)| 2.1.7+ ||
 |[JUnit Plugin](junit)|||
-|[OVal Plugin](oval)| 2.1.7+ | deprecated since 2.6, use [Bean Validation Plugin](bean-validarion) |
+|[OVal Plugin](oval)| 2.1.7+ | deprecated since 2.6, use [Bean Validation Plugin](bean-validation) |
 |[OSGi Plugin](osgi)| 2.1.7+ | deprecated since 2.6|
 |[Plexus Plugin](plexus)|| deprecated since 2.6 |
 |[Portlet Plugin](portlet)|| deprecated since 2.6 |
