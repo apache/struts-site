@@ -21,6 +21,9 @@ release. The GA designation is our highest quality grade.
 This release addresses Log4j vulnerability [CVE-2021-45105](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-45105)
 by using the latest Log4j 2.12.3 version (Java 1.7 compatible).
 
+**Please note, that the Apache Struts itself depends on the log4j-api package only, it's users' responsibility 
+to use a proper version of the log4j-core package!**
+
 > Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+2.5.28.2) to find more details about performed
 > bug fixes and improvements.
 
