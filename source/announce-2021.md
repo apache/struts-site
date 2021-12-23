@@ -18,8 +18,8 @@ title: Announcements 2021
 The Apache Struts group is pleased to announce that Struts 2.5.28.2 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
 
-This release addresses Log4j vulnerability [CVE-2021-45046](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-45046)
-by using the latest Log4j 2.12.2 version (Java 1.7 compatible).
+This release addresses Log4j vulnerability [CVE-2021-45105](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-45105)
+by using the latest Log4j 2.12.3 version (Java 1.7 compatible).
 
 > Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+2.5.28.2) to find more details about performed
 > bug fixes and improvements.
