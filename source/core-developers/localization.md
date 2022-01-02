@@ -150,6 +150,8 @@ will search the default bundles first. In some cases this can improve overall ap
 <constant name="struts.i18n.search.defaultbundles.first" value="true"/>
 ```
 
+> More details can be found in [WW-5112](https://issues.apache.org/jira/browse/WW-5112) and the linked PR. 
+
 ## Using only global bundles
 
 If you don't need to use the package-scan-functionality and only base on the global bundles (those provided by
