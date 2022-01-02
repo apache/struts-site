@@ -145,6 +145,7 @@
   <li><a href="#global-resources-strutscustomi18nresources-in-strutsproperties" id="markdown-toc-global-resources-strutscustomi18nresources-in-strutsproperties">Global Resources (struts.custom.i18n.resources) in struts.properties</a></li>
   <li><a href="#formatting-dates-and-numbers" id="markdown-toc-formatting-dates-and-numbers">Formatting Dates and Numbers</a></li>
   <li><a href="#comparison-with-struts-1" id="markdown-toc-comparison-with-struts-1">Comparison with Struts 1</a></li>
+  <li><a href="#search-in-default-bundles-first" id="markdown-toc-search-in-default-bundles-first">Search in default bundles first</a></li>
   <li><a href="#using-only-global-bundles" id="markdown-toc-using-only-global-bundles">Using only global bundles</a></li>
   <li><a href="#custom-textprovider-and-textproviderfactory" id="markdown-toc-custom-textprovider-and-textproviderfactory">Custom TextProvider and TextProviderFactory</a></li>
 </ul>
@@ -155,8 +156,9 @@
 
 <ol>
   <li>the <em>UI Tags</em></li>
-  <li>Messages and Errors from the <a href="http://struts.apache.org/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ValidationAware">ValidationAware</a></li>
-  <li>Within action classes that extend <a href="http://struts.apache.org/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ActionSupport">ActionSupport</a> through the <code class="highlighter-rouge">getText()</code> method</li>
+  <li>Messages and Errors from the <a href="http://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ValidationAware">ValidationAware</a></li>
+  <li>Within action classes that extend <a href="http://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ActionSupport">ActionSupport</a> 
+through the <code class="highlighter-rouge">getText()</code> method</li>
 </ol>
 
 <h2 id="resource-bundle-search-order">Resource Bundle Search Order</h2>
@@ -173,8 +175,8 @@
   <li>global resource properties</li>
 </ol>
 
-<p>This is how it is implemented in a default implementation of the <code class="highlighter-rouge">LocalizedTextProvider</code> interface. You can provide your
-own implementation using <code class="highlighter-rouge">TextProvider</code> and <code class="highlighter-rouge">TextProviderFactory</code> interfaces.</p>
+<p>This is how it is implemented in a default implementation of the <code class="highlighter-rouge">LocalizedTextProvider</code> interface. You can provide your
+own implementation using <code class="highlighter-rouge">TextProvider</code> and <code class="highlighter-rouge">TextProviderFactory</code> interfaces.</p>
 
 <p>To clarify #5, while traversing the package hierarchy, Struts 2 will look for a file <code class="highlighter-rouge">package.properties</code>:</p>
 
@@ -201,12 +203,12 @@ own implementation using <code class="highlighter-rouge">TextProvider</code> and
 <span class="nt">&lt;/action&gt;</span>
 </code></pre></div></div>
 
-<p>it will use a default class defined with <code class="highlighter-rouge">default-class-ref</code> in <code class="highlighter-rouge">struts-default.xml</code> which is
+<p>it will use a default class defined with <code class="highlighter-rouge">default-class-ref</code> in <code class="highlighter-rouge">struts-default.xml</code> which is
 <code class="highlighter-rouge">com.opensymphony.xwork2.ActionSupport</code>. It means you have two options here to get I18N working in that case:</p>
 
 <ul>
-  <li>define <code class="highlighter-rouge">com/opensymphony/xwork2/ActionSupport.properties</code> and put messages there</li>
-  <li>point <code class="highlighter-rouge">default-class-ref</code> to your base class and then defined appropriated <code class="highlighter-rouge">.properties</code> file (corresponding to
+  <li>define <code class="highlighter-rouge">com/opensymphony/xwork2/ActionSupport.properties</code> and put messages there</li>
+  <li>point <code class="highlighter-rouge">default-class-ref</code> to your base class and then defined appropriated <code class="highlighter-rouge">.properties</code> file (corresponding to
 class’ name or package)</li>
 </ul>
 
@@ -278,22 +280,37 @@ class, and you may end up with duplicated messages in those resource bundles. A 
 called ActionSupport.properties in com/opensymphony/xwork2 and put it on your classpath. This will only work well if
 all your actions subclass XWork2’s ActionSupport.</p>
 
+<h2 id="search-in-default-bundles-first">Search in default bundles first</h2>
+
+<p>Since Struts 2.6 it is possible to enable searching in default bundles first instead of performing a full class hierarchy
+scan and then default bundles.</p>
+
+<p>By setting the below flag to <code class="highlighter-rouge">true</code> the default implementation of <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/LocalizedTextProvider.html">LocalizedTextProvider</a>
+(which is <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/util/StrutsLocalizedTextProvider.html">StrutsLocalizedTextProvider</a>)
+will search the default bundles first. In some cases this can improve overall application performance.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.i18n.search.defaultbundles.first"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
 <h2 id="using-only-global-bundles">Using only global bundles</h2>
 
 <p>If you don’t need to use the package-scan-functionality and only base on the global bundles (those provided by
-the framework and via <code class="highlighter-rouge">struts.custom.i18n.resources</code>) you can use existing <code class="highlighter-rouge">GlobalLocalizedTextProvider</code>
-implementation. To use this please define the following option in your <code class="highlighter-rouge">struts.xml</code>:</p>
+the framework and via <code class="highlighter-rouge">struts.custom.i18n.resources</code>) you can use existing <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/util/GlobalLocalizedTextProvider.html">GlobalLocalizedTextProvider</a>
+implementation. To use this please define the following option in your <code class="highlighter-rouge">struts.xml</code>:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.localizedTextProvider"</span> <span class="na">value=</span><span class="s">"global-only"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <h2 id="custom-textprovider-and-textproviderfactory">Custom TextProvider and TextProviderFactory</h2>
 
-<p>If you want use a different logic to search for localized messages, or you want to use a database or just want to search
+<p>If you want to use a different logic to search for localized messages, or you want to use a database or just want to search
 default bundles, you must implement both those interfaces (or subclass the existing implementations). You can check
 a small <a href="https://github.com/apache/struts-examples/tree/master/text-provider">example app</a> how to use both.
-Please remember that the <code class="highlighter-rouge">TextProvider</code> interface is implemented by the <code class="highlighter-rouge">ActionSupport</code> class, that’s why
-an extra layer - <code class="highlighter-rouge">TextProviderFactory</code> - is needed.</p>
+Please remember that the <code class="highlighter-rouge">TextProvider</code> interface is implemented by the <code class="highlighter-rouge">ActionSupport</code> class, that’s why
+an extra layer - <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/TextProviderFactory.html">TextProviderFactory</a></p>
+<ul>
+  <li>is needed.</li>
+</ul>
 
   </section>
 </article>
