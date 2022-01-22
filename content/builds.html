@@ -102,12 +102,11 @@
                 <li><a href="/youatstruts.html">You at Struts</a></li>
                 <li><a href="/helping.html">How to Help FAQ</a></li>
                 <li><a href="/dev-mail.html">Development Lists</a></li>
-                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/submitting-patches.html">Submitting patches</a></li>
                 <li><a href="/builds.html">Source Code and Builds</a></li>
                 <li><a href="/coding-standards.html">Coding standards</a></li>
-                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/release-guidelines.html">Release Guidelines</a></li>
                 <li><a href="/bylaws.html">PMC Charter</a></li>
@@ -185,8 +184,8 @@ your own applications!)</p>
 <p>Maven will automatically download any dependencies as needed.</p>
 
 <p>For more about using Maven to build Struts 2, see
-<a href="/docs/building-the-framework-from-source.html">Building the framework from source</a> in the
-<a href="/docs/contributors-guide.html">Struts 2 Contributors Guide.</a></p>
+<a href="/docs/building-the-framework-from-source">Building the framework from source</a> in the
+<a href="/docs/contributors-guide">Struts 2 Contributors Guide.</a></p>
 
 <p>For more about using Maven to build Struts 1, see our <a href="http://wiki.apache.org/struts/StrutsMaintenanceMaven">Maven wiki page.</a></p>
 
@@ -198,7 +197,7 @@ your own applications!)</p>
 <p><em>Again: Use at your own risk!</em></p>
 
 <p>If you do <strong>not</strong> plan to contribute to the development of the framework, then you probably want to download a
-<a href="releases.html">release</a></p>
+<a href="releases">release</a></p>
 
 <p>NOTE: The Struts 2 nightly build is not fully operational. We suggest that contributors checkout
 the <a href="#SourceCode">source code</a> instead.</p>
@@ -209,18 +208,52 @@ the <a href="#SourceCode">source code</a> instead.</p>
 we post them <a href="https://dist.apache.org/repos/dist/dev/struts/">here</a> in binary, source and library distributions.
 Library distributions include any external dependencies needed to use a product with your application.</p>
 
+<p>You can also use Maven to test the builds, all you have to do is to configure a Staging repository in <code class="highlighter-rouge">~/.m2/settings.xml</code>
+file like this:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;settings&gt;</span>
+    ...
+    <span class="nt">&lt;profiles&gt;</span>
+        <span class="nt">&lt;profile&gt;</span>
+            <span class="nt">&lt;id&gt;</span>local<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;activation&gt;</span>
+                <span class="nt">&lt;activeByDefault&gt;</span>true<span class="nt">&lt;/activeByDefault&gt;</span>
+            <span class="nt">&lt;/activation&gt;</span>
+            <span class="nt">&lt;repositories&gt;</span>
+                <span class="nt">&lt;repository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>apache-pre-release<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>https://repository.apache.org/content/repositories/staging/<span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;layout&gt;</span>default<span class="nt">&lt;/layout&gt;</span>
+                <span class="nt">&lt;/repository&gt;</span>
+            <span class="nt">&lt;/repositories&gt;</span>
+        <span class="nt">&lt;/profile&gt;</span>
+    <span class="nt">&lt;/profiles&gt;</span>
+<span class="nt">&lt;/settings&gt;</span>
+</code></pre></div></div>
+
+<p>or add the Staging repository in the project’s POM:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;repositories&gt;</span>
+    <span class="nt">&lt;repository&gt;</span>
+        <span class="nt">&lt;id&gt;</span>apache-pre-release<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;url&gt;</span>https://repository.apache.org/content/repositories/staging/<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;layout&gt;</span>default<span class="nt">&lt;/layout&gt;</span>
+    <span class="nt">&lt;/repository&gt;</span>
+<span class="nt">&lt;/repositories&gt;</span>
+</code></pre></div></div>
+
 <p>A test build is made available so that it can be reviewed for quality by the Apache Struts development group.
 When a build is judged “ready for prime time”, it is promoted to “General Availability” status and may be
 made the “Best Available” release. If the group feels that a build requires more testing, then it may be marked
 as “Beta” release. When a test build is upgraded to “Beta” or “GA” by a vote of the project members,
-we make the distribution available as a formal <a href="releases.html">release</a>.</p>
+we make the distribution available as a formal <a href="releases">release</a>.</p>
 
 <h2 id="maven-snapshots">Maven Snapshots</h2>
 
 <p>When a distribution is first made available, it is rated as a development build or “snapshot”. Later, the quality
 of the distribution may be upgraded to “Beta” or “General Availability”, based on feedback from the community,
-and then made available through ibiblio and other public Maven repositories. To obtain an early distribution via Maven,
-specify the ASF Snapshot repository in the project’s POM.</p>
+and then made available through the Maven Central and other public Maven repositories. To obtain an early distribution 
+via Maven, specify the ASF Snapshot repository in the project’s POM.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;repositories&gt;</span>
     <span class="nt">&lt;repository&gt;</span>
@@ -245,7 +278,7 @@ with the License.</p>
 “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations under the License.</p>
 
-<p>Next: <a href="release-guidelines.html">Release Guidelines</a></p>
+<p>Next: <a href="release-guidelines">Release Guidelines</a></p>
 
   </section>
 </article>
@@ -253,7 +286,7 @@ specific language governing permissions and limitations under the License.</p>
 
 <footer class="container">
   <div class="col-md-12">
-    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    Copyright &copy; 2000-2021 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
     All Rights Reserved.
   </div>
   <div class="col-md-12">

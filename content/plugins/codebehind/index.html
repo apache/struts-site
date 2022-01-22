@@ -102,12 +102,11 @@
                 <li><a href="/youatstruts.html">You at Struts</a></li>
                 <li><a href="/helping.html">How to Help FAQ</a></li>
                 <li><a href="/dev-mail.html">Development Lists</a></li>
-                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/submitting-patches.html">Submitting patches</a></li>
                 <li><a href="/builds.html">Source Code and Builds</a></li>
                 <li><a href="/coding-standards.html">Coding standards</a></li>
-                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/release-guidelines.html">Release Guidelines</a></li>
                 <li><a href="/bylaws.html">PMC Charter</a></li>
@@ -137,26 +136,32 @@
   <p>Deprecated Plugin</p>
 </blockquote>
 
-<p>Since 2.1 this plugin has been deprecated in favor of the <a href="../convention">Convention Plugin</a>. See <a href="../convention/converting.html">this page</a> for details on how to port your application to the Convention plugin.</p>
+<p>Since 2.1 this plugin has been deprecated in favor of the <a href="../convention">Convention Plugin</a>. See <a href="../convention/converting">this page</a> 
+for details on how to port your application to the Convention plugin.</p>
 
 <p>The Codebehind Plugin reduces mundane configuration by adding “Page Controller” conventions.</p>
 
 <p>There are two common situations where the plugin applies convention over configuration:</p>
 
 <ol>
+  <li><strong>Default mappings</strong> - (or “pages with no mappings”) These are cases where the page is mostly static and doesn’t</li>
+  <li>require an Action class to execute logic.  Common examples are index pages and those that heavily use JSP tags</li>
   <li>
-    <p><strong>Default mappings</strong> - (or “pages with no mappings”) These are cases where the page is mostly static and doesn’t require an Action class to execute logic.  Common examples are index pages and those that heavily use JSP tags or JSF components.</p>
+    <p>or JSF components.</p>
   </li>
-  <li>
-    <p><strong>Default results</strong> - The purpose of most Actions is to execute code to prepare the data for a specific page. The name of this page is often the same as the Action itself.</p>
-  </li>
+  <li><strong>Default results</strong> - The purpose of most Actions is to execute code to prepare the data for a specific page.</li>
+  <li>The name of this page is often the same as the Action itself.</li>
 </ol>
 
-<p>To improve the first case, the plugin will detect the presence of a page with no corresponding Struts mapping and automatically substitute a mapping that uses the default Action class for the package, which is usually ActionSupport, a NO-OP Action.</p>
+<p>To improve the first case, the plugin will detect the presence of a page with no corresponding Struts mapping 
+and automatically substitute a mapping that uses the default Action class for the package, which is usually 
+ActionSupport, a NO-OP Action.</p>
 
-<p>For the problem of default results, the plugin will make it unnecessary to define those results by detecting the presence of a page for that Action and creating the appropriate configuration on-the-fly.</p>
+<p>For the problem of default results, the plugin will make it unnecessary to define those results by detecting 
+the presence of a page for that Action and creating the appropriate configuration on-the-fly.</p>
 
-<p>In these two ways, the plugin encourages a page-based development style, handling the linking of Struts actions with pages and pages with Results in a common way.</p>
+<p>In these two ways, the plugin encourages a page-based development style, handling the linking of Struts actions 
+with pages and pages with Results in a common way.</p>
 
 <blockquote>
   <p>To see the plugin in action, review the “Person Manager” example in the Showcase application.</p>
@@ -175,13 +180,18 @@
 
 <h2 id="usage">Usage</h2>
 
-<p>To use this plugin, simply copy its jar into your application.  The plugin can be used to find default mappings and results.</p>
+<p>To use this plugin, simply copy its jar into your application.  The plugin can be used to find default mappings 
+and results.</p>
 
 <h3 id="default-mappings">Default Mappings</h3>
 
-<p>To better facilitate a code-behind development approach, the plugin will detect the case where the request has no defined Struts action mapping, yet there exists a corresponding page.  It will then create a dummy action mapping referencing the default Action class (usually ActionSupport), allowing the page to be displayed normally.  Additionally, the default interceptor stack for the configured package will be applied, bringing the workflow benefits of interceptor stacks to simple pages.</p>
+<p>To better facilitate a code-behind development approach, the plugin will detect the case where the request has 
+no defined Struts action mapping, yet there exists a corresponding page.  It will then create a dummy action mapping referencing the default Action class (usually ActionSupport), allowing the page to be displayed normally.  Additionally, the default interceptor stack for the configured package will be applied, bringing the workflow benefits of interceptor stacks to simple pages.</p>
 
-<p>When no explicitly configured Action can be found for a request, the plugin searches the web application for a likely page. Specifically, the following pattern is used to locate a page:<code class="highlighter-rouge">/NAMESPACE/ACTION.(jsp|vm|ftl)</code>For example, if the request is for <code class="highlighter-rouge">http://www.company.com/myapp/member/login.action</code>, the plugin will look for the following pages, in this order:</p>
+<p>When no explicitly configured Action can be found for a request, the plugin searches the web application for 
+a likely page. Specifically, the following pattern is used to locate a page:<code class="highlighter-rouge">/NAMESPACE/ACTION.(jsp|vm|ftl)</code>
+For example, if the request is for <code class="highlighter-rouge">http://www.company.com/myapp/member/login.action</code>, the plugin will look for 
+the following pages, in this order:</p>
 
 <ol>
   <li><code class="highlighter-rouge">/member/login.jsp</code></li>
@@ -189,20 +199,32 @@
   <li><code class="highlighter-rouge">/member/login.ftl</code></li>
 </ol>
 
-<p>If any of those pages are found, the plugin will construct an ActionConfig object on the fly, using the ActionSupport class for the Action and a single Result that points to the discovered page.  The ActionConfig will be put in the configured package, meaning that it will inherit the default Interceptor stack for that package.  The default package is <code class="highlighter-rouge">codebehind-default</code>, however, it can be configured in any <em>configuration file</em>  via the <code class="highlighter-rouge">struts.codebehind.defaultPackage</code> constant.</p>
+<p>If any of those pages are found, the plugin will construct an ActionConfig object on the fly, using the ActionSupport 
+class for the Action and a single Result that points to the discovered page.  The ActionConfig will be put in the configured
+package, meaning that it will inherit the default Interceptor stack for that package.  The default package 
+is <code class="highlighter-rouge">codebehind-default</code>, however, it can be configured in any <em>configuration file</em>  via the <code class="highlighter-rouge">struts.codebehind.defaultPackage</code>
+constant.</p>
 
 <h3 id="default-results">Default Results</h3>
 
-<p>In many applications, a majority of Results could have the same root name as the action mapping.  To reduce this unnecessary configuration, the Struts plugin will try to guess the appropriate Result, if none is explicitly configured.  This technique works for any result code, including <code class="highlighter-rouge">success</code>. When combined with the <em>Zero Configuration</em>  style, the amount of configuration in an application dwindles to next to nothing.</p>
+<p>In many applications, a majority of Results could have the same root name as the action mapping.  To reduce this 
+unnecessary configuration, the Struts plugin will try to guess the appropriate Result, if none is explicitly configured.
+This technique works for any result code, including <code class="highlighter-rouge">success</code>. When combined with the <em>Zero Configuration</em>  style,
+the amount of configuration in an application dwindles to next to nothing.</p>
 
-<p>When no explicitly configured Result is found for an Action’s result code, the plugin, again, searches the web application for a matching page. Specifically, the following patterns, in the following order, are used to locate a page:</p>
+<p>When no explicitly configured Result is found for an Action’s result code, the plugin, again, searches the web 
+application for a matching page. Specifically, the following patterns, in the following order, are used to locate 
+a page:</p>
 
 <ol>
   <li><code class="highlighter-rouge">/NAMESPACE/ACTION-RESULT_CODE.(jsp|vm|ftl)</code></li>
   <li><code class="highlighter-rouge">/NAMESPACE/ACTION.(jsp|vm|ftl)</code></li>
 </ol>
 
-<p>These two patterns are searched for each of the three default page extensions: jsp, vm, and ftl.  For example, if the request is for <code class="highlighter-rouge">http://www.company.com/myapp/member/login.action</code>, so that the action name is <code class="highlighter-rouge">login</code> and the namespace is <code class="highlighter-rouge">member</code>, and the Action class returned a code of <code class="highlighter-rouge">success</code>, the plugin will look for the following pages, in this order:</p>
+<p>These two patterns are searched for each of the three default page extensions: jsp, vm, and ftl.  For example, 
+if the request is for <code class="highlighter-rouge">http://www.company.com/myapp/member/login.action</code>, so that the action name is <code class="highlighter-rouge">login</code> 
+and the namespace is <code class="highlighter-rouge">member</code>, and the Action class returned a code of <code class="highlighter-rouge">success</code>, the plugin will look for 
+the following pages, in this order:</p>
 
 <ol>
   <li><code class="highlighter-rouge">/member/login-success.jsp</code></li>
@@ -217,7 +239,7 @@
 
 <h3 id="settings">Settings</h3>
 
-<p>The following settings can be customized.  See the <a href="/core-developers/configuration-files.html">developer guide</a>.</p>
+<p>The following settings can be customized.  See the <a href="/core-developers/configuration-files">developer guide</a>.</p>
 
 <table>
   <thead>
@@ -246,7 +268,8 @@
 
 <h3 id="installation">Installation</h3>
 
-<p>This plugin can be installed by copying the plugin jar into your application’s <code class="highlighter-rouge">/WEB-INF/lib</code> directory.  No other files need to be copied or created.</p>
+<p>This plugin can be installed by copying the plugin jar into your application’s <code class="highlighter-rouge">/WEB-INF/lib</code> directory.<br />
+No other files need to be copied or created.</p>
 
   </section>
 </article>
@@ -254,7 +277,7 @@
 
 <footer class="container">
   <div class="col-md-12">
-    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    Copyright &copy; 2000-2021 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
     All Rights Reserved.
   </div>
   <div class="col-md-12">

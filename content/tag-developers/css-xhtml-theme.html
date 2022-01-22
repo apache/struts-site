@@ -102,12 +102,11 @@
                 <li><a href="/youatstruts.html">You at Struts</a></li>
                 <li><a href="/helping.html">How to Help FAQ</a></li>
                 <li><a href="/dev-mail.html">Development Lists</a></li>
-                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/submitting-patches.html">Submitting patches</a></li>
                 <li><a href="/builds.html">Source Code and Builds</a></li>
                 <li><a href="/coding-standards.html">Coding standards</a></li>
-                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/release-guidelines.html">Release Guidelines</a></li>
                 <li><a href="/bylaws.html">PMC Charter</a></li>
@@ -133,21 +132,21 @@
     
     <h1 id="css_xhtml-theme">css_xhtml theme</h1>
 
-<p>The <em>css_xhtml theme</em> provides all the basics that the <a href="simple-theme.html">simple theme</a> provides and adds several features.</p>
+<p>The <em>css_xhtml theme</em> provides all the basics that the <a href="simple-theme">simple theme</a> provides and adds several features.</p>
 
-<p>_ Standard two-column CSS-based layout, using <code class="highlighter-rouge">&lt;div&gt;</code> for the HTML <a href="struts-tags.html">Struts Tags</a> (<a href="form-tag.htmk">form</a>, 
-  <a href="textfield-tag.html">textfield</a>, <a href="select-tag.html">select</a>, etc)</p>
 <ul>
-  <li>Labels for each of the HTML <a href="struts-tags.html">Struts Tags</a>, placed according to the CSS stylesheet</li>
-  <li><a href="../core-developers/validation.html">Validation</a> and error reporting</li>
-  <li><a href="../core-developers/pure-java-script-client-side-validation.html">Pure JavaScript Client Side Validation</a> using 100% 
+  <li>Standard two-column CSS-based layout, using <code class="highlighter-rouge">&lt;div&gt;</code> for the HTML <a href="struts-tags">Struts Tags</a> (<a href="form-tag.htmk">form</a>, 
+<a href="textfield-tag">textfield</a>, <a href="select-tag">select</a>, etc)</li>
+  <li>Labels for each of the HTML <a href="struts-tags">Struts Tags</a>, placed according to the CSS stylesheet</li>
+  <li><a href="../core-developers/validation">Validation</a> and error reporting</li>
+  <li><a href="../core-developers/pure-java-script-client-side-validation">Pure JavaScript Client Side Validation</a> using 100% 
 JavaScript on the browser</li>
 </ul>
 
 <h2 id="wrapping-the-simple-theme">Wrapping the Simple Theme</h2>
 
-<p>The xhtml theme uses the “wrapping” technique described by <a href="extending-themes.html">Extending Themes</a>. Let’s look at how 
-the HTML tags are wrapped by a standard header and footer. For example, in the <a href="textfield-tag.html">textfield</a> template, 
+<p>The xhtml theme uses the “wrapping” technique described by <a href="extending-themes">Extending Themes</a>. Let’s look at how 
+the HTML tags are wrapped by a standard header and footer. For example, in the <a href="textfield-tag">textfield</a> template, 
 <code class="highlighter-rouge">text.ftl</code>, the <code class="highlighter-rouge">controlheader.ftl</code> and <code class="highlighter-rouge">controlfooter.ftl</code> templates are wrapped around the simple template.</p>
 
 <figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
@@ -205,7 +204,7 @@ the HTML tags are wrapped by a standard header and footer. For example, in the <
 
 <h2 id="css-xhtml-theme-header">CSS XHTML theme header</h2>
 
-<p>The header used by the HTML tags in the css_xhtml theme is complicated. Unlike the <a href="xhtml-theme.html">xhtml theme</a>, 
+<p>The header used by the HTML tags in the css_xhtml theme is complicated. Unlike the <a href="xhtml-theme">xhtml theme</a>, 
 the CSS theme does not use a <code class="highlighter-rouge">labelposition</code> attribute. Instead, the label position is defined by CSS rules.</p>
 
 <figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
@@ -229,20 +228,19 @@ the CSS theme does not use a <code class="highlighter-rouge">labelposition</code
  */
 --&gt;
 &lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/controlheader-core.ftl"&gt;
-&lt;#if !parameters.labelposition?? &amp;&amp; (parameters.form.labelposition)??&gt;
-&lt;#assign labelpos = parameters.form.labelposition/&gt;
-&lt;#elseif parameters.labelposition??&gt;
-&lt;#assign labelpos = parameters.labelposition/&gt;
+&lt;#if !parameters.labelPosition?? &amp;&amp; (parameters.form.labelPosition)??&gt;
+&lt;#assign labelPos = parameters.form.labelPosition/&gt;
+&lt;#elseif parameters.labelPosition??&gt;
+&lt;#assign labelPos = parameters.labelPosition/&gt;
 &lt;/#if&gt;
-&lt;#if (labelpos!"top") == 'top'&gt;
+&lt;#if (labelPos!"top") == 'top'&gt;
 &lt;div &lt;#rt/&gt;
 &lt;#else&gt;
 &lt;span &lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#if parameters.id??&gt;id="wwctrl_${parameters.id}"&lt;#rt/&gt;&lt;/#if&gt; class="wwctrl"&gt;
-    </code></pre></figure>
+&lt;#if parameters.id??&gt;id="wwctrl_${parameters.id}"&lt;#rt/&gt;&lt;/#if&gt; class="wwctrl"&gt;</code></pre></figure>
 
-<p>Note that the <code class="highlighter-rouge">fieldErrors</code>, usually caused by <a href="../core-developers/validation.html">Validation</a>, are displayed in a <code class="highlighter-rouge">div</code>
+<p>Note that the <code class="highlighter-rouge">fieldErrors</code>, usually caused by <a href="../core-developers/validation">Validation</a>, are displayed in a <code class="highlighter-rouge">div</code>
 block before the element is displayed.</p>
 
 <h2 id="css-xhtml-theme-footer">CSS XHTML theme footer</h2>
@@ -271,21 +269,21 @@ block before the element is displayed.</p>
 --&gt;
 ${parameters.after!}&lt;#t/&gt;
     &lt;#lt/&gt;
-&lt;#if !parameters.labelposition?? &amp;&amp; (parameters.form.labelposition)??&gt;
-&lt;#assign labelpos = parameters.form.labelposition/&gt;
-&lt;#elseif parameters.labelposition??&gt;
-&lt;#assign labelpos = parameters.labelposition/&gt;
+&lt;#if !parameters.labelPosition?? &amp;&amp; (parameters.form.labelPosition)??&gt;
+&lt;#assign labelPos = parameters.form.labelPosition/&gt;
+&lt;#elseif parameters.labelPosition??&gt;
+&lt;#assign labelPos = parameters.labelPosition/&gt;
 &lt;/#if&gt;
-&lt;#if (labelpos!"top") == 'top'&gt;
+&lt;#if (labelPos!"top") == 'top'&gt;
 &lt;/div&gt; &lt;#rt/&gt;
 &lt;#else&gt;
 &lt;/span&gt; &lt;#rt/&gt;
 &lt;/#if&gt;
 &lt;#if (parameters.errorposition!"top") == 'bottom'&gt;
-&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[parameters.name]??/&gt;
+&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(parameters.name)??/&gt;
 &lt;#if hasFieldErrors&gt;
 &lt;div &lt;#rt/&gt;&lt;#if parameters.id??&gt;id="wwerr_${parameters.id}"&lt;#rt/&gt;&lt;/#if&gt; class="wwerr"&gt;
-&lt;#list fieldErrors[parameters.name] as error&gt;
+&lt;#list fieldErrors.get(parameters.name) as error&gt;
     &lt;div&lt;#rt/&gt;
     &lt;#if parameters.id??&gt;
      errorFor="${parameters.id}"&lt;#rt/&gt;
@@ -305,7 +303,7 @@ ${parameters.after!}&lt;#t/&gt;
 
 <h3 id="head-template">Head template</h3>
 
-<p>The css_xhtml <a href="head-tag.html">head</a> template is similar to the xhtml head template. The difference is that CSS is used 
+<p>The css_xhtml <a href="head-tag">head</a> template is similar to the xhtml head template. The difference is that CSS is used 
 to provide the layout. The contents of <strong>head.ftl</strong> are:</p>
 
 <figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
@@ -376,16 +374,16 @@ to provide the layout. The contents of <strong>head.ftl</strong> are:</p>
 
 <h3 id="form-template">Form template</h3>
 
-<p>The css_xhtml <a href="form-tag.html">form</a> template is almost exactly like the <em>xhtml form template</em> , including support for 
-<a href="../core-developers/pure-java-script-client-side-validation.html">Pure JavaScript Client Side Validation</a>. The difference 
+<p>The css_xhtml <a href="form-tag">form</a> template is almost exactly like the <em>xhtml form template</em> , including support for 
+<a href="../core-developers/pure-java-script-client-side-validation">Pure JavaScript Client Side Validation</a>. The difference 
 is that instead of printing out an opening and closing <code class="highlighter-rouge">&lt;table&gt;</code> element, there are no elements. Instead, the CSS rules 
 for the individual HTML tags are assumed to handle all display logic. However, as noted, client-side validation is still 
 supported.</p>
 
 <h3 id="css_xhtml-form-template">css_xhtml form template</h3>
 
-<p>The css_xhtml <a href="form-tag.html">form</a> template is almost exactly like the <em>xhtml form template</em> , including support for 
-<a href="../core-developers/pure-java-script-client-side-validation.html">Pure JavaScript Client Side Validation</a>. The only 
+<p>The css_xhtml <a href="form-tag">form</a> template is almost exactly like the <em>xhtml form template</em> , including support for 
+<a href="../core-developers/pure-java-script-client-side-validation">Pure JavaScript Client Side Validation</a>. The only 
 difference is that instead of printing out an opening and closing <code class="highlighter-rouge">&lt;table&gt;</code> element, there are no elements. Instead, 
 the CSS rules for the individual HTML tags are assumed to handle all display logic. However, as noted, client side 
 validation is still supported.</p>
@@ -396,7 +394,7 @@ validation is still supported.</p>
 
 <footer class="container">
   <div class="col-md-12">
-    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    Copyright &copy; 2000-2021 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
     All Rights Reserved.
   </div>
   <div class="col-md-12">

@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Coding standards</title>
+  <title>Announcements 2022</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -126,113 +126,88 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/coding-standards.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/announce-2022.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <h1 class="no_toc" id="coding-standards">Coding standards</h1>
+    <h1 class="no_toc" id="announcements-2022">Announcements 2022</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#in-the-first-place" id="markdown-toc-in-the-first-place">In the first place</a></li>
-  <li><a href="#separation-of-concern" id="markdown-toc-separation-of-concern">Separation of concern</a></li>
-  <li><a href="#ask" id="markdown-toc-ask">Ask!</a></li>
-  <li><a href="#wip" id="markdown-toc-wip">WIP</a></li>
-  <li><a href="#examples" id="markdown-toc-examples">Examples</a>    <ul>
-      <li><a href="#from-defaults-to-extractions" id="markdown-toc-from-defaults-to-extractions">From defaults to extractions</a></li>
-    </ul>
-  </li>
+  <li><a href="#a20220122" id="markdown-toc-a20220122">22 January 2022 - Struts 2.5.29 General Availability</a></li>
+  <li><a href="#a20220102" id="markdown-toc-a20220102">02 January 2022 - Struts 2.5.28.3 General Availability</a></li>
 </ul>
 
-<h2 id="in-the-first-place">In the first place</h2>
+<p class="pull-right">
+  Skip to: <a href="announce-2021">Announcements - 2021</a>
+</p>
 
-<p>Please remember that most of the time others will read your code. Focusing on that allow you to gain required perspective
-about how code should look like. Defaults, margins, convention doesn’t matter if what you write is hard to read.</p>
+<h4 id="a20220122">22 January 2022 - Struts 2.5.29 General Availability</h4>
 
-<p><strong>Readability is the first rule!</strong></p>
+<p>The Apache Struts group is pleased to announce that Struts 2.5.29 is available as a “General Availability”
+release. The GA designation is our highest quality grade.</p>
 
-<h2 id="separation-of-concern">Separation of concern</h2>
-
-<p>If you want to reformat given file, part of class, etc do it in a dedicated commit. Never ever mix bug fixing,
-new feature implementation with code reformatting. Thus only confuses people reviewing your code.</p>
-
-<p><strong>Reformat different than coding!</strong></p>
-
-<h2 id="ask">Ask!</h2>
-
-<p>If something isn’t clear, you have doubts and anything else - ask! Maybe during materialising your thoughts as text
-you will gain the answer - Rubber Duck effect :-) Anyway, instead spending time on looking for solution - ask.</p>
-
-<p>The best place to ask question is Struts Developers List <a href="mailto:dev@struts.apache.org">dev@struts.apache.org</a></p>
-
-<h2 id="wip">WIP</h2>
-
-<p>If you have any idea how to improve this guideline, don’t hesitate to send them to us! Any help is welcome!</p>
-
-<h1 id="examples">Examples</h1>
-
-<p>Below examples shows how you should proceed when adjusting given part of source code via reformatting, extracting
-or improving.</p>
-
-<h2 id="from-defaults-to-extractions">From defaults to extractions</h2>
-
-<p>The original source code:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Hidden input section
-a = new Attributes();
-a.add("type", "hidden")
-    .add("id", "__multiselect_" + StringUtils.defaultString(StringEscapeUtils.escapeHtml4(id)))
-    .add("name", "__multiselect_" + StringUtils.defaultString(StringEscapeUtils.escapeHtml4(name)))
-    .add("value", "").addIfTrue("disabled", disabled);
-start("input", a);
-end("input");
-</code></pre></div></div>
-
-<p>After applying default reformatting (80 columns margin):</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Hidden input section
-a = new Attributes();
-a.add("type", "hidden")
-    .add("id",
-        "__multiselect_"
-            + StringUtils
-                .defaultString(StringEscapeUtils
-                    .escapeHtml4(id)))
-    .add("name",
-        "__multiselect_"
-            + StringUtils
-                .defaultString(StringEscapeUtils
-                    .escapeHtml4(name)))
-    .add("value", "").addIfTrue("disabled", disabled);
-start("input", a);
-end("input");
-</code></pre></div></div>
-
-<p>Some suggestions how to improve the code:</p>
-
+<p>Bugs:</p>
 <ul>
-  <li>
-    <p>use static imports</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  a.add("type", "hidden")
-   .add("id", "__multiselect_" + defaultString(escapeHtml4(id)));
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>use dedicated method</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  a.add("type", "hidden")
-   .add("id", "__multiselect_" + safeId(id));
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>use builder</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  a.add("type", "hidden")
-   .add("id", HtmlID.with("__multiselect_").withSafeId(id).create());
-</code></pre></div>    </div>
-  </li>
+  <li>[WW-5117] - %{id} evaluates different for data-* and value attribute</li>
+  <li>[WW-5160] - Template not found for name “Empty{name=’templateDir’}/simple/hidden.ftl”</li>
+  <li>[WW-5163] - Error executing FreeMarker template</li>
 </ul>
 
-<p>As you can see, reformatting a code is just the beginning, you shouldn’t stop there and think <em>how can I improve
-readability</em> and follow that path to the end.</p>
+<blockquote>
+  <p>Please read the <a href="https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.5.29">Version Notes</a> to find more details about performed
+bug fixes and improvements.</p>
+</blockquote>
+
+<p>Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework has been designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.</p>
+
+<p><strong>All developers are strongly advised to perform this upgrade.</strong></p>
+
+<p>The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.</p>
+
+<p>Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list,
+and, if appropriate, file <a href="https://issues.apache.org/jira/projects/WW/">a tracking ticket</a>.</p>
+
+<p>You can download this version from our <a href="download.cgi#struts-ga">download</a> page.</p>
+
+<h4 id="a20220102">02 January 2022 - Struts 2.5.28.3 General Availability</h4>
+
+<p>The Apache Struts group is pleased to announce that Struts 2.5.28.3 is available as a “General Availability”
+release. The GA designation is our highest quality grade.</p>
+
+<p>This release addresses Log4j vulnerability <a href="https://logging.apache.org/log4j/2.x/security.html#CVE-2021-44832">CVE-2021-44832</a>
+by using the latest Log4j ver. 2.12.4 (Java 1.7 compatible).</p>
+
+<p><strong>Please note, that the Apache Struts itself depends on the <code class="highlighter-rouge">log4j-api</code> package only, it’s users’ responsibility 
+to use a proper version of the log4j-core package!</strong></p>
+
+<blockquote>
+  <p>Please read the <a href="https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.5.28.3">Version Notes</a> to find more details about performed
+bug fixes and improvements.</p>
+</blockquote>
+
+<p>Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework has been designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.</p>
+
+<p><strong>All developers are strongly advised to perform this upgrade.</strong></p>
+
+<p>The 2.5.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 2.4, JSP API 2.0, and Java 7.</p>
+
+<p>Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list,
+and, if appropriate, file <a href="https://issues.apache.org/jira/projects/WW/">a tracking ticket</a>.</p>
+
+<p>You can download this version from our <a href="download.cgi#struts-ga">download</a> page.</p>
+
+<p class="pull-right">
+  Skip to: <a href="announce-2021.html">Announcements - 2021</a>
+</p>
+
+<p class="pull-left">
+  <strong>Next:</strong>
+  <a href="kickstart.html">Kickstart FAQ</a>
+</p>
 
   </section>
 </article>

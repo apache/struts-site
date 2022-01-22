@@ -102,12 +102,11 @@
                 <li><a href="/youatstruts.html">You at Struts</a></li>
                 <li><a href="/helping.html">How to Help FAQ</a></li>
                 <li><a href="/dev-mail.html">Development Lists</a></li>
-                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/submitting-patches.html">Submitting patches</a></li>
                 <li><a href="/builds.html">Source Code and Builds</a></li>
                 <li><a href="/coding-standards.html">Coding standards</a></li>
-                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/release-guidelines.html">Release Guidelines</a></li>
                 <li><a href="/bylaws.html">PMC Charter</a></li>
@@ -145,21 +144,21 @@
   </li>
 </ul>
 
-<p>The xhtml provides all the basics that the <a href="simple-theme.html">simple theme</a> provides and adds several features.</p>
+<p>The xhtml provides all the basics that the <a href="simple-theme">simple theme</a> provides and adds several features.</p>
 
 <ul>
-  <li>Standard two-column table layout for the HTML <a href="struts-tags.html">Struts Tags</a> (<a href="form-tag.html">form</a>, 
-<a href="textfield-tag.html">textfield</a>, <a href="select-tag.html">select</a>, and so forth)</li>
-  <li>Labels for each of the HTML <a href="struts-tags.html">Struts Tags</a> on the left hand side (or top, depending on 
+  <li>Standard two-column table layout for the HTML <a href="struts-tags">Struts Tags</a> (<a href="form-tag">form</a>, 
+<a href="textfield-tag">textfield</a>, <a href="select-tag">select</a>, and so forth)</li>
+  <li>Labels for each of the HTML <a href="struts-tags">Struts Tags</a> on the left hand side (or top, depending on 
 the <code class="highlighter-rouge">labelposition</code> attribute)</li>
-  <li><a href="../core-developers/validation.html">Validation</a> and error reporting</li>
-  <li><a href="../core-developers/pure-java-script-client-side-validation.html">Pure JavaScript Client Side Validation</a> using 
+  <li><a href="../core-developers/validation">Validation</a> and error reporting</li>
+  <li><a href="../core-developers/pure-java-script-client-side-validation">Pure JavaScript Client Side Validation</a> using 
 100% JavaScript on the browser</li>
 </ul>
 
 <h2 id="wrapping-the-simple-theme">Wrapping the Simple Theme</h2>
 
-<p>The xhtml theme uses the “wrapping” technique described by <a href="extending-themes.html">Extending Themes</a>. Let’s look at how 
+<p>The xhtml theme uses the “wrapping” technique described by <a href="extending-themes">Extending Themes</a>. Let’s look at how 
 the HTML tags are wrapped by a standard header and footer. For example, in the <code class="highlighter-rouge">text.ftl</code> template, the <code class="highlighter-rouge">controlheader.ftl</code>
 and <code class="highlighter-rouge">controlfooter.ftl</code> templates are wrapped around the simple template.</p>
 
@@ -189,13 +188,13 @@ and <code class="highlighter-rouge">controlfooter.ftl</code> templates are wrapp
 
 <blockquote>
   <p>The <code class="highlighter-rouge">controlheader.ftl</code> is referenced using <code class="highlighter-rouge">${parameters.theme}</code> so that the code can be reused 
-by the <a href="ajax-theme.html">ajax theme</a>.</p>
+by the <a href="ajax-theme">ajax theme</a>.</p>
 </blockquote>
 
 <h2 id="xhtml-theme-header">XHTML Theme Header</h2>
 
 <p>Now let’s look at the <code class="highlighter-rouge">controlheader.ftl</code> and <code class="highlighter-rouge">controlheader-core.ftl</code>. Again, these are split up for easy re-use with 
-the <a href="ajax-theme.html">ajax theme</a>) contents:</p>
+the <a href="ajax-theme">ajax theme</a>) contents:</p>
 
 <figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
 /*
@@ -250,10 +249,10 @@ the <a href="ajax-theme.html">ajax theme</a>) contents:</p>
 	Only show message if errors are available.
 	This will be done if ActionSupport is used.
 --&gt;
-&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[parameters.name]??/&gt;
+&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(parameters.name)??/&gt;
 &lt;#if (parameters.errorposition!"top") == 'top'&gt;
 &lt;#if hasFieldErrors&gt;
-&lt;#list fieldErrors[parameters.name] as error&gt;
+&lt;#list fieldErrors.get(parameters.name) as error&gt;
 &lt;tr errorFor="${parameters.id}"&gt;
     &lt;td class="tdErrorMessage" colspan="2"&gt;&lt;#rt/&gt;
         &lt;span class="errorMessage"&gt;${error}&lt;/span&gt;&lt;#t/&gt;
@@ -262,17 +261,17 @@ the <a href="ajax-theme.html">ajax theme</a>) contents:</p>
 &lt;/#list&gt;
 &lt;/#if&gt;
 &lt;/#if&gt;
-&lt;#if !parameters.labelposition?? &amp;&amp; (parameters.form.labelposition)??&gt;
-&lt;#assign labelpos = parameters.form.labelposition/&gt;
-&lt;#elseif parameters.labelposition??&gt;
-&lt;#assign labelpos = parameters.labelposition/&gt;
+&lt;#if !parameters.labelPosition?? &amp;&amp; (parameters.form.labelPosition)??&gt;
+&lt;#assign labelPos = parameters.form.labelPosition/&gt;
+&lt;#elseif parameters.labelPosition??&gt;
+&lt;#assign labelPos = parameters.labelPosition/&gt;
 &lt;/#if&gt;
 &lt;#--
 	if the label position is top,
 	then give the label it's own row in the table
 --&gt;
 &lt;tr&gt;
-&lt;#if (labelpos!"") == 'top'&gt;
+&lt;#if (labelPos!"") == 'top'&gt;
     &lt;td class="tdLabelTop" colspan="2"&gt;&lt;#rt/&gt;
 &lt;#else&gt;
     &lt;td class="tdLabel"&gt;&lt;#rt/&gt;
@@ -301,7 +300,7 @@ ${parameters.labelseparator!":"}&lt;#t/&gt;
 &lt;/#if&gt;
     &lt;/td&gt;&lt;#lt/&gt;
 &lt;#-- add the extra row --&gt;
-&lt;#if (labelpos!"") == 'top'&gt;
+&lt;#if (labelPos!"") == 'top'&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;/#if&gt;</code></pre></figure>
@@ -311,10 +310,10 @@ two behaviors: either a two-column format or a two-row format. Generally the two
 is the default option. To use the two-row approach, change the <code class="highlighter-rouge">labelposition</code> parameter to <code class="highlighter-rouge">top</code>.</p>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">fieldErrors</code>, usually caused by <a href="../core-developers/validation.html">Validation</a>, are printed out as a row above 
+  <p>The <code class="highlighter-rouge">fieldErrors</code>, usually caused by <a href="../core-developers/validation">Validation</a>, are printed out as a row above 
 the HTML form element. Some people prefer that the errors display elsewhere, such as in a third column. If you wish 
 to place these elsehwere, overriding the headers is easy, allowing you to continue to use the other features provided 
-by this theme. See <a href="template-loading.html">Template Loading</a> for more information on how to do this.</p>
+by this theme. See <a href="template-loading">Template Loading</a> for more information on how to do this.</p>
 </blockquote>
 
 <h2 id="xhtml-theme-footer">XHTML Theme Footer</h2>
@@ -346,9 +345,9 @@ ${parameters.after!}&lt;#t/&gt;
     &lt;/td&gt;&lt;#lt/&gt;
 &lt;/tr&gt;
 &lt;#if (parameters.errorposition!"top") == 'bottom'&gt;
-&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[parameters.name]??/&gt;
+&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(parameters.name)??/&gt;
 &lt;#if hasFieldErrors&gt;
-&lt;#list fieldErrors[parameters.name] as error&gt;
+&lt;#list fieldErrors.get(parameters.name) as error&gt;
 &lt;tr errorFor="${parameters.id}"&gt;
     &lt;td class="tdErrorMessage" colspan="2"&gt;&lt;#rt/&gt;
         &lt;span class="errorMessage"&gt;${error}&lt;/span&gt;&lt;#t/&gt;
@@ -358,9 +357,9 @@ ${parameters.after!}&lt;#t/&gt;
 &lt;/#if&gt;
 &lt;/#if&gt;</code></pre></figure>
 
-<p>While <code class="highlighter-rouge">after</code> isn’t an attribute supported by any of the <a href="struts-tags.html">Struts Tags</a>, if you are using 
-<a href="freemarker-tags.html">FreeMarker Tags</a>, <a href="velocity-tags.html">Velocity Tags</a>, or the <a href="param-tag.html">param</a> tag in any 
-template language, you can add an <code class="highlighter-rouge">after</code> parameter to place any content you like after the <a href="simple-theme.html">simple theme</a> 
+<p>While <code class="highlighter-rouge">after</code> isn’t an attribute supported by any of the <a href="struts-tags">Struts Tags</a>, if you are using 
+<a href="freemarker-tags">FreeMarker Tags</a>, <a href="velocity-tags">Velocity Tags</a>, or the <a href="param-tag">param</a> tag in any 
+template language, you can add an <code class="highlighter-rouge">after</code> parameter to place any content you like after the <a href="simple-theme">simple theme</a> 
 template renders. The <code class="highlighter-rouge">after</code> attribute makes it easier to fine-tune HTML forms for your specific environment.</p>
 
 <h2 id="special-interest">Special Interest</h2>
@@ -369,7 +368,7 @@ template renders. The <code class="highlighter-rouge">after</code> attribute mak
 
 <h3 id="xhtml-head-template">xhtml head template</h3>
 
-<p>The xhtml <a href="head-tag.html">head</a> template extends the <em>simple head template</em> and provides an additional CSS that helps 
+<p>The xhtml <a href="head-tag">head</a> template extends the <em>simple head template</em> and provides an additional CSS that helps 
 render the form elements.</p>
 
 <figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
@@ -446,7 +445,7 @@ render the form elements.</p>
 
 <p>The xhtml form template sets up the wrapping table around all the other  form elements. In addition to creating this 
 wrapping table, the opening and closing templates also, if the <code class="highlighter-rouge">validate</code> parameter is set to true, enable 
-<a href="../core-developers/pure-java-script-client-side-validation.html">Pure JavaScript Client Side Validation</a>.</p>
+<a href="../core-developers/pure-java-script-client-side-validation">Pure JavaScript Client Side Validation</a>.</p>
 
 <figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
 /*
@@ -508,7 +507,7 @@ wrapping table, the opening and closing templates also, if the <code class="high
 &lt;#if parameters.focusElement??&gt;
 &lt;script type="text/javascript" &lt;#include "/${parameters.templateDir}/simple/nonce.ftl" /&gt; &gt;
     StrutsUtils.addOnLoad(function() {
-        var element = document.getElementById("${parameters.focusElement}");
+        var element = document.getElementById("${parameters.focusElement?js_string}");
         if(element) {
             element.focus();
         }
@@ -518,7 +517,7 @@ wrapping table, the opening and closing templates also, if the <code class="high
 
 <h3 id="xhtml-form-template">xhtml form template</h3>
 
-<p>The xhtml form template sets up the wrapping table around all the other <a href="xhtml-theme.html">xhtml theme</a> form elements. 
+<p>The xhtml form template sets up the wrapping table around all the other <a href="xhtml-theme">xhtml theme</a> form elements. 
 In addition to creating this wrapping table, the opening and closing templates also, if the <code class="highlighter-rouge">validate</code> parameter is set 
 to <code class="highlighter-rouge">true</code>, enable <a href="../core-developers/pure-java-script-client-side-validation.htmk">Pure JavaScript Client Side Validation</a>.</p>
 
@@ -584,7 +583,7 @@ to <code class="highlighter-rouge">true</code>, enable <a href="../core-develope
 &lt;#if parameters.focusElement??&gt;
 &lt;script type="text/javascript" &lt;#include "/${parameters.templateDir}/simple/nonce.ftl" /&gt; &gt;
     StrutsUtils.addOnLoad(function() {
-        var element = document.getElementById("${parameters.focusElement}");
+        var element = document.getElementById("${parameters.focusElement?js_string}");
         if(element) {
             element.focus();
         }
@@ -599,7 +598,7 @@ to <code class="highlighter-rouge">true</code>, enable <a href="../core-develope
 
 <footer class="container">
   <div class="col-md-12">
-    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    Copyright &copy; 2000-2021 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
     All Rights Reserved.
   </div>
   <div class="col-md-12">

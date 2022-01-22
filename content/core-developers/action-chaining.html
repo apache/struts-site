@@ -102,12 +102,11 @@
                 <li><a href="/youatstruts.html">You at Struts</a></li>
                 <li><a href="/helping.html">How to Help FAQ</a></li>
                 <li><a href="/dev-mail.html">Development Lists</a></li>
-                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/submitting-patches.html">Submitting patches</a></li>
                 <li><a href="/builds.html">Source Code and Builds</a></li>
                 <li><a href="/coding-standards.html">Coding standards</a></li>
-                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/release-guidelines.html">Release Guidelines</a></li>
                 <li><a href="/bylaws.html">PMC Charter</a></li>
@@ -134,8 +133,8 @@
     <h1 id="action-chaining">Action Chaining</h1>
 
 <p>The framework provides the ability to chain multiple actions into a defined sequence or workflow. This feature works 
-by applying a <a href="chain-result.html">Chain Result</a> to a given Action, and intercepting its target Action’s invocation 
-with a <a href="chaining-interceptor.html">Chaining Interceptor</a>.</p>
+by applying a <a href="chain-result">Chain Result</a> to a given Action, and intercepting its target Action’s invocation 
+with a <a href="chaining-interceptor">Chaining Interceptor</a>.</p>
 
 <blockquote>
   <p>As a rule, Action Chaining is not recommended. First explore other options, such as the <code class="highlighter-rouge">Redirect After Post</code> technique.</p>
@@ -143,7 +142,7 @@ with a <a href="chaining-interceptor.html">Chaining Interceptor</a>.</p>
 
 <h2 id="chain-result">Chain Result</h2>
 
-<p>The <a href="chain-result.html">Chain Result</a> is a result type that invokes an Action with its own Interceptor Stack and Result. 
+<p>The <a href="chain-result">Chain Result</a> is a result type that invokes an Action with its own Interceptor Stack and Result. 
 This Interceptor allows an Action to forward requests to a target Action, while propagating the state of the source Action. 
 Below is an example of how to define this sequence.</p>
 
@@ -170,13 +169,13 @@ Below is an example of how to define this sequence.</p>
 </code></pre></div></div>
 
 <p>Another action mapping in the same namespace (or the default “” namespace) can be executed after this action mapping 
-(see <a href="configuration-files.html">Configuration Files</a>). An optional “namespace” parameter may also be added to specify 
+(see <a href="configuration-files">Configuration Files</a>). An optional “namespace” parameter may also be added to specify 
 an action in a different namespace.</p>
 
 <h2 id="chaining-interceptor">Chaining Interceptor</h2>
 
 <p>If you need to copy the properties from your previous Actions in the chain to the current action, you should apply 
-the <a href="chaining-interceptor.html">Chaining Interceptor</a>. The Interceptor will copy the original parameters from the request, 
+the <a href="chaining-interceptor">Chaining Interceptor</a>. The Interceptor will copy the original parameters from the request, 
 and the ValueStack is passed in to the target Action. The source Action is remembered by the ValueStack, allowing 
 the target Action to access the properties of the preceding Action(s) using the ValueStack, and also makes these 
 properties available to the final result of the chain, such as the JSP or Velocity page.</p>
@@ -184,12 +183,12 @@ properties available to the final result of the chain, such as the JSP or Veloci
 <p>One common use of Action chaining is to provide lookup lists (like for a dropdown list of states). Since these Actions 
 get put on the ValueStack, their properties will be available in the view. This functionality can also be done using 
 the ActionTag to execute an Action from the display page. You may also use 
-the <a href="redirect-action-result.html">Redirect Action Result</a> to accomplish this.</p>
+the <a href="redirect-action-result">Redirect Action Result</a> to accomplish this.</p>
 
 <h2 id="use-with-care">Use with care</h2>
 
 <p>Experience shows that chaining should be used with care. If chaining is overused, an application can turn into 
-“spaghetti code”. Actions should be treated as a <a href="http://martinfowler.com/eaaCatalog/transactionScript.html">Transaction Script</a>, 
+“spaghetti code”. Actions should be treated as a <a href="http://martinfowler.com/eaaCatalog/transactionScript">Transaction Script</a>, 
 rather than as methods in a <a href="http://msdn2.microsoft.com/en\-us/library/aa291571(VS.71).aspx">Business Facade</a>. Be sure 
 to ask yourself why you need to chain from one Action to another. Is a navigational issue, or could the logic in Action2 
 be pushed back to a support class or business facade so that Action1 can call it too?</p>
@@ -204,7 +203,7 @@ where coding logic is defined.</p>
 
 <footer class="container">
   <div class="col-md-12">
-    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    Copyright &copy; 2000-2021 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
     All Rights Reserved.
   </div>
   <div class="col-md-12">

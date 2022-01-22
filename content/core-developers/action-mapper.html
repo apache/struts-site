@@ -102,12 +102,11 @@
                 <li><a href="/youatstruts.html">You at Struts</a></li>
                 <li><a href="/helping.html">How to Help FAQ</a></li>
                 <li><a href="/dev-mail.html">Development Lists</a></li>
-                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/submitting-patches.html">Submitting patches</a></li>
                 <li><a href="/builds.html">Source Code and Builds</a></li>
                 <li><a href="/coding-standards.html">Coding standards</a></li>
-                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/release-guidelines.html">Release Guidelines</a></li>
                 <li><a href="/bylaws.html">PMC Charter</a></li>
@@ -156,34 +155,34 @@
 
 <p>The ActionMapper interface provides a mapping between HTTP requests and action invocation requests and vice-versa.</p>
 
-<p>When given an HttpServletRequest, the ActionMapper may return null if no action invocation request matches or it may 
+<p>When given an HttpServletRequest, the ActionMapper may return null if no action invocation request matches or it may 
 return an <code class="highlighter-rouge">ActionMapping</code> that describes an action invocation for the framework to try.</p>
 
-<p>The ActionMapper is not required to guarantee that the <code class="highlighter-rouge">ActionMapping</code> returned be a real action or otherwise ensure 
-a valid request. Accordingly, most ActionMappers do not need to consult the Struts configuration just to determine if 
+<p>The ActionMapper is not required to guarantee that the <code class="highlighter-rouge">ActionMapping</code> returned be a real action or otherwise ensure 
+a valid request. Accordingly, most ActionMappers do not need to consult the Struts configuration just to determine if 
 a request should be mapped.</p>
 
-<p>Just as requests can be mapped from HTTP to an action invocation, the opposite is true as well. However, because HTTP 
-requests (when shown in HTTP responses) must be in String form, a String is returned rather than an actual request object.</p>
+<p>Just as requests can be mapped from HTTP to an action invocation, the opposite is true as well. However, because HTTP 
+requests (when shown in HTTP responses) must be in String form, a String is returned rather than an actual request object.</p>
 
 <h2 id="defaultactionmapper">DefaultActionMapper</h2>
 
-<p>Default action mapper implementation, using the standard <code class="highlighter-rouge">*.[ext]</code> (where ext usually <strong>action</strong>) pattern. The extension 
-is looked up from the Struts configuration key <code class="highlighter-rouge">struts.action.extension</code>.</p>
+<p>Default action mapper implementation, using the standard <code class="highlighter-rouge">*.[ext]</code> (where ext usually <strong>action</strong>) pattern. The extension 
+is looked up from the Struts configuration key <code class="highlighter-rouge">struts.action.extension</code>.</p>
 
-<p>To help with dealing with buttons and other related requirements, this mapper (and other <code class="highlighter-rouge">ActionMapper</code>s, we hope) has 
-the ability to name a button with some predefined prefix and have that button name alter the execution behaviour.</p>
+<p>To help with dealing with buttons and other related requirements, this mapper (and other <code class="highlighter-rouge">ActionMapper</code>s, we hope) has 
+the ability to name a button with some predefined prefix and have that button name alter the execution behaviour.</p>
 
 <p>The four prefixes are:</p>
 
 <ul>
-  <li>Method prefix - <code class="highlighter-rouge">method:default</code></li>
-  <li>Action prefix - <code class="highlighter-rouge">action:dashboard</code></li>
+  <li>Method prefix - <code class="highlighter-rouge">method:default</code></li>
+  <li>Action prefix - <code class="highlighter-rouge">action:dashboard</code></li>
 </ul>
 
-<p>In addition to these four prefixes, this mapper also understands the action naming pattern of <code class="highlighter-rouge">foo!bar</code> in either 
-the extension form (eg: <code class="highlighter-rouge">foo!bar.action</code>) or in the prefix form (eg: <code class="highlighter-rouge">action:foo!bar</code>). This syntax tells this mapper 
-to map to the action named <code class="highlighter-rouge">foo</code> and the method <code class="highlighter-rouge">bar</code>.</p>
+<p>In addition to these four prefixes, this mapper also understands the action naming pattern of <code class="highlighter-rouge">foo!bar</code> in either 
+the extension form (eg: <code class="highlighter-rouge">foo!bar.action</code>) or in the prefix form (eg: <code class="highlighter-rouge">action:foo!bar</code>). This syntax tells this mapper 
+to map to the action named <code class="highlighter-rouge">foo</code> and the method <code class="highlighter-rouge">bar</code>.</p>
 
 <blockquote>
   <p>NOTE: By default support for the <code class="highlighter-rouge">action:</code> prefix has been disabled since Struts 2.3.15.3, please use the below 
@@ -204,10 +203,10 @@ constant to enable it:</p>
 
 <h3 id="method-prefix">Method prefix</h3>
 
-<p>With method-prefix, instead of calling baz action’s <code class="highlighter-rouge">execute()</code> method (by default if it isn’t overridden in <code class="highlighter-rouge">struts.xml</code>
-to be something else), the baz action’s <code class="highlighter-rouge">anotherMethod()</code> will be called. A very elegant way determine which button is 
-clicked. Alternatively, one would have submit button set a particular value on the action when clicked, and the <code class="highlighter-rouge">execute()</code>
-method decides on what to do with the setted value depending on which button is clicked.</p>
+<p>With method-prefix, instead of calling baz action’s <code class="highlighter-rouge">execute()</code> method (by default if it isn’t overridden in <code class="highlighter-rouge">struts.xml</code>
+to be something else), the baz action’s <code class="highlighter-rouge">anotherMethod()</code> will be called. A very elegant way determine which button is 
+clicked. Alternatively, one would have submit button set a particular value on the action when clicked, and the <code class="highlighter-rouge">execute()</code>
+method decides on what to do with the setted value depending on which button is clicked.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"baz"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Enter your name"</span> <span class="na">name=</span><span class="s">"person.name"</span><span class="nt">/&gt;</span>
@@ -218,8 +217,8 @@ method decides on what to do with the setted value depending on which button is
 
 <h3 id="action-prefix">Action prefix</h3>
 
-<p>With action-prefix, instead of executing baz action’s <code class="highlighter-rouge">execute()</code> method (by default if it isn’t overridden in <code class="highlighter-rouge">struts.xml</code> 
-to be something else), the anotherAction action’s <code class="highlighter-rouge">execute()</code> method (assuming again if it isn’t overridden with something 
+<p>With action-prefix, instead of executing baz action’s <code class="highlighter-rouge">execute()</code> method (by default if it isn’t overridden in <code class="highlighter-rouge">struts.xml</code> 
+to be something else), the anotherAction action’s <code class="highlighter-rouge">execute()</code> method (assuming again if it isn’t overridden with something 
 else in <code class="highlighter-rouge">struts.xml</code>) will be executed.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"baz"</span><span class="nt">&gt;</span>
@@ -231,19 +230,19 @@ else in <code class="highlighter-rouge">struts.xml</code>) will be executed.</p>
 
 <h3 id="allowed-action-name-regex">Allowed action name RegEx</h3>
 
-<p>By default the mapper will check if extracted action name matches provided RegEx, i.e. <code class="highlighter-rouge">[a-zA-Z0-9._!/-]*</code>. You redefine 
-this RegEx by defining a constant in <code class="highlighter-rouge">struts.xml</code> named <code class="highlighter-rouge">struts.allowed.action.names</code>. If action name doesn’t match 
-the RegEx a default action name will be returned which is defined as <code class="highlighter-rouge">index</code>. You can also redefine this by specifying 
-constant <code class="highlighter-rouge">struts.default.action.name</code> in <code class="highlighter-rouge">struts.xml</code>.</p>
+<p>By default the mapper will check if extracted action name matches provided RegEx, i.e. <code class="highlighter-rouge">[a-zA-Z0-9._!/-]*</code>. You redefine 
+this RegEx by defining a constant in <code class="highlighter-rouge">struts.xml</code> named <code class="highlighter-rouge">struts.allowed.action.names</code>. If action name doesn’t match 
+the RegEx a default action name will be returned which is defined as <code class="highlighter-rouge">index</code>. You can also redefine this by specifying 
+constant <code class="highlighter-rouge">struts.default.action.name</code> in <code class="highlighter-rouge">struts.xml</code>.</p>
 
 <h3 id="allowed-method-name-regex">Allowed method name RegEx</h3>
 
 <p>The same logic as above is used for extracted methods, the default RegEx (<code class="highlighter-rouge">[a-zA-Z_]*[0-9]*</code>) is used to check if method 
-is allowed, you can change this by setting constant <code class="highlighter-rouge">struts.allowed.method.names</code> in <code class="highlighter-rouge">struts.xml</code>. If method doesn’t match 
-the RegEx a default method is returned, i.e. <code class="highlighter-rouge">execute</code>. This can be changed by defining constant <code class="highlighter-rouge">struts.default.method.name</code>
-in <code class="highlighter-rouge">struts.xml</code>.</p>
+is allowed, you can change this by setting constant <code class="highlighter-rouge">struts.allowed.method.names</code> in <code class="highlighter-rouge">struts.xml</code>. If method doesn’t match 
+the RegEx a default method is returned, i.e. <code class="highlighter-rouge">execute</code>. This can be changed by defining constant <code class="highlighter-rouge">struts.default.method.name</code>
+in <code class="highlighter-rouge">struts.xml</code>.</p>
 
-<p>Please note that this functionality only works when <a href="action-configuration.html#dynamic-method-invocation">Dynamic Method Invocation</a>
+<p>Please note that this functionality only works when <a href="action-configuration.html#dynamic-method-invocation">Dynamic Method Invocation</a>
 is enabled.</p>
 
 <h2 id="custom-actionmapper">Custom ActionMapper</h2>
@@ -264,7 +263,7 @@ would be similar to a request to <strong>/getPerson.action?personID=1</strong> u
 <p>A composite action mapper that is capable of delegating to a series of  if the former failed to obtained a valid 
 <code class="highlighter-rouge">ActionMapping</code> or uri.</p>
 
-<p>It is configured through <a href="struts-xml.html">struts.xml</a>. For example, with the following entries in <code class="highlighter-rouge">struts.xml</code></p>
+<p>It is configured through <a href="struts-xml">struts.xml</a>. For example, with the following entries in <code class="highlighter-rouge">struts.xml</code></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.class"</span> <span class="na">value=</span><span class="s">"composite"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.mapper.composite"</span> <span class="na">value=</span><span class="s">"struts,restful,restful2"</span> <span class="nt">/&gt;</span>
@@ -359,7 +358,7 @@ entry in <code class="highlighter-rouge">struts.xml</code>. Note that the value 
 </code></pre></div></div>
 
 <blockquote>
-  <p>See also: <a href="restful-action-mapper.html">RestfulActionMapper</a></p>
+  <p>See also: <a href="restful-action-mapper">RestfulActionMapper</a></p>
 </blockquote>
 
   </section>
@@ -368,7 +367,7 @@ entry in <code class="highlighter-rouge">struts.xml</code>. Note that the value 
 
 <footer class="container">
   <div class="col-md-12">
-    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    Copyright &copy; 2000-2021 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
     All Rights Reserved.
   </div>
   <div class="col-md-12">

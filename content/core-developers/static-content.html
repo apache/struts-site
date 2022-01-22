@@ -102,12 +102,11 @@
                 <li><a href="/youatstruts.html">You at Struts</a></li>
                 <li><a href="/helping.html">How to Help FAQ</a></li>
                 <li><a href="/dev-mail.html">Development Lists</a></li>
-                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/submitting-patches.html">Submitting patches</a></li>
                 <li><a href="/builds.html">Source Code and Builds</a></li>
                 <li><a href="/coding-standards.html">Coding standards</a></li>
-                <li><a href="https://cwiki.apache.org/confluence/display/WW/Contributors+Guide">Contributors Guide</a></li>
+                <li><a href="/contributors/">Contributors Guide</a></li>
                 <li class="divider"></li>
                 <li><a href="/release-guidelines.html">Release Guidelines</a></li>
                 <li><a href="/bylaws.html">PMC Charter</a></li>
@@ -129,7 +128,14 @@
   <section class="col-md-12">
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/static-content.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="static-content">Static Content</h1>
+    <h1 class="no_toc" id="static-content">Static Content</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#custom-static-content-loaders" id="markdown-toc-custom-static-content-loaders">Custom Static Content Loaders</a></li>
+  <li><a href="#default-content-loader" id="markdown-toc-default-content-loader">Default Content Loader</a></li>
+  <li><a href="#default-path" id="markdown-toc-default-path">Default path</a></li>
+  <li><a href="#preventing-struts-from-handling-a-request" id="markdown-toc-preventing-struts-from-handling-a-request">Preventing Struts from Handling a Request</a></li>
+</ul>
 
 <p>Struts can serve static content like css and javascript files. This feature is enabled by default, but can be disabled 
 by setting:</p>
@@ -154,7 +160,7 @@ shipped inside the core jar are extracted to your web application directory.</p>
 <h2 id="default-content-loader">Default Content Loader</h2>
 
 <p>Struts provides a default implementation of <code class="highlighter-rouge">StaticContentLoader</code> which is <code class="highlighter-rouge">org.apache.struts2.dispatcher.DefaultStaticContentLoader</code>. 
-This loader will handle urls that start with “/static/”.</p>
+This loader will handle urls that start with “/static/” by default.</p>
 
 <p>This content loader can serve static content from the classpath, so when writing a plugin, you can put a file inside 
 your plugin’s jar like “/static/image/banner.jpg” and it will be served when the url “/static/image/banner.jpg” is 
@@ -164,6 +170,16 @@ requested.</p>
   <p>This loader is not optimized to handle static content, and to improve performance, it is recommended that you extract 
 your static content to the web application directory, and let the container handle them.</p>
 </blockquote>
+
+<h2 id="default-path">Default path</h2>
+
+<p>If needed you can change the default path at which static content is served. Just define a new <code class="highlighter-rouge">constant</code> in your
+<code class="highlighter-rouge">struts.xml</code> with a path as below:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ui.staticContentPath"</span> <span class="na">value=</span><span class="s">"/my-static-content"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>This value is also used by the Default Content Loader.</p>
 
 <h2 id="preventing-struts-from-handling-a-request">Preventing Struts from Handling a Request</h2>
 
@@ -177,7 +193,7 @@ a comma separated list of regular expressions like:</p>
 of them matches, then Struts will not handle the request.</p>
 
 <p>To evaluate each pattern Pattern class from JDK will be used, you can find more about what kind of pattern you can use 
-in the <a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Pattern class JavaDoc</a>.</p>
+in the <a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern">Pattern class JavaDoc</a>.</p>
 
   </section>
 </article>
@@ -185,7 +201,7 @@ in the <a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pat
 
 <footer class="container">
   <div class="col-md-12">
-    Copyright &copy; 2000-2018 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+    Copyright &copy; 2000-2021 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
     All Rights Reserved.
   </div>
   <div class="col-md-12">
