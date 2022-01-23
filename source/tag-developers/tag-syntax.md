@@ -17,7 +17,7 @@ we'd pass the String "postalCode" to the textfield tag.
 
 ## Creating a dynamic input field
 
-```jsp
+```html
 <s:textfield name="postalCode"/>
 ```
 
@@ -31,7 +31,7 @@ The expression escape sequence is `%{ ... }`.  Any text embedded in the escape s
 
 ### Using an expression to set the label
 
-```jsp
+```html
 <s:textfield key="postalCode.label" name="postalCode"/>
 ```
 
@@ -47,7 +47,7 @@ In this case, you do not need to use the escape notation. (But, if you do anyway
 
 ### Evaluating booleans
 
-```jsp
+```html
 <s:select key="state.label" name="state" multiple="true"/>
 ```
 
@@ -58,19 +58,19 @@ Since it's easy to forget which attributes are String and which are non-String, 
 
 ### Evaluating booleans (verbose)
 
-```jsp
+```html
 <s:select key="state.label" name="state" multiple="%{true}"/>
 ```
 
 ### Evaluating booleans (with property)
 
-```jsp
+```html
 <s:select key="state.label" name="state" multiple="allowMultiple"/>
 ```
 
 ### Evaluating booleans (verbose with property)
 
-```jsp
+```html
 <s:select key="state.label" name="state" multiple="%{allowMultiple}"/>
 ```
 
@@ -84,7 +84,7 @@ property to call to set the `value`. But, if there is a reason to set the `value
 
 ## Probably wrong!
 
-```jsp
+```html
 <s:textfield key="state.label" name="state" value="ca"/>
 ```
 
@@ -94,7 +94,7 @@ within quotes
 
 ## Passing a literal value the right way
 
-```jsp
+```html
 <s:textfield key="state.label" name="state" value="%{'ca'}" />
 ```
 
@@ -112,22 +112,22 @@ Please remember about _altSyntax_ option that can change when value is evaluated
 ## Expression Language Notations
 
 - A JavaBean object in a standard context in Freemarker, Velocity, or JSTL EL (Not OGNL).
-  ```jsp
+  ```html
   Username: ${user.username}
   ```
 - A username property on the Value Stack.
-  ```jsp
+  ```html
   <s:textfield name="username"/>
   ```
 - Another way to refer to a property placed on the Value Stack.
-  ```jsp
+  ```html
   <s:url var="es" action="Hello">
     <s:param name="request_locale">es</s:param>
   </s:url>
   <s:a href="%{es}">Espanol</s:a>
   ```
 - A static Map, as in `put("username","trillian")`.
-  ```jsp
+  ```html
   <s:property value="#session.user.username" />
   <s:select label="FooBar" name="foo" list="#{'username':'trillian', 'username':'zaphod'}" />
   ```
@@ -146,7 +146,7 @@ The following names of property are disallowed:
 
 The below code will not work:
 
-```jsp
+```html
 <s:iterator value="parameters"/>
 ```
 
@@ -162,4 +162,22 @@ public class MyAction {
 
 }
 
+```
+
+## Escaping body of a tag
+
+Since Struts 2.6 and migration to the latest Freemarker version (which enables auto-escaping by default) you should 
+stop using `?html` in your custom tags and freemarker based pages. You can also automatically escape body of the following
+tags by setting `escapeHtmlBody` attribute to true:
+ - `<s:a/>`
+ - `<s:submit/>`
+ - `<s:component/>`
+
+There is a new global flag `struts.ui.escapeHtmlBody` which controls this behaviour for all the above tags.
+Yet the attribute `escapeHtmlBody` always takes precedence over the flag.
+
+```html
+<s:a href="%{...}" escapeHtmlBody="true">
+  <img src="/images/icon_waste_sml.png"/>
+</s:a>
 ```
