@@ -110,16 +110,16 @@ Struts, it will help you when your application grows and becomes more complex.
 #### Properties Files and ResourceBundles {#resources}
 
 Java applications, including web applications, are often
-configured using [Properties](http://docs.oracle.com/javase/6/docs/api/java/util/Properties)
+configured using [Properties](https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html)
 files. Properties files are the basis for the
-[ResourceBundles](http://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle)
+[ResourceBundles](https://docs.oracle.com/javase/8/docs/api/java/util/ResourceBundle.html)
 that the framework uses to provide message resources to an application.
 
 The Java Tutorials provide a
 [great introduction to Properties](http://docs.oracle.com/javase/tutorial/essential/environment/properties).
 
 Java ResourceBundles use one or more Properties files to provide internationalized messages
-to users based their [Locale](http://docs.oracle.com/javase/6/docs/api/java/util/Locale).
+to users based their [Locale](https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html).
 Support for localizing an application was built into the framework from the ground-up.
 
 Again the Java Tutorials provide
