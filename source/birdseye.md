@@ -12,16 +12,16 @@ title: From a birds eye
 ## The Apache Struts web framework
 
 The Apache Struts web framework is a free open-source solution for
-creating Java web applications.
+creating dynamic web applications using Java.
 
-Web applications differ from conventional websites in that web applications
-can create a dynamic response. Many websites deliver only static pages.
+Web applications differ from conventional websites in a way that web applications
+can create dynamic response. Many websites deliver only static pages.
 A web application can interact with databases and business logic engines
 to customize a response.
 
 Web applications based on JavaServer Pages sometimes commingle database
 code, page design code, and control flow code. In practice, we find that
-unless these concerns are separated, larger applications become
+unless and until these concerns are separated, larger applications become
 difficult to maintain.
 
 One way to separate concerns in a software application is to use a
@@ -63,8 +63,8 @@ is the best choice for teams who value elegant solutions to difficult problems.
 
 ## Why should you use Apache Struts?
 
-Apache Struts is a modern, maintained and full-featured web framework. It has been there
-for years and give the huge user base it is unlikely it will go away anytime soon
+Apache Struts is a modern, well-maintained and full-featured web framework. It has been there
+for years and given the huge user base, it is unlikely it will go away anytime soon
 in the future. Not only that we have dedicated users and developers on the project.
 Apache Struts is licensed to the Apache License 2.0 and this will not change. We maintain
 a clean IP and you are "safe" to use the project. Sometimes you are not "safe" to use
@@ -78,10 +78,10 @@ It is usually very easy to integrate other technologies with Apache Struts. If y
 using an ORM like Apache Cayenne, Hibernate or JDBC you will not have any restrictions.
 Apache Struts is not even tied too much to a frontend technology. In old days it was
 JSP, then came Velocity and Freemarker. Nowadays you might build your web application
-with just static HTML and AngularJS. Or you want to use Sitemesh or Tiles. This all
-is no problem due to Struts elegant and easy to use extension mechanisms.
+with just static HTML and AngularJS or you want to use Sitemesh or Tiles. All of these pose no problem 
+due to Struts' elegant and easy to use extension mechanisms.
 
-Unlike other, component oriented frameworks, we do not aim to hide the stateless nature
+Unlike other component oriented frameworks, we do not aim to hide the stateless nature
 of the web. We think it is perfectly acceptable to build upon a Request/Response cycle.
 We also think the MVC pattern is not so bad, just because it is old. In fact, we believe
 the Apache Struts architecture is clean and easy to understand.
