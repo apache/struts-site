@@ -18,8 +18,8 @@ This annotation is used for class and application wide conversion rules.
 
 - Application wide conversion:
  
-  The conversion rules will be assembled within the `xwork-conversion.properties` file within the classpath root.
-   Set type to: `type = ConversionType.APPLICATION`
+  The conversion rules will be assembled within the `struts-conversion.properties` or `xwork-conversion.properties` (deprecated)
+  file within the classpath root. Set type to: `type = ConversionType.APPLICATION`
 
 ## Usage
 

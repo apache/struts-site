@@ -111,7 +111,8 @@ amount=com.acme.converters.MyCustomBigDecimalConverter
 
 ## Applying a Type Converter for an application
 
-Application-wide converters can be specified in a file called `xwork-conversion.properties` located in the root of the classpath.
+Application-wide converters can be specified in a file called `struts-conversion.properties` or `xwork-conversion.properties` (deprecated) 
+located in the root of the classpath.
 
 ```
 # syntax: <type> = <converterClassName>
@@ -144,10 +145,10 @@ in FreeMarker) and it will be printed as "3, 22" again. As such, if you submit t
 converted back to a Point once again.
 
 In some situations you may wish to apply a type converter globally. This can be done by editing the file
-`xwork-conversion.properties` in the root of your class path (typically WEB-INF/classes) and providing a
-property in the form of the class name of the object you wish to convert on the left hand side and the class name of
-the type converter on the right hand side. For example, providing a type converter for all Point objects would mean
-adding the following entry:
+`struts-conversion.properties` or `xwork-conversion.properties` (deprecated) in the root of your class path 
+(typically WEB-INF/classes) and providing a  property in the form of the class name of the object you wish to convert 
+on the left hand side and the class name of  the type converter on the right hand side. For example, providing a type 
+converter for all Point objects would mean adding the following entry:
 
 ```
 com.acme.Point = com.acme.PointConverter
