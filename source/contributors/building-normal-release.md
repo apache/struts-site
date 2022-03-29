@@ -204,9 +204,9 @@ Please follow [the guideline](../updating-website) how to update the website, be
 - If a new DTD was defined, add it to `source/dtds`
 - Update current version and release date in `struts-site/_config.yml`
 - Update page source files
-  - `struts-site/source/announce.md` (if applicable, refer also to corresponding security bulletin)
+  - `struts-site/source/announce-<year>.md` (if applicable, refer also to corresponding security bulletin)
   - `struts-site/source/downloads.html` (Prior Releases section)
-  - `struts-site/source/index.html` (some parts will updated automatically with values defined in `_config.yml`)
+  - `struts-site/source/index.html` (some parts will be updated automatically with values defined in `_config.yml`)
 - You can generate the website locally with Docker Jekyll image
   - you must have Docker installed and running
   - if you are doing this the first time, download the official Struts image to build the site from 
