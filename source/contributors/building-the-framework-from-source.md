@@ -21,7 +21,7 @@ to build the framework from scratch. You may want to try out new tweaks and patc
 your own tweak or patch.
 
 > If you just want to use the latest development build, perhaps because a patch you need has been applied, you can 
-> also [download a nightly build](http://ci.apache.org/projects/struts/nightlies/).
+> also [download a nightly build](https://nightlies.apache.org/struts/snapshot/).
 
 ## Getting the Sources
 

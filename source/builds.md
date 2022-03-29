@@ -59,15 +59,15 @@ or
 Maven will automatically download any dependencies as needed.
 
 For more about using Maven to build Struts 2, see
-[Building the framework from source](/docs/building-the-framework-from-source) in the
-[Struts 2 Contributors Guide.](/docs/contributors-guide)
+[Building the framework from source](contributors/building-the-framework-from-source) in the
+[Struts 2 Contributors Guide.](contributors/index)
 
 For more about using Maven to build Struts 1, see our [Maven wiki page.](http://wiki.apache.org/struts/StrutsMaintenanceMaven)
 
 ## Nightly Builds
 
 As part of our continuous integration practice, we also make available each morning the
-[latest stable development build.](https://nightlies.apache.org/x1/dist/struts/)
+[latest stable development build.](https://nightlies.apache.org/struts/snapshot/)
 
 *Again: Use at your own risk!*
 
