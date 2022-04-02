@@ -1,5 +1,6 @@
 ---
-layout: core-developers title: File Upload
+layout: core-developers 
+title: File Upload
 ---
 
 # File Upload
