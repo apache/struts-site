@@ -4,10 +4,10 @@ title: File Upload
 ---
 
 # File Upload
-
 {:.no_toc}
 
-* Will be replaced with the ToC, excluding a header {:toc}
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 The Struts 2 framework provides built-in support for processing file uploads that conform
 to [RFC 1867](http://www.ietf.org/rfc/rfc1867.txt),
