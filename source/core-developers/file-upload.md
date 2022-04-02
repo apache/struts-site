@@ -427,7 +427,7 @@ follow:
 ^multipart/form-data(?:\\s*;\\s*boundary=[0-9a-zA-Z'()+_,\\-./:=?]{1,70})?(?:\\s*;\\s*charset=[a-zA-Z\\-0-9]{3,14})?
 ```
 
-Please read [RFC1341](https://www.w3.org/Protocols/rfc1341/7\_2\_Multipart) the **Multipart section** for more details,
+Please read [RFC1341](https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html) the **Multipart section** for more details,
 existing Struts `Multipart` parsers support only `multipart/form-data` content type. This option is available since
 Struts 2.3.11.
 
