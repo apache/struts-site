@@ -24,7 +24,8 @@ Yasser's PR has been merged which contains a fix to double evaluation security v
 attack vectors, yet it can impact your application if you have been depending on double evaluation.
 
 **How to test**
-Run all your app tests, you shouldn't see any WARN log like below:
+
+Run all your app tests, you shouldn't see any `WARN` log like below:
 
 ```
 Expression [so-and-so] isn't allowed by pattern [so-and-so]! See Accepted / Excluded patterns at
@@ -33,8 +34,8 @@ https://struts.apache.org/security/
 
 See if following components are still functioning correctly regarding java-scripts:
 - forms with client side validations
-- doubleselect
-- combobox
+- `doubleselect` tag
+- `combobox` tag
 
 Check also `StreamResult`, `AliasInterceptor` and `JasperReportResult` if they are still working as expected.
 
