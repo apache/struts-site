@@ -18,7 +18,7 @@ title: Announcements 2022
 The Apache Struts group is pleased to announce that Struts 2.5.30 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
 
-#### Internal Changes:
+Internal Changes:
 
 Yasser's PR has been merged which contains a fix to double evaluation security vulnerability - it should solve any future 
 attack vectors, yet it can impact your application if you have been depending on double evaluation.
@@ -38,7 +38,7 @@ See if following components are still functioning correctly regarding java-scrip
 
 Check also `StreamResult`, `AliasInterceptor` and `JasperReportResult` if they are still working as expected.
 
-#### Dependency:
+Dependency:
 [WW-5170] - Upgrade Jackson-Core to version 2.10.5 and Jackson-Databind to 2.10.5.1
 [WW-5172] - Upgrade freemarker to 2.3.31
 
