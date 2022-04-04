@@ -33,15 +33,15 @@ https://struts.apache.org/security/
 ```
 
 See if following components are still functioning correctly regarding java-scripts:
-- forms with client side validations
-- `doubleselect` tag
-- `combobox` tag
+ - forms with client side validations
+ - `doubleselect` tag
+ - `combobox` tag
 
 Check also `StreamResult`, `AliasInterceptor` and `JasperReportResult` if they are still working as expected.
 
 Dependency:
-[WW-5170] - Upgrade Jackson-Core to version 2.10.5 and Jackson-Databind to 2.10.5.1
-[WW-5172] - Upgrade freemarker to 2.3.31
+ - [WW-5170] - Upgrade Jackson-Core to version 2.10.5 and Jackson-Databind to 2.10.5.1
+ - [WW-5172] - Upgrade freemarker to 2.3.31
 
 > Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+2.5.30) to find more details about performed
 > bug fixes and improvements.
