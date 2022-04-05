@@ -299,6 +299,41 @@ struts.date.formatter=myDateTimeFormatter
 
 ### Extension point provided by a plugin
 
+It's very the like as above except that the plugin must provide a `bean-selection` configuration option in `struts-plugin.xml`.
+The `bean-selection` option represents an implementation of a class `org.apache.struts2.config.AbstractBeanSelectionProvider`
+with _no-arguments_ constructor:
+
+```java
+public class VelocityBeanSelectionProvider extends AbstractBeanSelectionProvider {
+
+    @Override
+    public void register(ContainerBuilder builder, LocatableProperties props) throws ConfigurationException {
+        alias(VelocityManager.class, VelocityConstants.STRUTS_VELOCITY_MANAGER_CLASSNAME, builder, props);
+    }
+
+}
+```
+
+The class defines extension points by implementing `register()` method and using `alias()` method to register them.
+
+And finally it must be added to the `struts-plugin.xml`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.6//EN"
+	"http://struts.apache.org/dtds/struts-2.6.dtd">
+    
+<struts>
+  ...
+  
+  <bean-selection name="velocityBeans" class="org.apache.struts2.views.velocity.VelocityBeanSelectionProvider"/>
+
+</struts>
+```
+
+And now other plugins or user application can use the new extension point represented by `VelocityConstants.STRUTS_VELOCITY_MANAGER_CLASSNAME`. 
+
 ## Plugin Registry
 
 > For a list of bundled plugins, see the [Plugin Reference Documentation](index). For more about bundled and third-party 
