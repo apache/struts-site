@@ -9,7 +9,7 @@ Apache Struts 2 provides a simple [plugin architecture](plugins-architecture) so
 adding a JAR to the application's classpath. Since plugins are contained in a JAR, they are easy to share with others.
 Several plugins are bundled with the framework, and others are available from third-party sources.
 
-- [Plugins](plugins-architecture)
+- [Plugins Architecture](plugins-architecture)
 - [Extending an Application with Custom Plugins](extending-an-application-with-custom-plugins)
 
 ## Bundled Plugins

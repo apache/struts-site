@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Plugins
+title: Plugins Architecture
 parent:
   url: index.html
   title: Plugins
 ---
 
-# Plugins
+# Plugins architecture
 {:.no_toc}
 
 * Will be replaced with the ToC, excluding a header
