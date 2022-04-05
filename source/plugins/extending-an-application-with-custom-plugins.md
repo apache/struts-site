@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Plugins
+title: Extending an Application with Custom Plugins
 parent:
   url: index.html
   title: Plugins
