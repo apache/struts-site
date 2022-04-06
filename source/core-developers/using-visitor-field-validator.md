@@ -38,15 +38,15 @@ Create the action class.
 ```java
 public class VisitorValidatorsExampleAction extends AbstractValidationActionSupport {
 
-	private User user;
+    private User user;
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
 ```
 
