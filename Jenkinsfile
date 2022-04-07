@@ -59,8 +59,10 @@ pipeline {
           }
         }
         stage('Comment') {
-          if (env.CHANGE_ID) {
-            pullRequest.comment("Staged site is ready at https://struts.staged.apache.org/")
+          steps {
+            if (env.CHANGE_ID) {
+              pullRequest.comment("Staged site is ready at https://struts.staged.apache.org/")
+            }
           }
         }
       }
