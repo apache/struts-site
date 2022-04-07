@@ -18,15 +18,15 @@ pipeline {
           echo Generiting a new version of website
           mkdir -p target/content
 
-          export RUBY_PATH=${HOME}/.rvm
-          export GEM_HOME=${RUBY_PATH}/gems
+          export RUBY_PATH=${env.HOME}/.rvm
+          export GEM_HOME=${env.RUBY_PATH}/gems
 
-          curl -sSL https://get.rvm.io | bash -s -- --path ${RUBY_PATH}
-          mkdir -p ${GEM_HOME}/gems
-          gem install  --install-dir ${GEM_HOME} bundler -v '2.1.4'
+          curl -sSL https://get.rvm.io | bash -s -- --path ${env.RUBY_PATH}
+          mkdir -p ${env.GEM_HOME}/gems
+          gem install  --install-dir ${env.GEM_HOME} bundler -v '2.1.4'
 
-          export PATH=${GEM_HOME}/bin:$PATH
-          bundle install --path ${GEM_HOME}
+          export PATH=${env.GEM_HOME}/bin:${env.PATH}
+          bundle install --path ${env.GEM_HOME}
           bundle
           bundle exec jekyll build
         """
