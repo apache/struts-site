@@ -56,12 +56,12 @@ Create the `validator.xml`.
 
 ```xml
 <validators>
-	<field name="user">
-		<field-validator type="visitor">
-			<param name="context">userContext</param>
-			<param name="appendPrefix">true</param>
-			<message>User:</message>
-		</field-validator>
-	</field>
+    <field name="user">
+        <field-validator type="visitor">
+            <param name="context">userContext</param>
+            <param name="appendPrefix">true</param>
+            <message>User:</message>
+        </field-validator>
+    </field>
 </validators>
 ```
