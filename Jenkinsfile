@@ -1,35 +1,38 @@
 #!groovy
 
 pipeline {
-  agent none
+  agent {
+    label 'git-websites'
+  }
   options {
     buildDiscarder logRotator(numToKeepStr: '5')
     timeout(40)
     disableConcurrentBuilds()
     skipStagesAfterUnstable()
   }
+  environment {
+    RUBY_PATH="${env.WORKSPACE_TMP}/.rvm"
+    GEM_HOME="${RUBY_PATH}/gems"
+    PATH="${GEM_HOME}/bin:${env.PATH}"
+  }
   stages {
-    stage('Build a staged websites') {
-      agent {
-        label 'git-websites'
-      }
+    stage('Build a staged website') {
       steps {
         sh """
-          echo Generiting a new version of website
-          mkdir -p target/content
-
-          export RUBY_PATH=${HOME}/.rvm
-          export GEM_HOME=${RUBY_PATH}/gems
+          echo Generiting a new version of website        
 
           curl -sSL https://get.rvm.io | bash -s -- --path ${RUBY_PATH}
-          mkdir -p ${GEM_HOME}/gems
+          mkdir -p ${GEM_HOME}
           gem install  --install-dir ${GEM_HOME} bundler -v '2.1.4'
-
-          export PATH=${GEM_HOME}/bin:$PATH
+          
           bundle install --path ${GEM_HOME}
           bundle
           bundle exec jekyll build
         """
+      }
+    }
+    stage('Deploy to stage area') {
+      steps {
         sh """
           echo "Pushing changes into stage site"
 
@@ -37,6 +40,7 @@ pipeline {
             git remote add asf https://gitbox.apache.org/repos/asf/struts-site.git
           fi
 
+          git fetch asf
           git checkout asf-staging
           git pull asf asf-staging
 
@@ -49,8 +53,17 @@ pipeline {
 
           git commit -m "Updates stage by Jenkins" --allow-empty
           git push asf asf-staging
-          git checkout master
         """
+      }
+    }
+    stage('Comment on PR') {
+      when {
+        changeRequest()
+      }
+      steps {
+        script {
+          pullRequest.comment("Staged site is ready at https://struts.staged.apache.org/")
+        }
       }
     }
   }

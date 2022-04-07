@@ -38,15 +38,15 @@ Create the action class.
 ```java
 public class VisitorValidatorsExampleAction extends AbstractValidationActionSupport {
 
-	private User user;
+    private User user;
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
 ```
 
@@ -56,12 +56,12 @@ Create the `validator.xml`.
 
 ```xml
 <validators>
-	<field name="user">
-		<field-validator type="visitor">
-			<param name="context">userContext</param>
-			<param name="appendPrefix">true</param>
-			<message>User:</message>
-		</field-validator>
-	</field>
+    <field name="user">
+        <field-validator type="visitor">
+            <param name="context">userContext</param>
+            <param name="appendPrefix">true</param>
+            <message>User:</message>
+        </field-validator>
+    </field>
 </validators>
 ```
