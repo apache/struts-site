@@ -53,7 +53,6 @@ pipeline {
 
           git commit -m "Updates stage by Jenkins" --allow-empty
           git push asf asf-staging
-          git checkout master
         """
       }
     }
