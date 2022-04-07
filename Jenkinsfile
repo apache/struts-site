@@ -1,7 +1,9 @@
 #!groovy
 
 pipeline {
-  agent none
+  agent {
+    label 'git-websites'
+  }
   options {
     buildDiscarder logRotator(numToKeepStr: '5')
     timeout(40)
@@ -10,9 +12,6 @@ pipeline {
   }
   stages {
     stage('Build a staged website') {
-      agent {
-        label 'git-websites'
-      }
       environment {
         RUBY_PATH="${env.WORKSPACE_TMP}/.rvm"
         GEM_HOME="${RUBY_PATH}/gems"
@@ -51,11 +50,9 @@ pipeline {
           git push asf asf-staging
           git checkout master
         """
-      }
-    }
-    stage('Comment on PR') {
-      if (env.CHANGE_ID) {
-        pullRequest.comment("Staged site is ready at https://struts.staged.apache.org/")
+        if (env.CHANGE_ID) {
+          pullRequest.comment("Staged site is ready at https://struts.staged.apache.org/")
+        }
       }
     }
   }
