@@ -126,88 +126,79 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/using-non-field-validators.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="using-non-field-validators">Using Non Field Validators</h1>
+    
+    <a href="validation.html" title="back to Validation"><< back to Validation</a>
+    
+    <h1 class="no_toc" id="using-non-field-validators">Using Non Field Validators</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#description" id="markdown-toc-description">Description</a></li>
+  <li><a href="#create-the-jsp-page" id="markdown-toc-create-the-jsp-page">Create the jsp page</a></li>
+  <li><a href="#create-the-action-class" id="markdown-toc-create-the-action-class">Create the action class</a></li>
+  <li><a href="#create-the-validatorxml" id="markdown-toc-create-the-validatorxml">Create the <code class="highlighter-rouge">validator.xml</code>.</a></li>
+</ul>
 
 <h2 id="description">Description</h2>
 
-<p>The followings show a simple example using Webwork’s Non Field Validators</p>
+<p>The followings show a simple example using Struts’ Non Field Validators</p>
 
-<p><strong>Step 1</strong></p>
+<h2 id="create-the-jsp-page">Create the jsp page</h2>
 
-<p>Create the jsp page</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:actionerror/&gt;</span>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>			<span class="nt">&lt;s:actionerror/&gt;</span>
-
-			<span class="nt">&lt;s:form</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">action=</span><span class="s">"submitNonFieldValidatorsExamples"</span> <span class="na">namespace=</span><span class="s">"/validation"</span><span class="nt">&gt;</span>
-				<span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"someText"</span> <span class="na">label=</span><span class="s">"Some Text"</span><span class="nt">/&gt;</span>
-				<span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"someTextRetype"</span> <span class="na">label=</span><span class="s">"Retype Some Text"</span><span class="nt">/&gt;</span>
-				<span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"someTextRetypeAgain"</span> <span class="na">label=</span><span class="s">"Retype Some Text Again"</span><span class="nt">/&gt;</span>
-				<span class="nt">&lt;s:submit</span> <span class="na">label=</span><span class="s">"Submit"</span> <span class="na">cssClass=</span><span class="s">"btn btn-primary"</span><span class="nt">/&gt;</span>
-			<span class="nt">&lt;/s:form&gt;</span>
-
-
-
+<span class="nt">&lt;s:form</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">action=</span><span class="s">"submitNonFieldValidatorsExamples"</span> <span class="na">namespace=</span><span class="s">"/validation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"someText"</span> <span class="na">label=</span><span class="s">"Some Text"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"someTextRetype"</span> <span class="na">label=</span><span class="s">"Retype Some Text"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;s:textfield</span> <span class="na">name=</span><span class="s">"someTextRetypeAgain"</span> <span class="na">label=</span><span class="s">"Retype Some Text Again"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;s:submit</span> <span class="na">label=</span><span class="s">"Submit"</span> <span class="na">cssClass=</span><span class="s">"btn btn-primary"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:form&gt;</span>
 </code></pre></div></div>
 
-<p><strong>Step 2</strong></p>
+<h2 id="create-the-action-class">Create the action class</h2>
 
-<p>Create the action class</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NonFieldValidatorsExampleAction</span> <span class="kd">extends</span> <span class="n">AbstractValidationActionSupport</span> <span class="o">{</span>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NonFieldValidatorsExampleAction</span> <span class="kd">extends</span> <span class="n">AbstractValidationActionSupport</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">someText</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">someTextRetype</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">someTextRetypeAgain</span><span class="o">;</span>
 
-	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="o">-</span><span class="mi">524460368233581186L</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSomeText</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">someText</span><span class="o">;</span>
+    <span class="o">}</span>
 
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">someText</span><span class="o">;</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">someTextRetype</span><span class="o">;</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">someTextRetypeAgain</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSomeText</span><span class="o">(</span><span class="n">String</span> <span class="n">someText</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">someText</span> <span class="o">=</span> <span class="n">someText</span><span class="o">;</span>
+    <span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSomeText</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">someText</span><span class="o">;</span>
-	<span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSomeTextRetype</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">someTextRetype</span><span class="o">;</span>
+    <span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSomeText</span><span class="o">(</span><span class="n">String</span> <span class="n">someText</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">someText</span> <span class="o">=</span> <span class="n">someText</span><span class="o">;</span>
-	<span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSomeTextRetype</span><span class="o">(</span><span class="n">String</span> <span class="n">someTextRetype</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">someTextRetype</span> <span class="o">=</span> <span class="n">someTextRetype</span><span class="o">;</span>
+    <span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSomeTextRetype</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">someTextRetype</span><span class="o">;</span>
-	<span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSomeTextRetypeAgain</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">someTextRetypeAgain</span><span class="o">;</span>
+    <span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSomeTextRetype</span><span class="o">(</span><span class="n">String</span> <span class="n">someTextRetype</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">someTextRetype</span> <span class="o">=</span> <span class="n">someTextRetype</span><span class="o">;</span>
-	<span class="o">}</span>
-
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSomeTextRetypeAgain</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">someTextRetypeAgain</span><span class="o">;</span>
-	<span class="o">}</span>
-
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSomeTextRetypeAgain</span><span class="o">(</span><span class="n">String</span> <span class="n">someTextRetypeAgain</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">someTextRetypeAgain</span> <span class="o">=</span> <span class="n">someTextRetypeAgain</span><span class="o">;</span>
-	<span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSomeTextRetypeAgain</span><span class="o">(</span><span class="n">String</span> <span class="n">someTextRetypeAgain</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">someTextRetypeAgain</span> <span class="o">=</span> <span class="n">someTextRetypeAgain</span><span class="o">;</span>
+    <span class="o">}</span>
 <span class="o">}</span>
-
-
-
 </code></pre></div></div>
 
-<p><strong>Step 3</strong></p>
+<h2 id="create-the-validatorxml">Create the <code class="highlighter-rouge">validator.xml</code>.</h2>
 
-<p>Create the validator.xml.</p>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  		
-<span class="nt">&lt;validators&gt;</span>
-	<span class="nt">&lt;validator</span> <span class="na">type=</span><span class="s">"expression"</span><span class="nt">&gt;</span>
-		<span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"expression"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[ ( (someText == someTextRetype) &amp;&amp; (someTextRetype == someTextRetypeAgain) ) ]]&gt;</span><span class="nt">&lt;/param&gt;</span>
-		<span class="nt">&lt;message&gt;</span><span class="cp">&lt;![CDATA[ all three text must be exactly the same ]]&gt;</span><span class="nt">&lt;/message&gt;</span>
-	<span class="nt">&lt;/validator&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;validators&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">type=</span><span class="s">"expression"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"expression"</span><span class="nt">&gt;</span>
+            <span class="cp">&lt;![CDATA[ ( (someText == someTextRetype) &amp;&amp; (someTextRetype == someTextRetypeAgain) ) ]]&gt;</span><span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;message&gt;</span><span class="cp">&lt;![CDATA[ all three text must be exactly the same ]]&gt;</span><span class="nt">&lt;/message&gt;</span>
+    <span class="nt">&lt;/validator&gt;</span>
 <span class="nt">&lt;/validators&gt;</span>
-
-
 </code></pre></div></div>
-
 
   </section>
 </article>
