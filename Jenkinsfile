@@ -40,6 +40,7 @@ pipeline {
             git remote add asf https://gitbox.apache.org/repos/asf/struts-site.git
           fi
 
+          git fetch asf
           git checkout asf-staging
           git pull asf asf-staging
 
