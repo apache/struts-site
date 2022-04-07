@@ -18,7 +18,7 @@ pipeline {
         PATH="${GEM_HOME}/bin:${env.PATH}"
       }
       stages {
-        stage {
+        stage('Build') {
           steps {
             sh """
               echo Generiting a new version of website        
@@ -31,6 +31,10 @@ pipeline {
               bundle
               bundle exec jekyll build
             """
+          }
+        }
+        stage('Deploy') {
+          steps {
             sh """
               echo "Pushing changes into stage site"
     
@@ -54,7 +58,7 @@ pipeline {
             """
           }
         }
-        stage {
+        stage('Comment') {
           if (env.CHANGE_ID) {
             pullRequest.comment("Staged site is ready at https://struts.staged.apache.org/")
           }
