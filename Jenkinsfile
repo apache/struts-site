@@ -9,20 +9,18 @@ pipeline {
     skipStagesAfterUnstable()
   }
   stages {
-    stage('Build a staged websites') {
+    stage('Build a staged website') {
       agent {
         label 'git-websites'
       }
       environment {
-        RUBY_PATH="${env.HOME}/.rvm"
-        GEM_HOME="${env.RUBY_PATH}/gems"
+        RUBY_PATH="${env.WORKSPACE_TMP}/.rvm"
+        GEM_HOME="${RUBY_PATH}/gems"
         PATH="${GEM_HOME}/bin:${env.PATH}"
       }
       steps {
         sh """
-          echo Generiting a new version of website
-          mkdir -p target/content
-
+          echo Generiting a new version of website        
 
           curl -sSL https://get.rvm.io | bash -s -- --path ${RUBY_PATH}
           mkdir -p ${GEM_HOME}
@@ -53,6 +51,11 @@ pipeline {
           git push asf asf-staging
           git checkout master
         """
+      }
+    }
+    stage('Comment on PR') {
+      if (env.CHANGE_ID) {
+        pullRequest.comment("Staged site is ready at https://struts.staged.apache.org/")
       }
     }
   }
