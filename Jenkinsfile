@@ -14,9 +14,9 @@ pipeline {
         label 'git-websites'
       }
       environment {
-        RUBY_PATH=${env.HOME}/.rvm
-        GEM_HOME=${env.RUBY_PATH}/gems
-        PATH=${GEM_HOME}/bin:${env.PATH}
+        RUBY_PATH="${env.HOME}/.rvm"
+        GEM_HOME="${env.RUBY_PATH}/gems"
+        PATH="${GEM_HOME}/bin:${env.PATH}"
       }
       steps {
         sh """
