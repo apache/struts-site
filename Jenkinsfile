@@ -61,7 +61,9 @@ pipeline {
         changeRequest()
       }
       steps {
-        pullRequest.comment("Staged site is ready at https://struts.staged.apache.org/")
+        script {
+          pullRequest.comment("Staged site is ready at https://struts.staged.apache.org/")
+        }
       }
     }
   }
