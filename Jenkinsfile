@@ -31,7 +31,7 @@ pipeline {
         """
       }
     }
-    stage('Deploy') {
+    stage('Deploy to stage area') {
       steps {
         sh """
           echo "Pushing changes into stage site"
@@ -56,7 +56,7 @@ pipeline {
         """
       }
     }
-    stage('Comment') {
+    stage('Comment on PR') {
       when {
         changeRequest()
       }
