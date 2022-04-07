@@ -13,20 +13,22 @@ pipeline {
       agent {
         label 'git-websites'
       }
+      environment {
+        RUBY_PATH=${env.HOME}/.rvm
+        GEM_HOME=${env.RUBY_PATH}/gems
+        PATH=${GEM_HOME}/bin:${env.PATH}
+      }
       steps {
         sh """
           echo Generiting a new version of website
           mkdir -p target/content
 
-          export RUBY_PATH=${env.HOME}/.rvm
-          export GEM_HOME=${env.RUBY_PATH}/gems
 
-          curl -sSL https://get.rvm.io | bash -s -- --path ${env.RUBY_PATH}
-          mkdir -p ${env.GEM_HOME}/gems
-          gem install  --install-dir ${env.GEM_HOME} bundler -v '2.1.4'
-
-          export PATH=${env.GEM_HOME}/bin:${env.PATH}
-          bundle install --path ${env.GEM_HOME}
+          curl -sSL https://get.rvm.io | bash -s -- --path ${RUBY_PATH}
+          mkdir -p ${GEM_HOME}
+          gem install  --install-dir ${GEM_HOME} bundler -v '2.1.4'
+          
+          bundle install --path ${GEM_HOME}
           bundle
           bundle exec jekyll build
         """
