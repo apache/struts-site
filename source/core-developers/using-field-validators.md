@@ -21,7 +21,6 @@ The followings show a simple example using Struts' Field Validators
 Create the jsp page
 
 ```html
-
 <h3>All Field Errors Will Appear Here</h3>
 <s:fielderror/>
 <hr/>
@@ -150,7 +149,6 @@ public class FieldValidatorsExampleAction extends AbstractValidationActionSuppor
 Create the `validator.xml`.
 
 ```xml
-
 <validators>
     <field name="requiredValidatorField">
         <field-validator type="required">
