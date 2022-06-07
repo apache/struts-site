@@ -294,7 +294,7 @@ Support to access static methods via OGNL expressions has been removed, use acti
 - WW-5174 - Upgrade Jackson-Core to version 2.13.2 and Jackson-Databind to 2.13.2.1
 
 > Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+6.0.0) to find more details about performed
-> bug fixes and improvements. Also, a dedicated [migration guide](https://cwiki.apache.org/confluence/display/WW/Struts+2.5+to+6.0.0+migration) has been prepared.
+> bug fixes and improvements. Also, a dedicated [migration guide]({{ site.wiki_url }}/Struts+2.5+to+6.0.0+migration) has been prepared.
 
 Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
 The framework has been designed to streamline the full development cycle, from building, to deploying,
