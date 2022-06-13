@@ -435,7 +435,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Actions;
 
 public class HelloWorld extends ActionSupport {
-  @Action(interceptorRefs=@InterceptorRef(value="validation",params={"programmatic", "false", "declarative", "true}))
+  @Action(interceptorRefs=@InterceptorRef(value="validation",params={"programmatic", "false", "declarative", "true"}))
   public String execute() {
     return SUCCESS;
   }
