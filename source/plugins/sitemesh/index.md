@@ -70,6 +70,8 @@ From 2.2+ the recommended way to use Freemarker with Sitemesh is through the `or
 
 ### Velocity
 
+> NOTE: Please include the [Struts Velocity plugin](../velocity/) in your pom.xml before using this functionality
+
 From 2.2+ the recommended way to use Velocity with Sitemesh is through the `org.apache.struts2.sitemesh.VelocityDecoratorServlet` servlet, which can be configured like this in `web.xml`:
 
 
