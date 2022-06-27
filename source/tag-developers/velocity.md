@@ -16,6 +16,9 @@ For more information on Velocity itself, please visit the [Velocity website](htt
 > of a Servlet container. The framework uses FreeMarker internally since it has better error reporting. 
 > Developers may also like that FreeMarker supports JSP taglibs. However, both are good alternatives to JSP.
 
+> NOTE: Since Struts 6.0.0 support for Velocity has been moved into [a dedicated plugin](../plugins/velocity/),
+> you must include the plugin in your pom.xml to use Velocity in your application.
+
 ## Getting Started
 
 Getting started with Velocity is as simple as ensuring all the dependencies are included in your project's classpath. 
