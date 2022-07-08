@@ -227,3 +227,8 @@ We leave this as the last step, once the artifacts have had time to sync up on t
   - announce@a.o
    
 samples are available at [Sample announcements](sample-announcements) page.
+
+## Update Struts releases
+
+Login into [Apache Committee Report Helper](https://reporter.apache.org/addrelease.html?struts) and add release version
+with date.
