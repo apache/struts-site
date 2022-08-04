@@ -241,10 +241,6 @@ mapping to `web.xml`. Below is how the `web.xml` may look after adding the filte
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<display-name>Basic Struts2</display-name>
-	<welcome-file-list>
-		<welcome-file>index</welcome-file>
-	</welcome-file-list>
-
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -255,6 +251,9 @@ mapping to `web.xml`. Below is how the `web.xml` may look after adding the filte
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<welcome-file-list>
+		<welcome-file>index</welcome-file>
+	</welcome-file-list>
 </web-app>
 ```
 
