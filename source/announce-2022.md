@@ -13,6 +13,67 @@ title: Announcements 2022
   Skip to: <a href="announce-2021">Announcements - 2021</a>
 </p>
 
+#### 15 September 2022 - Apache Struts version 6.0.3 General Availability {#a20220915}
+
+The Apache Struts group is pleased to announce that Apache Struts version 6.0.3 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework has been designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+Below is a full list of all changes:
+
+**Bug**
+
+- WW-5185 - TilesDefinition is not found and the request for a Struts action fails after an upgrade from Struts 2.5.30 to Struts 6.0.
+- WW-5189 - Add missing struts-6.0.dtd
+- WW-5190 - StackOverflowError when dispatching to JSP
+- WW-5191 - template/simple/textarea.ftl not rendering parameters correctly
+- WW-5192 - radiomap.ftl not setting enum key values
+- WW-5194 - UIBean.evaluateParams() throws an IllegalStateException when getting the nonce out of a session that has been invalidated.
+- WW-5195 - Dispatcher: Infinite loop with dispatcher FORWARD
+- WW-5197 - java.lang.UnsupportedOperationException in the date component
+- WW-5198 - textarea's maxlength attribute displays in tag's body
+- WW-5203 - lazyPolicyBuilder in DefaultCspSettings is not lazy
+- WW-5205 - REST plugin cannot start due to injection error
+- WW-5207 - Convention Plugin - support for ASM 9
+- WW-5215 - CspInterceptor assumes Session was already created
+- WW-5216 - Freemarker Checkbox error after migrating from Struts 2.5.29 to 2.5.30
+
+**New Feature**
+
+- WW-5187 - java.lang.NoClassDefFoundError: org/apache/struts2/views/velocity/VelocityManager Improvement
+- WW-5173 - Implement additional OGNL cache configuration controls
+- WW-5188 - Use 6.0 marker instead of 2.6
+- WW-5218 - Allow to disable CSP related interceptors 
+ 
+**Dependency**
+
+- WW-5193 - Use proper hibernate-validator groupId and upgrade to version 6.1.3.Final
+- WW-5201 - Bump Log4j2 to 2.18.0
+- WW-5202 - Update jasperreports to 6.19.1 and exclude optional itext from jasperreports
+- WW-5204 - Upgrade to OGNL 3.3.3
+- WW-5208 - Update hibernate-validator to 6.2.4
+- WW-5212 - Upgrade Spring to version 5.3.22
+
+> Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+6.0.3) to find more details about performed
+> bug fixes and improvements. Also, a dedicated [migration guide]({{ site.wiki_url }}/Struts+2.5+to+6.0.0+migration) has been prepared.
+
+Apache Struts 2 is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework has been designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+**All developers are strongly advised to perform this upgrade.**
+
+The 6.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 3.1, JSP API 2.1, and Java 8.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list,
+and, if appropriate, file [a tracking ticket]({{ site.jira_url }}).
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
 #### 06 June 2022 - Struts 2 ver. 6.0.0 General Availability {#a20220606}
 
 The Apache Struts group is pleased to announce that Apache Struts 2 ver. 6.0.0 is available as a "General Availability"
