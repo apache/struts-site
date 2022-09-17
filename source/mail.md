@@ -33,6 +33,16 @@ Archives if you are looking for older discussions. There are many other archives
 If you want to **discuss patches or contribute to Struts** you should subscribe to the [developers list](dev-mail).
 {:.alert .alert-success}
 
+## Moderators
+
+Users with the moderate right to the above lists can check subscribers, subscribe and unsubscribe given users,
+check [Mailing list moderation](https://infra.apache.org/mailing-list-moderation.html) for more details, basically
+to unsubscribe someone you can email:
+
+```
+{listname}-unsubscribe-badboy=menace.com@tlp.apache.org
+```
+
 ## Guidelines
 
 Mailing lists provide a simple and effective communication mechanism. With potentially thousands of subscribers, there 
