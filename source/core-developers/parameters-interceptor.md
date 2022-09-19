@@ -101,7 +101,7 @@ Below is an example of adding a parameter named submit to the list of parameters
 
 ## Excluding parameter values
 
-This interceptor can be forced to ignore parameters, by setting its `excludeValuePatterns` attribute. This attribute accepts 
+This interceptor can be forced to ignore parameters based on the value, by setting its `excludeValuePatterns` attribute. This attribute accepts 
 a comma separated list of regular expressions. When any of these expressions match the value of a parameter, such parameter 
 will be ignored by the interceptor.
 
