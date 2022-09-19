@@ -47,6 +47,8 @@ the values to their final data type (`String[] -> int`) an unrecoverable error o
 conversion errors will be reported in the action context. See the type conversion documentation and the `XWorkConverter`
 javadocs for more information.
 
+Since Struts 6.1.0 this interceptor also implements a `ParameterValueAware` interface. This interface, in conjunction with the optional `excludeValuePatterns`, can be used to validate the parameter value(s) being set by the interceptor. If the value being set is excluded / not accepted the entire parameter will be dropped. This can be leveraged to mitigate against forced OGNL evaluation due to unsanitized user input being echoed back as part of the action result. This is not intended to replace good coding habits as described on [Proactively protect from OGNL Expression Injections attacks if easily applicable](https://struts.apache.org/security/#proactively-protect-from-ognl-expression-injections-attacks-if-easily-applicable) and is available as part of a defense in depth methodology. By default excludeValuePatterns is not defined.
+
 If you are looking for detailed logging information about your parameters, turn on `DEBUG` level logging for this
 interceptor. A detailed log of all the parameter keys and values will be reported.
 
@@ -61,8 +63,9 @@ For more information on ways to restrict the parameter names allowed, see the `P
 - `ordered` - set to true if you want the top-down property setter behaviour
 - `acceptParamNames` - a comma delimited list of regular expressions to describe a whitelist of accepted parameter names. 
   Don't change the default unless you know what you are doing in terms of security implications
-- `excludeParams` - a comma delimited list of regular expressions to describe a blacklist of not allowed parameter names
-- `excludeValuePatterns` - a comma delimited list of regular expressions to describe a blacklist of not allowed parameter values
+- `excludeParams` - a comma delimited list of regular expressions to describe a denylist of not allowed parameter names
+- `acceptedValuePatterns` - a comma delimited list of regular expressions to describe a whitelist of accepted parameter values 
+- `excludeValuePatterns` - a comma delimited list of regular expressions to describe a denylist of not allowed parameter values
 - `paramNameMaxLength` - the maximum length of parameter names; parameters with longer names will be ignored; 
   the default is 100 characters
 
@@ -102,7 +105,7 @@ This interceptor can be forced to ignore parameters, by setting its `excludeValu
 a comma separated list of regular expressions. When any of these expressions match the value of a parameter, such parameter 
 will be ignored by the interceptor.
 
-Below is an example of adding a parameter values ${} and %{} to the list of parameter values that should be excluded.
+Below is an example of adding parameter values ${} and %{} to the list of parameter values that should be excluded.
 
 **Setup Interceptor Stack To Exclude ${ and %{ Parameter Values**
 
