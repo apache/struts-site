@@ -61,10 +61,10 @@ For more information on ways to restrict the parameter names allowed, see the `P
 ## Parameters
 
 - `ordered` - set to true if you want the top-down property setter behaviour
-- `acceptParamNames` - a comma delimited list of regular expressions to describe a whitelist of accepted parameter names. 
+- `acceptParamNames` - a comma delimited list of regular expressions to describe a allowlist of accepted parameter names. 
   Don't change the default unless you know what you are doing in terms of security implications
 - `excludeParams` - a comma delimited list of regular expressions to describe a denylist of not allowed parameter names
-- `acceptedValuePatterns` - a comma delimited list of regular expressions to describe a whitelist of accepted parameter values 
+- `acceptedValuePatterns` - a comma delimited list of regular expressions to describe a allowlist of accepted parameter values 
 - `excludeValuePatterns` - a comma delimited list of regular expressions to describe a denylist of not allowed parameter values
 - `paramNameMaxLength` - the maximum length of parameter names; parameters with longer names will be ignored; 
   the default is 100 characters
