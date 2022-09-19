@@ -62,6 +62,7 @@ For more information on ways to restrict the parameter names allowed, see the `P
 - `acceptParamNames` - a comma delimited list of regular expressions to describe a whitelist of accepted parameter names. 
   Don't change the default unless you know what you are doing in terms of security implications
 - `excludeParams` - a comma delimited list of regular expressions to describe a blacklist of not allowed parameter names
+- `excludeValuePatterns` - a comma delimited list of regular expressions to describe a blacklist of not allowed parameter values
 - `paramNameMaxLength` - the maximum length of parameter names; parameters with longer names will be ignored; 
   the default is 100 characters
 
@@ -95,18 +96,42 @@ Below is an example of adding a parameter named submit to the list of parameters
 <default-interceptor-ref name="appDefault" />
 ```
 
+## Excluding parameter values
+
+This interceptor can be forced to ignore parameters, by setting its `excludeValuePatterns` attribute. This attribute accepts 
+a comma separated list of regular expressions. When any of these expressions match the value of a parameter, such parameter 
+will be ignored by the interceptor.
+
+Below is an example of adding a parameter values ${} and %{} to the list of parameter values that should be excluded.
+
+**Setup Interceptor Stack To Exclude ${ and %{ Parameter Values**
+
+```xml
+<interceptors>
+  <interceptor-stack name="appDefault">
+    <interceptor-ref name="defaultStack">
+       <param name="exception.logEnabled">true</param>
+       <param name="exception.logLevel">ERROR</param>
+       <param name="params.excludeValuePatterns">.*\$\{.*?\}.*,.*%\{.*?\}.*</param>
+    </interceptor-ref>
+  </interceptor-stack>
+</interceptors>
+
+<default-interceptor-ref name="appDefault" />
+```
+
 ## Extending the Interceptor
 
-The best way to add behavior to this interceptor is to utilize the `ParameterNameAware` interface in your actions. 
+The best way to add behavior to this interceptor is to utilize the `ParameterNameAware` and `ParameterValueAware` interfaces in your actions. 
 However, if you wish to apply a global rule that isn't implemented in your action, then you could extend this interceptor 
-and override the `#acceptableName(String)` method.
+and override the `#acceptableName(String)` and/or `#acceptableParameterValue(String)` method.
 
 > Using `ParameterNameAware` could be dangerous as `ParameterNameAware#acceptableParameterName(String)` takes precedence 
 > over `ParametersInterceptor` which means if `ParametersInterceptor` excluded given parameter name you can accept 
 > it with `ParameterNameAware#acceptableParameterName(String)`.
 
 > The best idea is to define very tight restrictions with `ParametersInterceptor` and relax them per action 
-> with `ParameterNameAware#acceptableParameterName(String)`
+> with `ParameterNameAware#acceptableParameterName(String)` and/or `ParameterValueAware#acceptableParameterValue(String)`
 
 ## Warning on missing parameters
 
