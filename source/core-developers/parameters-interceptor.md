@@ -101,11 +101,13 @@ Below is an example of adding a parameter named submit to the list of parameters
 
 ## Excluding parameter values
 
-This interceptor can be forced to ignore parameters based on the value, by setting its `excludeValuePatterns` attribute. This attribute accepts 
-a comma separated list of regular expressions. When any of these expressions match the value of a parameter, such parameter 
-will be ignored by the interceptor.
+This interceptor can be forced to ignore parameters based on the value, by setting its `excludedValuePatterns` attribute. This attribute accepts 
+a comma separated list of regular expressions. When any of these expressions match the value of a parameter, such parameter will be ignored 
+by the interceptor.
 
-Below is an example of adding parameter values ${} and %{} to the list of parameter values that should be excluded.
+It's also possible to define `acceptedValuePatterns` to accept only values that match the defined set of patterns.
+
+Below is an example of adding parameter values ${} and %{} to the list of parameter values that should be excluded and only accept **a-z** or **0-9**.
 
 **Setup Interceptor Stack To Exclude ${ and %{ Parameter Values**
 
@@ -115,7 +117,8 @@ Below is an example of adding parameter values ${} and %{} to the list of parame
     <interceptor-ref name="defaultStack">
        <param name="exception.logEnabled">true</param>
        <param name="exception.logLevel">ERROR</param>
-       <param name="params.excludeValuePatterns">.*\$\{.*?\}.*,.*%\{.*?\}.*</param>
+       <param name="params.excludedValuePatterns">.*\$\{.*?\}.*,.*%\{.*?\}.*</param>
+       <param name="params.acceptedValuePatterns">[a-zA-Z0-9]*</param>
     </interceptor-ref>
   </interceptor-stack>
 </interceptors>
