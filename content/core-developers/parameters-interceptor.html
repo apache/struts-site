@@ -233,11 +233,13 @@ will be ignored by the interceptor. Interceptor stacks defined by Struts already
 
 <h2 id="excluding-parameter-values">Excluding parameter values</h2>
 
-<p>This interceptor can be forced to ignore parameters based on the value, by setting its <code class="highlighter-rouge">excludeValuePatterns</code> attribute. This attribute accepts 
-a comma separated list of regular expressions. When any of these expressions match the value of a parameter, such parameter 
-will be ignored by the interceptor.</p>
+<p>This interceptor can be forced to ignore parameters based on the value, by setting its <code class="highlighter-rouge">excludedValuePatterns</code> attribute. This attribute accepts 
+a comma separated list of regular expressions. When any of these expressions match the value of a parameter, such parameter will be ignored 
+by the interceptor.</p>
 
-<p>Below is an example of adding parameter values ${} and %{} to the list of parameter values that should be excluded.</p>
+<p>It’s also possible to define <code class="highlighter-rouge">acceptedValuePatterns</code> to accept only values that match the defined set of patterns.</p>
+
+<p>Below is an example of adding parameter values ${} and %{} to the list of parameter values that should be excluded and only accept <strong>a-z</strong> or <strong>0-9</strong>.</p>
 
 <p><strong>Setup Interceptor Stack To Exclude ${ and %{ Parameter Values</strong></p>
 
@@ -246,7 +248,8 @@ will be ignored by the interceptor.</p>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"exception.logEnabled"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"exception.logLevel"</span><span class="nt">&gt;</span>ERROR<span class="nt">&lt;/param&gt;</span>
-       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"params.excludeValuePatterns"</span><span class="nt">&gt;</span>.*\$\{.*?\}.*,.*%\{.*?\}.*<span class="nt">&lt;/param&gt;</span>
+       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"params.excludedValuePatterns"</span><span class="nt">&gt;</span>.*\$\{.*?\}.*,.*%\{.*?\}.*<span class="nt">&lt;/param&gt;</span>
+       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"params.acceptedValuePatterns"</span><span class="nt">&gt;</span>[a-zA-Z0-9]*<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;/interceptor-ref&gt;</span>
   <span class="nt">&lt;/interceptor-stack&gt;</span>
 <span class="nt">&lt;/interceptors&gt;</span>

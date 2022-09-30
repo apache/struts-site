@@ -175,8 +175,8 @@ setting in <a href="default-properties">default.properties</a>.</p>
     and {@link com.opensymphony.xwork2.inject.Inject}
 --&gt;</span>
 <span class="cp">&lt;!DOCTYPE struts PUBLIC
-    "-//Apache Software Foundation//DTD Struts Configuration 6.0//EN"
-        "struts-6.0.dtd"&gt;</span>
+        "-//Apache Software Foundation//DTD Struts Configuration 6.0//EN"
+        "https://struts.apache.org/dtds/struts-6.0.dtd"&gt;</span>
 
 <span class="nt">&lt;struts&gt;</span>
 
@@ -191,7 +191,7 @@ setting in <a href="default-properties">default.properties</a>.</p>
                 java.lang.ProcessBuilder,
                 java.lang.Thread,
                 sun.misc.Unsafe,
-                com.opensymphony.xwork2.ActionContext"</span> <span class="nt">/&gt;</span>
+                com.opensymphony.xwork2.ActionContext"</span><span class="nt">/&gt;</span>
 
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.devMode.excludedClasses"</span>
               <span class="na">value=</span><span class="s">"
@@ -202,7 +202,7 @@ setting in <a href="default-properties">default.properties</a>.</p>
                 java.lang.ClassLoader,
                 java.lang.Shutdown,
                 java.lang.ProcessBuilder,
-                sun.misc.Unsafe"</span> <span class="nt">/&gt;</span>
+                sun.misc.Unsafe"</span><span class="nt">/&gt;</span>
 
     <span class="c">&lt;!-- this must be valid regex, each '.' in package name must be escaped! --&gt;</span>
     <span class="c">&lt;!-- it's more flexible but slower than simple string comparison --&gt;</span>
@@ -233,7 +233,7 @@ setting in <a href="default-properties">default.properties</a>.</p>
                 com.opensymphony.xwork2.util.,
                 org.apache.tomcat.,
                 org.apache.catalina.core.,
-                org.wildfly.extension.undertow.deployment."</span> <span class="nt">/&gt;</span>
+                org.wildfly.extension.undertow.deployment."</span><span class="nt">/&gt;</span>
 
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.devMode.excludedPackageNames"</span>
               <span class="na">value=</span><span class="s">"
@@ -255,128 +255,207 @@ setting in <a href="default-properties">default.properties</a>.</p>
                 com.opensymphony.xwork2.inject.,
                 com.opensymphony.xwork2.ognl.,
                 com.opensymphony.xwork2.security.,
-                com.opensymphony.xwork2.util."</span> <span class="nt">/&gt;</span>
+                com.opensymphony.xwork2.util."</span><span class="nt">/&gt;</span>
 
     <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ObjectFactory"</span> <span class="na">name=</span><span class="s">"struts"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.ResultFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.factory.StrutsResultFactory"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.ActionFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.factory.DefaultActionFactory"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.ConverterFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.factory.StrutsConverterFactory"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.InterceptorFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.factory.DefaultInterceptorFactory"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.ValidatorFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.factory.DefaultValidatorFactory"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.UnknownHandlerFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.factory.DefaultUnknownHandlerFactory"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.ResultFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.factory.StrutsResultFactory"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.ActionFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.factory.DefaultActionFactory"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.ConverterFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.factory.StrutsConverterFactory"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.InterceptorFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.factory.DefaultInterceptorFactory"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.ValidatorFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.factory.DefaultValidatorFactory"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.factory.UnknownHandlerFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.factory.DefaultUnknownHandlerFactory"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.FileManager"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.fs.DefaultFileManager"</span> <span class="na">name=</span><span class="s">"system"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.FileManagerFactory"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.fs.DefaultFileManagerFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.FileManager"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.fs.DefaultFileManager"</span>
+          <span class="na">name=</span><span class="s">"system"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.FileManagerFactory"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.fs.DefaultFileManagerFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.ActionProxyFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.factory.StrutsActionProxyFactory"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.ActionProxyFactory"</span> <span class="na">name=</span><span class="s">"prefix"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.factory.PrefixBasedActionProxyFactory"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.ActionProxyFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.factory.StrutsActionProxyFactory"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.ActionProxyFactory"</span> <span class="na">name=</span><span class="s">"prefix"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.factory.PrefixBasedActionProxyFactory"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.ObjectTypeDeterminer"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.DefaultObjectTypeDeterminer"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.ObjectTypeDeterminer"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.DefaultObjectTypeDeterminer"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.PatternMatcher"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.WildcardHelper"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.PatternMatcher"</span> <span class="na">name=</span><span class="s">"namedVariable"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.NamedVariablePatternMatcher"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.PatternMatcher"</span> <span class="na">name=</span><span class="s">"regex"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.util.RegexPatternMatcher"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.PatternMatcher"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.WildcardHelper"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.PatternMatcher"</span> <span class="na">name=</span><span class="s">"namedVariable"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.NamedVariablePatternMatcher"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.PatternMatcher"</span> <span class="na">name=</span><span class="s">"regex"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.util.RegexPatternMatcher"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.util.ContentTypeMatcher"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.util.DefaultContentTypeMatcher"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.util.ContentTypeMatcher"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.util.DefaultContentTypeMatcher"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.mapper.ActionMapper"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.mapper.DefaultActionMapper"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.mapper.ActionMapper"</span> <span class="na">name=</span><span class="s">"composite"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.mapper.CompositeActionMapper"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.mapper.ActionMapper"</span> <span class="na">name=</span><span class="s">"prefix"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.mapper.ActionMapper"</span> <span class="na">name=</span><span class="s">"restful"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.mapper.RestfulActionMapper"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.mapper.ActionMapper"</span> <span class="na">name=</span><span class="s">"restful2"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.mapper.Restful2ActionMapper"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.mapper.ActionMapper"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.mapper.DefaultActionMapper"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.mapper.ActionMapper"</span> <span class="na">name=</span><span class="s">"composite"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.mapper.CompositeActionMapper"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.mapper.ActionMapper"</span> <span class="na">name=</span><span class="s">"prefix"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.mapper.ActionMapper"</span> <span class="na">name=</span><span class="s">"restful"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.mapper.RestfulActionMapper"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.mapper.ActionMapper"</span> <span class="na">name=</span><span class="s">"restful2"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.mapper.Restful2ActionMapper"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.multipart.MultiPartRequest"</span> <span class="na">name=</span><span class="s">"jakarta"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.multipart.JakartaMultiPartRequest"</span> <span class="na">scope=</span><span class="s">"prototype"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.multipart.MultiPartRequest"</span> <span class="na">name=</span><span class="s">"jakarta-stream"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.multipart.JakartaStreamMultiPartRequest"</span> <span class="na">scope=</span><span class="s">"prototype"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.multipart.MultiPartRequest"</span> <span class="na">name=</span><span class="s">"jakarta"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.multipart.JakartaMultiPartRequest"</span> <span class="na">scope=</span><span class="s">"prototype"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.multipart.MultiPartRequest"</span> <span class="na">name=</span><span class="s">"jakarta-stream"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.multipart.JakartaStreamMultiPartRequest"</span> <span class="na">scope=</span><span class="s">"prototype"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.views.TagLibraryModelProvider"</span> <span class="na">name=</span><span class="s">"s"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.DefaultTagLibrary"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.views.TagLibraryModelProvider"</span> <span class="na">name=</span><span class="s">"s"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.views.DefaultTagLibrary"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.freemarker.FreemarkerThemeTemplateLoader"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.freemarker.FreemarkerManager"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.freemarker.FreemarkerThemeTemplateLoader"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.freemarker.FreemarkerManager"</span> <span class="na">name=</span><span class="s">"struts"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.components.template.TemplateEngineManager"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.template.TemplateEngine"</span> <span class="na">name=</span><span class="s">"ftl"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.components.template.FreemarkerTemplateEngine"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.template.TemplateEngine"</span> <span class="na">name=</span><span class="s">"jsp"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.components.template.JspTemplateEngine"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.components.template.TemplateEngineManager"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.template.TemplateEngine"</span> <span class="na">name=</span><span class="s">"ftl"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.components.template.FreemarkerTemplateEngine"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.template.TemplateEngine"</span> <span class="na">name=</span><span class="s">"jsp"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.components.template.JspTemplateEngine"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.XWorkConverter"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.XWorkConverter"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.XWorkConverter"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.XWorkConverter"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.ConversionPropertiesProcessor"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.conversion.StrutsConversionPropertiesProcessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.ConversionFileProcessor"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.DefaultConversionFileProcessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.ConversionAnnotationProcessor"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.DefaultConversionAnnotationProcessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.TypeConverterCreator"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.conversion.StrutsTypeConverterCreator"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.TypeConverterHolder"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.conversion.StrutsTypeConverterHolder"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.ConversionPropertiesProcessor"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.conversion.StrutsConversionPropertiesProcessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.ConversionFileProcessor"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.DefaultConversionFileProcessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.ConversionAnnotationProcessor"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.DefaultConversionAnnotationProcessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.TypeConverterCreator"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.conversion.StrutsTypeConverterCreator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.TypeConverterHolder"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.conversion.StrutsTypeConverterHolder"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.XWorkBasicConverter"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.XWorkBasicConverter"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.CollectionConverter"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.CollectionConverter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.ArrayConverter"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.ArrayConverter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.DateConverter"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.DateConverter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.NumberConverter"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.NumberConverter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.StringConverter"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.StringConverter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.CollectionConverter"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.CollectionConverter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.ArrayConverter"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.ArrayConverter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.DateConverter"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.DateConverter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.NumberConverter"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.NumberConverter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.StringConverter"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.StringConverter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.LocalizedTextProvider"</span> <span class="na">name=</span><span class="s">"global-only"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.GlobalLocalizedTextProvider"</span> <span class="na">scope=</span><span class="s">"singleton"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.LocalizedTextProvider"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.StrutsLocalizedTextProvider"</span> <span class="na">scope=</span><span class="s">"singleton"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.LocalizedTextProvider"</span> <span class="na">name=</span><span class="s">"global-only"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.GlobalLocalizedTextProvider"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.LocalizedTextProvider"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.StrutsLocalizedTextProvider"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.TextProvider"</span> <span class="na">name=</span><span class="s">"system"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.DefaultTextProvider"</span> <span class="na">scope=</span><span class="s">"singleton"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.TextProviderFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.StrutsTextProviderFactory"</span> <span class="na">scope=</span><span class="s">"singleton"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.LocaleProviderFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.DefaultLocaleProviderFactory"</span> <span class="na">scope=</span><span class="s">"singleton"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.TextProvider"</span> <span class="na">name=</span><span class="s">"system"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.DefaultTextProvider"</span>
+          <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.TextProviderFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.StrutsTextProviderFactory"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.LocaleProviderFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.DefaultLocaleProviderFactory"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.UrlRenderer"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.components.ServletUrlRenderer"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.views.util.UrlHelper"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.util.DefaultUrlHelper"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.UrlRenderer"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.components.ServletUrlRenderer"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.views.util.UrlHelper"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.views.util.DefaultUrlHelper"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.ValueStackFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.OgnlValueStackFactory"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.reflection.ReflectionProvider"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.OgnlReflectionProvider"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.reflection.ReflectionContextFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.OgnlReflectionContextFactory"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.ValueStackFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.OgnlValueStackFactory"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.reflection.ReflectionProvider"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.OgnlReflectionProvider"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.reflection.ReflectionContextFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.OgnlReflectionContextFactory"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.NullHandler"</span> <span class="na">name=</span><span class="s">"java.lang.Object"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.InstantiatingNullHandler"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.conversion.NullHandler"</span> <span class="na">name=</span><span class="s">"java.lang.Object"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.conversion.impl.InstantiatingNullHandler"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.validator.ActionValidatorManager"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.validator.AnnotationActionValidatorManager"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.validator.ActionValidatorManager"</span> <span class="na">name=</span><span class="s">"no-annotations"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.validator.DefaultActionValidatorManager"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.validator.ActionValidatorManager"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.validator.AnnotationActionValidatorManager"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.validator.ActionValidatorManager"</span> <span class="na">name=</span><span class="s">"no-annotations"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.validator.DefaultActionValidatorManager"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.validator.ValidatorFactory"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.validator.DefaultValidatorFactory"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.validator.ValidatorFileParser"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.validator.DefaultValidatorFileParser"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.validator.ValidatorFactory"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.validator.DefaultValidatorFactory"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.validator.ValidatorFileParser"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.validator.DefaultValidatorFileParser"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.OgnlUtil"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.OgnlUtil"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.TextParser"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.OgnlTextParser"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.util.TextParser"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.util.OgnlTextParser"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"com.opensymphony.xwork2.util.CompoundRoot"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.CompoundRootAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.lang.Object"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.ObjectAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.Iterator"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkIteratorPropertyAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.Enumeration"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkEnumerationAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.List"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkListPropertyAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.Set"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkCollectionPropertyAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.Map"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkMapPropertyAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.Collection"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkCollectionPropertyAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"com.opensymphony.xwork2.ognl.ObjectProxy"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.ObjectProxyPropertyAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"org.apache.struts2.dispatcher.HttpParameters"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.HttpParametersPropertyAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"org.apache.struts2.dispatcher.Parameter"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.ParameterPropertyAccessor"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"com.opensymphony.xwork2.util.CompoundRoot"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.CompoundRootAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.lang.Object"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.ObjectAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.Iterator"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkIteratorPropertyAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.Enumeration"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkEnumerationAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.List"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkListPropertyAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.Set"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkCollectionPropertyAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.Map"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkMapPropertyAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.Collection"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkCollectionPropertyAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"com.opensymphony.xwork2.ognl.ObjectProxy"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.ObjectProxyPropertyAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"org.apache.struts2.dispatcher.HttpParameters"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.HttpParametersPropertyAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"org.apache.struts2.dispatcher.Parameter"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.ParameterPropertyAccessor"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.MethodAccessor"</span> <span class="na">name=</span><span class="s">"java.lang.Object"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkMethodAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.MethodAccessor"</span> <span class="na">name=</span><span class="s">"com.opensymphony.xwork2.util.CompoundRoot"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.CompoundRootAccessor"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.MethodAccessor"</span> <span class="na">name=</span><span class="s">"java.lang.Object"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkMethodAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.MethodAccessor"</span> <span class="na">name=</span><span class="s">"com.opensymphony.xwork2.util.CompoundRoot"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.CompoundRootAccessor"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.jsp.ui.OgnlTool"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.jsp.ui.OgnlTool"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.StaticContentLoader"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.DefaultStaticContentLoader"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.UnknownHandlerManager"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.DefaultUnknownHandlerManager"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.StaticContentLoader"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.DefaultStaticContentLoader"</span> <span class="na">name=</span><span class="s">"struts"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.UnknownHandlerManager"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.DefaultUnknownHandlerManager"</span> <span class="na">name=</span><span class="s">"struts"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.DispatcherErrorHandler"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.DefaultDispatcherErrorHandler"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.DispatcherErrorHandler"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.dispatcher.DefaultDispatcherErrorHandler"</span><span class="nt">/&gt;</span>
 
     <span class="c">&lt;!--  Silly workarounds for OGNL since there is currently no way to flush its internal caches --&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.ArrayList"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkListPropertyAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.HashSet"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkCollectionPropertyAccessor"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.HashMap"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkMapPropertyAccessor"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.ArrayList"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkListPropertyAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.HashSet"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkCollectionPropertyAccessor"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"ognl.PropertyAccessor"</span> <span class="na">name=</span><span class="s">"java.util.HashMap"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.accessor.XWorkMapPropertyAccessor"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.security.ExcludedPatternsChecker"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.security.DefaultExcludedPatternsChecker"</span> <span class="na">scope=</span><span class="s">"prototype"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.security.AcceptedPatternsChecker"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.security.DefaultAcceptedPatternsChecker"</span> <span class="na">scope=</span><span class="s">"prototype"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.security.NotExcludedAcceptedPatternsChecker"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.security.DefaultNotExcludedAcceptedPatternsChecker"</span> <span class="na">scope=</span><span class="s">"singleton"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.security.ExcludedPatternsChecker"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.security.DefaultExcludedPatternsChecker"</span> <span class="na">scope=</span><span class="s">"prototype"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.security.AcceptedPatternsChecker"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.security.DefaultAcceptedPatternsChecker"</span> <span class="na">scope=</span><span class="s">"prototype"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.security.NotExcludedAcceptedPatternsChecker"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.security.DefaultNotExcludedAcceptedPatternsChecker"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.config.providers.ValueSubstitutor"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.config.providers.EnvsValueSubstitutor"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.config.providers.ValueSubstitutor"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.config.providers.EnvsValueSubstitutor"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.date.DateFormatter"</span> <span class="na">name=</span><span class="s">"simpleDateFormatter"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.components.date.SimpleDateFormatAdapter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.date.DateFormatter"</span> <span class="na">name=</span><span class="s">"dateTimeFormatter"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.components.date.DateTimeFormatterAdapter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.date.DateFormatter"</span> <span class="na">name=</span><span class="s">"simpleDateFormatter"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.components.date.SimpleDateFormatAdapter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.components.date.DateFormatter"</span> <span class="na">name=</span><span class="s">"dateTimeFormatter"</span>
+          <span class="na">class=</span><span class="s">"org.apache.struts2.components.date.DateTimeFormatterAdapter"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.ognl.ExpressionCacheFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.DefaultOgnlExpressionCacheFactory"</span> <span class="na">scope=</span><span class="s">"singleton"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.ognl.BeanInfoCacheFactory"</span> <span class="na">name=</span><span class="s">"struts"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.DefaultOgnlBeanInfoCacheFactory"</span> <span class="na">scope=</span><span class="s">"singleton"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.ognl.ExpressionCacheFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.DefaultOgnlExpressionCacheFactory"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"com.opensymphony.xwork2.ognl.BeanInfoCacheFactory"</span> <span class="na">name=</span><span class="s">"struts"</span>
+          <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ognl.DefaultOgnlBeanInfoCacheFactory"</span> <span class="na">scope=</span><span class="s">"singleton"</span><span class="nt">/&gt;</span>
 
     <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"struts-default"</span> <span class="na">abstract=</span><span class="s">"true"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;result-types&gt;</span>
@@ -388,50 +467,57 @@ setting in <a href="default-properties">default.properties</a>.</p>
             <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"redirectAction"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.ServletActionRedirectResult"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"stream"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.StreamResult"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"xslt"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.xslt.XSLTResult"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"plainText"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.PlainTextResult"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"postback"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.PostbackResult"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"plainText"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.PlainTextResult"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"postback"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.result.PostbackResult"</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;/result-types&gt;</span>
 
         <span class="nt">&lt;interceptors&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"alias"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.AliasInterceptor"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"autowiring"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.spring.interceptor.ActionAutowiringInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"autowiring"</span>
+                         <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.spring.interceptor.ActionAutowiringInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"chain"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ChainingInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"coepInterceptor"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.CoepInterceptor"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"conversionError"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.StrutsConversionErrorInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"conversionError"</span>
+                         <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.StrutsConversionErrorInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"cookie"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.CookieInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"cookieProvider"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.CookieProviderInterceptor"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"clearSession"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ClearSessionInterceptor"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"clearSession"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ClearSessionInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"coopInterceptor"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.CoopInterceptor"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"createSession"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.CreateSessionInterceptor"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"createSession"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.CreateSessionInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"cspInterceptor"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.csp.CspInterceptor"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"debugging"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.debugging.DebuggingInterceptor"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"debugging"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.debugging.DebuggingInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"execAndWait"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ExecuteAndWaitInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"exception"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"fileUpload"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.FileUploadInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"i18n"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.I18nInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"logger"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.LoggingInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"modelDriven"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ModelDrivenInterceptor"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"scopedModelDriven"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ScopedModelDrivenInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"scopedModelDriven"</span>
+                         <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ScopedModelDrivenInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"params"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ParametersInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"paramRemover"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.ParameterRemoverInterceptor"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"actionMappingParams"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ActionMappingParametersInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"actionMappingParams"</span>
+                         <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ActionMappingParametersInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"prepare"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.PrepareInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"staticParams"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.StaticParametersInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"scope"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ScopeInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"servletConfig"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.ServletConfigInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"token"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.TokenInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"tokenSession"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.TokenSessionStoreInterceptor"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"validation"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.validation.AnnotationValidationInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"validation"</span>
+                         <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.validation.AnnotationValidationInterceptor"</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"workflow"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"store"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.MessageStoreInterceptor"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"checkbox"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.CheckboxInterceptor"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"datetime"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.DateTextFieldInterceptor"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"roles"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.RolesInterceptor"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"annotationWorkflow"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"annotationParameterFilter"</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.annotations.AnnotationParameterFilterInterceptor"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"multiselect"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.MultiselectInterceptor"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"noop"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.NoOpInterceptor"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"fetchMetadata"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.FetchMetadataInterceptor"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"store"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.MessageStoreInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"checkbox"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.CheckboxInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"datetime"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.DateTextFieldInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"roles"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.RolesInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"annotationWorkflow"</span>
+                         <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"annotationParameterFilter"</span>
+                         <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.interceptor.annotations.AnnotationParameterFilterInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"multiselect"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.MultiselectInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"noop"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.NoOpInterceptor"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;interceptor</span> <span class="na">name=</span><span class="s">"fetchMetadata"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.interceptor.FetchMetadataInterceptor"</span><span class="nt">/&gt;</span>
 
             <span class="c">&lt;!-- Empty stack - performs no operations --&gt;</span>
             <span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"emptyStack"</span><span class="nt">&gt;</span>
@@ -592,11 +678,11 @@ setting in <a href="default-properties">default.properties</a>.</p>
                 <span class="nt">&lt;/interceptor-ref&gt;</span>
             <span class="nt">&lt;/interceptor-stack&gt;</span>
 
-       <span class="nt">&lt;/interceptors&gt;</span>
+        <span class="nt">&lt;/interceptors&gt;</span>
 
         <span class="nt">&lt;default-interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">/&gt;</span>
 
-        <span class="nt">&lt;default-class-ref</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ActionSupport"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;default-class-ref</span> <span class="na">class=</span><span class="s">"com.opensymphony.xwork2.ActionSupport"</span><span class="nt">/&gt;</span>
 
         <span class="nt">&lt;global-allowed-methods&gt;</span>execute,input,back,cancel,browse,save,delete,list,index<span class="nt">&lt;/global-allowed-methods&gt;</span>
 
