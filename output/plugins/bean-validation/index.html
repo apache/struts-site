@@ -154,7 +154,7 @@
 
 <h2 id="setup">Setup</h2>
 
-<p>In order to use the Bean Validation plugin, you first need to add the JAR file to the <code class="highlighter-rouge">WEB-INF/lib</code> directory of your application or include the dependency in your project’s Maven POM file.</p>
+<p>In order to use the Bean Validation plugin, you first need to add the JAR file to the <code class="language-plaintext highlighter-rouge">WEB-INF/lib</code> directory of your application or include the dependency in your project’s Maven POM file.</p>
 
 <p><strong>pom.xml</strong></p>
 
@@ -169,7 +169,7 @@
 
 <h2 id="configuration">Configuration</h2>
 
-<p>This sample shows the configuration constants the plugin provides. It also shows how to enable bean-validation by extending your own application package from <code class="highlighter-rouge">struts-bean-validation</code> which comes along with the plugin.</p>
+<p>This sample shows the configuration constants the plugin provides. It also shows how to enable bean-validation by extending your own application package from <code class="language-plaintext highlighter-rouge">struts-bean-validation</code> which comes along with the plugin.</p>
 
 <p><strong>struts.xml</strong></p>
 
@@ -206,11 +206,11 @@
 
 <h2 id="bean-validation-example">Bean Validation Example</h2>
 
-<p>Here is an example Action that makes use of bean validation. Note that some of the validation annotations are taken from <code class="highlighter-rouge">javax</code> package (which is defined in the JSR) while others are taken from the validaton provider (in this case: <code class="highlighter-rouge">hibernate</code>). You can specifiy own text keys in the <code class="highlighter-rouge">message</code> attribute of the annotations. If you do that the whole struts i18n mechanism kicks in to resolve those text keys.</p>
+<p>Here is an example Action that makes use of bean validation. Note that some of the validation annotations are taken from <code class="language-plaintext highlighter-rouge">javax</code> package (which is defined in the JSR) while others are taken from the validaton provider (in this case: <code class="language-plaintext highlighter-rouge">hibernate</code>). You can specifiy own text keys in the <code class="language-plaintext highlighter-rouge">message</code> attribute of the annotations. If you do that the whole struts i18n mechanism kicks in to resolve those text keys.</p>
 
 <p><strong>com.example.actions.BeanValidationAction</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.example.actions</span><span class="o">;</span>
 
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
@@ -236,96 +236,96 @@
 <span class="o">})</span>
 <span class="nd">@FieldMatch</span><span class="o">(</span><span class="n">first</span> <span class="o">=</span> <span class="s">"fieldExpressionValidatorField"</span><span class="o">,</span> <span class="n">second</span> <span class="o">=</span> <span class="s">"requiredValidatorField"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"requiredValidatorField and fieldExpressionValidatorField are not matching"</span><span class="o">)</span>
 <span class="nd">@ScriptAssert</span><span class="o">(</span><span class="n">lang</span> <span class="o">=</span> <span class="s">"javascript"</span><span class="o">,</span> <span class="n">script</span> <span class="o">=</span> <span class="s">"_this.dateValidatorField != null &amp;&amp; _this.dateValidatorField.before(new java.util.Date())"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"Date need to before now"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BeanValidationExampleAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BeanValidationExampleAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
     <span class="nd">@NotNull</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">requiredValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">requiredValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
     <span class="nd">@NotBlank</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">requiredStringValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">requiredStringValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
     <span class="nd">@NotNull</span><span class="o">(</span><span class="n">message</span><span class="o">=</span><span class="s">"your.text.key.here"</span><span class="o">)</span>
     <span class="nd">@Min</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
     <span class="nd">@Max</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">integerValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">integerValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
     <span class="nd">@NotNull</span>
-    <span class="kd">private</span> <span class="n">Date</span> <span class="n">dateValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Date</span> <span class="n">dateValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
     <span class="nd">@NotNull</span>
     <span class="nd">@Size</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">4</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">64</span><span class="o">)</span>
     <span class="nd">@Email</span>
 
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">emailValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">emailValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
     <span class="nd">@NotNull</span>
     <span class="nd">@Size</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">4</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">64</span><span class="o">)</span>
     <span class="nd">@URL</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">urlValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">urlValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
     <span class="nd">@NotNull</span>
     <span class="nd">@Size</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">4</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">stringLengthValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">stringLengthValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
     <span class="nd">@Pattern</span><span class="o">(</span><span class="n">regexp</span> <span class="o">=</span> <span class="s">"[^&lt;&gt;]+"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">regexValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">regexValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">fieldExpressionValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">fieldExpressionValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
 
- <span class="kd">public</span> <span class="n">Date</span> <span class="nf">getDateValidatorField</span><span class="o">()</span> <span class="o">{</span>
+ <span class="kd">public</span> <span class="nc">Date</span> <span class="nf">getDateValidatorField</span><span class="o">()</span> <span class="o">{</span>
 
         <span class="k">return</span> <span class="n">dateValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDateValidatorField</span><span class="o">(</span><span class="n">Date</span> <span class="n">dateValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDateValidatorField</span><span class="o">(</span><span class="nc">Date</span> <span class="n">dateValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">dateValidatorField</span> <span class="o">=</span> <span class="n">dateValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEmailValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmailValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">emailValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmailValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">emailValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmailValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">emailValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">emailValidatorField</span> <span class="o">=</span> <span class="n">emailValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">getIntegerValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">getIntegerValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">integerValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIntegerValidatorField</span><span class="o">(</span><span class="n">Integer</span> <span class="n">integerValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIntegerValidatorField</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">integerValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">integerValidatorField</span> <span class="o">=</span> <span class="n">integerValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getRegexValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getRegexValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">regexValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRegexValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">regexValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRegexValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">regexValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">regexValidatorField</span> <span class="o">=</span> <span class="n">regexValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getRequiredStringValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getRequiredStringValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">requiredStringValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRequiredStringValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">requiredStringValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRequiredStringValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">requiredStringValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">requiredStringValidatorField</span> <span class="o">=</span> <span class="n">requiredStringValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getRequiredValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getRequiredValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">requiredValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRequiredValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">requiredValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRequiredValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">requiredValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">requiredValidatorField</span> <span class="o">=</span> <span class="n">requiredValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getStringLengthValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getStringLengthValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">stringLengthValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setStringLengthValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">stringLengthValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setStringLengthValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">stringLengthValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">stringLengthValidatorField</span> <span class="o">=</span> <span class="n">stringLengthValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getFieldExpressionValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getFieldExpressionValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">fieldExpressionValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFieldExpressionValidatorField</span><span class="o">(</span>
-            <span class="n">String</span> <span class="n">fieldExpressionValidatorField</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">fieldExpressionValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">fieldExpressionValidatorField</span> <span class="o">=</span> <span class="n">fieldExpressionValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getUrlValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrlValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">urlValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUrlValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">urlValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUrlValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">urlValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">urlValidatorField</span> <span class="o">=</span> <span class="n">urlValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>

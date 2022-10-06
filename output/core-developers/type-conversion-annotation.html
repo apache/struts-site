@@ -139,21 +139,21 @@
   <li>
     <p>Class wide conversion:</p>
 
-    <p>The conversion rules will be assembled in a file called <code class="highlighter-rouge">XXXAction-conversion.properties</code> within the same package 
+    <p>The conversion rules will be assembled in a file called <code class="language-plaintext highlighter-rouge">XXXAction-conversion.properties</code> within the same package 
 as the related action class. 
-Set type to: <code class="highlighter-rouge">type = ConversionType.CLASS</code></p>
+Set type to: <code class="language-plaintext highlighter-rouge">type = ConversionType.CLASS</code></p>
   </li>
   <li>
     <p>Application wide conversion:</p>
 
-    <p>The conversion rules will be assembled within the <code class="highlighter-rouge">struts-conversion.properties</code> or <code class="highlighter-rouge">xwork-conversion.properties</code> (deprecated)
-file within the classpath root. Set type to: <code class="highlighter-rouge">type = ConversionType.APPLICATION</code></p>
+    <p>The conversion rules will be assembled within the <code class="language-plaintext highlighter-rouge">struts-conversion.properties</code> or <code class="language-plaintext highlighter-rouge">xwork-conversion.properties</code> (deprecated)
+file within the classpath root. Set type to: <code class="language-plaintext highlighter-rouge">type = ConversionType.APPLICATION</code></p>
   </li>
 </ul>
 
 <h2 id="usage">Usage</h2>
 
-<p>The <code class="highlighter-rouge">TypeConversion</code> annotation can be applied at property and method level.</p>
+<p>The <code class="language-plaintext highlighter-rouge">TypeConversion</code> annotation can be applied at property and method level.</p>
 
 <h2 id="parameters">Parameters</h2>
 
@@ -211,38 +211,38 @@ file within the classpath root. Set type to: <code class="highlighter-rouge">typ
 <h2 id="examples">Examples</h2>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@Conversion</span><span class="o">()</span>
- <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConversionAction</span> <span class="kd">implements</span> <span class="n">Action</span> <span class="o">{</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConversionAction</span> <span class="kd">implements</span> <span class="nc">Action</span> <span class="o">{</span>
 
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">convertInt</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">convertInt</span><span class="o">;</span>
 
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">convertDouble</span><span class="o">;</span>
-   <span class="kd">private</span> <span class="n">List</span> <span class="n">users</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">convertDouble</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">List</span> <span class="n">users</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
-   <span class="kd">private</span> <span class="n">HashMap</span> <span class="n">keyValues</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">HashMap</span> <span class="n">keyValues</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
-   <span class="nd">@TypeConversion</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ConversionType</span><span class="o">.</span><span class="na">APPLICATION</span><span class="o">)</span>
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setConvertInt</span><span class="o">(</span> <span class="n">String</span> <span class="n">convertInt</span> <span class="o">)</span> <span class="o">{</span>
+   <span class="nd">@TypeConversion</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="nc">ConversionType</span><span class="o">.</span><span class="na">APPLICATION</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setConvertInt</span><span class="o">(</span> <span class="nc">String</span> <span class="n">convertInt</span> <span class="o">)</span> <span class="o">{</span>
        <span class="k">this</span><span class="o">.</span><span class="na">convertInt</span> <span class="o">=</span> <span class="n">convertInt</span><span class="o">;</span>
    <span class="o">}</span>
 
-   <span class="nd">@TypeConversion</span><span class="o">(</span><span class="n">converterClass</span> <span class="o">=</span> <span class="n">XWorkBasicConverter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setConvertDouble</span><span class="o">(</span> <span class="n">String</span> <span class="n">convertDouble</span> <span class="o">)</span> <span class="o">{</span>
+   <span class="nd">@TypeConversion</span><span class="o">(</span><span class="n">converterClass</span> <span class="o">=</span> <span class="nc">XWorkBasicConverter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setConvertDouble</span><span class="o">(</span> <span class="nc">String</span> <span class="n">convertDouble</span> <span class="o">)</span> <span class="o">{</span>
        <span class="k">this</span><span class="o">.</span><span class="na">convertDouble</span> <span class="o">=</span> <span class="n">convertDouble</span><span class="o">;</span>
    <span class="o">}</span>
 
-   <span class="nd">@TypeConversion</span><span class="o">(</span><span class="n">rule</span> <span class="o">=</span> <span class="n">ConversionRule</span><span class="o">.</span><span class="na">COLLECTION</span><span class="o">,</span> <span class="n">converterClass</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUsers</span><span class="o">(</span> <span class="n">List</span> <span class="n">users</span> <span class="o">)</span> <span class="o">{</span>
+   <span class="nd">@TypeConversion</span><span class="o">(</span><span class="n">rule</span> <span class="o">=</span> <span class="nc">ConversionRule</span><span class="o">.</span><span class="na">COLLECTION</span><span class="o">,</span> <span class="n">converterClass</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUsers</span><span class="o">(</span> <span class="nc">List</span> <span class="n">users</span> <span class="o">)</span> <span class="o">{</span>
        <span class="k">this</span><span class="o">.</span><span class="na">users</span> <span class="o">=</span> <span class="n">users</span><span class="o">;</span>
    <span class="o">}</span>
 
-   <span class="nd">@TypeConversion</span><span class="o">(</span><span class="n">rule</span> <span class="o">=</span> <span class="n">ConversionRule</span><span class="o">.</span><span class="na">MAP</span><span class="o">,</span> <span class="n">converterClass</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setKeyValues</span><span class="o">(</span> <span class="n">HashMap</span> <span class="n">keyValues</span> <span class="o">)</span> <span class="o">{</span>
+   <span class="nd">@TypeConversion</span><span class="o">(</span><span class="n">rule</span> <span class="o">=</span> <span class="nc">ConversionRule</span><span class="o">.</span><span class="na">MAP</span><span class="o">,</span> <span class="n">converterClass</span> <span class="o">=</span> <span class="nc">BigInteger</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setKeyValues</span><span class="o">(</span> <span class="nc">HashMap</span> <span class="n">keyValues</span> <span class="o">)</span> <span class="o">{</span>
        <span class="k">this</span><span class="o">.</span><span class="na">keyValues</span> <span class="o">=</span> <span class="n">keyValues</span><span class="o">;</span>
    <span class="o">}</span>
 
-   <span class="nd">@TypeConversion</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">ConversionType</span><span class="o">.</span><span class="na">APPLICATION</span><span class="o">,</span> <span class="n">property</span> <span class="o">=</span> <span class="s">"java.util.Date"</span><span class="o">,</span> <span class="n">converterClass</span> <span class="o">=</span> <span class="n">XWorkBasicConverter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-       <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+   <span class="nd">@TypeConversion</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="nc">ConversionType</span><span class="o">.</span><span class="na">APPLICATION</span><span class="o">,</span> <span class="n">property</span> <span class="o">=</span> <span class="s">"java.util.Date"</span><span class="o">,</span> <span class="n">converterClass</span> <span class="o">=</span> <span class="nc">XWorkBasicConverter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+       <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
    <span class="o">}</span>
  <span class="o">}</span>
 </code></pre></div></div>

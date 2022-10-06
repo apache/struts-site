@@ -156,24 +156,24 @@ Generated value of token can be predictable</li>
 <ul>
   <li>merged security fixes from version 2.3.16.1, 2.3.16.2, 2.3.16.3</li>
   <li>extended existing security mechanism to block access to given Java packages and Classes</li>
-  <li>collection Parameters for <code class="highlighter-rouge">RedirectResult</code></li>
-  <li>make <code class="highlighter-rouge">ParametersInterceptor</code> supports chinese in hash key by default</li>
-  <li><code class="highlighter-rouge">themes.properties</code> can be loaded using <code class="highlighter-rouge">ServletContext</code> allows to put template folder under WEB-INF or on classpath</li>
-  <li>new tag <code class="highlighter-rouge">datetextfield</code></li>
+  <li>collection Parameters for <code class="language-plaintext highlighter-rouge">RedirectResult</code></li>
+  <li>make <code class="language-plaintext highlighter-rouge">ParametersInterceptor</code> supports chinese in hash key by default</li>
+  <li><code class="language-plaintext highlighter-rouge">themes.properties</code> can be loaded using <code class="language-plaintext highlighter-rouge">ServletContext</code> allows to put template folder under WEB-INF or on classpath</li>
+  <li>new tag <code class="language-plaintext highlighter-rouge">datetextfield</code></li>
   <li>only valid Ognl expressions are cached</li>
-  <li>custom <code class="highlighter-rouge">TextProvider</code> can be used for validation errors of model driven actions</li>
-  <li><code class="highlighter-rouge">datetimepicker</code>’s label fixed</li>
-  <li><code class="highlighter-rouge">PropertiesJudge</code> removed and properties are checked in <code class="highlighter-rouge">SecurityMemberAccess</code></li>
+  <li>custom <code class="language-plaintext highlighter-rouge">TextProvider</code> can be used for validation errors of model driven actions</li>
+  <li><code class="language-plaintext highlighter-rouge">datetimepicker</code>’s label fixed</li>
+  <li><code class="language-plaintext highlighter-rouge">PropertiesJudge</code> removed and properties are checked in <code class="language-plaintext highlighter-rouge">SecurityMemberAccess</code></li>
   <li>resource reloading works in IBM JVM</li>
   <li>default reloading settings were removed from default.properties</li>
-  <li><code class="highlighter-rouge">commons-fileupload</code> library upgraded to version 1.3.1 to fix potential security vulnerability</li>
-  <li>the scheme attribute accepts expressions in <code class="highlighter-rouge">s:url</code> tag</li>
-  <li>solves problem with infinite loop in <code class="highlighter-rouge">FastByteArrayOutputStream</code></li>
-  <li><code class="highlighter-rouge">LocalizedTextUtil</code> supports many ClassLoaders</li>
+  <li><code class="language-plaintext highlighter-rouge">commons-fileupload</code> library upgraded to version 1.3.1 to fix potential security vulnerability</li>
+  <li>the scheme attribute accepts expressions in <code class="language-plaintext highlighter-rouge">s:url</code> tag</li>
+  <li>solves problem with infinite loop in <code class="language-plaintext highlighter-rouge">FastByteArrayOutputStream</code></li>
+  <li><code class="language-plaintext highlighter-rouge">LocalizedTextUtil</code> supports many ClassLoaders</li>
   <li>Bill of Materials pom was introduced</li>
-  <li><code class="highlighter-rouge">debug=browser|console</code> was migrated to jQuery</li>
-  <li><code class="highlighter-rouge">struts_dojo.js</code> was fixed</li>
-  <li>interface <code class="highlighter-rouge">org/apache/struts2/views/TagLibrary</code> was restored and marked as <code class="highlighter-rouge">@Depreacted</code></li>
+  <li><code class="language-plaintext highlighter-rouge">debug=browser|console</code> was migrated to jQuery</li>
+  <li><code class="language-plaintext highlighter-rouge">struts_dojo.js</code> was fixed</li>
+  <li>interface <code class="language-plaintext highlighter-rouge">org/apache/struts2/views/TagLibrary</code> was restored and marked as <code class="language-plaintext highlighter-rouge">@Depreacted</code></li>
 </ul>
 
 <p>and many other small improvements, please careful read the <a href="http://struts.apache.org/docs/version-notes-2320">version notes</a>.</p>
@@ -239,7 +239,7 @@ the correction wasn’t sufficient.</p>
 <p>In your struts.xml, replace all custom references to params-interceptor with the following code, especially regarding the class-pattern
 found at the beginning of the excludeParams list:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;interceptor-ref name="params"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;interceptor-ref name="params"&gt;
    &lt;param name="excludeParams"&gt;(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*&lt;/param&gt;
 &lt;/interceptor-ref&gt;
 </code></pre></div></div>
@@ -247,7 +247,7 @@ found at the beginning of the excludeParams list:</p>
 <p>If you are using default interceptor stacks packaged in struts-default.xml, change your parent packages to a customized secured configuration
 as in the following example. Given you are using defaultStack so far, change your packages from</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;package name="default" namespace="/" extends="struts-default"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;package name="default" namespace="/" extends="struts-default"&gt;
     &lt;default-interceptor-ref name="defaultStack" /&gt;
     ...
     ...
@@ -256,7 +256,7 @@ as in the following example. Given you are using defaultStack so far, change you
 
 <p>to</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;package name="default" namespace="/" extends="struts-default"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;package name="default" namespace="/" extends="struts-default"&gt;
     &lt;interceptors&gt;
         &lt;interceptor-stack name="secureDefaultStack"&gt;
             &lt;interceptor-ref name="defaultStack"&gt;
@@ -309,7 +309,7 @@ the commons-fileupload jar file in WEB-INF/lib with the fixed jar. For
 Maven based Struts 2 projects, the following dependency needs to be
 added:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency&gt;
   &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
   &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
   &lt;version&gt;1.3.1&lt;/version&gt;

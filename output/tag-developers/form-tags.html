@@ -172,12 +172,12 @@ by templates. Templates are grouped together to create themes. The framework bun
     </tr>
     <tr>
       <td>xhtml</td>
-      <td>Extends simple, layout base on <code class="highlighter-rouge">&lt;table&gt;</code>s</td>
+      <td>Extends simple, layout base on <code class="language-plaintext highlighter-rouge">&lt;table&gt;</code>s</td>
       <td>(default)</td>
     </tr>
     <tr>
       <td>css_xhtml</td>
-      <td>Extends simple, layout base on <code class="highlighter-rouge">&lt;div&gt;</code>s and CSS</td>
+      <td>Extends simple, layout base on <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code>s and CSS</td>
       <td> </td>
     </tr>
   </tbody>
@@ -186,14 +186,14 @@ by templates. Templates are grouped together to create themes. The framework bun
 <p>The predefined themes can be used “as is” or customized.</p>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">xhtml</code> theme renders out a two-column table. If a different layout is needed, do <em>not</em> write your own HTML.
+  <p>The <code class="language-plaintext highlighter-rouge">xhtml</code> theme renders out a two-column table. If a different layout is needed, do <em>not</em> write your own HTML.
 Create a new theme or utilize the simple theme.</p>
 </blockquote>
 
 <h2 id="simple-theme-caveats">Simple theme caveats</h2>
 
 <p>The downside of using the simple theme is that it doesn’t support as many of the attributes that the other themes do.
-For example, the <code class="highlighter-rouge">label</code> attribute does nothing in the simple theme, and the automatic display of error messages
+For example, the <code class="language-plaintext highlighter-rouge">label</code> attribute does nothing in the simple theme, and the automatic display of error messages
 is not supported.</p>
 
 <h2 id="common-attributes">Common Attributes</h2>
@@ -202,9 +202,9 @@ is not supported.</p>
 in to three categories: <em>templated-related</em>, <em>javascript-related</em>, and <em>general</em> attributes. The individual attributes
 are documented on each tag’s reference page.</p>
 
-<p>In addition to the common attributes, a special attribute exists for all form element tags: <code class="highlighter-rouge">form</code> (<code class="highlighter-rouge">${parameters.form}</code>). 
-The <code class="highlighter-rouge">form</code> property represents the attributes used to render the form tag, such as the form’s id. In a template, 
-the form’s ID can be found by calling <code class="highlighter-rouge">${parameters.form.id}</code>.</p>
+<p>In addition to the common attributes, a special attribute exists for all form element tags: <code class="language-plaintext highlighter-rouge">form</code> (<code class="language-plaintext highlighter-rouge">${parameters.form}</code>). 
+The <code class="language-plaintext highlighter-rouge">form</code> property represents the attributes used to render the form tag, such as the form’s id. In a template, 
+the form’s ID can be found by calling <code class="language-plaintext highlighter-rouge">${parameters.form.id}</code>.</p>
 
 <h2 id="template-related-attributes">Template-Related Attributes</h2>
 
@@ -516,33 +516,33 @@ the tabindex attribute, but none of the themes render the tabindex.</p>
 
 <h2 id="valuename-relationship">Value/Name Relationship</h2>
 
-<p>In many of the tags (except for the form tag) there is a unique relationship between the <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">value</code> attributes.
-The <code class="highlighter-rouge">name</code> attribute provides the name for the tag, which in turn is used as the control attribute when the form 
-is submitted. The value submitted is bound to the <code class="highlighter-rouge">name</code>. In most cases, the <code class="highlighter-rouge">name</code> maps to a simple JavaBean property, 
-such as “postalCode”. On submit, the value would be set to the property by calling the <code class="highlighter-rouge">setPostalCode</code> mutator.</p>
+<p>In many of the tags (except for the form tag) there is a unique relationship between the <code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">value</code> attributes.
+The <code class="language-plaintext highlighter-rouge">name</code> attribute provides the name for the tag, which in turn is used as the control attribute when the form 
+is submitted. The value submitted is bound to the <code class="language-plaintext highlighter-rouge">name</code>. In most cases, the <code class="language-plaintext highlighter-rouge">name</code> maps to a simple JavaBean property, 
+such as “postalCode”. On submit, the value would be set to the property by calling the <code class="language-plaintext highlighter-rouge">setPostalCode</code> mutator.</p>
 
-<p>Likewise, a form control could be populated by calling a JavaBean accessor, like <code class="highlighter-rouge">getPostalCode</code>. In the expression 
-language, we can refer to the JavaBean property by name. An expression like “%{postalCode}” would in turn call <code class="highlighter-rouge">getPostalCode</code>.</p>
+<p>Likewise, a form control could be populated by calling a JavaBean accessor, like <code class="language-plaintext highlighter-rouge">getPostalCode</code>. In the expression 
+language, we can refer to the JavaBean property by name. An expression like “%{postalCode}” would in turn call <code class="language-plaintext highlighter-rouge">getPostalCode</code>.</p>
 
-<pre><code class="language-ftl">&lt;@s.form action="updateAddress"&gt;
-    &lt;@s.textfield label="Postal Code" name="postalCode" value="%{postalCode}"/&gt;
-    ...
-&lt;/@s.form&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.form</span><span class="w"> </span>action="updateAddress"&gt;<span class="w">
+    </span>&lt;@s.textfield label="Postal Code" name="postalCode" value="%<span class="p">{</span><span class="no">postalCode</span><span class="p">}</span>"/&gt;<span class="w">
+</span><span class="err">    ...</span><span class="w">
+</span><span class="err">&lt;/@</span><span class="no">s</span><span class="na">.form</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
 
-<p>However, since the tags imply a relationship between the <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">value</code>, the <code class="highlighter-rouge">value</code> attribute is optional. 
-If a <code class="highlighter-rouge">value</code> is not specified, by default, the JavaBean accessor is used instead.</p>
+<p>However, since the tags imply a relationship between the <code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">value</code>, the <code class="language-plaintext highlighter-rouge">value</code> attribute is optional. 
+If a <code class="language-plaintext highlighter-rouge">value</code> is not specified, by default, the JavaBean accessor is used instead.</p>
 
-<pre><code class="language-ftl">&lt;@s.form action="updateAddress"&gt;
-    &lt;@s.textfield label="Postal Code" name="postalCode"/&gt;
-    ...
-&lt;/@s.form&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.form</span><span class="w"> </span>action="updateAddress"&gt;<span class="w">
+    </span>&lt;@s.textfield label="Postal Code" name="postalCode"/&gt;<span class="w">
+</span><span class="err">    ...</span><span class="w">
+</span><span class="err">&lt;/@</span><span class="no">s</span><span class="na">.form</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
 
-<p>While most attributes are exposed to the underlying templates as the same key as the attribute (<code class="highlighter-rouge">${parameters.label}</code>), 
-the <code class="highlighter-rouge">value</code> attribute is not. Instead, it can be accessed via the <code class="highlighter-rouge">nameValue</code> key (<code class="highlighter-rouge">${parameters.nameValue}</code>).
-The <code class="highlighter-rouge">nameValue</code> key indicates that the value may have been generated from the <code class="highlighter-rouge">name</code> attribute rather than explicitly
-defined in the <code class="highlighter-rouge">value</code> attribute.</p>
+<p>While most attributes are exposed to the underlying templates as the same key as the attribute (<code class="language-plaintext highlighter-rouge">${parameters.label}</code>), 
+the <code class="language-plaintext highlighter-rouge">value</code> attribute is not. Instead, it can be accessed via the <code class="language-plaintext highlighter-rouge">nameValue</code> key (<code class="language-plaintext highlighter-rouge">${parameters.nameValue}</code>).
+The <code class="language-plaintext highlighter-rouge">nameValue</code> key indicates that the value may have been generated from the <code class="language-plaintext highlighter-rouge">name</code> attribute rather than explicitly
+defined in the <code class="language-plaintext highlighter-rouge">value</code> attribute.</p>
 
 <h2 id="id-name-assignment">ID Name Assignment</h2>
 
@@ -565,12 +565,12 @@ defined in the <code class="highlighter-rouge">value</code> attribute.</p>
 
 <h2 id="form-labelposition-propagation">Form labelposition propagation</h2>
 
-<p>When <code class="highlighter-rouge">labelposition</code> attribute was defined for <code class="highlighter-rouge">&lt;s:form&gt;</code> tag it will be propagated to all form elements, but if form 
-element defines its own <code class="highlighter-rouge">labelposition</code> it will take precedence over <code class="highlighter-rouge">&lt;s:form&gt;</code>’s attribute. Since 2.3.17.</p>
+<p>When <code class="language-plaintext highlighter-rouge">labelposition</code> attribute was defined for <code class="language-plaintext highlighter-rouge">&lt;s:form&gt;</code> tag it will be propagated to all form elements, but if form 
+element defines its own <code class="language-plaintext highlighter-rouge">labelposition</code> it will take precedence over <code class="language-plaintext highlighter-rouge">&lt;s:form&gt;</code>’s attribute. Since 2.3.17.</p>
 
 <h2 id="required-attribute">Required Attribute</h2>
 
-<p>The <code class="highlighter-rouge">required</code> attribute on many UI tags defaults to true only if you have client-side validation enabled,
+<p>The <code class="language-plaintext highlighter-rouge">required</code> attribute on many UI tags defaults to true only if you have client-side validation enabled,
 and a validator is associated with that particular field.</p>
 
 <h2 id="tooltip">Tooltip</h2>
@@ -579,7 +579,7 @@ and a validator is associated with that particular field.</p>
   <p><strong>NOTE</strong>: tooltipConfig is deprecated, use individual tooltip configuration attributes instead</p>
 </blockquote>
 
-<p>Every Form UI component (in <code class="highlighter-rouge">xhtml</code> / <code class="highlighter-rouge">css_xhtml</code> or any other which extends them) can have tooltips assigned to them.
+<p>Every Form UI component (in <code class="language-plaintext highlighter-rouge">xhtml</code> / <code class="language-plaintext highlighter-rouge">css_xhtml</code> or any other which extends them) can have tooltips assigned to them.
 The Form component’s tooltip related attribute, once defined, will be applied to all form UI components that are created 
 under it unless explicitly overridden by having the Form UI component itself defined with their own tooltip attribute.</p>
 
@@ -598,54 +598,54 @@ tooltipIcon defined as /myImages/myIcon.gif, inherited from its containing form,
   <li>Example 5: Set tooltip config through the tooltip attributes of the component tag</li>
 </ul>
 
-<pre><code class="language-jsp">&lt;!-- Example 1: --&gt;
-&lt;s:form
-         tooltipDelay="500"
-         tooltipIconPath="/myImages/myIcon.gif" .... &gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Example 1: --&gt;</span>
+<span class="nt">&lt;s:form
+         </span><span class="na">tooltipDelay=</span><span class="s">"500"</span><span class="na">
+         tooltipIconPath=</span><span class="s">"/myImages/myIcon.gif"</span> .... <span class="nt">&gt;</span>
   ....
-    &lt;s:textfield label="Customer Name" tooltip="Enter the customer name" .... /&gt;
+    <span class="nt">&lt;s:textfield </span><span class="na">label=</span><span class="s">"Customer Name"</span><span class="na"> tooltip=</span><span class="s">"Enter the customer name"</span> .... <span class="nt">/&gt;</span>
   ....
-&lt;/s:form&gt;
+<span class="nt">&lt;/s:form&gt;</span>
 
-&lt;!-- Example 2: --&gt;
-&lt;s:form
-         tooltipDelay="500"
-         tooltipIconPath="/myImages/myIcon.gif" .... &gt;
+<span class="c">&lt;!-- Example 2: --&gt;</span>
+<span class="nt">&lt;s:form
+         </span><span class="na">tooltipDelay=</span><span class="s">"500"</span><span class="na">
+         tooltipIconPath=</span><span class="s">"/myImages/myIcon.gif"</span> .... <span class="nt">&gt;</span>
   ....
-    &lt;s:textfield label="Address"
-         tooltip="Enter your address"
-         tooltipDelay="5000" /&gt;
+    <span class="nt">&lt;s:textfield </span><span class="na">label=</span><span class="s">"Address"</span><span class="na">
+         tooltip=</span><span class="s">"Enter your address"</span><span class="na">
+         tooltipDelay=</span><span class="s">"5000"</span> <span class="nt">/&gt;</span>
   ....
-&lt;/s:form&gt;
+<span class="nt">&lt;/s:form&gt;</span>
 
-&lt;-- Example 3: --&gt;
-&lt;s:textfield
-       label="Customer Name"
-       tooltip="One of our customer Details"&gt;
-       &lt;s:param name="tooltipDelay"&gt;
+<span class="nt">&lt;--</span> <span class="na">Example</span> <span class="err">3</span><span class="na">:</span> <span class="na">--</span><span class="nt">&gt;</span>
+<span class="nt">&lt;s:textfield
+       </span><span class="na">label=</span><span class="s">"Customer Name"</span><span class="na">
+       tooltip=</span><span class="s">"One of our customer Details"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;s:param </span><span class="na">name=</span><span class="s">"tooltipDelay"</span><span class="nt">&gt;</span>
             500
-       &lt;/s:param&gt;
-       &lt;s:param name="tooltipIconPath"&gt;
+       <span class="nt">&lt;/s:param&gt;</span>
+       <span class="nt">&lt;s:param </span><span class="na">name=</span><span class="s">"tooltipIconPath"</span><span class="nt">&gt;</span>
             /myImages/myIcon.gif
-       &lt;/s:param&gt;
-&lt;/s:textfield&gt;
+       <span class="nt">&lt;/s:param&gt;</span>
+<span class="nt">&lt;/s:textfield&gt;</span>
 
-&lt;-- Example 4: --&gt;
-&lt;s:textfield
-         label="Customer Address"
-         tooltip="Enter The Customer Address" &gt;
-         &lt;s:param
-             name="tooltipDelay"
-             value="500" /&gt;
-&lt;/s:textfield&gt;
+<span class="nt">&lt;--</span> <span class="na">Example</span> <span class="err">4</span><span class="na">:</span> <span class="na">--</span><span class="nt">&gt;</span>
+<span class="nt">&lt;s:textfield
+         </span><span class="na">label=</span><span class="s">"Customer Address"</span><span class="na">
+         tooltip=</span><span class="s">"Enter The Customer Address"</span> <span class="nt">&gt;</span>
+         <span class="nt">&lt;s:param
+             </span><span class="na">name=</span><span class="s">"tooltipDelay"</span><span class="na">
+             value=</span><span class="s">"500"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:textfield&gt;</span>
 
-&lt;-- Example 5: --&gt;
-&lt;s:textfield
-         label="Customer Telephone Number"
-         tooltip="Enter customer Telephone Number"
-         tooltipDelay="500"
-         tooltipIconPath="/myImages/myIcon.gif" /&gt;
-</code></pre>
+<span class="nt">&lt;--</span> <span class="na">Example</span> <span class="err">5</span><span class="na">:</span> <span class="na">--</span><span class="nt">&gt;</span>
+<span class="nt">&lt;s:textfield
+         </span><span class="na">label=</span><span class="s">"Customer Telephone Number"</span><span class="na">
+         tooltip=</span><span class="s">"Enter customer Telephone Number"</span><span class="na">
+         tooltipDelay=</span><span class="s">"500"</span><span class="na">
+         tooltipIconPath=</span><span class="s">"/myImages/myIcon.gif"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
   </section>
 </article>

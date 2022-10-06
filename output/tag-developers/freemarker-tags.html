@@ -145,30 +145,30 @@
 <p>FreeMarker tags are extensions of the generic <a href="struts-tags">Struts Tags</a> provided by the framework. You can jump 
 right in just by knowing the generic structure in which the tags can be accessed:</p>
 
-<pre><code class="language-ftl">&lt;@s.tag&gt; ...&lt;/@s.tag&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.tag</span><span class="err">&gt; ...&lt;/@</span><span class="no">s</span><span class="na">.tag</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
 
-<p>, where <code class="highlighter-rouge">tag</code> is any of the <a href="tag-reference">tags</a> supported by the framework.</p>
+<p>, where <code class="language-plaintext highlighter-rouge">tag</code> is any of the <a href="tag-reference">tags</a> supported by the framework.</p>
 
 <p>For example, in JSP you might create a form using Struts tags.</p>
 
 <p><strong>JSP Form</strong></p>
 
-<pre><code class="language-jsp">&lt;s:form action="updatePerson"&gt;
-    &lt;s:textfield label="First name" name="firstName"/&gt;
-    &lt;s:submit value="Update"/&gt;
-&lt;/s:form&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form </span><span class="na">action=</span><span class="s">"updatePerson"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;s:textfield </span><span class="na">label=</span><span class="s">"First name"</span><span class="na"> name=</span><span class="s">"firstName"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;s:submit </span><span class="na">value=</span><span class="s">"Update"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:form&gt;</span>
+</code></pre></div></div>
 
 <p>In FreeMarker the same form can also be built using Struts tags.</p>
 
 <p><strong>FTL Form</strong></p>
 
-<pre><code class="language-ftl">&lt;@s.form action="updatePerson"&gt;
-    &lt;@s.textfield label="First name" name="firstName"/&gt;
-    &lt;@s.submit value="Update"/&gt;
-&lt;/@s.form&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.form</span><span class="w"> </span>action="updatePerson"&gt;<span class="w">
+    </span>&lt;@s.textfield label="First name" name="firstName"/&gt;<span class="w">
+    </span>&lt;@s.submit value="Update"/&gt;<span class="w">
+</span><span class="err">&lt;/@</span><span class="no">s</span><span class="na">.form</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <p><strong>But, wait there’s more!</strong></p>
 
@@ -179,24 +179,24 @@ pages even easier to code. You can even invoke third-party JSP taglibs as if the
 
 <p>Unlike older versions of JSP (in which the <a href="jsp-tags">JSP Tags</a> are based), FreeMarker allows for <em>dynamic attributes</em>, 
 much like JSP 2.0. You can supply attributes to the tags that the tag doesn’t explicitedly support. Those attributes 
-that cannot be applied directly to the tag object will be set to the tag’s general-purpose <code class="highlighter-rouge">parameters</code> Map.</p>
+that cannot be applied directly to the tag object will be set to the tag’s general-purpose <code class="language-plaintext highlighter-rouge">parameters</code> Map.</p>
 
 <p>Suppose we wanted to build an URL in a JSP. The URL needs to take an arbitary parameter to the query string, 
-that (being arbitary) isn’t specified on the URL tag. In a JSP, we’d have to use the <code class="highlighter-rouge">url</code> and <code class="highlighter-rouge">param</code> tags together.</p>
+that (being arbitary) isn’t specified on the URL tag. In a JSP, we’d have to use the <code class="language-plaintext highlighter-rouge">url</code> and <code class="language-plaintext highlighter-rouge">param</code> tags together.</p>
 
 <p><strong>Creating a URL with a query string (JSP)</strong></p>
 
-<pre><code class="language-jsp">&lt;s:url value="somePage"&gt;
-    &lt;s:param name="personId" value="%{personId}"/&gt;
-&lt;/s:url&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:url </span><span class="na">value=</span><span class="s">"somePage"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;s:param </span><span class="na">name=</span><span class="s">"personId"</span><span class="na"> value=</span><span class="s">"%{personId}"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:url&gt;</span>
+</code></pre></div></div>
 
 <p>In FreeMarker, we can pass the arbitrary parameter directly and create the URL in one simple statement.</p>
 
 <p><strong>Creating a URL with a query string (FTL)</strong></p>
 
-<pre><code class="language-ftl">&lt;@s.url value="somePage" personId="%{personId}"/&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.url</span><span class="w"> </span>value="somePage" personId="%<span class="p">{</span><span class="no">personId</span><span class="p">}</span>"/&gt;<span class="w">
+</span></code></pre></div></div>
 
 <h3 id="using-inline-attributes-with-templates">Using inline attributes with templates</h3>
 
@@ -206,18 +206,18 @@ attribute into the textfield tag, no fuss, no muss.</p>
 
 <p><strong>Passing an attribute to the template</strong></p>
 
-<pre><code class="language-ftl">&lt;@s.form action="updatePerson"&gt;
-    &lt;@s.textfield label="First name" name="firstName" description="..."/&gt;
-    &lt;@s.submit value="Update"/&gt;
-&lt;/@s.form&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.form</span><span class="w"> </span>action="updatePerson"&gt;<span class="w">
+    </span>&lt;@s.textfield label="First name" name="firstName" description="..."/&gt;<span class="w">
+    </span>&lt;@s.submit value="Update"/&gt;<span class="w">
+</span><span class="err">&lt;/@</span><span class="no">s</span><span class="na">.form</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
 
-<p>In the new template, the description is referenced via the parameters Map: <code class="highlighter-rouge">${parameters.description}</code>.</p>
+<p>In the new template, the description is referenced via the parameters Map: <code class="language-plaintext highlighter-rouge">${parameters.description}</code>.</p>
 
 <blockquote>
-  <p>For simple cases, inline attributes are much easier to use than the param} tag. But, the <code class="highlighter-rouge">param</code> tag is more flexible 
-than inline attributes for advanced use cases. For example, <code class="highlighter-rouge">param</code> can take the entire body of the tag and apply 
-that as the <code class="highlighter-rouge">value</code> attribute.</p>
+  <p>For simple cases, inline attributes are much easier to use than the param} tag. But, the <code class="language-plaintext highlighter-rouge">param</code> tag is more flexible 
+than inline attributes for advanced use cases. For example, <code class="language-plaintext highlighter-rouge">param</code> can take the entire body of the tag and apply 
+that as the <code class="language-plaintext highlighter-rouge">value</code> attribute.</p>
 </blockquote>
 
 <h2 id="attribute-types">Attribute Types</h2>
@@ -226,24 +226,24 @@ that as the <code class="highlighter-rouge">value</code> attribute.</p>
 to a different type, such as List, int, or boolean. This generally works just fine, but it can be limiting when using 
 FreeMarker which provides more advanced ways to apply attributes. Suppose the following example:</p>
 
-<pre><code class="language-ftl">&lt;@s.select label="Foo label - %{foo}" name="%{name}" list="%{1, 2, 3}"/&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.select</span><span class="w"> </span>label="Foo label - %<span class="p">{</span><span class="no">foo</span><span class="p">}</span>" name="%<span class="p">{</span><span class="no">name</span><span class="p">}</span>" list="%<span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>"/&gt;<span class="w">
+</span></code></pre></div></div>
 
 <p>What will happen here is that each attribute will be evaluated to a String as best it can. This may involve calling the
-<code class="highlighter-rouge">toString</code> method on the internal FreeMarker objects. In this case, all objects will end up being exactly what you would 
-expect. Then, when the tag runs, the <code class="highlighter-rouge">list</code> attribute will be converted from a String to a List using <a href="ognl">OGNL</a>’s 
+<code class="language-plaintext highlighter-rouge">toString</code> method on the internal FreeMarker objects. In this case, all objects will end up being exactly what you would 
+expect. Then, when the tag runs, the <code class="language-plaintext highlighter-rouge">list</code> attribute will be converted from a String to a List using <a href="ognl">OGNL</a>’s 
 advanced collection support.</p>
 
 <p>But suppose you wish to use FreeMarker’s list or hash support instead? You can do this:</p>
 
-<pre><code class="language-ftl">&lt;@s.select label="Foo label - %{foo}" name="%{name}" list=[1, 2, 3]/&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.select</span><span class="w"> </span>label="Foo label - %<span class="p">{</span><span class="no">foo</span><span class="p">}</span>" name="%<span class="p">{</span><span class="no">name</span><span class="p">}</span>" list=[1, 2, 3]/&gt;<span class="w">
+</span></code></pre></div></div>
 
 <p>Notice that the list attribute no longer has quotes around it. Now it will come in to the tag as an object that can’t 
-easily be converted to a String. Normally, the tag would just call <code class="highlighter-rouge">toString</code>, which would return <code class="highlighter-rouge">[1, 2, 3]</code> and be 
+easily be converted to a String. Normally, the tag would just call <code class="language-plaintext highlighter-rouge">toString</code>, which would return <code class="language-plaintext highlighter-rouge">[1, 2, 3]</code> and be 
 unable to be converted back to a List by OGNL. Rather than go through all this back and forth, the frameworks’s FreeMarker 
 tag support will recognize collections and not pass them through the normal tag attribute. Instead, the framework will 
-set them directly in the <code class="highlighter-rouge">parameters</code> Map, ready to be consumed by the template.</p>
+set them directly in the <code class="language-plaintext highlighter-rouge">parameters</code> Map, ready to be consumed by the template.</p>
 
 <p>In the end, everything tends to do what you would expect, but it can help to understand the difference of when OGNL is 
 being used and when it isn’t, and how attribute types get converted.</p>
@@ -252,7 +252,7 @@ being used and when it isn’t, and how attribute types get converted.</p>
 
 <p>While the framework provides native FreeMarker Tags, you might wish to use other third-party tags that are only available 
 for JSP. Fortunately, FreeMarker has the ability to run JSP tags. To do so, you must include the JspSupportServlet in 
-the application’s <code class="highlighter-rouge">web.xml</code>, as this allows the FreeMarker integration to get access to the required objects needed 
+the application’s <code class="language-plaintext highlighter-rouge">web.xml</code>, as this allows the FreeMarker integration to get access to the required objects needed 
 to emulate a JSP taglib container.</p>
 
 <p><strong>Adding JspSupportSerlvet to web.xml</strong></p>
@@ -266,10 +266,10 @@ to emulate a JSP taglib container.</p>
 
 <p>Once you’ve done that, you can simply add something like this in your templates:</p>
 
-<pre><code class="language-ftl">&lt;#assign cewolf=JspTaglibs["/WEB-INF/cewolf.tld"] /&gt;
-...
-&lt;@cewold.xxx ... /&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">assign</span><span class="w"> </span>cewolf=JspTaglibs["/WEB-INF/cewolf.tld"] /&gt;<span class="w">
+</span><span class="err">...</span><span class="w">
+</span><span class="err">&lt;@</span><span class="no">cewold</span><span class="na">.xxx</span><span class="err"> ...</span><span class="w"> </span>/&gt;<span class="w">
+</span></code></pre></div></div>
 
   </section>
 </article>

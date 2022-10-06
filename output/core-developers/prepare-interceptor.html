@@ -133,40 +133,40 @@
     
     <h1 id="prepare-interceptor">Prepare Interceptor</h1>
 
-<p>This interceptor calls <code class="highlighter-rouge">prepare()</code> on actions which implement <code class="highlighter-rouge">Preparable</code>. This interceptor is very useful for any 
+<p>This interceptor calls <code class="language-plaintext highlighter-rouge">prepare()</code> on actions which implement <code class="language-plaintext highlighter-rouge">Preparable</code>. This interceptor is very useful for any 
 situation where you need to ensure some logic runs before the actual execute method runs.</p>
 
 <p>A typical use of this is to run some logic to load an object from the database so that when parameters are set they can 
-be set on this object. For example, suppose you have a User object with two properties: <code class="highlighter-rouge">id</code> and <code class="highlighter-rouge">name</code>. Provided that 
+be set on this object. For example, suppose you have a User object with two properties: <code class="language-plaintext highlighter-rouge">id</code> and <code class="language-plaintext highlighter-rouge">name</code>. Provided that 
 the params interceptor is called twice (once before and once after this interceptor), you can load the User object using
-the <code class="highlighter-rouge">id</code> property and then when the second params interceptor is called the parameter <code class="highlighter-rouge">user.name</code> will be set, as desired, 
+the <code class="language-plaintext highlighter-rouge">id</code> property and then when the second params interceptor is called the parameter <code class="language-plaintext highlighter-rouge">user.name</code> will be set, as desired, 
 on the actual object loaded from the database. See the example for more info.</p>
 
 <blockquote>
-  <p>Note: Since XWork 2.0.2, this interceptor extends <code class="highlighter-rouge">MethodFilterInterceptor</code>, therefore being able to deal with 
-<code class="highlighter-rouge">excludeMethods</code> / <code class="highlighter-rouge">includeMethods</code> parameters. See <a href="default-workflow-interceptor">Workflow Interceptor</a>
+  <p>Note: Since XWork 2.0.2, this interceptor extends <code class="language-plaintext highlighter-rouge">MethodFilterInterceptor</code>, therefore being able to deal with 
+<code class="language-plaintext highlighter-rouge">excludeMethods</code> / <code class="language-plaintext highlighter-rouge">includeMethods</code> parameters. See <a href="default-workflow-interceptor">Workflow Interceptor</a>
 for documentation and examples on how to use this feature.</p>
 </blockquote>
 
 <blockquote>
-  <p>Update: Added logic to execute a <code class="highlighter-rouge">prepare&lt;MethodName&gt;</code> and conditionally the a general <code class="highlighter-rouge">prepare()</code> Method, depending 
-on the <code class="highlighter-rouge">alwaysInvokePrepare</code> parameter/property which is by default <code class="highlighter-rouge">true</code>. This allows us to run some logic based 
-on the method name we specify in the <code class="highlighter-rouge">com.opensymphony.xwork2.ActionProxy</code>. For example, you can specify a <code class="highlighter-rouge">prepareInput()</code>
+  <p>Update: Added logic to execute a <code class="language-plaintext highlighter-rouge">prepare&lt;MethodName&gt;</code> and conditionally the a general <code class="language-plaintext highlighter-rouge">prepare()</code> Method, depending 
+on the <code class="language-plaintext highlighter-rouge">alwaysInvokePrepare</code> parameter/property which is by default <code class="language-plaintext highlighter-rouge">true</code>. This allows us to run some logic based 
+on the method name we specify in the <code class="language-plaintext highlighter-rouge">com.opensymphony.xwork2.ActionProxy</code>. For example, you can specify a <code class="language-plaintext highlighter-rouge">prepareInput()</code>
 method that will be run before the invocation of the input method.</p>
 </blockquote>
 
-<p>In <code class="highlighter-rouge">PrepareInterceptor</code> applies only when action implements <code class="highlighter-rouge">Preparable</code></p>
+<p>In <code class="language-plaintext highlighter-rouge">PrepareInterceptor</code> applies only when action implements <code class="language-plaintext highlighter-rouge">Preparable</code></p>
 <ol>
-  <li>if the action class have <code class="highlighter-rouge">prepare&lt;MethodName&gt;()</code>, it will be invoked</li>
-  <li>else if the action class have <code class="highlighter-rouge">prepareDo&lt;MethodName&gt;()</code>, it will be invoked</li>
-  <li>no matter if 1] or 2] is performed, if <code class="highlighter-rouge">alwaysInvokePrepare</code> property of the interceptor is <code class="highlighter-rouge">true</code> (which is by 
-   default <code class="highlighter-rouge">true</code>), <code class="highlighter-rouge">prepare()</code> will be invoked.</li>
+  <li>if the action class have <code class="language-plaintext highlighter-rouge">prepare&lt;MethodName&gt;()</code>, it will be invoked</li>
+  <li>else if the action class have <code class="language-plaintext highlighter-rouge">prepareDo&lt;MethodName&gt;()</code>, it will be invoked</li>
+  <li>no matter if 1] or 2] is performed, if <code class="language-plaintext highlighter-rouge">alwaysInvokePrepare</code> property of the interceptor is <code class="language-plaintext highlighter-rouge">true</code> (which is by 
+   default <code class="language-plaintext highlighter-rouge">true</code>), <code class="language-plaintext highlighter-rouge">prepare()</code> will be invoked.</li>
 </ol>
 
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">alwaysInvokePrepare</code> - Default to true. If true, prepare will always be invoked, otherwise it will not.</li>
+  <li><code class="language-plaintext highlighter-rouge">alwaysInvokePrepare</code> - Default to true. If true, prepare will always be invoked, otherwise it will not.</li>
 </ul>
 
 <h2 id="extending-the-interceptor">Extending the Interceptor</h2>

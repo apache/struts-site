@@ -161,22 +161,22 @@
 
 <p>OVal provides many annotations for validations that can be used out of the box (custom validators can also be defined). Once the “ovalValidation” interceptor is applied to an action, you can annotate it:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleField</span> <span class="kd">extends</span> <span class="n">ActionSupport</span><span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleField</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span><span class="o">{</span>
     <span class="nd">@NotNull</span><span class="o">()</span>
     <span class="nd">@NotEmpty</span>
     <span class="nd">@Length</span><span class="o">(</span><span class="n">max</span> <span class="o">=</span> <span class="mi">3</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
 <span class="c1">//...</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Use the @AssertValid annotation to validate nested objects, like</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberObject</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberObject</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
     <span class="nd">@AssertValid</span>
-    <span class="kd">private</span> <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+    <span class="kd">private</span> <span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
 
-    <span class="kd">public</span> <span class="n">Person</span> <span class="nf">getPerson</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Person</span> <span class="nf">getPerson</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">person</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -218,24 +218,24 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.apache.struts2.validation.Profiles</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FieldsWithProfiles</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FieldsWithProfiles</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
     <span class="nd">@NotNull</span><span class="o">(</span><span class="n">profiles</span> <span class="o">=</span> <span class="s">"1"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">firstName</span><span class="o">;</span>
 
     <span class="nd">@NotNull</span><span class="o">(</span><span class="n">profiles</span> <span class="o">=</span> <span class="s">"2"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">middleName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">middleName</span><span class="o">;</span>
 
     <span class="nd">@NotNull</span><span class="o">(</span><span class="n">profiles</span> <span class="o">=</span> <span class="s">"3"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">lastName</span><span class="o">;</span>
 
     <span class="nd">@Profiles</span><span class="o">({</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">})</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">firstAndLast</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">firstAndLast</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Profiles</span><span class="o">({</span><span class="s">"2"</span><span class="o">})</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">middle</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+        <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -257,13 +257,13 @@ field.too.long=${field.name} value is too long, allowed length is ${max}
 
 <p><strong>BookAction.java</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BookActionextends</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BookActionextends</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
     <span class="nd">@NotNull</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"notnull.field"</span><span class="o">)</span>
     <span class="nd">@Length</span><span class="o">(</span><span class="n">max</span> <span class="o">=</span> <span class="mi">3</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"field.too.long"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">title</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
 
     <span class="nd">@NotNull</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"You must enter a valid ISBN"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">isbn</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">isbn</span><span class="o">;</span>
 <span class="c1">//...</span>
 <span class="o">}</span>
 </code></pre></div></div>

@@ -183,11 +183,11 @@ to try to set the value of in the Action class.</p>
 </code></pre></div></div>
 
 <p>The s:submit tag will create a submit button with a name of submit. Since the Action class probably doesn’t have 
-a <code class="highlighter-rouge">setSubmit(String name)</code> method you will see the following log messages (only if Struts development mode is set to true):</p>
+a <code class="language-plaintext highlighter-rouge">setSubmit(String name)</code> method you will see the following log messages (only if Struts development mode is set to true):</p>
 
 <p><strong>Log Messages</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dec 31, 2012 3:43:53 PM 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dec 31, 2012 3:43:53 PM 
 com.opensymphony.xwork2.util.logging.commons.CommonsLogger warn
 WARNING: Parameter [submit] is not on the excludeParams list of patterns and will be appended to action!
 
@@ -201,7 +201,7 @@ Unexpected Exception caught setting 'submit' on 'class org.apache.struts.edit.ac
 <p>If you’re not familiar with setting up a custom interceptor stack for your Struts 2 application review <a href="introducing-interceptors">Introducing Interceptors</a>.</p>
 
 <p>To exclude specific parameters from being processed by the Struts 2 framework you need to add those parameter names 
-to the list of excluded parameters. One way to do this is by adding those parameter names to the collection of <code class="highlighter-rouge">excludedParams</code> 
+to the list of excluded parameters. One way to do this is by adding those parameter names to the collection of <code class="language-plaintext highlighter-rouge">excludedParams</code> 
 for the Parameters interceptor. You can do this by modifying the Parameters interceptor in setting up the stack of interceptors 
 used by your Struts 2 application. For example:</p>
 
@@ -220,9 +220,9 @@ used by your Struts 2 application. For example:</p>
 <span class="nt">&lt;default-interceptor-ref</span> <span class="na">name=</span><span class="s">"appDefault"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>The value of node <code class="highlighter-rouge">&lt;param name="params.excludeParams"&gt;</code> is a comma-delimited list of regular expressions or simple 
+<p>The value of node <code class="language-plaintext highlighter-rouge">&lt;param name="params.excludeParams"&gt;</code> is a comma-delimited list of regular expressions or simple 
 Strings that identify request parameters that should NOT be processed by the Parameters interceptor. To exclude 
-the <code class="highlighter-rouge">submit</code> parameter (which is the name of the submit button in the form code above), I just added <code class="highlighter-rouge">submit</code> to the list.</p>
+the <code class="language-plaintext highlighter-rouge">submit</code> parameter (which is the name of the submit button in the form code above), I just added <code class="language-plaintext highlighter-rouge">submit</code> to the list.</p>
 
 <p>See the <a href="../core-developers/struts-default-xml">Basic Stack of Interceptors described here</a> to view the initial 
 set of parameter names/regular expressions to exclude. Be sure to copy over the list of parameters already being excluded 
@@ -233,7 +233,7 @@ and then add your own parameters to the end separated by commas.</p>
 <p>Download the example application, <a href="https://github.com/apache/struts-examples/tree/master/exclude-parameters">exclude-params</a> 
 that demonstrates excluding a request parameter. See the project’s README.txt file for how to build and run the application.</p>
 
-<p>To see the log messages written when not excluding the submit parameter remove the <code class="highlighter-rouge">,submit</code> from the list of excluded 
+<p>To see the log messages written when not excluding the submit parameter remove the <code class="language-plaintext highlighter-rouge">,submit</code> from the list of excluded 
 parameter values in the struts.xml file. Then rebuild and redeploy the application and view the console when running the application.</p>
 
 <h2 id="summary">Summary</h2>
@@ -242,7 +242,7 @@ parameter values in the struts.xml file. Then rebuild and redeploy the applicati
 be processed. During development of a Struts 2 web application it’s a good practice to review these log messages to determine 
 if there are any parameters that the framework should not process. For those parameters the Struts 2 framework should 
 not process add the parameter name (or a regular expression that can be used to identify multiple parameter names) 
-to the comma-delimited list that is the value for the <code class="highlighter-rouge">&lt;param name="params.excludeParams"&gt;</code> node.</p>
+to the comma-delimited list that is the value for the <code class="language-plaintext highlighter-rouge">&lt;param name="params.excludeParams"&gt;</code> node.</p>
 
 <table>
   <tbody>

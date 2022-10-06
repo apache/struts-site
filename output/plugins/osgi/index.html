@@ -143,7 +143,7 @@
 
 <p>This plugin provides support for starting an instance of Apache Felix inside a web application, 
 and scanning installed bundles for Struts configuration. An admin bundle is also provided. It can be used 
-with Glassfish 3 as well (Glassfish 3 based on Apache Felix as well), but in such a way <code class="highlighter-rouge">struts.osgi.host</code> 
+with Glassfish 3 as well (Glassfish 3 based on Apache Felix as well), but in such a way <code class="language-plaintext highlighter-rouge">struts.osgi.host</code> 
 must be defined.</p>
 
 <h2 id="features">Features</h2>
@@ -182,11 +182,11 @@ must be defined.</p>
 <h2 id="about-run-levels">About Run levels</h2>
 
 <p>There are two ways of organizing bundles. If third party bundles will not be used, then the application 
-bundles can just be placed under <code class="highlighter-rouge">/WEB-INF/classes/bundles</code>. Bundles in this dir will be started in run level 2, 
+bundles can just be placed under <code class="language-plaintext highlighter-rouge">/WEB-INF/classes/bundles</code>. Bundles in this dir will be started in run level 2, 
 the Apache Felix framework’s bundles will be loaded in run level 1. If third parties bundles will be used, 
-or you need to start bundles on different run level, create sub dirs under <code class="highlighter-rouge">/WEB-INF/classes/bundles</code> with numeric 
+or you need to start bundles on different run level, create sub dirs under <code class="language-plaintext highlighter-rouge">/WEB-INF/classes/bundles</code> with numeric 
 names (starting from “2” because “1” is reserved for Felix), which correspond to the run level number. For example 
-bundles under <code class="highlighter-rouge">/WEB-INF/classes/bundles/2</code> will be started in run level 2, and bundles under <code class="highlighter-rouge">/WEB-INF/classes/bundles/3</code> 
+bundles under <code class="language-plaintext highlighter-rouge">/WEB-INF/classes/bundles/2</code> will be started in run level 2, and bundles under <code class="language-plaintext highlighter-rouge">/WEB-INF/classes/bundles/3</code> 
 will be started in run level 3.</p>
 
 <h2 id="simple-usage">Simple Usage</h2>
@@ -200,7 +200,7 @@ Bundle-SymbolicName: foo.actions
 Import-Package: com.opensymphony.xwork2
 </code></pre></div></div>
 
-<p>Now the jar is ready to be deployed.  Drop the jar into the <code class="highlighter-rouge">/WEB-INF/classes/bundles</code> directory and it will
+<p>Now the jar is ready to be deployed.  Drop the jar into the <code class="language-plaintext highlighter-rouge">/WEB-INF/classes/bundles</code> directory and it will
 automatically be installed when the application starts up.</p>
 
 <h2 id="using-spring">Using Spring</h2>
@@ -223,14 +223,14 @@ with the OSGi plugin.</p>
 
 <ol>
   <li>
-    <p>Place your Spring xml files under <code class="highlighter-rouge">/META-INF/spring</code> in the <strong>bundle</strong> jar file</p>
+    <p>Place your Spring xml files under <code class="language-plaintext highlighter-rouge">/META-INF/spring</code> in the <strong>bundle</strong> jar file</p>
   </li>
-  <li>Place your Spring xml files under <code class="highlighter-rouge">/spring</code> (they must be in the classpath, if you are using maven, put them</li>
+  <li>Place your Spring xml files under <code class="language-plaintext highlighter-rouge">/spring</code> (they must be in the classpath, if you are using maven, put them</li>
   <li>
     <p>under /src/resources/spring) in the <strong>application</strong></p>
   </li>
   <li>
-    <p>Copy all the bundle jar files into <code class="highlighter-rouge">/WEB-INF/classes/bundles</code> in your <strong>application</strong></p>
+    <p>Copy all the bundle jar files into <code class="language-plaintext highlighter-rouge">/WEB-INF/classes/bundles</code> in your <strong>application</strong></p>
   </li>
   <li>Make sure that the following properties are set in struts.xml or struts.properties in your <strong>application</strong>:</li>
 </ol>
@@ -384,25 +384,25 @@ located. There are two ways of doing so(assuming the templates are under <em>/co
 </ol>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ResultPath</span><span class="o">(</span><span class="s">"/content"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
 <span class="c1">//...</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <h2 id="the-osgi-interceptor">The OSGi interceptor</h2>
 
-<p>The OSGi plugins defines the <code class="highlighter-rouge">osgi</code> interceptor and <code class="highlighter-rouge">osgiStack</code>(<code class="highlighter-rouge">defaultStack</code> plus the <code class="highlighter-rouge">osgi</code> interceptor) 
-in the package <code class="highlighter-rouge">osgi-default</code>. This interceptor will check the action and if it implements <code class="highlighter-rouge">org.apache.struts2.osgi.interceptor.BundleContextAware</code>, 
+<p>The OSGi plugins defines the <code class="language-plaintext highlighter-rouge">osgi</code> interceptor and <code class="language-plaintext highlighter-rouge">osgiStack</code>(<code class="language-plaintext highlighter-rouge">defaultStack</code> plus the <code class="language-plaintext highlighter-rouge">osgi</code> interceptor) 
+in the package <code class="language-plaintext highlighter-rouge">osgi-default</code>. This interceptor will check the action and if it implements <code class="language-plaintext highlighter-rouge">org.apache.struts2.osgi.interceptor.BundleContextAware</code>, 
 it will invoke setBundleContext(BundleContext bundleContext) on the action, passing the BundleContext of the OSGi container. 
-The interceptor also checks if the class implements <code class="highlighter-rouge">org.apache.struts2.osgi.interceptor.ServiceAware&lt;T&gt;</code>, if it does, 
+The interceptor also checks if the class implements <code class="language-plaintext highlighter-rouge">org.apache.struts2.osgi.interceptor.ServiceAware&lt;T&gt;</code>, if it does, 
 setServices(List&lt;T&gt; services) will be called, where T is the type of a service published in the OSGi container. 
-For example, lets assume an installed bundle publishes a service with the interface <code class="highlighter-rouge">BookPriceLookup</code>, to get all 
+For example, lets assume an installed bundle publishes a service with the interface <code class="language-plaintext highlighter-rouge">BookPriceLookup</code>, to get all 
 the instances of this service, an action would look like:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BookPriceAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="kd">implements</span> <span class="n">ServiceAware</span><span class="o">&lt;</span><span class="n">BookPriceLookup</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">BookPriceLookup</span><span class="o">&gt;</span> <span class="n">services</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BookPriceAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="kd">implements</span> <span class="nc">ServiceAware</span><span class="o">&lt;</span><span class="nc">BookPriceLookup</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">BookPriceLookup</span><span class="o">&gt;</span> <span class="n">services</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setServices</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">BookPriceLookup</span><span class="o">&gt;</span> <span class="n">services</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setServices</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">BookPriceLookup</span><span class="o">&gt;</span> <span class="n">services</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">services</span> <span class="o">=</span> <span class="n">services</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -426,7 +426,7 @@ bundles are installed) and open http://localhost:PORT/CONTEXT/osgi/admin/ (repla
 
 <h2 id="about-stoppingstarting-bundles">About stopping/starting bundles</h2>
 
-<p>When a bundle is started, the OSGi plugin will check for the header <code class="highlighter-rouge">Struts2-Enabled</code> in it. If it is set to “true”,
+<p>When a bundle is started, the OSGi plugin will check for the header <code class="language-plaintext highlighter-rouge">Struts2-Enabled</code> in it. If it is set to “true”,
 the bundle will be scanned for XML config and Convention config. When a bundle is stopped, any actions that were 
 loaded from it will be removed from the runtime configuration.</p>
 
@@ -462,7 +462,7 @@ for example:</p>
 <span class="nt">&lt;/context-param&gt;</span>
 </code></pre></div></div>
 
-<p>If you are running your application on Glassfish 3 (which already contains Apache Felix) you must specify <code class="highlighter-rouge">struts.osgi.host</code>,
+<p>If you are running your application on Glassfish 3 (which already contains Apache Felix) you must specify <code class="language-plaintext highlighter-rouge">struts.osgi.host</code>,
 like below:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;context-param&gt;</span>

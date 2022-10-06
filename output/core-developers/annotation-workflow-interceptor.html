@@ -136,42 +136,42 @@
 <p>Invokes any annotated methods on the action. Specifically, it supports the following annotations</p>
 
 <ul>
-  <li><code class="highlighter-rouge">@Before</code> - will be invoked before the action method. If the returned value is not null, it is returned as the action 
+  <li><code class="language-plaintext highlighter-rouge">@Before</code> - will be invoked before the action method. If the returned value is not null, it is returned as the action 
 result code</li>
-  <li><code class="highlighter-rouge">@BeforeResult</code> - will be invoked after the action method but before the result execution</li>
-  <li><code class="highlighter-rouge">@After</code> - will be invoked after the action method and result execution</li>
+  <li><code class="language-plaintext highlighter-rouge">@BeforeResult</code> - will be invoked after the action method but before the result execution</li>
+  <li><code class="language-plaintext highlighter-rouge">@After</code> - will be invoked after the action method and result execution</li>
 </ul>
 
 <p>There can be multiple methods marked with the same annotations, but the order of their execution is not guaranteed. 
 However, the annotated methods on the superclass chain are guaranteed to be invoked before the annotated method in the current 
-class in the case of a <code class="highlighter-rouge">@Before</code> annotations and after, if the annotations is <code class="highlighter-rouge">@After</code>.</p>
+class in the case of a <code class="language-plaintext highlighter-rouge">@Before</code> annotations and after, if the annotations is <code class="language-plaintext highlighter-rouge">@After</code>.</p>
 
 <h2 id="examples">Examples</h2>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseAnnotatedAction</span> <span class="o">{</span>
-  	<span class="kd">protected</span> <span class="n">String</span> <span class="n">log</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+  	<span class="kd">protected</span> <span class="nc">String</span> <span class="n">log</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
 
   	<span class="nd">@Before</span>
-  	<span class="kd">public</span> <span class="n">String</span> <span class="nf">baseBefore</span><span class="o">()</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">baseBefore</span><span class="o">()</span> <span class="o">{</span>
   		<span class="n">log</span> <span class="o">=</span> <span class="n">log</span> <span class="o">+</span> <span class="s">"baseBefore-"</span><span class="o">;</span>
   		<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
   	<span class="o">}</span>
   <span class="o">}</span>
 
-  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnnotatedAction</span> <span class="kd">extends</span> <span class="n">BaseAnnotatedAction</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnnotatedAction</span> <span class="kd">extends</span> <span class="nc">BaseAnnotatedAction</span> <span class="o">{</span>
   	<span class="nd">@Before</span>
-  	<span class="kd">public</span> <span class="n">String</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
   		<span class="n">log</span> <span class="o">=</span> <span class="n">log</span> <span class="o">+</span> <span class="s">"before"</span><span class="o">;</span>
   		<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
   	<span class="o">}</span>
 
-  	<span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
   		<span class="n">log</span> <span class="o">=</span> <span class="n">log</span> <span class="o">+</span> <span class="s">"-execute"</span><span class="o">;</span>
-  		<span class="k">return</span> <span class="n">Action</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">;</span>
+  		<span class="k">return</span> <span class="nc">Action</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">;</span>
   	<span class="o">}</span>
 
   	<span class="nd">@BeforeResult</span>
-  	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeResult</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeResult</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
   		<span class="n">log</span> <span class="o">=</span> <span class="n">log</span> <span class="o">+</span><span class="s">"-beforeResult"</span><span class="o">;</span>
   	<span class="o">}</span>
 
@@ -200,8 +200,8 @@ class in the case of a <code class="highlighter-rouge">@Before</code> annotation
 <span class="nt">&lt;/action&gt;</span>
 </code></pre></div></div>
 
-<p>With the interceptor applied and the action executed on <code class="highlighter-rouge">AnnotatedAction</code> the log instance variable will contain 
-<code class="highlighter-rouge">baseBefore-before-execute-beforeResult-after</code>.</p>
+<p>With the interceptor applied and the action executed on <code class="language-plaintext highlighter-rouge">AnnotatedAction</code> the log instance variable will contain 
+<code class="language-plaintext highlighter-rouge">baseBefore-before-execute-beforeResult-after</code>.</p>
 
   </section>
 </article>

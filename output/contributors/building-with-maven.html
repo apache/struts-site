@@ -159,7 +159,7 @@ comes before <em>install</em> . Once we have Maven setup, we can invoke the Stru
 
 <p>The <em>install</em> phase builds up the project (“package”), and installs any JARs it needs into your local repository, e.g.:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.m2/repository
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.m2/repository
 </code></pre></div></div>
 
 <p>Once installed, the JARs can be used by any other Maven project you build.  The <em>install</em> phase is the <strong>default</strong> phase 
@@ -167,14 +167,14 @@ if none is specified.</p>
 
 <p>To run a basic install, change to the root of the source distribution, and enter</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn
 </code></pre></div></div>
 
 <p>That’s it! Maven will download any dependencies the build needs; run all unit tests; package up the JARs; then install th
 e new JARs locally. For your convenience, copies of the JARs can be found in the <em>target</em> directories of each module. 
 For example, after the build, the main JAR can found at</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>core/target/struts2-core-2.0-SNAPSHOT.jar
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>core/target/struts2-core-2.0-SNAPSHOT.jar
 </code></pre></div></div>
 
 <blockquote>
@@ -186,7 +186,7 @@ to install it to the your local repository. Once installed, the JAR is available
 
 <p><strong>Initial Build Successful</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[INFO] ------------------------------------------------------------------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary:
 [INFO]
 [INFO] Struts 2 Bill of Materials ......................... SUCCESS [  1.188 s]
@@ -247,7 +247,7 @@ And the <em>clean</em> phase will remove all artifacts, typically the entire <em
 locally to html files. To perform that, you must have an account on Confluence. In most cases you don’t need to export 
 the whole Confluence, so you can skip this, just type command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn clean install -DskipWiki
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn clean install -DskipWiki
 </code></pre></div></div>
 
 <h3 id="skip-creating-assemblies">Skip creating assemblies</h3>
@@ -255,7 +255,7 @@ the whole Confluence, so you can skip this, just type command:</p>
 <p>During normal development cycle you don’t need to create assembly packages which consist of all the libraries, 
 example apps and docs - you can skip them as well:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn clean install -DskipAssembly
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn clean install -DskipAssembly
 </code></pre></div></div>
 
 <h3 id="offline-mode">Offline mode</h3>
@@ -263,14 +263,14 @@ example apps and docs - you can skip them as well:</p>
 <p>If you are disconnected from the Internet or simply wish to make your build faster, pass in the <strong>-o</strong> argument 
 and Maven won’t check for new modules to download.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn -o
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn -o
 </code></pre></div></div>
 
 <h3 id="outofmemoryerror">OutOfMemoryError</h3>
 
 <p>If you get an OutOfMemoryError while running the tests:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Bash
 export MAVEN_OPTS=-Xmx512m
 
 // Windows
@@ -282,7 +282,7 @@ set MAVEN_OPTS=-Xmx512m
 <p>Although this shouldn’t ever happen, sometimes tests do fail and you need to build the framework anyway. 
 If there’s a problem, you can pass in the skip tests parameter.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn -Dmaven.test.skip=true
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn -Dmaven.test.skip=true
 </code></pre></div></div>
 
 <p>Of course, if you find tests are failing, please submit a patch to fix them!</p>
@@ -294,7 +294,7 @@ the Struts build doesn’t check for and retrieve a new version of the XWork sna
 
 <p>The solution is to clear out any stale XWork 2 jars in your local Maven repository, usually by removing the directory</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.m2/repository
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.m2/repository
 </code></pre></div></div>
 
 <p>This will force the Struts Maven build to pull down a fresh copy of XWork and hopefully resolve your problem.</p>
@@ -304,12 +304,12 @@ the Struts build doesn’t check for and retrieve a new version of the XWork sna
 <p>In some cases it has been seen that Maven will complain if a module doesn’t exist, even though it is part of the current 
 build. Often, the missing module turns up when executing</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn package
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn package
 </code></pre></div></div>
 
 <p>A simple fix for this is to run</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn install
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn install
 </code></pre></div></div>
 
 <p>instead. If you have to do this, it will probably only be a one time thing.</p>

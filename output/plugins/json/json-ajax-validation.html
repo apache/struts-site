@@ -170,70 +170,70 @@ located in Struts Dojo plugin. That has been deprecated for a long time and was 
 
 <h3 id="create-the-action-class">Create the action class</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AjaxFormSubmitAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">requiredValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">requiredStringValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">integerValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Date</span> <span class="n">dateValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">emailValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">urlValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">stringLengthValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">regexValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">fieldExpressionValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AjaxFormSubmitAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">requiredValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">requiredStringValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">integerValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Date</span> <span class="n">dateValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">emailValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">urlValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">stringLengthValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">regexValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">fieldExpressionValidatorField</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">validate</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">hasFieldErrors</span><span class="o">())</span> <span class="o">{</span>
             <span class="n">addActionError</span><span class="o">(</span><span class="s">"Errors present!"</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">Date</span> <span class="nf">getDateValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Date</span> <span class="nf">getDateValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">dateValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="nd">@DateRangeFieldValidator</span><span class="o">(</span>
         <span class="n">min</span><span class="o">=</span><span class="s">"01/01/1990"</span><span class="o">,</span> 
         <span class="n">max</span><span class="o">=</span><span class="s">"01/01/2000"</span><span class="o">,</span> 
         <span class="n">message</span><span class="o">=</span><span class="s">"must be a min 01-01-1990 max 01-01-2000 if supplied"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDateValidatorField</span><span class="o">(</span><span class="n">Date</span> <span class="n">dateValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDateValidatorField</span><span class="o">(</span><span class="nc">Date</span> <span class="n">dateValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">dateValidatorField</span> <span class="o">=</span> <span class="n">dateValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEmailValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmailValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">emailValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="nd">@EmailValidator</span><span class="o">(</span><span class="n">message</span><span class="o">=</span><span class="s">"must be a valid email if supplied"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmailValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">emailValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmailValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">emailValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">emailValidatorField</span> <span class="o">=</span> <span class="n">emailValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">getIntegerValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">getIntegerValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">integerValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="nd">@IntRangeFieldValidator</span><span class="o">(</span><span class="n">min</span><span class="o">=</span><span class="s">"1"</span><span class="o">,</span> <span class="n">max</span><span class="o">=</span><span class="s">"10"</span><span class="o">,</span> <span class="n">message</span><span class="o">=</span><span class="s">"must be integer min 1 max 10 if supplied"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIntegerValidatorField</span><span class="o">(</span><span class="n">Integer</span> <span class="n">integerValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIntegerValidatorField</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">integerValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">integerValidatorField</span> <span class="o">=</span> <span class="n">integerValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getRegexValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getRegexValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">regexValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="nd">@RegexFieldValidator</span><span class="o">(</span>
         <span class="n">regex</span><span class="o">=</span><span class="s">"[^&lt;&gt;]+"</span><span class="o">,</span> 
         <span class="n">message</span><span class="o">=</span><span class="s">"regexValidatorField must match a regexp (.*\.txt) if specified"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRegexValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">regexValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRegexValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">regexValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">regexValidatorField</span> <span class="o">=</span> <span class="n">regexValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getRequiredStringValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getRequiredStringValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">requiredStringValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="nd">@RequiredStringValidator</span><span class="o">(</span><span class="n">trim</span><span class="o">=</span><span class="kc">true</span><span class="o">,</span> <span class="n">message</span><span class="o">=</span><span class="s">"required and must be string"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRequiredStringValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">requiredStringValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRequiredStringValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">requiredStringValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">requiredStringValidatorField</span> <span class="o">=</span> <span class="n">requiredStringValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getRequiredValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getRequiredValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">requiredValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="nd">@RequiredFieldValidator</span><span class="o">(</span><span class="n">message</span><span class="o">=</span><span class="s">"required"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRequiredValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">requiredValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRequiredValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">requiredValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">requiredValidatorField</span> <span class="o">=</span> <span class="n">requiredValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getStringLengthValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getStringLengthValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">stringLengthValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="nd">@StringLengthFieldValidator</span><span class="o">(</span>
@@ -241,24 +241,24 @@ located in Struts Dojo plugin. That has been deprecated for a long time and was 
         <span class="n">maxLength</span><span class="o">=</span><span class="s">"4"</span><span class="o">,</span> 
         <span class="n">trim</span><span class="o">=</span><span class="kc">true</span><span class="o">,</span> 
         <span class="n">message</span><span class="o">=</span><span class="s">"must be a String of a specific greater than 1 less than 5 if specified"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setStringLengthValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">stringLengthValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setStringLengthValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">stringLengthValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">stringLengthValidatorField</span> <span class="o">=</span> <span class="n">stringLengthValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getFieldExpressionValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getFieldExpressionValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">fieldExpressionValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="nd">@FieldExpressionValidator</span><span class="o">(</span>
         <span class="n">expression</span> <span class="o">=</span> <span class="s">"(fieldExpressionValidatorField == requiredValidatorField)"</span><span class="o">,</span> 
         <span class="n">message</span> <span class="o">=</span> <span class="s">"must be the same as the Required Validator Field if specified"</span><span class="o">)</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFieldExpressionValidatorField</span><span class="o">(</span>
-            <span class="n">String</span> <span class="n">fieldExpressionValidatorField</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">fieldExpressionValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">fieldExpressionValidatorField</span> <span class="o">=</span> <span class="n">fieldExpressionValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getUrlValidatorField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrlValidatorField</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">urlValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="nd">@UrlValidator</span><span class="o">(</span><span class="n">message</span><span class="o">=</span><span class="s">"must be a valid url if supplied"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUrlValidatorField</span><span class="o">(</span><span class="n">String</span> <span class="n">urlValidatorField</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUrlValidatorField</span><span class="o">(</span><span class="nc">String</span> <span class="n">urlValidatorField</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">urlValidatorField</span> <span class="o">=</span> <span class="n">urlValidatorField</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -284,7 +284,7 @@ located in Struts Dojo plugin. That has been deprecated for a long time and was 
 </code></pre></div></div>
 
 <p>AJAX validation is performed by the <em>jsonValidation</em> interceptor. This interceptor is included in the <em>jsonValidationWorkflowStack</em>, 
-and is required in order to perform AJAX validation. Normal results(<code class="highlighter-rouge">input</code>, <code class="highlighter-rouge">success</code>, etc) should be provided for the action in the case 
+and is required in order to perform AJAX validation. Normal results(<code class="language-plaintext highlighter-rouge">input</code>, <code class="language-plaintext highlighter-rouge">success</code>, etc) should be provided for the action in the case 
 that someone tries to access the action directly, in which case normal validation will be triggered. So, how does the <em>jsonValidation</em> 
 know that it must perform AJAX validation vs regular validation? We will see that in a minute, but you don’t need to know that in order 
 to use AJAX validation. Same applies for specialized Redirect Result Type <em>jsonActionRedirect</em>.</p>
@@ -344,31 +344,31 @@ Otherwise the AJAX response will be empty and the form must be submitted a 2nd t
 
 <h4 id="themeproperties">theme.properties</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>parent = xhtml
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>parent = xhtml
 </code></pre></div></div>
 
 <h4 id="actionerrorftl">actionerror.ftl</h4>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="err">#</span><span class="na">--</span>
-    <span class="na">Make</span> <span class="na">sure</span> <span class="na">element</span> <span class="na">is</span> <span class="na">always</span> <span class="na">present</span><span class="err">.</span> <span class="na">To</span> <span class="na">be</span> <span class="na">filled</span> <span class="na">later</span> <span class="na">via</span> <span class="na">JS</span><span class="err">.</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="na">#--</span>
+    <span class="na">Make</span> <span class="na">sure</span> <span class="na">element</span> <span class="na">is</span> <span class="na">always</span> <span class="na">present.</span> <span class="na">To</span> <span class="na">be</span> <span class="na">filled</span> <span class="na">later</span> <span class="na">via</span> <span class="na">JS.</span>
 <span class="na">--</span><span class="nt">&gt;</span>
-<span class="nt">&lt;ul</span><span class="err">&lt;#</span><span class="na">rt</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">parameters</span><span class="err">.</span><span class="na">id</span><span class="err">??</span><span class="nt">&gt;</span>
- id="${parameters.id?html}"<span class="nt">&lt;</span><span class="err">#</span><span class="na">rt</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;ul</span><span class="err">&lt;</span><span class="na">#rt</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">parameters.id</span><span class="err">??</span><span class="nt">&gt;</span>
+ id="${parameters.id?html}"<span class="nt">&lt;</span><span class="na">#rt</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>            
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">parameters</span><span class="err">.</span><span class="na">cssClass</span><span class="err">??</span><span class="nt">&gt;</span>
- class="${parameters.cssClass?html}"<span class="nt">&lt;</span><span class="err">#</span><span class="na">rt</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">else</span><span class="nt">&gt;</span>
- class="errorMessage"<span class="nt">&lt;</span><span class="err">#</span><span class="na">rt</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">parameters.cssClass</span><span class="err">??</span><span class="nt">&gt;</span>
+ class="${parameters.cssClass?html}"<span class="nt">&lt;</span><span class="na">#rt</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#else</span><span class="nt">&gt;</span>
+ class="errorMessage"<span class="nt">&lt;</span><span class="na">#rt</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">parameters</span><span class="err">.</span><span class="na">cssStyle</span><span class="err">??</span><span class="nt">&gt;</span>
- style="${parameters.cssStyle?html}"<span class="nt">&lt;</span><span class="err">#</span><span class="na">rt</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">parameters.cssStyle</span><span class="err">??</span><span class="nt">&gt;</span>
+ style="${parameters.cssStyle?html}"<span class="nt">&lt;</span><span class="na">#rt</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
 &gt;
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="err">(</span><span class="na">actionErrors</span><span class="err">??</span> <span class="err">&amp;&amp;</span> <span class="na">actionErrors</span><span class="err">?</span><span class="na">size</span> <span class="nt">&gt;</span> 0)&gt;
-    <span class="nt">&lt;</span><span class="err">#</span><span class="na">list</span> <span class="na">actionErrors</span> <span class="na">as</span> <span class="na">error</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">error</span><span class="err">??</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;li&gt;&lt;span&gt;&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">parameters</span><span class="err">.</span><span class="na">escape</span><span class="nt">&gt;</span>${error!?html}<span class="nt">&lt;</span><span class="err">#</span><span class="na">else</span><span class="nt">&gt;</span>${error!}<span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;&lt;/span&gt;&lt;</span><span class="err">#</span><span class="na">rt</span><span class="nt">/&gt;&lt;/li&gt;&lt;</span><span class="err">#</span><span class="na">rt</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="err">(</span><span class="na">actionErrors</span><span class="err">??</span> <span class="err">&amp;&amp;</span> <span class="na">actionErrors</span><span class="err">?</span><span class="na">size</span> <span class="nt">&gt;</span> 0)&gt;
+    <span class="nt">&lt;</span><span class="na">#list</span> <span class="na">actionErrors</span> <span class="na">as</span> <span class="na">error</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;</span><span class="na">#if</span> <span class="na">error</span><span class="err">??</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;span&gt;&lt;</span><span class="na">#if</span> <span class="na">parameters.escape</span><span class="nt">&gt;</span>${error!?html}<span class="nt">&lt;</span><span class="na">#else</span><span class="nt">&gt;</span>${error!}<span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;&lt;/span&gt;&lt;</span><span class="na">#rt</span><span class="nt">/&gt;&lt;/li&gt;&lt;</span><span class="na">#rt</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
     <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">list&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
@@ -377,20 +377,20 @@ Otherwise the AJAX response will be empty and the form must be submitted a 2nd t
 
 <h4 id="controlfooterftl">controlfooter.ftl</h4>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${parameters.after!}<span class="nt">&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/td&gt;&lt;</span><span class="err">#</span><span class="na">lt</span><span class="nt">/&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${parameters.after!}<span class="nt">&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/td&gt;&lt;</span><span class="na">#lt</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/tr&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="err">(</span><span class="na">parameters</span><span class="err">.</span><span class="na">errorposition</span><span class="err">!"</span><span class="na">top</span><span class="err">")</span> <span class="err">==</span> <span class="err">'</span><span class="na">bottom</span><span class="err">'</span><span class="nt">&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">assign</span> <span class="na">hasFieldErrors =</span><span class="err"> </span><span class="s">parameters.name??</span> <span class="err">&amp;&amp;</span> <span class="na">fieldErrors</span><span class="err">??</span> <span class="err">&amp;&amp;</span> <span class="na">fieldErrors</span><span class="err">[</span><span class="na">parameters</span><span class="err">.</span><span class="na">name</span><span class="err">]??</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">hasFieldErrors</span><span class="nt">&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="err">(</span><span class="na">parameters.errorposition</span><span class="err">!"</span><span class="na">top</span><span class="err">"</span><span class="na">) =</span><span class="s">=</span> <span class="err">'</span><span class="na">bottom</span><span class="err">'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;</span><span class="na">#assign</span> <span class="na">hasFieldErrors = </span><span class="s">parameters.name??</span> <span class="err">&amp;&amp;</span> <span class="na">fieldErrors</span><span class="err">??</span> <span class="err">&amp;&amp;</span> <span class="na">fieldErrors</span><span class="err">[</span><span class="na">parameters.name</span><span class="err">]??</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">hasFieldErrors</span><span class="nt">&gt;</span>
 <span class="nt">&lt;tr</span> <span class="na">errorFor=</span><span class="s">"${parameters.id}"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"tdErrorMessage"</span> <span class="na">colspan=</span><span class="s">"2"</span><span class="nt">&gt;&lt;</span><span class="err">#</span><span class="na">rt</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">hasFieldErrors</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;</span><span class="err">#</span><span class="na">list</span> <span class="na">fieldErrors</span><span class="err">[</span><span class="na">parameters</span><span class="err">.</span><span class="na">name</span><span class="err">]</span> <span class="na">as</span> <span class="na">error</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"errorMessage"</span><span class="nt">&gt;</span>${error?html}<span class="nt">&lt;/div&gt;&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"tdErrorMessage"</span> <span class="na">colspan=</span><span class="s">"2"</span><span class="nt">&gt;&lt;</span><span class="na">#rt</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;</span><span class="na">#if</span> <span class="na">hasFieldErrors</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;</span><span class="na">#list</span> <span class="na">fieldErrors</span><span class="err">[</span><span class="na">parameters.name</span><span class="err">]</span> <span class="na">as</span> <span class="na">error</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"errorMessage"</span><span class="nt">&gt;</span>${error?html}<span class="nt">&lt;/div&gt;&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">list&gt;</span>
         <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-    <span class="nt">&lt;/td&gt;&lt;</span><span class="err">#</span><span class="na">lt</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/td&gt;&lt;</span><span class="na">#lt</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/tr&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
@@ -398,61 +398,61 @@ Otherwise the AJAX response will be empty and the form must be submitted a 2nd t
 
 <h4 id="controlheader-coreftl">controlheader-core.ftl</h4>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;</span><span class="err">#</span><span class="na">--</span>
-    <span class="na">Always</span> <span class="na">include</span> <span class="na">elements</span> <span class="na">to</span> <span class="na">show</span> <span class="na">errors</span><span class="err">.</span> <span class="na">They</span> <span class="na">may</span> <span class="na">be</span> <span class="na">filled</span> <span class="na">later</span> <span class="na">via</span> <span class="na">AJAX</span><span class="err">.</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;</span><span class="na">#--</span>
+    <span class="na">Always</span> <span class="na">include</span> <span class="na">elements</span> <span class="na">to</span> <span class="na">show</span> <span class="na">errors.</span> <span class="na">They</span> <span class="na">may</span> <span class="na">be</span> <span class="na">filled</span> <span class="na">later</span> <span class="na">via</span> <span class="na">AJAX.</span>
 <span class="na">--</span><span class="nt">&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">assign</span> <span class="na">hasFieldErrors =</span><span class="err"> </span><span class="s">parameters.name??</span> <span class="err">&amp;&amp;</span> <span class="na">fieldErrors</span><span class="err">??</span> <span class="err">&amp;&amp;</span> <span class="na">fieldErrors</span><span class="err">[</span><span class="na">parameters</span><span class="err">.</span><span class="na">name</span><span class="err">]??</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="err">(</span><span class="na">parameters</span><span class="err">.</span><span class="na">errorposition</span><span class="err">!"</span><span class="na">top</span><span class="err">")</span> <span class="err">==</span> <span class="err">'</span><span class="na">top</span><span class="err">'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;</span><span class="na">#assign</span> <span class="na">hasFieldErrors = </span><span class="s">parameters.name??</span> <span class="err">&amp;&amp;</span> <span class="na">fieldErrors</span><span class="err">??</span> <span class="err">&amp;&amp;</span> <span class="na">fieldErrors</span><span class="err">[</span><span class="na">parameters.name</span><span class="err">]??</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="err">(</span><span class="na">parameters.errorposition</span><span class="err">!"</span><span class="na">top</span><span class="err">"</span><span class="na">) =</span><span class="s">=</span> <span class="err">'</span><span class="na">top</span><span class="err">'</span><span class="nt">&gt;</span>
 <span class="nt">&lt;tr</span> <span class="na">errorFor=</span><span class="s">"${parameters.id}"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"tdErrorMessage"</span> <span class="na">colspan=</span><span class="s">"2"</span> <span class="na">data-error-for-fieldname=</span><span class="s">"${parameters.name}"</span><span class="nt">&gt;&lt;</span><span class="err">#</span><span class="na">rt</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">hasFieldErrors</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;</span><span class="err">#</span><span class="na">list</span> <span class="na">fieldErrors</span><span class="err">[</span><span class="na">parameters</span><span class="err">.</span><span class="na">name</span><span class="err">]</span> <span class="na">as</span> <span class="na">error</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"errorMessage"</span><span class="nt">&gt;</span>${error?html}<span class="nt">&lt;/div&gt;&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"tdErrorMessage"</span> <span class="na">colspan=</span><span class="s">"2"</span> <span class="na">data-error-for-fieldname=</span><span class="s">"${parameters.name}"</span><span class="nt">&gt;&lt;</span><span class="na">#rt</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;</span><span class="na">#if</span> <span class="na">hasFieldErrors</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;</span><span class="na">#list</span> <span class="na">fieldErrors</span><span class="err">[</span><span class="na">parameters.name</span><span class="err">]</span> <span class="na">as</span> <span class="na">error</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"errorMessage"</span><span class="nt">&gt;</span>${error?html}<span class="nt">&lt;/div&gt;&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
             <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">list&gt;</span>
         <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-    <span class="nt">&lt;/td&gt;&lt;</span><span class="err">#</span><span class="na">lt</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/td&gt;&lt;</span><span class="na">#lt</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/tr&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="err">!</span><span class="na">parameters</span><span class="err">.</span><span class="na">labelposition</span><span class="err">??</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">parameters</span><span class="err">.</span><span class="na">form</span><span class="err">.</span><span class="na">labelposition</span><span class="err">)??</span><span class="nt">&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">assign</span> <span class="na">labelpos =</span><span class="err"> </span><span class="s">parameters.form.labelposition/</span><span class="nt">&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">elseif</span> <span class="na">parameters</span><span class="err">.</span><span class="na">labelposition</span><span class="err">??</span><span class="nt">&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">assign</span> <span class="na">labelpos =</span><span class="err"> </span><span class="s">parameters.labelposition/</span><span class="nt">&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="err">!</span><span class="na">parameters.labelposition</span><span class="err">??</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">parameters.form.labelposition</span><span class="err">)??</span><span class="nt">&gt;</span>
+<span class="nt">&lt;</span><span class="na">#assign</span> <span class="na">labelpos = </span><span class="s">parameters.form.labelposition/</span><span class="nt">&gt;</span>
+<span class="nt">&lt;</span><span class="na">#elseif</span> <span class="na">parameters.labelposition</span><span class="err">??</span><span class="nt">&gt;</span>
+<span class="nt">&lt;</span><span class="na">#assign</span> <span class="na">labelpos = </span><span class="s">parameters.labelposition/</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">--</span>
+<span class="nt">&lt;</span><span class="na">#--</span>
     <span class="na">if</span> <span class="na">the</span> <span class="na">label</span> <span class="na">position</span> <span class="na">is</span> <span class="na">top</span><span class="err">,</span>
     <span class="na">then</span> <span class="na">give</span> <span class="na">the</span> <span class="na">label</span> <span class="na">it</span><span class="err">'</span><span class="na">s</span> <span class="na">own</span> <span class="na">row</span> <span class="na">in</span> <span class="na">the</span> <span class="na">table</span>
 <span class="na">--</span><span class="nt">&gt;</span>
 <span class="nt">&lt;tr&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="err">(</span><span class="na">labelpos</span><span class="err">!"")</span> <span class="err">==</span> <span class="err">'</span><span class="na">top</span><span class="err">'</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"tdLabelTop"</span> <span class="na">colspan=</span><span class="s">"2"</span><span class="nt">&gt;&lt;</span><span class="err">#</span><span class="na">rt</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">else</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"tdLabel"</span><span class="nt">&gt;&lt;</span><span class="err">#</span><span class="na">rt</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="err">(</span><span class="na">labelpos</span><span class="err">!""</span><span class="na">) =</span><span class="s">=</span> <span class="err">'</span><span class="na">top</span><span class="err">'</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"tdLabelTop"</span> <span class="na">colspan=</span><span class="s">"2"</span><span class="nt">&gt;&lt;</span><span class="na">#rt</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#else</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"tdLabel"</span><span class="nt">&gt;&lt;</span><span class="na">#rt</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">parameters</span><span class="err">.</span><span class="na">label</span><span class="err">??</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;label</span> <span class="err">&lt;#</span><span class="na">t</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">parameters</span><span class="err">.</span><span class="na">id</span><span class="err">??</span><span class="nt">&gt;</span>
-        for="${parameters.id?html}" <span class="nt">&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">parameters.label</span><span class="err">??</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="err">&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">parameters.id</span><span class="err">??</span><span class="nt">&gt;</span>
+        for="${parameters.id?html}" <span class="nt">&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">hasFieldErrors</span><span class="nt">&gt;</span>
-        class="errorLabel"<span class="nt">&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">else</span><span class="nt">&gt;</span>
-        class="label"<span class="nt">&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">hasFieldErrors</span><span class="nt">&gt;</span>
+        class="errorLabel"<span class="nt">&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#else</span><span class="nt">&gt;</span>
+        class="label"<span class="nt">&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-    &gt;<span class="nt">&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">parameters</span><span class="err">.</span><span class="na">required</span><span class="err">!</span><span class="na">false</span> <span class="err">&amp;&amp;</span> <span class="na">parameters</span><span class="err">.</span><span class="na">requiredPosition</span><span class="err">!"</span><span class="na">right</span><span class="err">"</span> <span class="err">!=</span> <span class="err">'</span><span class="na">right</span><span class="err">'</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"required"</span><span class="nt">&gt;</span>*<span class="nt">&lt;/span&gt;&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
+    &gt;<span class="nt">&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">parameters.required</span><span class="err">!</span><span class="na">false</span> <span class="err">&amp;&amp;</span> <span class="na">parameters.requiredPosition</span><span class="err">!"</span><span class="na">right</span><span class="err">"</span> <span class="err">!=</span> <span class="err">'</span><span class="na">right</span><span class="err">'</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"required"</span><span class="nt">&gt;</span>*<span class="nt">&lt;/span&gt;&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-${parameters.label?html}<span class="nt">&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="na">parameters</span><span class="err">.</span><span class="na">required</span><span class="err">!</span><span class="na">false</span> <span class="err">&amp;&amp;</span> <span class="na">parameters</span><span class="err">.</span><span class="na">requiredPosition</span><span class="err">!"</span><span class="na">right</span><span class="err">"</span> <span class="err">==</span> <span class="err">'</span><span class="na">right</span><span class="err">'</span><span class="nt">&gt;</span>
- <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"required"</span><span class="nt">&gt;</span>*<span class="nt">&lt;/span&gt;&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
+${parameters.label?html}<span class="nt">&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">parameters.required</span><span class="err">!</span><span class="na">false</span> <span class="err">&amp;&amp;</span> <span class="na">parameters.requiredPosition</span><span class="err">!"</span><span class="na">right</span><span class="err">"</span> <span class="err">==</span> <span class="err">'</span><span class="na">right</span><span class="err">'</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"required"</span><span class="nt">&gt;</span>*<span class="nt">&lt;/span&gt;&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-${parameters.labelseparator!":"?html}<span class="nt">&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">include</span> <span class="err">"/${</span><span class="na">parameters</span><span class="err">.</span><span class="na">templateDir</span><span class="err">}/${</span><span class="na">parameters</span><span class="err">.</span><span class="na">expandTheme</span><span class="err">}/</span><span class="na">tooltip</span><span class="err">.</span><span class="na">ftl</span><span class="err">"</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/label&gt;&lt;</span><span class="err">#</span><span class="na">t</span><span class="nt">/&gt;</span>
+${parameters.labelseparator!":"?html}<span class="nt">&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#include</span> <span class="err">"/${</span><span class="na">parameters.templateDir</span><span class="err">}/${</span><span class="na">parameters.expandTheme</span><span class="err">}/</span><span class="na">tooltip.ftl</span><span class="err">"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/label&gt;&lt;</span><span class="na">#t</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-    <span class="nt">&lt;/td&gt;&lt;</span><span class="err">#</span><span class="na">lt</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">--</span> <span class="na">add</span> <span class="na">the</span> <span class="na">extra</span> <span class="na">row</span> <span class="na">--</span><span class="nt">&gt;</span>
-<span class="nt">&lt;</span><span class="err">#</span><span class="na">if</span> <span class="err">(</span><span class="na">labelpos</span><span class="err">!"")</span> <span class="err">==</span> <span class="err">'</span><span class="na">top</span><span class="err">'</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/td&gt;&lt;</span><span class="na">#lt</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;</span><span class="na">#--</span> <span class="na">add</span> <span class="na">the</span> <span class="na">extra</span> <span class="na">row</span> <span class="na">--</span><span class="nt">&gt;</span>
+<span class="nt">&lt;</span><span class="na">#if</span> <span class="err">(</span><span class="na">labelpos</span><span class="err">!""</span><span class="na">) =</span><span class="s">=</span> <span class="err">'</span><span class="na">top</span><span class="err">'</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/tr&gt;</span>
 <span class="nt">&lt;tr&gt;</span>
 <span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
@@ -466,7 +466,7 @@ ${parameters.labelseparator!":"?html}<span class="nt">&lt;</span><span class="er
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="nx">ajaxVisualFeedback</span> <span class="p">{</span>
     <span class="nl">width</span><span class="p">:</span> <span class="mi">16</span><span class="nx">px</span><span class="p">;</span>
     <span class="nl">height</span><span class="p">:</span> <span class="mi">16</span><span class="nx">px</span><span class="p">;</span>
-    <span class="nx">background</span><span class="o">-</span><span class="nx">image</span><span class="p">:</span> <span class="nx">url</span><span class="p">(</span><span class="s1">'../images/indicator.gif'</span><span class="p">);</span>
+    <span class="nx">background</span><span class="o">-</span><span class="nx">image</span><span class="p">:</span> <span class="nx">url</span><span class="p">(</span><span class="dl">'</span><span class="s1">../images/indicator.gif</span><span class="dl">'</span><span class="p">);</span>
     <span class="nx">background</span><span class="o">-</span><span class="nx">repeat</span><span class="p">:</span> <span class="nx">no</span><span class="o">-</span><span class="nx">repeat</span><span class="p">;</span>
     <span class="nl">float</span><span class="p">:</span> <span class="nx">right</span><span class="p">;</span>
 <span class="p">}</span>
@@ -489,21 +489,21 @@ care of hiding validation errors that might be present, submit the form via AJAX
     <span class="kd">var</span> <span class="nx">_formData</span> <span class="o">=</span> <span class="nx">_form</span><span class="p">.</span><span class="nx">serialize</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
     <span class="c1">// prepare visual feedback</span>
     <span class="c1">// you may want to use other elements here</span>
-    <span class="kd">var</span> <span class="nx">originalButton</span> <span class="o">=</span> <span class="nx">_form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.btn-primary'</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">originalButton</span> <span class="o">=</span> <span class="nx">_form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">.btn-primary</span><span class="dl">'</span><span class="p">);</span>
     <span class="c1">// note: jQuery returns an array-like object</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">originalButton</span> <span class="o">&amp;&amp;</span> <span class="nx">originalButton</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">originalButton</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">originalButton</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
-        <span class="kd">var</span> <span class="nx">feedbackElement</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;div class="ajaxVisualFeedback"&gt;&lt;/div&gt;'</span><span class="p">).</span><span class="nx">insertAfter</span><span class="p">(</span><span class="nx">originalButton</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">feedbackElement</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;div class="ajaxVisualFeedback"&gt;&lt;/div&gt;</span><span class="dl">'</span><span class="p">).</span><span class="nx">insertAfter</span><span class="p">(</span><span class="nx">originalButton</span><span class="p">);</span>
         <span class="kd">var</span> <span class="nx">restoreFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
             <span class="nx">originalButton</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
             <span class="nx">feedbackElement</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="na">data</span><span class="p">:</span> <span class="s1">'struts.enableJSONValidation=true&amp;struts.validateOnly=false&amp;'</span> <span class="o">+</span> <span class="nx">_formData</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">struts.enableJSONValidation=true&amp;struts.validateOnly=false&amp;</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">_formData</span><span class="p">,</span>
         <span class="na">async</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="na">processData</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="na">type</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">success</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="nx">statusText</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">location</span><span class="p">)</span> <span class="p">{</span>
                 <span class="c1">// no validation errors</span>
@@ -527,7 +527,7 @@ care of hiding validation errors that might be present, submit the form via AJAX
                 <span class="nx">_handleValidationResult</span><span class="p">(</span><span class="nx">_form</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="p">))</span>
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
                 <span class="c1">// a real error occurred -&gt; show user an error message</span>
-                <span class="nx">_handleValidationResult</span><span class="p">(</span><span class="nx">_form</span><span class="p">,</span> <span class="p">{</span><span class="na">errors</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Network or server error!'</span><span class="p">]})</span>
+                <span class="nx">_handleValidationResult</span><span class="p">(</span><span class="nx">_form</span><span class="p">,</span> <span class="p">{</span><span class="na">errors</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Network or server error!</span><span class="dl">'</span><span class="p">]})</span>
             <span class="p">}</span>
 		<span class="p">}</span>
     <span class="p">}</span>
@@ -543,9 +543,9 @@ care of hiding validation errors that might be present, submit the form via AJAX
 <span class="kd">function</span> <span class="nx">_removeValidationErrors</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// action errors</span>
     <span class="c1">// you might want to use a custom ID here</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">'ul.errorMessage li'</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul.errorMessage li</span><span class="dl">'</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
     <span class="c1">// field errors</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">'div.errorMessage'</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">div.errorMessage</span><span class="dl">'</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="cm">/**
  * Incorporates validation errors in HTML DOM.
@@ -557,9 +557,9 @@ care of hiding validation errors that might be present, submit the form via AJAX
     <span class="c1">// action errors</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// you might want to use a custom ID here</span>
-        <span class="kd">var</span> <span class="nx">errorContainer</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'ul.errorMessage'</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">errorContainer</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul.errorMessage</span><span class="dl">'</span><span class="p">);</span>
         <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">errors</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">errorMsg</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;li&gt;&lt;span&gt;&lt;/span&gt;&lt;/li&gt;'</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;li&gt;&lt;span&gt;&lt;/span&gt;&lt;/li&gt;</span><span class="dl">'</span><span class="p">);</span>
             <span class="nx">li</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">);</span> <span class="c1">// use text() for security reasons</span>
             <span class="nx">errorContainer</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">li</span><span class="p">);</span>
         <span class="p">});</span>
@@ -567,9 +567,9 @@ care of hiding validation errors that might be present, submit the form via AJAX
     <span class="c1">// field errors</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">fieldErrors</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">fieldErrors</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">errorMsg</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">td</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'td[data-error-for-fieldname="'</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="s1">'"]'</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">td</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">td[data-error-for-fieldname="</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">"]</span><span class="dl">'</span><span class="p">);</span>
             <span class="k">if</span> <span class="p">(</span><span class="nx">td</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;div class="errorMessage"&gt;&lt;/div&gt;'</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;div class="errorMessage"&gt;&lt;/div&gt;</span><span class="dl">'</span><span class="p">);</span>
                 <span class="nx">div</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">);</span> <span class="c1">// use text() for security reasons</span>
                 <span class="nx">td</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
             <span class="p">}</span>
@@ -577,8 +577,8 @@ care of hiding validation errors that might be present, submit the form via AJAX
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="c1">// register onSubmit handler</span>
-<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">'submit'</span><span class="p">,</span> <span class="nx">ajaxFormValidation</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">form</span><span class="dl">'</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="dl">'</span><span class="s1">submit</span><span class="dl">'</span><span class="p">,</span> <span class="nx">ajaxFormValidation</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
@@ -594,10 +594,10 @@ validation, but will check for validation errors on the action being invoked (as
 if this parameter exists, is set to <em>true</em>, and there are validation errors (o action errors) they will be serialized into JSON in the form:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Global Error 1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Global Error 2"</span><span class="p">],</span><span class="w">
-    </span><span class="s2">"fieldErrors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"field1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Field 1 Error 1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Field 1 Error 2"</span><span class="p">],</span><span class="w">
-        </span><span class="s2">"field1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Field 2 Error 1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Field 2 Error 2"</span><span class="p">]</span><span class="w">  
+    </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Global Error 1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Global Error 2"</span><span class="p">],</span><span class="w">
+    </span><span class="nl">"fieldErrors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"field1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Field 1 Error 1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Field 1 Error 2"</span><span class="p">],</span><span class="w">
+        </span><span class="nl">"field1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Field 2 Error 1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Field 2 Error 2"</span><span class="p">]</span><span class="w">  
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
@@ -611,11 +611,11 @@ succeeds (and <em>struts.validateOnly</em> is true), an empty JSON string will 
 <p>If <em>struts.validateOnly</em> is false the action and result are executed. In this case <em>jsonActionRedirect</em> result is very useful. It creates 
 a JSON response in the form:</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;url to be loaded next&gt;"</span><span class="p">}</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;url to be loaded next&gt;"</span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <blockquote>
-  <p>Remember to set <code class="highlighter-rouge">struts.enableJSONValidation=true</code> in the request to enable AJAX validation</p>
+  <p>Remember to set <code class="language-plaintext highlighter-rouge">struts.enableJSONValidation=true</code> in the request to enable AJAX validation</p>
 </blockquote>
 
 <h3 id="jsonvalidationinterceptor-parameters">JSONValidationInterceptor parameters</h3>

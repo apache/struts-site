@@ -146,7 +146,7 @@
 
 <p>Often the data used to populate a form control is dynamically generated, perhaps from a database. When the user submits 
 the form, the Struts 2 validation interceptor attempts to validate the user’s form input. If validation fails the Struts 2 
-framework returns the value <code class="highlighter-rouge">input</code> but the <code class="highlighter-rouge">input</code> action is not re-executed. Rather the view associated with the <code class="highlighter-rouge">input</code> 
+framework returns the value <code class="language-plaintext highlighter-rouge">input</code> but the <code class="language-plaintext highlighter-rouge">input</code> action is not re-executed. Rather the view associated with the <code class="language-plaintext highlighter-rouge">input</code> 
 result is rendered to the user. Usually this view is the page that displayed the original form.</p>
 
 <p>This work-flow can cause a problem if one or more of the form fields or some other data displayed depends on a dynamic 
@@ -161,23 +161,23 @@ to your problem, post a question on the mailing list.</p>
 <h2 id="preparable-interface-1">Preparable Interface</h2>
 
 <p>Struts 2 provides the <a href="../maven/struts2-core/apidocs/com/opensymphony/xwork2/Preparable">Preparable interface</a>
-to overcome this problem. An Action class that implements this interface must override the prepare method. The <code class="highlighter-rouge">prepare</code> 
+to overcome this problem. An Action class that implements this interface must override the prepare method. The <code class="language-plaintext highlighter-rouge">prepare</code> 
 method will always be called by the Struts 2 framework’s <a href="../core-developers/prepare-interceptor">prepare interceptor</a> 
 whenever any method is called for the Action class and also when validation fails before the view is rendered.</p>
 
-<p>In the <code class="highlighter-rouge">prepare</code> method you should put any statements that must be executed no matter what other Action class method will 
+<p>In the <code class="language-plaintext highlighter-rouge">prepare</code> method you should put any statements that must be executed no matter what other Action class method will 
 be called and also statements that should be executed if validation fails. Usually statements in the prepare method set 
 the value for Action class instance fields that will be used to populate form controls and get the values that will be 
 used to set the initial form field values.</p>
 
 <p>In addition to automatically running the prepare method the <a href="../core-developers/prepare-interceptor">prepare interceptor</a> 
-will also call a method named <code class="highlighter-rouge">prepare&lt;ActionMethodName&gt;</code>. For example, define a prepare method and a <code class="highlighter-rouge">prepareInput</code> method 
-in the Action class that implements <code class="highlighter-rouge">Preparable</code>. When the Struts 2 framework calls the input method, the prepare interceptor 
+will also call a method named <code class="language-plaintext highlighter-rouge">prepare&lt;ActionMethodName&gt;</code>. For example, define a prepare method and a <code class="language-plaintext highlighter-rouge">prepareInput</code> method 
+in the Action class that implements <code class="language-plaintext highlighter-rouge">Preparable</code>. When the Struts 2 framework calls the input method, the prepare interceptor 
 will call the prepareInput and the prepare methods before calling the input method.</p>
 
 <h2 id="example-application">Example Application</h2>
 
-<p>If you examine class EditAction in the example application (see above) you’ll see that it implements the <code class="highlighter-rouge">Preparable</code> interface. 
+<p>If you examine class EditAction in the example application (see above) you’ll see that it implements the <code class="language-plaintext highlighter-rouge">Preparable</code> interface. 
 In the prepare method is this code:</p>
 
 <p><strong>EditAction.java prepare Method</strong></p>
@@ -192,7 +192,7 @@ get the information about the Person object being edited.</p>
 
 <p>When you run the example application, look in the log to see when the prepare method is called in relation to the input 
 and execute methods. Running the example application and examining the log should help you understand the impact of implementing 
-the <code class="highlighter-rouge">Preparable</code> interface and the prepare method.</p>
+the <code class="language-plaintext highlighter-rouge">Preparable</code> interface and the prepare method.</p>
 
 <h2 id="summary">Summary</h2>
 

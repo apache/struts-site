@@ -138,18 +138,18 @@ progress meter. This also prevents the HTTP request from timing out when the act
 
 <p>Using this interceptor is pretty straight forward. Assuming that you are including struts-default.xml, this interceptor 
 is already configured but is not part of any of the default stacks. Because of the nature of this interceptor, it must 
-be the <code class="highlighter-rouge">last</code> interceptor in the stack.</p>
+be the <code class="language-plaintext highlighter-rouge">last</code> interceptor in the stack.</p>
 
-<p>This interceptor works on a per-session basis. That means that the same action name (<code class="highlighter-rouge">myLongRunningAction</code>, in 
+<p>This interceptor works on a per-session basis. That means that the same action name (<code class="language-plaintext highlighter-rouge">myLongRunningAction</code>, in 
 the above example) cannot be run more than once at a time in a given session. On the initial request or any subsequent
-requests (before the action has completed), the <code class="highlighter-rouge">wait</code> result will be returned.</p>
+requests (before the action has completed), the <code class="language-plaintext highlighter-rouge">wait</code> result will be returned.</p>
 
 <blockquote>
   <p>The wait result is responsible for issuing a subsequent request back to the action, giving the effect 
 of a self-updating progress meter.</p>
 </blockquote>
 
-<p>If no <code class="highlighter-rouge">wait</code> result is found, Struts will automatically generate a wait result on the fly. This result is written 
+<p>If no <code class="language-plaintext highlighter-rouge">wait</code> result is found, Struts will automatically generate a wait result on the fly. This result is written 
 in FreeMarker and cannot run unless FreeMarker is installed. If you don’t wish to deploy with FreeMarker, you must 
 provide your own wait result. This is generally a good thing to do anyway, as the default wait page is very plain.</p>
 
@@ -167,29 +167,29 @@ ensure the user is presented fast search results immediately and for the slow re
 
 <blockquote>
   <p>Important: Because the action will be running in a separate thread, you can’t use ActionContext because it
-is a ThreadLocal. This means if you need to access, for example, session data, you need to implement <code class="highlighter-rouge">SessionAware</code>
-rather than calling <code class="highlighter-rouge">ActionContext.getSession()</code>.</p>
+is a ThreadLocal. This means if you need to access, for example, session data, you need to implement <code class="language-plaintext highlighter-rouge">SessionAware</code>
+rather than calling <code class="language-plaintext highlighter-rouge">ActionContext.getSession()</code>.</p>
 </blockquote>
 
-<p>The thread kicked off by this interceptor will be named in the form <code class="highlighter-rouge">&lt;actionName&gt;BackgroundProcess</code>.
-For example, the <code class="highlighter-rouge">search</code> action would run as a thread named <code class="highlighter-rouge">searchBackgroundProcess</code>.</p>
+<p>The thread kicked off by this interceptor will be named in the form <code class="language-plaintext highlighter-rouge">&lt;actionName&gt;BackgroundProcess</code>.
+For example, the <code class="language-plaintext highlighter-rouge">search</code> action would run as a thread named <code class="language-plaintext highlighter-rouge">searchBackgroundProcess</code>.</p>
 
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">threadPriority</code> (optional) - the priority to assign the thread. Default is <code class="highlighter-rouge">Thread.NORM_PRIORITY</code>.</li>
-  <li><code class="highlighter-rouge">delay</code> (optional) - an initial delay in millis to wait before the wait page is shown (returning <code class="highlighter-rouge">wait</code> as result code). 
+  <li><code class="language-plaintext highlighter-rouge">threadPriority</code> (optional) - the priority to assign the thread. Default is <code class="language-plaintext highlighter-rouge">Thread.NORM_PRIORITY</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">delay</code> (optional) - an initial delay in millis to wait before the wait page is shown (returning <code class="language-plaintext highlighter-rouge">wait</code> as result code). 
 Default is no initial delay.</li>
-  <li><code class="highlighter-rouge">delaySleepInterval</code> (optional) - only used with delay. Used for waking up at certain intervals to check if the background 
+  <li><code class="language-plaintext highlighter-rouge">delaySleepInterval</code> (optional) - only used with delay. Used for waking up at certain intervals to check if the background 
 process is already done. Default is 100 millis.</li>
 </ul>
 
 <h2 id="extending-the-interceptor">Extending the Interceptor</h2>
 
 <p>If you wish to make special preparations before and/or after the invocation of the background thread, you can extend 
-the <code class="highlighter-rouge">BackgroundProcess</code> class and implement the <code class="highlighter-rouge">beforeInvocation()</code> and <code class="highlighter-rouge">afterInvocation()</code> methods. This may be useful 
+the <code class="language-plaintext highlighter-rouge">BackgroundProcess</code> class and implement the <code class="language-plaintext highlighter-rouge">beforeInvocation()</code> and <code class="language-plaintext highlighter-rouge">afterInvocation()</code> methods. This may be useful 
 for  obtaining and releasing resources that the background process will need to execute successfully. To use your background 
-process extension, extend <code class="highlighter-rouge">ExecuteAndWaitInterceptor</code> and implement the <code class="highlighter-rouge">getNewBackgroundProcess()</code> method.</p>
+process extension, extend <code class="language-plaintext highlighter-rouge">ExecuteAndWaitInterceptor</code> and implement the <code class="language-plaintext highlighter-rouge">getNewBackgroundProcess()</code> method.</p>
 
 <h2 id="examples">Examples</h2>
 

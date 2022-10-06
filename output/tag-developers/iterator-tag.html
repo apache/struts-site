@@ -136,14 +136,14 @@
 <p>Please make sure you have read the <a href="tag-syntax">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
 <blockquote>
-  <p><strong>NOTE</strong>: The <code class="highlighter-rouge">id</code> attribute is deprecated in Struts 2.1.x, and has been replaced by the <code class="highlighter-rouge">var</code> attribute.
-The <code class="highlighter-rouge">begin</code>, <code class="highlighter-rouge">end</code> and <code class="highlighter-rouge">step</code> attributes are only available from 2.1.7+</p>
+  <p><strong>NOTE</strong>: The <code class="language-plaintext highlighter-rouge">id</code> attribute is deprecated in Struts 2.1.x, and has been replaced by the <code class="language-plaintext highlighter-rouge">var</code> attribute.
+The <code class="language-plaintext highlighter-rouge">begin</code>, <code class="language-plaintext highlighter-rouge">end</code> and <code class="language-plaintext highlighter-rouge">step</code> attributes are only available from 2.1.7+</p>
 </blockquote>
 
 <h2 id="description">Description</h2>
 
-<p>Iterator will iterate over a value. An iterable value can be any of: <code class="highlighter-rouge">java.util.Collection</code>, <code class="highlighter-rouge">java.util.Iterator</code>, 
-<code class="highlighter-rouge">java.util.Enumeration</code>, <code class="highlighter-rouge">java.util.Map</code>, or an array.</p>
+<p>Iterator will iterate over a value. An iterable value can be any of: <code class="language-plaintext highlighter-rouge">java.util.Collection</code>, <code class="language-plaintext highlighter-rouge">java.util.Iterator</code>, 
+<code class="language-plaintext highlighter-rouge">java.util.Enumeration</code>, <code class="language-plaintext highlighter-rouge">java.util.Map</code>, or an array.</p>
 
 <p>Iterate over a iterable value</p>
 
@@ -225,111 +225,111 @@ The <code class="highlighter-rouge">begin</code>, <code class="highlighter-rouge
 <h2 id="examples">Examples</h2>
 
 <p>The following example retrieves the value of the getDays() method of the current object on the value stack and uses 
-it to iterate over. The <code class="highlighter-rouge">&lt;s:property/&gt;</code> tag prints out the current value of the iterator.</p>
+it to iterate over. The <code class="language-plaintext highlighter-rouge">&lt;s:property/&gt;</code> tag prints out the current value of the iterator.</p>
 
-<pre><code class="language-jsp">&lt;s:iterator value="days"&gt;
-  &lt;p&gt;day is: &lt;s:property/&gt;&lt;/p&gt;
-&lt;/s:iterator&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"days"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;p&gt;</span>day is: <span class="nt">&lt;s:property/&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
 
 <p>The following example uses a {@link Bean} tag and places it into the ActionContext. The iterator tag will retrieve that 
-object from the <code class="highlighter-rouge">ActionContext</code> and then calls its <code class="highlighter-rouge">getDays()</code> method as above. The status attribute is also used 
-to create an <code class="highlighter-rouge">IteratorStatus</code> object, which in this example, its <code class="highlighter-rouge">odd()</code> method is used to alternate row colours:</p>
+object from the <code class="language-plaintext highlighter-rouge">ActionContext</code> and then calls its <code class="language-plaintext highlighter-rouge">getDays()</code> method as above. The status attribute is also used 
+to create an <code class="language-plaintext highlighter-rouge">IteratorStatus</code> object, which in this example, its <code class="language-plaintext highlighter-rouge">odd()</code> method is used to alternate row colours:</p>
 
-<pre><code class="language-jsp">&lt;s:bean name="org.apache.struts2.example.IteratorExample" var="it"&gt;
-  &lt;s:param name="day" value="'foo'"/&gt;
-  &lt;s:param name="day" value="'bar'"/&gt;
-&lt;/s:bean&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:bean </span><span class="na">name=</span><span class="s">"org.apache.struts2.example.IteratorExample"</span><span class="na"> var=</span><span class="s">"it"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;s:param </span><span class="na">name=</span><span class="s">"day"</span><span class="na"> value=</span><span class="s">"'foo'"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;s:param </span><span class="na">name=</span><span class="s">"day"</span><span class="na"> value=</span><span class="s">"'bar'"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:bean&gt;</span>
 
-&lt;table border="0" cellspacing="0" cellpadding="1"&gt;
-&lt;tr&gt;
-  &lt;th&gt;Days of the week&lt;/th&gt;
-&lt;/tr&gt;
+<span class="nt">&lt;table</span> <span class="na">border=</span><span class="s">"0"</span> <span class="na">cellspacing=</span><span class="s">"0"</span> <span class="na">cellpadding=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;tr&gt;</span>
+  <span class="nt">&lt;th&gt;</span>Days of the week<span class="nt">&lt;/th&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
 
-&lt;s:iterator value="#it.days" status="rowstatus"&gt;
-  &lt;tr&gt;
-    &lt;s:if test="#rowstatus.odd == true"&gt;
-      &lt;td style="background: grey"&gt;&lt;s:property/&gt;&lt;/td&gt;
-    &lt;/s:if&gt;
-    &lt;s:else&gt;
-      &lt;td&gt;&lt;s:property/&gt;&lt;/td&gt;
-    &lt;/s:else&gt;
-  &lt;/tr&gt;
-&lt;/s:iterator&gt;
-&lt;/table&gt;
-</code></pre>
+<span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"#it.days"</span><span class="na"> status=</span><span class="s">"rowstatus"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;s:if </span><span class="na">test=</span><span class="s">"#rowstatus.odd == true"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;td</span> <span class="na">style=</span><span class="s">"background: grey"</span><span class="nt">&gt;&lt;s:property/&gt;&lt;/td&gt;</span>
+    <span class="nt">&lt;/s:if&gt;</span>
+    <span class="nt">&lt;s:else&gt;</span>
+      <span class="nt">&lt;td&gt;&lt;s:property/&gt;&lt;/td&gt;</span>
+    <span class="nt">&lt;/s:else&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+</code></pre></div></div>
 
 <p>The next example will further demonstrate the use of the status attribute, using a DAO obtained from the action class 
 through OGNL, iterating over groups and their users (in a security context). The last() method indicates if the current 
 object is the last available in the iteration, and if not, we need to separate the users using a comma:</p>
 
-<pre><code class="language-jsp">&lt;s:iterator value="groupDao.groups" status="groupStatus"&gt;
-    &lt;tr class="&lt;s:if test="#groupStatus.odd == true "&gt;odd&lt;/s:if&gt;&lt;s:else&gt;even&lt;/s:else&gt;"&gt;
-        &lt;td&gt;&lt;s:property value="name" /&gt;&lt;/td&gt;
-        &lt;td&gt;&lt;s:property value="description" /&gt;&lt;/td&gt;
-        &lt;td&gt;
-            &lt;s:iterator value="users" status="userStatus"&gt;
-                &lt;s:property value="fullName" /&gt;&lt;s:if test="!#userStatus.last"&gt;,&lt;/s:if&gt;
-            &lt;/s:iterator&gt;
-        &lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/s:iterator&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"groupDao.groups"</span><span class="na"> status=</span><span class="s">"groupStatus"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"</span><span class="nt">&lt;s:if </span><span class="na">test=</span><span class="s">"#groupStatus.odd == true "</span><span class="nt">&gt;</span><span class="s">odd</span><span class="nt">&lt;/s:if&gt;&lt;s:else&gt;</span><span class="s">even</span><span class="nt">&lt;/s:else&gt;</span><span class="s">"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;td&gt;&lt;s:property </span><span class="na">value=</span><span class="s">"name"</span> <span class="nt">/&gt;&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;&lt;s:property </span><span class="na">value=</span><span class="s">"description"</span> <span class="nt">/&gt;&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>
+            <span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"users"</span><span class="na"> status=</span><span class="s">"userStatus"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"fullName"</span> <span class="nt">/&gt;&lt;s:if </span><span class="na">test=</span><span class="s">"!#userStatus.last"</span><span class="nt">&gt;</span>,<span class="nt">&lt;/s:if&gt;</span>
+            <span class="nt">&lt;/s:iterator&gt;</span>
+        <span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
 
 <p>The next example iterates over a an action collection and passes every iterator value to another action. The trick here 
-lies in the use of the <code class="highlighter-rouge">[0]</code> operator. It takes the current iterator value and passes it on to the edit action. 
-Using the <code class="highlighter-rouge">[0]</code> operator has the same effect as using <code class="highlighter-rouge">&lt;s:property /&gt;</code>. (The latter, however, does not work from inside 
-the <code class="highlighter-rouge">param</code> tag).</p>
+lies in the use of the <code class="language-plaintext highlighter-rouge">[0]</code> operator. It takes the current iterator value and passes it on to the edit action. 
+Using the <code class="language-plaintext highlighter-rouge">[0]</code> operator has the same effect as using <code class="language-plaintext highlighter-rouge">&lt;s:property /&gt;</code>. (The latter, however, does not work from inside 
+the <code class="language-plaintext highlighter-rouge">param</code> tag).</p>
 
-<pre><code class="language-jsp">&lt;s:action name="entries" var="entries"/&gt;
-&lt;s:iterator value="#entries.entries" &gt;
-    &lt;s:property value="name" /&gt;
-    &lt;s:property /&gt;
-    &lt;s:push value="..."&gt;
-        &lt;s:action name="edit" var="edit" &gt;
-            &lt;s:param name="entry" value="[0]" /&gt;
-        &lt;/s:action&gt;
-    &lt;/push&gt;
-&lt;/s:iterator&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:action </span><span class="na">name=</span><span class="s">"entries"</span><span class="na"> var=</span><span class="s">"entries"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"#entries.entries"</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"name"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;s:property /&gt;</span>
+    <span class="nt">&lt;s:push </span><span class="na">value=</span><span class="s">"..."</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;s:action </span><span class="na">name=</span><span class="s">"edit"</span><span class="na"> var=</span><span class="s">"edit"</span> <span class="nt">&gt;</span>
+            <span class="nt">&lt;s:param </span><span class="na">name=</span><span class="s">"entry"</span><span class="na"> value=</span><span class="s">"[0]"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/s:action&gt;</span>
+    <span class="nt">&lt;/push&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
 
 <p>A loop that iterates 5 times</p>
 
-<pre><code class="language-jsp">&lt;s:iterator var="counter" begin="1" end="5" &gt;
-   &lt;!-- current iteration value (1, ... 5) --&gt;
-   &lt;s:property value="top" /&gt;
-&lt;/s:iterator&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">var=</span><span class="s">"counter"</span><span class="na"> begin=</span><span class="s">"1"</span><span class="na"> end=</span><span class="s">"5"</span> <span class="nt">&gt;</span>
+   <span class="c">&lt;!-- current iteration value (1, ... 5) --&gt;</span>
+   <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"top"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
 
-<p>Another way to create a simple loop, similar to JSTL’s <code class="highlighter-rouge">&lt;c:forEach begin="..." end="..." ...&gt;</code> is to use some  OGNL 
+<p>Another way to create a simple loop, similar to JSTL’s <code class="language-plaintext highlighter-rouge">&lt;c:forEach begin="..." end="..." ...&gt;</code> is to use some  OGNL 
 magic, which provides some under-the-covers magic to make 0-n loops trivial. This example also loops five times.</p>
 
-<pre><code class="language-jsp">&lt;s:iterator status="stat" value="(5).{ #this }" &gt;
-   &lt;s:property value="#stat.count" /&gt; &lt;!-- Note that "count" is 1-based, "index" is 0-based. --&gt;
-&lt;/s:iterator&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">status=</span><span class="s">"stat"</span><span class="na"> value=</span><span class="s">"(5).{ #this }"</span> <span class="nt">&gt;</span>
+   <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#stat.count"</span> <span class="nt">/&gt;</span> <span class="c">&lt;!-- Note that "count" is 1-based, "index" is 0-based. --&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
 
 <p>A loop that iterates over a partial list</p>
 
-<pre><code class="language-jsp">&lt;s:iterator value="{1,2,3,4,5}" begin="2" end="4" &gt;
-   &lt;!-- current iteration value (2,3,4) --&gt;
-   &lt;s:property value="top" /&gt;
-&lt;/s:iterator&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"{1,2,3,4,5}"</span><span class="na"> begin=</span><span class="s">"2"</span><span class="na"> end=</span><span class="s">"4"</span> <span class="nt">&gt;</span>
+   <span class="c">&lt;!-- current iteration value (2,3,4) --&gt;</span>
+   <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"top"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
 
 <p>Another example when we can access a variable out of the current loop context and where name clashes with the current</p>
 
-<pre><code class="language-jsp">&lt;s:select name="location" size="1" list="locations" listKey="key"
-  listValue="value" emptyOption="false" /&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:select </span><span class="na">name=</span><span class="s">"location"</span><span class="na"> size=</span><span class="s">"1"</span><span class="na"> list=</span><span class="s">"locations"</span><span class="na"> listKey=</span><span class="s">"key"</span><span class="na">
+  listValue=</span><span class="s">"value"</span><span class="na"> emptyOption=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
 
-&lt;s:iterator var="item" value="items" status="rowstatus"&gt;
-    &lt;s:url var="myUrl" action="itemDelete"&gt;
-        &lt;s:param name="id" value="#item.id" /&gt;
-        &lt;%-- Outer loop variable name [1]. as clash with item.location --%&gt;
-        &lt;s:param name="location" value="[1].location" /&gt;
-    &lt;/s:url&gt;
-&lt;/s:iterator&gt;
-</code></pre>
+<span class="nt">&lt;s:iterator </span><span class="na">var=</span><span class="s">"item"</span><span class="na"> value=</span><span class="s">"items"</span><span class="na"> status=</span><span class="s">"rowstatus"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;s:url </span><span class="na">var=</span><span class="s">"myUrl"</span><span class="na"> action=</span><span class="s">"itemDelete"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;s:param </span><span class="na">name=</span><span class="s">"id"</span><span class="na"> value=</span><span class="s">"#item.id"</span> <span class="nt">/&gt;</span>
+        <span class="c">&lt;%-- Outer loop variable name [1]. as clash with item.location --%&gt;</span>
+        <span class="nt">&lt;s:param </span><span class="na">name=</span><span class="s">"location"</span><span class="na"> value=</span><span class="s">"[1].location"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/s:url&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
 
   </section>
 </article>

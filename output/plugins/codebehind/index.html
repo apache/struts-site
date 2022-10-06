@@ -190,27 +190,27 @@ and results.</p>
 no defined Struts action mapping, yet there exists a corresponding page.  It will then create a dummy action mapping referencing the default Action class (usually ActionSupport), allowing the page to be displayed normally.  Additionally, the default interceptor stack for the configured package will be applied, bringing the workflow benefits of interceptor stacks to simple pages.</p>
 
 <p>When no explicitly configured Action can be found for a request, the plugin searches the web application for 
-a likely page. Specifically, the following pattern is used to locate a page:<code class="highlighter-rouge">/NAMESPACE/ACTION.(jsp|vm|ftl)</code>
-For example, if the request is for <code class="highlighter-rouge">http://www.company.com/myapp/member/login.action</code>, the plugin will look for 
+a likely page. Specifically, the following pattern is used to locate a page:<code class="language-plaintext highlighter-rouge">/NAMESPACE/ACTION.(jsp|vm|ftl)</code>
+For example, if the request is for <code class="language-plaintext highlighter-rouge">http://www.company.com/myapp/member/login.action</code>, the plugin will look for 
 the following pages, in this order:</p>
 
 <ol>
-  <li><code class="highlighter-rouge">/member/login.jsp</code></li>
-  <li><code class="highlighter-rouge">/member/login.vm</code></li>
-  <li><code class="highlighter-rouge">/member/login.ftl</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/member/login.jsp</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/member/login.vm</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/member/login.ftl</code></li>
 </ol>
 
 <p>If any of those pages are found, the plugin will construct an ActionConfig object on the fly, using the ActionSupport 
 class for the Action and a single Result that points to the discovered page.  The ActionConfig will be put in the configured
 package, meaning that it will inherit the default Interceptor stack for that package.  The default package 
-is <code class="highlighter-rouge">codebehind-default</code>, however, it can be configured in any <em>configuration file</em>  via the <code class="highlighter-rouge">struts.codebehind.defaultPackage</code>
+is <code class="language-plaintext highlighter-rouge">codebehind-default</code>, however, it can be configured in any <em>configuration file</em>  via the <code class="language-plaintext highlighter-rouge">struts.codebehind.defaultPackage</code>
 constant.</p>
 
 <h3 id="default-results">Default Results</h3>
 
 <p>In many applications, a majority of Results could have the same root name as the action mapping.  To reduce this 
 unnecessary configuration, the Struts plugin will try to guess the appropriate Result, if none is explicitly configured.
-This technique works for any result code, including <code class="highlighter-rouge">success</code>. When combined with the <em>Zero Configuration</em>  style,
+This technique works for any result code, including <code class="language-plaintext highlighter-rouge">success</code>. When combined with the <em>Zero Configuration</em>  style,
 the amount of configuration in an application dwindles to next to nothing.</p>
 
 <p>When no explicitly configured Result is found for an Action’s result code, the plugin, again, searches the web 
@@ -218,22 +218,22 @@ application for a matching page. Specifically, the following patterns, in the fo
 a page:</p>
 
 <ol>
-  <li><code class="highlighter-rouge">/NAMESPACE/ACTION-RESULT_CODE.(jsp|vm|ftl)</code></li>
-  <li><code class="highlighter-rouge">/NAMESPACE/ACTION.(jsp|vm|ftl)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/NAMESPACE/ACTION-RESULT_CODE.(jsp|vm|ftl)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/NAMESPACE/ACTION.(jsp|vm|ftl)</code></li>
 </ol>
 
 <p>These two patterns are searched for each of the three default page extensions: jsp, vm, and ftl.  For example, 
-if the request is for <code class="highlighter-rouge">http://www.company.com/myapp/member/login.action</code>, so that the action name is <code class="highlighter-rouge">login</code> 
-and the namespace is <code class="highlighter-rouge">member</code>, and the Action class returned a code of <code class="highlighter-rouge">success</code>, the plugin will look for 
+if the request is for <code class="language-plaintext highlighter-rouge">http://www.company.com/myapp/member/login.action</code>, so that the action name is <code class="language-plaintext highlighter-rouge">login</code> 
+and the namespace is <code class="language-plaintext highlighter-rouge">member</code>, and the Action class returned a code of <code class="language-plaintext highlighter-rouge">success</code>, the plugin will look for 
 the following pages, in this order:</p>
 
 <ol>
-  <li><code class="highlighter-rouge">/member/login-success.jsp</code></li>
-  <li><code class="highlighter-rouge">/member/login.jsp</code></li>
-  <li><code class="highlighter-rouge">/member/login-success.vm</code></li>
-  <li><code class="highlighter-rouge">/member/login.vm</code></li>
-  <li><code class="highlighter-rouge">/member/login-success.ftl</code></li>
-  <li><code class="highlighter-rouge">/member/login.ftl</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/member/login-success.jsp</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/member/login.jsp</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/member/login-success.vm</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/member/login.vm</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/member/login-success.ftl</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/member/login.ftl</code></li>
 </ol>
 
 <p>If any of those pages are found, the appropriate Result will be constructed and processed.</p>
@@ -269,7 +269,7 @@ the following pages, in this order:</p>
 
 <h3 id="installation">Installation</h3>
 
-<p>This plugin can be installed by copying the plugin jar into your application’s <code class="highlighter-rouge">/WEB-INF/lib</code> directory.<br />
+<p>This plugin can be installed by copying the plugin jar into your application’s <code class="language-plaintext highlighter-rouge">/WEB-INF/lib</code> directory.<br />
 No other files need to be copied or created.</p>
 
   </section>

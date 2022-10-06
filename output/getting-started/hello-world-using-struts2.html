@@ -163,7 +163,7 @@ to create a “Hello World” example, you need to do four things:</p>
   <li>Create a class to store the welcome message (the model)</li>
   <li>Create a server page to present the message (the view)</li>
   <li>Create an Action class to control the interaction between the user, the model, and the view (the controller)</li>
-  <li>Create a mapping (<code class="highlighter-rouge">struts.xml</code>) to couple the Action class and view</li>
+  <li>Create a mapping (<code class="language-plaintext highlighter-rouge">struts.xml</code>) to couple the Action class and view</li>
 </ol>
 
 <p>By creating these components, we are separating the work flow into three well-known concerns: the View, the Model, 
@@ -198,7 +198,7 @@ to your problem, post a question on the mailing list.</p>
 
 <h3 id="step-1---create-the-model-class-messagestorejava">Step 1 - Create The Model Class MessageStore.java</h3>
 
-<p>Create the <code class="highlighter-rouge">MessageStore</code> class in <code class="highlighter-rouge">src/main/java</code>. Be sure to note the package statement below.</p>
+<p>Create the <code class="language-plaintext highlighter-rouge">MessageStore</code> class in <code class="language-plaintext highlighter-rouge">src/main/java</code>. Be sure to note the package statement below.</p>
 
 <blockquote>
   <p>Note that in the code shown below the JavaDoc comments are omitted. In the download example, JavaDoc comments are included.</p>
@@ -206,105 +206,105 @@ to your problem, post a question on the mailing list.</p>
 
 <p><strong>MessageStore.java</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts</span><span class="o">.</span><span class="na">helloworld</span><span class="o">.</span><span class="na">model</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.apache.struts.helloworld.model</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageStore</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">message</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span><span class="o">;</span>
     
     <span class="kd">public</span> <span class="nf">MessageStore</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">message</span> <span class="o">=</span> <span class="s">"Hello Struts User"</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">message</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Note the use of the public getter method to allow access to the private message String attribute. The Struts 2 framework 
-requires that objects you want to expose to the view (<code class="highlighter-rouge">HelloWorld.jsp</code>) follow the <a href="http://en.wikipedia.org/wiki/JavaBean#JavaBean_conventions">JavaBean-style conventions</a>.</p>
+requires that objects you want to expose to the view (<code class="language-plaintext highlighter-rouge">HelloWorld.jsp</code>) follow the <a href="http://en.wikipedia.org/wiki/JavaBean#JavaBean_conventions">JavaBean-style conventions</a>.</p>
 
 <h3 id="step-2---create-the-action-class-helloworldactionjava">Step 2 - Create The Action Class HelloWorldAction.java</h3>
 
 <p>We need an Action class to act as the Controller. The Action class responds to a user action (in this example that action 
 will be clicking an HTML hyperlink and sending a specific URL to the Servlet container). One or more of the Action class’s 
 methods are executed and a String result is returned. Based on the value of the result, a specific view page (in this 
-example that view page is <code class="highlighter-rouge">HelloWorld.jsp</code>) is rendered.</p>
+example that view page is <code class="language-plaintext highlighter-rouge">HelloWorld.jsp</code>) is rendered.</p>
 
 <p>Note the package and import statements below.</p>
 
 <p><strong>HelloWorldAction.java</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts</span><span class="o">.</span><span class="na">helloworld</span><span class="o">.</span><span class="na">action</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.apache.struts.helloworld.action</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.apache.struts.helloworld.model.MessageStore</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">MessageStore</span> <span class="n">messageStore</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">MessageStore</span> <span class="n">messageStore</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">messageStore</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MessageStore</span><span class="o">()</span> <span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">messageStore</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MessageStore</span><span class="o">()</span> <span class="o">;</span>
         
-        <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+        <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">MessageStore</span> <span class="nf">getMessageStore</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">MessageStore</span> <span class="nf">getMessageStore</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">messageStore</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>The Struts 2 framework will create an object of the <code class="highlighter-rouge">HelloWorldAction</code> class and call the execute method in response to 
+<p>The Struts 2 framework will create an object of the <code class="language-plaintext highlighter-rouge">HelloWorldAction</code> class and call the execute method in response to 
 a user’s action (clicking on a hyperlink that sends a specific URL to the Servlet container).</p>
 
-<p>In this example, the execute method creates an object of class <code class="highlighter-rouge">MessageStore</code> and then returns the String constant <code class="highlighter-rouge">SUCCESS</code>.</p>
+<p>In this example, the execute method creates an object of class <code class="language-plaintext highlighter-rouge">MessageStore</code> and then returns the String constant <code class="language-plaintext highlighter-rouge">SUCCESS</code>.</p>
 
-<p>Note also the public getter method for the private <code class="highlighter-rouge">MessageStore</code> object. Since we want to make the <code class="highlighter-rouge">MessageStore</code> object 
-available to the view page, <code class="highlighter-rouge">HelloWorld.jsp</code>, we need to follow the <a href="http://en.wikipedia.org/wiki/JavaBean#JavaBean_conventions">JavaBean-style</a> 
+<p>Note also the public getter method for the private <code class="language-plaintext highlighter-rouge">MessageStore</code> object. Since we want to make the <code class="language-plaintext highlighter-rouge">MessageStore</code> object 
+available to the view page, <code class="language-plaintext highlighter-rouge">HelloWorld.jsp</code>, we need to follow the <a href="http://en.wikipedia.org/wiki/JavaBean#JavaBean_conventions">JavaBean-style</a> 
 of providing getter and setter methods where needed.</p>
 
 <h3 id="step-3---create-the-view-helloworldjsp">Step 3 - Create The View HelloWorld.jsp</h3>
 
-<p>We need a server page to present the message that is stored in the model class <code class="highlighter-rouge">MessageStore</code>. Create the below JSP in 
-the <code class="highlighter-rouge">src/main/webapp</code> folder.</p>
+<p>We need a server page to present the message that is stored in the model class <code class="language-plaintext highlighter-rouge">MessageStore</code>. Create the below JSP in 
+the <code class="language-plaintext highlighter-rouge">src/main/webapp</code> folder.</p>
 
 <p><strong>HelloWorld.jsp</strong></p>
 
-<pre><code class="language-jsp">&lt;!DOCTYPE html&gt;
-&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %&gt;
-&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
-    &lt;title&gt;Hello World!&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h2&gt;&lt;s:property value="messageStore.message" /&gt;&lt;/h2&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na"> pageEncoding=</span><span class="s">"UTF-8"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"s"</span><span class="na"> uri=</span><span class="s">"/struts-tags"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Hello World!<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h2&gt;&lt;s:property </span><span class="na">value=</span><span class="s">"messageStore.message"</span> <span class="nt">/&gt;&lt;/h2&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
 
 <p>The taglib directive tells the Servlet container that this page will be using the Struts 2 tags and that these tags will 
-be preceded by an <code class="highlighter-rouge">s</code>.</p>
+be preceded by an <code class="language-plaintext highlighter-rouge">s</code>.</p>
 
-<p>The <code class="highlighter-rouge">&lt;s:property&gt;</code> tag displays the value returned by calling the method <code class="highlighter-rouge">getMessageStore</code> of the <code class="highlighter-rouge">HelloWorldAction</code> 
-controller class. That method returns a <code class="highlighter-rouge">MessageStore</code> object. By adding the <code class="highlighter-rouge">.message</code> onto the messageStore part of 
-the value attribute we are telling the Struts 2 framework to call the <code class="highlighter-rouge">getMessage</code> method of that <code class="highlighter-rouge">MessageStore</code> object. 
-The <code class="highlighter-rouge">getMessage</code> method of class <code class="highlighter-rouge">MessageStore</code> returns a String. It is that String that will be displayed by the <code class="highlighter-rouge">&lt;s:property&gt;</code> tag.</p>
+<p>The <code class="language-plaintext highlighter-rouge">&lt;s:property&gt;</code> tag displays the value returned by calling the method <code class="language-plaintext highlighter-rouge">getMessageStore</code> of the <code class="language-plaintext highlighter-rouge">HelloWorldAction</code> 
+controller class. That method returns a <code class="language-plaintext highlighter-rouge">MessageStore</code> object. By adding the <code class="language-plaintext highlighter-rouge">.message</code> onto the messageStore part of 
+the value attribute we are telling the Struts 2 framework to call the <code class="language-plaintext highlighter-rouge">getMessage</code> method of that <code class="language-plaintext highlighter-rouge">MessageStore</code> object. 
+The <code class="language-plaintext highlighter-rouge">getMessage</code> method of class <code class="language-plaintext highlighter-rouge">MessageStore</code> returns a String. It is that String that will be displayed by the <code class="language-plaintext highlighter-rouge">&lt;s:property&gt;</code> tag.</p>
 
 <p>We’ll learn more about tags in the next tutorial. See the <em>Struts Tags</em>  for more information about tags.</p>
 
 <h3 id="step-4---add-the-struts-configuration-in-strutsxml">Step 4 - Add The Struts Configuration In struts.xml</h3>
 
-<p>We need a mapping to tie the URL, the <code class="highlighter-rouge">HelloWorldAction</code> class (controller), and the <code class="highlighter-rouge">HelloWorld.jsp</code> (the view) together. 
+<p>We need a mapping to tie the URL, the <code class="language-plaintext highlighter-rouge">HelloWorldAction</code> class (controller), and the <code class="language-plaintext highlighter-rouge">HelloWorld.jsp</code> (the view) together. 
 The mapping tells the Struts 2 framework which class will respond to the user’s action (the URL), which method of that 
 class will be executed, and what view to render based on the String result that method returns.</p>
 
-<p>Edit the <code class="highlighter-rouge">struts.xml</code> file (in the Mvn project that file is in the <code class="highlighter-rouge">src/main/resources</code> folder) to add the action mapping. 
-Place the action node (action <code class="highlighter-rouge">name="hello"</code>) between the opening and closing package node, just after the action mapping 
-with the <code class="highlighter-rouge">name="index"</code>. Your complete <code class="highlighter-rouge">struts.xml</code> should look like:</p>
+<p>Edit the <code class="language-plaintext highlighter-rouge">struts.xml</code> file (in the Mvn project that file is in the <code class="language-plaintext highlighter-rouge">src/main/resources</code> folder) to add the action mapping. 
+Place the action node (action <code class="language-plaintext highlighter-rouge">name="hello"</code>) between the opening and closing package node, just after the action mapping 
+with the <code class="language-plaintext highlighter-rouge">name="index"</code>. Your complete <code class="language-plaintext highlighter-rouge">struts.xml</code> should look like:</p>
 
 <p><strong>struts.xml</strong></p>
 
@@ -329,37 +329,37 @@ with the <code class="highlighter-rouge">name="index"</code>. Your complete <cod
 
 <h3 id="step-5---create-the-url-action">Step 5 - Create The URL Action</h3>
 
-<p>Let’s add an Action URL inside <code class="highlighter-rouge">index.jsp</code> (see <code class="highlighter-rouge">src/main/webapp</code> folder) so the user can click on a link to tell the Struts 2 
-framework to run the execute method of the <code class="highlighter-rouge">HelloWorldAction</code> class and render the <code class="highlighter-rouge">HelloWorld.jsp</code> view.</p>
+<p>Let’s add an Action URL inside <code class="language-plaintext highlighter-rouge">index.jsp</code> (see <code class="language-plaintext highlighter-rouge">src/main/webapp</code> folder) so the user can click on a link to tell the Struts 2 
+framework to run the execute method of the <code class="language-plaintext highlighter-rouge">HelloWorldAction</code> class and render the <code class="language-plaintext highlighter-rouge">HelloWorld.jsp</code> view.</p>
 
-<p>First add the taglib directive at the top of the jsp <code class="highlighter-rouge">&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;</code>. Next add this <code class="highlighter-rouge">p</code> tag 
-<code class="highlighter-rouge">&lt;p&gt;&lt;a href="&lt;s:url action='hello'/&gt;"&gt;Hello World&lt;/a&gt;&lt;/p&gt;</code> after the h1 tag. Your new index.jsp should look like:</p>
+<p>First add the taglib directive at the top of the jsp <code class="language-plaintext highlighter-rouge">&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;</code>. Next add this <code class="language-plaintext highlighter-rouge">p</code> tag 
+<code class="language-plaintext highlighter-rouge">&lt;p&gt;&lt;a href="&lt;s:url action='hello'/&gt;"&gt;Hello World&lt;/a&gt;&lt;/p&gt;</code> after the h1 tag. Your new index.jsp should look like:</p>
 
 <p><strong>index.jsp</strong></p>
 
-<pre><code class="language-jsp">&lt;!DOCTYPE html&gt;
-&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %&gt;
-&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
-        &lt;title&gt;Basic Struts 2 Application - Welcome&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;Welcome To Struts 2!&lt;/h1&gt;
-        &lt;p&gt;&lt;a href="&lt;s:url action='hello'/&gt;"&gt;Hello World&lt;/a&gt;&lt;/p&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na"> pageEncoding=</span><span class="s">"UTF-8"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"s"</span><span class="na"> uri=</span><span class="s">"/struts-tags"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=UTF-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Basic Struts 2 Application - Welcome<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>Welcome To Struts 2!<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;s:url </span><span class="na">action=</span><span class="s">'hello'</span><span class="nt">/&gt;</span><span class="s">"</span><span class="nt">&gt;</span>Hello World<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
 
-<p>The Struts url tag creates the URL with an action of hello. The hello action was mapped to the <code class="highlighter-rouge">HelloWorldAction</code> class 
-and its <code class="highlighter-rouge">execute</code> method. When the user clicks on the above URL it will cause the Struts 2 framework to run the execute 
-method of the <code class="highlighter-rouge">HelloWorldAction</code> class. After that method returns the String <code class="highlighter-rouge">success</code> (constant <code class="highlighter-rouge">SUCCESS</code>), the view 
-page <code class="highlighter-rouge">HelloWorld.jsp</code> will be rendered.</p>
+<p>The Struts url tag creates the URL with an action of hello. The hello action was mapped to the <code class="language-plaintext highlighter-rouge">HelloWorldAction</code> class 
+and its <code class="language-plaintext highlighter-rouge">execute</code> method. When the user clicks on the above URL it will cause the Struts 2 framework to run the execute 
+method of the <code class="language-plaintext highlighter-rouge">HelloWorldAction</code> class. After that method returns the String <code class="language-plaintext highlighter-rouge">success</code> (constant <code class="language-plaintext highlighter-rouge">SUCCESS</code>), the view 
+page <code class="language-plaintext highlighter-rouge">HelloWorld.jsp</code> will be rendered.</p>
 
 <h3 id="step-6---build-the-war-file-and-run-the-application">Step 6 - Build the WAR File and Run The Application</h3>
 
-<p>Execute <code class="highlighter-rouge">mvn jetty:run</code> to run the application.</p>
+<p>Execute <code class="language-plaintext highlighter-rouge">mvn jetty:run</code> to run the application.</p>
 
 <p>Go to this URL <a href="http://localhost:8080/helloworld/index.action">http://localhost:8080/helloworld/index.action</a> where you 
 should see the following:</p>
@@ -375,25 +375,25 @@ should see the following:</p>
 <p>Your browser sends to the web server a request for the URL <a href="http://localhost:8080/helloworld/hello.action">http://localhost:8080/helloworld/hello.action</a>.</p>
 
 <ol>
-  <li>The container receives from the web server a request for the resource <code class="highlighter-rouge">hello.action</code>. According to the settings loaded 
+  <li>The container receives from the web server a request for the resource <code class="language-plaintext highlighter-rouge">hello.action</code>. According to the settings loaded 
   from the <a href="../core-developers/web-xml">web.xml</a>, the container finds that all requests are being routed to 
-  <code class="highlighter-rouge">org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</code>, including the <code class="highlighter-rouge">*.action</code> requests. 
-  The <code class="highlighter-rouge">StrutsPrepareAndExecuteFilter</code> is the entry point into the framework.</li>
+  <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</code>, including the <code class="language-plaintext highlighter-rouge">*.action</code> requests. 
+  The <code class="language-plaintext highlighter-rouge">StrutsPrepareAndExecuteFilter</code> is the entry point into the framework.</li>
   <li>The framework looks for an action mapping named “hello”, and it finds that this mapping corresponds to the class 
-  <code class="highlighter-rouge">HelloWorldAction</code>. The framework instantiates the Action and calls the Action’s <code class="highlighter-rouge">execute</code> method.</li>
-  <li>The <code class="highlighter-rouge">execute</code> method creates the MessageStore object and returns <code class="highlighter-rouge">SUCCESS</code> (=<code class="highlighter-rouge">"success"</code>). The framework checks 
-  the action mapping to see what page to load if <code class="highlighter-rouge">SUCCESS</code> is returned. The framework tells the container to render 
-  as the response to the request, the resource <code class="highlighter-rouge">HelloWorld.jsp</code>.</li>
-  <li>As the page <code class="highlighter-rouge">HelloWorld.jsp</code> is being processed, the <code class="highlighter-rouge">&lt;s:property value="messageStore.message" /&gt;</code> tag calls the getter 
-  <code class="highlighter-rouge">getMessageStore</code> of the <code class="highlighter-rouge">HelloWorld</code> Action and then calls the <code class="highlighter-rouge">getMessage</code> of the MessageStore object returned 
-  by <code class="highlighter-rouge">getMessageStore</code>. The tag merges the value of the message attribute into the response.</li>
+  <code class="language-plaintext highlighter-rouge">HelloWorldAction</code>. The framework instantiates the Action and calls the Action’s <code class="language-plaintext highlighter-rouge">execute</code> method.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">execute</code> method creates the MessageStore object and returns <code class="language-plaintext highlighter-rouge">SUCCESS</code> (=<code class="language-plaintext highlighter-rouge">"success"</code>). The framework checks 
+  the action mapping to see what page to load if <code class="language-plaintext highlighter-rouge">SUCCESS</code> is returned. The framework tells the container to render 
+  as the response to the request, the resource <code class="language-plaintext highlighter-rouge">HelloWorld.jsp</code>.</li>
+  <li>As the page <code class="language-plaintext highlighter-rouge">HelloWorld.jsp</code> is being processed, the <code class="language-plaintext highlighter-rouge">&lt;s:property value="messageStore.message" /&gt;</code> tag calls the getter 
+  <code class="language-plaintext highlighter-rouge">getMessageStore</code> of the <code class="language-plaintext highlighter-rouge">HelloWorld</code> Action and then calls the <code class="language-plaintext highlighter-rouge">getMessage</code> of the MessageStore object returned 
+  by <code class="language-plaintext highlighter-rouge">getMessageStore</code>. The tag merges the value of the message attribute into the response.</li>
   <li>A pure HTML response is sent back to the browser.</li>
 </ol>
 
 <h2 id="what-to-remember">What to Remember</h2>
 
-<p>The framework uses Actions to process HTML forms and other requests. The <code class="highlighter-rouge">Action</code> class returns a result-name such 
-as <code class="highlighter-rouge">SUCCESS</code>, <code class="highlighter-rouge">ERROR</code> or <code class="highlighter-rouge">INPUT</code>. Based on the mappings loaded from the <code class="highlighter-rouge">struts.xml</code>, a given result-name may select 
+<p>The framework uses Actions to process HTML forms and other requests. The <code class="language-plaintext highlighter-rouge">Action</code> class returns a result-name such 
+as <code class="language-plaintext highlighter-rouge">SUCCESS</code>, <code class="language-plaintext highlighter-rouge">ERROR</code> or <code class="language-plaintext highlighter-rouge">INPUT</code>. Based on the mappings loaded from the <code class="language-plaintext highlighter-rouge">struts.xml</code>, a given result-name may select 
 a page (as in this example), another action, or some other web resource (image, PDF).</p>
 
 <p>When a server page is rendered, most often it will include dynamic data provided by the Action. To make it easy to display 

@@ -170,8 +170,8 @@ in the xwork.xml.</p>
 
 <h2 id="usage">Usage</h2>
 
-<p>To use the plugin, have your Struts configuration package extend the <code class="highlighter-rouge">jfreechart-default</code> package, which provides
-the <code class="highlighter-rouge">chart</code> result type.  Next, use it as a result in an action:</p>
+<p>To use the plugin, have your Struts configuration package extend the <code class="language-plaintext highlighter-rouge">jfreechart-default</code> package, which provides
+the <code class="language-plaintext highlighter-rouge">chart</code> result type.  Next, use it as a result in an action:</p>
 
 <p><strong>Chart example in struts.xml</strong></p>
 
@@ -183,45 +183,45 @@ the <code class="highlighter-rouge">chart</code> result type.  Next, use it as a
 <span class="nt">&lt;/action&gt;</span>
 </code></pre></div></div>
 
-<p>In your Action class, provide a <code class="highlighter-rouge">getChart()</code> method that returns the chart to be rendered.  This method will be 
+<p>In your Action class, provide a <code class="language-plaintext highlighter-rouge">getChart()</code> method that returns the chart to be rendered.  This method will be 
 called by the chart result.</p>
 
 <h3 id="example">Example</h3>
 
 <p><strong>Struts Action that provides a chart</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ViewModerationChartAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ViewModerationChartAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
 
-	<span class="kd">private</span> <span class="n">JFreeChart</span> <span class="n">chart</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">JFreeChart</span> <span class="n">chart</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
 		<span class="c1">// chart creation logic...</span>
-		<span class="n">XYSeries</span> <span class="n">dataSeries</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XYSeries</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span> <span class="c1">//pass a key for this serie</span>
+		<span class="nc">XYSeries</span> <span class="n">dataSeries</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">XYSeries</span><span class="o">(</span><span class="k">new</span> <span class="nc">Integer</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span> <span class="c1">//pass a key for this serie</span>
 		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-			<span class="n">dataSeries</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">RandomUtils</span><span class="o">.</span><span class="na">nextInt</span><span class="o">());</span>
+			<span class="n">dataSeries</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="nc">RandomUtils</span><span class="o">.</span><span class="na">nextInt</span><span class="o">());</span>
 		<span class="o">}</span>
-		<span class="n">XYSeriesCollection</span> <span class="n">xyDataset</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XYSeriesCollection</span><span class="o">(</span><span class="n">dataSeries</span><span class="o">);</span>
+		<span class="nc">XYSeriesCollection</span> <span class="n">xyDataset</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">XYSeriesCollection</span><span class="o">(</span><span class="n">dataSeries</span><span class="o">);</span>
 
-		<span class="n">ValueAxis</span> <span class="n">xAxis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NumberAxis</span><span class="o">(</span><span class="s">"Raw Marks"</span><span class="o">);</span>
-		<span class="n">ValueAxis</span> <span class="n">yAxis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NumberAxis</span><span class="o">(</span><span class="s">"Moderated Marks"</span><span class="o">);</span>
+		<span class="nc">ValueAxis</span> <span class="n">xAxis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NumberAxis</span><span class="o">(</span><span class="s">"Raw Marks"</span><span class="o">);</span>
+		<span class="nc">ValueAxis</span> <span class="n">yAxis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NumberAxis</span><span class="o">(</span><span class="s">"Moderated Marks"</span><span class="o">);</span>
 
 		<span class="c1">// set my chart variable</span>
 		<span class="n">chart</span> <span class="o">=</span>
 			<span class="k">new</span> <span class="nf">JFreeChart</span><span class="o">(</span>
 				<span class="s">"Moderation Function"</span><span class="o">,</span>
-				<span class="n">JFreeChart</span><span class="o">.</span><span class="na">DEFAULT_TITLE_FONT</span><span class="o">,</span>
+				<span class="nc">JFreeChart</span><span class="o">.</span><span class="na">DEFAULT_TITLE_FONT</span><span class="o">,</span>
 				<span class="k">new</span> <span class="nf">XYPlot</span><span class="o">(</span>
 					<span class="n">xyDataset</span><span class="o">,</span>
 					<span class="n">xAxis</span><span class="o">,</span>
 					<span class="n">yAxis</span><span class="o">,</span>
-					<span class="k">new</span> <span class="nf">StandardXYItemRenderer</span><span class="o">(</span><span class="n">StandardXYItemRenderer</span><span class="o">.</span><span class="na">LINES</span><span class="o">)),</span>
+					<span class="k">new</span> <span class="nf">StandardXYItemRenderer</span><span class="o">(</span><span class="nc">StandardXYItemRenderer</span><span class="o">.</span><span class="na">LINES</span><span class="o">)),</span>
 				<span class="kc">false</span><span class="o">);</span>
 		<span class="n">chart</span><span class="o">.</span><span class="na">setBackgroundPaint</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">awt</span><span class="o">.</span><span class="na">Color</span><span class="o">.</span><span class="na">white</span><span class="o">);</span>
 
 		<span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">JFreeChart</span> <span class="nf">getChart</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">JFreeChart</span> <span class="nf">getChart</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">chart</span><span class="o">;</span>
 	<span class="o">}</span>
 
@@ -234,7 +234,7 @@ called by the chart result.</p>
 
 <h3 id="installation">Installation</h3>
 
-<p>This plugin can be installed by copying the plugin jar into your application’s <code class="highlighter-rouge">/WEB-INF/lib</code> directory.<br />
+<p>This plugin can be installed by copying the plugin jar into your application’s <code class="language-plaintext highlighter-rouge">/WEB-INF/lib</code> directory.<br />
 he JFreeChart library will need to be downloaded separately, as its LGPL license doesn’t allow it to be distributed 
 with Struts.</p>
 

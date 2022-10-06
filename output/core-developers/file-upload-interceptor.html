@@ -135,42 +135,42 @@
 
 <p>See <a href="file-upload">this page</a> for more examples and advanced configuration.</p>
 
-<p>Interceptor that is based off of <code class="highlighter-rouge">MultiPartRequestWrapper</code>, which is automatically applied for any request that includes 
-a file. It adds the following parameters, where <code class="highlighter-rouge">&lt;file name&gt;</code> is the name given to the file uploaded by the HTML form:</p>
+<p>Interceptor that is based off of <code class="language-plaintext highlighter-rouge">MultiPartRequestWrapper</code>, which is automatically applied for any request that includes 
+a file. It adds the following parameters, where <code class="language-plaintext highlighter-rouge">&lt;file name&gt;</code> is the name given to the file uploaded by the HTML form:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">&lt;file name&gt;</code>: <code class="highlighter-rouge">File</code> - the actual File</li>
-  <li><code class="highlighter-rouge">&lt;file name&gt;ContentType</code>: <code class="highlighter-rouge">String</code> - the content type of the file</li>
-  <li><code class="highlighter-rouge">&lt;file name&gt;FileName</code>: <code class="highlighter-rouge">String</code> - the actual name of the file uploaded (not the HTML name)</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;file name&gt;</code>: <code class="language-plaintext highlighter-rouge">File</code> - the actual File</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;file name&gt;ContentType</code>: <code class="language-plaintext highlighter-rouge">String</code> - the content type of the file</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;file name&gt;FileName</code>: <code class="language-plaintext highlighter-rouge">String</code> - the actual name of the file uploaded (not the HTML name)</li>
 </ul>
 
 <p>You can get access to these files by merely providing setters in your action that correspond to any of the three patterns 
-above, such as <code class="highlighter-rouge">setDocument(File document)</code>, <code class="highlighter-rouge">setDocumentContentType(String contentType)</code>, etc.</p>
+above, such as <code class="language-plaintext highlighter-rouge">setDocument(File document)</code>, <code class="language-plaintext highlighter-rouge">setDocumentContentType(String contentType)</code>, etc.</p>
 
 <p>See the example code section.</p>
 
-<p>This interceptor will add several field errors, assuming that the action implements <code class="highlighter-rouge">ValidationAware</code>. These error messages 
-are based on several i18n values stored in <code class="highlighter-rouge">struts-messages.properties</code>, a default i18n file processed for all i18n requests. 
+<p>This interceptor will add several field errors, assuming that the action implements <code class="language-plaintext highlighter-rouge">ValidationAware</code>. These error messages 
+are based on several i18n values stored in <code class="language-plaintext highlighter-rouge">struts-messages.properties</code>, a default i18n file processed for all i18n requests. 
 You can override the text of these messages by providing text for the following keys:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">struts.messages.error.uploading</code> - a general error that occurs when the file could not be uploaded</li>
-  <li><code class="highlighter-rouge">struts.messages.error.file.too.large</code> - occurs when the uploaded file is too large</li>
-  <li><code class="highlighter-rouge">struts.messages.error.content.type.not.allowed</code> - occurs when the uploaded file does not match the expected content 
+  <li><code class="language-plaintext highlighter-rouge">struts.messages.error.uploading</code> - a general error that occurs when the file could not be uploaded</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.messages.error.file.too.large</code> - occurs when the uploaded file is too large</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.messages.error.content.type.not.allowed</code> - occurs when the uploaded file does not match the expected content 
 types specified</li>
-  <li><code class="highlighter-rouge">struts.messages.error.file.extension.not.allowed</code> - occurs when the uploaded file does not match the expected 
+  <li><code class="language-plaintext highlighter-rouge">struts.messages.error.file.extension.not.allowed</code> - occurs when the uploaded file does not match the expected 
 file extensions specified</li>
 </ul>
 
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">maximumSize</code> (optional) - the maximum size (in bytes) that the interceptor will allow a file reference to be set
+  <li><code class="language-plaintext highlighter-rouge">maximumSize</code> (optional) - the maximum size (in bytes) that the interceptor will allow a file reference to be set
 on the action. Note, this is <b>not</b> related to the various properties found in struts.properties. 
 Default to approximately 2MB.</li>
-  <li><code class="highlighter-rouge">allowedTypes</code> (optional) - a comma separated list of content types (ie: <code class="highlighter-rouge">text/html</code>) that the interceptor will allow
+  <li><code class="language-plaintext highlighter-rouge">allowedTypes</code> (optional) - a comma separated list of content types (ie: <code class="language-plaintext highlighter-rouge">text/html</code>) that the interceptor will allow
 a file reference to be set on the action. If none is specified allow all types to be uploaded.</li>
-  <li><code class="highlighter-rouge">allowedExtensions</code> (optional) - a comma separated list of file extensions (ie: <code class="highlighter-rouge">.html</code>) that the interceptor will allow
+  <li><code class="language-plaintext highlighter-rouge">allowedExtensions</code> (optional) - a comma separated list of file extensions (ie: <code class="language-plaintext highlighter-rouge">.html</code>) that the interceptor will allow
 a file reference to be set on the action. If none is specified allow all extensions to be uploaded.</li>
 </ul>
 
@@ -206,31 +206,31 @@ and which are not.</p>
 
 <p><strong>Example Action class:</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="nn">com.example</span><span class="o">;</span>
 
     <span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
     <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">UploadAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
-       <span class="kd">private</span> <span class="n">File</span> <span class="n">file</span><span class="o">;</span>
-       <span class="kd">private</span> <span class="n">String</span> <span class="n">contentType</span><span class="o">;</span>
-       <span class="kd">private</span> <span class="n">String</span> <span class="n">filename</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">UploadAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
+       <span class="kd">private</span> <span class="nc">File</span> <span class="n">file</span><span class="o">;</span>
+       <span class="kd">private</span> <span class="nc">String</span> <span class="n">contentType</span><span class="o">;</span>
+       <span class="kd">private</span> <span class="nc">String</span> <span class="n">filename</span><span class="o">;</span>
 
-       <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUpload</span><span class="o">(</span><span class="n">File</span> <span class="n">file</span><span class="o">)</span> <span class="o">{</span>
+       <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUpload</span><span class="o">(</span><span class="nc">File</span> <span class="n">file</span><span class="o">)</span> <span class="o">{</span>
           <span class="k">this</span><span class="o">.</span><span class="na">file</span> <span class="o">=</span> <span class="n">file</span><span class="o">;</span>
        <span class="o">}</span>
 
-       <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUploadContentType</span><span class="o">(</span><span class="n">String</span> <span class="n">contentType</span><span class="o">)</span> <span class="o">{</span>
+       <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUploadContentType</span><span class="o">(</span><span class="nc">String</span> <span class="n">contentType</span><span class="o">)</span> <span class="o">{</span>
           <span class="k">this</span><span class="o">.</span><span class="na">contentType</span> <span class="o">=</span> <span class="n">contentType</span><span class="o">;</span>
        <span class="o">}</span>
 
-       <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUploadFileName</span><span class="o">(</span><span class="n">String</span> <span class="n">filename</span><span class="o">)</span> <span class="o">{</span>
+       <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUploadFileName</span><span class="o">(</span><span class="nc">String</span> <span class="n">filename</span><span class="o">)</span> <span class="o">{</span>
           <span class="k">this</span><span class="o">.</span><span class="na">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">;</span>
        <span class="o">}</span>
 
-       <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
+       <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
           <span class="c1">//...</span>
-          <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+          <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
        <span class="o">}</span>
   <span class="o">}</span>
 
@@ -245,7 +245,7 @@ and which are not.</p>
 <span class="nt">&lt;/interceptor-ref&gt;</span>
 </code></pre></div></div>
 
-<p>This part is optional and would be done in place of the <code class="highlighter-rouge">&lt;interceptor-ref name="fileUpload"/&gt;</code> line in the action mapping 
+<p>This part is optional and would be done in place of the <code class="language-plaintext highlighter-rouge">&lt;interceptor-ref name="fileUpload"/&gt;</code> line in the action mapping 
 example above.</p>
 
   </section>

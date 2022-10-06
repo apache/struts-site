@@ -168,12 +168,12 @@ into a separate file where we can easily change them and also provide the capabi
 <p>If you’re doing this tutorial after completing <a href="form-validation">Form Validation</a> then you can make these changes 
 to that tutorial’s example application.</p>
 
-<p>Put the text below in a file named Register.properties in the <code class="highlighter-rouge">org.apache.struts.register.action</code> package 
-in the <code class="highlighter-rouge">src/main/resources</code> folder.</p>
+<p>Put the text below in a file named Register.properties in the <code class="language-plaintext highlighter-rouge">org.apache.struts.register.action</code> package 
+in the <code class="language-plaintext highlighter-rouge">src/main/resources</code> folder.</p>
 
 <p><strong>Register.properties</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>personBean.firstName=First name
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>personBean.firstName=First name
 personBean.lastName=Last name
 personBean.age=Age
 personBean.email=Email
@@ -205,13 +205,13 @@ and their values directly, you can just use the key attribute.</p>
 </code></pre></div></div>
 
 <p>The value for the key attribute instructs the Struts 2 framework to use the same value for the name attribute 
-(<code class="highlighter-rouge">personBean.firstName</code>). For the label attribute’s value the value of the key attribute is used by the Struts 2 framework 
-to find a key in a properties file with the same value. So in our example, Struts 2 will look in <code class="highlighter-rouge">Register.properties</code> 
-for a key with a value of <code class="highlighter-rouge">personBean.firstName</code>. The value of that key (<code class="highlighter-rouge">First name</code>) will be used as the label attribute’s value.</p>
+(<code class="language-plaintext highlighter-rouge">personBean.firstName</code>). For the label attribute’s value the value of the key attribute is used by the Struts 2 framework 
+to find a key in a properties file with the same value. So in our example, Struts 2 will look in <code class="language-plaintext highlighter-rouge">Register.properties</code> 
+for a key with a value of <code class="language-plaintext highlighter-rouge">personBean.firstName</code>. The value of that key (<code class="language-plaintext highlighter-rouge">First name</code>) will be used as the label attribute’s value.</p>
 
 <p>To enable the key attribute to find the properties file, the display of the view page must be the result of executing 
 a Struts 2 Action class. Right now if you examine index.jsp from the <a href="form-validation">Form Validation</a> tutorial 
-the link to the <code class="highlighter-rouge">register.jsp</code> page is a standard URL.</p>
+the link to the <code class="language-plaintext highlighter-rouge">register.jsp</code> page is a standard URL.</p>
 
 <p><strong>link to register.jsp</strong></p>
 
@@ -227,8 +227,8 @@ this markup.</p>
 <span class="nt">&lt;p&gt;&lt;s:a</span> <span class="na">href=</span><span class="s">"%{registerInputLink}"</span><span class="nt">&gt;</span>Please register<span class="nt">&lt;/s:a&gt;</span> for our prize drawing.<span class="nt">&lt;/p&gt;</span>
 </code></pre></div></div>
 
-<p>We use the Struts 2 url tag to create a link to action registerInput. We then use that link as the value for the <code class="highlighter-rouge">href</code> 
-attribute of the anchor tag. We must define the registerInput action in <code class="highlighter-rouge">struts.xml</code>. Add the following to <code class="highlighter-rouge">struts.xml</code></p>
+<p>We use the Struts 2 url tag to create a link to action registerInput. We then use that link as the value for the <code class="language-plaintext highlighter-rouge">href</code> 
+attribute of the anchor tag. We must define the registerInput action in <code class="language-plaintext highlighter-rouge">struts.xml</code>. Add the following to <code class="language-plaintext highlighter-rouge">struts.xml</code></p>
 
 <p><strong>registerInput action node for struts.xml</strong></p>
 
@@ -238,51 +238,51 @@ attribute of the anchor tag. We must define the registerInput action in <code cl
 </code></pre></div></div>
 
 <p>The above action node instructs the Struts 2 framework to execute class Register’s input method in response to action 
-<code class="highlighter-rouge">registerInput</code>. The input method is inherited by class <code class="highlighter-rouge">Register</code> from class <code class="highlighter-rouge">ActionSupport</code>. The default behavior of 
+<code class="language-plaintext highlighter-rouge">registerInput</code>. The input method is inherited by class <code class="language-plaintext highlighter-rouge">Register</code> from class <code class="language-plaintext highlighter-rouge">ActionSupport</code>. The default behavior of 
 the inherited input method is to return the String input. The result node above specifies that if the returned result 
-is <code class="highlighter-rouge">input</code> then render the view <code class="highlighter-rouge">register.jsp</code>.</p>
+is <code class="language-plaintext highlighter-rouge">input</code> then render the view <code class="language-plaintext highlighter-rouge">register.jsp</code>.</p>
 
-<p>By doing the above the view page <code class="highlighter-rouge">register.jsp</code> will have access to the properties defined in <code class="highlighter-rouge">Register.properties</code>. 
-The Struts 2 framework will make those properties defined in <code class="highlighter-rouge">Register.properties</code> available to the view page since 
-the view page was rendered after <code class="highlighter-rouge">Register.java</code> (the Struts 2 Action class) was executed.</p>
+<p>By doing the above the view page <code class="language-plaintext highlighter-rouge">register.jsp</code> will have access to the properties defined in <code class="language-plaintext highlighter-rouge">Register.properties</code>. 
+The Struts 2 framework will make those properties defined in <code class="language-plaintext highlighter-rouge">Register.properties</code> available to the view page since 
+the view page was rendered after <code class="language-plaintext highlighter-rouge">Register.java</code> (the Struts 2 Action class) was executed.</p>
 
 <p>Follow the instructions (README.txt) in the project to create the war file and copy the war file to your servlet container. 
-Open a web browser and navigate to the home page specified in the README.txt file (<code class="highlighter-rouge">index.action</code>). You should see a link 
-to <code class="highlighter-rouge">registerInput.action</code> when mousing over the hyperlink <code class="highlighter-rouge">Please Register</code>.</p>
+Open a web browser and navigate to the home page specified in the README.txt file (<code class="language-plaintext highlighter-rouge">index.action</code>). You should see a link 
+to <code class="language-plaintext highlighter-rouge">registerInput.action</code> when mousing over the hyperlink <code class="language-plaintext highlighter-rouge">Please Register</code>.</p>
 
 <p><img src="attachments/att14975007_registerInput.png" alt="registerInput.png" /></p>
 
-<p>When you click on the Please Register link your browser should display the <code class="highlighter-rouge">register.jsp</code>. The form field labels should 
-be the key values from the <code class="highlighter-rouge">Register.properties</code> file.</p>
+<p>When you click on the Please Register link your browser should display the <code class="language-plaintext highlighter-rouge">register.jsp</code>. The form field labels should 
+be the key values from the <code class="language-plaintext highlighter-rouge">Register.properties</code> file.</p>
 
 <p><img src="attachments/att14975006_register.png" alt="register.png" /></p>
 
 <h2 id="struts-2-text-tag">Struts 2 Text Tag</h2>
 
-<p>We can also use the Struts 2 text tag to display values from a properties file. In <code class="highlighter-rouge">thankyou.jsp</code> add this <code class="highlighter-rouge">text</code> tag 
-instead of the <code class="highlighter-rouge">h3</code> tag that is in <code class="highlighter-rouge">thankyou.jsp</code>.</p>
+<p>We can also use the Struts 2 text tag to display values from a properties file. In <code class="language-plaintext highlighter-rouge">thankyou.jsp</code> add this <code class="language-plaintext highlighter-rouge">text</code> tag 
+instead of the <code class="language-plaintext highlighter-rouge">h3</code> tag that is in <code class="language-plaintext highlighter-rouge">thankyou.jsp</code>.</p>
 
 <p><strong>text tag</strong></p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h3&gt;&lt;s:text</span> <span class="na">name=</span><span class="s">"thankyou"</span> <span class="nt">/&gt;&lt;/h3&gt;</span>
 </code></pre></div></div>
 
-<p>Since <code class="highlighter-rouge">thankyou.jsp</code> is also rendered after executing the <code class="highlighter-rouge">Register.java</code> Action class, the key <code class="highlighter-rouge">thankyou</code> and its value 
+<p>Since <code class="language-plaintext highlighter-rouge">thankyou.jsp</code> is also rendered after executing the <code class="language-plaintext highlighter-rouge">Register.java</code> Action class, the key <code class="language-plaintext highlighter-rouge">thankyou</code> and its value 
 will be available to the view page.</p>
 
 <p><img src="attachments/att14975009_thankyou.png" alt="thankyou.png" /></p>
 
-<p>How did the value entered for the first name input field get displayed on <code class="highlighter-rouge">thankyou.jsp</code>? Look back at the value 
-for the <code class="highlighter-rouge">thankyou</code> key in the <code class="highlighter-rouge">Register.properties</code> file.</p>
+<p>How did the value entered for the first name input field get displayed on <code class="language-plaintext highlighter-rouge">thankyou.jsp</code>? Look back at the value 
+for the <code class="language-plaintext highlighter-rouge">thankyou</code> key in the <code class="language-plaintext highlighter-rouge">Register.properties</code> file.</p>
 
 <p><strong>Register.properties</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thankyou=Thank you for registering %{personBean.firstName}.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thankyou=Thank you for registering %{personBean.firstName}.
 </code></pre></div></div>
 
-<p>The markup <code class="highlighter-rouge">%{personBean.firstName}</code> tells Struts 2 to replace this part with the result of calling <code class="highlighter-rouge">getPersonBean</code>, 
-which returns a <code class="highlighter-rouge">Person</code> object. Then call the <code class="highlighter-rouge">getFirstName</code> method which returns a String (the value the user inputted 
-into the <code class="highlighter-rouge">personBean.firstName</code> form field on <code class="highlighter-rouge">register.jsp</code>).</p>
+<p>The markup <code class="language-plaintext highlighter-rouge">%{personBean.firstName}</code> tells Struts 2 to replace this part with the result of calling <code class="language-plaintext highlighter-rouge">getPersonBean</code>, 
+which returns a <code class="language-plaintext highlighter-rouge">Person</code> object. Then call the <code class="language-plaintext highlighter-rouge">getFirstName</code> method which returns a String (the value the user inputted 
+into the <code class="language-plaintext highlighter-rouge">personBean.firstName</code> form field on <code class="language-plaintext highlighter-rouge">register.jsp</code>).</p>
 
 <h2 id="package-level-properties">Package Level Properties</h2>
 
@@ -290,16 +290,16 @@ into the <code class="highlighter-rouge">personBean.firstName</code> form field 
 pages are rendered after executing different Action classes? Struts 2 has the ability to use multiple property files 
 provided the property file is found in the package hierarchy.</p>
 
-<p>Place the following in a file named <code class="highlighter-rouge">package.properties</code> and save that file in package <code class="highlighter-rouge">org.apache.struts</code> in <code class="highlighter-rouge">src/main/resources</code>.</p>
+<p>Place the following in a file named <code class="language-plaintext highlighter-rouge">package.properties</code> and save that file in package <code class="language-plaintext highlighter-rouge">org.apache.struts</code> in <code class="language-plaintext highlighter-rouge">src/main/resources</code>.</p>
 
 <p><strong>package.properties</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>greeting=Welcome to The Wonderful World of Struts 2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>greeting=Welcome to The Wonderful World of Struts 2
 </code></pre></div></div>
 
-<p>Now any view rendered by an Action that is in the hierarchy <code class="highlighter-rouge">org.apache.struts...</code> can use a Struts 2 <code class="highlighter-rouge">text</code> tag with 
-a <code class="highlighter-rouge">name</code> attribute value of <code class="highlighter-rouge">greeting</code> to display the value of the <code class="highlighter-rouge">greeting</code> property key. For example add the following 
-markup to <code class="highlighter-rouge">helloworld.jsp</code> before the <code class="highlighter-rouge">h2</code> tag.</p>
+<p>Now any view rendered by an Action that is in the hierarchy <code class="language-plaintext highlighter-rouge">org.apache.struts...</code> can use a Struts 2 <code class="language-plaintext highlighter-rouge">text</code> tag with 
+a <code class="language-plaintext highlighter-rouge">name</code> attribute value of <code class="language-plaintext highlighter-rouge">greeting</code> to display the value of the <code class="language-plaintext highlighter-rouge">greeting</code> property key. For example add the following 
+markup to <code class="language-plaintext highlighter-rouge">helloworld.jsp</code> before the <code class="language-plaintext highlighter-rouge">h2</code> tag.</p>
 
 <p><strong>Using properties set in package.properties</strong></p>
 
@@ -312,31 +312,31 @@ You should see:</p>
 <p><img src="attachments/att14975005_hellogreeting.png" alt="hellogreeting.png" /></p>
 
 <p>The property keys and values defined in package.properties are available to any view that is rendered after executing 
-an Action class that is the package hierarchy that includes <code class="highlighter-rouge">package.properties</code>.</p>
+an Action class that is the package hierarchy that includes <code class="language-plaintext highlighter-rouge">package.properties</code>.</p>
 
 <h2 id="global-properties">Global Properties</h2>
 
-<p>You can also specify a global property file in <code class="highlighter-rouge">struts.xml</code>. The keys and values defined in that property file will be 
+<p>You can also specify a global property file in <code class="language-plaintext highlighter-rouge">struts.xml</code>. The keys and values defined in that property file will be 
 available to all the view pages that are rendered after executing an Action class.</p>
 
-<p>Add the following to a file named <code class="highlighter-rouge">global.properties</code> (note the name doesn’t have to be global).</p>
+<p>Add the following to a file named <code class="language-plaintext highlighter-rouge">global.properties</code> (note the name doesn’t have to be global).</p>
 
 <p><strong>global.properties</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>contact=For assistance contact &lt;a href='mailto:contact@email.com'&gt;contact@email.com&lt;/a&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>contact=For assistance contact &lt;a href='mailto:contact@email.com'&gt;contact@email.com&lt;/a&gt;
 </code></pre></div></div>
 
-<p>Save the <code class="highlighter-rouge">global.properties</code> file in the <code class="highlighter-rouge">src/main/resources</code> folder.</p>
+<p>Save the <code class="language-plaintext highlighter-rouge">global.properties</code> file in the <code class="language-plaintext highlighter-rouge">src/main/resources</code> folder.</p>
 
-<p>To inform the Struts 2 framework about the <code class="highlighter-rouge">global.properties</code> file add the follow node to <code class="highlighter-rouge">struts.xml</code> after the constant 
-<code class="highlighter-rouge">name="struts.devmode"</code> node.</p>
+<p>To inform the Struts 2 framework about the <code class="language-plaintext highlighter-rouge">global.properties</code> file add the follow node to <code class="language-plaintext highlighter-rouge">struts.xml</code> after the constant 
+<code class="language-plaintext highlighter-rouge">name="struts.devmode"</code> node.</p>
 
 <p><strong>Specify Global Property File In struts.xml</strong></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.custom.i18n.resources"</span> <span class="na">value=</span><span class="s">"global"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>To use the contact key in a view page, add the following markup to <code class="highlighter-rouge">index.jsp</code> just before the closing body tag.</p>
+<p>To use the contact key in a view page, add the following markup to <code class="language-plaintext highlighter-rouge">index.jsp</code> just before the closing body tag.</p>
 
 <p><strong>Using contact property</strong></p>
 
@@ -344,13 +344,13 @@ available to all the view pages that are rendered after executing an Action clas
 <span class="nt">&lt;s:text</span> <span class="na">name=</span><span class="s">"contact"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>Rebuild the war file, deploy it to your Servlet container, and then go to <code class="highlighter-rouge">index.action</code>. You should see:</p>
+<p>Rebuild the war file, deploy it to your Servlet container, and then go to <code class="language-plaintext highlighter-rouge">index.action</code>. You should see:</p>
 
 <p><img src="attachments/att14975004_contact.png" alt="contact.png" /></p>
 
 <p>Struts 2 will look for a property key of contact in all the property files starting with the property file that matches 
 the Action class, then in the property files that are in the package hierarchy of the Action class, and then in any property 
-files specified in <code class="highlighter-rouge">struts.xml</code>. For this example Struts 2 will find the contact key in <code class="highlighter-rouge">global.properties</code>. The value 
+files specified in <code class="language-plaintext highlighter-rouge">struts.xml</code>. For this example Struts 2 will find the contact key in <code class="language-plaintext highlighter-rouge">global.properties</code>. The value 
 of the contact key will be displayed where we have put the text tag.</p>
 
 <p>You can add the text tag above to all the JSPs in this example.</p>
@@ -359,15 +359,15 @@ of the contact key will be displayed where we have put the text tag.</p>
 
 <p>Using message resource files (resource bundles) also enables you to provide text in different languages. By default, 
 Struts 2 will use the user’s default locale. If that locale is en for English then the property files used will be 
-the ones without a locale specification (for example <code class="highlighter-rouge">Register.properties</code>). If the locale is not English but 
-say Spanish (es) then Struts 2 will look for a properties file named <code class="highlighter-rouge">Register_es.properties</code>.</p>
+the ones without a locale specification (for example <code class="language-plaintext highlighter-rouge">Register.properties</code>). If the locale is not English but 
+say Spanish (es) then Struts 2 will look for a properties file named <code class="language-plaintext highlighter-rouge">Register_es.properties</code>.</p>
 
-<p>To provide an example of Struts 2 support for i18n create a file named <code class="highlighter-rouge">Register_es.properties</code> and in that file add 
+<p>To provide an example of Struts 2 support for i18n create a file named <code class="language-plaintext highlighter-rouge">Register_es.properties</code> and in that file add 
 the following Spanish translations.</p>
 
 <p><strong>Register_es.properties</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>personBean.firstName=Nombre
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>personBean.firstName=Nombre
 personBean.lastName=Apellidos
 personBean.age=Edad
 personBean.email=Correo
@@ -378,7 +378,7 @@ thankyou=Gracias por registrarse, %{personBean.firstName}.
   <p>My apologies to Spanish language speakers for any mistakes in the Spanish translations.</p>
 </blockquote>
 
-<p>Save the <code class="highlighter-rouge">Register_es.properties</code> file in the same package as <code class="highlighter-rouge">Register.properties</code>.</p>
+<p>Save the <code class="language-plaintext highlighter-rouge">Register_es.properties</code> file in the same package as <code class="language-plaintext highlighter-rouge">Register.properties</code>.</p>
 
 <p>In our example application, we need to tell Struts 2 to use a locale value of es (since we’re not in a Spanish locale) 
 instead of the default locale value of our location (which is en). Add the following markup to index.jsp.</p>
@@ -392,17 +392,17 @@ instead of the default locale value of our location (which is en). Add the follo
 <span class="nt">&lt;p&gt;&lt;s:a</span> <span class="na">href=</span><span class="s">"%{registerInputLinkES}"</span><span class="nt">&gt;</span>Por favor, regístrese<span class="nt">&lt;/s:a&gt;</span> para nuestro sorteo<span class="nt">&lt;/p&gt;</span>
 </code></pre></div></div>
 
-<p>In the above markup we’ve added a parameter named request_locale to the URL. The value of that parameter is <code class="highlighter-rouge">es</code>. 
-The Action class that responds to this URL (<code class="highlighter-rouge">Register.java</code>) will see that the locale is <code class="highlighter-rouge">es</code> and will look for property 
-files with <code class="highlighter-rouge">_es</code> (for example <code class="highlighter-rouge">Register_es.properties</code>). It will use those property files to find the values of the property 
-keys referenced by the view page (e.g. <code class="highlighter-rouge">personBean.firstName</code>).</p>
+<p>In the above markup we’ve added a parameter named request_locale to the URL. The value of that parameter is <code class="language-plaintext highlighter-rouge">es</code>. 
+The Action class that responds to this URL (<code class="language-plaintext highlighter-rouge">Register.java</code>) will see that the locale is <code class="language-plaintext highlighter-rouge">es</code> and will look for property 
+files with <code class="language-plaintext highlighter-rouge">_es</code> (for example <code class="language-plaintext highlighter-rouge">Register_es.properties</code>). It will use those property files to find the values of the property 
+keys referenced by the view page (e.g. <code class="language-plaintext highlighter-rouge">personBean.firstName</code>).</p>
 
 <p>After clicking on the above link you should see the same form as before but with the form field labels in Spanish.</p>
 
 <p><img src="attachments/att14975008_spanishform.png" alt="spanishform.png" /></p>
 
-<p>If we implement the same concept by creating _es.properties versions of <code class="highlighter-rouge">global.properties</code> (<code class="highlighter-rouge">global_es.properties</code>) 
-and <code class="highlighter-rouge">package.properties</code> (<code class="highlighter-rouge">package_es.properties</code>) then we can create a complete registration web page in Spanish. 
+<p>If we implement the same concept by creating _es.properties versions of <code class="language-plaintext highlighter-rouge">global.properties</code> (<code class="language-plaintext highlighter-rouge">global_es.properties</code>) 
+and <code class="language-plaintext highlighter-rouge">package.properties</code> (<code class="language-plaintext highlighter-rouge">package_es.properties</code>) then we can create a complete registration web page in Spanish. 
 Download the finished example application for this tutorial from Github - <a href="https://github.com/apache/struts-examples/tree/master/message-resource">message-resource</a> 
 to see those property files and run the complete example with the registration form in Spanish.</p>
 

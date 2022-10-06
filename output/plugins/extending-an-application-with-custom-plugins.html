@@ -152,35 +152,35 @@ between the web application and the plugins, keep the interface in a separate JA
 
 <p><strong>IMyPlugin.java</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">example</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">example</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IMyPlugIn</span> <span class="o">{</span>
-   <span class="n">String</span> <span class="nf">saySomething</span><span class="o">();</span>
+   <span class="nc">String</span> <span class="nf">saySomething</span><span class="o">();</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <h2 id="the-plugin">The Plugin</h2>
 
 <p>Now that we have an interface to implement we’ll create the plugin. At load time, the framework looks for JARs 
-containing a <code class="highlighter-rouge">struts-plugin.xml</code> file at the root of the archive. To create a plugin, all we need to do is build 
-a JAR and put the expected <code class="highlighter-rouge">struts-plugin.xml</code> at the root.</p>
+containing a <code class="language-plaintext highlighter-rouge">struts-plugin.xml</code> file at the root of the archive. To create a plugin, all we need to do is build 
+a JAR and put the expected <code class="language-plaintext highlighter-rouge">struts-plugin.xml</code> at the root.</p>
 
 <p>To get started, let’s create a class that implements our IMyPlugin interface.</p>
 
 <p><strong>MyPlugin.java</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">example</span><span class="o">.</span><span class="na">impl</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">example.impl</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">example.IMyPlugin</span><span class="o">;</span> 
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyPlugin</span> <span class="kd">implements</span> <span class="n">IMyPlugin</span> <span class="o">{</span>
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">saySomething</span><span class="o">()</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyPlugin</span> <span class="kd">implements</span> <span class="nc">IMyPlugin</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">saySomething</span><span class="o">()</span> <span class="o">{</span>
        <span class="k">return</span> <span class="s">"We don't need no education"</span><span class="o">;</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>Internally, the framework utilizes a number of JavaBeans. We can use the <code class="highlighter-rouge">bean</code> element to add our own JavaBeans 
+<p>Internally, the framework utilizes a number of JavaBeans. We can use the <code class="language-plaintext highlighter-rouge">bean</code> element to add our own JavaBeans 
 to the set managed by the framework.</p>
 
 <p><strong>struts-default.xml</strong></p>
@@ -200,9 +200,9 @@ to the set managed by the framework.</p>
 
 <h2 id="the-action">The Action</h2>
 
-<p>The JavaBeans configured by <code class="highlighter-rouge">bean</code> elements can be retrieved via a Container provided by XWork 2. We obtain 
-a reference to the Container by using the <code class="highlighter-rouge">@Inject</code> notation. (This notation is part of the Guice framework that 
-XWork and Struts use under the covers.) The framework predefines a Container object, and the <code class="highlighter-rouge">@Inject</code> annotation tells 
+<p>The JavaBeans configured by <code class="language-plaintext highlighter-rouge">bean</code> elements can be retrieved via a Container provided by XWork 2. We obtain 
+a reference to the Container by using the <code class="language-plaintext highlighter-rouge">@Inject</code> notation. (This notation is part of the Guice framework that 
+XWork and Struts use under the covers.) The framework predefines a Container object, and the <code class="language-plaintext highlighter-rouge">@Inject</code> annotation tells 
 the framework to set its Container object to the Action property.</p>
 
 <p>We might want to supply a number of JavaBeans to the application this way. In the Action, we will obtain a reference 
@@ -211,23 +211,23 @@ JavaBean’s message.</p>
 
 <p><strong>MyAction.java</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">example</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">example.actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">example.IMyPlugin</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">IMyPlugin</span><span class="o">&gt;</span> <span class="n">plugins</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
+    <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">IMyPlugin</span><span class="o">&gt;</span> <span class="n">plugins</span><span class="o">;</span>
 
     <span class="nd">@Inject</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setContainer</span><span class="o">(</span><span class="n">Container</span> <span class="n">container</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="na">getInstanceNames</span><span class="o">(</span><span class="n">IMyPlugin</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-        <span class="n">plugins</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">IMyPlugin</span><span class="o">&gt;();</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">name</span> <span class="o">:</span> <span class="n">names</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">plugins</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">container</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">IMyPlugin</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">name</span><span class="o">));</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setContainer</span><span class="o">(</span><span class="nc">Container</span> <span class="n">container</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="na">getInstanceNames</span><span class="o">(</span><span class="nc">IMyPlugin</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">plugins</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;</span><span class="nc">IMyPlugin</span><span class="o">&gt;();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">name</span> <span class="o">:</span> <span class="n">names</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">plugins</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">container</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="nc">IMyPlugin</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">name</span><span class="o">));</span>
         <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">IMyPlugin</span><span class="o">&gt;</span> <span class="nf">getPlugins</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">IMyPlugin</span><span class="o">&gt;</span> <span class="nf">getPlugins</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">plugins</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -245,10 +245,10 @@ Results, or any other JAR-able resource that an application might utilize.</p>
 
 <p><strong>Page.jsp</strong></p>
 
-<pre><code class="language-jsp">&lt;s:iterator id="plugin" value="plugins"&gt;
-  &lt;s:property value="#plugin.saySomething()"/&gt;
-&lt;/s:iterator&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">id=</span><span class="s">"plugin"</span><span class="na"> value=</span><span class="s">"plugins"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#plugin.saySomething()"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
 
   </section>
 </article>

@@ -141,15 +141,15 @@
   <li><a href="#custom-configuration-provider" id="markdown-toc-custom-configuration-provider">Custom configuration provider</a></li>
 </ul>
 
-<p>The <code class="highlighter-rouge">web.xml</code> web application descriptor file represents the core of the Java web application, so it is appropriate 
-that it is also part of the core of the Struts framework. In the <code class="highlighter-rouge">web.xml</code> file, Struts defines its FilterDispatcher, 
+<p>The <code class="language-plaintext highlighter-rouge">web.xml</code> web application descriptor file represents the core of the Java web application, so it is appropriate 
+that it is also part of the core of the Struts framework. In the <code class="language-plaintext highlighter-rouge">web.xml</code> file, Struts defines its FilterDispatcher, 
 the Servlet Filter class that initializes the Struts framework and handles all requests. This filter can contain 
 initialization parameters that affect what, if any, additional configuration files are loaded and how the framework 
 should behave.</p>
 
 <h2 id="simple-example">Simple Example</h2>
 
-<p>Configuring <code class="highlighter-rouge">web.xml</code> for the framework is a matter of adding a filter and filter-mapping.</p>
+<p>Configuring <code class="language-plaintext highlighter-rouge">web.xml</code> for the framework is a matter of adding a filter and filter-mapping.</p>
 
 <p><strong>Filter Example (web.xml)</strong></p>
 
@@ -206,11 +206,11 @@ and execution phase</p>
 
 <h2 id="exclude-specific-urls">Exclude specific URLs</h2>
 
-<p>In the example above we’ve mapped the Struts 2 dispatcher to <code class="highlighter-rouge">/*</code>, so Struts 2 has a crack at all incoming requests. 
+<p>In the example above we’ve mapped the Struts 2 dispatcher to <code class="language-plaintext highlighter-rouge">/*</code>, so Struts 2 has a crack at all incoming requests. 
 This is because Struts 2 serves static content from its jar files, including Dojo JavaScript files (if using S2.0, 
 or the Dojo plugin in S2.1+) and FreeMarker templates for the Struts 2 tags that produce HTML.</p>
 
-<p>If we change the filter mapping to something else, for example <code class="highlighter-rouge">/*.html</code>, we must take this into account and extract 
+<p>If we change the filter mapping to something else, for example <code class="language-plaintext highlighter-rouge">/*.html</code>, we must take this into account and extract 
 the content that would normally be served from the Struts 2 jar files, or some other solution.</p>
 
 <p>Since Struts 2.1.7, you are able to provide a comma separated list of patterns for which when matching against 
@@ -226,12 +226,12 @@ for example in your struts.xml:</p>
 
 <h2 id="taglib-example">Taglib Example</h2>
 
-<p>Typically, configuring a taglib is neither required nor recommended. The taglib is included in <code class="highlighter-rouge">struts-core.jar</code>, and 
+<p>Typically, configuring a taglib is neither required nor recommended. The taglib is included in <code class="language-plaintext highlighter-rouge">struts-core.jar</code>, and 
 the container will discover it automatically.</p>
 
 <blockquote>
-  <p>If, for some reason, a taglib configuration is needed within web.xml, extract the TLD file from the <code class="highlighter-rouge">struts-core.jar</code>
-<code class="highlighter-rouge">META-INF</code> folder, and add a <code class="highlighter-rouge">taglib</code> element to the <code class="highlighter-rouge">web.xml</code>.</p>
+  <p>If, for some reason, a taglib configuration is needed within web.xml, extract the TLD file from the <code class="language-plaintext highlighter-rouge">struts-core.jar</code>
+<code class="language-plaintext highlighter-rouge">META-INF</code> folder, and add a <code class="language-plaintext highlighter-rouge">taglib</code> element to the <code class="language-plaintext highlighter-rouge">web.xml</code>.</p>
 </blockquote>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c">&lt;!-- ... --&gt;</span>
@@ -249,7 +249,7 @@ the container will discover it automatically.</p>
 <p>If there is a need to support an App Server’s specific file system (eg. VFS in JBoss), you can implement your own 
 version of FileManager. But it must be registered at “the beginning” to support bootstrap of the whole framework.</p>
 
-<p>To register your own FileManger you can do it with <code class="highlighter-rouge">&lt;init-param/&gt;</code> as below:</p>
+<p>To register your own FileManger you can do it with <code class="language-plaintext highlighter-rouge">&lt;init-param/&gt;</code> as below:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
      <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
@@ -261,7 +261,7 @@ version of FileManager. But it must be registered at “the beginning” to supp
 <span class="nt">&lt;/filter&gt;</span>
 </code></pre></div></div>
 
-<p>You can as well register your own FileManagerFactory with <code class="highlighter-rouge">&lt;init-param/&gt;</code>, see example:</p>
+<p>You can as well register your own FileManagerFactory with <code class="language-plaintext highlighter-rouge">&lt;init-param/&gt;</code>, see example:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
      <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
@@ -273,12 +273,12 @@ version of FileManager. But it must be registered at “the beginning” to supp
 <span class="nt">&lt;/filter&gt;</span>
 </code></pre></div></div>
 
-<p>Take a look on default implementations - <code class="highlighter-rouge">DefaultFileManager.java</code> and <code class="highlighter-rouge">DefaultFileManagerFactory.java</code> to understand how and why.</p>
+<p>Take a look on default implementations - <code class="language-plaintext highlighter-rouge">DefaultFileManager.java</code> and <code class="language-plaintext highlighter-rouge">DefaultFileManagerFactory.java</code> to understand how and why.</p>
 
 <h2 id="custom-configuration-provider">Custom configuration provider</h2>
 
-<p>It is possible to use your custom <code class="highlighter-rouge">ConfigurationProvider</code> to programmatically configure your application. To do this use 
-<code class="highlighter-rouge">configProviders</code> (it can be a comma-separated list of class names) <code class="highlighter-rouge">&lt;init-param/&gt;</code> as below:</p>
+<p>It is possible to use your custom <code class="language-plaintext highlighter-rouge">ConfigurationProvider</code> to programmatically configure your application. To do this use 
+<code class="language-plaintext highlighter-rouge">configProviders</code> (it can be a comma-separated list of class names) <code class="language-plaintext highlighter-rouge">&lt;init-param/&gt;</code> as below:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
      <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>

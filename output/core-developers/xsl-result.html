@@ -153,7 +153,7 @@ to its internal DTM model before further processing.</p>
 If it notices that some object’s property was already walked through, it doesn’t go any deeper. Say you have two objects, 
 x and y, with the following properties set (pseudocode):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x.y = y;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x.y = y;
 and
 y.x = x;
 action.x=x;
@@ -168,10 +168,10 @@ action.x=x;
 <span class="nt">&lt;/result&gt;</span>
 </code></pre></div></div>
 
-<p>Without it there would be endless <code class="highlighter-rouge">x/y/x/y/x/y/...</code> elements. The <code class="highlighter-rouge">XSLTResult</code> code tries also to deal with the fact 
+<p>Without it there would be endless <code class="language-plaintext highlighter-rouge">x/y/x/y/x/y/...</code> elements. The <code class="language-plaintext highlighter-rouge">XSLTResult</code> code tries also to deal with the fact 
 that DTM model is built in a manner that children are processed before siblings. The result is that if there is object 
-<code class="highlighter-rouge">x</code> that is both set in action’s <code class="highlighter-rouge">x</code> property, and very deeply under action’s a property then it would only appear under 
-<code class="highlighter-rouge">a</code>, not under <code class="highlighter-rouge">x</code>. That’s not what we expect, and that’s why <code class="highlighter-rouge">XSLTResult</code> allows objects to repeat in various places 
+<code class="language-plaintext highlighter-rouge">x</code> that is both set in action’s <code class="language-plaintext highlighter-rouge">x</code> property, and very deeply under action’s a property then it would only appear under 
+<code class="language-plaintext highlighter-rouge">a</code>, not under <code class="language-plaintext highlighter-rouge">x</code>. That’s not what we expect, and that’s why <code class="language-plaintext highlighter-rouge">XSLTResult</code> allows objects to repeat in various places 
 to some extent.</p>
 
 <p>Sometimes the object mesh is still very dense and you may notice that even though you have a relatively simple stylesheet, 
@@ -179,7 +179,7 @@ execution takes a tremendous amount of time. To help you to deal with that obsta
 to elements paths (xpath).</p>
 
 <blockquote>
-  <p>In your .xsl file the root match must be named <code class="highlighter-rouge">result</code>. This example will output the username by using <code class="highlighter-rouge">getUsername</code> on your action class:</p>
+  <p>In your .xsl file the root match must be named <code class="language-plaintext highlighter-rouge">result</code>. This example will output the username by using <code class="language-plaintext highlighter-rouge">getUsername</code> on your action class:</p>
 </blockquote>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">"result"</span><span class="nt">&gt;</span>
@@ -192,8 +192,8 @@ to elements paths (xpath).</p>
 </code></pre></div></div>
 
 <p>In the following example the XSLT result would only walk through action’s properties without their children. It would also 
-skip every property that has <code class="highlighter-rouge">hugeCollection</code> in their name. Element’s path is first compared to <code class="highlighter-rouge">excludingPattern</code> - 
-if it matches it’s no longer processed. Then it is compared to <code class="highlighter-rouge">matchingPattern</code> and processed only if there’s a match.</p>
+skip every property that has <code class="language-plaintext highlighter-rouge">hugeCollection</code> in their name. Element’s path is first compared to <code class="language-plaintext highlighter-rouge">excludingPattern</code> - 
+if it matches it’s no longer processed. Then it is compared to <code class="language-plaintext highlighter-rouge">matchingPattern</code> and processed only if there’s a match.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"xslt"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"stylesheetLocation"</span><span class="nt">&gt;</span>foo.xslt<span class="nt">&lt;/param&gt;</span>
@@ -203,7 +203,7 @@ if it matches it’s no longer processed. Then it is compared to <code class="hi
 </code></pre></div></div>
 
 <p>In the following example the XSLT result would use the action’s user property instead of the action as it’s base document 
-and walk through it’s properties. The <code class="highlighter-rouge">exposedValue</code> uses an OGNL expression to derive it’s value.</p>
+and walk through it’s properties. The <code class="language-plaintext highlighter-rouge">exposedValue</code> uses an OGNL expression to derive it’s value.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"xslt"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"stylesheetLocation"</span><span class="nt">&gt;</span>foo.xslt<span class="nt">&lt;/param&gt;</span>
@@ -216,18 +216,18 @@ and walk through it’s properties. The <code class="highlighter-rouge">exposedV
 <p>This result type takes the following parameters:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">stylesheetLocation</code> (default) - the location to go to after execution.</li>
-  <li><code class="highlighter-rouge">location</code> (deprecated) - the same as <code class="highlighter-rouge">stylesheetLocation</code> but it was dropped since Struts 2.5.</li>
-  <li><code class="highlighter-rouge">encoding</code> - character encoding used in XML, default UTF-8.</li>
-  <li><code class="highlighter-rouge">parse</code> - <code class="highlighter-rouge">true</code> by default. If set to false, the location param will not be parsed for Ognl expressions.</li>
-  <li><code class="highlighter-rouge">matchingPattern</code> - a <code class="highlighter-rouge">Pattern</code> that matches only desired elements, by default it matches everything.</li>
-  <li><code class="highlighter-rouge">excludingPattern</code> - a <code class="highlighter-rouge">Pattern</code> that eliminates unwanted elements, by default it matches none.</li>
+  <li><code class="language-plaintext highlighter-rouge">stylesheetLocation</code> (default) - the location to go to after execution.</li>
+  <li><code class="language-plaintext highlighter-rouge">location</code> (deprecated) - the same as <code class="language-plaintext highlighter-rouge">stylesheetLocation</code> but it was dropped since Struts 2.5.</li>
+  <li><code class="language-plaintext highlighter-rouge">encoding</code> - character encoding used in XML, default UTF-8.</li>
+  <li><code class="language-plaintext highlighter-rouge">parse</code> - <code class="language-plaintext highlighter-rouge">true</code> by default. If set to false, the location param will not be parsed for Ognl expressions.</li>
+  <li><code class="language-plaintext highlighter-rouge">matchingPattern</code> - a <code class="language-plaintext highlighter-rouge">Pattern</code> that matches only desired elements, by default it matches everything.</li>
+  <li><code class="language-plaintext highlighter-rouge">excludingPattern</code> - a <code class="language-plaintext highlighter-rouge">Pattern</code> that eliminates unwanted elements, by default it matches none.</li>
 </ul>
 
-<p><code class="highlighter-rouge">struts.xml</code> related configuration:</p>
+<p><code class="language-plaintext highlighter-rouge">struts.xml</code> related configuration:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">struts.xslt.nocache</code> - defaults to <code class="highlighter-rouge">false</code>. If set to true, disables stylesheet caching. Good for development, bad for production.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.xslt.nocache</code> - defaults to <code class="language-plaintext highlighter-rouge">false</code>. If set to true, disables stylesheet caching. Good for development, bad for production.</li>
 </ul>
 
 <h2 id="examples">Examples</h2>

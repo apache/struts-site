@@ -146,10 +146,10 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p>In our previous tutorials we’ve been using an XML file (<code class="highlighter-rouge">struts.xml</code>) to configure our applications. The XML file wires 
-up the action names (register), with ActionSupport classes (<code class="highlighter-rouge">RegisterAction.java</code>), and with the result to render back 
-to the browser (<code class="highlighter-rouge">register.jsp</code>). Struts 2 provides an alternative to using XML to configure your application by using 
-standard naming conventions and annotations for your action names, <code class="highlighter-rouge">ActionSupport</code> classes, and results.</p>
+<p>In our previous tutorials we’ve been using an XML file (<code class="language-plaintext highlighter-rouge">struts.xml</code>) to configure our applications. The XML file wires 
+up the action names (register), with ActionSupport classes (<code class="language-plaintext highlighter-rouge">RegisterAction.java</code>), and with the result to render back 
+to the browser (<code class="language-plaintext highlighter-rouge">register.jsp</code>). Struts 2 provides an alternative to using XML to configure your application by using 
+standard naming conventions and annotations for your action names, <code class="language-plaintext highlighter-rouge">ActionSupport</code> classes, and results.</p>
 
 <p>This tutorial assumes you understand how to apply annotations to Java classes and methods. If you’re not familiar with 
 annotations, consult the <a href="http://download.oracle.com/javase/tutorial/java/javaOO/annotations">Java online tutorial</a>.</p>
@@ -172,29 +172,29 @@ application’s class path. If you’re using Maven you’ll need to add a depen
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div></div>
 
-<p>If you’re using Ant then copy the struts2-convention-plugin jar file from the Struts 2 download to your <code class="highlighter-rouge">WEB-INF/lib</code> folder.</p>
+<p>If you’re using Ant then copy the struts2-convention-plugin jar file from the Struts 2 download to your <code class="language-plaintext highlighter-rouge">WEB-INF/lib</code> folder.</p>
 
 <p>The convention plugin provide several different ways you can configure your Struts 2 application without using XML. 
 Consult the <a href="../plugins/convention/">Convention Plugin</a> documentation for complete details. This tutorial only examines 
 one simple way of following the conventions provided by the Convention plugin.</p>
 
-<p>When you run the example application you’ll see on the <code class="highlighter-rouge">index.jsp</code> page a link to Get your hello. This URL for the link 
-is <code class="highlighter-rouge">hello.action</code>. When you click on this link, the execute method of class <code class="highlighter-rouge">HelloAction.java</code> (which is a Struts 2 <code class="highlighter-rouge">ActionSupport</code> class) 
-is run. The view page rendered back to the browser after the execute method returns success is <code class="highlighter-rouge">hello-success.jsp</code>.</p>
+<p>When you run the example application you’ll see on the <code class="language-plaintext highlighter-rouge">index.jsp</code> page a link to Get your hello. This URL for the link 
+is <code class="language-plaintext highlighter-rouge">hello.action</code>. When you click on this link, the execute method of class <code class="language-plaintext highlighter-rouge">HelloAction.java</code> (which is a Struts 2 <code class="language-plaintext highlighter-rouge">ActionSupport</code> class) 
+is run. The view page rendered back to the browser after the execute method returns success is <code class="language-plaintext highlighter-rouge">hello-success.jsp</code>.</p>
 
 <p>None of the above is wired up using XML but rather happens because the application follows the standard naming conventions 
-expected by the Convention plugin. The first convention is that the ActionSupport class, <code class="highlighter-rouge">HelloAction.java</code>, is in package 
-<code class="highlighter-rouge">org.apache.struts.struts2annotations.action</code>. One of the Convention plugin’s defaults is to look for <code class="highlighter-rouge">ActionSupport</code>
-classes that are in package structure that ends in action. The next convention the application follows is that <code class="highlighter-rouge">HelloAction.java</code>
+expected by the Convention plugin. The first convention is that the ActionSupport class, <code class="language-plaintext highlighter-rouge">HelloAction.java</code>, is in package 
+<code class="language-plaintext highlighter-rouge">org.apache.struts.struts2annotations.action</code>. One of the Convention plugin’s defaults is to look for <code class="language-plaintext highlighter-rouge">ActionSupport</code>
+classes that are in package structure that ends in action. The next convention the application follows is that <code class="language-plaintext highlighter-rouge">HelloAction.java</code>
 extends the ActionSupport class and defines an execute method. The link is hello.action. When the Struts 2 filter sees 
 a request for hello.action it will map that request to the HelloAction class’s execute method due to the Convention
 plugin being used.</p>
 
-<p>So a link of hello.action causes the execute method of class HelloAction to be run. That method returns <code class="highlighter-rouge">success</code>. 
+<p>So a link of hello.action causes the execute method of class HelloAction to be run. That method returns <code class="language-plaintext highlighter-rouge">success</code>. 
 Because the application is using the Convention plugin, Struts 2 will render back to the browser a view page named 
-<code class="highlighter-rouge">hello-success.jsp</code> that is located in WEB-INF/content (by default the Convention plugin expects all view pages to be 
+<code class="language-plaintext highlighter-rouge">hello-success.jsp</code> that is located in WEB-INF/content (by default the Convention plugin expects all view pages to be 
 in this location). If the execute method returns “input” or “error” then the view page rendered would have been 
-<code class="highlighter-rouge">hello-input.jsp</code> or <code class="highlighter-rouge">hello-error.jsp</code>.</p>
+<code class="language-plaintext highlighter-rouge">hello-input.jsp</code> or <code class="language-plaintext highlighter-rouge">hello-error.jsp</code>.</p>
 
 <h2 id="struts-2-configuration-plugin">Struts 2 Configuration Plugin</h2>
 
@@ -214,37 +214,37 @@ the ActionSupport class’s input method to setup form field default values and 
 ActionSupport class when the form is submitted (to validate and save the user’s input).</p>
 
 <p>The link to Register for the drawing on the example application’s home page follows this work flow. The link value 
-is <code class="highlighter-rouge">register-input.action</code>. If you examine the RegisterAction.java class you’ll find the input method with an Action annotation.</p>
+is <code class="language-plaintext highlighter-rouge">register-input.action</code>. If you examine the RegisterAction.java class you’ll find the input method with an Action annotation.</p>
 
 <p><strong>Action Annotation</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Action</span><span class="o">(</span><span class="s">"register-input"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">input</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">input</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"In input method of class Register"</span><span class="o">);</span>
 
-    <span class="k">return</span> <span class="n">INPUT</span><span class="o">;</span>
+    <span class="k">return</span> <span class="no">INPUT</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>The Action annotation tells Struts 2 to execute the annotated method when the action link value equals the Action 
-annotation’s value (<code class="highlighter-rouge">register-input</code>). So a link of <code class="highlighter-rouge">register-input.action</code> will call the input method of class <code class="highlighter-rouge">RegisterAction</code>. 
-On the example application’s home page is a link to Register for the drawing with a URL of <code class="highlighter-rouge">register-input.action</code>.</p>
+annotation’s value (<code class="language-plaintext highlighter-rouge">register-input</code>). So a link of <code class="language-plaintext highlighter-rouge">register-input.action</code> will call the input method of class <code class="language-plaintext highlighter-rouge">RegisterAction</code>. 
+On the example application’s home page is a link to Register for the drawing with a URL of <code class="language-plaintext highlighter-rouge">register-input.action</code>.</p>
 
 <p>The input method above returns “input”. By the standards of the Convention plugin, the view page rendered will be 
-<code class="highlighter-rouge">register-input.jsp</code> (from <code class="highlighter-rouge">WEB-INF/content</code>). On that view page is a Struts 2 form tag with an action attribute value 
+<code class="language-plaintext highlighter-rouge">register-input.jsp</code> (from <code class="language-plaintext highlighter-rouge">WEB-INF/content</code>). On that view page is a Struts 2 form tag with an action attribute value 
 of register. When submitting the form, the execute method of class RegisterAction will be run. Since the execute method 
-returns success, the view page rendered is <code class="highlighter-rouge">register-success.jsp</code>.</p>
+returns success, the view page rendered is <code class="language-plaintext highlighter-rouge">register-success.jsp</code>.</p>
 
 <h2 id="struts-2-configuration-values">Struts 2 Configuration Values</h2>
 
-<p>In previous examples, we included in <code class="highlighter-rouge">struts.xml</code> values for some of the Struts 2 configuration parameters.</p>
+<p>In previous examples, we included in <code class="language-plaintext highlighter-rouge">struts.xml</code> values for some of the Struts 2 configuration parameters.</p>
 
 <p><strong>struts.xml parameter configuration</strong></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.devMode"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>When we don’t use a struts.xml file, we can set the value of these Struts 2 parameters by using filter parameters in <code class="highlighter-rouge">web.xml</code>:</p>
+<p>When we don’t use a struts.xml file, we can set the value of these Struts 2 parameters by using filter parameters in <code class="language-plaintext highlighter-rouge">web.xml</code>:</p>
 
 <p><strong>Struts 2 Parameter Configuration web.xml</strong></p>
 

@@ -216,57 +216,57 @@
 
 <p><strong>Example 1</strong>: generate a simple iterator</p>
 
-<pre><code class="language-jsp">&lt;s:generator val="%{'aaa,bbb,ccc,ddd,eee'}"&gt;
- &lt;s:iterator&gt;
-     &lt;s:property /&gt;&lt;br/&gt;
- &lt;/s:iterator&gt;
-&lt;/s:generator&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:generator </span><span class="na">val=</span><span class="s">"%{'aaa,bbb,ccc,ddd,eee'}"</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;s:iterator&gt;</span>
+     <span class="nt">&lt;s:property /&gt;&lt;br/&gt;</span>
+ <span class="nt">&lt;/s:iterator&gt;</span>
+<span class="nt">&lt;/s:generator&gt;</span>
+</code></pre></div></div>
 
 <p>This generates an iterator and print it out using the iterator tag.</p>
 
 <p><strong>Example 2</strong>: generate an iterator with count attribute</p>
 
-<pre><code class="language-jsp">&lt;s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" count="3"&gt;
- &lt;s:iterator&gt;
-     &lt;s:property /&gt;&lt;br/&gt;
- &lt;/s:iterator&gt;
-&lt;/s:generator&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:generator </span><span class="na">val=</span><span class="s">"%{'aaa,bbb,ccc,ddd,eee'}"</span><span class="na"> count=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;s:iterator&gt;</span>
+     <span class="nt">&lt;s:property /&gt;&lt;br/&gt;</span>
+ <span class="nt">&lt;/s:iterator&gt;</span>
+<span class="nt">&lt;/s:generator&gt;</span>
+</code></pre></div></div>
 
 <p>This generates an iterator, but only 3 entries will be available in the iterator generated, namely aaa, bbb and ccc 
 respectively because count attribute is set to 3.</p>
 
 <p><strong>Example 3</strong>: generate an iterator with var attribute</p>
 
-<pre><code class="language-jsp">&lt;s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" count="4" separator="," var="myAtt" /&gt;
-&lt;%
- Iterator i = (Iterator) pageContext.getAttribute("myAtt");
- while(i.hasNext()) {
-     String s = (String) i.next(); %&gt;
-     &lt;%=s%&gt; &lt;br/&gt;
-&lt;%    }
-%&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:generator </span><span class="na">val=</span><span class="s">"%{'aaa,bbb,ccc,ddd,eee'}"</span><span class="na"> count=</span><span class="s">"4"</span><span class="na"> separator=</span><span class="s">","</span><span class="na"> var=</span><span class="s">"myAtt"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;%</span>
+ <span class="nc">Iterator</span> <span class="n">i</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Iterator</span><span class="o">)</span> <span class="n">pageContext</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"myAtt"</span><span class="o">);</span>
+ <span class="k">while</span><span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+     <span class="nc">String</span> <span class="n">s</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span> <span class="nt">%&gt;</span>
+     <span class="nt">&lt;%=</span><span class="n">s</span><span class="nt">%&gt;</span> <span class="nt">&lt;br/&gt;</span>
+<span class="nt">&lt;%</span>    <span class="o">}</span>
+<span class="nt">%&gt;</span>
+</code></pre></div></div>
 
 <p>This generates an iterator and put it in the PageContext under the key as specified by the var attribute.</p>
 
 <p><strong>Example 4</strong>: generate an iterator with comparator attribute</p>
 
-<pre><code class="language-jsp">&lt;s:generator val="%{'aaa,bbb,ccc,ddd,eee'}" converter="%{myConverter}"&gt;
- &lt;s:iterator&gt;
-     &lt;s:property /&gt;&lt;br/&gt;
- &lt;/s:iterator&gt;
-&lt;/s:generator&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:generator </span><span class="na">val=</span><span class="s">"%{'aaa,bbb,ccc,ddd,eee'}"</span><span class="na"> converter=</span><span class="s">"%{myConverter}"</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;s:iterator&gt;</span>
+     <span class="nt">&lt;s:property /&gt;&lt;br/&gt;</span>
+ <span class="nt">&lt;/s:iterator&gt;</span>
+<span class="nt">&lt;/s:generator&gt;</span>
+</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GeneratorTagAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GeneratorTagAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
 
   <span class="o">....</span>
 
-  <span class="kd">public</span> <span class="n">Converter</span> <span class="nf">getMyConverter</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="nc">Converter</span> <span class="nf">getMyConverter</span><span class="o">()</span> <span class="o">{</span>
      <span class="k">return</span> <span class="k">new</span> <span class="nf">Converter</span><span class="o">()</span> <span class="o">{</span>
-         <span class="kd">public</span> <span class="n">Object</span> <span class="nf">convert</span><span class="o">(</span><span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+         <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">convert</span><span class="o">(</span><span class="nc">String</span> <span class="n">value</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
              <span class="k">return</span> <span class="s">"converter-"</span><span class="o">+</span><span class="n">value</span><span class="o">;</span>
          <span class="o">}</span>
      <span class="o">};</span>

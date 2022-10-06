@@ -140,25 +140,25 @@ file streams you should take a look at <a href="https-and-ie-issues">HTTPS and I
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">contentType</code> - the stream mime-type as sent to the web browser (default = <code class="highlighter-rouge">text/plain</code>).</li>
-  <li><code class="highlighter-rouge">contentLength</code> - the stream length in bytes (the browser displays a progress bar).</li>
-  <li><code class="highlighter-rouge">contentDisposition</code> - the content disposition header value for specifying the file name (default = <code class="highlighter-rouge">inline</code>, values 
-are typically <code class="highlighter-rouge">attachment;filename="document.pdf"</code>.</li>
-  <li><code class="highlighter-rouge">inputName</code> - the name of the InputStream property from the chained action (default = <code class="highlighter-rouge">inputStream</code>).</li>
-  <li><code class="highlighter-rouge">bufferSize</code> - the size of the buffer to copy from input to output (default = <code class="highlighter-rouge">1024</code>).</li>
-  <li><code class="highlighter-rouge">allowCaching</code> - if set to ‘false’ it will set the headers <code class="highlighter-rouge">Pragma</code> and <code class="highlighter-rouge">Cache-Control</code> to <code class="highlighter-rouge">no-cahce</code>, and prevent 
-client from caching the content (default = <code class="highlighter-rouge">true</code>).</li>
-  <li><code class="highlighter-rouge">contentCharSet</code> - if set to a string, ‘;charset=value’ will be added to the content-type header, where value is the string 
+  <li><code class="language-plaintext highlighter-rouge">contentType</code> - the stream mime-type as sent to the web browser (default = <code class="language-plaintext highlighter-rouge">text/plain</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">contentLength</code> - the stream length in bytes (the browser displays a progress bar).</li>
+  <li><code class="language-plaintext highlighter-rouge">contentDisposition</code> - the content disposition header value for specifying the file name (default = <code class="language-plaintext highlighter-rouge">inline</code>, values 
+are typically <code class="language-plaintext highlighter-rouge">attachment;filename="document.pdf"</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">inputName</code> - the name of the InputStream property from the chained action (default = <code class="language-plaintext highlighter-rouge">inputStream</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">bufferSize</code> - the size of the buffer to copy from input to output (default = <code class="language-plaintext highlighter-rouge">1024</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">allowCaching</code> - if set to ‘false’ it will set the headers <code class="language-plaintext highlighter-rouge">Pragma</code> and <code class="language-plaintext highlighter-rouge">Cache-Control</code> to <code class="language-plaintext highlighter-rouge">no-cahce</code>, and prevent 
+client from caching the content (default = <code class="language-plaintext highlighter-rouge">true</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">contentCharSet</code> - if set to a string, ‘;charset=value’ will be added to the content-type header, where value is the string 
 set. If set to an expression, the result of evaluating the expression will be used. If not set, then no charset will 
 be set on the header</li>
 </ul>
 
 <p>These parameters can also be set by exposing a similarly named getter method on your Action. For example, you can provide 
-<code class="highlighter-rouge">getContentType()</code> to override that parameter for the current action. To do it you you must explicitly define this param 
-as an expression i.e. <code class="highlighter-rouge">&lt;param name="contentType"&gt;${contentType}&lt;/param&gt;</code></p>
+<code class="language-plaintext highlighter-rouge">getContentType()</code> to override that parameter for the current action. To do it you you must explicitly define this param 
+as an expression i.e. <code class="language-plaintext highlighter-rouge">&lt;param name="contentType"&gt;${contentType}&lt;/param&gt;</code></p>
 
 <p class="alert alert-success">Please be aware that this was changed since Struts 2.5.2, previously each parameter was automatically resolved by looking 
-throughout the <code class="highlighter-rouge">ValueStack</code>, now you must explicitly define which parameter must be evaluated, even <code class="highlighter-rouge">inputName</code>.</p>
+throughout the <code class="language-plaintext highlighter-rouge">ValueStack</code>, now you must explicitly define which parameter must be evaluated, even <code class="language-plaintext highlighter-rouge">inputName</code>.</p>
 
 <h2 id="examples">Examples</h2>
 
@@ -167,7 +167,7 @@ throughout the <code class="highlighter-rouge">ValueStack</code>, now you must e
 <p>To configure Actions and Results with Annotations you need to activate the Struts2 <a href="../plugins/convention/">Convention Plugin</a> 
 in your Struts2 application.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">webapp</span><span class="o">.</span><span class="na">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.mycompany.webapp.actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.FileInputStream</span><span class="o">;</span>
@@ -188,30 +188,30 @@ in your Struts2 application.</p>
 		<span class="s">"contentDisposition"</span><span class="o">,</span> <span class="s">"attachment;filename=\"${filename}\""</span> 
 	<span class="o">}</span>
 <span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FileDisplay</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FileDisplay</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
 
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">type</span> <span class="o">=</span> <span class="s">"image/jpeg"</span><span class="o">;</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">filename</span><span class="o">;</span>
-	<span class="kd">private</span> <span class="n">InputStream</span> <span class="n">stream</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">type</span> <span class="o">=</span> <span class="s">"image/jpeg"</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">filename</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">InputStream</span> <span class="n">stream</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
 
 		<span class="n">filename</span> <span class="o">=</span> <span class="s">"myimage.jpg"</span><span class="o">;</span>
-		<span class="n">File</span> <span class="n">img</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"/path/to/image/image.jpg"</span><span class="o">);</span>
-		<span class="n">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">img</span><span class="o">);</span>
+		<span class="nc">File</span> <span class="n">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"/path/to/image/image.jpg"</span><span class="o">);</span>
+		<span class="n">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">img</span><span class="o">);</span>
 
-		<span class="k">return</span> <span class="n">Action</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">;</span>
+		<span class="k">return</span> <span class="nc">Action</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">;</span>
 	<span class="o">}</span>
 	
-	<span class="kd">private</span> <span class="n">String</span> <span class="nf">getType</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="nf">getType</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">type</span><span class="o">;</span>
 	<span class="o">}</span>
 	
-	<span class="kd">private</span> <span class="n">String</span> <span class="nf">getFilename</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="nf">getFilename</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">filename</span><span class="o">;</span>
 	<span class="o">}</span>
 	
-	<span class="kd">private</span> <span class="n">String</span> <span class="nf">getStream</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="nf">getStream</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">stream</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>

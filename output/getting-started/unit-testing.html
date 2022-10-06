@@ -157,7 +157,7 @@ to your problem, post a question on the mailing list.</p>
 <h2 id="setup">Setup</h2>
 
 <p>The Struts 2 JUnit plugin jar file must be on your application’s class path. In the example application (see info above) 
-the <code class="highlighter-rouge">pom.xml</code> includes a dependency for the <code class="highlighter-rouge">struts2-junit-plugin</code>. There are numerous transitive dependencies, including 
+the <code class="language-plaintext highlighter-rouge">pom.xml</code> includes a dependency for the <code class="language-plaintext highlighter-rouge">struts2-junit-plugin</code>. There are numerous transitive dependencies, including 
 to JUnit and the Spring framework.</p>
 
 <h2 id="writing-a-unit-test">Writing A Unit Test</h2>
@@ -187,7 +187,7 @@ methods to be run. In the example application this action is register.</p>
 </code></pre></div></div>
 
 <p>Remember the validate method will be called automatically by the framework before calling the execute method. If validation 
-fails the Struts framework will return <code class="highlighter-rouge">input</code>. If there are no validation errors then the framework will call the execute 
+fails the Struts framework will return <code class="language-plaintext highlighter-rouge">input</code>. If there are no validation errors then the framework will call the execute 
 method and return whatever String the execute method returns.</p>
 
 <h2 id="test-validation-should-pass">Test Validation Should Pass</h2>
@@ -197,29 +197,29 @@ would first enter the form data shown on the register.jsp page.</p>
 
 <p><img src="attachments/att28017281_Screen shot 2012-02-17 at 2.46.54 PM.png" alt="Screen shot 2012-02-17 at 2.46.54 PM.png" /></p>
 
-<p>The input fields for the form have the following name values: <code class="highlighter-rouge">personBean.firstName</code>, <code class="highlighter-rouge">personBean.lastName</code>, 
-<code class="highlighter-rouge">personBean.email</code>, and <code class="highlighter-rouge">personBean.age</code>. When the user fills out those fields Struts will take the values and provide 
-them to the appropriate set methods of the <code class="highlighter-rouge">personBean</code> object. So as part of the test I need to simulate the user filling 
-out these form fields. The StrutsTestCase provides a request object (of type <code class="highlighter-rouge">MockHttpServletRequest</code>) that I can use 
+<p>The input fields for the form have the following name values: <code class="language-plaintext highlighter-rouge">personBean.firstName</code>, <code class="language-plaintext highlighter-rouge">personBean.lastName</code>, 
+<code class="language-plaintext highlighter-rouge">personBean.email</code>, and <code class="language-plaintext highlighter-rouge">personBean.age</code>. When the user fills out those fields Struts will take the values and provide 
+them to the appropriate set methods of the <code class="language-plaintext highlighter-rouge">personBean</code> object. So as part of the test I need to simulate the user filling 
+out these form fields. The StrutsTestCase provides a request object (of type <code class="language-plaintext highlighter-rouge">MockHttpServletRequest</code>) that I can use 
 to set these values in the request scope.</p>
 
 <p><strong>testExecuteValidationPasses method from RegisterTest class</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteValidationPasses</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteValidationPasses</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.firstName"</span><span class="o">,</span> <span class="s">"Bruce"</span><span class="o">);</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.lastName"</span><span class="o">,</span> <span class="s">"Phillips"</span><span class="o">);</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.email"</span><span class="o">,</span> <span class="s">"bphillips@ku.edu"</span><span class="o">);</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.age"</span><span class="o">,</span> <span class="s">"19"</span><span class="o">);</span>
 
-    <span class="n">ActionProxy</span> <span class="n">actionProxy</span> <span class="o">=</span> <span class="n">getActionProxy</span><span class="o">(</span><span class="s">"/register.action"</span><span class="o">);</span>
-    <span class="n">Register</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="n">Register</span><span class="o">)</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">;</span>
+    <span class="nc">ActionProxy</span> <span class="n">actionProxy</span> <span class="o">=</span> <span class="n">getActionProxy</span><span class="o">(</span><span class="s">"/register.action"</span><span class="o">);</span>
+    <span class="nc">Register</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Register</span><span class="o">)</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">;</span>
 
     <span class="n">assertNotNull</span><span class="o">(</span><span class="s">"The action is null but should not be."</span><span class="o">,</span> <span class="n">action</span><span class="o">);</span>
 
-    <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
+    <span class="nc">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
 
-    <span class="n">assertEquals</span><span class="o">(</span><span class="s">"The execute method did not return "</span> <span class="o">+</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">SUCCESS</span> <span class="o">+</span> <span class="s">" but should have."</span><span class="o">,</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+    <span class="n">assertEquals</span><span class="o">(</span><span class="s">"The execute method did not return "</span> <span class="o">+</span> <span class="nc">ActionSupport</span><span class="o">.</span><span class="na">SUCCESS</span> <span class="o">+</span> <span class="s">" but should have."</span><span class="o">,</span> <span class="nc">ActionSupport</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -240,7 +240,7 @@ a way of checking that you’ve correctly setup struts.xml for this action.</p>
 <p>After that I can call actionProxy.execute(). This causes the Struts 2 framework to go through its normal process of Servlet 
 filter and interceptors for the action identified by the actionProxy (in this case that is the register.action). The validate 
 method of class Register will get called and if it doesn’t create any field or action errors then Struts 2 will call 
-the <code class="highlighter-rouge">execute</code> method. In this example, the execute method should return <code class="highlighter-rouge">success</code>.</p>
+the <code class="language-plaintext highlighter-rouge">execute</code> method. In this example, the execute method should return <code class="language-plaintext highlighter-rouge">success</code>.</p>
 
 <p>So in the next statement, I check that success was returned.</p>
 
@@ -254,24 +254,24 @@ for that field.</p>
 <p><strong>testExecuteValidationFailsMissingFirstName method from RegisterTest class</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteValidationFailsMissingFirstName</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteValidationFailsMissingFirstName</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="c1">//request.setParameter("personBean.firstName", "Bruce");</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.lastName"</span><span class="o">,</span> <span class="s">"Phillips"</span><span class="o">);</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.email"</span><span class="o">,</span> <span class="s">"bphillips@ku.edu"</span><span class="o">);</span>
     <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"personBean.age"</span><span class="o">,</span> <span class="s">"19"</span><span class="o">);</span>
     
-    <span class="n">ActionProxy</span> <span class="n">actionProxy</span> <span class="o">=</span> <span class="n">getActionProxy</span><span class="o">(</span><span class="s">"/register.action"</span><span class="o">);</span>
-    <span class="n">Register</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="n">Register</span><span class="o">)</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">;</span>
+    <span class="nc">ActionProxy</span> <span class="n">actionProxy</span> <span class="o">=</span> <span class="n">getActionProxy</span><span class="o">(</span><span class="s">"/register.action"</span><span class="o">);</span>
+    <span class="nc">Register</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Register</span><span class="o">)</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">;</span>
     
     <span class="n">assertNotNull</span><span class="o">(</span><span class="s">"The action is null but should not be."</span><span class="o">,</span> <span class="n">action</span><span class="o">);</span>
     
-    <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
+    <span class="nc">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">actionProxy</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
     
-    <span class="n">assertEquals</span><span class="o">(</span><span class="s">"The execute method did not return "</span> <span class="o">+</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">INPUT</span> <span class="o">+</span> <span class="s">" but should have."</span><span class="o">,</span> <span class="n">ActionSupport</span><span class="o">.</span><span class="na">INPUT</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+    <span class="n">assertEquals</span><span class="o">(</span><span class="s">"The execute method did not return "</span> <span class="o">+</span> <span class="nc">ActionSupport</span><span class="o">.</span><span class="na">INPUT</span> <span class="o">+</span> <span class="s">" but should have."</span><span class="o">,</span> <span class="nc">ActionSupport</span><span class="o">.</span><span class="na">INPUT</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>In the last assertEquals statement my test checks that the Struts 2 framework returned <code class="highlighter-rouge">input</code> as that is what the Struts 2 
+<p>In the last assertEquals statement my test checks that the Struts 2 framework returned <code class="language-plaintext highlighter-rouge">input</code> as that is what the Struts 2 
 framework will return if the validation adds a field or action error.</p>
 
 <h2 id="summary">Summary</h2>
