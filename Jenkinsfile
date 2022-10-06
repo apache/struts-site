@@ -22,8 +22,10 @@ pipeline {
           echo Generiting a new version of website        
 
           curl -sSL https://get.rvm.io | bash -s -- --path ${RUBY_PATH}
+          rvm install 2.7.6
+          
           mkdir -p ${GEM_HOME}
-          gem install  --install-dir ${GEM_HOME} bundler -v '2.1.4'
+          gem install  --install-dir ${GEM_HOME} bundler -v '2.3.13'
           
           bundle install --path ${GEM_HOME}
           bundle
