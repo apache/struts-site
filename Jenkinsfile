@@ -11,17 +11,14 @@ pipeline {
     skipStagesAfterUnstable()
   }
   environment {
-    RUBY_PATH="${env.WORKSPACE_TMP}/.rvm"
-    GEM_HOME="${RUBY_PATH}/gems"
-    PATH="${GEM_HOME}/bin:${RUBY_PATH}/bin:${env.PATH}"
+    GEM_HOME="${env.WORKSPACE_TMP}/gems"
+    PATH="${GEM_HOME}/bin:${env.PATH}"
   }
   stages {
     stage('Build a staged website') {
       steps {
         sh """
           echo Generiting a new version of website
-          rm -rv ${RUBY_PATH}
-          curl -sSL https://get.rvm.io | bash -s -- --path ${RUBY_PATH}
           rvm install 2.7.6
           
           mkdir -p ${GEM_HOME}
