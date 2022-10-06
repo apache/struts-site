@@ -13,7 +13,7 @@ pipeline {
   environment {
     RUBY_PATH="${env.WORKSPACE_TMP}/.rvm"
     GEM_HOME="${RUBY_PATH}/gems"
-    PATH="${GEM_HOME}/bin:${env.PATH}"
+    PATH="${RUBY_PATH}/bin:${GEM_HOME}/bin:${env.PATH}"
   }
   stages {
     stage('Build a staged website') {
