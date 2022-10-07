@@ -16,13 +16,9 @@ pipeline {
   }
   stages {
     stage('Build a staged website') {
-      agent {
-        docker {
-          image 'jekyll/builder:4.2.2'
-        }
-      }
-      steps {
+      docker.image('jekyll/builder:4.2.2').inside('-v $WORKSPACE:/srv/jekyll') {
         sh """
+          bundle install
           jekyll build
         """
       }
