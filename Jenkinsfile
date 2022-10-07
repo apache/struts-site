@@ -16,16 +16,13 @@ pipeline {
   }
   stages {
     stage('Build a staged website') {
+      agent {
+        docker {
+          image 'jekyll/jekyll:4.2.2'
+        }
+      }
       steps {
         sh """
-          echo Generiting a new version of website
-          rvm install 2.7.6
-          
-          mkdir -p ${GEM_HOME}
-          gem install  --install-dir ${GEM_HOME} bundler -v '2.3.13'
-          
-          bundle install --path ${GEM_HOME}
-          bundle
           bundle exec jekyll build
         """
       }

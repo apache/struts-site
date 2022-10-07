@@ -28,7 +28,7 @@ module Jekyll
     end
 
     def fetchContent(url)
-      Net::HTTP.get(URI.parse(URI.encode(url.strip)))
+      Net::HTTP.get(URI.parse(url.strip))
     end
   end
 end
