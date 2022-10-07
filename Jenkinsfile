@@ -19,7 +19,7 @@ pipeline {
       agent {
         docker {
           image 'jekyll/builder:4.2.2'
-          args '-v $WORKSPACE:/srv/jekyll'
+          args "-v ${env.WORKSPACE}:/srv/jekyll -v ${env.WORKSPACE_TMP}:/tmp"
         }
       }
       steps {
