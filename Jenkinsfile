@@ -23,10 +23,14 @@ pipeline {
         }
       }
       steps {
-        sh """
-          bundle install
+        sh '''
+          export RUBY_PATH="/tmp/.rvm"
+          export GEM_HOME="$RUBY_PATH/gems"
+          export PATH="$GEM_HOME/bin:$PATH"
+
+          bundle install --path $GEM_HOME
           bundle exec jekyll build
-        """
+        '''
       }
     }
     stage('Deploy to stage area') {
