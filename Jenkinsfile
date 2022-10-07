@@ -19,12 +19,11 @@ pipeline {
       agent {
         docker {
           image 'jekyll/builder:4.2.2'
-          args '-v $WORKSPACE:/srv/jekyll'
         }
       }
       steps {
         sh """
-          bundle exec jekyll build
+          jekyll build
         """
       }
     }
