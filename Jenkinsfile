@@ -18,7 +18,8 @@ pipeline {
     stage('Build a staged website') {
       agent {
         docker {
-          image 'jekyll/jekyll:4.2.2'
+          image 'jekyll/builder:4.2.2'
+          args '-v $WORKSPACE:/srv/jekyll'
         }
       }
       steps {
