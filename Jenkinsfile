@@ -19,7 +19,7 @@ pipeline {
       agent {
         docker {
           image 'jekyll/builder:4.2.2'
-          args "-v ${env.WORKSPACE}:/srv/jekyll -v ${env.WORKSPACE_TMP}:/tmp"
+          args "-v ${env.WORKSPACE}:/srv/jekyll:rw -v ${env.WORKSPACE_TMP}:/tmp:rw"
         }
       }
       steps {
@@ -28,7 +28,8 @@ pipeline {
           export GEM_HOME="$RUBY_PATH/gems"
           export PATH="$GEM_HOME/bin:$PATH"
 
-          bundle install --path $GEM_HOME
+          bundle config set --local path $GEM_HOME
+          bundle install
           bundle exec jekyll build
         '''
       }
