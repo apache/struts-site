@@ -16,11 +16,13 @@ pipeline {
   }
   stages {
     stage('Build a staged website') {
-      docker.image('jekyll/builder:4.2.2').inside('-v $WORKSPACE:/srv/jekyll') {
-        sh """
-          bundle install
-          jekyll build
-        """
+      steps {
+        docker.image('jekyll/builder:4.2.2').inside('-v $WORKSPACE:/srv/jekyll') {
+          sh """
+            bundle install
+            bundle exec jekyll build
+          """
+        }
       }
     }
     stage('Deploy to stage area') {
