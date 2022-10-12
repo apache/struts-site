@@ -20,6 +20,7 @@ pipeline {
       }
       steps {
         sh '''
+          export
           export RUBY_PATH="$HOME/.rvm"
           export GEM_HOME="$RUBY_PATH/gems"
           export PATH="$GEM_HOME/bin:$PATH"
