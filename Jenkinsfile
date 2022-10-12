@@ -15,13 +15,12 @@ pipeline {
       agent {
         docker {
           image 'jekyll/builder:4.2.2'
-          args "-v ${env.WORKSPACE}:/srv/jekyll:rw,z -v ${env.WORKSPACE_TMP}:/tmp:rw,z"
         }
       }
       steps {
         sh '''
           export
-          export RUBY_PATH="$HOME/.rvm"
+          export RUBY_PATH="$WORKSPACE/.rvm"
           export GEM_HOME="$RUBY_PATH/gems"
           export PATH="$GEM_HOME/bin:$PATH"
 
