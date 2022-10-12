@@ -20,9 +20,9 @@ pipeline {
       steps {
         sh '''
           export
-          export RUBY_PATH="$WORKSPACE/.rvm"
-          export GEM_HOME="$RUBY_PATH/gems"
+          export GEM_HOME="$$WORKSPACE/.gems"
           export PATH="$GEM_HOME/bin:$PATH"
+          export BUNDLE_USER_HOME="$WORKSPACE/.bundle"
 
           bundle config set --local path $GEM_HOME
           bundle install
