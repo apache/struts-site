@@ -10,16 +10,12 @@ pipeline {
     disableConcurrentBuilds()
     skipStagesAfterUnstable()
   }
-  environment {
-    GEM_HOME="${env.WORKSPACE_TMP}/gems"
-    PATH="${GEM_HOME}/bin:${env.PATH}"
-  }
   stages {
     stage('Build a staged website') {
       agent {
         docker {
           image 'jekyll/builder:4.2.2'
-          args "-v ${env.WORKSPACE}:/srv/jekyll:rw -v ${env.WORKSPACE_TMP}:/tmp:rw"
+          args "-v ${env.WORKSPACE}:/srv/jekyll:rw,z -v ${env.WORKSPACE_TMP}:/tmp:rw,z"
         }
       }
       steps {
