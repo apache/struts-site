@@ -19,7 +19,6 @@ pipeline {
       }
       steps {
         sh '''
-          export
           export GEM_HOME="$WORKSPACE/.gems"
           export PATH="$GEM_HOME/bin:$PATH"
           export BUNDLE_USER_HOME="$WORKSPACE/.bundle"
