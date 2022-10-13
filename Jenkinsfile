@@ -10,26 +10,31 @@ pipeline {
     disableConcurrentBuilds()
     skipStagesAfterUnstable()
   }
+  environment {
+    RUBY_PATH="${env.WORKSPACE}/.rvm"
+    GEM_HOME="${evn.WORKSPACE}/gems"
+    PATH="${GEM_HOME}/bin:${env.PATH}"
+  }
   stages {
     stage('Build a staged website') {
       steps {
-        sh '''
-          export GEM_HOME="$WORKSPACE/.gems"
-          export PATH="$GEM_HOME/bin:$PATH"
-          export BUNDLE_USER_HOME="$WORKSPACE/.bundle"
+        sh """
+          echo Generiting a new version of website        
 
-          bundle config set --local path $GEM_HOME
+          curl -sSL https://get.rvm.io | bash -s -- --path ${RUBY_PATH}
+          mkdir -p ${GEM_HOME}
+          bundle config set --local path $GEM_HOM
+          gem install  --install-dir ${GEM_HOME} bundler -v '2.3.23'
+          
           bundle install
           bundle exec jekyll build
-        '''
+        """
       }
     }
     stage('Deploy to stage area') {
       steps {
         sh """
           echo "Pushing changes into stage site"
-          
-          ls -l
 
           if ! git config remote.asf.url > /dev/null; then
             git remote add asf https://gitbox.apache.org/repos/asf/struts-site.git
