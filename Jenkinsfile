@@ -33,6 +33,8 @@ pipeline {
       steps {
         sh """
           echo "Pushing changes into stage site"
+          
+          ls -l
 
           if ! git config remote.asf.url > /dev/null; then
             git remote add asf https://gitbox.apache.org/repos/asf/struts-site.git
