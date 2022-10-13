@@ -1,6 +1,7 @@
 ---
 layout: core-developers
 title: Postback Result
+parent:
     title: Result types
     url: result-types
 ---
