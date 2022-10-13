@@ -10,21 +10,19 @@ pipeline {
     disableConcurrentBuilds()
     skipStagesAfterUnstable()
   }
-  environment {
-    RUBY_PATH="${env.WORKSPACE}/.rvm"
-    GEM_HOME="${evn.WORKSPACE}/gems"
-    PATH="${GEM_HOME}/bin:${env.PATH}"
-  }
   stages {
     stage('Build a staged website') {
       steps {
         sh """
           echo Generiting a new version of website        
+          export RUBY_PATH="${env.WORKSPACE}/.rvm"
+          export GEM_HOME="${evn.WORKSPACE}/.gems"
+          export PATH="${env.GEM_HOME}/bin:${env.PATH}"
 
-          curl -sSL https://get.rvm.io | bash -s -- --path ${RUBY_PATH}
-          mkdir -p ${GEM_HOME}
-          bundle config set --local path ${GEM_HOME}
-          gem install  --install-dir ${GEM_HOME} bundler -v '2.3.23'
+          curl -sSL https://get.rvm.io | bash -s -- --path ${env.RUBY_PATH}
+          mkdir -p ${env.GEM_HOME}
+          bundle config set --local path ${env.GEM_HOME}
+          gem install  --install-dir ${env.GEM_HOME} bundler -v '2.3.23'
           
           bundle install
           bundle exec jekyll build
