@@ -2,8 +2,8 @@
 layout: default
 title: Chain Result
 parent:
-    title: Core Developers Guide
-    url: index.html
+    title: Result types
+    url: result-types
 ---
 
 # Chain Result

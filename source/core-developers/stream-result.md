@@ -2,8 +2,8 @@
 layout: default
 title: Stream Result
 parent:
-    title: Core Developers Guide
-    url: index.html
+    title: Result types
+    url: result-types
 ---
 
 # Stream Result
