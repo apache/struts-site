@@ -10,15 +10,17 @@ pipeline {
     disableConcurrentBuilds()
     skipStagesAfterUnstable()
   }
+  environment {
+    RUBY_PATH="${env.WORKSPACE}/.rvm"
+    GEM_HOME="${RUBY_PATH}/gems"
+    PATH="${GEM_HOME}/bin:${env.PATH}"
+  }
   stages {
     stage('Build a staged website') {
       steps {
         sh """
           echo Generiting a new version of website        
-          export RUBY_PATH="${WORKSPACE}/.rvm"
-          export GEM_HOME="${WORKSPACE}/.gems"
-          export PATH="${GEM_HOME}/bin:${PATH}"
-
+   
           curl -sSL https://get.rvm.io | bash -s -- --path ${RUBY_PATH}
           mkdir -p ${GEM_HOME}
           bundle config set --local path ${GEM_HOME}
