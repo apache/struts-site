@@ -12,6 +12,11 @@ pipeline {
   }
   stages {
     stage('Build a staged website') {
+      agent {
+        docker {
+          image 'jekyll/builder:4.2.2'
+        }
+      }
       steps {
         sh '''
           export GEM_HOME="$WORKSPACE/.gems"
