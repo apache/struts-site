@@ -27,8 +27,8 @@ pipeline {
           bundle config set --local path $GEM_HOME
           bundle install
           bundle exec jekyll build
-          
-          mv $WORKSPACE/_site $DESTINATION
+          ls -l
+          mv ./_site $DESTINATION
         '''
       }
     }
