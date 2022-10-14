@@ -28,7 +28,7 @@ pipeline {
           bundle install
           bundle exec jekyll build
           
-          mv _site $DESTINATION
+          mv $WORKSPACE/_site $DESTINATION
         '''
       }
     }
