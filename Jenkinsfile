@@ -15,7 +15,7 @@ pipeline {
       agent {
         docker {
           image 'jekyll/builder:4.2.2'
-          args "-e DESTINATION=${env.WORKSPACE}"
+          args "-v ${env.WORKSPACE}:/dest:rw,z"
         }
       }
       steps {
@@ -27,8 +27,9 @@ pipeline {
           bundle config set --local path $GEM_HOME
           bundle install
           bundle exec jekyll build
+          ls -l /dest
           ls -l
-          mv ./_site $DESTINATION
+          mv ./_site /dest
         '''
       }
     }
