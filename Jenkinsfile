@@ -12,11 +12,6 @@ pipeline {
   }
   stages {
     stage('Build a staged website') {
-      agent {
-        docker {
-          image 'jekyll/builder:4.2.2'
-        }
-      }
       steps {
         sh '''
           export GEM_HOME="$WORKSPACE/.gems"
@@ -26,19 +21,8 @@ pipeline {
           bundle config set --local path $GEM_HOME
           bundle install
           bundle exec jekyll build
-          
-          pwd
-          ls -la
-        '''
-      }
-    }
-    stage('Deploy to stage area') {
-      steps {
-        sh '''
-          echo "Pushing changes into stage site"
 
-          pwd
-          ls -la
+          echo "Pushing changes into stage site"
           
           if ! git config remote.asf.url > /dev/null; then
             git remote add asf https://gitbox.apache.org/repos/asf/struts-site.git
@@ -47,8 +31,6 @@ pipeline {
           git fetch asf
           git checkout asf-staging
           git pull asf asf-staging
-          
-          ls -la
           
           cp -r _site/* content
           cp -r _site/.htaccess content/.htaccess
