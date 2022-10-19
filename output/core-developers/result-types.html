@@ -129,11 +129,21 @@
   <section class="col-md-12">
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/result-types.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="result-types">Result Types</h1>
+    <h1 class="no_toc" id="result-types">Result Types</h1>
 
 <p>Most use cases can be divided into two phases. First, we need to change or query the application’s state, and then we need 
 to present an updated view of the application. The Action class manages the application’s state, and the Result Type 
 manages the view.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#predefined-result-types" id="markdown-toc-predefined-result-types">Predefined Result Types</a></li>
+  <li><a href="#how-to-use-results" id="markdown-toc-how-to-use-results">How to use results</a></li>
+  <li><a href="#default-result-type" id="markdown-toc-default-result-type">Default result type</a></li>
+  <li><a href="#default-result-name" id="markdown-toc-default-result-name">Default result name</a></li>
+  <li><a href="#default-parameters" id="markdown-toc-default-parameters">Default parameters</a></li>
+  <li><a href="#registering-result-types" id="markdown-toc-registering-result-types">Registering result types</a></li>
+  <li><a href="#extending" id="markdown-toc-extending">Extending</a></li>
+</ul>
 
 <h2 id="predefined-result-types">Predefined Result Types</h2>
 
@@ -180,7 +190,7 @@ own applications.</p>
     </tr>
     <tr>
       <td><a href="plain-result">Plain Result</a></td>
-      <td>A plain result which all you to write directly to a HttpResponse using a simplified API (since Struts 2.6)</td>
+      <td>A plain result which all you to write directly to a HttpResponse using a simplified API (since Struts 6.x)</td>
     </tr>
     <tr>
       <td><a href="plaintext-result">PlainText Result</a></td>
@@ -191,10 +201,6 @@ own applications.</p>
       <td>Used to provide Tiles integration</td>
     </tr>
     <tr>
-      <td><a href="../plugins/tiles-3/">Tiles 3 Result</a></td>
-      <td>Used to provide Tiles 3 integration</td>
-    </tr>
-    <tr>
       <td><a href="postback-result">Postback Result</a></td>
       <td>Used to postback request parameters as a form to the specified destination</td>
     </tr>
@@ -202,17 +208,9 @@ own applications.</p>
       <td><a href="../plugins/json/">JSON Result</a></td>
       <td>Used to serialize actions into JSON</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="optional">Optional</h2>
-
-<table>
-  <tbody>
     <tr>
       <td><a href="../plugins/jasperreports/">JasperReports Plugin</a></td>
       <td>Used for <a href="../getting-started/jasper-reports-tutorial">JasperReports Tutorial</a> integration</td>
-      <td>Optional, third-party plugin</td>
     </tr>
   </tbody>
 </table>
@@ -220,7 +218,40 @@ own applications.</p>
 <p>Additional Result Types can be created and plugged into an application by implementing the <code class="language-plaintext highlighter-rouge">com.opensymphony.xwork2.Result</code>
 interface. Custom Result Types might include generating an email or JMS message, generating images, and so forth.</p>
 
-<h2 id="default-parameters">Default Parameters</h2>
+<h2 id="how-to-use-results">How to use results</h2>
+
+<p>Once your action has been executed it must either return a result name (as <code class="language-plaintext highlighter-rouge">java.lang.String</code>) or instance 
+of <code class="language-plaintext highlighter-rouge">com.opensymphony.xwork2.Result</code> and then the result will be executed directly.</p>
+
+<p>If a String has been returned, the framework will try to find a matching result in the configuration and then it will
+execute the result of a given type, see example:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>/WEB-INF/index.jsp<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
+
+<p>You can define many results per action distinguishing them by different names:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>/WEB-INF/index.jsp<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>/WEB-INF/form.jsp<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"error"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>/WEB-INF/error.jsp<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
+
+<h2 id="default-result-type">Default result type</h2>
+
+<p>In <code class="language-plaintext highlighter-rouge">struts-default.xml</code> the Dispatcher result type is registered as a default result type, which means you don’t have to
+specify the <code class="language-plaintext highlighter-rouge">type</code> attribute if you want to use it:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>/WEB-INF/index.jsp<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
+
+<h2 id="default-result-name">Default result name</h2>
+
+<p>If you action method returns <code class="language-plaintext highlighter-rouge">success</code>, which is a default name of the result, you don’t have specify the <code class="language-plaintext highlighter-rouge">name</code> attribute as well:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result&gt;</span>/WEB-INF/index.jsp<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
+
+<h2 id="default-parameters">Default parameters</h2>
 
 <p>To minimize configuration, Results can be configured with a single value, which will be converted into a parameter, 
 and each Result can specify which parameter this value should be set as. For example, here is a result defined in XML 
@@ -240,7 +271,7 @@ that uses a default parameter:</p>
 a significant amount of configuration. It also follows that if you have specified the default parameter, you don’t need 
 to set the same parameter as a specifically-named parameter.</p>
 
-<h2 id="registering-result-types">Registering Result Types</h2>
+<h2 id="registering-result-types">Registering result types</h2>
 
 <p>All Result Types are plugged in via the <a href="result-configuration">Result Configuration</a>.</p>
 
@@ -253,7 +284,7 @@ Check <a href="object-factory">Define dedicated factory</a> to see how to do it.
 <p>Struts 2 provides one such extension for you:</p>
 
 <p><code class="language-plaintext highlighter-rouge">ParamNameAwareResult</code> interface when used with <code class="language-plaintext highlighter-rouge">StrutsResultBuilder</code> can limit parameters assigned to the result. 
-So you can simple extend existing result with such a functionality as below:</p>
+So you can simply extend existing result with such a functionality as below:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyResult</span> <span class="kd">extends</span> <span class="nc">ServletDispatcherResult</span> <span class="kd">implements</span> <span class="nc">ParamNameAwareResult</span> <span class="o">{</span>
 
