@@ -1,6 +1,9 @@
 ---
 layout: core-developers
 title: Velocity Result
+parent:
+    title: Result types
+    url: result-types
 ---
 
 # Velocity Result

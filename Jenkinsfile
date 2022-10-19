@@ -10,20 +10,24 @@ pipeline {
     disableConcurrentBuilds()
     skipStagesAfterUnstable()
   }
+  environment {
+    RUBY_PATH="${env.WORKSPACE}/.rvm"
+    GEM_HOME="${RUBY_PATH}/gems"
+    PATH="${GEM_HOME}/bin:${RUBY_PATH}/bin:${env.PATH}"
+  }
   stages {
     stage('Build a staged website') {
-      agent {
-        docker {
-          image 'jekyll/builder:4.2.2'
-        }
-      }
       steps {
         sh '''
-          export GEM_HOME="$WORKSPACE/.gems"
-          export PATH="$GEM_HOME/bin:$PATH"
-          export BUNDLE_USER_HOME="$WORKSPACE/.bundle"
+          echo Generating a new version of website        
 
-          bundle config set --local path $GEM_HOME
+          curl -sSL https://get.rvm.io | bash -s -- --path ${RUBY_PATH}
+          mkdir -p ${GEM_HOME}
+
+          gem install --install-dir ${GEM_HOME} bundler -v '2.3.23'
+          
+          bundle -v
+          bundle config set --local path ${GEM_HOME}
           bundle install
           bundle exec jekyll build
         '''
@@ -31,17 +35,19 @@ pipeline {
     }
     stage('Deploy to stage area') {
       steps {
-        sh """
+        sh '''
           echo "Pushing changes into stage site"
 
           if ! git config remote.asf.url > /dev/null; then
             git remote add asf https://gitbox.apache.org/repos/asf/struts-site.git
           fi
 
+          git checkout Gemfile.lock
+
           git fetch asf
           git checkout asf-staging
           git pull asf asf-staging
-
+          
           cp -r _site/* content
           cp -r _site/.htaccess content/.htaccess
 
@@ -51,7 +57,7 @@ pipeline {
 
           git commit -m "Updates stage by Jenkins" --allow-empty
           git push asf asf-staging
-        """
+        '''
       }
     }
     stage('Comment on PR') {
