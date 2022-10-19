@@ -13,8 +13,9 @@ pipeline {
   stages {
     stage('Build a staged website') {
       agent {
-        dockerfile true
-        args "-v ${env.WORKSPACE}:/dest:rw,z"
+        dockerfile {
+          args "-v ${env.WORKSPACE}:/dest:rw,z"
+        }
       }
       steps {
         sh '''
