@@ -19,6 +19,8 @@ pipeline {
       }
       steps {
         sh '''
+          bundle install
+          bundle exec jekyll build
           mv ./_site /dest
         '''
       }
@@ -28,9 +30,6 @@ pipeline {
         sh '''
           echo "Pushing changes into stage site"
 
-          pwd
-          ls -la
-          
           if ! git config remote.asf.url > /dev/null; then
             git remote add asf https://gitbox.apache.org/repos/asf/struts-site.git
           fi
@@ -38,8 +37,6 @@ pipeline {
           git fetch asf
           git checkout asf-staging
           git pull asf asf-staging
-          
-          ls -la
           
           cp -r _site/* content
           cp -r _site/.htaccess content/.htaccess
