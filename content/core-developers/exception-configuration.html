@@ -136,7 +136,7 @@ that an Exception thrown during the Action method can be automatically caught an
 declarative strategy is especially useful for frameworks, like Hibernate and Acegi, that throw RuntimeExceptions.</p>
 
 <p>As with many other parts of the framework, an Interceptor is needed to activate the exception mapping functionality. 
-Below is a snippet from <code class="highlighter-rouge">struts-default.xml</code> which has the exception mapping already activated.</p>
+Below is a snippet from <code class="language-plaintext highlighter-rouge">struts-default.xml</code> which has the exception mapping already activated.</p>
 
 <p><strong>snippet of struts-default.xml</strong></p>
 
@@ -174,8 +174,8 @@ Below is a snippet from <code class="highlighter-rouge">struts-default.xml</code
 </code></pre></div></div>
 
 <p>To use exception mapping, we simply need to map Exceptions to specific Results. The framework provides two ways 
-to declare an exception mapping <code class="highlighter-rouge">&lt;exception-mapping/&gt;</code> - globally or for a specific action mapping. The exception 
-mapping element takes two attributes, <code class="highlighter-rouge">exception</code> and <code class="highlighter-rouge">result</code>.</p>
+to declare an exception mapping <code class="language-plaintext highlighter-rouge">&lt;exception-mapping/&gt;</code> - globally or for a specific action mapping. The exception 
+mapping element takes two attributes, <code class="language-plaintext highlighter-rouge">exception</code> and <code class="language-plaintext highlighter-rouge">result</code>.</p>
 
 <p>When declaring an exception mapping, the Interceptor will find the closest class inheritance match between the Exception 
 thrown and the Exception declared. The Interceptor will examine all declared mappings applicable to the action mapping, 
@@ -217,14 +217,14 @@ action mapping, and if not found, it looks for a global Result.</p>
 <p>In the example above, here is what happens based upon each Exception:</p>
 
 <ul>
-  <li>A <code class="highlighter-rouge">java.sql.SQLException</code> will chain to the <code class="highlighter-rouge">SQLExceptionAction</code> (action mapping not shown)</li>
-  <li>A <code class="highlighter-rouge">com.company.SecurityException</code> will redirect to <code class="highlighter-rouge">Login.action</code></li>
-  <li>Any other exception that extends <code class="highlighter-rouge">java.lang.Exception</code> will return the <code class="highlighter-rouge">/Exception.jsp</code> page</li>
+  <li>A <code class="language-plaintext highlighter-rouge">java.sql.SQLException</code> will chain to the <code class="language-plaintext highlighter-rouge">SQLExceptionAction</code> (action mapping not shown)</li>
+  <li>A <code class="language-plaintext highlighter-rouge">com.company.SecurityException</code> will redirect to <code class="language-plaintext highlighter-rouge">Login.action</code></li>
+  <li>Any other exception that extends <code class="language-plaintext highlighter-rouge">java.lang.Exception</code> will return the <code class="language-plaintext highlighter-rouge">/Exception.jsp</code> page</li>
 </ul>
 
 <h2 id="exception-values-on-the-valuestack">Exception Values on the ValueStack</h2>
 
-<p>By default, the <code class="highlighter-rouge">ExceptionMappingInterceptor</code> adds the following values to the Value Stack:</p>
+<p>By default, the <code class="language-plaintext highlighter-rouge">ExceptionMappingInterceptor</code> adds the following values to the Value Stack:</p>
 
 <table>
   <thead>
@@ -243,28 +243,28 @@ action mapping, and if not found, it looks for a global Result.</p>
 
 <p><strong>Sample JSP using Error and Exception Values</strong></p>
 
-<pre><code class="language-jsp">&lt;h2&gt;An unexpected error has occurred&lt;/h2&gt;
-&lt;p&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h2&gt;</span>An unexpected error has occurred<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;p&gt;</span>
     Please report this error to your system administrator
     or appropriate technical support personnel.
     Thank you for your cooperation.
-&lt;/p&gt;
-&lt;hr/&gt;
-&lt;h3&gt;Error Message&lt;/h3&gt;
-&lt;s:actionerror/&gt;
-&lt;p&gt;
-    &lt;s:property value="%{exception.message}"/&gt;
-&lt;/p&gt;
-&lt;hr/&gt;
-&lt;h3&gt;Technical Details&lt;/h3&gt;
-&lt;p&gt;
-    &lt;s:property value="%{exceptionStack}"/&gt;
-&lt;/p&gt;
-</code></pre>
+<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;hr/&gt;</span>
+<span class="nt">&lt;h3&gt;</span>Error Message<span class="nt">&lt;/h3&gt;</span>
+<span class="nt">&lt;s:actionerror/&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+    <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"%{exception.message}"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;hr/&gt;</span>
+<span class="nt">&lt;h3&gt;</span>Technical Details<span class="nt">&lt;/h3&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+    <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"%{exceptionStack}"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
 
 <h2 id="exception-in-constructors">Exception in constructors</h2>
 
-<p>Global exception mappings are designed to be used with exceptions thrown by action methods (like <code class="highlighter-rouge">execute</code>). exceptions 
+<p>Global exception mappings are designed to be used with exceptions thrown by action methods (like <code class="language-plaintext highlighter-rouge">execute</code>). exceptions 
 thrown from constructors will <strong>not</strong> be handled by global exception mappings.</p>
 
   </section>

@@ -139,13 +139,13 @@
   <li><a href="#returning-result-objects" id="markdown-toc-returning-result-objects">Returning Result Objects</a></li>
 </ul>
 
-<p>When an <code class="highlighter-rouge">action</code> class method completes, it returns a String. The value of the String is used to select a result element. 
+<p>When an <code class="language-plaintext highlighter-rouge">action</code> class method completes, it returns a String. The value of the String is used to select a result element. 
 An action mapping will often have a set of results representing different possible outcomes. A standard set of result 
-tokens are defined by the <code class="highlighter-rouge">ActionSupport</code> base class.</p>
+tokens are defined by the <code class="language-plaintext highlighter-rouge">ActionSupport</code> base class.</p>
 
 <p><strong>Predefined result names</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String SUCCESS = "success";
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String SUCCESS = "success";
 String NONE    = "none";
 String ERROR   = "error";
 String INPUT   = "input";
@@ -155,15 +155,15 @@ String LOGIN   = "login";
 <p>Of course, applications can define other result tokens to match specific cases.</p>
 
 <blockquote>
-  <p>Returning <code class="highlighter-rouge">ActionSupport.NONE</code> (or <code class="highlighter-rouge">null</code>) from an action class method causes the results processing 
+  <p>Returning <code class="language-plaintext highlighter-rouge">ActionSupport.NONE</code> (or <code class="language-plaintext highlighter-rouge">null</code>) from an action class method causes the results processing 
 to be skipped. This is useful if the action fully handles the result processing such as writing directly
 to the HttpServletResponse OutputStream.</p>
 </blockquote>
 
 <h2 id="result-elements">Result Elements</h2>
 
-<p>The result element has two jobs. First, it provides a logical name. An <code class="highlighter-rouge">Action</code> can pass back a token like <code class="highlighter-rouge">success</code> 
-or <code class="highlighter-rouge">error</code> without knowing any other implementation details. Second, the result element provides a result type. Most 
+<p>The result element has two jobs. First, it provides a logical name. An <code class="language-plaintext highlighter-rouge">Action</code> can pass back a token like <code class="language-plaintext highlighter-rouge">success</code> 
+or <code class="language-plaintext highlighter-rouge">error</code> without knowing any other implementation details. Second, the result element provides a result type. Most 
 results simply forward to a server page or template, but other <a href="result-types">Result Types</a> can be used to do more 
 interesting things.</p>
 
@@ -179,10 +179,10 @@ another, the “child” package can set its own default result, or inherit one 
 <span class="nt">&lt;/result-types&gt;</span>
 </code></pre></div></div>
 
-<p>If a <code class="highlighter-rouge">type</code> attribute is not specified, the framework will use the default <code class="highlighter-rouge">dispatcher</code> type, which forwards to another 
+<p>If a <code class="language-plaintext highlighter-rouge">type</code> attribute is not specified, the framework will use the default <code class="language-plaintext highlighter-rouge">dispatcher</code> type, which forwards to another 
 web resource. If the resource is a JavaServer Page, then the container will render it, using its JSP engine.</p>
 
-<p>Likewise if the <code class="highlighter-rouge">name</code> attribute is not specified, the framework will give it the name <code class="highlighter-rouge">success</code>.</p>
+<p>Likewise if the <code class="language-plaintext highlighter-rouge">name</code> attribute is not specified, the framework will give it the name <code class="language-plaintext highlighter-rouge">success</code>.</p>
 
 <p>Using these intelligent defaults, the most often used result types also become the simplest.</p>
 
@@ -200,8 +200,8 @@ web resource. If the resource is a JavaServer Page, then the container will rend
 <span class="nt">&lt;/result&gt;</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">param</code> tag sets a property on the Result object. The most commonly-set property is <code class="highlighter-rouge">location</code>, which usually 
-specifies the path to a web resources. The <code class="highlighter-rouge">param</code> attribute is another intelligent default.</p>
+<p>The <code class="language-plaintext highlighter-rouge">param</code> tag sets a property on the Result object. The most commonly-set property is <code class="language-plaintext highlighter-rouge">location</code>, which usually 
+specifies the path to a web resources. The <code class="language-plaintext highlighter-rouge">param</code> attribute is another intelligent default.</p>
 
 <p><strong>Result element using more defaults</strong></p>
 
@@ -219,7 +219,7 @@ specifies the path to a web resources. The <code class="highlighter-rouge">param
 <span class="nt">&lt;/action&gt;</span>
 </code></pre></div></div>
 
-<p>A special “other” result can be configured by adding a result with <code class="highlighter-rouge">name="*"</code>. This result will only be selected if no 
+<p>A special “other” result can be configured by adding a result with <code class="language-plaintext highlighter-rouge">name="*"</code>. This result will only be selected if no 
 result is found with a matching name.</p>
 
 <p><strong>‘*’ Other Result</strong></p>
@@ -233,7 +233,7 @@ result is found with a matching name.</p>
 </code></pre></div></div>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">name="*"</code> is <strong>not</strong> a wildcard pattern, it is a special name that is only selected if an exact match is not found.</p>
+  <p>The <code class="language-plaintext highlighter-rouge">name="*"</code> is <strong>not</strong> a wildcard pattern, it is a special name that is only selected if an exact match is not found.</p>
 </blockquote>
 
 <blockquote>
@@ -256,7 +256,7 @@ result is found with a matching name.</p>
 
 <p>Most often, results are nested with the action element. But some results apply to multiple actions. In a secure 
 application, a client might try to access a page without being authorized, and many actions may need access 
-to a <code class="highlighter-rouge">logon</code> result.</p>
+to a <code class="language-plaintext highlighter-rouge">logon</code> result.</p>
 
 <p>If actions need to share results, a set of global results can be defined for each package. The framework will first 
 look for a local result nested in the action. If a local match is not found, then the global results are checked.</p>
@@ -285,9 +285,9 @@ the Action’s properties, just like the Struts 2 tag libraries. So given the fo
 
 <p><strong>FragmentAction implementation</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">String</span> <span class="n">nextAction</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">String</span> <span class="n">nextAction</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">getNextAction</span><span class="o">()</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getNextAction</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">nextAction</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -301,9 +301,9 @@ the Action’s properties, just like the Struts 2 tag libraries. So given the fo
 <span class="nt">&lt;/action&gt;</span>
 </code></pre></div></div>
 
-<p>If a <code class="highlighter-rouge">FragmentAction</code> method returns <code class="highlighter-rouge">next</code> the actual <em>value</em> of that result will be whatever is in <code class="highlighter-rouge">FragmentAction</code>’s 
-<code class="highlighter-rouge">nextAction</code> property. So <code class="highlighter-rouge">nextAction</code> may be computed based on whatever state information necessary then passed 
-at runtime to <code class="highlighter-rouge">next</code>’s <code class="highlighter-rouge">redirectAction</code>.</p>
+<p>If a <code class="language-plaintext highlighter-rouge">FragmentAction</code> method returns <code class="language-plaintext highlighter-rouge">next</code> the actual <em>value</em> of that result will be whatever is in <code class="language-plaintext highlighter-rouge">FragmentAction</code>’s 
+<code class="language-plaintext highlighter-rouge">nextAction</code> property. So <code class="language-plaintext highlighter-rouge">nextAction</code> may be computed based on whatever state information necessary then passed 
+at runtime to <code class="language-plaintext highlighter-rouge">next</code>’s <code class="language-plaintext highlighter-rouge">redirectAction</code>.</p>
 
 <p>See <a href="../faq/parameters-in-configuration-results">Parameters in configuration results</a> for an expanded discussion. </p>
 
@@ -311,8 +311,8 @@ at runtime to <code class="highlighter-rouge">next</code>’s <code class="highl
 
 <p>Instead of configuring results and returning the name, it is possible to return a result object:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Result</span> <span class="nf">runAction</span><span class="o">()</span> <span class="o">{</span>
-	<span class="n">ServletDispatcherResult</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServletDispatcherResult</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Result</span> <span class="nf">runAction</span><span class="o">()</span> <span class="o">{</span>
+	<span class="nc">ServletDispatcherResult</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServletDispatcherResult</span><span class="o">();</span>
 	<span class="n">result</span><span class="o">.</span><span class="na">setLocation</span><span class="o">(</span><span class="s">"input-form.jsp"</span><span class="o">);</span>
 	<span class="k">return</span> <span class="n">result</span><span class="o">;</span>
 <span class="o">}</span>

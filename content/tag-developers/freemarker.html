@@ -177,15 +177,15 @@ see <a href="http://freemarker.org/fmVsVel">here</a>.</p>
 <h2 id="getting-started">Getting Started</h2>
 
 <p>Getting started with FreeMarker is as simple as ensuring all the dependencies are included in your project’s classpath. 
-Typically, the only dependency is <code class="highlighter-rouge">freemarker.jar</code>. Other than that, <code class="highlighter-rouge">struts-default.xml</code> already configures 
-the <code class="highlighter-rouge">FreeMarker Result</code> needed to process your application’s templates.</p>
+Typically, the only dependency is <code class="language-plaintext highlighter-rouge">freemarker.jar</code>. Other than that, <code class="language-plaintext highlighter-rouge">struts-default.xml</code> already configures 
+the <code class="language-plaintext highlighter-rouge">FreeMarker Result</code> needed to process your application’s templates.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"test"</span> <span class="na">class=</span><span class="s">"com.acme.TestAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"freemarker"</span><span class="nt">&gt;</span>test-success.ftl<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
 </code></pre></div></div>
 
-<p>Then in <code class="highlighter-rouge">test-success.ftl</code>:</p>
+<p>Then in <code class="language-plaintext highlighter-rouge">test-success.ftl</code>:</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
@@ -199,7 +199,7 @@ Hello, ${name}
 <span class="nt">&lt;/html&gt;</span>
 </code></pre></div></div>
 
-<p>Where <code class="highlighter-rouge">name</code> is a property on your action. That’s it! Read the rest of this document for details on how templates 
+<p>Where <code class="language-plaintext highlighter-rouge">name</code> is a property on your action. That’s it! Read the rest of this document for details on how templates 
 are loaded, variables are resolved, and tags can be used.</p>
 
 <h2 id="servlet--jsp-scoped-objects">Servlet / JSP Scoped Objects</h2>
@@ -209,71 +209,71 @@ Request parameters, and framework Context scope parameters.</p>
 
 <h3 id="application-scope-attribute">Application Scope Attribute</h3>
 
-<p>Assuming there’s an attribute with name <code class="highlighter-rouge">myApplicationAttribute</code> in the Application scope.</p>
+<p>Assuming there’s an attribute with name <code class="language-plaintext highlighter-rouge">myApplicationAttribute</code> in the Application scope.</p>
 
-<pre><code class="language-ftl">&lt;#if Application.myApplicationAttribute?exists&gt;
-     ${Application.myApplicationAttribute}
-&lt;/#if&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>Application.myApplicationAttribute?exists&gt;<span class="w">
+     </span>$<span class="p">{</span><span class="nb">A</span><span class="no">pplication</span><span class="na">.myApplicationAttribute</span><span class="p">}</span><span class="w">
+</span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>or</p>
 
-<pre><code class="language-ftl">&lt;@s.property value="%{#application.myApplicationAttribute}" /&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.property</span><span class="w"> </span>value="%<span class="p">{</span><span class="err">#</span><span class="no">application</span><span class="na">.myApplicationAttribute</span><span class="p">}</span>" /&gt;<span class="w">
+</span></code></pre></div></div>
 
 <h3 id="session-scope-attribute">Session Scope Attribute</h3>
 
-<p>Assuming there’s an attribute with name <code class="highlighter-rouge">mySessionAttribute</code> in the Session scope.</p>
+<p>Assuming there’s an attribute with name <code class="language-plaintext highlighter-rouge">mySessionAttribute</code> in the Session scope.</p>
 
-<pre><code class="language-ftl">&lt;#if Session.mySessionAttribute?exists&gt;
-     ${Session.mySessionAttribute}
-&lt;/#if&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>Session.mySessionAttribute?exists&gt;<span class="w">
+     </span>$<span class="p">{</span><span class="nb">S</span><span class="no">ession</span><span class="na">.mySessionAttribute</span><span class="p">}</span><span class="w">
+</span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>or</p>
 
-<pre><code class="language-ftl">&lt;@s.property value="%{#session.mySessionAttribute}" /&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.property</span><span class="w"> </span>value="%<span class="p">{</span><span class="err">#</span><span class="no">session</span><span class="na">.mySessionAttribute</span><span class="p">}</span>" /&gt;<span class="w">
+</span></code></pre></div></div>
 
 <h3 id="request-scope-attribute">Request Scope Attribute</h3>
 
-<p>Assuming there’s an attribute with name <code class="highlighter-rouge">myRequestAttribute</code> in the Request scope.</p>
+<p>Assuming there’s an attribute with name <code class="language-plaintext highlighter-rouge">myRequestAttribute</code> in the Request scope.</p>
 
-<pre><code class="language-ftl">&lt;#if Request.myRequestAttribute?exists&gt;
-      ${Request.myRequestAttribute}
-&lt;/#if&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>Request.myRequestAttribute?exists&gt;<span class="w">
+      </span>$<span class="p">{</span><span class="nb">R</span><span class="no">equest</span><span class="na">.myRequestAttribute</span><span class="p">}</span><span class="w">
+</span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>or</p>
 
-<pre><code class="language-ftl">&lt;@s.property value="%{#request.myRequestAttribute}" /&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.property</span><span class="w"> </span>value="%<span class="p">{</span><span class="err">#</span><span class="no">request</span><span class="na">.myRequestAttribute</span><span class="p">}</span>" /&gt;<span class="w">
+</span></code></pre></div></div>
 
 <h3 id="request-parameter">Request Parameter</h3>
 
-<p>Assuming there’s a request parameter <code class="highlighter-rouge">myParameter</code> (eg. [http://host/myApp/myAction.action?myParameter=one]).</p>
+<p>Assuming there’s a request parameter <code class="language-plaintext highlighter-rouge">myParameter</code> (eg. [http://host/myApp/myAction.action?myParameter=one]).</p>
 
-<pre><code class="language-ftl">&lt;#if Parameters.myParameter?exists&gt;
-     ${Parameters.myParameter}
-&lt;/#if&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>Parameters.myParameter?exists&gt;<span class="w">
+     </span>$<span class="p">{</span><span class="nb">P</span><span class="no">arameters</span><span class="na">.myParameter</span><span class="p">}</span><span class="w">
+</span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>or</p>
 
-<pre><code class="language-ftl">&lt;@s.property value="%{#parameters.myParameter}" /&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.property</span><span class="w"> </span>value="%<span class="p">{</span><span class="err">#</span><span class="no">parameters</span><span class="na">.myParameter</span><span class="p">}</span>" /&gt;<span class="w">
+</span></code></pre></div></div>
 
 <h3 id="context-parameter">Context parameter</h3>
 
-<p>Assuming there’s a parameter with the name <code class="highlighter-rouge">myContextParam</code> in framework context.</p>
+<p>Assuming there’s a parameter with the name <code class="language-plaintext highlighter-rouge">myContextParam</code> in framework context.</p>
 
-<pre><code class="language-ftl">${stack.findValue('#myContextParam')}
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">${</span><span class="no">stack</span><span class="na">.findValue</span><span class="err">('#</span><span class="no">myContextParam</span><span class="err">')}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>or</p>
 
-<pre><code class="language-ftl">&lt;@s.property value="%{#myContextParam}" /&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.property</span><span class="w"> </span>value="%<span class="p">{</span><span class="err">#</span><span class="no">myContextParam</span><span class="p">}</span>" /&gt;<span class="w">
+</span></code></pre></div></div>
 
 <h2 id="template-loading">Template Loading</h2>
 
@@ -288,8 +288,8 @@ Request parameters, and framework Context scope parameters.</p>
 templates to be defined in your web application. In fact, this is how you can override the default UI tags 
 and <a href="form-tags">Form Tags</a> included with the framework.</p>
 
-<p>In addition, you can specify a location (directory on your file system) through the <code class="highlighter-rouge">templatePath</code> or <code class="highlighter-rouge">TemplatePath</code>
-context variable (in the <code class="highlighter-rouge">web.xml</code>). If a variable is specified, the content of the directory it points to will be 
+<p>In addition, you can specify a location (directory on your file system) through the <code class="language-plaintext highlighter-rouge">templatePath</code> or <code class="language-plaintext highlighter-rouge">TemplatePath</code>
+context variable (in the <code class="language-plaintext highlighter-rouge">web.xml</code>). If a variable is specified, the content of the directory it points to will be 
 searched first.</p>
 
 <blockquote>
@@ -310,12 +310,12 @@ searched first.</p>
 </ol>
 
 <p>Note that the action context is looked up after the value stack. This means that you can reference the variable without 
-the typical preceding hash marker (<code class="highlighter-rouge">#</code>) like you would have to when using the JSP <code class="highlighter-rouge">s:property</code> tag. This is a nice 
+the typical preceding hash marker (<code class="language-plaintext highlighter-rouge">#</code>) like you would have to when using the JSP <code class="language-plaintext highlighter-rouge">s:property</code> tag. This is a nice 
 convenience, though be careful because there is a small chance it could trip you up.</p>
 
-<pre><code class="language-ftl">&lt;@s.url id="url" value="http://www.yahoo.com"/&gt;
-Click &lt;a href="${url}"&gt;here&lt;/a&gt;!
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.url</span><span class="w"> </span>id="url" value="http://www.yahoo.com"/&gt;<span class="w">
+</span><span class="no">Click</span><span class="w"> </span>&lt;a href="$<span class="p">{</span><span class="no">url</span><span class="p">}</span>"&gt;here&lt;/a&gt;!<span class="w">
+</span></code></pre></div></div>
 
 <p>The built-in variables that Struts-FreeMarker integration provides are:</p>
 
@@ -329,7 +329,7 @@ Click &lt;a href="${url}"&gt;here&lt;/a&gt;!
   <tbody>
     <tr>
       <td>stack</td>
-      <td>The value stack itself, useful for calls like <code class="highlighter-rouge">${stack.findString('ognl expr')}</code></td>
+      <td>The value stack itself, useful for calls like <code class="language-plaintext highlighter-rouge">${stack.findString('ognl expr')}</code></td>
     </tr>
     <tr>
       <td>action</td>
@@ -372,12 +372,12 @@ Click &lt;a href="${url}"&gt;here&lt;/a&gt;!
 on how to use the generic <a href="struts-tags">Struts Tags</a> provided by Struts. In addition to this, you can use any JSP tag, 
 like so:</p>
 
-<pre><code class="language-ftl">&lt;#assign mytag=JspTaglibs["/WEB-INF/mytag.tld"]&gt;
-&lt;@mytag.tagx attribute1="some ${value}"/&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">assign</span><span class="w"> </span>mytag=JspTaglibs["/WEB-INF/mytag.tld"]&gt;<span class="w">
+</span><span class="err">&lt;@</span><span class="no">mytag</span><span class="na">.tagx</span><span class="w"> </span>attribute1="some $<span class="p">{</span><span class="no">value</span><span class="p">}</span>"/&gt;<span class="w">
+</span></code></pre></div></div>
 
 <p>Where <strong>mytag.tld</strong> is the JSP Tag Library Definition file for your tag library. Note: in order to use this support 
-in FreeMarker, you must enable the <code class="highlighter-rouge">JSPSupportServlet</code> in <code class="highlighter-rouge">web.xml</code>:</p>
+in FreeMarker, you must enable the <code class="language-plaintext highlighter-rouge">JSPSupportServlet</code> in <code class="language-plaintext highlighter-rouge">web.xml</code>:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;servlet&gt;</span>
     <span class="nt">&lt;servlet-name&gt;</span>JspSupportServlet<span class="nt">&lt;/servlet-name&gt;</span>
@@ -393,14 +393,14 @@ in FreeMarker, you must enable the <code class="highlighter-rouge">JSPSupportSer
 <h3 id="type-conversion-and-locales">Type Conversion and Locales</h3>
 
 <p>FreeMarker has built in support for formatting dates and numbers. The formatting rules are based on the locale associated 
-with the action request, which is by default set in <code class="highlighter-rouge">struts.properties</code> but can be over-ridden using the <code class="highlighter-rouge">I18n Interceptor</code>. 
+with the action request, which is by default set in <code class="language-plaintext highlighter-rouge">struts.properties</code> but can be over-ridden using the <code class="language-plaintext highlighter-rouge">I18n Interceptor</code>. 
 This is normally perfect for your needs, but it is important to remember that these formatting rules are handled 
 by FreeMarker and not by the framework’s <em>Type Conversion</em> support.</p>
 
 <p>If you want the framework to handle the formatting according to the <em>Type Conversion</em>  you have specified, you shouldn’t
-use the normal <code class="highlighter-rouge">${...}</code> syntax. Instead, you should use the <a href="property-tag">property</a> tag. The difference is that 
-the <code class="highlighter-rouge">property</code> tag is specifically designed to take an <a href="ognl">OGNL</a> expression, evaluate it, and then convert it 
-to a String using any <em>Type Conversion</em> rules you have specified. The normal <code class="highlighter-rouge">${...}</code> syntax will use a FreeMarker 
+use the normal <code class="language-plaintext highlighter-rouge">${...}</code> syntax. Instead, you should use the <a href="property-tag">property</a> tag. The difference is that 
+the <code class="language-plaintext highlighter-rouge">property</code> tag is specifically designed to take an <a href="ognl">OGNL</a> expression, evaluate it, and then convert it 
+to a String using any <em>Type Conversion</em> rules you have specified. The normal <code class="language-plaintext highlighter-rouge">${...}</code> syntax will use a FreeMarker 
 expression language, evaluate it, and then convert it to a String using the built in formatting rules.</p>
 
 <blockquote>
@@ -412,26 +412,26 @@ expression language, evaluate it, and then convert it to a String using the buil
 <p>Sometimes you may with to extend the framework’s FreeMarker support. For example, you might want to extend the Struts 
 tags that come bundled with the framework.</p>
 
-<p>To extend the Freemarker support, develop a class that extends <code class="highlighter-rouge">org.apache.struts2.views.freemarker.FreemarkerManager</code>, 
-overriding methods as needed, and plugin the class through the <code class="highlighter-rouge">struts.xml</code>:</p>
+<p>To extend the Freemarker support, develop a class that extends <code class="language-plaintext highlighter-rouge">org.apache.struts2.views.freemarker.FreemarkerManager</code>, 
+overriding methods as needed, and plugin the class through the <code class="language-plaintext highlighter-rouge">struts.xml</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;constant name="struts.freemarker.manager.classname" value="com.yourcompany.YourFreeMarkerManager" /&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;constant name="struts.freemarker.manager.classname" value="com.yourcompany.YourFreeMarkerManager" /&gt;
 </code></pre></div></div>
 
 <h3 id="objectwrapper-settings">ObjectWrapper Settings</h3>
 
 <p>Once you get familiar with FreeMarker, you will find certain <em>subtleties</em> with it that may become frustrating. 
-The most common thing you’ll likely run in to is the <code class="highlighter-rouge">BeansWrapper</code> provided by FreeMarker. If you don’t know what this 
+The most common thing you’ll likely run in to is the <code class="language-plaintext highlighter-rouge">BeansWrapper</code> provided by FreeMarker. If you don’t know what this 
 is, don’t worry. However, if you do, know this:</p>
 
-<p>The <code class="highlighter-rouge">StrutsBeanWrapper</code> extends the default FreeMarker <code class="highlighter-rouge">BeansWrapper</code> and provides almost no change in functionality,
+<p>The <code class="language-plaintext highlighter-rouge">StrutsBeanWrapper</code> extends the default FreeMarker <code class="language-plaintext highlighter-rouge">BeansWrapper</code> and provides almost no change in functionality,
 <strong>except</strong> for how it handles maps. Normally, FreeMarker has two modes of operation: either support for friendly
-map built-ins (<code class="highlighter-rouge">?keys</code>, <code class="highlighter-rouge">?values</code>, etc) but only support for String keys; OR no special built-in support (ie: <code class="highlighter-rouge">?keys</code>
+map built-ins (<code class="language-plaintext highlighter-rouge">?keys</code>, <code class="language-plaintext highlighter-rouge">?values</code>, etc) but only support for String keys; OR no special built-in support (ie: <code class="language-plaintext highlighter-rouge">?keys</code>
 returns the methods on the map instead of the keys) but support for String and non-String keys alike. Struts
 provides an alternative implementation that gives us the best of both worlds.</p>
 
 <p>It is possible that this special behavior may be confusing or can cause problems. Therefore, you can set the
-<code class="highlighter-rouge">struts.freemarker.wrapper.altMap</code> property in <code class="highlighter-rouge">struts.xml</code> to false, allowing the normal BeansWrapper
+<code class="language-plaintext highlighter-rouge">struts.freemarker.wrapper.altMap</code> property in <code class="language-plaintext highlighter-rouge">struts.xml</code> to false, allowing the normal BeansWrapper
 logic to take place instead.</p>
 
 <h3 id="syntax-notes">Syntax Notes</h3>
@@ -442,30 +442,30 @@ logic to take place instead.</p>
 
 <h3 id="cache">Cache</h3>
 
-<p>You can enable FreeMarker cache mechanism by specifying below options in <code class="highlighter-rouge">struts.xml</code>:</p>
+<p>You can enable FreeMarker cache mechanism by specifying below options in <code class="language-plaintext highlighter-rouge">struts.xml</code>:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">&lt;constant name="struts.freemarker.mru.max.strong.size" value="250" /&gt;</code> - this option will be used 
+  <li><code class="language-plaintext highlighter-rouge">&lt;constant name="struts.freemarker.mru.max.strong.size" value="250" /&gt;</code> - this option will be used 
 by <a href="http://freemarker.org/docs/api/freemarker/cache/MruCacheStorage">freemarker.cache.MruCacheStorage</a></li>
-  <li><code class="highlighter-rouge">&lt;constant name="struts.freemarker.templatesCache.updateDelay" value="1800" /&gt;</code> - default update cache interval (5 seconds)
--<code class="highlighter-rouge">&lt;constant name="struts.freemarker.templatesCache" value="true" /&gt;</code> - *<strong>DEPRECATED</strong>* this option will use a internal 
+  <li><code class="language-plaintext highlighter-rouge">&lt;constant name="struts.freemarker.templatesCache.updateDelay" value="1800" /&gt;</code> - default update cache interval (5 seconds)
+-<code class="language-plaintext highlighter-rouge">&lt;constant name="struts.freemarker.templatesCache" value="true" /&gt;</code> - *<strong>DEPRECATED</strong>* this option will use a internal 
 ConcurrentHashMap in FreemarkerTemplateEngine but not freemarker native cache</li>
 </ul>
 
-<p>Setting <code class="highlighter-rouge">devMode</code> to <code class="highlighter-rouge">true</code> will disable cache and updateDelay immediately, but you can explicit specify these constants 
-to enable cache even in <code class="highlighter-rouge">devMode</code>, see <a href="../core-developers/development-mode">devMode</a>.</p>
+<p>Setting <code class="language-plaintext highlighter-rouge">devMode</code> to <code class="language-plaintext highlighter-rouge">true</code> will disable cache and updateDelay immediately, but you can explicit specify these constants 
+to enable cache even in <code class="language-plaintext highlighter-rouge">devMode</code>, see <a href="../core-developers/development-mode">devMode</a>.</p>
 
 <h3 id="incompatible-improvements">Incompatible Improvements</h3>
 
 <p>By default Struts is using FreeMarker in way to be backward compatible as much as possible but if you need to enable new 
-features you can do it via <code class="highlighter-rouge">freemarker.properties</code> by defining 
+features you can do it via <code class="language-plaintext highlighter-rouge">freemarker.properties</code> by defining 
 <a href="http://freemarker.org/docs/pgui_config_incompatible_improvements.html#pgui_config_incompatible_improvements_how_to_set">incompatible improvements</a>
 settings, ie.:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>incompatible_improvements=2.3.22
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>incompatible_improvements=2.3.22
 </code></pre></div></div>
 
-<p>You can also pass this setting via <code class="highlighter-rouge">ServletContext</code> setting <code class="highlighter-rouge">&lt;init-param/&gt;</code> (since Struts 2.5.13):</p>
+<p>You can also pass this setting via <code class="language-plaintext highlighter-rouge">ServletContext</code> setting <code class="language-plaintext highlighter-rouge">&lt;init-param/&gt;</code> (since Struts 2.5.13):</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;init-param&gt;</span>
     <span class="nt">&lt;param-name&gt;</span>freemarker.incompatible_improvements<span class="nt">&lt;/param-name&gt;</span>

@@ -145,7 +145,7 @@ be tested.</p>
 
 <h2 id="struts-actions-without-spring">Struts actions (without Spring)</h2>
 
-<p>To test actions that do not use Spring, extend <code class="highlighter-rouge">StrutsTestCase</code>. The following example shows different ways of testing 
+<p>To test actions that do not use Spring, extend <code class="language-plaintext highlighter-rouge">StrutsTestCase</code>. The following example shows different ways of testing 
 an action:</p>
 
 <ul>
@@ -166,14 +166,14 @@ an action:</p>
   <li>Action:</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -183,7 +183,7 @@ an action:</p>
   <li>JUnit:</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts2</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.apache.struts2</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.apache.struts2.dispatcher.mapper.ActionMapping</span><span class="o">;</span>
 
@@ -195,38 +195,38 @@ an action:</p>
 
 <span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StrutsTestCaseTest</span> <span class="kd">extends</span> <span class="n">StrutsTestCase</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StrutsTestCaseTest</span> <span class="kd">extends</span> <span class="nc">StrutsTestCase</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetActionMapping</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">ActionMapping</span> <span class="n">mapping</span> <span class="o">=</span> <span class="n">getActionMapping</span><span class="o">(</span><span class="s">"/test/testAction.action"</span><span class="o">);</span>
+        <span class="nc">ActionMapping</span> <span class="n">mapping</span> <span class="o">=</span> <span class="n">getActionMapping</span><span class="o">(</span><span class="s">"/test/testAction.action"</span><span class="o">);</span>
         <span class="n">assertNotNull</span><span class="o">(</span><span class="n">mapping</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="s">"/test"</span><span class="o">,</span> <span class="n">mapping</span><span class="o">.</span><span class="na">getNamespace</span><span class="o">());</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="s">"testAction"</span><span class="o">,</span> <span class="n">mapping</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetActionProxy</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetActionProxy</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
         <span class="c1">//set parameters before calling getActionProxy</span>
         <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"FD"</span><span class="o">);</span>
         
-        <span class="n">ActionProxy</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">getActionProxy</span><span class="o">(</span><span class="s">"/test/testAction.action"</span><span class="o">);</span>
+        <span class="nc">ActionProxy</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">getActionProxy</span><span class="o">(</span><span class="s">"/test/testAction.action"</span><span class="o">);</span>
         <span class="n">assertNotNull</span><span class="o">(</span><span class="n">proxy</span><span class="o">);</span>
 
-        <span class="n">TestAction</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="n">TestAction</span><span class="o">)</span> <span class="n">proxy</span><span class="o">.</span><span class="na">getAction</span><span class="o">();</span>
+        <span class="nc">TestAction</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="nc">TestAction</span><span class="o">)</span> <span class="n">proxy</span><span class="o">.</span><span class="na">getAction</span><span class="o">();</span>
         <span class="n">assertNotNull</span><span class="o">(</span><span class="n">action</span><span class="o">);</span>
 
-        <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">proxy</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
-        <span class="n">assertEquals</span><span class="o">(</span><span class="n">Action</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">proxy</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
+        <span class="n">assertEquals</span><span class="o">(</span><span class="nc">Action</span><span class="o">.</span><span class="na">SUCCESS</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="s">"FD"</span><span class="o">,</span> <span class="n">action</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteAction</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ServletException</span><span class="o">,</span> <span class="n">UnsupportedEncodingException</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">output</span> <span class="o">=</span> <span class="n">executeAction</span><span class="o">(</span><span class="s">"/test/testAction.action"</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testExecuteAction</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">UnsupportedEncodingException</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">output</span> <span class="o">=</span> <span class="n">executeAction</span><span class="o">(</span><span class="s">"/test/testAction.action"</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">,</span> <span class="n">output</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetValueFromStack</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ServletException</span><span class="o">,</span> <span class="n">UnsupportedEncodingException</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetValueFromStack</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">UnsupportedEncodingException</span> <span class="o">{</span>
         <span class="n">request</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"FD"</span><span class="o">);</span>
         <span class="n">executeAction</span><span class="o">(</span><span class="s">"/test/testAction.action"</span><span class="o">);</span>
-        <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">findValueAfterExecute</span><span class="o">(</span><span class="s">"name"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">findValueAfterExecute</span><span class="o">(</span><span class="s">"name"</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="s">"FD"</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -312,7 +312,7 @@ the classpath and outside the container.</p>
 
 <h2 id="struts-actions-using-spring">Struts Actions using Spring</h2>
 
-<p>Make sure to add a dependency to the <a href="../spring/">Spring Plugin</a> to your <code class="highlighter-rouge">pom.xml</code>:</p>
+<p>Make sure to add a dependency to the <a href="../spring/">Spring Plugin</a> to your <code class="language-plaintext highlighter-rouge">pom.xml</code>:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
@@ -321,11 +321,11 @@ the classpath and outside the container.</p>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div></div>
 
-<p>If you use Spring as the object factory, the <code class="highlighter-rouge">StrutsSpringTestCase</code> class can be used to write your JUnits. This class 
-extends <code class="highlighter-rouge">StrutsTestCase</code> and has an <code class="highlighter-rouge">applicationContext</code> field of type <code class="highlighter-rouge">ApplicationContext</code>.</p>
+<p>If you use Spring as the object factory, the <code class="language-plaintext highlighter-rouge">StrutsSpringTestCase</code> class can be used to write your JUnits. This class 
+extends <code class="language-plaintext highlighter-rouge">StrutsTestCase</code> and has an <code class="language-plaintext highlighter-rouge">applicationContext</code> field of type <code class="language-plaintext highlighter-rouge">ApplicationContext</code>.</p>
 
-<p>The Spring context is loaded from <code class="highlighter-rouge">classpath\*:applicationContext.xml</code> by default. To provide a different location, 
-overwrite <code class="highlighter-rouge">getContextLocations</code>.</p>
+<p>The Spring context is loaded from <code class="language-plaintext highlighter-rouge">classpath\*:applicationContext.xml</code> by default. To provide a different location, 
+overwrite <code class="language-plaintext highlighter-rouge">getContextLocations</code>.</p>
 
   </section>
 </article>

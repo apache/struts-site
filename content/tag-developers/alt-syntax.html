@@ -138,7 +138,7 @@
 to create an expression as stated below.</p>
 </blockquote>
 
-<p>The <em>altSyntax</em> is an option that can be defined in <code class="highlighter-rouge">struts.xml</code>. By default it is set to true and it is <strong>strongly</strong> 
+<p>The <em>altSyntax</em> is an option that can be defined in <code class="language-plaintext highlighter-rouge">struts.xml</code>. By default it is set to true and it is <strong>strongly</strong> 
 recommend you do not change that unless you are upgrading from WebWork 2.1.7 or previous versions.</p>
 
 <blockquote>
@@ -153,26 +153,26 @@ the value stack and needing single quotes to mark string literals, only marked e
 
 <p>the following code uses the <a href="tag-syntax">Tag Syntax</a>:</p>
 
-<pre><code class="language-jsp">&lt;s:iterator value="cart.items"&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"cart.items"</span><span class="nt">&gt;</span>
    ...
-   &lt;s:textfield label="'Cart item No.' + #rowstatus.index + ' note'" 
-                 name="'cart.items[' + #rowstatus.index + '].note'" 
-                 value="note" /&gt;
-&lt;/s:iterator&gt;
-</code></pre>
+   <span class="nt">&lt;s:textfield </span><span class="na">label=</span><span class="s">"'Cart item No.' + #rowstatus.index + ' note'"</span><span class="na"> 
+                 name=</span><span class="s">"'cart.items[' + #rowstatus.index + '].note'"</span><span class="na"> 
+                 value=</span><span class="s">"note"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
 
 <p>this is somewhat counter intuitive to normal HTML tag behaviour, and you get loads of single quotes. Now the same example 
 in altSyntax:</p>
 
-<pre><code class="language-jsp">&lt;s:iterator value="cart.items"&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"cart.items"</span><span class="nt">&gt;</span>
    ...
-   &lt;s:textfield label="Cart item No. %{#rowstatus.index} note" 
-                 name="cart.items[%{#rowstatus.index}].note" 
-                 value="%{note}" /&gt;
-&lt;/s:iterator&gt;
-</code></pre>
+   <span class="nt">&lt;s:textfield </span><span class="na">label=</span><span class="s">"Cart item No. %{#rowstatus.index} note"</span><span class="na"> 
+                 name=</span><span class="s">"cart.items[%{#rowstatus.index}].note"</span><span class="na"> 
+                 value=</span><span class="s">"%{note}"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
 
-<p>Only expressions enclosed with <code class="highlighter-rouge">%{}</code> are evaluated. The code is shorter and clearer, very similar to JSTL EL usage. 
+<p>Only expressions enclosed with <code class="language-plaintext highlighter-rouge">%{}</code> are evaluated. The code is shorter and clearer, very similar to JSTL EL usage. 
 Quoting problems, eg. with javascript function calls, are avoided.</p>
 
 <p>In order to fully understand why this option exists and what the differences are, it is best to get a bit of history 

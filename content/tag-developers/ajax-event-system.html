@@ -138,33 +138,33 @@
 <p>As you may have seen with the <a href="ajax-div-template">ajax div template</a> and <a href="ajax-a-template">ajax a template</a>, 
 the framework and Dojo provide a nice way to subscribe and notify of topics from within the browser. A benefit of using 
 Dojo as the basis of many of these components is being able to loosely couple UI components. There are two 
-attributes of importance: <code class="highlighter-rouge">listenTopics</code> and <code class="highlighter-rouge">notifyTopics</code>.</p>
+attributes of importance: <code class="language-plaintext highlighter-rouge">listenTopics</code> and <code class="language-plaintext highlighter-rouge">notifyTopics</code>.</p>
 
 <ul>
-  <li>If a component has a <code class="highlighter-rouge">notifyTopics</code> attribute, then after the processing has been completed a message with be published 
+  <li>If a component has a <code class="language-plaintext highlighter-rouge">notifyTopics</code> attribute, then after the processing has been completed a message with be published 
 to the topic names supplied as a value (comma delimited).</li>
-  <li>If a component has a <code class="highlighter-rouge">listenTopics</code> attribute, then when a message is published to the topic names supplied as a value 
+  <li>If a component has a <code class="language-plaintext highlighter-rouge">listenTopics</code> attribute, then when a message is published to the topic names supplied as a value 
 (comma delimited), the component will perform custom tag-specific logic ( i.e a DIV tag will re-fresh its content).</li>
 </ul>
 
-<p>As well as this, you can publish and subscribe to topic names with javascript code. To publish to the <code class="highlighter-rouge">topic_name</code> topic:</p>
+<p>As well as this, you can publish and subscribe to topic names with javascript code. To publish to the <code class="language-plaintext highlighter-rouge">topic_name</code> topic:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dojo</span><span class="o">.</span><span class="na">event</span><span class="o">.</span><span class="na">topic</span><span class="o">.</span><span class="na">publish</span><span class="o">(</span><span class="s">"topic_name"</span><span class="o">,</span> <span class="s">"content"</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">topic_name</code> attribute is required, the content attribute is not and most elements are triggered without having this 
+<p>The <code class="language-plaintext highlighter-rouge">topic_name</code> attribute is required, the content attribute is not and most elements are triggered without having this 
 attribute. See the <a href="ajax-div-template">ajax div template</a> for an example of this type of interaction.</p>
 
-<p>To subscribe to the <code class="highlighter-rouge">topic_name</code> topic:</p>
+<p>To subscribe to the <code class="language-plaintext highlighter-rouge">topic_name</code> topic:</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">doSomethingWithEvent</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">...</span>
 <span class="p">}</span>
 
-<span class="nx">dojo</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">topic</span><span class="p">.</span><span class="nx">getTopic</span><span class="p">(</span><span class="s2">"topic_name"</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s2">"doSomethingWithEvent"</span><span class="p">);</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">topic</span><span class="p">.</span><span class="nx">getTopic</span><span class="p">(</span><span class="dl">"</span><span class="s2">topic_name</span><span class="dl">"</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="dl">"</span><span class="s2">doSomethingWithEvent</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">subscribe</code> method takes 2 parameters, the first is the JavaScript object variable (or null if the function is not 
+<p>The <code class="language-plaintext highlighter-rouge">subscribe</code> method takes 2 parameters, the first is the JavaScript object variable (or null if the function is not 
 from an object) and the second is the name of the function to call when an event is received on the topic.</p>
 
   </section>

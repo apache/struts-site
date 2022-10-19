@@ -147,7 +147,7 @@ or HTML, or plain text, another script, or whatever else the calling script may 
 In Struts 1, you can just do something like:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html"</span><span class="o">);</span>
-<span class="n">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">();</span>
+<span class="nc">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">();</span>
 <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World!  This is an AJAX response from a Struts Action."</span><span class="o">);</span>
 <span class="n">out</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
 <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
@@ -162,21 +162,21 @@ directly from within an action. See sections following this for further details.
 
 <p><strong>Struts 2 Stream result Action</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">actions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">actions</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.StringBufferInputStream</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TextResult</span> <span class="kd">extends</span> <span class="n">ActionSupport</span>  <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">InputStream</span> <span class="n">inputStream</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="n">InputStream</span> <span class="nf">getInputStream</span><span class="o">()</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TextResult</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span>  <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">InputStream</span> <span class="n">inputStream</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">InputStream</span> <span class="nf">getInputStream</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">inputStream</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-        <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="s">"Hello World! This is a text string response from a Struts 2 Action."</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">"UTF-8"</span><span class="o">));</span>
-        <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ByteArrayInputStream</span><span class="o">(</span><span class="s">"Hello World! This is a text string response from a Struts 2 Action."</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">"UTF-8"</span><span class="o">));</span>
+        <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -251,23 +251,23 @@ Here’s an example:</p>
 
 <p><strong>book.jsp</strong></p>
 
-<pre><code class="language-jsp">&lt;%@ page import="java.util.Iterator,
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">import=</span><span class="s">"java.util.Iterator,
     java.util.List,
     com.esolaria.dojoex.Book,
-    com.esolaria.dojoex.BookManager" %&gt;
-&lt;%
-    String bookIdStr = request.getParameter("bookId");
-    int bookId = (bookIdStr == null || "".equals(bookIdStr.trim())) 
-        ? 0 : Integer.parseInt(bookIdStr);
-    Book book = BookManager.getBook(bookId);
-    if (book != null) {
-        out.println(book.toJSONString());
-        System.out.println("itis: " + book.toJSONString());
-    }
-%&gt;
-</code></pre>
+    com.esolaria.dojoex.BookManager"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%</span>
+    <span class="nc">String</span> <span class="n">bookIdStr</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="s">"bookId"</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">bookId</span> <span class="o">=</span> <span class="o">(</span><span class="n">bookIdStr</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="s">""</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">bookIdStr</span><span class="o">.</span><span class="na">trim</span><span class="o">()))</span> 
+        <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">bookIdStr</span><span class="o">);</span>
+    <span class="nc">Book</span> <span class="n">book</span> <span class="o">=</span> <span class="nc">BookManager</span><span class="o">.</span><span class="na">getBook</span><span class="o">(</span><span class="n">bookId</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">book</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">book</span><span class="o">.</span><span class="na">toJSONString</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"itis: "</span> <span class="o">+</span> <span class="n">book</span><span class="o">.</span><span class="na">toJSONString</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="nt">%&gt;</span>
+</code></pre></div></div>
 
-<p>In the code example, we use <code class="highlighter-rouge">System.out.println</code> to return a JSON data stream as the response. For more about this 
+<p>In the code example, we use <code class="language-plaintext highlighter-rouge">System.out.println</code> to return a JSON data stream as the response. For more about this 
 technique, see the article <a href="http://today.java.net/pub/a/today/2006/04/27/building-ajax-with-dojo-and-json">Using Dojo and JSON to Build Ajax Applications</a>.</p>
 
   </section>

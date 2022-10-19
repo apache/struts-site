@@ -140,7 +140,7 @@ the <a href="../primer">Key Technologies Primer</a>.</p>
 <p><img src="attachments/struts2-arch.png" alt="struts2-arch.png" /></p>
 
 <ol>
-  <li>The web browser requests a resource - <code class="highlighter-rouge">/mypage.action</code>, <code class="highlighter-rouge">/reports/myreport.pdf</code>, etc</li>
+  <li>The web browser requests a resource - <code class="language-plaintext highlighter-rouge">/mypage.action</code>, <code class="language-plaintext highlighter-rouge">/reports/myreport.pdf</code>, etc</li>
   <li>The Filter Dispatcher looks at the request and determines the appropriate Action</li>
   <li>The Interceptors automatically apply common functionality to the request, like workflow, validation, and file upload handling</li>
   <li>The Action method executes, usually storing and/or retrieving information from a database</li>
@@ -153,7 +153,7 @@ the <a href="../primer">Key Technologies Primer</a>.</p>
 in a web application goes into the pages. The Struts Tags reduce effort by reducing code.</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nt">&lt;</span><span class="err">%</span> <span class="na">User</span> <span class="na">user =</span><span class="err"> </span><span class="s">...</span> <span class="err">%</span><span class="nt">&gt;</span>
+<span class="nt">&lt;</span><span class="err">%</span> <span class="na">User</span> <span class="na">user = </span><span class="s">...</span> <span class="err">%</span><span class="nt">&gt;</span>
 <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"Profile_update.action"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;table&gt;</span>
         <span class="nt">&lt;tr&gt;</span>
@@ -162,7 +162,7 @@ in a web application goes into the pages. The Struts Tags reduce effort by reduc
         &lt;/tr&gt;
         &lt;tr&gt;
             &lt;td&gt;&lt;input type="</span><span class="na">radio</span><span class="err">"</span> <span class="na">name=</span><span class="s">"user.gender"</span> <span class="na">value=</span><span class="s">"0"</span> <span class="na">id=</span><span class="s">"user.gender0"</span> 
-                <span class="err">&lt;%</span> <span class="na">if</span> <span class="err">(</span><span class="na">user</span><span class="err">.</span><span class="na">getGender</span><span class="err">()==</span><span class="na">0</span><span class="err">)</span> <span class="err">{</span> <span class="err">%</span><span class="nt">&gt;</span> checked="checked" %&gt; } %&gt; /&gt;
+                <span class="err">&lt;%</span> <span class="na">if</span> <span class="na">(user.getGender()=</span><span class="s">=0)</span> <span class="err">{</span> <span class="err">%</span><span class="nt">&gt;</span> checked="checked" %&gt; } %&gt; /&gt;
             <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"user.gender0"</span><span class="nt">&gt;</span>Female<span class="nt">&lt;/label&gt;</span>
         <span class="nt">&lt;/tr&gt;</span>
     <span class="nt">&lt;/table&gt;</span>
@@ -195,12 +195,12 @@ an entire data-input form with eight controls. Not only is there less code, but 
 <h2 id="struts-configuration-in-a-nutshell">Struts Configuration in a Nutshell</h2>
 
 <p>A web application uses a deployment descriptor to initialize resources like filters and listeners. The web deployment 
-descriptor is formatted as a XML document and named <code class="highlighter-rouge">web.xml</code>. Struts can either initialize its resources by scanning 
-your classes using Java packages declared in this <code class="highlighter-rouge">web.xml</code> file, or you can have full control over the configuration 
-via a configuration file, named <code class="highlighter-rouge">struts.xml</code>. These resources include action mappings, to direct input to server-side 
+descriptor is formatted as a XML document and named <code class="language-plaintext highlighter-rouge">web.xml</code>. Struts can either initialize its resources by scanning 
+your classes using Java packages declared in this <code class="language-plaintext highlighter-rouge">web.xml</code> file, or you can have full control over the configuration 
+via a configuration file, named <code class="language-plaintext highlighter-rouge">struts.xml</code>. These resources include action mappings, to direct input to server-side 
 Action classes, and result types, to select output pages.</p>
 
-<p>Here’s a typical configuration (<code class="highlighter-rouge">struts.xml</code>) for a login workflow:</p>
+<p>Here’s a typical configuration (<code class="language-plaintext highlighter-rouge">struts.xml</code>) for a login workflow:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
     <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"default"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>

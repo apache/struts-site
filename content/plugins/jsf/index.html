@@ -137,9 +137,9 @@
 
 <p>The JSF Plugin provides support for JavaServer Faces components with no additional configuration.</p>
 
-<p>The JSF support works by breaking up the JSF Licycle class into Struts Interceptors, one for each JSF phase.  When you include the <code class="highlighter-rouge">jsfStack</code> stack, you are ensuring the JSF page has its phases execute correctly.  At the end of the phases, the Struts Action itself is executed just like non-JSF pages.  The String return code of the Action is treated like any other Action as well.  Finally, the JSF “render” phase has been transformed into a Result.</p>
+<p>The JSF support works by breaking up the JSF Licycle class into Struts Interceptors, one for each JSF phase.  When you include the <code class="language-plaintext highlighter-rouge">jsfStack</code> stack, you are ensuring the JSF page has its phases execute correctly.  At the end of the phases, the Struts Action itself is executed just like non-JSF pages.  The String return code of the Action is treated like any other Action as well.  Finally, the JSF “render” phase has been transformed into a Result.</p>
 
-<p>JavaServer Faces also has a concept of an “action”, which are generally executed in response to a button click.  The handling of the JSF action is preserved through the <code class="highlighter-rouge">jsfStack</code> Interceptor stack, but its String result code, rather than being applied against a JSF navigation rule, is treated as a Struts result code thereby keeping the navigation responsibility within Struts.</p>
+<p>JavaServer Faces also has a concept of an “action”, which are generally executed in response to a button click.  The handling of the JSF action is preserved through the <code class="language-plaintext highlighter-rouge">jsfStack</code> Interceptor stack, but its String result code, rather than being applied against a JSF navigation rule, is treated as a Struts result code thereby keeping the navigation responsibility within Struts.</p>
 
 <p>The limitations of this approach include:</p>
 
@@ -177,14 +177,14 @@
 
 <ol>
   <li>
-    <p>Add the <code class="highlighter-rouge">jsfStack</code> interceptor stack to your action definition.  This is easiest done by having your package extend <code class="highlighter-rouge">jsf-default</code>.</p>
+    <p>Add the <code class="language-plaintext highlighter-rouge">jsfStack</code> interceptor stack to your action definition.  This is easiest done by having your package extend <code class="language-plaintext highlighter-rouge">jsf-default</code>.</p>
   </li>
   <li>
-    <p>Add a <code class="highlighter-rouge">jsf</code> result associated with the name <code class="highlighter-rouge">success</code>You can still add additional interceptors and results, including those that don’t use JSF at all.  In fact, the recommended approach is to use regular Struts results to handle inter-page navigation to avoid a common problem of JSF applications where every page request is a HTTP POST.</p>
+    <p>Add a <code class="language-plaintext highlighter-rouge">jsf</code> result associated with the name <code class="language-plaintext highlighter-rouge">success</code>You can still add additional interceptors and results, including those that don’t use JSF at all.  In fact, the recommended approach is to use regular Struts results to handle inter-page navigation to avoid a common problem of JSF applications where every page request is a HTTP POST.</p>
   </li>
 </ol>
 
-<p>This approach brings an additional advantage to JSF - every page can have an Action to execute page setup code, and the same Action instance will be automatically available later in the JSF page’s expression language as <code class="highlighter-rouge">action</code>.  This means any common page logic such as retrieving data from a database can remain in your Action, and having that instance available later in your JSF components means the JSF configuration file is completely optional.  The JSF configuration file, <code class="highlighter-rouge">faces-config.xml</code>, generally contains backing bean definitions and navigation rules, both of which can be solely handled by Struts.</p>
+<p>This approach brings an additional advantage to JSF - every page can have an Action to execute page setup code, and the same Action instance will be automatically available later in the JSF page’s expression language as <code class="language-plaintext highlighter-rouge">action</code>.  This means any common page logic such as retrieving data from a database can remain in your Action, and having that instance available later in your JSF components means the JSF configuration file is completely optional.  The JSF configuration file, <code class="language-plaintext highlighter-rouge">faces-config.xml</code>, generally contains backing bean definitions and navigation rules, both of which can be solely handled by Struts.</p>
 
 <h3 id="example">Example</h3>
 
@@ -219,7 +219,7 @@
 
 <h3 id="installation">Installation</h3>
 
-<p>This plugin can be installed by copying the plugin jar into your application’s <code class="highlighter-rouge">/WEB-INF/lib</code> directory.  No other files need to be copied or created.</p>
+<p>This plugin can be installed by copying the plugin jar into your application’s <code class="language-plaintext highlighter-rouge">/WEB-INF/lib</code> directory.  No other files need to be copied or created.</p>
 
 <h2 id="resources">Resources</h2>
 

@@ -151,7 +151,7 @@ the assumption there is only one “root”, Struts’s ValueStack concept requi
 “foo” -&gt; foo and “bar” -&gt; bar and that the foo object is also configured to be the single <strong>root</strong> object. 
 The following code illustrates how OGNL deals with these three situations:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#foo.blah // returns foo.getBlah()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#foo.blah // returns foo.getBlah()
 #bar.blah // returns bar.getBlah()
 blah      // returns foo.getBlah() because foo is the root
 </code></pre></div></div>
@@ -170,7 +170,7 @@ you are looking for.</p>
 a “species” property, and Person has a “salary” property. Animal is on the top of the stack, and Person is below it. 
 The follow code fragments help you get an idea of what is going on here:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>species    // call to animal.getSpecies()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>species    // call to animal.getSpecies()
 salary     // call to person.getSalary()
 name       // call to animal.getName() because animal is on the top
 </code></pre></div></div>
@@ -179,12 +179,12 @@ name       // call to animal.getName() because animal is on the top
 sometimes you want the property of a lower-level object. To do this, XWork has added support for indexes on the ValueStack. 
 All you have to do is:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0].name   // call to animal.getName()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0].name   // call to animal.getName()
 [1].name   // call to person.getName()
 </code></pre></div></div>
 
-<p>With expression like <code class="highlighter-rouge">[0] ... [3]</code> etc. Struts will cut the stack and still return back a CompoundRoot object. To get 
-the top of that particular stack cut, use <code class="highlighter-rouge">[0].top</code></p>
+<p>With expression like <code class="language-plaintext highlighter-rouge">[0] ... [3]</code> etc. Struts will cut the stack and still return back a CompoundRoot object. To get 
+the top of that particular stack cut, use <code class="language-plaintext highlighter-rouge">[0].top</code></p>
 
 <table>
   <thead>
@@ -195,11 +195,11 @@ the top of that particular stack cut, use <code class="highlighter-rouge">[0].to
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">[0].top</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[0].top</code></td>
       <td>would get the top of the stack cut starting from element 0 in the stack (similar to top in this case)</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">[1].top</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[1].top</code></td>
       <td>would get the top of the stack cut starting from element 1 in the stack</td>
     </tr>
   </tbody>
@@ -210,18 +210,18 @@ the top of that particular stack cut, use <code class="highlighter-rouge">[0].to
 <p>OGNL supports accessing static properties as well as static methods.</p>
 
 <p>By default, Struts 2 is configured to disallow this - to enable OGNL’s static member support you must set the
-<code class="highlighter-rouge">struts.ognl.allowStaticMethodAccess</code> constant to <code class="highlighter-rouge">true</code> via any of the <a href="../core-developers/constant-configuration">Constant Configuration</a> methods.</p>
+<code class="language-plaintext highlighter-rouge">struts.ognl.allowStaticMethodAccess</code> constant to <code class="language-plaintext highlighter-rouge">true</code> via any of the <a href="../core-developers/constant-configuration">Constant Configuration</a> methods.</p>
 
 <p>OGNL’s static access looks like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@some.package.ClassName@FOO_PROPERTY
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@some.package.ClassName@FOO_PROPERTY
 @some.package.ClassName@someMethod()
 </code></pre></div></div>
 
 <p>However, Struts allows you to avoid having to specify the full package name and call static properties and methods of your 
 action classes using the “vs” prefix:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;at:var at:name="vs" /&gt;FOO_PROPERTY
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;at:var at:name="vs" /&gt;FOO_PROPERTY
 &lt;at:var at:name="vs" /&gt;someMethod()
 
 &lt;at:var at:name="vs1" /&gt;FOO_PROPERTY

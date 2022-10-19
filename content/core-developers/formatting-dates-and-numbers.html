@@ -140,7 +140,7 @@ built-in date formatting features.</p>
 with Struts2, giving the developer the opportunity to define locale dependent message formats. This is the entry point 
 to define the needed date, time and number formats. Your default properties could contain the following generic formats:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>format.time = {0,time}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>format.time = {0,time}
 format.number = {0,number,#0.0##}
 format.percent = {0,number,##0.00'%'}
 format.money = {0,number,\u00A4##0.00}
@@ -148,12 +148,12 @@ format.money = {0,number,\u00A4##0.00}
 
 <p>An appropriate en_US format definition extension could look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>format.date = {0,date,MM/dd/yy}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>format.date = {0,date,MM/dd/yy}
 </code></pre></div></div>
 
 <p>In parallel, you could add the following to your de_DE bundle:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>format.date = {0,date,dd.MM.yyyy}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>format.date = {0,date,dd.MM.yyyy}
 </code></pre></div></div>
 
 <p>Read more on how to define message formats in Sun’s Java API docs for <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/text/MessageFormat">MessageFormat</a>.</p>
@@ -164,41 +164,41 @@ format.money = {0,number,\u00A4##0.00}
 
 <p>Given you had a Float value myMoneyValue, accessible through the getter getMyMoneyValue in your action, the following 
 code would print out localized representation of the value as a currency amount, using the format.money message 
-format defined above with a <code class="highlighter-rouge">s:text</code> tag:</p>
+format defined above with a <code class="language-plaintext highlighter-rouge">s:text</code> tag:</p>
 
-<pre><code class="language-jsp">&lt;s:text name="format.money"&gt;
-    &lt;s:param name="value" value="myMoneyValue"/&gt;
-&lt;/s:text&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:text </span><span class="na">name=</span><span class="s">"format.money"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;s:param </span><span class="na">name=</span><span class="s">"value"</span><span class="na"> value=</span><span class="s">"myMoneyValue"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:text&gt;</span>
+</code></pre></div></div>
 
 <p>The (first) parameter defines the value which is to replace the ‘0’ placeholder in the defined message format.</p>
 
 <p>Another example, formatting a date value:</p>
 
-<pre><code class="language-jsp">&lt;s:text name="format.date"&gt;&lt;s:param value="dueDate"/&gt;&lt;/s:text&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:text </span><span class="na">name=</span><span class="s">"format.date"</span><span class="nt">&gt;&lt;s:param </span><span class="na">value=</span><span class="s">"dueDate"</span><span class="nt">/&gt;&lt;/s:text&gt;</span>
+</code></pre></div></div>
 
 <blockquote>
-  <p>While the <code class="highlighter-rouge">s:text</code> tag is very useful to format numbers, date formatting has become a lot easier thanks 
-to the <code class="highlighter-rouge">s:date</code> tag.</p>
+  <p>While the <code class="language-plaintext highlighter-rouge">s:text</code> tag is very useful to format numbers, date formatting has become a lot easier thanks 
+to the <code class="language-plaintext highlighter-rouge">s:date</code> tag.</p>
 </blockquote>
 
 <h2 id="localizing-form-data-with-gettext">Localizing form data with getText</h2>
 
 <p>Placing a textfield in a form like this</p>
 
-<pre><code class="language-jsp">&lt;s:textfield key="orderItem.price" /&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:textfield </span><span class="na">key=</span><span class="s">"orderItem.price"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>to input a number, one might have noticed that the number is always shown in the Java default number format. Not only
 that this is not “nice”, if you are in a non-en locale, it will also cause trouble when submitting the form since type 
 conversion is locale aware. The solution is to again use the message formats as defined above, by using the getText 
 method of ActionSupport:</p>
 
-<pre><code class="language-jsp">&lt;s:textfield key="orderItem.price" value="%{getText('format.number',{orderItem.price})}" /&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:textfield </span><span class="na">key=</span><span class="s">"orderItem.price"</span><span class="na"> value=</span><span class="s">"%{getText('format.number',{orderItem.price})}"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
-<p>This maps to the method signature <code class="highlighter-rouge">getText( String key, Object[] params )</code> in ActionSupport.</p>
+<p>This maps to the method signature <code class="language-plaintext highlighter-rouge">getText( String key, Object[] params )</code> in ActionSupport.</p>
 
 <h2 id="using-getformatted-with-conversion-support">Using getFormatted() with conversion support</h2>
 
@@ -207,8 +207,8 @@ formatting and conversion errors with I10N.</p>
 
 <p>You can place a code like below</p>
 
-<pre><code class="language-jsp">&lt;s:textfield key="user.born" value="%{getFormatted('format.number','user.born')}" /&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:textfield </span><span class="na">key=</span><span class="s">"user.born"</span><span class="na"> value=</span><span class="s">"%{getFormatted('format.number','user.born')}"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>to get support for I10N and also to support conversion errors.</p>
 

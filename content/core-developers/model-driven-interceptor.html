@@ -133,36 +133,36 @@
     
     <h1 id="model-driven-interceptor">Model Driven Interceptor</h1>
 
-<p>Watches for <code class="highlighter-rouge">ModelDriven</code> actions and adds the action’s model on to the value stack.</p>
+<p>Watches for <code class="language-plaintext highlighter-rouge">ModelDriven</code> actions and adds the action’s model on to the value stack.</p>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">ModelDrivenInterceptor</code> must come before the both <code class="highlighter-rouge">StaticParametersInterceptor</code> and <code class="highlighter-rouge">ParametersInterceptor</code>
+  <p>The <code class="language-plaintext highlighter-rouge">ModelDrivenInterceptor</code> must come before the both <code class="language-plaintext highlighter-rouge">StaticParametersInterceptor</code> and <code class="language-plaintext highlighter-rouge">ParametersInterceptor</code>
 if you want the parameters to be applied to the model.</p>
 </blockquote>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">ModelDrivenInterceptor</code> will only push the model into the stack when the model is not null, else it will be ignored.</p>
+  <p>The <code class="language-plaintext highlighter-rouge">ModelDrivenInterceptor</code> will only push the model into the stack when the model is not null, else it will be ignored.</p>
 </blockquote>
 
-<p>To create a Model Driven action, implement the <code class="highlighter-rouge">ModelDriven</code> interface by adding a model property, or at least the accessor.</p>
+<p>To create a Model Driven action, implement the <code class="language-plaintext highlighter-rouge">ModelDriven</code> interface by adding a model property, or at least the accessor.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Object</span> <span class="nf">getModel</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Object</span> <span class="nf">getModel</span><span class="o">();</span>
 </code></pre></div></div>
 
-<p>In the implementation of <code class="highlighter-rouge">getModel</code>, acquire an instance of a business object and return it.</p>
+<p>In the implementation of <code class="language-plaintext highlighter-rouge">getModel</code>, acquire an instance of a business object and return it.</p>
 
 <p>On the page, you can address any JavaBean properties on the business object as if they were coded directly on the Action 
 class. The framework pushes the Model object onto the ValueStack.</p>
 
-<p>Many developers use Spring to acquire the business object. With the addition of a <code class="highlighter-rouge">setModel</code> method, the business logic 
+<p>Many developers use Spring to acquire the business object. With the addition of a <code class="language-plaintext highlighter-rouge">setModel</code> method, the business logic 
 can be injected automatically.</p>
 
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">refreshModelBeforeResult</code> - set to true if you want the model to be refreshed on the value stack after action
+  <li><code class="language-plaintext highlighter-rouge">refreshModelBeforeResult</code> - set to true if you want the model to be refreshed on the value stack after action
 execution and before result execution. The setting is useful if you want to change the model instance during the
-action execution phase, like when loading it from the data layer. This will result in <code class="highlighter-rouge">getModel()</code> being called at
+action execution phase, like when loading it from the data layer. This will result in <code class="language-plaintext highlighter-rouge">getModel()</code> being called at
 least twice.</li>
 </ul>
 

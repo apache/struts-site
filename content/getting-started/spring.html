@@ -161,30 +161,30 @@ a problem getting the tutorial example applications to work search the Struts 2 
 to your problem, post a question on the mailing list.</p>
 
 <p>If you examine the example application for the <a href="themes">Struts 2 Themes</a> tutorial you’ll see this code in the 
-<code class="highlighter-rouge">EditAction</code> class</p>
+<code class="language-plaintext highlighter-rouge">EditAction</code> class</p>
 
 <p><strong>EditAction Class Hard-Coded Dependency</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">EditService</span> <span class="n">editService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EditServiceInMemory</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">EditService</span> <span class="n">editService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EditServiceInMemory</span><span class="o">();</span>
 </code></pre></div></div>
 
-<p>The above statement hard-codes a dependency between the <code class="highlighter-rouge">EditAction</code> class and the <code class="highlighter-rouge">EditServiceInMemory</code> class. This is 
+<p>The above statement hard-codes a dependency between the <code class="language-plaintext highlighter-rouge">EditAction</code> class and the <code class="language-plaintext highlighter-rouge">EditServiceInMemory</code> class. This is 
 poor design for two reasons.</p>
 
 <ol>
-  <li>If I need to replace the <code class="highlighter-rouge">EditServiceInMemory</code> with another class that implements the <code class="highlighter-rouge">EditService</code> interface I’ll 
+  <li>If I need to replace the <code class="language-plaintext highlighter-rouge">EditServiceInMemory</code> with another class that implements the <code class="language-plaintext highlighter-rouge">EditService</code> interface I’ll 
   have to hunt down and replace all statements where I hard-coded the dependency.</li>
-  <li>I cannot test <code class="highlighter-rouge">EditAction</code> without using the <code class="highlighter-rouge">EditServiceInMemory</code> class. I cannot isolate <code class="highlighter-rouge">EditAction</code> by using 
-  a stub implementation of <code class="highlighter-rouge">EditService</code> when writing my test case because the use of <code class="highlighter-rouge">EditServiceInMemory</code> is hard-coded.</li>
+  <li>I cannot test <code class="language-plaintext highlighter-rouge">EditAction</code> without using the <code class="language-plaintext highlighter-rouge">EditServiceInMemory</code> class. I cannot isolate <code class="language-plaintext highlighter-rouge">EditAction</code> by using 
+  a stub implementation of <code class="language-plaintext highlighter-rouge">EditService</code> when writing my test case because the use of <code class="language-plaintext highlighter-rouge">EditServiceInMemory</code> is hard-coded.</li>
 </ol>
 
 <p>Spring provides a mechanism to manage dependencies by injecting them at run time. Struts 2 ActionSupport classes—like 
 any other Java class—can be injected with a dependent object by the Spring framework. So instead of having the above code, 
-I would have this statement in <code class="highlighter-rouge">EditAction</code>.</p>
+I would have this statement in <code class="language-plaintext highlighter-rouge">EditAction</code>.</p>
 
 <p><strong>EditAction Class No Hard-Coded Dependency</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">EditService</span> <span class="n">editService</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">EditService</span> <span class="n">editService</span><span class="o">;</span>
 </code></pre></div></div>
 
 <p>At run time the Spring framework will provide an object of a class that implements the EditService interface.</p>
@@ -199,22 +199,22 @@ about how the plugin works.</p>
 for this tutorial). The plugin’s pom.xml includes transitive dependencies to the Spring jar files.</p>
 
 <blockquote>
-  <p>The current version (<code class="highlighter-rouge">2.5.10.1</code>) of the Struts 2 Spring plugin has transitive dependencies to the Spring <code class="highlighter-rouge">4.1.6.RELEASE</code> version. 
+  <p>The current version (<code class="language-plaintext highlighter-rouge">2.5.10.1</code>) of the Struts 2 Spring plugin has transitive dependencies to the Spring <code class="language-plaintext highlighter-rouge">4.1.6.RELEASE</code> version. 
 If you want to use the latest version of Spring, then you should exclude the transitive dependencies in your pom.xml 
 for the Struts 2 Spring plugin and then declare dependency nodes to the current version of the Spring jar files. 
 If you are using Ant and explicitly including the jar files in your application, then just include the latest version 
 of the Spring jar files.</p>
 </blockquote>
 
-<p>In your <code class="highlighter-rouge">ActionSupport</code> class you must have a set method for the dependent object that follows standard Java bean naming 
-conventions. If you examine the <code class="highlighter-rouge">EditAction</code> class for this tutorial’s application you’ll see this set method.</p>
+<p>In your <code class="language-plaintext highlighter-rouge">ActionSupport</code> class you must have a set method for the dependent object that follows standard Java bean naming 
+conventions. If you examine the <code class="language-plaintext highlighter-rouge">EditAction</code> class for this tutorial’s application you’ll see this set method.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEditService</span><span class="o">(</span><span class="n">EditService</span> <span class="n">editService</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEditService</span><span class="o">(</span><span class="nc">EditService</span> <span class="n">editService</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">this</span><span class="o">.</span><span class="na">editService</span> <span class="o">=</span> <span class="n">editService</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>Spring will use that set method to provide an object of type <code class="highlighter-rouge">EditService</code> to the <code class="highlighter-rouge">EditAction</code> class at run time.</p>
+<p>Spring will use that set method to provide an object of type <code class="language-plaintext highlighter-rouge">EditService</code> to the <code class="language-plaintext highlighter-rouge">EditAction</code> class at run time.</p>
 
 <p>To make our application “Spring aware” we need to add this line to web.xml.</p>
 
@@ -232,7 +232,7 @@ how you can change where Spring looks and what the configuration file name is).<
 <h2 id="spring-configuration-file">Spring Configuration File</h2>
 
 <p>In the Spring configuration file we create a bean node for those objects we want Spring to create an instance of and inject 
-into our ActionSupport class. In the example application is this <code class="highlighter-rouge">applicationContext.xml</code>.</p>
+into our ActionSupport class. In the example application is this <code class="language-plaintext highlighter-rouge">applicationContext.xml</code>.</p>
 
 <p><strong>Spring Configuration File</strong></p>
 
@@ -249,7 +249,7 @@ into our ActionSupport class. In the example application is this <code class="hi
 </code></pre></div></div>
 
 <p>Note the id value above. By default the Spring plugin works with Spring to autowire the dependencies of the ActionClass 
-by <code class="highlighter-rouge">name</code>. Spring will create an object of class EditServiceMemory and provide that object to any ActionSupport class 
+by <code class="language-plaintext highlighter-rouge">name</code>. Spring will create an object of class EditServiceMemory and provide that object to any ActionSupport class 
 that has a setEditService method with an argument of type EditService. Consult the <a href="../plugins/spring/">Spring Plugin</a> 
 documentation for how to change the default autowire method.</p>
 
@@ -259,7 +259,7 @@ scope (e.g. request or session).</p>
 
 <h2 id="alternative---have-spring-manage-creation-of-actionsupport-class">Alternative - Have Spring Manage Creation Of ActionSupport Class</h2>
 
-<p>Using the above methodology, the Struts 2 framework will still manage the creation of the <code class="highlighter-rouge">ActionSupport</code> class. If you 
+<p>Using the above methodology, the Struts 2 framework will still manage the creation of the <code class="language-plaintext highlighter-rouge">ActionSupport</code> class. If you 
 prefer you can configure the application so that Spring will create the ActionSupport class also. To support this technique 
 you need to add a bean node to the Spring configuration file for the ActionSupport class.</p>
 
@@ -281,12 +281,12 @@ you need to add a bean node to the Spring configuration file for the ActionSuppo
 <span class="nt">&lt;/beans&gt;</span>
 </code></pre></div></div>
 
-<p>Note in the above that there is an <code class="highlighter-rouge">editAction</code> bean and its <code class="highlighter-rouge">editService</code> property is set to the <code class="highlighter-rouge">editService</code> bean. 
-Since we are having Spring manage the <code class="highlighter-rouge">EditAction</code> class we must specify any properties of <code class="highlighter-rouge">EditAction</code> that we want Spring 
-to inject. Please remember that actions must be created on each request, they cannot be <code class="highlighter-rouge">singletons</code>- this is the default 
-<code class="highlighter-rouge">scope</code> that’s why it must be changed to <code class="highlighter-rouge">prototype</code>.</p>
+<p>Note in the above that there is an <code class="language-plaintext highlighter-rouge">editAction</code> bean and its <code class="language-plaintext highlighter-rouge">editService</code> property is set to the <code class="language-plaintext highlighter-rouge">editService</code> bean. 
+Since we are having Spring manage the <code class="language-plaintext highlighter-rouge">EditAction</code> class we must specify any properties of <code class="language-plaintext highlighter-rouge">EditAction</code> that we want Spring 
+to inject. Please remember that actions must be created on each request, they cannot be <code class="language-plaintext highlighter-rouge">singletons</code>- this is the default 
+<code class="language-plaintext highlighter-rouge">scope</code> that’s why it must be changed to <code class="language-plaintext highlighter-rouge">prototype</code>.</p>
 
-<p>In the <code class="highlighter-rouge">struts.xml</code> configuration file you must specify the Spring id value for the class attribute of the action node. 
+<p>In the <code class="language-plaintext highlighter-rouge">struts.xml</code> configuration file you must specify the Spring id value for the class attribute of the action node. 
 This tells Struts to get a bean with that id value from Spring for the Action class.</p>
 
 <p><strong>Struts Configuration For Spring Managed ActionSupport Class</strong></p>

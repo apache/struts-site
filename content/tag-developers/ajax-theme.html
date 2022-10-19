@@ -171,31 +171,31 @@ browsers. The supported browsers are:</p>
 
 <h2 id="extending-the-ajax-theme">Extending the AJAX Theme</h2>
 
-<p>The wrapping technique utilized by the ajax theme is much like <a href="xhtml-theme">xhtml theme</a>, but the <code class="highlighter-rouge">controlheader.ftl</code>
+<p>The wrapping technique utilized by the ajax theme is much like <a href="xhtml-theme">xhtml theme</a>, but the <code class="language-plaintext highlighter-rouge">controlheader.ftl</code>
 is a wee bit different.</p>
 
-<pre><code class="language-ftl">&lt;#if parameters.label?if_exists != ""&gt;
-	&lt;#include "/${parameters.templateDir}/xhtml/controlheader.ftl" /&gt;
-&lt;/#if&gt;
-&lt;#if parameters.form?exists &amp;&amp; parameters.form.validate?default(false) == true&gt;
-	&lt;#-- can't mutate the data model in freemarker --&gt;
-    &lt;#if parameters.onblur?exists&gt;
-        ${tag.addParameter('onblur', "validate(this);${parameters.onblur}")}
-    &lt;#else&gt;
-        ${tag.addParameter('onblur', "validate(this);")}
-    &lt;/#if&gt;
-&lt;/#if&gt;
-</code></pre>
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>parameters.label?if_exists != ""&gt;<span class="w">
+	</span>&lt;#include "/$<span class="p">{</span><span class="no">parameters</span><span class="na">.templateDir</span><span class="p">}</span>/xhtml/controlheader.ftl" /&gt;<span class="w">
+</span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>parameters.form?exists &amp;&amp; parameters.form.validate?default(false) == true&gt;<span class="w">
+	</span>&lt;#-- can't mutate the data model in freemarker --&gt;<span class="w">
+    </span>&lt;#if parameters.onblur?exists&gt;<span class="w">
+        </span>$<span class="p">{</span><span class="no">tag</span><span class="na">.addParameter</span><span class="p">(</span><span class="err">'</span><span class="no">onblur</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="s2">"validate(this);${parameters.onblur}"</span><span class="p">)}</span><span class="w">
+    </span>&lt;#else&gt;<span class="w">
+        </span>$<span class="p">{</span><span class="no">tag</span><span class="na">.addParameter</span><span class="p">(</span><span class="err">'</span><span class="no">onblur</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="s2">"validate(this);"</span><span class="p">)}</span><span class="w">
+    </span>&lt;/#if&gt;<span class="w">
+</span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>The header provides for <a href="../core-developers/ajax-client-side-validation">AJAX Client Side Validation</a> by checking 
-if the <code class="highlighter-rouge">validate</code> attribute is set to true. If it is, a validation request is made on each <code class="highlighter-rouge">onblur</code> event 
-for a HTML <a href="struts-tags">Struts Tags</a>. Some people don’t like the <code class="highlighter-rouge">onblur</code> behavior; they would rather a more 
+if the <code class="language-plaintext highlighter-rouge">validate</code> attribute is set to true. If it is, a validation request is made on each <code class="language-plaintext highlighter-rouge">onblur</code> event 
+for a HTML <a href="struts-tags">Struts Tags</a>. Some people don’t like the <code class="language-plaintext highlighter-rouge">onblur</code> behavior; they would rather a more 
 advanced timer (say, 200ms) be kicked off after every keystroke. You can override this template and provide that 
 type of behavior if you would like.</p>
 
 <h2 id="special-interest">Special Interest</h2>
 
-<p>Three ajax_xhtml templates of special interest are <code class="highlighter-rouge">head</code>, <code class="highlighter-rouge">div</code> , and <code class="highlighter-rouge">a</code>.</p>
+<p>Three ajax_xhtml templates of special interest are <code class="language-plaintext highlighter-rouge">head</code>, <code class="language-plaintext highlighter-rouge">div</code> , and <code class="language-plaintext highlighter-rouge">a</code>.</p>
 
 <blockquote>
   <p>Especially with the ajax theme, it is important to use the <a href="dojo-head-tag">head</a> tag. 

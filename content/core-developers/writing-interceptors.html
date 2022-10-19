@@ -135,34 +135,34 @@
 
 <h2 id="interceptor-interface">Interceptor interface</h2>
 
-<p>Interceptors must implement the <code class="highlighter-rouge">com.opensymphony.xwork2.interceptor.Interceptor</code> interface.</p>
+<p>Interceptors must implement the <code class="language-plaintext highlighter-rouge">com.opensymphony.xwork2.interceptor.Interceptor</code> interface.</p>
 
 <p><strong>Interceptor.java</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Interceptor</span> <span class="kd">extends</span> <span class="n">Serializable</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Interceptor</span> <span class="kd">extends</span> <span class="nc">Serializable</span> <span class="o">{</span>
 
     <span class="kt">void</span> <span class="nf">destroy</span><span class="o">();</span>
 
     <span class="kt">void</span> <span class="nf">init</span><span class="o">();</span>
 
-    <span class="n">String</span> <span class="nf">intercept</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>
+    <span class="nc">String</span> <span class="nf">intercept</span><span class="o">(</span><span class="nc">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">init</code> method is called the after interceptor is instantiated and before calling <code class="highlighter-rouge">intercept</code>. This is the place 
+<p>The <code class="language-plaintext highlighter-rouge">init</code> method is called the after interceptor is instantiated and before calling <code class="language-plaintext highlighter-rouge">intercept</code>. This is the place 
 to allocate any resources used by the interceptor.</p>
 
-<p>The <code class="highlighter-rouge">intercept</code> method is where the interceptor code is written. Just like an action method, <code class="highlighter-rouge">intercept</code> returns 
-a result used by Struts to forward the request to another web resource. Calling <code class="highlighter-rouge">invoke</code> on the parameter of type 
-<code class="highlighter-rouge">ActionInvocation</code> will execute the action (if this is the last interceptor on the stack) or another interceptor.</p>
+<p>The <code class="language-plaintext highlighter-rouge">intercept</code> method is where the interceptor code is written. Just like an action method, <code class="language-plaintext highlighter-rouge">intercept</code> returns 
+a result used by Struts to forward the request to another web resource. Calling <code class="language-plaintext highlighter-rouge">invoke</code> on the parameter of type 
+<code class="language-plaintext highlighter-rouge">ActionInvocation</code> will execute the action (if this is the last interceptor on the stack) or another interceptor.</p>
 
 <blockquote>
-  <p>Keep in mind that <code class="highlighter-rouge">invoke</code> will return <strong>after</strong> the result has been called (eg. after you JSP has been rendered), 
+  <p>Keep in mind that <code class="language-plaintext highlighter-rouge">invoke</code> will return <strong>after</strong> the result has been called (eg. after you JSP has been rendered), 
 making it perfect for things like open-session-in-view patterns. If you want to do something before the result gets 
-called, you should implement a <code class="highlighter-rouge">PreResultListener</code>.</p>
+called, you should implement a <code class="language-plaintext highlighter-rouge">PreResultListener</code>.</p>
 </blockquote>
 
-<p>Overwrite <code class="highlighter-rouge">destroy</code> to release resources on application shutdown.</p>
+<p>Overwrite <code class="language-plaintext highlighter-rouge">destroy</code> to release resources on application shutdown.</p>
 
 <h2 id="thread-safety">Thread Safety</h2>
 
@@ -175,13 +175,13 @@ are shared between requests and must be <a href="http://en.wikipedia.org/wiki/Th
 
 <h2 id="abstractinterceptor">AbstractInterceptor</h2>
 
-<p>The AbstractInterceptor class provides an empty implementation of <code class="highlighter-rouge">init</code> and <code class="highlighter-rouge">destroy</code>, and can be used if these 
+<p>The AbstractInterceptor class provides an empty implementation of <code class="language-plaintext highlighter-rouge">init</code> and <code class="language-plaintext highlighter-rouge">destroy</code>, and can be used if these 
 methods are not going to be implemented.</p>
 
 <h2 id="mapping">Mapping</h2>
 
-<p>Interceptors are declared using the <code class="highlighter-rouge">&lt;interceptor/&gt;</code> element, nested inside the <code class="highlighter-rouge">&lt;interceptors/&gt;</code> element. 
-Example from <code class="highlighter-rouge">struts-default.xml</code>:</p>
+<p>Interceptors are declared using the <code class="language-plaintext highlighter-rouge">&lt;interceptor/&gt;</code> element, nested inside the <code class="language-plaintext highlighter-rouge">&lt;interceptors/&gt;</code> element. 
+Example from <code class="language-plaintext highlighter-rouge">struts-default.xml</code>:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
    ...
@@ -208,11 +208,11 @@ of the action to the current date:</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionInvocation</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.interceptor.AbstractInterceptor</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleInterceptor</span> <span class="kd">extends</span> <span class="n">AbstractInterceptor</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleInterceptor</span> <span class="kd">extends</span> <span class="nc">AbstractInterceptor</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">intercept</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-       <span class="n">MyAction</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="n">MyAction</span><span class="o">)</span><span class="n">invocation</span><span class="o">.</span><span class="na">getAction</span><span class="o">();</span>
-       <span class="n">action</span><span class="o">.</span><span class="na">setDate</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">());</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">intercept</span><span class="o">(</span><span class="nc">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+       <span class="nc">MyAction</span> <span class="n">action</span> <span class="o">=</span> <span class="o">(</span><span class="nc">MyAction</span><span class="o">)</span><span class="n">invocation</span><span class="o">.</span><span class="na">getAction</span><span class="o">();</span>
+       <span class="n">action</span><span class="o">.</span><span class="na">setDate</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">());</span>
        <span class="k">return</span> <span class="n">invocation</span><span class="o">.</span><span class="na">invoke</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>

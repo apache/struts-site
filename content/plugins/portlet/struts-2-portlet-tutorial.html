@@ -161,7 +161,7 @@ If you have not used Struts 2 before, please check out some of the other Struts 
     -DgroupId=com.mycompany -DremoteRepositories=http://people.apache.org/repo/m2-snapshot-repository
 </code></pre></div></div>
 
-<p>This will set up the maven 2 structure for us and also set up the basic configuration needed to create a Struts 2 portlet. The archetype creates a sample HelloWorld portlet that shows off some of the basic principles of Struts 2 portlet programming. To test the set up, type <code class="highlighter-rouge">mvn jetty:run -P pluto-embedded</code> in a command prompt. Open a browser and point your browser to http://localhost:8080/bookmark-portlet/pluto/index.jsp and play around.</p>
+<p>This will set up the maven 2 structure for us and also set up the basic configuration needed to create a Struts 2 portlet. The archetype creates a sample HelloWorld portlet that shows off some of the basic principles of Struts 2 portlet programming. To test the set up, type <code class="language-plaintext highlighter-rouge">mvn jetty:run -P pluto-embedded</code> in a command prompt. Open a browser and point your browser to http://localhost:8080/bookmark-portlet/pluto/index.jsp and play around.</p>
 
 <h3 id="looking-at-the-basics">Looking at the basics</h3>
 
@@ -264,7 +264,7 @@ If you have not used Struts 2 before, please check out some of the other Struts 
 
 <h3 id="import-the-project-into-eclipse">Import the project into Eclipse</h3>
 
-<p>Now let’s import the project into Eclipse. First, type <code class="highlighter-rouge">mvn eclipse:eclipse -P pluto-embedded</code> then start Eclipse (if you have not already done so), and import the project using “File -&gt; Import -&gt; General -&gt; Existing Projects into Workspace”. Browse to the folder where you created the project and press finish. Your portlet project should now be setup up with all dependencies in place.</p>
+<p>Now let’s import the project into Eclipse. First, type <code class="language-plaintext highlighter-rouge">mvn eclipse:eclipse -P pluto-embedded</code> then start Eclipse (if you have not already done so), and import the project using “File -&gt; Import -&gt; General -&gt; Existing Projects into Workspace”. Browse to the folder where you created the project and press finish. Your portlet project should now be setup up with all dependencies in place.</p>
 
 <h3 id="creating-the-bookmark-domain-object">Creating the Bookmark domain object</h3>
 
@@ -274,19 +274,19 @@ If you have not used Struts 2 before, please check out some of the other Struts 
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bookmark</span> <span class="o">{</span>
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">url</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">url</span><span class="o">;</span>
 
-   <span class="kd">public</span> <span class="nf">Bookmark</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nf">Bookmark</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
       <span class="k">this</span><span class="o">.</span><span class="na">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">;</span>
    <span class="o">}</span>
 	
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
       <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
    <span class="o">}</span>
 
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
       <span class="k">return</span> <span class="n">url</span><span class="o">;</span>
    <span class="o">}</span>
 <span class="o">}</span>
@@ -300,22 +300,22 @@ If you have not used Struts 2 before, please check out some of the other Struts 
 <p><strong>src/main/java/com/mycompany/AddBookmark.java</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AddBookmarkAction</span> <span class="kd">extends</span> <span class="n">DefaultActionSupport</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AddBookmarkAction</span> <span class="kd">extends</span> <span class="nc">DefaultActionSupport</span> <span class="o">{</span>
 
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">url</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">url</span><span class="o">;</span>
 
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
    <span class="o">}</span>
 
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUrl</span><span class="o">(</span><span class="n">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">;</span>
    <span class="o">}</span>
 
    <span class="nd">@Override</span>
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-      <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
    <span class="o">}</span>
 <span class="o">}</span>
 
@@ -340,22 +340,22 @@ If you have not used Struts 2 before, please check out some of the other Struts 
 
 <p><strong>src/main/webapp/WEB-INF/jsp/edit/index.jsp</strong></p>
 
-<pre><code class="language-jsp">
-&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"s"</span><span class="na"> uri=</span><span class="s">"/struts-tags"</span> <span class="nt">%&gt;</span>
 
-&lt;h2&gt;Manage bookmarks&lt;/h2&gt;
+<span class="nt">&lt;h2&gt;</span>Manage bookmarks<span class="nt">&lt;/h2&gt;</span>
 
-&lt;s:form action="index"&gt;
-   &lt;table&gt;
-      &lt;s:textfield name="name" label="Name"/&gt;
-      &lt;s:textfield name="url" label="URL"/&gt;
-      &lt;s:submit value="Add"/&gt;
-   &lt;/table&gt;
-&lt;/s:form&gt;
+<span class="nt">&lt;s:form </span><span class="na">action=</span><span class="s">"index"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;table&gt;</span>
+      <span class="nt">&lt;s:textfield </span><span class="na">name=</span><span class="s">"name"</span><span class="na"> label=</span><span class="s">"Name"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;s:textfield </span><span class="na">name=</span><span class="s">"url"</span><span class="na"> label=</span><span class="s">"URL"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;s:submit </span><span class="na">value=</span><span class="s">"Add"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/s:form&gt;</span>
 
-</code></pre>
+</code></pre></div></div>
 
-<p>The textfields maps to the property names we have defined in <em>AddBookmarkAction</em> . Before we continue, let’s check that everything is configured correctly and check that our portlet can be run. In a command prompt, change into the directory where you have created the project and issue the command <code class="highlighter-rouge">mvn jetty:run -P pluto-embedded</code> . Then open http://localhost:8080/bookmark-portlet/pluto/index.jsp and click on the <em>edit</em>  portlet window control. If everything is set up correctly, you should see a form like this:</p>
+<p>The textfields maps to the property names we have defined in <em>AddBookmarkAction</em> . Before we continue, let’s check that everything is configured correctly and check that our portlet can be run. In a command prompt, change into the directory where you have created the project and issue the command <code class="language-plaintext highlighter-rouge">mvn jetty:run -P pluto-embedded</code> . Then open http://localhost:8080/bookmark-portlet/pluto/index.jsp and click on the <em>edit</em>  portlet window control. If everything is set up correctly, you should see a form like this:</p>
 
 <p><img src="../attachments/att59671071_AddBookmarkForm.jpg" alt="AddBookmarkForm.jpg" /></p>
 
@@ -364,30 +364,30 @@ If you have not used Struts 2 before, please check out some of the other Struts 
 <p><strong>src/main/java/com/mycompany/AddBookmarkAction.java</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AddBookmarkAction</span> <span class="kd">extends</span> <span class="n">DefaultActionSupport</span> <span class="kd">implements</span> <span class="n">PortletPreferencesAware</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AddBookmarkAction</span> <span class="kd">extends</span> <span class="nc">DefaultActionSupport</span> <span class="kd">implements</span> <span class="nc">PortletPreferencesAware</span> <span class="o">{</span>
 
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">url</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">url</span><span class="o">;</span>
 	
-   <span class="kd">private</span> <span class="n">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">;</span>
 
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
    <span class="o">}</span>
 
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUrl</span><span class="o">(</span><span class="n">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">;</span>
    <span class="o">}</span>
 	
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPortletPreferences</span><span class="o">(</span><span class="n">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPortletPreferences</span><span class="o">(</span><span class="nc">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">portletPreferences</span> <span class="o">=</span> <span class="n">portletPreferences</span><span class="o">;</span>	
    <span class="o">}</span>
 
    <span class="nd">@Override</span>
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
       <span class="n">portletPreferences</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">url</span><span class="o">);</span>
       <span class="n">portletPreferences</span><span class="o">.</span><span class="na">store</span><span class="o">();</span>
-      <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+      <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
    <span class="o">}</span>
 <span class="o">}</span>
 
@@ -422,26 +422,26 @@ If you have not used Struts 2 before, please check out some of the other Struts 
 <p><strong>src/main/java/com/mycompany/ListBookmarksAction.java</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ListBookmarksAction</span> <span class="kd">extends</span> <span class="n">DefaultActionSupport</span> <span class="kd">implements</span> <span class="n">PortletPreferencesAware</span> <span class="o">{</span>
-   <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Bookmark</span><span class="o">&gt;</span> <span class="n">bookmarks</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Bookmark</span><span class="o">&gt;();</span>
-   <span class="kd">private</span> <span class="n">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ListBookmarksAction</span> <span class="kd">extends</span> <span class="nc">DefaultActionSupport</span> <span class="kd">implements</span> <span class="nc">PortletPreferencesAware</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Bookmark</span><span class="o">&gt;</span> <span class="n">bookmarks</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Bookmark</span><span class="o">&gt;();</span>
+   <span class="kd">private</span> <span class="nc">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">;</span>
 
-   <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Bookmark</span><span class="o">&gt;</span> <span class="nf">getBookmarks</span><span class="o">()</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Bookmark</span><span class="o">&gt;</span> <span class="nf">getBookmarks</span><span class="o">()</span> <span class="o">{</span>
       <span class="k">return</span> <span class="n">bookmarks</span><span class="o">;</span>
    <span class="o">}</span>
 
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPortletPreferences</span><span class="o">(</span><span class="n">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPortletPreferences</span><span class="o">(</span><span class="nc">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">portletPreferences</span> <span class="o">=</span> <span class="n">portletPreferences</span><span class="o">;</span>
    <span class="o">}</span>
 
    <span class="nd">@Override</span>
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
       <span class="c1">// For simplicity, we'll assume that only bookmarks are stored in the preferences.</span>
-      <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">[]&gt;</span> <span class="n">preferencesMap</span> <span class="o">=</span> <span class="n">portletPreferences</span><span class="o">.</span><span class="na">getMap</span><span class="o">();</span>
-      <span class="k">for</span><span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">[]&gt;</span> <span class="n">entry</span> <span class="o">:</span> <span class="n">preferencesMap</span><span class="o">.</span><span class="na">entrySet</span><span class="o">())</span> <span class="o">{</span>
-         <span class="n">bookmarks</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Bookmark</span><span class="o">(</span><span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">(),</span> <span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">()[</span><span class="mi">0</span><span class="o">]));</span>
+      <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">[]&gt;</span> <span class="n">preferencesMap</span> <span class="o">=</span> <span class="n">portletPreferences</span><span class="o">.</span><span class="na">getMap</span><span class="o">();</span>
+      <span class="k">for</span><span class="o">(</span><span class="nc">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">[]&gt;</span> <span class="n">entry</span> <span class="o">:</span> <span class="n">preferencesMap</span><span class="o">.</span><span class="na">entrySet</span><span class="o">())</span> <span class="o">{</span>
+         <span class="n">bookmarks</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Bookmark</span><span class="o">(</span><span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">(),</span> <span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">()[</span><span class="mi">0</span><span class="o">]));</span>
       <span class="o">}</span>
-      <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+      <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
    <span class="o">}</span>
 <span class="o">}</span>
 
@@ -453,22 +453,22 @@ If you have not used Struts 2 before, please check out some of the other Struts 
 
 <p><strong>src/main/webapp/WEB-INF/jsp/view/index.jsp</strong></p>
 
-<pre><code class="language-jsp">
-&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"s"</span><span class="na"> uri=</span><span class="s">"/struts-tags"</span> <span class="nt">%&gt;</span>
 
-&lt;strong&gt;Bookmarks&lt;/strong&gt;
-&lt;p&gt;
-   &lt;table&gt;
-   &lt;s:iterator value="%{bookmarks}" var="bookmark"&gt;
-      &lt;tr&gt;
-         &lt;td&gt;&lt;s:property value="%{name}"/&gt;&lt;/td&gt;
-         &lt;td&gt;&lt;a href="&lt;s:property value="%{url}"/&gt;" target="_blank"&gt;&lt;s:property value="%{url}"/&gt;&lt;/a&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-   &lt;/s:iterator&gt;
-   &lt;/table&gt;
-&lt;/p&gt;
+<span class="nt">&lt;strong&gt;</span>Bookmarks<span class="nt">&lt;/strong&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+   <span class="nt">&lt;table&gt;</span>
+   <span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"%{bookmarks}"</span><span class="na"> var=</span><span class="s">"bookmark"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;tr&gt;</span>
+         <span class="nt">&lt;td&gt;&lt;s:property </span><span class="na">value=</span><span class="s">"%{name}"</span><span class="nt">/&gt;&lt;/td&gt;</span>
+         <span class="nt">&lt;td&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"%{url}"</span><span class="nt">/&gt;</span><span class="s">"</span> <span class="na">target=</span><span class="s">"_blank"</span><span class="nt">&gt;&lt;s:property </span><span class="na">value=</span><span class="s">"%{url}"</span><span class="nt">/&gt;&lt;/a&gt;&lt;/td&gt;</span>
+      <span class="nt">&lt;/tr&gt;</span>
+   <span class="nt">&lt;/s:iterator&gt;</span>
+   <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <p>In the JSP, we just iterate over the list of Bookmarks and print the properties in the iterator loop.</p>
 
@@ -485,7 +485,7 @@ If you have not used Struts 2 before, please check out some of the other Struts 
 
 </code></pre></div></div>
 
-<p>When you’re ready, go back to a command prompt and start the server again (<code class="highlighter-rouge">mvn jetty:run -P pluto-embedded</code>), open a browser and start adding some bookmarks. When you go back to <em>view</em>  mode after adding a few, you’ll see the bookmarks listed:</p>
+<p>When you’re ready, go back to a command prompt and start the server again (<code class="language-plaintext highlighter-rouge">mvn jetty:run -P pluto-embedded</code>), open a browser and start adding some bookmarks. When you go back to <em>view</em>  mode after adding a few, you’ll see the bookmarks listed:</p>
 
 <p><img src="../attachments/att59671072_ListBookmarks.jpg" alt="ListBookmarks.jpg" /></p>
 
@@ -495,39 +495,39 @@ If you have not used Struts 2 before, please check out some of the other Struts 
 
 <p><strong>src/main/webapp/WEB-INF/jsp/edit/index.jsp</strong></p>
 
-<pre><code class="language-jsp">
-&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"s"</span><span class="na"> uri=</span><span class="s">"/struts-tags"</span> <span class="nt">%&gt;</span>
 
-&lt;h2&gt;Manage bookmarks&lt;/h2&gt;
+<span class="nt">&lt;h2&gt;</span>Manage bookmarks<span class="nt">&lt;/h2&gt;</span>
 
-&lt;p&gt;
-   &lt;table&gt;
-   &lt;s:iterator value="%{bookmarks}" var="bookmark"&gt;
-      &lt;s:url action="editBookmark!input" id="editUrl"&gt;
-         &lt;s:param name="oldName" value="%{name}"/&gt;
-      &lt;/s:url&gt;
-      &lt;s:url action="deleteBookmark" portletUrlType="action" id="deleteUrl"&gt;
-         &lt;s:param name="bookmarkName" value="%{name}"/&gt;
-      &lt;/s:url&gt;
-      &lt;tr&gt;
-         &lt;td&gt;&lt;s:property value="%{name}"/&gt;&lt;/td&gt;
-         &lt;td&gt;&lt;a href="&lt;s:property value="%{url}"/&gt;" target="_blank"&gt;&lt;s:property value="%{url}"/&gt;&lt;/a&gt;&lt;/td&gt;
-         &lt;td&gt;&lt;a href="&lt;s:property value="%{editUrl}"/&gt;"&gt;Edit&lt;/a&gt;&lt;/td&gt;
-         &lt;td&gt;&lt;a href="&lt;s:property value="%{deleteUrl}"/&gt;"&gt;Delete&lt;/a&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-   &lt;/s:iterator&gt;
-   &lt;/table&gt;
-&lt;/p&gt;
+<span class="nt">&lt;p&gt;</span>
+   <span class="nt">&lt;table&gt;</span>
+   <span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"%{bookmarks}"</span><span class="na"> var=</span><span class="s">"bookmark"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;s:url </span><span class="na">action=</span><span class="s">"editBookmark!input"</span><span class="na"> id=</span><span class="s">"editUrl"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;s:param </span><span class="na">name=</span><span class="s">"oldName"</span><span class="na"> value=</span><span class="s">"%{name}"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/s:url&gt;</span>
+      <span class="nt">&lt;s:url </span><span class="na">action=</span><span class="s">"deleteBookmark"</span><span class="na"> portletUrlType=</span><span class="s">"action"</span><span class="na"> id=</span><span class="s">"deleteUrl"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;s:param </span><span class="na">name=</span><span class="s">"bookmarkName"</span><span class="na"> value=</span><span class="s">"%{name}"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/s:url&gt;</span>
+      <span class="nt">&lt;tr&gt;</span>
+         <span class="nt">&lt;td&gt;&lt;s:property </span><span class="na">value=</span><span class="s">"%{name}"</span><span class="nt">/&gt;&lt;/td&gt;</span>
+         <span class="nt">&lt;td&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"%{url}"</span><span class="nt">/&gt;</span><span class="s">"</span> <span class="na">target=</span><span class="s">"_blank"</span><span class="nt">&gt;&lt;s:property </span><span class="na">value=</span><span class="s">"%{url}"</span><span class="nt">/&gt;&lt;/a&gt;&lt;/td&gt;</span>
+         <span class="nt">&lt;td&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"%{editUrl}"</span><span class="nt">/&gt;</span><span class="s">"</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/a&gt;&lt;/td&gt;</span>
+         <span class="nt">&lt;td&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"%{deleteUrl}"</span><span class="nt">/&gt;</span><span class="s">"</span><span class="nt">&gt;</span>Delete<span class="nt">&lt;/a&gt;&lt;/td&gt;</span>
+      <span class="nt">&lt;/tr&gt;</span>
+   <span class="nt">&lt;/s:iterator&gt;</span>
+   <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
 
-&lt;s:form action="addBookmark"&gt;
-   &lt;table&gt;
-      &lt;s:textfield name="name" label="Name"/&gt;
-      &lt;s:textfield name="url" label="URL"/&gt;
-      &lt;s:submit value="Add"/&gt;
-   &lt;/table&gt;
-&lt;/s:form&gt;
+<span class="nt">&lt;s:form </span><span class="na">action=</span><span class="s">"addBookmark"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;table&gt;</span>
+      <span class="nt">&lt;s:textfield </span><span class="na">name=</span><span class="s">"name"</span><span class="na"> label=</span><span class="s">"Name"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;s:textfield </span><span class="na">name=</span><span class="s">"url"</span><span class="na"> label=</span><span class="s">"URL"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;s:submit </span><span class="na">value=</span><span class="s">"Add"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/s:form&gt;</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <p>For the <em>delete</em>  url we need to specify that it is a portlet action url since portlet preferences cannot be changed in the render phase. We also need to change our configuration a bit since we’ll use this page as index page for <em>edit</em>  mode, and not only as the input form for the <em>AddBookmarkAction</em> :</p>
 
@@ -574,25 +574,25 @@ If you have not used Struts 2 before, please check out some of the other Struts 
 <p><strong>src/main/java/com/mycompany/DeleteBookmarkAction.java</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DeleteBookmarkAction</span> <span class="kd">extends</span> <span class="n">DefaultActionSupport</span> <span class="kd">implements</span> <span class="n">PortletPreferencesAware</span><span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DeleteBookmarkAction</span> <span class="kd">extends</span> <span class="nc">DefaultActionSupport</span> <span class="kd">implements</span> <span class="nc">PortletPreferencesAware</span><span class="o">{</span>
 
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">bookmarkName</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">bookmarkName</span><span class="o">;</span>
 	
-   <span class="kd">private</span> <span class="n">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">;</span>
 
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBookmarkName</span><span class="o">(</span><span class="n">String</span> <span class="n">bookmarkName</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBookmarkName</span><span class="o">(</span><span class="nc">String</span> <span class="n">bookmarkName</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">bookmarkName</span> <span class="o">=</span> <span class="n">bookmarkName</span><span class="o">;</span>
    <span class="o">}</span>
 	
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPortletPreferences</span><span class="o">(</span><span class="n">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPortletPreferences</span><span class="o">(</span><span class="nc">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">portletPreferences</span> <span class="o">=</span> <span class="n">portletPreferences</span><span class="o">;</span>
    <span class="o">}</span>
 	
    <span class="nd">@Override</span>
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
       <span class="n">portletPreferences</span><span class="o">.</span><span class="na">reset</span><span class="o">(</span><span class="n">bookmarkName</span><span class="o">);</span>
       <span class="n">portletPreferences</span><span class="o">.</span><span class="na">store</span><span class="o">();</span>
-      <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+      <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
    <span class="o">}</span>
 
 <span class="o">}</span>
@@ -620,77 +620,77 @@ If you have not used Struts 2 before, please check out some of the other Struts 
 
 <p><strong>src/main/webapp/WEB-INF/jsp/edit.jsp</strong></p>
 
-<pre><code class="language-jsp">
-&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"s"</span><span class="na"> uri=</span><span class="s">"/struts-tags"</span> <span class="nt">%&gt;</span>
 
-&lt;h2&gt;Edit bookmark&lt;/h2&gt;
+<span class="nt">&lt;h2&gt;</span>Edit bookmark<span class="nt">&lt;/h2&gt;</span>
 
-&lt;s:form action="editBookmark"&gt;
-   &lt;input type="hidden" name="oldName" value="&lt;s:property value="%{oldName}"/&gt;"/&gt;
-   &lt;table&gt;
-      &lt;s:textfield name="name" label="Name" value="%{oldName}"/&gt;
-      &lt;s:textfield name="url" label="URL"/&gt;
-      &lt;s:submit value="Update"/&gt;
-   &lt;/table&gt;
-&lt;/s:form&gt;
+<span class="nt">&lt;s:form </span><span class="na">action=</span><span class="s">"editBookmark"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"oldName"</span> <span class="na">value=</span><span class="s">"</span><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"%{oldName}"</span><span class="nt">/&gt;</span><span class="s">"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;table&gt;</span>
+      <span class="nt">&lt;s:textfield </span><span class="na">name=</span><span class="s">"name"</span><span class="na"> label=</span><span class="s">"Name"</span><span class="na"> value=</span><span class="s">"%{oldName}"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;s:textfield </span><span class="na">name=</span><span class="s">"url"</span><span class="na"> label=</span><span class="s">"URL"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;s:submit </span><span class="na">value=</span><span class="s">"Update"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/s:form&gt;</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <p>The <em>oldName</em>  hidden field keeps track of which bookmark is beeing edited, since the name is also our id to the entry beeing edited. The actual update of the bookmark will be a “delete and add a new entry”:</p>
 
 <p><strong>src/main/java/com/mycompany/EditBookmarkAction.java</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EditBookmarkAction</span> <span class="kd">extends</span> <span class="n">DefaultActionSupport</span> <span class="kd">implements</span> <span class="n">PortletPreferencesAware</span><span class="o">,</span> <span class="n">Preparable</span><span class="o">,</span> <span class="n">ParameterAware</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EditBookmarkAction</span> <span class="kd">extends</span> <span class="nc">DefaultActionSupport</span> <span class="kd">implements</span> <span class="nc">PortletPreferencesAware</span><span class="o">,</span> <span class="nc">Preparable</span><span class="o">,</span> <span class="nc">ParameterAware</span> <span class="o">{</span>
 
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">oldName</span><span class="o">;</span>
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">url</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">oldName</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">url</span><span class="o">;</span>
 	
-   <span class="kd">private</span> <span class="n">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">;</span>
-   <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">[]&gt;</span> <span class="n">parameters</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">[]&gt;</span> <span class="n">parameters</span><span class="o">;</span>
 	
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">getOldName</span><span class="o">()</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getOldName</span><span class="o">()</span> <span class="o">{</span>
       <span class="k">return</span> <span class="n">oldName</span><span class="o">;</span>
    <span class="o">}</span>
 	
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setOldName</span><span class="o">(</span><span class="n">String</span> <span class="n">oldName</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setOldName</span><span class="o">(</span><span class="nc">String</span> <span class="n">oldName</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">oldName</span> <span class="o">=</span> <span class="n">oldName</span><span class="o">;</span>
    <span class="o">}</span>
 	
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
       <span class="k">return</span> <span class="n">url</span><span class="o">;</span>
    <span class="o">}</span>
 
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUrl</span><span class="o">(</span><span class="n">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">;</span>
    <span class="o">}</span>
 
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
    <span class="o">}</span>
 	
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPortletPreferences</span><span class="o">(</span><span class="n">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPortletPreferences</span><span class="o">(</span><span class="nc">PortletPreferences</span> <span class="n">portletPreferences</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">portletPreferences</span> <span class="o">=</span> <span class="n">portletPreferences</span><span class="o">;</span>
    <span class="o">}</span>
 	
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setParameters</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">[]&gt;</span> <span class="n">parameters</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setParameters</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">[]&gt;</span> <span class="n">parameters</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">this</span><span class="o">.</span><span class="na">parameters</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">;</span>
    <span class="o">}</span>
 	
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">prepare</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">prepare</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
       <span class="c1">// Since the prepare interceptor is run before the parameter interceptor, </span>
       <span class="c1">// we have to get the parameter "manually".</span>
       <span class="k">this</span><span class="o">.</span><span class="na">oldName</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"oldName"</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
       <span class="k">this</span><span class="o">.</span><span class="na">url</span> <span class="o">=</span> <span class="n">portletPreferences</span><span class="o">.</span><span class="na">getValue</span><span class="o">(</span><span class="n">oldName</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
    <span class="o">}</span>
 	
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
       <span class="c1">// The modification is handled as remove/add</span>
       <span class="n">portletPreferences</span><span class="o">.</span><span class="na">reset</span><span class="o">(</span><span class="n">oldName</span><span class="o">);</span>
       <span class="n">portletPreferences</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">url</span><span class="o">);</span>
       <span class="n">portletPreferences</span><span class="o">.</span><span class="na">store</span><span class="o">();</span>
-      <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+      <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
    <span class="o">}</span>
 <span class="o">}</span>
 

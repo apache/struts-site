@@ -173,20 +173,20 @@
 <span class="kn">import</span> <span class="nn">de.laures.cewolf.DatasetProduceException</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">de.laures.cewolf.DatasetProducer</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PageViewCountData</span> <span class="kd">implements</span> <span class="n">DatasetProducer</span><span class="o">,</span> <span class="n">Serializable</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PageViewCountData</span> <span class="kd">implements</span> <span class="nc">DatasetProducer</span><span class="o">,</span> <span class="nc">Serializable</span> <span class="o">{</span>
 
 	<span class="c1">// These values would normally not be hard coded but produced by</span>
 	<span class="c1">// some kind of data source like a database or a file</span>
-	<span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span><span class="o">[]</span> <span class="n">categories</span> <span class="o">=</span>    <span class="o">{</span><span class="s">"mon"</span><span class="o">,</span> <span class="s">"tue"</span><span class="o">,</span> <span class="s">"wen"</span><span class="o">,</span> <span class="s">"thu"</span><span class="o">,</span> <span class="s">"fri"</span><span class="o">,</span> <span class="s">"sat"</span><span class="o">,</span> <span class="s">"sun"</span><span class="o">};</span>
-	<span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span><span class="o">[]</span> <span class="n">seriesNames</span> <span class="o">=</span>    <span class="o">{</span><span class="s">"cewolfset.jsp"</span><span class="o">,</span> <span class="s">"tutorial.jsp"</span><span class="o">,</span> <span class="s">"testpage.jsp"</span><span class="o">,</span> <span class="s">"performancetest.jsp"</span><span class="o">};</span>
-	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Integer</span><span class="o">[]</span> <span class="o">[]</span> <span class="n">values</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">[</span><span class="nl">OS:</span><span class="n">seriesNames</span><span class="o">.</span><span class="na">length</span><span class="o">]</span> <span class="o">[</span><span class="nl">OS:</span><span class="n">categories</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">categories</span> <span class="o">=</span>    <span class="o">{</span><span class="s">"mon"</span><span class="o">,</span> <span class="s">"tue"</span><span class="o">,</span> <span class="s">"wen"</span><span class="o">,</span> <span class="s">"thu"</span><span class="o">,</span> <span class="s">"fri"</span><span class="o">,</span> <span class="s">"sat"</span><span class="o">,</span> <span class="s">"sun"</span><span class="o">};</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">seriesNames</span> <span class="o">=</span>    <span class="o">{</span><span class="s">"cewolfset.jsp"</span><span class="o">,</span> <span class="s">"tutorial.jsp"</span><span class="o">,</span> <span class="s">"testpage.jsp"</span><span class="o">,</span> <span class="s">"performancetest.jsp"</span><span class="o">};</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">Integer</span><span class="o">[]</span> <span class="o">[]</span> <span class="n">values</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Integer</span><span class="o">[</span><span class="nl">OS:</span><span class="n">seriesNames</span><span class="o">.</span><span class="na">length</span><span class="o">]</span> <span class="o">[</span><span class="nl">OS:</span><span class="n">categories</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
 
-	<span class="kd">public</span> <span class="n">Object</span> <span class="nf">produceDataset</span><span class="o">(</span><span class="n">Map</span> <span class="n">params</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">DatasetProduceException</span> <span class="o">{</span>
-		<span class="n">DefaultCategoryDataset</span> <span class="n">dataset</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DefaultCategoryDataset</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="nc">Object</span> <span class="nf">produceDataset</span><span class="o">(</span><span class="nc">Map</span> <span class="n">params</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">DatasetProduceException</span> <span class="o">{</span>
+		<span class="nc">DefaultCategoryDataset</span> <span class="n">dataset</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultCategoryDataset</span><span class="o">();</span>
 		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">series</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">series</span> <span class="o">&lt;</span> <span class="n">seriesNames</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">series</span> <span class="o">++)</span> <span class="o">{</span>
-			<span class="kt">int</span> <span class="n">lastY</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">+</span> <span class="mi">1000</span><span class="o">);</span>
+			<span class="kt">int</span> <span class="n">lastY</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">+</span> <span class="mi">1000</span><span class="o">);</span>
 			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">categories</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-				<span class="kd">final</span> <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">lastY</span> <span class="o">+</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">200</span> <span class="o">-</span> <span class="mi">100</span><span class="o">);</span>
+				<span class="kd">final</span> <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">lastY</span> <span class="o">+</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">200</span> <span class="o">-</span> <span class="mi">100</span><span class="o">);</span>
 				<span class="n">lastY</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
 				<span class="n">dataset</span><span class="o">.</span><span class="na">addValue</span><span class="o">((</span><span class="kt">double</span><span class="o">)</span><span class="n">y</span><span class="o">,</span> <span class="n">seriesNames</span><span class="o">[</span><span class="nl">OS:</span><span class="n">series</span><span class="o">],</span> <span class="n">categories</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
 			<span class="o">}</span>
@@ -194,11 +194,11 @@
 		<span class="k">return</span> <span class="n">dataset</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasExpired</span><span class="o">(</span><span class="n">Map</span> <span class="n">params</span><span class="o">,</span> <span class="n">Date</span> <span class="n">since</span><span class="o">)</span> <span class="o">{</span>		
-		<span class="k">return</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">since</span><span class="o">.</span><span class="na">getTime</span><span class="o">())</span>  <span class="o">&gt;</span> <span class="mi">5000</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasExpired</span><span class="o">(</span><span class="nc">Map</span> <span class="n">params</span><span class="o">,</span> <span class="nc">Date</span> <span class="n">since</span><span class="o">)</span> <span class="o">{</span>		
+		<span class="k">return</span> <span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">since</span><span class="o">.</span><span class="na">getTime</span><span class="o">())</span>  <span class="o">&gt;</span> <span class="mi">5000</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getProducerId</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getProducerId</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="s">"PageViewCountData DatasetProducer"</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
@@ -209,26 +209,26 @@
 
 <p>With the new WebWork refactorings, nested JSP tags with arbitrary parameters can be used, so we convert the CeWolf tutorial JSP script to Velocity.</p>
 
-<pre><code class="language-jsp">
-&lt;jsp:useBean id="pageViews" class="de.laures.cewolf.example.PageViewCountData"/&gt;
-&lt;cewolf:chart 
-    id="line" 
-    title="Page View Statistics" 
-    type="line" 
-    xaxislabel="Page" 
-    yaxislabel="Views"&gt;
-    &lt;cewolf:data&gt;
-        &lt;cewolf:producer id="pageViews"/&gt;
-    &lt;/cewolf:data&gt;
-&lt;/cewolf:chart&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;jsp:useBean </span><span class="na">id=</span><span class="s">"pageViews"</span><span class="na"> class=</span><span class="s">"de.laures.cewolf.example.PageViewCountData"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;cewolf:chart 
+    </span><span class="na">id=</span><span class="s">"line"</span><span class="na"> 
+    title=</span><span class="s">"Page View Statistics"</span><span class="na"> 
+    type=</span><span class="s">"line"</span><span class="na"> 
+    xaxislabel=</span><span class="s">"Page"</span><span class="na"> 
+    yaxislabel=</span><span class="s">"Views"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;cewolf:data&gt;</span>
+        <span class="nt">&lt;cewolf:producer </span><span class="na">id=</span><span class="s">"pageViews"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/cewolf:data&gt;</span>
+<span class="nt">&lt;/cewolf:chart&gt;</span>
 
-&lt;cewolf:img chartid="line" renderer="cewolf" width="400" height="300"/&gt;
+<span class="nt">&lt;cewolf:img </span><span class="na">chartid=</span><span class="s">"line"</span><span class="na"> renderer=</span><span class="s">"cewolf"</span><span class="na"> width=</span><span class="s">"400"</span><span class="na"> height=</span><span class="s">"300"</span><span class="nt">/&gt;</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <p>In Velocity it looks like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 #set( $pageViews = $stack.findValue("new com.PageViewCountData()") )
 $req.session.setAttribute("pageViews", $pageViews ) 
 

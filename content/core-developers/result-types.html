@@ -137,7 +137,7 @@ manages the view.</p>
 
 <h2 id="predefined-result-types">Predefined Result Types</h2>
 
-<p>The framework provides several implementations of the <code class="highlighter-rouge">com.opensymphony.xwork2.Result</code> interface, ready to use in your 
+<p>The framework provides several implementations of the <code class="language-plaintext highlighter-rouge">com.opensymphony.xwork2.Result</code> interface, ready to use in your 
 own applications.</p>
 
 <table>
@@ -191,10 +191,6 @@ own applications.</p>
       <td>Used to provide Tiles integration</td>
     </tr>
     <tr>
-      <td><a href="../plugins/tiles-3/">Tiles 3 Result</a></td>
-      <td>Used to provide Tiles 3 integration</td>
-    </tr>
-    <tr>
       <td><a href="postback-result">Postback Result</a></td>
       <td>Used to postback request parameters as a form to the specified destination</td>
     </tr>
@@ -202,23 +198,48 @@ own applications.</p>
       <td><a href="../plugins/json/">JSON Result</a></td>
       <td>Used to serialize actions into JSON</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="optional">Optional</h2>
-
-<table>
-  <tbody>
     <tr>
       <td><a href="../plugins/jasperreports/">JasperReports Plugin</a></td>
       <td>Used for <a href="../getting-started/jasper-reports-tutorial">JasperReports Tutorial</a> integration</td>
-      <td>Optional, third-party plugin</td>
     </tr>
   </tbody>
 </table>
 
-<p>Additional Result Types can be created and plugged into an application by implementing the <code class="highlighter-rouge">com.opensymphony.xwork2.Result</code>
+<p>Additional Result Types can be created and plugged into an application by implementing the <code class="language-plaintext highlighter-rouge">com.opensymphony.xwork2.Result</code>
 interface. Custom Result Types might include generating an email or JMS message, generating images, and so forth.</p>
+
+<h2 id="how-to-use-results">How to use results</h2>
+
+<p>Once your action has been executed it must either return a result name (as <code class="language-plaintext highlighter-rouge">java.lang.String</code>) or instance 
+of <code class="language-plaintext highlighter-rouge">com.opensymphony.xwork2.Result</code> and the result will be executed directly.</p>
+
+<p>If a String has been returned, the framework will try to find a matching result in the configuration and then it will
+execute the result of a given type, see example:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>/WEB-INF/index.jsp<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
+
+<p>You can define many results per action distinguishing them by different names.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>/WEB-INF/index.jsp<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>/WEB-INF/form.jsp<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"error"</span> <span class="na">type=</span><span class="s">"dispatcher"</span><span class="nt">&gt;</span>/WEB-INF/error.jsp<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
+
+<h2 id="default-result-type">Default result type</h2>
+
+<p>In <code class="language-plaintext highlighter-rouge">struts-default.xml</code> the Dispatcher result type is registered as a default result type, which means you don’t have to
+specify the <code class="language-plaintext highlighter-rouge">type</code> attribute if yoy want to use it:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>/WEB-INF/index.jsp<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
+
+<h2 id="default-result-name">Default result name</h2>
+
+<p>If you action method returns <code class="language-plaintext highlighter-rouge">success</code>, which is a default name of the result, you don’t have specify the <code class="language-plaintext highlighter-rouge">name</code> attribute as well:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result&gt;</span>/WEB-INF/index.jsp<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
 
 <h2 id="default-parameters">Default Parameters</h2>
 
@@ -247,24 +268,24 @@ to set the same parameter as a specifically-named parameter.</p>
 <h2 id="extending">Extending</h2>
 
 <p>You can always extend defined result types and implement whatever logic you need. To simplify process of that, you can 
-define your custom <code class="highlighter-rouge">ResultFactory</code> and use it with connection with custom interface which your Result implements. 
+define your custom <code class="language-plaintext highlighter-rouge">ResultFactory</code> and use it with connection with custom interface which your Result implements. 
 Check <a href="object-factory">Define dedicated factory</a> to see how to do it.</p>
 
 <p>Struts 2 provides one such extension for you:</p>
 
-<p><code class="highlighter-rouge">ParamNameAwareResult</code> interface when used with <code class="highlighter-rouge">StrutsResultBuilder</code> can limit parameters assigned to the result. 
+<p><code class="language-plaintext highlighter-rouge">ParamNameAwareResult</code> interface when used with <code class="language-plaintext highlighter-rouge">StrutsResultBuilder</code> can limit parameters assigned to the result. 
 So you can simple extend existing result with such a functionality as below:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyResult</span> <span class="kd">extends</span> <span class="n">ServletDispatcherResult</span> <span class="kd">implements</span> <span class="n">ParamNameAwareResult</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyResult</span> <span class="kd">extends</span> <span class="nc">ServletDispatcherResult</span> <span class="kd">implements</span> <span class="nc">ParamNameAwareResult</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">acceptableParamName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">acceptableParamName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"accept"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
     <span class="o">}</span>
 
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>and then register it and use instead of default <code class="highlighter-rouge">dispatcher</code> result.</p>
+<p>and then register it and use instead of default <code class="language-plaintext highlighter-rouge">dispatcher</code> result.</p>
 
   </section>
 </article>

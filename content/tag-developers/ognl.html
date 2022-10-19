@@ -145,14 +145,14 @@ basic concepts, refer to <a href="ognl-basics">OGNL Basics</a>.</p>
 <p>The framework uses a standard naming context to evaluate OGNL expressions. The top level object dealing with OGNL is 
 a Map (usually referred as a context map or context). OGNL has a notion of there being a root (or default) object within 
 the context. In expression, the properties of the root object can be referenced without any special “marker” notion. 
-References to other objects are marked with a pound sign (<code class="highlighter-rouge">#</code>).</p>
+References to other objects are marked with a pound sign (<code class="language-plaintext highlighter-rouge">#</code>).</p>
 
 <p>The framework sets the OGNL context to be our ActionContext, and the value stack to be the OGNL root object. 
 (The value stack is a set of several objects, but to OGNL it appears to be a single object.) Along with the value stack, 
 the framework places other objects in the ActionContext, including Maps representing the application, session, 
 and request contexts. These objects coexist in the ActionContext, alongside the value stack (our OGNL root).</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>context map---|
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>context map---|
               |--application
               |
               |--session
@@ -170,32 +170,32 @@ and request contexts. These objects coexist in the ActionContext, alongside the 
 </code></pre></div></div>
 
 <p>The Action instance is always pushed onto the value stack. Because the Action is on the stack, and the stack is 
-the OGNL root, references to Action properties can omit the <code class="highlighter-rouge">#</code> marker. But, to access other objects in the ActionContext, 
-we must use the <code class="highlighter-rouge">#</code> notation so OGNL knows not to look in the root object, but for some other object in the ActionContext.</p>
+the OGNL root, references to Action properties can omit the <code class="language-plaintext highlighter-rouge">#</code> marker. But, to access other objects in the ActionContext, 
+we must use the <code class="language-plaintext highlighter-rouge">#</code> notation so OGNL knows not to look in the root object, but for some other object in the ActionContext.</p>
 
 <p><strong>Referencing an Action property</strong></p>
 
-<pre><code class="language-jsp">&lt;s:property value="postalCode"/&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"postalCode"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
-<p>Other (non-root) objects in the ActionContext can be rendered use the <code class="highlighter-rouge">#</code> notation.</p>
+<p>Other (non-root) objects in the ActionContext can be rendered use the <code class="language-plaintext highlighter-rouge">#</code> notation.</p>
 
-<pre><code class="language-jsp">&lt;s:property value="#session.mySessionPropKey"/&gt; or
-&lt;s:property value="#session['mySessionPropKey']"/&gt; or
-&lt;s:property value="#request['myRequestPropKey']"/&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#session.mySessionPropKey"</span><span class="nt">/&gt;</span> or
+<span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#session['mySessionPropKey']"</span><span class="nt">/&gt;</span> or
+<span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#request['myRequestPropKey']"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>The ActionContext is also exposed to Action classes via a static method but you <strong>should not</strong> use this approach. 
-Safer is to use one of the <code class="highlighter-rouge">*Aware</code> interfaces.</p>
+Safer is to use one of the <code class="language-plaintext highlighter-rouge">*Aware</code> interfaces.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getSession</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"mySessionPropKey"</span><span class="o">,</span> <span class="n">mySessionObject</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getSession</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"mySessionPropKey"</span><span class="o">,</span> <span class="n">mySessionObject</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>You can also put expression for attributes that don’t support dynamic content, like below:</p>
 
-<pre><code class="language-jsp">&lt;c:set var="foo" value="bar" scope="request"/&gt;
-&lt;s:textfield name="username" label="%{#request.foo}" /&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;c:set </span><span class="na">var=</span><span class="s">"foo"</span><span class="na"> value=</span><span class="s">"bar"</span><span class="na"> scope=</span><span class="s">"request"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;s:textfield </span><span class="na">name=</span><span class="s">"username"</span><span class="na"> label=</span><span class="s">"%{#request.foo}"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <h2 id="collections-maps-lists-sets">Collections (Maps, Lists, Sets)</h2>
 
@@ -203,46 +203,46 @@ Safer is to use one of the <code class="highlighter-rouge">*Aware</code> interfa
 using the select tag. The <a href="http://commons.apache.org/proper/commons-ognl/language-guide.html#Collection_Construction">OGNL documentation</a>
 also includes some examples.</p>
 
-<p>Syntax for list: <code class="highlighter-rouge">{e1,e2,e3}</code>. This idiom creates a List containing the String “name1”, “name2” and “name3”. It also 
+<p>Syntax for list: <code class="language-plaintext highlighter-rouge">{e1,e2,e3}</code>. This idiom creates a List containing the String “name1”, “name2” and “name3”. It also 
 selects “name2” as the default value.</p>
 
-<pre><code class="language-jsp">&lt;s:select label="label" name="name" list="{'name1','name2','name3'}" value="%{'name2'}" /&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:select </span><span class="na">label=</span><span class="s">"label"</span><span class="na"> name=</span><span class="s">"name"</span><span class="na"> list=</span><span class="s">"{'name1','name2','name3'}"</span><span class="na"> value=</span><span class="s">"%{'name2'}"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
-<p>Syntax for map: <code class="highlighter-rouge">#{key1:value1,key2:value2}</code>. This idiom creates a map that maps the string “foo” to the string 
+<p>Syntax for map: <code class="language-plaintext highlighter-rouge">#{key1:value1,key2:value2}</code>. This idiom creates a map that maps the string “foo” to the string 
 “foovalue” and “bar” to the string “barvalue”:</p>
 
-<pre><code class="language-jsp">&lt;s:select label="label" name="name" list="#{'foo':'foovalue', 'bar':'barvalue'}" /&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:select </span><span class="na">label=</span><span class="s">"label"</span><span class="na"> name=</span><span class="s">"name"</span><span class="na"> list=</span><span class="s">"#{'foo':'foovalue', 'bar':'barvalue'}"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
-<p>To determine if an element exists in a Collection, use the operations <code class="highlighter-rouge">in</code> and <code class="highlighter-rouge">not in</code>.</p>
+<p>To determine if an element exists in a Collection, use the operations <code class="language-plaintext highlighter-rouge">in</code> and <code class="language-plaintext highlighter-rouge">not in</code>.</p>
 
-<pre><code class="language-jsp">&lt;s:if test="'foo' in {'foo','bar'}"&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:if </span><span class="na">test=</span><span class="s">"'foo' in {'foo','bar'}"</span><span class="nt">&gt;</span>
    muhahaha
-&lt;/s:if&gt;
-&lt;s:else&gt;
+<span class="nt">&lt;/s:if&gt;</span>
+<span class="nt">&lt;s:else&gt;</span>
    boo
-&lt;/s:else&gt;
+<span class="nt">&lt;/s:else&gt;</span>
 
-&lt;s:if test="'foo' not in {'foo','bar'}"&gt;
+<span class="nt">&lt;s:if </span><span class="na">test=</span><span class="s">"'foo' not in {'foo','bar'}"</span><span class="nt">&gt;</span>
    muhahaha
-&lt;/s:if&gt;
-&lt;s:else&gt;
+<span class="nt">&lt;/s:if&gt;</span>
+<span class="nt">&lt;s:else&gt;</span>
    boo
-&lt;/s:else&gt;
-</code></pre>
+<span class="nt">&lt;/s:else&gt;</span>
+</code></pre></div></div>
 
 <p>To select a subset of a collection (called projection), use a wildcard within the collection.</p>
 
 <ul>
-  <li><code class="highlighter-rouge">?</code> - All elements matching the selection logic</li>
-  <li><code class="highlighter-rouge">^</code> - Only the first element matching the selection logic</li>
-  <li><code class="highlighter-rouge">$</code> - Only the last element matching the selection logic</li>
+  <li><code class="language-plaintext highlighter-rouge">?</code> - All elements matching the selection logic</li>
+  <li><code class="language-plaintext highlighter-rouge">^</code> - Only the first element matching the selection logic</li>
+  <li><code class="language-plaintext highlighter-rouge">$</code> - Only the last element matching the selection logic</li>
 </ul>
 
 <p>To obtain a subset of just male relatives from the object person:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>person.relatives.{? #this.gender == 'male'}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>person.relatives.{? #this.gender == 'male'}
 </code></pre></div></div>
 
 <h2 id="lambda-expressions">Lambda Expressions</h2>
@@ -251,7 +251,7 @@ selects “name2” as the default value.</p>
 (Dedicated to all you math majors who didn’t think you would ever see this one again.)</p>
 
 <p>Fibonacci:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if n == 0 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if n == 0 
    return 0;
  elseif n == 1
    return 1;
@@ -267,12 +267,12 @@ selects “name2” as the default value.</p>
 <p><strong>How the expression works</strong></p>
 
 <blockquote>
-  <p>The lambda expression is everything inside the square brackets. The <code class="highlighter-rouge">#this</code> variable holds the argument to the expression, 
-which in the following example is the number 11 (the code after the square-bracketed lamba expression, <code class="highlighter-rouge">#fib(11)</code>).</p>
+  <p>The lambda expression is everything inside the square brackets. The <code class="language-plaintext highlighter-rouge">#this</code> variable holds the argument to the expression, 
+which in the following example is the number 11 (the code after the square-bracketed lamba expression, <code class="language-plaintext highlighter-rouge">#fib(11)</code>).</p>
 </blockquote>
 
-<pre><code class="language-jsp">&lt;s:property value="#fib =:[#this==0 ? 0 : #this==1 ? 1 : #fib(#this-2)+#fib(#this-1)], #fib(11)" /&gt;
-</code></pre>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#fib =:[#this==0 ? 0 : #this==1 ? 1 : #fib(#this-2)+#fib(#this-1)], #fib(11)"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
   </section>
 </article>

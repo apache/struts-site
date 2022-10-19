@@ -167,7 +167,7 @@
 <a href="../convention">Convention Plugin</a>.</p>
 
 <p>If you prefer to see a working code example, instead of reading through an explanation, you can download 
-the <a href="/download.cgi#struts-ga">Struts2 Example Applications</a> and check out the <code class="highlighter-rouge">struts2-rest-showcase</code> application, 
+the <a href="/download.cgi#struts-ga">Struts2 Example Applications</a> and check out the <code class="language-plaintext highlighter-rouge">struts2-rest-showcase</code> application, 
 a complete WAR file, that demonstrates a simple REST web program.</p>
 
 <h3 id="features">Features</h3>
@@ -184,7 +184,7 @@ a complete WAR file, that demonstrates a simple REST web program.</p>
 <h3 id="mapping-rest-urls-to-struts-2-actions">Mapping REST URLs to Struts 2 Actions</h3>
 
 <p>The main functionality of the REST plugin lies in the interpretation of incoming request URL’s according the RESTful 
-rules. In the Struts 2 framework, this <code class="highlighter-rouge">mapping</code> of request URL’s to Actions is handled by in implementation of 
+rules. In the Struts 2 framework, this <code class="language-plaintext highlighter-rouge">mapping</code> of request URL’s to Actions is handled by in implementation of 
 the <a href="/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/ActionMapper">ActionMapper</a> interface. 
 Out of the box, Struts 2 uses the <a href="/maven/struts2-core/apidocs/org/apache/struts2/dispatcher/mapper/DefaultActionMapper">DefaultActionMapper</a> 
 to map URL’s to Actions via the logic you are probably already familiar with.</p>
@@ -196,46 +196,46 @@ In the context of the REST plugin, just to keep you on your toes, we’ll adopt 
 Actions as <strong>Controllers</strong>. Don’t be confused; it’s just a name!</p>
 
 <p>The REST plugin provides an alternative implementation, <a href="/maven/struts2-plugins/struts2-rest-plugin/apidocs/org/apache/struts2/rest/RestActionMapper">RestActionMapper</a>, 
-that provides the RESTful logic that maps a URL to a give action class ( aka <code class="highlighter-rouge">controller</code> in RESTful terms ) and, 
+that provides the RESTful logic that maps a URL to a give action class ( aka <code class="language-plaintext highlighter-rouge">controller</code> in RESTful terms ) and, 
 more specifically, to the invocation of a method on that controller class. The following section, which comes from 
 the Javadoc for the class, details this logic.</p>
 
 <h3 id="restful-url-mapping-logic">RESTful URL Mapping Logic</h3>
 
-<p>This Restful action mapper enforces Ruby-On-Rails REST-style mappings. If the method is not specified (via <code class="highlighter-rouge">!</code> 
-or <code class="highlighter-rouge">method:</code> prefix), the method is “guessed” at using REST-style conventions that examine the URL and the HTTP method. 
+<p>This Restful action mapper enforces Ruby-On-Rails REST-style mappings. If the method is not specified (via <code class="language-plaintext highlighter-rouge">!</code> 
+or <code class="language-plaintext highlighter-rouge">method:</code> prefix), the method is “guessed” at using REST-style conventions that examine the URL and the HTTP method. 
 Special care has been given to ensure this mapper works correctly with the codebehind plugin so that XML configuration 
 is unnecessary.</p>
 
 <p>This mapper supports the following parameters:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">struts.mapper.idParameterName</code> - If set, this value will be the name  of the parameter under which the id is stored. 
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.idParameterName</code> - If set, this value will be the name  of the parameter under which the id is stored. 
 The id will then be removed  from the action name. Whether or not the method is specified, the mapper will try 
 to truncate the identifier from the url and store it as a parameter.</li>
-  <li><code class="highlighter-rouge">struts.mapper.indexMethodName</code>  - The method name to call for a GET  request with no id parameter. Defaults to <strong>index</strong>.</li>
-  <li><code class="highlighter-rouge">struts.mapper.getMethodName</code>  - The method name to call for a GET  request with an id parameter. Defaults to <strong>show</strong>.</li>
-  <li><code class="highlighter-rouge">struts.mapper.postMethodName</code>  - The method name to call for a POST  request with no id parameter. Defaults to <strong>create</strong>.</li>
-  <li><code class="highlighter-rouge">struts.mapper.putMethodName</code>  - The method name to call for a PUT  request with an id parameter. Defaults to <strong>update</strong>.</li>
-  <li><code class="highlighter-rouge">struts.mapper.deleteMethodName</code>  - The method name to call for a DELETE  request with an id parameter. Defaults to <strong>destroy</strong>.</li>
-  <li><code class="highlighter-rouge">struts.mapper.editMethodName</code>  - The method name to call for a GET  request with an id parameter and the <strong>edit</strong> view specified. Defaults to <strong>edit</strong>.</li>
-  <li><code class="highlighter-rouge">struts.mapper.newMethodName</code>  - The method name to call for a GET  request with no id parameter and the <strong>new</strong> view specified. Defaults to <strong>editNew</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.indexMethodName</code>  - The method name to call for a GET  request with no id parameter. Defaults to <strong>index</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.getMethodName</code>  - The method name to call for a GET  request with an id parameter. Defaults to <strong>show</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.postMethodName</code>  - The method name to call for a POST  request with no id parameter. Defaults to <strong>create</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.putMethodName</code>  - The method name to call for a PUT  request with an id parameter. Defaults to <strong>update</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.deleteMethodName</code>  - The method name to call for a DELETE  request with an id parameter. Defaults to <strong>destroy</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.editMethodName</code>  - The method name to call for a GET  request with an id parameter and the <strong>edit</strong> view specified. Defaults to <strong>edit</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.newMethodName</code>  - The method name to call for a GET  request with no id parameter and the <strong>new</strong> view specified. Defaults to <strong>editNew</strong>.</li>
 </ul>
 
 <p>The following URL’s will invoke its methods:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">GET: /movies</code> =&gt; method=<strong>index</strong></li>
-  <li><code class="highlighter-rouge">GET: /movies/Thrillers</code> =&gt; method=<strong>show</strong>, id=<strong>Thrillers</strong></li>
-  <li><code class="highlighter-rouge">GET: /movies/Thrillers;edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></li>
-  <li><code class="highlighter-rouge">GET: /movies/Thrillers/edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></li>
-  <li><code class="highlighter-rouge">GET: /movies/new</code>  =&gt; method=<strong>editNew</strong></li>
-  <li><code class="highlighter-rouge">POST: /movies</code>  =&gt; method=<strong>create</strong></li>
-  <li><code class="highlighter-rouge">PUT: /movies/Thrillers</code>  =&gt; method=<strong>update</strong>, id=<strong>Thrillers</strong></li>
-  <li><code class="highlighter-rouge">DELETE: /movies/Thrillers</code>  =&gt; method=<strong>destroy</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">GET: /movies</code> =&gt; method=<strong>index</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">GET: /movies/Thrillers</code> =&gt; method=<strong>show</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">GET: /movies/Thrillers;edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">GET: /movies/Thrillers/edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">GET: /movies/new</code>  =&gt; method=<strong>editNew</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">POST: /movies</code>  =&gt; method=<strong>create</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">PUT: /movies/Thrillers</code>  =&gt; method=<strong>update</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">DELETE: /movies/Thrillers</code>  =&gt; method=<strong>destroy</strong>, id=<strong>Thrillers</strong></li>
 </ul>
 
-<p>To simulate the HTTP methods PUT and DELETE, since they aren’t supported by HTML, the HTTP parameter <code class="highlighter-rouge">_method</code> will be used.</p>
+<p>To simulate the HTTP methods PUT and DELETE, since they aren’t supported by HTML, the HTTP parameter <code class="language-plaintext highlighter-rouge">_method</code> will be used.</p>
 
 <p>Or, expressed as a table:</p>
 
@@ -352,7 +352,7 @@ The first consideration is whether you want to have any non-RESTful URL’s coex
 show two configurations. The first assumes all you want to do is REST. The second assumes you want to keep other 
 non-RESTful URL’s alive in the same Struts 2 application.</p>
 
-<p>As with all configuration of Struts 2, we prefer using <code class="highlighter-rouge">&lt;constant/&gt;</code> elements in our <code class="highlighter-rouge">struts.xml</code>.</p>
+<p>As with all configuration of Struts 2, we prefer using <code class="language-plaintext highlighter-rouge">&lt;constant/&gt;</code> elements in our <code class="language-plaintext highlighter-rouge">struts.xml</code>.</p>
 
 <h3 id="rest-only-configuration">REST Only Configuration</h3>
 
@@ -387,7 +387,7 @@ you’ll see some configuration settings made by the plugin. Often, the plugin j
 You may frequently need to override those settings in your own struts.xml.</p>
 
 <p>First, you’ll need to re-assert the extensions that struts knows about because the rest plugin will have thrown out 
-the default <code class="highlighter-rouge">action</code> extension.</p>
+the default <code class="language-plaintext highlighter-rouge">action</code> extension.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.action.extension"</span> <span class="na">value=</span><span class="s">"xhtml,,xml,json,action"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
@@ -401,8 +401,8 @@ which is part of the core Struts 2 distribution, to have some URL’s routed to 
 </code></pre></div></div>
 
 <blockquote>
-  <p>Please be aware that you should also use the <code class="highlighter-rouge">PrefixBasedActionProxyFactory</code> factory together with the <code class="highlighter-rouge">PrefixBasedActionMapper</code> 
-mapper to allow the framework to create proper <code class="highlighter-rouge">ActionProxy</code>s per given prefix.</p>
+  <p>Please be aware that you should also use the <code class="language-plaintext highlighter-rouge">PrefixBasedActionProxyFactory</code> factory together with the <code class="language-plaintext highlighter-rouge">PrefixBasedActionMapper</code> 
+mapper to allow the framework to create proper <code class="language-plaintext highlighter-rouge">ActionProxy</code>s per given prefix.</p>
 </blockquote>
 
 <p>And, again, we’re relying on the Convention plugin to find our controllers, so we need to configure the convention plugin a bit:</p>
@@ -417,20 +417,20 @@ mapper to allow the framework to create proper <code class="highlighter-rouge">A
 
 <p>Once everything is configured, you need to create the controllers. Controllers are simply actions created with 
 the purpose of handling requests for a give RESTful resource. As we saw in the mapping logic above, various REST URL’s 
-will hit different methods on the controller. Traditionally, normal Struts 2 actions expose the <code class="highlighter-rouge">execute</code> method as their 
-target method. Here’s a sample controller for a <code class="highlighter-rouge">orders</code> resource. Note, this sample doesn’t implement all of the methods 
+will hit different methods on the controller. Traditionally, normal Struts 2 actions expose the <code class="language-plaintext highlighter-rouge">execute</code> method as their 
+target method. Here’s a sample controller for a <code class="language-plaintext highlighter-rouge">orders</code> resource. Note, this sample doesn’t implement all of the methods 
 that can be hit via the RESTful action mapper’s interpretation of URL’s.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">struts2</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.apache.struts2.rest.example</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrdersController</span> <span class="kd">implements</span> <span class="n">ModelDriven</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrdersController</span> <span class="kd">implements</span> <span class="nc">ModelDriven</span><span class="o">&lt;</span><span class="nc">Order</span><span class="o">&gt;</span> <span class="o">{</span>
 
-    <span class="kd">private</span> <span class="n">OrderManager</span> <span class="n">orderManager</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">id</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Order</span> <span class="n">model</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">OrderManager</span> <span class="n">orderManager</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Order</span> <span class="n">model</span><span class="o">;</span>
 
     <span class="c1">// Handles /orders/{id} GET requests</span>
-    <span class="kd">public</span> <span class="n">HttpHeaders</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">HttpHeaders</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">orderManager</span><span class="o">.</span><span class="na">findOrder</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">DefaultHttpHeaders</span><span class="o">(</span><span class="s">"show"</span><span class="o">)</span>
             <span class="o">.</span><span class="na">withETag</span><span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="na">getUniqueStamp</span><span class="o">())</span>
@@ -438,7 +438,7 @@ that can be hit via the RESTful action mapper’s interpretation of URL’s.</p>
     <span class="o">}</span>
 
     <span class="c1">// Handles /orders/{id} PUT requests</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">orderManager</span><span class="o">.</span><span class="na">updateOrder</span><span class="o">(</span><span class="n">model</span><span class="o">);</span>
         <span class="k">return</span> <span class="s">"update"</span><span class="o">;</span>
     <span class="o">}</span>
@@ -447,8 +447,8 @@ that can be hit via the RESTful action mapper’s interpretation of URL’s.</p>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>In this example, the <code class="highlighter-rouge">ModelDriven</code> interface is used to ensure that only my model, the Order object in this case, is 
-returned to the client, otherwise, the whole <code class="highlighter-rouge">OrdersController</code> object would be serialized.</p>
+<p>In this example, the <code class="language-plaintext highlighter-rouge">ModelDriven</code> interface is used to ensure that only my model, the Order object in this case, is 
+returned to the client, otherwise, the whole <code class="language-plaintext highlighter-rouge">OrdersController</code> object would be serialized.</p>
 
 <p>Where’s ActionSupport? Normally, you extend ActionSupport when writing Struts 2 actions. In these case, our controller 
 doesn’t do that. Why, you ask? ActionSupport provides a bunch of important functionality to our actions, including support 
@@ -457,16 +457,16 @@ defined in the REST plugin’s struts-plugin.xml file. Unless you willfully brea
 in the rest-default package in which that stack is defined, then you’ll get all that functionality you are used 
 to inheriting from ActionSupport.</p>
 
-<p>You may wonder why the <code class="highlighter-rouge">show()</code> method returns a <code class="highlighter-rouge">HttpHeaders</code> object and the <code class="highlighter-rouge">update()</code> method returns the expected 
-result code String. The REST Plugin adds support for action methods that return <code class="highlighter-rouge">HttpHeaders</code> objects as a way for 
+<p>You may wonder why the <code class="language-plaintext highlighter-rouge">show()</code> method returns a <code class="language-plaintext highlighter-rouge">HttpHeaders</code> object and the <code class="language-plaintext highlighter-rouge">update()</code> method returns the expected 
+result code String. The REST Plugin adds support for action methods that return <code class="language-plaintext highlighter-rouge">HttpHeaders</code> objects as a way for 
 the action to have more control over the response. In this example, we wanted to ensure the response included the ETag 
-header and a last modified date so that the information will be cached properly by the client. The <code class="highlighter-rouge">HttpHeaders</code> object 
+header and a last modified date so that the information will be cached properly by the client. The <code class="language-plaintext highlighter-rouge">HttpHeaders</code> object 
 is a convenient way to control the response in a type-safe way.</p>
 
 <p>Also, notice we aren’t returning the usual “success” result code in either method. This allows us to use the special 
 features of the <a href="../codebehind">Codebehind Plugin</a> to intuitively select the result template to process when this 
-resource is accessed with the <code class="highlighter-rouge">.xhtml</code> extension. In this case, we can provide a customized XHTML view of the resource 
-by creating <code class="highlighter-rouge">/orders-show.jsp</code> and <code class="highlighter-rouge">/orders-update.jsp</code> for the respective methods.</p>
+resource is accessed with the <code class="language-plaintext highlighter-rouge">.xhtml</code> extension. In this case, we can provide a customized XHTML view of the resource 
+by creating <code class="language-plaintext highlighter-rouge">/orders-show.jsp</code> and <code class="language-plaintext highlighter-rouge">/orders-update.jsp</code> for the respective methods.</p>
 
 <h2 id="advanced-topics">Advanced Topics</h2>
 
@@ -475,19 +475,19 @@ application’s more non-standard requirements.</p>
 
 <h3 id="custom-contenttypehandlers">Custom ContentTypeHandlers</h3>
 
-<p>If you need to handle extensions that aren’t supported by the default handlers, you can create your own <code class="highlighter-rouge">ContentTypeHandler</code> 
-implementation and define it in your <code class="highlighter-rouge">struts.xml</code>:</p>
+<p>If you need to handle extensions that aren’t supported by the default handlers, you can create your own <code class="language-plaintext highlighter-rouge">ContentTypeHandler</code> 
+implementation and define it in your <code class="language-plaintext highlighter-rouge">struts.xml</code>:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">"yaml"</span> <span class="na">type=</span><span class="s">"org.apache.struts2.rest.handler.ContentTypeHandler"</span> <span class="na">class=</span><span class="s">"com.mycompany.MyYamlContentHandler"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <p>If the built-in content type handlers don’t do what you need, you can override the handling of any extension by providing 
-an alternate handler. First, define your own <code class="highlighter-rouge">ContentTypeHandler</code> and declare with its own alias. For example:</p>
+an alternate handler. First, define your own <code class="language-plaintext highlighter-rouge">ContentTypeHandler</code> and declare with its own alias. For example:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">"myXml"</span> <span class="na">type=</span><span class="s">"org.apache.struts2.rest.handler.ContentTypeHandler"</span> <span class="na">class=</span><span class="s">"com.mycompany.MyXmlContentHandler"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>Then, tell the REST Plugin to override the handler for the desired extension with yours. In <code class="highlighter-rouge">struts.properties</code>, it would 
+<p>Then, tell the REST Plugin to override the handler for the desired extension with yours. In <code class="language-plaintext highlighter-rouge">struts.properties</code>, it would 
 look like this:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.rest.handlerOverride.xml"</span> <span class="na">value=</span><span class="s">"myXml"</span><span class="nt">/&gt;</span>

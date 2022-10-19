@@ -131,23 +131,23 @@
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/pre-result-listener.md" title="Edit this page on GitHub">Edit on GitHub</a>
     <h1 id="preresultlistener">PreResultListener</h1>
 
-<p>A <code class="highlighter-rouge">PreResultListener</code> can affect an action invocation between the interceptor/action phase and the result phase. 
+<p>A <code class="language-plaintext highlighter-rouge">PreResultListener</code> can affect an action invocation between the interceptor/action phase and the result phase. 
 Typical uses include switching to a different Result or somehow modifying the Result or Action objects before 
 the Result executes.</p>
 
 <h2 id="examples">Examples</h2>
 
-<p>A <code class="highlighter-rouge">PreResultListener</code> can be added by an Action or an Interceptor.</p>
+<p>A <code class="language-plaintext highlighter-rouge">PreResultListener</code> can be added by an Action or an Interceptor.</p>
 
 <h3 id="by-an-action">By an Action</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
      <span class="o">...</span>
-     <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-         <span class="n">ActionInvocation</span> <span class="n">invocation</span> <span class="o">=</span> <span class="n">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getActionInvocation</span><span class="o">();</span>
-         <span class="n">invocation</span><span class="o">.</span><span class="na">addPreResultListener</span><span class="o">(</span><span class="k">new</span> <span class="n">PreResultListener</span><span class="o">()</span> <span class="o">{</span>
-              <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeResult</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">invocation</span><span class="o">,</span> 
-                                       <span class="n">String</span> <span class="n">resultCode</span><span class="o">)</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+         <span class="nc">ActionInvocation</span> <span class="n">invocation</span> <span class="o">=</span> <span class="nc">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getActionInvocation</span><span class="o">();</span>
+         <span class="n">invocation</span><span class="o">.</span><span class="na">addPreResultListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">PreResultListener</span><span class="o">()</span> <span class="o">{</span>
+              <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeResult</span><span class="o">(</span><span class="nc">ActionInvocation</span> <span class="n">invocation</span><span class="o">,</span> 
+                                       <span class="nc">String</span> <span class="n">resultCode</span><span class="o">)</span> <span class="o">{</span>
                   <span class="c1">// perform operation necessary before Result execution</span>
               <span class="o">}</span>
          <span class="o">});</span>
@@ -158,12 +158,12 @@ the Result executes.</p>
 
 <h3 id="by-an-interceptor">By an Interceptor</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyInterceptor</span> <span class="kd">extends</span> <span class="n">AbstractInterceptor</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyInterceptor</span> <span class="kd">extends</span> <span class="nc">AbstractInterceptor</span> <span class="o">{</span>
      <span class="o">...</span>
-      <span class="kd">public</span> <span class="n">String</span> <span class="nf">intercept</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-         <span class="n">invocation</span><span class="o">.</span><span class="na">addPreResultListener</span><span class="o">(</span><span class="k">new</span> <span class="n">PreResultListener</span><span class="o">()</span> <span class="o">{</span>
-              <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeResult</span><span class="o">(</span><span class="n">ActionInvocation</span> <span class="n">invocation</span><span class="o">,</span> 
-                                       <span class="n">String</span> <span class="n">resultCode</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="nc">String</span> <span class="nf">intercept</span><span class="o">(</span><span class="nc">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+         <span class="n">invocation</span><span class="o">.</span><span class="na">addPreResultListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">PreResultListener</span><span class="o">()</span> <span class="o">{</span>
+              <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeResult</span><span class="o">(</span><span class="nc">ActionInvocation</span> <span class="n">invocation</span><span class="o">,</span> 
+                                       <span class="nc">String</span> <span class="n">resultCode</span><span class="o">)</span> <span class="o">{</span>
                   <span class="c1">// perform operation necessary before Result execution</span>
               <span class="o">}</span>
          <span class="o">});</span>
