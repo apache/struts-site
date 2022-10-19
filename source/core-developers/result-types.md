@@ -6,12 +6,12 @@ title: Result Types
 # Result Types
 {:.no_toc}
 
-* Will be replaced with the ToC, excluding a header
-{:toc}
-
 Most use cases can be divided into two phases. First, we need to change or query the application's state, and then we need 
 to present an updated view of the application. The Action class manages the application's state, and the Result Type 
 manages the view.
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Predefined Result Types
 
@@ -40,7 +40,7 @@ interface. Custom Result Types might include generating an email or JMS message,
 ## How to use results
 
 Once your action has been executed it must either return a result name (as `java.lang.String`) or instance 
-of `com.opensymphony.xwork2.Result` and the result will be executed directly.
+of `com.opensymphony.xwork2.Result` and then the result will be executed directly.
 
 If a String has been returned, the framework will try to find a matching result in the configuration and then it will
 execute the result of a given type, see example:
@@ -49,7 +49,7 @@ execute the result of a given type, see example:
 <result name="success" type="dispatcher">/WEB-INF/index.jsp</result>
 ```
 
-You can define many results per action distinguishing them by different names.
+You can define many results per action distinguishing them by different names:
 
 ```xml
 <result name="success" type="dispatcher">/WEB-INF/index.jsp</result>
@@ -60,7 +60,7 @@ You can define many results per action distinguishing them by different names.
 ## Default result type
 
 In `struts-default.xml` the Dispatcher result type is registered as a default result type, which means you don't have to
-specify the `type` attribute if yoy want to use it:
+specify the `type` attribute if you want to use it:
 
 ```xml
 <result name="success">/WEB-INF/index.jsp</result>
@@ -109,7 +109,7 @@ Check [Define dedicated factory](object-factory) to see how to do it.
 Struts 2 provides one such extension for you: 
 
 `ParamNameAwareResult` interface when used with `StrutsResultBuilder` can limit parameters assigned to the result. 
-So you can simple extend existing result with such a functionality as below:
+So you can simply extend existing result with such a functionality as below:
 
 ```java
 public class MyResult extends ServletDispatcherResult implements ParamNameAwareResult {
