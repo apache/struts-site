@@ -43,7 +43,7 @@ pipeline {
 
           git add Gemfile.lock
           git commit -m "Updates Gemfile.lock"
-          git push
+          git push asf
 
           git fetch asf
           git checkout asf-staging
