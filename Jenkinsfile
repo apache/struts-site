@@ -14,11 +14,16 @@ pipeline {
     stage('Build a staged website') {
       agent {
         dockerfile {
-          args "-v ${env.WORKSPACE}:/dest:rw,z -e WORKSPACE=${env.WORKSPACE}"
+          args "-v ${env.WORKSPACE}:/dest:rw,z"
         }
       }
       steps {
         sh '''
+          export GEM_HOME="$WORKSPACE/.gems"
+          export PATH="$GEM_HOME/bin:$PATH"
+          export BUNDLE_USER_HOME="$WORKSPACE/.bundle"
+
+          bundle config set --local path $GEM_HOME
           bundle install
           bundle exec jekyll build
           mv ./_site /dest
