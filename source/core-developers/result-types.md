@@ -4,6 +4,10 @@ title: Result Types
 ---
 
 # Result Types
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 Most use cases can be divided into two phases. First, we need to change or query the application's state, and then we need 
 to present an updated view of the application. The Action class manages the application's state, and the Result Type 
@@ -70,7 +74,7 @@ If you action method returns `success`, which is a default name of the result, y
 <result>/WEB-INF/index.jsp</result>
 ```
 
-## Default Parameters
+## Default parameters
 
 To minimize configuration, Results can be configured with a single value, which will be converted into a parameter, 
 and each Result can specify which parameter this value should be set as. For example, here is a result defined in XML 
@@ -92,7 +96,7 @@ Since probably 95% of your actions won't need results that contain multiple para
 a significant amount of configuration. It also follows that if you have specified the default parameter, you don't need 
 to set the same parameter as a specifically-named parameter.
 
-## Registering Result Types
+## Registering result types
 
 All Result Types are plugged in via the [Result Configuration](result-configuration).
 
