@@ -42,10 +42,7 @@ pipeline {
             git remote add asf https://gitbox.apache.org/repos/asf/struts-site.git
           fi
 
-          git status
-          git add Gemfile.lock
-          git commit -m "Updates Gemfile.lock"
-          git push asf master
+          git restore Gemfile.lock
 
           git fetch asf
           git checkout asf-staging
