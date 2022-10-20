@@ -21,9 +21,7 @@ pipeline {
         sh '''
           echo Generating a new version of website        
 
-          bundle -v
           gem install --install-dir ${GEM_HOME} bundler -v '2.3.23'          
-          bundle -v
 
           bundle config set --local path ${GEM_HOME}
           bundle install
