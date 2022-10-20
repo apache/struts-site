@@ -135,17 +135,17 @@
   <li><a href="#custom-static-content-loaders" id="markdown-toc-custom-static-content-loaders">Custom Static Content Loaders</a></li>
   <li><a href="#default-content-loader" id="markdown-toc-default-content-loader">Default Content Loader</a></li>
   <li><a href="#default-path" id="markdown-toc-default-path">Default path</a></li>
-  <li><a href="#preventing-struts-from-handling-a-request" id="markdown-toc-preventing-struts-from-handling-a-request">Preventing Struts from Handling a Request</a></li>
+  <li><a href="#preventing-struts-from-handling-a-request" id="markdown-toc-preventing-struts-from-handling-a-request">Preventing Struts from handling a request</a></li>
 </ul>
 
-<p>Struts can serve static content like css and javascript files. This feature is enabled by default, but can be disabled 
+<p>Struts can serve static content like css and javascript files. This feature is enabled by default, but can be disabled
 by setting:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.serve.static"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.serve.static"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p>If you disable this feature, but use the <code class="language-plaintext highlighter-rouge">xhtml</code>, or <code class="language-plaintext highlighter-rouge">css_xhtml</code> theme, make sure that the javascript and css files 
+  <p>If you disable this feature, but use the <code class="language-plaintext highlighter-rouge">xhtml</code>, or <code class="language-plaintext highlighter-rouge">css_xhtml</code> theme, make sure that the javascript and css files
 shipped inside the core jar are extracted to your web application directory.</p>
 </blockquote>
 
@@ -154,21 +154,22 @@ shipped inside the core jar are extracted to your web application directory.</p>
 <p>Static content is served by an implementation of <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.StaticContentLoader</code>. To write your own
 <code class="language-plaintext highlighter-rouge">StaticContentLoader</code>, implement <code class="language-plaintext highlighter-rouge">StaticContentLoader</code> and define a bean for the class:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.StaticContentLoader"</span> <span class="na">class=</span><span class="s">"MyStaticContentLoader"</span> <span class="na">name=</span><span class="s">"myLoader"</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.staticContentLoader"</span> <span class="na">value=</span><span class="s">"myLoader"</span> <span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.StaticContentLoader"</span> <span class="na">class=</span><span class="s">"MyStaticContentLoader"</span> <span class="na">name=</span><span class="s">"myLoader"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.staticContentLoader"</span> <span class="na">value=</span><span class="s">"myLoader"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <h2 id="default-content-loader">Default Content Loader</h2>
 
-<p>Struts provides a default implementation of <code class="language-plaintext highlighter-rouge">StaticContentLoader</code> which is <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.DefaultStaticContentLoader</code>. 
-This loader will handle urls that start with “/static/” by default.</p>
+<p>The Apache Struts provides a default implementation of <code class="language-plaintext highlighter-rouge">StaticContentLoader</code> which
+is <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.DefaultStaticContentLoader</code>. This loader will handle urls that start with “/static/”
+by default.</p>
 
-<p>This content loader can serve static content from the classpath, so when writing a plugin, you can put a file inside 
-your plugin’s jar like “/static/image/banner.jpg” and it will be served when the url “/static/image/banner.jpg” is 
+<p>This content loader can serve static content from the classpath, so when writing a plugin, you can put a file inside
+your plugin’s jar like “/static/image/banner.jpg” and it will be served when the url “/static/image/banner.jpg” is
 requested.</p>
 
 <blockquote>
-  <p>This loader is not optimized to handle static content, and to improve performance, it is recommended that you extract 
+  <p>This loader is not optimized to handle static content, and to improve performance, it is recommended that you extract
 your static content to the web application directory, and let the container handle them.</p>
 </blockquote>
 
@@ -182,19 +183,28 @@ your static content to the web application directory, and let the container hand
 
 <p>This value is also used by the Default Content Loader.</p>
 
-<h2 id="preventing-struts-from-handling-a-request">Preventing Struts from Handling a Request</h2>
+<h2 id="preventing-struts-from-handling-a-request">Preventing Struts from handling a request</h2>
 
-<p>If there is a request that Struts is handling as an action, and you wish to make Struts ignore it, you can do so by specifying 
-a comma separated list of regular expressions like:</p>
+<p>If there is a request that Struts is handling as an action, and you wish to make Struts ignore it,
+you can do so by specifying a comma separated list of regular expressions like:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.action.excludePattern"</span> <span class="na">value=</span><span class="s">"/some/content/.*?"</span> <span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.action.excludePattern"</span> <span class="na">value=</span><span class="s">"/some/content/.*,/other/content/.*"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>These regular expression will be evaluated against the request’s URI (<code class="language-plaintext highlighter-rouge">HttpServletRequest.getRequestURI()</code>), and if any 
+<p>These regular expression will be evaluated against the request’s URI (<code class="language-plaintext highlighter-rouge">HttpServletRequest.getRequestURI()</code>), and if any
 of them matches, then Struts will not handle the request.</p>
 
-<p>To evaluate each pattern Pattern class from JDK will be used, you can find more about what kind of pattern you can use 
-in the <a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern">Pattern class JavaDoc</a>.</p>
+<p>To evaluate each pattern the <code class="language-plaintext highlighter-rouge">Pattern</code> class from JDK will be used, you can find more about what kind of pattern you can
+use in the <a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern">Pattern class JavaDoc</a>.</p>
+
+<p>Since Struts 6.1.0 you can use a custom separator. By default, the provided patterns are split using comma <code class="language-plaintext highlighter-rouge">,</code>,
+but it can happen that you want to use comma in your patterns as well, e.g.: <code class="language-plaintext highlighter-rouge">/static/[a-z]{1,10}.json</code>. In such case
+you can define a custom separator to be used to split the patterns, use <code class="language-plaintext highlighter-rouge">struts.action.excludePattern.separator</code>
+constant:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.action.excludePattern.separator"</span> <span class="na">value=</span><span class="s">"//"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.action.excludePattern"</span> <span class="na">value=</span><span class="s">"/some/[a-zA-Z]{1,10}.json///other/content/.*"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
   </section>
 </article>
