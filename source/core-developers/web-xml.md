@@ -22,10 +22,11 @@ Configuring `web.xml` for the framework is a matter of adding a filter and filte
 **Filter Example (web.xml)**
 
 ```xml
-<web-app id="MyStrutsApp" version="2.4" 
-	xmlns="http://java.sun.com/xml/ns/j2ee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
 
     <filter>
         <filter-name>struts2</filter-name>
@@ -56,7 +57,9 @@ see example:
     <filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    </filter>
     ...
+</web-app>
 ```
 
 ## Changed Filter Structure in Struts >= 2.1.3
@@ -72,20 +75,20 @@ versions, you need to use
     ...
 ```
 
-See [SiteMesh Plugin](../plugins/sitemesh-plugin) for an example on when to use seperate Filters for prepare 
-and execution phase
+See [SiteMesh Plugin](../plugins/sitemesh-plugin) for an example on when to use separate Filters for prepare 
+and execution phase.
 
 ## Exclude specific URLs
 
-In the example above we've mapped the Struts 2 dispatcher to `/*`, so Struts 2 has a crack at all incoming requests. 
-This is because Struts 2 serves static content from its jar files, including Dojo JavaScript files (if using S2.0, 
-or the Dojo plugin in S2.1+) and FreeMarker templates for the Struts 2 tags that produce HTML.
+In the example above we've mapped the Struts 2 dispatcher to `/*`, so Struts has a crack at all incoming requests. 
+This is because Struts serves static content from its jar files, including Dojo JavaScript files (if using 2.0, 
+or the Dojo plugin in 2.1+) and FreeMarker templates for the Struts tags that produce HTML.
 
 If we change the filter mapping to something else, for example `/*.html`, we must take this into account and extract 
-the content that would normally be served from the Struts 2 jar files, or some other solution.
+the content that would normally be served from the Struts jar files, or some other solution.
 
 Since Struts 2.1.7, you are able to provide a comma separated list of patterns for which when matching against 
-the request URL the Filter will just pass by. This is done via the configuration option struts.action.excludePattern, 
+the request URL the Filter will just pass by. This is done via the configuration option `struts.action.excludePattern`, 
 for example in your struts.xml:
 
 ```xml
@@ -95,6 +98,8 @@ for example in your struts.xml:
 
 </struts>
 ```
+
+Read more in [Static content](static-content).
 
 ## Taglib Example
 
