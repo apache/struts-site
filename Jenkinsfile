@@ -21,12 +21,10 @@ pipeline {
         sh '''
           echo Generating a new version of website        
 
-          curl -sSL https://get.rvm.io | bash -s -- --path ${RUBY_PATH}
-          mkdir -p ${GEM_HOME}
-
-          gem install --install-dir ${GEM_HOME} bundler -v '2.3.23'
-          
           bundle -v
+          gem install --install-dir ${GEM_HOME} bundler -v '2.3.23'          
+          bundle -v
+
           bundle config set --local path ${GEM_HOME}
           bundle install
           bundle exec jekyll build
