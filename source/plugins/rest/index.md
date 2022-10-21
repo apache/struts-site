@@ -16,19 +16,18 @@ This plugin is only available with Struts 2.1.1 or later.
 The REST Plugin provides high level support for the implementation of RESTful resource based web applications
 [Convention Plugin](../convention).
 
-
 If you prefer to see a working code example, instead of reading through an explanation, you can download 
 the [Struts2 Example Applications](/download.cgi#struts-ga) and check out the `struts2-rest-showcase` application, 
 a complete WAR file, that demonstrates a simple REST web program.
 
 ### Features
 
-+ Ruby on Rails REST-style URLs
-+ Zero XML config when used with Convention Plugin
-+ Built-in serialization and deserialization support for XML and JSON
-+ Automatic error handling
-+ Type-safe configuration of the HTTP response
-+ Automatic conditional GET support
+- Ruby on Rails REST-style URLs
+- Zero XML config when used with Convention Plugin
+- Built-in serialization and deserialization support for XML and JSON
+- Automatic error handling
+- Type-safe configuration of the HTTP response
+- Automatic conditional GET support
 
 ### Mapping REST URLs to Struts 2 Actions
 
@@ -53,46 +52,46 @@ the Javadoc for the class, details this logic.
 
 This Restful action mapper enforces Ruby-On-Rails REST-style mappings. If the method is not specified (via `!` 
 or `method:` prefix), the method is "guessed" at using REST-style conventions that examine the URL and the HTTP method. 
-Special care has been given to ensure this mapper works correctly with the codebehind plugin so that XML configuration 
+Special care has been given to ensure this mapper works correctly with the Convention plugin so that XML configuration 
 is unnecessary.
 
 This mapper supports the following parameters:
 
-+ `struts.mapper.idParameterName` - If set, this value will be the name  of the parameter under which the id is stored. 
-  The id will then be removed  from the action name. Whether or not the method is specified, the mapper will try 
+- `struts.mapper.idParameterName` - If set, this value will be the name  of the parameter under which the id is stored. 
+  The id will then be removed  from the action name. Whether the method is specified, the mapper will try 
   to truncate the identifier from the url and store it as a parameter.
-+ `struts.mapper.indexMethodName`  - The method name to call for a GET  request with no id parameter. Defaults to **index**.
-+ `struts.mapper.getMethodName`  - The method name to call for a GET  request with an id parameter. Defaults to **show**.
-+ `struts.mapper.postMethodName`  - The method name to call for a POST  request with no id parameter. Defaults to **create**.
-+ `struts.mapper.putMethodName`  - The method name to call for a PUT  request with an id parameter. Defaults to **update**.
-+ `struts.mapper.deleteMethodName`  - The method name to call for a DELETE  request with an id parameter. Defaults to **destroy**.
-+ `struts.mapper.editMethodName`  - The method name to call for a GET  request with an id parameter and the **edit** view specified. Defaults to **edit**.
-+ `struts.mapper.newMethodName`  - The method name to call for a GET  request with no id parameter and the **new** view specified. Defaults to **editNew**.
+- `struts.mapper.indexMethodName`  - The method name to call for a GET  request with no id parameter. Defaults to **index**.
+- `struts.mapper.getMethodName`  - The method name to call for a GET  request with an id parameter. Defaults to **show**.
+- `struts.mapper.postMethodName`  - The method name to call for a POST  request with no id parameter. Defaults to **create**.
+- `struts.mapper.putMethodName`  - The method name to call for a PUT  request with an id parameter. Defaults to **update**.
+- `struts.mapper.deleteMethodName`  - The method name to call for a DELETE  request with an id parameter. Defaults to **destroy**.
+- `struts.mapper.editMethodName`  - The method name to call for a GET  request with an id parameter and the **edit** view specified. Defaults to **edit**.
+- `struts.mapper.newMethodName`  - The method name to call for a GET  request with no id parameter and the **new** view specified. Defaults to **editNew**.
 
 The following URL's will invoke its methods:
 
-+ `GET: /movies` => method=**index**
-+ `GET: /movies/Thrillers` => method=**show**, id=**Thrillers**
-+ `GET: /movies/Thrillers;edit`  => method=**edit**, id=**Thrillers**
-+ `GET: /movies/Thrillers/edit`  => method=**edit**, id=**Thrillers**
-+ `GET: /movies/new`  => method=**editNew**
-+ `POST: /movies`  => method=**create**
-+ `PUT: /movies/Thrillers`  => method=**update**, id=**Thrillers**
-+ `DELETE: /movies/Thrillers`  => method=**destroy**, id=**Thrillers**
+- `GET: /movies` => method=**index**
+- `GET: /movies/Thrillers` => method=**show**, id=**Thrillers**
+- `GET: /movies/Thrillers;edit`  => method=**edit**, id=**Thrillers**
+- `GET: /movies/Thrillers/edit`  => method=**edit**, id=**Thrillers**
+- `GET: /movies/new`  => method=**editNew**
+- `POST: /movies`  => method=**create**
+- `PUT: /movies/Thrillers`  => method=**update**, id=**Thrillers**
+- `DELETE: /movies/Thrillers`  => method=**destroy**, id=**Thrillers**
 
-To simulate the HTTP methods PUT and DELETE, since they aren't supported by HTML, the HTTP parameter `_method` will be used.
+To simulate the HTTP methods PUT and DELETE, since they aren't supported by HTML, the HTTP parameter `_method` will be used.
 
 Or, expressed as a table:
 
 |HTTP method|URI                     |Class.method |parameters    
 |-----------|------------------------|-------------|--------------
-|GET        |/movie|Movie.index      |             |              
-|POST       |/movie|Movie.create     |             |              
+|GET        |/movie|Movie.index      |             |              
+|POST       |/movie|Movie.create     |             |              
 |PUT        |/movie/Thrillers        |Movie.update |id="Thrillers"
 |DELETE     |/movie/Thrillers        |Movie.destroy|id="Thrillers"
 |GET        |/movie/Thrillers        |Movie.show   |id="Thrillers"
 |GET        |/movie/Thrillers/edit   |Movie.edit   |id="Thrillers"
-|GET        |/movie/new|Movie.editNew|             |              
+|GET        |/movie/new|Movie.editNew|             |              
 
 ### Content Types
 
@@ -100,9 +99,9 @@ In addition to providing mapping of RESTful URL's to Controller ( Action ) invoc
 the ability to produce multiple representations of the resource data. By default, the plugin can return the resource 
 in the following content types:
 
-+ HTML
-+ XML 
-+ JSON
+- HTML
+- XML 
+- JSON
 
 There is nothing configure here, just add the content type extension to your RESTful URL. The framework will take care 
 of the rest. So, for instance, assuming a Controller called Movies and a movie with the id of superman, the following 
@@ -123,16 +122,16 @@ http://my.company.com/myapp/movies/superman.json
 
 This section will walk you through a quick demo. Here are the steps in the sequence that we will follow.
 
-+ Setting Up your Project
-+ Configuring your Project
-+  Writing your Controllers
+- Setting Up your Project
+- Configuring your Project
+- Writing your Controllers
 
 ### Setting Up
 
 Assuming you have a normal Struts 2 application, all you need to do for this REST demo is to add the following two plugins:
 
-+ Struts 2 Rest Plugin
-+ [Struts 2 Convention Plugin](../convention)
+- Struts 2 Rest Plugin
+- [Struts 2 Convention Plugin](../convention)
 
 > Note, you can download the jars for these plugins from [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cstruts2-convention-plugin)
 
@@ -257,15 +256,37 @@ header and a last modified date so that the information will be cached properly 
 is a convenient way to control the response in a type-safe way.
 
 Also, notice we aren't returning the usual "success" result code in either method. This allows us to use the special 
-features of the [Codebehind Plugin](../codebehind) to intuitively select the result template to process when this 
+features of the [Conventio Plugin](../convention) to intuitively select the result template to process when this 
 resource is accessed with the `.xhtml` extension. In this case, we can provide a customized XHTML view of the resource 
 by creating `/orders-show.jsp` and `/orders-update.jsp` for the respective methods.
 
 ## Advanced Topics
 
-The following sections describe some of the non-standard bells and whistles that you might need to utilize for your 
+The following sections describe some non-standard bells and whistles that you might need to utilize for your 
 application's more non-standard requirements.
+       
+### XStream configuration
 
+Since Struts 6.1.0 you can customise XStream handler by implementing a few interfaces:
+- `XStreamAllowedClasses` - to control which classes can be accessed by the XStream
+- `XStreamAllowedClassNames` - similar to the above but you can specify class names
+- `XStreamPermissionProvider` - you can define a custom set of `TypePermission`s used by XStream
+- `XStreamProvider` - you can create your own instance of `XStream` which will be used to serialise/deserialize objects
+
+These interfaces need to be implemented by an action:
+
+```java
+private static class SimpleAction extends ActionSupport implements XStreamProvider {
+    @Override
+    public XStream createXStream() {
+        XStream stream = new XStream(new StaxDriver());
+        stream.alias("parents", ArrayList.class);
+        stream.alias("data", SimpleBean.class);
+        return stream;
+    }
+}
+```
+                                                                                      
 ### Custom ContentTypeHandlers
 
 If you need to handle extensions that aren't supported by the default handlers, you can create your own `ContentTypeHandler` 

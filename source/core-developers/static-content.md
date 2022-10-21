@@ -9,14 +9,14 @@ title: Static Content
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-Struts can serve static content like css and javascript files. This feature is enabled by default, but can be disabled 
+Struts can serve static content like css and javascript files. This feature is enabled by default, but can be disabled
 by setting:
 
 ```xml
-<constant name="struts.serve.static" value="false" />
+<constant name="struts.serve.static" value="false"/>
 ```
 
-> If you disable this feature, but use the `xhtml`, or `css_xhtml` theme, make sure that the javascript and css files 
+> If you disable this feature, but use the `xhtml`, or `css_xhtml` theme, make sure that the javascript and css files
 > shipped inside the core jar are extracted to your web application directory.
 
 ## Custom Static Content Loaders
@@ -25,20 +25,21 @@ Static content is served by an implementation of `org.apache.struts2.dispatcher.
 `StaticContentLoader`, implement `StaticContentLoader` and define a bean for the class:
 
 ```xml
-<bean type="org.apache.struts2.dispatcher.StaticContentLoader" class="MyStaticContentLoader" name="myLoader" />
-<constant name="struts.staticContentLoader" value="myLoader" />
+<bean type="org.apache.struts2.dispatcher.StaticContentLoader" class="MyStaticContentLoader" name="myLoader"/>
+<constant name="struts.staticContentLoader" value="myLoader"/>
 ```
 
 ## Default Content Loader
 
-Struts provides a default implementation of `StaticContentLoader` which is `org.apache.struts2.dispatcher.DefaultStaticContentLoader`. 
-This loader will handle urls that start with "/static/" by default. 
+The Apache Struts provides a default implementation of `StaticContentLoader` which
+is `org.apache.struts2.dispatcher.DefaultStaticContentLoader`. This loader will handle urls that start with "/static/"
+by default.
 
-This content loader can serve static content from the classpath, so when writing a plugin, you can put a file inside 
-your plugin's jar like "/static/image/banner.jpg" and it will be served when the url "/static/image/banner.jpg" is 
-requested. 
+This content loader can serve static content from the classpath, so when writing a plugin, you can put a file inside
+your plugin's jar like "/static/image/banner.jpg" and it will be served when the url "/static/image/banner.jpg" is
+requested.
 
-> This loader is not optimized to handle static content, and to improve performance, it is recommended that you extract 
+> This loader is not optimized to handle static content, and to improve performance, it is recommended that you extract
 > your static content to the web application directory, and let the container handle them.
 
 ## Default path
@@ -52,17 +53,27 @@ If needed you can change the default path at which static content is served. Jus
 
 This value is also used by the Default Content Loader.
 
-## Preventing Struts from Handling a Request
+## Preventing Struts from handling a request
 
-If there is a request that Struts is handling as an action, and you wish to make Struts ignore it, you can do so by specifying 
-a comma separated list of regular expressions like:
+If there is a request that Struts is handling as an action, and you wish to make Struts ignore it,
+you can do so by specifying a comma separated list of regular expressions like:
 
 ```xml
-<constant name="struts.action.excludePattern" value="/some/content/.*?" />
+<constant name="struts.action.excludePattern" value="/some/content/.*,/other/content/.*"/>
 ```
 
-These regular expression will be evaluated against the request's URI (`HttpServletRequest.getRequestURI()`), and if any 
+These regular expression will be evaluated against the request's URI (`HttpServletRequest.getRequestURI()`), and if any
 of them matches, then Struts will not handle the request.
 
-To evaluate each pattern Pattern class from JDK will be used, you can find more about what kind of pattern you can use 
-in the [Pattern class JavaDoc](http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern).
+To evaluate each pattern the `Pattern` class from JDK will be used, you can find more about what kind of pattern you can
+use in the [Pattern class JavaDoc](http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern).
+
+Since Struts 6.1.0 you can use a custom separator. By default, the provided patterns are split using comma `,`,
+but it can happen that you want to use comma in your patterns as well, e.g.: `/static/[a-z]{1,10}.json`. In such case
+you can define a custom separator to be used to split the patterns, use `struts.action.excludePattern.separator`
+constant:
+
+```xml
+<constant name="struts.action.excludePattern.separator" value="//"/>
+<constant name="struts.action.excludePattern" value="/some/[a-zA-Z]{1,10}.json///other/content/.*"/>
+```
