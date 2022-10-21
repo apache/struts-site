@@ -153,6 +153,7 @@
     </ul>
   </li>
   <li><a href="#advanced-topics" id="markdown-toc-advanced-topics">Advanced Topics</a>    <ul>
+      <li><a href="#xstream-configuration" id="markdown-toc-xstream-configuration">XStream configuration</a></li>
       <li><a href="#custom-contenttypehandlers" id="markdown-toc-custom-contenttypehandlers">Custom ContentTypeHandlers</a></li>
       <li><a href="#settings" id="markdown-toc-settings">Settings</a></li>
     </ul>
@@ -204,38 +205,38 @@ the Javadoc for the class, details this logic.</p>
 
 <p>This Restful action mapper enforces Ruby-On-Rails REST-style mappings. If the method is not specified (via <code class="language-plaintext highlighter-rouge">!</code> 
 or <code class="language-plaintext highlighter-rouge">method:</code> prefix), the method is “guessed” at using REST-style conventions that examine the URL and the HTTP method. 
-Special care has been given to ensure this mapper works correctly with the codebehind plugin so that XML configuration 
+Special care has been given to ensure this mapper works correctly with the Convention plugin so that XML configuration 
 is unnecessary.</p>
 
 <p>This mapper supports the following parameters:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">struts.mapper.idParameterName</code> - If set, this value will be the name  of the parameter under which the id is stored. 
-The id will then be removed  from the action name. Whether or not the method is specified, the mapper will try 
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.idParameterName</code> - If set, this value will be the name  of the parameter under which the id is stored. 
+The id will then be removed  from the action name. Whether the method is specified, the mapper will try 
 to truncate the identifier from the url and store it as a parameter.</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.mapper.indexMethodName</code>  - The method name to call for a GET  request with no id parameter. Defaults to <strong>index</strong>.</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.mapper.getMethodName</code>  - The method name to call for a GET  request with an id parameter. Defaults to <strong>show</strong>.</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.mapper.postMethodName</code>  - The method name to call for a POST  request with no id parameter. Defaults to <strong>create</strong>.</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.mapper.putMethodName</code>  - The method name to call for a PUT  request with an id parameter. Defaults to <strong>update</strong>.</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.mapper.deleteMethodName</code>  - The method name to call for a DELETE  request with an id parameter. Defaults to <strong>destroy</strong>.</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.mapper.editMethodName</code>  - The method name to call for a GET  request with an id parameter and the <strong>edit</strong> view specified. Defaults to <strong>edit</strong>.</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.mapper.newMethodName</code>  - The method name to call for a GET  request with no id parameter and the <strong>new</strong> view specified. Defaults to <strong>editNew</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.indexMethodName</code>  - The method name to call for a GET  request with no id parameter. Defaults to <strong>index</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.getMethodName</code>  - The method name to call for a GET  request with an id parameter. Defaults to <strong>show</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.postMethodName</code>  - The method name to call for a POST  request with no id parameter. Defaults to <strong>create</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.putMethodName</code>  - The method name to call for a PUT  request with an id parameter. Defaults to <strong>update</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.deleteMethodName</code>  - The method name to call for a DELETE  request with an id parameter. Defaults to <strong>destroy</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.editMethodName</code>  - The method name to call for a GET  request with an id parameter and the <strong>edit</strong> view specified. Defaults to <strong>edit</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.mapper.newMethodName</code>  - The method name to call for a GET  request with no id parameter and the <strong>new</strong> view specified. Defaults to <strong>editNew</strong>.</li>
 </ul>
 
 <p>The following URL’s will invoke its methods:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">GET: /movies</code> =&gt; method=<strong>index</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">GET: /movies/Thrillers</code> =&gt; method=<strong>show</strong>, id=<strong>Thrillers</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">GET: /movies/Thrillers;edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">GET: /movies/Thrillers/edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">GET: /movies/new</code>  =&gt; method=<strong>editNew</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">GET: /movies</code> =&gt; method=<strong>index</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">GET: /movies/Thrillers</code> =&gt; method=<strong>show</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">GET: /movies/Thrillers;edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">GET: /movies/Thrillers/edit</code>  =&gt; method=<strong>edit</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">GET: /movies/new</code>  =&gt; method=<strong>editNew</strong></li>
   <li><code class="language-plaintext highlighter-rouge">POST: /movies</code>  =&gt; method=<strong>create</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">PUT: /movies/Thrillers</code>  =&gt; method=<strong>update</strong>, id=<strong>Thrillers</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">DELETE: /movies/Thrillers</code>  =&gt; method=<strong>destroy</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">PUT: /movies/Thrillers</code>  =&gt; method=<strong>update</strong>, id=<strong>Thrillers</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">DELETE: /movies/Thrillers</code>  =&gt; method=<strong>destroy</strong>, id=<strong>Thrillers</strong></li>
 </ul>
 
-<p>To simulate the HTTP methods PUT and DELETE, since they aren’t supported by HTML, the HTTP parameter <code class="language-plaintext highlighter-rouge">_method</code> will be used.</p>
+<p>To simulate the HTTP methods PUT and DELETE, since they aren’t supported by HTML, the HTTP parameter <code class="language-plaintext highlighter-rouge">_method</code> will be used.</p>
 
 <p>Or, expressed as a table:</p>
 
@@ -302,7 +303,7 @@ in the following content types:</p>
 
 <ul>
   <li>HTML</li>
-  <li>XML </li>
+  <li>XML</li>
   <li>JSON</li>
 </ul>
 
@@ -464,14 +465,37 @@ header and a last modified date so that the information will be cached properly 
 is a convenient way to control the response in a type-safe way.</p>
 
 <p>Also, notice we aren’t returning the usual “success” result code in either method. This allows us to use the special 
-features of the <a href="../codebehind">Codebehind Plugin</a> to intuitively select the result template to process when this 
+features of the <a href="../convention">Conventio Plugin</a> to intuitively select the result template to process when this 
 resource is accessed with the <code class="language-plaintext highlighter-rouge">.xhtml</code> extension. In this case, we can provide a customized XHTML view of the resource 
 by creating <code class="language-plaintext highlighter-rouge">/orders-show.jsp</code> and <code class="language-plaintext highlighter-rouge">/orders-update.jsp</code> for the respective methods.</p>
 
 <h2 id="advanced-topics">Advanced Topics</h2>
 
-<p>The following sections describe some of the non-standard bells and whistles that you might need to utilize for your 
+<p>The following sections describe some non-standard bells and whistles that you might need to utilize for your 
 application’s more non-standard requirements.</p>
+
+<h3 id="xstream-configuration">XStream configuration</h3>
+
+<p>Since Struts 6.1.0 you can customise XStream handler by implementing a few interfaces:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">XStreamAllowedClasses</code> - to control which classes can be accessed by the XStream</li>
+  <li><code class="language-plaintext highlighter-rouge">XStreamAllowedClassNames</code> - similar to the above but you can specify class names</li>
+  <li><code class="language-plaintext highlighter-rouge">XStreamPermissionProvider</code> - you can define a custom set of <code class="language-plaintext highlighter-rouge">TypePermission</code>s used by XStream</li>
+  <li><code class="language-plaintext highlighter-rouge">XStreamProvider</code> - you can create your own instance of <code class="language-plaintext highlighter-rouge">XStream</code> which will be used to serialise/deserialize objects</li>
+</ul>
+
+<p>These interfaces need to be implemented by an action:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">SimpleAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="kd">implements</span> <span class="nc">XStreamProvider</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">XStream</span> <span class="nf">createXStream</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">XStream</span> <span class="n">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">XStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">StaxDriver</span><span class="o">());</span>
+        <span class="n">stream</span><span class="o">.</span><span class="na">alias</span><span class="o">(</span><span class="s">"parents"</span><span class="o">,</span> <span class="nc">ArrayList</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">stream</span><span class="o">.</span><span class="na">alias</span><span class="o">(</span><span class="s">"data"</span><span class="o">,</span> <span class="nc">SimpleBean</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">stream</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <h3 id="custom-contenttypehandlers">Custom ContentTypeHandlers</h3>
 

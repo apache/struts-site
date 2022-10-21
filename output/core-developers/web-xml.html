@@ -153,10 +153,11 @@ should behave.</p>
 
 <p><strong>Filter Example (web.xml)</strong></p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;web-app</span> <span class="na">id=</span><span class="s">"MyStrutsApp"</span> <span class="na">version=</span><span class="s">"2.4"</span> 
-	<span class="na">xmlns=</span><span class="s">"http://java.sun.com/xml/ns/j2ee"</span> 
-	<span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> 
-	<span class="na">xsi:schemaLocation=</span><span class="s">"http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;web-app</span> <span class="na">xmlns=</span><span class="s">"http://xmlns.jcp.org/xml/ns/javaee"</span>
+         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+         <span class="na">xsi:schemaLocation=</span><span class="s">"http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"</span>
+         <span class="na">version=</span><span class="s">"3.1"</span><span class="nt">&gt;</span>
 
     <span class="nt">&lt;filter&gt;</span>
         <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
@@ -186,7 +187,9 @@ see example:</p>
     <span class="nt">&lt;filter&gt;</span>
         <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
         <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
+    <span class="nt">&lt;/filter&gt;</span>
     ...
+<span class="nt">&lt;/web-app&gt;</span>
 </code></pre></div></div>
 
 <h2 id="changed-filter-structure-in-struts--213">Changed Filter Structure in Struts &gt;= 2.1.3</h2>
@@ -201,20 +204,20 @@ versions, you need to use</p>
     ...
 </code></pre></div></div>
 
-<p>See <a href="../plugins/sitemesh-plugin">SiteMesh Plugin</a> for an example on when to use seperate Filters for prepare 
-and execution phase</p>
+<p>See <a href="../plugins/sitemesh-plugin">SiteMesh Plugin</a> for an example on when to use separate Filters for prepare 
+and execution phase.</p>
 
 <h2 id="exclude-specific-urls">Exclude specific URLs</h2>
 
-<p>In the example above we’ve mapped the Struts 2 dispatcher to <code class="language-plaintext highlighter-rouge">/*</code>, so Struts 2 has a crack at all incoming requests. 
-This is because Struts 2 serves static content from its jar files, including Dojo JavaScript files (if using S2.0, 
-or the Dojo plugin in S2.1+) and FreeMarker templates for the Struts 2 tags that produce HTML.</p>
+<p>In the example above we’ve mapped the Struts 2 dispatcher to <code class="language-plaintext highlighter-rouge">/*</code>, so Struts has a crack at all incoming requests. 
+This is because Struts serves static content from its jar files, including Dojo JavaScript files (if using 2.0, 
+or the Dojo plugin in 2.1+) and FreeMarker templates for the Struts tags that produce HTML.</p>
 
 <p>If we change the filter mapping to something else, for example <code class="language-plaintext highlighter-rouge">/*.html</code>, we must take this into account and extract 
-the content that would normally be served from the Struts 2 jar files, or some other solution.</p>
+the content that would normally be served from the Struts jar files, or some other solution.</p>
 
 <p>Since Struts 2.1.7, you are able to provide a comma separated list of patterns for which when matching against 
-the request URL the Filter will just pass by. This is done via the configuration option struts.action.excludePattern, 
+the request URL the Filter will just pass by. This is done via the configuration option <code class="language-plaintext highlighter-rouge">struts.action.excludePattern</code>, 
 for example in your struts.xml:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
@@ -223,6 +226,8 @@ for example in your struts.xml:</p>
 
 <span class="nt">&lt;/struts&gt;</span>
 </code></pre></div></div>
+
+<p>Read more in <a href="static-content">Static content</a>.</p>
 
 <h2 id="taglib-example">Taglib Example</h2>
 
