@@ -43,6 +43,25 @@ to unsubscribe someone you can email:
 {listname}-unsubscribe-badboy=menace.com@tlp.apache.org
 ```
 
+### Unsubscribe from the Users mailing list
+
+<script>
+function generate(form) {
+  var badBoy=form[0];
+  var email = 'user-unsubscribe-' + badBoy.value.replace('@', '=') + '@struts.apache.org';
+  var link = document.getElementById('ready-email');
+  link.style.visibility = 'visible';
+  link.href = 'mailto:' + email;
+}
+</script>
+
+<form action="javascript: void(0);">
+    <label for="bad-boy">Paste user email address</label>
+    <input id="bad-boy" type="text"/>
+    <input type="button" value="Generate" onclick="generate(this.form)">
+    <div><a style="visibility: hidden" id="ready-email" href="#">Unsubscribe</a></div>
+</form>
+
 ## Guidelines
 
 Mailing lists provide a simple and effective communication mechanism. With potentially thousands of subscribers, there 
