@@ -141,6 +141,7 @@
   <li><a href="#interceptor-parameter-overriding" id="markdown-toc-interceptor-parameter-overriding">Interceptor Parameter Overriding</a></li>
   <li><a href="#interceptor-parameter-overriding-inheritance" id="markdown-toc-interceptor-parameter-overriding-inheritance">Interceptor Parameter Overriding Inheritance</a></li>
   <li><a href="#lazy-parameters" id="markdown-toc-lazy-parameters">Lazy parameters</a></li>
+  <li><a href="#disabling-interceptor" id="markdown-toc-disabling-interceptor">Disabling interceptor</a></li>
   <li><a href="#order-of-interceptor-execution" id="markdown-toc-order-of-interceptor-execution">Order of Interceptor Execution</a></li>
 </ul>
 
@@ -167,7 +168,7 @@ is pluggable, so you can decide exactly which features an Action needs to suppor
 the Interceptors bundled with the framework. Interceptors “set the stage” for the Action classes, doing much of 
 the “heavy lifting” before the Action executes.</p>
 
-<p><strong>Action Lifecyle</strong></p>
+<p><strong>Action Lifecycle</strong></p>
 
 <p><img src="attachments/att1607_overview.png" alt="overview.png" /></p>
 
@@ -773,7 +774,7 @@ than reiterate the same list of Interceptors, we can bundle these Interceptors t
 
 <span class="nt">&lt;/struts&gt;</span></code></pre></figure>
 
-<p>Since the <code class="language-plaintext highlighter-rouge">struts-default.xml</code> is included in the application’s configuration by default, all of the predefined 
+<p>Since the <code class="language-plaintext highlighter-rouge">struts-default.xml</code> is included in the application’s configuration by default, all the predefined 
 interceptors and stacks are available “out of the box”.</p>
 
 <h2 id="framework-interceptors">Framework Interceptors</h2>
@@ -1103,7 +1104,7 @@ the other params will be null.</p>
 <p>This functionality was added in Struts 2.5.9</p>
 
 <p>It is possible to define an interceptor with parameters evaluated during action invocation. In such case 
-the interceptor must be marked with <code class="language-plaintext highlighter-rouge">WithLazyParams</code> interface. This must be developer’s decision as interceptor 
+the interceptor must be marked with <code class="language-plaintext highlighter-rouge">WithLazyParams</code> interface. This must be developer’s decision as interceptor 
 must be aware of having those parameters set during invocation and not when the interceptor is created as it happens 
 in normal way.</p>
 
@@ -1117,23 +1118,38 @@ in normal way.</p>
 <span class="nt">&lt;/action&gt;</span>
 </code></pre></div></div>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class MockLazyInterceptor extends AbstractInterceptor implements WithLazyParams {
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MockLazyInterceptor</span> <span class="kd">extends</span> <span class="nc">AbstractInterceptor</span> <span class="kd">implements</span> <span class="nc">WithLazyParams</span> <span class="o">{</span>
 
-    private String foo = "";
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">foo</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
 
-    public void setFoo(String foo) {
-        this.foo = foo;
-    }
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFoo</span><span class="o">(</span><span class="nc">String</span> <span class="n">foo</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">foo</span> <span class="o">=</span> <span class="n">foo</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public String intercept(ActionInvocation invocation) throws Exception {
-        ....
-        return invocation.invoke();
-    }
-}
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">intercept</span><span class="o">(</span><span class="nc">ActionInvocation</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="o">....</span>
+        <span class="k">return</span> <span class="n">invocation</span><span class="o">.</span><span class="na">invoke</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></div>
 
 <p>Please be aware that order of interceptors can matter when want to access parameters passed via request as those 
-parameters are set by <a href="parameters-interceptor">Parameters Interceptor</a>.</p>
+parameters are set by <a href="parameters-interceptor">Parameters Interceptor</a>.</p>
+
+<h2 id="disabling-interceptor">Disabling interceptor</h2>
+
+<p>Since Struts 6.1.0 it is possible to <em>disable</em> a given interceptor which won’t be executed during action invocation.
+All the interceptors extending the <code class="language-plaintext highlighter-rouge">AbstractInterceptor</code> class (all the base interceptors do so) can use the parameters
+overriding logic to set the <code class="language-plaintext highlighter-rouge">disabled</code> parameter to <code class="language-plaintext highlighter-rouge">true</code> to skip processing of a given interceptor.</p>
+
+<p>An example how to disable the Validation interceptor:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"myAction"</span> <span class="na">class=</span><span class="s">"myActionClass"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"validation.disabled"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;/interceptor-ref&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
+</code></pre></div></div>
 
 <h2 id="order-of-interceptor-execution">Order of Interceptor Execution</h2>
 
