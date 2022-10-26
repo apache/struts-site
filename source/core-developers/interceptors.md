@@ -1,9 +1,6 @@
 ---
 layout: core-developers
 title: Interceptors
-parent:
-    title: Core Developers Guide
-    url: index.html
 ---
 
 # Interceptors
@@ -35,7 +32,7 @@ Interceptors can be configured on a per-action basis. Your own custom Intercepto
 the Interceptors bundled with the framework. Interceptors "set the stage" for the Action classes, doing much of 
 the "heavy lifting" before the Action executes.
 
-**Action Lifecyle**
+**Action Lifecycle**
 
 ![overview.png](attachments/att1607_overview.png)
 
@@ -99,7 +96,7 @@ Looking inside `struts-default.xml`, we can see how it's done.
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/struts-default.xml %}
 {% endhighlight %}
 
-Since the `struts-default.xml` is included in the application's configuration by default, all of the predefined 
+Since the `struts-default.xml` is included in the application's configuration by default, all the predefined 
 interceptors and stacks are available "out of the box".
 
 ## Framework Interceptors
@@ -272,7 +269,7 @@ the other params will be null.
 This functionality was added in Struts 2.5.9
 
 It is possible to define an interceptor with parameters evaluated during action invocation. In such case 
-the interceptor must be marked with `WithLazyParams` interface. This must be developer's decision as interceptor 
+the interceptor must be marked with `WithLazyParams` interface. This must be developer's decision as interceptor 
 must be aware of having those parameters set during invocation and not when the interceptor is created as it happens 
 in normal way.
 
@@ -287,7 +284,7 @@ Params are evaluated as any other expression starting with from action as a top 
 </action>
 ```
 
-```xml
+```java
 public class MockLazyInterceptor extends AbstractInterceptor implements WithLazyParams {
 
     private String foo = "";
@@ -304,7 +301,23 @@ public class MockLazyInterceptor extends AbstractInterceptor implements WithLazy
 ```
 
 Please be aware that order of interceptors can matter when want to access parameters passed via request as those 
-parameters are set by [Parameters Interceptor](parameters-interceptor).
+parameters are set by [Parameters Interceptor](parameters-interceptor).
+
+## Disabling interceptor
+
+Since Struts 6.1.0 it is possible to _disable_ a given interceptor which won't be executed during action invocation.
+All the interceptors extending the `AbstractInterceptor` class (all the base interceptors do so) can use the parameters
+overriding logic to set the `disabled` parameter to `true` to skip processing of a given interceptor.
+
+An example how to disable the Validation interceptor:
+
+```xml
+<action name="myAction" class="myActionClass">
+    <interceptor-ref name="defaultStack">
+        <param name="validation.disabled">true</param>
+    </interceptor-ref>
+</action>
+```
 
 ## Order of Interceptor Execution
 
