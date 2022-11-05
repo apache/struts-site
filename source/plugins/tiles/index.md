@@ -1,6 +1,9 @@
 ---
 layout: plugin
 title: Tiles Plugin
+parent:
+    url: /plugins
+    title: Plugins
 ---
 
 # Tiles Plugin

@@ -1,6 +1,9 @@
 ---
 layout: plugin
 title: Spring Plugin
+parent:
+    url: /plugins
+    title: Plugins
 ---
 
 # Spring Plugin
@@ -11,27 +14,35 @@ title: Spring Plugin
 
 ## Description
 
-[Spring](http://www.springframework.org) is a lightweight container, providing centralized, automated configuration and wiring of your application objects, using a technique called "Dependency Injection".
+[Spring](http://www.springframework.org) is a lightweight container, providing centralized, automated configuration 
+and wiring of your application objects, using a technique called "Dependency Injection".
 
-The Spring Plugin works by overriding the Struts [ObjectFactory](/core-developers/object-factory) to enhance the creation of core framework objects. When an object is to be created, it uses the `class` attribute in the Struts configuration to correspond to the `id` attribute in the Spring configuration. If not found, the class will try to be created as usual, then be autowired by Spring. In the case of Actions, Spring 2's [bean scope feature](http://www.springframework.org/docs/reference/beans.html#beans-factory-scopes) can be used to scope an Action instance to the session, application, or a custom scope, providing advanced customization above the default per-request scoping.
+The Spring Plugin works by overriding the Struts [ObjectFactory](/core-developers/object-factory) to enhance 
+the creation of core framework objects. When an object is to be created, it uses the `class` attribute in 
+the Struts configuration to correspond to the `id` attribute in the Spring configuration. If not found, the class will 
+try to be created as usual, then be autowired by Spring. In the case of Actions, Spring 2's 
+[bean scope feature](http://www.springframework.org/docs/reference/beans.html#beans-factory-scopes) can be used to scope 
+an Action instance to the session, application, or a custom scope, providing advanced customization above 
+the default per-request scoping.
 
-> Remember: 
-> 
-> **registering Actions with Spring is not required**. The Spring alternative is there if you need it, but the framework will automatically create Actions objects from the action mappings. But, if you want to use Spring to inject your Actions, the option is there.
+> Remember:
+> **registering Actions with Spring is not required**. The Spring alternative is there if you need it, but the framework 
+> will automatically create Actions objects from the action mappings. But, if you want to use Spring to inject your Actions, 
+> the option is there.
 
-__Features__
+## Features
 
-+ Allow Actions, Interceptors, and Results to be created by Spring
-
-+ Struts-created objects can be autowired by Spring after creation
-
-+ Provides two interceptors that autowire actions, if not using the Spring ObjectFactory
+- Allow Actions, Interceptors, and Results to be created by Spring
+- Struts-created objects can be autowired by Spring after creation
+- Provides two interceptors that autowire actions, if not using the Spring ObjectFactory
 
 ## Usage
 
 To enable Spring integration, simply include struts2-spring-plugin-x-x-x.jar in your application.
 
-If you are using more than one object factory, (for example, by including both the Spring and Plexus plugins in your application,) you will need to set the struts.objectFactory property in [default.properties](/core-developers/default-properties)  or in one of several XML files via [Constant Configuration](/core-developers/constant-configuration):
+If you are using more than one object factory, (for example, by including both the Spring and Plexus plugins in your application) 
+you will need to set the struts.objectFactory property in [default.properties](/core-developers/default-properties)
+or in one of several XML files via [Constant Configuration](/core-developers/constant-configuration):
 
 **struts.properties**
 
@@ -49,9 +60,10 @@ struts.objectFactory = spring
 
 ```
 
-__Autowiring__
+## Autowiring
 
-The framework enables "autowiring" by default. (Autowiring means to look for objects defined in Spring with the same name as your object property). To change the wiring mode, modify the `spring.autowire` property.
+The framework enables "autowiring" by default. (Autowiring means to look for objects defined in Spring with the same 
+name as your object property). To change the wiring mode, modify the `spring.autowire` property.
 
 **Wiring Mode**
 
@@ -77,7 +89,6 @@ Enabling Spring integration for other application objects is a two-step process.
 
 **web.xml**
 
-
 ```xml
 <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -89,7 +100,6 @@ Enabling Spring integration for other application objects is a two-step process.
 2. Register your objects via the Spring configuration
 
 **applicationContext.xml**
-
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -103,7 +113,9 @@ Enabling Spring integration for other application objects is a two-step process.
 
 More applicationContext configuration files needed?
 
-Since the Spring integration uses a standard Listener, it can be configured to support configuration files other than applicationContext.xml. Adding the following to your web.xml will cause Spring's ApplicationContext to be inititalized from all files matching the given pattern:
+Since the Spring integration uses a standard Listener, it can be configured to support configuration files other than 
+applicationContext.xml. Adding the following to your web.xml will cause Spring's ApplicationContext to be initialized 
+from all files matching the given pattern:
 
 ```xml
 <!-- Context Configuration locations for Spring XML files -->
@@ -115,18 +127,27 @@ Since the Spring integration uses a standard Listener, it can be configured to s
 
 See the Spring documentation for a full description of this parameter.
 
-__Initializing Actions from Spring__
+## Initializing Actions from Spring
 
-Normally, in `struts.xml` you specify the class for each Action. When using the default SpringObjectFactory, the framework will ask Spring to create the Action and wire up dependencies as specified by the default auto-wire behavior.
+Normally, in `struts.xml` you specify the class for each Action. When using the default SpringObjectFactory, the framework 
+will ask Spring to create the Action and wire up dependencies as specified by the default auto-wire behavior.
 
-We **strongly** recommend that you find declarative ways of letting Spring know what to provide for your actions. This includes making your beans able to be autowired by either naming your dependent properties on your action the same as the bean defined in Spring which should be provided (to allow for name-based autowiring), or using autowire-by-type and only having one of the required type registered with Spring. It also can include using JDK5 annotations to declare transactional and security requirements rather than having to explicitly set up proxies in your Spring configuration. If you can find ways to let Spring know what it needs to do for your action without needing any explicit configuration in the Spring applicationContext.xml, then you won't have to maintain this configuration in both places.
+We **strongly** recommend that you find declarative ways of letting Spring know what to provide for your actions. 
+This includes making your beans able to be autowired by either naming your dependent properties on your action the same 
+as the bean defined in Spring which should be provided (to allow for name-based autowiring), or using autowire-by-type 
+and only having one of the required type registered with Spring. It also can include using JDK5 annotations to declare 
+ransactional and security requirements rather than having to explicitly set up proxies in your Spring configuration. 
+If you can find ways to let Spring know what it needs to do for your action without needing any explicit configuration 
+in the Spring applicationContext.xml, then you won't have to maintain this configuration in both places.
 
-However, sometimes you might want the bean to be completely managed by Spring. This is useful, for example, if you wish to apply more complex AOP or Spring-enabled technologies, such as Acegi, to your beans. To do this, all you have to do is configure the bean in your Spring `applicationContext.xml` and then _change_  the class attribute from your Action in the `struts.xml` to use the bean name defined in Spring instead of the class name.
+However, sometimes you might want the bean to be completely managed by Spring. This is useful, for example, if you wish 
+to apply more complex AOP or Spring-enabled technologies, such as Acegi, to your beans. To do this, all you have to do 
+is configure the bean in your Spring `applicationContext.xml` and then _change_ the class attribute from your Action 
+in the `struts.xml` to use the bean name defined in Spring instead of the class name.
 
 Your `struts.xml` file would then have the Action class attributes changed.
 
 **struts.xml**
-
 
 ```xml
 <!DOCTYPE struts PUBLIC
@@ -150,12 +171,12 @@ Your `struts.xml` file would then have the Action class attributes changed.
 
 ```
 
-Where you have a Spring bean defined in your `applicationContext.xml` named "bar". Note that the `com.acme.Foo` Action did not need to be changed, because it can be autowired.
+Where you have a Spring bean defined in your `applicationContext.xml` named "bar". Note that the `com.acme.Foo` 
+Action did not need to be changed, because it can be autowired.
 
 A typical spring configuration for bar could look as following.
 
 **applicationConext.xml**
-
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -164,33 +185,29 @@ A typical spring configuration for bar could look as following.
     <bean id="bar" class="com.my.BarClass" singleton="false"/>
     ...
 </beans>
-
 ```
 
 To use session-scoped components with Spring and Struts, see the [Spring Session Components Workarounds](spring-session-components-workarounds) analysis.
 
-__Class Reloading__
+## Class Reloading
 
-The Spring plugin can be configured to automatically reload classes that change in the file system. This feature will enable code changes to be "hot deployed" without having to restart the web container. To enable this feature follow these steps:
+The Spring plugin can be configured to automatically reload classes that change in the file system. This feature will 
+enable code changes to be "hot deployed" without having to restart the web container. To enable this feature follow 
+these steps:
 
 1. Set "struts.devMode" to "true"
-
 2. Set "struts.class.reloading.watchList" to a comma separated list of directories, or jar files (absolute or relative paths)
-
 3. Add this to web.xml:
 
-
 ```xml
-   <context-param>
-       <param-name>contextClass</param-name>
-       <param-value>org.apache.struts2.spring.ClassReloadingXMLWebApplicationContext</param-value>
-   </context-param> 
-
+<context-param>
+   <param-name>contextClass</param-name>
+   <param-value>org.apache.struts2.spring.ClassReloadingXMLWebApplicationContext</param-value>
+</context-param>
 ```
 
 {:start="4"}
 4. Add Apache Commons JCI FAM to the classpath. If you are using maven, add this to pom.xml
-
 
 ```xml
    <dependency>
@@ -201,8 +218,10 @@ The Spring plugin can be configured to automatically reload classes that change 
 
 ```
 
-Letting the reloading class loader handle all the classes can lead to ClassCastException(s) because instances of the same classes loaded by different class loaders can not be assigned to each other. To prevent this problem we suggest that `struts.class.reloading.acceptClasses` is used to limit the classes loaded by the reloading class loader, so only actions are handled by it. This constant supports a comma separated list of regular expressions:
-
+Letting the reloading class loader handle all the classes can lead to ClassCastException(s) because instances of the same 
+classes loaded by different class loaders can not be assigned to each other. To prevent this problem we suggest 
+that `struts.class.reloading.acceptClasses` is used to limit the classes loaded by the reloading class loader, 
+so only actions are handled by it. This constant supports a comma separated list of regular expressions:
 
 ```xml
 <constant name="struts.class.reloading.acceptClasses" value="com.myproject.example.actions..*" />
@@ -211,7 +230,7 @@ Letting the reloading class loader handle all the classes can lead to ClassCastE
 
 > This feature is experimental, and **should never** be used in production systems.
 
-__Settings__
+## Settings
 
 The following settings can be customized. See the [developer guide](/core-developers/configuration-files).
 
@@ -225,6 +244,6 @@ The following settings can be customized. See the [developer guide](/core-develo
 |struts.class.reloading.reloadConfig|Reload the runtime configuration (action mappings, results etc) when a change is detected in one of the watched directories|false|true or false|
 |DEPRECATED: struts.objectFactory.spring.enableAopSupport|Uses different logic to construct beans to allow support AOP, it uses an old approach to create a bean, switch this flag if you have problems with Spring beans and AOP|false|true or false|
 
-__Installation__
+## Installation
 
 This plugin can be installed by copying the plugin jar into your application's `/WEB-INF/lib` directory. No other files need to be copied or created.

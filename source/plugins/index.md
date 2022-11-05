@@ -16,6 +16,7 @@ to share with others. Several plugins are bundled with the framework, and others
 
 | Name                                      | Versions               | Note                                                                  |
 |-------------------------------------------|------------------------|-----------------------------------------------------------------------|
+| [Async Plugin](async)                     | 6.0.0+                 |
 | [Bean Validation Plugin](bean-validation) | 2.5+                   |
 | [CDI (JSR 299) Plugin](cdi)               | 2.3.1+                 |
 | [Codebehind Plugin](codebehind)           | < 2.5                  | removed since 2.5, use [Convention Plugin](convention)                |
@@ -43,7 +44,7 @@ to share with others. Several plugins are bundled with the framework, and others
 | [TestNG Plugin](testng)                   |||
 | [Tiles Plugin](tiles)                     |||
 | [Tiles 3 Plugin](tiles-3)                 | < 2.5                  | removed since 2.5                                                     |
-| [Velocity Plugin](velocity)               | |                                                                       |
+| [Velocity Plugin](velocity)               |                        |                                                                       |
 
 > For a complete list of bundled and third-party plugins, visit
 > the [Plugin Registry](http://cwiki.apache.org/S2PLUGINS/Home).

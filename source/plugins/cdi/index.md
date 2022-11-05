@@ -1,6 +1,9 @@
 ---
 layout: plugin
 title: CDI Plugin
+parent:
+    url: /plugins
+    title: Plugins
 ---
 
 # CDI Plugin
@@ -221,9 +224,7 @@ to undefined - so check your imports!
 Now that you are aware of that, here is the rest of the inevitable NumberGuess CDI example in Struts 2 flavour. 
 Add a JSP view similar to this:
 
-
 ```jsp
-
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
@@ -253,7 +254,6 @@ along - if not using the fabulous and recommended Struts 2 [Convention Plugin](.
 
 
 ```xml
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
           "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"       
@@ -275,14 +275,11 @@ along - if not using the fabulous and recommended Struts 2 [Convention Plugin](.
     </package>
 
 </struts>
-
 ```
 
 Now you can add the business logic we want to be managed and injected by CDI. Start with two qualifier annotations:
 
-
 ```java
-
 package org.apache.struts2.example.cdi;
 
 import javax.inject.Qualifier;
@@ -297,12 +294,9 @@ import java.lang.annotation.Target;
 @Documented
 @Qualifier
 public @interface Random {}
-
 ```
 
-
 ```java
-
 package org.apache.struts2.example.cdi;
 
 import javax.inject.Qualifier;
@@ -317,14 +311,11 @@ import java.lang.annotation.Target;
 @Documented
 @Qualifier
 public @interface MaxNumber {}
-
 ```
 
 Now on to the actual business beans, the Game and the Generator bean:
 
-
 ```java
-
 package org.apache.struts2.example.cdi;
 
 import javax.annotation.PostConstruct;
@@ -407,9 +398,7 @@ public class Game implements Serializable {
     }
 
 }
-
 ```
-
 
 ```java
 
@@ -438,10 +427,8 @@ public class Generator implements Serializable {
       return maxNumber;
    }
 
-} 
-
+}
 ```
-
 If you understand that code at a glance, you are either already an CDI expert or profit from the readable, natural
 language oriented way the CDI stack works. If neither of this is the case, now it's time to check the CDI and Weld 
 documentation. Remember, this is a trivial example - there is much more to know about CDI.

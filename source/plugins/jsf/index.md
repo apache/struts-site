@@ -1,9 +1,18 @@
 ---
 layout: plugin
 title: JSF Plugin
+parent:
+    url: /plugins
+    title: Plugins
 ---
 
 # JSF Plugin
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
+
+## Description
 
 [JavaServer Faces](http://java.sun.com/j2ee/javaserverfaces) technology simplifies building user interfaces for JavaServer applications. Developers of various skill levels can quickly build web applications by: assembling reusable UI components in a page; connecting these components to an application data source; and wiring client-generated events to server-side event handlers.
 

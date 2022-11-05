@@ -1,9 +1,16 @@
 ---
 layout: plugin
 title: Codebehind Plugin
+parent:
+    url: /plugins
+    title: Plugins
 ---
 
 # Codebehind Plugin
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 > Deprecated Plugin
 

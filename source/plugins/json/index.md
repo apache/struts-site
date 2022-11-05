@@ -1,6 +1,9 @@
 ---
 layout: plugin
 title: JSON plugin
+parent:
+    url: /plugins
+    title: Plugins
 ---
 
 # JSON Plugin

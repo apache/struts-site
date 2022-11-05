@@ -1,6 +1,9 @@
 ---
 layout: plugin
 title: REST Plugin
+parent:
+    url: /plugins
+    title: Plugins
 ---
 
 # REST Plugin

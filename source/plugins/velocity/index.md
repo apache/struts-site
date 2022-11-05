@@ -2,8 +2,8 @@
 layout: default
 title: Velocity plugin
 parent:
-  url: index.html
-  title: Plugins
+    url: /plugins
+    title: Plugins
 ---
 
 # Velocity Plugin

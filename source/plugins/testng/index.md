@@ -1,12 +1,20 @@
 ---
 layout: plugin
 title: TestNG Plugin
+parent:
+    url: /plugins
+    title: Plugins
 ---
 
 # TestNG Plugin
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
+
+## Description
 
 The TestNG plugin provides integration with the popular [TestNG](http://testng.org) unit testing framework.
-
 This plugin provides a base `StrutsTestCase` class that can subclassed for tests that work on Struts 2 components.  
 
 > This plugin is only available with Struts 2.1.1 or later

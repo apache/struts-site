@@ -1,9 +1,16 @@
 ---
 layout: plugin
 title: OVal Plugin
+parent:
+    url: /plugins
+    title: Plugins
 ---
 
 # OVal Plugin
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 > This plugin got marked as deprecated since Struts 2.6!
 

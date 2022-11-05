@@ -1,6 +1,9 @@
 ---
 layout: plugin
 title: Convention plugin
+parent:
+    url: /plugins
+    title: Plugins
 ---
 
 # Convention Plugin
