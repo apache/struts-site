@@ -129,9 +129,24 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/plugins/sitemesh/index.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="../" title="back to Plugins"><< back to Plugins</a>
+    <a href="index.html" title="back to Plugins"><< back to Plugins</a>
     
-    <h1 id="sitemesh-plugin">SiteMesh Plugin</h1>
+    <h1 class="no_toc" id="sitemesh-plugin">SiteMesh Plugin</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#about-sitemesh" id="markdown-toc-about-sitemesh">About SiteMesh</a></li>
+  <li><a href="#features" id="markdown-toc-features">Features</a></li>
+  <li><a href="#usage" id="markdown-toc-usage">Usage</a></li>
+  <li><a href="#freemarker--and-velocity-decorators" id="markdown-toc-freemarker--and-velocity-decorators">FreeMarker  and Velocity Decorators</a>    <ul>
+      <li><a href="#freemarker" id="markdown-toc-freemarker">FreeMarker</a></li>
+      <li><a href="#velocity" id="markdown-toc-velocity">Velocity</a></li>
+      <li><a href="#full-integration-with-sitemesh-2--freemarker-242--velocity-13--including-struts-2-tags-valuestack-and-freemarkermanager-statics" id="markdown-toc-full-integration-with-sitemesh-2--freemarker-242--velocity-13--including-struts-2-tags-valuestack-and-freemarkermanager-statics">Full integration with SiteMesh 2 + Freemarker 2.4.2 + Velocity 1.3 , including Struts 2 Tags, ValueStack, and FreemarkerManager statics.</a></li>
+    </ul>
+  </li>
+  <li><a href="#example" id="markdown-toc-example">Example</a></li>
+  <li><a href="#settings" id="markdown-toc-settings">Settings</a></li>
+  <li><a href="#installation" id="markdown-toc-installation">Installation</a></li>
+</ul>
 
 <blockquote>
   <p>This plugin got marked as deprecated since Struts 2.6!</p>
@@ -146,25 +161,23 @@ framework to aid in creating large sites consisting of many pages for which a co
 
 <p>The Sitemesh plugin allows Sitemesh templates to access framework resources.</p>
 
-<p>The framework stores all its value stack information as request attributes, meaning that if you wish to display data that is on the stack (or even the ActionContext), you can do so by using the normal tag libraries that come with the framework. That’s it!</p>
+<p>The framework stores all its value stack information as request attributes, meaning that if you wish to display data 
+that is on the stack (or even the ActionContext), you can do so by using the normal tag libraries that come 
+with the framework. That’s it!</p>
 
 <h2 id="features">Features</h2>
 
 <ul>
-  <li>
-    <p>Can use Struts tags in Sitemesh decorator templates</p>
-  </li>
-  <li>
-    <p>Sitemesh decorators can be written in FreeMarker as well as Velocity and JSP</p>
-  </li>
+  <li>Can use Struts tags in Sitemesh decorator templates</li>
+  <li>Sitemesh decorators can be written in FreeMarker as well as Velocity and JSP</li>
 </ul>
 
 <h2 id="usage">Usage</h2>
 
-<p>From 2.2+ the new <code class="language-plaintext highlighter-rouge">com.opensymphony.sitemesh.webapp.SiteMeshFilter</code> filter and Struts <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.ng.listener.StrutsListener</code> context listener must be added to <code class="language-plaintext highlighter-rouge">web.xml</code>, like:</p>
+<p>From 2.2+ the new <code class="language-plaintext highlighter-rouge">com.opensymphony.sitemesh.webapp.SiteMeshFilter</code> filter 
+and Struts <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.ng.listener.StrutsListener</code> context listener must be added to <code class="language-plaintext highlighter-rouge">web.xml</code>, like:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nt">&lt;filter&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>sitemesh<span class="nt">&lt;/filter-name&gt;</span>
     <span class="nt">&lt;filter-class&gt;</span>com.opensymphony.sitemesh.webapp.SiteMeshFilter<span class="nt">&lt;/filter-class&gt;</span>
 <span class="nt">&lt;/filter&gt;</span> 
@@ -177,11 +190,13 @@ framework to aid in creating large sites consisting of many pages for which a co
 
 <h2 id="freemarker--and-velocity-decorators">FreeMarker  and Velocity Decorators</h2>
 
-<p>The plugin provides an extension of the SiteMesh <em>Velocity</em>  and <em>FreeMarker</em>  servlets. These servlets provide the standard variables and <em>Struts Tags</em>  that you used to create views in your favourite template language.</p>
+<p>The plugin provides an extension of the SiteMesh <em>Velocity</em>  and <em>FreeMarker</em>  servlets. These servlets provide 
+the standard variables and <em>Struts Tags</em>  that you used to create views in your favourite template language.</p>
 
 <h3 id="freemarker">FreeMarker</h3>
 
-<p>From 2.2+ the recommended way to use Freemarker with Sitemesh is through the <code class="language-plaintext highlighter-rouge">org.apache.struts2.sitemesh.FreemarkerDecoratorServlet</code> servlet, which can be configured like this in <code class="language-plaintext highlighter-rouge">web.xml</code>:</p>
+<p>From 2.2+ the recommended way to use Freemarker with Sitemesh is through the <code class="language-plaintext highlighter-rouge">org.apache.struts2.sitemesh.FreemarkerDecoratorServlet</code> 
+servlet, which can be configured like this in <code class="language-plaintext highlighter-rouge">web.xml</code>:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nt">&lt;servlet&gt;</span>
@@ -207,7 +222,8 @@ framework to aid in creating large sites consisting of many pages for which a co
   <p>NOTE: Please include the <a href="../velocity/">Struts Velocity plugin</a> in your pom.xml before using this functionality</p>
 </blockquote>
 
-<p>From 2.2+ the recommended way to use Velocity with Sitemesh is through the <code class="language-plaintext highlighter-rouge">org.apache.struts2.sitemesh.VelocityDecoratorServlet</code> servlet, which can be configured like this in <code class="language-plaintext highlighter-rouge">web.xml</code>:</p>
+<p>From 2.2+ the recommended way to use Velocity with Sitemesh is through the <code class="language-plaintext highlighter-rouge">org.apache.struts2.sitemesh.VelocityDecoratorServlet</code> 
+servlet, which can be configured like this in <code class="language-plaintext highlighter-rouge">web.xml</code>:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nt">&lt;servlet&gt;</span>
@@ -296,8 +312,7 @@ framework to aid in creating large sites consisting of many pages for which a co
 
 <p>Here is an example of how to configure the filter chains in <code class="language-plaintext highlighter-rouge">web.xml</code>:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nt">&lt;filter&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>struts-prepare<span class="nt">&lt;/filter-name&gt;</span>
     <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter<span class="nt">&lt;/filter-class&gt;</span>
 <span class="nt">&lt;/filter&gt;</span>
@@ -366,8 +381,7 @@ framework to aid in creating large sites consisting of many pages for which a co
 
 <p>Struts 2.1 web.xml filter chain example:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nt">&lt;filter&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>struts-prepare<span class="nt">&lt;/filter-name&gt;</span>
     <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter<span class="nt">&lt;/filter-class&gt;</span>
 <span class="nt">&lt;/filter&gt;</span>
@@ -399,12 +413,10 @@ framework to aid in creating large sites consisting of many pages for which a co
 
 </code></pre></div></div>
 
-<p>You do not need the struts2-sitmesh-plugin if you are using JSP for your decorators.</p>
+<p>You do not need the struts2-sitmesh-plugin if you are using JSP for your decorators.
+Here are the only changes needed to web.xml</p>
 
-<p>Here are the only only changes needed to web.xml</p>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nt">&lt;filter&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>struts2-prepare<span class="nt">&lt;/filter-name&gt;</span>
     <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter<span class="nt">&lt;/filter-class&gt;</span>
 <span class="nt">&lt;/filter&gt;</span>

@@ -129,94 +129,78 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/plugins/jasperreports/index.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="../" title="back to Plugins"><< back to Plugins</a>
+    <a href="index.html" title="back to Plugins"><< back to Plugins</a>
     
-    <h1 id="jasperreports-plugin">JasperReports Plugin</h1>
+    <h1 class="no_toc" id="jasperreports-plugin">JasperReports Plugin</h1>
 
-<p><a href="http://jasperforge.org/sf/projects/jasperreports">JasperReports</a> is a powerful open source Java (LGPL) reporting tool that has the ability to deliver rich content onto the screen, to the printer or into PDF, HTML, XLS, CSV and XML files.</p>
+<ul id="markdown-toc">
+  <li><a href="#description" id="markdown-toc-description">Description</a></li>
+  <li><a href="#features" id="markdown-toc-features">Features</a></li>
+  <li><a href="#usage" id="markdown-toc-usage">Usage</a>    <ul>
+      <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
+      <li><a href="#settings" id="markdown-toc-settings">Settings</a></li>
+      <li><a href="#installation" id="markdown-toc-installation">Installation</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="description">Description</h2>
+<p><a href="http://jasperforge.org/sf/projects/jasperreports">JasperReports</a> is a powerful open source Java (LGPL) reporting
+tool that has the ability to deliver rich content onto the screen, to the printer or into PDF, HTML, XLS, CSV and XML files.</p>
 
 <p>The JasperReports plugin enables Actions to create high-quality reports as results.</p>
 
 <h2 id="features">Features</h2>
 
 <ul>
-  <li>Allows Actions to be rendered through JasperReports</li>
+  <li>Allows actions to be rendered through JasperReports</li>
 </ul>
 
 <h2 id="usage">Usage</h2>
 
-<p>To use this plugin, have your packages that contain the target actions extend the provided <code class="language-plaintext highlighter-rouge">jasperreports-default</code> package, which contains the <code class="language-plaintext highlighter-rouge">jasper</code> result type.  Then, simply use the result type in the desired actions.  The result takes the following parameters:</p>
+<p>To use this plugin, have your packages that contain the target actions extend the provided <code class="language-plaintext highlighter-rouge">jasperreports-default</code> 
+package, which contains the <code class="language-plaintext highlighter-rouge">jasper</code> result type.  Then, simply use the result type in the desired actions.<br />
+The result takes the following parameters:</p>
 
-<p> <p>
- Generates a JasperReports report using the specified format or PDF if no
- format is specified.
- </p>
-</p>
+<ul>
+  <li>location (default) - the location where the compiled jasper report definition is (foo.jasper), relative from current URL</li>
+  <li>dataSource (required) - the EL expression used to retrieve the datasource from the value stack (usually a List)</li>
+  <li>parse - <code class="language-plaintext highlighter-rouge">true</code> by default, if set to false, the location param will not be parsed for EL expressions</li>
+  <li>format - the format in which the report should be generated. Valid  values can be found in <code class="language-plaintext highlighter-rouge">JasperReportConstants</code>. 
+If no format is specified, PDF will be used</li>
+  <li>contentDisposition - disposition (defaults to “inline”, values are typically <code class="language-plaintext highlighter-rouge">filename="document.pdf"</code>)</li>
+  <li>documentName - name of the document (will generate the http header <code class="language-plaintext highlighter-rouge">Content-disposition = X; filename=X.[format]</code>)</li>
+  <li>delimiter - the delimiter used when generating CSV reports. By default, the character used is “,”</li>
+  <li>imageServletUrl - name of the url that, when prefixed with the context page, can return report images</li>
+  <li>reportParameters - (since 2.1.2+) OGNL expression used to retrieve a map of report parameters from the value stack. 
+The parameters may be accessed in the report via the usual JR mechanism and might include data not part of the 
+dataSource, such as the user name of the report creator, etc.</li>
+  <li>exportParameters - (since 2.1.2+) OGNL expression used to retrieve a map of JR exporter parameters from the value stack.
+The export parameters are used to customize the JR export. For example, a PDF export might enable encryption 
+and set the user password to a string known to the report creator.</li>
+  <li>connection - (since 2.1.7+) JDBC Connection which can be passed to the report instead of dataSource</li>
+  <li>wrapField - (since 2.3.18+) defines if fields should warp with ValueStackDataSource see
+<a href="https://issues.apache.org/jira/browse/WW-3698">WW-3698</a> for more details</li>
+</ul>
 
-<p>
- <ul>
-
- <li><b>location (default)</b> - the location where the compiled jasper report
- definition is (foo.jasper), relative from current URL.</li>
- <li><b>dataSource (required)</b> - the EL expression used to retrieve the
- datasource from the value stack (usually a List).</li>
- <li><b>parse</b> - true by default. If set to false, the location param will
- not be parsed for EL expressions.</li>
- <li><b>format</b> - the format in which the report should be generated. Valid
- values can be found in {@link JasperReportConstants}. If no format is
- specified, PDF will be used.</li>
- <li><b>contentDisposition</b> - disposition (defaults to "inline", values are
- typically <i>filename="document.pdf"</i>).</li>
- <li><b>documentName</b> - name of the document (will generate the http header
- <code>Content-disposition = X; filename=X.[format]</code>).</li>
- <li><b>delimiter</b> - the delimiter used when generating CSV reports. By
- default, the character used is ",".</li>
- <li><b>imageServletUrl</b> - name of the url that, when prefixed with the
- context page, can return report images.</li>
- <li>
- <b>reportParameters</b> - (2.1.2+) OGNL expression used to retrieve a map of
- report parameters from the value stack. The parameters may be accessed
- in the report via the usual JR mechanism and might include data not
- part of the dataSource, such as the user name of the report creator, etc.
- </li>
- <li>
- <b>exportParameters</b> - (2.1.2+) OGNL expression used to retrieve a map of
- JR exporter parameters from the value stack. The export parameters are
- used to customize the JR export. For example, a PDF export might enable
- encryption and set the user password to a string known to the report creator.
- </li>
- <li>
- <b>connection</b> - (2.1.7+) JDBC Connection which can be passed to the
- report instead of dataSource
- </li>
- <li><b>wrapField</b> - (2.3.18+) defines if fields should warp with ValueStackDataSource
- see https://issues.apache.org/jira/browse/WW-3698 for more details
- </li>
- </ul>
- <p>
- This result follows the same rules from {@link StrutsResultSupport}.
- Specifically, all parameters will be parsed if the "parse" parameter
- is not set to false.
- </p>
-</p>
+<p>This result follows the same rules from {@link StrutsResultSupport}. Specifically, all parameters will be parsed 
+if the “parse” parameter is not set to false.</p>
 
 <h3 id="examples">Examples</h3>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"jasper"</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>foo.jasper<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"dataSource"</span><span class="nt">&gt;</span>mySource<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"format"</span><span class="nt">&gt;</span>CSV<span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/result&gt;</span>
-
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"jasper"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>foo.jasper<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"dataSource"</span><span class="nt">&gt;</span>mySource<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"format"</span><span class="nt">&gt;</span>CSV<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/result&gt;</span>
 </code></pre></div></div>
 
 <p>or for pdf:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"jasper"</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>foo.jasper<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"dataSource"</span><span class="nt">&gt;</span>mySource<span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/result&gt;</span>
-
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"jasper"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>foo.jasper<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"dataSource"</span><span class="nt">&gt;</span>mySource<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/result&gt;</span>
 </code></pre></div></div>
 
 <h3 id="settings">Settings</h3>
@@ -225,9 +209,8 @@
 
 <h3 id="installation">Installation</h3>
 
-<p>This plugin can be installed by copying the plugin jar into your application’s <code class="language-plaintext highlighter-rouge">/WEB-INF/lib</code> directory.  No other files need to be copied or created.</p>
-
-<hr />
+<p>This plugin can be installed by copying the plugin jar into your application’s <code class="language-plaintext highlighter-rouge">/WEB-INF/lib</code> directory.<br />
+No other files need to be copied or created.</p>
 
 <blockquote>
   <p>See also <a href="http://www.vitarara.org/cms/node/131http://www.vitarara.org/cms/node/131">Compiling JasperReports JRXML Files with Maven</a> (Mark Menard)</p>

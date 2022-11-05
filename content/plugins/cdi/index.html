@@ -129,7 +129,7 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/plugins/cdi/index.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="../" title="back to Plugins"><< back to Plugins</a>
+    <a href="index.html" title="back to Plugins"><< back to Plugins</a>
     
     <h1 class="no_toc" id="cdi-plugin">CDI Plugin</h1>
 
@@ -364,8 +364,7 @@ to undefined - so check your imports!</p>
 <p>Now that you are aware of that, here is the rest of the inevitable NumberGuess CDI example in Struts 2 flavour. 
 Add a JSP view similar to this:</p>
 
-<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nt">&lt;%@ page </span><span class="na">contentType=</span><span class="s">"text/html; charset=UTF-8"</span> <span class="nt">%&gt;</span>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">contentType=</span><span class="s">"text/html; charset=UTF-8"</span> <span class="nt">%&gt;</span>
 <span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"s"</span><span class="na"> uri=</span><span class="s">"/struts-tags"</span> <span class="nt">%&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
@@ -392,8 +391,7 @@ Add a JSP view similar to this:</p>
 
 <p>along - if not using the fabulous and recommended Struts 2 <a href="../convention">Convention Plugin</a> - with a struts.xml like this</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE struts PUBLIC
           "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"       
           "http://struts.apache.org/dtds/struts-2.3.dtd"&gt;</span>
@@ -414,13 +412,11 @@ Add a JSP view similar to this:</p>
     <span class="nt">&lt;/package&gt;</span>
 
 <span class="nt">&lt;/struts&gt;</span>
-
 </code></pre></div></div>
 
 <p>Now you can add the business logic we want to be managed and injected by CDI. Start with two qualifier annotations:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kn">package</span> <span class="nn">org.apache.struts2.example.cdi</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.apache.struts2.example.cdi</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.inject.Qualifier</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.lang.annotation.Documented</span><span class="o">;</span>
@@ -434,11 +430,9 @@ Add a JSP view similar to this:</p>
 <span class="nd">@Documented</span>
 <span class="nd">@Qualifier</span>
 <span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">Random</span> <span class="o">{}</span>
-
 </code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kn">package</span> <span class="nn">org.apache.struts2.example.cdi</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.apache.struts2.example.cdi</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.inject.Qualifier</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.lang.annotation.Documented</span><span class="o">;</span>
@@ -452,13 +446,11 @@ Add a JSP view similar to this:</p>
 <span class="nd">@Documented</span>
 <span class="nd">@Qualifier</span>
 <span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">MaxNumber</span> <span class="o">{}</span>
-
 </code></pre></div></div>
 
 <p>Now on to the actual business beans, the Game and the Generator bean:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kn">package</span> <span class="nn">org.apache.struts2.example.cdi</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.apache.struts2.example.cdi</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.annotation.PostConstruct</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.enterprise.context.SessionScoped</span><span class="o">;</span>
@@ -540,7 +532,6 @@ Add a JSP view similar to this:</p>
     <span class="o">}</span>
 
 <span class="o">}</span>
-
 </code></pre></div></div>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -569,10 +560,8 @@ Add a JSP view similar to this:</p>
       <span class="k">return</span> <span class="n">maxNumber</span><span class="o">;</span>
    <span class="o">}</span>
 
-<span class="o">}</span> 
-
+<span class="o">}</span>
 </code></pre></div></div>
-
 <p>If you understand that code at a glance, you are either already an CDI expert or profit from the readable, natural
 language oriented way the CDI stack works. If neither of this is the case, now it’s time to check the CDI and Weld 
 documentation. Remember, this is a trivial example - there is much more to know about CDI.</p>
