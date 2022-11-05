@@ -2,7 +2,7 @@
 layout: plugin
 title: OSGi Plugin
 parent:
-    url: index.html
+    url: /plugins
     title: Plugins
 ---
 

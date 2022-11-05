@@ -1,6 +1,9 @@
 ---
 layout: plugin
 title: Codebehind Plugin
+parent:
+    url: /plugins
+    title: Plugins
 ---
 
 # Codebehind Plugin

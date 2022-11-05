@@ -2,7 +2,7 @@
 layout: plugin
 title: Bean Validation Plugin
 parent:
-    url: index.html
+    url: /plugins
     title: Plugins
 ---
 

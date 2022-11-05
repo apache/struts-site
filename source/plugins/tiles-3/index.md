@@ -2,7 +2,7 @@
 layout: plugin
 title: Tiles 3 Plugin
 parent:
-    url: index.html
+    url: /plugins
     title: Plugins
 ---
 

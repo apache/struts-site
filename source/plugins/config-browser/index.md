@@ -2,7 +2,7 @@
 layout: plugin
 title: Config Browser Plugin
 parent:
-    url: index.html
+    url: /plugins
     title: Plugins
 ---
 

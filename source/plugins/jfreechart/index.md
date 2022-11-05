@@ -2,7 +2,7 @@
 layout: plugin
 title: JFreeChart Plugin
 parent:
-    url: index.html
+    url: /plugins
     title: Plugins
 ---
 

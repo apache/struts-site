@@ -2,7 +2,7 @@
 layout: plugin
 title: Struts 1 Plugin
 parent:
-    url: index.html
+    url: /plugins
     title: Plugins
 ---
 

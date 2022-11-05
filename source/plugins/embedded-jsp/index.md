@@ -2,7 +2,7 @@
 layout: plugin
 title: Embedded JSP Plugin
 parent:
-    url: index.html
+    url: /plugins
     title: Plugins
 ---
 

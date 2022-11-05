@@ -2,7 +2,7 @@
 layout: plugin
 title: DWR Plugin
 parent:
-    url: index.html
+    url: /plugins
     title: Plugins
 ---
 

@@ -2,7 +2,7 @@
 layout: plugin
 title: JSON plugin
 parent:
-    url: index.html
+    url: /plugins
     title: Plugins
 ---
 

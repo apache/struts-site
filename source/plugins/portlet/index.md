@@ -2,7 +2,7 @@
 layout: plugin
 title: Portlet Plugin
 parent:
-    url: index.html
+    url: /plugins
     title: Plugins
 ---
 

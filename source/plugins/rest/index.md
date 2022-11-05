@@ -2,7 +2,7 @@
 layout: plugin
 title: REST Plugin
 parent:
-    url: index.html
+    url: /plugins
     title: Plugins
 ---
 

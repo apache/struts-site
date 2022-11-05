@@ -2,7 +2,7 @@
 layout: plugin
 title: Async Plugin
 parent:
-  url: index.html
+  url: /plugins
   title: Plugins
 ---
 
