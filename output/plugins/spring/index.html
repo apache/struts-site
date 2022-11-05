@@ -129,46 +129,56 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/plugins/spring/index.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="../" title="back to Plugins"><< back to Plugins</a>
+    <a href="/plugins" title="back to Plugins"><< back to Plugins</a>
     
     <h1 class="no_toc" id="spring-plugin">Spring Plugin</h1>
 
 <ul id="markdown-toc">
   <li><a href="#description" id="markdown-toc-description">Description</a></li>
+  <li><a href="#features" id="markdown-toc-features">Features</a></li>
   <li><a href="#usage" id="markdown-toc-usage">Usage</a></li>
+  <li><a href="#autowiring" id="markdown-toc-autowiring">Autowiring</a></li>
+  <li><a href="#initializing-actions-from-spring" id="markdown-toc-initializing-actions-from-spring">Initializing Actions from Spring</a></li>
+  <li><a href="#class-reloading" id="markdown-toc-class-reloading">Class Reloading</a></li>
+  <li><a href="#settings" id="markdown-toc-settings">Settings</a></li>
+  <li><a href="#installation" id="markdown-toc-installation">Installation</a></li>
 </ul>
 
 <h2 id="description">Description</h2>
 
-<p><a href="http://www.springframework.org">Spring</a> is a lightweight container, providing centralized, automated configuration and wiring of your application objects, using a technique called “Dependency Injection”.</p>
+<p><a href="http://www.springframework.org">Spring</a> is a lightweight container, providing centralized, automated configuration 
+and wiring of your application objects, using a technique called “Dependency Injection”.</p>
 
-<p>The Spring Plugin works by overriding the Struts <a href="/core-developers/object-factory">ObjectFactory</a> to enhance the creation of core framework objects. When an object is to be created, it uses the <code class="language-plaintext highlighter-rouge">class</code> attribute in the Struts configuration to correspond to the <code class="language-plaintext highlighter-rouge">id</code> attribute in the Spring configuration. If not found, the class will try to be created as usual, then be autowired by Spring. In the case of Actions, Spring 2’s <a href="http://www.springframework.org/docs/reference/beans.html#beans-factory-scopes">bean scope feature</a> can be used to scope an Action instance to the session, application, or a custom scope, providing advanced customization above the default per-request scoping.</p>
+<p>The Spring Plugin works by overriding the Struts <a href="/core-developers/object-factory">ObjectFactory</a> to enhance 
+the creation of core framework objects. When an object is to be created, it uses the <code class="language-plaintext highlighter-rouge">class</code> attribute in 
+the Struts configuration to correspond to the <code class="language-plaintext highlighter-rouge">id</code> attribute in the Spring configuration. If not found, the class will 
+try to be created as usual, then be autowired by Spring. In the case of Actions, Spring 2’s 
+<a href="http://www.springframework.org/docs/reference/beans.html#beans-factory-scopes">bean scope feature</a> can be used to scope 
+an Action instance to the session, application, or a custom scope, providing advanced customization above 
+the default per-request scoping.</p>
 
 <blockquote>
-  <p>Remember:</p>
-
-  <p><strong>registering Actions with Spring is not required</strong>. The Spring alternative is there if you need it, but the framework will automatically create Actions objects from the action mappings. But, if you want to use Spring to inject your Actions, the option is there.</p>
+  <p>Remember:
+<strong>registering Actions with Spring is not required</strong>. The Spring alternative is there if you need it, but the framework 
+will automatically create Actions objects from the action mappings. But, if you want to use Spring to inject your Actions, 
+the option is there.</p>
 </blockquote>
 
-<p><strong>Features</strong></p>
+<h2 id="features">Features</h2>
 
 <ul>
-  <li>
-    <p>Allow Actions, Interceptors, and Results to be created by Spring</p>
-  </li>
-  <li>
-    <p>Struts-created objects can be autowired by Spring after creation</p>
-  </li>
-  <li>
-    <p>Provides two interceptors that autowire actions, if not using the Spring ObjectFactory</p>
-  </li>
+  <li>Allow Actions, Interceptors, and Results to be created by Spring</li>
+  <li>Struts-created objects can be autowired by Spring after creation</li>
+  <li>Provides two interceptors that autowire actions, if not using the Spring ObjectFactory</li>
 </ul>
 
 <h2 id="usage">Usage</h2>
 
 <p>To enable Spring integration, simply include struts2-spring-plugin-x-x-x.jar in your application.</p>
 
-<p>If you are using more than one object factory, (for example, by including both the Spring and Plexus plugins in your application,) you will need to set the struts.objectFactory property in <a href="/core-developers/default-properties">default.properties</a>  or in one of several XML files via <a href="/core-developers/constant-configuration">Constant Configuration</a>:</p>
+<p>If you are using more than one object factory, (for example, by including both the Spring and Plexus plugins in your application) 
+you will need to set the struts.objectFactory property in <a href="/core-developers/default-properties">default.properties</a>
+or in one of several XML files via <a href="/core-developers/constant-configuration">Constant Configuration</a>:</p>
 
 <p><strong>struts.properties</strong></p>
 
@@ -184,9 +194,10 @@
 
 </code></pre></div></div>
 
-<p><strong>Autowiring</strong></p>
+<h2 id="autowiring">Autowiring</h2>
 
-<p>The framework enables “autowiring” by default. (Autowiring means to look for objects defined in Spring with the same name as your object property). To change the wiring mode, modify the <code class="language-plaintext highlighter-rouge">spring.autowire</code> property.</p>
+<p>The framework enables “autowiring” by default. (Autowiring means to look for objects defined in Spring with the same 
+name as your object property). To change the wiring mode, modify the <code class="language-plaintext highlighter-rouge">spring.autowire</code> property.</p>
 
 <p><strong>Wiring Mode</strong></p>
 
@@ -259,7 +270,9 @@
 
 <p>More applicationContext configuration files needed?</p>
 
-<p>Since the Spring integration uses a standard Listener, it can be configured to support configuration files other than applicationContext.xml. Adding the following to your web.xml will cause Spring’s ApplicationContext to be inititalized from all files matching the given pattern:</p>
+<p>Since the Spring integration uses a standard Listener, it can be configured to support configuration files other than 
+applicationContext.xml. Adding the following to your web.xml will cause Spring’s ApplicationContext to be initialized 
+from all files matching the given pattern:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Context Configuration locations for Spring XML files --&gt;</span>
  <span class="nt">&lt;context-param&gt;</span>
@@ -270,13 +283,23 @@
 
 <p>See the Spring documentation for a full description of this parameter.</p>
 
-<p><strong>Initializing Actions from Spring</strong></p>
+<h2 id="initializing-actions-from-spring">Initializing Actions from Spring</h2>
 
-<p>Normally, in <code class="language-plaintext highlighter-rouge">struts.xml</code> you specify the class for each Action. When using the default SpringObjectFactory, the framework will ask Spring to create the Action and wire up dependencies as specified by the default auto-wire behavior.</p>
+<p>Normally, in <code class="language-plaintext highlighter-rouge">struts.xml</code> you specify the class for each Action. When using the default SpringObjectFactory, the framework 
+will ask Spring to create the Action and wire up dependencies as specified by the default auto-wire behavior.</p>
 
-<p>We <strong>strongly</strong> recommend that you find declarative ways of letting Spring know what to provide for your actions. This includes making your beans able to be autowired by either naming your dependent properties on your action the same as the bean defined in Spring which should be provided (to allow for name-based autowiring), or using autowire-by-type and only having one of the required type registered with Spring. It also can include using JDK5 annotations to declare transactional and security requirements rather than having to explicitly set up proxies in your Spring configuration. If you can find ways to let Spring know what it needs to do for your action without needing any explicit configuration in the Spring applicationContext.xml, then you won’t have to maintain this configuration in both places.</p>
+<p>We <strong>strongly</strong> recommend that you find declarative ways of letting Spring know what to provide for your actions. 
+This includes making your beans able to be autowired by either naming your dependent properties on your action the same 
+as the bean defined in Spring which should be provided (to allow for name-based autowiring), or using autowire-by-type 
+and only having one of the required type registered with Spring. It also can include using JDK5 annotations to declare 
+ransactional and security requirements rather than having to explicitly set up proxies in your Spring configuration. 
+If you can find ways to let Spring know what it needs to do for your action without needing any explicit configuration 
+in the Spring applicationContext.xml, then you won’t have to maintain this configuration in both places.</p>
 
-<p>However, sometimes you might want the bean to be completely managed by Spring. This is useful, for example, if you wish to apply more complex AOP or Spring-enabled technologies, such as Acegi, to your beans. To do this, all you have to do is configure the bean in your Spring <code class="language-plaintext highlighter-rouge">applicationContext.xml</code> and then <em>change</em>  the class attribute from your Action in the <code class="language-plaintext highlighter-rouge">struts.xml</code> to use the bean name defined in Spring instead of the class name.</p>
+<p>However, sometimes you might want the bean to be completely managed by Spring. This is useful, for example, if you wish 
+to apply more complex AOP or Spring-enabled technologies, such as Acegi, to your beans. To do this, all you have to do 
+is configure the bean in your Spring <code class="language-plaintext highlighter-rouge">applicationContext.xml</code> and then <em>change</em> the class attribute from your Action 
+in the <code class="language-plaintext highlighter-rouge">struts.xml</code> to use the bean name defined in Spring instead of the class name.</p>
 
 <p>Your <code class="language-plaintext highlighter-rouge">struts.xml</code> file would then have the Action class attributes changed.</p>
 
@@ -303,7 +326,8 @@
 
 </code></pre></div></div>
 
-<p>Where you have a Spring bean defined in your <code class="language-plaintext highlighter-rouge">applicationContext.xml</code> named “bar”. Note that the <code class="language-plaintext highlighter-rouge">com.acme.Foo</code> Action did not need to be changed, because it can be autowired.</p>
+<p>Where you have a Spring bean defined in your <code class="language-plaintext highlighter-rouge">applicationContext.xml</code> named “bar”. Note that the <code class="language-plaintext highlighter-rouge">com.acme.Foo</code> 
+Action did not need to be changed, because it can be autowired.</p>
 
 <p>A typical spring configuration for bar could look as following.</p>
 
@@ -315,32 +339,26 @@
     <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"bar"</span> <span class="na">class=</span><span class="s">"com.my.BarClass"</span> <span class="na">singleton=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
     ...
 <span class="nt">&lt;/beans&gt;</span>
-
 </code></pre></div></div>
 
 <p>To use session-scoped components with Spring and Struts, see the <a href="spring-session-components-workarounds">Spring Session Components Workarounds</a> analysis.</p>
 
-<p><strong>Class Reloading</strong></p>
+<h2 id="class-reloading">Class Reloading</h2>
 
-<p>The Spring plugin can be configured to automatically reload classes that change in the file system. This feature will enable code changes to be “hot deployed” without having to restart the web container. To enable this feature follow these steps:</p>
+<p>The Spring plugin can be configured to automatically reload classes that change in the file system. This feature will 
+enable code changes to be “hot deployed” without having to restart the web container. To enable this feature follow 
+these steps:</p>
 
 <ol>
-  <li>
-    <p>Set “struts.devMode” to “true”</p>
-  </li>
-  <li>
-    <p>Set “struts.class.reloading.watchList” to a comma separated list of directories, or jar files (absolute or relative paths)</p>
-  </li>
-  <li>
-    <p>Add this to web.xml:</p>
-  </li>
+  <li>Set “struts.devMode” to “true”</li>
+  <li>Set “struts.class.reloading.watchList” to a comma separated list of directories, or jar files (absolute or relative paths)</li>
+  <li>Add this to web.xml:</li>
 </ol>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nt">&lt;context-param&gt;</span>
-       <span class="nt">&lt;param-name&gt;</span>contextClass<span class="nt">&lt;/param-name&gt;</span>
-       <span class="nt">&lt;param-value&gt;</span>org.apache.struts2.spring.ClassReloadingXMLWebApplicationContext<span class="nt">&lt;/param-value&gt;</span>
-   <span class="nt">&lt;/context-param&gt;</span> 
-
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;context-param&gt;</span>
+   <span class="nt">&lt;param-name&gt;</span>contextClass<span class="nt">&lt;/param-name&gt;</span>
+   <span class="nt">&lt;param-value&gt;</span>org.apache.struts2.spring.ClassReloadingXMLWebApplicationContext<span class="nt">&lt;/param-value&gt;</span>
+<span class="nt">&lt;/context-param&gt;</span>
 </code></pre></div></div>
 
 <ol start="4">
@@ -355,7 +373,10 @@
 
 </code></pre></div></div>
 
-<p>Letting the reloading class loader handle all the classes can lead to ClassCastException(s) because instances of the same classes loaded by different class loaders can not be assigned to each other. To prevent this problem we suggest that <code class="language-plaintext highlighter-rouge">struts.class.reloading.acceptClasses</code> is used to limit the classes loaded by the reloading class loader, so only actions are handled by it. This constant supports a comma separated list of regular expressions:</p>
+<p>Letting the reloading class loader handle all the classes can lead to ClassCastException(s) because instances of the same 
+classes loaded by different class loaders can not be assigned to each other. To prevent this problem we suggest 
+that <code class="language-plaintext highlighter-rouge">struts.class.reloading.acceptClasses</code> is used to limit the classes loaded by the reloading class loader, 
+so only actions are handled by it. This constant supports a comma separated list of regular expressions:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.class.reloading.acceptClasses"</span> <span class="na">value=</span><span class="s">"com.myproject.example.actions..*"</span> <span class="nt">/&gt;</span>
 
@@ -365,7 +386,7 @@
   <p>This feature is experimental, and <strong>should never</strong> be used in production systems.</p>
 </blockquote>
 
-<p><strong>Settings</strong></p>
+<h2 id="settings">Settings</h2>
 
 <p>The following settings can be customized. See the <a href="/core-developers/configuration-files">developer guide</a>.</p>
 
@@ -424,7 +445,7 @@
   </tbody>
 </table>
 
-<p><strong>Installation</strong></p>
+<h2 id="installation">Installation</h2>
 
 <p>This plugin can be installed by copying the plugin jar into your application’s <code class="language-plaintext highlighter-rouge">/WEB-INF/lib</code> directory. No other files need to be copied or created.</p>
 
