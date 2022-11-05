@@ -14,59 +14,65 @@ parent:
 
 This interceptor sets all parameters on the value stack.
 
-This interceptor gets all parameters from `ActionContext#getParameters()` and sets them on the value stack by calling 
-`ValueStack#setValue(String, Object)`, typically resulting in the values submitted in a form request being applied 
-to an action in the value stack. Note that the parameter map must contain a `String` key and often containers a `String[]`
+This interceptor gets all parameters from `ActionContext#getParameters()` and sets them on the value stack by calling 
+`ValueStack#setValue(String, Object)`, typically resulting in the values submitted in a form request being applied 
+to an action in the value stack. Note that the parameter map must contain a `String` key and often containers a `String[]`
 for the value.
 
-The interceptor takes one parameter named `ordered`. When set to true action properties are guaranteed to be set top-down 
-which means that top action's properties are set first. Then it's subcomponents properties are set. The reason for this 
-order is to enable a "factory" pattern. For example, let's assume that one has an action that contains a property named
-`modelClass` that allows to choose what is the underlying implementation of model. By assuring that `modelClass`
-property is set before any model properties are set, it's possible to choose model implementation during 
-`action.setModelClass()` call. Similarly it's possible to use `action.setPrimaryKey()` property set call to actually 
-load the model class from persistent storage. Without any assumption on parameter order you have to use patterns 
+The interceptor takes one parameter named `ordered`. When set to true action properties are guaranteed to be set top-down 
+which means that top action's properties are set first. Then it's subcomponents properties are set. The reason for this 
+order is to enable a "factory" pattern. For example, let's assume that one has an action that contains a property named
+`modelClass` that allows to choose what is the underlying implementation of model. By assuring that `modelClass`
+property is set before any model properties are set, it's possible to choose model implementation during 
+`action.setModelClass()` call. Similarly it's possible to use `action.setPrimaryKey()` property set call to actually 
+load the model class from persistent storage. Without any assumption on parameter order you have to use patterns 
 like [Preparable Interface](prepare-interceptor).
 
-Because parameter names are effectively OGNL statements, it is important that security be taken in to account. This 
-interceptor will not apply any values in the parameters map if the expression contains an assignment (=), multiple 
+Because parameter names are effectively OGNL statements, it is important that security be taken in to account. This 
+interceptor will not apply any values in the parameters map if the expression contains an assignment (=), multiple 
 expressions (,), or references any objects in the context (#). This is all done in the `#acceptableName(String)`
-method. In addition to this method, if the action being invoked implements the `ParameterNameAware` interface, the action 
+method. In addition to this method, if the action being invoked implements the `ParameterNameAware` interface, the action 
 will be consulted to determine if the parameter should be set.
 
-In addition to these restrictions, a flag (`ReflectionContextState#DENY_METHOD_EXECUTION`) is set such that no methods 
-are allowed to be invoked. That means that any expression such as `person.doSomething()` or `person.getName()` will be 
-explicitly forbidden. This is needed to make sure that your application is not exposed to attacks by malicious users.
+In addition to these restrictions, a flag (`ReflectionContextState#DENY_METHOD_EXECUTION`) is set such that no methods 
+are allowed to be invoked. That means that any expression such as `person.doSomething()` or `person.getName()` will be 
+explicitly forbidden. This is needed to make sure that your application is not exposed to attacks by malicious users.
 
-While this interceptor is being invoked, a flag (`ReflectionContextState#CREATE_NULL_OBJECTS`) is turned on to ensure 
-that any null reference is automatically created - if possible. See the type conversion documentation 
-and the `InstantiatingNullHandler` javadocs for more information.
+While this interceptor is being invoked, a flag (`ReflectionContextState#CREATE_NULL_OBJECTS`) is turned on to ensure 
+that any null reference is automatically created - if possible. See the type conversion documentation 
+and the `InstantiatingNullHandler` javadocs for more information.
 
-Finally, a third flag (`XWorkConverter#REPORT_CONVERSION_ERRORS`) is set that indicates any errors when converting 
-the values to their final data type (`String[] -> int`) an unrecoverable error occurred. With this flag set, the type 
-conversion errors will be reported in the action context. See the type conversion documentation and the `XWorkConverter`
+Finally, a third flag (`XWorkConverter#REPORT_CONVERSION_ERRORS`) is set that indicates any errors when converting 
+the values to their final data type (`String[] -> int`) an unrecoverable error occurred. With this flag set, the type 
+conversion errors will be reported in the action context. See the type conversion documentation and the `XWorkConverter`
 javadocs for more information.
 
-Since Struts 6.1.0 this interceptor also implements a `ParameterValueAware` interface. This interface, in conjunction with the optional `excludeValuePatterns`, can be used to validate the parameter value(s) being set by the interceptor. If the value being set is excluded / not accepted the entire parameter will be dropped. This can be leveraged to mitigate against forced OGNL evaluation due to unsanitized user input being echoed back as part of the action result. This is not intended to replace good coding habits as described on [Proactively protect from OGNL Expression Injections attacks if easily applicable](https://struts.apache.org/security/#proactively-protect-from-ognl-expression-injections-attacks-if-easily-applicable) and is available as part of a defense in depth methodology. By default excludeValuePatterns is not defined.
+Since Struts 6.1.0 this interceptor also implements a `ParameterValueAware` interface. This interface, in conjunction 
+with the optional `excludeValuePatterns`, can be used to validate the parameter value(s) being set by the interceptor. 
+If the value being set is excluded / not accepted the entire parameter will be dropped. This can be leveraged 
+to mitigate against forced OGNL evaluation due to unsanitized user input being echoed back as part of the action result. 
+This is not intended to replace good coding habits as described on 
+[Proactively protect from OGNL Expression Injections attacks if easily applicable](../../security/#proactively-protect-from-ognl-expression-injections-attacks-if-easily-applicable) 
+and is available as part of a defense in depth methodology. By default excludeValuePatterns is not defined.
 
-If you are looking for detailed logging information about your parameters, turn on `DEBUG` level logging for this
+If you are looking for detailed logging information about your parameters, turn on `DEBUG` level logging for this
 interceptor. A detailed log of all the parameter keys and values will be reported.
 
 Since XWork 2.0.2, this interceptor extends `MethodFilterInterceptor`, therefore being able to deal with 
 excludeMethods/includeMethods parameters. See [Default Workflow Interceptor](default-workflow-interceptor) 
 for documentation and examples on how to use this feature.
 
-For more information on ways to restrict the parameter names allowed, see the `ParameterNameAware` javadocs.
+For more information on ways to restrict the parameter names allowed, see the `ParameterNameAware` javadocs.
 
 ## Parameters
 
-- `ordered` - set to true if you want the top-down property setter behaviour
-- `acceptParamNames` - a comma delimited list of regular expressions to describe a allowlist of accepted parameter names. 
+- `ordered` - set to true if you want the top-down property setter behaviour
+- `acceptParamNames` - a comma delimited list of regular expressions to describe a allowlist of accepted parameter names. 
   Don't change the default unless you know what you are doing in terms of security implications
-- `excludeParams` - a comma delimited list of regular expressions to describe a denylist of not allowed parameter names
-- `acceptedValuePatterns` - a comma delimited list of regular expressions to describe a allowlist of accepted parameter values 
-- `excludeValuePatterns` - a comma delimited list of regular expressions to describe a denylist of not allowed parameter values
-- `paramNameMaxLength` - the maximum length of parameter names; parameters with longer names will be ignored; 
+- `excludeParams` - a comma delimited list of regular expressions to describe a denylist of not allowed parameter names
+- `acceptedValuePatterns` - a comma delimited list of regular expressions to describe a allowlist of accepted parameter values 
+- `excludeValuePatterns` - a comma delimited list of regular expressions to describe a denylist of not allowed parameter values
+- `paramNameMaxLength` - the maximum length of parameter names; parameters with longer names will be ignored; 
   the default is 100 characters
 
 ## Excluding parameters
@@ -107,7 +113,8 @@ by the interceptor.
 
 It's also possible to define `acceptedValuePatterns` to accept only values that match the defined set of patterns.
 
-Below is an example of adding parameter values ${} and %{} to the list of parameter values that should be excluded and only accept **a-z** or **0-9**.
+Below is an example of adding parameter values ${} and %{} to the list of parameter values that should be excluded 
+and only accept **a-z** or **0-9**.
 
 **Setup Interceptor Stack To Exclude ${ and %{ Parameter Values**
 
@@ -128,9 +135,10 @@ Below is an example of adding parameter values ${} and %{} to the list of parame
 
 ## Extending the Interceptor
 
-The best way to add behavior to this interceptor is to utilize the `ParameterNameAware` and `ParameterValueAware` interfaces in your actions. 
-However, if you wish to apply a global rule that isn't implemented in your action, then you could extend this interceptor 
-and override the `#acceptableName(String)` and/or `#acceptableParameterValue(String)` method.
+The best way to add behavior to this interceptor is to utilize the `ParameterNameAware` and `ParameterValueAware` 
+interfaces in your actions. However, if you wish to apply a global rule that isn't implemented in your action, then 
+you could extend this interceptor and override the `#acceptableName(String)` and/or `#acceptableParameterValue(String)` 
+method.
 
 > Using `ParameterNameAware` could be dangerous as `ParameterNameAware#acceptableParameterName(String)` takes precedence 
 > over `ParametersInterceptor` which means if `ParametersInterceptor` excluded given parameter name you can accept 
