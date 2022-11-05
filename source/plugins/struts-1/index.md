@@ -1,10 +1,18 @@
 ---
 layout: plugin
 title: Struts 1 Plugin
+parent:
+    url: index.html
+    title: Plugins
 ---
 
 # Struts 1 Plugin
+{:.no_toc}
 
+* Will be replaced with the ToC, excluding a header
+{:toc}
+
+## Description
 The Struts 1 plugin allows you to use existing Struts 1 Actions and ActionForms in Struts 2 applications
 
 This plugin provides a generic Struts 2 Action class to wrap an existing Struts 1 Action, `org.apache.struts2.s1.Struts1Action`.  The wrapper class provides the expected calls to the legacy Struts 1 Action and ActionForm, converting incoming and outgoing objects into the expected forms.  It works by using the [scoped model driven](/core-developers/scoped-model-driven-interceptor)  technique that uses a single Object as the model for every page, very similar to how the Struts 1 ActionForm works.  The plugin also provides several interceptors to emulate Struts 1 logic:

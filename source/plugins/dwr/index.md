@@ -1,28 +1,32 @@
 ---
 layout: plugin
 title: DWR Plugin
+parent:
+    url: index.html
+    title: Plugins
 ---
 
 # DWR Plugin
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
+
+## Description
 
 The DWR plugin provides integration with the Ajax framework [Direct Web Remoting](http://getahead.org/dwr)
-
 This plugin works by allowing DWR to execute a Struts 2 action and return any validation errors.
-
 This plugin is only available with Struts 2.1.1 or later.
 
 ## Features
 
-+ Expose Struts 2 validations via DWR
+- Expose Struts 2 validations via DWR
 
 ## Usage
 
 To expose Struts 2 validations via DWR, add this to your DWR configuration:
 
-{% comment %}start snippet id=dwrConfiguration|lang=xml|javadoc=true|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dwr/src/main/java/org/apache/struts2/validators/DWRValidator.java;hb=HEAD {% endcomment %}
-
 ```xml
-
  <dwr>
     <allow>
       <create creator="new" javascript="validator" class="org.apache.struts2.validators.DWRValidator"/>
@@ -32,8 +36,6 @@ To expose Struts 2 validations via DWR, add this to your DWR configuration:
 
 
 ```
-
-{% comment %}end snippet id=dwrConfiguration|lang=xml|javadoc=true|https://gitbox.apache.org/repos/asf?p=struts.git;a=blob_plain;f=plugins/dwr/src/main/java/org/apache/struts2/validators/DWRValidator.java;hb=HEAD {% endcomment %}
 
 ## Settings
 

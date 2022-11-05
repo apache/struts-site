@@ -1,6 +1,9 @@
 ---
 layout: plugin
 title: Tiles Plugin
+parent:
+    url: index.html
+    title: Plugins
 ---
 
 # Tiles Plugin

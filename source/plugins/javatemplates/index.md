@@ -1,9 +1,16 @@
 ---
 layout: plugin
 title: Javatemplates Plugin
+parent:
+    url: index.html
+    title: Plugins
 ---
 
 # Javatemplates Plugin
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 This plugin provides a faster Java implementation of tags in the "simple" theme.
 
@@ -23,25 +30,25 @@ The plugin is a drop in replacement for the supported tags in the simple theme, 
 
 ## Supported tags
 
-+ _a_ 
-+ _actionerror_ 
-+ _actionmessage_ 
-+ _checkbox_ 
-+ _datetextfield_ 
-+ _div_ 
-+ _fielderror_ 
-+ _file_ 
-+ _form_ 
-+ _head_ 
-+ _hidden_ 
-+ _label_ 
-+ _password_ 
-+ _select_ 
-+ _reset_ 
-+ _submit_ 
-+ _textfield_ 
-+ _textarea_ 
-+ _token_ 
+- `a` 
+- `actionerror` 
+- `actionmessage` 
+- `checkbox` 
+- `datetextfield` 
+- `div` 
+- `fielderror` 
+- `file` 
+- `form` 
+- `head` 
+- `hidden` 
+- `label` 
+- `password` 
+- `select` 
+- `reset` 
+- `submit` 
+- `textfield` 
+- `textarea` 
+- `token` 
 
 ## Performance benchmark
 

@@ -1,9 +1,16 @@
 ---
 layout: plugin
 title: Embedded JSP Plugin
+parent:
+    url: index.html
+    title: Plugins
 ---
 
 # Embedded JSP Plugin
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 The Embedded JSP plugin allows you to use JSPs from the classpath (from jar files).
 

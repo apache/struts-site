@@ -1,13 +1,21 @@
 ---
 layout: plugin
 title: Tiles 3 Plugin
+parent:
+    url: index.html
+    title: Plugins
 ---
 
 # Tiles 3 Plugin
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 > This plugin was dropped in Struts 2.5, instead please use [Tiles Plugin](../tiles) which was extended and upgraded to Tiles 3.
-> 
-> Tiles is a templating framework designed to easily allow the creation of web application pages with a consistent look and feel. It can be used for both page decorating and componentization. This is the first release of the plugin!
+
+> Tiles is a templating framework designed to easily allow the creation of web application pages with a consistent look 
+> and feel. It can be used for both page decorating and componentization. This is the first release of the plugin!
 
 The Tiles 3 plugin allows actions to return Tiles 3 pages.
 

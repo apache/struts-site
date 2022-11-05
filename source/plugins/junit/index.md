@@ -1,6 +1,9 @@
 ---
 layout: plugin
 title: JUnit plugin
+parent:
+    url: index.html
+    title: Plugins
 ---
 
 # JUnit plugin

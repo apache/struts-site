@@ -1,9 +1,18 @@
 ---
 layout: plugin
 title: JFreeChart Plugin
+parent:
+    url: index.html
+    title: Plugins
 ---
 
 # JFreeChart Plugin
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
+
+## Description
 
 [JFreeChart](http://www.jfree.org/jfreechart/) is a free 100% Java (LGPL) chart library that makes it easy for 
 developers to display professional quality charts in their applications.

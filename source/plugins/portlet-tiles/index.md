@@ -1,9 +1,16 @@
 ---
 layout: plugin
 title: Portlet Tiles Plugin
+parent:
+    url: index.html
+    title: Plugins
 ---
 
 # Portlet Tiles Plugin
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 > This plugin got marked as deprecated since Struts 2.6!
 
