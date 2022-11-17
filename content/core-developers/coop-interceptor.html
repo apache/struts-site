@@ -131,20 +131,29 @@
     
     <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
     
-    <h1 id="fetch-metadata-interceptor">Fetch Metadata Interceptor</h1>
+    <h1 id="cross-origin-opener-policy-interceptor">Cross-Origin Opener Policy Interceptor</h1>
 
 <h2 id="description">Description</h2>
 
 <p>Interceptor that implements Cross-Origin Opener Policy on incoming requests.</p>
 
-<p>COOP is a security mitigation that lets developers isolate their resources against side-channel attacks and information leaks. The COOP response header allows a document to request a new browsing context group to better isolate itself from other untrustworthy origins. Separating browsing contexts is necessary because at least two types of attacks are possible when a document shares a browsing context group and possibly an operating system process with cross-origin documents:</p>
+<p>COOP is a security mitigation that lets developers isolate their resources against side-channel attacks and information 
+leaks. The COOP response header allows a document to request a new browsing context group to better isolate itself 
+from other untrustworthy origins. Separating browsing contexts is necessary because at least two types of attacks 
+are possible when a document shares a browsing context group and possibly an operating system process with cross-origin documents:</p>
 
 <ul>
-  <li>Cross-window attacks. A malicious document can open a victim document in a new window and later navigate the window to a look-alike document to trick the user, or attempt to exploit postMessage vulnerabilities in the victim document.</li>
-  <li>Process-wide attacks. Side channel and transient execution attacks like Spectre may provide an opportunity to the malicious document to get access to sensitive data from the victim document, if they share an OS process.</li>
+  <li>Cross-window attacks. A malicious document can open a victim document in a new window and later navigate the window 
+to a look-alike document to trick the user, or attempt to exploit postMessage vulnerabilities in the victim document.</li>
+  <li>Process-wide attacks. Side channel and transient execution attacks like Spectre may provide an opportunity 
+to the malicious document to get access to sensitive data from the victim document, if they share an OS process.</li>
 </ul>
 
-<p>The COOP header can have one of 3 values: <code class="language-plaintext highlighter-rouge">same-origin</code>, <code class="language-plaintext highlighter-rouge">same-origin-allow-popups</code>, <code class="language-plaintext highlighter-rouge">unsafe-none</code>.  If the COOP values are the same, and the origins of the documents match the relationship declared in the COOP header value, documents can interact with each other. Otherwise if at least one of the documents sets COOP, the browser will create a new browsing context group severing the link between the documents. Sites can use <code class="language-plaintext highlighter-rouge">same-origin-allow-popups</code> to allow popups they open to be in their browsing context group (unless the popup’s own COOP prevents this).</p>
+<p>The COOP header can have one of 3 values: <code class="language-plaintext highlighter-rouge">same-origin</code>, <code class="language-plaintext highlighter-rouge">same-origin-allow-popups</code>, <code class="language-plaintext highlighter-rouge">unsafe-none</code>. If the COOP values 
+are the same, and the origins of the documents match the relationship declared in the COOP header value, documents can 
+interact with each other. Otherwise, if at least one of the documents sets COOP, the browser will create a new browsing 
+context group severing the link between the documents. Sites can use <code class="language-plaintext highlighter-rouge">same-origin-allow-popups</code> to allow popups they open
+to be in their browsing context group (unless the popup’s own COOP prevents this).</p>
 
 <p>COOP is now supported by all major browsers.</p>
 
@@ -153,8 +162,10 @@
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">exemptedPaths</code> - Set of opt out endpoints that are meant to serve cross-site traffic. Paths should contain leading slashes and must be relative. This field is empty by default.</li>
-  <li><code class="language-plaintext highlighter-rouge">mode</code> - The policy mode COOP should follow. Available modes are <code class="language-plaintext highlighter-rouge">same-origin</code>, <code class="language-plaintext highlighter-rouge">same-origin-allow-popups</code>, <code class="language-plaintext highlighter-rouge">unsafe-none</code>. Default mode is <code class="language-plaintext highlighter-rouge">same-origin</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">exemptedPaths</code> - Set of opt out endpoints that are meant to serve cross-site traffic. Paths should contain leading 
+slashes and must be relative. This field is empty by default.</li>
+  <li><code class="language-plaintext highlighter-rouge">mode</code> - The policy mode COOP should follow. Available modes are <code class="language-plaintext highlighter-rouge">same-origin</code>, <code class="language-plaintext highlighter-rouge">same-origin-allow-popups</code>, 
+<code class="language-plaintext highlighter-rouge">unsafe-none</code>. Default mode is <code class="language-plaintext highlighter-rouge">same-origin</code>.</li>
 </ul>
 
 <h2 id="examples">Examples</h2>
