@@ -13,6 +13,86 @@ title: Announcements 2022
   Skip to: <a href="announce-2021">Announcements - 2021</a>
 </p>
 
+#### 28 November 2022 - Apache Struts version 6.1.3 General Availability {#a20221128}
+
+The Apache Struts group is pleased to announce that Apache Struts version 6.1.1 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+The Apache Struts is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework has been designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+Below is a full list of all changes:
+
+**Bug**
+
+- WW-3529 - NamedVariablePatternMatcher does not properly escape characters
+- WW-3737 - Parsing of excludePattern breaks regex
+- WW-4514 - DefaultUrlHelper.buildParametersString appends just ? if collection is empty
+- WW-5145 - Checkbox with multiple values do not default correctly
+- WW-5214 - When value for SELECT element is greater than 2147483647, the value does not pre-select
+- WW-5238 - Strict Method Invocation (SMI) too strict or wrong ActionMapping?
+- WW-5239 - regression btw struts 2.5.30 and 6.0.30 / submit s:checkbox unchecked -> NPE
+- WW-5241 - <s:url includeParams="all"> is generating an invalid url when used in conjunction with ExecuteAndWait interceptor
+- WW-5247 - Related to: [WW-5117] - %{id} evaluates different for data-* and value attribute
+- WW-5248 - action attribute on submit tag not working as espected
+- WW-5255 - <s:script> and <s:link> tags are broken
+
+**New Feature**
+
+- WW-4173 - Add option to disable a given interceptor
+
+**Improvement**
+
+- WW-2815 - No way to configure XStream engine
+- WW-3691 - BackgroundProcess should use a java.util.concurrent.Executor alternatively to spawning a new thread
+- WW-3715 - Allow for dynamic validation xml files, by building validator cache based on action AND context
+- WW-3725 - Remove unused tag templates from core/src/main/resources/template/archive
+- WW-4440 - Add basic README.md to all subprojects
+- WW-4567 - Drop unused dependencies or put a proper scope
+- WW-4692 - Extract encoding logic from UrlHelper into a dedicated bean
+- WW-5133 - Remove deprecated labelposition
+- WW-5137 - Remove class attribute
+- WW-5184 - Add optional parameter value check to ParametersInterceptor
+- WW-5219 - Move TestNGXWorkTestCase from the Core into the TestNG plugin
+- WW-5220 - Move XWorkJUnit4TestCase from the Core into the JUnit plugin
+- WW-5232 - Use Github Actions instead of Travis to build PRs
+- WW-5234 - Normalise DTD definitions
+- WW-5235 - Reduce "OGNL Expression Max Length enabled with 256" log entry to trace
+- WW-5240 - doubleOnchange attribute of the doubleselect tag is not supported
+- WW-5242 - Make "struts.mapper.action.prefix.crossNamespaces" deprecated
+- WW-5252 - Completely disable external entities declarations in XML config
+- WW-5254 - Document how to use the Async plugin
+- WW-5257 - <s:checkbox> output is followed by a newline in simple theme (diff to Struts 2)
+- WW-5259 - Extract UrlHelper#parseQueryString into a dedicated plugin
+- WW-5260 - Checkbox tag default value for attribute submitUnchecked
+
+**Dependency**
+
+- WW-5213 - Bump javax.el from 3.0.1-b11 to 3.0.1-b12
+- WW-5226 - Upgrade weld-core to version 2.4.8.Final
+- WW-5227 - Upgrade Apache Log4j to version 2.19.0
+- WW-5228 - Upgrade dependency-check-maven from 7.1.2 to 7.2.0
+- WW-5229 - Upgrade Spring to version 5.3.23
+- WW-5230 - Upgrade OGNL to version 3.3.4
+- WW-5231 - Upgrade apache-rat-plugin to version 0.15
+- WW-5244 - Upgrade commons-text to ver. 1.10.0
+- WW-5245 - Upgrade jackson-databind to version 2.13.4.1
+- WW-5258 - Upgrade Struts Annotation to version 1.0.8
+
+> Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+6.1.1) to find more details about performed
+> bug fixes and improvements. Also, a dedicated [migration guide]({{ site.wiki_url }}/Struts+2.5+to+6.0.0+migration) has been prepared.
+
+**All developers are strongly advised to perform this upgrade.**
+
+The 6.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 3.1, JSP API 2.1, and Java 8.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list,
+and, if appropriate, file [a tracking ticket]({{ site.jira_url }}).
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
 #### 15 September 2022 - Apache Struts version 6.0.3 General Availability {#a20220915}
 
 The Apache Struts group is pleased to announce that Apache Struts version 6.0.3 is available as a "General Availability"
