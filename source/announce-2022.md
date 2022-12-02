@@ -13,7 +13,7 @@ title: Announcements 2022
   Skip to: <a href="announce-2021">Announcements - 2021</a>
 </p>
 
-#### 28 November 2022 - Apache Struts version 6.1.3 General Availability {#a20221128}
+#### 28 November 2022 - Apache Struts version 6.1.1 General Availability {#a20221128}
 
 The Apache Struts group is pleased to announce that Apache Struts version 6.1.1 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
