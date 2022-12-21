@@ -69,14 +69,14 @@ In the XML validation file (for this example that is EditAction-validation.xml),
 Within the validators node you can have 1 or more validator nodes. The type attribute specifies which validator you 
 want the Struts 2 framework to use (see [Validation](../core-developers/validation) ). The param name="fieldname" node 
 is used to tell the framework which form field entry to apply the rule to. See edit.jsp for the form fields and their 
-name value (review [Struts 2 Form Tags](form-tags) if you're not familiar with how to use Struts 2 form tags). T
-he message node is used to tell the framework what message to display if the validation fails.
+name value (review [Struts 2 Form Tags](form-tags) if you're not familiar with how to use Struts 2 form tags). The 
+message node is used to tell the framework what message to display if the validation fails.
 
 | There are alternate ways to write the XML that goes in the validation XML file. See [Validation](../core-developers/validation) 
 in the Struts 2 documentation for a full discussion.
 
-For example if the user doesn't enter a value in the first name form field and clicks on the Save Changes button, h
-e will see the following.
+For example if the user doesn't enter a value in the first name form field and clicks on the Save Changes button, he 
+will see the following.
 
 ![form-validation-2.png](attachments/att20873264_form-validation-2.png)
 
