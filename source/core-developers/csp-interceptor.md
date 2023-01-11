@@ -19,9 +19,7 @@ to site defacement, to malware distribution.
 CSP can work in two modes, either **enforce** or **report**. In the report mode the `Content-Security-Policy-Report-Only`
 header is sent and `Content-Security-Policy` header is used when using the enforce mode.
 
-CSP is now supported by all major browsers.
-
-[More information about CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
+CSP is now supported by all major browsers. [More information about CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
 
 ## Parameters
 

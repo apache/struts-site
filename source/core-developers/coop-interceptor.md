@@ -10,7 +10,7 @@ parent:
 
 ## Description
 
-Interceptor that implements Cross-Origin Opener Policy on incoming requests.
+Interceptor that implements _Cross-Origin Opener Policy_ on incoming requests.
 
 COOP is a security mitigation that lets developers isolate their resources against side-channel attacks and information 
 leaks. The COOP response header allows a document to request a new browsing context group to better isolate itself 
@@ -22,15 +22,17 @@ are possible when a document shares a browsing context group and possibly an ope
 - Process-wide attacks. Side channel and transient execution attacks like Spectre may provide an opportunity 
   to the malicious document to get access to sensitive data from the victim document, if they share an OS process.
 
-The COOP header can have one of 3 values: `same-origin`, `same-origin-allow-popups`, `unsafe-none`. If the COOP values 
-are the same, and the origins of the documents match the relationship declared in the COOP header value, documents can 
-interact with each other. Otherwise, if at least one of the documents sets COOP, the browser will create a new browsing 
-context group severing the link between the documents. Sites can use `same-origin-allow-popups` to allow popups they open
-to be in their browsing context group (unless the popup's own COOP prevents this).
+The COOP header can have one of 3 values:
+- `same-origin`
+- `same-origin-allow-popups`
+- `unsafe-none`
+ 
+If the COOP values are the same, and the origins of the documents match the relationship declared in the COOP header 
+value, documents can interact with each other. Otherwise, if at least one of the documents sets COOP, the browser 
+will create a new browsing context group severing the link between the documents. Sites can use `same-origin-allow-popups` 
+to allow popups they open to be in their browsing context group (unless the popup's own COOP prevents this).
 
-COOP is now supported by all major browsers.
-
-[More information about COOP](https://web.dev/why-coop-coep/#coop).
+COOP is now supported by all major browsers. [More information about COOP](https://web.dev/why-coop-coep/#coop).
 
 ## Parameters
 
@@ -44,8 +46,8 @@ COOP is now supported by all major browsers.
 ```xml
 <action  name="someAction" class="com.examples.SomeAction">
     <interceptor-ref name="defaultStack">
-        <param name="coopInterceptor.exemptedPaths">/path1,/path2,/path3</param>
-        <param name="coopInterceptor.mode">same-origin</param>
+        <param name="coop.exemptedPaths">/path1,/path2,/path3</param>
+        <param name="coop.mode">same-origin</param>
     </interceptor-ref>
     <result name="success">good_result.ftl</result>
 </action>
