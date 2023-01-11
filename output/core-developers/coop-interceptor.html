@@ -135,7 +135,7 @@
 
 <h2 id="description">Description</h2>
 
-<p>Interceptor that implements Cross-Origin Opener Policy on incoming requests.</p>
+<p>Interceptor that implements <em>Cross-Origin Opener Policy</em> on incoming requests.</p>
 
 <p>COOP is a security mitigation that lets developers isolate their resources against side-channel attacks and information 
 leaks. The COOP response header allows a document to request a new browsing context group to better isolate itself 
@@ -149,15 +149,19 @@ to a look-alike document to trick the user, or attempt to exploit postMessage vu
 to the malicious document to get access to sensitive data from the victim document, if they share an OS process.</li>
 </ul>
 
-<p>The COOP header can have one of 3 values: <code class="language-plaintext highlighter-rouge">same-origin</code>, <code class="language-plaintext highlighter-rouge">same-origin-allow-popups</code>, <code class="language-plaintext highlighter-rouge">unsafe-none</code>. If the COOP values 
-are the same, and the origins of the documents match the relationship declared in the COOP header value, documents can 
-interact with each other. Otherwise, if at least one of the documents sets COOP, the browser will create a new browsing 
-context group severing the link between the documents. Sites can use <code class="language-plaintext highlighter-rouge">same-origin-allow-popups</code> to allow popups they open
-to be in their browsing context group (unless the popup’s own COOP prevents this).</p>
+<p>The COOP header can have one of 3 values:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">same-origin</code></li>
+  <li><code class="language-plaintext highlighter-rouge">same-origin-allow-popups</code></li>
+  <li><code class="language-plaintext highlighter-rouge">unsafe-none</code></li>
+</ul>
 
-<p>COOP is now supported by all major browsers.</p>
+<p>If the COOP values are the same, and the origins of the documents match the relationship declared in the COOP header 
+value, documents can interact with each other. Otherwise, if at least one of the documents sets COOP, the browser 
+will create a new browsing context group severing the link between the documents. Sites can use <code class="language-plaintext highlighter-rouge">same-origin-allow-popups</code> 
+to allow popups they open to be in their browsing context group (unless the popup’s own COOP prevents this).</p>
 
-<p><a href="https://web.dev/why-coop-coep/#coop">More information about COOP</a>.</p>
+<p>COOP is now supported by all major browsers. <a href="https://web.dev/why-coop-coep/#coop">More information about COOP</a>.</p>
 
 <h2 id="parameters">Parameters</h2>
 
@@ -172,8 +176,8 @@ slashes and must be relative. This field is empty by default.</li>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span>  <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coopInterceptor.exemptedPaths"</span><span class="nt">&gt;</span>/path1,/path2,/path3<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coopInterceptor.mode"</span><span class="nt">&gt;</span>same-origin<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coop.exemptedPaths"</span><span class="nt">&gt;</span>/path1,/path2,/path3<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coop.mode"</span><span class="nt">&gt;</span>same-origin<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;/interceptor-ref&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
