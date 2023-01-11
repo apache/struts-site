@@ -131,23 +131,29 @@
     
     <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
     
-    <h1 id="fetch-metadata-interceptor">Fetch Metadata Interceptor</h1>
+    <h1 id="cross-origin-embedder-policy-interceptor">Cross-Origin Embedder Policy Interceptor</h1>
 
 <h2 id="description">Description</h2>
 
 <p>Interceptor that implements Cross-Origin Embedder Policy on incoming requests.</p>
 
-<p>COEP prevents the document from loading any framed documents which don’t opt-in by setting the COEP header. (<code class="language-plaintext highlighter-rouge">Cross-Origin-Embedder-Policy: require-corp</code>). This provides protection for documents that don’t restrict framing. A document that doesn’t set COEP cannot be framed by another document with COEP. All descendents of a document with COEP will also enforce the same restrictions.</p>
+<p>COEP prevents the document from loading any framed documents which don’t opt-in by setting the COEP header:</p>
 
-<p>COEP is now supported by all major browsers.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cross-Origin-Embedder-Policy: require-corp
+</code></pre></div></div>
 
-<p><a href="https://web.dev/why-coop-coep/#coep">More information about COEP</a>.</p>
+<p>This provides protection for documents that don’t restrict framing. A document that doesn’t set COEP cannot be framed 
+by another document with COEP. All descendents of a document with COEP will also enforce the same restrictions.</p>
+
+<p>COEP is now supported by all major browsers. <a href="https://web.dev/why-coop-coep/#coep">More information about COEP</a>.</p>
 
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">exemptedPaths</code> - Set of opt out endpoints that are meant to serve cross-site traffic. Paths should contain leading slashes and must be relative. This field is empty by default.</li>
-  <li><code class="language-plaintext highlighter-rouge">enforcingMode</code> - Boolean variable allowing the user to let COEP operate in <code class="language-plaintext highlighter-rouge">enforcing</code>, which blocks both resource and reports violations, or <code class="language-plaintext highlighter-rouge">report-only</code> mode, which only reports violations. Default value for field is <code class="language-plaintext highlighter-rouge">false</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">exemptedPaths</code> - Set of opt out endpoints that are meant to serve cross-site traffic. Paths should contain leading
+ slashes and must be relative. This field is empty by default.</li>
+  <li><code class="language-plaintext highlighter-rouge">enforcingMode</code> - Boolean variable allowing the user to let COEP operate in <code class="language-plaintext highlighter-rouge">enforcing</code>, which blocks both resource 
+ and reports violations, or <code class="language-plaintext highlighter-rouge">report-only</code> mode, which only reports violations. Default value for field is <code class="language-plaintext highlighter-rouge">false</code>.</li>
   <li><code class="language-plaintext highlighter-rouge">disabled</code> - Boolean variable disabling and enabling COEP. Default value for field is <code class="language-plaintext highlighter-rouge">false</code>.</li>
 </ul>
 
@@ -155,9 +161,9 @@
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span>  <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coepInterceptor.exemptedPaths"</span><span class="nt">&gt;</span>/path1,/path2,/path3<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coepInterceptor.enforcingMode"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coepInterceptor.disabled"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coep.exemptedPaths"</span><span class="nt">&gt;</span>/path1,/path2,/path3<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coep.enforcingMode"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coep.disabled"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;/interceptor-ref&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
