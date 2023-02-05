@@ -30,7 +30,7 @@ or
 Disabling the OGNL expression cache can have a negative impact on performance, but 
 disabling the cache can limit memory overhead for the application (a trade-off).
 
-As of Struts 2.6, additional configuration properties have been made available to control the
+As of Struts 6.0.0, additional configuration properties have been made available to control the
 OGNL cache configuration.  These include a configureable cache size limit, and activating
 an LRU (Least Recently Used) cache mode.  The expression cache and BeanInfo cache can have
 their properties set independently.  Both caches are standard caches with a high maximum
@@ -73,7 +73,7 @@ Below are some examples of setting the cache configuration via struts.xml:
 <constant name="struts.ognl.beanInfoCacheLRUMode" value="true"/>
 ```
 
-As of Struts 2.6, developers may choose to implement their own OGNL cache factories,
+As of Struts 6.0.0, developers may choose to implement their own OGNL cache factories,
 instead of using the default implementations, should they desire to.  The default 
 implementations can be referenced to give an idea of how to implement a custom implementation.
 For example, if a developer implements a CustomExpressionCacheFactory and CustomBeanInfoCacheFactory 
