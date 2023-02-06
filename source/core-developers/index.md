@@ -32,6 +32,7 @@ and [results](result-configuration). Each may be configured via XML or annotatio
   - [struts-default.xml](struts-default-xml)
   - [velocity.properties](velocity-properties)
   - [struts-default.vm](struts-default-vm)
+- [OGNL Cache Configuration](ognl-cache-configuration)
 - [Application Servers](application-servers)
 - [Performance Tuning](performance-tuning)
 - [Security](../security/)
