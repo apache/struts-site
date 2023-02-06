@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Core Developers Guide</title>
+  <title>OGNL Cache Configuration</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -127,107 +127,84 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/index.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    
-    <h1 id="core-developers-guide">Core Developers Guide</h1>
+    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/ognl-cache-configuration.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <h1 id="ognl-cache-configuration">OGNL Cache Configuration</h1>
 
-<p>Struts 2 processes requests using three core types: <a href="interceptor-configuration">interceptors</a>, <a href="action-configuration">actions</a>
-and <a href="result-configuration">results</a>. Each may be configured via XML or annotations.</p>
+<p>The Struts framework provides two different OGNL caches, an expression cache and a BeanInfo cache.
+Developers may set properties in <a href="struts-xml">struts.xml</a> and/or <a href="default-properties">default.properties</a> to 
+configure certain behaviours for the OGNL caches.  The properties that can be set vary between Struts 
+versions, referring to the configuration files in a given version should provide guidance in that respect.</p>
 
-<h2 id="developing-applications-with-struts-2">Developing Applications with Struts 2</h2>
+<p>The OGNL expression cache is enabled by default.  Developers can toggle that state via default.properties:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struts.ognl.enableExpressionCache=true
+</code></pre></div></div>
+<p>or</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struts.ognl.enableExpressionCache=false
+</code></pre></div></div>
+<p>The same toggle is also available via struts.xml:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;constant name="struts.ognl.enableExpressionCache" value="true"/&gt;
+</code></pre></div></div>
+<p>or</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;constant name="struts.ognl.enableExpressionCache" value="false"/&gt;
+</code></pre></div></div>
 
-<ul>
-  <li><a href="nutshell">Nutshell</a></li>
-  <li><a href="ajax">AJAX</a></li>
-  <li><a href="dependency-injection">Dependency Injection</a></li>
-  <li><a href="debugging">Debugging</a></li>
-  <li><a href="development-mode">Development Mode</a></li>
-</ul>
+<p>Disabling the OGNL expression cache can have a negative impact on performance, but 
+disabling the cache can limit memory overhead for the application (a trade-off).</p>
 
-<h2 id="configuration">Configuration</h2>
+<p>As of Struts 6.0.0, additional configuration properties have been made available to control the
+OGNL cache configuration.  These include a configureable cache size limit, and activating
+an LRU (Least Recently Used) cache mode.  The expression cache and BeanInfo cache can have
+their properties set independently.  Both caches are standard caches with a high maximum
+capacity by default.  The developer may override the default behaviour using the 
+appropriate configuration properties.</p>
 
-<ul>
-  <li><a href="../plugins/convention/">Configuration by Convention</a></li>
-  <li><a href="annotations">Annotations</a></li>
-  <li><a href="configuration-elements">Configuration Elements</a>
-    <ul>
-      <li><a href="action-configuration">Actions</a>, <a href="wildcard-mappings">Wildcard Mappings</a>, <a href="bean-configuration">Beans</a>, <a href="constant-configuration">Constants</a></li>
-      <li><a href="exception-configuration">Exceptions</a>, <a href="include-configuration">Includes</a>, <a href="interceptor-configuration">Interceptors</a></li>
-      <li><a href="namespace-configuration">Namespaces</a>, <a href="package-configuration">Packages</a>, <a href="result-configuration">Results</a></li>
-      <li><a href="unknown-handlers">Unknown Handlers</a>, <a href="dispatcher">Dispatcher</a></li>
-    </ul>
-  </li>
-  <li><a href="configuration-files">Configuration Files</a>
-    <ul>
-      <li><a href="web-xml">web.xml</a></li>
-      <li><a href="struts-xml">struts.xml</a></li>
-      <li><a href="default-properties">default.properties</a></li>
-      <li><a href="struts-default-xml">struts-default.xml</a></li>
-      <li><a href="velocity-properties">velocity.properties</a></li>
-      <li><a href="struts-default-vm">struts-default.vm</a></li>
-    </ul>
-  </li>
-  <li><a href="ognl-cache-configuration">OGNL Cache Configuration</a></li>
-  <li><a href="application-servers">Application Servers</a></li>
-  <li><a href="performance-tuning">Performance Tuning</a></li>
-  <li><a href="../security/">Security</a></li>
-  <li><a href="../plugins/junit/">Testing Actions</a>
-    <ul>
-      <li><a href="https://depressedprogrammer.wordpress.com/2007/06/18/unit-testing-struts-2-actions-spring-junit/">(arsenalist)</a></li>
-      <li><a href="http://fassisrosa.blogspot.com/2006/11/unit-testing-struts-20\">(rosa)</a></li>
-    </ul>
-  </li>
-  <li><a href="interceptors">Interceptors</a>
-    <ul>
-      <li><a href="writing-interceptors">Writing Interceptors</a></li>
-      <li><a href="parameters-interceptor">Excluding Parameters</a></li>
-    </ul>
-  </li>
-  <li>Actions
-    <ul>
-      <li><a href="model-driven">Model Driven</a></li>
-      <li><a href="action-chaining">Action Chaining</a></li>
-      <li><a href="action-event-listener">ActionEventListener</a></li>
-    </ul>
-  </li>
-  <li>Results
-    <ul>
-      <li><a href="result-types">Result Types</a></li>
-      <li><a href="dispatcher-listener">DispatcherListener</a></li>
-      <li><a href="pre-result-listener">PreResultListener</a></li>
-    </ul>
-  </li>
-  <li><a href="validation">Validation</a></li>
-  <li><a href="localization">Localization</a>
-    <ul>
-      <li><a href="formatting-dates-and-numbers">Formatting Dates and Numbers</a></li>
-    </ul>
-  </li>
-  <li><a href="type-conversion">Type Conversion</a></li>
-  <li><a href="static-content">Static Content</a></li>
-  <li>Portlets
-    <ul>
-      <li>[Tutorial] - export https://cwiki.apache.org/confluence/display/WW/Struts+2+Portlet+Tutorial</li>
-      <li>[Configuration/Documentation] - export https://cwiki.apache.org/confluence/display/WW/Portlet+Plugin</li>
-    </ul>
-  </li>
-  <li><a href="logging">Logging</a></li>
-  <li><a href="accessing-application-session-request-objects">Accessing application, session, request objects</a></li>
-  <li><a href="big-picture">Big Picture</a>
-    <ul>
-      <li><a href="object-factory">ObjectFactory</a></li>
-      <li><a href="action-mapper">Action Mapper</a></li>
-      <li><a href="action-proxy-and-actionproxy-factory">Action Proxy &amp; ActionProxy Factory</a></li>
-      <li><a href="configuration-provider-and-configuration">Configuration Provider &amp; Configuration</a></li>
-    </ul>
-  </li>
-  <li><a href="../faq/">FAQs</a>
-    <ul>
-      <li><a href="../maven-archetypes/">Struts 2 Maven Archetypes</a></li>
-      <li>[Cookbook]</li>
-    </ul>
-  </li>
-</ul>
+<p>Below are some examples of setting the cache configuration via default.properties:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>### Set expression and BeanInfo caches to size 1250 with standard cache mode
+struts.ognl.enableExpressionCache=true
+struts.ognl.expressionCacheMaxSize=1250
+struts.ognl.expressionCacheLRUMode=false
+struts.ognl.beanInfoCacheMaxSize=1250
+struts.ognl.beanInfoCacheLRUMode=false
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>### Set expression and BeanInfo caches to size 1000 with LRU cache mode
+struts.ognl.enableExpressionCache=true
+struts.ognl.expressionCacheMaxSize=1000
+struts.ognl.expressionCacheLRUMode=true
+struts.ognl.beanInfoCacheMaxSize=1000
+struts.ognl.beanInfoCacheLRUMode=true
+</code></pre></div></div>
+
+<p>Below are some examples of setting the cache configuration via struts.xml:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- Set expression and BeanInfo caches to size 1250 with standard cache mode --&gt;
+&lt;constant name="struts.ognl.enableExpressionCache" value="true"/&gt;
+&lt;constant name="struts.ognl.expressionCacheMaxSize" value="1250"/&gt;
+&lt;constant name="struts.ognl.expressionCacheLRUMode" value="false"/&gt;
+&lt;constant name="struts.ognl.beanInfoCacheMaxSize" value="1250"/&gt;
+&lt;constant name="struts.ognl.beanInfoCacheLRUMode" value="false"/&gt;
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- Set expression and BeanInfo caches to size 1000 with LRU cache mode --&gt;
+&lt;constant name="struts.ognl.enableExpressionCache" value="true"/&gt;
+&lt;constant name="struts.ognl.expressionCacheMaxSize" value="1000"/&gt;
+&lt;constant name="struts.ognl.expressionCacheLRUMode" value="true"/&gt;
+&lt;constant name="struts.ognl.beanInfoCacheMaxSize" value="1000"/&gt;
+&lt;constant name="struts.ognl.beanInfoCacheLRUMode" value="true"/&gt;
+</code></pre></div></div>
+
+<p>As of Struts 6.0.0, developers may choose to implement their own OGNL cache factories,
+instead of using the default implementations, should they desire to.  The default 
+implementations can be referenced to give an idea of how to implement a custom implementation.
+For example, if a developer implements a CustomExpressionCacheFactory and CustomBeanInfoCacheFactory 
+that both implement the OgnlCacheFactory interface, they could be installed via
+a configuration in struts.xml:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;constant name="struts.ognl.expressionCacheFactory" value="some.package.CustomExpressionCacheFactory"/&gt;
+&lt;constant name="struts.ognl.beanInfoCacheFactory" value="some.package.CustomBeanInfoCacheFactory"/&gt;
+</code></pre></div></div>
+<p>If the developer wants the standard configuration properties for the caches to function, they will need
+to implement equivalent methods to the ones the default implementation uses to populate those properties.</p>
+
+<p>Beyond the configuration properties, in certain circumstances, developers may choose to utilize certain methods to 
+interact with the OGNL caches.  Refer to the API documentation for <a href="https://struts.apache.org/maven/struts2-core/apidocs/com/opensymphony/xwork2/ognl/OgnlUtil.html">OgnlUtil</a>.</p>
 
   </section>
 </article>
