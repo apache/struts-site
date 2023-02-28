@@ -357,7 +357,7 @@ really only a “style guard” for long OGNL expressions in an application).</p
 it’s a OGNL-wide mechanism which means it affects any aspect of the framework ie. incoming parameters, expressions 
 used in JSPs, etc.</p>
 
-<p>There are three options that can be used to configure excluded packages and classes:</p>
+<p>There are 4 options that can be used to configure excluded packages and classes:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">struts.excludedClasses</code> - comma-separated list of excluded classes</li>
@@ -365,20 +365,10 @@ used in JSPs, etc.</p>
 simple string comparison but it’s more flexible</li>
   <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageNames</code> - comma-separated list of excluded packages, it is used with simple string comparison 
 via <code class="language-plaintext highlighter-rouge">startWith</code> and <code class="language-plaintext highlighter-rouge">equals</code></li>
+  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageExemptClasses</code> - comma-separated list of classes to exempt from any of the excluded packages or package name patterns</li>
 </ul>
 
-<p>The defaults are as follow:</p>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.excludedClasses"</span>
-          <span class="na">value=</span><span class="s">"com.opensymphony.xwork2.ActionContext"</span> <span class="nt">/&gt;</span>
-
-<span class="c">&lt;!-- this must be valid regex, each '.' in package name must be escaped! --&gt;</span>
-<span class="c">&lt;!-- it's more flexible but slower than simple string comparison --&gt;</span>
-<span class="c">&lt;!-- constant name="struts.excludedPackageNamePatterns" value="^java\.lang\..*,^ognl.*,^(?!javax\.servlet\..+)(javax\..+)" / --&gt;</span>
-
-<span class="c">&lt;!-- this is simpler version of the above used with string comparison --&gt;</span>
-<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.excludedPackageNames"</span> <span class="na">value=</span><span class="s">"java.lang,ognl,javax"</span> <span class="nt">/&gt;</span>
-</code></pre></div></div>
+<p>The defaults are defined <a href="https://github.com/apache/struts/blob/master/core/src/main/resources/struts-excluded-classes.xml">here</a>.</p>
 
 <p>Any expression or target which evaluates to one of these will be blocked and you see a WARN in logs:</p>
 
