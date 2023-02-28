@@ -208,27 +208,16 @@ The Apache Struts 2 contains internal security manager which blocks access to pa
 it's a OGNL-wide mechanism which means it affects any aspect of the framework ie. incoming parameters, expressions 
 used in JSPs, etc.
 
-There are three options that can be used to configure excluded packages and classes:
+There are 4 options that can be used to configure excluded packages and classes:
 
  - `struts.excludedClasses` - comma-separated list of excluded classes
  - `struts.excludedPackageNamePatterns` - patterns used to exclude packages based on RegEx - this option is slower than 
    simple string comparison but it's more flexible
  - `struts.excludedPackageNames` - comma-separated list of excluded packages, it is used with simple string comparison 
    via `startWith` and `equals`
+ - `struts.excludedPackageExemptClasses` - comma-separated list of classes to exempt from any of the excluded packages or package name patterns
 
-The defaults are as follow:
-
-```xml
-<constant name="struts.excludedClasses"
-          value="com.opensymphony.xwork2.ActionContext" />
-
-<!-- this must be valid regex, each '.' in package name must be escaped! -->
-<!-- it's more flexible but slower than simple string comparison -->
-<!-- constant name="struts.excludedPackageNamePatterns" value="^java\.lang\..*,^ognl.*,^(?!javax\.servlet\..+)(javax\..+)" / -->
-
-<!-- this is simpler version of the above used with string comparison -->
-<constant name="struts.excludedPackageNames" value="java.lang,ognl,javax" />
-```
+The defaults are defined [here](https://github.com/apache/struts/blob/master/core/src/main/resources/struts-excluded-classes.xml).
 
 Any expression or target which evaluates to one of these will be blocked and you see a WARN in logs:
 
