@@ -7,6 +7,10 @@ parent:
 ---
 
 # Execute and Wait Interceptor
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 The ExecuteAndWaitInterceptor is great for running long-lived actions in the background while showing the user a nice
 progress meter. This also prevents the HTTP request from timing out when the action takes more than 5 or 10 minutes.
@@ -60,6 +64,21 @@ the `BackgroundProcess` class and implement the `beforeInvocation()` and `afterI
 for obtaining and releasing resources that the background process will need to execute successfully. To use your
 background
 process extension, extend `ExecuteAndWaitInterceptor` and implement the `getNewBackgroundProcess()` method.
+
+## Using ExecutorProvider
+
+Since Struts 6.1.1 it is possible to use your own `ExecutorProvider` to run _background tasks_. To use your own executor
+you must implement interface `org.apache.struts2.interceptor.exec.ExecutorProvider` and install the bean using `struts.xml`
+like follows:
+
+```xml
+<bean type="org.apache.struts2.interceptor.exec.ExecutorProvider" 
+      class="com.company.MyExecutorProvider"/>
+```
+
+Please a take look into example implementation in the Showcase App.
+
+If now custom executor is defined, Struts will use `org.apache.struts2.interceptor.exec.StrutsExecutorProvider` by default.
 
 ## Examples
 
