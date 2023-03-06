@@ -150,6 +150,7 @@
   </li>
   <li><a href="#advanced-configuration" id="markdown-toc-advanced-configuration">Advanced Configuration</a>    <ul>
       <li><a href="#file-size-limits" id="markdown-toc-file-size-limits">File Size Limits</a></li>
+      <li><a href="#files-number-limit" id="markdown-toc-files-number-limit">Files Number Limit</a></li>
       <li><a href="#file-types" id="markdown-toc-file-types">File Types</a></li>
       <li><a href="#error-messages" id="markdown-toc-error-messages">Error Messages</a></li>
       <li><a href="#temporary-directories" id="markdown-toc-temporary-directories">Temporary Directories</a></li>
@@ -463,27 +464,24 @@ in necessary to change these values. The names and default values are:</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struts.multipart.parser=jakarta
 struts.multipart.saveDir=
 struts.multipart.maxSize=2097152
+struts.multipart.maxFiles=256
 </code></pre></div></div>
 
 <blockquote>
-  <p>Please remember that the <code class="language-plaintext highlighter-rouge">struts.multipart.maxSize</code> is the size limit of the whole request, which means when you uploading multiple files,
-the sum of their size must be below the <code class="language-plaintext highlighter-rouge">struts.multipart.maxSize</code>!</p>
+  <p>Please remember that the <code class="language-plaintext highlighter-rouge">struts.multipart.maxSize</code> is the size limit of the whole request, which means when you’re 
+uploading multiple files, the sum of their size must be below the <code class="language-plaintext highlighter-rouge">struts.multipart.maxSize</code>!</p>
 </blockquote>
 
-<p>In order to change theses settings you define a constant in your applications <code class="language-plaintext highlighter-rouge">struts.xml</code> file like so:</p>
+<p>In order to change these settings you define a constant in your applications <code class="language-plaintext highlighter-rouge">struts.xml</code> file like so:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="cp">&lt;!DOCTYPE struts PUBLIC
-        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-        "http://struts.apache.org/dtds/struts-2.0.dtd"&gt;</span>
-<span class="nt">&lt;struts&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.maxSize"</span> <span class="na">value=</span><span class="s">"1000000"</span><span class="nt">/&gt;</span>
     ...
 <span class="nt">&lt;/struts&gt;</span>
 </code></pre></div></div>
 
-<p>Additionally the <code class="language-plaintext highlighter-rouge">fileUpload</code> interceptor has settings that can be put in place for individual action mappings by
-customizing your interceptor stack.</p>
+<p>Additionally, the <code class="language-plaintext highlighter-rouge">fileUpload</code> interceptor has settings that can be put in place for individual action mappings
+by customizing your interceptor stack.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"doUpload"</span> <span class="na">class=</span><span class="s">"com.example.UploadAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"basicStack"</span><span class="nt">/&gt;</span>
@@ -507,11 +505,7 @@ more than one file on a form the <code class="language-plaintext highlighter-rou
 sizes. The other setting, <code class="language-plaintext highlighter-rouge">maximumSize</code>, is an interceptor setting that is used to ensure a particular Action does not
 receive a file that is too large. Notice the locations of both settings in the following example:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="cp">&lt;!DOCTYPE struts PUBLIC
-        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-        "http://struts.apache.org/dtds/struts-2.0.dtd"&gt;</span>
-<span class="nt">&lt;struts&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.maxSize"</span> <span class="na">value=</span><span class="s">"1000000"</span><span class="nt">/&gt;</span>
 
     <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"doUpload"</span> <span class="na">class=</span><span class="s">"com.example.UploadAction"</span><span class="nt">&gt;</span>
@@ -525,7 +519,18 @@ receive a file that is too large. Notice the locations of both settings in the f
         <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;/action&gt;</span>
 <span class="nt">&lt;/struts&gt;</span>
+</code></pre></div></div>
 
+<h3 id="files-number-limit">Files Number Limit</h3>
+
+<p>Since Struts 6.2.0 a new option was added, which uses Commons FileUpload feature to limit how many files can be uploaded
+at once, in one request. This option requires to use Commons FileUpload ver. 1.5 at least and by default is set to <strong>256</strong>.
+To change this value define a constant in <code class="language-plaintext highlighter-rouge">struts.xml</code> as follows:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
+    <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.maxFiles"</span> <span class="na">value=</span><span class="s">"500"</span><span class="nt">/&gt;</span>
+    
+<span class="nt">&lt;/struts&gt;</span>
 </code></pre></div></div>
 
 <h3 id="file-types">File Types</h3>
