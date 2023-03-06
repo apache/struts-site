@@ -76,9 +76,9 @@ like follows:
       class="com.company.MyExecutorProvider"/>
 ```
 
-Please a take look into example implementation in the Showcase App.
+Please take a look into example implementation in the Showcase App.
 
-If now custom executor is defined, Struts will use `org.apache.struts2.interceptor.exec.StrutsExecutorProvider` by default.
+If no custom executor is defined, Struts will use `org.apache.struts2.interceptor.exec.StrutsExecutorProvider` by default.
 
 ## Examples
 
