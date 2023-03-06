@@ -282,26 +282,23 @@ in necessary to change these values. The names and default values are:
 struts.multipart.parser=jakarta
 struts.multipart.saveDir=
 struts.multipart.maxSize=2097152
+struts.multipart.maxFiles=256
 ```
 
-> Please remember that the `struts.multipart.maxSize` is the size limit of the whole request, which means when you uploading multiple files,
-> the sum of their size must be below the `struts.multipart.maxSize`!
+> Please remember that the `struts.multipart.maxSize` is the size limit of the whole request, which means when you're 
+> uploading multiple files, the sum of their size must be below the `struts.multipart.maxSize`!
 
-In order to change theses settings you define a constant in your applications `struts.xml` file like so:
+In order to change these settings you define a constant in your applications `struts.xml` file like so:
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE struts PUBLIC
-        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-        "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
     <constant name="struts.multipart.maxSize" value="1000000"/>
     ...
 </struts>
 ```
 
-Additionally the `fileUpload` interceptor has settings that can be put in place for individual action mappings by
-customizing your interceptor stack.
+Additionally, the `fileUpload` interceptor has settings that can be put in place for individual action mappings
+by customizing your interceptor stack.
 
 ```xml
 <action name="doUpload" class="com.example.UploadAction">
@@ -327,10 +324,6 @@ sizes. The other setting, `maximumSize`, is an interceptor setting that is used 
 receive a file that is too large. Notice the locations of both settings in the following example:
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE struts PUBLIC
-        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-        "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
     <constant name="struts.multipart.maxSize" value="1000000"/>
 
@@ -345,7 +338,19 @@ receive a file that is too large. Notice the locations of both settings in the f
         <result name="success">good_result.jsp</result>
     </action>
 </struts>
+```
 
+### Files Number Limit
+
+Since Struts 6.2.0 a new option was added, which uses Commons FileUpload feature to limit how many files can be uploaded
+at once, in one request. This option requires to use Commons FileUpload ver. 1.5 at least and by default is set to **256**.
+To change this value define a constant in `struts.xml` as follows:
+
+```xml
+<struts>
+    <constant name="struts.multipart.maxFiles" value="500"/>
+    
+</struts>
 ```
 
 ### File Types
