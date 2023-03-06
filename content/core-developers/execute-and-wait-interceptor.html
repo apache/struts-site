@@ -131,7 +131,19 @@
     
     <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
     
-    <h1 id="execute-and-wait-interceptor">Execute and Wait Interceptor</h1>
+    <h1 class="no_toc" id="execute-and-wait-interceptor">Execute and Wait Interceptor</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
+  <li><a href="#extending-the-interceptor" id="markdown-toc-extending-the-interceptor">Extending the Interceptor</a></li>
+  <li><a href="#using-executorprovider" id="markdown-toc-using-executorprovider">Using ExecutorProvider</a></li>
+  <li><a href="#examples" id="markdown-toc-examples">Examples</a>    <ul>
+      <li><a href="#example-code-1" id="markdown-toc-example-code-1">Example code 1</a></li>
+      <li><a href="#example-code-2" id="markdown-toc-example-code-2">Example code 2:</a></li>
+      <li><a href="#example-code-3" id="markdown-toc-example-code-3">Example code 3:</a></li>
+    </ul>
+  </li>
+</ul>
 
 <p>The ExecuteAndWaitInterceptor is great for running long-lived actions in the background while showing the user a nice
 progress meter. This also prevents the HTTP request from timing out when the action takes more than 5 or 10 minutes.</p>
@@ -191,6 +203,20 @@ the <code class="language-plaintext highlighter-rouge">BackgroundProcess</code> 
 for obtaining and releasing resources that the background process will need to execute successfully. To use your
 background
 process extension, extend <code class="language-plaintext highlighter-rouge">ExecuteAndWaitInterceptor</code> and implement the <code class="language-plaintext highlighter-rouge">getNewBackgroundProcess()</code> method.</p>
+
+<h2 id="using-executorprovider">Using ExecutorProvider</h2>
+
+<p>Since Struts 6.1.1 it is possible to use your own <code class="language-plaintext highlighter-rouge">ExecutorProvider</code> to run <em>background tasks</em>. To use your own executor
+you must implement interface <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.exec.ExecutorProvider</code> and install the bean using <code class="language-plaintext highlighter-rouge">struts.xml</code>
+like follows:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.interceptor.exec.ExecutorProvider"</span> 
+      <span class="na">class=</span><span class="s">"com.company.MyExecutorProvider"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>Please take a look into example implementation in the Showcase App.</p>
+
+<p>If no custom executor is defined, Struts will use <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.exec.StrutsExecutorProvider</code> by default.</p>
 
 <h2 id="examples">Examples</h2>
 
