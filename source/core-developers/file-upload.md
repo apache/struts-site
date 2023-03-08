@@ -1,5 +1,5 @@
 ---
-layout: core-developers 
+layout: core-developers
 title: File Upload
 ---
 
@@ -9,8 +9,7 @@ title: File Upload
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-The Struts 2 framework provides built-in support for processing file uploads that conform
-to [RFC 1867](http://www.ietf.org/rfc/rfc1867.txt),
+The Struts 2 framework provides built-in support for processing file uploads that conform to [RFC 1867](http://www.ietf.org/rfc/rfc1867.txt), 
 "Form-based File Upload in HTML". When correctly configured the framework will pass uploaded file(s) into your Action
 class. Support for individual and multiple file uploads are provided. When a file is uploaded it will typically be
 stored in a temporary directory. Uploaded files should be processed or moved by your Action class to ensure the data is
@@ -19,50 +18,13 @@ than the temporary directory and the directories that belong to your web applica
 
 ## Dependencies
 
-The Struts 2 framework leverages add-on libraries to handle the parsing of uploaded files. These libraries are not
-included in the Struts distribution, you must add them into your project. The libraries needed are:
-
-|Library|URL|Struts 2.0.x|Struts 2.1.x|Struts 2.5.x|
-|-------|---|--------------|--------------|--------------|
-|Commons-FileUpload|[http://commons.apache.org/fileupload/](http://commons.apache.org/fileupload/)|1.1.1|1.2.1|1.3.2|
-|Commons-IO|[http://commons.apache.org/io/](http://commons.apache.org/io/)|1.0|1.3.2|2.4|
-
-If you are using Maven then you can add these libraries as dependencies in your project's pom.xml.
-
-### Struts 2.0.x File Upload Dependencies
-
-```xml
-<dependency>
-    <groupId>commons-fileupload</groupId>
-    <artifactId>commons-fileupload</artifactId>
-    <version>1.1.1</version>
-</dependency>
-<dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>1.0</version>
-</dependency>
-```
-
-### Struts 2.1.x File Upload Dependencies
-
-```xml
-<dependency>
-    <groupId>commons-fileupload</groupId>
-    <artifactId>commons-fileupload</artifactId>
-    <version>1.2.1</version>
-</dependency>
-<dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>1.3.2</version>
-</dependency>
-```
+The Struts 2 framework leverages the Commons FileUpload library as a based library to support file upload in the framework.
+The library is included in a base Struts 2 distribution.
 
 ## Basic Usage
 
 The `org.apache.struts2.interceptor.FileUploadInterceptor` class is included as part of the `defaultStack`. As long as
-the required libraries are added to your project you will be able to take advantage of of the Struts 2 fileUpload
+the required libraries are added to your project you will be able to take advantage of the Struts 2 file upload
 capability. Configure an Action mapping for your Action class as you typically would.
 
 ### Example action mapping:
@@ -75,9 +37,10 @@ capability. Configure an Action mapping for your Action class as you typically w
 ```
 
 A form must be create with a form field of type file, `<INPUT type="file" name="upload">`. The form used to upload the
-file must have its encoding type set to `multipart/form-data`
-, `<form action="doUpload" enctype="multipart/form-data" method="post">`. The standard procedure for adding these
-elements is by using the Struts 2 tag libraries as shown in the following example:
+file must have its encoding type set
+to `multipart/form-data`, `<form action="doUpload" enctype="multipart/form-data" method="post">`.
+The standard procedure for adding these elements is by using the Struts 2 tag libraries as shown in the following
+example:
 
 ### Example JSP form tags:
 
@@ -128,11 +91,11 @@ The purpose of each one of these methods is described in the table below. Notice
 elements with different names you would be required to have another corresponding set of these methods for each file
 uploaded.
 
-|Method Signature|Description|
-|----------------|-----------|
-|`setX(File file)`|The file that contains the content of the uploaded file. This is a temporary file and file.getName() will not return the original name of the file|
-|`setXContentType(String contentType)`|The mime type of the uploaded file|
-|`setXFileName(String fileName)`|The actual file name of the uploaded file (not the HTML name)|
+| Method Signature                      | Description                                                                                                                                        |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `setX(File file)`                     | The file that contains the content of the uploaded file. This is a temporary file and file.getName() will not return the original name of the file |
+| `setXContentType(String contentType)` | The mime type of the uploaded file                                                                                                                 |
+| `setXFileName(String fileName)`       | The actual file name of the uploaded file (not the HTML name)                                                                                      |
 
 ## Uploading Multiple Files
 
@@ -149,10 +112,10 @@ see `struts-fileupload.xml` in the sample application download.
 
 ```html
 <s:form action="doMultipleUploadUsingArray" method="POST" enctype="multipart/form-data">
-  <s:file label="File (1)" name="upload" />
-  <s:file label="File (2)" name="upload" />
-  <s:file label="FIle (3)" name="upload" />
-  <s:submit cssClass="btn btn-primary"/>
+    <s:file label="File (1)" name="upload"/>
+    <s:file label="File (2)" name="upload"/>
+    <s:file label="FIle (3)" name="upload"/>
+    <s:submit cssClass="btn btn-primary"/>
 </s:form>
 ```
 
@@ -214,10 +177,10 @@ public class MultipleFileUploadUsingArrayAction extends ActionSupport {
 
 ```html
 <s:form action="doMultipleUploadUsingList" method="POST" enctype="multipart/form-data">
-  <s:file label="File (1)" name="upload" />
-  <s:file label="File (2)" name="upload" />
-  <s:file label="FIle (3)" name="upload" />
-  <s:submit cssClass="btn btn-primary"/>
+    <s:file label="File (1)" name="upload"/>
+    <s:file label="File (2)" name="upload"/>
+    <s:file label="FIle (3)" name="upload"/>
+    <s:submit cssClass="btn btn-primary"/>
 </s:form>
 ```
 
@@ -285,7 +248,7 @@ struts.multipart.maxSize=2097152
 struts.multipart.maxFiles=256
 ```
 
-> Please remember that the `struts.multipart.maxSize` is the size limit of the whole request, which means when you're 
+> Please remember that the `struts.multipart.maxSize` is the size limit of the whole request, which means when you're
 > uploading multiple files, the sum of their size must be below the `struts.multipart.maxSize`!
 
 In order to change these settings you define a constant in your applications `struts.xml` file like so:
@@ -342,14 +305,13 @@ receive a file that is too large. Notice the locations of both settings in the f
 
 ### Files Number Limit
 
-Since Struts 6.2.0 a new option was added, which uses Commons FileUpload feature to limit how many files can be uploaded
+Since Struts 6.1.2/6.2.0 a new option was added, which uses Commons FileUpload feature to limit how many files can be uploaded
 at once, in one request. This option requires to use Commons FileUpload ver. 1.5 at least and by default is set to **256**.
 To change this value define a constant in `struts.xml` as follows:
 
 ```xml
 <struts>
     <constant name="struts.multipart.maxFiles" value="500"/>
-    
 </struts>
 ```
 
@@ -385,14 +347,14 @@ or extends `com.opensymphony.xwork2.ActionSupport`. These error messages are bas
 struts-messages.properties, a default i18n file processed for all i18n requests. You can override the text of these
 messages by providing text for the following keys:
 
-|Error Key|Description|
-|---------|-----------|
-|`struts.messages.error.uploading`|A general error that occurs when the file could not be uploaded|
-|`struts.messages.error.file.too.large`|Occurs when the uploaded file is too large as specified by maximumSize.|
-|`struts.messages.error.content.type.not.allowed`|Occurs when the uploaded file does not match the expected content types specified|
-|`struts.messages.error.file.extension.not.allowed`|Occurs when uploaded file has disallowed extension|
-|`struts.messages.upload.error.SizeLimitExceededException`|Occurs when the upload request (as a whole) exceed configured **struts.multipart.maxSize**|
-|`struts.messages.upload.error.<Exception class SimpleName>`|Occurs when any other exception took place during file upload process|
+| Error Key                                                   | Description                                                                                |
+|-------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| `struts.messages.error.uploading`                           | A general error that occurs when the file could not be uploaded                            |
+| `struts.messages.error.file.too.large`                      | Occurs when the uploaded file is too large as specified by maximumSize.                    |
+| `struts.messages.error.content.type.not.allowed`            | Occurs when the uploaded file does not match the expected content types specified          |
+| `struts.messages.error.file.extension.not.allowed`          | Occurs when uploaded file has disallowed extension                                         |
+| `struts.messages.upload.error.SizeLimitExceededException`   | Occurs when the upload request (as a whole) exceed configured **struts.multipart.maxSize** |
+| `struts.messages.upload.error.<Exception class SimpleName>` | Occurs when any other exception took place during file upload process                      |
 
 ### Temporary Directories
 
@@ -432,7 +394,8 @@ follow:
 ^multipart/form-data(?:\\s*;\\s*boundary=[0-9a-zA-Z'()+_,\\-./:=?]{1,70})?(?:\\s*;\\s*charset=[a-zA-Z\\-0-9]{3,14})?
 ```
 
-Please read [RFC1341](https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html) the **Multipart section** for more details,
+Please read [RFC1341](https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html) the **Multipart section** for more
+details,
 existing Struts `Multipart` parsers support only `multipart/form-data` content type. This option is available since
 Struts 2.3.11.
 
