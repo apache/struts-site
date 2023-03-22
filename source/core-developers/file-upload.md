@@ -239,56 +239,56 @@ public class MultipleFileUploadUsingListAction extends ActionSupport {
 ## Advanced Configuration
 
 The Struts 2 `default.properties` file defines several settings that affect the behavior of file uploading. You may find
-in necessary to change these values. The names and default values are:
+it necessary to change these values. The names and default values are:
 
 ```
 struts.multipart.parser=jakarta
-struts.multipart.saveDir=
-struts.multipart.maxSize=2097152
-struts.multipart.maxFiles=256
+struts.multipart.saveDir= # Filesystem location to save parsed request data
+struts.multipart.maxSize=2097152 # Max combined size of files per request
+struts.multipart.maxFiles=256 # Max number of files per request
+struts.multipart.maxFileSize= # Max size per file per request
 ```
 
-> Please remember that the `struts.multipart.maxSize` is the size limit of the whole request, which means when you're
-> uploading multiple files, the sum of their size must be below the `struts.multipart.maxSize`!
+You can also set the max options to unlimited by setting their value to `-1`, but please see the sections below for
+further details on these options first.
 
-In order to change these settings you define a constant in your applications `struts.xml` file like so:
+### Files Number Limit
+
+Since Struts 6.1.2/6.2.0 a new option was added, which uses Commons FileUpload feature to limit how many files can be
+uploaded at once, in one request. This option requires to use Commons FileUpload ver. 1.5 at least and by default is set
+to **256**. Please always set this to a finite value to prevent DoS attacks.
+
+To change this value define a constant
+in `struts.xml` as follows:
 
 ```xml
 <struts>
-    <constant name="struts.multipart.maxSize" value="1000000"/>
-    ...
+    <constant name="struts.multipart.maxFiles" value="500"/>
 </struts>
-```
-
-Additionally, the `fileUpload` interceptor has settings that can be put in place for individual action mappings
-by customizing your interceptor stack.
-
-```xml
-<action name="doUpload" class="com.example.UploadAction">
-    <interceptor-ref name="basicStack"/>
-    <interceptor-ref name="fileUpload">
-        <param name="allowedTypes">text/plain</param>
-    </interceptor-ref>
-    <interceptor-ref name="validation"/>
-    <interceptor-ref name="workflow"/>
-
-    <result name="success">good_result.jsp</result>
-</action>
 ```
 
 ### File Size Limits
 
-There are two separate file size limits. First is `struts.multipart.maxSize` which comes from the Struts
-2 `default.properties` file. This setting exists for security reasons to prohibit a malicious user from uploading
-extremely large files to file up your servers disk space. This setting defaults to approximately 2 megabytes and should
-be adjusted to the maximum size file (2 gigs max) that your will need the framework to receive. If you are uploading
-more than one file on a form the `struts.multipart.maxSize` applies to the combined total, not the individual file
-sizes. The other setting, `maximumSize`, is an interceptor setting that is used to ensure a particular Action does not
-receive a file that is too large. Notice the locations of both settings in the following example:
+There are multiple methods to enforce file size limits.
 
+There is `struts.multipart.maxSize` which is loaded from the Struts configuration. This setting exists for security
+reasons to prohibit a malicious user from uploading extremely large files to fill up your server's disk space. This
+setting defaults to approximately 2MB and should be adjusted to the maximum size (2GB) that you expect to parse. If you
+are uploading more than one file in a single request, the `struts.multipart.maxSize` applies to the combined total, not
+the individual files.
+
+There is also `struts.multipart.maxFileSize` which is not enforced by default, but can be enabled to enforce a max size
+on a per-file basis.
+
+The other setting, `maximumSize`, is an interceptor setting that is used to ensure a particular Action does not receive
+a file that is too large. Note that the aforementioned settings are applied at the request parsing level and take
+precedence over this interceptor setting.
+
+Notice the locations of these settings in the following example:
 ```xml
 <struts>
     <constant name="struts.multipart.maxSize" value="1000000"/>
+    <constant name="struts.multipart.maxFileSize" value="750000"/>
 
     <action name="doUpload" class="com.example.UploadAction">
         <interceptor-ref name="basicStack"/>
@@ -300,18 +300,6 @@ receive a file that is too large. Notice the locations of both settings in the f
 
         <result name="success">good_result.jsp</result>
     </action>
-</struts>
-```
-
-### Files Number Limit
-
-Since Struts 6.1.2/6.2.0 a new option was added, which uses Commons FileUpload feature to limit how many files can be uploaded
-at once, in one request. This option requires to use Commons FileUpload ver. 1.5 at least and by default is set to **256**.
-To change this value define a constant in `struts.xml` as follows:
-
-```xml
-<struts>
-    <constant name="struts.multipart.maxFiles" value="500"/>
 </struts>
 ```
 
@@ -347,14 +335,16 @@ or extends `com.opensymphony.xwork2.ActionSupport`. These error messages are bas
 struts-messages.properties, a default i18n file processed for all i18n requests. You can override the text of these
 messages by providing text for the following keys:
 
-| Error Key                                                   | Description                                                                                |
-|-------------------------------------------------------------|--------------------------------------------------------------------------------------------|
-| `struts.messages.error.uploading`                           | A general error that occurs when the file could not be uploaded                            |
-| `struts.messages.error.file.too.large`                      | Occurs when the uploaded file is too large as specified by maximumSize.                    |
-| `struts.messages.error.content.type.not.allowed`            | Occurs when the uploaded file does not match the expected content types specified          |
-| `struts.messages.error.file.extension.not.allowed`          | Occurs when uploaded file has disallowed extension                                         |
-| `struts.messages.upload.error.SizeLimitExceededException`   | Occurs when the upload request (as a whole) exceed configured **struts.multipart.maxSize** |
-| `struts.messages.upload.error.<Exception class SimpleName>` | Occurs when any other exception took place during file upload process                      |
+| Error Key                                                      | Description                                                                                            |
+|----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| `struts.messages.error.uploading`                              | A general error that occurs when the file could not be uploaded                                        |
+| `struts.messages.error.file.too.large`                         | Occurs when the uploaded file is too large as specified by maximumSize.                                |
+| `struts.messages.error.content.type.not.allowed`               | Occurs when the uploaded file does not match the expected content types specified                      |
+| `struts.messages.error.file.extension.not.allowed`             | Occurs when uploaded file has disallowed extension                                                     |
+| `struts.messages.upload.error.SizeLimitExceededException`      | Occurs when the upload request (as a whole) exceed configured **struts.multipart.maxSize**             |
+| `struts.messages.upload.error.FileSizeLimitExceededException`  | Occurs when a file within the upload request exceeds configured **struts.multipart.maxFileSize**       |
+| `struts.messages.upload.error.FileCountLimitExceededException` | Occurs when the number of files in the upload request exceeds configured **struts.multipart.maxFiles** |
+| `struts.messages.upload.error.<Exception class SimpleName>`    | Occurs when any other exception took place during file upload process                                  |
 
 ### Temporary Directories
 
