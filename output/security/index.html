@@ -333,8 +333,8 @@ framework with following proactive optional possibilities since OGNL 3.1.24 and 
 default but via enabling them, you can proactively protect from potential still unknown OGNL Expression Injections flaws:</p>
 
 <blockquote>
-  <p><strong>NOTE</strong>: These might break your current app functionality. Before using in production environment, you’re recommended to 
-comprehensively test your app UI and functionalities with these enabled.</p>
+  <p><strong>NOTE</strong>: These might break your current app functionality. Before using in production environment, you’re recommended
+to comprehensively test your app UI and functionalities with these enabled.</p>
 </blockquote>
 
 <h4 id="run-ognl-expressions-inside-sandbox">Run OGNL expressions inside sandbox</h4>
@@ -355,17 +355,18 @@ really only a “style guard” for long OGNL expressions in an application).</p
 
 <p>The Apache Struts 2 contains internal security manager which blocks access to particular classes and Java packages - 
 it’s a OGNL-wide mechanism which means it affects any aspect of the framework ie. incoming parameters, expressions 
-used in JSPs, etc.</p>
+used in JSPs, etc. Matching is done based on both the target and member class of an OGNL expression.</p>
 
 <p>There are 4 options that can be used to configure excluded packages and classes:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">struts.excludedClasses</code> - comma-separated list of excluded classes</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageNamePatterns</code> - patterns used to exclude packages based on RegEx - this option is slower than 
-simple string comparison but it’s more flexible</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageNames</code> - comma-separated list of excluded packages, it is used with simple string comparison 
-via <code class="language-plaintext highlighter-rouge">startWith</code> and <code class="language-plaintext highlighter-rouge">equals</code></li>
-  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageExemptClasses</code> - comma-separated list of classes to exempt from any of the excluded packages or package name patterns</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.excludedClasses</code>: comma-separated list of excluded classes. Note that superclasses are also matched.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageNames</code>: comma-separated list of excluded packages, matched using string
+comparison via <code class="language-plaintext highlighter-rouge">startWith</code>. Note that classes in subpackages are also excluded.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageNamePatterns</code> - comma-separated list of RegEx patterns used to exclude packages. Note that this
+option is slower than string comparison but more flexible.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageExemptClasses</code> - comma-separated list of classes to exempt from any of the excluded packages or
+package name patterns. An exact exemption must exist for each exclusion match (target or member or both).</li>
 </ul>
 
 <p>The defaults are defined <a href="https://github.com/apache/struts/blob/master/core/src/main/resources/struts-excluded-classes.xml">here</a>.</p>
