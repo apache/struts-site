@@ -67,18 +67,19 @@ process extension, extend `ExecuteAndWaitInterceptor` and implement the `getNewB
 
 ## Using ExecutorProvider
 
-Since Struts 6.1.1 it is possible to use your own `ExecutorProvider` to run _background tasks_. To use your own executor
+Since Struts 6.2.0 it is possible to use your own `ExecutorProvider` to run _background tasks_. To use your own executor
 you must implement interface `org.apache.struts2.interceptor.exec.ExecutorProvider` and install the bean using `struts.xml`
 like follows:
 
 ```xml
-<bean type="org.apache.struts2.interceptor.exec.ExecutorProvider" 
+<bean type="org.apache.struts2.interceptor.exec.ExecutorProvider" name="myExecutor"
       class="com.company.MyExecutorProvider"/>
+
+<constant name="struts.executor.provider" value="myExecutor"/>
 ```
 
-Please take a look into example implementation in the Showcase App.
-
-If no custom executor is defined, Struts will use `org.apache.struts2.interceptor.exec.StrutsExecutorProvider` by default.
+Please take a look into example implementation in the Showcase App. If no custom executor has been defined, 
+Struts will use `org.apache.struts2.interceptor.exec.StrutsExecutorProvider` by default.
 
 ## Examples
 
