@@ -206,17 +206,18 @@ process extension, extend <code class="language-plaintext highlighter-rouge">Exe
 
 <h2 id="using-executorprovider">Using ExecutorProvider</h2>
 
-<p>Since Struts 6.1.1 it is possible to use your own <code class="language-plaintext highlighter-rouge">ExecutorProvider</code> to run <em>background tasks</em>. To use your own executor
+<p>Since Struts 6.2.0 it is possible to use your own <code class="language-plaintext highlighter-rouge">ExecutorProvider</code> to run <em>background tasks</em>. To use your own executor
 you must implement interface <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.exec.ExecutorProvider</code> and install the bean using <code class="language-plaintext highlighter-rouge">struts.xml</code>
 like follows:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.interceptor.exec.ExecutorProvider"</span> 
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.interceptor.exec.ExecutorProvider"</span> <span class="na">name=</span><span class="s">"myExecutor"</span>
       <span class="na">class=</span><span class="s">"com.company.MyExecutorProvider"</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.executor.provider"</span> <span class="na">value=</span><span class="s">"muExecutor"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>Please take a look into example implementation in the Showcase App.</p>
-
-<p>If no custom executor is defined, Struts will use <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.exec.StrutsExecutorProvider</code> by default.</p>
+<p>Please take a look into example implementation in the Showcase App. If no custom executor has been defined, 
+Struts will use <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.exec.StrutsExecutorProvider</code> by default.</p>
 
 <h2 id="examples">Examples</h2>
 
