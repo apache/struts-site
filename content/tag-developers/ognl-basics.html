@@ -136,7 +136,6 @@
 <ul id="markdown-toc">
   <li><a href="#struts-specific-language-features" id="markdown-toc-struts-specific-language-features">Struts-specific language features</a>    <ul>
       <li><a href="#accessing-static-properties" id="markdown-toc-accessing-static-properties">Accessing static properties</a></li>
-      <li><a href="#differences-from-the-webwork-1x-el" id="markdown-toc-differences-from-the-webwork-1x-el">Differences from the WebWork 1.x EL</a></li>
       <li><a href="#struts-2-named-objects" id="markdown-toc-struts-2-named-objects">Struts 2 Named Objects</a></li>
     </ul>
   </li>
@@ -144,11 +143,11 @@
 
 <h2 id="struts-specific-language-features">Struts-specific language features</h2>
 
-<p>The biggest addition that Struts provides on top of OGNL is the support for the ValueStack. While OGNL operates under 
+<p>The biggest addition that Struts provides on top of OGNL is the support for the ValueStack. While OGNL operates under
 the assumption there is only one “root”, Struts’s ValueStack concept requires there be many “roots”.</p>
 
-<p>For example, suppose we are using standard OGNL (not using Struts) and there are two objects in the OgnlContext map: 
-“foo” -&gt; foo and “bar” -&gt; bar and that the foo object is also configured to be the single <strong>root</strong> object. 
+<p>For example, suppose we are using standard OGNL (not using Struts) and there are two objects in the OgnlContext map:
+“foo” -&gt; foo and “bar” -&gt; bar and that the foo object is also configured to be the single <strong>root</strong> object.
 The following code illustrates how OGNL deals with these three situations:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#foo.blah // returns foo.getBlah()
@@ -156,34 +155,34 @@ The following code illustrates how OGNL deals with these three situations:</p>
 blah      // returns foo.getBlah() because foo is the root
 </code></pre></div></div>
 
-<p>What this means is that OGNL allows many objects in the context, but unless the object you are trying to access is the root, 
-it must be prepended with a namespaces such as @bar. Now let’s talk about how Struts is a little different…</p>
+<p>What this means is that OGNL allows many objects in the context, but unless the object you are trying to access is the
+root, it must be prepended with a namespaces such as @bar. Now let’s talk about how Struts is a little different…</p>
 
 <blockquote>
-  <p>In Struts, the entire ValueStack is the root object in the context. Rather than having your expressions get the object 
-you want from the stack and then get properties from that (ie: peek().blah), Struts has a special OGNL PropertyAccessor 
-that will automatically look at the all entries in the stack (from the top down) until it finds an object with the property 
-you are looking for.</p>
+  <p>In Struts, the entire ValueStack is the root object in the context. Rather than having your expressions get the object
+you want from the stack and then get properties from that (ie: peek().blah), Struts has a special OGNL
+PropertyAccessor that will automatically look at the all entries in the stack (from the top down) until it finds 
+an object with the property you are looking for.</p>
 </blockquote>
 
-<p>For example, suppose the stack contains two objects: Animal and Person. Both objects have a “name” property, Animal has 
-a “species” property, and Person has a “salary” property. Animal is on the top of the stack, and Person is below it. 
-The follow code fragments help you get an idea of what is going on here:</p>
+<p>For example, suppose the stack contains two objects: <code class="language-plaintext highlighter-rouge">Animal</code> and <code class="language-plaintext highlighter-rouge">Person</code>. Both objects have a <code class="language-plaintext highlighter-rouge">name</code> property, 
+<code class="language-plaintext highlighter-rouge">Animal</code> has a <code class="language-plaintext highlighter-rouge">species</code> property, and <code class="language-plaintext highlighter-rouge">Person</code> has a <code class="language-plaintext highlighter-rouge">salary</code> property. <code class="language-plaintext highlighter-rouge">Animal</code> is on the top of the stack, 
+and <code class="language-plaintext highlighter-rouge">Person</code> is below it. The follow code fragments help you get an idea of what is going on here:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>species    // call to animal.getSpecies()
 salary     // call to person.getSalary()
 name       // call to animal.getName() because animal is on the top
 </code></pre></div></div>
 
-<p>In the last example, there was a tie and so the animal’s name was returned. Usually this is the desired effect, but 
-sometimes you want the property of a lower-level object. To do this, XWork has added support for indexes on the ValueStack. 
-All you have to do is:</p>
+<p>In the last example, there was a tie and so the animal’s name was returned. Usually this is the desired effect, but
+sometimes you want the property of a lower-level object. To do this, XWork has added support for indexes on the
+ValueStack. All you have to do is:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0].name   // call to animal.getName()
 [1].name   // call to person.getName()
 </code></pre></div></div>
 
-<p>With expression like <code class="language-plaintext highlighter-rouge">[0] ... [3]</code> etc. Struts will cut the stack and still return back a CompoundRoot object. To get 
+<p>With expression like <code class="language-plaintext highlighter-rouge">[0] ... [3]</code> etc. Struts will cut the stack and still return back a CompoundRoot object. To get
 the top of that particular stack cut, use <code class="language-plaintext highlighter-rouge">[0].top</code></p>
 
 <table>
@@ -210,7 +209,8 @@ the top of that particular stack cut, use <code class="language-plaintext highli
 <p>OGNL supports accessing static properties as well as static methods.</p>
 
 <p>By default, Struts 2 is configured to disallow this - to enable OGNL’s static member support you must set the
-<code class="language-plaintext highlighter-rouge">struts.ognl.allowStaticMethodAccess</code> constant to <code class="language-plaintext highlighter-rouge">true</code> via any of the <a href="../core-developers/constant-configuration">Constant Configuration</a> methods.</p>
+<code class="language-plaintext highlighter-rouge">struts.ognl.allowStaticMethodAccess</code> constant to <code class="language-plaintext highlighter-rouge">true</code> via any 
+of the <a href="../core-developers/constant-configuration">Constant Configuration</a> methods.</p>
 
 <p>OGNL’s static access looks like this:</p>
 
@@ -218,68 +218,10 @@ the top of that particular stack cut, use <code class="language-plaintext highli
 @some.package.ClassName@someMethod()
 </code></pre></div></div>
 
-<p>However, Struts allows you to avoid having to specify the full package name and call static properties and methods of your 
-action classes using the “vs” prefix:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;at:var at:name="vs" /&gt;FOO_PROPERTY
-&lt;at:var at:name="vs" /&gt;someMethod()
-
-&lt;at:var at:name="vs1" /&gt;FOO_PROPERTY
-&lt;at:var at:name="vs1" /&gt;someMethod()
-
-&lt;at:var at:name="vs2" /&gt;BAR_PROPERTY
-&lt;at:var at:name="vs2" /&gt;someOtherMethod()
-</code></pre></div></div>
-
-<p>“vs” stands for “value stack”. The important thing to note here is that if the class name you specify is just “vs”, 
-the class for the object on the top of the stack is used. If you specify a number after the “vs” string, an object’s 
-class deeper in the stack is used instead.</p>
-
-<h3 id="differences-from-the-webwork-1x-el">Differences from the WebWork 1.x EL</h3>
-
-<p>Besides the examples and descriptions given above, there are a few major changes in the EL since WebWork 1.x. The biggest 
-one is that properties are no longer accessed with a forward slash (/) but with a dot (.). Also, rather than using “..” 
-to traverse down the stack, we now use “[n]” where n is some positive number. Lastly, in WebWork 1.x one could access 
-special named objects (the request scope attributes to be exact) by using “@foo”, but now special variables are accessed 
-using “#foo”. However, it is important to note that “#foo” does NOT access the request attributes. Because XWork is not 
-built only for the web, there is no concept of “request attributes”, and thus “#foo” is merely a request to another 
-object in the OgnlContext other than the root.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Old Expression</th>
-      <th>New Expression</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>foo/blah</td>
-      <td>foo.blah</td>
-    </tr>
-    <tr>
-      <td>foo/someMethod()</td>
-      <td>foo.someMethod()</td>
-    </tr>
-    <tr>
-      <td>../bar/blah</td>
-      <td>[1].bar.blah</td>
-    </tr>
-    <tr>
-      <td>@baz</td>
-      <td>not directly supported, but #baz is similar</td>
-    </tr>
-    <tr>
-      <td>.</td>
-      <td>‘top’ or [0]</td>
-    </tr>
-  </tbody>
-</table>
-
 <h3 id="struts-2-named-objects">Struts 2 Named Objects</h3>
 
-<p>Struts 2 places request parameters and request, session, and application attributes on the OGNL stack. They may be accessed 
-as shown below.</p>
+<p>Struts 2 places request parameters and request, session, and application attributes on the OGNL stack. They may be
+accessed as shown below.</p>
 
 <table>
   <thead>
