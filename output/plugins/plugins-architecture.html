@@ -143,43 +143,49 @@
   </li>
   <li><a href="#developing-new-extension-point" id="markdown-toc-developing-new-extension-point">Developing new extension point</a>    <ul>
       <li><a href="#extension-point-provided-by-the-core" id="markdown-toc-extension-point-provided-by-the-core">Extension point provided by the Core</a></li>
-      <li><a href="#extension-point-provided-by-a-plugin" id="markdown-toc-extension-point-provided-by-a-plugin">Extension point provided by a plugin</a></li>
+      <li><a href="#plugin-ext" id="markdown-toc-plugin-ext">Plugin-defined extension points</a></li>
     </ul>
   </li>
   <li><a href="#plugin-registry" id="markdown-toc-plugin-registry">Plugin Registry</a></li>
 </ul>
 
-<p>Struts 2 plugins contain classes and configuration that extend, replace, or add to existing Struts framework functionality. 
-A plugin can be installed by adding its JAR file to the application’s class path, in addition to the JAR files to fulfill
-whatever dependencies the plugin itself may have. To configure the plugin, the JAR should contain a <code class="language-plaintext highlighter-rouge">struts-plugin.xml</code> 
-file, which follows the same format as an ordinary <code class="language-plaintext highlighter-rouge">struts.xml</code> file.</p>
+<p>Struts 2 plugins contain classes and configuration that extend, replace, or add to existing Struts framework
+functionality. A plugin can be installed by adding its JAR file to the application’s class path, in addition to the JAR
+files to fulfill whatever dependencies the plugin itself may have. To configure the plugin, the JAR should contain
+a <code class="language-plaintext highlighter-rouge">struts-plugin.xml</code> file and optionally a <code class="language-plaintext highlighter-rouge">struts-deferred.xml</code>, which follow the same format as an
+ordinary <code class="language-plaintext highlighter-rouge">struts.xml</code> file.</p>
 
-<p>Since a plugin can contain the <code class="language-plaintext highlighter-rouge">struts-plugin.xml</code> file, it has the ability to:</p>
+<p>Since a plugin can contain these xml files, they have the ability to:</p>
 <ul>
   <li>Define new packages with results, interceptors, and/or actions</li>
   <li>Override framework constants</li>
   <li>Introduce new extension point implementation classes</li>
 </ul>
 
-<p>Many popular but optional features of the framework are distributed as plugins. An application can retain all the plugins 
-provided with the distribution, or just include the ones it uses. Plugins can be used to organize application code 
-or to distribute code to third-parties.</p>
+<p>Whilst configuration from <code class="language-plaintext highlighter-rouge">struts-plugin.xml</code> is loaded prior to <code class="language-plaintext highlighter-rouge">struts.xml</code>, <code class="language-plaintext highlighter-rouge">struts-deferred.xml</code> is loaded after all
+other configuration is loaded. This makes it useful for defining <a href="#plugin-ext">plugin extension points</a>.</p>
 
-<p>Packages defined in a plugin can have parent packages that are defined in another plugin. Plugins may define 
-configuration elements with classes not contained in the plugin. Any classes not included in the plugin’s JAR must be 
-on the application’s classpath at runtime. As from Struts 2.3.5</p>
+<p>Many popular but optional features of the framework are distributed as plugins. An application can retain all the
+plugins provided with the distribution, or just include the ones it uses. Plugins can be used to organize application
+code or to distribute code to third-parties.</p>
 
-<p>The framework loads its default configuration first, then any plugin configuration files found in others JARs
-on the classpath, and finally the “bootstrap” <code class="language-plaintext highlighter-rouge">struts.xml</code>.</p>
+<p>Packages defined in a plugin can have parent packages that are defined in another plugin. Plugins may define
+configuration elements with classes not contained in the plugin. Any classes not included in the plugin’s JAR must be on
+the application’s classpath at runtime. As from Struts 2.3.5</p>
+
+<p>The framework loads its default configuration first, then any <code class="language-plaintext highlighter-rouge">struts-plugin.xml</code> files found in others JARs on the
+classpath, the “bootstrap” <code class="language-plaintext highlighter-rouge">struts.xml</code>, then finally any <code class="language-plaintext highlighter-rouge">struts-deferred.xml</code> files.</p>
 
 <ol>
   <li><code class="language-plaintext highlighter-rouge">struts-default.xml</code> (bundled in the Core JAR)</li>
   <li><code class="language-plaintext highlighter-rouge">struts-plugin.xml</code> (as many as can be found in other JARs)</li>
   <li><code class="language-plaintext highlighter-rouge">struts.xml</code> (provided by your application)</li>
+  <li><code class="language-plaintext highlighter-rouge">struts-deferred.xml</code> (as many as can be found in other JARs)</li>
 </ol>
 
-<p>Since the <code class="language-plaintext highlighter-rouge">struts.xml</code> file is always loaded last, it can make use of any resources provided by the plugins bundled
-with the distribution, or any other plugins available to an application.</p>
+<p>Since the <code class="language-plaintext highlighter-rouge">struts.xml</code> file is loaded between <code class="language-plaintext highlighter-rouge">struts-plugin.xml</code> and before any potential plugin extension points
+in <code class="language-plaintext highlighter-rouge">struts-deferred.xml</code>, it can make use of any resources provided by the plugins bundled with the distribution, or any
+other plugins available to an application.</p>
 
 <h2 id="static-resources">Static resources</h2>
 
@@ -639,10 +645,11 @@ in <code class="language-plaintext highlighter-rouge">struts.xml</code> with a n
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struts.date.formatter=myDateTimeFormatter
 </code></pre></div></div>
 
-<h3 id="extension-point-provided-by-a-plugin">Extension point provided by a plugin</h3>
+<h3 id="plugin-ext">Plugin-defined extension points</h3>
 
-<p>It’s very the like as above except that the plugin must provide a <code class="language-plaintext highlighter-rouge">bean-selection</code> configuration option in <code class="language-plaintext highlighter-rouge">struts-plugin.xml</code>.
-The <code class="language-plaintext highlighter-rouge">bean-selection</code> option represents an implementation of a class <code class="language-plaintext highlighter-rouge">org.apache.struts2.config.AbstractBeanSelectionProvider</code>
+<p>It’s very much like above except that the plugin must provide a <code class="language-plaintext highlighter-rouge">bean-selection</code> configuration option
+in <code class="language-plaintext highlighter-rouge">struts-deferred.xml</code>. The <code class="language-plaintext highlighter-rouge">bean-selection</code> option represents an implementation of a
+class <code class="language-plaintext highlighter-rouge">org.apache.struts2.config.AbstractBeanSelectionProvider</code>
 with <em>no-arguments</em> constructor:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">VelocityBeanSelectionProvider</span> <span class="kd">extends</span> <span class="nc">AbstractBeanSelectionProvider</span> <span class="o">{</span>
@@ -657,7 +664,7 @@ with <em>no-arguments</em> constructor:</p>
 
 <p>The class defines extension points by implementing <code class="language-plaintext highlighter-rouge">register()</code> method and using <code class="language-plaintext highlighter-rouge">alias()</code> method to register them.</p>
 
-<p>And finally it must be added to the <code class="language-plaintext highlighter-rouge">struts-plugin.xml</code>:</p>
+<p>And finally it must be added to the <code class="language-plaintext highlighter-rouge">struts-deferred.xml</code>:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE struts PUBLIC
