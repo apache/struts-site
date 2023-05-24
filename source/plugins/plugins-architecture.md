@@ -303,7 +303,7 @@ in `struts.xml` with a name and then tie it to the extension point overriding th
 struts.date.formatter=myDateTimeFormatter
 ```
 
-### <a name="plugin-ext"></a>Plugin-defined extension points
+### Plugin-defined extension points {#plugin-ext}
 
 It's very much like above except that the plugin must provide a `bean-selection` configuration option
 in `struts-deferred.xml`. The `bean-selection` option represents an implementation of a
