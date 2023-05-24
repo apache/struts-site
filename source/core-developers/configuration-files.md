@@ -14,16 +14,16 @@ The table lists the files that you can use to configure the framework for your a
 can be reloaded dynamically. Dynamic reloading makes interactive development possible. 
 See [Reloading configuration](reloading-configuration) for more.
 
-| File | Optional | Location (relative to webapp) | Purpose |
-|------|----------|-------------------------------|---------|
-|[web.xml](web-xml)| no | /WEB-INF/ | Web deployment descriptor to include all necessary framework components |
-|[struts.xml](struts-xml)| yes | /WEB-INF/classes/ | Main configuration, contains result/view types, action mappings, interceptors, and so forth \
-|
-|[default.properties](default-properties)| yes | /WEB-INF/classes/ | Framework properties |
-|[struts-default.xml](struts-default-xml)| yes | /WEB-INF/lib/struts2-core.jar | Default configuration provided by Struts |
-|[struts-default.vm](struts-default-vm)| yes | /WEB-INF/classes/ | Default macros referenced by velocity.properties|
-| struts-plugin.xml | yes | At the root of a plugin JAR| Optional configuration files for [Plugins](../plugins-developer-guide/)  in the same format as struts.xml. |
-|[velocity.properties](velocity-properties)| yes | /WEB-INF/classes/ | Override the default _Velocity_  configuration |
+| File                                                   | Optional | Location (relative to webapp) | Purpose                                                                                     |
+|--------------------------------------------------------|----------|-------------------------------|---------------------------------------------------------------------------------------------|
+| [web.xml](web-xml)                                     | no       | /WEB-INF/                     | Web deployment descriptor to include all necessary framework components                     |
+| [struts.xml](struts-xml)                               | yes      | /WEB-INF/classes/             | Main configuration, contains result/view types, action mappings, interceptors, and so forth |
+| [default.properties](default-properties)               | yes      | /WEB-INF/classes/             | Framework properties                                                                        |
+| [struts-default.xml](struts-default-xml)               | yes      | /WEB-INF/lib/struts2-core.jar | Default configuration provided by Struts                                                    |
+| [struts-default.vm](struts-default-vm)                 | yes      | /WEB-INF/classes/             | Default macros referenced by velocity.properties                                            |
+| [struts-plugin.xml](../plugins/plugins-architecture)   | yes      | At the root of a plugin JAR   | Optional configuration files for Plugins in the same format as struts.xml.                  |
+| [struts-deferred.xml](../plugins/plugins-architecture) | yes      | At the root of a plugin JAR   | Optional configuration files for Plugins, most useful for defining extension points         |
+| [velocity.properties](velocity-properties)             | yes      | /WEB-INF/classes/             | Override the default _Velocity_  configuration                                              |
 
 ## Static Content
 

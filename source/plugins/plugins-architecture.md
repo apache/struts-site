@@ -12,33 +12,39 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-Struts 2 plugins contain classes and configuration that extend, replace, or add to existing Struts framework functionality. 
-A plugin can be installed by adding its JAR file to the application's class path, in addition to the JAR files to fulfill
-whatever dependencies the plugin itself may have. To configure the plugin, the JAR should contain a `struts-plugin.xml` 
-file, which follows the same format as an ordinary `struts.xml` file.
+Struts 2 plugins contain classes and configuration that extend, replace, or add to existing Struts framework
+functionality. A plugin can be installed by adding its JAR file to the application's class path, in addition to the JAR
+files to fulfill whatever dependencies the plugin itself may have. To configure the plugin, the JAR should contain
+a `struts-plugin.xml` file and optionally a `struts-deferred.xml`, which follow the same format as an
+ordinary `struts.xml` file.
 
-Since a plugin can contain the `struts-plugin.xml` file, it has the ability to:
+Since a plugin can contain these xml files, they have the ability to:
  - Define new packages with results, interceptors, and/or actions
  - Override framework constants 
  - Introduce new extension point implementation classes
 
-Many popular but optional features of the framework are distributed as plugins. An application can retain all the plugins 
-provided with the distribution, or just include the ones it uses. Plugins can be used to organize application code 
-or to distribute code to third-parties.
+Whilst configuration from `struts-plugin.xml` is loaded prior to `struts.xml`, `struts-deferred.xml` is loaded after all
+other configuration is loaded. This makes it useful for defining [plugin extension points](#plugin-ext).
 
-Packages defined in a plugin can have parent packages that are defined in another plugin. Plugins may define 
-configuration elements with classes not contained in the plugin. Any classes not included in the plugin's JAR must be 
-on the application's classpath at runtime. As from Struts 2.3.5
+Many popular but optional features of the framework are distributed as plugins. An application can retain all the
+plugins provided with the distribution, or just include the ones it uses. Plugins can be used to organize application
+code or to distribute code to third-parties.
 
-The framework loads its default configuration first, then any plugin configuration files found in others JARs
-on the classpath, and finally the "bootstrap" `struts.xml`.
+Packages defined in a plugin can have parent packages that are defined in another plugin. Plugins may define
+configuration elements with classes not contained in the plugin. Any classes not included in the plugin's JAR must be on
+the application's classpath at runtime. As from Struts 2.3.5
+
+The framework loads its default configuration first, then any `struts-plugin.xml` files found in others JARs on the
+classpath, the "bootstrap" `struts.xml`, then finally any `struts-deferred.xml` files.
 
 1. `struts-default.xml` (bundled in the Core JAR)
 2. `struts-plugin.xml` (as many as can be found in other JARs)
 3. `struts.xml` (provided by your application)
+4. `struts-deferred.xml` (as many as can be found in other JARs)
 
-Since the `struts.xml` file is always loaded last, it can make use of any resources provided by the plugins bundled
-with the distribution, or any other plugins available to an application.
+Since the `struts.xml` file is loaded between `struts-plugin.xml` and before any potential plugin extension points
+in `struts-deferred.xml`, it can make use of any resources provided by the plugins bundled with the distribution, or any
+other plugins available to an application.
 
 ## Static resources
 
@@ -297,10 +303,11 @@ in `struts.xml` with a name and then tie it to the extension point overriding th
 struts.date.formatter=myDateTimeFormatter
 ```
 
-### Extension point provided by a plugin
+### Plugin-defined extension points {#plugin-ext}
 
-It's very the like as above except that the plugin must provide a `bean-selection` configuration option in `struts-plugin.xml`.
-The `bean-selection` option represents an implementation of a class `org.apache.struts2.config.AbstractBeanSelectionProvider`
+It's very much like above except that the plugin must provide a `bean-selection` configuration option
+in `struts-deferred.xml`. The `bean-selection` option represents an implementation of a
+class `org.apache.struts2.config.AbstractBeanSelectionProvider`
 with _no-arguments_ constructor:
 
 ```java
@@ -316,7 +323,7 @@ public class VelocityBeanSelectionProvider extends AbstractBeanSelectionProvider
 
 The class defines extension points by implementing `register()` method and using `alias()` method to register them.
 
-And finally it must be added to the `struts-plugin.xml`:
+And finally it must be added to the `struts-deferred.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
