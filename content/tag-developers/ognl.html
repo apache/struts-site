@@ -138,7 +138,7 @@
   <li><a href="#lambda-expressions" id="markdown-toc-lambda-expressions">Lambda Expressions</a></li>
 </ul>
 
-<p>OGNL is the Object Graph Navigation Language (see [http://commons.apache.org/proper/commons-ognl/] for the full 
+<p>OGNL is the Object Graph Navigation Language (see <a href="https://ognl.orphan.software/">OGNL page</a> for the full 
 documentation of OGNL). Here, we will cover a few examples of OGNL features that co-exist with the framework. To review 
 basic concepts, refer to <a href="ognl-basics">OGNL Basics</a>.</p>
 
@@ -185,12 +185,6 @@ we must use the <code class="language-plaintext highlighter-rouge">#</code> nota
 <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#request['myRequestPropKey']"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>The ActionContext is also exposed to Action classes via a static method but you <strong>should not</strong> use this approach. 
-Safer is to use one of the <code class="language-plaintext highlighter-rouge">*Aware</code> interfaces.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getSession</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"mySessionPropKey"</span><span class="o">,</span> <span class="n">mySessionObject</span><span class="o">);</span>
-</code></pre></div></div>
-
 <p>You can also put expression for attributes that don’t support dynamic content, like below:</p>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;c:set </span><span class="na">var=</span><span class="s">"foo"</span><span class="na"> value=</span><span class="s">"bar"</span><span class="na"> scope=</span><span class="s">"request"</span><span class="nt">/&gt;</span>
@@ -200,7 +194,7 @@ Safer is to use one of the <code class="language-plaintext highlighter-rouge">*A
 <h2 id="collections-maps-lists-sets">Collections (Maps, Lists, Sets)</h2>
 
 <p>Dealing with Collections (Maps, Lists, and Sets) in the framework comes often, so below please there are a few examples 
-using the select tag. The <a href="http://commons.apache.org/proper/commons-ognl/language-guide.html#Collection_Construction">OGNL documentation</a>
+using the select tag. The <a href="https://github.com/orphan-oss/ognl/blob/master/docs/LanguageGuide.md#collection-construction">OGNL documentation</a>
 also includes some examples.</p>
 
 <p>Syntax for list: <code class="language-plaintext highlighter-rouge">{e1,e2,e3}</code>. This idiom creates a List containing the String “name1”, “name2” and “name3”. It also 
@@ -232,7 +226,7 @@ selects “name2” as the default value.</p>
 <span class="nt">&lt;/s:else&gt;</span>
 </code></pre></div></div>
 
-<p>To select a subset of a collection (called projection), use a wildcard within the collection.</p>
+<p>To select a subset of a collection, use a wildcard within the collection.</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">?</code> - All elements matching the selection logic</li>
@@ -242,12 +236,14 @@ selects “name2” as the default value.</p>
 
 <p>To obtain a subset of just male relatives from the object person:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>person.relatives.{? #this.gender == 'male'}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;s:iterator value="person.relatives.{? #this.gender == 'male'}"&gt;
+  ...
+&lt;/s:iterator&gt;
 </code></pre></div></div>
 
 <h2 id="lambda-expressions">Lambda Expressions</h2>
 
-<p>OGNL supports basic lamba expression syntax enabling you to write simple functions.
+<p>OGNL supports basic lambda expression syntax enabling you to write simple functions.
 (Dedicated to all you math majors who didn’t think you would ever see this one again.)</p>
 
 <p>Fibonacci:</p>
@@ -266,10 +262,8 @@ selects “name2” as the default value.</p>
 
 <p><strong>How the expression works</strong></p>
 
-<blockquote>
-  <p>The lambda expression is everything inside the square brackets. The <code class="language-plaintext highlighter-rouge">#this</code> variable holds the argument to the expression, 
-which in the following example is the number 11 (the code after the square-bracketed lamba expression, <code class="language-plaintext highlighter-rouge">#fib(11)</code>).</p>
-</blockquote>
+<p>The lambda expression is everything inside the square brackets. The <code class="language-plaintext highlighter-rouge">#this</code> variable holds the argument to the expression, 
+which in the following example is the number 11 (the code after the square-bracketed lambda expression, <code class="language-plaintext highlighter-rouge">#fib(11)</code>).</p>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#fib =:[#this==0 ? 0 : #this==1 ? 1 : #fib(#this-2)+#fib(#this-1)], #fib(11)"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
