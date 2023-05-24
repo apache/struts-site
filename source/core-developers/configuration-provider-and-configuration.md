@@ -29,9 +29,13 @@ through a Dispatcher's [DispatcherListener](dispatcher-listener).
 `ConfigurationProvider` is the basic piece of configuration used to tie all the options together in `ConfigurationManager`. 
 There is few different implementations that are already used internally by the Apache Struts:
 
-- `XmlConfigurationProvider` - an abstract based implementation which can use XML files as source of configuration
-- `StrutsXmlConfigurationProvider` - primary configuration provider, represents `struts.xml` and `struts-plugin.xml` files
+- `XmlDocConfigurationProvider` - an abstract based implementation which can use XML documents from any source as
+  configuration
+- `XmlConfigurationProvider` - an abstract based implementation which can use XML files on disk as source of
+  configuration
+- `StrutsXmlConfigurationProvider` - primary configuration provider, represents `struts.xml`, `struts-plugin.xml`
+  and `struts-deferred.xml` files
 - `PropertiesConfigurationProvider` - used to load `struts.properties`
--`ServletContextAwareConfigurationProvider` - marking interface allowing to inject `ServletContext` into provider
+  -`ServletContextAwareConfigurationProvider` - marking interface allowing to inject `ServletContext` into provider
 
 To inject your custom configuration provider use `configProviders` `<init-param/>` in [web.xml](web-xml)

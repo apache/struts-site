@@ -14,10 +14,11 @@ Constants can be declared in multiple files. By default, constants are searched 
 for subsequent files to override previous ones:
 
 1. [struts-default.xml](struts-default-xml)
-2. struts-plugin.xml
+2. [struts-plugin.xml](../plugins/plugins-architecture)
 3. [struts.xml](struts-xml)
 4. [default.properties](default-properties)
 5. [web.xml](web-xml)
+6. [struts-deferred.xml](../plugins/plugins-architecture)
 
 > The `struts.properties` file is provided for backward-compatibility with WebWork.
 
