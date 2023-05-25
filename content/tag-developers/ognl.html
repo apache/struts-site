@@ -239,10 +239,26 @@ selects “name2” as the default value:</p>
 
 <p>To obtain a subset of just male relatives from the object person:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;s:iterator value="person.relatives.{? #this.gender == 'male'}"&gt;
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"person.relatives.{? #this.gender == 'male'}"</span><span class="nt">&gt;</span>
   ...
-&lt;/s:iterator&gt;
+<span class="nt">&lt;/s:iterator&gt;</span>
 </code></pre></div></div>
+
+<p>You can also use projection to extract just a given property out of a bean:</p>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"persons.{firstName}"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;s:property/&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
+
+<p>it’s the same as using more expressive version:</p>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"persons"</span><span class="na"> var=</span><span class="s">"person"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"person.firstName"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
+</code></pre></div></div>
+
+<p>More details can can be found in OGNL documentation about <a href="https://ognl.orphan.software/language-guide#projecting-across-collections">projection</a>.</p>
 
   </section>
 </article>
