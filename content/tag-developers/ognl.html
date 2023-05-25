@@ -135,7 +135,6 @@
 
 <ul id="markdown-toc">
   <li><a href="#collections-maps-lists-sets" id="markdown-toc-collections-maps-lists-sets">Collections (Maps, Lists, Sets)</a></li>
-  <li><a href="#lambda-expressions" id="markdown-toc-lambda-expressions">Lambda Expressions</a></li>
 </ul>
 
 <p>OGNL is the Object Graph Navigation Language (see <a href="https://ognl.orphan.software/">OGNL page</a> for the full 
@@ -194,16 +193,16 @@ we must use the <code class="language-plaintext highlighter-rouge">#</code> nota
 <h2 id="collections-maps-lists-sets">Collections (Maps, Lists, Sets)</h2>
 
 <p>Dealing with Collections (Maps, Lists, and Sets) in the framework comes often, so below please there are a few examples 
-using the select tag. The <a href="https://github.com/orphan-oss/ognl/blob/master/docs/LanguageGuide.md#collection-construction">OGNL documentation</a>
+using tags. The <a href="https://github.com/orphan-oss/ognl/blob/master/docs/LanguageGuide.md#collection-construction">OGNL documentation</a>
 also includes some examples.</p>
 
-<p>Syntax for list: <code class="language-plaintext highlighter-rouge">{e1,e2,e3}</code>. This idiom creates a List containing the String “name1”, “name2” and “name3”. It also 
-selects “name2” as the default value.</p>
+<p>Syntax for a list: <code class="language-plaintext highlighter-rouge">{e1, e2, e3}</code>. This idiom creates a List containing the String “name1”, “name2” and “name3”. It also 
+selects “name2” as the default value:</p>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:select </span><span class="na">label=</span><span class="s">"label"</span><span class="na"> name=</span><span class="s">"name"</span><span class="na"> list=</span><span class="s">"{'name1','name2','name3'}"</span><span class="na"> value=</span><span class="s">"%{'name2'}"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>Syntax for map: <code class="language-plaintext highlighter-rouge">#{key1:value1,key2:value2}</code>. This idiom creates a map that maps the string “foo” to the string 
+<p>Syntax for a map: <code class="language-plaintext highlighter-rouge">#{key1:value1, key2:value2}</code>. This idiom creates a map that maps the string “foo” to the string 
 “foovalue” and “bar” to the string “barvalue”:</p>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:select </span><span class="na">label=</span><span class="s">"label"</span><span class="na"> name=</span><span class="s">"name"</span><span class="na"> list=</span><span class="s">"#{'foo':'foovalue', 'bar':'barvalue'}"</span> <span class="nt">/&gt;</span>
@@ -239,33 +238,6 @@ selects “name2” as the default value.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;s:iterator value="person.relatives.{? #this.gender == 'male'}"&gt;
   ...
 &lt;/s:iterator&gt;
-</code></pre></div></div>
-
-<h2 id="lambda-expressions">Lambda Expressions</h2>
-
-<p>OGNL supports basic lambda expression syntax enabling you to write simple functions.
-(Dedicated to all you math majors who didn’t think you would ever see this one again.)</p>
-
-<p>Fibonacci:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if n == 0 
-   return 0;
- elseif n == 1
-   return 1;
- else
-   return fib(n-2) + fib(n-1);
-
-
- fib(0) = 0
- fib(1) = 1
- fib(11) = 89
-</code></pre></div></div>
-
-<p><strong>How the expression works</strong></p>
-
-<p>The lambda expression is everything inside the square brackets. The <code class="language-plaintext highlighter-rouge">#this</code> variable holds the argument to the expression, 
-which in the following example is the number 11 (the code after the square-bracketed lambda expression, <code class="language-plaintext highlighter-rouge">#fib(11)</code>).</p>
-
-<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#fib =:[#this==0 ? 0 : #this==1 ? 1 : #fib(#this-2)+#fib(#this-1)], #fib(11)"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
   </section>
