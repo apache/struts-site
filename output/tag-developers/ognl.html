@@ -134,11 +134,12 @@
     <h1 class="no_toc" id="ognl">OGNL</h1>
 
 <ul id="markdown-toc">
+  <li><a href="#context" id="markdown-toc-context">Context</a></li>
+  <li><a href="#referencing-an-action-property" id="markdown-toc-referencing-an-action-property">Referencing an Action property</a></li>
   <li><a href="#collections-maps-lists-sets" id="markdown-toc-collections-maps-lists-sets">Collections (Maps, Lists, Sets)</a></li>
-  <li><a href="#lambda-expressions" id="markdown-toc-lambda-expressions">Lambda Expressions</a></li>
 </ul>
 
-<p>OGNL is the Object Graph Navigation Language (see [http://commons.apache.org/proper/commons-ognl/] for the full 
+<p>OGNL is the Object Graph Navigation Language (see <a href="https://ognl.orphan.software/">OGNL page</a> for the full 
 documentation of OGNL). Here, we will cover a few examples of OGNL features that co-exist with the framework. To review 
 basic concepts, refer to <a href="ognl-basics">OGNL Basics</a>.</p>
 
@@ -147,10 +148,12 @@ a Map (usually referred as a context map or context). OGNL has a notion of there
 the context. In expression, the properties of the root object can be referenced without any special “marker” notion. 
 References to other objects are marked with a pound sign (<code class="language-plaintext highlighter-rouge">#</code>).</p>
 
-<p>The framework sets the OGNL context to be our ActionContext, and the value stack to be the OGNL root object. 
-(The value stack is a set of several objects, but to OGNL it appears to be a single object.) Along with the value stack, 
-the framework places other objects in the ActionContext, including Maps representing the application, session, 
-and request contexts. These objects coexist in the ActionContext, alongside the value stack (our OGNL root).</p>
+<h2 id="context">Context</h2>
+
+<p>The framework sets the OGNL context to be our <code class="language-plaintext highlighter-rouge">ActionContext</code>, and the <code class="language-plaintext highlighter-rouge">ValueStack</code> to be the OGNL root object. 
+(The <code class="language-plaintext highlighter-rouge">ValueStack</code> is a set of several objects, but to OGNL it appears to be a single object). Along with the value stack, 
+the framework places other objects in the <code class="language-plaintext highlighter-rouge">ActionContext</code>, including maps representing the application, session, 
+and request contexts. These objects coexist in the <code class="language-plaintext highlighter-rouge">ActionContext</code>, alongside the value stack (our OGNL root).</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>context map---|
               |--application
@@ -169,11 +172,11 @@ and request contexts. These objects coexist in the ActionContext, alongside the 
               |
 </code></pre></div></div>
 
-<p>The Action instance is always pushed onto the value stack. Because the Action is on the stack, and the stack is 
-the OGNL root, references to Action properties can omit the <code class="language-plaintext highlighter-rouge">#</code> marker. But, to access other objects in the ActionContext, 
-we must use the <code class="language-plaintext highlighter-rouge">#</code> notation so OGNL knows not to look in the root object, but for some other object in the ActionContext.</p>
+<h2 id="referencing-an-action-property">Referencing an Action property</h2>
 
-<p><strong>Referencing an Action property</strong></p>
+<p>The Action instance is always pushed onto the value stack. Because the Action is on the stack, and the stack is
+the OGNL root, references to Action properties can omit the <code class="language-plaintext highlighter-rouge">#</code> marker. But, to access other objects in the ActionContext,
+we must use the <code class="language-plaintext highlighter-rouge">#</code> notation so OGNL knows not to look in the root object, but for some other object in the ActionContext.</p>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"postalCode"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
@@ -185,12 +188,6 @@ we must use the <code class="language-plaintext highlighter-rouge">#</code> nota
 <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#request['myRequestPropKey']"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>The ActionContext is also exposed to Action classes via a static method but you <strong>should not</strong> use this approach. 
-Safer is to use one of the <code class="language-plaintext highlighter-rouge">*Aware</code> interfaces.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getSession</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"mySessionPropKey"</span><span class="o">,</span> <span class="n">mySessionObject</span><span class="o">);</span>
-</code></pre></div></div>
-
 <p>You can also put expression for attributes that don’t support dynamic content, like below:</p>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;c:set </span><span class="na">var=</span><span class="s">"foo"</span><span class="na"> value=</span><span class="s">"bar"</span><span class="na"> scope=</span><span class="s">"request"</span><span class="nt">/&gt;</span>
@@ -200,16 +197,16 @@ Safer is to use one of the <code class="language-plaintext highlighter-rouge">*A
 <h2 id="collections-maps-lists-sets">Collections (Maps, Lists, Sets)</h2>
 
 <p>Dealing with Collections (Maps, Lists, and Sets) in the framework comes often, so below please there are a few examples 
-using the select tag. The <a href="http://commons.apache.org/proper/commons-ognl/language-guide.html#Collection_Construction">OGNL documentation</a>
+using tags. The <a href="https://github.com/orphan-oss/ognl/blob/master/docs/LanguageGuide.md#collection-construction">OGNL documentation</a>
 also includes some examples.</p>
 
-<p>Syntax for list: <code class="language-plaintext highlighter-rouge">{e1,e2,e3}</code>. This idiom creates a List containing the String “name1”, “name2” and “name3”. It also 
-selects “name2” as the default value.</p>
+<p>Syntax for a list: <code class="language-plaintext highlighter-rouge">{e1, e2, e3}</code>. This idiom creates a List containing the String “name1”, “name2” and “name3”. It also 
+selects “name2” as the default value:</p>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:select </span><span class="na">label=</span><span class="s">"label"</span><span class="na"> name=</span><span class="s">"name"</span><span class="na"> list=</span><span class="s">"{'name1','name2','name3'}"</span><span class="na"> value=</span><span class="s">"%{'name2'}"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>Syntax for map: <code class="language-plaintext highlighter-rouge">#{key1:value1,key2:value2}</code>. This idiom creates a map that maps the string “foo” to the string 
+<p>Syntax for a map: <code class="language-plaintext highlighter-rouge">#{key1:value1, key2:value2}</code>. This idiom creates a map that maps the string “foo” to the string 
 “foovalue” and “bar” to the string “barvalue”:</p>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:select </span><span class="na">label=</span><span class="s">"label"</span><span class="na"> name=</span><span class="s">"name"</span><span class="na"> list=</span><span class="s">"#{'foo':'foovalue', 'bar':'barvalue'}"</span> <span class="nt">/&gt;</span>
@@ -232,7 +229,7 @@ selects “name2” as the default value.</p>
 <span class="nt">&lt;/s:else&gt;</span>
 </code></pre></div></div>
 
-<p>To select a subset of a collection (called projection), use a wildcard within the collection.</p>
+<p>To select a subset of a collection, use a wildcard within the collection.</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">?</code> - All elements matching the selection logic</li>
@@ -242,37 +239,26 @@ selects “name2” as the default value.</p>
 
 <p>To obtain a subset of just male relatives from the object person:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>person.relatives.{? #this.gender == 'male'}
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"person.relatives.{? #this.gender == 'male'}"</span><span class="nt">&gt;</span>
+  ...
+<span class="nt">&lt;/s:iterator&gt;</span>
 </code></pre></div></div>
 
-<h2 id="lambda-expressions">Lambda Expressions</h2>
+<p>You can also use projection to extract just a given property out of a bean:</p>
 
-<p>OGNL supports basic lamba expression syntax enabling you to write simple functions.
-(Dedicated to all you math majors who didn’t think you would ever see this one again.)</p>
-
-<p>Fibonacci:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if n == 0 
-   return 0;
- elseif n == 1
-   return 1;
- else
-   return fib(n-2) + fib(n-1);
-
-
- fib(0) = 0
- fib(1) = 1
- fib(11) = 89
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"persons.{firstName}"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;s:property/&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
 </code></pre></div></div>
 
-<p><strong>How the expression works</strong></p>
+<p>it’s the same as using more expressive version:</p>
 
-<blockquote>
-  <p>The lambda expression is everything inside the square brackets. The <code class="language-plaintext highlighter-rouge">#this</code> variable holds the argument to the expression, 
-which in the following example is the number 11 (the code after the square-bracketed lamba expression, <code class="language-plaintext highlighter-rouge">#fib(11)</code>).</p>
-</blockquote>
-
-<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#fib =:[#this==0 ? 0 : #this==1 ? 1 : #fib(#this-2)+#fib(#this-1)], #fib(11)"</span> <span class="nt">/&gt;</span>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"persons"</span><span class="na"> var=</span><span class="s">"person"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"person.firstName"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/s:iterator&gt;</span>
 </code></pre></div></div>
+
+<p>More details can can be found in OGNL documentation about <a href="https://ognl.orphan.software/language-guide#projecting-across-collections">projection</a>.</p>
 
   </section>
 </article>
