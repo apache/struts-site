@@ -4,7 +4,6 @@ title: Old docs
 ---
 
 # Old docs
-[Edit on GitHub]({{ site.repository_url }}/edit/master/source/{{ page.path }}){: .edit-on-gh title="Edit this page on GitHub"}
 
 The [old docs](https://cwiki.apache.org/confluence/display/WW/) are still available for reference on our wiki. We have migrated 
 all of them to Markdown and are hosted directly in [struts-site](https://gitbox.apache.org/repos/asf?p=struts-site.git)

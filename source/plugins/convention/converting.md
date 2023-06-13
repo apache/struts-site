@@ -7,8 +7,6 @@ title: Converting application from Codebehind to Convention Plugin (WIP)
 
 # Converting application from Codebehind to Convention Plugin
 
-[Edit on GitHub]({{ site.repository_url }}/edit/master/source/{{ page.path }}){: .edit-on-gh title="Edit this page on GitHub"}
-
 ## Changes required
 
  - Replace `org.apache.struts2.config.Namespace` with `org.apache.struts2.convention.annotation.Namespace`
