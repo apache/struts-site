@@ -13,7 +13,7 @@ title: Announcements 2023
   Skip to: <a href="announce-2022">Announcements - 2022</a>
 </p>
 
-#### 10 Juky 2023 - Apache Struts version 6.2.0 General Availability {#a20230710}
+#### 10 July 2023 - Apache Struts version 6.2.0 General Availability {#a20230710}
 
 The Apache Struts group is pleased to announce that Apache Struts version 6.2.0 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
