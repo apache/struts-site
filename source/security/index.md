@@ -284,6 +284,8 @@ more in the Strict Method Invocation section of [Action Configuration](../core-d
 
 ### Resource Isolation Using Fetch Metadata
 
+> Note: since Struts 6.0.0
+
 Fetch Metadata is a mitigation against common cross origin attacks such as Cross-Site Request Forgery (CSRF). It is 
 a web platform security feature designed to help servers defend themselves against cross-origin attacks based 
 on the preferred resource isolation policy. The browser provides information about the context of an HTTP request 
@@ -300,7 +302,7 @@ This mechanism is implemented in Struts using the [FetchMetadata Interceptor](..
 
 ### Cross Origin Isolation with COOP and COEP
 
-> Note: since Struts 2.6.
+> Note: since Struts 6.0.0
 
 [Cross-Origin Opener Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy) is 
 a security mitigation that lets developers isolate their resources against side-channel attacks and information leaks. 
