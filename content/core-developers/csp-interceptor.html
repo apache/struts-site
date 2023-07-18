@@ -131,7 +131,14 @@
     
     <a href="interceptors.html" title="back to Interceptors"><< back to Interceptors</a>
     
-    <h1 id="content-security-policy-interceptor">Content Security Policy Interceptor</h1>
+    <h1 class="no_toc" id="content-security-policy-interceptor">Content Security Policy Interceptor</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#description" id="markdown-toc-description">Description</a></li>
+  <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
+  <li><a href="#action-aware" id="markdown-toc-action-aware">Action aware</a></li>
+  <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
+</ul>
 
 <h2 id="description">Description</h2>
 
@@ -153,6 +160,23 @@ header is sent and <code class="language-plaintext highlighter-rouge">Content-Se
 is going to be enforced.</li>
   <li><code class="language-plaintext highlighter-rouge">reportUri</code> - an uri under, which the violations have to be reported.</li>
 </ul>
+
+<h2 id="action-aware">Action aware</h2>
+
+<p>Since Struts 6.2.0 it is possible to configure the CSP interceptor by providing the an instance of <code class="language-plaintext highlighter-rouge">CspSettings</code> interface.
+Please use <code class="language-plaintext highlighter-rouge">CspSettingsAware</code> interface and implement the <code class="language-plaintext highlighter-rouge">getCspSettings()</code> method to steer the policy per action.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="kd">implements</span> <span class="nc">CspSettingsAware</span> <span class="o">{</span>
+    
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"success"</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="nc">CspSetting</span> <span class="nf">getCspSettings</span><span class="o">()</span> <span class="o">{</span>
+      <span class="o">...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <h2 id="examples">Examples</h2>
 
