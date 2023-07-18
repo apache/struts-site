@@ -7,6 +7,10 @@ parent:
 ---
 
 # Content Security Policy Interceptor
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 ## Description
 
@@ -26,6 +30,24 @@ CSP is now supported by all major browsers. [More information about CSP](https:/
 - `enforcingMode` (default `false`) - When set to "true", the enforce mode has been enabled, and the provided policy 
   is going to be enforced.
 - `reportUri` - an uri under, which the violations have to be reported.
+
+## Action aware
+
+Since Struts 6.2.0 it is possible to configure the CSP interceptor by providing the an instance of `CspSettings` interface.
+Please use `CspSettingsAware` interface and implement the `getCspSettings()` method to steer the policy per action.
+
+```java
+public class MyAction implements CspSettingsAware {
+    
+    public String execute() {
+        return "success";
+    }
+    
+    public CspSetting getCspSettings() {
+      ...
+    }
+}
+```
 
 ## Examples
 
