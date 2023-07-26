@@ -404,6 +404,7 @@ struts.multipart.saveDir= # Filesystem location to save parsed request data
 struts.multipart.maxSize=2097152 # Max combined size of files per request
 struts.multipart.maxFiles=256 # Max number of files per request
 struts.multipart.maxFileSize= # Max size per file per request
+struts.multipart.maxStringLength=4096 # Max length of a string parameter (a normal field) in a multipart request (since Struts 6.1.2.1)
 </code></pre></div></div>
 
 <p>You can also set the max options to unlimited by setting their value to <code class="language-plaintext highlighter-rouge">-1</code>, but please see the sections below for
@@ -411,12 +412,11 @@ further details on these options first.</p>
 
 <h3 id="files-number-limit">Files Number Limit</h3>
 
-<p>Since Struts 6.1.2/6.2.0 a new option was added, which uses Commons FileUpload feature to limit how many files can be
+<p>Since Struts 6.1.2 a new option was added, which uses Commons FileUpload feature to limit how many files can be
 uploaded at once, in one request. This option requires to use Commons FileUpload ver. 1.5 at least and by default is set
 to <strong>256</strong>. Please always set this to a finite value to prevent DoS attacks.</p>
 
-<p>To change this value define a constant
-in <code class="language-plaintext highlighter-rouge">struts.xml</code> as follows:</p>
+<p>To change this value define a constant in <code class="language-plaintext highlighter-rouge">struts.xml</code> as follows:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.maxFiles"</span> <span class="na">value=</span><span class="s">"500"</span><span class="nt">/&gt;</span>
