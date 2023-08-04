@@ -312,7 +312,7 @@ struts.multipart.maxStringLength=4096
 ```
 
 This options prevents attacks, which consists of multiple large objects in the multipart request. Such attack can exhaust 
-the available memory and finally produce `OutOfMemoryException`. If the limit is too low you can increase it but defining
+the available memory and finally produce `OutOfMemoryException`. If the limit is too low you can increase it by defining
 the following constant in `struts.xml`:
 
 ```xml
