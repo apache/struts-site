@@ -147,6 +147,7 @@
   <li><a href="#advanced-configuration" id="markdown-toc-advanced-configuration">Advanced Configuration</a>    <ul>
       <li><a href="#files-number-limit" id="markdown-toc-files-number-limit">Files Number Limit</a></li>
       <li><a href="#file-size-limits" id="markdown-toc-file-size-limits">File Size Limits</a></li>
+      <li><a href="#normal-field-size-limit" id="markdown-toc-normal-field-size-limit">Normal Field Size Limit</a></li>
       <li><a href="#file-types" id="markdown-toc-file-types">File Types</a></li>
       <li><a href="#error-messages" id="markdown-toc-error-messages">Error Messages</a></li>
       <li><a href="#temporary-directories" id="markdown-toc-temporary-directories">Temporary Directories</a></li>
@@ -454,6 +455,26 @@ precedence over this interceptor setting.</p>
         <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"workflow"</span><span class="nt">/&gt;</span>
 
         <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+<span class="nt">&lt;/struts&gt;</span>
+</code></pre></div></div>
+<h3 id="normal-field-size-limit">Normal Field Size Limit</h3>
+
+<p>Since Struts 6.1.2.1 a new option has been introduced to limit the size of a normal string field in the multipart request.
+The defeault limit is set to 4096 bytes:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struts.multipart.maxStringLength=4096
+</code></pre></div></div>
+
+<p>This options prevents attacks, which consists of multiple large objects in the multipart request. Such attack can exhaust 
+the available memory and finally produce <code class="language-plaintext highlighter-rouge">OutOfMemoryException</code>. If the limit is too low you can increase it but defining
+the following constant in <code class="language-plaintext highlighter-rouge">struts.xml</code>:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
+    <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.maxStringLength"</span> <span class="na">value=</span><span class="s">"10000"</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"doUpload"</span> <span class="na">class=</span><span class="s">"com.example.UploadAction"</span><span class="nt">&gt;</span>
+          ...
     <span class="nt">&lt;/action&gt;</span>
 <span class="nt">&lt;/struts&gt;</span>
 </code></pre></div></div>
