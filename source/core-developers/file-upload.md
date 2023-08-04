@@ -302,6 +302,28 @@ Notice the locations of these settings in the following example:
     </action>
 </struts>
 ```
+### Normal Field Size Limit
+
+Since Struts 6.1.2.1 a new option has been introduced to limit the size of a normal string field in the multipart request.
+The defeault limit is set to 4096 bytes:
+
+```
+struts.multipart.maxStringLength=4096
+```
+
+This options prevents attacks, which consists of multiple large objects in the multipart request. Such attack can exhaust 
+the available memory and finally produce `OutOfMemoryException`. If the limit is too low you can increase it but defining
+the following constant in `struts.xml`:
+
+```xml
+<struts>
+    <constant name="struts.multipart.maxStringLength" value="10000"/>
+
+    <action name="doUpload" class="com.example.UploadAction">
+          ...
+    </action>
+</struts>
+```
 
 ### File Types
 
