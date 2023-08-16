@@ -131,46 +131,60 @@
     
     <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     
-    <h1 id="accessing-application-session-request-objects">Accessing application, session, request objects</h1>
+    <h1 class="no_toc" id="accessing-application-session-request-objects">Accessing application, session, request objects</h1>
 
-<p><strong>DEPRECATED???</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#accessing-from-java" id="markdown-toc-accessing-from-java">Accessing from Java</a>    <ul>
+      <li><a href="#avoid-using-actioncontext" id="markdown-toc-avoid-using-actioncontext">Avoid using ActionContext</a></li>
+    </ul>
+  </li>
+  <li><a href="#accessing-from-the-view-jsp-freemarker-etc" id="markdown-toc-accessing-from-the-view-jsp-freemarker-etc">Accessing from the view (JSP, FreeMarker, etc.)</a></li>
+</ul>
 
-<p>The framework provides several access helpers to access Session, Application, Request scopes.</p>
+<p>The framework provides several access helpers to access Request, Session, Application scopes.
+See <a href="servlet-config-interceptor">Servlet Config Interceptor</a> page to find all the supported interfaces.</p>
 
 <h2 id="accessing-from-java">Accessing from Java</h2>
 
-<p>All the JEE scope attribute maps can be accessed via <code class="language-plaintext highlighter-rouge">ActionContext</code>.</p>
+<p>The best way to access Request, Session or Application scope is to use one of the following interfaces:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ServletRequestAware</code> - to access Request scope</li>
+  <li><code class="language-plaintext highlighter-rouge">ServletResponseAware</code> - to access Response scope</li>
+  <li><code class="language-plaintext highlighter-rouge">SessionAware</code> - to access Session scope</li>
+  <li><code class="language-plaintext highlighter-rouge">ApplicationAware</code> - to access Application scope</li>
+</ul>
 
-<p><strong>Accessing servlet scopes</strong></p>
+<p>Example usage of the interfaces:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Map</span> <span class="n">attr</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Map</span><span class="o">)</span> <span class="nc">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"attr"</span><span class="o">);</span>
-<span class="n">attr</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>  <span class="c1">// Page scope.</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="kd">implements</span> <span class="nc">ApplicationAware</span> <span class="o">{</span>
+ 
+    <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">application</span><span class="o">;</span>
 
-<span class="nc">Map</span> <span class="n">application</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Map</span><span class="o">)</span> <span class="nc">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"application"</span><span class="o">);</span>
-<span class="n">application</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>
-
-<span class="nc">Map</span> <span class="n">session</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Map</span><span class="o">)</span> <span class="nc">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"session"</span><span class="o">);</span>
-<span class="n">session</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>
-
-<span class="nc">Map</span> <span class="n">request</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Map</span><span class="o">)</span> <span class="nc">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"request"</span><span class="o">);</span>
-<span class="n">request</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">withApplication</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">application</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">application</span> <span class="o">=</span> <span class="n">application</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">application</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">"myKey"</span><span class="o">,</span> <span class="s">"myValue"</span><span class="o">);</span>
+        <span class="o">...</span>
+        <span class="k">return</span> <span class="s">"success"</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+<span class="o">}</span>
 </code></pre></div></div>
 
-<blockquote>
-  <p>Do not use <code class="language-plaintext highlighter-rouge">ActionContext.getContext()</code> in the constructor of your Action class. The values may not be set up, and 
-the call may return null for getSession().</p>
-</blockquote>
+<p>Implementing <code class="language-plaintext highlighter-rouge">ServletRequestAware</code> or <code class="language-plaintext highlighter-rouge">ServletResponseAware</code> will tie your actions to Servlet objects. Yet using these 
+interfaces and <code class="language-plaintext highlighter-rouge">SessionAware</code> or <code class="language-plaintext highlighter-rouge">ApplicationAware</code> combined with the <code class="language-plaintext highlighter-rouge">servletConfig</code> interceptor, is the best way 
+to access these scopes.</p>
 
-<p>We can also access the <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> and <code class="language-plaintext highlighter-rouge">HttpServletResponse</code> objects themselves through <code class="language-plaintext highlighter-rouge">ServletActionContext</code>. 
-In general this isn’t recommended as it will tie our action to the servlet specification.</p>
+<h3 id="avoid-using-actioncontext">Avoid using ActionContext</h3>
 
-<p><strong>Setting session attribute through session object</strong></p>
+<p>Using <code class="language-plaintext highlighter-rouge">ActionContext</code> directly is a bad practice and should be avoided, instead of using</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ServletActionContext</span><span class="o">.</span><span class="na">getRequest</span><span class="o">().</span><span class="na">getSession</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"myId"</span><span class="o">,</span> <span class="n">myProp</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ActionContext</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getSession</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"myAttribute"</span><span class="o">,</span> <span class="s">"myValue"</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>Implementing <code class="language-plaintext highlighter-rouge">ServletRequestAware</code> or <code class="language-plaintext highlighter-rouge">ServletResponseAware</code>, combined with the <code class="language-plaintext highlighter-rouge">servletConfig</code> interceptor, 
-is an alternative way to access the request and response objects, with the same caveat.</p>
+<p>use one of the <code class="language-plaintext highlighter-rouge">*Aware</code> interfaces above.</p>
 
 <h2 id="accessing-from-the-view-jsp-freemarker-etc">Accessing from the view (JSP, FreeMarker, etc.)</h2>
 
