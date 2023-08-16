@@ -7,45 +7,55 @@ parent:
 ---
 
 # Accessing application, session, request objects
+{:.no_toc}
 
-**DEPRECATED???**
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
-The framework provides several access helpers to access Session, Application, Request scopes.
+The framework provides several access helpers to access Request, Session, Application scopes.
+See [Servlet Config Interceptor](servlet-config-interceptor) page to find all the supported interfaces.
 
 ## Accessing from Java
 
-All the JEE scope attribute maps can be accessed via `ActionContext`.
+The best way to access Request, Session or Application scope is to use one of the following interfaces:
+- `ServletRequestAware` - to access Request scope
+- `ServletResponseAware` - to access Response scope
+- `SessionAware` - to access Session scope
+- `ApplicationAware` - to access Application scope
 
-**Accessing servlet scopes**
-
-```java
-Map attr = (Map) ActionContext.getContext().get("attr");
-attr.put("myId", myProp);  // Page scope.
-
-Map application = (Map) ActionContext.getContext().get("application");
-application.put("myId", myProp);
-
-Map session = (Map) ActionContext.getContext().get("session");
-session.put("myId", myProp);
-
-Map request = (Map) ActionContext.getContext().get("request");
-request.put("myId", myProp);
-```
-
-> Do not use `ActionContext.getContext()` in the constructor of your Action class. The values may not be set up, and 
-> the call may return null for getSession().
-
-We can also access the `HttpServletRequest` and `HttpServletResponse` objects themselves through `ServletActionContext`. 
-In general this isn't recommended as it will tie our action to the servlet specification.
-
-**Setting session attribute through session object**
+Example usage of the interfaces:
 
 ```java
-ServletActionContext.getRequest().getSession().put("myId", myProp);
+public class MyAction implements ApplicationAware {
+ 
+    private Map<String, Object> application;
+
+    public void withApplication(Map<String, Object> application) {
+        this.application = application;
+    }
+    
+    public String execute() {
+        application.set("myKey", "myValue");
+        ...
+        return "success";
+    }
+    
+}
 ```
 
-Implementing `ServletRequestAware` or `ServletResponseAware`, combined with the `servletConfig` interceptor, 
-is an alternative way to access the request and response objects, with the same caveat.
+Implementing `ServletRequestAware` or `ServletResponseAware` will tie your actions to Servlet objects. Yet using these 
+interfaces and `SessionAware` or `ApplicationAware` combined with the `servletConfig` interceptor, is the best way 
+to access these scopes.
+
+### Avoid using ActionContext
+
+Using `ActionContext` directly is a bad practice and should be avoided, instead of using 
+
+```java
+ActionContext.getContext().getSession().put("myAttribute", "myValue");
+```
+
+use one of the `*Aware` interfaces above.
 
 ## Accessing from the view (JSP, FreeMarker, etc.)
 
