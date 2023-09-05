@@ -140,87 +140,7 @@ JavaScript includes for the <a href="http://dojotoolkit.org">Dojo Toolkit</a>, w
 <a href="ajax-div-template">ajax div template</a>, and the <a href="">ajax tabbedPanel template</a>. It is required to use this tag, 
 <code class="language-plaintext highlighter-rouge">&lt;ww:head theme="ajax"/&gt;</code> , in your HTML <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> block if you wish to use AJAX feature. The contents of <strong>head.ftl</strong> are:</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;</span><span class="na">#--</span>
-<span class="err">/</span><span class="na">*</span>
- <span class="na">*</span> <span class="err">$</span><span class="na">Id</span><span class="err">$</span>
- <span class="na">*</span>
- <span class="na">*</span> <span class="na">Licensed</span> <span class="na">to</span> <span class="na">the</span> <span class="na">Apache</span> <span class="na">Software</span> <span class="na">Foundation</span> <span class="err">(</span><span class="na">ASF</span><span class="err">)</span> <span class="na">under</span> <span class="na">one</span>
- <span class="na">*</span> <span class="na">or</span> <span class="na">more</span> <span class="na">contributor</span> <span class="na">license</span> <span class="na">agreements.</span>  <span class="na">See</span> <span class="na">the</span> <span class="na">NOTICE</span> <span class="na">file</span>
- <span class="na">*</span> <span class="na">distributed</span> <span class="na">with</span> <span class="na">this</span> <span class="na">work</span> <span class="na">for</span> <span class="na">additional</span> <span class="na">information</span>
- <span class="na">*</span> <span class="na">regarding</span> <span class="na">copyright</span> <span class="na">ownership.</span>  <span class="na">The</span> <span class="na">ASF</span> <span class="na">licenses</span> <span class="na">this</span> <span class="na">file</span>
- <span class="na">*</span> <span class="na">to</span> <span class="na">you</span> <span class="na">under</span> <span class="na">the</span> <span class="na">Apache</span> <span class="na">License</span><span class="err">,</span> <span class="na">Version</span> <span class="err">2.0</span> <span class="err">(</span><span class="na">the</span>
- <span class="na">*</span> <span class="err">"</span><span class="na">License</span><span class="err">");</span> <span class="na">you</span> <span class="na">may</span> <span class="na">not</span> <span class="na">use</span> <span class="na">this</span> <span class="na">file</span> <span class="na">except</span> <span class="na">in</span> <span class="na">compliance</span>
- <span class="na">*</span> <span class="na">with</span> <span class="na">the</span> <span class="na">License.</span>  <span class="na">You</span> <span class="na">may</span> <span class="na">obtain</span> <span class="na">a</span> <span class="na">copy</span> <span class="na">of</span> <span class="na">the</span> <span class="na">License</span> <span class="na">at</span>
- <span class="na">*</span>
- <span class="na">*</span>  <span class="na">http:</span><span class="err">//</span><span class="na">www.apache.org</span><span class="err">/</span><span class="na">licenses</span><span class="err">/</span><span class="na">LICENSE-2.0</span>
- <span class="na">*</span>
- <span class="na">*</span> <span class="na">Unless</span> <span class="na">required</span> <span class="na">by</span> <span class="na">applicable</span> <span class="na">law</span> <span class="na">or</span> <span class="na">agreed</span> <span class="na">to</span> <span class="na">in</span> <span class="na">writing</span><span class="err">,</span>
- <span class="na">*</span> <span class="na">software</span> <span class="na">distributed</span> <span class="na">under</span> <span class="na">the</span> <span class="na">License</span> <span class="na">is</span> <span class="na">distributed</span> <span class="na">on</span> <span class="na">an</span>
- <span class="na">*</span> <span class="err">"</span><span class="na">AS</span> <span class="na">IS</span><span class="err">"</span> <span class="na">BASIS</span><span class="err">,</span> <span class="na">WITHOUT</span> <span class="na">WARRANTIES</span> <span class="na">OR</span> <span class="na">CONDITIONS</span> <span class="na">OF</span> <span class="na">ANY</span>
- <span class="na">*</span> <span class="na">KIND</span><span class="err">,</span> <span class="na">either</span> <span class="na">express</span> <span class="na">or</span> <span class="na">implied.</span>  <span class="na">See</span> <span class="na">the</span> <span class="na">License</span> <span class="na">for</span> <span class="na">the</span>
- <span class="na">*</span> <span class="na">specific</span> <span class="na">language</span> <span class="na">governing</span> <span class="na">permissions</span> <span class="na">and</span> <span class="na">limitations</span>
- <span class="na">*</span> <span class="na">under</span> <span class="na">the</span> <span class="na">License.</span>
- <span class="na">*</span><span class="err">/</span>
-<span class="na">--</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">language=</span><span class="s">"JavaScript"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
-    <span class="c1">// Dojo configuration</span>
-    <span class="nx">djConfig</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="na">isDebug</span><span class="p">:</span> <span class="nx">$</span><span class="p">{</span><span class="nx">parameters</span><span class="p">.</span><span class="nx">debug</span><span class="p">?</span><span class="k">default</span><span class="p">(</span><span class="kc">false</span><span class="p">)?</span><span class="nx">string</span><span class="p">},</span>
-        <span class="nx">bindEncoding</span><span class="p">:</span> <span class="dl">"</span><span class="s2">${parameters.encoding}</span><span class="dl">"</span>
-        <span class="o">&lt;</span><span class="err">#</span><span class="k">if</span> <span class="nx">parameters</span><span class="p">.</span><span class="nx">baseRelativePath</span><span class="p">?</span><span class="nx">if_exists</span> <span class="o">!=</span> <span class="dl">""</span><span class="o">&gt;</span>
-          <span class="p">,</span><span class="nx">baseRelativePath</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;@s.url value='${parameters.baseRelativePath}' includeParams='none' encode='false' /&gt;</span><span class="dl">"</span>
-          <span class="p">,</span><span class="nx">baseScriptUri</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;@s.url value='${parameters.baseRelativePath}' includeParams='none' encode='false' /&gt;</span><span class="dl">"</span>
-        <span class="o">&lt;</span><span class="err">#</span><span class="k">else</span><span class="o">&gt;</span>
-          <span class="p">,</span><span class="na">baseRelativePath</span><span class="p">:</span> <span class="dl">"</span><span class="s2">${base}/struts/dojo/</span><span class="dl">"</span>
-          <span class="p">,</span><span class="na">baseScriptUri</span><span class="p">:</span> <span class="dl">"</span><span class="s2">${base}/struts/dojo/</span><span class="dl">"</span>
-        <span class="o">&lt;</span><span class="sr">/#if&gt; </span><span class="err"> 
-</span>        <span class="o">&lt;</span><span class="err">#</span><span class="k">if</span> <span class="nx">parameters</span><span class="p">.</span><span class="nx">locale</span><span class="p">?</span><span class="nx">if_exists</span> <span class="o">!=</span> <span class="dl">""</span><span class="o">&gt;</span>
-          <span class="p">,</span><span class="nx">locale</span><span class="p">:</span> <span class="dl">"</span><span class="s2">${parameters.locale}</span><span class="dl">"</span>
-        <span class="o">&lt;</span><span class="sr">/#if</span><span class="err">&gt;
-</span>        <span class="o">&lt;</span><span class="err">#</span><span class="k">if</span> <span class="nx">parameters</span><span class="p">.</span><span class="nx">extraLocales</span><span class="p">?</span><span class="nx">exists</span><span class="o">&gt;</span>
-          <span class="p">,</span><span class="nx">extraLocale</span><span class="p">:</span> <span class="p">[</span>
-        	<span class="o">&lt;</span><span class="err">#</span><span class="nx">list</span> <span class="nx">parameters</span><span class="p">.</span><span class="nx">extraLocales</span> <span class="k">as</span> <span class="nx">locale</span><span class="o">&gt;</span>
-        		<span class="dl">"</span><span class="s2">${locale}</span><span class="dl">"</span><span class="o">&lt;</span><span class="err">#</span><span class="k">if</span> <span class="nx">locale_has_next</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="sr">/#if</span><span class="err">&gt;
-</span>        	<span class="o">&lt;</span><span class="sr">/#list</span><span class="err">&gt;
-</span>          <span class="p">]</span>
-        <span class="o">&lt;</span><span class="sr">/#if</span><span class="err">&gt;
-</span>         <span class="p">,</span><span class="na">parseWidgets</span> <span class="p">:</span> <span class="nx">$</span><span class="p">{</span><span class="nx">parameters</span><span class="p">.</span><span class="nx">parseContent</span><span class="p">?</span><span class="nx">string</span><span class="p">}</span>
-        
-    <span class="p">};</span>
-<span class="nt">&lt;/script&gt;</span>
-
-<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">parameters.compressed</span><span class="err">?</span><span class="na">default</span><span class="err">(</span><span class="na">true</span><span class="err">)</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;</span><span class="na">#assign</span> <span class="na">dojoFile=</span><span class="s">"dojo.js"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;</span><span class="na">#else</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;</span><span class="na">#assign</span> <span class="na">dojoFile=</span><span class="s">"dojo.js.uncompressed.js"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>
-
-<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">parameters.cache</span><span class="err">?</span><span class="na">default</span><span class="err">(</span><span class="na">true</span><span class="err">)</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;</span><span class="na">#assign</span> <span class="na">profile=</span><span class="s">"struts_"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;</span><span class="na">#else</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;</span><span class="na">#assign</span> <span class="na">profile=</span><span class="s">""</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>           
-
-<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">parameters.baseRelativePath</span><span class="err">?</span><span class="na">if_exists</span> <span class="err">!=</span> <span class="err">""</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;script </span><span class="na">language=</span><span class="s">"JavaScript"</span> <span class="na">type=</span><span class="s">"text/javascript"</span>
-        <span class="na">src=</span><span class="s">"&lt;@s.url value='${parameters.baseRelativePath}/${profile}${dojoFile}' includeParams='none' encode='false'  /&gt;"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;</span><span class="na">#else</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;script </span><span class="na">language=</span><span class="s">"JavaScript"</span> <span class="na">type=</span><span class="s">"text/javascript"</span>
-        <span class="na">src=</span><span class="s">"${base}/struts/dojo/${profile}${dojoFile}"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>  
-
-<span class="nt">&lt;script </span><span class="na">language=</span><span class="s">"JavaScript"</span> <span class="na">type=</span><span class="s">"text/javascript"</span>
-        <span class="na">src=</span><span class="s">"${base}/struts/ajax/dojoRequire.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;</span><span class="na">#if</span> <span class="na">parameters.debug</span><span class="err">?</span><span class="na">default</span><span class="err">(</span><span class="na">false</span><span class="err">)</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">language=</span><span class="s">"JavaScript"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
-    <span class="nx">dojo</span><span class="p">.</span><span class="nx">hostenv</span><span class="p">.</span><span class="nx">writeIncludes</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-<span class="nt">&lt;/script&gt;</span>     
-<span class="nt">&lt;/</span><span class="err">#</span><span class="nt">if&gt;</span>        
-<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"${base}/struts/xhtml/styles.css"</span> <span class="na">type=</span><span class="s">"text/css"</span><span class="nt">/&gt;</span>
-
-<span class="nt">&lt;script </span><span class="na">language=</span><span class="s">"JavaScript"</span> <span class="na">src=</span><span class="s">"${base}/struts/utils.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">language=</span><span class="s">"JavaScript"</span> <span class="na">src=</span><span class="s">"${base}/struts/xhtml/validation.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">language=</span><span class="s">"JavaScript"</span> <span class="na">src=</span><span class="s">"${base}/struts/css_xhtml/validation.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">404: Not Found</code></pre></figure>
 
 <blockquote>
   <p>If you are having trouble getting the AJAX theme to work, you should include the above JavaScript in your page manually, 
@@ -230,11 +150,7 @@ changing “isDebug: false” to “isDebug: true”.  This will log out debuggi
 <p>Note that Dojo is configured to use the same character encoding specified in <code class="language-plaintext highlighter-rouge">struts.xml</code> , typically UTF-8. For a simple 
 example of how to use the <a href="dojo-head-tag">head</a> tag with the AJAX theme, simply do the following in your HTML:</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;</span><span class="err">%@</span> <span class="na">taglib</span> <span class="na">prefix=</span><span class="s">"s"</span> <span class="na">uri=</span><span class="s">"/struts-tags"</span> <span class="err">%</span><span class="nt">&gt;</span>
-<span class="nt">&lt;</span><span class="err">%@</span> <span class="na">taglib</span> <span class="na">prefix=</span><span class="s">"sx"</span> <span class="na">uri=</span><span class="s">"/struts-dojo-tags"</span> <span class="err">%</span><span class="nt">&gt;</span>
-<span class="c">&lt;!--// START SNIPPET: common-include--&gt;</span>
-<span class="nt">&lt;sx:head</span> <span class="na">cache=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
-<span class="c">&lt;!--// END SNIPPET: common-include--&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">404: Not Found</code></pre></figure>
 
 <blockquote>
   <p>The above sample is from Struts trunk; for 2.0.6 you should use <code class="language-plaintext highlighter-rouge">&lt;s:head debug="true"/&gt;</code>.</p>
