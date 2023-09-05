@@ -19,9 +19,9 @@ pipeline {
     stage('Build a staged website') {
       steps {
         sh '''
-          echo Generating a new version of website        
+          echo Generating a new version of website
 
-          gem install --install-dir ${GEM_HOME} bundler -v '2.3.23'          
+          gem install --install-dir ${GEM_HOME} bundler -v '2.3.23'
 
           bundle config set --local path ${GEM_HOME}
           bundle install
@@ -41,7 +41,7 @@ pipeline {
           git fetch asf
           git checkout asf-staging
           git pull asf asf-staging
-          
+
           cp -r _site/* content
           cp -r _site/.htaccess content/.htaccess
 
@@ -70,7 +70,7 @@ pipeline {
     failure {
       script {
         emailext(
-            //to: "dev@struts.apache.org",
+            //to: "commits@struts.apache.org",
             recipientProviders: [[$class: 'DevelopersRecipientProvider']],
             from: "Mr. Jenkins <jenkins@builds.apache.org>",
             subject: "Jenkins job ${env.JOB_NAME}#${env.BUILD_NUMBER} failed",
@@ -93,7 +93,7 @@ Director of Continuous Integration
     fixed {
       script {
         emailext(
-            //to: "dev@struts.apache.org",
+            //to: "commits@struts.apache.org",
             recipientProviders: [[$class: 'DevelopersRecipientProvider']],
             from: 'Mr. Jenkins <jenkins@builds.apache.org>',
             subject: "Jenkins job ${env.JOB_NAME}#${env.BUILD_NUMBER} back to normal",
