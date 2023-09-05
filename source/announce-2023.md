@@ -29,28 +29,31 @@ to maintaining applications over time.
 Below is a full list of all changes:
 
 **Bug**
-WW-5330 - Issue when submitting a form with a textarea containing more than 4000 characters.
-WW-5331 - Access to request attributes via tags is broken
+
+- WW-5330 - Issue when submitting a form with a textarea containing more than 4000 characters.
+- WW-5331 - Access to request attributes via tags is broken
 
 **Improvement**
-WW-5233 - Include Apache Tiles code base in the Tiles plugin
-WW-5321 - notify / document about new maxStringLength limitation
-WW-5327 - Stop using JavaBeans notation for setters in SecurityMemberAccess & MemberAccessValueStack
-WW-5332 - Validate excluded package name list for missing commas
-WW-5334 - Misc VelocityManager code cleanup
-WW-5336 - Merge OgnlTool class into StrutsUtil class
-WW-5337 - Improve performance of excluded classes and packages
+
+- WW-5233 - Include Apache Tiles code base in the Tiles plugin
+- WW-5321 - notify / document about new maxStringLength limitation
+- WW-5327 - Stop using JavaBeans notation for setters in SecurityMemberAccess & MemberAccessValueStack
+- WW-5332 - Validate excluded package name list for missing commas
+- WW-5334 - Misc VelocityManager code cleanup
+- WW-5336 - Merge OgnlTool class into StrutsUtil class
+- WW-5337 - Improve performance of excluded classes and packages
 
 **Dependency**
-WW-5315 - Upgrades ASM to version 9.5
-WW-5316 - Upgrades commons-io to version 2.13.0
-WW-5317 - Upgrades log4j-api to version 2.20.0
-WW-5318 - Upgrades slf4j-api to version 2.0.7
-WW-5320 - finish Reproducible Builds
-WW-5322 - Upgrade Jackson version to 2.15.2
-WW-5323 - Upgrade JasperReports to version 6.20.5
-WW-5325 - Upgrade commons-lang3 to version 2.13.0
-WW-5329 - Upgrade xstream to version 1.4.20
+
+- WW-5315 - Upgrades ASM to version 9.5
+- WW-5316 - Upgrades commons-io to version 2.13.0
+- WW-5317 - Upgrades log4j-api to version 2.20.0
+- WW-5318 - Upgrades slf4j-api to version 2.0.7
+- WW-5320 - finish Reproducible Builds
+- WW-5322 - Upgrade Jackson version to 2.15.2
+- WW-5323 - Upgrade JasperReports to version 6.20.5
+- WW-5325 - Upgrade commons-lang3 to version 2.13.0
+- WW-5329 - Upgrade xstream to version 1.4.20
 
 > Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+6.3.0) to find more details about performed
 > bug fixes and improvements.
