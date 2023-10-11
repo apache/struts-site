@@ -43,40 +43,52 @@ Configuring `web.xml` for the framework is a matter of adding a filter and filte
 </web-app>
 ```
 
-## Changed filter package in Struts >= 2.5
+See [SiteMesh Plugin](../plugins/sitemesh-plugin) for an example on when to use separate Filters for prepare and execution phase.
 
-As from Struts 2.5 all filters were moved to top package, if you are using older version you must use the old package, 
-see example:
+## Custom mapping
+
+The above approach is a preferred way of enabling support for Struts in your web application. Yet you can have more
+specific requirements and use more specific mapping like presented below:
 
 ```xml
-<web-app id="WebApp_9" version="2.4" 
-	xmlns="http://java.sun.com/xml/ns/j2ee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app ...>
 
     <filter>
         <filter-name>struts2</filter-name>
-        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
     </filter>
-    ...
+
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+
 </web-app>
 ```
 
-## Changed Filter Structure in Struts >= 2.1.3
-
-To split up the the dispatcher phases, FilterDispatcher is deprecated since Struts 2.1.3. If working with older 
-versions, you need to use
+In such case only requests ending with `.action` will be directed by a Servlet container to be handled by Struts filter.
+This can impact serving static content provided by Struts and you will have to define additional mapping to support it:
 
 ```xml
-    ...
+<web-app ...>
+
     <filter>
         <filter-name>struts2</filter-name>
-        <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
-    ...
-```
+        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    </filter>
 
-See [SiteMesh Plugin](../plugins/sitemesh-plugin) for an example on when to use separate Filters for prepare 
-and execution phase.
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/static/*</url-pattern>
+    </filter-mapping>
+
+</web-app>
+```
 
 ## Exclude specific URLs
 
@@ -110,8 +122,8 @@ the container will discover it automatically.
 `META-INF` folder, and add a `taglib` element to the `web.xml`.
 
 ```xml
-    <!-- ... -->
-    </welcome-file-list>
+<web-app ...>
+    <!-- ... --> 
 
     <taglib>
        <taglib-uri>/s</taglib-uri>
@@ -155,8 +167,8 @@ Take a look on default implementations - `DefaultFileManager.java` and `DefaultF
 
 ## Custom configuration provider
 
-It is possible to use your custom `ConfigurationProvider` to programmatically configure your application. To do this use 
-`configProviders` (it can be a comma-separated list of class names) `<init-param/>` as below:
+It is possible to use your custom `ConfigurationProvider` to programmatically configure your application. To do this use 
+`configProviders` (it can be a comma-separated list of class names) `<init-param/>` as below:
 
 ```xml
 <filter>
@@ -169,4 +181,4 @@ It is possible to use your custom `ConfigurationProvider` to programmatically c
 </filter>
 ```
 
-See [Configuration Provider & Configuration](configuration-provider-and-configuration) for more details.
+See [Configuration Provider & Configuration](configuration-provider-and-configuration) for more details.

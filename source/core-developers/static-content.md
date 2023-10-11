@@ -9,15 +9,22 @@ title: Static Content
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-Struts can serve static content like css and javascript files. This feature is enabled by default, but can be disabled
-by setting:
+Struts can serve a static content like CSS and JavaScript files using a predefined path. By default, these resources
+are served using `/static` path defined using a constant `struts.ui.staticContentPath` - see below for more details.
+
+Please remember to include this path in your filter mapping if you use a custom mapping, see [web.xml](web-xml.md) example config. 
+
+## Disabling static content
+
+You can disable this feature by setting the following constant to `false`. Once disabled you must provided the required
+CSS & JavaScript files on your own, which can be a good thing when you want to use a CDN.
 
 ```xml
 <constant name="struts.serve.static" value="false"/>
 ```
 
-> If you disable this feature, but use the `xhtml`, or `css_xhtml` theme, make sure that the javascript and css files
-> shipped inside the core jar are extracted to your web application directory.
+> If you disable this feature, but you use the `xhtml`, or `css_xhtml` theme, make sure the JavasScript and CSS files
+> shipped inside the core jar are extracted to your web application directory or served in some other way.
 
 ## Custom Static Content Loaders
 
