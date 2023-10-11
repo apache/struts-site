@@ -133,8 +133,7 @@
 
 <ul id="markdown-toc">
   <li><a href="#simple-example" id="markdown-toc-simple-example">Simple Example</a></li>
-  <li><a href="#changed-filter-package-in-struts--25" id="markdown-toc-changed-filter-package-in-struts--25">Changed filter package in Struts &gt;= 2.5</a></li>
-  <li><a href="#changed-filter-structure-in-struts--213" id="markdown-toc-changed-filter-structure-in-struts--213">Changed Filter Structure in Struts &gt;= 2.1.3</a></li>
+  <li><a href="#custom-mapping" id="markdown-toc-custom-mapping">Custom mapping</a></li>
   <li><a href="#exclude-specific-urls" id="markdown-toc-exclude-specific-urls">Exclude specific URLs</a></li>
   <li><a href="#taglib-example" id="markdown-toc-taglib-example">Taglib Example</a></li>
   <li><a href="#custom-filemanager-and-filemanagerfactory-implementations" id="markdown-toc-custom-filemanager-and-filemanagerfactory-implementations">Custom FileManager and FileManagerFactory implementations</a></li>
@@ -174,38 +173,50 @@ should behave.</p>
 <span class="nt">&lt;/web-app&gt;</span>
 </code></pre></div></div>
 
-<h2 id="changed-filter-package-in-struts--25">Changed filter package in Struts &gt;= 2.5</h2>
+<p>See <a href="../plugins/sitemesh-plugin">SiteMesh Plugin</a> for an example on when to use separate Filters for prepare and execution phase.</p>
 
-<p>As from Struts 2.5 all filters were moved to top package, if you are using older version you must use the old package, 
-see example:</p>
+<h2 id="custom-mapping">Custom mapping</h2>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;web-app</span> <span class="na">id=</span><span class="s">"WebApp_9"</span> <span class="na">version=</span><span class="s">"2.4"</span> 
-	<span class="na">xmlns=</span><span class="s">"http://java.sun.com/xml/ns/j2ee"</span> 
-	<span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> 
-	<span class="na">xsi:schemaLocation=</span><span class="s">"http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span><span class="nt">&gt;</span>
+<p>The above approach is a preferred way of enabling support for Struts in your web application. Yet you can have more
+specific requirements and use more specific mapping like presented below:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;web-app</span> <span class="err">...</span><span class="nt">&gt;</span>
 
     <span class="nt">&lt;filter&gt;</span>
         <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
-        <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
+        <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
     <span class="nt">&lt;/filter&gt;</span>
-    ...
+
+    <span class="nt">&lt;filter-mapping&gt;</span>
+        <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
+        <span class="nt">&lt;url-pattern&gt;</span>*.action<span class="nt">&lt;/url-pattern&gt;</span>
+    <span class="nt">&lt;/filter-mapping&gt;</span>
+
 <span class="nt">&lt;/web-app&gt;</span>
 </code></pre></div></div>
 
-<h2 id="changed-filter-structure-in-struts--213">Changed Filter Structure in Struts &gt;= 2.1.3</h2>
+<p>In such case only requests ending with <code class="language-plaintext highlighter-rouge">.action</code> will be directed by a Servlet container to be handled by Struts filter.
+This can impact serving static content provided by Struts and you will have to define additional mapping to support it:</p>
 
-<p>To split up the the dispatcher phases, FilterDispatcher is deprecated since Struts 2.1.3. If working with older 
-versions, you need to use</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;web-app</span> <span class="err">...</span><span class="nt">&gt;</span>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ...
     <span class="nt">&lt;filter&gt;</span>
         <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
-        <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.FilterDispatcher<span class="nt">&lt;/filter-class&gt;</span>
-    ...
-</code></pre></div></div>
+        <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
+    <span class="nt">&lt;/filter&gt;</span>
 
-<p>See <a href="../plugins/sitemesh-plugin">SiteMesh Plugin</a> for an example on when to use separate Filters for prepare 
-and execution phase.</p>
+    <span class="nt">&lt;filter-mapping&gt;</span>
+        <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
+        <span class="nt">&lt;url-pattern&gt;</span>*.action<span class="nt">&lt;/url-pattern&gt;</span>
+    <span class="nt">&lt;/filter-mapping&gt;</span>
+
+    <span class="nt">&lt;filter-mapping&gt;</span>
+        <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
+        <span class="nt">&lt;url-pattern&gt;</span>/static/*<span class="nt">&lt;/url-pattern&gt;</span>
+    <span class="nt">&lt;/filter-mapping&gt;</span>
+
+<span class="nt">&lt;/web-app&gt;</span>
+</code></pre></div></div>
 
 <h2 id="exclude-specific-urls">Exclude specific URLs</h2>
 
@@ -239,8 +250,8 @@ the container will discover it automatically.</p>
 <code class="language-plaintext highlighter-rouge">META-INF</code> folder, and add a <code class="language-plaintext highlighter-rouge">taglib</code> element to the <code class="language-plaintext highlighter-rouge">web.xml</code>.</p>
 </blockquote>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c">&lt;!-- ... --&gt;</span>
-    <span class="nt">&lt;/welcome-file-list&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;web-app</span> <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span> 
 
     <span class="nt">&lt;taglib&gt;</span>
        <span class="nt">&lt;taglib-uri&gt;</span>/s<span class="nt">&lt;/taglib-uri&gt;</span>
@@ -282,8 +293,8 @@ version of FileManager. But it must be registered at “the beginning” to supp
 
 <h2 id="custom-configuration-provider">Custom configuration provider</h2>
 
-<p>It is possible to use your custom <code class="language-plaintext highlighter-rouge">ConfigurationProvider</code> to programmatically configure your application. To do this use 
-<code class="language-plaintext highlighter-rouge">configProviders</code> (it can be a comma-separated list of class names) <code class="language-plaintext highlighter-rouge">&lt;init-param/&gt;</code> as below:</p>
+<p>It is possible to use your custom <code class="language-plaintext highlighter-rouge">ConfigurationProvider</code> to programmatically configure your application. To do this use 
+<code class="language-plaintext highlighter-rouge">configProviders</code> (it can be a comma-separated list of class names) <code class="language-plaintext highlighter-rouge">&lt;init-param/&gt;</code> as below:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
      <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
@@ -295,7 +306,7 @@ version of FileManager. But it must be registered at “the beginning” to supp
 <span class="nt">&lt;/filter&gt;</span>
 </code></pre></div></div>
 
-<p>See <a href="configuration-provider-and-configuration">Configuration Provider &amp; Configuration</a> for more details.</p>
+<p>See <a href="configuration-provider-and-configuration">Configuration Provider &amp; Configuration</a> for more details.</p>
 
   </section>
 </article>

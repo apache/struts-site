@@ -132,21 +132,29 @@
     <h1 class="no_toc" id="static-content">Static Content</h1>
 
 <ul id="markdown-toc">
+  <li><a href="#disabling-static-content" id="markdown-toc-disabling-static-content">Disabling static content</a></li>
   <li><a href="#custom-static-content-loaders" id="markdown-toc-custom-static-content-loaders">Custom Static Content Loaders</a></li>
   <li><a href="#default-content-loader" id="markdown-toc-default-content-loader">Default Content Loader</a></li>
   <li><a href="#default-path" id="markdown-toc-default-path">Default path</a></li>
   <li><a href="#preventing-struts-from-handling-a-request" id="markdown-toc-preventing-struts-from-handling-a-request">Preventing Struts from handling a request</a></li>
 </ul>
 
-<p>Struts can serve static content like css and javascript files. This feature is enabled by default, but can be disabled
-by setting:</p>
+<p>Struts can serve a static content like CSS and JavaScript files using a predefined path. By default, these resources
+are served using <code class="language-plaintext highlighter-rouge">/static</code> path defined using a constant <code class="language-plaintext highlighter-rouge">struts.ui.staticContentPath</code> - see below for more details.</p>
+
+<p>Please remember to include this path in your filter mapping if you use a custom mapping, see <a href="web-xml.md">web.xml</a> example config.</p>
+
+<h2 id="disabling-static-content">Disabling static content</h2>
+
+<p>You can disable this feature by setting the following constant to <code class="language-plaintext highlighter-rouge">false</code>. Once disabled you must provided the required
+CSS &amp; JavaScript files on your own, which can be a good thing when you want to use a CDN.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.serve.static"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p>If you disable this feature, but use the <code class="language-plaintext highlighter-rouge">xhtml</code>, or <code class="language-plaintext highlighter-rouge">css_xhtml</code> theme, make sure that the javascript and css files
-shipped inside the core jar are extracted to your web application directory.</p>
+  <p>If you disable this feature, but you use the <code class="language-plaintext highlighter-rouge">xhtml</code>, or <code class="language-plaintext highlighter-rouge">css_xhtml</code> theme, make sure the JavasScript and CSS files
+shipped inside the core jar are extracted to your web application directory or served in some other way.</p>
 </blockquote>
 
 <h2 id="custom-static-content-loaders">Custom Static Content Loaders</h2>
