@@ -20,13 +20,13 @@ overall framework's security.
 
     All resources will stay where they are. The documentation will still be accessible from the Apache Struts homepage, 
     as well as the downloads for all released Struts 2.5.x versions. All the Struts 2.5.x source code can be found 
-    in the Apache Struts Git repository under branch `support/struts-2-5-x`, now and in the future. All released Maven
-    artifacts will still be accessible in Maven Central.
+    in the Apache Struts Git repository under branch [support/struts-2-5-x](https://github.com/apache/struts/tree/support/struts-2-5-x),
+    now and in the future. All released Maven artifacts will still be accessible in Maven Central.
 
 *   **Given a major security problem or a serious bug is reported for Struts 2.5.x in near future, can we expect a new release with fixes?**
 
     Yes, we will continue to support Struts 2.5.x in case of security issues for the next 6 months, after that time 
-    we won't support this branch in any case.   
+    we won't support this branch in any case.
 
 *   **Is there an immediate need to eliminate Struts 2.5.x from my projects?**
 

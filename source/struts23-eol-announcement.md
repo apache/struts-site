@@ -18,7 +18,8 @@ internal changes to improve overall framework's security.
 
     All resources will stay where they are. The documentation will still be accessible from the Apache Struts homepage, as well as the downloads 
     for all released Struts 2.3.x versions. All of the Struts 2.3.x source code can be found in the Apache Struts Git repository under branch 
-    `support/struts-2-3-x`, now and in future. All released Maven artifacts will still be accessible in Maven Central.
+    [support/struts-2-3-x(https://github.com/apache/struts/tree/support/struts-2-3-x), now and in the future.
+    All released Maven artifacts will still be accessible in Maven Central.
 
 *   **Given a major security problem or a serious bug is reported for Struts 2.3.x in near future, can we expect a new release with fixes?**
 
