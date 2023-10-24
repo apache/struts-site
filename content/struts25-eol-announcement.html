@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>fieldexpression validator</title>
+  <title>Apache Struts 2.5.x EOL Announcement</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -145,49 +145,63 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/fieldexpression-validator.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/struts25-eol-announcement.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="validation.html" title="back to Validation"><< back to Validation</a>
-    
-    <h1 class="no_toc" id="fieldexpression-validator">fieldexpression validator</h1>
+    <h1 id="apache-struts-25x-end-of-life-eol-announcement">Apache Struts 2.5.x End-Of-Life (EOL) Announcement</h1>
 
-<ul id="markdown-toc">
-  <li><a href="#description" id="markdown-toc-description">Description</a></li>
-  <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
-  <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
-</ul>
+<p><strong>The Apache Struts Project Team would like to inform you that the Struts 2.5.x web framework will reach its 
+end of life in 6 months and won’t be longer officially supported.</strong></p>
 
-<h2 id="description">Description</h2>
+<p>This announcement takes place on 2023-10-30 and starting from that date we will only support Apache Struts 2.5.x 
+in case of security vulnerabilities. Within those 6 months period you can expect that we do our best to keep 
+Struts 2.5.x branch secure, but some of the security related changes cannot happen without architectural changes that 
+can affect backward compatibility. This what happened to Struts 2.5.x, we introduced some internal changes to improve 
+overall framework’s security.</p>
 
-<p>Validates a field using an OGNL expression.</p>
-
-<h2 id="parameters">Parameters</h2>
+<h2 id="questions-and-answers">Questions and Answers</h2>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">fieldName</code> - The field name this validator is validating. Required if using Plain-Validator Syntax otherwise not required.</li>
-  <li><code class="language-plaintext highlighter-rouge">expression</code> - The Ognl expression (must evaluate to a boolean) which is to be validated the stack.</li>
+  <li>
+    <p><strong>With the announcement of Struts 2.5.x EOL, what happens to Struts 2.5.x resources?</strong></p>
+
+    <p>All resources will stay where they are. The documentation will still be accessible from the Apache Struts homepage, 
+as well as the downloads for all released Struts 2.5.x versions. All the Struts 2.5.x source code can be found 
+in the Apache Struts Git repository under branch <code class="language-plaintext highlighter-rouge">support/struts-2-5-x</code>, now and in the future. All released Maven
+artifacts will still be accessible in Maven Central.</p>
+  </li>
+  <li>
+    <p><strong>Given a major security problem or a serious bug is reported for Struts 2.5.x in near future, can we expect a new release with fixes?</strong></p>
+
+    <p>Yes, we will continue to support Struts 2.5.x in case of security issues for the next 6 months, after that time 
+we won’t support this branch in any case.</p>
+  </li>
+  <li>
+    <p><strong>Is there an immediate need to eliminate Struts 2.5.x from my projects?</strong></p>
+
+    <p>As far as the Struts team is currently aware of, there is no urgent issue posing the immediate need to eliminate 
+Struts 2.5.x usage from your projects. However, you should consider migration to the latest available version
+as we stop supporting this version in 6 months.</p>
+  </li>
+  <li>
+    <p><strong>We plan to start a new project based on Struts 2.5.x. Can we still do so?</strong></p>
+
+    <p>Basically yes, but we would not recommend doing so. As long as no code line is written, it is very easy to conceptually 
+select the latest version of Struts 2.</p>
+  </li>
+  <li>
+    <p><strong>My friends / colleagues and I would like to see Struts 2.5.x being maintained again. What can we do?</strong></p>
+
+    <p>You are free to put effort in Struts 2.5.x. There are basically one possibility: fork the existing source and support 
+it on your own.</p>
+  </li>
+  <li>
+    <p><strong>I’m using Apache Struts 6.x.x, what will happen with this version?</strong></p>
+
+    <p>Struts 6.x.x is still actively supported, we are working on new versions as well as we are preparing 
+a new Struts 7.x.x version. Migration from Struts 2.5.x to Struts 6.x.x will a way smoother than switching from 
+Struts 2.5.x to Struts 7.x.x.</p>
+  </li>
 </ul>
-
-<h2 id="examples">Examples</h2>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Plain Validator Syntax --&gt;</span>
-<span class="nt">&lt;validators&gt;</span>
-    <span class="c">&lt;!-- Plain Validator Syntax --&gt;</span>
-    <span class="nt">&lt;validator</span> <span class="na">type=</span><span class="s">"fieldexpression"</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"fieldName"</span><span class="nt">&gt;</span>myField<span class="nt">&lt;/param&gt;</span>
-       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"expression"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[#myCreditLimit &gt; #myGirfriendCreditLimit]]&gt;</span><span class="nt">&lt;/param&gt;</span>
-       <span class="nt">&lt;message&gt;</span>My credit limit should be MORE than my girlfriend<span class="nt">&lt;/message&gt;</span>
-    <span class="nt">&lt;validator&gt;</span>
-     
-    <span class="c">&lt;!-- Field Validator Syntax --&gt;</span>
-    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"myField"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;field-validator</span> <span class="na">type=</span><span class="s">"fieldexpression"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"expression"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[#myCreditLimit &gt; #myGirfriendCreditLimit]]&gt;</span><span class="nt">&lt;/param&gt;</span>
-            <span class="nt">&lt;message&gt;</span>My credit limit should be MORE than my girlfriend<span class="nt">&lt;/message&gt;</span>
-        <span class="nt">&lt;/field-validator&gt;</span>
-    <span class="nt">&lt;/field&gt;</span>
-<span class="nt">&lt;/validators&gt;</span>
-</code></pre></div></div>
 
   </section>
 </article>
