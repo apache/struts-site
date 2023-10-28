@@ -13,6 +13,15 @@ title: Announcements 2023
   Skip to: <a href="announce-2022">Announcements - 2022</a>
 </p>
 
+#### 30 October 2023 - Apache Struts 2.5.x End-Of-Life (EOL) Announcement {#a20231030}
+
+The Apache Struts Project Team would like to inform you that the Struts 2.5.x web framework will reach
+its end of life in 6 months and won't be longer officially supported.
+
+Please check the following reading to find more details.
+
+- [Apache Struts 2.5.x EOL Announcement](struts25-eol-announcement), including a detailed Q/A section
+
 #### 13 September 2023 - Apache Struts version 6.3.0.1 General Availability {#a20230913-1}
 
 The Apache Struts group is pleased to announce that Apache Struts version 6.3.0.1 is available as a "General Availability"
