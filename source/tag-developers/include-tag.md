@@ -18,10 +18,18 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 > through the `<s:property.../>` tag since no ValueStack will be created. You can, however, access them in a servlet
 > via the HttpServletRequest object or from a JSP page via a scriptlet.
 
-**How To access parameters**
+### How to access parameters
 
 Parameters are passed as request parameters, so use the `${param.ParamName}` notation to access them. Do not use 
 the **property** tag to access parameters in included files.
+
+Below it's an example how you can access parameters passed into the included page:
+
+```
+<s:set var="paramName" scope="page">${param.ParamName}</s:set>
+```
+
+> **Note**: You can access such params without using JSTL, just use `${param.ParamName}` notation in Struts tags.
 
 ## Attributes
 
@@ -46,7 +54,7 @@ do an include myJsp.jsp page
 </s:include>
 ```
 
-do an include to myJsp.jsp page with parameters `param1=value1` and `param2=value2`
+do an include to `myJsp.jsp` page with parameters `param1=value1` and `param2=value2`
 
 **Example 3**
 
@@ -57,4 +65,4 @@ do an include to myJsp.jsp page with parameters `param1=value1` and `param2=valu
 </s:include>
 ```
 
-do an include to myJsp.jsp page with parameters `param1=value1` and `param2=value2`
+do an include to `myJsp.jsp` page with parameters `param1=value1` and `param2=value2`
