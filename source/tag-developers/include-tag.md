@@ -20,16 +20,17 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 ### How to access parameters
 
-Parameters are passed as request parameters, so use the `${param.ParamName}` notation to access them. Do not use 
-the **property** tag to access parameters in included files.
+Parameters are passed as request parameters, so use the `${param.paramName}` notation to access them. Do not use 
+the `<s:property/>` tag to access parameters in included files.
 
 Below it's an example how you can access parameters passed into the included page:
 
 ```
-<s:set var="paramName" scope="page">${param.ParamName}</s:set>
+<s:set var="paramName" scope="page">${param.paramName}</s:set>
+<s:property value="paramName"/>
 ```
 
-> **Note**: You can access such params without using JSTL, just use `${param.ParamName}` notation in Struts tags.
+> **Note**: You can access such params without using JSTL, just use `${param.paramName}` notation.
 
 ## Attributes
 
@@ -66,3 +67,13 @@ do an include to `myJsp.jsp` page with parameters `param1=value1` and `param2=va
 ```
 
 do an include to `myJsp.jsp` page with parameters `param1=value1` and `param2=value2`
+
+**Example 4**
+
+```jsp
+<s:set var="param1" scope="page">${param.param1}</s:set>
+Param1 = <s:property value="param1"/>
+Param2 = ${param.param2}
+```
+
+do access passed parameters in the included page
