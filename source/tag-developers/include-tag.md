@@ -27,17 +27,16 @@ Below it's an example how you can access parameters passed into the included pag
 
 with scope:
 ```
-<s:set var="paramName" scope="page">${param.paramName}</s:set>
-<s:property value="paramName"/>
+<s:set var="innerName" scope="page">${param.paramName}</s:set>
+<s:property value="#attr.innerName"/>
 ```
 
 with no scope:
 ```jsp
-<s:set var="paramName">${param.paramName}</s:set>
-<s:property value="paramName"/>
-
-<s:property value="#attr.paramName"/>
-<s:property value="#paramName"/>
+<s:set var="innerName">${param.paramName}</s:set>
+<s:property value="innerName"/>
+<s:property value="#attr.innerName"/>
+<s:property value="#innerName"/>
 ```
 
 > **Note**: You can access such params without using JSTL, just use `${param.paramName}` notation.
