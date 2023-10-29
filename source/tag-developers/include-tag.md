@@ -25,9 +25,19 @@ the `<s:property/>` tag to access parameters in included files.
 
 Below it's an example how you can access parameters passed into the included page:
 
+with scope:
 ```
 <s:set var="paramName" scope="page">${param.paramName}</s:set>
 <s:property value="paramName"/>
+```
+
+with no scope:
+```jsp
+<s:set var="paramName">${param.paramName}</s:set>
+<s:property value="paramName"/>
+
+<s:property value="#attr.paramName"/>
+<s:property value="#paramName"/>
 ```
 
 > **Note**: You can access such params without using JSTL, just use `${param.paramName}` notation.
@@ -70,10 +80,19 @@ do an include to `myJsp.jsp` page with parameters `param1=value1` and `param2=va
 
 **Example 4**
 
+accessing passed parameters in the included page
+
+with scope:
 ```jsp
 <s:set var="param1" scope="page">${param.param1}</s:set>
-Param1 = <s:property value="param1"/>
-Param2 = ${param.param2}
+<s:property value="#attr.param1"/>
 ```
 
-do access passed parameters in the included page
+with no scope:
+```jsp
+<s:set var="param2">${param.param2}</s:set>
+<s:property value="param2"/>
+
+<s:property value="#attr.param2"/>
+<s:property value="#param2"/>
+```
