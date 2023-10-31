@@ -64,13 +64,13 @@ Page attributes are accessed via OGNL using the `#attr` stack value, and Applica
 the `#application` stack value.
 
 The `#attr` stack value will search the `javax.servlet.jsp.PageContext` for the specified key. If the `PageContext`
-doesn't exist, it will search the request, session, and application scopes, in that order.
+doesn't exist, it will search the `request`, `session` and `application` scopes, in that order.
 
-**Accessing attributes in the Application, Session, Request, or Page scope from a JSP**
+**Accessing attributes in the Application, Session, Request or Page scope from a JSP**
+
+Retrieve the attribute (property), with key `myId`, from the specified scope:
 
 ```jsp
-<p>Retrieve the attribute (property), with key myId, from the specified scope:</p>
-
 <s:property value="#application.myId" />
 
 <s:property value="#session.myId" />
@@ -78,6 +78,8 @@ doesn't exist, it will search the request, session, and application scopes, in t
 <s:property value="#request.myId" />
 
 <s:property value="#attr.myId" />
-
-<p>Reminder: #attr is for Page scope attributes first, but will search the remaining scopes, in order, seeking a match.</p>
 ```
+
+**Note**: `#attr` is for Page scope attributes first, but will search the remaining scopes, in order, seeking a match.
+In opposite using just `#` means you want to fetch a value from the top of the [ValueStack](../tag-developers/access-to-valuestack-from-jsps.md) 
+without searching down the stack.
