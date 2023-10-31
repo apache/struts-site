@@ -21,11 +21,16 @@ Explore commercial support options for Apache Struts and JavaEE applications thr
 For detailed assistance, kindly reach out to them directly. Help us keep this list current; if you’re aware of other 
 supportive companies, please share details with us.
 
-Last updated: **2023-10-10**
+Last updated: **2023-10-31**
 
-1. [Company name]
-    - contact details: phone, web page, contact person
-    - scope of support: consulting, development, testing, audit
+1. [SoftwareMill](https://softwaremill.com/contact/)
+    - contact details:
+      - [Apache Struts Consultancy](https://softwaremill.com/services/apache-struts-consultancy/)
+      - [hello@softwaremill.com](mailto:hello@softwaremill.com)
+      - phone:
+        - [+48 22 188 11 33](tel:+48221881133) (PL)
+        - [+44 56 0156 3406](tel:+445601563406) (UK)
+    - scope of support: consulting, Java & UI development, audit
 
 ## How to add a new company
 
