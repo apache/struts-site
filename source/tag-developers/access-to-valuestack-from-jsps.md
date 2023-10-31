@@ -1,6 +1,9 @@
 ---
 layout: default
 title: Access to ValueStack from JSPs
+parent:
+  title: JSP
+  url: jsp
 ---
 
 # Access to ValueStack from JSPs
