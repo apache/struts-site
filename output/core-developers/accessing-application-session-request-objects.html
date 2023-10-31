@@ -211,22 +211,24 @@ Page attributes are accessed via OGNL using the <code class="language-plaintext 
 the <code class="language-plaintext highlighter-rouge">#application</code> stack value.</p>
 
 <p>The <code class="language-plaintext highlighter-rouge">#attr</code> stack value will search the <code class="language-plaintext highlighter-rouge">javax.servlet.jsp.PageContext</code> for the specified key. If the <code class="language-plaintext highlighter-rouge">PageContext</code>
-doesn’t exist, it will search the request, session, and application scopes, in that order.</p>
+doesn’t exist, it will search the <code class="language-plaintext highlighter-rouge">request</code>, <code class="language-plaintext highlighter-rouge">session</code> and <code class="language-plaintext highlighter-rouge">application</code> scopes, in that order.</p>
 
-<p><strong>Accessing attributes in the Application, Session, Request, or Page scope from a JSP</strong></p>
+<p><strong>Accessing attributes in the Application, Session, Request or Page scope from a JSP</strong></p>
 
-<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>Retrieve the attribute (property), with key myId, from the specified scope:<span class="nt">&lt;/p&gt;</span>
+<p>Retrieve the attribute (property), with key <code class="language-plaintext highlighter-rouge">myId</code>, from the specified scope:</p>
 
-<span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#application.myId"</span> <span class="nt">/&gt;</span>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#application.myId"</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#session.myId"</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#request.myId"</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"#attr.myId"</span> <span class="nt">/&gt;</span>
-
-<span class="nt">&lt;p&gt;</span>Reminder: #attr is for Page scope attributes first, but will search the remaining scopes, in order, seeking a match.<span class="nt">&lt;/p&gt;</span>
 </code></pre></div></div>
+
+<p><strong>Note</strong>: <code class="language-plaintext highlighter-rouge">#attr</code> is for Page scope attributes first, but will search the remaining scopes, in order, seeking a match.
+In opposite using just <code class="language-plaintext highlighter-rouge">#</code> means you want to fetch a value from the top of the <a href="../tag-developers/access-to-valuestack-from-jsps">ValueStack</a> 
+without searching down the stack.</p>
 
   </section>
 </article>
