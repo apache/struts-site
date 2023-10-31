@@ -81,5 +81,5 @@ Retrieve the attribute (property), with key `myId`, from the specified scope:
 ```
 
 **Note**: `#attr` is for Page scope attributes first, but will search the remaining scopes, in order, seeking a match.
-In opposite using just `#` means you want to fetch a value from the top of the [ValueStack](../tag-developers/access-to-valuestack-from-jsps.md) 
+In opposite using just `#` means you want to fetch a value from the top of the [ValueStack](../tag-developers/access-to-valuestack-from-jsps) 
 without searching down the stack.
