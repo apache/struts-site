@@ -315,8 +315,6 @@ There are 4 options that can be used to configure excluded packages and classes:
 
 The defaults are defined [here](https://github.com/apache/struts/blob/master/core/src/main/resources/struts-excluded-classes.xml).
 
-Additionally, static methods are blocked, and static fields can also be blocked with 'struts.allowStaticFieldAccess'.
-
 Any expression or target which does not pass this criteria will be blocked, and you will see a warning in the logs:
 
 ```
@@ -328,6 +326,15 @@ of such expression is `java.lang.Class` which is excluded.
 
 It is possible to redefine the above constants in `struts.xml`, but avoid reducing the list, instead extending the list
 with other known dangerous classes or packages in your application.
+
+#### Additional Options
+
+We additionally recommend enabling the following options and hope to enable them by default in a future major version.
+
+ * `struts.ognl.allowStaticFieldAccess=false` - static methods are always blocked, but static fields can also optionally be blocked
+ * `struts.disallowProxyMemberAccess=true` - disallow proxied objects from being used in OGNL expressions as they may present a security risk
+ * `struts.disallowDefaultPackageAccess=true` - disallow access to classes in the default package which should not be used in production
+ * `struts.ognl.disallowCustomOgnlMap=true` - disallow construction of custom OGNL maps which can be used to bypass the SecurityMemberAccess policy
 
 #### Allowlist Capability
 
