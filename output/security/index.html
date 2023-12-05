@@ -163,20 +163,25 @@
       <li><a href="#do-not-use-incoming-untrusted-user-input-in-forced-expression-evaluation" id="markdown-toc-do-not-use-incoming-untrusted-user-input-in-forced-expression-evaluation">Do not use incoming, untrusted user input in forced expression evaluation</a></li>
       <li><a href="#use-struts-tags-instead-of-raw-el-expressions" id="markdown-toc-use-struts-tags-instead-of-raw-el-expressions">Use Struts tags instead of raw EL expressions</a></li>
       <li><a href="#define-custom-error-pages" id="markdown-toc-define-custom-error-pages">Define custom error pages</a></li>
-      <li><a href="#proactively-protect-from-ognl-expression-injections-attacks-if-easily-applicable" id="markdown-toc-proactively-protect-from-ognl-expression-injections-attacks-if-easily-applicable">Proactively protect from OGNL Expression Injections attacks if easily applicable</a>        <ul>
-          <li><a href="#run-ognl-expressions-inside-sandbox" id="markdown-toc-run-ognl-expressions-inside-sandbox">Run OGNL expressions inside sandbox</a></li>
-          <li><a href="#apply-a-maximum-allowed-length-on-ognl-expressions" id="markdown-toc-apply-a-maximum-allowed-length-on-ognl-expressions">Apply a maximum allowed length on OGNL expressions</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#internal-security-mechanism" id="markdown-toc-internal-security-mechanism">Internal security mechanism</a>    <ul>
-      <li><a href="#accessing-static-methods" id="markdown-toc-accessing-static-methods">Accessing static methods</a></li>
-      <li><a href="#ognl-is-used-to-call-actions-methods" id="markdown-toc-ognl-is-used-to-call-actions-methods">OGNL is used to call action’s methods</a></li>
-      <li><a href="#accepted--excluded-patterns" id="markdown-toc-accepted--excluded-patterns">Accepted / Excluded patterns</a></li>
+      <li><a href="#ambiguous-action-methods" id="markdown-toc-ambiguous-action-methods">Ambiguous Action Methods</a></li>
+      <li><a href="#accepted--excluded-patterns" id="markdown-toc-accepted--excluded-patterns">Accepted / Excluded Patterns</a></li>
       <li><a href="#strict-method-invocation" id="markdown-toc-strict-method-invocation">Strict Method Invocation</a></li>
       <li><a href="#resource-isolation-using-fetch-metadata" id="markdown-toc-resource-isolation-using-fetch-metadata">Resource Isolation Using Fetch Metadata</a></li>
       <li><a href="#cross-origin-isolation-with-coop-and-coep" id="markdown-toc-cross-origin-isolation-with-coop-and-coep">Cross Origin Isolation with COOP and COEP</a></li>
+    </ul>
+  </li>
+  <li><a href="#proactively-protecting-against-ognl-expression-injections-attacks" id="markdown-toc-proactively-protecting-against-ognl-expression-injections-attacks">Proactively protecting against OGNL Expression Injections attacks</a>    <ul>
+      <li><a href="#run-ognl-expressions-inside-sandbox" id="markdown-toc-run-ognl-expressions-inside-sandbox">Run OGNL expressions inside sandbox</a></li>
+      <li><a href="#apply-a-maximum-allowed-length-on-ognl-expressions" id="markdown-toc-apply-a-maximum-allowed-length-on-ognl-expressions">Apply a maximum allowed length on OGNL expressions</a></li>
+      <li><a href="#ognl-member-access" id="markdown-toc-ognl-member-access">OGNL Member Access</a>        <ul>
+          <li><a href="#allowlist-capability" id="markdown-toc-allowlist-capability">Allowlist Capability</a></li>
+          <li><a href="#extensibility" id="markdown-toc-extensibility">Extensibility</a></li>
+        </ul>
+      </li>
+      <li><a href="#struts-ognl-guard" id="markdown-toc-struts-ognl-guard">Struts OGNL Guard</a>        <ul>
+          <li><a href="#extensibility-1" id="markdown-toc-extensibility-1">Extensibility</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
@@ -326,7 +331,7 @@ Never use a raw <code class="language-plaintext highlighter-rouge">${}</code> EL
 error pages. This avoids exposing users to XSS attacks as Struts does not escape action’s names in automatically 
 generated error pages.</p>
 
-<p>You can eaither disable <a href="../core-developers/action-configuration#dynamic-method-invocation">DMI</a></p>
+<p>You can either disable <a href="../core-developers/action-configuration#dynamic-method-invocation">DMI</a></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.enable.DynamicMethodInvocation"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
@@ -342,69 +347,7 @@ generated error pages.</p>
 <span class="nt">&lt;/global-exception-mappings&gt;</span>
 </code></pre></div></div>
 
-<h3 id="proactively-protect-from-ognl-expression-injections-attacks-if-easily-applicable">Proactively protect from OGNL Expression Injections attacks if easily applicable</h3>
-
-<p>The framework has a history of critical security bugs, many tied to its use of OGNL technology; Due to its ability to 
-create or change executable code, OGNL is capable of introducing critical security flaws to any framework that uses it. 
-Multiple Struts 2 versions have been vulnerable to OGNL security flaws. Consequently, we’ve equipped OGNL and the 
-framework with following proactive optional possibilities since OGNL 3.1.24 and Struts 2.5.22. They’re disabled by 
-default but via enabling them, you can proactively protect from potential still unknown OGNL Expression Injections flaws:</p>
-
-<blockquote>
-  <p><strong>NOTE</strong>: These might break your current app functionality. Before using in production environment, you’re recommended
-to comprehensively test your app UI and functionalities with these enabled.</p>
-</blockquote>
-
-<h4 id="run-ognl-expressions-inside-sandbox">Run OGNL expressions inside sandbox</h4>
-
-<p>You can do this simply via adding <code class="language-plaintext highlighter-rouge">-Dognl.security.manager</code> to JVM arguments. OGNL thereupon utilizes Java Security
-Manager to run OGNL expressions (which includes your actions either!) inside a sandbox with no permission. It is worth 
-noting that it affects only OGNL expression execution and thereafter OGNL reverts Java Security Manager to its previous 
-state.</p>
-
-<h4 id="apply-a-maximum-allowed-length-on-ognl-expressions">Apply a maximum allowed length on OGNL expressions</h4>
-
-<p>You can enable this via Struts configuration key <code class="language-plaintext highlighter-rouge">struts.ognl.expressionMaxLength</code>. OGNL thereupon doesn’t evaluate any 
-expression longer than specified value. You would choose a value large enough to permit ALL valid OGNL expressions used 
-within the application. Values larger than the 200-400 range have diminishing security value (at which point it is 
-really only a “style guard” for long OGNL expressions in an application).</p>
-
-<h2 id="internal-security-mechanism">Internal security mechanism</h2>
-
-<p>The Apache Struts 2 contains internal security manager which blocks access to particular classes and Java packages - 
-it’s a OGNL-wide mechanism which means it affects any aspect of the framework ie. incoming parameters, expressions 
-used in JSPs, etc. Matching is done based on both the target and member class of an OGNL expression.</p>
-
-<p>There are 4 options that can be used to configure excluded packages and classes:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">struts.excludedClasses</code>: comma-separated list of excluded classes. Note that superclasses are also matched.</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageNames</code>: comma-separated list of excluded packages, matched using string
-comparison via <code class="language-plaintext highlighter-rouge">startWith</code>. Note that classes in subpackages are also excluded.</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageNamePatterns</code> - comma-separated list of RegEx patterns used to exclude packages. Note that this
-option is slower than string comparison but more flexible.</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageExemptClasses</code> - comma-separated list of classes to exempt from any of the excluded packages or
-package name patterns. An exact exemption must exist for each exclusion match (target or member or both).</li>
-</ul>
-
-<p>The defaults are defined <a href="https://github.com/apache/struts/blob/master/core/src/main/resources/struts-excluded-classes.xml">here</a>.</p>
-
-<p>Any expression or target which evaluates to one of these will be blocked and you see a WARN in logs:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[WARNING] Target class [class example.MyBean] or declaring class of member type [public example.MyBean()] are excluded!
-</code></pre></div></div>
-
-<p>In that case <code class="language-plaintext highlighter-rouge">new MyBean()</code> was used to create a new instance of class (inside JSP) - it’s blocked because <code class="language-plaintext highlighter-rouge">target</code> 
-of such expression is evaluated to <code class="language-plaintext highlighter-rouge">java.lang.Class</code></p>
-
-<p>It is possible to redefine the above constants in struts.xml but try to avoid this and rather change design of your application!</p>
-
-<h3 id="accessing-static-methods">Accessing static methods</h3>
-
-<p>Support for accessing static methods from expression will be disabled soon, please consider re-factoring your application 
-to avoid further problems! Please check <a href="https://issues.apache.org/jira/browse/WW-4348">WW-4348</a>.</p>
-
-<h3 id="ognl-is-used-to-call-actions-methods">OGNL is used to call action’s methods</h3>
+<h3 id="ambiguous-action-methods">Ambiguous Action Methods</h3>
 
 <p>This can impact actions which have large inheritance hierarchy and use the same method’s name throughout the hierarchy, 
 this was reported as an issue <a href="https://issues.apache.org/jira/browse/WW-4405">WW-4405</a>. See the example below:</p>
@@ -435,12 +378,12 @@ this was reported as an issue <a href="https://issues.apache.org/jira/browse/WW-
 To solve the problem don’t use the same method’s names through the hierarchy, you can simply change the action’s method 
 from <code class="language-plaintext highlighter-rouge">save()</code> to <code class="language-plaintext highlighter-rouge">saveAction()</code> and leaving annotation as is to allow call this action via  <code class="language-plaintext highlighter-rouge">/save.action</code> request.</p>
 
-<h3 id="accepted--excluded-patterns">Accepted / Excluded patterns</h3>
+<h3 id="accepted--excluded-patterns">Accepted / Excluded Patterns</h3>
 
 <p>As from version 2.3.20 the framework provides two new interfaces which are used to accept / exclude param names 
 and values - <a href="../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/AcceptedPatternsChecker">AcceptedPatternsChecker</a> 
 and <a href="../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/ExcludedPatternsChecker">ExcludedPatternsChecker</a> 
-with default implementations. These two interfaces are used by <a href="../core-developers/parameters-interceptor">Parameters Interceptor</a> 
+with default implementations. These two interfaces are used by the <a href="../core-developers/parameters-interceptor">Parameters Interceptor</a> 
 and <a href="../core-developers/cookie-interceptor">Cookie Interceptor</a> to check if param can be accepted or must be excluded. 
 If you were using <code class="language-plaintext highlighter-rouge">excludeParams</code> previously please compare patterns used by you with these provided by the framework in default implementation.</p>
 
@@ -456,7 +399,7 @@ more in the Strict Method Invocation section of <a href="../core-developers/acti
   <p>Note: since Struts 6.0.0</p>
 </blockquote>
 
-<p>Fetch Metadata is a mitigation against common cross origin attacks such as Cross-Site Request Forgery (CSRF). It is 
+<p>Fetch Metadata is a mitigation against common cross-origin attacks such as Cross-Site Request Forgery (CSRF). It is 
 a web platform security feature designed to help servers defend themselves against cross-origin attacks based 
 on the preferred resource isolation policy. The browser provides information about the context of an HTTP request 
 in a set of <code class="language-plaintext highlighter-rouge">Sec-Fetch-*</code> headers. This allows the server processing the request to make decisions on whether the request 
@@ -499,6 +442,156 @@ Cross-Origin-Opener-Policy: same-origin;
 
 <p>COOP and COEP are implemented in Struts using <a href="../core-developers/coop-interceptor">CoopInterceptor</a> 
 and <a href="../core-developers/coep-interceptor">CoepInterceptor</a>.</p>
+
+<h2 id="proactively-protecting-against-ognl-expression-injections-attacks">Proactively protecting against OGNL Expression Injections attacks</h2>
+
+<p>The framework has a history of critical security bugs, many tied to its use of OGNL technology; Due to its ability to
+create or change executable code, OGNL is capable of introducing critical security flaws to any framework that uses it.
+Multiple Struts 2 versions have been vulnerable to OGNL security flaws. Consequently, we’ve equipped OGNL and the
+framework with a number of additional security capabilities, some of which need to be manually enabled.</p>
+
+<blockquote>
+  <p><strong>NOTE</strong>: These might break your current app functionality. Before using in production environment, you’re recommended
+to comprehensively test your app UI and functionalities with these enabled.</p>
+</blockquote>
+
+<h3 id="run-ognl-expressions-inside-sandbox">Run OGNL expressions inside sandbox</h3>
+
+<p>You can do this simply via adding <code class="language-plaintext highlighter-rouge">-Dognl.security.manager</code> to JVM arguments. OGNL thereupon utilizes Java Security
+Manager to run OGNL expressions (which includes your actions either!) inside a sandbox with no permission. It is worth
+noting that it affects only OGNL expression execution and thereafter OGNL reverts Java Security Manager to its previous
+state.</p>
+
+<p>Note: This feature does not work with JDK 21 and above.</p>
+
+<h3 id="apply-a-maximum-allowed-length-on-ognl-expressions">Apply a maximum allowed length on OGNL expressions</h3>
+
+<p>You can enable this via Struts configuration key <code class="language-plaintext highlighter-rouge">struts.ognl.expressionMaxLength</code> (defaults to 256). OGNL thereupon doesn’t evaluate any
+expression longer than specified value. You would choose a value large enough to permit ALL valid OGNL expressions used
+within the application. Values larger than the 200-400 range have diminishing security value (at which point it is
+really only a “style guard” for long OGNL expressions in an application).</p>
+
+<h3 id="ognl-member-access">OGNL Member Access</h3>
+
+<p>Struts 2 implements an OGNL internal security mechanism which blocks access to particular classes and Java packages -
+it’s an OGNL-wide mechanism which means it affects any aspect of the framework i.e. incoming parameters, expressions
+used in JSPs, etc. Matching is done based on both the target and member class of all components of an OGNL expression.</p>
+
+<p>There are 4 options that can be used to configure excluded packages and classes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">struts.excludedClasses</code>: comma-separated list of excluded classes.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageNames</code>: comma-separated list of excluded packages, matched using string comparison via
+<code class="language-plaintext highlighter-rouge">startWith</code>. Note that classes in subpackages are also excluded.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageNamePatterns</code> - comma-separated list of RegEx patterns used to exclude packages. Note that this
+option is more flexible than <code class="language-plaintext highlighter-rouge">struts.excludedPackageNames</code> but will have a greater impact on performance and page 
+latency.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.excludedPackageExemptClasses</code> - comma-separated list of classes to exempt from any of the excluded packages or
+package name patterns. An exact exemption must exist for each exclusion match (target or member or both).</li>
+</ul>
+
+<p>The defaults are defined <a href="https://github.com/apache/struts/blob/master/core/src/main/resources/struts-excluded-classes.xml">here</a>.</p>
+
+<p>Additionally, static methods are blocked, and static fields can also be blocked with ‘struts.allowStaticFieldAccess’.</p>
+
+<p>Any expression or target which does not pass this criteria will be blocked, and you will see a warning in the logs:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[WARNING] Target class [class example.MyBean] or declaring class of member type [public example.MyBean()] are excluded!
+</code></pre></div></div>
+
+<p>In that case <code class="language-plaintext highlighter-rouge">new MyBean()</code> was used to create a new instance of class (inside JSP) - it’s blocked because the <code class="language-plaintext highlighter-rouge">target</code>
+of such expression is <code class="language-plaintext highlighter-rouge">java.lang.Class</code> which is excluded.</p>
+
+<p>It is possible to redefine the above constants in <code class="language-plaintext highlighter-rouge">struts.xml</code>, but avoid reducing the list, instead extending the list
+with other known dangerous classes or packages in your application.</p>
+
+<h4 id="allowlist-capability">Allowlist Capability</h4>
+
+<blockquote>
+  <p>Note: since Struts 6.4.</p>
+</blockquote>
+
+<p>For even more stringent OGNL protection, we recommend enabling the allowlist capability with <code class="language-plaintext highlighter-rouge">struts.allowlist.enable</code>.</p>
+
+<p>Now, in addition to enforcing the exclusion list, classes involved in OGNL expression must also belong to a list of
+allowlisted classes and packages. By default, all required Struts classes are allowlisted as well as any classes that
+are defined in your <code class="language-plaintext highlighter-rouge">struts.xml</code> package configurations.</p>
+
+<p>You can add additional classes and packages to the allowlist with:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">struts.allowlist.classes</code>: comma-separated list of allowlisted classes.</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.allowlist.packages</code>: comma-separated list of allowlisted packages, matched using string comparison via
+<code class="language-plaintext highlighter-rouge">startWith</code>. Note that classes in subpackages are also allowlisted.</li>
+</ul>
+
+<p>Generally, the only additional classes or packages you will need to configure are those model classes that you wish to
+be constructed/manipulated by Struts form submissions (i.e. parameter injected).</p>
+
+<h4 id="extensibility">Extensibility</h4>
+
+<blockquote>
+  <p>Note: since Struts 6.4.</p>
+</blockquote>
+
+<p>The OGNL Member Access mechanism is extensible, allowing you to define your own rules for blocking access to OGNL
+expression evaluations. To do so, you may use the <code class="language-plaintext highlighter-rouge">struts.securityMemberAccess</code> extension point. Please be vigilant when
+overriding methods as not to reduce protections offered by the default implementation.</p>
+
+<h3 id="struts-ognl-guard">Struts OGNL Guard</h3>
+
+<blockquote>
+  <p>Note: since Struts 6.4.</p>
+</blockquote>
+
+<p>The Struts OGNL Guard allows applications to completely disable certain OGNL expression features/capabilities. This
+feature is disabled by default but can be enabled and configured with <code class="language-plaintext highlighter-rouge">struts.ognl.excludedNodeTypes</code>.</p>
+
+<p>It is recommended to disable any OGNL feature you are not leveraging in your application. For applications using a
+minimal number of Struts features, you may find the following list a good starting point.</p>
+
+<p>Please be aware that this list WILL break certain Struts features:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ognl.excludedNodeTypes"</span>
+          <span class="na">value=</span><span class="s">"
+            ognl.ASTAdd,
+            ognl.ASTAssign,
+            ognl.ASTBitAnd,
+            ognl.ASTBitNegate,
+            ognl.ASTBitOr,
+            ognl.ASTCtor,
+            ognl.ASTDivide,
+            ognl.ASTEval,
+            ognl.ASTIn,
+            ognl.ASTInstanceof,
+            ognl.ASTKeyValue,
+            ognl.ASTList,
+            ognl.ASTMap,
+            ognl.ASTMultiply,
+            ognl.ASTNegate,
+            ognl.ASTNotIn,
+            ognl.ASTProject,
+            ognl.ASTRootVarRef,
+            ognl.ASTSelect,
+            ognl.ASTSelectFirst,
+            ognl.ASTSelectLast,
+            ognl.ASTSequence,
+            ognl.ASTShiftLeft,
+            ognl.ASTShiftRight,
+            ognl.ASTStaticField,
+            ognl.ASTStaticMethod,
+            ognl.ASTThisVarRef,
+            ognl.ASTUnsignedShiftRight,
+            ognl.ASTVarRef,
+            ognl.ASTXor
+"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<h4 id="extensibility-1">Extensibility</h4>
+
+<p>The Struts OGNL Guard mechanism is extensible, allowing you to define your own rules for blocking access to both raw
+OGNL expressions and compiled syntax trees. To do so, you may use the <code class="language-plaintext highlighter-rouge">struts.ognlGuard</code> extension point. You may choose
+to override the default implementation or implement the <code class="language-plaintext highlighter-rouge">OgnlGuard</code> interface directly.</p>
 
   </section>
 </article>
