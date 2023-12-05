@@ -174,6 +174,7 @@
       <li><a href="#run-ognl-expressions-inside-sandbox" id="markdown-toc-run-ognl-expressions-inside-sandbox">Run OGNL expressions inside sandbox</a></li>
       <li><a href="#apply-a-maximum-allowed-length-on-ognl-expressions" id="markdown-toc-apply-a-maximum-allowed-length-on-ognl-expressions">Apply a maximum allowed length on OGNL expressions</a></li>
       <li><a href="#ognl-member-access" id="markdown-toc-ognl-member-access">OGNL Member Access</a>        <ul>
+          <li><a href="#additional-options" id="markdown-toc-additional-options">Additional Options</a></li>
           <li><a href="#allowlist-capability" id="markdown-toc-allowlist-capability">Allowlist Capability</a></li>
           <li><a href="#extensibility" id="markdown-toc-extensibility">Extensibility</a></li>
         </ul>
@@ -492,8 +493,6 @@ package name patterns. An exact exemption must exist for each exclusion match (t
 
 <p>The defaults are defined <a href="https://github.com/apache/struts/blob/master/core/src/main/resources/struts-excluded-classes.xml">here</a>.</p>
 
-<p>Additionally, static methods are blocked, and static fields can also be blocked with ‘struts.allowStaticFieldAccess’.</p>
-
 <p>Any expression or target which does not pass this criteria will be blocked, and you will see a warning in the logs:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[WARNING] Target class [class example.MyBean] or declaring class of member type [public example.MyBean()] are excluded!
@@ -504,6 +503,17 @@ of such expression is <code class="language-plaintext highlighter-rouge">java.la
 
 <p>It is possible to redefine the above constants in <code class="language-plaintext highlighter-rouge">struts.xml</code>, but avoid reducing the list, instead extending the list
 with other known dangerous classes or packages in your application.</p>
+
+<h4 id="additional-options">Additional Options</h4>
+
+<p>We additionally recommend enabling the following options and hope to enable them by default in a future major version.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">struts.ognl.allowStaticFieldAccess=false</code> - static methods are always blocked, but static fields can also optionally be blocked</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.disallowProxyMemberAccess=true</code> - disallow proxied objects from being used in OGNL expressions as they may present a security risk</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.disallowDefaultPackageAccess=true</code> - disallow access to classes in the default package which should not be used in production</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.ognl.disallowCustomOgnlMap=true</code> - disallow construction of custom OGNL maps which can be used to bypass the SecurityMemberAccess policy</li>
+</ul>
 
 <h4 id="allowlist-capability">Allowlist Capability</h4>
 
