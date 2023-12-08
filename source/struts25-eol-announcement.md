@@ -47,5 +47,5 @@ overall framework's security.
 *   **I'm using Apache Struts 6.x.x, what will happen with this version?**
 
     Struts 6.x.x is still actively supported, we are working on new versions as well as we are preparing 
-    a new Struts 7.x.x version. Migration from Struts 2.5.x to Struts 6.x.x will a way smoother than switching from 
+    a new Struts 7.x.x version. Migration from Struts 2.5.x to Struts 6.x.x will be smoother than switching from 
     Struts 2.5.x to Struts 7.x.x.
