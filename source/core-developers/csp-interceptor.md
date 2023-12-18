@@ -31,6 +31,14 @@ CSP is now supported by all major browsers. [More information about CSP](https:/
   is going to be enforced.
 - `reportUri` - an uri under, which the violations have to be reported.
 
+## Report action
+
+To receive reports about violations against CSP an abstract `CspReportAction` action has been created, which you can
+extend to process the reports. When extending the action you must implement `processReport(String)` to process the report.
+Read JavaDoc of the action for more details.
+
+> Note: the action must always return an HTTP status `204`.
+
 ## Action aware
 
 Since Struts 6.2.0 it is possible to configure the CSP interceptor by providing the an instance of `CspSettings` interface.
