@@ -54,7 +54,7 @@ generates this HTML markup:
 
 Notice how the HTML generated uses table tags to control the layout of the label and select HTML. There is also a class, 
 `tdLabel`, applied to the table column where the label tag is rendered. Since no theme was specified for the Struts 2 
-select tag the default `xhmtl` theme was used.
+select tag the default `xhtml` theme was used.
 
 ## Specifying The Theme Struts 2 Should Use
 
