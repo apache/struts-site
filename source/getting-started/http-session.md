@@ -111,8 +111,7 @@ This method will be called by the Struts 2 framework for each parameter in the r
 the parameter name contains "session" we are telling the Struts 2 framework to ignore that parameter. This will prevent 
 a malicious user from trying to hack the HTTP session object.
 
-Instead of having each action that implements SessionAware also implement the ParameterNameAware interface you can tell t
-he params interceptor to exclude specific request attributes for all actions in a package. In struts.xml configure 
+Instead of having each action that implements SessionAware also implement the ParameterNameAware interface you can tell the params interceptor to exclude specific request attributes for all actions in a package. In struts.xml configure 
 the `struts-default` set of interceptors as follows:
 
 **struts.xml configure params interceptor**
