@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Preperable Interface
+title: Preparable Interface
 parent:
     title: Getting started
     url: index.html
