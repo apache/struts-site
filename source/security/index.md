@@ -292,7 +292,7 @@ Note: This feature does not work with JDK 21 and above.
 ### Restricting access to the Struts Context (ActionContext)
 
 The Struts ActionContext is a core construct of the Struts framework. It is shared and manipulated throughout the
-codebase. From the ActionContext, it is possible to access application parameters, the 'OgnlValueStack', the current
+codebase. From the ActionContext, it is possible to access application parameters, the OgnlValueStack, the current
 request/response/session, the servlet context, the Guice container, and a number of other objects either directly or
 indirectly via the directly exposed objects. The Struts ActionContext enables powerful features and functionality, but
 it also presents a major security risk if not properly secured.
