@@ -289,6 +289,39 @@ state.
 
 Note: This feature does not work with JDK 21 and above.
 
+### Restricting access to the Struts Context (ActionContext)
+
+The Struts ActionContext is a core construct of the Struts framework. It is shared and manipulated throughout the
+codebase. From the ActionContext, it is possible to access application parameters, the 'OgnlValueStack', the current
+request/response/session, the servlet context, the Guice container, and a number of other objects either directly or
+indirectly via the directly exposed objects. The Struts ActionContext enables powerful features and functionality, but
+it also presents a major security risk if not properly secured.
+
+The Struts ActionContext is accessible to OGNL expressions. In the case of an OGNL expression exploit, usually achieved
+through some form of server-side template injection or parameter injection, the ActionContext is a prime gadget for
+escalation of the vulnerability, often to remote code execution (RCE). Whilst known harmful capabilities of the
+ActionContext items are blocked by the OGNL Member Access policy exclusion list (see below), this is not always
+effective due to the myriad of changing objects available on the ActionContext. The new allowlist capability (also see
+below) offers much stronger protection. However, for the strongest level of protection, we recommend disabling access
+to the ActionContext from OGNL expressions entirely.
+
+Note that before disabling access to the ActionContext from OGNL expressions, you should ensure that your application
+does not rely on this capability. OGNL expressions may access the context directly using the `#` operator, or indirectly
+using the OgnlValueStack's fallback to context lookup capability. As of Struts 6.4.0, the Set and Action Struts
+components require ActionContext access from OGNL expressions.
+
+To disable access to the ActionContext from OGNL expressions, set the following constants in your `struts.xml` or
+`struts.properties` file. Please also refer to the documentation below for further details on these configuration
+options.
+
+```xml
+<constant name="struts.ognl.valueStackFallbackToContext" value="false"/>
+<constant name="struts.ognl.excludedNodeTypes" value="
+            ognl.ASTThisVarRef,
+            ognl.ASTVarRef
+"/>
+```
+
 ### Apply a maximum allowed length on OGNL expressions
 
 You can enable this via Struts configuration key `struts.ognl.expressionMaxLength` (defaults to 256). OGNL thereupon doesn't evaluate any
@@ -335,6 +368,7 @@ We additionally recommend enabling the following options and hope to enable them
  * `struts.disallowProxyMemberAccess=true` - disallow proxied objects from being used in OGNL expressions as they may present a security risk
  * `struts.disallowDefaultPackageAccess=true` - disallow access to classes in the default package which should not be used in production
  * `struts.ognl.disallowCustomOgnlMap=true` - disallow construction of custom OGNL maps which can be used to bypass the SecurityMemberAccess policy
+ * `struts.ognl.valueStackFallbackToContext=false` - disable fallback to OGNL context lookup if expression does not evaluate to a valid value
 
 #### Allowlist Capability
 
@@ -370,9 +404,12 @@ overriding methods as not to reduce protections offered by the default implement
 The Struts OGNL Guard allows applications to completely disable certain OGNL expression features/capabilities. This
 feature is disabled by default but can be enabled and configured with `struts.ognl.excludedNodeTypes`.
 
-It is recommended to disable any OGNL feature you are not leveraging in your application. For applications using a
-minimal number of Struts features, you may find the following list a good starting point.
+It is recommended to disable any OGNL feature you are not leveraging in your application.
 
+For example, if you do not need to use the addition operation in any OGNL expressions, you can add `ognl.ASTAdd` to your
+excluded node types. This will mitigate against a host of String concatenation attacks.
+
+For applications using a minimal number of Struts features, you may find the following list a good starting point.
 Please be aware that this list WILL break certain Struts features:
 
 ```xml
