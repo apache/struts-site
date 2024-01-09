@@ -172,6 +172,7 @@
   </li>
   <li><a href="#proactively-protecting-against-ognl-expression-injections-attacks" id="markdown-toc-proactively-protecting-against-ognl-expression-injections-attacks">Proactively protecting against OGNL Expression Injections attacks</a>    <ul>
       <li><a href="#run-ognl-expressions-inside-sandbox" id="markdown-toc-run-ognl-expressions-inside-sandbox">Run OGNL expressions inside sandbox</a></li>
+      <li><a href="#restricting-access-to-the-struts-context-actioncontext" id="markdown-toc-restricting-access-to-the-struts-context-actioncontext">Restricting access to the Struts Context (ActionContext)</a></li>
       <li><a href="#apply-a-maximum-allowed-length-on-ognl-expressions" id="markdown-toc-apply-a-maximum-allowed-length-on-ognl-expressions">Apply a maximum allowed length on OGNL expressions</a></li>
       <li><a href="#ognl-member-access" id="markdown-toc-ognl-member-access">OGNL Member Access</a>        <ul>
           <li><a href="#additional-options" id="markdown-toc-additional-options">Additional Options</a></li>
@@ -465,6 +466,38 @@ state.</p>
 
 <p>Note: This feature does not work with JDK 21 and above.</p>
 
+<h3 id="restricting-access-to-the-struts-context-actioncontext">Restricting access to the Struts Context (ActionContext)</h3>
+
+<p>The Struts ActionContext is a core construct of the Struts framework. It is shared and manipulated throughout the
+codebase. From the ActionContext, it is possible to access application parameters, the OgnlValueStack, the current
+request/response/session, the servlet context, the Guice container, and a number of other objects either directly or
+indirectly via the directly exposed objects. The Struts ActionContext enables powerful features and functionality, but
+it also presents a major security risk if not properly secured.</p>
+
+<p>The Struts ActionContext is accessible to OGNL expressions. In the case of an OGNL expression exploit, usually achieved
+through some form of server-side template injection or parameter injection, the ActionContext is a prime gadget for
+escalation of the vulnerability, often to remote code execution (RCE). Whilst known harmful capabilities of the
+ActionContext items are blocked by the OGNL Member Access policy exclusion list (see below), this is not always
+effective due to the myriad of changing objects available on the ActionContext. The new allowlist capability (also see
+below) offers much stronger protection. However, for the strongest level of protection, we recommend disabling access
+to the ActionContext from OGNL expressions entirely.</p>
+
+<p>Note that before disabling access to the ActionContext from OGNL expressions, you should ensure that your application
+does not rely on this capability. OGNL expressions may access the context directly using the <code class="language-plaintext highlighter-rouge">#</code> operator, or indirectly
+using the OgnlValueStack’s fallback to context lookup capability. As of Struts 6.4.0, the Set and Action Struts
+components require ActionContext access from OGNL expressions.</p>
+
+<p>To disable access to the ActionContext from OGNL expressions, set the following constants in your <code class="language-plaintext highlighter-rouge">struts.xml</code> or
+<code class="language-plaintext highlighter-rouge">struts.properties</code> file. Please also refer to the documentation below for further details on these configuration
+options.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ognl.valueStackFallbackToContext"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ognl.excludedNodeTypes"</span> <span class="na">value=</span><span class="s">"
+            ognl.ASTThisVarRef,
+            ognl.ASTVarRef
+"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
 <h3 id="apply-a-maximum-allowed-length-on-ognl-expressions">Apply a maximum allowed length on OGNL expressions</h3>
 
 <p>You can enable this via Struts configuration key <code class="language-plaintext highlighter-rouge">struts.ognl.expressionMaxLength</code> (defaults to 256). OGNL thereupon doesn’t evaluate any
@@ -513,6 +546,7 @@ with other known dangerous classes or packages in your application.</p>
   <li><code class="language-plaintext highlighter-rouge">struts.disallowProxyMemberAccess=true</code> - disallow proxied objects from being used in OGNL expressions as they may present a security risk</li>
   <li><code class="language-plaintext highlighter-rouge">struts.disallowDefaultPackageAccess=true</code> - disallow access to classes in the default package which should not be used in production</li>
   <li><code class="language-plaintext highlighter-rouge">struts.ognl.disallowCustomOgnlMap=true</code> - disallow construction of custom OGNL maps which can be used to bypass the SecurityMemberAccess policy</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.ognl.valueStackFallbackToContext=false</code> - disable fallback to OGNL context lookup if expression does not evaluate to a valid value</li>
 </ul>
 
 <h4 id="allowlist-capability">Allowlist Capability</h4>
@@ -557,10 +591,13 @@ overriding methods as not to reduce protections offered by the default implement
 <p>The Struts OGNL Guard allows applications to completely disable certain OGNL expression features/capabilities. This
 feature is disabled by default but can be enabled and configured with <code class="language-plaintext highlighter-rouge">struts.ognl.excludedNodeTypes</code>.</p>
 
-<p>It is recommended to disable any OGNL feature you are not leveraging in your application. For applications using a
-minimal number of Struts features, you may find the following list a good starting point.</p>
+<p>It is recommended to disable any OGNL feature you are not leveraging in your application.</p>
 
-<p>Please be aware that this list WILL break certain Struts features:</p>
+<p>For example, if you do not need to use the addition operation in any OGNL expressions, you can add <code class="language-plaintext highlighter-rouge">ognl.ASTAdd</code> to your
+excluded node types. This will mitigate against a host of String concatenation attacks.</p>
+
+<p>For applications using a minimal number of Struts features, you may find the following list a good starting point.
+Please be aware that this list WILL break certain Struts features:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ognl.excludedNodeTypes"</span>
           <span class="na">value=</span><span class="s">"
