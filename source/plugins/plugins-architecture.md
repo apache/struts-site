@@ -112,6 +112,8 @@ The following extension points are available in Struts 2:
 | struts.date.formatter                   | Allow define a date formatter used by `<s:date/>` tag (since 6.0.0)                                                                                                                          | singleton   | org.apache.struts2.components.date.DateFormatter                 |
 | struts.ognlGuard                        | Define a custom OgnlGuard implementation to block raw or compiled OGNL expressions (since 6.4.0)                                                                                             | singleton   | org.apache.struts2.ognl.OgnlGuard                                |
 | struts.securityMemberAccess             | Define a custom SecurityMemberAccess implementation, used to restrict OGNL evaluations based on classes involved (since 6.4.0)                                                               | prototype   | com.opensymphony.xwork2.ognl.SecurityMemberAccess                |
+| struts.compoundRootAccessor             | Define a custom CompoundRootAccessor implementation, used to resolve classes and manipulate the CompoundRoot (since 6.4.0)                                                                   | singleton   | com.opensymphony.xwork2.ognl.accessor.RootAccessor               |
+| struts.methodAccessor                   | Define a custom MethodAccessor implementation, used to evaluate OGNL method calls (since 6.4.0)                                                                                              | singleton   | ognl.MethodAccessor                                              |
 
 ## Plugin Examples
 
