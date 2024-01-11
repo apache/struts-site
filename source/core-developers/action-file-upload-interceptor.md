@@ -82,7 +82,7 @@ public class UploadAction extends ActionSupport implements UploadedFilesAware {
 
    @Override
    public void withUploadedFiles(List<UploadedFile> uploadedFiles) {
-      if (!uploadedFiles.isEmpty() > 0) {
+      if (!uploadedFiles.isEmpty()) {
          this.uploadedFile = uploadedFiles.get(0);
          this.fileName = uploadedFile.getName();
          this.contentType = uploadedFile.getContentType();
