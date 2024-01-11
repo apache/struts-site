@@ -29,8 +29,9 @@ The library is included in a base Struts 2 distribution.
 ## Basic Usage
 
 The `org.apache.struts2.interceptor.FileUploadInterceptor` and `org.apache.struts2.interceptor.ActionFileUploadInterceptor`
-classes is included as part of the `defaultStack`. As long as  the required libraries are added to your project you will be able 
-to take advantage of the Struts 2 file upload capability. Configure an Action mapping for your Action class as you typically would.
+interceptors are included as part of the `defaultStack` and named appropriately: `fileUpload` and `actionFileUpload`. 
+As long as the required libraries are added to your project you will be able to take advantage of the Struts 2 file upload 
+capability. Configure an Action mapping for your Action class as you typically would.
 
 ### Example action mapping:
 
@@ -68,7 +69,7 @@ public class UploadAction extends ActionSupport implements UploadedFilesAware {
 
     @Override
     public void withUploadedFiles(List<UploadedFile> uploadedFiles) {
-        if (!uploadedFiles.isEmpty() > 0) {
+        if (!uploadedFiles.isEmpty()) {
           this.uploadedFile = uploadedFiles.get(0);
           this.fileName = uploadedFile.getName();
           this.contentType = uploadedFile.getContentType();
