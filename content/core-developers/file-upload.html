@@ -196,8 +196,9 @@ The library is included in a base Struts 2 distribution.</p>
 <h2 id="basic-usage">Basic Usage</h2>
 
 <p>The <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.FileUploadInterceptor</code> and <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.ActionFileUploadInterceptor</code>
-classes is included as part of the <code class="language-plaintext highlighter-rouge">defaultStack</code>. As long as  the required libraries are added to your project you will be able 
-to take advantage of the Struts 2 file upload capability. Configure an Action mapping for your Action class as you typically would.</p>
+interceptors are included as part of the <code class="language-plaintext highlighter-rouge">defaultStack</code> and named appropriately: <code class="language-plaintext highlighter-rouge">fileUpload</code> and <code class="language-plaintext highlighter-rouge">actionFileUpload</code>. 
+As long as the required libraries are added to your project you will be able to take advantage of the Struts 2 file upload 
+capability. Configure an Action mapping for your Action class as you typically would.</p>
 
 <h3 id="example-action-mapping">Example action mapping:</h3>
 
@@ -232,7 +233,7 @@ information and content of uploaded file. Your action should implement the inter
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">withUploadedFiles</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">UploadedFile</span><span class="o">&gt;</span> <span class="n">uploadedFiles</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(!</span><span class="n">uploadedFiles</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">uploadedFiles</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
           <span class="k">this</span><span class="o">.</span><span class="na">uploadedFile</span> <span class="o">=</span> <span class="n">uploadedFiles</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
           <span class="k">this</span><span class="o">.</span><span class="na">fileName</span> <span class="o">=</span> <span class="n">uploadedFile</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
           <span class="k">this</span><span class="o">.</span><span class="na">contentType</span> <span class="o">=</span> <span class="n">uploadedFile</span><span class="o">.</span><span class="na">getContentType</span><span class="o">();</span>
