@@ -1,6 +1,9 @@
 ---
 layout: core-developers
 title: File Upload
+parent:
+  title: Core Developers Guide
+  url: index
 ---
 
 # File Upload
@@ -21,10 +24,13 @@ than the temporary directory and the directories that belong to your web applica
 The Struts 2 framework leverages the Commons FileUpload library as a based library to support file upload in the framework.
 The library is included in a base Struts 2 distribution.
 
+> NOTE: Since Struts 6.4.0 the `FileUploadInterceptor` is deprecated and you should use `ActionFileUploadInterceptor` instead!
+
 ## Basic Usage
 
-The `org.apache.struts2.interceptor.FileUploadInterceptor` class is included as part of the `defaultStack`. As long as
-the required libraries are added to your project you will be able to take advantage of the Struts 2 file upload
+The `org.apache.struts2.interceptor.FileUploadInterceptor` and `org.apache.struts2.interceptor.ActionFileUploadInterceptor`
+interceptors are included as part of the `defaultStack` and named appropriately: `fileUpload` and `actionFileUpload`. 
+As long as the required libraries are added to your project you will be able to take advantage of the Struts 2 file upload 
 capability. Configure an Action mapping for your Action class as you typically would.
 
 ### Example action mapping:
@@ -36,9 +42,8 @@ capability. Configure an Action mapping for your Action class as you typically w
 
 ```
 
-A form must be create with a form field of type file, `<INPUT type="file" name="upload">`. The form used to upload the
-file must have its encoding type set
-to `multipart/form-data`, `<form action="doUpload" enctype="multipart/form-data" method="post">`.
+A form must be created with a form field of type file, `<INPUT type="file" name="upload">`. The form used to upload the
+file must have its encoding type set to `multipart/form-data`, `<form action="doUpload" enctype="multipart/form-data" method="post">`.
 The standard procedure for adding these elements is by using the Struts 2 tag libraries as shown in the following
 example:
 
@@ -51,7 +56,35 @@ example:
 </s:form>
 ```
 
-The fileUpload interceptor will use setter injection to insert the uploaded file and related data into your Action
+The actionFileUpload interceptor will use a dedicated interface `org.apache.struts2.action.UploadedFilesAware` to transfer
+information and content of uploaded file. Your action should implement the interface to receive the uploaded file:
+
+```java
+public class UploadAction extends ActionSupport implements UploadedFilesAware {
+  
+    private UploadedFile uploadedFile;
+    private String contentType;
+    private String fileName;
+    private String originalName;
+
+    @Override
+    public void withUploadedFiles(List<UploadedFile> uploadedFiles) {
+        if (!uploadedFiles.isEmpty()) {
+          this.uploadedFile = uploadedFiles.get(0);
+          this.fileName = uploadedFile.getName();
+          this.contentType = uploadedFile.getContentType();
+          this.originalName = uploadedFile.getOriginalName();
+        }
+    }
+
+    public String execute() {
+        // do something with the file
+        return SUCCESS;
+    }
+}
+```
+
+**Deprecated approach**: the fileUpload interceptor will use setter injection to insert the uploaded file and related data into your Action
 class. For a form field named `upload` you would provide the three setter methods shown in the following example:
 
 ### Example Action class:
@@ -119,7 +152,10 @@ see `struts-fileupload.xml` in the sample application download.
 </s:form>
 ```
 
-`MultipleFileUploadUsingArrayAction.java`
+The `org.apache.struts2.action.UploadedFilesAware` interface already supports uploading multiple files, you do not need to
+follow the below example.
+
+**Deprecated approach**: `MultipleFileUploadUsingArrayAction.java`
 
 ```java
 public class MultipleFileUploadUsingArrayAction extends ActionSupport {

@@ -1,26 +1,20 @@
 ---
 layout: default
-title: File Upload Interceptor
+title: Action File Upload Interceptor
 parent:
     title: Interceptors
     url: interceptors
 ---
 
-# File Upload Interceptor
+# Action File Upload Interceptor
 
-> Since Struts 6.4.0 this interceptor is deprecated, please use Action FileUpload Interceptor instead!
+> Available since Struts 6.4.0 as replacement for [File Upload Interceptor](file-upload-interceptor)
 
 See [this page](file-upload) for more examples and advanced configuration.
 
 Interceptor that is based off of `MultiPartRequestWrapper`, which is automatically applied for any request that includes 
-a file. It adds the following parameters, where `<file name>` is the name given to the file uploaded by the HTML form:
-
- - `<file name>`: `File` - the actual File
- - `<file name>ContentType`: `String` - the content type of the file
- - `<file name>FileName`: `String` - the actual name of the file uploaded (not the HTML name)
-
-You can get access to these files by merely providing setters in your action that correspond to any of the three patterns 
-above, such as `setDocument(File document)`, `setDocumentContentType(String contentType)`, etc.
+a file. If an action implements `org.apache.struts2.action.UploadedFilesAware` interface, the interceptor will pass
+information and content of uploaded files using the callback method `withUploadedFiles(List<UploadedFile>)`.
 
 See the example code section.
 
@@ -56,7 +50,7 @@ and which are not.
 
 ```xml
  <action name="doUpload" class="com.example.UploadAction">
-     <interceptor-ref name="fileUpload"/>
+     <interceptor-ref name="actionFileUpload"/>
      <interceptor-ref name="basicStack"/>
      <result name="success">good_result.jsp</result>
  </action>
@@ -80,34 +74,27 @@ You must set the encoding to <code>multipart/form-data</code> in the form where 
 **Example Action class:**
 
 ```java
-    package com.example;
+public class UploadAction extends ActionSupport implements UploadedFilesAware {
+   private UploadedFile uploadedFile;
+   private String contentType;
+   private String fileName;
+   private String originalName;
 
-    import java.io.File;
-    import com.opensymphony.xwork2.ActionSupport;
+   @Override
+   public void withUploadedFiles(List<UploadedFile> uploadedFiles) {
+      if (!uploadedFiles.isEmpty()) {
+         this.uploadedFile = uploadedFiles.get(0);
+         this.fileName = uploadedFile.getName();
+         this.contentType = uploadedFile.getContentType();
+         this.originalName = uploadedFile.getOriginalName();
+      }
+   }
 
-    public UploadAction extends ActionSupport {
-       private File file;
-       private String contentType;
-       private String filename;
-
-       public void setUpload(File file) {
-          this.file = file;
-       }
-
-       public void setUploadContentType(String contentType) {
-          this.contentType = contentType;
-       }
-
-       public void setUploadFileName(String filename) {
-          this.filename = filename;
-       }
-
-       public String execute() {
-          //...
-          return SUCCESS;
-       }
-  }
-
+   public String execute() {
+      //do something with the file
+      return SUCCESS;
+   }
+}
 ```
 
 **Setting parameters example:**
@@ -120,5 +107,5 @@ You must set the encoding to <code>multipart/form-data</code> in the form where 
 </interceptor-ref>
 ```
 
-This part is optional and would be done in place of the `<interceptor-ref name="fileUpload"/>` line in the action mapping 
+This part is optional and would be done in place of the `<interceptor-ref name="actionFileUpload"/>` line in the action mapping 
 example above.

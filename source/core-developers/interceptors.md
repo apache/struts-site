@@ -1,45 +1,48 @@
 ---
-layout: core-developers
+layout: default
 title: Interceptors
+parent:
+  title: Core Developers Guide
+  url: index
 ---
 
 # Interceptors
 {:.no_toc}
 
 * Will be replaced with the ToC, excluding a header
-{:toc}
+  {:toc}
 
-The default Interceptor stack is designed to serve the needs of most applications. Most applications will **not** need 
+The default Interceptor stack is designed to serve the needs of most applications. Most applications will **not** need
 to add Interceptors or change the Interceptor stack.
 
-Many Actions share common concerns. Some Actions need input validated. Other Actions may need a file upload 
-to be pre-processed. Another Action might need protection from a double submit. Many Actions need drop-down lists 
+Many Actions share common concerns. Some Actions need input validated. Other Actions may need a file upload
+to be pre-processed. Another Action might need protection from a double submit. Many Actions need drop-down lists
 and other controls pre-populated before the page displays.
 
-The framework makes it easy to share solutions to these concerns using an "Interceptor" strategy. When you request 
-a resource that maps to an "action", the framework invokes the Action object. But, before the Action is executed, 
-the invocation can be intercepted by another object. After the Action executes, the invocation could be intercepted 
+The framework makes it easy to share solutions to these concerns using an "Interceptor" strategy. When you request
+a resource that maps to an "action", the framework invokes the Action object. But, before the Action is executed,
+the invocation can be intercepted by another object. After the Action executes, the invocation could be intercepted
 again. Unsurprisingly, we call these objects "Interceptors."
 
 ## Understanding Interceptors
 
-Interceptors can execute code before and after an Action is invoked. Most of the framework's core functionality is 
-implemented as Interceptors. Features like double-submit guards, type conversion, object population, validation, 
-file upload, page preparation, and more, are all implemented with the help of Interceptors. Each and every Interceptor 
+Interceptors can execute code before and after an Action is invoked. Most of the framework's core functionality is
+implemented as Interceptors. Features like double-submit guards, type conversion, object population, validation,
+file upload, page preparation, and more, are all implemented with the help of Interceptors. Each and every Interceptor
 is pluggable, so you can decide exactly which features an Action needs to support.
 
-Interceptors can be configured on a per-action basis. Your own custom Interceptors can be mixed-and-matched with 
-the Interceptors bundled with the framework. Interceptors "set the stage" for the Action classes, doing much of 
+Interceptors can be configured on a per-action basis. Your own custom Interceptors can be mixed-and-matched with
+the Interceptors bundled with the framework. Interceptors "set the stage" for the Action classes, doing much of
 the "heavy lifting" before the Action executes.
 
 **Action Lifecycle**
 
 ![overview.png](attachments/att1607_overview.png)
 
-In some cases, an Interceptor might keep an Action from firing, because of a double-submit or because validation failed. 
+In some cases, an Interceptor might keep an Action from firing, because of a double-submit or because validation failed.
 Interceptors can also change the state of an Action before it executes.
 
-The Interceptors are defined in a stack that specifies the execution order. In some cases, the order of the Interceptors 
+The Interceptors are defined in a stack that specifies the execution order. In some cases, the order of the Interceptors
 on the stack can be very important.
 
 ## Configuring Interceptors
@@ -47,44 +50,46 @@ on the stack can be very important.
 **struts.xml**
 
 ```xml
-<package name="default" extends="struts-default">
-   <interceptors>
-       <interceptor name="timer" class=".."/>
-       <interceptor name="logger" class=".."/>
-   </interceptors>
 
-   <action name="login" class="tutorial.Login">
-      <interceptor-ref name="timer"/>
-      <interceptor-ref name="logger"/>
-      <result name="input">login.jsp</result>
-      <result name="success" type="redirectAction">/secure/home</result>
-   </action>
+<package name="default" extends="struts-default">
+    <interceptors>
+        <interceptor name="timer" class=".."/>
+        <interceptor name="logger" class=".."/>
+    </interceptors>
+
+    <action name="login" class="tutorial.Login">
+        <interceptor-ref name="timer"/>
+        <interceptor-ref name="logger"/>
+        <result name="input">login.jsp</result>
+        <result name="success" type="redirectAction">/secure/home</result>
+    </action>
 </package>
 ```
 
 ## Stacking Interceptors
 
-With most web applications, we find ourselves wanting to apply the same set of Interceptors over and over again. Rather 
+With most web applications, we find ourselves wanting to apply the same set of Interceptors over and over again. Rather
 than reiterate the same list of Interceptors, we can bundle these Interceptors together using an Interceptor Stack.
 
 **struts.xml**
 
 ```xml
+
 <package name="default" extends="struts-default">
-   <interceptors>
+    <interceptors>
         <interceptor name="timer" class=".."/>
         <interceptor name="logger" class=".."/>
         <interceptor-stack name="myStack">
-           <interceptor-ref name="timer"/>
-           <interceptor-ref name="logger"/>
+            <interceptor-ref name="timer"/>
+            <interceptor-ref name="logger"/>
         </interceptor-stack>
     </interceptors>
 
-   <action name="login" class="tutuorial.Login">
-         <interceptor-ref name="myStack"/>
-         <result name="input">login.jsp</result>
-         <result name="success" type="redirectAction">/secure/home</result>
-   </action>
+    <action name="login" class="tutuorial.Login">
+        <interceptor-ref name="myStack"/>
+        <result name="input">login.jsp</result>
+        <result name="success" type="redirectAction">/secure/home</result>
+    </action>
 </package>
 ```
 
@@ -96,18 +101,19 @@ Looking inside `struts-default.xml`, we can see how it's done.
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/struts-default.xml %}
 {% endhighlight %}
 
-Since the `struts-default.xml` is included in the application's configuration by default, all the predefined 
+Since the `struts-default.xml` is included in the application's configuration by default, all the predefined
 interceptors and stacks are available "out of the box".
 
 ## Framework Interceptors
 
-Interceptor classes are also defined using a key-value pair specified in the Struts configuration file. The names 
-specified below come specified in [struts-default.xml](struts-default-xml). If you extend the `struts-default` 
-package, then you can use the names below. Otherwise, they must be defined in your package with a name-class pair 
+Interceptor classes are also defined using a key-value pair specified in the Struts configuration file. The names
+specified below come specified in [struts-default.xml](struts-default-xml). If you extend the `struts-default`
+package, then you can use the names below. Otherwise, they must be defined in your package with a name-class pair
 specified in the `<interceptors/>` tag.
 
 | Interceptor                                                                        | Name                      | Description                                                                                                                                                                                                                                                                                    |
 |------------------------------------------------------------------------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Action File Upload Interceptor](action-file-upload-interceptor)                   | actionFileUpload          | Available since Struts 6.4.0: an Interceptor that adds easy access to file upload support.                                                                                                                                                                                                     |
 | [Alias Interceptor](alias-interceptor)                                             | alias                     | Converts similar parameters that may be named differently between requests.                                                                                                                                                                                                                    |
 | [Annotation Parameter Filter Interceptor](annotation-parameter-filter-interceptor) | annotationParameterFilter | Annotation based version of [Parameter Filter Interceptor](parameter-filter-interceptor).                                                                                                                                                                                                      |
 | [Annotation Workflow Interceptor](annotation-workflow-interceptor)                 | annotationWorkflow        | Invokes any annotated methods on the action.                                                                                                                                                                                                                                                   |
@@ -120,17 +126,17 @@ specified in the `<interceptors/>` tag.
 | [Cross-Origin Opener Policy Interceptor](coop-interceptor)                         | coop                      | Implements the Cross-Origin Opener Policy on incoming requests used to isolate resources against side-channel attacks and information leaks.                                                                                                                                                   |
 | [Create Session Interceptor](create-session-interceptor)                           | createSession             | Create an HttpSession automatically, useful with certain Interceptors that require a HttpSession to work properly (like the TokenInterceptor)                                                                                                                                                  |
 | [Clear Session Interceptor](clear-session-interceptor)                             | clearSession              | This interceptor clears the HttpSession.                                                                                                                                                                                                                                                       |
-| [Content Security Policy Interceptor](csp-interceptor)                             | csp                       | Adds support for Content Security policy.                                                                                                                                                                                                               |
+| [Content Security Policy Interceptor](csp-interceptor)                             | csp                       | Adds support for Content Security policy.                                                                                                                                                                                                                                                      |
 | [Debugging Interceptor](debugging-interceptor)                                     | debugging                 | Provides several different debugging screens to provide insight into the data behind the page.                                                                                                                                                                                                 |
 | [Default Workflow Interceptor](default-workflow-interceptor)                       | workflow                  | Calls the validate method in your Action class. If Action errors are created then it returns the INPUT view.                                                                                                                                                                                   |
 | [Exception Interceptor](exception-interceptor)                                     | exception                 | Maps exceptions to a result.                                                                                                                                                                                                                                                                   |
 | [Execute and Wait Interceptor](execute-and-wait-interceptor)                       | execAndWait               | Executes the Action in the background and then sends the user off to an intermediate waiting page.                                                                                                                                                                                             |
 | [Fetch Metadata Interceptor](fetch-metadata-interceptor)                           | fetchMetadata             | Implements the Resource Isolation Policies on incoming requests used to protect against CSRF, XSSI, and cross-origin information leaks.                                                                                                                                                        |
-| [File Upload Interceptor](file-upload-interceptor)                                 | fileUpload                | An Interceptor that adds easy access to file upload support.                                                                                                                                                                                                                                   |
+| [File Upload Interceptor](file-upload-interceptor)                                 | fileUpload                | **DEPERECTED** since Struts 6.4.0: an Interceptor that adds easy access to file upload support.                                                                                                                                                                                                |
 | [I18n Interceptor](i18n-interceptor)                                               | i18n                      | Remembers the locale selected for a user's session.                                                                                                                                                                                                                                            |
 | [Logging Interceptor](logging-interceptor)                                         | logger                    | Outputs the name of the Action.                                                                                                                                                                                                                                                                |
 | [Message Store Interceptor](message-store-interceptor)                             | store                     | Store and retrieve action messages / errors / field errors for action that implements ValidationAware interface into session.                                                                                                                                                                  |
-| [Model Driven Interceptor](model-driven-interceptor)                           | modelDriven               | If the Action implements ModelDriven, pushes the getModel Result onto the Value Stack.                                                                                                                                                                                                         |
+| [Model Driven Interceptor](model-driven-interceptor)                               | modelDriven               | If the Action implements ModelDriven, pushes the getModel Result onto the Value Stack.                                                                                                                                                                                                         |
 | [Multiselect Interceptor](multiselect-interceptor)                                 | multiselect               | Like the checkbox interceptor detects that no value was selected for a field with multiple values (like a select) and adds an empty parameter                                                                                                                                                  |
 | [NoOp Interceptor](no-op-interceptor)                                              | noop                      | Does nothing, just passes invocation further, used in empty stack                                                                                                                                                                                                                              |
 | [Parameter Filter Interceptor](parameter-filter-interceptor)                       | parameterFilter           | Removes parameters from the list of those available to Actions                                                                                                                                                                                                                                 |
@@ -147,23 +153,25 @@ specified in the `<interceptors/>` tag.
 | [Token Session Interceptor](token-session-interceptor)                             | tokenSession              | Same as Token Interceptor, but stores the submitted data in session when handed an invalid token                                                                                                                                                                                               |
 | [Validation Interceptor](validation-interceptor)                                   | validation                | Performs validation using the validators defined in _action_ -validation.xml                                                                                                                                                                                                                   |
 
-Since 2.0.7, Interceptors and Results with hyphenated names were converted to camelCase. (The former model-driven is 
-now modelDriven.) The original hyphenated names are retained as "aliases" until Struts 2.1.0. For clarity, 
+Since 2.0.7, Interceptors and Results with hyphenated names were converted to camelCase. (The former model-driven is
+now modelDriven.) The original hyphenated names are retained as "aliases" until Struts 2.1.0. For clarity,
 the hyphenated versions are not listed here, but might be referenced in prior versions of the documentation.
 
 ## Method Filtering
 
-`MethodFilterInterceptor` is an abstract `Interceptor` used as a base class for interceptors that will filter execution 
+`MethodFilterInterceptor` is an abstract `Interceptor` used as a base class for interceptors that will filter execution
 based on method names according to specified included/excluded method lists.
 
 Settable parameters are as follows:
+
 - excludeMethods - method names to be excluded from interceptor processing
 - includeMethods - method names to be included in interceptor processing
 
-> If method name are available in both includeMethods and excludeMethods, it will be considered as an included method: 
+> If method name are available in both includeMethods and excludeMethods, it will be considered as an included method:
 > includeMethods takes precedence over excludeMethods.
 
 Interceptors that extends this capability include:
+
 - `TokenInterceptor`
 - `TokenSessionStoreInterceptor`
 - `DefaultWorkflowInterceptor`
@@ -176,6 +184,7 @@ Interceptor's parameter could be overridden through the following ways :
 **Method 1**:
 
 ```xml
+
 <action name="myAction" class="myActionClass">
     <interceptor-ref name="exception"/>
     <interceptor-ref name="alias"/>
@@ -201,6 +210,7 @@ Interceptor's parameter could be overridden through the following ways :
 **Method 2**:
 
 ```xml
+
 <action name="myAction" class="myActionClass">
     <interceptor-ref name="defaultStack">
         <param name="validation.excludeMethods">myValidationExcludeMethod</param>
@@ -211,21 +221,22 @@ Interceptor's parameter could be overridden through the following ways :
 
 In the first method, the whole default stack is copied and the parameter then changed accordingly.
 
-In the second method, the `interceptor-ref` refers to an existing interceptor-stack, namely `defaultStack` in this 
+In the second method, the `interceptor-ref` refers to an existing interceptor-stack, namely `defaultStack` in this
 example, and override the `validator` and `workflow` interceptor `excludeMethods` attribute. Note that in the `param`
-tag, the name attribute contains a dot (.) the word before the dot(.) specifies the interceptor name whose parameter is 
+tag, the name attribute contains a dot (.) the word before the dot(.) specifies the interceptor name whose parameter is
 to be overridden and the word after the dot (.) specifies the parameter itself. The syntax is as follows:
 
 ```
    <interceptor-name>.<parameter-name>
 ```
 
-Note also that in this case the `interceptor-ref` name attribute is used to indicate an interceptor stack which makes 
+Note also that in this case the `interceptor-ref` name attribute is used to indicate an interceptor stack which makes
 sense as if it is referring to the interceptor itself it would be just using Method 1 describe above.
 
 **Method 3**:
 
 ```xml
+
 <interceptors>
     <interceptor-stack name="parentStack">
         <interceptor-ref name="defaultStack">
@@ -239,49 +250,52 @@ sense as if it is referring to the interceptor itself it would be just using Met
 
 ## Interceptor Parameter Overriding Inheritance
 
-Parameters override are not inherited in interceptors, meaning that the last set of overridden parameters will be used. 
+Parameters override are not inherited in interceptors, meaning that the last set of overridden parameters will be used.
 For example, if a stack overrides the parameter "defaultBlock" for the "postPrepareParameterFilter" interceptor as:
 
 ```xml
+
 <interceptor-stack name="parentStack">
-  <interceptor-ref name="postPrepareParameterFilter">
-    <param name="defaultBlock">true</param>
-  </interceptor-ref>
+    <interceptor-ref name="postPrepareParameterFilter">
+        <param name="defaultBlock">true</param>
+    </interceptor-ref>
 </interceptor-stack>
 ```
 
 and an action overrides the "allowed" for "postPrepareParameterFilter":
 
 ```xml
+
 <package name="child2" namespace="/child" extends="parentPackage">
-  <action name="list" class="SomeAction">
-    <interceptor-ref name="parentStack">
-      <param name="postPrepareParameterFilter.allowed">myObject.name</param>
-    </interceptor-ref>
-  </action>
+    <action name="list" class="SomeAction">
+        <interceptor-ref name="parentStack">
+            <param name="postPrepareParameterFilter.allowed">myObject.name</param>
+        </interceptor-ref>
+    </action>
 </package>
 ```
 
-Then, only "allowed" will be overridden for the "postPrepareParameterFilter" interceptor in that action, 
+Then, only "allowed" will be overridden for the "postPrepareParameterFilter" interceptor in that action,
 the other params will be null.
 
 ## Lazy parameters
 
 This functionality was added in Struts 2.5.9
 
-It is possible to define an interceptor with parameters evaluated during action invocation. In such case 
-the interceptor must be marked with `WithLazyParams` interface. This must be developer's decision as interceptor 
-must be aware of having those parameters set during invocation and not when the interceptor is created as it happens 
+It is possible to define an interceptor with parameters evaluated during action invocation. In such case
+the interceptor must be marked with `WithLazyParams` interface. This must be developer's decision as interceptor
+must be aware of having those parameters set during invocation and not when the interceptor is created as it happens
 in normal way.
 
 Params are evaluated as any other expression starting with from action as a top object.
 
 ```xml
+
 <action name="LazyFoo" class="com.opensymphony.xwork2.SimpleAction">
-  <result name="success">result.jsp</result>
-  <interceptor-ref name="lazy">
-    <param name="foo">${bar}</param>
-  </interceptor-ref>
+    <result name="success">result.jsp</result>
+    <interceptor-ref name="lazy">
+        <param name="foo">${bar}</param>
+    </interceptor-ref>
 </action>
 ```
 
@@ -301,7 +315,7 @@ public class MockLazyInterceptor extends AbstractInterceptor implements WithLazy
 }
 ```
 
-Please be aware that order of interceptors can matter when want to access parameters passed via request as those 
+Please be aware that order of interceptors can matter when want to access parameters passed via request as those
 parameters are set by [Parameters Interceptor](parameters-interceptor).
 
 ## Disabling interceptor
@@ -313,6 +327,7 @@ overriding logic to set the `disabled` parameter to `true` to skip processing of
 An example how to disable the Validation interceptor:
 
 ```xml
+
 <action name="myAction" class="myActionClass">
     <interceptor-ref name="defaultStack">
         <param name="validation.disabled">true</param>
@@ -322,20 +337,22 @@ An example how to disable the Validation interceptor:
 
 ## Order of Interceptor Execution
 
-Interceptors provide an excellent means to wrap before/after processing. The concept reduces code duplication (think AOP).
+Interceptors provide an excellent means to wrap before/after processing. The concept reduces code duplication (think
+AOP).
 
 ```xml
+
 <interceptor-stack name="xaStack">
-  <interceptor-ref name="thisWillRunFirstInterceptor"/>
-  <interceptor-ref name="thisWillRunNextInterceptor"/>
-  <interceptor-ref name="followedByThisInterceptor"/>
-  <interceptor-ref name="thisWillRunLastInterceptor"/>
+    <interceptor-ref name="thisWillRunFirstInterceptor"/>
+    <interceptor-ref name="thisWillRunNextInterceptor"/>
+    <interceptor-ref name="followedByThisInterceptor"/>
+    <interceptor-ref name="thisWillRunLastInterceptor"/>
 </interceptor-stack>
 ```
 
 > Note that some Interceptors will interrupt the stack/chain/flow ... so the order is very important.
 
-Interceptors implementing `com.opensymphony.xwork2.interceptor.PreResultListener` will run after the Action executes 
+Interceptors implementing `com.opensymphony.xwork2.interceptor.PreResultListener` will run after the Action executes
 but before the Result executes.
 
 ```
