@@ -189,10 +189,15 @@ than the temporary directory and the directories that belong to your web applica
 <p>The Struts 2 framework leverages the Commons FileUpload library as a based library to support file upload in the framework.
 The library is included in a base Struts 2 distribution.</p>
 
+<blockquote>
+  <p>NOTE: Since Struts 6.4.0 the <code class="language-plaintext highlighter-rouge">FileUploadInterceptor</code> is deprecated and you should use <code class="language-plaintext highlighter-rouge">ActionFileUploadInterceptor</code> instead!</p>
+</blockquote>
+
 <h2 id="basic-usage">Basic Usage</h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.FileUploadInterceptor</code> class is included as part of the <code class="language-plaintext highlighter-rouge">defaultStack</code>. As long as
-the required libraries are added to your project you will be able to take advantage of the Struts 2 file upload
+<p>The <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.FileUploadInterceptor</code> and <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.ActionFileUploadInterceptor</code>
+interceptors are included as part of the <code class="language-plaintext highlighter-rouge">defaultStack</code> and named appropriately: <code class="language-plaintext highlighter-rouge">fileUpload</code> and <code class="language-plaintext highlighter-rouge">actionFileUpload</code>. 
+As long as the required libraries are added to your project you will be able to take advantage of the Struts 2 file upload 
 capability. Configure an Action mapping for your Action class as you typically would.</p>
 
 <h3 id="example-action-mapping">Example action mapping:</h3>
@@ -203,9 +208,8 @@ capability. Configure an Action mapping for your Action class as you typically w
 
 </code></pre></div></div>
 
-<p>A form must be create with a form field of type file, <code class="language-plaintext highlighter-rouge">&lt;INPUT type="file" name="upload"&gt;</code>. The form used to upload the
-file must have its encoding type set
-to <code class="language-plaintext highlighter-rouge">multipart/form-data</code>, <code class="language-plaintext highlighter-rouge">&lt;form action="doUpload" enctype="multipart/form-data" method="post"&gt;</code>.
+<p>A form must be created with a form field of type file, <code class="language-plaintext highlighter-rouge">&lt;INPUT type="file" name="upload"&gt;</code>. The form used to upload the
+file must have its encoding type set to <code class="language-plaintext highlighter-rouge">multipart/form-data</code>, <code class="language-plaintext highlighter-rouge">&lt;form action="doUpload" enctype="multipart/form-data" method="post"&gt;</code>.
 The standard procedure for adding these elements is by using the Struts 2 tag libraries as shown in the following
 example:</p>
 
@@ -217,7 +221,34 @@ example:</p>
 <span class="nt">&lt;/s:form&gt;</span>
 </code></pre></div></div>
 
-<p>The fileUpload interceptor will use setter injection to insert the uploaded file and related data into your Action
+<p>The actionFileUpload interceptor will use a dedicated interface <code class="language-plaintext highlighter-rouge">org.apache.struts2.action.UploadedFilesAware</code> to transfer
+information and content of uploaded file. Your action should implement the interface to receive the uploaded file:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UploadAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="kd">implements</span> <span class="nc">UploadedFilesAware</span> <span class="o">{</span>
+  
+    <span class="kd">private</span> <span class="nc">UploadedFile</span> <span class="n">uploadedFile</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">contentType</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">fileName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">originalName</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">withUploadedFiles</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">UploadedFile</span><span class="o">&gt;</span> <span class="n">uploadedFiles</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">uploadedFiles</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">uploadedFile</span> <span class="o">=</span> <span class="n">uploadedFiles</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">fileName</span> <span class="o">=</span> <span class="n">uploadedFile</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">contentType</span> <span class="o">=</span> <span class="n">uploadedFile</span><span class="o">.</span><span class="na">getContentType</span><span class="o">();</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">originalName</span> <span class="o">=</span> <span class="n">uploadedFile</span><span class="o">.</span><span class="na">getOriginalName</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// do something with the file</span>
+        <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Deprecated approach</strong>: the fileUpload interceptor will use setter injection to insert the uploaded file and related data into your Action
 class. For a form field named <code class="language-plaintext highlighter-rouge">upload</code> you would provide the three setter methods shown in the following example:</p>
 
 <h3 id="example-action-class">Example Action class:</h3>
@@ -300,7 +331,10 @@ see <code class="language-plaintext highlighter-rouge">struts-fileupload.xml</co
 <span class="nt">&lt;/s:form&gt;</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">MultipleFileUploadUsingArrayAction.java</code></p>
+<p>The <code class="language-plaintext highlighter-rouge">org.apache.struts2.action.UploadedFilesAware</code> interface already supports uploading multiple files, you do not need to
+follow the below example.</p>
+
+<p><strong>Deprecated approach</strong>: <code class="language-plaintext highlighter-rouge">MultipleFileUploadUsingArrayAction.java</code></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MultipleFileUploadUsingArrayAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="nc">File</span><span class="o">[]</span> <span class="n">uploads</span><span class="o">;</span>
