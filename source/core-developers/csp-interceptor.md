@@ -30,6 +30,7 @@ CSP is now supported by all major browsers. [More information about CSP](https:/
 - `enforcingMode` (default `false`) - When set to "true", the enforce mode has been enabled, and the provided policy 
   is going to be enforced.
 - `reportUri` - an uri under, which the violations have to be reported.
+- `prependServletContext` (default `true`) - a flag to prepend or not the Servlet context to the `reportUri`  
 
 ## Report action
 
