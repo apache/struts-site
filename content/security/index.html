@@ -158,6 +158,7 @@
       <li><a href="#disable-devmode" id="markdown-toc-disable-devmode">Disable devMode</a></li>
       <li><a href="#reduce-logging-level" id="markdown-toc-reduce-logging-level">Reduce logging level</a></li>
       <li><a href="#use-utf-8-encoding" id="markdown-toc-use-utf-8-encoding">Use UTF-8 encoding</a></li>
+      <li><a href="#defining-and-annotating-your-action-parameters" id="markdown-toc-defining-and-annotating-your-action-parameters">Defining and annotating your Action parameters</a></li>
       <li><a href="#do-not-define-setters-when-not-needed" id="markdown-toc-do-not-define-setters-when-not-needed">Do not define setters when not needed</a></li>
       <li><a href="#do-not-use-incoming-values-as-an-input-for-localisation-logic" id="markdown-toc-do-not-use-incoming-values-as-an-input-for-localisation-logic">Do not use incoming values as an input for localisation logic</a></li>
       <li><a href="#do-not-use-incoming-untrusted-user-input-in-forced-expression-evaluation" id="markdown-toc-do-not-use-incoming-untrusted-user-input-in-forced-expression-evaluation">Do not use incoming, untrusted user input in forced expression evaluation</a></li>
@@ -289,7 +290,78 @@ header to each JSP file</p>
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">contentType=</span><span class="s">"text/html; charset=UTF-8"</span> <span class="nt">%&gt;</span>
 </code></pre></div></div>
 
+<h3 id="defining-and-annotating-your-action-parameters">Defining and annotating your Action parameters</h3>
+
+<blockquote>
+  <p>Note: Since 6.4 using <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations=true</code>. Or by default from 7.0.</p>
+</blockquote>
+
+<p>Request parameters, such as those submitted by a form, can be stored on your Struts Action class by defining getters and
+setters for them. For example, if you have a form with a field called <code class="language-plaintext highlighter-rouge">name</code>, you can store the value of that field by
+defining a <code class="language-plaintext highlighter-rouge">public void setName(String name)</code> method on your Action class, and then importantly, annotating this method
+with <code class="language-plaintext highlighter-rouge">@StrutsParameter</code>. The presence of this annotation indicates that the method is intended for parameter injection
+and is safe to be invoked by any user who can view the Action.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+<span class="nd">@StrutsParameter</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>If you wish to populate a DTO (Data Transfer Object) instead of setting the parameters directly on the Action class, you
+can define a getter for the DTO on your Action class instead. For example, define a method <code class="language-plaintext highlighter-rouge">public MyDto getFormData()</code>
+which is also annotated by <code class="language-plaintext highlighter-rouge">@StrutsParameter(depth = 1)</code>. Then, a parameter with name <code class="language-plaintext highlighter-rouge">formData.fullName</code> will be mapped
+to the setter <code class="language-plaintext highlighter-rouge">setFullName</code> on that DTO. Note that the <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> annotation has a <code class="language-plaintext highlighter-rouge">depth</code> field which dictates
+the depth to which parameter injection is permitted. The default value is 0, which only allows setting parameters
+directly on the Action class as in the first example. A <code class="language-plaintext highlighter-rouge">depth</code> of 1 indicates that the immediate public properties of
+an object returned by the getter are permitted to be set. If you have further nested objects, you can increase
+the <code class="language-plaintext highlighter-rouge">depth</code> accordingly. Do not set this <code class="language-plaintext highlighter-rouge">depth</code> field to a value greater than the minimum required for your use case.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">MyDto</span> <span class="n">formData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyDto</span><span class="o">();</span>
+
+<span class="nd">@StrutsParameter</span><span class="o">(</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">MyDto</span> <span class="nf">getFormData</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">formData</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">MyDto</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">fullName</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFullName</span><span class="o">(</span><span class="nc">String</span> <span class="n">fullName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">fullName</span> <span class="o">=</span> <span class="n">fullName</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>It is critical that any method you annotate with <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> is safe for any user who can view that corresponding
+action to invoke (including any public methods on objects returned by that method and so forth). Any getters you
+annotate should only ever return a DTO or a collection/hierarchy of DTOs. Do NOT mix business logic or service
+references with your parameter injection methods and DTOs. Additionally, any database DTOs should be entirely separate
+from request parameter/form DTOs.</p>
+
+<p>Do NOT under any circumstance, annotate a method that returns one of the following unsafe objects:</p>
+<ul>
+  <li>live Hibernate persistent objects</li>
+  <li>container or Spring-managed beans, or any other live components/services</li>
+  <li>objects (or objects that contain references to objects) that contain setter methods that are used for anything other
+than setting form parameter values</li>
+</ul>
+
+<p>If you are finding updating your application with this new annotation time-consuming, you can temporarily combine the
+above option with <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations.transitionMode=true</code>. When this mode is enabled, only ‘nested’
+parameters, i.e. DTOs or Collections represented by public getters on Action classes, will require annotations. This
+means public setters will still be exposed for parameter injection. Notably,
+the <a href="#allowlist-capability">auto-allowlisting capability</a>, which is also supported by these annotations, is not degraded
+in any way, so it proves a useful transitioning option for applications that wish to enable the OGNL allowlist as soon
+as possible.</p>
+
 <h3 id="do-not-define-setters-when-not-needed">Do not define setters when not needed</h3>
+
+<blockquote>
+  <p>Note: Only relevant if you are not using <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations=true</code> as per the previous section.</p>
+</blockquote>
 
 <p>You should carefully design your actions without exposing anything via setters and getters, thus can leads to potential 
 security vulnerabilities. Any action’s setter can be used to set incoming untrusted user’s value which can contain 
@@ -561,6 +633,9 @@ with other known dangerous classes or packages in your application.</p>
 allowlisted classes and packages. By default, all required Struts classes are allowlisted as well as any classes that
 are defined in your <code class="language-plaintext highlighter-rouge">struts.xml</code> package configurations.</p>
 
+<p>We highly recommend enabling the <a href="#defining-and-annotating-your-action-parameters">parameter annotation</a> capability to
+ensure any necessary parameter injection types are allowlisted, in addition to its other benefits.</p>
+
 <p>You can add additional classes and packages to the allowlist with:</p>
 
 <ul>
@@ -569,8 +644,8 @@ are defined in your <code class="language-plaintext highlighter-rouge">struts.xm
 <code class="language-plaintext highlighter-rouge">startWith</code>. Note that classes in subpackages are also allowlisted.</li>
 </ul>
 
-<p>Generally, the only additional classes or packages you will need to configure are those model classes that you wish to
-be constructed/manipulated by Struts form submissions (i.e. parameter injected).</p>
+<p>Depending on the functionality of your application, you may not need to manually allowlist any classes. Please monitor
+your application logs for any warnings about blocked classes and add them to the allowlist as necessary.</p>
 
 <h4 id="extensibility">Extensibility</h4>
 

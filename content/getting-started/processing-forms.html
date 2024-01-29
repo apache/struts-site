@@ -276,7 +276,7 @@ then discuss some key points. Create a view page named <code class="language-pla
 <p>Note the four Struts 2 textfield tags. Each tag has a name value that includes an attribute of the <code class="language-plaintext highlighter-rouge">Person</code> class 
 (e.g. <code class="language-plaintext highlighter-rouge">firstName</code>). The name attribute’s value also has a reference to an object called <code class="language-plaintext highlighter-rouge">personBean</code>. This object is 
 of type <code class="language-plaintext highlighter-rouge">Person</code>. When we create the Action class that handles this form submission, we’ll have to specify that object 
-in that Action class (see below).</p>
+in that Action class and annotate it (see below).</p>
 
 <p>The complete name value, <code class="language-plaintext highlighter-rouge">personBean.firstName</code>, instructs Struts 2 to use the input value for that textfield as 
 the argument to the personBean object’s <code class="language-plaintext highlighter-rouge">setFirstName</code> method. So if the user types “Bruce” in the textfield that has 
@@ -313,7 +313,8 @@ the Struts 2 framework. We need an Action class to process this form. If you rec
         
         <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
     <span class="o">}</span>
-    
+
+    <span class="nd">@StrutsParameter</span><span class="o">(</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
     <span class="kd">public</span> <span class="nc">Person</span> <span class="nf">getPersonBean</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">personBean</span><span class="o">;</span>
     <span class="o">}</span>
@@ -325,8 +326,18 @@ the Struts 2 framework. We need an Action class to process this form. If you rec
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>In the <code class="language-plaintext highlighter-rouge">Register</code> class note that we’ve declared an attribute named <code class="language-plaintext highlighter-rouge">personBean</code> of type <code class="language-plaintext highlighter-rouge">Person</code> and there is a public 
-get and set method for this object.</p>
+<p>In the <code class="language-plaintext highlighter-rouge">Register</code> class, note that we’ve declared an attribute named <code class="language-plaintext highlighter-rouge">personBean</code> of type <code class="language-plaintext highlighter-rouge">Person</code>, there are public 
+getter and setter methods for this object, and the getter is annotated with <code class="language-plaintext highlighter-rouge">@StrutsParameter(depth = 1)</code>.</p>
+
+<p>In the previous <a href="coding-actions">Coding Struts 2 Actions</a> tutorial, we annotated the username <strong>setter</strong>,
+which took a simple String as its parameter type, with <code class="language-plaintext highlighter-rouge">@StrutsParameter</code>. In this example, we are using a “Bean”
+object (sometimes referred to as a DTO or model object) to encapsulate the form data. When we choose to use a DTO
+instead of a primitive, String, or other TypeConverter supported object, we must annotate the <strong>getter</strong>
+method instead, and also assign a depth corresponding to how deep the DTO graph is. In this case, the <code class="language-plaintext highlighter-rouge">Person</code> object
+does not have any further DTOs or collections within it, so a depth of 1 will suffice.</p>
+
+<p>For more information on these annotations and their security implications, please refer
+to <a href="../security/index#defining-and-annotating-your-action-parameters">Security</a>.</p>
 
 <p>The <code class="language-plaintext highlighter-rouge">Register</code> class also overrides the <code class="language-plaintext highlighter-rouge">execute</code> method. The <code class="language-plaintext highlighter-rouge">execute</code> method is the one we will specify in the 
 <code class="language-plaintext highlighter-rouge">struts.xml</code> to be called in response to the register action. In this example, the <code class="language-plaintext highlighter-rouge">execute</code> method just returns 
