@@ -96,6 +96,8 @@ URL and extracted as parameters, for example:
 @Namespace{"/users/{userID}");
 public class DetailsAction exends ActionSupport {
   private Long userID;
+
+  @StrutsParameter
   public void setUserID(Long userID) {...}
 }
 ```

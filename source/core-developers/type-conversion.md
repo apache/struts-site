@@ -322,6 +322,7 @@ public class MyBeanAction implements Action {
     private List beanList = new ArrayList();
     private Map beanMap = new HashMap();
 
+    @StrutsParameter(depth = 2)
     public List getBeanList() {
         return beanList;
     }
@@ -330,6 +331,7 @@ public class MyBeanAction implements Action {
         this.beanList = beanList;
     }
 
+    @StrutsParameter(depth = 2)
     public Map getBeanMap() {
         return beanMap;
     }

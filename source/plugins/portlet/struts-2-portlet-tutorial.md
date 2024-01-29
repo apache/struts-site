@@ -187,10 +187,12 @@ public class AddBookmarkAction extends DefaultActionSupport {
    private String name;
    private String url;
 
+   @StrutsParameter
    public void setName(String name) {
       this.name = name;
    }
 
+   @StrutsParameter
    public void setUrl(String url) {
       this.url = url;
    }
@@ -259,10 +261,12 @@ public class AddBookmarkAction extends DefaultActionSupport implements PortletPr
 	
    private PortletPreferences portletPreferences;
 
+   @StrutsParameter
    public void setName(String name) {
       this.name = name;
    }
 
+   @StrutsParameter
    public void setUrl(String url) {
       this.url = url;
    }
@@ -484,6 +488,7 @@ public class DeleteBookmarkAction extends DefaultActionSupport implements Portle
 	
    private PortletPreferences portletPreferences;
 
+   @StrutsParameter
    public void setBookmarkName(String bookmarkName) {
       this.bookmarkName = bookmarkName;
    }
@@ -563,7 +568,8 @@ public class EditBookmarkAction extends DefaultActionSupport implements PortletP
    public String getOldName() {
       return oldName;
    }
-	
+
+   @StrutsParameter
    public void setOldName(String oldName) {
       this.oldName = oldName;
    }
@@ -572,10 +578,12 @@ public class EditBookmarkAction extends DefaultActionSupport implements PortletP
       return url;
    }
 
+   @StrutsParameter
    public void setUrl(String url) {
       this.url = url;
    }
 
+   @StrutsParameter
    public void setName(String name) {
       this.name = name;
    }

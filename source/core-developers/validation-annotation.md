@@ -48,6 +48,7 @@ Validation annotation must be applied at Type level.
 
      @RequiredFieldValidator(type = ValidatorType.FIELD, message = "You must enter a value for bar.")
      @IntRangeFieldValidator(type = ValidatorType.FIELD, min = "6", max = "10", message = "bar must be between ${min} and ${max}, current value is ${bar}.")
+     @StrutsParameter
      public void setBar(int bar) {
          this.bar = bar;
      }

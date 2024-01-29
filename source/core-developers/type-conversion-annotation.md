@@ -92,21 +92,25 @@ The `TypeConversion` annotation can be applied at property and method level.
    private HashMap keyValues = null;
 
    @TypeConversion(type = ConversionType.APPLICATION)
+   @StrutsParameter
    public void setConvertInt( String convertInt ) {
        this.convertInt = convertInt;
    }
 
    @TypeConversion(converterClass = XWorkBasicConverter.class)
+   @StrutsParameter
    public void setConvertDouble( String convertDouble ) {
        this.convertDouble = convertDouble;
    }
 
    @TypeConversion(rule = ConversionRule.COLLECTION, converterClass = String.class)
+   @StrutsParameter
    public void setUsers( List users ) {
        this.users = users;
    }
 
    @TypeConversion(rule = ConversionRule.MAP, converterClass = BigInteger.class)
+   @StrutsParameter
    public void setKeyValues( HashMap keyValues ) {
        this.keyValues = keyValues;
    }
