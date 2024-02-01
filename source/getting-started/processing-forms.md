@@ -198,12 +198,13 @@ the String constant `SUCCESS` (inherited from the `ActionSupport` class). But in
 method we would call upon other classes (Service objects) to perform the business processing of the form, such as storing 
 the user's input into a data repository.
 
-The `personBean` object of type `Person` declared in the Register Action class matches the `personBean` name we used in 
-the form's textfields. When the form is submitted, the Struts 2 framework will inspect the Action class and look for 
-an object named `personBean`. It will create that object using the `Person` class's default constructor. Then for each 
-form field that has a name value of personBean.someAttribute (e.g `personBean.firstName`) it will call the personBean's 
-public set method for that attribute and pass it the form field's value (the user input). This all happens before 
-the execute method occurs.
+The `personBean` getter of return type `Person` declared in the Register Action class matches the `personBean` name we
+used in the form's textfields. When the form is submitted, the Struts 2 framework will inspect the Action class and look
+for a getter for `personBean`. If it returns `null` and a matching setter exists, it will create that object using the
+`Person` class's default constructor and set it using the setter. Note that the setter can be omitted if your Action
+initialises the field on construction. Then for each form field that has a name value of personBean.someAttribute 
+(e.g `personBean.firstName`) it will call the personBean's public set method for that attribute and pass it the form
+field's value (the user input). This all happens before the execute method occurs.
 
 When Struts 2 runs the `execute` method of class `Register`, the `personBean` object in class `Register` now has values 
 for its instance fields that are equal to the values the user entered into the corresponding form fields.
