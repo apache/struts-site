@@ -164,7 +164,7 @@ annotate should only ever return a DTO or a collection/hierarchy of DTOs. Do NOT
 references with your parameter injection methods and DTOs. Additionally, any database DTOs should be entirely separate
 from request parameter/form DTOs.
 
-Do NOT under any circumstance, annotate a method that returns one of the following unsafe objects:
+Do NOT, under any circumstance, annotate a method that returns one of the following unsafe objects:
 - live Hibernate persistent objects
 - container or Spring-managed beans, or any other live components/services
 - objects (or objects that contain references to objects) that contain setter methods that are used for anything other
@@ -182,7 +182,7 @@ as possible.
 
 > Note: Only relevant if you are not using `struts.parameters.requireAnnotations=true` as per the previous section.
 
-You should carefully design your actions without exposing anything via setters and getters, thus can leads to potential 
+You should carefully design your actions without exposing anything via setters and getters, this can lead to potential 
 security vulnerabilities. Any action's setter can be used to set incoming untrusted user's value which can contain 
 suspicious expression. Some Struts `Result`s automatically populate params based on values in 
 `ValueStack` (action in most cases is the root) which means incoming value will be evaluated as an expression during 
