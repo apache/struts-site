@@ -341,7 +341,7 @@ annotate should only ever return a DTO or a collection/hierarchy of DTOs. Do NOT
 references with your parameter injection methods and DTOs. Additionally, any database DTOs should be entirely separate
 from request parameter/form DTOs.</p>
 
-<p>Do NOT under any circumstance, annotate a method that returns one of the following unsafe objects:</p>
+<p>Do NOT, under any circumstance, annotate a method that returns one of the following unsafe objects:</p>
 <ul>
   <li>live Hibernate persistent objects</li>
   <li>container or Spring-managed beans, or any other live components/services</li>
@@ -363,7 +363,7 @@ as possible.</p>
   <p>Note: Only relevant if you are not using <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations=true</code> as per the previous section.</p>
 </blockquote>
 
-<p>You should carefully design your actions without exposing anything via setters and getters, thus can leads to potential 
+<p>You should carefully design your actions without exposing anything via setters and getters, this can lead to potential 
 security vulnerabilities. Any action’s setter can be used to set incoming untrusted user’s value which can contain 
 suspicious expression. Some Struts <code class="language-plaintext highlighter-rouge">Result</code>s automatically populate params based on values in 
 <code class="language-plaintext highlighter-rouge">ValueStack</code> (action in most cases is the root) which means incoming value will be evaluated as an expression during 
@@ -556,12 +556,14 @@ to the ActionContext from OGNL expressions entirely.</p>
 
 <p>Note that before disabling access to the ActionContext from OGNL expressions, you should ensure that your application
 does not rely on this capability. OGNL expressions may access the context directly using the <code class="language-plaintext highlighter-rouge">#</code> operator, or indirectly
-using the OgnlValueStack’s fallback to context lookup capability. As of Struts 6.4.0, the Set and Action Struts
-components require ActionContext access from OGNL expressions.</p>
+using the OgnlValueStack’s fallback to context lookup capability. As of Struts 6.4.0, the Set, Iterator and Action
+Struts components require ActionContext access from OGNL expressions.</p>
 
 <p>To disable access to the ActionContext from OGNL expressions, set the following constants in your <code class="language-plaintext highlighter-rouge">struts.xml</code> or
-<code class="language-plaintext highlighter-rouge">struts.properties</code> file. Please also refer to the documentation below for further details on these configuration
-options.</p>
+<code class="language-plaintext highlighter-rouge">struts.properties</code> file. The option <code class="language-plaintext highlighter-rouge">struts.ognl.excludedNodeTypes</code> is an <a href="#Struts-OGNL-Guard">OGNL Guard</a> setting
+which completely forbids the context accessing syntax node. The <code class="language-plaintext highlighter-rouge">struts.ognl.valueStackFallbackToContext</code> option
+disables ValueStack behaviour which allows the context to be accessed indirectly via a fallback behaviour triggered when
+an OGNL expression does not evaluate to a valid value.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ognl.valueStackFallbackToContext"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ognl.excludedNodeTypes"</span> <span class="na">value=</span><span class="s">"
@@ -611,23 +613,22 @@ with other known dangerous classes or packages in your application.</p>
 
 <h4 id="additional-options">Additional Options</h4>
 
-<p>We additionally recommend enabling the following options and hope to enable them by default in a future major version.</p>
+<p>We additionally recommend enabling the following options (enabled by default in 7.0).</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">struts.ognl.allowStaticFieldAccess=false</code> - static methods are always blocked, but static fields can also optionally be blocked</li>
   <li><code class="language-plaintext highlighter-rouge">struts.disallowProxyMemberAccess=true</code> - disallow proxied objects from being used in OGNL expressions as they may present a security risk</li>
   <li><code class="language-plaintext highlighter-rouge">struts.disallowDefaultPackageAccess=true</code> - disallow access to classes in the default package which should not be used in production</li>
   <li><code class="language-plaintext highlighter-rouge">struts.ognl.disallowCustomOgnlMap=true</code> - disallow construction of custom OGNL maps which can be used to bypass the SecurityMemberAccess policy</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.ognl.valueStackFallbackToContext=false</code> - disable fallback to OGNL context lookup if expression does not evaluate to a valid value</li>
 </ul>
 
 <h4 id="allowlist-capability">Allowlist Capability</h4>
 
 <blockquote>
-  <p>Note: since Struts 6.4.</p>
+  <p>Note: Since Struts 6.4. Or by default from 7.0.</p>
 </blockquote>
 
-<p>For even more stringent OGNL protection, we recommend enabling the allowlist capability with <code class="language-plaintext highlighter-rouge">struts.allowlist.enable</code>.</p>
+<p>For the most stringent OGNL protection, we recommend enabling the allowlist capability with <code class="language-plaintext highlighter-rouge">struts.allowlist.enable</code>.</p>
 
 <p>Now, in addition to enforcing the exclusion list, classes involved in OGNL expression must also belong to a list of
 allowlisted classes and packages. By default, all required Struts classes are allowlisted as well as any classes that
@@ -641,7 +642,7 @@ ensure any necessary parameter injection types are allowlisted, in addition to i
 <ul>
   <li><code class="language-plaintext highlighter-rouge">struts.allowlist.classes</code>: comma-separated list of allowlisted classes.</li>
   <li><code class="language-plaintext highlighter-rouge">struts.allowlist.packages</code>: comma-separated list of allowlisted packages, matched using string comparison via
-<code class="language-plaintext highlighter-rouge">startWith</code>. Note that classes in subpackages are also allowlisted.</li>
+<code class="language-plaintext highlighter-rouge">startsWith</code>. Note that classes in subpackages are also allowlisted.</li>
 </ul>
 
 <p>Depending on the functionality of your application, you may not need to manually allowlist any classes. Please monitor
@@ -672,7 +673,7 @@ feature is disabled by default but can be enabled and configured with <code clas
 excluded node types. This will mitigate against a host of String concatenation attacks.</p>
 
 <p>For applications using a minimal number of Struts features, you may find the following list a good starting point.
-Please be aware that this list WILL break certain Struts features:</p>
+Please be aware that this list WILL break certain Struts features.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.ognl.excludedNodeTypes"</span>
           <span class="na">value=</span><span class="s">"
