@@ -374,12 +374,14 @@ to the ActionContext from OGNL expressions entirely.
 
 Note that before disabling access to the ActionContext from OGNL expressions, you should ensure that your application
 does not rely on this capability. OGNL expressions may access the context directly using the `#` operator, or indirectly
-using the OgnlValueStack's fallback to context lookup capability. As of Struts 6.4.0, the Set and Action Struts
-components require ActionContext access from OGNL expressions.
+using the OgnlValueStack's fallback to context lookup capability. As of Struts 6.4.0, the Set, Iterator and Action
+Struts components require ActionContext access from OGNL expressions.
 
 To disable access to the ActionContext from OGNL expressions, set the following constants in your `struts.xml` or
-`struts.properties` file. Please also refer to the documentation below for further details on these configuration
-options.
+`struts.properties` file. The option `struts.ognl.excludedNodeTypes` is an [OGNL Guard](#Struts-OGNL-Guard) setting
+which completely forbids the context accessing syntax node. The `struts.ognl.valueStackFallbackToContext` option
+disables ValueStack behaviour which allows the context to be accessed indirectly via a fallback behaviour triggered when
+an OGNL expression does not evaluate to a valid value.
 
 ```xml
 <constant name="struts.ognl.valueStackFallbackToContext" value="false"/>
@@ -429,19 +431,18 @@ with other known dangerous classes or packages in your application.
 
 #### Additional Options
 
-We additionally recommend enabling the following options and hope to enable them by default in a future major version.
+We additionally recommend enabling the following options (enabled by default in 7.0).
 
  * `struts.ognl.allowStaticFieldAccess=false` - static methods are always blocked, but static fields can also optionally be blocked
  * `struts.disallowProxyMemberAccess=true` - disallow proxied objects from being used in OGNL expressions as they may present a security risk
  * `struts.disallowDefaultPackageAccess=true` - disallow access to classes in the default package which should not be used in production
  * `struts.ognl.disallowCustomOgnlMap=true` - disallow construction of custom OGNL maps which can be used to bypass the SecurityMemberAccess policy
- * `struts.ognl.valueStackFallbackToContext=false` - disable fallback to OGNL context lookup if expression does not evaluate to a valid value
 
 #### Allowlist Capability
 
-> Note: since Struts 6.4.
+> Note: Since Struts 6.4. Or by default from 7.0.
 
-For even more stringent OGNL protection, we recommend enabling the allowlist capability with `struts.allowlist.enable`.
+For the most stringent OGNL protection, we recommend enabling the allowlist capability with `struts.allowlist.enable`.
 
 Now, in addition to enforcing the exclusion list, classes involved in OGNL expression must also belong to a list of
 allowlisted classes and packages. By default, all required Struts classes are allowlisted as well as any classes that
@@ -454,7 +455,7 @@ You can add additional classes and packages to the allowlist with:
 
 - `struts.allowlist.classes`: comma-separated list of allowlisted classes.
 - `struts.allowlist.packages`: comma-separated list of allowlisted packages, matched using string comparison via
-  `startWith`. Note that classes in subpackages are also allowlisted.
+  `startsWith`. Note that classes in subpackages are also allowlisted.
 
 Depending on the functionality of your application, you may not need to manually allowlist any classes. Please monitor
 your application logs for any warnings about blocked classes and add them to the allowlist as necessary.
@@ -480,7 +481,7 @@ For example, if you do not need to use the addition operation in any OGNL expres
 excluded node types. This will mitigate against a host of String concatenation attacks.
 
 For applications using a minimal number of Struts features, you may find the following list a good starting point.
-Please be aware that this list WILL break certain Struts features:
+Please be aware that this list WILL break certain Struts features.
 
 ```xml
 <constant name="struts.ognl.excludedNodeTypes"
