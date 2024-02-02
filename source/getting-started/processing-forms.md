@@ -128,7 +128,7 @@ The Struts 2 form will submit to an action named register. We'll need to define 
 Note the four Struts 2 textfield tags. Each tag has a name value that includes an attribute of the `Person` class 
 (e.g. `firstName`). The name attribute's value also has a reference to an object called `personBean`. This object is 
 of type `Person`. When we create the Action class that handles this form submission, we'll have to specify that object 
-in that Action class (see below).
+in that Action class and annotate it (see below).
 
 The complete name value, `personBean.firstName`, instructs Struts 2 to use the input value for that textfield as 
 the argument to the personBean object's `setFirstName` method. So if the user types "Bruce" in the textfield that has 
@@ -166,7 +166,8 @@ public class Register extends ActionSupport {
         
         return SUCCESS;
     }
-    
+
+    @StrutsParameter(depth = 1)
     public Person getPersonBean() {
         return personBean;
     }
@@ -178,8 +179,18 @@ public class Register extends ActionSupport {
 }
 ```
 
-In the `Register` class note that we've declared an attribute named `personBean` of type `Person` and there is a public 
-get and set method for this object.
+In the `Register` class, note that we've declared an attribute named `personBean` of type `Person`, there are public 
+getter and setter methods for this object, and the getter is annotated with `@StrutsParameter(depth = 1)`.
+
+In the previous [Coding Struts 2 Actions](coding-actions) tutorial, we annotated the username **setter**, which took a
+simple String as its parameter type, with `@StrutsParameter`. In this example, we are using a "Bean" object (sometimes
+referred to as a DTO or model object) to encapsulate the form data. When we choose to use a DTO instead of a primitive,
+String, or other TypeConverter supported object, we must annotate the **getter** method instead, and also assign a depth
+corresponding to how deep the DTO graph is. In this case, the `Person` object does not have any further DTOs or
+collections within it, so a depth of 1 will suffice.
+
+For more information on these annotations and their security implications, please refer
+to [Security](../security/index#defining-and-annotating-your-action-parameters).
 
 The `Register` class also overrides the `execute` method. The `execute` method is the one we will specify in the 
 `struts.xml` to be called in response to the register action. In this example, the `execute` method just returns 
@@ -187,12 +198,13 @@ the String constant `SUCCESS` (inherited from the `ActionSupport` class). But in
 method we would call upon other classes (Service objects) to perform the business processing of the form, such as storing 
 the user's input into a data repository.
 
-The `personBean` object of type `Person` declared in the Register Action class matches the `personBean` name we used in 
-the form's textfields. When the form is submitted, the Struts 2 framework will inspect the Action class and look for 
-an object named `personBean`. It will create that object using the `Person` class's default constructor. Then for each 
-form field that has a name value of personBean.someAttribute (e.g `personBean.firstName`) it will call the personBean's 
-public set method for that attribute and pass it the form field's value (the user input). This all happens before 
-the execute method occurs.
+The `personBean` getter of return type `Person` declared in the Register Action class matches the `personBean` name we
+used in the form's textfields. When the form is submitted, the Struts 2 framework will inspect the Action class and look
+for a getter for `personBean`. If it returns `null` and a matching setter exists, it will create that object using the
+`Person` class's default constructor and set it using the setter. Note that the setter can be omitted if your Action
+initialises the field on construction. Then for each form field that has a name value of personBean.someAttribute 
+(e.g `personBean.firstName`) it will call the personBean's public set method for that attribute and pass it the form
+field's value (the user input). This all happens before the execute method occurs.
 
 When Struts 2 runs the `execute` method of class `Register`, the `personBean` object in class `Register` now has values 
 for its instance fields that are equal to the values the user entered into the corresponding form fields.

@@ -101,14 +101,17 @@ public class UploadAction extends ActionSupport {
     private String contentType;
     private String filename;
 
+    @StrutsParameter
     public void setUpload(File file) {
         this.file = file;
     }
 
+    @StrutsParameter
     public void setUploadContentType(String contentType) {
         this.contentType = contentType;
     }
 
+    @StrutsParameter
     public void setUploadFileName(String filename) {
         this.filename = filename;
     }
@@ -185,6 +188,7 @@ public class MultipleFileUploadUsingArrayAction extends ActionSupport {
         return this.uploads;
     }
 
+    @StrutsParameter
     public void setUpload(File[] upload) {
         this.uploads = upload;
     }
@@ -193,6 +197,7 @@ public class MultipleFileUploadUsingArrayAction extends ActionSupport {
         return this.uploadFileNames;
     }
 
+    @StrutsParameter
     public void setUploadFileName(String[] uploadFileName) {
         this.uploadFileNames = uploadFileName;
     }
@@ -201,6 +206,7 @@ public class MultipleFileUploadUsingArrayAction extends ActionSupport {
         return this.uploadContentTypes;
     }
 
+    @StrutsParameter
     public void setUploadContentType(String[] uploadContentType) {
         this.uploadContentTypes = uploadContentType;
     }
@@ -232,6 +238,7 @@ public class MultipleFileUploadUsingListAction extends ActionSupport {
         return this.uploads;
     }
 
+    @StrutsParameter
     public void setUpload(List<File> uploads) {
         this.uploads = uploads;
     }
@@ -240,6 +247,7 @@ public class MultipleFileUploadUsingListAction extends ActionSupport {
         return this.uploadFileNames;
     }
 
+    @StrutsParameter
     public void setUploadFileName(List<String> uploadFileNames) {
         this.uploadFileNames = uploadFileNames;
     }
@@ -248,6 +256,7 @@ public class MultipleFileUploadUsingListAction extends ActionSupport {
         return this.uploadContentTypes;
     }
 
+    @StrutsParameter
     public void setUploadContentType(List<String> contentTypes) {
         this.uploadContentTypes = contentTypes;
     }

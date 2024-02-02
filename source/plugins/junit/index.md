@@ -44,6 +44,7 @@ public class TestAction extends ActionSupport {
         return name;
     }
 
+    @StrutsParameter
     public void setName(String name) {
         this.name = name;
     }

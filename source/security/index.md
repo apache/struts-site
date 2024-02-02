@@ -113,9 +113,76 @@ header to each JSP file
 <%@ page contentType="text/html; charset=UTF-8" %>
 ```
 
+### Defining and annotating your Action parameters
+
+> Note: Since 6.4 using `struts.parameters.requireAnnotations=true`. Or by default from 7.0.
+
+Request parameters, such as those submitted by a form, can be stored on your Struts Action class by defining getters and
+setters for them. For example, if you have a form with a field called `name`, you can store the value of that field by
+defining a `public void setName(String name)` method on your Action class, and then importantly, annotating this method
+with `@StrutsParameter`. The presence of this annotation indicates that the method is intended for parameter injection
+and is safe to be invoked by any user who can view the Action.
+
+```java
+private String name;
+
+@StrutsParameter
+public void setName(String name) {
+    this.name = name;
+}
+```
+
+If you wish to populate a DTO (Data Transfer Object) instead of setting the parameters directly on the Action class, you
+can define a getter for the DTO on your Action class instead. For example, define a method `public MyDto getFormData()`
+which is also annotated by `@StrutsParameter(depth = 1)`. Then, a parameter with name `formData.fullName` will be mapped
+to the setter `setFullName` on that DTO. Note that the `@StrutsParameter` annotation has a `depth` field which dictates
+the depth to which parameter injection is permitted. The default value is 0, which only allows setting parameters
+directly on the Action class as in the first example. A `depth` of 1 indicates that the immediate public properties of
+an object returned by the getter are permitted to be set. If you have further nested objects, you can increase
+the `depth` accordingly. Do not set this `depth` field to a value greater than the minimum required for your use case.
+
+```java
+private MyDto formData = new MyDto();
+
+@StrutsParameter(depth = 1)
+public MyDto getFormData() {
+    return formData;
+}
+
+public static class MyDto {
+    private String fullName;
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+}
+```
+
+It is critical that any method you annotate with `@StrutsParameter` is safe for any user who can view that corresponding
+action to invoke (including any public methods on objects returned by that method and so forth). Any getters you
+annotate should only ever return a DTO or a collection/hierarchy of DTOs. Do NOT mix business logic or service
+references with your parameter injection methods and DTOs. Additionally, any database DTOs should be entirely separate
+from request parameter/form DTOs.
+
+Do NOT, under any circumstance, annotate a method that returns one of the following unsafe objects:
+- live Hibernate persistent objects
+- container or Spring-managed beans, or any other live components/services
+- objects (or objects that contain references to objects) that contain setter methods that are used for anything other
+  than setting form parameter values
+
+If you are finding updating your application with this new annotation time-consuming, you can temporarily combine the
+above option with `struts.parameters.requireAnnotations.transitionMode=true`. When this mode is enabled, only 'nested'
+parameters, i.e. DTOs or Collections represented by public getters on Action classes, will require annotations. This
+means public setters will still be exposed for parameter injection. Notably,
+the [auto-allowlisting capability](#allowlist-capability), which is also supported by these annotations, is not degraded
+in any way, so it proves a useful transitioning option for applications that wish to enable the OGNL allowlist as soon
+as possible.
+
 ### Do not define setters when not needed
 
-You should carefully design your actions without exposing anything via setters and getters, thus can leads to potential 
+> Note: Only relevant if you are not using `struts.parameters.requireAnnotations=true` as per the previous section.
+
+You should carefully design your actions without exposing anything via setters and getters, this can lead to potential 
 security vulnerabilities. Any action's setter can be used to set incoming untrusted user's value which can contain 
 suspicious expression. Some Struts `Result`s automatically populate params based on values in 
 `ValueStack` (action in most cases is the root) which means incoming value will be evaluated as an expression during 
@@ -307,12 +374,14 @@ to the ActionContext from OGNL expressions entirely.
 
 Note that before disabling access to the ActionContext from OGNL expressions, you should ensure that your application
 does not rely on this capability. OGNL expressions may access the context directly using the `#` operator, or indirectly
-using the OgnlValueStack's fallback to context lookup capability. As of Struts 6.4.0, the Set and Action Struts
-components require ActionContext access from OGNL expressions.
+using the OgnlValueStack's fallback to context lookup capability. As of Struts 6.4.0, the Set, Iterator and Action
+Struts components require ActionContext access from OGNL expressions.
 
 To disable access to the ActionContext from OGNL expressions, set the following constants in your `struts.xml` or
-`struts.properties` file. Please also refer to the documentation below for further details on these configuration
-options.
+`struts.properties` file. The option `struts.ognl.excludedNodeTypes` is an [OGNL Guard](#Struts-OGNL-Guard) setting
+which completely forbids the context accessing syntax node. The `struts.ognl.valueStackFallbackToContext` option
+disables ValueStack behaviour which allows the context to be accessed indirectly via a fallback behaviour triggered when
+an OGNL expression does not evaluate to a valid value.
 
 ```xml
 <constant name="struts.ognl.valueStackFallbackToContext" value="false"/>
@@ -362,32 +431,34 @@ with other known dangerous classes or packages in your application.
 
 #### Additional Options
 
-We additionally recommend enabling the following options and hope to enable them by default in a future major version.
+We additionally recommend enabling the following options (enabled by default in 7.0).
 
  * `struts.ognl.allowStaticFieldAccess=false` - static methods are always blocked, but static fields can also optionally be blocked
  * `struts.disallowProxyMemberAccess=true` - disallow proxied objects from being used in OGNL expressions as they may present a security risk
  * `struts.disallowDefaultPackageAccess=true` - disallow access to classes in the default package which should not be used in production
  * `struts.ognl.disallowCustomOgnlMap=true` - disallow construction of custom OGNL maps which can be used to bypass the SecurityMemberAccess policy
- * `struts.ognl.valueStackFallbackToContext=false` - disable fallback to OGNL context lookup if expression does not evaluate to a valid value
 
 #### Allowlist Capability
 
-> Note: since Struts 6.4.
+> Note: Since Struts 6.4. Or by default from 7.0.
 
-For even more stringent OGNL protection, we recommend enabling the allowlist capability with `struts.allowlist.enable`.
+For the most stringent OGNL protection, we recommend enabling the allowlist capability with `struts.allowlist.enable`.
 
 Now, in addition to enforcing the exclusion list, classes involved in OGNL expression must also belong to a list of
 allowlisted classes and packages. By default, all required Struts classes are allowlisted as well as any classes that
 are defined in your `struts.xml` package configurations.
 
+We highly recommend enabling the [parameter annotation](#defining-and-annotating-your-action-parameters) capability to
+ensure any necessary parameter injection types are allowlisted, in addition to its other benefits.
+
 You can add additional classes and packages to the allowlist with:
 
 - `struts.allowlist.classes`: comma-separated list of allowlisted classes.
 - `struts.allowlist.packages`: comma-separated list of allowlisted packages, matched using string comparison via
-  `startWith`. Note that classes in subpackages are also allowlisted.
+  `startsWith`. Note that classes in subpackages are also allowlisted.
 
-Generally, the only additional classes or packages you will need to configure are those model classes that you wish to
-be constructed/manipulated by Struts form submissions (i.e. parameter injected).
+Depending on the functionality of your application, you may not need to manually allowlist any classes. Please monitor
+your application logs for any warnings about blocked classes and add them to the allowlist as necessary.
 
 #### Extensibility
 
@@ -410,7 +481,7 @@ For example, if you do not need to use the addition operation in any OGNL expres
 excluded node types. This will mitigate against a host of String concatenation attacks.
 
 For applications using a minimal number of Struts features, you may find the following list a good starting point.
-Please be aware that this list WILL break certain Struts features:
+Please be aware that this list WILL break certain Struts features.
 
 ```xml
 <constant name="struts.ognl.excludedNodeTypes"

@@ -40,6 +40,7 @@ public class VisitorValidatorsExampleAction extends AbstractValidationActionSupp
 
     private User user;
 
+    @StrutsParameter(depth = 1)
     public User getUser() {
         return user;
     }

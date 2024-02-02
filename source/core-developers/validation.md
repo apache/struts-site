@@ -292,6 +292,7 @@ The same mechanism can be used with annotations as follow:
 @RequiredStringValidator(key = "errors.required", messageParams = {
     "getText('username.field.name')"
 })
+@StrutsParameter
 public void setUsername(String username) {
     this.username = username;
 }

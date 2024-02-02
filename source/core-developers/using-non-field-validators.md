@@ -42,6 +42,7 @@ public class NonFieldValidatorsExampleAction extends AbstractValidationActionSup
         return someText;
     }
 
+    @StrutsParameter
     public void setSomeText(String someText) {
         this.someText = someText;
     }
@@ -50,6 +51,7 @@ public class NonFieldValidatorsExampleAction extends AbstractValidationActionSup
         return someTextRetype;
     }
 
+    @StrutsParameter
     public void setSomeTextRetype(String someTextRetype) {
         this.someTextRetype = someTextRetype;
     }
@@ -58,6 +60,7 @@ public class NonFieldValidatorsExampleAction extends AbstractValidationActionSup
         return someTextRetypeAgain;
     }
 
+    @StrutsParameter
     public void setSomeTextRetypeAgain(String someTextRetypeAgain) {
         this.someTextRetypeAgain = someTextRetypeAgain;
     }

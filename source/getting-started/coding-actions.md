@@ -105,6 +105,7 @@ public String getUserName() {
     return userName;
 }
 
+@StrutsParameter
 public void setUserName(String userName) {
     this.userName = userName;
 }
@@ -128,7 +129,8 @@ You should see the following page.
 ![coding_actions_form_submit_result.png](attachments/coding_actions_form_submit_result.png)
 
 When the form is submitted, Struts will call any set methods of the HelloWorldAction class that match the form field 
-names. So in this example method `setUserName` was called and passed the value the user entered in the `userName` form field.
+names and are annotated with `@StrutsParameter`. So in this example method `setUserName` was called and passed the value
+the user entered in the `userName` form field.
 
 On the `index.jsp` we also have a Struts 2 action link (see tutorial [Using Struts 2 Tags](using-tags)) that includes 
 a query string parameter: `userName=Bruce+Phillips`. If you click on that link you should see the following result:

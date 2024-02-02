@@ -90,14 +90,17 @@ You must set the encoding to <code>multipart/form-data</code> in the form where 
        private String contentType;
        private String filename;
 
+       @StrutsParameter
        public void setUpload(File file) {
           this.file = file;
        }
 
+       @StrutsParameter
        public void setUploadContentType(String contentType) {
           this.contentType = contentType;
        }
 
+       @StrutsParameter
        public void setUploadFileName(String filename) {
           this.filename = filename;
        }

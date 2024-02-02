@@ -81,7 +81,8 @@ public class MyActionSupport extends ActionSupport {
     public Integer getMyIntegerField() { 
         return this.myIntegerField; 
     }
-    
+
+    @StrutsParameter
     public void setMyIntegerField(Integer myIntegerField) {
         this.myIntegerField = myIntegerField;
     }
