@@ -164,8 +164,8 @@
   <li><a href="#installation" id="markdown-toc-installation">Installation</a></li>
 </ul>
 
-<p>Tiles is a templating framework designed to easily allow the creation of web application pages with a consistent look and feel. It can 
-be used for both page decorating and componentization.</p>
+<p>Tiles is a templating framework designed to easily allow the creation of web application pages with a consistent 
+look and feel. It can be used for both page decorating and componentization.</p>
 
 <p>The Tiles plugin allows actions to return Tiles pages.</p>
 
@@ -181,101 +181,93 @@ be used for both page decorating and componentization.</p>
 <p>The following steps must be taken in order to enable tiles support within your Struts2 application:</p>
 
 <ol>
-  <li>Include the struts-tiles-plugin as a dependency in your web application. If you are using maven2, the dependency configuration will 
-  be similar to:</li>
-</ol>
+  <li>
+    <p>Include the struts-tiles-plugin as a dependency in your web application. If you are using maven2, the dependency 
+configuration will be similar to:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
   <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>struts2-tiles-plugin<span class="nt">&lt;/artifactId&gt;</span>
   <span class="nt">&lt;version&gt;</span>${version.tiles}<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Register the Tiles listener. This listener will typically either be the standard tiles listener <code class="language-plaintext highlighter-rouge">org.apache.tiles.listener.TilesListener</code>
+or the Struts2 replacement <code class="language-plaintext highlighter-rouge">org.apache.struts2.tiles.TilesListener</code>. The latter provides tighter integration with 
+Struts features such as freemarker integration.</p>
 
-</code></pre></div></div>
-
-<ol>
-  <li>Register the tiles listener. This listener will typically either be the standard tiles listener <code class="language-plaintext highlighter-rouge">org.apache.tiles.listener.TilesListener</code>
-  or the Struts2 replacement <code class="language-plaintext highlighter-rouge">org.apache.struts2.tiles.TilesListener</code>. The latter provides tighter integration with Struts features such 
-  as freemarker integration.</li>
-</ol>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;listener&gt;</span>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;listener&gt;</span>
   <span class="nt">&lt;listener-class&gt;</span>org.apache.struts2.tiles.StrutsTilesListener<span class="nt">&lt;/listener-class&gt;</span>
 <span class="nt">&lt;/listener&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>All package definitions, which require tiles support, must either extend the <code class="language-plaintext highlighter-rouge">tiles-default</code> package or must register 
+the <strong>Tiles Result</strong> type definition.</p>
 
-</code></pre></div></div>
-
-<ol>
-  <li>All package definitions which require tiles support must either extend the <code class="language-plaintext highlighter-rouge">tiles-default</code> package or must register 
-  the [Tiles Result] type definition.</li>
-</ol>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result-types&gt;</span>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result-types&gt;</span>
   <span class="nt">&lt;result-type</span> <span class="na">name=</span><span class="s">"tiles"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.views.tiles.TilesResult"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/result-types&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Configure your actions to utilize a tiles definition:</p>
 
-</code></pre></div></div>
-
-<ol>
-  <li>Configure your actions to utilize a tiles definition:</li>
-</ol>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"sample"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.tiles.example.SampleAction"</span> <span class="nt">&gt;</span>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"sample"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.tiles.example.SampleAction"</span> <span class="nt">&gt;</span>
   <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"tiles"</span><span class="nt">&gt;</span>tilesWorks<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Instead of xml configuration you can use annotations</p>
 
-</code></pre></div></div>
-
-<ol>
-  <li>Instead of xml configuration you can use annotations</li>
-</ol>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Result</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"success"</span><span class="o">,</span> <span class="n">type</span><span class="o">=</span><span class="s">"tiles"</span><span class="o">)</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Result</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"success"</span><span class="o">,</span> <span class="n">type</span><span class="o">=</span><span class="s">"tiles"</span><span class="o">)</span>
 <span class="nd">@TilesDefinition</span><span class="o">(</span><span class="n">extend</span> <span class="o">=</span> <span class="s">"fooLayout"</span><span class="o">,</span> <span class="n">putAttributes</span> <span class="o">=</span> <span class="o">{</span>
     <span class="nd">@TilesPutAttribute</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"header"</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">"/WEB-INF/tiles/header.jsp"</span><span class="o">),</span>
     <span class="nd">@TilesPutAttribute</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"body"</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">"/WEB-INF/tiles/body.ftl"</span><span class="o">)</span>
 <span class="o">})</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>You have to define Tiles Definitions in a <code class="language-plaintext highlighter-rouge">tiles.xml</code> file. That can be placed in <code class="language-plaintext highlighter-rouge">resources</code> or in <code class="language-plaintext highlighter-rouge">WEB-INF</code>.</p>
 
-<ol>
-  <li>You have to define Tiles Definitons in a <code class="language-plaintext highlighter-rouge">tiles.xml</code> file. That can be placed in <code class="language-plaintext highlighter-rouge">resources</code> or in <code class="language-plaintext highlighter-rouge">WEB-INF</code>.</li>
-</ol>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE tiles-definitions PUBLIC
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE tiles-definitions PUBLIC
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd"&gt;</span>
-
 <span class="nt">&lt;tiles-definitions&gt;</span>
-
+   
     <span class="nt">&lt;definition</span> <span class="na">name=</span><span class="s">"fooLayout"</span> <span class="na">template=</span><span class="s">"/WEB-INF/tiles/layout.jsp"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;put-attribute</span> <span class="na">name=</span><span class="s">"title"</span> <span class="na">value=</span><span class="s">"Tiles Sample"</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;put-attribute</span> <span class="na">name=</span><span class="s">"header"</span> <span class="na">value=</span><span class="s">".header"</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;put-attribute</span> <span class="na">name=</span><span class="s">"body"</span> <span class="na">value=</span><span class="s">".bodyp"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/definition&gt;</span>
-
+   
     <span class="nt">&lt;definition</span> <span class="na">name=</span><span class="s">"tilesWorks"</span> <span class="na">extends=</span><span class="s">"fooLayout"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;put-attribute</span> <span class="na">name=</span><span class="s">"header"</span> <span class="na">value=</span><span class="s">"/WEB-INF/tiles/header.jsp"</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;put-attribute</span> <span class="na">name=</span><span class="s">"body"</span> <span class="na">value=</span><span class="s">"/WEB-INF/tiles/body.jsp"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/definition&gt;</span>
-
+   
 <span class="nt">&lt;/tiles-definitions&gt;</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
+  </li>
+</ol>
 
-<p>As from Struts 2.3.28, the plugin automatically loads all Tiles definitions matching the following pattern <code class="language-plaintext highlighter-rouge">tiles*.xml</code> - you don’t have 
-to specify them via <code class="language-plaintext highlighter-rouge">org.apache.tiles.definition.DefinitionsFactory.DEFINITIONS_CONFIG</code> in <code class="language-plaintext highlighter-rouge">web.xml</code>, but you can use this option if your 
-application is going to work in restricted servlet environment e.g. Google AppEngine. In such case, definitions will be read from 
-the provided init-param.</p>
+<p>As from Struts 2.3.28, the plugin automatically loads all Tiles definitions matching the following pattern <code class="language-plaintext highlighter-rouge">tiles*.xml</code> - 
+you don’t have to specify them via <code class="language-plaintext highlighter-rouge">org.apache.tiles.definition.DefinitionsFactory.DEFINITIONS_CONFIG</code> in <code class="language-plaintext highlighter-rouge">web.xml</code>, 
+but you can use this option if your application is going to work in restricted servlet environment e.g., Google AppEngine. 
+In such case, definitions will be read from the provided init-param.</p>
 
 <blockquote>
-  <p>Note: When using a Tomcat WAR versoning mechanism which uses <code class="language-plaintext highlighter-rouge">##</code> you must specify all the tiles definition directly using
-the <code class="language-plaintext highlighter-rouge">init-param</code>, in other case it won’t be loaded. It’s due to limitation of <code class="language-plaintext highlighter-rouge">URL</code> class.</p>
+  <p>Note: When using a Tomcat WAR versoning mechanism which uses <code class="language-plaintext highlighter-rouge">##</code> you must specify all the tiles definition directly
+using the <code class="language-plaintext highlighter-rouge">init-param</code>, in other case it won’t be loaded. It’s due to limitation of <code class="language-plaintext highlighter-rouge">URL</code> class.</p>
 </blockquote>
 
 <h3 id="accessing-struts-attributes">Accessing Struts attributes</h3>
 
-<p>As from Struts version 2.5.3 it’s possible accessing defined values on a <code class="language-plaintext highlighter-rouge">ValueStack</code> using <code class="language-plaintext highlighter-rouge">S2</code> prefix when defining an expression 
-in tiles definition, e.g.:</p>
+<p>As from Struts version 2.5.3 it’s possible accessing defined values on a <code class="language-plaintext highlighter-rouge">ValueStack</code> using <code class="language-plaintext highlighter-rouge">S2</code> prefix when defining 
+an expression in tiles definition, e.g.:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;definition</span> <span class="na">name=</span><span class="s">"home"</span> <span class="na">extends=</span><span class="s">"logged-in"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;put-attribute</span> <span class="na">name=</span><span class="s">"title"</span> <span class="na">expression=</span><span class="s">"S2:actionProperty"</span><span class="nt">/&gt;</span>
@@ -283,12 +275,12 @@ in tiles definition, e.g.:</p>
 <span class="nt">&lt;/definition&gt;</span>
 </code></pre></div></div>
 
-<p>In such case Tiles will delegate evaluation of the expression to Struts and <code class="language-plaintext highlighter-rouge">ValueStack</code> will be examined to evaluate the expression.</p>
+<p>In such case Tiles will delegate evaluation of the expression to Struts and <code class="language-plaintext highlighter-rouge">ValueStack</code> will be examined.</p>
 
 <h3 id="i18n">I18N</h3>
 
-<p>Instead of defining new tiles definitions per supported language (i.e.: <code class="language-plaintext highlighter-rouge">tiles.xml</code>, <code class="language-plaintext highlighter-rouge">tiles_de.xml</code>, <code class="language-plaintext highlighter-rouge">tiles_pl.xml</code>) you can use <code class="language-plaintext highlighter-rouge">I18N</code> 
-prefix to evaluate provided expression as a key in Struts resource bundles. </p>
+<p>Instead of defining new tiles definitions per supported language (i.e.: <code class="language-plaintext highlighter-rouge">tiles.xml</code>, <code class="language-plaintext highlighter-rouge">tiles_de.xml</code>, <code class="language-plaintext highlighter-rouge">tiles_pl.xml</code>) 
+you can use <code class="language-plaintext highlighter-rouge">I18N</code> prefix to evaluate provided expression as a key in Struts resource bundles.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;definition</span> <span class="na">name=</span><span class="s">"home"</span> <span class="na">extends=</span><span class="s">"logged-in"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;put-attribute</span> <span class="na">name=</span><span class="s">"title"</span> <span class="na">expression=</span><span class="s">"I18N:home.title"</span><span class="nt">/&gt;</span>
@@ -310,21 +302,21 @@ prefix to evaluate provided expression as a key in Struts resource bundles. </p
 <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;tiles:insertAttribute </span><span class="na">name=</span><span class="s">"header"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;tiles:insertAttribute </span><span class="na">name=</span><span class="s">"body"</span><span class="nt">/&gt;</span>
-	<span class="nt">&lt;p&gt;</span>Notice that this is a layout made in JSP<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Notice that this is a layout made in JSP<span class="nt">&lt;/p&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-
 </code></pre></div></div>
 
-<p>Please check <a href="https://github.com/apache/struts-examples/tree/master/tiles">tiles</a> example in <a href="https://github.com/apache/struts-examples/tree/master/tiles">struts-examples</a> project.</p>
+<p>Please check <a href="https://github.com/apache/struts-examples/tree/master/tiles">tiles</a> example in <a href="https://github.com/apache/struts-examples/tree/master/tiles">struts-examples</a> project.</p>
 
 <h2 id="settings">Settings</h2>
 
-<p>This plugin does inherits settings from <a href="https://tiles.apache.org/framework/config-reference.html">Tiles configuration</a>.</p>
+<p>This plugin does inherit settings from <a href="https://tiles.apache.org/framework/config-reference.html">Tiles configuration</a>.</p>
 
 <h2 id="installation">Installation</h2>
 
-<p>This plugin can be installed by copying the plugin jar into your application’s <code class="language-plaintext highlighter-rouge">/WEB-INF/lib</code> directory. No other files need to be copied or created.</p>
+<p>This plugin can be installed by copying the plugin jar into your application’s <code class="language-plaintext highlighter-rouge">/WEB-INF/lib</code> directory. 
+No other files need to be copied or created.</p>
 
   </section>
 </article>
