@@ -54,6 +54,7 @@ Other committers are listed in the chronological order, according to the date ea
 - Mathias Bogaert (pathos at apache.org)
 - John Lindal (jafl at apache.org)
 - Bruce A. Phillips (bphillips at apache.org)
+- Kusal Kithul-Godage (kusal at apache.org)
 
 ## Emeritus Volunteers
 
