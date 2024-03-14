@@ -1,9 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: File Upload
 parent:
-  title: Core Developers Guide
-  url: index
+  title: Action File Upload Interceptor
+  url: action-file-upload-interceptor
 ---
 
 # File Upload
@@ -24,7 +24,7 @@ than the temporary directory and the directories that belong to your web applica
 The Struts 2 framework leverages the Commons FileUpload library as a based library to support file upload in the framework.
 The library is included in a base Struts 2 distribution.
 
-> NOTE: Since Struts 6.4.0 the `FileUploadInterceptor` is deprecated and you should use `ActionFileUploadInterceptor` instead!
+> NOTE: Since Struts 6.4.0 the `FileUploadInterceptor` is deprecated, and you should use `ActionFileUploadInterceptor` instead!
 
 ## Basic Usage
 
