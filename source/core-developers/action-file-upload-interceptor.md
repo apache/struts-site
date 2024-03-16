@@ -10,7 +10,7 @@ parent:
 
 > Available since Struts 6.4.0 as replacement for [File Upload Interceptor](file-upload-interceptor)
 
-See [this page](file-upload) for more examples and advanced configuration.
+See [this page](action-file-upload) for more examples and advanced configuration.
 
 Interceptor that is based off of `MultiPartRequestWrapper`, which is automatically applied for any request that includes 
 a file. If an action implements `org.apache.struts2.action.UploadedFilesAware` interface, the interceptor will pass
