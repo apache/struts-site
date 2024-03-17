@@ -7,6 +7,10 @@ parent:
 ---
 
 # File Upload Interceptor
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 Since Struts 6.4.0 this interceptor is deprecated, please use [Action File Upload Interceptor](action-file-upload-interceptor) instead!
 {:.alert .alert-warning}
