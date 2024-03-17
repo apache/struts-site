@@ -57,6 +57,8 @@ and which are not.
 
 ## Examples
 
+See [this page](file-upload) for more examples and advanced configuration.
+
 **Example action mapping:**
 
 ```xml

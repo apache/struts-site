@@ -53,8 +53,8 @@ example:
 </s:form>
 ```
 
-The actionFileUpload interceptor will use a dedicated interface `org.apache.struts2.action.UploadedFilesAware` to transfer
-information and content of uploaded file. Your action should implement the interface to receive the uploaded file:
+The **actionFileUpload** interceptor will use a dedicated interface `org.apache.struts2.action.UploadedFilesAware` 
+to transfer information and content of uploaded file. Your action should implement the interface to receive the uploaded file:
 
 ```java
 public class UploadAction extends ActionSupport implements UploadedFilesAware {
@@ -86,16 +86,13 @@ public class UploadAction extends ActionSupport implements UploadedFilesAware {
 As mentioned in the previous section one technique for uploading multiple files would be to simply have multiple form
 input elements of type file all with different names. This would require a number of setter methods that was equal to 3
 times the number of files being uploaded. Another option is to use Arrays or java.util.Lists. The following examples are
-taken from the Showcase example application that is part sample applications you can download
-at [http://struts.apache.org/download.cgi](http://struts.apache.org/download.cgi). For the Action mapping details
-see `struts-fileupload.xml` in the sample application download.
+taken from the Showcase example application that is part sample applications you can download at [download](http://struts.apache.org/download.cgi).
+For the Action mapping details  see `struts-fileupload.xml` in the sample application download.
 
-### Uploading Multiple Files using Arrays
-
-`multipleUploadUsingArray.jsp` Notice all file input types have the same name.
+`multipleUploadUsingList.jsp` Notice all file input types have the same name.
 
 ```html
-<s:form action="doMultipleUploadUsingArray" method="POST" enctype="multipart/form-data">
+<s:form action="multipleFileUploadUsingList" method="POST" enctype="multipart/form-data">
     <s:file label="File (1)" name="upload"/>
     <s:file label="File (2)" name="upload"/>
     <s:file label="FIle (3)" name="upload"/>
@@ -103,8 +100,52 @@ see `struts-fileupload.xml` in the sample application download.
 </s:form>
 ```
 
-The `org.apache.struts2.action.UploadedFilesAware` interface already supports uploading multiple files, you do not need 
-to  follow the below example.
+The `org.apache.struts2.action.UploadedFilesAware` interface already supports uploading multiple files:
+
+```java
+public class MultipleFileUploadUsingListAction extends ActionSupport implements UploadedFilesAware {
+
+    private List<UploadedFile> uploads = new ArrayList<>();
+
+    public List<UploadedFile> getUpload() {
+        return this.uploads;
+    }
+
+    @Override
+    public void withUploadedFiles(List<UploadedFile> uploads) {
+        this.uploads = uploads;
+    }
+
+    private List<String> getUploadFileNames() {
+        return this.uploads.stream()
+                .map(UploadedFile::getOriginalName)
+                .collect(Collectors.toList());
+    }
+
+    private List<String> getUploadContentTypes() {
+        return this.uploads.stream()
+                .map(UploadedFile::getContentType)
+                .collect(Collectors.toList());
+    }
+
+    public String execute() throws Exception {
+        System.out.println("files:");
+        for (UploadedFile u : uploads) {
+            System.out.println("*** " + u + "\t" + u.length());
+        }
+        System.out.println("filenames:");
+        for (String n : getUploadFileNames()) {
+            System.out.println("*** " + n);
+        }
+        System.out.println("content types:");
+        for (String c : getUploadContentTypes()) {
+            System.out.println("*** " + c);
+        }
+        System.out.println("\n\n");
+        return SUCCESS;
+    }
+}
+```
 
 ## Advanced Configuration
 
