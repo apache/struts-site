@@ -159,10 +159,7 @@
       <li><a href="#example-jsp-form-tags" id="markdown-toc-example-jsp-form-tags">Example JSP form tags:</a></li>
     </ul>
   </li>
-  <li><a href="#uploading-multiple-files" id="markdown-toc-uploading-multiple-files">Uploading Multiple Files</a>    <ul>
-      <li><a href="#uploading-multiple-files-using-arrays" id="markdown-toc-uploading-multiple-files-using-arrays">Uploading Multiple Files using Arrays</a></li>
-    </ul>
-  </li>
+  <li><a href="#uploading-multiple-files" id="markdown-toc-uploading-multiple-files">Uploading Multiple Files</a></li>
   <li><a href="#advanced-configuration" id="markdown-toc-advanced-configuration">Advanced Configuration</a>    <ul>
       <li><a href="#files-number-limit" id="markdown-toc-files-number-limit">Files Number Limit</a></li>
       <li><a href="#file-size-limits" id="markdown-toc-file-size-limits">File Size Limits</a></li>
@@ -216,8 +213,8 @@ example:</p>
 <span class="nt">&lt;/s:form&gt;</span>
 </code></pre></div></div>
 
-<p>The actionFileUpload interceptor will use a dedicated interface <code class="language-plaintext highlighter-rouge">org.apache.struts2.action.UploadedFilesAware</code> to transfer
-information and content of uploaded file. Your action should implement the interface to receive the uploaded file:</p>
+<p>The <strong>actionFileUpload</strong> interceptor will use a dedicated interface <code class="language-plaintext highlighter-rouge">org.apache.struts2.action.UploadedFilesAware</code> 
+to transfer information and content of uploaded file. Your action should implement the interface to receive the uploaded file:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UploadAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="kd">implements</span> <span class="nc">UploadedFilesAware</span> <span class="o">{</span>
   
@@ -248,15 +245,12 @@ information and content of uploaded file. Your action should implement the inter
 <p>As mentioned in the previous section one technique for uploading multiple files would be to simply have multiple form
 input elements of type file all with different names. This would require a number of setter methods that was equal to 3
 times the number of files being uploaded. Another option is to use Arrays or java.util.Lists. The following examples are
-taken from the Showcase example application that is part sample applications you can download
-at <a href="http://struts.apache.org/download.cgi">http://struts.apache.org/download.cgi</a>. For the Action mapping details
-see <code class="language-plaintext highlighter-rouge">struts-fileupload.xml</code> in the sample application download.</p>
+taken from the Showcase example application that is part sample applications you can download at <a href="http://struts.apache.org/download.cgi">download</a>.
+For the Action mapping details  see <code class="language-plaintext highlighter-rouge">struts-fileupload.xml</code> in the sample application download.</p>
 
-<h3 id="uploading-multiple-files-using-arrays">Uploading Multiple Files using Arrays</h3>
+<p><code class="language-plaintext highlighter-rouge">multipleUploadUsingList.jsp</code> Notice all file input types have the same name.</p>
 
-<p><code class="language-plaintext highlighter-rouge">multipleUploadUsingArray.jsp</code> Notice all file input types have the same name.</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"doMultipleUploadUsingArray"</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">enctype=</span><span class="s">"multipart/form-data"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form</span> <span class="na">action=</span><span class="s">"multipleFileUploadUsingList"</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">enctype=</span><span class="s">"multipart/form-data"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;s:file</span> <span class="na">label=</span><span class="s">"File (1)"</span> <span class="na">name=</span><span class="s">"upload"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;s:file</span> <span class="na">label=</span><span class="s">"File (2)"</span> <span class="na">name=</span><span class="s">"upload"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;s:file</span> <span class="na">label=</span><span class="s">"FIle (3)"</span> <span class="na">name=</span><span class="s">"upload"</span><span class="nt">/&gt;</span>
@@ -264,8 +258,51 @@ see <code class="language-plaintext highlighter-rouge">struts-fileupload.xml</co
 <span class="nt">&lt;/s:form&gt;</span>
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">org.apache.struts2.action.UploadedFilesAware</code> interface already supports uploading multiple files, you do not need 
-to  follow the below example.</p>
+<p>The <code class="language-plaintext highlighter-rouge">org.apache.struts2.action.UploadedFilesAware</code> interface already supports uploading multiple files:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MultipleFileUploadUsingListAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="kd">implements</span> <span class="nc">UploadedFilesAware</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">UploadedFile</span><span class="o">&gt;</span> <span class="n">uploads</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">UploadedFile</span><span class="o">&gt;</span> <span class="nf">getUpload</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">uploads</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">withUploadedFiles</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">UploadedFile</span><span class="o">&gt;</span> <span class="n">uploads</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">uploads</span> <span class="o">=</span> <span class="n">uploads</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getUploadFileNames</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">uploads</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">UploadedFile:</span><span class="o">:</span><span class="n">getOriginalName</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getUploadContentTypes</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">uploads</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">UploadedFile:</span><span class="o">:</span><span class="n">getContentType</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"files:"</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">UploadedFile</span> <span class="n">u</span> <span class="o">:</span> <span class="n">uploads</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"*** "</span> <span class="o">+</span> <span class="n">u</span> <span class="o">+</span> <span class="s">"\t"</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"filenames:"</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">n</span> <span class="o">:</span> <span class="n">getUploadFileNames</span><span class="o">())</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"*** "</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"content types:"</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">c</span> <span class="o">:</span> <span class="n">getUploadContentTypes</span><span class="o">())</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"*** "</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n\n"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="no">SUCCESS</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <h2 id="advanced-configuration">Advanced Configuration</h2>
 
