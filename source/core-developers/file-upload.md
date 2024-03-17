@@ -13,7 +13,7 @@ parent:
 {:toc}
 
 Since Struts 6.4.0 the `FileUploadInterceptor` is deprecated, and you should use [ActionFileUploadInterceptor](action-file-upload-interceptor) instead!
-{:.alert .alert-block .alert-error}
+{:.alert .alert-warning}
 
 The Struts 2 framework provides built-in support for processing file uploads that conform to [RFC 1867](http://www.ietf.org/rfc/rfc1867.txt), 
 "Form-based File Upload in HTML". When correctly configured the framework will pass uploaded file(s) into your Action

@@ -10,7 +10,7 @@ parent:
 {:.no_toc}
 
 * Will be replaced with the ToC, excluding a header
-  {:toc}
+{:toc}
 
 The default Interceptor stack is designed to serve the needs of most applications. Most applications will **not** need
 to add Interceptors or change the Interceptor stack.

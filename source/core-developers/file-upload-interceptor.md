@@ -8,7 +8,8 @@ parent:
 
 # File Upload Interceptor
 
-> Since Struts 6.4.0 this interceptor is deprecated, please use [Action File Upload Interceptor](action-file-upload-interceptor) instead!
+Since Struts 6.4.0 this interceptor is deprecated, please use [Action File Upload Interceptor](action-file-upload-interceptor) instead!
+{:.alert .alert-warning}
 
 See [this page](file-upload) for more examples and advanced configuration.
 
