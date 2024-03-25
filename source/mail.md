@@ -14,7 +14,7 @@ A message sent to a public mailing list cannot be unpublished. Although we might
 the message is mirrored to a lot of other archiving systems which we do not have under control. Therefore almost 100% 
 of all delete requests are denied. Please make sure you **do not send any potential sensitive information to the mailing list**,
 including passwords, server names, ips and so on.
-{:.alert .alert-block .alert-error}
+{:.alert .alert-info}
 
 ## Subscribing
 
@@ -72,7 +72,7 @@ is a common set of etiquette guidelines that you should observe. Please keep on 
 Please make sure that you are joining the list that is appropriate for the topic or product that you would like to discuss. 
 For example, please do not join the Struts mailing list and ask questions about Tomcat. Instead, you should join the Tomcat 
 User list and ask your questions there.
-{:.alert .alert-box .alert-error}
+{:.alert .alert-warning}
 
 ### Respect the mailing list type
 
@@ -99,7 +99,7 @@ it will go to the list and not to the original author directly. The reason is be
 on the list for everyone to benefit from. Be careful of this as sometimes you may intend to reply to a message directly 
 to someone instead of the entire list.
 
-### Do not send HTML emails to the list.
+### Do not send HTML emails to the list.
 
 If you are using Outlook or Outlook Express or Eudora, chances are that you are sending HTML email by default. There is 
 usually a setting that will allow you to send "Plain Text" email.

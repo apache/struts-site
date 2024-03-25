@@ -7,8 +7,13 @@ parent:
 ---
 
 # File Upload Interceptor
+{:.no_toc}
 
-> Since Struts 6.4.0 this interceptor is deprecated, please use [Action File Upload Interceptor](action-file-upload-interceptor) instead!
+* Will be replaced with the ToC, excluding a header
+{:toc}
+
+Since Struts 6.4.0 this interceptor is deprecated, please use [Action File Upload Interceptor](action-file-upload-interceptor) instead!
+{:.alert .alert-warning}
 
 See [this page](file-upload) for more examples and advanced configuration.
 
@@ -51,6 +56,8 @@ You can extend this interceptor and override the acceptFile method to provide mo
 and which are not.
 
 ## Examples
+
+See [this page](file-upload) for more examples and advanced configuration.
 
 **Example action mapping:**
 

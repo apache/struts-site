@@ -7,10 +7,15 @@ parent:
 ---
 
 # Action File Upload Interceptor
+{:.no_toc}
 
-> Available since Struts 6.4.0 as replacement for [File Upload Interceptor](file-upload-interceptor)
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
-See [this page](file-upload) for more examples and advanced configuration.
+Available since Struts 6.4.0 as replacement for [File Upload Interceptor](file-upload-interceptor)
+{:.alert .alert-info}
+
+See [this page](action-file-upload) for more examples and advanced configuration.
 
 Interceptor that is based off of `MultiPartRequestWrapper`, which is automatically applied for any request that includes 
 a file. If an action implements `org.apache.struts2.action.UploadedFilesAware` interface, the interceptor will pass
@@ -45,6 +50,8 @@ You can extend this interceptor and override the acceptFile method to provide mo
 and which are not.
 
 ## Examples
+
+See [this page](action-file-upload) for more examples and advanced configuration.
 
 **Example action mapping:**
 

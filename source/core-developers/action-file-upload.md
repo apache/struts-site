@@ -1,19 +1,16 @@
 ---
 layout: default
-title: File Upload
+title: Action File Upload
 parent:
-  title: File Upload Interceptor
-  url: file-upload-interceptor
+  title: Action File Upload Interceptor
+  url: action-file-upload-interceptor
 ---
 
-# File Upload
+# Action File Upload
 {:.no_toc}
 
 * Will be replaced with the ToC, excluding a header
 {:toc}
-
-Since Struts 6.4.0 the `FileUploadInterceptor` is deprecated, and you should use [ActionFileUploadInterceptor](action-file-upload-interceptor) instead!
-{:.alert .alert-warning}
 
 The Struts 2 framework provides built-in support for processing file uploads that conform to [RFC 1867](http://www.ietf.org/rfc/rfc1867.txt), 
 "Form-based File Upload in HTML". When correctly configured the framework will pass uploaded file(s) into your Action
@@ -29,8 +26,8 @@ The library is included in a base Struts 2 distribution.
 
 ## Basic Usage
 
-The `org.apache.struts2.interceptor.FileUploadInterceptor` interceptor is included as part of the `defaultStack` 
-and named `fileUpload`. As long as the required libraries are added to your project you will be able to take 
+The `org.apache.struts2.interceptor.ActionFileUploadInterceptor` interceptor is included as part of the `defaultStack` 
+and named `actionFileUpload`. As long as the required libraries are added to your project you will be able to take 
 advantage of the Struts 2 file upload capability. Configure an Action mapping for your Action class as you typically would.
 
 ### Example action mapping:
@@ -56,138 +53,46 @@ example:
 </s:form>
 ```
 
-The **fileUpload** interceptor will use setter injection to insert the uploaded file and related data into your Action
-class. For a form field named `upload` you would provide the three setter methods shown in the following example:
-
-### Example Action class:
+The **actionFileUpload** interceptor will use a dedicated interface `org.apache.struts2.action.UploadedFilesAware` 
+to transfer information and content of uploaded file. Your action should implement the interface to receive the uploaded file:
 
 ```java
-package com.example;
-
-import java.io.File;
-
-import com.opensymphony.xwork2.ActionSupport;
-
-public class UploadAction extends ActionSupport {
-    private File file;
+public class UploadAction extends ActionSupport implements UploadedFilesAware {
+  
+    private UploadedFile uploadedFile;
     private String contentType;
-    private String filename;
+    private String fileName;
+    private String originalName;
 
-    @StrutsParameter
-    public void setUpload(File file) {
-        this.file = file;
-    }
-
-    @StrutsParameter
-    public void setUploadContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    @StrutsParameter
-    public void setUploadFileName(String filename) {
-        this.filename = filename;
+    @Override
+    public void withUploadedFiles(List<UploadedFile> uploadedFiles) {
+        if (!uploadedFiles.isEmpty()) {
+          this.uploadedFile = uploadedFiles.get(0);
+          this.fileName = uploadedFile.getName();
+          this.contentType = uploadedFile.getContentType();
+          this.originalName = uploadedFile.getOriginalName();
+        }
     }
 
     public String execute() {
-        //...
+        // do something with the file
         return SUCCESS;
     }
 }
 ```
-
-The purpose of each one of these methods is described in the table below. Notice that if you have multiple file form
-elements with different names you would be required to have another corresponding set of these methods for each file
-uploaded.
-
-| Method Signature                      | Description                                                                                                                                        |
-|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `setX(File file)`                     | The file that contains the content of the uploaded file. This is a temporary file and file.getName() will not return the original name of the file |
-| `setXContentType(String contentType)` | The mime type of the uploaded file                                                                                                                 |
-| `setXFileName(String fileName)`       | The actual file name of the uploaded file (not the HTML name)                                                                                      |
 
 ## Uploading Multiple Files
 
 As mentioned in the previous section one technique for uploading multiple files would be to simply have multiple form
 input elements of type file all with different names. This would require a number of setter methods that was equal to 3
 times the number of files being uploaded. Another option is to use Arrays or java.util.Lists. The following examples are
-taken from the Showcase example application that is part sample applications you can download
-at [http://struts.apache.org/download.cgi](http://struts.apache.org/download.cgi). For the Action mapping details
-see `struts-fileupload.xml` in the sample application download.
-
-### Uploading Multiple Files using Arrays
-
-`multipleUploadUsingArray.jsp` Notice all file input types have the same name.
-
-```html
-<s:form action="doMultipleUploadUsingArray" method="POST" enctype="multipart/form-data">
-    <s:file label="File (1)" name="upload"/>
-    <s:file label="File (2)" name="upload"/>
-    <s:file label="FIle (3)" name="upload"/>
-    <s:submit cssClass="btn btn-primary"/>
-</s:form>
-```
-
-**MultipleFileUploadUsingArrayAction.java**
-
-```java
-public class MultipleFileUploadUsingArrayAction extends ActionSupport {
-    private File[] uploads;
-    private String[] uploadFileNames;
-    private String[] uploadContentTypes;
-
-    public String upload() throws Exception {
-        System.out.println("\n\n upload2");
-        System.out.println("files:");
-        for (File u : uploads) {
-            System.out.println("*** " + u + "\t" + u.length());
-        }
-        System.out.println("filenames:");
-        for (String n : uploadFileNames) {
-            System.out.println("*** " + n);
-        }
-        System.out.println("content types:");
-        for (String c : uploadContentTypes) {
-            System.out.println("*** " + c);
-        }
-        System.out.println("\n\n");
-        return SUCCESS;
-    }
-
-    public File[] getUpload() {
-        return this.uploads;
-    }
-
-    @StrutsParameter
-    public void setUpload(File[] upload) {
-        this.uploads = upload;
-    }
-
-    public String[] getUploadFileName() {
-        return this.uploadFileNames;
-    }
-
-    @StrutsParameter
-    public void setUploadFileName(String[] uploadFileName) {
-        this.uploadFileNames = uploadFileName;
-    }
-
-    public String[] getUploadContentType() {
-        return this.uploadContentTypes;
-    }
-
-    @StrutsParameter
-    public void setUploadContentType(String[] uploadContentType) {
-        this.uploadContentTypes = uploadContentType;
-    }
-}
-```
-
-### Uploading Multiple Files using Lists
+taken from the Showcase example application that is part sample applications you can download at [download](http://struts.apache.org/download.cgi).
+For the Action mapping details  see `struts-fileupload.xml` in the sample application download.
 
 `multipleUploadUsingList.jsp` Notice all file input types have the same name.
 
 ```html
-<s:form action="doMultipleUploadUsingList" method="POST" enctype="multipart/form-data">
+<s:form action="multipleFileUploadUsingList" method="POST" enctype="multipart/form-data">
     <s:file label="File (1)" name="upload"/>
     <s:file label="File (2)" name="upload"/>
     <s:file label="FIle (3)" name="upload"/>
@@ -195,53 +100,45 @@ public class MultipleFileUploadUsingArrayAction extends ActionSupport {
 </s:form>
 ```
 
-`MultipleFileUploadUsingListAction.java`
+The `org.apache.struts2.action.UploadedFilesAware` interface already supports uploading multiple files:
 
 ```java
-public class MultipleFileUploadUsingListAction extends ActionSupport {
-    private List<File> uploads = new ArrayList<File>();
-    private List<String> uploadFileNames = new ArrayList<String>();
-    private List<String> uploadContentTypes = new ArrayList<String>();
+public class MultipleFileUploadUsingListAction extends ActionSupport implements UploadedFilesAware {
 
-    public List<File> getUpload() {
+    private List<UploadedFile> uploads = new ArrayList<>();
+
+    public List<UploadedFile> getUpload() {
         return this.uploads;
     }
 
-    @StrutsParameter
-    public void setUpload(List<File> uploads) {
+    @Override
+    public void withUploadedFiles(List<UploadedFile> uploads) {
         this.uploads = uploads;
     }
 
-    public List<String> getUploadFileName() {
-        return this.uploadFileNames;
+    private List<String> getUploadFileNames() {
+        return this.uploads.stream()
+                .map(UploadedFile::getOriginalName)
+                .collect(Collectors.toList());
     }
 
-    @StrutsParameter
-    public void setUploadFileName(List<String> uploadFileNames) {
-        this.uploadFileNames = uploadFileNames;
+    private List<String> getUploadContentTypes() {
+        return this.uploads.stream()
+                .map(UploadedFile::getContentType)
+                .collect(Collectors.toList());
     }
 
-    public List<String> getUploadContentType() {
-        return this.uploadContentTypes;
-    }
-
-    @StrutsParameter
-    public void setUploadContentType(List<String> contentTypes) {
-        this.uploadContentTypes = contentTypes;
-    }
-
-    public String upload() throws Exception {
-        System.out.println("\n\n upload1");
+    public String execute() throws Exception {
         System.out.println("files:");
-        for (File u : uploads) {
+        for (UploadedFile u : uploads) {
             System.out.println("*** " + u + "\t" + u.length());
         }
         System.out.println("filenames:");
-        for (String n : uploadFileNames) {
+        for (String n : getUploadFileNames()) {
             System.out.println("*** " + n);
         }
         System.out.println("content types:");
-        for (String c : uploadContentTypes) {
+        for (String c : getUploadContentTypes()) {
             System.out.println("*** " + c);
         }
         System.out.println("\n\n");
@@ -299,6 +196,7 @@ a file that is too large. Note that the aforementioned settings are applied at t
 precedence over this interceptor setting.
 
 Notice the locations of these settings in the following example:
+
 ```xml
 <struts>
     <constant name="struts.multipart.maxSize" value="1000000"/>
@@ -320,7 +218,7 @@ Notice the locations of these settings in the following example:
 ### Normal Field Size Limit
 
 Since Struts 6.1.2.1 a new option has been introduced to limit the size of a normal string field in the multipart request.
-The defeault limit is set to 4096 bytes:
+The default limit is set to 4096 bytes:
 
 ```
 struts.multipart.maxStringLength=4096
@@ -421,10 +319,8 @@ follow:
 ^multipart/form-data(?:\\s*;\\s*boundary=[0-9a-zA-Z'()+_,\\-./:=?]{1,70})?(?:\\s*;\\s*charset=[a-zA-Z\\-0-9]{3,14})?
 ```
 
-Please read [RFC1341](https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html) the **Multipart section** for more
-details,
-existing Struts `Multipart` parsers support only `multipart/form-data` content type. This option is available since
-Struts 2.3.11.
+Please read [RFC1341](https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html) the **Multipart section** for more details, existing Struts `Multipart` parsers support 
+only `multipart/form-data` content type. This option is available since Struts 2.3.11.
 
 ### Disabling file upload support
 
