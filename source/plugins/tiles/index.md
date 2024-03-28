@@ -38,7 +38,7 @@ The following steps must be taken in order to enable tiles support within your S
    ```
 
 2. Register the Tiles listener. This listener will typically either be the standard tiles listener `org.apache.tiles.listener.TilesListener`
-   or the Struts2 replacement `org.apache.struts2.tiles.TilesListener`. The latter provides tighter integration with 
+   or the Struts2 replacement `org.apache.struts2.tiles.StrutsTilesListener`. The latter provides tighter integration with 
    Struts features such as freemarker integration.
 
    ```xml
