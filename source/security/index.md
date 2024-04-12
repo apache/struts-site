@@ -433,10 +433,16 @@ with other known dangerous classes or packages in your application.
 
 We additionally recommend enabling the following options (enabled by default in 7.0).
 
- * `struts.ognl.allowStaticFieldAccess=false` - static methods are always blocked, but static fields can also optionally be blocked
- * `struts.disallowProxyMemberAccess=true` - disallow proxied objects from being used in OGNL expressions as they may present a security risk
- * `struts.disallowDefaultPackageAccess=true` - disallow access to classes in the default package which should not be used in production
- * `struts.ognl.disallowCustomOgnlMap=true` - disallow construction of custom OGNL maps which can be used to bypass the SecurityMemberAccess policy
+* `struts.ognl.allowStaticFieldAccess=false` - static field values which aren't a primitive type can be used to access
+  classes that wouldn't otherwise be accessible
+* `struts.disallowProxyObjectAccess=true` - disallow proxied objects from being used in OGNL expressions as these often
+  represent application beans or database entities which are sensitive
+* `struts.disallowDefaultPackageAccess=true` - disallow access to classes in the default package which should not be
+  used in production
+* `struts.ognl.disallowCustomOgnlMap=true` - disallow construction of custom OGNL maps which can be used to bypass the
+  SecurityMemberAccess policy
+* `struts.actionConfig.fallbackToEmptyNamespace=false` - prevent Actions in the empty namespace from being accessed from
+  alternative endpoints
 
 #### Allowlist Capability
 
