@@ -2,7 +2,7 @@
 layout: default
 title: Velocity plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 

@@ -1,8 +1,8 @@
 ---
-layout: plugin
+layout: default
 title: Config Browser Plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 

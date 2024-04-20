@@ -1,9 +1,10 @@
 ---
 layout: default
 title: Converting application from Codebehind to Convention Plugin (WIP)
+parent:
+   url: index
+   title: Convention plugin
 ---
-
-[<< back to Convention Plugin](./)
 
 # Converting application from Codebehind to Convention Plugin
 

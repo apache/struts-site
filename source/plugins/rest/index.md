@@ -1,8 +1,8 @@
 ---
-layout: plugin
+layout: default
 title: REST Plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 

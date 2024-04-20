@@ -1,8 +1,8 @@
 ---
-layout: plugin
+layout: default
 title: JFreeChart Plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 

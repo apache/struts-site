@@ -1,8 +1,8 @@
 ---
-layout: plugin
+layout: default
 title: Spring Plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 
@@ -186,8 +186,6 @@ A typical spring configuration for bar could look as following.
     ...
 </beans>
 ```
-
-To use session-scoped components with Spring and Struts, see the [Spring Session Components Workarounds](spring-session-components-workarounds) analysis.
 
 ## Class Reloading
 

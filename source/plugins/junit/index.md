@@ -1,8 +1,8 @@
 ---
-layout: plugin
+layout: default
 title: JUnit plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 

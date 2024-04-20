@@ -10,10 +10,11 @@ title: web.xml
 {:toc}
 
 The `web.xml` web application descriptor file represents the core of the Java web application, so it is appropriate 
-that it is also part of the core of the Struts framework. In the `web.xml` file, Struts defines its FilterDispatcher, 
-the Servlet Filter class that initializes the Struts framework and handles all requests. This filter can contain 
-initialization parameters that affect what, if any, additional configuration files are loaded and how the framework 
-should behave.
+that it is also part of the core of the Struts framework. In the `web.xml` file you can use one of the two options:
+1. Configure `org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter` which acts as a central 
+  point of initializing the Struts framework and handles all requests.
+2. Use combination of `org.apache.struts2.dispatcher.filter.StrutsPrepareFilter` and `org.apache.struts2.dispatcher.filter.StrutsExecuteFilter`
+  to support custom integration with other frameworks like Sitemesh.
 
 ## Simple Example
 
@@ -43,7 +44,7 @@ Configuring `web.xml` for the framework is a matter of adding a filter and filte
 </web-app>
 ```
 
-See [SiteMesh Plugin](../plugins/sitemesh-plugin) for an example on when to use separate Filters for prepare and execution phase.
+See [SiteMesh Plugin](../plugins/sitemesh/) for an example on when to use separate Filters for prepare and execution phase.
 
 ## Custom mapping
 
