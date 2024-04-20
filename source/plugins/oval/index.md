@@ -1,8 +1,8 @@
 ---
-layout: plugin
+layout: default
 title: OVal Plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 

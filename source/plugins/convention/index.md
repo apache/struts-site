@@ -1,8 +1,8 @@
 ---
-layout: plugin
+layout: default
 title: Convention plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 

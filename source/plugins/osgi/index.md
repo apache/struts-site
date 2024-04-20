@@ -1,8 +1,8 @@
 ---
-layout: plugin
+layout: default
 title: OSGi Plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 

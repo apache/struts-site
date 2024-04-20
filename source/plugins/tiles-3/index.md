@@ -1,8 +1,8 @@
 ---
-layout: plugin
+layout: default
 title: Tiles 3 Plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 

@@ -1,6 +1,9 @@
 ---
-layout: plugin
+layout: default
 title: Struts 2 Portlet Tutorial
+parent:
+    url: index
+    title: Portlet Plugin
 ---
 
 # Struts 2 Portlet Tutorial

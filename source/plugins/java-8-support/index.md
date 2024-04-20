@@ -1,8 +1,8 @@
 ---
-layout: plugin
+layout: default
 title: Java 8 Support Plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 

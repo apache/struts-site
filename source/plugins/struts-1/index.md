@@ -1,8 +1,8 @@
 ---
-layout: plugin
+layout: default
 title: Struts 1 Plugin
 parent:
-    url: /plugins
+    url: ../
     title: Plugins
 ---
 

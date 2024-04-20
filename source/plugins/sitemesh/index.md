@@ -1,9 +1,9 @@
 ---
-layout: plugin
+layout: default
 title: SiteMesh Plugin
 parent:
-    url: /plugins
     title: Plugins
+    url: ../
 ---
 
 # SiteMesh Plugin
@@ -12,12 +12,11 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-> This plugin got marked as deprecated since Struts 2.6!
-
 ## About SiteMesh
 
 > [SiteMesh](http://www.sitemesh.org/) is a web-page layout and decoration framework and web application integration 
-> framework to aid in creating large sites consisting of many pages for which a consistent look/feel, navigation and layout scheme is required.
+> framework to aid in creating large sites consisting of many pages for which a consistent look/feel, navigation 
+> and layout scheme is required.
 
 The Sitemesh plugin allows Sitemesh templates to access framework resources.
 
@@ -33,7 +32,7 @@ with the framework. That's it!
 ## Usage
 
 From 2.2+ the new `com.opensymphony.sitemesh.webapp.SiteMeshFilter` filter 
-and Struts `org.apache.struts2.dispatcher.ng.listener.StrutsListener` context listener must be added to `web.xml`, like:
+and Struts `org.apache.struts2.dispatcher.listener.StrutsListener` context listener must be added to `web.xml`, like:
 
 ```xml
 <filter>
@@ -42,15 +41,15 @@ and Struts `org.apache.struts2.dispatcher.ng.listener.StrutsListener` context li
 </filter> 
 ...
 <listener>
-    <listener-class>org.apache.struts2.dispatcher.ng.listener.StrutsListener</listener-class>
+    <listener-class>org.apache.struts2.dispatcher.listener.StrutsListener</listener-class>
 </listener> 
 
 ```
 
-## FreeMarker  and Velocity Decorators
+## FreeMarker and Velocity Decorators
 
-The plugin provides an extension of the SiteMesh _Velocity_  and _FreeMarker_  servlets. These servlets provide 
-the standard variables and _Struts Tags_  that you used to create views in your favourite template language.
+The plugin provides an extension of the SiteMesh _Velocity_ and _FreeMarker_ servlets. These servlets provide 
+the standard variables and _Struts Tags_ that you used to create views in your favourite template language.
 
 ### FreeMarker
 
@@ -84,13 +83,12 @@ From 2.2+ the recommended way to use Velocity with Sitemesh is through the `org.
 servlet, which can be configured like this in `web.xml`:
 
 ```xml
-
 <servlet>
     <servlet-name>sitemesh-freemarker</servlet-name>
     <servlet-class>org.apache.struts2.sitemesh.VelocityDecoratorServlet</servlet-class>
     <init-param>
- 	<param-name>default_encoding</param-name>
- 	<param-value>UTF-8</param-value>
+        <param-name>default_encoding</param-name>
+        <param-value>UTF-8</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
 </servlet> 
@@ -98,8 +96,7 @@ servlet, which can be configured like this in `web.xml`:
 <servlet-mapping>
     <servlet-name>sitemesh-freemarker</servlet-name>
     <url-pattern>*.ftl</url-pattern>
-</servlet-mapping> 
-
+</servlet-mapping>
 ```
 
 ### Full integration with SiteMesh 2 + Freemarker 2.4.2 + Velocity 1.3 , including Struts 2 Tags, ValueStack, and FreemarkerManager statics.
@@ -107,10 +104,9 @@ servlet, which can be configured like this in `web.xml`:
 Such configuration is available as from Struts 2.2.0, please refer to [WW-3296](https://issues.apache.org/jira/browse/WW-3296) for me details.
 
 ```xml
-
     <filter>
         <filter-name>struts-prepare</filter-name>
-        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter</filter-class>
+        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareFilter</filter-class>
     </filter>
 
     <filter>
@@ -120,7 +116,7 @@ Such configuration is available as from Struts 2.2.0, please refer to [WW-3296](
 
     <filter>
         <filter-name>struts-execute</filter-name>
-        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter</filter-class>
+        <filter-class>org.apache.struts2.dispatcher.filter.StrutsExecuteFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -175,12 +171,12 @@ Here is an example of how to configure the filter chains in `web.xml`:
 ```xml
 <filter>
     <filter-name>struts-prepare</filter-name>
-    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter</filter-class>
+    <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareFilter</filter-class>
 </filter>
 
 <filter>
     <filter-name>struts-execute</filter-name>
-    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter</filter-class>
+    <filter-class>org.apache.struts2.dispatcher.filter.StrutsExecuteFilter</filter-class>
 </filter>
 
 
@@ -205,7 +201,7 @@ Here is an example of how to configure the filter chains in `web.xml`:
 </filter-mapping>
 
 <listener>
-    <listener-class>org.apache.struts2.dispatcher.ng.listener.StrutsListener</listener-class>
+    <listener-class>org.apache.struts2.dispatcher.listener.StrutsListener</listener-class>
 </listener>
 
 <servlet>
@@ -245,12 +241,12 @@ Struts 2.1 web.xml filter chain example:
 ```xml
 <filter>
     <filter-name>struts-prepare</filter-name>
-    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter</filter-class>
+    <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareFilter</filter-class>
 </filter>
 
 <filter>
     <filter-name>struts-execute</filter-name>
-    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter</filter-class>
+    <filter-class>org.apache.struts2.dispatcher.filter.StrutsExecuteFilter</filter-class>
 </filter>
 
 <filter>
@@ -272,16 +268,15 @@ Struts 2.1 web.xml filter chain example:
     <filter-name>struts-execute</filter-name>
     <url-pattern>/*</url-pattern>
 </filter-mapping>
-
 ```
 
-You do not need the struts2-sitmesh-plugin if you are using JSP for your decorators.
+You do not need the Struts2 Sitmesh plugin if you are using JSP for your decorators.
 Here are the only changes needed to web.xml
 
 ```xml
 <filter>
     <filter-name>struts2-prepare</filter-name>
-    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter</filter-class>
+    <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareFilter</filter-class>
 </filter>
 
 <filter>
@@ -291,7 +286,7 @@ Here are the only changes needed to web.xml
 
 <filter>
     <filter-name>struts2-execute</filter-name>
-    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter</filter-class>
+    <filter-class>org.apache.struts2.dispatcher.filter.StrutsExecuteFilter</filter-class>
 </filter>
 
 <filter-mapping>
@@ -320,4 +315,5 @@ This plugin doesn't support any global settings.
 
 ## Installation
 
-This plugin can be installed by copying the plugin jar into your application's `/WEB-INF/lib` directory.  No other files need to be copied or created.
+This plugin can be installed by copying the plugin jar into your application's `/WEB-INF/lib` directory.
+No other files need to be copied or created.
