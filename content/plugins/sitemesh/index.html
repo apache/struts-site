@@ -13,7 +13,7 @@
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
   <link href="/css/custom.css" rel="stylesheet">
-  <link href="/highlighter/github-theme.css" rel="stylesheet">
+  <link href="/css/syntax.css" rel="stylesheet">
 
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
@@ -148,7 +148,7 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/plugins/sitemesh/index.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="/plugins" title="back to Plugins"><< back to Plugins</a>
+    <a href="plugins" title="back to Plugins"><< back to Plugins</a>
     
     <h1 class="no_toc" id="sitemesh-plugin">SiteMesh Plugin</h1>
 
@@ -156,7 +156,7 @@
   <li><a href="#about-sitemesh" id="markdown-toc-about-sitemesh">About SiteMesh</a></li>
   <li><a href="#features" id="markdown-toc-features">Features</a></li>
   <li><a href="#usage" id="markdown-toc-usage">Usage</a></li>
-  <li><a href="#freemarker--and-velocity-decorators" id="markdown-toc-freemarker--and-velocity-decorators">FreeMarker  and Velocity Decorators</a>    <ul>
+  <li><a href="#freemarker-and-velocity-decorators" id="markdown-toc-freemarker-and-velocity-decorators">FreeMarker and Velocity Decorators</a>    <ul>
       <li><a href="#freemarker" id="markdown-toc-freemarker">FreeMarker</a></li>
       <li><a href="#velocity" id="markdown-toc-velocity">Velocity</a></li>
       <li><a href="#full-integration-with-sitemesh-2--freemarker-242--velocity-13--including-struts-2-tags-valuestack-and-freemarkermanager-statics" id="markdown-toc-full-integration-with-sitemesh-2--freemarker-242--velocity-13--including-struts-2-tags-valuestack-and-freemarkermanager-statics">Full integration with SiteMesh 2 + Freemarker 2.4.2 + Velocity 1.3 , including Struts 2 Tags, ValueStack, and FreemarkerManager statics.</a></li>
@@ -175,7 +175,8 @@
 
 <blockquote>
   <p><a href="http://www.sitemesh.org/">SiteMesh</a> is a web-page layout and decoration framework and web application integration 
-framework to aid in creating large sites consisting of many pages for which a consistent look/feel, navigation and layout scheme is required.</p>
+framework to aid in creating large sites consisting of many pages for which a consistent look/feel, navigation 
+and layout scheme is required.</p>
 </blockquote>
 
 <p>The Sitemesh plugin allows Sitemesh templates to access framework resources.</p>
@@ -194,7 +195,7 @@ with the framework. That’s it!</p>
 <h2 id="usage">Usage</h2>
 
 <p>From 2.2+ the new <code class="language-plaintext highlighter-rouge">com.opensymphony.sitemesh.webapp.SiteMeshFilter</code> filter 
-and Struts <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.ng.listener.StrutsListener</code> context listener must be added to <code class="language-plaintext highlighter-rouge">web.xml</code>, like:</p>
+and Struts <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.listener.StrutsListener</code> context listener must be added to <code class="language-plaintext highlighter-rouge">web.xml</code>, like:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>sitemesh<span class="nt">&lt;/filter-name&gt;</span>
@@ -202,15 +203,15 @@ and Struts <code class="language-plaintext highlighter-rouge">org.apache.struts2
 <span class="nt">&lt;/filter&gt;</span> 
 ...
 <span class="nt">&lt;listener&gt;</span>
-    <span class="nt">&lt;listener-class&gt;</span>org.apache.struts2.dispatcher.ng.listener.StrutsListener<span class="nt">&lt;/listener-class&gt;</span>
+    <span class="nt">&lt;listener-class&gt;</span>org.apache.struts2.dispatcher.listener.StrutsListener<span class="nt">&lt;/listener-class&gt;</span>
 <span class="nt">&lt;/listener&gt;</span> 
 
 </code></pre></div></div>
 
-<h2 id="freemarker--and-velocity-decorators">FreeMarker  and Velocity Decorators</h2>
+<h2 id="freemarker-and-velocity-decorators">FreeMarker and Velocity Decorators</h2>
 
-<p>The plugin provides an extension of the SiteMesh <em>Velocity</em>  and <em>FreeMarker</em>  servlets. These servlets provide 
-the standard variables and <em>Struts Tags</em>  that you used to create views in your favourite template language.</p>
+<p>The plugin provides an extension of the SiteMesh <em>Velocity</em> and <em>FreeMarker</em> servlets. These servlets provide 
+the standard variables and <em>Struts Tags</em> that you used to create views in your favourite template language.</p>
 
 <h3 id="freemarker">FreeMarker</h3>
 
@@ -244,13 +245,12 @@ servlet, which can be configured like this in <code class="language-plaintext hi
 <p>From 2.2+ the recommended way to use Velocity with Sitemesh is through the <code class="language-plaintext highlighter-rouge">org.apache.struts2.sitemesh.VelocityDecoratorServlet</code> 
 servlet, which can be configured like this in <code class="language-plaintext highlighter-rouge">web.xml</code>:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nt">&lt;servlet&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;servlet&gt;</span>
     <span class="nt">&lt;servlet-name&gt;</span>sitemesh-freemarker<span class="nt">&lt;/servlet-name&gt;</span>
     <span class="nt">&lt;servlet-class&gt;</span>org.apache.struts2.sitemesh.VelocityDecoratorServlet<span class="nt">&lt;/servlet-class&gt;</span>
     <span class="nt">&lt;init-param&gt;</span>
- 	<span class="nt">&lt;param-name&gt;</span>default_encoding<span class="nt">&lt;/param-name&gt;</span>
- 	<span class="nt">&lt;param-value&gt;</span>UTF-8<span class="nt">&lt;/param-value&gt;</span>
+        <span class="nt">&lt;param-name&gt;</span>default_encoding<span class="nt">&lt;/param-name&gt;</span>
+        <span class="nt">&lt;param-value&gt;</span>UTF-8<span class="nt">&lt;/param-value&gt;</span>
     <span class="nt">&lt;/init-param&gt;</span>
     <span class="nt">&lt;load-on-startup&gt;</span>1<span class="nt">&lt;/load-on-startup&gt;</span>
 <span class="nt">&lt;/servlet&gt;</span> 
@@ -258,18 +258,16 @@ servlet, which can be configured like this in <code class="language-plaintext hi
 <span class="nt">&lt;servlet-mapping&gt;</span>
     <span class="nt">&lt;servlet-name&gt;</span>sitemesh-freemarker<span class="nt">&lt;/servlet-name&gt;</span>
     <span class="nt">&lt;url-pattern&gt;</span>*.ftl<span class="nt">&lt;/url-pattern&gt;</span>
-<span class="nt">&lt;/servlet-mapping&gt;</span> 
-
+<span class="nt">&lt;/servlet-mapping&gt;</span>
 </code></pre></div></div>
 
 <h3 id="full-integration-with-sitemesh-2--freemarker-242--velocity-13--including-struts-2-tags-valuestack-and-freemarkermanager-statics">Full integration with SiteMesh 2 + Freemarker 2.4.2 + Velocity 1.3 , including Struts 2 Tags, ValueStack, and FreemarkerManager statics.</h3>
 
 <p>Such configuration is available as from Struts 2.2.0, please refer to <a href="https://issues.apache.org/jira/browse/WW-3296">WW-3296</a> for me details.</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    <span class="nt">&lt;filter&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;filter&gt;</span>
         <span class="nt">&lt;filter-name&gt;</span>struts-prepare<span class="nt">&lt;/filter-name&gt;</span>
-        <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter<span class="nt">&lt;/filter-class&gt;</span>
+        <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsPrepareFilter<span class="nt">&lt;/filter-class&gt;</span>
     <span class="nt">&lt;/filter&gt;</span>
 
     <span class="nt">&lt;filter&gt;</span>
@@ -279,7 +277,7 @@ servlet, which can be configured like this in <code class="language-plaintext hi
 
     <span class="nt">&lt;filter&gt;</span>
         <span class="nt">&lt;filter-name&gt;</span>struts-execute<span class="nt">&lt;/filter-name&gt;</span>
-        <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
+        <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
     <span class="nt">&lt;/filter&gt;</span>
 
     <span class="nt">&lt;filter-mapping&gt;</span>
@@ -333,12 +331,12 @@ servlet, which can be configured like this in <code class="language-plaintext hi
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>struts-prepare<span class="nt">&lt;/filter-name&gt;</span>
-    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter<span class="nt">&lt;/filter-class&gt;</span>
+    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsPrepareFilter<span class="nt">&lt;/filter-class&gt;</span>
 <span class="nt">&lt;/filter&gt;</span>
 
 <span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>struts-execute<span class="nt">&lt;/filter-name&gt;</span>
-    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
+    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
 <span class="nt">&lt;/filter&gt;</span>
 
 
@@ -363,7 +361,7 @@ servlet, which can be configured like this in <code class="language-plaintext hi
 <span class="nt">&lt;/filter-mapping&gt;</span>
 
 <span class="nt">&lt;listener&gt;</span>
-    <span class="nt">&lt;listener-class&gt;</span>org.apache.struts2.dispatcher.ng.listener.StrutsListener<span class="nt">&lt;/listener-class&gt;</span>
+    <span class="nt">&lt;listener-class&gt;</span>org.apache.struts2.dispatcher.listener.StrutsListener<span class="nt">&lt;/listener-class&gt;</span>
 <span class="nt">&lt;/listener&gt;</span>
 
 <span class="nt">&lt;servlet&gt;</span>
@@ -402,12 +400,12 @@ servlet, which can be configured like this in <code class="language-plaintext hi
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>struts-prepare<span class="nt">&lt;/filter-name&gt;</span>
-    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter<span class="nt">&lt;/filter-class&gt;</span>
+    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsPrepareFilter<span class="nt">&lt;/filter-class&gt;</span>
 <span class="nt">&lt;/filter&gt;</span>
 
 <span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>struts-execute<span class="nt">&lt;/filter-name&gt;</span>
-    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
+    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
 <span class="nt">&lt;/filter&gt;</span>
 
 <span class="nt">&lt;filter&gt;</span>
@@ -429,15 +427,14 @@ servlet, which can be configured like this in <code class="language-plaintext hi
     <span class="nt">&lt;filter-name&gt;</span>struts-execute<span class="nt">&lt;/filter-name&gt;</span>
     <span class="nt">&lt;url-pattern&gt;</span>/*<span class="nt">&lt;/url-pattern&gt;</span>
 <span class="nt">&lt;/filter-mapping&gt;</span>
-
 </code></pre></div></div>
 
-<p>You do not need the struts2-sitmesh-plugin if you are using JSP for your decorators.
+<p>You do not need the Struts2 Sitmesh plugin if you are using JSP for your decorators.
 Here are the only changes needed to web.xml</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>struts2-prepare<span class="nt">&lt;/filter-name&gt;</span>
-    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter<span class="nt">&lt;/filter-class&gt;</span>
+    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsPrepareFilter<span class="nt">&lt;/filter-class&gt;</span>
 <span class="nt">&lt;/filter&gt;</span>
 
 <span class="nt">&lt;filter&gt;</span>
@@ -447,7 +444,7 @@ Here are the only changes needed to web.xml</p>
 
 <span class="nt">&lt;filter&gt;</span>
     <span class="nt">&lt;filter-name&gt;</span>struts2-execute<span class="nt">&lt;/filter-name&gt;</span>
-    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
+    <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
 <span class="nt">&lt;/filter&gt;</span>
 
 <span class="nt">&lt;filter-mapping&gt;</span>
@@ -476,7 +473,8 @@ Here are the only changes needed to web.xml</p>
 
 <h2 id="installation">Installation</h2>
 
-<p>This plugin can be installed by copying the plugin jar into your application’s <code class="language-plaintext highlighter-rouge">/WEB-INF/lib</code> directory.  No other files need to be copied or created.</p>
+<p>This plugin can be installed by copying the plugin jar into your application’s <code class="language-plaintext highlighter-rouge">/WEB-INF/lib</code> directory.
+No other files need to be copied or created.</p>
 
   </section>
 </article>
