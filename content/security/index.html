@@ -608,16 +608,10 @@ with other known dangerous classes or packages in your application.</p>
 <p>We additionally recommend enabling the following options (enabled by default in 7.0).</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">struts.ognl.allowStaticFieldAccess=false</code> - static field values which aren’t a primitive type can be used to access
-classes that wouldn’t otherwise be accessible</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.disallowProxyObjectAccess=true</code> - disallow proxied objects from being used in OGNL expressions as these often
-represent application beans or database entities which are sensitive</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.disallowDefaultPackageAccess=true</code> - disallow access to classes in the default package which should not be
-used in production</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.ognl.disallowCustomOgnlMap=true</code> - disallow construction of custom OGNL maps which can be used to bypass the
-SecurityMemberAccess policy</li>
-  <li><code class="language-plaintext highlighter-rouge">struts.actionConfig.fallbackToEmptyNamespace=false</code> - prevent Actions in the empty namespace from being accessed from
-alternative endpoints</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.ognl.allowStaticFieldAccess=false</code> - static methods are always blocked, but static fields can also optionally be blocked</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.disallowProxyMemberAccess=true</code> - disallow proxied objects from being used in OGNL expressions as they may present a security risk</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.disallowDefaultPackageAccess=true</code> - disallow access to classes in the default package which should not be used in production</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.ognl.disallowCustomOgnlMap=true</code> - disallow construction of custom OGNL maps which can be used to bypass the SecurityMemberAccess policy</li>
 </ul>
 
 <h4 id="allowlist-capability">Allowlist Capability</h4>
