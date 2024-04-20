@@ -160,10 +160,13 @@
 </ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">web.xml</code> web application descriptor file represents the core of the Java web application, so it is appropriate 
-that it is also part of the core of the Struts framework. In the <code class="language-plaintext highlighter-rouge">web.xml</code> file, Struts defines its FilterDispatcher, 
-the Servlet Filter class that initializes the Struts framework and handles all requests. This filter can contain 
-initialization parameters that affect what, if any, additional configuration files are loaded and how the framework 
-should behave.</p>
+that it is also part of the core of the Struts framework. In the <code class="language-plaintext highlighter-rouge">web.xml</code> file you can use one of the two options:</p>
+<ol>
+  <li>Configure <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</code> which acts as a central 
+  point of initializing the Struts framework and handles all requests.</li>
+  <li>Use combination of <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.filter.StrutsPrepareFilter</code> and <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.filter.StrutsExecuteFilter</code>
+  to support custom integration with other frameworks like Sitemesh.</li>
+</ol>
 
 <h2 id="simple-example">Simple Example</h2>
 
@@ -192,7 +195,7 @@ should behave.</p>
 <span class="nt">&lt;/web-app&gt;</span>
 </code></pre></div></div>
 
-<p>See <a href="../plugins/sitemesh-plugin">SiteMesh Plugin</a> for an example on when to use separate Filters for prepare and execution phase.</p>
+<p>See <a href="../plugins/sitemesh/">SiteMesh Plugin</a> for an example on when to use separate Filters for prepare and execution phase.</p>
 
 <h2 id="custom-mapping">Custom mapping</h2>
 
