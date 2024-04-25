@@ -54,7 +54,7 @@ To include static resources in your plugins add them under "/static" in your jar
 ```ftl
 <!-- Assuming /static/main.css is inside a plugin jar, to add it to the page: -->
 
-<@s.url value="/struts/main.css" var="css" />
+<@s.url value="/static/main.css" var="css" />
 <link rel="stylesheet" type="text/css" href="%{#css}" />
 ```
 
