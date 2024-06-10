@@ -25,7 +25,7 @@ header is sent and `Content-Security-Policy` header is used when using the enfor
 
 CSP is now supported by all major browsers. [More information about CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
 
-The interceptor adds a nonce value automatically to to `<s:script>` and `<s:link>` tags. This provides a painless way to
+The interceptor adds a nonce value automatically to `<s:script>` and `<s:link>` tags. This provides a painless way to
 implement CSP in a highly secure fashion.
 
 ## Parameters
@@ -33,7 +33,9 @@ implement CSP in a highly secure fashion.
 - `enforcingMode` (default `false`) - When set to "true", the enforce mode has been enabled, and the provided policy 
   is going to be enforced.
 - `reportUri` - an uri under which the violations will be reported.
-- `prependServletContext` (default `true`) - a flag to prepend or not the Servlet context to the `reportUri`  
+- `prependServletContext` (default `true`) - a flag to prepend or not the Servlet context to the `reportUri`
+- `cspSettingsClassName` (default to `DefaultCspSettings.class`) - a class name implementing `CspSettings` interface
+  to allow to define a custom CPS settings. It's alternative approach of using [CspAware](#Action_aware) interface below.
 
 ## Report action
 
