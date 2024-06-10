@@ -34,8 +34,9 @@ implement CSP in a highly secure fashion.
   is going to be enforced.
 - `reportUri` - an uri under which the violations will be reported.
 - `prependServletContext` (default `true`) - a flag to prepend or not the Servlet context to the `reportUri`
-- `cspSettingsClassName` (default to `DefaultCspSettings.class`) - a class name implementing `CspSettings` interface
-  to allow to define a custom CPS settings. It's alternative approach of using [CspAware](#Action_aware) interface below.
+- `cspSettingsClassName` (default to `DefaultCspSettings.class`) - a full class name implementing `CspSettings` interface
+  to allow to define a custom CPS settings. It's alternative approach of using the [CspSettingsAware](#action-aware) 
+  interface below.
 
 ## Report action
 
