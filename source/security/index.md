@@ -460,7 +460,7 @@ ensure any necessary parameter injection types are allowlisted, in addition to i
 You can add additional classes and packages to the allowlist with:
 
 - `struts.allowlist.classes`: comma-separated list of allowlisted classes.
-- `struts.allowlist.packages`: comma-separated list of allowlisted packages, matched using string comparison via
+- `struts.allowlist.packageNames`: comma-separated list of allowlisted packages, matched using string comparison via
   `startsWith`. Note that classes in subpackages are also allowlisted.
 
 Depending on the functionality of your application, you may not need to manually allowlist any classes. Please monitor
