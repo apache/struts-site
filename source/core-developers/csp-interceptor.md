@@ -33,10 +33,10 @@ implement CSP in a highly secure fashion.
 - `enforcingMode` (default `false`) - When set to "true", the enforce mode has been enabled, and the provided policy 
   is going to be enforced.
 - `reportUri` - an uri under which the violations will be reported.
-- `prependServletContext` (default `true`) - a flag to prepend or not the Servlet context to the `reportUri`
+- `prependServletContext` (default `true`) - a flag to prepend or not the Servlet context to the `reportUri` (since Struts 6.4.0).
 - `cspSettingsClassName` (default to `DefaultCspSettings.class`) - a full class name implementing `CspSettings` interface
   to allow to define a custom CPS settings. It's alternative approach of using the [CspSettingsAware](#action-aware) 
-  interface below.
+  interface below (since Struts 6.5.0).
 
 ## Report action
 
