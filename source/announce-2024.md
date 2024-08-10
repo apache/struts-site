@@ -37,6 +37,25 @@ and, if appropriate, file [a tracking ticket]({{ site.jira_url }}).
 
 You can download this version from our [download](download.cgi#struts-ga) page.
 
+#### 21 July 2024 - Apache Struts version 7.0.0-M9 {#a20240721}
+
+The Apache Struts group is pleased to announce that Apache Struts version 7.0.0-M9 is available as a Test Build.
+
+The Apache Struts is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework has been designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+> Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+7.0.0-M9) to find more details about performed
+> bug fixes and improvements.
+
+**This is a test build not ready to be used in production environments!**
+
+The 7.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+JakartaEE Servlet API 6.0.0, JakartaEE JSP API 3.0, and Java 17.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list,
+and, if appropriate, file [a tracking ticket]({{ site.jira_url }}).
+
 #### 20 April 2024 - Apache Struts version 7.0.0-M6 {#a20240420}
 
 The Apache Struts group is pleased to announce that Apache Struts version 7.0.0-MS is available as a Test Build.
