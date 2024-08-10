@@ -80,7 +80,7 @@ The following extension points are available in Struts 2:
 | struts.mapper.class                     | Determines the ActionMapping from a request and a URI from an ActionMapping                                                                                                                  | singleton   | org.apache.struts2.dispatcher.mapper.ActionMapper                |
 | struts.multipart.parser                 | Parses a multipart request (file upload)                                                                                                                                                     | per request | org.apache.struts2.dispatcher.multipart.MultiPartRequest         |
 | struts.freemarker.manager.classname     | Loads and processes Freemarker templates                                                                                                                                                     | singleton   | org.apache.struts2.views.freemarker.FreemarkerManager            |
-| struts.velocity.manager.classname       | Loads and processes Velocity templates                                                                                                                                                       | singleton   | org.apache.struts2.views.velocity.VelocityManagerInterface       |
+| struts.velocity.manager.classname       | Loads and processes Velocity templates                                                                                                                                                       | singleton   | org.apache.struts2.views.velocity.VelocityManager                |
 | struts.actionValidatorManager           | Main interface for validation managers (regular and annotation based).  Handles both the loading of configuration and the actual validation (since 2.1)                                      | singleton   | com.opensymphony.xwork2.validator.ActionValidatorManager         |
 | struts.valueStackFactory                | Creates value stacks (since 2.1)                                                                                                                                                             | singleton   | com.opensymphony.xwork2.util.ValueStackFactory                   |
 | struts.reflectionProvider               | Provides reflection services, key place to plug in a custom expression language (since 2.1)                                                                                                  | singleton   | com.opensymphony.xwork2.reflection.ReflectionProvider            |
@@ -319,7 +319,7 @@ public class VelocityBeanSelectionProvider extends AbstractBeanSelectionProvider
 
     @Override
     public void register(ContainerBuilder builder, LocatableProperties props) throws ConfigurationException {
-        alias(VelocityManagerInterface.class, VelocityConstants.STRUTS_VELOCITY_MANAGER_CLASSNAME, builder, props);
+        alias(VelocityManager.class, VelocityConstants.STRUTS_VELOCITY_MANAGER_CLASSNAME, builder, props);
     }
 
 }
