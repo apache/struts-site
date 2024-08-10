@@ -22,7 +22,6 @@ pipeline {
           echo Generating a new version of website
 
           gem install --install-dir ${GEM_HOME} bundler -v '2.3.23'
-
           bundle config set --local path ${GEM_HOME}
           bundle install
           bundle exec jekyll build
