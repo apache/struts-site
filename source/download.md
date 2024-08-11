@@ -19,36 +19,6 @@ Use the links below to download a release of Apache Struts from one of our mirro
 [verify the integrity](#verify) of the downloaded files using signatures downloaded from our
 main distribution directory.
 
-## Mirror {#mirror}
-
-[if-any logo] []([link]) [end] The currently selected mirror is **[preferred]**. If you encounter a problem with 
-this mirror, please select another mirror. If all mirrors are failing, there are *backup* mirrors (at the end 
-of the mirrors list) that should be available.
-
-<form action="[location]" method="get" id="SelectMirror">
-  Other mirrors:
-  <select name="Preferred">
-    [if-any https]
-    [for https]
-    <option value="[https]">[https]</option>
-    [end]
-    [end]
-    [if-any ftp]
-    [for ftp]
-    <option value="[ftp]">[ftp]</option>
-    [end]
-    [end]
-    [if-any backup]
-    [for backup]
-    <option value="[backup]">[backup] (backup)</option>
-    [end]
-    [end]
-  </select>
-  <input type="submit" value="Change"/>
-</form>
-
-You may also consult the [complete list of mirrors](//www.apache.org/mirrors/).
-
 ## Full Releases {#struts-ga}
 
 ### Struts {{ site.current_version }} {#struts{{ site.current_version_short }}}
