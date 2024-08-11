@@ -25,8 +25,9 @@ main distribution directory.
 
 The [Apache Struts {{ site.current_version }}](//struts.apache.org)  is an elegant, extensible framework
 for creating enterprise-ready Java web applications. It is available in a full distribution, or as separate library, 
-source, example and documentation distributions. Struts {{ site.current_version }} is the "best available" 
-version of Struts in the 6.x series.
+source, example and documentation distributions.
+
+Struts {{ site.current_version }} is the "best available" version of Struts in the 6.x series.
 
 - [Version Notes]({{ site.wiki_url }}/Version+Notes+{{ site.current_version }})
 - Source:
