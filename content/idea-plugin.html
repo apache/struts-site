@@ -7,13 +7,13 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>HTTPS and IE Issues</title>
+  <title>IntelliJ IDEA plugin</title>
 
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic,600italic,700italic" rel="stylesheet" type="text/css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
   <link href="/css/custom.css" rel="stylesheet">
-  <link href="/highlighter/github-theme.css" rel="stylesheet">
+  <link href="/css/syntax.css" rel="stylesheet">
 
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
@@ -147,38 +147,36 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/https-and-ie-issues.md" title="Edit this page on GitHub">Edit on GitHub</a>
-    <h1 id="https-and-ie-issues">HTTPS and IE Issues</h1>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/idea-plugin.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <h1 class="no_toc" id="intellij-idea-plugin">IntelliJ IDEA plugin</h1>
 
-<p> When trying to stream PDF’s, TIFF’s, and various other types of content over HTTPS to certain versions of Internet Explorer you may trigger a creative (broken) interpretation of the HTTP spec. The following interceptor should be applied to your actions to set the HTTP headers cache settings to private. This should avoid the issue. (You should *only* do this if you are running over HTTPS!)</p>
+<ul id="markdown-toc">
+  <li><a href="#description" id="markdown-toc-description">Description</a></li>
+  <li><a href="#version-notes" id="markdown-toc-version-notes">Version notes</a>    <ul>
+      <li><a href="#version-202441" id="markdown-toc-version-202441">Version 2024.4.1</a></li>
+    </ul>
+  </li>
+</ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kn">package</span> <span class="nn">org.tuxbot.ww.interceptor</span><span class="o">;</span>
+<h2 id="description">Description</h2>
 
-<span class="kn">import</span> <span class="nn">com.opensymphony.xwork.interceptor.AroundInterceptor</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">com.opensymphony.xwork.ActionInvocation</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">com.opensymphony.webwork.ServletActionContext</span><span class="o">;</span>
+<p>In 2024 the original <strong>struts2</strong> plugin has be donated by Jetbrains to Apache Software Foundation and now it’s a part
+of the Apache Struts project. The plugin has been adapted to support the latest versions of the Struts framework
+and as well to support the latest IntelliJ IDEA.</p>
 
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
-<span class="cm">/**
- * This interceptor sets the the HTTP Header to work around IE SSL weirdness  *
- * @author Eric Molitor &lt;a href="mailto:eric@tuxbot.com"&gt;eric@tuxbot.com&lt;/a&gt;
- * @version 1.0
- */</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HTTPRequestCachePrivateInterceptor</span> <span class="kd">extends</span> <span class="nc">AroundInterceptor</span> <span class="o">{</span>
+<p>Any issues should be reported using ASF JIRA and component <a href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20WW%20AND%20component%20%3D%20%22IDEA%20Plugin%22">IDEA Plugin</a>.</p>
 
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">after</span><span class="o">(</span><span class="nc">ActionInvocation</span> <span class="n">actionInvocation</span><span class="o">,</span> <span class="nc">String</span> <span class="n">string</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="c1">// Nothing</span>
-    <span class="o">}</span>
+<h2 id="version-notes">Version notes</h2>
 
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">(</span><span class="nc">ActionInvocation</span> <span class="n">actionInvocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">HttpServletResponse</span> <span class="n">res</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpServletResponse</span><span class="o">)</span> <span class="n">actionInvocation</span><span class="o">.</span><span class="na">getInvocationContext</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="nc">ServletActionContext</span><span class="o">.</span><span class="na">HTTP_RESPONSE</span><span class="o">);</span>
-        <span class="n">res</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">"CACHE-CONTROL"</span><span class="o">,</span> <span class="s">"PRIVATE"</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+<p>The plugin has been officially released yet, it can be only download as a test build from <a href="https://dist.apache.org/repos/dist/dev/struts/idea-plugin/">here</a></p>
 
-</code></pre></div></div>
+<h3 id="version-202441">Version 2024.4.1</h3>
+
+<ul>
+  <li>support for Struts 6.x has been added</li>
+  <li>plugin has been updated to support IDEA version 2024.1.5</li>
+</ul>
 
   </section>
 </article>
