@@ -86,7 +86,7 @@ public class FileDisplay extends ActionSupport {
 		return this.filename;
 	}
 	
-	private String getStream() {
+	private InputStream getStream() {
 		return this.stream;
 	}
 }
