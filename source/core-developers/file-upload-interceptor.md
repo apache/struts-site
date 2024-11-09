@@ -15,6 +15,9 @@ parent:
 Since Struts 6.4.0 this interceptor is deprecated, please use [Action File Upload Interceptor](action-file-upload-interceptor) instead!
 {:.alert .alert-warning}
 
+This interceptor has benn removed in Struts 7.0.0!
+{:.alert .alert-danger}
+
 See [this page](file-upload) for more examples and advanced configuration.
 
 Interceptor that is based off of `MultiPartRequestWrapper`, which is automatically applied for any request that includes 

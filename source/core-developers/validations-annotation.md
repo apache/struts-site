@@ -158,7 +158,7 @@ Here's a complete example of updating the default stack:
                 <interceptor-ref name="profiling"/>
                 <interceptor-ref name="scopedModelDriven"/>
                 <interceptor-ref name="modelDriven"/>
-                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="actionFileUpload"/>
                 <interceptor-ref name="checkbox"/>
                 <interceptor-ref name="staticParams"/>
                 <interceptor-ref name="params">

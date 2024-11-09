@@ -204,7 +204,7 @@ Notice the locations of these settings in the following example:
 
     <action name="doUpload" class="com.example.UploadAction">
         <interceptor-ref name="basicStack"/>
-        <interceptor-ref name="fileUpload">
+        <interceptor-ref name="actionFileUpload">
             <param name="maximumSize">500000</param>
         </interceptor-ref>
         <interceptor-ref name="validation"/>
@@ -247,7 +247,7 @@ example:
 ```xml
 <action name="doUpload" class="com.example.UploadAction">
     <interceptor-ref name="basicStack"/>
-    <interceptor-ref name="fileUpload">
+    <interceptor-ref name="actionFileUpload">
         <param name="allowedTypes">image/jpeg,image/gif</param>
     </interceptor-ref>
     <interceptor-ref name="validation"/>
