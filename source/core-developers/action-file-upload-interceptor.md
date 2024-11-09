@@ -107,7 +107,7 @@ public class UploadAction extends ActionSupport implements UploadedFilesAware {
 **Setting parameters example:**
 
 ```xml
-<interceptor-ref name="fileUpload">
+<interceptor-ref name="actionFileUpload">
   <param name="allowedTypes">
      image/png,image/gif,image/jpeg
   </param>

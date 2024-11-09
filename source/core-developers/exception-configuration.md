@@ -33,7 +33,7 @@ Below is a snippet from `struts-default.xml` which has the exception mapping alr
     <interceptor-ref name="profiling"/>
     <interceptor-ref name="scoped-model-driven"/>
     <interceptor-ref name="model-driven"/>
-    <interceptor-ref name="fileUpload"/>
+    <interceptor-ref name="actionFileUpload"/>
     <interceptor-ref name="checkbox"/>
     <interceptor-ref name="static-params"/>
     <interceptor-ref name="params"/>
