@@ -25,21 +25,20 @@ or action executions.
 
 Struts Generic Tags control the execution flow as pages render.
 
-|**Control Tags**|                               |**Data Tags**|                 
-|                |[if](if-tag)              |             |[a](a-tag)              |   
-|                |[elseif](elseif-tag)      |             |[action](action-tag)    |
-|                |[else](else-tag)          |             |[bean](bean-tag)        |
-|                |[append](append-tag)      |             |[date](date-tag)        |
-|                |[generator](generator-tag)|             |[debug](debug-tag)      |
-|                |[iterator](iterator-tag)  |             |[i18n](i18n-tag)        |
-|                |[merge](merge-tag)        |             |[include](include-tag)  |
-|                |[sort](sort-tag)          |             |[param](param-tag)      |   
-|                |[subset](subset-tag)      |             |[property](property-tag)|
-|                |                               |             |[push](push-tag)        |
-|                |                               |             |[set](set-tag)          |
-|                |                               |             |[text](text-tag)        |
-|                |                               |             |[url](url-tag)          |
-
+|**Control Tags**| |**Data Tags**| |**Other Tags** |                 
+| |[if](if-tag)              | |[a](a-tag)              | | [script](script-tag) |   
+| |[elseif](elseif-tag)      | |[action](action-tag)    | | [link](link-tag) |
+| |[else](else-tag)          | |[bean](bean-tag)        | | |
+| |[append](append-tag)      | |[date](date-tag)        | | |
+| |[generator](generator-tag)| |[debug](debug-tag)      | | |
+| |[iterator](iterator-tag)  | |[i18n](i18n-tag)        | | |
+| |[merge](merge-tag)        | |[include](include-tag)  | | |
+| |[sort](sort-tag)          | |[param](param-tag)      | | |   
+| |[subset](subset-tag)      | |[property](property-tag)| | |
+| | | |[push](push-tag)        | | |
+| | | |[set](set-tag)          | | |
+| | | |[text](text-tag)        | | |
+| | | |[url](url-tag)          | | |
 
 ## UI Tag Reference
 
