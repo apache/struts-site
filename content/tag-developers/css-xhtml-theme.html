@@ -191,36 +191,36 @@ the HTML tags are wrapped by a standard header and footer. For example, in the <
  */
 --&gt;
 &lt;input&lt;#rt/&gt;
- type="${(parameters.type!"text")}"&lt;#rt/&gt;
- name="${(parameters.name!"")}"&lt;#rt/&gt;
-&lt;#if parameters.get("size")?has_content&gt;
- size="${parameters.get("size")}"&lt;#rt/&gt;
+ type="${(attributes.type!"text")}"&lt;#rt/&gt;
+ name="${(attributes.name!"")}"&lt;#rt/&gt;
+&lt;#if attributes.get("size")?has_content&gt;
+ size="${attributes.get("size")}"&lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#if parameters.maxlength?has_content&gt;
- maxlength="${parameters.maxlength}"&lt;#rt/&gt;
+&lt;#if attributes.maxlength?has_content&gt;
+ maxlength="${attributes.maxlength}"&lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#if parameters.nameValue??&gt;
- value="${parameters.nameValue}"&lt;#rt/&gt;
+&lt;#if attributes.nameValue??&gt;
+ value="${attributes.nameValue}"&lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#if parameters.disabled!false&gt;
+&lt;#if attributes.disabled!false&gt;
  disabled="disabled"&lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#if parameters.readonly!false&gt;
+&lt;#if attributes.readonly!false&gt;
  readonly="readonly"&lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#if parameters.tabindex?has_content&gt;
- tabindex="${parameters.tabindex}"&lt;#rt/&gt;
+&lt;#if attributes.tabindex?has_content&gt;
+ tabindex="${attributes.tabindex}"&lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#if parameters.id?has_content&gt;
- id="${parameters.id}"&lt;#rt/&gt;
+&lt;#if attributes.id?has_content&gt;
+ id="${attributes.id}"&lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/css.ftl" /&gt;
-&lt;#if parameters.title?has_content&gt;
- title="${parameters.title}"&lt;#rt/&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/css.ftl" /&gt;
+&lt;#if attributes.title?has_content&gt;
+ title="${attributes.title}"&lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/scripting-events.ftl" /&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/common-attributes.ftl" /&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/dynamic-attributes.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/scripting-events.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/common-attributes.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/dynamic-attributes.ftl" /&gt;
 /&gt;</code></pre></figure>
 
 <h2 id="css-xhtml-theme-header">CSS XHTML theme header</h2>
@@ -248,18 +248,18 @@ the CSS theme does not use a <code class="language-plaintext highlighter-rouge">
  * under the License.
  */
 --&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/controlheader-core.ftl"&gt;
-&lt;#if !parameters.labelPosition?? &amp;&amp; (parameters.form.labelPosition)??&gt;
-&lt;#assign labelPos = parameters.form.labelPosition/&gt;
-&lt;#elseif parameters.labelPosition??&gt;
-&lt;#assign labelPos = parameters.labelPosition/&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/controlheader-core.ftl"&gt;
+&lt;#if !attributes.labelPosition?? &amp;&amp; (attributes.form.labelPosition)??&gt;
+&lt;#assign labelPos = attributes.form.labelPosition/&gt;
+&lt;#elseif attributes.labelPosition??&gt;
+&lt;#assign labelPos = attributes.labelPosition/&gt;
 &lt;/#if&gt;
 &lt;#if (labelPos!"top") == 'top'&gt;
 &lt;div &lt;#rt/&gt;
 &lt;#else&gt;
 &lt;span &lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#if parameters.id??&gt;id="wwctrl_${parameters.id}"&lt;#rt/&gt;&lt;/#if&gt; class="wwctrl"&gt;</code></pre></figure>
+&lt;#if attributes.id??&gt;id="wwctrl_${attributes.id}"&lt;#rt/&gt;&lt;/#if&gt; class="wwctrl"&gt;</code></pre></figure>
 
 <p>Note that the <code class="language-plaintext highlighter-rouge">fieldErrors</code>, usually caused by <a href="../core-developers/validation">Validation</a>, are displayed in a <code class="language-plaintext highlighter-rouge">div</code>
 block before the element is displayed.</p>
@@ -288,26 +288,26 @@ block before the element is displayed.</p>
  * under the License.
  */
 --&gt;
-${parameters.after!}&lt;#t/&gt;
+${attributes.after!}&lt;#t/&gt;
     &lt;#lt/&gt;
-&lt;#if !parameters.labelPosition?? &amp;&amp; (parameters.form.labelPosition)??&gt;
-&lt;#assign labelPos = parameters.form.labelPosition/&gt;
-&lt;#elseif parameters.labelPosition??&gt;
-&lt;#assign labelPos = parameters.labelPosition/&gt;
+&lt;#if !attributes.labelPosition?? &amp;&amp; (attributes.form.labelPosition)??&gt;
+&lt;#assign labelPos = attributes.form.labelPosition/&gt;
+&lt;#elseif attributes.labelPosition??&gt;
+&lt;#assign labelPos = attributes.labelPosition/&gt;
 &lt;/#if&gt;
 &lt;#if (labelPos!"top") == 'top'&gt;
 &lt;/div&gt; &lt;#rt/&gt;
 &lt;#else&gt;
 &lt;/span&gt; &lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#if (parameters.errorposition!"top") == 'bottom'&gt;
-&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(parameters.name)??/&gt;
+&lt;#if (attributes.errorposition!"top") == 'bottom'&gt;
+&lt;#assign hasFieldErrors = attributes.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(attributes.name)??/&gt;
 &lt;#if hasFieldErrors&gt;
-&lt;div &lt;#rt/&gt;&lt;#if parameters.id??&gt;id="wwerr_${parameters.id}"&lt;#rt/&gt;&lt;/#if&gt; class="wwerr"&gt;
-&lt;#list fieldErrors.get(parameters.name) as error&gt;
+&lt;div &lt;#rt/&gt;&lt;#if attributes.id??&gt;id="wwerr_${attributes.id}"&lt;#rt/&gt;&lt;/#if&gt; class="wwerr"&gt;
+&lt;#list fieldErrors.get(attributes.name) as error&gt;
     &lt;div&lt;#rt/&gt;
-    &lt;#if parameters.id??&gt;
-     errorFor="${parameters.id}"&lt;#rt/&gt;
+    &lt;#if attributes.id??&gt;
+     errorFor="${attributes.id}"&lt;#rt/&gt;
     &lt;/#if&gt;
     class="errorMessage"&gt;
              ${error}
@@ -347,8 +347,8 @@ to provide the layout. The contents of <strong>head.ftl</strong> are:</p>
  * under the License.
  */
 --&gt;
-&lt;@s.link rel="stylesheet" href="${base}${parameters.staticContentPath}/css_xhtml/styles.css" type="text/css" /&gt;
-&lt;#include "/${parameters.templateDir}/simple/head.ftl" /&gt;</code></pre></figure>
+&lt;@s.link rel="stylesheet" href="${base}${attributes.staticContentPath}/css_xhtml/styles.css" type="text/css" /&gt;
+&lt;#include "/${attributes.templateDir}/simple/head.ftl" /&gt;</code></pre></figure>
 
 <p>The head includes a style sheet. The contents of <strong>styles.css</strong> are:</p>
 
