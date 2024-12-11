@@ -203,9 +203,9 @@ and <code class="language-plaintext highlighter-rouge">controlfooter.ftl</code> 
  * under the License.
  */
 --&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/controlheader.ftl" /&gt;
-&lt;#include "/${parameters.templateDir}/simple/text.ftl" /&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/controlfooter.ftl" /&gt;</code></pre></figure>
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/controlheader.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/simple/text.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/controlfooter.ftl" /&gt;</code></pre></figure>
 
 <blockquote>
   <p>The <code class="language-plaintext highlighter-rouge">controlheader.ftl</code> is referenced using <code class="language-plaintext highlighter-rouge">${parameters.theme}</code> so that the code can be reused 
@@ -237,12 +237,12 @@ the <a href="ajax-theme">ajax theme</a>) contents:</p>
  * under the License.
  */
 --&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/controlheader-core.ftl" /&gt;
-    &lt;td 
-        &lt;#if parameters.align?? &gt;
-            class="align-${parameters.align}"
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/controlheader-core.ftl" /&gt;
+    &lt;td
+        &lt;#if attributes.align?? &gt;
+            class="align-${attributes.align}"
          &lt;#else &gt;
-            class="tdInput"            
+            class="tdInput"
         &lt;/#if&gt;
 &gt;&lt;#t/&gt;</code></pre></figure>
 
@@ -270,11 +270,11 @@ the <a href="ajax-theme">ajax theme</a>) contents:</p>
 	Only show message if errors are available.
 	This will be done if ActionSupport is used.
 --&gt;
-&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(parameters.name)??/&gt;
-&lt;#if (parameters.errorposition!"top") == 'top'&gt;
+&lt;#assign hasFieldErrors = attributes.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(attributes.name)??/&gt;
+&lt;#if (attributes.errorposition!"top") == 'top'&gt;
 &lt;#if hasFieldErrors&gt;
-&lt;#list fieldErrors.get(parameters.name) as error&gt;
-&lt;tr errorFor="${parameters.id}"&gt;
+&lt;#list fieldErrors.get(attributes.name) as error&gt;
+&lt;tr errorFor="${attributes.id}"&gt;
     &lt;td class="tdErrorMessage" colspan="2"&gt;&lt;#rt/&gt;
         &lt;span class="errorMessage"&gt;${error}&lt;/span&gt;&lt;#t/&gt;
     &lt;/td&gt;&lt;#lt/&gt;
@@ -282,10 +282,10 @@ the <a href="ajax-theme">ajax theme</a>) contents:</p>
 &lt;/#list&gt;
 &lt;/#if&gt;
 &lt;/#if&gt;
-&lt;#if !parameters.labelPosition?? &amp;&amp; (parameters.form.labelPosition)??&gt;
-&lt;#assign labelPos = parameters.form.labelPosition/&gt;
-&lt;#elseif parameters.labelPosition??&gt;
-&lt;#assign labelPos = parameters.labelPosition/&gt;
+&lt;#if !attributes.labelPosition?? &amp;&amp; (attributes.form.labelPosition)??&gt;
+&lt;#assign labelPos = attributes.form.labelPosition/&gt;
+&lt;#elseif attributes.labelPosition??&gt;
+&lt;#assign labelPos = attributes.labelPosition/&gt;
 &lt;/#if&gt;
 &lt;#--
 	if the label position is top,
@@ -297,10 +297,10 @@ the <a href="ajax-theme">ajax theme</a>) contents:</p>
 &lt;#else&gt;
     &lt;td class="tdLabel"&gt;&lt;#rt/&gt;
 &lt;/#if&gt;
-&lt;#if parameters.label??&gt;
+&lt;#if attributes.label??&gt;
     &lt;label &lt;#t/&gt;
-&lt;#if parameters.id??&gt;
-        for="${parameters.id}" &lt;#t/&gt;
+&lt;#if attributes.id??&gt;
+        for="${attributes.id}" &lt;#t/&gt;
 &lt;/#if&gt;
 &lt;#if hasFieldErrors&gt;
         class="errorLabel"&lt;#t/&gt;
@@ -308,15 +308,15 @@ the <a href="ajax-theme">ajax theme</a>) contents:</p>
         class="label"&lt;#t/&gt;
 &lt;/#if&gt;
     &gt;&lt;#t/&gt;
-&lt;#if (parameters.required!false) &amp;&amp; ((parameters.requiredPosition!"right") != 'right')&gt;
+&lt;#if (attributes.required!false) &amp;&amp; ((attributes.requiredPosition!"right") != 'right')&gt;
         &lt;span class="required"&gt;*&lt;/span&gt;&lt;#t/&gt;
 &lt;/#if&gt;
-${parameters.label}&lt;#t/&gt;
-&lt;#if (parameters.required!false) &amp;&amp; ((parameters.requiredPosition!"right") == 'right')&gt;
+${attributes.label}&lt;#t/&gt;
+&lt;#if (attributes.required!false) &amp;&amp; ((attributes.requiredPosition!"right") == 'right')&gt;
  &lt;span class="required"&gt;*&lt;/span&gt;&lt;#t/&gt;
 &lt;/#if&gt;
-${parameters.labelseparator!":"}&lt;#t/&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/tooltip.ftl" /&gt;
+${attributes.labelseparator!":"}&lt;#t/&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/tooltip.ftl" /&gt;
 &lt;/label&gt;&lt;#t/&gt;
 &lt;/#if&gt;
     &lt;/td&gt;&lt;#lt/&gt;
@@ -362,14 +362,14 @@ for an <code class="language-plaintext highlighter-rouge">after</code> parameter
  * under the License.
  */
 --&gt;
-${parameters.after!}&lt;#t/&gt;
+${attributes.after!}&lt;#t/&gt;
     &lt;/td&gt;&lt;#lt/&gt;
 &lt;/tr&gt;
-&lt;#if (parameters.errorposition!"top") == 'bottom'&gt;
-&lt;#assign hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(parameters.name)??/&gt;
+&lt;#if (attributes.errorposition!"top") == 'bottom'&gt;
+&lt;#assign hasFieldErrors = attributes.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(attributes.name)??/&gt;
 &lt;#if hasFieldErrors&gt;
-&lt;#list fieldErrors.get(parameters.name) as error&gt;
-&lt;tr errorFor="${parameters.id}"&gt;
+&lt;#list fieldErrors.get(attributes.name) as error&gt;
+&lt;tr errorFor="${attributes.id}"&gt;
     &lt;td class="tdErrorMessage" colspan="2"&gt;&lt;#rt/&gt;
         &lt;span class="errorMessage"&gt;${error}&lt;/span&gt;&lt;#t/&gt;
     &lt;/td&gt;&lt;#lt/&gt;
@@ -412,8 +412,8 @@ render the form elements.</p>
  * under the License.
  */
 --&gt;
-&lt;@s.link rel="stylesheet" href="${base}${parameters.staticContentPath}/xhtml/styles.css" type="text/css" /&gt;
-&lt;#include "/${parameters.templateDir}/simple/head.ftl" /&gt;</code></pre></figure>
+&lt;@s.link rel="stylesheet" href="${base}${attributes.staticContentPath}/xhtml/styles.css" type="text/css" /&gt;
+&lt;#include "/${attributes.templateDir}/simple/head.ftl" /&gt;</code></pre></figure>
 
 <p>The head template imports a style sheet. The contents of <strong>styles.css</strong> are:</p>
 
@@ -488,17 +488,17 @@ wrapping table, the opening and closing templates also, if the <code class="lang
  * under the License.
  */
 --&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/form-validate.ftl" /&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/form-common.ftl" /&gt;
-&lt;#if (parameters.validate!false)&gt;
-  onreset="&lt;#outputformat 'JavaScript'&gt;${parameters.onreset!'clearErrorMessages(this);clearErrorLabels(this);'}&lt;/#outputformat&gt;"
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/form-validate.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/form-common.ftl" /&gt;
+&lt;#if (attributes.validate!false)&gt;
+  onreset="&lt;#outputformat 'JavaScript'&gt;${attributes.onreset!'clearErrorMessages(this);clearErrorLabels(this);'}&lt;/#outputformat&gt;"
 &lt;#else&gt;
-  &lt;#if parameters.onreset??&gt;
-  onreset="&lt;#outputformat 'JavaScript'&gt;${parameters.onreset}&lt;/#outputformat&gt;"
+  &lt;#if attributes.onreset??&gt;
+  onreset="&lt;#outputformat 'JavaScript'&gt;${attributes.onreset}&lt;/#outputformat&gt;"
   &lt;/#if&gt;
 &lt;/#if&gt;
 &gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/control.ftl" /&gt;</code></pre></figure>
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/control.ftl" /&gt;</code></pre></figure>
 
 <p>The closing template, <code class="language-plaintext highlighter-rouge">form-close.ftl</code>:</p>
 
@@ -522,13 +522,13 @@ wrapping table, the opening and closing templates also, if the <code class="lang
  * under the License.
  */
 --&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/control-close.ftl" /&gt;
-&lt;#include "/${parameters.templateDir}/simple/form-close.ftl" /&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/form-close-validate.ftl" /&gt;
-&lt;#if parameters.focusElement??&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/control-close.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/simple/form-close.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/form-close-validate.ftl" /&gt;
+&lt;#if attributes.focusElement??&gt;
 &lt;@s.script&gt;
     StrutsUtils.addOnLoad(function() {
-        var element = document.getElementById("${parameters.focusElement?js_string}");
+        var element = document.getElementById("${attributes.focusElement?js_string}");
         if(element) {
             element.focus();
         }
@@ -564,17 +564,17 @@ to <code class="language-plaintext highlighter-rouge">true</code>, enable <a hre
  * under the License.
  */
 --&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/form-validate.ftl" /&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/form-common.ftl" /&gt;
-&lt;#if (parameters.validate!false)&gt;
-  onreset="&lt;#outputformat 'JavaScript'&gt;${parameters.onreset!'clearErrorMessages(this);clearErrorLabels(this);'}&lt;/#outputformat&gt;"
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/form-validate.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/form-common.ftl" /&gt;
+&lt;#if (attributes.validate!false)&gt;
+  onreset="&lt;#outputformat 'JavaScript'&gt;${attributes.onreset!'clearErrorMessages(this);clearErrorLabels(this);'}&lt;/#outputformat&gt;"
 &lt;#else&gt;
-  &lt;#if parameters.onreset??&gt;
-  onreset="&lt;#outputformat 'JavaScript'&gt;${parameters.onreset}&lt;/#outputformat&gt;"
+  &lt;#if attributes.onreset??&gt;
+  onreset="&lt;#outputformat 'JavaScript'&gt;${attributes.onreset}&lt;/#outputformat&gt;"
   &lt;/#if&gt;
 &lt;/#if&gt;
 &gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/control.ftl" /&gt;</code></pre></figure>
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/control.ftl" /&gt;</code></pre></figure>
 
 <p>The closing template, <strong>form-close.ftl</strong>:</p>
 
@@ -598,13 +598,13 @@ to <code class="language-plaintext highlighter-rouge">true</code>, enable <a hre
  * under the License.
  */
 --&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/control-close.ftl" /&gt;
-&lt;#include "/${parameters.templateDir}/simple/form-close.ftl" /&gt;
-&lt;#include "/${parameters.templateDir}/${parameters.expandTheme}/form-close-validate.ftl" /&gt;
-&lt;#if parameters.focusElement??&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/control-close.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/simple/form-close.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/form-close-validate.ftl" /&gt;
+&lt;#if attributes.focusElement??&gt;
 &lt;@s.script&gt;
     StrutsUtils.addOnLoad(function() {
-        var element = document.getElementById("${parameters.focusElement?js_string}");
+        var element = document.getElementById("${attributes.focusElement?js_string}");
         if(element) {
             element.focus();
         }
