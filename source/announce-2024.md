@@ -13,6 +13,22 @@ title: Announcements 2024
   Skip to: <a href="announce-2023">Announcements - 2023</a>
 </p>
 
+#### 10 December 2024 - CVE-2024-53677 File upload logic is flawed {#a20241210}
+
+The Apache Struts group recommends upgrading to Apache Struts version 6.4.0 at least and migrating to 
+the [new file upload](core-developers/action-file-upload) mechanism to mitigate potential security
+vulnerability when using deprecated [FileUploadInterceptor](core-developers/file-upload-interceptor). 
+
+> Please read the Security Bulletin [S2-067](https://cwiki.apache.org/confluence/display/WW/S2-067) to find more 
+> details about this security vulnerability
+
+**All developers are strongly advised to perform this upgrade.**
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list,
+and, if appropriate, file [a tracking ticket]({{ site.jira_url }}).
+
+You can download the latest version from our [download](download.cgi#struts-ga) page.
+
 #### 17 November 2024 - Apache Struts version 6.7.0 General Availability {#a20241117}
 
 The Apache Struts group is pleased to announce that Apache Struts version 6.6.7 is available as a "General Availability"
