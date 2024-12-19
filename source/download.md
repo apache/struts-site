@@ -60,34 +60,6 @@ version of Struts in the 6.x series.
     [SHA256](https://downloads.apache.org/struts/{{ site.current_version }}/struts-{{ site.current_version }}-docs.zip.sha256)
     [SHA512](https://downloads.apache.org/struts/{{ site.current_version }}/struts-{{ site.current_version }}-docs.zip.sha512)
 
-### Struts {{ site.current_25x_version }} {#struts-25x}
-
-- [Version Notes]({{ site.wiki_url }}/Version+Notes+{{ site.current_25x_version }})
-- Source:
-  - [struts-{{ site.current_25x_version }}-src.zip]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-src.zip) (7MB)
-    [PGP]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-src.zip.asc)
-    [SHA256]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-src.zip.sha256)
-- Full Distribution:
-  - [struts-{{ site.current_25x_version }}-all.zip]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-all.zip) (65MB)
-    [PGP]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-all.zip.asc)
-    [SHA256]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-all.zip.sha256)
-- Example Applications:
-  - [struts-{{ site.current_25x_version }}-apps.zip]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-apps.zip) (35MB)
-    [PGP]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-apps.zip.asc)
-    [SHA256]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-apps.zip.sha256)
-- Essential Dependencies Only:
-  - [struts-{{ site.current_25x_version }}-min-lib.zip]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-min-lib.zip) (4MB)
-    [PGP]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-min-lib.zip.asc)
-    [SHA256]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-min-lib.zip.sha256)
-- All Dependencies:
-  - [struts-{{ site.current_25x_version }}-lib.zip]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-lib.zip) (19MB)
-    [PGP]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-lib.zip.asc)
-    [SHA256]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-lib.zip.sha256)
-- Documentation:
-  - [struts-{{ site.current_25x_version }}-docs.zip]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-docs.zip) (13MB)
-    [PGP]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-docs.zip.asc)
-    [SHA256]({{ site.archive_url }}{{ site.current_25x_version }}/struts-{{ site.current_25x_version }}-docs.zip.sha256)
-
 ## Prior releases
 
 If you are looking for other versions than above please check the <a href="https://archive.apache.org/dist/struts/">Apache Archive</a> site.
