@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.apache.struts2.convention"},{"l":"org.apache.struts2.convention.annotation"},{"l":"org.apache.struts2.convention.config.entities"}];updateSearchResults();

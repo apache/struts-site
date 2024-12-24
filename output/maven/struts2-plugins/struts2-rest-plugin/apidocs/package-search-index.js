@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.apache.struts2.rest"},{"l":"org.apache.struts2.rest.config.entities"},{"l":"org.apache.struts2.rest.handler"},{"l":"org.apache.struts2.rest.handler.xstream"}];updateSearchResults();

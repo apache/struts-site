@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.apache.struts.beanvalidation.constraints"},{"l":"org.apache.struts.beanvalidation.constraints.impl"},{"l":"org.apache.struts.beanvalidation.validation.constant"},{"l":"org.apache.struts.beanvalidation.validation.interceptor"}];updateSearchResults();
