@@ -269,26 +269,26 @@ As of FreeMarker 2.3.4, an alternative syntax is supported. This alternative syn
 You can enable FreeMarker cache mechanism by specifying below options in `struts.xml`:
 
 - `<constant name="struts.freemarker.mru.max.strong.size" value="250" />` - this option will be used 
-  by [freemarker.cache.MruCacheStorage](http://freemarker.org/docs/api/freemarker/cache/MruCacheStorage)
-- `<constant name="struts.freemarker.templatesCache.updateDelay" value="1800" />` - default update cache interval (5 seconds)
--`<constant name="struts.freemarker.templatesCache" value="true" />` - \***DEPRECATED**\* this option will use a internal 
-  ConcurrentHashMap in FreemarkerTemplateEngine but not freemarker native cache
+  by [freemarker.cache.MruCacheStorage](http://freemarker.org/docs/api/freemarker/cache/MruCacheStorage), see also [Template caching](https://freemarker.apache.org/docs/pgui_config_templateloading.html#pgui_config_templateloading_caching).
+- `<constant name="struts.freemarker.templatesCache.updateDelay" value="60 s" />` - default update cache interval (60 seconds), as from [FreeMarker 2.3.23](https://freemarker.apache.org/docs/versions_2_3_23.html#autoid_176) timeunits are also supported
+- `<constant name="struts.freemarker.templatesCache" value="true" />` - **DEPRECATED** this option will use an internal 
+  ConcurrentHashMap in FreemarkerTemplateEngine but not freemarker native cache (this option has been removed in the latest Struts versions)
    
 Setting `devMode` to `true` will disable cache and updateDelay immediately, but you can explicit specify these constants 
 to enable cache even in `devMode`, see [devMode](../core-developers/development-mode). 
 
 ### Incompatible Improvements
 
-By default Struts is using FreeMarker in way to be backward compatible as much as possible but if you need to enable new 
-features you can do it via `freemarker.properties` by defining 
+By default, Struts is using FreeMarker in way to be backward compatible as much as possible but if you need to enable new 
+features you can do it via `freemarker.properties` by defining 
 [incompatible improvements](http://freemarker.org/docs/pgui_config_incompatible_improvements.html#pgui_config_incompatible_improvements_how_to_set)
-settings, ie.:
+settings, i.e.:
 
 ```
 incompatible_improvements=2.3.22
 ```
 
-You can also pass this setting via `ServletContext` setting `<init-param/>` (since Struts 2.5.13):
+You can also pass this setting via `ServletContext` setting `<init-param/>` (since Struts 2.5.13):
 
 ```xml
 <init-param>

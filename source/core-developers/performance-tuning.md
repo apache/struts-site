@@ -4,31 +4,33 @@ title: Performance Tuning
 ---
 
 # Performance Tuning
+{:.no_toc}
 
-## Performance tuning
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 The following are some tips and tricks to squeeze the most performance out of Struts 2.
 
 > For Struts 2 versions before 2.3: the OGNL version 3.0.3 library is a drop-in replacement for older OGNL jars,
 > and provides **much** better performance. See the following JIRA issue for more information: 
-> [https://issues.apache.org/jira/browse/WW-3580](https://issues.apache.org/jira/browse/WW-3580)
+> [WW-3580](https://issues.apache.org/jira/browse/WW-3580)
 
 ## Turn off logging and devMode
 
-The [devMode](development-mode) allows reloading of configuration and validation related files, but because they 
-happen on each request, this setting will totally kill your performance.
+The [devMode](development-mode) allows reloading of configuration and validation related files, but because they  happen on each 
+request, this setting will totally kill your performance.
 When using logging, make sure to turn off logging (esp. Freemarker generates a LOT of logging), and check if a level is 
 enabled before printing it, or you will get the cost of the String parsing/concatenation anyways.
 
 ## Use the Java Templates
 
 If you use the simple theme, and do not overwrite any of the FreeMarker templates, consider using the [java templates](../plugins/javatemplates-plugin/),
-which provide a drop in replacement for most tags, and are a lot faster than the regular tags.
+which provide a drop in replacement for most of the tags, and are a lot faster than the regular tags.
 
 ## Do not use interceptors you do not need
 
 If you do not require a full stack of interceptors for an Action, then try using a different one (basicStack), 
-or remove interceptors you do not need. Remove the I18nInterceptor interceptor if you don't need it, as it can cause 
+or remove interceptors you do not need. Remove the `I18nInterceptor` interceptor if you don't need it, as it can cause 
 a session to be created.
 
 ## Use the correct HTTP headers (Cache-Control & Expires)
@@ -38,7 +40,7 @@ When returning HTML views, make sure to add the correct headers so browsers know
 ## Copy the static content from the Struts 2 jar when using the Ajax theme (Dojo) or the Calendar tag
 
 Struts 2 uses some external javascript libraries and cascading stylesheets for certain themes and tags. These by default 
-are located inside the Struts 2 jar, and a special filter returns them when requesting a special path (`/struts`). 
+are located inside the Struts 2 jar, and a special filter returns them when requesting a special path (`/static`). 
 Although Struts 2 can handle these requests, an application/servlet container is not optimized for these kind of requests. 
 Consider moving these .js and .css files to a seperated server (Lighttpd, Apache HTTPD, ..).
 
@@ -54,11 +56,13 @@ This value determines how often Freemarker checks if it needs to reloads the tem
 is 500 ms. Since there is no reason to check if a template needs reloading, it is best to set this to a very large value. 
 Note that this value is in seconds and freemarker will convert this value to milliseconds.
 
-You can also use `struts.freemarker.templatesCache.updateDelay` constant to achieve the same effect.
+You can also use `struts.freemarker.templatesCache.updateDelay` constant to achieve the same effect.
 
-See also: [Freemarker configuration properties](http://freemarker.sourceforge.net/docs/api/freemarker/template/Configuration.html\#setSetting(java.lang.String,%20java.lang.String))
+See also: [Freemarker configuration properties](https://freemarker.apache.org/docs/pgui_config_settings.html)
 
 ## Enable Freemarker template caching
+
+> Note: support for this options has been removed in Struts. See the [Cache](../tag-developers/freemarker#cache) section of the FreeMarker page.
 
 As of Struts 2.0.10, setting the property `struts.freemarker.templatesCache` to true will enable the Struts internal 
 caching of Freemarker templates. This property is set to false by default.
