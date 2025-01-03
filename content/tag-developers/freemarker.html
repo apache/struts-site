@@ -466,10 +466,10 @@ logic to take place instead.</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">&lt;constant name="struts.freemarker.mru.max.strong.size" value="250" /&gt;</code> - this option will be used 
-by <a href="http://freemarker.org/docs/api/freemarker/cache/MruCacheStorage">freemarker.cache.MruCacheStorage</a></li>
-  <li><code class="language-plaintext highlighter-rouge">&lt;constant name="struts.freemarker.templatesCache.updateDelay" value="1800" /&gt;</code> - default update cache interval (5 seconds)
--<code class="language-plaintext highlighter-rouge">&lt;constant name="struts.freemarker.templatesCache" value="true" /&gt;</code> - *<strong>DEPRECATED</strong>* this option will use a internal 
-ConcurrentHashMap in FreemarkerTemplateEngine but not freemarker native cache</li>
+by <a href="http://freemarker.org/docs/api/freemarker/cache/MruCacheStorage">freemarker.cache.MruCacheStorage</a>, see <a href="https://freemarker.apache.org/docs/pgui_config_templateloading.html#pgui_config_templateloading_caching">Template cache</a> section as well.</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;constant name="struts.freemarker.templatesCache.updateDelay" value="1800" /&gt;</code> - default update cache interval (5 seconds)</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;constant name="struts.freemarker.templatesCache" value="true" /&gt;</code> - <strong>DEPRECATED</strong> this option will use an internal 
+ConcurrentHashMap in FreemarkerTemplateEngine but not freemarker native cache (this option has been removed in the latest Struts versions)</li>
 </ul>
 
 <p>Setting <code class="language-plaintext highlighter-rouge">devMode</code> to <code class="language-plaintext highlighter-rouge">true</code> will disable cache and updateDelay immediately, but you can explicit specify these constants 
@@ -477,15 +477,15 @@ to enable cache even in <code class="language-plaintext highlighter-rouge">devMo
 
 <h3 id="incompatible-improvements">Incompatible Improvements</h3>
 
-<p>By default Struts is using FreeMarker in way to be backward compatible as much as possible but if you need to enable new 
-features you can do it via <code class="language-plaintext highlighter-rouge">freemarker.properties</code> by defining 
+<p>By default, Struts is using FreeMarker in way to be backward compatible as much as possible but if you need to enable new 
+features you can do it via <code class="language-plaintext highlighter-rouge">freemarker.properties</code> by defining 
 <a href="http://freemarker.org/docs/pgui_config_incompatible_improvements.html#pgui_config_incompatible_improvements_how_to_set">incompatible improvements</a>
-settings, ie.:</p>
+settings, i.e.:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>incompatible_improvements=2.3.22
 </code></pre></div></div>
 
-<p>You can also pass this setting via <code class="language-plaintext highlighter-rouge">ServletContext</code> setting <code class="language-plaintext highlighter-rouge">&lt;init-param/&gt;</code> (since Struts 2.5.13):</p>
+<p>You can also pass this setting via <code class="language-plaintext highlighter-rouge">ServletContext</code> setting <code class="language-plaintext highlighter-rouge">&lt;init-param/&gt;</code> (since Struts 2.5.13):</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;init-param&gt;</span>
     <span class="nt">&lt;param-name&gt;</span>freemarker.incompatible_improvements<span class="nt">&lt;/param-name&gt;</span>
