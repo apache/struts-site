@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.apache.struts2.spring"},{"l":"org.apache.struts2.spring.config.entities"},{"l":"org.apache.struts2.spring.interceptor"}];updateSearchResults();
