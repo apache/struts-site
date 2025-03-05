@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.apache.struts2.views.java"},{"l":"org.apache.struts2.views.java.simple"}];updateSearchResults();
