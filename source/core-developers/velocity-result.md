@@ -1,5 +1,5 @@
 ---
-layout: core-developers
+layout: default
 title: Velocity Result
 parent:
     title: Result types

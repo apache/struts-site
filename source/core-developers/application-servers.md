@@ -1,11 +1,14 @@
 ---
-layout: core-developers
+layout: default
 title: Application Servers
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Application Servers
 
-The framework is known to work well with most application servers. If a server's name is linked, then there may 
+The framework is known to work well with most application servers. If a server's name is linked, then there may 
 be some extra steps to obtain full functionality.
 
 - Jetty

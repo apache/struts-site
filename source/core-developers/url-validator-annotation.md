@@ -12,19 +12,19 @@ This validator checks that a field is a valid URL.
 
 ## Usage
 
-  The annotation must be applied at method level.
+  The annotation must be applied at method level.
 
 ## Parameters
 
 | Parameter|Required|Default|Notes|
 |----------|--------|-------|-----|
-|message|yes| |field error message|
-|key|no| |i18n key from language specific properties file|
-|messageParams|no| |additional params to be used to customize message - will be evaluated against the Value Stack|
-|fieldName|no| |field name under validation|
+|message|yes| |field error message|
+|key|no| |i18n key from language specific properties file|
+|messageParams|no| |additional params to be used to customize message - will be evaluated against the Value Stack|
+|fieldName|no| |field name under validation|
 |shortCircuit|no|false|if this validator should be used as shortCircuit|
-|urlRegex|no| |defines regex to use to validate url|
-|urlRegexExpression|no| |defines regex as expression to validate url, expression will be evaluated against current stack to get proper regex|
+|urlRegex|no| |defines regex to use to validate url|
+|urlRegexExpression|no| |defines regex as expression to validate url, expression will be evaluated against current stack to get proper regex|
 |type|yes|ValidatorType.FIELD|Enum value from ValidatorType. Either FIELD or SIMPLE can be used here|
 
 ## Examples

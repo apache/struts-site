@@ -57,6 +57,10 @@ validation won't work either.
 > by certain themes (like xhtml) to put a visual marker (usually '*') next to the field. The tag doesn't know 
 > if the validation system actually "requires" the field or not.
 
+## Example
+
+See [Client Validation example](client-validation-example) for a complete example of client-side validation.
+
 ## Client Side Validation Types
 
 There are two styles of client side validation.

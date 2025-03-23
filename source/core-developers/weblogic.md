@@ -1,14 +1,15 @@
 ---
-layout: core-developers
+layout: default
 title: WebLogic
+parent:
+  title: Application Servers
+  url: application-servers
 ---
 
 # WebLogic
 
-
 When deploying to WebLogic, some developers report problems with the framework locating resources, especially with Velocity. 
 For more about WebLogic and Velocity, see the [Velocity website](http://wiki.apache.org/jakarta-velocity/VelocityAndWeblogic).
-
 
 To deploy to WebLogic, the common approach is to create and deploy an unexpanded WAR to the WebLogic deployment directory. 
 With WL 8.x, the deployment directory is typically at `<bea_home>/user_projects/domains/mydomain/`.
@@ -30,7 +31,6 @@ struts.velocity.configfile = struts-velocity.properties
 - In your new `struts-velocity.properties` file, find he section titled  `T E M P L A T E  L O A D E R S`, and change this section as so:
 
 ```
-
 ===========================================
 resource.loader = class
 
@@ -43,7 +43,6 @@ file.resource.loader.modificationCheckInterval = 2
 class.resource.loader.class = org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
 class.resource.loader.cache = true
 ===========================================
-
 ```
 
 - Redeploy a fresh WAR to WebLogic.

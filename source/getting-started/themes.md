@@ -177,7 +177,7 @@ the KUTheme will inherit all the themes from xhmtl except for the theme for the 
 a definition for that tag's layout. In the `struts.xml` file (`src/main/resources`) you will see that the I've specified 
 the default theme to be KUTheme.
 
-In the deployed web application, Struts 2 will first look for a tag's template on the application's class path and if it 
+In the deployed web application, Struts 2 will first look for a tag's template on the application's class path and if it 
 doesn't find the template there it will use the default template that is part of the Struts 2 core jar. Since we've 
 added a template folder to the application's web root, now when Struts 2 creates the HTML to display the checkboxlist 
 tag it will use the template that is in the KUTheme folder (which tells it to use the `checkboxlist.ftl` file that is 

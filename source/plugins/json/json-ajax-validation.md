@@ -177,7 +177,7 @@ to use AJAX validation. Same applies for specialized Redirect Result Type _jsonA
         <s:submit label="Submit" cssClass="btn btn-primary"/>
     </s:form>
 </body>
-</html> 
+</html> 
 ```
 
 Things to note on this JSP:
@@ -196,7 +196,7 @@ Otherwise the AJAX response will be empty and the form must be submitted a 2nd t
 
 ### Custom Theme
 
-In this sample the _custom theme_ is based on _xhtml_ theme. It is required to override 3 FTL files.
+In this sample the _custom theme_ is based on _xhtml_ theme. It is required to override 3 FTL files.
 
 #### theme.properties
 
@@ -258,7 +258,7 @@ ${parameters.after!}<#t/>
 #### controlheader-core.ftl
 
 ```html
- <#--
+ <#--
     Always include elements to show errors. They may be filled later via AJAX.
 -->
 <#assign hasFieldErrors = parameters.name?? && fieldErrors?? && fieldErrors[parameters.name]??/>
@@ -466,7 +466,7 @@ if this parameter exists, is set to _true_, and there are validation errors (o a
 ```
 
 If the action implements the _ModelDrive_ interface, "model." will be stripped from the field names in the returned JSON. If validation 
-succeeds (and _struts.validateOnly_ is true), an empty JSON string will be returned:
+succeeds (and _struts.validateOnly_ is true), an empty JSON string will be returned:
 
 ```json
 {}
@@ -485,17 +485,17 @@ a JSON response in the form:
 
 The following request parameters can be used to enable exposing validation errors:
 
-- **struts.enableJSONValidation** - a request parameter must be set to **true** to use this interceptor
+- **struts.enableJSONValidation** - a request parameter must be set to **true** to use this interceptor
 - **struts.validateOnly** - If the request has this parameter, execution will return after validation (action won't be executed). 
-  If **struts.validateOnly** is set to false you may want to use _JSONActionRedirectResult_   
+  If **struts.validateOnly** is set to false you may want to use _JSONActionRedirectResult_   
 - **struts.JSONValidation.no.encoding** - If the request has this parameter set to **true,** the character encoding will **NOT** be set on 
   the response - is needed in portlet environment
 
 You can override names of these parameters by specifying the following parameters when setting up a stack:
 
-- **validateJsonParam** - to override name of **struts.enableJSONValidation****
+- **validateJsonParam** - to override name of **struts.enableJSONValidation****
 - **validateOnlyParam** - to override name of **struts.validateOnly**
-- **noEncodingSetParam** - to override name of **struts.JSONValidation.no.encoding**
+- **noEncodingSetParam** - to override name of **struts.JSONValidation.no.encoding**
 - **validationFailedStatus** - status to be set on response when there are validation errors, by default **400**
 
 Parameters overriding is available since Struts 2.5.9
@@ -507,4 +507,4 @@ Some details are omitted, like results used.
 As explained above: there is a case where form is submitted twice, one time as AJAX with validation only and another time as usual submit.
 
 ![Flow chart ](struts2-ajax-vali-flow.png) 
- 
+ 

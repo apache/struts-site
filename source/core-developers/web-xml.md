@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: web.xml
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # web.xml

@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Constant Configuration
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Constant Configuration
@@ -37,7 +40,7 @@ In the [web.xml](web-xml) file, any FilterDispatcher initialization parameters a
 
 ### Value substitution
 
-Since Apache Struts 2.5.6 it is possible to use value substitution when defining `constant`s in `struts.xml` file. 
+Since Apache Struts 2.5.6 it is possible to use value substitution when defining `constant`s in `struts.xml` file. 
 You can also define a default value if given System property or ENV variable is missing, see example below:
 
 ```xml
@@ -48,7 +51,7 @@ You can also define a default value if given System property or ENV variable is 
 </struts>
 ```
 
-Note: substitution is limited to System properties and ENV variables and works only for `constant`s (as for now).
+Note: substitution is limited to System properties and ENV variables and works only for `constant`s (as for now).
 
 ## Examples
 

@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Configuration Elements
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Configuration Elements

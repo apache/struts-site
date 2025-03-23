@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: PreResultListener
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # PreResultListener

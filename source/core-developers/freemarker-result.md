@@ -20,9 +20,9 @@ Also see [Freemarker Support](freemarker-support).
 
 - `location` (default) - the location of the template to process.
 - `parse`- true by default. If set to false, the location param will not be parsed for expressions.
-- `contentType` - defaults to `text/html` unless specified.
-- `writeIfCompleted` - `false` by default, write to stream only if there isn't any error processing the template. 
-  Setting `template_exception_handler=rethrow` in `freemarker.properties` will have the same effect.
+- `contentType` - defaults to `text/html` unless specified.
+- `writeIfCompleted` - `false` by default, write to stream only if there isn't any error processing the template. 
+  Setting `template_exception_handler=rethrow` in `freemarker.properties` will have the same effect.
 
 ## Examples
 

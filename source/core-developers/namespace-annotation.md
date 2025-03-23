@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Namespace Annotation
+parent:
+  title: Annotations
+  url: annotations
 ---
 
 # Namespace Annotation

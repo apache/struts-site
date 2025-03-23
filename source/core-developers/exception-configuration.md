@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Exception Configuration
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Exception Configuration

@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Bean Configuration
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Bean Configuration

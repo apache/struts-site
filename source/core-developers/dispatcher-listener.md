@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: DispatcherListener
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # DispatcherListener

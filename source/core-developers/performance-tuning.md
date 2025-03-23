@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Performance Tuning
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Performance Tuning

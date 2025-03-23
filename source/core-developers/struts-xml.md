@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: struts.xml
+parent:
+  title: Configuration Files
+  url: configuration-files
 ---
 
 # struts.xml

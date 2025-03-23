@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: AJAX
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # AJAX
@@ -30,12 +33,10 @@ return null;
 
 In Struts 2, we can do the same thing with a Stream result.
 
-
 > Using a Struts 2 plugin (e.g., _JSON plugin_ , jQuery plugin, etc.) is, in general, preferred to writing the response 
 directly from within an action. See sections following this for further details.
 
-
-**Struts 2 Stream result Action**
+## Struts 2 Stream result Action
 
 ```java
 package actions;
@@ -57,7 +58,7 @@ public class TextResult extends ActionSupport  {
 }
 ```
 
-**Struts 2 Configuring the TextResult Action**
+## Struts 2 Configuring the TextResult Action
 
 ```xml
 <action name="text-result" class="actions.TextResult">
@@ -93,13 +94,13 @@ While Struts works fine with Ajax out-of-the-box, for added value, several Ajax-
 
 ### Ajax Tag Plugins
 
-- **jQuery** - The [jQuery Plugin](https://github.com/struts-community-plugins/struts2-jquery) provides ajax 
+- **jQuery** - The [jQuery Plugin](https://github.com/struts-community-plugins/struts2-jquery) provides ajax 
   functionality and UI Widgets an JavaScript Grid based on the jQuery javascript framework.
 - **Ajax Parts** - The [AjaxParts Taglib (APT)](http://code.google.com/p/struts2ajaxpartstaglibplugin/) is a component 
   of the Java Web Parts (JWP) project ([http://javawebparts.sourceforge.net](http://javawebparts.sourceforge.net)) that 
   allows for 100% declarative (read: no Javascript coding required!) AJAX functionality within a Java-based webapp.
 - **Dojo** - The _Ajax Tags Dojo Plugin_  was represented as a theme for Struts 2.0. For Struts 2.1, the Dojo tags are 
-  bundled as a plugin until version 2.3.x. Since version 2.5 this plugin is not part of th Struts2 distribution anymore. 
+  bundled as a plugin until version 2.3.x. Since version 2.5 this plugin is not part of th Struts2 distribution anymore. 
 - **YUI** - The [Yahoo User Interface (YUI) Plugin](https://code.google.com/p/struts2yuiplugin/) has only a few tags 
   are available so far, but the YUI tags tend to be easier to use than the Dojo versions.
 

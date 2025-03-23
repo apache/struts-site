@@ -152,12 +152,12 @@ you need to add a bean node to the Spring configuration file for the ActionSuppo
 </beans>
 ```
 
-Note in the above that there is an `editAction` bean and its `editService` property is set to the `editService` bean. 
-Since we are having Spring manage the `EditAction` class we must specify any properties of `EditAction` that we want Spring 
-to inject. Please remember that actions must be created on each request, they cannot be `singletons`- this is the default 
-`scope` that's why it must be changed to `prototype`.
+Note in the above that there is an `editAction` bean and its `editService` property is set to the `editService` bean. 
+Since we are having Spring manage the `EditAction` class we must specify any properties of `EditAction` that we want Spring 
+to inject. Please remember that actions must be created on each request, they cannot be `singletons`- this is the default 
+`scope` that's why it must be changed to `prototype`.
 
-In the `struts.xml` configuration file you must specify the Spring id value for the class attribute of the action node. 
+In the `struts.xml` configuration file you must specify the Spring id value for the class attribute of the action node. 
 This tells Struts to get a bean with that id value from Spring for the Action class.
 
 **Struts Configuration For Spring Managed ActionSupport Class**

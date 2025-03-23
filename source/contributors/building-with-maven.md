@@ -27,7 +27,7 @@ The _install_ phase builds up the project ("package"), and installs any JARs it 
 ~/.m2/repository
 ```
 
-Once installed, the JARs can be used by any other Maven project you build.  The _install_ phase is the **default** phase 
+Once installed, the JARs can be used by any other Maven project you build.  The _install_ phase is the **default** phase 
 if none is specified.
 
 To run a basic install, change to the root of the source distribution, and enter

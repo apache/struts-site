@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Development Mode
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Development Mode (aka "devMode")
