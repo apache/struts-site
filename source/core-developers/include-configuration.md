@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Include Configuration
+parent:
+    title: Core Developers
+    url: index
 ---
 
 # Include Configuration
@@ -10,8 +13,8 @@ using the `<include .../>` element.
 
 ```xml
 <!DOCTYPE struts PUBLIC
-  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-  "http://struts.apache.org/dtds/struts-2.0.dtd">
+  "-//Apache Software Foundation//DTD Struts Configuration 6.0//EN"
+  "https://struts.apache.org/dtds/struts-6.0.dtd">
 <struts>
     <include file="Home.xml"/>
     <include file="Hello.xml"/>

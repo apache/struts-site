@@ -157,7 +157,7 @@ Typical usage for the _portletUrlType_  is if you have a _delete_  link that rem
 
 ### Security
 
-Basically the Struts2 Portlet Plugin doesn't support different auth level in the same portlet. If you want to achieve that you must create two separated portlets and configure access level with portlet engine for each of them.
+Basically the Struts2 Portlet Plugin doesn't support different auth level in the same portlet. If you want to achieve that you must create two separated portlets and configure access level with portlet engine for each of them.
 
 ### Other resources
 

@@ -1,13 +1,16 @@
 ---
-layout: core-developers
+layout: default
 title: Glassfish 2.x
+parent:
+  title: Application Servers
+  url: application-servers
 ---
 
 # Glassfish 2.x
 
-__Convention plugin support__
+## Convention plugin support
 
-To have proper support of the _Convention Plugin_  in Glassfish 2\.x when packed as EAR archive add the following constant to `struts.xml`
+To have proper support of the _Convention Plugin_  in Glassfish 2\.x when packed as EAR archive add the following constant to `struts.xml`
 
 
 ```xml
@@ -15,4 +18,4 @@ To have proper support of the _Convention Plugin_  in Glassfish 2\.x when pack
 
 ```
 
-Thanks to [pavpal](http://stackoverflow.com/a/22490925/1805267)!
+Thanks to [pavpal](http://stackoverflow.com/a/22490925/1805267)!

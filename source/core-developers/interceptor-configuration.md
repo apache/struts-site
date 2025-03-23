@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Interceptor Configuration
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Interceptor Configuration

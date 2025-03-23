@@ -117,8 +117,8 @@ a user's action (clicking on a hyperlink that sends a specific URL to the Servle
 
 In this example, the execute method creates an object of class `MessageStore` and then returns the String constant `SUCCESS`.
 
-Note also the public getter method for the private `MessageStore` object. Since we want to make the `MessageStore` object 
-available to the view page, `HelloWorld.jsp`, we need to follow the [JavaBean-style](http://en.wikipedia.org/wiki/JavaBean#JavaBean_conventions) 
+Note also the public getter method for the private `MessageStore` object. Since we want to make the `MessageStore` object 
+available to the view page, `HelloWorld.jsp`, we need to follow the [JavaBean-style](http://en.wikipedia.org/wiki/JavaBean#JavaBean_conventions) 
 of providing getter and setter methods where needed.
 
 ### Step 3 - Create The View HelloWorld.jsp
@@ -146,16 +146,16 @@ the `src/main/webapp` folder.
 The taglib directive tells the Servlet container that this page will be using the Struts 2 tags and that these tags will 
 be preceded by an `s`.
 
-The `<s:property>` tag displays the value returned by calling the method `getMessageStore` of the `HelloWorldAction` 
-controller class. That method returns a `MessageStore` object. By adding the `.message` onto the messageStore part of 
-the value attribute we are telling the Struts 2 framework to call the `getMessage` method of that `MessageStore` object. 
-The `getMessage` method of class `MessageStore` returns a String. It is that String that will be displayed by the `<s:property>` tag.
+The `<s:property>` tag displays the value returned by calling the method `getMessageStore` of the `HelloWorldAction` 
+controller class. That method returns a `MessageStore` object. By adding the `.message` onto the messageStore part of 
+the value attribute we are telling the Struts 2 framework to call the `getMessage` method of that `MessageStore` object. 
+The `getMessage` method of class `MessageStore` returns a String. It is that String that will be displayed by the `<s:property>` tag.
 
 We'll learn more about tags in the next tutorial. See the _Struts Tags_  for more information about tags.
 
 ### Step 4 - Add The Struts Configuration In struts.xml
 
-We need a mapping to tie the URL, the `HelloWorldAction` class (controller), and the `HelloWorld.jsp` (the view) together. 
+We need a mapping to tie the URL, the `HelloWorldAction` class (controller), and the `HelloWorld.jsp` (the view) together. 
 The mapping tells the Struts 2 framework which class will respond to the user's action (the URL), which method of that 
 class will be executed, and what view to render based on the String result that method returns.
 

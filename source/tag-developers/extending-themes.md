@@ -80,6 +80,6 @@ from parent theme (defined in `theme.properties`) and so on.
 
 Please also notice that the `ThemeManager` builds list of possible templates based on current theme and inherited 
 themes (`/template/custom/textarea.ftl`, `/template/xhtml/textarea.ftl`, `/template/simple/textarea.ftl`). This is also 
-true for templates which are loaded via `${parameters.expandTheme}`.
+true for templates which are loaded via `${parameters.expandTheme}`.
 
-> See also example [Struts 2 Themes]() or [Creating a Theme in Struts 2](http://www.vitarara.org/cms/struts_2_cookbook/creating_a_theme) (Mark Menard)
+> See also example [Struts 2 Themes]() or [Creating a Theme in Struts 2](http://www.vitarara.org/cms/struts_2_cookbook/creating_a_theme) (Mark Menard)

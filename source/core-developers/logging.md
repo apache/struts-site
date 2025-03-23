@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Logging
+parent:
+    title: Core Developers
+    url: index
 ---
 
 # Logging
@@ -9,6 +12,8 @@ title: Logging
 
 > As from Struts 2.5 version, the logging layer is deprecated and Struts uses Log4j2
 > The logging layer will be dropped with the next major release.
+
+> Note: support for a custom logging layer has been removed in Struts 6.x
 
 XWork provides its own layer to support logging - it allows to use many different implementations.
 

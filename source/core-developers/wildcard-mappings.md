@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Wildcard Mappings
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Wildcard Mappings

@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Namespace Configuration
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Namespace Configuration

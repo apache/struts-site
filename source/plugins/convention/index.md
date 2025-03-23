@@ -77,7 +77,7 @@ the Convention plugin handles this for you. Here is our hello world JSP:
 ```
 
 If you start Tomcat (or whichever J2EE container you are using) and type in 
-[http://localhost:8080/hello-world](http://localhost:8080/hello-world) (assuming that your context path is `/`, 
+[http://localhost:8080/hello-world](http://localhost:8080/hello-world) (assuming that your context path is `/`, 
 ie. starting application from Eclipse) into your browser you should get this result:
 
 **WEB-INF/content/hello-world.jsp**
@@ -734,7 +734,7 @@ When using this plugin with JBoss, you need to set the following constants:
 <constant name="struts.convention.action.fileProtocols" value="jar,vfsfile,vfszip" />
 ```
 
-You can also check the _JBoss 5_  page for more details.
+You can also check the _JBoss 5_  page for more details.
 
 ## Jetty (embedded)
 
@@ -846,8 +846,8 @@ Add a **constant** element to your struts config file to change the value of a c
 |Name|Default Value|Description|
 |----|-------------|-----------|
 |struts.convention.action.alwaysMapExecute|true|Set to false, to prevent Convention from creating a default mapping to "execute" when there are other methods annotated as actions in the class|
-|struts.convention.action.includeJars| |Comma separated list of regular expressions of jar URLs to be scanned. eg. ".**myJar-0\\.2.**, .**thirdparty-0\\.1.**"|
-|struts.convention.action.packages| |An optional list of action packages that this should create configuration for (they don't need to match a locator pattern)|
+|struts.convention.action.includeJars| |Comma separated list of regular expressions of jar URLs to be scanned. eg. ".**myJar-0\\.2.**, .**thirdparty-0\\.1.**"|
+|struts.convention.action.packages| |An optional list of action packages that this should create configuration for (they don't need to match a locator pattern)|
 |struts.convention.result.path|/WEB-INF/content/|Directory where templates are located|
 |struts.convention.result.flatLayout|true|If set to false, the result can be put in its own directory: resultsRoot/namespace/actionName/result.extension|
 |struts.convention.action.suffix|Action|Suffix used to find actions based on class names|
@@ -860,7 +860,7 @@ Add a **constant** element to your struts config file to change the value of a c
 |struts.convention.package.locators|action,actions,struts,struts2|Packages whose name end with one of these strings will be scanned for actions|
 |struts.convention.package.locators.disable|false|Disable the scanning of packages based on package locators|
 |struts.convention.exclude.packages|`org.apache.struts.\*`, `org.apache.struts2.\*`, `org.springframework.web.struts.\*`, `org.springframework.web.struts2.\*`, `org.hibernate.\*`|Packages excluded from the action scanning, packages already excluded cannot be included in other way, eg. org.demo.actions.exclude is specified as a part of the struts.convention.exclude.packages so all packages below are also excluded, eg. org.demo.actions.exclude.include even if **include** is specified as a struts.convention.package.locators or struts.convention.action.packages|
-|struts.convention.package.locators.basePackage| |If set, only packages that start with its value will be scanned for actions|
+|struts.convention.package.locators.basePackage| |If set, only packages that start with its value will be scanned for actions|
 |struts.convention.relative.result.types|dispatcher,velocity,freemarker|The list of result types that can have locations that are relative and the result location (which is the resultPath plus the namespace) prepended to them|
 |struts.convention.redirect.to.slash|true|A boolean parameter that controls whether or not this will handle unknown actions in the same manner as Apache, Tomcat and other web servers. This handling will send back a redirect for URLs such as /foo to /foo/ if there doesn't exist an action that responds to /foo|
 |struts.convention.classLoader.excludeParent|true|Exclude URLs found by the parent class loader from the list of URLs scanned to find actions (needs to be set to false for JBoss 5)|

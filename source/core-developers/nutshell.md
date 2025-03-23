@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Nutshell
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Nutshell

@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Result Types
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Result Types

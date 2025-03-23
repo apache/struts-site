@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Result Configuration
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Result Configuration
@@ -178,7 +181,7 @@ If a `FragmentAction` method returns `next` the actual _value_ of that result wi
 `nextAction` property. So `nextAction` may be computed based on whatever state information necessary then passed 
 at runtime to `next`'s `redirectAction`.
 
-See [Parameters in configuration results](../faq/parameters-in-configuration-results) for an expanded discussion. 
+See [Parameters in configuration results](../faq/parameters-in-configuration-results) for an expanded discussion. 
 
 ## Returning Result Objects
 

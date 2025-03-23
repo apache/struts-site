@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: velocity.properties
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # velocity.properties

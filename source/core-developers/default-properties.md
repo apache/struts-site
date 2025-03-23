@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: default.properties
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # default.properties

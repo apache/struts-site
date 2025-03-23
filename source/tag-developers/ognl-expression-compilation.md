@@ -13,12 +13,12 @@ parent:
 {:toc}
 
 This document is meant as a development/integration guide for anyone wanting to use the new OGNL 2.7 features for doing 
-byte code runtime enhancements on OGNL statements.  This is _not_  meant for general user reference as it covers what 
+byte code runtime enhancements on OGNL statements.  This is _not_  meant for general user reference as it covers what 
 are mostly internal API development concerns.
 
-## Basic Usage
+## Basic Usage
 
-By default there isn't much you have to do to use the new compilation abilities in OGNL.  Following is an example of compiling 
+By default there isn't much you have to do to use the new compilation abilities in OGNL.  Following is an example of compiling 
 a simple property expression and invoking it.
 
 ```java
@@ -35,7 +35,7 @@ values from the compiled versions of the code.  Although the old `Ognl.getValue(
 values will correctly detect a compiled expression and use the accessor directly as well,  it's not going to be as fast 
 as you doing it directly.
 
-## ognl.enhance.OgnlExpressionCompiler
+## ognl.enhance.OgnlExpressionCompiler
 
 The core class involved in doing the management of these expression compilations by default is `ognl.enhance.ExpressionCompiler`, 
 which implements `ognl.enhance.OgnlExpressionCompiler`. Although you can in theory use this default implementation it 
@@ -305,7 +305,7 @@ public void get(OgnlContext context, Object root) {
 These are the more delicate parts of the compiler API that the majority of people will need to worry about during any 
 integration efforts.
 
-## Known Issues / Limitations
+## Known Issues / Limitations
 
 ## Compiler Errors
 

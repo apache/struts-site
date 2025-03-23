@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Writing Interceptors
+parent:
+  title: Interceptors
+  url: interceptors
 ---
 
 # Writing Interceptors

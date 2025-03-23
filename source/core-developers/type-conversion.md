@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Type Conversion
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Type Conversion

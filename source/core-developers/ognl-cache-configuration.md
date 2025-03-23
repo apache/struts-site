@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: OGNL Cache Configuration
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # OGNL Cache Configuration

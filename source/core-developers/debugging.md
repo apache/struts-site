@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Debugging
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Debugging

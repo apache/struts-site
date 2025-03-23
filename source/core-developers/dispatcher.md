@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Dispatcher
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Dispatcher
@@ -10,10 +13,10 @@ by [filters](web-xml) / servlet / listener / portlet to set up and run Struts en
 
 ## Error handling
 
-When exception occurs (misconfiguration or some internal error), Dispatcher will pass handling to `DispatcherErrorHandler`
-which by default uses `HttpServletResponse#sendError` to report error back to client. It will be 404 or 500 by default 
+When exception occurs (misconfiguration or some internal error), Dispatcher will pass handling to `DispatcherErrorHandler`
+which by default uses `HttpServletResponse#sendError` to report error back to client. It will be 404 or 500 by default 
 (depends on exception type).
 
-If you need a different type of handling you can implement your own `DispatcherErrorHandler` and register it with 
-Dispatcher using extension point `struts.dispatcher.errorHandler`, see [Plugins](../plugins-developer-guide/) for how 
+If you need a different type of handling you can implement your own `DispatcherErrorHandler` and register it with 
+Dispatcher using extension point `struts.dispatcher.errorHandler`, see [Plugins](../plugins-developer-guide/) for how 
 to register your own implementation of internal mechanism.

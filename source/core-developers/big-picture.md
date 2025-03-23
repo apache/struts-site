@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Big Picture
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Big Picture

@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Static Content
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Static Content

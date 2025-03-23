@@ -87,8 +87,8 @@ names (eg. createUser) or underscores (eg. my_action).
 __Allowed action names__
 
 `DefaultActionMapper` is using pre-defined RegEx to check if action name matches allowed names. The default RegEx is 
-defined as follow: `[a-zA-Z0-9._!/-]*` - if at some point this doesn't match your action naming schema you can define 
-your own RegEx and override the default using constant named `struts.allowed.action.names`, e.g.:
+defined as follow: `[a-zA-Z0-9._!/-]*` - if at some point this doesn't match your action naming schema you can define 
+your own RegEx and override the default using constant named `struts.allowed.action.names`, e.g.:
 
 ```xml
 <struts>
@@ -247,9 +247,9 @@ the specific actions that have `<allowed-methods>`.
 
 ### Strict Method Invocation
 
-In Struts 2.5 the Strict DMI was extended and it's called **Strict Method Invocation** aka SMI. You can imagine that 
+In Struts 2.5 the Strict DMI was extended and it's called **Strict Method Invocation** aka SMI. You can imagine that 
 the DMI is a "border police", where SMI is a "tax police" and keeps eye on internals. With this version, SMI is enabled 
-by default (`strict-method-invocation` attribute is set to `true` by default in `struts-default` package), you have 
+by default (`strict-method-invocation` attribute is set to `true` by default in `struts-default` package), you have 
 option to disable it per package - there is no global switch to disable SMI for the whole application. To gain advantage 
 of the new configuration option please use the latest DTD definition:
 
@@ -267,13 +267,13 @@ of the new configuration option please use the latest DTD definition:
 
 SMI works in the following way:
 
-- `<allowed-methods>` / `@AllowedMethods` is defined per action - SMI works without switching it on but just for those 
+- `<allowed-methods>` / `@AllowedMethods` is defined per action - SMI works without switching it on but just for those 
   actions (plus adding `<global-allowed-methods/>`)
-- SMI is enabled but no `<allowed-methods>` / `@AllowedMethods` are defined - SMI works but only with 
+- SMI is enabled but no `<allowed-methods>` / `@AllowedMethods` are defined - SMI works but only with 
   `<global-allowed-methods/>`
-- SMI is disabled - call to any action method is allowed that matches the default RegEx - `([A-Za-z0-9_$]*)`
+- SMI is disabled - call to any action method is allowed that matches the default RegEx - `([A-Za-z0-9_$]*)`
 
-You can redefine the default RegEx by using a constant as follow 
+You can redefine the default RegEx by using a constant as follow 
 
 ```xml
 <constant name="struts.strictMethodInvocation.methodRegex" value="([a-zA-Z]*)"/>
@@ -286,7 +286,7 @@ When using wildcard mapping in actions' definitions SMI works in two ways:
 - SMI is enabled - no wildcard substitution will happen, you must strictly define which methods can be accessed 
   by annotations or `<allowed-method/>` tag.
 
-You can configure SMI per `<action/>` using `<allowed-methods/>` tag or via `@AllowedMethod` annotation plus using per 
+You can configure SMI per `<action/>` using `<allowed-methods/>` tag or via `@AllowedMethod` annotation plus using per 
 `<package/>` `<global-allowed-methods/>`, see the examples below:
 
 **SMI via struts.xml**
@@ -296,11 +296,11 @@ You can configure SMI per `<action/>` using `<allowed-methods/>` tag or via `@
   ...
   <global-allowed-methods>execute,input,back,cancel,browse</global-allowed-methods>
   ...
- 
+ 
   <action name="Bar">
     <allowed-methods>foo,bar</allowed-methods>
   </action>
- 
+ 
   ...
 </package>
 ```
@@ -327,7 +327,7 @@ Allowed methods can be defined as:
 
 - literals ie. in xml: `execute,cancel` or in annotation: `{"execute", "cancel"}`
 - patterns when using with wildcard mapping, i.e `<action ... method="do{2}"/>`
-- RegExs using `regex:` prefix, ie: `<global-allowed-methods>execute,input,cancel,regex:user([A-Z]*)</global-allowed-methods>`
+- RegExs using `regex:` prefix, ie: `<global-allowed-methods>execute,input,cancel,regex:user([A-Z]*)</global-allowed-methods>`
 
 Please be aware when using your own `ConfigurationProvider` that the logic to set allowed methods is defined in built-in 
 providers - `XmlConfigurationProvider` and `PackageBasedActionConfigBuilder` - and you must replicate such logic in your 

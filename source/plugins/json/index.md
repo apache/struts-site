@@ -542,16 +542,16 @@ Example with XML Configuration:
 
 ### Accepting JSON
 
-Your actions can accept incoming JSON if they are in package which uses `json` interceptor or by adding reference 
+Your actions can accept incoming JSON if they are in package which uses `json` interceptor or by adding reference 
 to it as follow:
 
 ```jaba
 @InterceptorRef(value="json")
 ```
 
-By default `Content-Type` of value `application/json` is recognised to be used for de-serialisation 
-and `application/json-rpc` to execute SMD processing. You can override those settings be defining `jsonContentType`
-and `jsonRpcContentType` params, see example:
+By default `Content-Type` of value `application/json` is recognised to be used for de-serialisation 
+and `application/json-rpc` to execute SMD processing. You can override those settings be defining `jsonContentType`
+and `jsonRpcContentType` params, see example:
 
 ```xml
 <interceptor-ref name="json">

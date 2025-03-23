@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Freemarker Support
+parent:
+  title: Freemarker Result
+  url: freemarker-result
 ---
 
 # Freemarker Support

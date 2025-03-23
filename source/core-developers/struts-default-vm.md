@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: struts-default.vm
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # struts-default.vm

@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Localization
+parent:
+    title: Core Developers
+    url: index
 ---
 
 # Localization

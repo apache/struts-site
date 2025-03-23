@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Formatting Dates and Numbers
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Formatting Dates and Numbers

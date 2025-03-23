@@ -1,6 +1,9 @@
 ---
-layout: core-developers
+layout: default
 title: Unknown Handlers
+parent:
+  title: Core Developers
+  url: index
 ---
 
 # Unknown Handlers
