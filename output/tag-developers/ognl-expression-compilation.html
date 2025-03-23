@@ -154,23 +154,26 @@
     <h1 class="no_toc" id="ognl-expression-compilation">OGNL Expression Compilation</h1>
 
 <ul id="markdown-toc">
+  <li><a href="#basic-usage" id="markdown-toc-basic-usage">Basic Usage</a></li>
+  <li><a href="#ognlenhanceognlexpressioncompiler" id="markdown-toc-ognlenhanceognlexpressioncompiler">ognl.enhance.OgnlExpressionCompiler</a></li>
   <li><a href="#tapestry-ognl-integration" id="markdown-toc-tapestry-ognl-integration">Tapestry OGNL Integration</a></li>
   <li><a href="#expressionevaluator" id="markdown-toc-expressionevaluator">ExpressionEvaluator</a></li>
   <li><a href="#hivemindexpressioncompiler" id="markdown-toc-hivemindexpressioncompiler">HiveMindExpressionCompiler</a></li>
   <li><a href="#expressionbinding" id="markdown-toc-expressionbinding">ExpressionBinding</a></li>
   <li><a href="#beanproviderpropertyaccessor--custom-propertyaccessor-implementations" id="markdown-toc-beanproviderpropertyaccessor--custom-propertyaccessor-implementations">BeanProviderPropertyAccessor / Custom PropertyAccessor implementations</a></li>
+  <li><a href="#known-issues--limitations" id="markdown-toc-known-issues--limitations">Known Issues / Limitations</a></li>
   <li><a href="#compiler-errors" id="markdown-toc-compiler-errors">Compiler Errors</a></li>
   <li><a href="#compile-vs-normal-expression-evaluation" id="markdown-toc-compile-vs-normal-expression-evaluation">Compile vs. normal expression evaluation</a></li>
   <li><a href="#snapshot-repository" id="markdown-toc-snapshot-repository">Snapshot Repository</a></li>
 </ul>
 
 <p>This document is meant as a development/integration guide for anyone wanting to use the new OGNL 2.7 features for doing 
-byte code runtime enhancements on OGNL statements.  This is <em>not</em>  meant for general user reference as it covers what 
+byte code runtime enhancements on OGNL statements.  This is <em>not</em>  meant for general user reference as it covers what 
 are mostly internal API development concerns.</p>
 
-<p>## Basic Usage</p>
+<h2 id="basic-usage">Basic Usage</h2>
 
-<p>By default there isn’t much you have to do to use the new compilation abilities in OGNL.  Following is an example of compiling 
+<p>By default there isn’t much you have to do to use the new compilation abilities in OGNL.  Following is an example of compiling 
 a simple property expression and invoking it.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">SimpleObject</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleObject</span><span class="o">();</span>
@@ -186,7 +189,7 @@ values from the compiled versions of the code.  Although the old <code class="la
 values will correctly detect a compiled expression and use the accessor directly as well,  it’s not going to be as fast 
 as you doing it directly.</p>
 
-<p>## ognl.enhance.OgnlExpressionCompiler</p>
+<h2 id="ognlenhanceognlexpressioncompiler">ognl.enhance.OgnlExpressionCompiler</h2>
 
 <p>The core class involved in doing the management of these expression compilations by default is <code class="language-plaintext highlighter-rouge">ognl.enhance.ExpressionCompiler</code>, 
 which implements <code class="language-plaintext highlighter-rouge">ognl.enhance.OgnlExpressionCompiler</code>. Although you can in theory use this default implementation it 
@@ -445,7 +448,7 @@ should really look like:</p>
 <p>These are the more delicate parts of the compiler API that the majority of people will need to worry about during any 
 integration efforts.</p>
 
-<p>## Known Issues / Limitations</p>
+<h2 id="known-issues--limitations">Known Issues / Limitations</h2>
 
 <h2 id="compiler-errors">Compiler Errors</h2>
 

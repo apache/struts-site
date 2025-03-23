@@ -13,7 +13,7 @@
   <link href="/css/font-awesome.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
   <link href="/css/custom.css" rel="stylesheet">
-  <link href="/highlighter/github-theme.css" rel="stylesheet">
+  <link href="/css/syntax.css" rel="stylesheet">
 
   <script src="/js/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
@@ -147,38 +147,35 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/sunone-7-0.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="application-servers" title="back to Application Servers"><< back to Application Servers</a>
+    
     <h1 id="sunone-70">SunOne 7.0</h1>
 
-<p>To use SunOne wkith the framework, you will need to grant the appropriate permissions. You can simply grant all permissions, or just the specific permissions the framework needs.</p>
+<p>To use SunOne with the framework, you will need to grant the appropriate permissions. You can simply grant 
+all permissions, or just the specific permissions the framework needs.</p>
 
 <h2 id="granting-all-permissions">Granting All Permissions</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-grant {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grant {
 	permission java.security.AllPermission;
 };
-
 </code></pre></div></div>
 
 <h2 id="granting-specific-permissions">Granting Specific Permissions</h2>
 
 <ul>
   <li>Grant Write Permissions to <code class="language-plaintext highlighter-rouge">java.util.PropertyPermission</code></li>
-  <li>
-    <p>Add <code class="language-plaintext highlighter-rouge">java.lang.reflect.ReflectPermission</code> “suppressAccessChecks”</p>
-  </li>
+  <li>Add <code class="language-plaintext highlighter-rouge">java.lang.reflect.ReflectPermission</code> “suppressAccessChecks”</li>
   <li>Grant all permissions to <code class="language-plaintext highlighter-rouge">OgnlInvokePermission</code></li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-grant {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grant {
 	permission java.util.PropertyPermission "*", "read, write";
 	permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
 	permission ognl.OgnlInvokePermission "*";
 };
-
 </code></pre></div></div>
 
   </section>

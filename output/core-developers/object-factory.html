@@ -13,7 +13,7 @@
   <link href="/css/font-awesome.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
   <link href="/css/custom.css" rel="stylesheet">
-  <link href="/highlighter/github-theme.css" rel="stylesheet">
+  <link href="/css/syntax.css" rel="stylesheet">
 
   <script src="/js/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
@@ -147,68 +147,50 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/object-factory.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="index" title="back to Core Developers"><< back to Core Developers</a>
+    
     <h1 id="objectfactory">ObjectFactory</h1>
 
-<p>All objects created by the framework are instantiated by the ObjectFactory. The ObjectFactory provides the means of integrating the framework with IoC containers like Spring, Pico, Plexus, and so forth.</p>
+<p>All objects created by the framework are instantiated by the ObjectFactory. The ObjectFactory provides 
+the means of integrating the framework with IoC containers like Spring, Pico, Plexus, and so forth.</p>
 
 <h2 id="customize">Customize</h2>
 
 <h3 id="extend-objectfactory">Extend ObjectFactory</h3>
 
-<p>Customized ObjectFactory must extend ObjectFactory or any of its descendants and have a default, no-argument constructor.</p>
+<p>Customized ObjectFactory must extend ObjectFactory or any of its descendants and have a default, no-argument constructor.
+To register a customized ObjectFactory, add or edit an entry in <code class="language-plaintext highlighter-rouge">struts.properties</code></p>
 
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>To register a customized ObjectFactory, add or edit an entry in <code class="language-plaintext highlighter-rouge">struts.properties</code></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> struts.objectFactory=foo.bar.MyCustomObjectFactory
-
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struts.objectFactory=foo.bar.MyCustomObjectFactory
 </code></pre></div></div>
 
-<p>where foo.bar.MyCustomObjectFactory is the custom object factory.</p>
+<p>where <code class="language-plaintext highlighter-rouge">foo.bar.MyCustomObjectFactory</code> is the custom object factory.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyObjectFactory</span> <span class="kd">extends</span> <span class="nc">ObjectFactory</span> <span class="o">{</span>
     <span class="o">.....</span>
 <span class="o">}</span>
-
 </code></pre></div></div>
 
 <h3 id="define-dedicated-factory">Define dedicated factory</h3>
 
-<p>If you want to just extend one part of ObjectFactory, ie. to change how <a href="result-types">Result Types</a> are build, you can implement <code class="language-plaintext highlighter-rouge">ResultFactory</code> interface and register it with dedicated name, see <em>Extension Points</em>  for more details. Original ObjectFactory will use these dedicated factories to do the work. It’s already done this way - the original functionality of ObjectFactory was extracted to separated classes which implements the interfaces below. Check the source of ObjectFactory to see more details. All these factories are available as from version 2.3.16.</p>
+<p>If you want to just extend one part of ObjectFactory, ie. to change how <a href="result-types">Result Types</a> are build, 
+you can implement <code class="language-plaintext highlighter-rouge">ResultFactory</code> interface and register it with dedicated name, see <em>Extension Points</em> for more details.
+Original ObjectFactory will use these dedicated factories to do the work. It’s already done this way - the original 
+functionality of ObjectFactory was extracted to separated classes which implements the interfaces below. 
+Check the source of ObjectFactory to see more details. All these factories are available as from version 2.3.16.</p>
 
 <p>List of Factory interfaces:</p>
 
 <ul>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">ResultFactory</code> - dedicated interfaces used by  to create <a href="result-types">Result Types</a></p>
-
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">StrutsResultFactory</code> it’s internal implementation which checks if Result implements <code class="language-plaintext highlighter-rouge">ParamNameAwareResult</code> interface to restrict names of parameters set on the instance of Result, see <a href="result-types">Result Types</a> for more info.</li>
-    </ul>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">ActionFactory</code> - dedicated interface used by  to actions</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">InterceptorFactory</code> - dedicated interface used by  to create interceptors</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">ValidatorFactory</code> - dedicated interface used by  to create validators</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">ConverterFactory</code> - dedicated interface used by  to create instances of <em>TypeConverter</em></p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">UnknownHandlerFactory</code> - dedicated interfaces used by  to create instances of <a href="unknown-handlers">Unknown Handlers</a> (as from version 2.3.18)</p>
-  </li>
+  <li><code class="language-plaintext highlighter-rouge">ResultFactory</code> - dedicated interfaces used by  to create <a href="result-types">Result Types</a></li>
+  <li><code class="language-plaintext highlighter-rouge">StrutsResultFactory</code> it’s internal implementation which checks if Result implements <code class="language-plaintext highlighter-rouge">ParamNameAwareResult</code> interface to restrict names of parameters set on the instance of Result, see <a href="result-types">Result Types</a> for more info.</li>
+  <li><code class="language-plaintext highlighter-rouge">ActionFactory</code> - dedicated interface used by  to actions</li>
+  <li><code class="language-plaintext highlighter-rouge">InterceptorFactory</code> - dedicated interface used by  to create interceptors</li>
+  <li><code class="language-plaintext highlighter-rouge">ValidatorFactory</code> - dedicated interface used by  to create validators</li>
+  <li><code class="language-plaintext highlighter-rouge">ConverterFactory</code> - dedicated interface used by  to create instances of <em>TypeConverter</em></li>
+  <li><code class="language-plaintext highlighter-rouge">UnknownHandlerFactory</code> - dedicated interfaces used by  to create instances of <a href="unknown-handlers">Unknown Handlers</a> (as from version 2.3.18)</li>
 </ul>
 
   </section>
