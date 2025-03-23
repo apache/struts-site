@@ -12,30 +12,32 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 ## Description
 
-Renders an custom UI widget using the specified templates. Additional objects can be passed in to the template
+Renders a custom UI widget using the specified templates. Additional objects can be passed in to the template
 using the [param](param-tag) tags.
+
+> Note: in Struts versions older than 7.x please use `$parameters`, in Struts 7.x+ please user `$attributes`
 
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/component-description.html %}
 
 ### Freemarker:
 
-Objects provided can be retrieve from within the template via `$parameters._paramname_`.
+Objects provided can be retrieved from within the template via `$attributes._paramname_`.
 
 ### JSP:
 
-Objects provided can be retrieve from within the template via `<s:property value="%{parameters._paramname_}" />`
+Objects provided can be retrieved from within the template via `<s:property value="%{attributes._paramname_}" />`
 
 In the bottom JSP and Velocity samples, two parameters are being passed in to the component. From within the
 component, they can be accessed as:
 
 ### Freemarker:
  
-`$parameters.get('key1')` and `$parameters.get('key2')` or `$parameters.key1` and `$parameters.key2`
+`$attributes.get('key1')` and `$attributes.get('key2')` or `$attributes.key1` and `$attributes.key2`
 
 ### JSP:
 
-`<s:property value="%{parameters.key1}" />` and `<s:property value="%{'parameters.key2'}" />` or
-`<s:property value="%{parameters.get('key1')}" />` and `<s:property value="%{parameters.get('key2')}" />`
+`<s:property value="%{$attributes.key1}" />` and `<s:property value="%{'$attributes.key2'}" />` or
+`<s:property value="%{$attributes.get('key1')}" />` and `<s:property value="%{$attributes.get('key2')}" />`
 
 Currently, your custom UI components can be written in Velocity, JSP, or Freemarker, and the correct rendering
 engine will be found based on file extension.
@@ -47,13 +49,13 @@ otherwise, the value stack will search for an Object on the stack with a method 
 If JSP is used as the template, the JSP template itself must lie within the webapp itself and not the classpath. 
 Unlike Freemarker or Velocity, JSP template could not be picked up from the classpath.
 
-**(!) templateDir and theme attribute**
+### `templateDir` and theme attribute
 
-> The final path to the template will be built using the _templateDir_  and _template_  attributes, like 
-> \${templateDir}/\${theme}/\${template}. If for example your component is under _/components/html/option.jsp_, 
-> you would have to set templateDir="components", theme="html" and template="options.jsp". 
+> The final path to the template will be built using the `templateDir` and `template`attributes, like 
+> `${templateDir}/${theme}/${template}`. If for example your component is under `/components/html/option.jsp`, 
+> you would have to set `templateDir="components"`, `theme="html"` and `template="options.jsp"`. 
 
-> For any Struts tag that you use in your component, make sure that you set its templateDir="template"
+> For any Struts tag that you use in your component, make sure that you set its `templateDir="template"`
 
 ## Attributes
 
@@ -94,7 +96,7 @@ or
 ### Freemarker
 
 ```
-<@s..component template="/my/custom/component.ftl" />
+<@s.component template="/my/custom/component.ftl" />
 ```
 
 or
