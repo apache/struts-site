@@ -15,11 +15,11 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 A tag that takes an iterator and outputs a subset of it. It delegates to `org.apache.struts2.util.SubsetIteratorFilter`
 internally to perform the subset functionality.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/subset-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/subset-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/subset-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/subset-attributes.html %}
 
 ## Examples
 

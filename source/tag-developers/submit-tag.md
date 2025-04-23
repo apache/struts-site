@@ -27,8 +27,8 @@ shown on the button face, but has issues with Microsoft Internet Explorer at lea
 > [security vulnerability](http://www.brucephillips.name/blog/index.cfm/2011/2/19/Struts-2-Security-Vulnerability--Dynamic-Method-Invocation)^[http://www.brucephillips.name/blog/index.cfm/2011/2/19/Struts-2-Security-Vulnerability--Dynamic-Method-Invocation] 
 > - use with care! Instead you can try to use Multiple Submit Buttons] solution.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/submit-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/submit-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/submit-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/submit-attributes.html %}

@@ -18,11 +18,11 @@ to be null and not used.
 
 Creates a series of checkboxes from a list. Setup is like `<s:select />` or `<s:radio />`, but creates checkbox tags.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/checkboxlist-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/checkboxlist-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/checkboxlist-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/checkboxlist-attributes.html %}
 
 ## Examples
 

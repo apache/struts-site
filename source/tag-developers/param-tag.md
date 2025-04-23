@@ -33,11 +33,11 @@ This tag has the following two parameters.
 > (B) the value would be evaluated to the stack as a `java.lang.Object` object. 
 > For more information see [WW-808](https://issues.apache.org/jira/browse/WW-808).
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/param-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/param-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/param-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/param-attributes.html %}
 
 ## Examples
 

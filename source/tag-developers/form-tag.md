@@ -12,7 +12,7 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 ## Description
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/form-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/form-description.html %}
 
 The remote form allows the form to be submitted without the page being refreshed. The results from the form can be 
 inserted into any HTML element on the page.
@@ -27,7 +27,7 @@ inserted into any HTML element on the page.
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/form-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/form-attributes.html %}
 
 ## Examples
 

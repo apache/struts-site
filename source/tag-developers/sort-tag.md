@@ -16,11 +16,11 @@ A Tag that sorts a List using a Comparator both passed in as the tag attribute. 
 the sorted list will be placed into the `PageContext` attribute using the key specified by `var`. The sorted list will 
 **ALWAYS** be pushed into the stack and poped at the end of this tag.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/sort-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/sort-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/sort-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/sort-attributes.html %}
 
 ## Examples
 

@@ -30,11 +30,11 @@ The scopes available are as follows:
 > **NOTE**: If no scope is specified, it will default to `action` scope.  For the `set` tag **specifically**, this also
 > places (sets) the generated value into the `page` scope as well (retrieve via #attr).
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/set-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/set-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/set-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/set-attributes.html %}
 
 ## Examples
 

@@ -24,11 +24,11 @@ If no value is found on the stack, the key of the message will be written out.
 
 For more details on using resource bundles with Struts 2 read the [localization guide](../core-developers/localization).
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/text-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/text-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/text-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/text-attributes.html %}
 
 > **NOTE**: When the `var` attribute is used with the `text` tag, the tag's generated value **will not** be written out to the
 > visible page (it will only be placed into the action scope).

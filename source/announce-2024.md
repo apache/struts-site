@@ -67,7 +67,7 @@ A lot of classes have been marked as deprecated because of relocation of them in
 package `com.opensymphony.xwork2`  will be moved into `org.apache.struts2` in Struts 7 and this deprecation can help you 
 adapt to incoming changes. Please be aware that we are dropping support for DWR and Sitemesh plugins. 
 In the case of DWR there is no more active development nor support for JakartaEE. 
-Sitemesh can be integrated directly with the framework, please check [sitemesh3](https://github.com/apache/struts-examples/tree/master/sitemesh3) example.
+Sitemesh can be integrated directly with the framework, please check [sitemesh3](https://github.com/apache/struts-examples/tree/main/sitemesh3) example.
 
 > Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+6.7.0) to find more details about performed
 > bug fixes and improvements.

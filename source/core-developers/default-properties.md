@@ -19,5 +19,5 @@ The list of properties can be found in `default.properties` (inside `struts2-cor
 **default.properties**
 
 {% highlight txt %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/org/apache/struts2/default.properties %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/org/apache/struts2/default.properties %}
 {% endhighlight %}

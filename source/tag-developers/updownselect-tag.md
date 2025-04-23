@@ -17,11 +17,11 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 Create a Select component with buttons to move the elements in the select component up and down. When the containing
 form is submitted, its elements will be submitted in the order they are arranged (top to bottom).
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/updownselect-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/updownselect-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/updownselect-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/updownselect-attributes.html %}
 
 ## Examples
 

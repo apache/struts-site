@@ -17,11 +17,11 @@ of [param](param-tag) elements to set any mutator methods on that class.
 
 If the var attribute is set on the BeanTag, it will place the instantiated bean into the stack's Context.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/bean-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/bean-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/bean-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/bean-attributes.html %}
 
 ## Examples
 

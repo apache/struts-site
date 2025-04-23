@@ -98,7 +98,7 @@ addFieldError("personBean.firstName", "First name is required.")
 will cause the message _First name is required_ to be displayed above the `firstName` field on the form.
 
 If you have made the above changes to the [Processing Forms](processing-forms) tutorial or you have downloaded 
-from [form-validation](https://github.com/apache/struts-examples/tree/master/form-validation) 
+from [form-validation](https://github.com/apache/struts-examples/tree/main/form-validation) 
 run the application (see the README.txt in the project root folder). Click on the Please register link. On the registration 
 form, just click the submit button and you should see:
 

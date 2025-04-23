@@ -16,11 +16,11 @@ The token tag is used to help with the _double click_ submission problem. It is 
 the `TokenInterceptor` or the `TokenSessionInterceptor`. The `s:token` tag merely places a hidden element that contains
 the unique token.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/token-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/token-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/token-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/token-attributes.html %}
 
 ## Examples
 

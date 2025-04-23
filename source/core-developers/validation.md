@@ -79,7 +79,7 @@ The following list shows the default validators included in the framework and is
 our own validators.
 
 {% highlight xml %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/com/opensymphony/xwork2/validator/validators/default.xml %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/com/opensymphony/xwork2/validator/validators/default.xml %}
 {% endhighlight %}
 
 > **Struts 2.1 and Prior**

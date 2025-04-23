@@ -15,11 +15,11 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 Renders an HTML LABEL that will allow you to output label:name combination that has the same format treatment 
 as the rest of your UI controls.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/label-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/label-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/label-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/label-attributes.html %}
 
 ## Examples
 

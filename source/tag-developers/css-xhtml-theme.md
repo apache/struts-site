@@ -24,7 +24,7 @@ the HTML tags are wrapped by a standard header and footer. For example, in the [
 `text.ftl`, the `controlheader.ftl` and `controlfooter.ftl` templates are wrapped around the simple template.
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/simple/text.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/simple/text.ftl %}
 {% endhighlight %}
 
 ## CSS XHTML theme header
@@ -33,7 +33,7 @@ The header used by the HTML tags in the css_xhtml theme is complicated. Unlike t
 the CSS theme does not use a `labelposition` attribute. Instead, the label position is defined by CSS rules.
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/css_xhtml/controlheader.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/css_xhtml/controlheader.ftl %}
 {% endhighlight %}
 
 Note that the `fieldErrors`, usually caused by [Validation](../core-developers/validation), are displayed in a `div`
@@ -44,7 +44,7 @@ block before the element is displayed.
 And the `controlfooter.ftl` contents:
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/css_xhtml/controlfooter.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/css_xhtml/controlfooter.ftl %}
 {% endhighlight %}
 
 ## Special Interest
@@ -57,13 +57,13 @@ The css_xhtml [head](head-tag) template is similar to the xhtml head template. T
 to provide the layout. The contents of **head.ftl** are:
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/css_xhtml/head.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/css_xhtml/head.ftl %}
 {% endhighlight %}
 
 The head includes a style sheet. The contents of **styles.css** are:
 
 {% highlight css %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/css_xhtml/styles.css %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/css_xhtml/styles.css %}
 {% endhighlight %}
 
 ### Form template

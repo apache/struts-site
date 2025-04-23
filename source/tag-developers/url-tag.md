@@ -48,11 +48,11 @@ See [Constant Configuration](../core-developers/constant-configuration) for furt
 
 > **NOTE**: As of Struts 2.1.3 the includeParams constant defaults to `none`. 
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/url-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/url-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/url-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/url-attributes.html %}
 
 > **NOTE**: When the `var` attribute is used with the `url` tag, the tag's generated URL value will be placed into the request scope
 > **in addition to** the action scope.

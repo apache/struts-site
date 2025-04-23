@@ -15,11 +15,11 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 Perform basic condition flow. `if` tag could be used by itself or can be followed by zero or more `elseif` tags 
 followed by zero or one `else` tag.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/if-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/if-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/if-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/if-attributes.html %}
 
 ## Examples
 

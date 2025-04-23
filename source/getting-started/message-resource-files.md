@@ -284,7 +284,7 @@ After clicking on the above link you should see the same form as before but with
 
 If we implement the same concept by creating _es.properties versions of `global.properties` (`global_es.properties`) 
 and `package.properties` (`package_es.properties`) then we can create a complete registration web page in Spanish. 
-Download the finished example application for this tutorial from Github - [message-resource](https://github.com/apache/struts-examples/tree/master/message-resource) 
+Download the finished example application for this tutorial from Github - [message-resource](https://github.com/apache/struts-examples/tree/main/message-resource) 
 to see those property files and run the complete example with the registration form in Spanish.
 
 ## Summary

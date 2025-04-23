@@ -415,7 +415,7 @@ There are 4 options that can be used to configure excluded packages and classes:
 - `struts.excludedPackageExemptClasses` - comma-separated list of classes to exempt from any of the excluded packages or
   package name patterns. An exact exemption must exist for each exclusion match (target or member or both).
 
-The defaults are defined [here](https://github.com/apache/struts/blob/master/core/src/main/resources/struts-excluded-classes.xml).
+The defaults are defined [here](https://github.com/apache/struts/blob/main/core/src/main/resources/struts-excluded-classes.xml).
 
 Any expression or target which does not pass this criteria will be blocked, and you will see a warning in the logs:
 
