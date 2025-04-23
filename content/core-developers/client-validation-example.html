@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Basic Validation</title>
+  <title>Client Validation example</title>
 
   <link href="/css/source-sans-pro.css" rel="stylesheet" type="text/css">
   <link href="/css/font-awesome.css" rel="stylesheet">
@@ -147,58 +147,53 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/basic-validation.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/client-validation-example.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="validation.html" title="back to Validation"><< back to Validation</a>
+    <a href="client-side-validation" title="back to Client Side Validation"><< back to Client Side Validation</a>
     
-    <h1 class="no_toc" id="basic-validation">Basic Validation</h1>
+    <h1 id="client-validation-example">Client Validation Example</h1>
 
-<p>Let’s configure a basic validation workflow, step by step.</p>
+<p>Let’s create a Client-Side validation workflow, step by step. The <code class="language-plaintext highlighter-rouge">validate</code> attribute is set to <code class="language-plaintext highlighter-rouge">true</code>.</p>
 
-<ul id="markdown-toc">
-  <li><a href="#step-1" id="markdown-toc-step-1">Step 1</a></li>
-  <li><a href="#step-2" id="markdown-toc-step-2">Step 2</a></li>
-  <li><a href="#step-3" id="markdown-toc-step-3">Step 3</a></li>
-  <li><a href="#step-4" id="markdown-toc-step-4">Step 4</a></li>
-</ul>
+<blockquote>
+  <p>Note: Some themes do not support client-side validation.</p>
+</blockquote>
 
 <h2 id="step-1">Step 1</h2>
 
-<p>Create the input form.</p>
+<p>Create the form.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-	<span class="nt">&lt;title&gt;</span>Struts2 Showcase - Validation - Basic<span class="nt">&lt;/title&gt;</span>
-	<span class="nt">&lt;s:head/&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Struts2 Showcase - Validation - Basic<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;s:head/&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
 
-<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
 
-<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page-header"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;h1&gt;</span>Basic validation Example<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page-header"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h1&gt;</span>Basic validation Example<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
 
-<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container-fluid"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
-		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-12"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container-fluid"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-12"</span><span class="nt">&gt;</span>
 
-			<span class="nt">&lt;p&gt;</span>
-				<span class="nt">&lt;b&gt;</span>What is your favorite color?<span class="nt">&lt;/b&gt;</span>
 
-			<span class="nt">&lt;p/&gt;</span>
-
-			<span class="nt">&lt;s:form</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
-				<span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Name"</span> <span class="na">name=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
-				<span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Age"</span> <span class="na">name=</span><span class="s">"age"</span><span class="nt">/&gt;</span>
-				<span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Favorite color"</span> <span class="na">name=</span><span class="s">"answer"</span><span class="nt">/&gt;</span>
-				<span class="nt">&lt;s:submit</span> <span class="na">cssClass=</span><span class="s">"btn btn-primary"</span><span class="nt">/&gt;</span>
-			<span class="nt">&lt;/s:form&gt;</span>
-		<span class="nt">&lt;/div&gt;</span>
-	<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
+                    <span class="nt">&lt;s:form</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">validate=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Name"</span> <span class="na">name=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
+                        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Age"</span> <span class="na">name=</span><span class="s">"age"</span><span class="nt">/&gt;</span>
+                        <span class="nt">&lt;s:textfield</span> <span class="na">label=</span><span class="s">"Favorite color"</span> <span class="na">name=</span><span class="s">"answer"</span><span class="nt">/&gt;</span>
+                        <span class="nt">&lt;s:submit</span> <span class="na">cssClass=</span><span class="s">"btn btn-primary"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;/s:form&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
 </code></pre></div></div>
+
+<p>This case uses the default <code class="language-plaintext highlighter-rouge">xhtml</code> theme, so the <code class="language-plaintext highlighter-rouge">&lt;s:head &gt;</code> tag is used to link a style sheet.</p>
 
 <h2 id="step-2">Step 2</h2>
 
@@ -206,45 +201,42 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">QuizAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
 
-	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="o">-</span><span class="mi">7505437345373234225L</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">answer</span><span class="o">;</span>
 
-	<span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
-	<span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
-	<span class="nc">String</span> <span class="n">answer</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
 
-	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
-	<span class="o">}</span>
+    <span class="nd">@StrutsParameter</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
 
-	<span class="nd">@StrutsParameter</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
-	<span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">age</span><span class="o">;</span>
-	<span class="o">}</span>
+    <span class="nd">@StrutsParameter</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
 
-	<span class="nd">@StrutsParameter</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
-	<span class="o">}</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAnswer</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+    <span class="o">}</span>
 
-	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAnswer</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
-	<span class="o">}</span>
-
-	<span class="nd">@StrutsParameter</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAnswer</span><span class="o">(</span><span class="nc">String</span> <span class="n">answer</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">answer</span> <span class="o">=</span> <span class="n">answer</span><span class="o">;</span>
-	<span class="o">}</span>
+    <span class="nd">@StrutsParameter</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAnswer</span><span class="o">(</span><span class="nc">String</span> <span class="n">answer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">answer</span> <span class="o">=</span> <span class="n">answer</span><span class="o">;</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <h2 id="step-3">Step 3</h2>
 
-<p>Create the validators. The <code class="language-plaintext highlighter-rouge">validation.xml</code> format is either <code class="language-plaintext highlighter-rouge">&lt;ActionClassName&gt;-validation.xml</code>
-or <code class="language-plaintext highlighter-rouge">&lt;ActionClassName&gt;-&lt;ActionAliasName&gt;-validation.xml</code>.</p>
+<p>Create the <code class="language-plaintext highlighter-rouge">validation.xml</code> to configure the validators to be used.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--
     Add the following DOCTYPE declaration as first line of your XXX-validation.xml file:
@@ -266,19 +258,29 @@ or <code class="language-plaintext highlighter-rouge">&lt;ActionClassName&gt;-&l
 <span class="nt">&lt;/validators&gt;</span>
 </code></pre></div></div>
 
-<h2 id="step-4">Step 4</h2>
+<h3 id="action-and-namespace">Action and Namespace</h3>
 
-<p>Make sure there is a result for “input” listed in the struts.xml for when the validation fails:</p>
+<p>A correct action and namespace attributes must be provided to the <code class="language-plaintext highlighter-rouge">&lt;s:form&gt;</code> tag. For example, if the action named 
+<code class="language-plaintext highlighter-rouge">quizClient</code> is defined in the <code class="language-plaintext highlighter-rouge">/validation</code> namespace, the form must be configured as:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"HelloWorld"</span> <span class="na">class=</span><span class="s">"tutorial.HelloWorld"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>/tutorial/createconfirm.jsp<span class="nt">&lt;/result&gt;</span>
-<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"error"</span><span class="nt">&gt;</span>/tutorial/error.jsp<span class="nt">&lt;/result&gt;</span>
-<span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span><span class="nt">&gt;</span>/tutorial/create.jsp<span class="nt">&lt;/result&gt;</span>
-<span class="nt">&lt;/action&gt;</span>
-
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form </span><span class="na">method=</span><span class="s">"post"</span><span class="na"> validate=</span><span class="s">"true"</span><span class="na"> action=</span><span class="s">"quizClient"</span><span class="na"> namespace=</span><span class="s">"/validation"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;s:textfield </span><span class="na">label=</span><span class="s">"Name"</span><span class="na"> name=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;s:textfield </span><span class="na">label=</span><span class="s">"Age"</span><span class="na"> name=</span><span class="s">"age"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;s:textfield </span><span class="na">label=</span><span class="s">"Favorite color"</span><span class="na"> name=</span><span class="s">"answer"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;s:submit/&gt;</span>
+<span class="nt">&lt;/s:form&gt;</span> 
 </code></pre></div></div>
 
-<p>If you don’t have this, you’ll get a: “No result defined for action xxx.xxx.tutorial.HellowWorld and result input” error.</p>
+<p>While the following will “work” in the sense that the form will function correctly, <em>client-side validation will not</em>. 
+That is because Struts must know the exact namespace and action (rather than a URL) to properly support validation.</p>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form </span><span class="na">method=</span><span class="s">"post"</span><span class="na"> validate=</span><span class="s">"true"</span><span class="na"> action=</span><span class="s">"/validation/quizClient.action"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;s:textfield </span><span class="na">label=</span><span class="s">"Name"</span><span class="na"> name=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;s:textfield </span><span class="na">label=</span><span class="s">"Age"</span><span class="na"> name=</span><span class="s">"age"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;s:textfield </span><span class="na">label=</span><span class="s">"Favorite color"</span><span class="na"> name=</span><span class="s">"answer"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;s:submit/&gt;</span>
+<span class="nt">&lt;/s:form&gt;</span> 
+</code></pre></div></div>
 
   </section>
 </article>

@@ -13,7 +13,7 @@
   <link href="/css/font-awesome.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
   <link href="/css/custom.css" rel="stylesheet">
-  <link href="/highlighter/github-theme.css" rel="stylesheet">
+  <link href="/css/syntax.css" rel="stylesheet">
 
   <script src="/js/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
@@ -67,7 +67,7 @@
                 <li><a href="/index.html">Welcome</a></li>
                 <li><a href="/download.cgi">Download</a></li>
                 <li><a href="/releases.html">Releases</a></li>
-                <li><a href="/announce-2024.html">Announcements</a></li>
+                <li><a href="/announce-2025.html">Announcements</a></li>
                 <li><a href="http://www.apache.org/licenses/">License</a></li>
                 <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
                 <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
@@ -147,127 +147,59 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/master/source/core-developers/websphere.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="application-servers" title="back to Application Servers"><< back to Application Servers</a>
+    
     <h1 id="websphere">WebSphere</h1>
 
 <h2 id="websphere-51">WebSphere 5.1</h2>
 
-<p>(ok) <a href="http://forums\.opensymphony\.com/thread\.jspa?threadID=26068">Be sure to install WebSphere’s Fix Pack 1</a>^[http://forums.opensymphony.com/thread.jspa?threadID=26068].</p>
+<p>(ok) <a href="http://forums.opensymphony.com/thread.jspa?threadID=26068">Be sure to install WebSphere’s Fix Pack 1</a>.</p>
 
 <h2 id="websphere-6">WebSphere 6</h2>
 
-<p>See forum thread: <a href="http://forums\.opensymphony\.com/message\.jspa?messageID=119574\#119574">http://forums.opensymphony.com/message.jspa?messageID=119574#119574</a></p>
+<p>See forum thread: <a href="http://forums.opensymphony.com/message.jspa?messageID=119574\#119574">http://forums.opensymphony.com/message.jspa?messageID=119574#119574</a></p>
 
 <blockquote>
-
+  <p>It looks like there is a bug in WebSphere App Server related to which classloader is used at the time that Struts2 is loading the properties files, (all properties files, not just struts.properties and default.properties). The bug may have been fixed in WAS 6.0.2.9, (check out this link for details <a href="http://www-1.ibm.com/support/docview.wss?uid=swg27006876">http://www-1.ibm.com/support/docview.wss?uid=swg27006876</a>).
+If you just want to confirm the issue, or you need just a temporary fix, try this:
+1) jar up all properties files for your project, (including default.properties in its full path), and put these into the WS common applications lib directory at the same level as the “profiles” directory.
+2) Run the application - everything should work</p>
 </blockquote>
 
 <blockquote>
-
-</blockquote>
-
-<blockquote>
-  <p>It looks like there is a bug in WebSphere App Server related to which classloader is used at the time that Struts2 is loading the properties files, (all properties files, not just struts.properties and default.properties). The bug may have been fixed in WAS 6.0.2.9, (check out this link for details <a href="http://www\-1\.ibm\.com/support/docview\.wss?uid=swg27006876">http://www-1.ibm.com/support/docview.wss?uid=swg27006876</a>).</p>
-</blockquote>
-
-<blockquote>
-
-</blockquote>
-
-<blockquote>
-
-</blockquote>
-
-<blockquote>
-  <p>If you just want to confirm the issue, or you need just a temporary fix, try this:</p>
-</blockquote>
-
-<blockquote>
-
-</blockquote>
-
-<blockquote>
-
-</blockquote>
-
-<blockquote>
-  <p>1) jar up all properties files for your project, (including default.properties in its full path), and put these into the WS common applications lib directory at the same level as the “profiles” directory.</p>
-</blockquote>
-
-<blockquote>
-
-  <p>2) Run the application - everything should work</p>
-</blockquote>
-
-<blockquote>
-
-</blockquote>
-
-<blockquote>
-
-</blockquote>
-
-<blockquote>
-  <p>This solution is strictly temporary, as all struts2 apps in this instance of WAS would have to use the same properties files. A better solution:</p>
-</blockquote>
-
-<blockquote>
-
-</blockquote>
-
-<blockquote>
-
-</blockquote>
-
-<blockquote>
-  <p>1) add a servlet that initializes the Struts Dispatcher with the servlet context:</p>
-</blockquote>
-
-<blockquote>
-
-  <p>import org.apache.struts2.dispatcher.Dispatcher;</p>
+  <p>This solution is strictly temporary, as all struts2 apps in this instance of WAS would have to use the same properties files. A better solution:
+1) add a servlet that initializes the Struts Dispatcher with the servlet context:
+import org.apache.struts2.dispatcher.Dispatcher;</p>
 
   <p>public class LaunchServlet extends HttpServlet implements Servlet {</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public LaunchServlet() \{
 	super();
-\}
+}
  
 public void init(ServletConfig arg0) throws ServletException \{
 	
-	// this works around a bug in the websphere classloader\.
-	super\.init(arg0);
-	Dispatcher d = new Dispatcher(getServletContext(), new HashMap\&lt;String, String\&gt;());	
+	// this works around a bug in the websphere classloader.
+	super.init(arg0);
+	Dispatcher d = new Dispatcher(getServletContext(), new HashMap&lt;String, String&gt;());	
 	
-\}
+}
 </code></pre></div>  </div>
 
   <p>}</p>
 
-</blockquote>
-
-<blockquote>
   <p>2) launch it at start-up (web.xml):</p>
-</blockquote>
 
-<blockquote>
-
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\&lt;servlet\&gt;
-  \&lt;servlet\-name\&gt;dummyaction\&lt;/servlet\-name\&gt;
-  \&lt;servlet\-class\&gt;com\.xxx\.yyyyyy\.service\.LaunchServlet\&lt;/servlet\-class\&gt;
-  \&lt;load\-on\-startup\&gt;1\&lt;/load\-on\-startup\&gt;
-\&lt;/servlet\&gt;
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;servlet&gt;
+  &lt;servlet-name&gt;dummyaction&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;com.xxx.yyyyyy.service.LaunchServlet&lt;/servlet-class&gt;
+  &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
 </code></pre></div>  </div>
 
-</blockquote>
-
-<blockquote>
   <p>3) Run application and everything should work.</p>
-</blockquote>
-
-<blockquote>
-
 </blockquote>
 
 <h2 id="websphere-65">WebSphere 6.5</h2>
@@ -276,26 +208,20 @@ public void init(ServletConfig arg0) throws ServletException \{
 
 <p>The properties are:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-com.ibm.ws.webcontainer.assumefiltersuccessonsecurityerror = true
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com.ibm.ws.webcontainer.assumefiltersuccessonsecurityerror = true
 com.ibm.ws.webcontainer.invokefilterscompatibility = true
-
 </code></pre></div></div>
 
 <p>At least that is necessary when using StrutsPrepareAndExecuteFilter.</p>
 
 <p>In Websphre admin console one has to add those properties here:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-Servers &gt; Application servers &gt; {server name} &gt; Web container &gt; Custom Properties
-
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Servers &gt; Application servers &gt; {server name} &gt; Web container &gt; Custom Properties
 </code></pre></div></div>
 
 <p>A wsadmin jython script to set those properties could look like this:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-
-def findObjectName(objectId):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def findObjectName(objectId):
         index = objectId.find('(')
         return objectId[0 : index]
 
@@ -314,7 +240,6 @@ if webContainerDetails.find("com.ibm.ws.webcontainer.assumefiltersuccessonsecuri
 if webContainerDetails.find("com.ibm.ws.webcontainer.invokefilterscompatibility") == -1:
         print "creating prop: com.ibm.ws.webcontainer.invokefilterscompatibility"
         AdminServerManagement.configureCustomProperty(nodeName, serverName, "WebContainer", "com.ibm.ws.webcontainer.invokefilterscompatibility", "true")
-
 </code></pre></div></div>
 
 <p>Thanks to Christoph Nenning (christoph dot nenning at lex-com at net)</p>
@@ -330,21 +255,13 @@ if webContainerDetails.find("com.ibm.ws.webcontainer.invokefilterscompatibility"
 <p>For All versions:</p>
 
 <ol>
-  <li>
-    <p>Open the administrative console.</p>
-  </li>
-  <li>
-    <p>Select Servers &gt; Application Servers &gt; Server_Name &gt; Server Infrastructure &gt; Java and Process Management &gt; Process Definition &gt; Java Virtual Machine &gt; Custom Properties &gt; New</p>
-  </li>
-  <li>
-    <p>Add a new Custom Property for the JVM to reuse the sessionId:</p>
-  </li>
+  <li>Open the administrative console.</li>
+  <li>Select Servers &gt; Application Servers &gt; Server_Name &gt; Server Infrastructure &gt; Java and Process Management &gt; Process Definition &gt; Java Virtual Machine &gt; Custom Properties &gt; New</li>
+  <li>Add a new Custom Property for the JVM to reuse the sessionId:</li>
 </ol>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-System Property Name: HttpSessionIdReuse
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>System Property Name: HttpSessionIdReuse
 System Property Value: true
-
 </code></pre></div></div>
 
 <ol>
@@ -354,50 +271,13 @@ System Property Value: true
 <p>If the application client does not navigate across multiple WebSphere Application Server nodes residing in the same domain but there are multiple WARs with different context roots, following is the step that needs to be followed for session to be maintained in one web application:</p>
 
 <ol>
-  <li>
-    <p>Open the administrative console.</p>
-  </li>
-  <li>
-    <p>Select Application servers &gt; Server_Name &gt; Session management &gt; Cookies</p>
-  </li>
-  <li>
-    <p>In “Cookie Path”, specify the context root of web application in which session needs to be maintained. This will ensure that cookies are sent only to /«context_root» URL and prevent overriding of JSSESSIONID cookie which results in new session creation by WAS.</p>
-  </li>
-  <li>
-    <p>Save your changes and restart the Application Server.</p>
-  </li>
+  <li>Open the administrative console.</li>
+  <li>Select Application servers &gt; Server_Name &gt; Session management &gt; Cookies</li>
+  <li>In “Cookie Path”, specify the context root of web application in which session needs to be maintained. This will ensure that cookies are sent only to /«context_root» URL and prevent overriding of JSSESSIONID cookie which results in new session creation by WAS.</li>
+  <li>Save your changes and restart the Application Server.</li>
 </ol>
 
 <p>Thanks to Vineet Kanwal from IBM!</p>
-
-<p>##Big Picture## {#PAGE_13859}</p>
-
-<p>The diagram describes the framework’s architecture.</p>
-
-<p><img src="/Users/lukaszlenart/Projects/Apache/struts\-site/target/md/attachments/att2475\_Struts2\-Architecture\.png" alt="Struts2-Architecture.png" /></p>
-
-<p>In the diagram, an initial request goes to the Servlet container (such as Jetty or Resin) which is passed through a standard filter chain. The chain includes the (optional) <strong>ActionContextCleanUp</strong> filter, which is useful when integrating technologies such as <em>SiteMesh Plugin</em> . Next, the required <strong>FilterDispatcher</strong> is called, which in turn consults the <a href="#PAGE_14128">ActionMapper</a> to determine if the request should invoke an action.</p>
-
-<p>If the ActionMapper determines that an Action should be invoked, the FilterDispatcher delegates control to the <strong>ActionProxy</strong>. The ActionProxy consults the framework <a href="#PAGE_14163">Configuration Files</a> manager (initialized from the <a href="#PAGE_13901">struts.xml</a> file). Next, the ActionProxy creates an <strong>ActionInvocation</strong>, which is responsible for the command pattern implementation. This includes invoking any <strong>Interceptors</strong> (the <em>before</em>  clause) in advance of invoking the <strong>Action</strong> itself.</p>
-
-<p>Once the Action returns, the ActionInvocation is responsible for looking up the proper <strong>result</strong> associated with the <strong>Action result code</strong> mapped in <code class="language-plaintext highlighter-rouge">struts.xml</code>. The result is then executed, which often (but not always, as is the case for <a href="#PAGE_14214">Action Chaining</a>) involves a template written in <em>JSP</em>  or <em>FreeMarker</em>  to be rendered. While rendering, the templates can use the <em>Struts Tags</em>  provided by the framework. Some of those components will work with the ActionMapper to render proper URLs for additional requests.</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>All objects in this architecture (Actions, <a href="#PAGE_14035">Results</a>, <a href="#PAGE_13941">Interceptors</a>, and so forth) are created by an <a href="#PAGE_27470">ObjectFactory</a>. This ObjectFactory is pluggable. We can provide our own ObjectFactory for any reason that requires knowing when objects in the framework are created. A popular ObjectFactory implementation uses Spring as provided by the <em>Spring Plugin</em> .</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<p>Interceptors are executed again (in reverse order, calling the <em>after</em>  clause). Finally, the response returns through the filters configured in the <code class="language-plaintext highlighter-rouge">web.xml</code>. If the ActionContextCleanUp filter is present, the FilterDispatcher will <em>not</em>  clean up the ThreadLocal <strong>ActionContext</strong>. If the ActionContextCleanUp filter is not present, the FilterDispatcher will cleanup all ThreadLocals.</p>
 
   </section>
 </article>

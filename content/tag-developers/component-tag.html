@@ -67,7 +67,7 @@
                 <li><a href="/index.html">Welcome</a></li>
                 <li><a href="/download.cgi">Download</a></li>
                 <li><a href="/releases.html">Releases</a></li>
-                <li><a href="/announce-2024.html">Announcements</a></li>
+                <li><a href="/announce-2025.html">Announcements</a></li>
                 <li><a href="http://www.apache.org/licenses/">License</a></li>
                 <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
                 <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
@@ -157,30 +157,34 @@
 
 <h2 id="description">Description</h2>
 
-<p>Renders an custom UI widget using the specified templates. Additional objects can be passed in to the template
+<p>Renders a custom UI widget using the specified templates. Additional objects can be passed in to the template
 using the <a href="param-tag">param</a> tags.</p>
+
+<blockquote>
+  <p>Note: in Struts versions older than 7.x please use <code class="language-plaintext highlighter-rouge">$parameters</code>, in Struts 7.x+ please user <code class="language-plaintext highlighter-rouge">$attributes</code></p>
+</blockquote>
 
 <p>Render a custom ui widget</p>
 
 <h3 id="freemarker">Freemarker:</h3>
 
-<p>Objects provided can be retrieve from within the template via <code class="language-plaintext highlighter-rouge">$parameters._paramname_</code>.</p>
+<p>Objects provided can be retrieved from within the template via <code class="language-plaintext highlighter-rouge">$attributes._paramname_</code>.</p>
 
 <h3 id="jsp">JSP:</h3>
 
-<p>Objects provided can be retrieve from within the template via <code class="language-plaintext highlighter-rouge">&lt;s:property value="%{parameters._paramname_}" /&gt;</code></p>
+<p>Objects provided can be retrieved from within the template via <code class="language-plaintext highlighter-rouge">&lt;s:property value="%{attributes._paramname_}" /&gt;</code></p>
 
 <p>In the bottom JSP and Velocity samples, two parameters are being passed in to the component. From within the
 component, they can be accessed as:</p>
 
 <h3 id="freemarker-1">Freemarker:</h3>
 
-<p><code class="language-plaintext highlighter-rouge">$parameters.get('key1')</code> and <code class="language-plaintext highlighter-rouge">$parameters.get('key2')</code> or <code class="language-plaintext highlighter-rouge">$parameters.key1</code> and <code class="language-plaintext highlighter-rouge">$parameters.key2</code></p>
+<p><code class="language-plaintext highlighter-rouge">$attributes.get('key1')</code> and <code class="language-plaintext highlighter-rouge">$attributes.get('key2')</code> or <code class="language-plaintext highlighter-rouge">$attributes.key1</code> and <code class="language-plaintext highlighter-rouge">$attributes.key2</code></p>
 
 <h3 id="jsp-1">JSP:</h3>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;s:property value="%{parameters.key1}" /&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;s:property value="%{'parameters.key2'}" /&gt;</code> or
-<code class="language-plaintext highlighter-rouge">&lt;s:property value="%{parameters.get('key1')}" /&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;s:property value="%{parameters.get('key2')}" /&gt;</code></p>
+<p><code class="language-plaintext highlighter-rouge">&lt;s:property value="%{$attributes.key1}" /&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;s:property value="%{'$attributes.key2'}" /&gt;</code> or
+<code class="language-plaintext highlighter-rouge">&lt;s:property value="%{$attributes.get('key1')}" /&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;s:property value="%{$attributes.get('key2')}" /&gt;</code></p>
 
 <p>Currently, your custom UI components can be written in Velocity, JSP, or Freemarker, and the correct rendering
 engine will be found based on file extension.</p>
@@ -192,16 +196,16 @@ otherwise, the value stack will search for an Object on the stack with a method 
 <p>If JSP is used as the template, the JSP template itself must lie within the webapp itself and not the classpath. 
 Unlike Freemarker or Velocity, JSP template could not be picked up from the classpath.</p>
 
-<p><strong>(!) templateDir and theme attribute</strong></p>
+<h3 id="templatedir-and-theme-attribute"><code class="language-plaintext highlighter-rouge">templateDir</code> and theme attribute</h3>
 
 <blockquote>
-  <p>The final path to the template will be built using the <em>templateDir</em>  and <em>template</em>  attributes, like 
-${templateDir}/${theme}/${template}. If for example your component is under <em>/components/html/option.jsp</em>, 
-you would have to set templateDir=”components”, theme=”html” and template=”options.jsp”.</p>
+  <p>The final path to the template will be built using the <code class="language-plaintext highlighter-rouge">templateDir</code> and <code class="language-plaintext highlighter-rouge">template</code>attributes, like 
+<code class="language-plaintext highlighter-rouge">${templateDir}/${theme}/${template}</code>. If for example your component is under <code class="language-plaintext highlighter-rouge">/components/html/option.jsp</code>, 
+you would have to set <code class="language-plaintext highlighter-rouge">templateDir="components"</code>, <code class="language-plaintext highlighter-rouge">theme="html"</code> and <code class="language-plaintext highlighter-rouge">template="options.jsp"</code>.</p>
 </blockquote>
 
 <blockquote>
-  <p>For any Struts tag that you use in your component, make sure that you set its templateDir=”template”</p>
+  <p>For any Struts tag that you use in your component, make sure that you set its <code class="language-plaintext highlighter-rouge">templateDir="template"</code></p>
 </blockquote>
 
 <h2 id="attributes">Attributes</h2>
@@ -597,7 +601,7 @@ you would have to set templateDir=”components”, theme=”html” and templat
 
 <h3 id="freemarker-2">Freemarker</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;@s..component template="/my/custom/component.ftl" /&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;@s.component template="/my/custom/component.ftl" /&gt;
 </code></pre></div></div>
 
 <p>or</p>
