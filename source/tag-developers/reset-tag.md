@@ -20,11 +20,11 @@ The reset can have two different types of rendering:
 Please note that the button type has advantages by adding the possibility to separate the submitted value from the text 
 shown on the button face, but has issues with Microsoft Internet Explorer at least up to 6.0.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/reset-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/reset-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/reset-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/reset-attributes.html %}
 
 ## Examples
 

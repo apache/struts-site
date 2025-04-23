@@ -34,5 +34,5 @@ Ajax/Dojo support so that tags can import Dojo widgets easily.
 The source of the simple `head.ftl` template is:
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/simple/head.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/simple/head.ftl %}
 {% endhighlight %}

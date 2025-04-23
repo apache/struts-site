@@ -29,7 +29,7 @@ the HTML tags are wrapped by a standard header and footer. For example, in the `
 and `controlfooter.ftl` templates are wrapped around the simple template.
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/text.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/text.ftl %}
 {% endhighlight %}
 
 > The `controlheader.ftl` is referenced using `${parameters.theme}` so that the code can be reused 
@@ -41,11 +41,11 @@ Now let's look at the `controlheader.ftl` and `controlheader-core.ftl`. Again, t
 the [ajax theme](ajax-theme)) contents:
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/controlheader.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/controlheader.ftl %}
 {% endhighlight %}
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/controlheader-core.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/controlheader-core.ftl %}
 {% endhighlight %}
 
 The header used by the HTML tags in the xhtml theme is complicated. However, a close look reveals that the logic produces 
@@ -63,7 +63,7 @@ The primary objective of `controlfooter.ftl` is to close the table. But, before 
 for an `after` parameter.
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/controlfooter.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/controlfooter.ftl %}
 {% endhighlight %}
 
 While `after` isn't an attribute supported by any of the [Struts Tags](struts-tags), if you are using 
@@ -81,13 +81,13 @@ The xhtml [head](head-tag) template extends the _simple head template_ and provi
 render the form elements.
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/head.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/head.ftl %}
 {% endhighlight %}
 
 The head template imports a style sheet. The contents of **styles.css** are:
 
 {% highlight css %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/styles.css %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/styles.css %}
 {% endhighlight %}
 
 ### form template
@@ -97,13 +97,13 @@ wrapping table, the opening and closing templates also, if the `validate` parame
 [Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation).
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/form.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/form.ftl %}
 {% endhighlight %}
 
 The closing template, `form-close.ftl`:
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/form-close.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/form-close.ftl %}
 {% endhighlight %}
 
 ### xhtml form template
@@ -115,11 +115,11 @@ to `true`, enable [Pure JavaScript Client Side Validation](../core-developers/pu
 See the **form.ftl** contents:
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/form.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/form.ftl %}
 {% endhighlight %}
 
 The closing template, **form-close.ftl**:
 
 {% highlight freemarker %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/template/xhtml/form-close.ftl %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/form-close.ftl %}
 {% endhighlight %}

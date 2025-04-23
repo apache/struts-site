@@ -22,11 +22,11 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 Iterator will iterate over a value. An iterable value can be any of: `java.util.Collection`, `java.util.Iterator`, 
 `java.util.Enumeration`, `java.util.Map`, or an array.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/iterator-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/iterator-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/iterator-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/iterator-attributes.html %}
 
 ## Conversion
 

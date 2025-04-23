@@ -21,7 +21,7 @@ available as from Servlet API 3. It's a thin layer over the Servlet async layer.
 ## Simple usage
 
 The example code below shows how to implement and use async actions. Please check an async action example
-in our [Showcase app](https://github.com/apache/struts/tree/master/apps/showcase/src/main/java/org/apache/struts2/showcase/async).
+in our [Showcase app](https://github.com/apache/struts/tree/main/apps/showcase/src/main/java/org/apache/struts2/showcase/async).
 
 **Action**
 

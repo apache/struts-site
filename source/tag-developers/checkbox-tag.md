@@ -14,11 +14,11 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 Renders an HTML input element of type checkbox, populated by the specified property from the ValueStack.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/checkbox-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/checkbox-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/checkbox-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/checkbox-attributes.html %}
 
 ## Examples
 

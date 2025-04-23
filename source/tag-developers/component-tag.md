@@ -17,7 +17,7 @@ using the [param](param-tag) tags.
 
 > Note: in Struts versions older than 7.x please use `$parameters`, in Struts 7.x+ please user `$attributes`
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/component-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/component-description.html %}
 
 ### Freemarker:
 
@@ -59,7 +59,7 @@ Unlike Freemarker or Velocity, JSP template could not be picked up from the clas
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/component-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/component-attributes.html %}
 
 ## Examples
 

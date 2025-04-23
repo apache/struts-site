@@ -151,7 +151,7 @@ This example shows a Tiles layout page using Struts tags:
 </html>
 ```
 
-Please check [tiles](https://github.com/apache/struts-examples/tree/master/tiles) example in [struts-examples](https://github.com/apache/struts-examples/tree/master/tiles) project.
+Please check [tiles](https://github.com/apache/struts-examples/tree/main/tiles) example in [struts-examples](https://github.com/apache/struts-examples/) project.
 
 ## Settings
 

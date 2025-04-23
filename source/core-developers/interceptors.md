@@ -98,7 +98,7 @@ Looking inside `struts-default.xml`, we can see how it's done.
 ## The Default Configuration
 
 {% highlight xml %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/struts-default.xml %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/struts-default.xml %}
 {% endhighlight %}
 
 Since the `struts-default.xml` is included in the application's configuration by default, all the predefined

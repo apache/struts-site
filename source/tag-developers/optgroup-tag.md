@@ -16,11 +16,11 @@ Create a optgroup component which needs to resides within a select tag.
 
 This tag is to be used within a `select` tag.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/optgroup-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/optgroup-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/optgroup-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/optgroup-attributes.html %}
 
 ## Examples
 

@@ -74,7 +74,7 @@ You can also put expression for attributes that don't support dynamic content, l
 ## Collections (Maps, Lists, Sets)
 
 Dealing with Collections (Maps, Lists, and Sets) in the framework comes often, so below please there are a few examples 
-using tags. The [OGNL documentation](https://github.com/orphan-oss/ognl/blob/master/docs/LanguageGuide.md#collection-construction)
+using tags. The [OGNL documentation](https://github.com/orphan-oss/ognl/blob/main/docs/LanguageGuide.md#collection-construction)
 also includes some examples.
 
 Syntax for a list: `{e1, e2, e3}`. This idiom creates a List containing the String "name1", "name2" and "name3". It also 

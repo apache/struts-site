@@ -24,11 +24,11 @@ or content separately. Each of these is simply populated from the toString() met
 this is because the select box isn't intended to actually submit useful data, but to assist the user in filling
 out the text field.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/combobox-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/combobox-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/combobox-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/combobox-attributes.html %}
 
 ## Examples
 

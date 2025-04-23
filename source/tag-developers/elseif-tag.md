@@ -14,11 +14,11 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 Perform basic condition flow. `elseif` tag can be only used with `if` tag.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/elseif-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/elseif-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/elseif-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/elseif-attributes.html %}
 
 ## Examples
 

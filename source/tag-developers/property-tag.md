@@ -14,11 +14,11 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 Used to get the property of a `value`, which will default to the top of the stack if none is specified.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/property-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/property-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/property-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/property-attributes.html %}
 
 ## Examples
 

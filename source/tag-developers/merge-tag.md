@@ -31,11 +31,11 @@ Example if there are 3 lists being merged, each list have 3 entries, the followi
 8. Display third element of the second list
 9. Display third element of the third list
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/merge-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/merge-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/merge-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/merge-attributes.html %}
 
 ## Examples
 

@@ -14,11 +14,11 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 
 Renders parts of the HEAD section for an HTML file. Encoding can be set using this tag.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/head-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/head-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/head-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/head-attributes.html %}
 
 ## Examples
 

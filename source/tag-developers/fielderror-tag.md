@@ -15,11 +15,11 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 Render field errors if they exists. Specific layout depends on the particular theme. The field error strings will be 
 html escaped by default.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/fielderror-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/fielderror-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/fielderror-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/fielderror-attributes.html %}
 
 ## Examples
 

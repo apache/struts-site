@@ -16,11 +16,11 @@ Generate an iterator based on the val attribute supplied.
 
 > NOTE: The generated iterator will **ALWAYS** be pushed into the top of the stack, and poped at the end of the tag.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/generator-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/generator-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/generator-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/generator-attributes.html %}
 
 ## Examples
 

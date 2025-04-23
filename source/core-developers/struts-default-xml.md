@@ -18,7 +18,7 @@ to copy them.
 The content of `struts-default.xml` is here:
 
 {% highlight xml %}
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/main/resources/struts-default.xml %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/struts-default.xml %}
 {% endhighlight %}
 
 This file defines all of the default bundled results and interceptors and many interceptor stacks which you can use 

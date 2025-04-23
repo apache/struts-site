@@ -22,7 +22,7 @@ The regular expression used to validate that the string is an email address is:
 \\b^['_a-z0-9-\\+]+(\\.['_a-z0-9-\\+]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*\\.([a-z]{2,6})$\\b
 ```
 
-> This Regex can change, please always check in the [source code](https://github.com/apache/struts/blob/master/core/src/main/java/com/opensymphony/xwork2/validator/validators/EmailValidator.java#L83)
+> This Regex can change, please always check it in the [source code](https://github.com/apache/struts/blob/main/core/src/main/java/org/apache/struts2/validator/validators/EmailValidator.java#L83)
 
 You can also specify `expression`, `caseSensitive` and `trim` params as a OGNL expression, see the example below.
 

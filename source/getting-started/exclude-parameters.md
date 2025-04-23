@@ -104,7 +104,7 @@ and then add your own parameters to the end separated by commas.
 
 ## Example Application
 
-Download the example application, [exclude-params](https://github.com/apache/struts-examples/tree/master/exclude-parameters) 
+Download the example application, [exclude-params](https://github.com/apache/struts-examples/tree/main/exclude-parameters) 
 that demonstrates excluding a request parameter. See the project's README.txt file for how to build and run the application.
 
 To see the log messages written when not excluding the submit parameter remove the `,submit` from the list of excluded 

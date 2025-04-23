@@ -15,11 +15,11 @@ Please make sure you have read the [Tag Syntax](tag-syntax) document and underst
 Render action errors if they exists the specific layout of the rendering depends on the theme itself. Empty (null or 
 blank string) errors will not be printed. The action error strings will be html escaped by default.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/actionerror-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/actionerror-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/actionerror-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/actionerror-attributes.html %}
 
 ## Examples
 

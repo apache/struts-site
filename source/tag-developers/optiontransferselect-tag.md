@@ -24,11 +24,11 @@ its containing form submission.
 > tag is being used in a form tag. The generated `id` and `doubleId` will be `<form_id>_<optiontransferselect_name>` 
 > and `<form_id>_<optiontransferselect_doubleName>` respectively.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/optiontransferselect-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/optiontransferselect-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/optiontransferselect-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/optiontransferselect-attributes.html %}
 
 ## Dynamic attributes
 

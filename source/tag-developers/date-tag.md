@@ -77,11 +77,11 @@ In this case the format attribute will be used.
 |--------|-------|
 |struts.date.format|if one is not found DateFormat.MEDIUM format will be used|
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/date-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/date-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/date-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/date-attributes.html %}
 
 ## Examples
 

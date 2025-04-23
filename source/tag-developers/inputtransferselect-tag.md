@@ -20,11 +20,11 @@ containing form submission.
 > tag is being used in a form tag. The generated id and doubleId will be `<form_id>_<inputtransferselect_doubleName>` 
 > and `<form_id>_<inputtransferselect_doubleName>` respectively.
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/inputtransferselect-description.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/inputtransferselect-description.html %}
 
 ## Attributes
 
-{% remote_file_content https://raw.githubusercontent.com/apache/struts/master/core/src/site/resources/tags/inputtransferselect-attributes.html %}
+{% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/site/resources/tags/inputtransferselect-attributes.html %}
 
 ## Dynamic attributes
 
