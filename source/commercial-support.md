@@ -23,15 +23,15 @@ supportive companies, please share details with us.
 
 Last updated: **2024-12-23**
 
-1. [SoftwareMill](https://softwaremill.com/contact/)
+- <a href="https://softwaremill.com/contact/" rel="nofollow" target="_blank">SoftwareMill</a>
     - contact details:
-      - [Apache Struts Consultancy](https://softwaremill.com/services/apache-struts-consultancy/)
+      - <a href="https://softwaremill.com/services/apache-struts-consultancy/" rel="nofollow" target="_blank">Apache Struts Consultancy</a>
       - [hello@softwaremill.com](mailto:hello@softwaremill.com)
       - phone:
         - [+48 22 188 11 33](tel:+48221881133) (PL)
         - [+44 56 0156 3406](tel:+445601563406) (UK)
     - scope of support: consulting, Java & UI development, audit
-1. [HeroDevs](https://www.herodevs.com/support/struts-nes)
+- <a href="https://www.herodevs.com/support/struts-nes" rel="nofollow" target="_blank">HeroDevs</a>
     - contact details:
       - email: [hello@herodevs.com](mailto:hello@herodevs.com)
       - phone: [+1 877-586-1965](tel:+18775861965)
@@ -39,5 +39,5 @@ Last updated: **2024-12-23**
 
 ## How to add a new company
 
-Create a Pull Request with the required information. A committer will review it, ensuring accuracy, or seek clarification.
-Alternatively, you can submit a request to the [User Mailing](https://struts.staged.apache.org/mail.html) list.
+You can create a Pull Request with the required information. A committer will review it, ensuring accuracy, or seek clarification.
+Alternatively, you can submit a request to the [User Mailing](mail) list.
