@@ -42,13 +42,13 @@ The wrapping technique utilized by the ajax theme is much like [xhtml theme](xht
 is a wee bit different.
 
 ```ftl
-<#if parameters.label?if_exists != "">
-	<#include "/${parameters.templateDir}/xhtml/controlheader.ftl" />
+<#if attributes.label?if_exists != "">
+	<#include "/${attributes.templateDir}/xhtml/controlheader.ftl" />
 </#if>
-<#if parameters.form?exists && parameters.form.validate?default(false) == true>
+<#if attributes.form?exists && attributes.form.validate?default(false) == true>
 	<#-- can't mutate the data model in freemarker -->
-    <#if parameters.onblur?exists>
-        ${tag.addParameter('onblur', "validate(this);${parameters.onblur}")}
+    <#if attributes.onblur?exists>
+        ${tag.addParameter('onblur', "validate(this);${attributes.onblur}")}
     <#else>
         ${tag.addParameter('onblur', "validate(this);")}
     </#if>

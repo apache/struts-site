@@ -35,10 +35,12 @@ by adding a header and footer.
 
 ### Wrapping a control
 
+> NOTE: Since Struts 7.x the `parameters` have been replaced with `attributes`
+
 ```ftl
-<#include "/${parameters.templateDir}/${parameters.expandTheme}/controlheader.ftl" />
-<#include "/${parameters.templateDir}/simple/xxx.ftl" />
-<#include "/${parameters.templateDir}/${parameters.expandTheme}/controlfooter.ftl" />
+<#include "/${attributes.templateDir}/${attributes.expandTheme}/controlheader.ftl" />
+<#include "/${attributes.templateDir}/simple/xxx.ftl" />
+<#include "/${attributes.templateDir}/${attributes.expandTheme}/controlfooter.ftl" />
 ```
 
 Wrapping is a great way to augment the basic HTML elements provided by the simple theme.
@@ -59,7 +61,7 @@ parent = xhtml
 An extended theme does not need to implement every single template that the [Struts Tags](struts-tags) expect. 
 It only needs to implement the templates that change. The other templates are loaded from the parent template.
 
-## Special parameters
+## Special attributes
 
 [UIBean](http://struts.apache.org/maven/struts2-core/apidocs/org/apache/struts2/components/UIBean) provides few 
 special parameters which can be used to build a new template (they are already used in `xhtml` and `css_xhtml` theme):
@@ -75,11 +77,11 @@ special parameters which can be used to build a new template (they are already u
 Using `expandTheme` parameter allows to override only some parts of the theme's templates, e.g. `css.ftl`. You can
 define a new theme (set `theme.properties`) and override just single file.
 
-`${parameters.expandTheme}` is a recurrence which tells `ThemeManager` to load template from current theme and then 
+`${attributes.expandTheme}` is a recurrence which tells `ThemeManager` to load template from current theme and then 
 from parent theme (defined in `theme.properties`) and so on.
 
 Please also notice that the `ThemeManager` builds list of possible templates based on current theme and inherited 
 themes (`/template/custom/textarea.ftl`, `/template/xhtml/textarea.ftl`, `/template/simple/textarea.ftl`). This is also 
-true for templates which are loaded via `${parameters.expandTheme}`.
+true for templates which are loaded via `${attributes.expandTheme}`.
 
 > See also example [Struts 2 Themes]() or [Creating a Theme in Struts 2](http://www.vitarara.org/cms/struts_2_cookbook/creating_a_theme) (Mark Menard)

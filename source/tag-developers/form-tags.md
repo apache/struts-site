@@ -42,9 +42,9 @@ All the form tags extend the UIBean class. This base class provides a set of com
 in to three categories: _templated-related_, _javascript-related_, and _general_ attributes. The individual attributes
 are documented on each tag's reference page.
 
-In addition to the common attributes, a special attribute exists for all form element tags: `form` (`${parameters.form}`). 
+In addition to the common attributes, a special attribute exists for all form element tags: `form` (`${attributes.form}`). 
 The `form` property represents the attributes used to render the form tag, such as the form's id. In a template, 
-the form's ID can be found by calling `${parameters.form.id}`.
+the form's ID can be found by calling `${attributes.form.id}`.
 
 ## Template-Related Attributes
 
@@ -134,8 +134,8 @@ If a `value` is not specified, by default, the JavaBean accessor is used instead
 </@s.form>
 ```
 
-While most attributes are exposed to the underlying templates as the same key as the attribute (`${parameters.label}`), 
-the `value` attribute is not. Instead, it can be accessed via the `nameValue` key (`${parameters.nameValue}`).
+While most attributes are exposed to the underlying templates as the same key as the attribute (`${attributes.label}`), 
+the `value` attribute is not. Instead, it can be accessed via the `nameValue` key (`${attributes.nameValue}`).
 The `nameValue` key indicates that the value may have been generated from the `name` attribute rather than explicitly
 defined in the `value` attribute.
 

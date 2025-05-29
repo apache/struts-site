@@ -211,22 +211,22 @@ parent = xhtml
     Make sure element is always present. To be filled later via JS.
 -->
 <ul<#rt/>
-<#if parameters.id??>
- id="${parameters.id?html}"<#rt/>
+<#if attributes.id??>
+ id="${attributes.id?html}"<#rt/>
 </#if>            
-<#if parameters.cssClass??>
- class="${parameters.cssClass?html}"<#rt/>
+<#if attributes.cssClass??>
+ class="${attributes.cssClass?html}"<#rt/>
 <#else>
  class="errorMessage"<#rt/>
 </#if>
-<#if parameters.cssStyle??>
- style="${parameters.cssStyle?html}"<#rt/>
+<#if attributes.cssStyle??>
+ style="${attributes.cssStyle?html}"<#rt/>
 </#if>
 >
 <#if (actionErrors?? && actionErrors?size > 0)>
     <#list actionErrors as error>
         <#if error??>
-            <li><span><#if parameters.escape>${error!?html}<#else>${error!}</#if></span><#rt/></li><#rt/>
+            <li><span><#if attributes.escape>${error!?html}<#else>${error!}</#if></span><#rt/></li><#rt/>
         </#if>
     </#list>
 </#if>
@@ -236,16 +236,16 @@ parent = xhtml
 #### controlfooter.ftl
 
 ```html
-${parameters.after!}<#t/>
+${attributes.after!}<#t/>
     </td><#lt/>
 </tr>
-<#if (parameters.errorposition!"top") == 'bottom'>
-<#assign hasFieldErrors = parameters.name?? && fieldErrors?? && fieldErrors[parameters.name]??/>
+<#if (attributes.errorposition!"top") == 'bottom'>
+<#assign hasFieldErrors = attributes.name?? && fieldErrors?? && fieldErrors[attributes.name]??/>
 <#if hasFieldErrors>
-<tr errorFor="${parameters.id}">
+<tr errorFor="${attributes.id}">
     <td class="tdErrorMessage" colspan="2"><#rt/>
         <#if hasFieldErrors>
-            <#list fieldErrors[parameters.name] as error>
+            <#list fieldErrors[attributes.name] as error>
                 <div class="errorMessage">${error?html}</div><#t/>
             </#list>
         </#if>
@@ -261,22 +261,22 @@ ${parameters.after!}<#t/>
  <#--
     Always include elements to show errors. They may be filled later via AJAX.
 -->
-<#assign hasFieldErrors = parameters.name?? && fieldErrors?? && fieldErrors[parameters.name]??/>
-<#if (parameters.errorposition!"top") == 'top'>
-<tr errorFor="${parameters.id}">
-    <td class="tdErrorMessage" colspan="2" data-error-for-fieldname="${parameters.name}"><#rt/>
+<#assign hasFieldErrors = attributes.name?? && fieldErrors?? && fieldErrors[attributes.name]??/>
+<#if (attributes.errorposition!"top") == 'top'>
+<tr errorFor="${attributes.id}">
+    <td class="tdErrorMessage" colspan="2" data-error-for-fieldname="${attributes.name}"><#rt/>
         <#if hasFieldErrors>
-            <#list fieldErrors[parameters.name] as error>
+            <#list fieldErrors[attributes.name] as error>
                 <div class="errorMessage">${error?html}</div><#t/>
             </#list>
         </#if>
     </td><#lt/>
 </tr>
 </#if>
-<#if !parameters.labelposition?? && (parameters.form.labelposition)??>
-<#assign labelpos = parameters.form.labelposition/>
-<#elseif parameters.labelposition??>
-<#assign labelpos = parameters.labelposition/>
+<#if !attributes.labelposition?? && (attributes.form.labelposition)??>
+<#assign labelpos = attributes.form.labelposition/>
+<#elseif attributes.labelposition??>
+<#assign labelpos = attributes.labelposition/>
 </#if>
 <#--
     if the label position is top,
@@ -288,10 +288,10 @@ ${parameters.after!}<#t/>
 <#else>
     <td class="tdLabel"><#rt/>
 </#if>
-<#if parameters.label??>
+<#if attributes.label??>
     <label <#t/>
-<#if parameters.id??>
-        for="${parameters.id?html}" <#t/>
+<#if attributes.id??>
+        for="${attributes.id?html}" <#t/>
 </#if>
 <#if hasFieldErrors>
         class="errorLabel"<#t/>
@@ -299,15 +299,15 @@ ${parameters.after!}<#t/>
         class="label"<#t/>
 </#if>
     ><#t/>
-<#if parameters.required!false && parameters.requiredPosition!"right" != 'right'>
+<#if attributes.required!false && attributes.requiredPosition!"right" != 'right'>
         <span class="required">*</span><#t/>
 </#if>
-${parameters.label?html}<#t/>
-<#if parameters.required!false && parameters.requiredPosition!"right" == 'right'>
+${attributes.label?html}<#t/>
+<#if attributes.required!false && attributes.requiredPosition!"right" == 'right'>
  <span class="required">*</span><#t/>
 </#if>
-${parameters.labelseparator!":"?html}<#t/>
-<#include "/${parameters.templateDir}/${parameters.expandTheme}/tooltip.ftl" />
+${attributes.labelseparator!":"?html}<#t/>
+<#include "/${attributes.templateDir}/${attributes.expandTheme}/tooltip.ftl" />
 </label><#t/>
 </#if>
     </td><#lt/>

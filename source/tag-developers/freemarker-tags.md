@@ -50,12 +50,14 @@ pages even easier to code. You can even invoke third-party JSP taglibs as if the
 
 ## Attributes and Parameters
 
-Unlike older versions of JSP (in which the [JSP Tags](jsp-tags) are based), FreeMarker allows for _dynamic attributes_, 
-much like JSP 2.0. You can supply attributes to the tags that the tag doesn't explicitedly support. Those attributes 
-that cannot be applied directly to the tag object will be set to the tag's general-purpose `parameters` Map.
+> NOTE: Since Struts 7.x the `parameters` have been replaced with `attributes`
 
-Suppose we wanted to build an URL in a JSP. The URL needs to take an arbitary parameter to the query string, 
-that (being arbitary) isn't specified on the URL tag. In a JSP, we'd have to use the `url` and `param` tags together.
+Unlike older versions of JSP (in which the [JSP Tags](jsp-tags) are based), FreeMarker allows for _dynamic attributes_, 
+much like JSP 2.0. You can supply attributes to the tags that the tag doesn't explicitly support. Those attributes 
+that cannot be applied directly to the tag object will be set to the tag's general-purpose `attributes` Map.
+
+Suppose we wanted to build an URL in a JSP. The URL needs to take an arbitrary parameter to the query string, 
+that (being arbitrary) isn't specified on the URL tag. In a JSP, we'd have to use the `url` and `param` tags together.
 
 **Creating a URL with a query string (JSP)**
 
@@ -88,9 +90,9 @@ attribute into the textfield tag, no fuss, no muss.
 </@s.form>
 ```
 
-In the new template, the description is referenced via the parameters Map: `${parameters.description}`.
+In the new template, the description is referenced via the attributes Map: `${attributes.description}`.
 
-> For simple cases, inline attributes are much easier to use than the param} tag. But, the `param` tag is more flexible 
+> For simple cases, inline attributes are much easier to use than the param tag. But, the `param` tag is more flexible 
 > than inline attributes for advanced use cases. For example, `param` can take the entire body of the tag and apply 
 > that as the `value` attribute.
 
