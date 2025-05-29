@@ -197,12 +197,16 @@ pages even easier to code. You can even invoke third-party JSP taglibs as if the
 
 <h2 id="attributes-and-parameters">Attributes and Parameters</h2>
 
-<p>Unlike older versions of JSP (in which the <a href="jsp-tags">JSP Tags</a> are based), FreeMarker allows for <em>dynamic attributes</em>, 
-much like JSP 2.0. You can supply attributes to the tags that the tag doesn’t explicitedly support. Those attributes 
-that cannot be applied directly to the tag object will be set to the tag’s general-purpose <code class="language-plaintext highlighter-rouge">parameters</code> Map.</p>
+<blockquote>
+  <p>NOTE: Since Struts 7.x the <code class="language-plaintext highlighter-rouge">parameters</code> have been replaced with <code class="language-plaintext highlighter-rouge">attributes</code></p>
+</blockquote>
 
-<p>Suppose we wanted to build an URL in a JSP. The URL needs to take an arbitary parameter to the query string, 
-that (being arbitary) isn’t specified on the URL tag. In a JSP, we’d have to use the <code class="language-plaintext highlighter-rouge">url</code> and <code class="language-plaintext highlighter-rouge">param</code> tags together.</p>
+<p>Unlike older versions of JSP (in which the <a href="jsp-tags">JSP Tags</a> are based), FreeMarker allows for <em>dynamic attributes</em>, 
+much like JSP 2.0. You can supply attributes to the tags that the tag doesn’t explicitly support. Those attributes 
+that cannot be applied directly to the tag object will be set to the tag’s general-purpose <code class="language-plaintext highlighter-rouge">attributes</code> Map.</p>
+
+<p>Suppose we wanted to build an URL in a JSP. The URL needs to take an arbitrary parameter to the query string, 
+that (being arbitrary) isn’t specified on the URL tag. In a JSP, we’d have to use the <code class="language-plaintext highlighter-rouge">url</code> and <code class="language-plaintext highlighter-rouge">param</code> tags together.</p>
 
 <p><strong>Creating a URL with a query string (JSP)</strong></p>
 
@@ -232,10 +236,10 @@ attribute into the textfield tag, no fuss, no muss.</p>
 </span><span class="err">&lt;/@</span><span class="no">s</span><span class="na">.form</span><span class="err">&gt;</span><span class="w">
 </span></code></pre></div></div>
 
-<p>In the new template, the description is referenced via the parameters Map: <code class="language-plaintext highlighter-rouge">${parameters.description}</code>.</p>
+<p>In the new template, the description is referenced via the attributes Map: <code class="language-plaintext highlighter-rouge">${attributes.description}</code>.</p>
 
 <blockquote>
-  <p>For simple cases, inline attributes are much easier to use than the param} tag. But, the <code class="language-plaintext highlighter-rouge">param</code> tag is more flexible 
+  <p>For simple cases, inline attributes are much easier to use than the param tag. But, the <code class="language-plaintext highlighter-rouge">param</code> tag is more flexible 
 than inline attributes for advanced use cases. For example, <code class="language-plaintext highlighter-rouge">param</code> can take the entire body of the tag and apply 
 that as the <code class="language-plaintext highlighter-rouge">value</code> attribute.</p>
 </blockquote>

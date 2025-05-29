@@ -194,13 +194,13 @@ browsers. The supported browsers are:</p>
 <p>The wrapping technique utilized by the ajax theme is much like <a href="xhtml-theme">xhtml theme</a>, but the <code class="language-plaintext highlighter-rouge">controlheader.ftl</code>
 is a wee bit different.</p>
 
-<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>parameters.label?if_exists != ""&gt;<span class="w">
-	</span>&lt;#include "/$<span class="p">{</span><span class="no">parameters</span><span class="na">.templateDir</span><span class="p">}</span>/xhtml/controlheader.ftl" /&gt;<span class="w">
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>attributes.label?if_exists != ""&gt;<span class="w">
+	</span>&lt;#include "/$<span class="p">{</span><span class="no">attributes</span><span class="na">.templateDir</span><span class="p">}</span>/xhtml/controlheader.ftl" /&gt;<span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
-</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>parameters.form?exists &amp;&amp; parameters.form.validate?default(false) == true&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>attributes.form?exists &amp;&amp; attributes.form.validate?default(false) == true&gt;<span class="w">
 	</span>&lt;#-- can't mutate the data model in freemarker --&gt;<span class="w">
-    </span>&lt;#if parameters.onblur?exists&gt;<span class="w">
-        </span>$<span class="p">{</span><span class="no">tag</span><span class="na">.addParameter</span><span class="p">(</span><span class="err">'</span><span class="no">onblur</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="s2">"validate(this);${parameters.onblur}"</span><span class="p">)}</span><span class="w">
+    </span>&lt;#if attributes.onblur?exists&gt;<span class="w">
+        </span>$<span class="p">{</span><span class="no">tag</span><span class="na">.addParameter</span><span class="p">(</span><span class="err">'</span><span class="no">onblur</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="s2">"validate(this);${attributes.onblur}"</span><span class="p">)}</span><span class="w">
     </span>&lt;#else&gt;<span class="w">
         </span>$<span class="p">{</span><span class="no">tag</span><span class="na">.addParameter</span><span class="p">(</span><span class="err">'</span><span class="no">onblur</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="s2">"validate(this);"</span><span class="p">)}</span><span class="w">
     </span>&lt;/#if&gt;<span class="w">
