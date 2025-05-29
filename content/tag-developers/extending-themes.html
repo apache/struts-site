@@ -158,7 +158,7 @@
       <li><a href="#extending-an-existing-theme" id="markdown-toc-extending-an-existing-theme">Extending an Existing Theme</a></li>
     </ul>
   </li>
-  <li><a href="#special-parameters" id="markdown-toc-special-parameters">Special parameters</a></li>
+  <li><a href="#special-attributes" id="markdown-toc-special-attributes">Special attributes</a></li>
 </ul>
 
 <p>Most often, an application may just need to override a template (see <a href="template-loading">Template Loading</a>) so that 
@@ -189,9 +189,13 @@ by adding a header and footer.</p>
 
 <h3 id="wrapping-a-control">Wrapping a control</h3>
 
-<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">include</span><span class="w"> </span>"/$<span class="p">{</span><span class="no">parameters</span><span class="na">.templateDir</span><span class="p">}</span>/$<span class="p">{</span><span class="no">parameters</span><span class="na">.expandTheme</span><span class="p">}</span>/controlheader.ftl" /&gt;<span class="w">
-</span><span class="err">&lt;#</span><span class="no">include</span><span class="w"> </span>"/$<span class="p">{</span><span class="no">parameters</span><span class="na">.templateDir</span><span class="p">}</span>/simple/xxx.ftl" /&gt;<span class="w">
-</span><span class="err">&lt;#</span><span class="no">include</span><span class="w"> </span>"/$<span class="p">{</span><span class="no">parameters</span><span class="na">.templateDir</span><span class="p">}</span>/$<span class="p">{</span><span class="no">parameters</span><span class="na">.expandTheme</span><span class="p">}</span>/controlfooter.ftl" /&gt;<span class="w">
+<blockquote>
+  <p>NOTE: Since Struts 7.x the <code class="language-plaintext highlighter-rouge">parameters</code> have been replaced with <code class="language-plaintext highlighter-rouge">attributes</code></p>
+</blockquote>
+
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">include</span><span class="w"> </span>"/$<span class="p">{</span><span class="no">attributes</span><span class="na">.templateDir</span><span class="p">}</span>/$<span class="p">{</span><span class="no">attributes</span><span class="na">.expandTheme</span><span class="p">}</span>/controlheader.ftl" /&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">include</span><span class="w"> </span>"/$<span class="p">{</span><span class="no">attributes</span><span class="na">.templateDir</span><span class="p">}</span>/simple/xxx.ftl" /&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">include</span><span class="w"> </span>"/$<span class="p">{</span><span class="no">attributes</span><span class="na">.templateDir</span><span class="p">}</span>/$<span class="p">{</span><span class="no">attributes</span><span class="na">.expandTheme</span><span class="p">}</span>/controlfooter.ftl" /&gt;<span class="w">
 </span></code></pre></div></div>
 
 <p>Wrapping is a great way to augment the basic HTML elements provided by the simple theme.</p>
@@ -211,7 +215,7 @@ The <a href="ajax-theme">ajax theme</a> extends the <a href="xhtml-theme">xhtml 
 <p>An extended theme does not need to implement every single template that the <a href="struts-tags">Struts Tags</a> expect. 
 It only needs to implement the templates that change. The other templates are loaded from the parent template.</p>
 
-<h2 id="special-parameters">Special parameters</h2>
+<h2 id="special-attributes">Special attributes</h2>
 
 <p><a href="http://struts.apache.org/maven/struts2-core/apidocs/org/apache/struts2/components/UIBean">UIBean</a> provides few 
 special parameters which can be used to build a new template (they are already used in <code class="language-plaintext highlighter-rouge">xhtml</code> and <code class="language-plaintext highlighter-rouge">css_xhtml</code> theme):</p>
@@ -229,12 +233,12 @@ theme (and parent theme, and so on)</li>
 <p>Using <code class="language-plaintext highlighter-rouge">expandTheme</code> parameter allows to override only some parts of the theme’s templates, e.g. <code class="language-plaintext highlighter-rouge">css.ftl</code>. You can
 define a new theme (set <code class="language-plaintext highlighter-rouge">theme.properties</code>) and override just single file.</p>
 
-<p><code class="language-plaintext highlighter-rouge">${parameters.expandTheme}</code> is a recurrence which tells <code class="language-plaintext highlighter-rouge">ThemeManager</code> to load template from current theme and then 
+<p><code class="language-plaintext highlighter-rouge">${attributes.expandTheme}</code> is a recurrence which tells <code class="language-plaintext highlighter-rouge">ThemeManager</code> to load template from current theme and then 
 from parent theme (defined in <code class="language-plaintext highlighter-rouge">theme.properties</code>) and so on.</p>
 
 <p>Please also notice that the <code class="language-plaintext highlighter-rouge">ThemeManager</code> builds list of possible templates based on current theme and inherited 
 themes (<code class="language-plaintext highlighter-rouge">/template/custom/textarea.ftl</code>, <code class="language-plaintext highlighter-rouge">/template/xhtml/textarea.ftl</code>, <code class="language-plaintext highlighter-rouge">/template/simple/textarea.ftl</code>). This is also 
-true for templates which are loaded via <code class="language-plaintext highlighter-rouge">${parameters.expandTheme}</code>.</p>
+true for templates which are loaded via <code class="language-plaintext highlighter-rouge">${attributes.expandTheme}</code>.</p>
 
 <blockquote>
   <p>See also example <a href="">Struts 2 Themes</a> or <a href="http://www.vitarara.org/cms/struts_2_cookbook/creating_a_theme">Creating a Theme in Struts 2</a> (Mark Menard)</p>

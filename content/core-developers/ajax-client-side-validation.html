@@ -381,22 +381,22 @@ but as usual request, not AJAX.</p>
     </span>Make sure element is always present. To be filled later via JS.<span class="w">
 </span><span class="err">--&gt;</span><span class="w">
 </span><span class="err">&lt;</span><span class="no">ul</span><span class="err">&lt;#</span><span class="no">rt</span><span class="err">/&gt;</span><span class="w">
-</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>parameters.id??&gt;<span class="w">
- </span>id="$<span class="p">{</span><span class="no">parameters</span><span class="na">.id</span><span class="err">?</span><span class="no">html</span><span class="p">}</span>"&lt;#rt/&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>attributes.id??&gt;<span class="w">
+ </span>id="$<span class="p">{</span><span class="no">attributes</span><span class="na">.id</span><span class="err">?</span><span class="no">html</span><span class="p">}</span>"&lt;#rt/&gt;<span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">            
-</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>parameters.cssClass??&gt;<span class="w">
- </span>class="$<span class="p">{</span><span class="no">parameters</span><span class="na">.cssClass</span><span class="err">?</span><span class="no">html</span><span class="p">}</span>"&lt;#rt/&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>attributes.cssClass??&gt;<span class="w">
+ </span>class="$<span class="p">{</span><span class="no">attributes</span><span class="na">.cssClass</span><span class="err">?</span><span class="no">html</span><span class="p">}</span>"&lt;#rt/&gt;<span class="w">
 </span><span class="err">&lt;#</span><span class="no">else</span><span class="err">&gt;</span><span class="w">
  </span>class="errorMessage"&lt;#rt/&gt;<span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
-</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>parameters.cssStyle??&gt;<span class="w">
- </span>style="$<span class="p">{</span><span class="no">parameters</span><span class="na">.cssStyle</span><span class="err">?</span><span class="no">html</span><span class="p">}</span>"&lt;#rt/&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>attributes.cssStyle??&gt;<span class="w">
+ </span>style="$<span class="p">{</span><span class="no">attributes</span><span class="na">.cssStyle</span><span class="err">?</span><span class="no">html</span><span class="p">}</span>"&lt;#rt/&gt;<span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
 </span><span class="err">&gt;</span><span class="w">
 </span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>(actionErrors?? &amp;&amp; actionErrors?size &gt; 0)&gt;<span class="w">
     </span>&lt;#list actionErrors as error&gt;<span class="w">
         </span>&lt;#if error??&gt;<span class="w">
-            </span>&lt;li&gt;&lt;span&gt;&lt;#if parameters.escape&gt;$<span class="p">{</span><span class="no">error</span><span class="err">!?</span><span class="no">html</span><span class="p">}</span>&lt;#else&gt;$<span class="p">{</span><span class="no">error</span><span class="err">!</span><span class="p">}</span>&lt;/#if&gt;&lt;/span&gt;&lt;#rt/&gt;&lt;/li&gt;&lt;#rt/&gt;<span class="w">
+            </span>&lt;li&gt;&lt;span&gt;&lt;#if attributes.escape&gt;$<span class="p">{</span><span class="no">error</span><span class="err">!?</span><span class="no">html</span><span class="p">}</span>&lt;#else&gt;$<span class="p">{</span><span class="no">error</span><span class="err">!</span><span class="p">}</span>&lt;/#if&gt;&lt;/span&gt;&lt;#rt/&gt;&lt;/li&gt;&lt;#rt/&gt;<span class="w">
         </span>&lt;/#if&gt;<span class="w">
     </span>&lt;/#list&gt;<span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
@@ -405,16 +405,16 @@ but as usual request, not AJAX.</p>
 
 <p><strong>controlfooter.ftl</strong></p>
 
-<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">${</span><span class="no">parameters</span><span class="na">.after</span><span class="err">!}&lt;#</span><span class="no">t</span><span class="err">/&gt;</span><span class="w">
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">${</span><span class="no">attributes</span><span class="na">.after</span><span class="err">!}&lt;#</span><span class="no">t</span><span class="err">/&gt;</span><span class="w">
     </span>&lt;/td&gt;&lt;#lt/&gt;<span class="w">
 </span><span class="err">&lt;/</span><span class="no">tr</span><span class="err">&gt;</span><span class="w">
-</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>(parameters.errorposition!"top") == 'bottom'&gt;<span class="w">
-</span><span class="err">&lt;#</span><span class="no">assign</span><span class="w"> </span>hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[parameters.name]??/&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>(attributes.errorposition!"top") == 'bottom'&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">assign</span><span class="w"> </span>hasFieldErrors = attributes.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[attributes.name]??/&gt;<span class="w">
 </span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>hasFieldErrors&gt;<span class="w">
-</span><span class="err">&lt;</span><span class="no">tr</span><span class="w"> </span>errorFor="$<span class="p">{</span><span class="no">parameters</span><span class="na">.id</span><span class="p">}</span>"&gt;<span class="w">
+</span><span class="err">&lt;</span><span class="no">tr</span><span class="w"> </span>errorFor="$<span class="p">{</span><span class="no">attributes</span><span class="na">.id</span><span class="p">}</span>"&gt;<span class="w">
     </span>&lt;td class="tdErrorMessage" colspan="2"&gt;&lt;#rt/&gt;<span class="w">
         </span>&lt;#if hasFieldErrors&gt;<span class="w">
-            </span>&lt;#list fieldErrors[parameters.name] as error&gt;<span class="w">
+            </span>&lt;#list fieldErrors[attributes.name] as error&gt;<span class="w">
                 </span>&lt;div class="errorMessage"&gt;$<span class="p">{</span><span class="no">error</span><span class="err">?</span><span class="no">html</span><span class="p">}</span>&lt;/div&gt;&lt;#t/&gt;<span class="w">
             </span>&lt;/#list&gt;<span class="w">
         </span>&lt;/#if&gt;<span class="w">
@@ -429,22 +429,22 @@ but as usual request, not AJAX.</p>
 <div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#--</span><span class="w">
     </span>Always include elements to show errors. They may be filled later via AJAX.<span class="w">
 </span><span class="err">--&gt;</span><span class="w">
-</span><span class="err">&lt;#</span><span class="no">assign</span><span class="w"> </span>hasFieldErrors = parameters.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[parameters.name]??/&gt;<span class="w">
-</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>(parameters.errorposition!"top") == 'top'&gt;<span class="w">
-</span><span class="err">&lt;</span><span class="no">tr</span><span class="w"> </span>errorFor="$<span class="p">{</span><span class="no">parameters</span><span class="na">.id</span><span class="p">}</span>"&gt;<span class="w">
-    </span>&lt;td class="tdErrorMessage" colspan="2" data-error-for-fieldname="$<span class="p">{</span><span class="no">parameters</span><span class="na">.name</span><span class="p">}</span>"&gt;&lt;#rt/&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">assign</span><span class="w"> </span>hasFieldErrors = attributes.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors[attributes.name]??/&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>(attributes.errorposition!"top") == 'top'&gt;<span class="w">
+</span><span class="err">&lt;</span><span class="no">tr</span><span class="w"> </span>errorFor="$<span class="p">{</span><span class="no">attributes</span><span class="na">.id</span><span class="p">}</span>"&gt;<span class="w">
+    </span>&lt;td class="tdErrorMessage" colspan="2" data-error-for-fieldname="$<span class="p">{</span><span class="no">attributes</span><span class="na">.name</span><span class="p">}</span>"&gt;&lt;#rt/&gt;<span class="w">
         </span>&lt;#if hasFieldErrors&gt;<span class="w">
-            </span>&lt;#list fieldErrors[parameters.name] as error&gt;<span class="w">
+            </span>&lt;#list fieldErrors[attributes.name] as error&gt;<span class="w">
                 </span>&lt;div class="errorMessage"&gt;$<span class="p">{</span><span class="no">error</span><span class="err">?</span><span class="no">html</span><span class="p">}</span>&lt;/div&gt;&lt;#t/&gt;<span class="w">
             </span>&lt;/#list&gt;<span class="w">
         </span>&lt;/#if&gt;<span class="w">
     </span>&lt;/td&gt;&lt;#lt/&gt;<span class="w">
 </span><span class="err">&lt;/</span><span class="no">tr</span><span class="err">&gt;</span><span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
-</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>!parameters.labelposition?? &amp;&amp; (parameters.form.labelposition)??&gt;<span class="w">
-</span><span class="err">&lt;#</span><span class="no">assign</span><span class="w"> </span>labelpos = parameters.form.labelposition/&gt;<span class="w">
-</span><span class="err">&lt;#</span><span class="no">elseif</span><span class="w"> </span>parameters.labelposition??&gt;<span class="w">
-</span><span class="err">&lt;#</span><span class="no">assign</span><span class="w"> </span>labelpos = parameters.labelposition/&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>!attributes.labelposition?? &amp;&amp; (attributes.form.labelposition)??&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">assign</span><span class="w"> </span>labelpos = attributes.form.labelposition/&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">elseif</span><span class="w"> </span>attributes.labelposition??&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">assign</span><span class="w"> </span>labelpos = attributes.labelposition/&gt;<span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
 </span><span class="err">&lt;#--</span><span class="w">
     </span>if the label position is top,<span class="w">
@@ -456,10 +456,10 @@ but as usual request, not AJAX.</p>
 </span><span class="err">&lt;#</span><span class="no">else</span><span class="err">&gt;</span><span class="w">
     </span>&lt;td class="tdLabel"&gt;&lt;#rt/&gt;<span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
-</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>parameters.label??&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>attributes.label??&gt;<span class="w">
     </span>&lt;label &lt;#t/&gt;<span class="w">
-</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>parameters.id??&gt;<span class="w">
-        </span>for="$<span class="p">{</span><span class="no">parameters</span><span class="na">.id</span><span class="err">?</span><span class="no">html</span><span class="p">}</span>" &lt;#t/&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>attributes.id??&gt;<span class="w">
+        </span>for="$<span class="p">{</span><span class="no">attributes</span><span class="na">.id</span><span class="err">?</span><span class="no">html</span><span class="p">}</span>" &lt;#t/&gt;<span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
 </span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>hasFieldErrors&gt;<span class="w">
         </span>class="errorLabel"&lt;#t/&gt;<span class="w">
@@ -467,15 +467,15 @@ but as usual request, not AJAX.</p>
         </span>class="label"&lt;#t/&gt;<span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
     </span>&gt;&lt;#t/&gt;<span class="w">
-</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>parameters.required!false &amp;&amp; parameters.requiredPosition!"right" != 'right'&gt;<span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>attributes.required!false &amp;&amp; attributes.requiredPosition!"right" != 'right'&gt;<span class="w">
         </span>&lt;span class="required"&gt;<span class="err">*</span>&lt;/span&gt;&lt;#t/&gt;<span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
-</span><span class="err">${</span><span class="no">parameters</span><span class="na">.label</span><span class="err">?</span><span class="no">html</span><span class="err">}&lt;#</span><span class="no">t</span><span class="err">/&gt;</span><span class="w">
-</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>parameters.required!false &amp;&amp; parameters.requiredPosition!"right" == 'right'&gt;<span class="w">
+</span><span class="err">${</span><span class="no">attributes</span><span class="na">.label</span><span class="err">?</span><span class="no">html</span><span class="err">}&lt;#</span><span class="no">t</span><span class="err">/&gt;</span><span class="w">
+</span><span class="err">&lt;#</span><span class="no">if</span><span class="w"> </span>attributes.required!false &amp;&amp; attributes.requiredPosition!"right" == 'right'&gt;<span class="w">
  </span>&lt;span class="required"&gt;<span class="err">*</span>&lt;/span&gt;&lt;#t/&gt;<span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
-</span><span class="err">${</span><span class="no">parameters</span><span class="na">.labelseparator</span><span class="err">!":"?</span><span class="no">html</span><span class="err">}&lt;#</span><span class="no">t</span><span class="err">/&gt;</span><span class="w">
-</span><span class="err">&lt;#</span><span class="no">include</span><span class="w"> </span>"/$<span class="p">{</span><span class="no">parameters</span><span class="na">.templateDir</span><span class="p">}</span>/$<span class="p">{</span><span class="no">parameters</span><span class="na">.expandTheme</span><span class="p">}</span>/tooltip.ftl" /&gt;<span class="w">
+</span><span class="err">${</span><span class="no">attributes</span><span class="na">.labelseparator</span><span class="err">!":"?</span><span class="no">html</span><span class="err">}&lt;#</span><span class="no">t</span><span class="err">/&gt;</span><span class="w">
+</span><span class="err">&lt;#</span><span class="no">include</span><span class="w"> </span>"/$<span class="p">{</span><span class="no">attributes</span><span class="na">.templateDir</span><span class="p">}</span>/$<span class="p">{</span><span class="no">attributes</span><span class="na">.expandTheme</span><span class="p">}</span>/tooltip.ftl" /&gt;<span class="w">
 </span><span class="err">&lt;/</span><span class="no">label</span><span class="err">&gt;&lt;#</span><span class="no">t</span><span class="err">/&gt;</span><span class="w">
 </span><span class="err">&lt;/#</span><span class="no">if</span><span class="err">&gt;</span><span class="w">
     </span>&lt;/td&gt;&lt;#lt/&gt;<span class="w">
