@@ -157,11 +157,11 @@ I then modified the `checkboxlist.ftl` in the KUTheme folder to be:
 **Modified checkboxlist.ftl**
 
 ```ftl
-<#include "/${parameters.templateDir}/${parameters.expandTheme}/controlheader.ftl" />
+<#include "/${attributes.templateDir}/${attributes.expandTheme}/controlheader.ftl" />
 
-<#include "/${parameters.templateDir}/KUTheme_simple/checkboxlist.ftl" />
+<#include "/${attributes.templateDir}/KUTheme_simple/checkboxlist.ftl" />
 
-<#include "/${parameters.templateDir}/${parameters.expandTheme}/controlfooter.ftl" /><#nt/>
+<#include "/${attributes.templateDir}/${attributes.expandTheme}/controlfooter.ftl" /><#nt/>
 ```
 
 Be sure to note the change to the second line—using KUTheme_simple in the path.

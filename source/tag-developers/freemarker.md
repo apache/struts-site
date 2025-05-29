@@ -113,15 +113,15 @@ or
 Assuming there's a request parameter `myParameter` (eg. [http://host/myApp/myAction.action?myParameter=one]).
 
 ```ftl
-<#if Parameters.myParameter?exists>
-     ${Parameters.myParameter}
+<#if attributes.myParameter?exists>
+     ${attributes.myParameter}
 </#if>
 ```
 
 or
 
 ```ftl
-<@s.property value="%{#parameters.myParameter}" />
+<@s.property value="%{#attributes.myParameter}" />
 ```
 
 ### Context parameter

@@ -32,7 +32,7 @@ and `controlfooter.ftl` templates are wrapped around the simple template.
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/text.ftl %}
 {% endhighlight %}
 
-> The `controlheader.ftl` is referenced using `${parameters.theme}` so that the code can be reused 
+> The `controlheader.ftl` is referenced using `${attributes.theme}` so that the code can be reused 
 > by the [ajax theme](ajax-theme).
 
 ## XHTML Theme Header
