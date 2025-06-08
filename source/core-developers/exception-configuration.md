@@ -7,6 +7,10 @@ parent:
 ---
 
 # Exception Configuration
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 Exception mappings is a powerful feature for dealing with an Action class that throws an Exception. The core idea is 
 that an Exception thrown during the Action method can be automatically caught and mapped to a predefined Result. This 
@@ -15,7 +19,7 @@ declarative strategy is especially useful for frameworks, like Hibernate and Ace
 As with many other parts of the framework, an Interceptor is needed to activate the exception mapping functionality. 
 Below is a snippet from `struts-default.xml` which has the exception mapping already activated.
 
-**snippet of struts-default.xml**
+### Snippet of struts-default.xml
 
 ```xml
 ...
@@ -65,7 +69,7 @@ by the Action.
 
 Below is an example of global and local exception mappings.
 
-**snippet from struts.xml**
+### Snippet from struts.xml
 
 ```xml
 <struts>
@@ -100,12 +104,12 @@ In the example above, here is what happens based upon each Exception:
 ## Exception Values on the ValueStack
 
 By default, the `ExceptionMappingInterceptor` adds the following values to the Value Stack:
+- `exception` the exception object
+- `exceptionStack` details of the exception
 
-| exception | The exception object itself |
-|-----------|-----------------------------|
-| exceptionStack | The value from the stack trace |
+Please also check [Exception Handling](../getting-started/exception-handling) in the Getting Started guide. See [ExceptionHolder](https://github.com/apache/struts/blob/main/core/src/main/java/org/apache/struts2/interceptor/ExceptionHolder.java) for more details.
 
-**Sample JSP using Error and Exception Values**
+### Sample JSP using Error and Exception Values
 
 ```jsp 
 <h2>An unexpected error has occurred</h2>
@@ -118,16 +122,16 @@ By default, the `ExceptionMappingInterceptor` adds the following values to the V
 <h3>Error Message</h3>
 <s:actionerror/>
 <p>
-    <s:property value="%{exception.message}"/>
+    <s:property value="exception"/>
 </p>
 <hr/>
 <h3>Technical Details</h3>
 <p>
-    <s:property value="%{exceptionStack}"/>
+    <s:property value="exceptionStack"/>
 </p>
 ```
 
 ## Exception in constructors
 
-Global exception mappings are designed to be used with exceptions thrown by action methods (like `execute`). exceptions 
+Global exception mappings are designed to be used with exceptions thrown by action methods (like `execute`). Exceptions 
 thrown from constructors will **not** be handled by global exception mappings.
