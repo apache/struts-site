@@ -151,7 +151,17 @@
     
     <a href="index" title="back to Core Developers"><< back to Core Developers</a>
     
-    <h1 id="exception-configuration">Exception Configuration</h1>
+    <h1 class="no_toc" id="exception-configuration">Exception Configuration</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#snippet-of-struts-defaultxml" id="markdown-toc-snippet-of-struts-defaultxml">Snippet of struts-default.xml</a></li>
+  <li><a href="#snippet-from-strutsxml" id="markdown-toc-snippet-from-strutsxml">Snippet from struts.xml</a></li>
+  <li><a href="#exception-values-on-the-valuestack" id="markdown-toc-exception-values-on-the-valuestack">Exception Values on the ValueStack</a>    <ul>
+      <li><a href="#sample-jsp-using-error-and-exception-values" id="markdown-toc-sample-jsp-using-error-and-exception-values">Sample JSP using Error and Exception Values</a></li>
+    </ul>
+  </li>
+  <li><a href="#exception-in-constructors" id="markdown-toc-exception-in-constructors">Exception in constructors</a></li>
+</ul>
 
 <p>Exception mappings is a powerful feature for dealing with an Action class that throws an Exception. The core idea is 
 that an Exception thrown during the Action method can be automatically caught and mapped to a predefined Result. This 
@@ -160,7 +170,7 @@ declarative strategy is especially useful for frameworks, like Hibernate and Ace
 <p>As with many other parts of the framework, an Interceptor is needed to activate the exception mapping functionality. 
 Below is a snippet from <code class="language-plaintext highlighter-rouge">struts-default.xml</code> which has the exception mapping already activated.</p>
 
-<p><strong>snippet of struts-default.xml</strong></p>
+<h3 id="snippet-of-struts-defaultxml">Snippet of struts-default.xml</h3>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 <span class="nt">&lt;interceptors&gt;</span>
@@ -211,7 +221,7 @@ action mapping, and if not found, it looks for a global Result.</p>
 
 <p>Below is an example of global and local exception mappings.</p>
 
-<p><strong>snippet from struts.xml</strong></p>
+<h3 id="snippet-from-strutsxml">Snippet from struts.xml</h3>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
     <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"default"</span><span class="nt">&gt;</span>
@@ -247,23 +257,14 @@ action mapping, and if not found, it looks for a global Result.</p>
 <h2 id="exception-values-on-the-valuestack">Exception Values on the ValueStack</h2>
 
 <p>By default, the <code class="language-plaintext highlighter-rouge">ExceptionMappingInterceptor</code> adds the following values to the Value Stack:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">exception</code> the exception object</li>
+  <li><code class="language-plaintext highlighter-rouge">exceptionStack</code> details of the exception</li>
+</ul>
 
-<table>
-  <thead>
-    <tr>
-      <th>exception</th>
-      <th>The exception object itself</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>exceptionStack</td>
-      <td>The value from the stack trace</td>
-    </tr>
-  </tbody>
-</table>
+<p>Please also check <a href="../getting-started/exception-handling">Exception Handling</a> in the Getting Started guide. See <a href="https://github.com/apache/struts/blob/main/core/src/main/java/org/apache/struts2/interceptor/ExceptionHolder.java">ExceptionHolder</a> for more details.</p>
 
-<p><strong>Sample JSP using Error and Exception Values</strong></p>
+<h3 id="sample-jsp-using-error-and-exception-values">Sample JSP using Error and Exception Values</h3>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h2&gt;</span>An unexpected error has occurred<span class="nt">&lt;/h2&gt;</span>
 <span class="nt">&lt;p&gt;</span>
@@ -275,18 +276,18 @@ action mapping, and if not found, it looks for a global Result.</p>
 <span class="nt">&lt;h3&gt;</span>Error Message<span class="nt">&lt;/h3&gt;</span>
 <span class="nt">&lt;s:actionerror/&gt;</span>
 <span class="nt">&lt;p&gt;</span>
-    <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"%{exception.message}"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"exception"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/p&gt;</span>
 <span class="nt">&lt;hr/&gt;</span>
 <span class="nt">&lt;h3&gt;</span>Technical Details<span class="nt">&lt;/h3&gt;</span>
 <span class="nt">&lt;p&gt;</span>
-    <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"%{exceptionStack}"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;s:property </span><span class="na">value=</span><span class="s">"exceptionStack"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/p&gt;</span>
 </code></pre></div></div>
 
 <h2 id="exception-in-constructors">Exception in constructors</h2>
 
-<p>Global exception mappings are designed to be used with exceptions thrown by action methods (like <code class="language-plaintext highlighter-rouge">execute</code>). exceptions 
+<p>Global exception mappings are designed to be used with exceptions thrown by action methods (like <code class="language-plaintext highlighter-rouge">execute</code>). Exceptions 
 thrown from constructors will <strong>not</strong> be handled by global exception mappings.</p>
 
   </section>
