@@ -45,13 +45,13 @@ and `global-results`. For example examine the `struts.xml` from the exception-ha
 </global-exception-mappings>
 ```
 
-The global exception mapping node tells the Struts 2 framework what to do if an uncaught exception of the type specified 
-(or a child of that type) is thrown by the the application. For example if a SecurityBreachException is thrown but 
-not caught, the Struts 2 Action class will return a result of "securityerror". All other uncaught exceptions will cause 
+The global exception mapping node tells the Struts framework what to do if an uncaught exception of the type specified 
+(or a child of that type) is thrown by the application. For example if a SecurityBreachException is thrown but 
+not caught, the Struts 2 Action class will return a result of `securityerror`. All other uncaught exceptions will cause 
 the Struts 2 Action class to return a result of "error".
 
-The global results mapping node relates the result value to a specific view page. For example the result "securityerror"
-will cause the framework to redirect the user's browser to the securityerror.jsp view page.
+The global results mapping node relates the result value to a specific view page. For example the result `securityerror`
+will cause the framework to redirect the user's browser to the `securityerror.jsp` view page.
 
 ## Exception Handling Per Action
 
