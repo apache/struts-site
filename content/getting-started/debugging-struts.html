@@ -149,7 +149,7 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/getting-started/debugging-struts.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    <a href="index" title="back to Getting started"><< back to Getting started</a>
     
     <h1 class="no_toc" id="debugging-struts">Debugging Struts</h1>
 
@@ -157,7 +157,7 @@
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#configuration-plugin" id="markdown-toc-configuration-plugin">Configuration Plugin</a></li>
   <li><a href="#using-the-debugging-interceptor" id="markdown-toc-using-the-debugging-interceptor">Using the Debugging Interceptor</a></li>
-  <li><a href="#struts-2-logging" id="markdown-toc-struts-2-logging">Struts 2 Logging</a></li>
+  <li><a href="#struts-logging" id="markdown-toc-struts-logging">Struts Logging</a></li>
   <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
 </ul>
 
@@ -165,20 +165,20 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p>During development of a Struts 2 web application you may want to view the information being managed by the Struts 2 framework. 
-This tutorial will cover two tools you can use to see how Struts 2 views your web application. One tool is the Struts 2 
+<p>During development of a Struts web application you may want to view the information being managed by the Struts framework. 
+This tutorial will cover two tools you can use to see how Struts views your web application. One tool is the Struts 
 configuration plugin and the other is the debugging interceptor. This article also discusses how to set the log level 
 to see more or fewer log messages.</p>
 
-<p>The Struts 2 <a href="http://struts.apache.org/mail">user mailing list</a> is an excellent place to get help. If you are having 
-a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer 
+<p>The Struts <a href="http://struts.apache.org/mail">user mailing list</a> is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts mailing list. If you don’t find an answer 
 to your problem, post a question on the mailing list.</p>
 
 <h2 id="configuration-plugin">Configuration Plugin</h2>
 
-<p>The Struts 2 config browser plugin provides details about the configuration the Struts 2 framework is using to run your 
+<p>The Struts config browser plugin provides details about the configuration the Struts framework is using to run your 
 application. To use the plugin your application needs to have the struts2-config-browser-plugin-x.x.x.x.jar in your 
-application’s class path. The config-browser-plugin jar is part of the Struts 2 download and is also available in the Maven 
+application’s class path. The config-browser-plugin jar is part of the Struts download and is also available in the Maven 
 repository.</p>
 
 <p>To use the plugin in your application, just call index.action in namespace <code class="language-plaintext highlighter-rouge">config-browser</code>. For example you could have 
@@ -189,7 +189,7 @@ the following link on your admin page (or just anywhere during your development)
 
 <p>In the example application, there is a link to the configuration browser on the index.jsp page.</p>
 
-<p>Clicking on the link for the configuration browser will cause the Struts 2 framework to return this page to your browser.</p>
+<p>Clicking on the link for the configuration browser will cause the Struts framework to return this page to your browser.</p>
 
 <p><img src="attachments/att17137672_debuging-struts-1.png" alt="debuging-struts-1.png" /></p>
 
@@ -199,16 +199,16 @@ link results in this.</p>
 <p><img src="attachments/att17137673_debuging-struts-2.png" alt="debuging-struts-2.png" /></p>
 
 <p>You may then click on one of the tabs (Results, Exception Mappings, Interceptors, Properties, Validators) to get more 
-information about how the Struts 2 framework has configured that specific action.</p>
+information about how the Struts framework has configured that specific action.</p>
 
 <p>On the left side of the page is the config browser plugin menu. Clicking on constants will render a view that lists all 
-the Struts 2 constants and their properties for your application. Clicking on beans shows the beans Struts 2 is managing. 
+the Struts constants and their properties for your application. Clicking on beans shows the beans Struts is managing. 
 Clicking on Jars shows the jars your application is using.</p>
 
 <h2 id="using-the-debugging-interceptor">Using the Debugging Interceptor</h2>
 
 <p>If you have set <code class="language-plaintext highlighter-rouge">devMode</code> to true (in the example application see <code class="language-plaintext highlighter-rouge">struts.xml</code>) then one of the interceptors that is 
-activated when Struts 2 processes an action is the DebuggingInterceptor. The DebuggingInterceptor looks for a query 
+activated when Struts processes an action is the DebuggingInterceptor. The DebuggingInterceptor looks for a query 
 string appended to the action URL with a name of debug and a value of xml, console, command, or browser.</p>
 
 <p>If the <code class="language-plaintext highlighter-rouge">DebuggingInterceptor</code> finds that query string then it will halt further execution of the action and instead return 
@@ -217,19 +217,19 @@ See <a href="../core-developers/debugging-interceptor">DebuggingInterceptor</a> 
 
 <p>In the example application on the index.jsp is a link for displaying debugging information. This link includes the query 
 string <code class="language-plaintext highlighter-rouge">debug=browser</code>. If you click on this link you’ll see a table with columns that can be expanded and collapsed. 
-The table contains the various objects and their state being managed by the Struts 2 framework.</p>
+The table contains the various objects and their state being managed by the Struts framework.</p>
 
 <p><img src="attachments/att17137674_debuging-struts-3.png" alt="debuging-struts-3.png" /></p>
 
 <p>Note that to enable the correct display and interaction of the expand/collapse links on the debugging information web page 
 you need to include the <code class="language-plaintext highlighter-rouge">s:head</code> tag in your JSP’s head section (see index.jsp in the example application) and also include 
-the Struts 2 dojo plugin in your application’s class path. The Struts 2 dojo plugin is available as part of the Struts 2 
+the Struts dojo plugin in your application’s class path. The Struts dojo plugin is available as part of the Struts 
 download and from the Maven repository.</p>
 
-<h2 id="struts-2-logging">Struts 2 Logging</h2>
+<h2 id="struts-logging">Struts Logging</h2>
 
-<p>The Struts 2 framework will write to a log a great deal of information if you’ve configured the log properties to log at 
-the debug level. In the example application, view <code class="language-plaintext highlighter-rouge">log4j2.xml</code>. The two major packages involved in the Struts 2 framework, 
+<p>The Struts framework will write to a log a great deal of information if you’ve configured the log properties to log at 
+the debug level. In the example application, view <code class="language-plaintext highlighter-rouge">log4j2.xml</code>. The two major packages involved in the Struts framework, 
 <code class="language-plaintext highlighter-rouge">com.opensymphony</code> and <code class="language-plaintext highlighter-rouge">org.apache.struts2</code>, are configured to write debug and above log messages. When you run the application 
 view the standard out for your Servlet container to see all the information written to the log. Please check <a href="../core-developers/logging">Logging</a>
 page for other options.</p>
@@ -237,7 +237,7 @@ page for other options.</p>
 <h2 id="summary">Summary</h2>
 
 <p>Using the configuration browser plugin and the debugging interceptor can assist you in trouble shooting a problem with 
-a Struts 2 web application. These tools should only be used in development.</p>
+a Struts web application. These tools should only be used in development.</p>
 
 <p>Prior to creating your war file for deployment to production you should change <code class="language-plaintext highlighter-rouge">devMode</code> to false and remove the debugging 
 links. You may also want to adjust the level of logging in your log properties file to a higher level (info or warn) to reduce 

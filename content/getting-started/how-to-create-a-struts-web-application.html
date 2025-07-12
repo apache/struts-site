@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>How to create a Struts web application</title>
+
+  <link href="/css/source-sans-pro.css" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/css/syntax.css" rel="stylesheet">
+
+  <script src="/js/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+
+  <!-- Matomo -->
+  <script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    /* We explicitly disable cookie tracking to avoid privacy issues */
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//analytics.apache.org/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '41']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+<body>
+
+<a href="https://github.com/apache/struts" class="github-ribbon">
+  <img decoding="async" loading="lazy" style="position: absolute; right: 0; border: 0;" width="149" height="149" src="/img/forkme_right_red_aa0000.webp?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/download.cgi">Download</a></li>
+                <li><a href="/releases.html">Releases</a></li>
+                <li><a href="/announce-2025.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+                <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li><a href="/commercial-support.html">Commercial Support</a></li>
+                <li class="divider"></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Version Notes</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins">Security Bulletins</a></li>
+                <li><a href="/idea-plugin">IntelliJ IDEA plugin</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Maven Project Info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core Dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin Dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/core-developers/">Core Developers Guide</a></li>
+                <li><a href="/tag-developers/">Tag Developers Guide</a></li>
+                <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
+                <li><a href="/plugins/">Plugins</a></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/tag-developers/tag-reference.html">Tag reference</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/FAQs">FAQs</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code and Builds</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li><a href="/contributors/">Contributors Guide</a></li>
+                <li class="divider"></li>
+                <li><a href="/release-guidelines.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://gitbox.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+                <li><a href="/updating-website.html">Updating the website</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/getting-started/how-to-create-a-struts-web-application.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="index" title="back to Getting started"><< back to Getting started</a>
+    
+    <h1 class="no_toc" id="how-to-create-a-struts-web-application">How To Create A Struts Web Application</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#java-requirements" id="markdown-toc-java-requirements">Java Requirements</a></li>
+  <li><a href="#our-first-application" id="markdown-toc-our-first-application">Our First Application</a></li>
+  <li><a href="#create-struts-web-application-using-maven-to-manage-artifacts-and-to-build-the-application" id="markdown-toc-create-struts-web-application-using-maven-to-manage-artifacts-and-to-build-the-application">Create Struts Web Application Using Maven To Manage Artifacts and To Build The Application</a>    <ul>
+      <li><a href="#step-1---create-a-java-web-application" id="markdown-toc-step-1---create-a-java-web-application">Step 1 - Create A Java Web Application</a></li>
+      <li><a href="#step-2---add-indexjsp" id="markdown-toc-step-2---add-indexjsp">Step 2 - Add index.jsp</a></li>
+      <li><a href="#step-3---add-struts-jar-files-to-class-path" id="markdown-toc-step-3---add-struts-jar-files-to-class-path">Step 3 - Add Struts Jar Files To Class Path</a></li>
+      <li><a href="#step-4---add-logging" id="markdown-toc-step-4---add-logging">Step 4 - Add Logging</a></li>
+      <li><a href="#step-5---add-struts-servlet-filter" id="markdown-toc-step-5---add-struts-servlet-filter">Step 5 - Add Struts Servlet Filter</a></li>
+      <li><a href="#step-6---create-strutsxml" id="markdown-toc-step-6---create-strutsxml">Step 6 - Create struts.xml</a></li>
+      <li><a href="#step-7---build-and-run-the-application" id="markdown-toc-step-7---build-and-run-the-application">Step 7 - Build and Run the Application</a></li>
+    </ul>
+  </li>
+  <li><a href="#getting-help" id="markdown-toc-getting-help">Getting Help</a></li>
+</ul>
+
+<p>This tutorial walks through installing the framework and creating a simple application.</p>
+
+<p>While the Struts framework is simple to use, creating non-trivial applications assumes a working knowledge 
+of many J2EE technologies, including:</p>
+
+<ul>
+  <li>Java</li>
+  <li>Filters, JSP, and Tag Libraries</li>
+  <li>JavaBeans</li>
+  <li>HTML and HTTP</li>
+  <li>Web Containers (such as Tomcat)</li>
+  <li>XML</li>
+</ul>
+
+<blockquote>
+  <p>For more about supporting technologies, see the <a href="../primer">Key Technologies Primer</a>.</p>
+</blockquote>
+
+<h2 id="java-requirements">Java Requirements</h2>
+
+<p>Struts 7 requires Jakarta Servlet API 6 or higher and Java 17 or higher.
+In case of Struts 6, it requires Servlet API 2.5 or higher and Java 8 or higher.</p>
+
+<blockquote>
+  <p>Note: This guide focuses on Struts 7.</p>
+</blockquote>
+
+<h2 id="our-first-application">Our First Application</h2>
+
+<p>To get started using Struts we will create a web application using Maven to manage the artifact dependencies.
+You can checkout all the example applications from the Struts GitHub repository 
+at <a href="https://github.com/apache/struts-examples">struts-examples</a>.</p>
+
+<h2 id="create-struts-web-application-using-maven-to-manage-artifacts-and-to-build-the-application">Create Struts Web Application Using Maven To Manage Artifacts and To Build The Application</h2>
+
+<blockquote>
+  <p>This tutorial assumes you know how to create a Java web application that uses Maven to manage artifacts and build 
+the web application archive (war) file.</p>
+</blockquote>
+
+<h3 id="step-1---create-a-java-web-application">Step 1 - Create A Java Web Application</h3>
+
+<p>In your Java IDE create a Java web application with a project name of <code class="language-plaintext highlighter-rouge">basic_struts</code> that follows the standard Maven
+project folder structure. In your <code class="language-plaintext highlighter-rouge">pom.xml</code> include the following:</p>
+
+<p><strong>pom.xml build node</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;finalName&gt;</span>basic-struts<span class="nt">&lt;/finalName&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</code></pre></div></div>
+
+<h5 id="to-run-the-application-using-maven-add-the-jetty-maven-plugin-to-your-pomxml">to run the application using maven, add the jetty maven-plugin to your pom.xml</h5>
+
+<p><strong>pom.xml jetty plugin</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build&gt;</span>
+    ...   
+    <span class="nt">&lt;plugins&gt;</span>
+        <span class="nt">&lt;plugin&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.eclipse.jetty<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>jetty-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${jetty-plugin.version}<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+                <span class="nt">&lt;webApp&gt;</span>
+                    <span class="nt">&lt;contextPath&gt;</span>/${project.artifactId}<span class="nt">&lt;/contextPath&gt;</span>
+                <span class="nt">&lt;/webApp&gt;</span>
+                <span class="nt">&lt;stopKey&gt;</span>CTRL+C<span class="nt">&lt;/stopKey&gt;</span>
+                <span class="nt">&lt;stopPort&gt;</span>8999<span class="nt">&lt;/stopPort&gt;</span>
+                <span class="nt">&lt;scan&gt;</span>10<span class="nt">&lt;/scan&gt;</span>
+            <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</code></pre></div></div>
+<p>The above plugin will enable you to run the application using <code class="language-plaintext highlighter-rouge">mvn jetty:run</code></p>
+
+<h3 id="step-2---add-indexjsp">Step 2 - Add index.jsp</h3>
+
+<p>Our next step is to add a simple <code class="language-plaintext highlighter-rouge">index.jsp</code> to this web application. Create an <code class="language-plaintext highlighter-rouge">index.jsp</code> under <code class="language-plaintext highlighter-rouge">src/main/webapp</code>
+with a title of <strong>Basic Struts Application - Welcome</strong> and in the body add an h1 heading of <strong>Welcome To Struts!</strong></p>
+
+<p><strong>index.jsp</strong></p>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na"> pageEncoding=</span><span class="s">"UTF-8"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Basic Struts Application - Welcome<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Welcome To Struts!<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>Run <code class="language-plaintext highlighter-rouge">mvn jetty:run</code> to run the application.</p>
+
+<p>In a web browser go to <a href="http://localhost:8080/basic-struts/index.jsp">http://localhost:8080/basic-struts/index.jsp</a>.
+You should see the following:</p>
+
+<p><img src="attachments/basic_struts2_maven_jsp.png" alt="basic_struts2_maven_jsp.png" /></p>
+
+<h3 id="step-3---add-struts-jar-files-to-class-path">Step 3 - Add Struts Jar Files To Class Path</h3>
+
+<p>Now that we know we have a working Java web application, let’s add the minimal required Struts framework Jar files 
+to our web application’s class path. In <code class="language-plaintext highlighter-rouge">pom.xml</code> add the following dependency node:</p>
+
+<p><strong>pom.xml dependency node</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>struts2-core<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${struts2.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<p>Of course replace the <code class="language-plaintext highlighter-rouge">${struts2.version}</code> with the current Struts version (or define within pom <code class="language-plaintext highlighter-rouge">properties</code>). 
+Maven will get the <code class="language-plaintext highlighter-rouge">struts2-core</code> jar and the other jar files struts2-core requires (transitive dependencies).</p>
+
+<p class="alert alert-info">Beginning with Struts version 2.2.3 you do not need to specify a separate dependency node for javassist.</p>
+
+<h3 id="step-4---add-logging">Step 4 - Add Logging</h3>
+
+<p>To see what’s happening under the hood, the example application for this tutorial uses log4j2. 
+Setup a <code class="language-plaintext highlighter-rouge">log4j2.xml</code> configuration in the <code class="language-plaintext highlighter-rouge">src/main/resources</code> folder which contains the following</p>
+
+<p><strong>log4j2.xml</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;Configuration&gt;</span>
+    <span class="nt">&lt;Appenders&gt;</span>
+        <span class="nt">&lt;Console</span> <span class="na">name=</span><span class="s">"STDOUT"</span> <span class="na">target=</span><span class="s">"SYSTEM_OUT"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;PatternLayout</span> <span class="na">pattern=</span><span class="s">"%d %-5p [%t] %C{2} (%F:%L) - %m%n"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Console&gt;</span>
+    <span class="nt">&lt;/Appenders&gt;</span>
+    <span class="nt">&lt;Loggers&gt;</span>
+        <span class="nt">&lt;Logger</span> <span class="na">name=</span><span class="s">"org.apache.struts2"</span> <span class="na">level=</span><span class="s">"debug"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Root</span> <span class="na">level=</span><span class="s">"warn"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AppenderRef</span> <span class="na">ref=</span><span class="s">"STDOUT"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Root&gt;</span>
+    <span class="nt">&lt;/Loggers&gt;</span>
+<span class="nt">&lt;/Configuration&gt;</span>
+</code></pre></div></div>
+
+<p>Note the above log4j2 configuration specifies the console as the log target.</p>
+
+<p>You’ll need to add a dependency node for log4j2 to the pom:</p>
+
+<p><strong>pom.xml log4j dependency node</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>log4j-core<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${log4j2.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>log4j-api<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${log4j2.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<p>Using both <code class="language-plaintext highlighter-rouge">log4j-core</code> and <code class="language-plaintext highlighter-rouge">log4j-api</code> allows to use <a href="//logging.apache.org/log4j/2.x/maven-artifacts">the latest version of Log4j2</a> without a clash with version provided by the framework.</p>
+
+<p>Optionally, if using maven bom “bill of materials” in <code class="language-plaintext highlighter-rouge">dependencyManagement</code> section for both Struts and log4j2,
+<code class="language-plaintext highlighter-rouge">pom.xml</code> will look like. Note that this way you can omit <code class="language-plaintext highlighter-rouge">version</code> line for every used module,
+and all <code class="language-plaintext highlighter-rouge">struts2-*</code> and <code class="language-plaintext highlighter-rouge">log4j-*</code> modules are managed to be of the same version.
+The <code class="language-plaintext highlighter-rouge">struts2-bom</code> is available since version 2.3.20 of Struts.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;properties&gt;</span>
+    <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+    <span class="nt">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.reporting.outputEncoding&gt;</span>
+    <span class="nt">&lt;java.version&gt;</span>17<span class="nt">&lt;/java.version&gt;</span>
+
+    <span class="nt">&lt;struts2.version&gt;</span>7.03<span class="nt">&lt;/struts2.version&gt;</span>
+    <span class="nt">&lt;log4j2.version&gt;</span>2.25.1<span class="nt">&lt;/log4j2.version&gt;</span>
+<span class="nt">&lt;/properties&gt;</span>
+
+<span class="nt">&lt;dependencyManagement&gt;</span>
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>struts2-bom<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${struts2.version}<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>log4j-bom<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${log4j2.version}<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+            <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/dependencyManagement&gt;</span>
+
+<span class="nt">&lt;dependencies&gt;</span>
+<span class="c">&lt;!-- Struts --&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>struts2-core<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>log4j-core<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+</code></pre></div></div>
+
+<h3 id="step-5---add-struts-servlet-filter">Step 5 - Add Struts Servlet Filter</h3>
+
+<p>To enable the Struts framework to work with your web application you need to add a Servlet filter class and filter 
+mapping to <code class="language-plaintext highlighter-rouge">web.xml</code>. Below is how the <code class="language-plaintext highlighter-rouge">web.xml</code> may look after adding the filter and filter-mapping nodes. 
+<code class="language-plaintext highlighter-rouge">web.xml</code> is to be under <code class="language-plaintext highlighter-rouge">src/main/webapp/WEB-INF</code> folder.</p>
+
+<p><strong>web.xml Servlet Filter</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;web-app</span> <span class="na">id=</span><span class="s">"WebApp_ID"</span> <span class="na">version=</span><span class="s">"6.0"</span>
+         <span class="na">xmlns=</span><span class="s">"https://jakarta.ee/xml/ns/jakartaee"</span>
+         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+         <span class="na">xsi:schemaLocation=</span><span class="s">"https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;display-name&gt;</span>Form Tags<span class="nt">&lt;/display-name&gt;</span>
+    <span class="nt">&lt;welcome-file-list&gt;</span>
+        <span class="nt">&lt;welcome-file&gt;</span>index.jsp<span class="nt">&lt;/welcome-file&gt;</span>
+    <span class="nt">&lt;/welcome-file-list&gt;</span>
+
+    <span class="nt">&lt;filter&gt;</span>
+        <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
+        <span class="nt">&lt;filter-class&gt;</span>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter<span class="nt">&lt;/filter-class&gt;</span>
+    <span class="nt">&lt;/filter&gt;</span>
+
+    <span class="nt">&lt;filter-mapping&gt;</span>
+        <span class="nt">&lt;filter-name&gt;</span>struts2<span class="nt">&lt;/filter-name&gt;</span>
+        <span class="nt">&lt;url-pattern&gt;</span>/*<span class="nt">&lt;/url-pattern&gt;</span>
+    <span class="nt">&lt;/filter-mapping&gt;</span>
+
+<span class="nt">&lt;/web-app&gt;</span>
+</code></pre></div></div>
+
+<p>For more information about configuring the deployment descriptor for Struts see <a href="/core-developers/web-xml">Core Developers Guide / web.xml page</a>.</p>
+<blockquote>
+  <p>Note: the url-pattern node value is <code class="language-plaintext highlighter-rouge">/*</code> meaning the Struts filter will be applied to all URLs for this web application.</p>
+</blockquote>
+
+<h3 id="step-6---create-strutsxml">Step 6 - Create struts.xml</h3>
+
+<p>Struts can use either an XML configuration file or annotations (or both) to specify the relationship between a URL, 
+a Java class, and a view page (such as <code class="language-plaintext highlighter-rouge">index.jsp</code>). For our basic Struts application, we’ll use a minimal xml 
+configuration. Note the file name is <code class="language-plaintext highlighter-rouge">struts.xml</code> and it should be in the <code class="language-plaintext highlighter-rouge">src/main/resources</code> folder (<code class="language-plaintext highlighter-rouge">struts.xml</code> 
+must be on the web application’s root class path).</p>
+
+<p><strong>struts.xml</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 6.0//EN"
+        "https://struts.apache.org/dtds/struts-6.0.dtd"&gt;</span>
+<span class="nt">&lt;struts&gt;</span>
+
+    <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.devMode"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"basicstruts2"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"index"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;result&gt;</span>/index.jsp<span class="nt">&lt;/result&gt;</span>
+        <span class="nt">&lt;/action&gt;</span>
+    <span class="nt">&lt;/package&gt;</span>
+
+<span class="nt">&lt;/struts&gt;</span>
+</code></pre></div></div>
+
+<p>This minimal Struts configuration file tells the framework that if the URL ends in <code class="language-plaintext highlighter-rouge">index.action</code> to redirect 
+the browser to <code class="language-plaintext highlighter-rouge">index.jsp</code>.</p>
+
+<p>For more information about the struts.xml configuration file see <a href="../core-developers/struts-xml">struts.xml</a></p>
+
+<h3 id="step-7---build-and-run-the-application">Step 7 - Build and Run the Application</h3>
+
+<p>Run <code class="language-plaintext highlighter-rouge">mvn jetty:run</code> to run the web-application using the jetty maven-plugin.</p>
+
+<p>View the console where you should see numerous debug messages that tell you the Struts framework is being included 
+in the <code class="language-plaintext highlighter-rouge">basic-struts2</code> web application.</p>
+
+<p>Open a web browser and go to <a href="http://localhost:8080/basic-struts/index.action">http://localhost:8080/basic-struts/index.action</a> 
+(note that’s <code class="language-plaintext highlighter-rouge">index.action</code> not <code class="language-plaintext highlighter-rouge">index.jsp</code> at the end of the URL). You should see the same web page as when going to 
+<a href="http://localhost:8080/basic-struts/index.jsp">http://localhost:8080/basic-struts/index.jsp</a>. 
+View the log  messages written to the console and you should find several that discuss <code class="language-plaintext highlighter-rouge">index.action</code> and <code class="language-plaintext highlighter-rouge">index.jsp</code>:</p>
+
+<p><strong>Struts Log Messages</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+2017-04-17 11:16:01,084 DEBUG [qtp1723848804-22] DefaultActionProxy (DefaultActionProxy.java:89) - Creating an DefaultActionProxy for namespace [/] and action name [index]
+...
+2017-04-17 11:16:01,172 DEBUG [qtp1723848804-22] result.ServletDispatcherResult (ServletDispatcherResult.java:131) - Forwarding to location: /index.jsp
+...
+</code></pre></div></div>
+
+<h2 id="getting-help">Getting Help</h2>
+
+<p>The <a href="/mail">Struts user mailing list</a> is an excellent place to get help. If you are having a problem getting 
+this Basic Struts application to work search the Struts mailing list. If you don’t find an answer to your problem, 
+post a question on the mailing list.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Return to <a href="index">Getting started</a></td>
+      <td>or</td>
+      <td>onward to <a href="hello-world-using-struts">Hello World using Struts</a></td>
+    </tr>
+  </tbody>
+</table>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2025 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation. All Rights Reserved.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<a href="https://twitter.com/x?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @x</a>
+<script async src="/js/twitter-widgets.js" charset="utf-8"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "/js/facebook-all.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+</body>
+</html>

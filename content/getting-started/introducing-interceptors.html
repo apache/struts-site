@@ -149,7 +149,7 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/getting-started/introducing-interceptors.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    <a href="index" title="back to Getting started"><< back to Getting started</a>
     
     <h1 class="no_toc" id="introducing-interceptors">Introducing Interceptors</h1>
 
@@ -165,11 +165,11 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p>So far our tutorials have not delved into the inner workings of the Struts 2 framework. But in this tutorial we’ll 
-introduce a key set of classes the Struts 2 framework relies upon to do most of the work whenever an Action is executed. 
+<p>So far our tutorials have not delved into the inner workings of the Struts framework. But in this tutorial we’ll 
+introduce a key set of classes the Struts framework relies upon to do most of the work whenever an Action is executed. 
 In this tutorial’s example project there is a register link that is mapped in the Struts XML configuration file (<code class="language-plaintext highlighter-rouge">struts.xml</code>) 
 to the execute method of class Register. Before that execute method is called much work is done behind the scenes 
-by the Struts 2 framework. For example:</p>
+by the Struts framework. For example:</p>
 
 <ol>
   <li>Handling any exceptions generated</li>
@@ -187,27 +187,27 @@ by the Struts 2 framework. For example:</p>
 
 <p>The above list of tasks are not complete - several other tasks are done before and after the execution of the Action.</p>
 
-<p>The benefit of using Struts 2 is all this work happens automatically. You can focus on the logic of the controller 
-(the Struts 2 ActionSupport class), the Service layer, the data access layer, your domain models, etc.</p>
+<p>The benefit of using Struts is all this work happens automatically. You can focus on the logic of the controller 
+(the Struts ActionSupport class), the Service layer, the data access layer, your domain models, etc.</p>
 
-<p>The <a href="http://struts.apache.org/mail">Struts 2 user mailing list</a> is an excellent place to get help. If you are 
-having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find 
+<p>The <a href="../mail">Struts user mailing list</a> is an excellent place to get help. If you are 
+having a problem getting the tutorial example applications to work search the Struts mailing list. If you don’t find 
 an answer to your problem, post a question on the mailing list.</p>
 
 <h2 id="introducing-interceptors-1">Introducing Interceptors</h2>
 
-<p>The tasks that are done by the Struts 2 framework before and after an Action is executed are done by Struts 2 interceptors. 
-Interceptors are standard Java classes included in the Struts 2 core jar which are executed in a specific order.</p>
+<p>The tasks that are done by the Struts framework before and after an Action is executed are done by Struts interceptors. 
+Interceptors are standard Java classes included in the Struts core jar which are executed in a specific order.</p>
 
 <p>In our example application there is a package node in struts.xml. The package node has an attribute of extends with 
 a value of “struts-default.” The value “struts-default” identifies to the framework the specific stack of interceptors 
 that will be executed before and after the Actions in that package.</p>
 
 <p>If you want to learn more about the inner workings of interceptors, what interceptors belong to the struts default stack, 
-and what are all the interceptors included with Struts 2, visit <a href="../core-developers/interceptors">Understanding Interceptors</a> .</p>
+and what are all the interceptors included with Struts, visit <a href="../core-developers/interceptors">Understanding Interceptors</a> .</p>
 
-<p>Sometime the Struts 2 default stack of interceptors are not exactly what you need for a particular action. You may want 
-to use interceptors that are not part of the Struts 2 default stack. For an individual Action or for the entire 
+<p>Sometime the Struts default stack of interceptors are not exactly what you need for a particular action. You may want 
+to use interceptors that are not part of the Struts default stack. For an individual Action or for the entire 
 package of Actions, you can specify a different stack of interceptors that the Action or package should use. Below is 
 how you would specify that the register Action should use both the <a href="../core-developers/logging-interceptor">logger</a> 
 and <a href="../core-developers/timer-interceptor">timer</a> interceptors in addition to the interceptors provided by the default stack.</p>
@@ -235,15 +235,15 @@ Action we are instructing the framework to use the <code class="language-plainte
 are all the interceptors normally executed for an Action.</p>
 
 <p>How did I know to use the value of timer for the name attribute and even that there is a timer interceptor? 
-On the <a href="../core-developers/interceptors">Interceptors</a> web page in the Struts 2 documentation are a list of interceptors 
-that come with the Struts 2 framework and what the name value is for each interceptor.</p>
+On the <a href="../core-developers/interceptors">Interceptors</a> web page in the Struts documentation are a list of interceptors 
+that come with the Struts framework and what the name value is for each interceptor.</p>
 
 <p>How did I know that the timer interceptor isn’t part of the defaultStack of interceptors already? Again on the Interceptors 
 documentation web page is a list of which interceptors belong to the <code class="language-plaintext highlighter-rouge">defaultStack</code>.</p>
 
 <p>Note the param nodes. These nodes are used to provide a value to the setLogEnabled and setLogLevel methods 
 of the <a href="../core-developers/exception-interceptor">Exception Interceptor</a>. Providing the values of true and ERROR 
-will cause the Struts 2 framework to log any exceptions not caught by the application’s code and to log those exceptions 
+will cause the Struts framework to log any exceptions not caught by the application’s code and to log those exceptions 
 at the ERROR level.</p>
 
 <h2 id="run-the-example">Run The Example</h2>
@@ -252,10 +252,8 @@ at the ERROR level.</p>
 sent to the JVM console to see the log messages generated by the logger and timer interceptors. You should see log messages 
 similar to the following:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO: Starting execution stack for action //register
-Nov 20, 2010 9:55:48 AM com.opensymphony.xwork2.util.logging.jdk.JdkLogger info
-INFO: Finishing execution stack for action //register
-Nov 20, 2010 9:55:48 AM com.opensymphony.xwork2.util.logging.jdk.JdkLogger info
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO: Starting execution stack for action /register
+INFO: Finishing execution stack for action /register
 INFO: Executed action /register!execute took 177 ms.
 </code></pre></div></div>
 
@@ -298,8 +296,8 @@ how to do this. For example, you could create your own interceptor to handle aut
 
 <h2 id="summary">Summary</h2>
 
-<p>Interceptors provide the Struts 2 framework with both power and flexibility. Developers may add additional interceptors 
-(either ones provided by Struts 2 or ones they create) to the stack of interceptors executed when an Action class is called.</p>
+<p>Interceptors provide the Struts framework with both power and flexibility. Developers may add additional interceptors 
+(either ones provided by Struts or ones they create) to the stack of interceptors executed when an Action class is called.</p>
 
 <table>
   <tbody>

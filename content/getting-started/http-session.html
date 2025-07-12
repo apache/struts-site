@@ -149,7 +149,7 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/getting-started/http-session.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    <a href="index" title="back to Getting started"><< back to Getting started</a>
     
     <h1 class="no_toc" id="http-session">HTTP Session</h1>
 
@@ -166,12 +166,12 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p>Your Struts 2 application may need to access the HTTP session object. Struts 2 provides an interface, 
+<p>Your Struts application may need to access the HTTP session object. Struts provides an interface, 
 <a href="/maven/struts2-core/apidocs/org/apache/struts2/interceptor/SessionAware">SessionAware</a>, that your Action class 
 should implement to obtain a reference to the HTTP session object.</p>
 
-<p>The <a href="http://struts.apache.org/mail">Struts 2 user mailing list</a> is an excellent place to get help. If you are 
-having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find 
+<p>The <a href="../mail">Struts user mailing list</a> is an excellent place to get help. If you are 
+having a problem getting the tutorial example applications to work search the Struts mailing list. If you don’t find 
 an answer to your problem, post a question on the mailing list.</p>
 
 <h2 id="sessionaware-interface">SessionAware Interface</h2>
@@ -188,7 +188,7 @@ application (see above), the HelloWorldAction class implements the SessionAware 
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>The Struts 2 framework has an interceptor that will inject the HTTP session object into the Action class by calling 
+<p>The Struts framework has an interceptor that will inject the HTTP session object into the Action class by calling 
 the <code class="language-plaintext highlighter-rouge">setSession</code> method.</p>
 
 <h2 id="using-the-http-session-object-in-the-action-class">Using the HTTP Session Object In The Action Class</h2>
@@ -212,12 +212,12 @@ It stores this count in the HTTP session object in the increaseHelloCount method
 </code></pre></div></div>
 
 <p>When the increaseHelloCount method is called from within the execute method, the userSession object is a reference 
-to the HTTP session object injected by the Struts 2 framework. So any objects stored in the HTTP session can be retrieved 
+to the HTTP session object injected by the Struts framework. So any objects stored in the HTTP session can be retrieved 
 using the userSession object and any objects stored in the userSession object will be stored in the HTTP session object.</p>
 
 <h2 id="accessing-http-session-objects-in-the-view">Accessing HTTP Session Objects In The View</h2>
 
-<p>Struts 2 provides an easy way to get an object stored in the HTTP session from within the view page. In the example 
+<p>Struts provides an easy way to get an object stored in the HTTP session from within the view page. In the example 
 application is <code class="language-plaintext highlighter-rouge">HelloWorld.jsp</code> with this markup:</p>
 
 <p><strong>HelloWorld.jsp Get helloCount Value From HTTP Session</strong></p>
@@ -238,7 +238,7 @@ practices in the Action class that implements the SessionAware interface.</p>
 <ol>
   <li>Do not have a public <code class="language-plaintext highlighter-rouge">Map&lt;String, Object&gt; getSession</code> method in the Action class. You only need a public void 
   <code class="language-plaintext highlighter-rouge">setSession</code> method to implement the <code class="language-plaintext highlighter-rouge">SessionAware</code> interface.</li>
-  <li>Also have the Action class implement the <a href="/maven/struts2-core/apidocs/com/opensymphony/xwork2/interceptor/ParameterNameAware">ParameterNameAware interface</a> 
+  <li>Also have the Action class implement the <a href="/maven/struts2-core/apidocs/org/apache/struts2/interceptor/ParameterNameAware">ParameterNameAware interface</a> 
   and override its acceptableParameterName method:</li>
 </ol>
 
@@ -255,11 +255,12 @@ practices in the Action class that implements the SessionAware interface.</p>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>This method will be called by the Struts 2 framework for each parameter in the request scope. By returning false if 
-the parameter name contains “session” we are telling the Struts 2 framework to ignore that parameter. This will prevent 
+<p>This method will be called by the Struts framework for each parameter in the request scope. By returning false if 
+the parameter name contains “session” we are telling the Struts framework to ignore that parameter. This will prevent 
 a malicious user from trying to hack the HTTP session object.</p>
 
-<p>Instead of having each action that implements SessionAware also implement the ParameterNameAware interface you can tell the params interceptor to exclude specific request attributes for all actions in a package. In struts.xml configure 
+<p>Instead of having each action that implements SessionAware also implement the ParameterNameAware interface you can tell 
+the params interceptor to exclude specific request attributes for all actions in a package. In struts.xml configure 
 the <code class="language-plaintext highlighter-rouge">struts-default</code> set of interceptors as follows:</p>
 
 <p><strong>struts.xml configure params interceptor</strong></p>
@@ -296,7 +297,7 @@ false if the parameter name contains “request”.</p>
 the <code class="language-plaintext highlighter-rouge">setSession</code> method. Be sure to also implement the <code class="language-plaintext highlighter-rouge">ParameterNameAware</code> interface and override 
 the <code class="language-plaintext highlighter-rouge">acceptableParameterName</code> method to mitigate a potential security vulnerability. If you have multiple actions 
 that implement <code class="language-plaintext highlighter-rouge">SessionAware</code> then consider modifying the params interceptor’s <code class="language-plaintext highlighter-rouge">excludeParams</code> value as part of your 
-Struts 2 package setup.</p>
+Struts package setup.</p>
 
 <table>
   <tbody>

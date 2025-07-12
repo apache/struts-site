@@ -149,15 +149,15 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/getting-started/themes.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    <a href="index" title="back to Getting started"><< back to Getting started</a>
     
     <h1 class="no_toc" id="themes">Themes</h1>
 
 <ul id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
-  <li><a href="#specifying-the-theme-struts-2-should-use" id="markdown-toc-specifying-the-theme-struts-2-should-use">Specifying The Theme Struts 2 Should Use</a></li>
-  <li><a href="#specifying-the-css-used-by-the-struts-2-tag" id="markdown-toc-specifying-the-css-used-by-the-struts-2-tag">Specifying The CSS Used By The Struts 2 Tag</a></li>
-  <li><a href="#creating-and-applying-your-own-themes-for-struts-2-tags" id="markdown-toc-creating-and-applying-your-own-themes-for-struts-2-tags">Creating And Applying Your Own Themes For Struts 2 Tags</a></li>
+  <li><a href="#specifying-the-theme-struts-should-use" id="markdown-toc-specifying-the-theme-struts-should-use">Specifying The Theme Struts Should Use</a></li>
+  <li><a href="#specifying-the-css-used-by-the-struts-tag" id="markdown-toc-specifying-the-css-used-by-the-struts-tag">Specifying The CSS Used By The Struts Tag</a></li>
+  <li><a href="#creating-and-applying-your-own-themes-for-struts-tags" id="markdown-toc-creating-and-applying-your-own-themes-for-struts-tags">Creating And Applying Your Own Themes For Struts Tags</a></li>
   <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
 </ul>
 
@@ -165,25 +165,25 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p>When you use a Struts 2 tag such as <code class="language-plaintext highlighter-rouge">s:select</code> in your web page, the Struts 2 framework generates HTML that styles 
-the appearance and controls the layout of the select control. The style and layout is determined by which Struts 2 theme 
-is set for the tag. Struts 2 comes with three built-in themes: <code class="language-plaintext highlighter-rouge">simple</code>, <code class="language-plaintext highlighter-rouge">xhtml</code>, and <code class="language-plaintext highlighter-rouge">css_xhtml</code>. If you don’t specify 
-a theme, then Struts 2 will use the <code class="language-plaintext highlighter-rouge">xhtml</code> theme by default.</p>
+<p>When you use a Struts tag such as <code class="language-plaintext highlighter-rouge">s:select</code> in your web page, the Struts framework generates HTML that styles 
+the appearance and controls the layout of the select control. The style and layout is determined by which Struts theme 
+is set for the tag. Struts comes with three built-in themes: <code class="language-plaintext highlighter-rouge">simple</code>, <code class="language-plaintext highlighter-rouge">xhtml</code>, and <code class="language-plaintext highlighter-rouge">css_xhtml</code>. If you don’t specify 
+a theme, then Struts will use the <code class="language-plaintext highlighter-rouge">xhtml</code> theme by default.</p>
 
-<p>The <a href="http://struts.apache.org/mail">Struts 2 user mailing list</a> is an excellent place to get help. If you are having 
-a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer 
+<p>The <a href="http://struts.apache.org/mail">Struts user mailing list</a> is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts mailing list. If you don’t find an answer 
 to your problem, post a question on the mailing list.</p>
 
-<p>For example, this Struts 2 select tag:</p>
+<p>For example, this Struts select tag:</p>
 
-<p><strong>Struts 2 Select Tag</strong></p>
+<p><strong>Struts Select Tag</strong></p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:select</span> <span class="na">key=</span><span class="s">"personBean.sport"</span> <span class="na">list=</span><span class="s">"sports"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <p>generates this HTML markup:</p>
 
-<p><strong>HTML Created By Struts 2 Select Tag</strong></p>
+<p><strong>HTML Created By Struts Select Tag</strong></p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tr&gt;</span>
     <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"tdLabel"</span><span class="nt">&gt;</span>
@@ -200,19 +200,19 @@ to your problem, post a question on the mailing list.</p>
 </code></pre></div></div>
 
 <p>Notice how the HTML generated uses table tags to control the layout of the label and select HTML. There is also a class, 
-<code class="language-plaintext highlighter-rouge">tdLabel</code>, applied to the table column where the label tag is rendered. Since no theme was specified for the Struts 2 
+<code class="language-plaintext highlighter-rouge">tdLabel</code>, applied to the table column where the label tag is rendered. Since no theme was specified for the Struts 
 select tag the default <code class="language-plaintext highlighter-rouge">xhtml</code> theme was used.</p>
 
-<h2 id="specifying-the-theme-struts-2-should-use">Specifying The Theme Struts 2 Should Use</h2>
+<h2 id="specifying-the-theme-struts-should-use">Specifying The Theme Struts Should Use</h2>
 
-<p>The Struts 2 tags have a theme attribute you can use to specify which Struts 2 theme should be used when creating the HTML 
+<p>The Struts tags have a theme attribute you can use to specify which Struts theme should be used when creating the HTML 
 for that tag. The values for the theme attribute are <code class="language-plaintext highlighter-rouge">simple</code>, <code class="language-plaintext highlighter-rouge">xhtml</code>, <code class="language-plaintext highlighter-rouge">css_xhtml</code>, and <code class="language-plaintext highlighter-rouge">ajax</code>. To learn more about these themes 
 visit <a href="../tag-developers/themes-and-templates">Themes and Templates Documentation</a>. This tutorial will review 
 the <code class="language-plaintext highlighter-rouge">xhtml</code>, <code class="language-plaintext highlighter-rouge">css_xhtml</code>, and the <code class="language-plaintext highlighter-rouge">simple</code> themes. The <code class="language-plaintext highlighter-rouge">ajax</code> theme is a special theme used for ajax operations 
 (see <a href="../tag-developers/ajax-theme">Ajax Theme in the documentation</a>).</p>
 
-<p>You can specify the theme on a per Struts 2 tag basis or you can use one of the following methods to specify what theme 
-Struts 2 should use:</p>
+<p>You can specify the theme on a per Struts tag basis or you can use one of the following methods to specify what theme 
+Struts should use:</p>
 
 <ol>
   <li>The <code class="language-plaintext highlighter-rouge">theme</code> attribute on the specific tag</li>
@@ -237,7 +237,7 @@ are no label tags for the text fields.</p>
 <p>Change the theme to <code class="language-plaintext highlighter-rouge">css_xhtml</code> for the form’s theme attribute and redeploy the application. Examine the source for <code class="language-plaintext highlighter-rouge">edit.jsp</code>
 after it is rendered in the browser. The layout of the form tags is now controlled by div tags and the label tags are back.</p>
 
-<h2 id="specifying-the-css-used-by-the-struts-2-tag">Specifying The CSS Used By The Struts 2 Tag</h2>
+<h2 id="specifying-the-css-used-by-the-struts-tag">Specifying The CSS Used By The Struts Tag</h2>
 
 <p>Change the theme attribute for the form tag back to xhtml. Notice when you view the source of edit.jsp after it is rendered 
 in the browser that there is a class named tdLabel applied to the table column that contains the label. This CSS class 
@@ -273,31 +273,31 @@ the following to the head section of <code class="language-plaintext highlighter
 
 <p>Now the label tag will render the text in blue, bold, normal (not italics) style.</p>
 
-<h2 id="creating-and-applying-your-own-themes-for-struts-2-tags">Creating And Applying Your Own Themes For Struts 2 Tags</h2>
+<h2 id="creating-and-applying-your-own-themes-for-struts-tags">Creating And Applying Your Own Themes For Struts Tags</h2>
 
-<p>The theme templates (simple, xhtml, css_xhtml) can be found in the Struts 2 core jar file. If you expand (extract the files) 
-the Struts 2 core jar file you’ll find folders named <code class="language-plaintext highlighter-rouge">template.css_xhtml</code>, <code class="language-plaintext highlighter-rouge">template.simple</code>, and <code class="language-plaintext highlighter-rouge">template.xhtml</code>. 
-Those folders contain the templates for the three default Struts 2 themes. In each folder is a file for each Struts 2 tag. 
+<p>The theme templates (simple, xhtml, css_xhtml) can be found in the Struts core jar file. If you expand (extract the files) 
+the Struts core jar file you’ll find folders named <code class="language-plaintext highlighter-rouge">template.css_xhtml</code>, <code class="language-plaintext highlighter-rouge">template.simple</code>, and <code class="language-plaintext highlighter-rouge">template.xhtml</code>. 
+Those folders contain the templates for the three default Struts themes. In each folder is a file for each Struts tag. 
 For example if you expand the <code class="language-plaintext highlighter-rouge">template.xhtml</code> folder you’ll see the <code class="language-plaintext highlighter-rouge">select.ftl</code> file.</p>
 
-<p>The Struts 2 framework uses the FreeMarker template engine to generate the HTML for the Struts 2 tags. That’s why the file 
+<p>The Struts framework uses the FreeMarker template engine to generate the HTML for the Struts tags. That’s why the file 
 extension is <code class="language-plaintext highlighter-rouge">.ftl</code>. You can learn more about FreeMarker by visiting <a href="https://freemarker.apache.org/">https://freemarker.apache.org/</a>.</p>
 
 <p>Also in the <code class="language-plaintext highlighter-rouge">template.xhmtl</code> folder is the <code class="language-plaintext highlighter-rouge">styles.css</code> file. This is the <code class="language-plaintext highlighter-rouge">styles.css</code> file that your application will use 
 if it uses the <code class="language-plaintext highlighter-rouge">xhtml</code> theme.</p>
 
-<p>Let’s say we wanted to create our own theme that will change how the Struts 2 checkboxlist tag displays the checkboxes 
+<p>Let’s say we wanted to create our own theme that will change how the Struts checkboxlist tag displays the checkboxes 
 and their labels.</p>
 
 <p>In the example application I’ve extended the default XHMTL theme (see file <code class="language-plaintext highlighter-rouge">theme.properties</code> under <code class="language-plaintext highlighter-rouge">src/main/resources/template/KUTheme</code>).
 The <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code> theme that is part of the XHTML theme only includes a space between each label and the next checkbox 
-(see <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code> in the <code class="language-plaintext highlighter-rouge">template/simple</code> folder in Struts 2 core). That is why all the checkboxes are displayed 
+(see <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code> in the <code class="language-plaintext highlighter-rouge">template/simple</code> folder in Struts core). That is why all the checkboxes are displayed 
 across the width of the browser window. For my custom checkboxlist theme I want to have a break tag after each label tag 
 so that each checkbox and its label will be on their own line.</p>
 
 <p>In the example application there is a folder named <code class="language-plaintext highlighter-rouge">src/main/resources/template/KUTheme</code>. In that folder is a <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code>, 
 the contents of which I originally copied from the <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code> that is in the <code class="language-plaintext highlighter-rouge">templates.xhtml</code> folder from 
-the Struts 2 core jar.</p>
+the Struts core jar.</p>
 
 <p>I then modified the <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code> in the KUTheme folder to be:</p>
 
@@ -314,7 +314,7 @@ the Struts 2 core jar.</p>
 
 <p>Then in the example application I created a KUTheme_simple folder under <code class="language-plaintext highlighter-rouge">src/main/resources/template</code> (optionally you 
 can place it under <code class="language-plaintext highlighter-rouge">webapp</code>, e.g. <code class="language-plaintext highlighter-rouge">src/main/webapp/template</code> ). In that folder I created <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code> and copied 
-the contents from <code class="language-plaintext highlighter-rouge">template.simple</code> <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code> (again found in the Struts 2 core jar). After copying the contents 
+the contents from <code class="language-plaintext highlighter-rouge">template.simple</code> <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code> (again found in the Struts core jar). After copying the contents 
 to <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code> that is in <code class="language-plaintext highlighter-rouge">KUTheme_simple</code> folder, I modified <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code> so that the label tag has a style 
 of red bold text and I added a break tag after each label so that each check box and label will be on its own line.</p>
 
@@ -323,11 +323,11 @@ the KUTheme will inherit all the themes from xhmtl except for the theme for the 
 a definition for that tag’s layout. In the <code class="language-plaintext highlighter-rouge">struts.xml</code> file (<code class="language-plaintext highlighter-rouge">src/main/resources</code>) you will see that the I’ve specified 
 the default theme to be KUTheme.</p>
 
-<p>In the deployed web application, Struts 2 will first look for a tag’s template on the application’s class path and if it 
-doesn’t find the template there it will use the default template that is part of the Struts 2 core jar. Since we’ve 
-added a template folder to the application’s web root, now when Struts 2 creates the HTML to display the checkboxlist 
+<p>In the deployed web application, Struts will first look for a tag’s template on the application’s class path and if it 
+doesn’t find the template there it will use the default template that is part of the Struts core jar. Since we’ve 
+added a template folder to the application’s web root, now when Struts creates the HTML to display the checkboxlist 
 tag it will use the template that is in the KUTheme folder (which tells it to use the <code class="language-plaintext highlighter-rouge">checkboxlist.ftl</code> file that is 
-in the KUTheme_simple folder instead of the one in the <code class="language-plaintext highlighter-rouge">template.simple</code> folder that is part of the Struts 2 core Jar).</p>
+in the KUTheme_simple folder instead of the one in the <code class="language-plaintext highlighter-rouge">template.simple</code> folder that is part of the Struts core Jar).</p>
 
 <p>After redeploying the application the check boxes for the Car Models Owned should appear like:</p>
 
@@ -335,21 +335,21 @@ in the KUTheme_simple folder instead of the one in the <code class="language-pla
 
 <h2 id="summary">Summary</h2>
 
-<p>You can easily override the default theme used by Struts 2 to control the appearance and layout of a Struts 2 tag. Each 
-Struts 2 tag has an associated template file (e.g. <code class="language-plaintext highlighter-rouge">select.ftl</code>) that is in a folder named after the theme (e.g. xhtml). 
-By default the Struts framework will look in the Struts 2 core Jar file for the theme folder and templates. However, 
+<p>You can easily override the default theme used by Struts to control the appearance and layout of a Struts tag. Each 
+Struts tag has an associated template file (e.g. <code class="language-plaintext highlighter-rouge">select.ftl</code>) that is in a folder named after the theme (e.g. xhtml). 
+By default the Struts framework will look in the Struts core Jar file for the theme folder and templates. However, 
 if you include your own theme folder (e.g. KUTheme) under webapp/template (or WebContent/template in the Ant version) 
-and specify that folder name (e.g. KUTheme) as the value for the theme attribute, then the Struts 2 framework will look 
+and specify that folder name (e.g. KUTheme) as the value for the theme attribute, then the Struts framework will look 
 in that theme folder for the tag’s template.</p>
 
-<p>To learn more about how to use the Struts 2 themes and how you can override them, visit <a href="../tag-developers/themes-and-templates">Themes and Templates Documentation</a> .</p>
+<p>To learn more about how to use the Struts themes and how you can override them, visit <a href="../tag-developers/themes-and-templates">Themes and Templates Documentation</a> .</p>
 
 <table>
   <tbody>
     <tr>
       <td>Return to <a href="wildcard-method-selection">Wildcard method selection</a></td>
       <td>or</td>
-      <td>onward to <a href="spring">Spring and Struts 2</a></td>
+      <td>onward to <a href="spring">Spring and Struts</a></td>
     </tr>
   </tbody>
 </table>

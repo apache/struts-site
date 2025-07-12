@@ -149,7 +149,7 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/getting-started/preperable-interface.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    <a href="index" title="back to Getting started"><< back to Getting started</a>
     
     <h1 class="no_toc" id="preparable-interface">Preparable Interface</h1>
 
@@ -165,7 +165,7 @@
 <h2 id="introduction">Introduction</h2>
 
 <p>Often the data used to populate a form control is dynamically generated, perhaps from a database. When the user submits 
-the form, the Struts 2 validation interceptor attempts to validate the user’s form input. If validation fails the Struts 2 
+the form, the Struts validation interceptor attempts to validate the user’s form input. If validation fails the Struts 
 framework returns the value <code class="language-plaintext highlighter-rouge">input</code> but the <code class="language-plaintext highlighter-rouge">input</code> action is not re-executed. Rather the view associated with the <code class="language-plaintext highlighter-rouge">input</code> 
 result is rendered to the user. Usually this view is the page that displayed the original form.</p>
 
@@ -174,15 +174,15 @@ look-up that that is accomplished in the Action class’s input method. Since th
 re-executed when validation fails, the view page may no longer have access to the correct information to create the form 
 or other display information.</p>
 
-<p>The <a href="http://struts.apache.org/mail">Struts 2 user mailing list</a> is an excellent place to get help. If you are having 
-a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find an answer 
+<p>The <a href="../mail">Struts user mailing list</a> is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts mailing list. If you don’t find an answer 
 to your problem, post a question on the mailing list.</p>
 
 <h2 id="preparable-interface-1">Preparable Interface</h2>
 
-<p>Struts 2 provides the <a href="../maven/struts2-core/apidocs/com/opensymphony/xwork2/Preparable">Preparable interface</a>
+<p>Struts provides the <a href="/maven/struts2-core/apidocs/org/apache/struts2/Preparable">Preparable interface</a>
 to overcome this problem. An Action class that implements this interface must override the prepare method. The <code class="language-plaintext highlighter-rouge">prepare</code> 
-method will always be called by the Struts 2 framework’s <a href="../core-developers/prepare-interceptor">prepare interceptor</a> 
+method will always be called by the Struts framework’s <a href="../core-developers/prepare-interceptor">prepare interceptor</a> 
 whenever any method is called for the Action class and also when validation fails before the view is rendered.</p>
 
 <p>In the <code class="language-plaintext highlighter-rouge">prepare</code> method you should put any statements that must be executed no matter what other Action class method will 
@@ -192,7 +192,7 @@ used to set the initial form field values.</p>
 
 <p>In addition to automatically running the prepare method the <a href="../core-developers/prepare-interceptor">prepare interceptor</a> 
 will also call a method named <code class="language-plaintext highlighter-rouge">prepare&lt;ActionMethodName&gt;</code>. For example, define a prepare method and a <code class="language-plaintext highlighter-rouge">prepareInput</code> method 
-in the Action class that implements <code class="language-plaintext highlighter-rouge">Preparable</code>. When the Struts 2 framework calls the input method, the prepare interceptor 
+in the Action class that implements <code class="language-plaintext highlighter-rouge">Preparable</code>. When the Struts framework calls the input method, the prepare interceptor 
 will call the prepareInput and the prepare methods before calling the input method.</p>
 
 <h2 id="example-application">Example Application</h2>
