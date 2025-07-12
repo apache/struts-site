@@ -3,7 +3,7 @@ layout: default
 title: Control tags
 parent:
     title: Getting started
-    url: index.html
+    url: index
 ---
 
 # Control Tags
@@ -16,15 +16,15 @@ The example code for this tutorial, **control-tags**, is available at [struts-ex
 
 ## Introduction
 
-Struts 2 has several control tags that can be used in the view. This tutorial will discuss and show examples of how to 
-use the Struts 2 if and iterator tags. For more information about these and other control tags visit 
+Struts has several control tags that can be used in the view. This tutorial will discuss and show examples of how to 
+use the Struts if and iterator tags. For more information about these and other control tags visit 
 [tags reference](../tag-developers/tag-reference).
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
-a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find 
+The [Struts user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts mailing list. If you don't find 
 an answer to your problem, post a question on the mailing list.
 
-## Struts 2 if Tag
+## Struts if Tag
 
 In the example application's thankyou.jsp is this markup.
 
@@ -100,15 +100,15 @@ tag to determine what field to display. For example:
 </table>
 ```
 
-The value of the iterator tag is states, which causes the Struts 2 framework to call the getStates method of the Action 
+The value of the iterator tag is states, which causes the Struts framework to call the getStates method of the Action 
 class (`EditAction.java`). The getStates method returns a List of State objects. The State class has two fields stateAbbr
 and stateName, both having the appropriate get method. The iterator will loop over each State object stored in the collection. 
-Each time through the loop, the Struts 2 framework will have a reference to the current State object and will call 
+Each time through the loop, the Struts framework will have a reference to the current State object and will call 
 getStateAbbr and getStateName methods for that current State object.
 
 ## Additional Iterator Attributes
 
-The Struts 2 iterator tag has additional attributes you can use to control the begin and end values for specifying 
+The Struts iterator tag has additional attributes you can use to control the begin and end values for specifying 
 that the iterator tag should only loop over a part of the collection. See the [iterator tag reference](../tag-developers/iterator-tag) for more information.
 
 |Return to [Form validation using XML](form-validation-using-xml)|or|onward to [Wildcard method selection](wildcard-method-selection)|

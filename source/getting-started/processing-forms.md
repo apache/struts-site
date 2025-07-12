@@ -3,7 +3,7 @@ layout: default
 title: Processing forms
 parent:
     title: Getting started
-    url: index.html
+    url: index
 ---
 
 # Processing Forms
@@ -12,20 +12,20 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-This tutorial assumes you've completed the [Coding Struts 2 Actions](coding-actions) tutorial and have a working 
+This tutorial assumes you've completed the [Coding Struts Actions](coding-actions) tutorial and have a working 
 **coding-actions** project. The example code for this tutorial, **form-processing**, is available for checkout from 
-the Struts 2 GitHub repository [struts-examples](https://github.com/apache/struts-examples).
+the Struts GitHub repository [struts-examples](https://github.com/apache/struts-examples).
 
 ## Introduction
 
-In this tutorial we'll explore using Struts 2 to do more involved processing of a form submission. We'll cover how to 
-use a Java model class to store the form input and how to create the Struts 2 form to match up with that model class.
+In this tutorial we'll explore using Struts to do more involved processing of a form submission. We'll cover how to 
+use a Java model class to store the form input and how to create the Struts form to match up with that model class.
 
-The code provided in this tutorial may be added to the [Coding Struts 2 Actions](coding-actions) example or you 
-can download this complete example from the github respository - [https://github.com/apache/struts-examples](https://github.com/apache/struts-examples).
+The code provided in this tutorial may be added to the [Coding Struts Actions](coding-actions) example or you 
+can download this complete example from the Github repository [struts-examples](https://github.com/apache/struts-examples).
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are 
-having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find 
+The [Struts user mailing list](../mail) is an excellent place to get help. If you are 
+having a problem getting the tutorial example applications to work search the Struts mailing list. If you don't find 
 an answer to your problem, post a question on the mailing list.
 
 ## Forms and a Java model class
@@ -35,7 +35,7 @@ business rules state the user must provide his/her first name, last name, email 
 
 To encapsulate this data, we'll use a simple Java class that follows the basic Java Bean specifications (public set/get 
 methods for each instance field). If you're following along add this class to the package `org.apache.struts.register.model` 
-in the [Coding Struts 2 Actions](coding-actions) example.
+in the [Coding Struts Actions](coding-actions) example.
 
 **Person.java**
 
@@ -92,7 +92,7 @@ their null values.
 
 ## Form structure
 
-To collect the above information we'll use a Struts 2 form. When creating this form the key concept we need to employ 
+To collect the above information we'll use a Struts form. When creating this form the key concept we need to employ 
 is to tie each form field to a specific instance field of an object of type Person. Let's look over the form first and 
 then discuss some key points. Create a view page named `register.jsp` (in `src/main/webapp`)
 
@@ -121,37 +121,37 @@ then discuss some key points. Create a view page named `register.jsp` (in `src/m
 </html>
 ```
 
-Since we are using Struts 2 tags, at the top of the page we need the Struts tag library declaration.
+Since we are using Struts tags, at the top of the page we need the Struts tag library declaration.
 
-The Struts 2 form will submit to an action named register. We'll need to define that action in our `struts.xml` file.
+The Struts form will submit to an action named register. We'll need to define that action in our `struts.xml` file.
 
-Note the four Struts 2 textfield tags. Each tag has a name value that includes an attribute of the `Person` class 
+Note the four Struts textfield tags. Each tag has a name value that includes an attribute of the `Person` class 
 (e.g. `firstName`). The name attribute's value also has a reference to an object called `personBean`. This object is 
 of type `Person`. When we create the Action class that handles this form submission, we'll have to specify that object 
 in that Action class and annotate it (see below).
 
-The complete name value, `personBean.firstName`, instructs Struts 2 to use the input value for that textfield as 
+The complete name value, `personBean.firstName`, instructs Struts to use the input value for that textfield as 
 the argument to the personBean object's `setFirstName` method. So if the user types "Bruce" in the textfield that has 
 the label "First name", the personBean's `firstName` instance field will have a value of "Bruce".
 
-Note that we have a Struts 2 textfield for each instance field of the class Person. Remember that Person class's age 
-attribute is of type integer. All form field input values are Strings. Struts 2 will automatically convert the String 
+Note that we have a Struts textfield for each instance field of the class Person. Remember that Person class's age 
+attribute is of type integer. All form field input values are Strings. Struts will automatically convert the String 
 value ("25") the user entered for the age form field to 25 when calling the `setAge` method of object `personBean`.
 
 ## Creating the Action class to handle the form submission
 
 When the user clicks on the submit button of the above form, the action "register" and the form data will be sent to 
-the Struts 2 framework. We need an Action class to process this form. If you recall from the tutorial 
-[Coding Struts 2 Actions](coding-actions) our Action class should extend the Struts 2 ActionSupport class.
+the Struts framework. We need an Action class to process this form. If you recall from the tutorial 
+[Coding Struts Actions](coding-actions) our Action class should extend the Struts ActionSupport class.
 
 Here is the Action class used for this example. Place it in package org.apache.struts.register.action.
 
-**Register.java Struts 2 Action Class**
+**Register.java Struts Action Class**
 
 ```java
 package org.apache.struts.register.action;
 
-import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ActionSupport;
 import org.apache.struts.register.model.Person;
 
 public class Register extends ActionSupport {
@@ -182,7 +182,7 @@ public class Register extends ActionSupport {
 In the `Register` class, note that we've declared an attribute named `personBean` of type `Person`, there are public 
 getter and setter methods for this object, and the getter is annotated with `@StrutsParameter(depth = 1)`.
 
-In the previous [Coding Struts 2 Actions](coding-actions) tutorial, we annotated the username **setter**, which took a
+In the previous [Coding Struts Actions](coding-actions) tutorial, we annotated the username **setter**, which took a
 simple String as its parameter type, with `@StrutsParameter`. In this example, we are using a "Bean" object (sometimes
 referred to as a DTO or model object) to encapsulate the form data. When we choose to use a DTO instead of a primitive,
 String, or other TypeConverter supported object, we must annotate the **getter** method instead, and also assign a depth
@@ -199,14 +199,14 @@ method we would call upon other classes (Service objects) to perform the busines
 the user's input into a data repository.
 
 The `personBean` getter of return type `Person` declared in the Register Action class matches the `personBean` name we
-used in the form's textfields. When the form is submitted, the Struts 2 framework will inspect the Action class and look
+used in the form's textfields. When the form is submitted, the Struts framework will inspect the Action class and look
 for a getter for `personBean`. If it returns `null` and a matching setter exists, it will create that object using the
 `Person` class's default constructor and set it using the setter. Note that the setter can be omitted if your Action
 initialises the field on construction. Then for each form field that has a name value of personBean.someAttribute 
 (e.g `personBean.firstName`) it will call the personBean's public set method for that attribute and pass it the form
 field's value (the user input). This all happens before the execute method occurs.
 
-When Struts 2 runs the `execute` method of class `Register`, the `personBean` object in class `Register` now has values 
+When Struts runs the `execute` method of class `Register`, the `personBean` object in class `Register` now has values 
 for its instance fields that are equal to the values the user entered into the corresponding form fields.
 
 By using a Java model class to encapsulate the data provided by the form we don't have to have a separate attribute 
@@ -238,11 +238,11 @@ registration. Add the `thankyou.jsp` below to `src/main/webapp`.
 </html>
 ```
 
-If you don't recall how the Struts 2 property and url tags work consult the [Using Struts 2 Tags](using-tags) tutorial.
+If you don't recall how the Struts property and url tags work consult the [Using Struts Tags](using-tags) tutorial.
 
 ## Create action mapping in struts.xml
 
-To specify the relationship between the form submission page, the Struts 2 Action class, and the success view page 
+To specify the relationship between the form submission page, the Struts Action class, and the success view page 
 we need to add an action node to `struts.xml`. Add this action node to `struts.xml` (`src/main/resources`) after 
 the hello action and before the closing package node.
 
@@ -254,10 +254,10 @@ the hello action and before the closing package node.
 </action>
 ```
 
-The above action tells Struts 2 that when the register action is provided to call method `execute` of class `Register`. 
+The above action tells Struts that when the register action is provided to call method `execute` of class `Register`. 
 If that method returns result "success" return to the browser the `thankyou.jsp`.
 
-Note that we don't need to tell Struts 2 anything about processing the form. The transfer of the form field input values 
+Note that we don't need to tell Struts anything about processing the form. The transfer of the form field input values 
 to the `personBean` object will happen automatically provided we've followed the convention of naming our form fields 
 to match personBean.attributeName (e.g. `personBean.lastName`).
 
@@ -271,7 +271,7 @@ So that the user can find the registration page, add this link to index.jsp
 <p><a href="register.jsp">Please register</a> for our prize drawing.</p>
 ```
 
-__Run The Example__
+## Run The Example
 
 If everything is correct, you should be able to run the application (using `mvn jetty:run`), and open this URL in your 
 web browser:
@@ -285,4 +285,4 @@ Fill out the form and click the submit button. You should then see the `thankyou
 
 ![thanyoujsp.png](attachments/att14975000_thanyoujsp.png)
 
-|Return to [Coding Struts 2 Actions](coding-actions)|or|onward to [Form validation](form-validation)|
+|Return to [Coding Struts Actions](coding-actions)|or|onward to [Form validation](form-validation)|

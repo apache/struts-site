@@ -3,7 +3,7 @@ layout: default
 title: Getting started
 parent:
     title: Getting started
-    url: index.html
+    url: index
 ---
 
 # JasperReports Tutorial
@@ -12,7 +12,7 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-The Struts 2 JasperReports plugin is a bridge from Struts 2 to JasperReports and does not include JasperReports itself, 
+The Struts JasperReports plugin is a bridge from Struts to JasperReports and does not include JasperReports itself, 
 which must be downloaded separately.
 
 [JasperReports](http://jasperreports.sourceforge.net) is one of the leading open-source Java reporting libraries. 
@@ -109,7 +109,7 @@ import java.util.List;
 import net.sf.jasperreports.engine.JasperCompileManager;
 
 import com.acme.test.Person;
-import com.opensymphony.xwork.ActionSupport;
+import org.apache.struts2.ActionSupport;
 
 public class JasperAction extends ActionSupport {
 
@@ -176,7 +176,7 @@ report. This is a handwritten version - for more complex versions I seriously su
       <staticText>
         <reportElement x="0" y="0" width="180" height="15"/>
         <textElement/>
-        <text><![CDATA[Struts 2 JasperReports Sample]]></text>
+        <text><![CDATA[Struts JasperReports Sample]]></text>
       </staticText>
     </band>
   </title>
@@ -303,7 +303,7 @@ the result type manually.
 <result name="success" type="jasper">
 ```
 
-The `location` parameter defines the location of the compiled jasper file, which will be filled by Struts 2 with our dataSource:
+The `location` parameter defines the location of the compiled jasper file, which will be filled by Struts with our dataSource:
 
 ```xml
 <param name="location">/jasper/our_compiled_template.jasper</param>

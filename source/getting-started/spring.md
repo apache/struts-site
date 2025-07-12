@@ -3,10 +3,10 @@ layout: default
 title: Spring
 parent:
     title: Getting started
-    url: index.html
+    url: index
 ---
 
-# Spring and Struts 2
+# Spring and Struts
 {:.no_toc}
 
 * Will be replaced with the ToC, excluding a header
@@ -16,20 +16,20 @@ The example code for this tutorial, **spring-struts**, is available for checkout
 
 ## Introduction
 
-In the execute method of many Struts 2 ActionSupport classes are statements that create objects and then have those 
+In the execute method of many Struts ActionSupport classes are statements that create objects and then have those 
 objects execute methods that perform needed tasks. Whenever one class creates an object of another class that introduces 
 a dependency between the two classes. The Spring framework makes it easier for the application developer to manage these 
-dependencies and helps make the application more flexible and maintainable. This tutorial will show you how to use Struts 2 
+dependencies and helps make the application more flexible and maintainable. This tutorial will show you how to use Struts 
 and Spring together to manage the dependencies between your ActionSupport classes and other classes in your application.
 
 > This tutorial assumes you understand how to use the Spring framework to manage dependencies between classes. You can 
 > learn more about Spring by reading the documentation at [https://spring.io/docs](https://spring.io/docs)
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
-a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer 
+The [Struts user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts mailing list. If you don't find an answer 
 to your problem, post a question on the mailing list.
 
-If you examine the example application for the [Struts 2 Themes](themes) tutorial you'll see this code in the 
+If you examine the example application for the [Struts Themes](themes) tutorial you'll see this code in the 
 `EditAction` class
 
 **EditAction Class Hard-Coded Dependency**
@@ -46,7 +46,7 @@ poor design for two reasons.
 2. I cannot test `EditAction` without using the `EditServiceInMemory` class. I cannot isolate `EditAction` by using 
   a stub implementation of `EditService` when writing my test case because the use of `EditServiceInMemory` is hard-coded.
 
-Spring provides a mechanism to manage dependencies by injecting them at run time. Struts 2 ActionSupport classes—like 
+Spring provides a mechanism to manage dependencies by injecting them at run time. Struts ActionSupport classes—like 
 any other Java class—can be injected with a dependent object by the Spring framework. So instead of having the above code, 
 I would have this statement in `EditAction`.
 
@@ -58,18 +58,17 @@ private EditService editService;
 
 At run time the Spring framework will provide an object of a class that implements the EditService interface.
 
-## Struts 2 Spring Plugin
+## Struts Spring Plugin
 
-Struts 2 provides a plugin that enables Spring to inject into the ActionSupport classes any dependent objects you've 
+Struts provides a plugin that enables Spring to inject into the ActionSupport classes any dependent objects you've 
 specified in the Spring configuration file. Consult [Spring Plugin documentation](../plugins/spring/) for more information 
 about how the plugin works.
 
 For a Maven application you'll need to add a dependency to the struts2-spring-plugin jar (see the Maven example application 
 for this tutorial). The plugin's pom.xml includes transitive dependencies to the Spring jar files.
 
-> The current version (`2.5.10.1`) of the Struts 2 Spring plugin has transitive dependencies to the Spring `4.1.6.RELEASE` version. 
 > If you want to use the latest version of Spring, then you should exclude the transitive dependencies in your pom.xml 
-> for the Struts 2 Spring plugin and then declare dependency nodes to the current version of the Spring jar files. 
+> for the Struts Spring plugin and then declare dependency nodes to the current version of the Spring jar files. 
 > If you are using Ant and explicitly including the jar files in your application, then just include the latest version 
 > of the Spring jar files.
 
@@ -129,7 +128,7 @@ scope (e.g. request or session).
 
 ## Alternative - Have Spring Manage Creation Of ActionSupport Class
 
-Using the above methodology, the Struts 2 framework will still manage the creation of the `ActionSupport` class. If you 
+Using the above methodology, the Struts framework will still manage the creation of the `ActionSupport` class. If you 
 prefer you can configure the application so that Spring will create the ActionSupport class also. To support this technique 
 you need to add a bean node to the Spring configuration file for the ActionSupport class.
 
@@ -170,7 +169,7 @@ This tells Struts to get a bean with that id value from Spring for the Action cl
 
 ## Summary
 
-In this tutorial we reviewed how to use the Struts 2 Spring plugin to integrate Spring and Struts. By using the Struts 2 
+In this tutorial we reviewed how to use the Struts Spring plugin to integrate Spring and Struts. By using the Struts 
 Spring plugin you can have Spring manage the dependencies of your ActionSupport classes. Of course you can also take 
 advantage of the many other benefits (AOP, Spring JDBC) that the Spring framework provides.
 

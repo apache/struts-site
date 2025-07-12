@@ -3,7 +3,7 @@ layout: default
 title: Http Session
 parent:
     title: Getting started
-    url: index.html
+    url: index
 ---
 
 # HTTP Session
@@ -16,12 +16,12 @@ The example code for this tutorial, **http-session**, is available at [struts-ex
 
 ## Introduction
 
-Your Struts 2 application may need to access the HTTP session object. Struts 2 provides an interface, 
+Your Struts application may need to access the HTTP session object. Struts provides an interface, 
 [SessionAware]({{ site.apidocs }}/org/apache/struts2/interceptor/SessionAware), that your Action class 
 should implement to obtain a reference to the HTTP session object.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are 
-having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find 
+The [Struts user mailing list](../mail) is an excellent place to get help. If you are 
+having a problem getting the tutorial example applications to work search the Struts mailing list. If you don't find 
 an answer to your problem, post a question on the mailing list.
 
 ## SessionAware Interface
@@ -39,7 +39,7 @@ public void setSession(Map<String, Object> session) {
 }
 ```
 
-The Struts 2 framework has an interceptor that will inject the HTTP session object into the Action class by calling 
+The Struts framework has an interceptor that will inject the HTTP session object into the Action class by calling 
 the `setSession` method.
 
 ## Using the HTTP Session Object In The Action Class
@@ -64,12 +64,12 @@ private void increaseHelloCount() {
 ```
 
 When the increaseHelloCount method is called from within the execute method, the userSession object is a reference 
-to the HTTP session object injected by the Struts 2 framework. So any objects stored in the HTTP session can be retrieved 
+to the HTTP session object injected by the Struts framework. So any objects stored in the HTTP session can be retrieved 
 using the userSession object and any objects stored in the userSession object will be stored in the HTTP session object.
 
 ## Accessing HTTP Session Objects In The View
 
-Struts 2 provides an easy way to get an object stored in the HTTP session from within the view page. In the example 
+Struts provides an easy way to get an object stored in the HTTP session from within the view page. In the example 
 application is `HelloWorld.jsp` with this markup:
 
 **HelloWorld.jsp Get helloCount Value From HTTP Session**
@@ -90,7 +90,7 @@ practices in the Action class that implements the SessionAware interface.
 
 1. Do not have a public `Map<String, Object> getSession` method in the Action class. You only need a public void 
   `setSession` method to implement the `SessionAware` interface.
-2. Also have the Action class implement the [ParameterNameAware interface]({{ site.apidocs }}/com/opensymphony/xwork2/interceptor/ParameterNameAware) 
+2. Also have the Action class implement the [ParameterNameAware interface]({{ site.apidocs }}/org/apache/struts2/interceptor/ParameterNameAware) 
   and override its acceptableParameterName method:
 
 **HelloWorldAction.java acceptableParameterName Method**
@@ -107,11 +107,12 @@ public boolean acceptableParameterName(String parameterName) {
 }
 ```
 
-This method will be called by the Struts 2 framework for each parameter in the request scope. By returning false if 
-the parameter name contains "session" we are telling the Struts 2 framework to ignore that parameter. This will prevent 
+This method will be called by the Struts framework for each parameter in the request scope. By returning false if 
+the parameter name contains "session" we are telling the Struts framework to ignore that parameter. This will prevent 
 a malicious user from trying to hack the HTTP session object.
 
-Instead of having each action that implements SessionAware also implement the ParameterNameAware interface you can tell the params interceptor to exclude specific request attributes for all actions in a package. In struts.xml configure 
+Instead of having each action that implements SessionAware also implement the ParameterNameAware interface you can tell 
+the params interceptor to exclude specific request attributes for all actions in a package. In struts.xml configure 
 the `struts-default` set of interceptors as follows:
 
 **struts.xml configure params interceptor**
@@ -147,6 +148,6 @@ When your Action class needs to access the HTTP session object implement the Ses
 the `setSession` method. Be sure to also implement the `ParameterNameAware` interface and override 
 the `acceptableParameterName` method to mitigate a potential security vulnerability. If you have multiple actions 
 that implement `SessionAware` then consider modifying the params interceptor's `excludeParams` value as part of your 
-Struts 2 package setup.
+Struts package setup.
 
 |Return to [Unit Testing](unit-testing)|or|onward to [Preparable Interface](preperable-interface)|

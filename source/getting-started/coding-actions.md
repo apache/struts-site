@@ -3,7 +3,7 @@ layout: default
 title: Coding actions
 parent:
     title: Getting started
-    url: index.html
+    url: index
 ---
 
 # Coding actions
@@ -12,13 +12,13 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
-This tutorial assumes you've completed the [Using Struts 2 Tags](using-tags) tutorial and have a working **using-tags** 
-project. The example code for this tutorial, **coding-actions**, is available for checkout from the Struts 2 GitHub repository 
+This tutorial assumes you've completed the [Using Struts Tags](using-tags) tutorial and have a working **using-tags** 
+project. The example code for this tutorial, **coding-actions**, is available for checkout from the Struts GitHub repository 
 [struts-examples](https://github.com/apache/struts-examples).
 
 ## Introduction
 
-Coding a Struts 2 Action involves several parts:
+Coding a Struts Action involves several parts:
 
 1. Mapping an action to a class
 2. Mapping a result to a view
@@ -40,17 +40,17 @@ then the view `HelloWorld.jsp` will be returned to the browser.
 
 This tutorial will introduce you to the basics of writing the controller logic in the Action class.
 
-## Struts 2 Action Classes
+## Struts Action Classes
 
 Action classes act as the controller in the MVC pattern. Action classes respond to a user action, execute business 
 logic (or call upon other classes to do that), and then return a result that tells Struts what view to render.
 
-Struts 2 Action classes usually extend the `ActionSupport` class, which is provided by the Struts 2 framework. 
+Struts Action classes usually extend the `ActionSupport` class, which is provided by the Struts framework. 
 Class `ActionSupport` provides default implementations for the most common actions (e.g. execute, input) and also 
-implements several useful Struts 2 interfaces. When your Action class extends class `ActionSupport` your class can either 
+implements several useful Struts interfaces. When your Action class extends class `ActionSupport` your class can either 
 override the default implementations or inherit them.
 
-If you examine class HelloWorldAction from tutorial [Using Struts 2 Tags](using-tags) you'll see that it extends 
+If you examine class HelloWorldAction from tutorial [Using Struts Tags](using-tags) you'll see that it extends 
 the class `ActionSupport` and then overrides method `execute`.
 
 The method `execute` is where we placed what we want this controller to do in response to the `hello.action`.
@@ -75,9 +75,9 @@ One of the most common responsibilities of the Action class is to process user i
 the result of the processing available to the view page. To illustrate this responsibility, let's say that 
 on our view page, `HelloWorld.jsp`, we want to display a personal hello, such as "Hello Struts User Bruce."
 
-In the [Using Struts 2 Tags](using-tags) example application we added a Struts 2 form to `index.jsp`.
+In the [Using Struts Tags](using-tags) example application we added a Struts form to `index.jsp`.
 
-**Struts 2 Form Tags**
+**Struts Form Tags**
 
 ```xml
 <s:form action="hello">
@@ -86,13 +86,13 @@ In the [Using Struts 2 Tags](using-tags) example application we added a Struts 2
 </s:form>
 ```
 
-Make a note of the value of the name attribute for the Struts 2 textfield tag, which is userName. When the user 
+Make a note of the value of the name attribute for the Struts textfield tag, which is userName. When the user 
 clicks on the submit button for the above form, the action hello will be executed (`hello.action`). The form field 
-values will be posted to the Struts 2 Action class (`HelloWorldAction`). The Action class may automatically receive 
+values will be posted to the Struts Action class (`HelloWorldAction`). The Action class may automatically receive 
 those form field values provided it has a public set method that matches the form field name value.
 
 So for the HelloWorldAction class to automatically receive the userName value it must have a public method setUserName 
-(note the JavaBean convention discussed in tutorial [Hello World](hello-world-using-struts2)).
+(note the JavaBean convention discussed in tutorial [Hello World](hello-world-using-struts)).
 
 For the example application associated with this tutorial, add the following Java code to class `HelloWorldAction`.
 
@@ -132,15 +132,15 @@ When the form is submitted, Struts will call any set methods of the HelloWorldAc
 names and are annotated with `@StrutsParameter`. So in this example method `setUserName` was called and passed the value
 the user entered in the `userName` form field.
 
-On the `index.jsp` we also have a Struts 2 action link (see tutorial [Using Struts 2 Tags](using-tags)) that includes 
+On the `index.jsp` we also have a Struts action link (see tutorial [Using Struts Tags](using-tags)) that includes 
 a query string parameter: `userName=Bruce+Phillips`. If you click on that link you should see the following result:
 
 ![coding_actions_link_with_param_result.png](attachments/coding_actions_link_with_param_result.png)
 
 Since the query string parameter is `userName`, Struts passed the value of that parameter to the `setUserName` method.
 
-On the view page, `HelloWorld.jsp`, you can also access the `userName` value by using the Struts 2 property tag 
-(see tutorial [Using Struts 2 Tags](using-tags)). Try showing just the `userName` value on the view page.
+On the view page, `HelloWorld.jsp`, you can also access the `userName` value by using the Struts property tag 
+(see tutorial [Using Struts Tags](using-tags)). Try showing just the `userName` value on the view page.
 
 ## Summary
 
@@ -149,4 +149,4 @@ a query string parameter. If the form had numerous fields, it would be cumbersom
 up with each form field. So our next tutorial will cover how to integrate a model class, form fields in the view 
 and form processing in the Action class.
 
-|Return to [Using Struts 2 Tags](using-tags)|or|onward to [Processing Forms](processing-forms)|
+|Return to [Using Struts Tags](using-tags)|or|onward to [Processing Forms](processing-forms)|
