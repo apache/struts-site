@@ -3,7 +3,7 @@ layout: default
 title: Wildcard Method Selection
 parent:
     title: Getting started
-    url: index.html
+    url: index
 ---
 
 # Wildcard Method Selection
@@ -20,23 +20,23 @@ In this tutorial we'll cover how to configure an action node in the struts.xml c
 node can be used to relate several different Action URLs to specific methods of the Action class. This will reduce 
 the number of action nodes we must write in the struts.xml configuration file.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
-a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer 
+The [Struts user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts mailing list. If you don't find an answer 
 to your problem, post a question on the mailing list.
 
 ## Example Application
 
 ![Screen shot 2010-05-30 at 8.51.40 AM.png](attachments/att21921805_Screen shot 2010-05-30 at 8.51.40 AM.png)
 
-The example application that supports this tutorial shows how to use Struts 2's wildcard method selection methodology. 
+The example application that supports this tutorial shows how to use Struts's wildcard method selection methodology. 
 The example application is just a simple one that lists some people and lets you edit them, delete them, and add 
 a new person to the list. Everything that the application needs to do with a `Person` (the model class) is controlled 
-by the Struts 2 `ActionSupport` class `PersonAction`. The `PersonAction` class has several different methods 
+by the Struts `ActionSupport` class `PersonAction`. The `PersonAction` class has several different methods 
 (e.g. create, edit, delete) that are called depending on what the user wants to do.
 
 ## Wildcard Method Selection
 
-Without using the wildcard method selection technique, I'd have to write an action mapping node in the Struts 2 
+Without using the wildcard method selection technique, I'd have to write an action mapping node in the Struts 
 configuration file for each separate action I'd want to call. For example:
 
 **Struts.xml Action Configuration**
@@ -57,7 +57,7 @@ So even for this simple application, I'd have to write four separate action mapp
 saveOrUpdate) in the configuration file. So you can easily see that a more complex application can have dozens of action 
 mapping nodes.
 
-To implement the wildcard method selection technique to enable the Struts 2 framework to dynamically select the correct 
+To implement the wildcard method selection technique to enable the Struts framework to dynamically select the correct 
 method to call at runtime you just need to use the wildcard character, *, in your name value and an attribute value 
 placeholder ( `{1}` ) for the method value. For example:
 
@@ -86,21 +86,21 @@ What happens if we have a URL with nothing in front of Person? For example:
 
 [http://localhost:8080/wildcard-method-selection/Person.action](http://localhost:8080/wildcard-method-selection/Person.action)
 
-If there is no value in front of Person, then the Struts 2 framework will call the execute method of the class `PersonAction`.
+If there is no value in front of Person, then the Struts framework will call the execute method of the class `PersonAction`.
 
 ## Dynamic Method Invocation
 
 The wildcard method selection technique explained above should not be confused with the "Dynamic Method Invocation" 
-technique. The Struts 2 documentation explains this technique (which uses the bang, `!`, operator in the action name) 
+technique. The Struts documentation explains this technique (which uses the bang, `!`, operator in the action name) 
 and recommends against using the "Dynamic Method Invocation" technique due to security and other reasons related to how 
 this technique is implemented internally.
 
-The Struts 2 documentation also recommends turning off the option to use the dynamic method invocation by setting 
+The Struts documentation also recommends turning off the option to use the dynamic method invocation by setting 
 `struts.enable.DynamicMethodInvocation` to `FALSE` in the Struts configuration.
 
 ## Summary
 
 By using the wildcard method selection technique explained above, you can significantly reduce the number of action 
-mapping nodes you need to write and manage in the Struts 2 XML configuration file.
+mapping nodes you need to write and manage in the Struts XML configuration file.
 
 |Return to [Form validation using XML](form-validation-using-xml)|or|onward to [Themes](themes)|

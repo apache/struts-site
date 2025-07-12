@@ -9,20 +9,19 @@ The framework documentation is written for active web developers and assumes a w
 about how Java web applications are built. For more about the underlying nuts and bolts, see 
 the [Key Technologies Primer](/primer).
 
-Follow along with these tutorials to get started using Struts 2. The example code for the tutorials 
-available for checkout from the Struts 2 GitHub repository at [struts-examples](https://github.com/apache/struts-examples).
+Follow along with these tutorials to get started using Struts. The example code for the tutorials 
+available for checkout from the Struts GitHub repository at [struts-examples](https://github.com/apache/struts-examples).
 The example projects use Maven to manage the artifact dependencies and to build the .war files.
 
-
-> The [Struts 2 user mailing list](/mail) is an excellent place to get help. If you are having a problem getting 
-> the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer to your problem, 
+> The [Struts user mailing list](/mail) is an excellent place to get help. If you are having a problem getting 
+> the tutorial example applications to work search the Struts mailing list. If you don't find an answer to your problem, 
 > post a question on the mailing list.
 
 ## Examples
 
-[How to create a Struts 2 web application](how-to-create-a-struts2-web-application)
+[How to create a Struts web application](how-to-create-a-struts-web-application)
 
-[Hello World Using Struts 2](hello-world-using-struts2)
+[Hello World Using Struts](hello-world-using-struts)
 
 [Using Tags](using-tags)
 
@@ -48,7 +47,7 @@ The example projects use Maven to manage the artifact dependencies and to build 
 
 [Themes](themes)
 
-[Spring and Struts 2](spring)
+[Spring and Struts](spring)
 
 [Annotations](annotations)
 

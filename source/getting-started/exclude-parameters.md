@@ -3,7 +3,7 @@ layout: default
 title: Exclude parameters
 parent:
     title: Getting started
-    url: index.html
+    url: index
 ---
 
 # Exclude Parameters
@@ -23,21 +23,21 @@ These log messages can be helpful in clearly identifying parameters that you do 
 to process for security or other reasons. This article discusses how to exclude parameters from being handled by 
 the parameter interceptor.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
-a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer 
+The [Struts user mailing list](../mail) is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts mailing list. If you don't find an answer 
 to your problem, post a question on the mailing list.
 
 ## Processing Request Parameters
 
-Most request parameters are by default processed by the parameter interceptor and Struts 2 will attempt to modify the state 
+Most request parameters are by default processed by the parameter interceptor and Struts will attempt to modify the state 
 of those Action class fields that match up to a parameter name by calling a corresponding public set method. For example 
-if the request includes a parameter of lastName with a value of Phillips, Struts 2 will try to call a public method with 
-a signature of setLastName(String lastName). However, there may be request parameters that you do not want Struts 2 
+if the request includes a parameter of lastName with a value of Phillips, Struts will try to call a public method with 
+a signature of setLastName(String lastName). However, there may be request parameters that you do not want Struts 
 to try to set the value of in the Action class.
 
 Consider this code which creates a form:
 
-**Struts 2 Form Tags**
+**Struts Form Tags**
 
 ```html
 <s:form action="save" method="post">
@@ -61,22 +61,21 @@ a `setSubmit(String name)` method you will see the following log messages (only 
 
 ```
 Dec 31, 2012 3:43:53 PM 
-com.opensymphony.xwork2.util.logging.commons.CommonsLogger warn
 WARNING: Parameter [submit] is not on the excludeParams list of patterns and will be appended to action!
 
-Dec 31, 2012 3:43:53 PM com.opensymphony.xwork2.util.logging.commons.CommonsLogger error
+Dec 31, 2012 3:43:53 PM error
 SEVERE: Developer Notification (set struts.devMode to false to disable this message):
 Unexpected Exception caught setting 'submit' on 'class org.apache.struts.edit.action.EditAction: Error setting expression 'submit' with value ['Save Changes', ]
 ```
 
-## Excluding Request Parameters From Struts 2 Processing
+## Excluding Request Parameters From Struts Processing
 
-If you're not familiar with setting up a custom interceptor stack for your Struts 2 application review [Introducing Interceptors](introducing-interceptors).
+If you're not familiar with setting up a custom interceptor stack for your Struts application review [Introducing Interceptors](introducing-interceptors).
 
-To exclude specific parameters from being processed by the Struts 2 framework you need to add those parameter names 
+To exclude specific parameters from being processed by the Struts framework you need to add those parameter names 
 to the list of excluded parameters. One way to do this is by adding those parameter names to the collection of `excludedParams` 
 for the Parameters interceptor. You can do this by modifying the Parameters interceptor in setting up the stack of interceptors 
-used by your Struts 2 application. For example:
+used by your Struts application. For example:
 
 **Setup Interceptor Stack To Exclude submit Parameter**
 
@@ -112,9 +111,9 @@ parameter values in the struts.xml file. Then rebuild and redeploy the applicati
 
 ## Summary
 
-It's a nice feature of the Struts 2 framework that it logs during development which request parameters will and will not 
-be processed. During development of a Struts 2 web application it's a good practice to review these log messages to determine 
-if there are any parameters that the framework should not process. For those parameters the Struts 2 framework should 
+It's a nice feature of the Struts framework that it logs during development which request parameters will and will not 
+be processed. During development of a Struts web application it's a good practice to review these log messages to determine 
+if there are any parameters that the framework should not process. For those parameters the Struts framework should 
 not process add the parameter name (or a regular expression that can be used to identify multiple parameter names) 
 to the comma-delimited list that is the value for the `<param name="params.excludeParams">` node.
 

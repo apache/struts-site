@@ -3,7 +3,7 @@ layout: default
 title: Preparable Interface
 parent:
     title: Getting started
-    url: index.html
+    url: index
 ---
 
 # Preparable Interface
@@ -17,7 +17,7 @@ The example code for this tutorial, **preparable-interface**, is available at [s
 ## Introduction
 
 Often the data used to populate a form control is dynamically generated, perhaps from a database. When the user submits 
-the form, the Struts 2 validation interceptor attempts to validate the user's form input. If validation fails the Struts 2 
+the form, the Struts validation interceptor attempts to validate the user's form input. If validation fails the Struts 
 framework returns the value `input` but the `input` action is not re-executed. Rather the view associated with the `input` 
 result is rendered to the user. Usually this view is the page that displayed the original form.
 
@@ -26,15 +26,15 @@ look-up that that is accomplished in the Action class's input method. Since the 
 re-executed when validation fails, the view page may no longer have access to the correct information to create the form 
 or other display information.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
-a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find an answer 
+The [Struts user mailing list](../mail) is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts mailing list. If you don't find an answer 
 to your problem, post a question on the mailing list.
 
 ## Preparable Interface
 
-Struts 2 provides the [Preparable interface](../maven/struts2-core/apidocs/com/opensymphony/xwork2/Preparable)
+Struts provides the [Preparable interface]({{ site.apidocs }}/org/apache/struts2/Preparable)
 to overcome this problem. An Action class that implements this interface must override the prepare method. The `prepare` 
-method will always be called by the Struts 2 framework's [prepare interceptor](../core-developers/prepare-interceptor) 
+method will always be called by the Struts framework's [prepare interceptor](../core-developers/prepare-interceptor) 
 whenever any method is called for the Action class and also when validation fails before the view is rendered.
 
 In the `prepare` method you should put any statements that must be executed no matter what other Action class method will 
@@ -44,7 +44,7 @@ used to set the initial form field values.
 
 In addition to automatically running the prepare method the [prepare interceptor](../core-developers/prepare-interceptor) 
 will also call a method named `prepare<ActionMethodName>`. For example, define a prepare method and a `prepareInput` method 
-in the Action class that implements `Preparable`. When the Struts 2 framework calls the input method, the prepare interceptor 
+in the Action class that implements `Preparable`. When the Struts framework calls the input method, the prepare interceptor 
 will call the prepareInput and the prepare methods before calling the input method.
 
 ## Example Application

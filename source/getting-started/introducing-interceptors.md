@@ -3,7 +3,7 @@ layout: default
 title: Introducing Interceptors
 parent:
     title: Getting started
-    url: index.html
+    url: index
 ---
 
 # Introducing Interceptors
@@ -16,11 +16,11 @@ The example code for this tutorial, **interceptors**, is available at [struts-ex
 
 ## Introduction
 
-So far our tutorials have not delved into the inner workings of the Struts 2 framework. But in this tutorial we'll 
-introduce a key set of classes the Struts 2 framework relies upon to do most of the work whenever an Action is executed. 
+So far our tutorials have not delved into the inner workings of the Struts framework. But in this tutorial we'll 
+introduce a key set of classes the Struts framework relies upon to do most of the work whenever an Action is executed. 
 In this tutorial's example project there is a register link that is mapped in the Struts XML configuration file (`struts.xml`) 
 to the execute method of class Register. Before that execute method is called much work is done behind the scenes 
-by the Struts 2 framework. For example:
+by the Struts framework. For example:
 
 1. Handling any exceptions generated
 2. Converting the String request parameters to the Register class's instance fields where the name values match
@@ -34,27 +34,27 @@ After the execute method is completed more work must be done
 
 The above list of tasks are not complete - several other tasks are done before and after the execution of the Action.
 
-The benefit of using Struts 2 is all this work happens automatically. You can focus on the logic of the controller 
-(the Struts 2 ActionSupport class), the Service layer, the data access layer, your domain models, etc.
+The benefit of using Struts is all this work happens automatically. You can focus on the logic of the controller 
+(the Struts ActionSupport class), the Service layer, the data access layer, your domain models, etc.
 
-The [Struts 2 user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are 
-having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don't find 
+The [Struts user mailing list](../mail) is an excellent place to get help. If you are 
+having a problem getting the tutorial example applications to work search the Struts mailing list. If you don't find 
 an answer to your problem, post a question on the mailing list.
 
 ## Introducing Interceptors
 
-The tasks that are done by the Struts 2 framework before and after an Action is executed are done by Struts 2 interceptors. 
-Interceptors are standard Java classes included in the Struts 2 core jar which are executed in a specific order.
+The tasks that are done by the Struts framework before and after an Action is executed are done by Struts interceptors. 
+Interceptors are standard Java classes included in the Struts core jar which are executed in a specific order.
 
 In our example application there is a package node in struts.xml. The package node has an attribute of extends with 
 a value of "struts-default." The value "struts-default" identifies to the framework the specific stack of interceptors 
 that will be executed before and after the Actions in that package.
 
 If you want to learn more about the inner workings of interceptors, what interceptors belong to the struts default stack, 
-and what are all the interceptors included with Struts 2, visit [Understanding Interceptors](../core-developers/interceptors) .
+and what are all the interceptors included with Struts, visit [Understanding Interceptors](../core-developers/interceptors) .
 
-Sometime the Struts 2 default stack of interceptors are not exactly what you need for a particular action. You may want 
-to use interceptors that are not part of the Struts 2 default stack. For an individual Action or for the entire 
+Sometime the Struts default stack of interceptors are not exactly what you need for a particular action. You may want 
+to use interceptors that are not part of the Struts default stack. For an individual Action or for the entire 
 package of Actions, you can specify a different stack of interceptors that the Action or package should use. Below is 
 how you would specify that the register Action should use both the [logger](../core-developers/logging-interceptor) 
 and [timer](../core-developers/timer-interceptor) interceptors in addition to the interceptors provided by the default stack.
@@ -83,15 +83,15 @@ Action we are instructing the framework to use the `timer`, `logger`, and `defau
 are all the interceptors normally executed for an Action.
 
 How did I know to use the value of timer for the name attribute and even that there is a timer interceptor? 
-On the [Interceptors](../core-developers/interceptors) web page in the Struts 2 documentation are a list of interceptors 
-that come with the Struts 2 framework and what the name value is for each interceptor.
+On the [Interceptors](../core-developers/interceptors) web page in the Struts documentation are a list of interceptors 
+that come with the Struts framework and what the name value is for each interceptor.
 
 How did I know that the timer interceptor isn't part of the defaultStack of interceptors already? Again on the Interceptors 
 documentation web page is a list of which interceptors belong to the `defaultStack`.
 
 Note the param nodes. These nodes are used to provide a value to the setLogEnabled and setLogLevel methods 
 of the [Exception Interceptor](../core-developers/exception-interceptor). Providing the values of true and ERROR 
-will cause the Struts 2 framework to log any exceptions not caught by the application's code and to log those exceptions 
+will cause the Struts framework to log any exceptions not caught by the application's code and to log those exceptions 
 at the ERROR level.
 
 ## Run The Example
@@ -101,10 +101,8 @@ sent to the JVM console to see the log messages generated by the logger and time
 similar to the following:
 
 ```
-INFO: Starting execution stack for action //register
-Nov 20, 2010 9:55:48 AM com.opensymphony.xwork2.util.logging.jdk.JdkLogger info
-INFO: Finishing execution stack for action //register
-Nov 20, 2010 9:55:48 AM com.opensymphony.xwork2.util.logging.jdk.JdkLogger info
+INFO: Starting execution stack for action /register
+INFO: Finishing execution stack for action /register
 INFO: Executed action /register!execute took 177 ms.
 ```
 
@@ -148,7 +146,7 @@ how to do this. For example, you could create your own interceptor to handle aut
 
 ## Summary
 
-Interceptors provide the Struts 2 framework with both power and flexibility. Developers may add additional interceptors 
-(either ones provided by Struts 2 or ones they create) to the stack of interceptors executed when an Action class is called.
+Interceptors provide the Struts framework with both power and flexibility. Developers may add additional interceptors 
+(either ones provided by Struts or ones they create) to the stack of interceptors executed when an Action class is called.
 
 |Return to [Annotations](annotations)|or|onward to [Unit Testing](unit-testing)|
