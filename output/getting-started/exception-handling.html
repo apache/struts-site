@@ -149,7 +149,7 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/getting-started/exception-handling.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    <a href="index" title="back to Getting started"><< back to Getting started</a>
     
     <h1 class="no_toc" id="exception-handling">Exception Handling</h1>
 
@@ -166,17 +166,17 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p>In this tutorial we’ll explore how to enable the Struts 2 framework to handle any uncaught exceptions generated 
-by a web application. Struts 2 provides robust exception handling, including the ability to automatically log any 
+<p>In this tutorial we’ll explore how to enable the Struts framework to handle any uncaught exceptions generated 
+by a web application. Struts provides robust exception handling, including the ability to automatically log any 
 uncaught exceptions and redirect the user to an error web page.</p>
 
-<p>The <a href="http://struts.apache.org/mail">Struts 2 user mailing list</a> is an excellent place to get help. If you are having 
-a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find 
+<p>The <a href="http://struts.apache.org/mail">Struts user mailing list</a> is an excellent place to get help. If you are having 
+a problem getting the tutorial example applications to work search the Struts mailing list. If you don’t find 
 an answer to your problem, post a question on the mailing list.</p>
 
 <h2 id="global-exception-handling">Global Exception Handling</h2>
 
-<p>Using the Struts 2 framework you can specify in the struts.xml how the framework should handle uncaught exceptions. 
+<p>Using the Struts framework you can specify in the struts.xml how the framework should handle uncaught exceptions. 
 The handling logic can apply to all actions (global exception handling) or to a specific action. Let’s first discuss
 how to enable global exception handling.</p>
 
@@ -196,8 +196,8 @@ and <code class="language-plaintext highlighter-rouge">global-results</code>. Fo
 
 <p>The global exception mapping node tells the Struts framework what to do if an uncaught exception of the type specified 
 (or a child of that type) is thrown by the application. For example if a SecurityBreachException is thrown but 
-not caught, the Struts 2 Action class will return a result of <code class="language-plaintext highlighter-rouge">securityerror</code>. All other uncaught exceptions will cause 
-the Struts 2 Action class to return a result of “error”.</p>
+not caught, the Struts Action class will return a result of <code class="language-plaintext highlighter-rouge">securityerror</code>. All other uncaught exceptions will cause 
+the Struts Action class to return a result of “error”.</p>
 
 <p>The global results mapping node relates the result value to a specific view page. For example the result <code class="language-plaintext highlighter-rouge">securityerror</code>
 will cause the framework to redirect the user’s browser to the <code class="language-plaintext highlighter-rouge">securityerror.jsp</code> view page.</p>
@@ -215,16 +215,16 @@ the action node.</p>
 </code></pre></div></div>
 
 <p>The above action node from the example application’s struts.xml file specifies that if the method <code class="language-plaintext highlighter-rouge">throwSecurityException</code>
-throws an uncaught exception of type <code class="language-plaintext highlighter-rouge">SecurityBreachException</code> the Struts 2 framework should return a result of login. 
+throws an uncaught exception of type <code class="language-plaintext highlighter-rouge">SecurityBreachException</code> the Struts framework should return a result of login. 
 The login result will cause the user’s browser to be redirected to login.jsp.</p>
 
 <p>You can see that an action-specific exception mapping will take precedence if the same exception is also mapped globally.</p>
 
 <h2 id="logging-exceptions">Logging Exceptions</h2>
 
-<p>You can configure the Struts 2 framework to log any uncaught exceptions. To enable logging of the exceptions being 
-handled by the Struts 2 framework you must specify some parameter values in struts.xml. If you examine 
-the <a href="https://struts.apache.org/maven/struts2-core/apidocs/com/opensymphony/xwork2/interceptor/ExceptionMappingInterceptor">ExceptionMappingInterceptor class API</a> 
+<p>You can configure the Struts framework to log any uncaught exceptions. To enable logging of the exceptions being 
+handled by the Struts framework you must specify some parameter values in struts.xml. If you examine 
+the <a href="/maven/struts2-core/apidocs/org/apache/struts2/interceptor/ExceptionMappingInterceptor">ExceptionMappingInterceptor class API</a> 
 there are three parameter values you can set to enable logging (logEnabled), the log level to use (logLevel), 
 and the log category (logCategory) to specify in the log message.</p>
 
@@ -243,15 +243,15 @@ the following in struts.xml just after the opening package node.</p>
 <span class="nt">&lt;default-interceptor-ref</span> <span class="na">name=</span><span class="s">"appDefaultStack"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>The above interceptors node configures a new stack of Struts 2 interceptors named <code class="language-plaintext highlighter-rouge">appDefaultStack</code>. This stack 
-of interceptors is based upon the defaultStack of interceptors (which are the Struts 2 interceptors that execute 
-by default whenever an Action class method is called by the Struts 2 framework).</p>
+<p>The above interceptors node configures a new stack of Struts interceptors named <code class="language-plaintext highlighter-rouge">appDefaultStack</code>. This stack 
+of interceptors is based upon the defaultStack of interceptors (which are the Struts interceptors that execute 
+by default whenever an Action class method is called by the Struts framework).</p>
 
-<p>The ExceptionMappingInterceptor is one of the Struts 2 interceptors that is part of the default stack. In the definition 
+<p>The ExceptionMappingInterceptor is one of the Struts interceptors that is part of the default stack. In the definition 
 of the struts defaultStack, the ExceptionMappingInterceptor is given the name of exception. By specifying a param node 
 with the name of exception.logEnabled and a value of true, I’m setting the logEnabled parameter of the ExceptionMappingInterceptor class to true.</p>
 
-<p>Now when the application throws an uncaught exception, the Struts 2 framework will handle it and will also write
+<p>Now when the application throws an uncaught exception, the Struts framework will handle it and will also write
 an entry to the log that includes the stack trace. In the example above, I’ve set the level to log these exceptions 
 to be ERROR.</p>
 
@@ -277,9 +277,9 @@ and the exception’s stack trace.</p>
 
 <h2 id="summary">Summary</h2>
 
-<p>Struts 2 provides an easy to use configuration for handling uncaught exceptions and redirecting users to appropriate 
+<p>Struts provides an easy to use configuration for handling uncaught exceptions and redirecting users to appropriate 
 view pages. You can configure exception handling to be global for all actions or to just for a specific action. 
-You can also enable the Struts 2 framework to log the uncaught exceptions.</p>
+You can also enable the Struts framework to log the uncaught exceptions.</p>
 
 <table>
   <tbody>

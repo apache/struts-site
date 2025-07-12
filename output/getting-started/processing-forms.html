@@ -149,7 +149,7 @@
   <section class="col-md-12">
     <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/getting-started/processing-forms.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="index.html" title="back to Getting started"><< back to Getting started</a>
+    <a href="index" title="back to Getting started"><< back to Getting started</a>
     
     <h1 class="no_toc" id="processing-forms">Processing Forms</h1>
 
@@ -161,22 +161,23 @@
   <li><a href="#adding-the-view-for-the-result" id="markdown-toc-adding-the-view-for-the-result">Adding the view for the result</a></li>
   <li><a href="#create-action-mapping-in-strutsxml" id="markdown-toc-create-action-mapping-in-strutsxml">Create action mapping in struts.xml</a></li>
   <li><a href="#create-a-link-to-registerjsp" id="markdown-toc-create-a-link-to-registerjsp">Create a link to register.jsp</a></li>
+  <li><a href="#run-the-example" id="markdown-toc-run-the-example">Run The Example</a></li>
 </ul>
 
-<p>This tutorial assumes you’ve completed the <a href="coding-actions">Coding Struts 2 Actions</a> tutorial and have a working 
+<p>This tutorial assumes you’ve completed the <a href="coding-actions">Coding Struts Actions</a> tutorial and have a working 
 <strong>coding-actions</strong> project. The example code for this tutorial, <strong>form-processing</strong>, is available for checkout from 
-the Struts 2 GitHub repository <a href="https://github.com/apache/struts-examples">struts-examples</a>.</p>
+the Struts GitHub repository <a href="https://github.com/apache/struts-examples">struts-examples</a>.</p>
 
 <h2 id="introduction">Introduction</h2>
 
-<p>In this tutorial we’ll explore using Struts 2 to do more involved processing of a form submission. We’ll cover how to 
-use a Java model class to store the form input and how to create the Struts 2 form to match up with that model class.</p>
+<p>In this tutorial we’ll explore using Struts to do more involved processing of a form submission. We’ll cover how to 
+use a Java model class to store the form input and how to create the Struts form to match up with that model class.</p>
 
-<p>The code provided in this tutorial may be added to the <a href="coding-actions">Coding Struts 2 Actions</a> example or you 
-can download this complete example from the github respository - <a href="https://github.com/apache/struts-examples">https://github.com/apache/struts-examples</a>.</p>
+<p>The code provided in this tutorial may be added to the <a href="coding-actions">Coding Struts Actions</a> example or you 
+can download this complete example from the Github repository <a href="https://github.com/apache/struts-examples">struts-examples</a>.</p>
 
-<p>The <a href="http://struts.apache.org/mail">Struts 2 user mailing list</a> is an excellent place to get help. If you are 
-having a problem getting the tutorial example applications to work search the Struts 2 mailing list. If you don’t find 
+<p>The <a href="../mail">Struts user mailing list</a> is an excellent place to get help. If you are 
+having a problem getting the tutorial example applications to work search the Struts mailing list. If you don’t find 
 an answer to your problem, post a question on the mailing list.</p>
 
 <h2 id="forms-and-a-java-model-class">Forms and a Java model class</h2>
@@ -186,7 +187,7 @@ business rules state the user must provide his/her first name, last name, email 
 
 <p>To encapsulate this data, we’ll use a simple Java class that follows the basic Java Bean specifications (public set/get 
 methods for each instance field). If you’re following along add this class to the package <code class="language-plaintext highlighter-rouge">org.apache.struts.register.model</code> 
-in the <a href="coding-actions">Coding Struts 2 Actions</a> example.</p>
+in the <a href="coding-actions">Coding Struts Actions</a> example.</p>
 
 <p><strong>Person.java</strong></p>
 
@@ -242,7 +243,7 @@ their null values.</p>
 
 <h2 id="form-structure">Form structure</h2>
 
-<p>To collect the above information we’ll use a Struts 2 form. When creating this form the key concept we need to employ 
+<p>To collect the above information we’ll use a Struts form. When creating this form the key concept we need to employ 
 is to tie each form field to a specific instance field of an object of type Person. Let’s look over the form first and 
 then discuss some key points. Create a view page named <code class="language-plaintext highlighter-rouge">register.jsp</code> (in <code class="language-plaintext highlighter-rouge">src/main/webapp</code>)</p>
 
@@ -270,36 +271,36 @@ then discuss some key points. Create a view page named <code class="language-pla
 <span class="nt">&lt;/html&gt;</span>
 </code></pre></div></div>
 
-<p>Since we are using Struts 2 tags, at the top of the page we need the Struts tag library declaration.</p>
+<p>Since we are using Struts tags, at the top of the page we need the Struts tag library declaration.</p>
 
-<p>The Struts 2 form will submit to an action named register. We’ll need to define that action in our <code class="language-plaintext highlighter-rouge">struts.xml</code> file.</p>
+<p>The Struts form will submit to an action named register. We’ll need to define that action in our <code class="language-plaintext highlighter-rouge">struts.xml</code> file.</p>
 
-<p>Note the four Struts 2 textfield tags. Each tag has a name value that includes an attribute of the <code class="language-plaintext highlighter-rouge">Person</code> class 
+<p>Note the four Struts textfield tags. Each tag has a name value that includes an attribute of the <code class="language-plaintext highlighter-rouge">Person</code> class 
 (e.g. <code class="language-plaintext highlighter-rouge">firstName</code>). The name attribute’s value also has a reference to an object called <code class="language-plaintext highlighter-rouge">personBean</code>. This object is 
 of type <code class="language-plaintext highlighter-rouge">Person</code>. When we create the Action class that handles this form submission, we’ll have to specify that object 
 in that Action class and annotate it (see below).</p>
 
-<p>The complete name value, <code class="language-plaintext highlighter-rouge">personBean.firstName</code>, instructs Struts 2 to use the input value for that textfield as 
+<p>The complete name value, <code class="language-plaintext highlighter-rouge">personBean.firstName</code>, instructs Struts to use the input value for that textfield as 
 the argument to the personBean object’s <code class="language-plaintext highlighter-rouge">setFirstName</code> method. So if the user types “Bruce” in the textfield that has 
 the label “First name”, the personBean’s <code class="language-plaintext highlighter-rouge">firstName</code> instance field will have a value of “Bruce”.</p>
 
-<p>Note that we have a Struts 2 textfield for each instance field of the class Person. Remember that Person class’s age 
-attribute is of type integer. All form field input values are Strings. Struts 2 will automatically convert the String 
+<p>Note that we have a Struts textfield for each instance field of the class Person. Remember that Person class’s age 
+attribute is of type integer. All form field input values are Strings. Struts will automatically convert the String 
 value (“25”) the user entered for the age form field to 25 when calling the <code class="language-plaintext highlighter-rouge">setAge</code> method of object <code class="language-plaintext highlighter-rouge">personBean</code>.</p>
 
 <h2 id="creating-the-action-class-to-handle-the-form-submission">Creating the Action class to handle the form submission</h2>
 
 <p>When the user clicks on the submit button of the above form, the action “register” and the form data will be sent to 
-the Struts 2 framework. We need an Action class to process this form. If you recall from the tutorial 
-<a href="coding-actions">Coding Struts 2 Actions</a> our Action class should extend the Struts 2 ActionSupport class.</p>
+the Struts framework. We need an Action class to process this form. If you recall from the tutorial 
+<a href="coding-actions">Coding Struts Actions</a> our Action class should extend the Struts ActionSupport class.</p>
 
 <p>Here is the Action class used for this example. Place it in package org.apache.struts.register.action.</p>
 
-<p><strong>Register.java Struts 2 Action Class</strong></p>
+<p><strong>Register.java Struts Action Class</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.apache.struts.register.action</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.struts2.ActionSupport</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.struts.register.model.Person</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Register</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
@@ -330,7 +331,7 @@ the Struts 2 framework. We need an Action class to process this form. If you rec
 <p>In the <code class="language-plaintext highlighter-rouge">Register</code> class, note that we’ve declared an attribute named <code class="language-plaintext highlighter-rouge">personBean</code> of type <code class="language-plaintext highlighter-rouge">Person</code>, there are public 
 getter and setter methods for this object, and the getter is annotated with <code class="language-plaintext highlighter-rouge">@StrutsParameter(depth = 1)</code>.</p>
 
-<p>In the previous <a href="coding-actions">Coding Struts 2 Actions</a> tutorial, we annotated the username <strong>setter</strong>, which took a
+<p>In the previous <a href="coding-actions">Coding Struts Actions</a> tutorial, we annotated the username <strong>setter</strong>, which took a
 simple String as its parameter type, with <code class="language-plaintext highlighter-rouge">@StrutsParameter</code>. In this example, we are using a “Bean” object (sometimes
 referred to as a DTO or model object) to encapsulate the form data. When we choose to use a DTO instead of a primitive,
 String, or other TypeConverter supported object, we must annotate the <strong>getter</strong> method instead, and also assign a depth
@@ -347,14 +348,14 @@ method we would call upon other classes (Service objects) to perform the busines
 the user’s input into a data repository.</p>
 
 <p>The <code class="language-plaintext highlighter-rouge">personBean</code> getter of return type <code class="language-plaintext highlighter-rouge">Person</code> declared in the Register Action class matches the <code class="language-plaintext highlighter-rouge">personBean</code> name we
-used in the form’s textfields. When the form is submitted, the Struts 2 framework will inspect the Action class and look
+used in the form’s textfields. When the form is submitted, the Struts framework will inspect the Action class and look
 for a getter for <code class="language-plaintext highlighter-rouge">personBean</code>. If it returns <code class="language-plaintext highlighter-rouge">null</code> and a matching setter exists, it will create that object using the
 <code class="language-plaintext highlighter-rouge">Person</code> class’s default constructor and set it using the setter. Note that the setter can be omitted if your Action
 initialises the field on construction. Then for each form field that has a name value of personBean.someAttribute 
 (e.g <code class="language-plaintext highlighter-rouge">personBean.firstName</code>) it will call the personBean’s public set method for that attribute and pass it the form
 field’s value (the user input). This all happens before the execute method occurs.</p>
 
-<p>When Struts 2 runs the <code class="language-plaintext highlighter-rouge">execute</code> method of class <code class="language-plaintext highlighter-rouge">Register</code>, the <code class="language-plaintext highlighter-rouge">personBean</code> object in class <code class="language-plaintext highlighter-rouge">Register</code> now has values 
+<p>When Struts runs the <code class="language-plaintext highlighter-rouge">execute</code> method of class <code class="language-plaintext highlighter-rouge">Register</code>, the <code class="language-plaintext highlighter-rouge">personBean</code> object in class <code class="language-plaintext highlighter-rouge">Register</code> now has values 
 for its instance fields that are equal to the values the user entered into the corresponding form fields.</p>
 
 <p>By using a Java model class to encapsulate the data provided by the form we don’t have to have a separate attribute 
@@ -385,11 +386,11 @@ registration. Add the <code class="language-plaintext highlighter-rouge">thankyo
 <span class="nt">&lt;/html&gt;</span>
 </code></pre></div></div>
 
-<p>If you don’t recall how the Struts 2 property and url tags work consult the <a href="using-tags">Using Struts 2 Tags</a> tutorial.</p>
+<p>If you don’t recall how the Struts property and url tags work consult the <a href="using-tags">Using Struts Tags</a> tutorial.</p>
 
 <h2 id="create-action-mapping-in-strutsxml">Create action mapping in struts.xml</h2>
 
-<p>To specify the relationship between the form submission page, the Struts 2 Action class, and the success view page 
+<p>To specify the relationship between the form submission page, the Struts Action class, and the success view page 
 we need to add an action node to <code class="language-plaintext highlighter-rouge">struts.xml</code>. Add this action node to <code class="language-plaintext highlighter-rouge">struts.xml</code> (<code class="language-plaintext highlighter-rouge">src/main/resources</code>) after 
 the hello action and before the closing package node.</p>
 
@@ -400,10 +401,10 @@ the hello action and before the closing package node.</p>
 <span class="nt">&lt;/action&gt;</span>
 </code></pre></div></div>
 
-<p>The above action tells Struts 2 that when the register action is provided to call method <code class="language-plaintext highlighter-rouge">execute</code> of class <code class="language-plaintext highlighter-rouge">Register</code>. 
+<p>The above action tells Struts that when the register action is provided to call method <code class="language-plaintext highlighter-rouge">execute</code> of class <code class="language-plaintext highlighter-rouge">Register</code>. 
 If that method returns result “success” return to the browser the <code class="language-plaintext highlighter-rouge">thankyou.jsp</code>.</p>
 
-<p>Note that we don’t need to tell Struts 2 anything about processing the form. The transfer of the form field input values 
+<p>Note that we don’t need to tell Struts anything about processing the form. The transfer of the form field input values 
 to the <code class="language-plaintext highlighter-rouge">personBean</code> object will happen automatically provided we’ve followed the convention of naming our form fields 
 to match personBean.attributeName (e.g. <code class="language-plaintext highlighter-rouge">personBean.lastName</code>).</p>
 
@@ -416,7 +417,7 @@ to match personBean.attributeName (e.g. <code class="language-plaintext highligh
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"register.jsp"</span><span class="nt">&gt;</span>Please register<span class="nt">&lt;/a&gt;</span> for our prize drawing.<span class="nt">&lt;/p&gt;</span>
 </code></pre></div></div>
 
-<p><strong>Run The Example</strong></p>
+<h2 id="run-the-example">Run The Example</h2>
 
 <p>If everything is correct, you should be able to run the application (using <code class="language-plaintext highlighter-rouge">mvn jetty:run</code>), and open this URL in your 
 web browser:
@@ -433,7 +434,7 @@ Click on that link and you should see the <code class="language-plaintext highli
 <table>
   <tbody>
     <tr>
-      <td>Return to <a href="coding-actions">Coding Struts 2 Actions</a></td>
+      <td>Return to <a href="coding-actions">Coding Struts Actions</a></td>
       <td>or</td>
       <td>onward to <a href="form-validation">Form validation</a></td>
     </tr>
