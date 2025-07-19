@@ -13,6 +13,20 @@ title: Announcements 2025
   Skip to: <a href="announce-2024">Announcements - 2024</a>
 </p>
 
+#### 02 July 2025 - Apache Struts Annotations version 2.0 General Availability {#a20250702}
+
+The Apache Struts group is pleased to announce that Apache Struts Annotations version 2.0 is available as a “General Availability”
+release. The GA designation is our highest quality grade.
+
+The Apache Struts Annotations are used by the Apache Struts project to  generate taglib info and generate tags' documentation 
+based on custom annotations.
+
+This release adds support for JDK 17 and requires Java 17 as a minimal Java version. Please read [version notes](https://github.com/apache/struts-annotations/releases/tag/STRUTS_ANNOTATIONS_2_0)
+for more details.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list,
+and, if appropriate, file [a tracking ticket]({{ site.jira_url }}).
+
 #### 05 March 2025 - Apache Struts version 6.7.4 General Availability {#a20250305}
 
 The Apache Struts group is pleased to announce that Apache Struts version 6.7.4 is available as a "General Availability"
