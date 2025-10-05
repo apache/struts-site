@@ -15,6 +15,14 @@ parent:
 In many places, applications can use Java 5 annotations as an alternative to XML and Java properties configuration. 
 This page serves as a reference for all annotations across the framework.
 
+## Security annotation
+
+This a group of annotation used to improve security of your application.
+
+| Annotation                                                | Description                                                                                |
+|-----------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| [StrutsParameter Annotation](struts-parameter-annotation) | Marks which fields and methods in your Action class can receive values from user requests. |
+
 ## Action Annotations
 
 Since Struts 2.1, these annotations are provided by the [Convention Plugin](../plugins/convention/). Codebehind and Zero Config 
@@ -114,5 +122,3 @@ Instead tiles definitions can be created by annotating actions.
 |TilesPutListAttribute|Represents a `<put-list-attribute>` element in tiles.xml|
 |TilesAddAttribute|Represents a `<add-attribute>` element in tiles.xml|
 |TilesAddListAttribute|Represents a `<add-list-attribute>` element in tiles.xml|
-
- 
