@@ -13,6 +13,28 @@ title: Announcements 2025
   Skip to: <a href="announce-2024">Announcements - 2024</a>
 </p>
 
+#### 16 October 2025 - Apache Struts version 6.8.0 General Availability {#a20251016}
+
+The Apache Struts group is pleased to announce that Apache Struts version 6.8.0 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+The Apache Struts is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework has been designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+> Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+6.8.0) to find more details about performed
+> bug fixes and improvements.
+
+**All developers are strongly advised to perform this upgrade.**
+
+The 6.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Servlet API 3.1, JSP API 2.1, and Java 8.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list,
+and, if appropriate, file [a tracking ticket]({{ site.jira_url }}).
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
 #### 02 July 2025 - Apache Struts Annotations version 2.0 General Availability {#a20250702}
 
 The Apache Struts group is pleased to announce that Apache Struts Annotations version 2.0 is available as a “General Availability”
