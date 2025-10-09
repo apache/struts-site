@@ -13,7 +13,7 @@ title: Announcements 2025
   Skip to: <a href="announce-2024">Announcements - 2024</a>
 </p>
 
-#### 16 October 2025 - Apache Struts version 6.8.0 General Availability {#a20251016}
+#### 5 October 2025 - Apache Struts version 6.8.0 General Availability {#a20251005}
 
 The Apache Struts group is pleased to announce that Apache Struts version 6.8.0 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
