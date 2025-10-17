@@ -18,7 +18,7 @@ combined with XML and annotation-driven validation.
 Validation also depends on both the `validation` and `workflow` interceptors (both are included in the default interceptor 
 stack). The `validation` interceptor does the validation itself and creates a list of field-specific errors. 
 The `workflow` interceptor checks for the presence of validation errors: if any are found, it returns the "input" result 
-(by default), taking the user back to the form which contained the validation errors.
+(by default), taking the user back to the form which contained the validation errors. See [Default Workflow Interceptor](default-workflow-interceptor) for details on method-specific validation and workflow behavior.
 
 If we're using the default settings _and_ our action does not have an "input" result defined _and_  there are validation 
 (or, incidentally, type conversion) errors, we'll get an error message back telling us there's no "input" result defined 
@@ -488,7 +488,7 @@ and Field validators for email2 field to not be validated as well.
 
 **Usefull Information:**
 More complicated validation should probably be done in the `validate()` method on the action itself (assuming the action 
-implements `Validatable` interface which `ActionSupport` already does).
+implements `Validatable` interface which `ActionSupport` already does). You can also use method-specific validation methods like `validate{MethodName}()` or `validateDo{MethodName}()` - see [Default Workflow Interceptor](default-workflow-interceptor) for details.
 
 A plain Validator (non FieldValidator) that gets short-circuited will completely break out of the validation stack. 
 No other validators will be evaluated and plain validators takes precedence over field validators meaning that they 
