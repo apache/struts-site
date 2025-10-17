@@ -184,7 +184,7 @@ combined with XML and annotation-driven validation.</p>
 <p>Validation also depends on both the <code class="language-plaintext highlighter-rouge">validation</code> and <code class="language-plaintext highlighter-rouge">workflow</code> interceptors (both are included in the default interceptor 
 stack). The <code class="language-plaintext highlighter-rouge">validation</code> interceptor does the validation itself and creates a list of field-specific errors. 
 The <code class="language-plaintext highlighter-rouge">workflow</code> interceptor checks for the presence of validation errors: if any are found, it returns the “input” result 
-(by default), taking the user back to the form which contained the validation errors.</p>
+(by default), taking the user back to the form which contained the validation errors. See <a href="default-workflow-interceptor">Default Workflow Interceptor</a> for details on method-specific validation and workflow behavior.</p>
 
 <p>If we’re using the default settings <em>and</em> our action does not have an “input” result defined <em>and</em>  there are validation 
 (or, incidentally, type conversion) errors, we’ll get an error message back telling us there’s no “input” result defined 
@@ -664,7 +664,7 @@ and Field validators for email2 field to not be validated as well.</p>
 
 <p><strong>Usefull Information:</strong>
 More complicated validation should probably be done in the <code class="language-plaintext highlighter-rouge">validate()</code> method on the action itself (assuming the action 
-implements <code class="language-plaintext highlighter-rouge">Validatable</code> interface which <code class="language-plaintext highlighter-rouge">ActionSupport</code> already does).</p>
+implements <code class="language-plaintext highlighter-rouge">Validatable</code> interface which <code class="language-plaintext highlighter-rouge">ActionSupport</code> already does). You can also use method-specific validation methods like <code class="language-plaintext highlighter-rouge">validate{MethodName}()</code> or <code class="language-plaintext highlighter-rouge">validateDo{MethodName}()</code> - see <a href="default-workflow-interceptor">Default Workflow Interceptor</a> for details.</p>
 
 <p>A plain Validator (non FieldValidator) that gets short-circuited will completely break out of the validation stack. 
 No other validators will be evaluated and plain validators takes precedence over field validators meaning that they 
