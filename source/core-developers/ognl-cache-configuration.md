@@ -90,4 +90,4 @@ If the developer wants the standard configuration properties for the caches to f
 to implement equivalent methods to the ones the default implementation uses to populate those properties.
 
 Beyond the configuration properties, in certain circumstances, developers may choose to utilize certain methods to 
-interact with the OGNL caches.  Refer to the API documentation for [OgnlUtil](https://struts.apache.org/maven/struts2-core/apidocs/com/opensymphony/xwork2/ognl/OgnlUtil.html).
+interact with the OGNL caches.  Refer to the API documentation for [OgnlUtil](https://struts.apache.org/maven/struts2-core/apidocs/org/apache/struts2/ognl/OgnlUtil.html).
