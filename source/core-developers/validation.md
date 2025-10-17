@@ -144,6 +144,33 @@ Validation rules can be specified:
    XWork searches up the inheritance tree of the action to find default
    validations for parent classes of the Action and interfaces implemented
 
+### Validation Files for Actions with Slashes
+
+When using action names with slashes (enabled via `struts.enable.SlashesInActionNames`), the validation file naming follows a special rule: **slashes in the action alias are replaced with hyphens**.
+
+**Pattern:** `ClassName-{action-alias-with-slashes-replaced-by-hyphens}-validation.xml`
+
+**Example:**
+
+For this action configuration:
+```xml
+<constant name="struts.enable.SlashesInActionNames" value="true"/>
+
+<action name="a/b/myaction.validate" 
+        class="myPath.MyAction" 
+        method="create">
+    <result name="input" type="tiles">mytiles</result>
+</action>
+```
+
+The validation file should be named:
+- **Action-specific alias validation:** `MyAction-a-b-myaction.validate-validation.xml`
+- **General action validation:** `MyAction-validation.xml` (applies to all aliases)
+
+**Location:** Place validation files in `src/main/resources/myPath/` (following your package structure)
+
+This behavior is implemented in `AnnotationActionValidatorManager` where `context.replace('/', '-')` converts the action alias for file resolution.
+
 Here is an example for SimpleAction-validation.xml:
 
 ```xml

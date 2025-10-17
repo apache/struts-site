@@ -42,6 +42,8 @@ To validate a user's form field entries you can use a separate XML file that con
 The XML file that contains the validation rules must be named as ActionClassName-validation.xml. In the example 
 application, the XML validation file is named EditAction-validation.xml (see src/main/resources/org/apache/struts/edit/action).
 
+> **Note:** When using action names with slashes (enabled via `struts.enable.SlashesInActionNames`), validation file naming follows a special rule where slashes are replaced with hyphens. See [Validation Files for Actions with Slashes](../core-developers/validation#validation-files-for-actions-with-slashes) for detailed information.
+
 Struts provides several different validators that you can use in the XML validation file. See [Validation](../core-developers/validation) 
 for a list of validators you can employ.
 
