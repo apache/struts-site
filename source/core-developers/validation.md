@@ -18,7 +18,7 @@ combined with XML and annotation-driven validation.
 Validation also depends on both the `validation` and `workflow` interceptors (both are included in the default interceptor 
 stack). The `validation` interceptor does the validation itself and creates a list of field-specific errors. 
 The `workflow` interceptor checks for the presence of validation errors: if any are found, it returns the "input" result 
-(by default), taking the user back to the form which contained the validation errors.
+(by default), taking the user back to the form which contained the validation errors. See [Default Workflow Interceptor](default-workflow-interceptor) for details on method-specific validation and workflow behavior.
 
 If we're using the default settings _and_ our action does not have an "input" result defined _and_  there are validation 
 (or, incidentally, type conversion) errors, we'll get an error message back telling us there's no "input" result defined 
@@ -143,6 +143,35 @@ Validation rules can be specified:
 3. Inheritance hierarchy and interfaces implemented by Action class:
    XWork searches up the inheritance tree of the action to find default
    validations for parent classes of the Action and interfaces implemented
+
+**Note on "Action Alias":** In this context, "action alias" refers to the action name specified in the `name` attribute of the `<action>` element in your Struts configuration (e.g., `struts.xml`). For example, if you have `<action name="editUser" class="com.example.UserAction">`, then "editUser" is the action alias. This allows you to have different validation rules for the same Action class when it's mapped to different action names.
+
+### Validation Files for Actions with Slashes
+
+When using action names with slashes (enabled via `struts.enable.SlashesInActionNames`), the validation file naming follows a special rule: **slashes in the action alias are replaced with hyphens**.
+
+**Pattern:** `ClassName-{action-alias-with-slashes-replaced-by-hyphens}-validation.xml`
+
+**Example:**
+
+For this action configuration:
+```xml
+<constant name="struts.enable.SlashesInActionNames" value="true"/>
+
+<action name="a/b/myaction.validate" 
+        class="myPath.MyAction" 
+        method="create">
+    <result name="input" type="tiles">mytiles</result>
+</action>
+```
+
+The validation file should be named:
+- **Action-specific alias validation:** `MyAction-a-b-myaction.validate-validation.xml`
+- **General action validation:** `MyAction-validation.xml` (applies to all aliases)
+
+**Location:** Place validation files in `src/main/resources/myPath/` (following your package structure)
+
+This behavior is implemented in `AnnotationActionValidatorManager` where `context.replace('/', '-')` converts the action alias for file resolution.
 
 Here is an example for SimpleAction-validation.xml:
 
@@ -459,7 +488,7 @@ and Field validators for email2 field to not be validated as well.
 
 **Usefull Information:**
 More complicated validation should probably be done in the `validate()` method on the action itself (assuming the action 
-implements `Validatable` interface which `ActionSupport` already does).
+implements `Validatable` interface which `ActionSupport` already does). You can also use method-specific validation methods like `validate{MethodName}()` or `validateDo{MethodName}()` - see [Default Workflow Interceptor](default-workflow-interceptor) for details.
 
 A plain Validator (non FieldValidator) that gets short-circuited will completely break out of the validation stack. 
 No other validators will be evaluated and plain validators takes precedence over field validators meaning that they 

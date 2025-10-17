@@ -77,6 +77,8 @@ to specifically allow slashes in your action names via a constant in the `struts
 See [JIRA Issue WW-1383](https://issues.apache.org/jira/browse/WW-1383) for discussion as there are side effects 
 to setting this property to `true`.
 
+> **Note:** When using slashes in action names, validation file naming requires special attention. Slashes in action aliases are replaced with hyphens in validation file names. See [Validation Files for Actions with Slashes](validation#validation-files-for-actions-with-slashes) for detailed information.
+
 __Action Names with Dots and Dashes__
 
 Although action naming is pretty flexible, one should pay attention when using dots (eg. create.user) and/or dashes 
