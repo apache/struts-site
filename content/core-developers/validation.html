@@ -162,7 +162,10 @@
   <li><a href="#turning-on-validation" id="markdown-toc-turning-on-validation">Turning on Validation</a></li>
   <li><a href="#validator-scopes" id="markdown-toc-validator-scopes">Validator Scopes</a></li>
   <li><a href="#notes" id="markdown-toc-notes">Notes</a></li>
-  <li><a href="#defining-validation-rules" id="markdown-toc-defining-validation-rules">Defining Validation Rules</a></li>
+  <li><a href="#defining-validation-rules" id="markdown-toc-defining-validation-rules">Defining Validation Rules</a>    <ul>
+      <li><a href="#validation-files-for-actions-with-slashes" id="markdown-toc-validation-files-for-actions-with-slashes">Validation Files for Actions with Slashes</a></li>
+    </ul>
+  </li>
   <li><a href="#localizing-and-parameterizing-messages" id="markdown-toc-localizing-and-parameterizing-messages">Localizing and Parameterizing Messages</a>    <ul>
       <li><a href="#customizing-validation-messages" id="markdown-toc-customizing-validation-messages">Customizing validation messages</a></li>
     </ul>
@@ -181,7 +184,7 @@ combined with XML and annotation-driven validation.</p>
 <p>Validation also depends on both the <code class="language-plaintext highlighter-rouge">validation</code> and <code class="language-plaintext highlighter-rouge">workflow</code> interceptors (both are included in the default interceptor 
 stack). The <code class="language-plaintext highlighter-rouge">validation</code> interceptor does the validation itself and creates a list of field-specific errors. 
 The <code class="language-plaintext highlighter-rouge">workflow</code> interceptor checks for the presence of validation errors: if any are found, it returns the “input” result 
-(by default), taking the user back to the form which contained the validation errors.</p>
+(by default), taking the user back to the form which contained the validation errors. See <a href="default-workflow-interceptor">Default Workflow Interceptor</a> for details on method-specific validation and workflow behavior.</p>
 
 <p>If we’re using the default settings <em>and</em> our action does not have an “input” result defined <em>and</em>  there are validation 
 (or, incidentally, type conversion) errors, we’ll get an error message back telling us there’s no “input” result defined 
@@ -245,7 +248,52 @@ to have many field-validators which is almost always the case.</p>
 <p>The following list shows the default validators included in the framework and is an example of the syntax used to declare 
 our own validators.</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml">404: Not Found</code></pre></figure>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="c">&lt;!--
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+--&gt;</span>
+<span class="cp">&lt;!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator Definition 1.0//EN"
+        "https://struts.apache.org/dtds/xwork-validator-definition-1.0.dtd"&gt;</span>
+
+<span class="c">&lt;!-- START SNIPPET: validators-default --&gt;</span>
+<span class="nt">&lt;validators&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"required"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.RequiredFieldValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"requiredstring"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.RequiredStringValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"int"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.IntRangeFieldValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"long"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.LongRangeFieldValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"short"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.ShortRangeFieldValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"double"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.DoubleRangeFieldValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"date"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.DateRangeFieldValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"expression"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.ExpressionValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"fieldexpression"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.FieldExpressionValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.EmailValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"creditcard"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.CreditCardValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"url"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.URLValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"visitor"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.VisitorFieldValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"conversion"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.ConversionErrorFieldValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"stringlength"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.StringLengthFieldValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"regex"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.RegexFieldValidator"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;validator</span> <span class="na">name=</span><span class="s">"conditionalvisitor"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.validator.validators.ConditionalVisitorFieldValidator"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/validators&gt;</span>
+<span class="c">&lt;!--  END SNIPPET: validators-default --&gt;</span></code></pre></figure>
 
 <blockquote>
   <p><strong>Struts 2.1 and Prior</strong>
@@ -312,6 +360,36 @@ See validation framework documentation for more info.</p>
 XWork searches up the inheritance tree of the action to find default
 validations for parent classes of the Action and interfaces implemented</li>
 </ol>
+
+<p><strong>Note on “Action Alias”:</strong> In this context, “action alias” refers to the action name specified in the <code class="language-plaintext highlighter-rouge">name</code> attribute of the <code class="language-plaintext highlighter-rouge">&lt;action&gt;</code> element in your Struts configuration (e.g., <code class="language-plaintext highlighter-rouge">struts.xml</code>). For example, if you have <code class="language-plaintext highlighter-rouge">&lt;action name="editUser" class="com.example.UserAction"&gt;</code>, then “editUser” is the action alias. This allows you to have different validation rules for the same Action class when it’s mapped to different action names.</p>
+
+<h3 id="validation-files-for-actions-with-slashes">Validation Files for Actions with Slashes</h3>
+
+<p>When using action names with slashes (enabled via <code class="language-plaintext highlighter-rouge">struts.enable.SlashesInActionNames</code>), the validation file naming follows a special rule: <strong>slashes in the action alias are replaced with hyphens</strong>.</p>
+
+<p><strong>Pattern:</strong> <code class="language-plaintext highlighter-rouge">ClassName-{action-alias-with-slashes-replaced-by-hyphens}-validation.xml</code></p>
+
+<p><strong>Example:</strong></p>
+
+<p>For this action configuration:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.enable.SlashesInActionNames"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"a/b/myaction.validate"</span> 
+        <span class="na">class=</span><span class="s">"myPath.MyAction"</span> 
+        <span class="na">method=</span><span class="s">"create"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"input"</span> <span class="na">type=</span><span class="s">"tiles"</span><span class="nt">&gt;</span>mytiles<span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
+</code></pre></div></div>
+
+<p>The validation file should be named:</p>
+<ul>
+  <li><strong>Action-specific alias validation:</strong> <code class="language-plaintext highlighter-rouge">MyAction-a-b-myaction.validate-validation.xml</code></li>
+  <li><strong>General action validation:</strong> <code class="language-plaintext highlighter-rouge">MyAction-validation.xml</code> (applies to all aliases)</li>
+</ul>
+
+<p><strong>Location:</strong> Place validation files in <code class="language-plaintext highlighter-rouge">src/main/resources/myPath/</code> (following your package structure)</p>
+
+<p>This behavior is implemented in <code class="language-plaintext highlighter-rouge">AnnotationActionValidatorManager</code> where <code class="language-plaintext highlighter-rouge">context.replace('/', '-')</code> converts the action alias for file resolution.</p>
 
 <p>Here is an example for SimpleAction-validation.xml:</p>
 
@@ -631,7 +709,7 @@ and Field validators for email2 field to not be validated as well.</p>
 
 <p><strong>Usefull Information:</strong>
 More complicated validation should probably be done in the <code class="language-plaintext highlighter-rouge">validate()</code> method on the action itself (assuming the action 
-implements <code class="language-plaintext highlighter-rouge">Validatable</code> interface which <code class="language-plaintext highlighter-rouge">ActionSupport</code> already does).</p>
+implements <code class="language-plaintext highlighter-rouge">Validatable</code> interface which <code class="language-plaintext highlighter-rouge">ActionSupport</code> already does). You can also use method-specific validation methods like <code class="language-plaintext highlighter-rouge">validate{MethodName}()</code> or <code class="language-plaintext highlighter-rouge">validateDo{MethodName}()</code> - see <a href="default-workflow-interceptor">Default Workflow Interceptor</a> for details.</p>
 
 <p>A plain Validator (non FieldValidator) that gets short-circuited will completely break out of the validation stack. 
 No other validators will be evaluated and plain validators takes precedence over field validators meaning that they 

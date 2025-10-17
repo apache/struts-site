@@ -179,8 +179,8 @@
 
 <ol>
   <li>the <em>UI Tags</em></li>
-  <li>Messages and Errors from the <a href="http://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ValidationAware">ValidationAware</a></li>
-  <li>Within action classes that extend <a href="http://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ActionSupport">ActionSupport</a> 
+  <li>Messages and Errors from the <a href="http://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/interceptor/ValidationAware">ValidationAware</a></li>
+  <li>Within action classes that extend <a href="http://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/ActionSupport">ActionSupport</a> 
 through the <code class="language-plaintext highlighter-rouge">getText()</code> method</li>
 </ol>
 
@@ -230,7 +230,7 @@ own implementation using <code class="language-plaintext highlighter-rouge">Text
 <code class="language-plaintext highlighter-rouge">com.opensymphony.xwork2.ActionSupport</code>. It means you have two options here to get I18N working in that case:</p>
 
 <ul>
-  <li>define <code class="language-plaintext highlighter-rouge">com/opensymphony/xwork2/ActionSupport.properties</code> and put messages there</li>
+  <li>define <code class="language-plaintext highlighter-rouge">org/apache/struts2/ActionSupport.properties</code> and put messages there</li>
   <li>point <code class="language-plaintext highlighter-rouge">default-class-ref</code> to your base class and then defined appropriated <code class="language-plaintext highlighter-rouge">.properties</code> file (corresponding to
 class’ name or package)</li>
 </ul>
@@ -300,7 +300,7 @@ or details.</p>
 <p>Struts 1 users should be familiar with the application.properties resource bundle, where you can put all the messages
 in the application that are going to be translated. Struts 2, though, splits the resource bundles per action or model
 class, and you may end up with duplicated messages in those resource bundles. A quick fix for that is to create a file
-called ActionSupport.properties in com/opensymphony/xwork2 and put it on your classpath. This will only work well if
+called ActionSupport.properties in org/apache/struts2 and put it on your classpath. This will only work well if
 all your actions subclass XWork2’s ActionSupport.</p>
 
 <h2 id="search-in-default-bundles-first">Search in default bundles first</h2>
@@ -308,8 +308,8 @@ all your actions subclass XWork2’s ActionSupport.</p>
 <p>Since Struts 2.6 it is possible to enable searching in default bundles first instead of performing a full class hierarchy
 scan and then default bundles.</p>
 
-<p>By setting the below flag to <code class="language-plaintext highlighter-rouge">true</code> the default implementation of <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/LocalizedTextProvider.html">LocalizedTextProvider</a>
-(which is <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/util/StrutsLocalizedTextProvider.html">StrutsLocalizedTextProvider</a>)
+<p>By setting the below flag to <code class="language-plaintext highlighter-rouge">true</code> the default implementation of <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/text/LocalizedTextProvider.html">LocalizedTextProvider</a>
+(which is <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/text/StrutsLocalizedTextProvider.html">StrutsLocalizedTextProvider</a>)
 will search the default bundles first. In some cases this can improve overall application performance.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.i18n.search.defaultbundles.first"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
@@ -322,7 +322,7 @@ will search the default bundles first. In some cases this can improve overall ap
 <h2 id="using-only-global-bundles">Using only global bundles</h2>
 
 <p>If you don’t need to use the package-scan-functionality and only base on the global bundles (those provided by
-the framework and via <code class="language-plaintext highlighter-rouge">struts.custom.i18n.resources</code>) you can use existing <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/util/GlobalLocalizedTextProvider.html">GlobalLocalizedTextProvider</a>
+the framework and via <code class="language-plaintext highlighter-rouge">struts.custom.i18n.resources</code>) you can use existing <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/text/GlobalLocalizedTextProvider.html">GlobalLocalizedTextProvider</a>
 implementation. To use this please define the following option in your <code class="language-plaintext highlighter-rouge">struts.xml</code>:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.localizedTextProvider"</span> <span class="na">value=</span><span class="s">"global-only"</span> <span class="nt">/&gt;</span>
@@ -334,7 +334,7 @@ implementation. To use this please define the following option in your <code cla
 default bundles, you must implement both those interfaces (or subclass the existing implementations). You can check
 a small <a href="https://github.com/apache/struts-examples/tree/main/text-provider">example app</a> how to use both.
 Please remember that the <code class="language-plaintext highlighter-rouge">TextProvider</code> interface is implemented by the <code class="language-plaintext highlighter-rouge">ActionSupport</code> class, that’s why
-an extra layer - <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/TextProviderFactory.html">TextProviderFactory</a></p>
+an extra layer - <a href="https://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/text/TextProviderFactory.html">TextProviderFactory</a></p>
 <ul>
   <li>is needed.</li>
 </ul>
