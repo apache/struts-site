@@ -17,8 +17,8 @@ parent:
 The framework supports internationalization (i18n) in the following places:
 
 1. the _UI Tags_
-2. Messages and Errors from the [ValidationAware](http://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ValidationAware)
-3. Within action classes that extend [ActionSupport](http://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/ActionSupport) 
+2. Messages and Errors from the [ValidationAware](http://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/interceptor/ValidationAware)
+3. Within action classes that extend [ActionSupport](http://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/ActionSupport) 
    through the `getText()` method
 
 ## Resource Bundle Search Order
@@ -64,7 +64,7 @@ If you configure action as follow
 it will use a default class defined with `default-class-ref` in `struts-default.xml` which is
 `com.opensymphony.xwork2.ActionSupport`. It means you have two options here to get I18N working in that case:
 
-- define `com/opensymphony/xwork2/ActionSupport.properties` and put messages there
+- define `org/apache/struts2/ActionSupport.properties` and put messages there
 - point `default-class-ref` to your base class and then defined appropriated `.properties` file (corresponding to
   class' name or package)
 
@@ -137,7 +137,7 @@ See [Formatting Dates and Numbers](formatting-dates-and-numbers) for more detail
 Struts 1 users should be familiar with the application.properties resource bundle, where you can put all the messages
 in the application that are going to be translated. Struts 2, though, splits the resource bundles per action or model
 class, and you may end up with duplicated messages in those resource bundles. A quick fix for that is to create a file
-called ActionSupport.properties in com/opensymphony/xwork2 and put it on your classpath. This will only work well if
+called ActionSupport.properties in org/apache/struts2 and put it on your classpath. This will only work well if
 all your actions subclass XWork2's ActionSupport.
 
 ## Search in default bundles first 
@@ -145,8 +145,8 @@ all your actions subclass XWork2's ActionSupport.
 Since Struts 2.6 it is possible to enable searching in default bundles first instead of performing a full class hierarchy
 scan and then default bundles.
 
-By setting the below flag to `true` the default implementation of [LocalizedTextProvider](https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/LocalizedTextProvider.html)
-(which is [StrutsLocalizedTextProvider](https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/util/StrutsLocalizedTextProvider.html))
+By setting the below flag to `true` the default implementation of [LocalizedTextProvider](https://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/text/LocalizedTextProvider.html)
+(which is [StrutsLocalizedTextProvider](https://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/text/StrutsLocalizedTextProvider.html))
 will search the default bundles first. In some cases this can improve overall application performance.
 
 ```xml
@@ -158,7 +158,7 @@ will search the default bundles first. In some cases this can improve overall ap
 ## Using only global bundles
 
 If you don't need to use the package-scan-functionality and only base on the global bundles (those provided by
-the framework and via `struts.custom.i18n.resources`) you can use existing [GlobalLocalizedTextProvider](https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/util/GlobalLocalizedTextProvider.html)
+the framework and via `struts.custom.i18n.resources`) you can use existing [GlobalLocalizedTextProvider](https://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/text/GlobalLocalizedTextProvider.html)
 implementation. To use this please define the following option in your `struts.xml`:
 
 ```xml
@@ -171,5 +171,5 @@ If you want to use a different logic to search for localized messages, or you wa
 default bundles, you must implement both those interfaces (or subclass the existing implementations). You can check
 a small [example app](https://github.com/apache/struts-examples/tree/main/text-provider) how to use both.
 Please remember that the `TextProvider` interface is implemented by the `ActionSupport` class, that's why
-an extra layer - [TextProviderFactory](https://struts.apache.org/maven/struts2-core/apidocs/index.html?com/opensymphony/xwork2/TextProviderFactory.html)
+an extra layer - [TextProviderFactory](https://struts.apache.org/maven/struts2-core/apidocs/index.html?org/apache/struts2/text/TextProviderFactory.html)
 - is needed.

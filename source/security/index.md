@@ -278,8 +278,8 @@ from `save()` to `saveAction()` and leaving annotation as is to allow call this 
 ### Accepted / Excluded Patterns
 
 As from version 2.3.20 the framework provides two new interfaces which are used to accept / exclude param names 
-and values - [AcceptedPatternsChecker](../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/AcceptedPatternsChecker) 
-and [ExcludedPatternsChecker](../maven/struts2-core/apidocs/com/opensymphony/xwork2/security/ExcludedPatternsChecker) 
+and values - [AcceptedPatternsChecker](../maven/struts2-core/apidocs/org/apache/struts2/security/AcceptedPatternsChecker) 
+and [ExcludedPatternsChecker](../maven/struts2-core/apidocs/org/apache/struts2/security/ExcludedPatternsChecker) 
 with default implementations. These two interfaces are used by the [Parameters Interceptor](../core-developers/parameters-interceptor) 
 and [Cookie Interceptor](../core-developers/cookie-interceptor) to check if param can be accepted or must be excluded. 
 If you were using `excludeParams` previously please compare patterns used by you with these provided by the framework in default implementation.

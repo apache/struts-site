@@ -11,10 +11,10 @@ parent:
 ## Description
 
 An interceptor that copies all the properties of every object in the value stack to the currently executing object,
-except for any object that implements [Unchainable](/maven/struts2-core/apidocs/com/opensymphony/xwork2/Unchainable). 
+except for any object that implements [Unchainable](/maven/struts2-core/apidocs/org/apache/struts2/Unchainable). 
 A collection of optional `includes` and `excludes` may be provided to control how and which parameters are copied. 
 Only `includes` or `excludes` may be specified. Specifying both results in undefined behavior. See the JavaDocs 
-for [ReflectionProvider#copy(Object, Object, java.util.Map, java.util.Collection, java.util.Collection)](/maven/struts2-core/apidocs/com/opensymphony/xwork2/util/reflection/ReflectionProvider.html#copy(java.lang.Object, java.lang.Object, java.util.Map, java.util.Collection, java.util.Collection))
+for [ReflectionProvider#copy(Object, Object, java.util.Map, java.util.Collection, java.util.Collection)](/maven/struts2-core/apidocs/org/apache/struts2/util/reflection/ReflectionProvider.html#copy(java.lang.Object, java.lang.Object, java.util.Map, java.util.Collection, java.util.Collection))
 for more information.
 
 > It is important to remember that this interceptor does nothing if there are no objects already on the stack. 
