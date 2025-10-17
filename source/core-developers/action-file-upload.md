@@ -178,6 +178,10 @@ To change this value define a constant in `struts.xml` as follows:
 </struts>
 ```
 
+**Note**: This limit also affects number of normal fields in the request, there is an open bug in the Commons FileUpload
+library to address this problem, see [FILEUPLOAD-351](https://issues.apache.org/jira/browse/FILEUPLOAD-351).
+{:.alert .alert-warning}
+
 ### File Size Limits
 
 There are multiple methods to enforce file size limits.
