@@ -144,6 +144,8 @@ Validation rules can be specified:
    XWork searches up the inheritance tree of the action to find default
    validations for parent classes of the Action and interfaces implemented
 
+**Note on "Action Alias":** In this context, "action alias" refers to the action name specified in the `name` attribute of the `<action>` element in your Struts configuration (e.g., `struts.xml`). For example, if you have `<action name="editUser" class="com.example.UserAction">`, then "editUser" is the action alias. This allows you to have different validation rules for the same Action class when it's mapped to different action names.
+
 ### Validation Files for Actions with Slashes
 
 When using action names with slashes (enabled via `struts.enable.SlashesInActionNames`), the validation file naming follows a special rule: **slashes in the action alias are replaced with hyphens**.
