@@ -8,19 +8,50 @@ parent:
 
 # Checkbox Interceptor
 
-This interceptor is  defined in the `defaultStack`. It checks each form parameter submitted  to the action and if it 
-finds one with a prefix of `_checkbox` it inserts a value for a parameter whose name is derived from the suffix 
-to `_checkbox` if it does not exist. The default value inserted is `false` but this can be changed by setting 
-the `uncheckedValue` parameter on the interceptor.
+This interceptor is defined in the `defaultStack`. It is essential for handling HTML checkboxes, as unchecked checkboxes are not submitted as part of a form. This interceptor ensures that a value is always present for a checkbox, so that in the Action class, the property is not `null`.
 
-This means that a checkbox can be accompanied by a hidden input with the same name but a prefix of `_checkbox` so that 
-if the checkbox is not checked on the form the action will still receive a value rather than the default HTML action 
-of not providing a value for unchecked checkboxes.
+## How it works
+
+The interceptor looks for a special hidden field in the form that is associated with the checkbox. This hidden field must have a name that starts with `__checkbox_` followed by the name of the checkbox. For example, if your checkbox is named `myCheckbox`, the hidden field should be named `__checkbox_myCheckbox`.
+
+When the form is submitted, the `CheckboxInterceptor` does the following:
+1. It iterates through the request parameters.
+2. If it finds a parameter that starts with `__checkbox_`, it extracts the name of the checkbox from it (e.g., `myCheckbox`).
+3. It then checks if a parameter with the checkbox's name (`myCheckbox`) exists in the request.
+4. If the checkbox parameter does not exist (which means the checkbox was unchecked), the interceptor adds a new parameter to the request with the checkbox's name and a value of `false`.
+5. Finally, it removes the `__checkbox_` prefixed parameters from the request, so they are not processed further.
+
+This ensures that the Action property for the checkbox will be set to `false` instead of being `null`.
+
+The `<s:checkbox>` tag from the Struts UI Tags library automatically generates this hidden field for you.
 
 ## Parameters
 
- - `uncheckedValue` - the default value of an unchecked box can be overridden by setting the `uncheckedValue` property.
+ - `uncheckedValue` - The default value for an unchecked box is `false`. You can override this by setting the `uncheckedValue` property on the interceptor.
 
 ## Extending the Interceptor
 
 This interceptor does not have any known extension points.
+
+## Checkbox lists usage with @StrutsParameter
+
+The `<s:checkboxlist>` tag is used to render a list of checkboxes. When using this tag, the submitted values are populated into a `Collection` or an array in your Action.
+When using `@StrutsParameter` with a checkbox list, you must place the annotation on the setter method of the collection property.
+
+### Example
+
+```java
+public class MyAction extends ActionSupport {
+    private Collection<String> mySelection;
+
+    @StrutsParameter
+    public void setMySelection(Collection<String> mySelection) {
+        this.mySelection = mySelection;
+    }
+
+    @StrutsParameter
+    public Collection<String> getMySelection() {
+        return mySelection;
+    }
+}
+```
