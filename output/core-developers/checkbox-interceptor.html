@@ -153,24 +153,56 @@
     
     <h1 id="checkbox-interceptor">Checkbox Interceptor</h1>
 
-<p>This interceptor is  defined in the <code class="language-plaintext highlighter-rouge">defaultStack</code>. It checks each form parameter submitted  to the action and if it 
-finds one with a prefix of <code class="language-plaintext highlighter-rouge">_checkbox</code> it inserts a value for a parameter whose name is derived from the suffix 
-to <code class="language-plaintext highlighter-rouge">_checkbox</code> if it does not exist. The default value inserted is <code class="language-plaintext highlighter-rouge">false</code> but this can be changed by setting 
-the <code class="language-plaintext highlighter-rouge">uncheckedValue</code> parameter on the interceptor.</p>
+<p>This interceptor is defined in the <code class="language-plaintext highlighter-rouge">defaultStack</code>. It is essential for handling HTML checkboxes, as unchecked checkboxes are not submitted as part of a form. This interceptor ensures that a value is always present for a checkbox, so that in the Action class, the property is not <code class="language-plaintext highlighter-rouge">null</code>.</p>
 
-<p>This means that a checkbox can be accompanied by a hidden input with the same name but a prefix of <code class="language-plaintext highlighter-rouge">_checkbox</code> so that 
-if the checkbox is not checked on the form the action will still receive a value rather than the default HTML action 
-of not providing a value for unchecked checkboxes.</p>
+<h2 id="how-it-works">How it works</h2>
+
+<p>The interceptor looks for a special hidden field in the form that is associated with the checkbox. This hidden field must have a name that starts with <code class="language-plaintext highlighter-rouge">__checkbox_</code> followed by the name of the checkbox. For example, if your checkbox is named <code class="language-plaintext highlighter-rouge">myCheckbox</code>, the hidden field should be named <code class="language-plaintext highlighter-rouge">__checkbox_myCheckbox</code>.</p>
+
+<p>When the form is submitted, the <code class="language-plaintext highlighter-rouge">CheckboxInterceptor</code> does the following:</p>
+<ol>
+  <li>It iterates through the request parameters.</li>
+  <li>If it finds a parameter that starts with <code class="language-plaintext highlighter-rouge">__checkbox_</code>, it extracts the name of the checkbox from it (e.g., <code class="language-plaintext highlighter-rouge">myCheckbox</code>).</li>
+  <li>It then checks if a parameter with the checkbox’s name (<code class="language-plaintext highlighter-rouge">myCheckbox</code>) exists in the request.</li>
+  <li>If the checkbox parameter does not exist (which means the checkbox was unchecked), the interceptor adds a new parameter to the request with the checkbox’s name and a value of <code class="language-plaintext highlighter-rouge">false</code>.</li>
+  <li>Finally, it removes the <code class="language-plaintext highlighter-rouge">__checkbox_</code> prefixed parameters from the request, so they are not processed further.</li>
+</ol>
+
+<p>This ensures that the Action property for the checkbox will be set to <code class="language-plaintext highlighter-rouge">false</code> instead of being <code class="language-plaintext highlighter-rouge">null</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">&lt;s:checkbox&gt;</code> tag from the Struts UI Tags library automatically generates this hidden field for you.</p>
 
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">uncheckedValue</code> - the default value of an unchecked box can be overridden by setting the <code class="language-plaintext highlighter-rouge">uncheckedValue</code> property.</li>
+  <li><code class="language-plaintext highlighter-rouge">uncheckedValue</code> - The default value for an unchecked box is <code class="language-plaintext highlighter-rouge">false</code>. You can override this by setting the <code class="language-plaintext highlighter-rouge">uncheckedValue</code> property on the interceptor.</li>
 </ul>
 
 <h2 id="extending-the-interceptor">Extending the Interceptor</h2>
 
 <p>This interceptor does not have any known extension points.</p>
+
+<h2 id="checkbox-lists-usage-with-strutsparameter">Checkbox lists usage with @StrutsParameter</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">&lt;s:checkboxlist&gt;</code> tag is used to render a list of checkboxes. When using this tag, the submitted values are populated into a <code class="language-plaintext highlighter-rouge">Collection</code> or an array in your Action.
+When using <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> with a checkbox list, you must place the annotation on the setter method of the collection property.</p>
+
+<h3 id="example">Example</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="kd">extends</span> <span class="nc">ActionSupport</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">Collection</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">mySelection</span><span class="o">;</span>
+
+    <span class="nd">@StrutsParameter</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMySelection</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">mySelection</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">mySelection</span> <span class="o">=</span> <span class="n">mySelection</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@StrutsParameter</span>
+    <span class="kd">public</span> <span class="nc">Collection</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getMySelection</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">mySelection</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
   </section>
 </article>

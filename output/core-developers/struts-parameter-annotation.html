@@ -159,44 +159,116 @@
 
 <h2 id="usage">Usage</h2>
 
-<p>Used to annotate public <em>getter/setter</em> methods or <em>fields</em> on Action classes that are intended for parameter injection</p>
-
-<h2 id="parameters">Parameters</h2>
+<p>The placement of the <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> annotation is crucial and depends on how you want to populate your action properties.</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">depth</code> controls how deep into nested objects parameters can be set:</li>
+  <li><strong>On a public setter method:</strong> Place the annotation on a setter method when you want to populate the property with a value from the request. This applies to:
+    <ul>
+      <li>Simple types (String, int, boolean, etc.).</li>
+      <li>Checkboxes (single or multiple values).</li>
+      <li>Collections and Maps, when you are populating the whole collection/map from the request.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>On a public getter method:</strong> Place the annotation on a getter method when you want to allow populating the properties of the object returned by the getter. The <code class="language-plaintext highlighter-rouge">depth</code> parameter is used to control how deep the object graph can be populated. This is typically used for complex objects or collections of complex objects.</p>
+  </li>
+  <li><strong>On a public field:</strong> For simple types, you can place the annotation directly on the public field as a shorthand for a setter annotation.</li>
 </ul>
 
 <h2 id="examples">Examples</h2>
 
+<h3 id="simple-field">Simple field</h3>
+
+<p>Annotating the field:</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
     <span class="nd">@StrutsParameter</span>
     <span class="kd">public</span> <span class="nc">String</span> <span class="n">username</span><span class="o">;</span>  <span class="c1">// ✅ Can receive request parameter</span>
-
-    <span class="kd">public</span> <span class="nc">String</span> <span class="n">password</span><span class="o">;</span>  <span class="c1">// ❌ Cannot receive request parameter (not annotated)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Annotating the setter:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">username</span><span class="o">;</span>
+    <span class="nd">@StrutsParameter</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUsername</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">;</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">depth</code> controls how deep into nested objects parameters can be set:</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">depth = 0</code> (default): Only sets values directly on your action
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  @StrutsParameter
-  public String name;  // Accepts: ?name=value
-</code></pre></div>    </div>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">depth = 1</code>: Allows one level of nesting
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  @StrutsParameter(depth = 1)
-  public User user;  // Accepts: ?user.name=value
-</code></pre></div>    </div>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">depth = 2</code>: Allows two levels of nesting
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  @StrutsParameter(depth = 2)
-  public User user;  // Accepts: ?user.address.city=value
-</code></pre></div>    </div>
-  </li>
-</ul>
+<h3 id="checkbox">Checkbox</h3>
 
-<p>Rule of thumb: The depth equals the number of dots (or brackets) allowed in the parameter name.</p>
+<p>For a single checkbox, the annotation must be on the setter.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">myCheckbox</span><span class="o">;</span>
+
+    <span class="nd">@StrutsParameter</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMyCheckbox</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">myCheckbox</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">myCheckbox</span> <span class="o">=</span> <span class="n">myCheckbox</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// ... getter</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="collections">Collections</h3>
+
+<h4 id="populating-a-collection-of-simple-types">Populating a collection of simple types</h4>
+
+<p>When populating a collection of simple types (e.g., from a checkbox list), annotate the setter.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">mySelection</span><span class="o">;</span>
+
+    <span class="nd">@StrutsParameter</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMySelection</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">mySelection</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">mySelection</span> <span class="o">=</span> <span class="n">mySelection</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// ... getter</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="populating-properties-of-objects-within-a-collection">Populating properties of objects within a collection</h4>
+
+<p>When populating properties of objects that are already in a collection, annotate the getter.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="n">users</span><span class="o">;</span> <span class="c1">// assume this is initialized in the constructor or elsewhere</span>
+
+    <span class="nd">@StrutsParameter</span><span class="o">(</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="nf">getUsers</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">users</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>This allows requests like <code class="language-plaintext highlighter-rouge">users[0].name=John</code>.</p>
+
+<h3 id="complex-object">Complex object</h3>
+
+<h4 id="populating-the-object-itself">Populating the object itself</h4>
+
+<p>To populate the whole object from the request (e.g., using a custom type converter), annotate the setter.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">User</span> <span class="n">user</span><span class="o">;</span>
+
+    <span class="nd">@StrutsParameter</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUser</span><span class="o">(</span><span class="nc">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">user</span> <span class="o">=</span> <span class="n">user</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// ... getter</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="populating-properties-of-a-complex-object">Populating properties of a complex object</h4>
+
+<p>To populate the properties of a complex object, annotate the getter.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="o">();</span>
+
+    <span class="nd">@StrutsParameter</span><span class="o">(</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">User</span> <span class="nf">getUser</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">user</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>This allows requests like <code class="language-plaintext highlighter-rouge">user.name=John</code>.</p>
 
   </section>
 </article>
