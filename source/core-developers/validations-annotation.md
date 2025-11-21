@@ -61,6 +61,21 @@ Used at METHOD level.
  <td class='confluenceTd'> Add list of IntRangeFieldValidators </td>
  </tr>
  <tr>
+ <td class='confluenceTd'> longRangeFields </td>
+ <td class='confluenceTd'> no </td>
+ <td class='confluenceTd'> Add list of LongRangeFieldValidators </td>
+ </tr>
+ <tr>
+ <td class='confluenceTd'> shortRangeFields </td>
+ <td class='confluenceTd'> no </td>
+ <td class='confluenceTd'> Add list of ShortRangeFieldValidators </td>
+ </tr>
+ <tr>
+ <td class='confluenceTd'> doubleRangeFields </td>
+ <td class='confluenceTd'> no </td>
+ <td class='confluenceTd'> Add list of DoubleRangeFieldValidators </td>
+ </tr>
+ <tr>
  <td class='confluenceTd'> requiredStrings </td>
  <td class='confluenceTd'> no </td>
  <td class='confluenceTd'> Add list of RequiredStringValidators </td>
@@ -113,6 +128,8 @@ Used at METHOD level.
                    { @LongRangeFieldValidator(type = ValidatorType.SIMPLE, fieldName = "intfield", min = "6", max = "10", message = "bar must be between ${min} and ${max}, current value is ${bar}.")},
            shortRangeFields =
                    { @ShortRangeFieldValidator(type = ValidatorType.SIMPLE, fieldName = "shortfield", min = "1", max = "128", message = "bar must be between ${min} and ${max}, current value is ${bar}.")},
+           doubleRangeFields =
+                   { @DoubleRangeFieldValidator(type = ValidatorType.SIMPLE, fieldName = "doublefield", minInclusive = "0.0", maxInclusive = "100.0", message = "bar must be between ${minInclusive} and ${maxInclusive}, current value is ${bar}.")},
            dateRangeFields =
                    {@DateRangeFieldValidator(type = ValidatorType.SIMPLE, fieldName = "datefield", min = "-1", max = "99", message = "bar must be between ${min} and ${max}, current value is ${bar}.")},
            expressions = {
