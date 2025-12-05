@@ -13,6 +13,7 @@ parent:
 {:toc}
 
 Since Struts 6.4.0 the `FileUploadInterceptor` is deprecated, and you should use [ActionFileUploadInterceptor](action-file-upload-interceptor) instead!
+Please refer to the [action file upload](action-file-upload) page to understand how to use it.
 {:.alert .alert-warning}
 
 The Struts 2 framework provides built-in support for processing file uploads that conform to [RFC 1867](http://www.ietf.org/rfc/rfc1867.txt), 
