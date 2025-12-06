@@ -8,12 +8,12 @@ parent:
 
 # Constant Configuration
 
-Constants provide a simple way to customize a Struts application by defining key settings that modify framework and 
-plugin behavior. There are two key roles for constants. First, they are used to override settings like the maximum file 
-upload size or whether the Struts framework should be in "devMode" or not, and so on. Second, they specify which 
+Constants provide a simple way to customize a Struts application by defining key settings that modify framework and
+plugin behavior. There are two key roles for constants. First, they are used to override settings like the maximum file
+upload size or whether the Struts framework should be in "devMode" or not, and so on. Second, they specify which
 [Bean](bean-configuration) implementation, among multiple implementations of a given type, should be chosen.
 
-Constants can be declared in multiple files. By default, constants are searched for in the following order, allowing 
+Constants can be declared in multiple files. By default, constants are searched for in the following order, allowing
 for subsequent files to override previous ones:
 
 1. [struts-default.xml](struts-default-xml)
@@ -29,10 +29,10 @@ for subsequent files to override previous ones:
 
 In the various XML variants, the constant element has two required attributes: `name` and `value`.
 
-|Attribute|Required|Description|
-|---------|--------|-----------|
-|name|**yes**|the name of the constant|
-|value|**yes**|the value of the constant|
+| Attribute | Required | Description               |
+|-----------|----------|---------------------------|
+| name      | **yes**  | the name of the constant  |
+| value     | **yes**  | the value of the constant |
 
 In the [default.properties](default-properties) file, each entry is treated as a constant.
 
@@ -40,7 +40,7 @@ In the [web.xml](web-xml) file, any FilterDispatcher initialization parameters a
 
 ### Value substitution
 
-Since Apache Struts 2.5.6 it is possible to use value substitution when defining `constant`s in `struts.xml` file. 
+Since Apache Struts 2.5.6 it is possible to use value substitution when defining `constant`s in `struts.xml` file.
 You can also define a default value if given System property or ENV variable is missing, see example below:
 
 ```xml
@@ -70,6 +70,20 @@ Note: substitution is limited to System properties and ENV variables and works o
 
 ```
 struts.devMode = true
+```
+
+**Constant Example (Performance - Struts 7.2.0+)**
+
+```xml
+<struts>
+  <!-- Enable FreeMarker whitespace stripping (default: true, auto-disabled in devMode) -->
+  <constant name="struts.freemarker.whitespaceStripping" value="true" />
+  
+  <!-- Control HTML compression globally -->
+  <constant name="struts.compress.enabled" value="true" />
+  <constant name="struts.compress.maxSize" value="10485760" />
+  <constant name="struts.compress.log.maxLength" value="200" />
+</struts>
 ```
 
 **Constant Example (web.xml)**
