@@ -289,29 +289,26 @@ block before the element is displayed.</p>
  */
 --&gt;
 ${attributes.after!}&lt;#t/&gt;
-    &lt;#lt/&gt;
 &lt;#if !attributes.labelPosition?? &amp;&amp; (attributes.form.labelPosition)??&gt;
 &lt;#assign labelPos = attributes.form.labelPosition/&gt;
 &lt;#elseif attributes.labelPosition??&gt;
 &lt;#assign labelPos = attributes.labelPosition/&gt;
 &lt;/#if&gt;
 &lt;#if (labelPos!"top") == 'top'&gt;
-&lt;/div&gt; &lt;#rt/&gt;
+&lt;/div&gt;&lt;#rt/&gt;
 &lt;#else&gt;
-&lt;/span&gt; &lt;#rt/&gt;
+&lt;/span&gt;&lt;#rt/&gt;
 &lt;/#if&gt;
 &lt;#if (attributes.errorposition!"top") == 'bottom'&gt;
 &lt;#assign hasFieldErrors = attributes.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(attributes.name)??/&gt;
 &lt;#if hasFieldErrors&gt;
 &lt;div &lt;#rt/&gt;&lt;#if attributes.id??&gt;id="wwerr_${attributes.id}"&lt;#rt/&gt;&lt;/#if&gt; class="wwerr"&gt;
 &lt;#list fieldErrors.get(attributes.name) as error&gt;
-    &lt;div&lt;#rt/&gt;
-    &lt;#if attributes.id??&gt;
-     errorFor="${attributes.id}"&lt;#rt/&gt;
-    &lt;/#if&gt;
-    class="errorMessage"&gt;
-             ${error}
-    &lt;/div&gt;&lt;#t/&gt;
+&lt;div&lt;#rt/&gt;
+&lt;#if attributes.id??&gt;
+ errorFor="${attributes.id}"&lt;#rt/&gt;
+&lt;/#if&gt;
+ class="errorMessage"&gt;${error}&lt;/div&gt;&lt;#rt/&gt;
 &lt;/#list&gt;
 &lt;/div&gt;&lt;#t/&gt;
 &lt;/#if&gt;
