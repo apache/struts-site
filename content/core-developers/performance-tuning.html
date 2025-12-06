@@ -151,45 +151,37 @@
     
     <a href="index" title="back to Core Developers"><< back to Core Developers</a>
     
-    <h1 class="no_toc" id="performance-tuning">Performance Tuning</h1>
+    <h1 id="performance-tuning">Performance Tuning</h1>
 
-<ul id="markdown-toc">
-  <li><a href="#turn-off-logging-and-devmode" id="markdown-toc-turn-off-logging-and-devmode">Turn off logging and devMode</a></li>
-  <li><a href="#use-the-java-templates" id="markdown-toc-use-the-java-templates">Use the Java Templates</a></li>
-  <li><a href="#do-not-use-interceptors-you-do-not-need" id="markdown-toc-do-not-use-interceptors-you-do-not-need">Do not use interceptors you do not need</a></li>
-  <li><a href="#use-the-correct-http-headers-cache-control--expires" id="markdown-toc-use-the-correct-http-headers-cache-control--expires">Use the correct HTTP headers (Cache-Control &amp; Expires)</a></li>
-  <li><a href="#copy-the-static-content-from-the-struts-2-jar-when-using-the-ajax-theme-dojo-or-the-calendar-tag" id="markdown-toc-copy-the-static-content-from-the-struts-2-jar-when-using-the-ajax-theme-dojo-or-the-calendar-tag">Copy the static content from the Struts 2 jar when using the Ajax theme (Dojo) or the Calendar tag</a></li>
-  <li><a href="#create-a-freemarkerproperties-file-in-your-web-infclasses-directory" id="markdown-toc-create-a-freemarkerproperties-file-in-your-web-infclasses-directory">Create a freemarker.properties file in your WEB-INF/classes directory</a></li>
-  <li><a href="#enable-freemarker-template-caching" id="markdown-toc-enable-freemarker-template-caching">Enable Freemarker template caching</a></li>
-  <li><a href="#when-overriding-a-theme-copy-all-necessary-templates-to-the-theme-directory" id="markdown-toc-when-overriding-a-theme-copy-all-necessary-templates-to-the-theme-directory">When overriding a theme, copy all necessary templates to the theme directory</a></li>
-  <li><a href="#do-not-create-sessions-unless-you-need-them" id="markdown-toc-do-not-create-sessions-unless-you-need-them">Do not create sessions unless you need them</a></li>
-  <li><a href="#when-using-freemarker-try-to-use-the-freemarker-equivalent-rather-than-using-the-jsp-tags" id="markdown-toc-when-using-freemarker-try-to-use-the-freemarker-equivalent-rather-than-using-the-jsp-tags">When using Freemarker, try to use the Freemarker equivalent rather than using the JSP tags</a></li>
+<ul class="no_toc">
+  <li>Will be replaced with the ToC, excluding a header</li>
 </ul>
 
 <p>The following are some tips and tricks to squeeze the most performance out of Struts 2.</p>
 
 <blockquote>
   <p>For Struts 2 versions before 2.3: the OGNL version 3.0.3 library is a drop-in replacement for older OGNL jars,
-and provides <strong>much</strong> better performance. See the following JIRA issue for more information: 
+and provides <strong>much</strong> better performance. See the following JIRA issue for more information:
 <a href="https://issues.apache.org/jira/browse/WW-3580">WW-3580</a></p>
 </blockquote>
 
 <h2 id="turn-off-logging-and-devmode">Turn off logging and devMode</h2>
 
-<p>The <a href="development-mode">devMode</a> allows reloading of configuration and validation related files, but because they  happen on each 
-request, this setting will totally kill your performance.
-When using logging, make sure to turn off logging (esp. Freemarker generates a LOT of logging), and check if a level is 
-enabled before printing it, or you will get the cost of the String parsing/concatenation anyways.</p>
+<p>The <a href="development-mode">devMode</a> allows reloading of configuration and validation related files, but because they happen
+on each request, this setting will totally kill your performance. When using logging, make sure to turn off logging
+(esp. Freemarker generates a LOT of logging), and check if a level is enabled before printing it, or you will get
+the cost of the String parsing/concatenation anyways.</p>
 
 <h2 id="use-the-java-templates">Use the Java Templates</h2>
 
-<p>If you use the simple theme, and do not overwrite any of the FreeMarker templates, consider using the <a href="../plugins/javatemplates-plugin/">java templates</a>,
+<p>If you use the simple theme, and do not overwrite any of the FreeMarker templates, consider using
+the <a href="../plugins/javatemplates-plugin/">java templates</a>,
 which provide a drop in replacement for most of the tags, and are a lot faster than the regular tags.</p>
 
 <h2 id="do-not-use-interceptors-you-do-not-need">Do not use interceptors you do not need</h2>
 
-<p>If you do not require a full stack of interceptors for an Action, then try using a different one (basicStack), 
-or remove interceptors you do not need. Remove the <code class="language-plaintext highlighter-rouge">I18nInterceptor</code> interceptor if you don’t need it, as it can cause 
+<p>If you do not require a full stack of interceptors for an Action, then try using a different one (basicStack),
+or remove interceptors you do not need. Remove the <code class="language-plaintext highlighter-rouge">I18nInterceptor</code> interceptor if you don’t need it, as it can cause
 a session to be created.</p>
 
 <h2 id="use-the-correct-http-headers-cache-control--expires">Use the correct HTTP headers (Cache-Control &amp; Expires)</h2>
@@ -198,9 +190,10 @@ a session to be created.</p>
 
 <h2 id="copy-the-static-content-from-the-struts-2-jar-when-using-the-ajax-theme-dojo-or-the-calendar-tag">Copy the static content from the Struts 2 jar when using the Ajax theme (Dojo) or the Calendar tag</h2>
 
-<p>Struts 2 uses some external javascript libraries and cascading stylesheets for certain themes and tags. These by default 
-are located inside the Struts 2 jar, and a special filter returns them when requesting a special path (<code class="language-plaintext highlighter-rouge">/static</code>). 
-Although Struts 2 can handle these requests, an application/servlet container is not optimized for these kind of requests. 
+<p>Struts 2 uses some external javascript libraries and cascading stylesheets for certain themes and tags. These by default
+are located inside the Struts 2 jar, and a special filter returns them when requesting a special path (<code class="language-plaintext highlighter-rouge">/static</code>).
+Although Struts 2 can handle these requests, an application/servlet container is not optimized for these kind of
+requests.
 Consider moving these .js and .css files to a seperated server (Lighttpd, Apache HTTPD, ..).</p>
 
 <h2 id="create-a-freemarkerproperties-file-in-your-web-infclasses-directory">Create a freemarker.properties file in your WEB-INF/classes directory</h2>
@@ -210,8 +203,9 @@ Consider moving these .js and .css files to a seperated server (Lighttpd, Apache
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>template_update_delay=60000
 </code></pre></div></div>
 
-<p>This value determines how often Freemarker checks if it needs to reloads the templates from disk. The default value 
-is 500 ms. Since there is no reason to check if a template needs reloading, it is best to set this to a very large value. 
+<p>This value determines how often Freemarker checks if it needs to reloads the templates from disk. The default value
+is 500 ms. Since there is no reason to check if a template needs reloading, it is best to set this to a very large
+value.
 Note that this value is in seconds and freemarker will convert this value to milliseconds.</p>
 
 <p>You can also use <code class="language-plaintext highlighter-rouge">struts.freemarker.templatesCache.updateDelay</code> constant to achieve the same effect.</p>
@@ -221,36 +215,97 @@ Note that this value is in seconds and freemarker will convert this value to mil
 <h2 id="enable-freemarker-template-caching">Enable Freemarker template caching</h2>
 
 <blockquote>
-  <p>Note: support for this options has been removed in Struts. See the <a href="../tag-developers/freemarker#cache">Cache</a> section of the FreeMarker page.</p>
+  <p>Note: support for this options has been removed in Struts. See the <a href="../tag-developers/freemarker#cache">Cache</a> section
+of the FreeMarker page.</p>
 </blockquote>
 
-<p>As of Struts 2.0.10, setting the property <code class="language-plaintext highlighter-rouge">struts.freemarker.templatesCache</code> to true will enable the Struts internal 
+<p>As of Struts 2.0.10, setting the property <code class="language-plaintext highlighter-rouge">struts.freemarker.templatesCache</code> to true will enable the Struts internal
 caching of Freemarker templates. This property is set to false by default.</p>
 
-<p>In Struts versions prior to 2.0.10, you had to copy the <code class="language-plaintext highlighter-rouge">/template</code> directory from the Struts 2 jar in your <code class="language-plaintext highlighter-rouge">WEB_APP</code> 
+<p>In Struts versions prior to 2.0.10, you had to copy the <code class="language-plaintext highlighter-rouge">/template</code> directory from the Struts 2 jar in your <code class="language-plaintext highlighter-rouge">WEB_APP</code>
 root to utilize Freemarker’s built in caching mechanism in order to achieve similar results.</p>
 
-<p>The built in Freemarker caching mechanism fails to properly cache templates when they are retrieved from the classpath. 
-Copying them to the WEB_APP root allows Freemarker to cache them correctly. Freemarker looks at the last modified time 
-of the template to determine if it needs to reload the templates. Resources retrieved from the classpath have no last 
+<p>The built in Freemarker caching mechanism fails to properly cache templates when they are retrieved from the classpath.
+Copying them to the WEB_APP root allows Freemarker to cache them correctly. Freemarker looks at the last modified time
+of the template to determine if it needs to reload the templates. Resources retrieved from the classpath have no last
 modified time, so Freemarker will reload them on every request.</p>
+
+<h2 id="enable-freemarker-whitespace-stripping">Enable FreeMarker Whitespace Stripping</h2>
+
+<p><strong>Available since Struts 7.2.0</strong></p>
+
+<p>Struts now supports automatic whitespace stripping during FreeMarker template compilation, which removes indentation and
+trailing whitespace from lines containing only FTL tags. This significantly reduces the size of generated HTML output
+without affecting the visual presentation.</p>
+
+<p>This feature is enabled by default and automatically disabled when <code class="language-plaintext highlighter-rouge">devMode</code> is active to make debugging easier.</p>
+
+<p><strong>Configuration:</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.freemarker.whitespaceStripping"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>Or in <code class="language-plaintext highlighter-rouge">struts.properties</code>:</p>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">struts.freemarker.whitespaceStripping</span><span class="p">=</span><span class="s">true</span>
+</code></pre></div></div>
+
+<p><strong>Default value:</strong> <code class="language-plaintext highlighter-rouge">true</code> (automatically disabled in devMode)</p>
+
+<h2 id="use-the-compress-tag-for-html-output-optimization">Use the Compress Tag for HTML Output Optimization</h2>
+
+<p><strong>Available since Struts 7.2.0</strong></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">&lt;s:compress&gt;</code> tag provides runtime HTML compression by removing unnecessary whitespace between tags. This
+complements FreeMarker whitespace stripping and can further reduce output size for specific sections of your pages.</p>
+
+<p><strong>Usage:</strong></p>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:compress&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+        <span class="nt">&lt;p&gt;</span>Content here will be compressed<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/s:compress&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Configuration:</strong></p>
+
+<p>Control compression globally:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.tag.compress.enabled"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.tag.compress.maxSize"</span> <span class="na">value=</span><span class="s">"10485760"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>The compress tag is enabled by default and includes security protections:</p>
+
+<ul>
+  <li>Maximum content size limit (10MB default) prevents DoS attacks</li>
+  <li>Body content truncation in logs (200 chars default) prevents sensitive data exposure</li>
+  <li>ReDoS safeguards for regex operations</li>
+</ul>
+
+<p>For development debugging, compression is automatically disabled in devMode unless you use the <code class="language-plaintext highlighter-rouge">force="true"</code> attribute.</p>
+
+<p><strong>See also:</strong> <a href="../tag-developers/compress-tag">Compress Tag</a></p>
 
 <h2 id="when-overriding-a-theme-copy-all-necessary-templates-to-the-theme-directory">When overriding a theme, copy all necessary templates to the theme directory</h2>
 
-<p>There’s a performance cost when a template cannot be found in the current directory. The reason for this is that 
-Struts 2 must check for a template in the current theme first before falling back to the parent theme. In the future, 
+<p>There’s a performance cost when a template cannot be found in the current directory. The reason for this is that
+Struts 2 must check for a template in the current theme first before falling back to the parent theme. In the future,
 this penalty could be eliminated by implementing a missing template cache in Struts 2.</p>
 
 <h2 id="do-not-create-sessions-unless-you-need-them">Do not create sessions unless you need them</h2>
 
-<p>Struts 2 does not create sessions unless asked to (for example, by having the createSession interceptor in your 
-interceptor stack). Note that when you use SiteMesh however, a session will <strong>always</strong> be created. 
+<p>Struts 2 does not create sessions unless asked to (for example, by having the createSession interceptor in your
+interceptor stack). Note that when you use SiteMesh however, a session will <strong>always</strong> be created.
 The I18nInterceptor interceptor can create sessions, so make sure you remove it, if you don’t need it.</p>
 
 <h2 id="when-using-freemarker-try-to-use-the-freemarker-equivalent-rather-than-using-the-jsp-tags">When using Freemarker, try to use the Freemarker equivalent rather than using the JSP tags</h2>
 
-<p>Freemarker has support for iterating lists, displaying properties, including other templates, macro’s, and so on. 
-There is a small performance cost when using the S2 tags instead of the Freemarker equivalent 
+<p>Freemarker has support for iterating lists, displaying properties, including other templates, macro’s, and so on.
+There is a small performance cost when using the S2 tags instead of the Freemarker equivalent
 (eg. <code class="language-plaintext highlighter-rouge">&lt;s:property value="foo"/&gt;</code> should be replaced by <code class="language-plaintext highlighter-rouge">${foo}</code>).</p>
 
   </section>

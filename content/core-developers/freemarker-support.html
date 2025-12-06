@@ -151,13 +151,24 @@
     
     <a href="freemarker-result" title="back to Freemarker Result"><< back to Freemarker Result</a>
     
-    <h1 id="freemarker-support">Freemarker Support</h1>
+    <h1 class="no_toc" id="freemarker-support">Freemarker Support</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#configure-your-action-to-use-the-freemarker-result-type" id="markdown-toc-configure-your-action-to-use-the-freemarker-result-type">Configure your action to use the freemarker result type</a></li>
+  <li><a href="#property-resolution" id="markdown-toc-property-resolution">Property Resolution</a></li>
+  <li><a href="#objects-in-the-context" id="markdown-toc-objects-in-the-context">Objects in the Context</a></li>
+  <li><a href="#freemarker-configuration-with-recent-releases" id="markdown-toc-freemarker-configuration-with-recent-releases">FreeMarker configuration with recent releases</a></li>
+  <li><a href="#freemarker-whitespace-stripping" id="markdown-toc-freemarker-whitespace-stripping">FreeMarker Whitespace Stripping</a></li>
+  <li><a href="#using-struts-ui-tags---or-any-jsp-tag-library" id="markdown-toc-using-struts-ui-tags---or-any-jsp-tag-library">Using struts UI tags - or any JSP Tag Library</a></li>
+  <li><a href="#dynamic-attributes-support" id="markdown-toc-dynamic-attributes-support">Dynamic attributes support</a></li>
+</ul>
 
 <p>Freemarker views can be rendered using a result type <code class="language-plaintext highlighter-rouge">freemarker</code>.</p>
 
 <h2 id="configure-your-action-to-use-the-freemarker-result-type">Configure your action to use the freemarker result type</h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">freemarker</code> result type is defined in <code class="language-plaintext highlighter-rouge">struts-default.xml</code>, so normally you just include it, and define your results to use <code class="language-plaintext highlighter-rouge">type="freemarker"</code>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">freemarker</code> result type is defined in <code class="language-plaintext highlighter-rouge">struts-default.xml</code>, so normally you just include it, and define your 
+results to use <code class="language-plaintext highlighter-rouge">type="freemarker"</code>.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;include</span> <span class="na">file=</span><span class="s">"struts-default.xml"</span><span class="nt">/&gt;</span>
 ...
@@ -196,7 +207,7 @@
   <li><code class="language-plaintext highlighter-rouge">stack</code> - the current <code class="language-plaintext highlighter-rouge">OgnlValueStack</code></li>
   <li><code class="language-plaintext highlighter-rouge">ognl</code> - the <code class="language-plaintext highlighter-rouge">OgnlTool</code> instance
     <ul>
-      <li>This class contains useful methods to execute OGNL expressions against arbitary objects, and a method to generate a select list using 
+      <li>This class contains useful methods to execute OGNL expressions against arbitrary objects, and a method to generate a select list using 
 the <code class="language-plaintext highlighter-rouge">&lt;s:select/&gt;</code> pattern. (i.e. taking the name of the list property, a listKey and listValue)</li>
     </ul>
   </li>
@@ -207,8 +218,8 @@ the <code class="language-plaintext highlighter-rouge">&lt;s:select/&gt;</code> 
 
 <h2 id="freemarker-configuration-with-recent-releases">FreeMarker configuration with recent releases</h2>
 
-<p>To configure the freemarker engine that Struts uses, just add a file <code class="language-plaintext highlighter-rouge">freemarker.properties</code> to the classpath. The supported properties 
-are those that the Freemarker Configuration object expects - see the <a href="https://freemarker.apache.org/docs/api/freemarker/template/Configuration.html#setSetting-java.lang.String-java.lang.String-">Freemarker documentation</a>
+<p>To configure the freemarker engine that Struts uses, just add a file <code class="language-plaintext highlighter-rouge">freemarker.properties</code> to the classpath.
+The supported properties are those that the Freemarker Configuration object expects - see the <a href="https://freemarker.apache.org/docs/api/freemarker/template/Configuration.html#setSetting-java.lang.String-java.lang.String-">Freemarker documentation</a>
 for these.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default_encoding=ISO-8859-1
@@ -216,13 +227,51 @@ template_update_delay=5
 locale=no_NO
 </code></pre></div></div>
 
+<h2 id="freemarker-whitespace-stripping">FreeMarker Whitespace Stripping</h2>
+
+<p><strong>Available since Struts 7.2.0</strong></p>
+
+<p>Struts supports automatic whitespace stripping during FreeMarker template compilation. When enabled, this feature
+removes indentation and trailing whitespace from lines containing only FTL directives, significantly reducing the size
+of generated HTML output.</p>
+
+<p>This feature is controlled by the <code class="language-plaintext highlighter-rouge">struts.freemarker.whitespaceStripping</code> constant:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.freemarker.whitespaceStripping"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Default behavior:</strong></p>
+
+<ul>
+  <li><strong>Enabled by default</strong> (<code class="language-plaintext highlighter-rouge">true</code>)</li>
+  <li><strong>Automatically disabled</strong> when <code class="language-plaintext highlighter-rouge">struts.devMode</code> is enabled to make debugging easier</li>
+  <li>Works transparently with existing templates</li>
+</ul>
+
+<p><strong>Benefits:</strong></p>
+
+<ul>
+  <li>Reduces HTML output size by removing template indentation</li>
+  <li>Improves page load times and reduces bandwidth usage</li>
+  <li>No changes needed to existing FreeMarker templates</li>
+  <li>Automatically disabled in development mode for easier debugging</li>
+</ul>
+
+<p><strong>See also:</strong></p>
+
+<ul>
+  <li><a href="performance-tuning#enable-freemarker-whitespace-stripping">Performance Tuning - FreeMarker Whitespace Stripping</a></li>
+  <li><a href="../tag-developers/compress-tag">Compress Tag</a> for runtime HTML compression</li>
+</ul>
+
 <h2 id="using-struts-ui-tags---or-any-jsp-tag-library">Using struts UI tags - or any JSP Tag Library</h2>
 
 <p>Freemarker has builtin support for using any JSP taglib. You can use JSP taglibs in FreeMarker even if</p>
+
 <ul>
   <li>your servlet container has no support for JSP, or</li>
-  <li>you didn’t specify the taglib in your web.xml - note how in the example below we refer to the taglib by its webapp-absolute URL, 
- so no configuration in web.xml is needed.</li>
+  <li>you didn’t specify the taglib in your web.xml - note how in the example below we refer to the taglib by its
+webapp-absolute URL, so no configuration in web.xml is needed.</li>
 </ul>
 
 <div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;#</span><span class="no">assign</span><span class="w"> </span>s=JspTaglibs["/WEB-INF/struts.tld"] /&gt;<span class="w">
@@ -235,8 +284,8 @@ locale=no_NO
 
 </span></code></pre></div></div>
 
-<p><em>NOTE</em>: numeric properties for tags MUST be numbers, not strings. as in the rows and cols properties above. if you use <code class="language-plaintext highlighter-rouge">cols="40"</code> you will 
-receive an exception. Other than that, the freemarker tag container behaves as you would expect.</p>
+<p><em>NOTE</em>: numeric properties for tags MUST be numbers, not strings. as in the rows and cols properties above. If you use
+<code class="language-plaintext highlighter-rouge">cols="40"</code> you will receive an exception. Other than that, the freemarker tag container behaves as you would expect.</p>
 
 <h2 id="dynamic-attributes-support">Dynamic attributes support</h2>
 
