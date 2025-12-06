@@ -7,10 +7,11 @@ parent:
 ---
 
 # Performance Tuning
+
 {:.no_toc}
 
 * Will be replaced with the ToC, excluding a header
-{:toc}
+  {:toc}
 
 The following are some tips and tricks to squeeze the most performance out of Struts 2.
 
@@ -21,13 +22,14 @@ The following are some tips and tricks to squeeze the most performance out of St
 ## Turn off logging and devMode
 
 The [devMode](development-mode) allows reloading of configuration and validation related files, but because they happen
-on each request, this setting will totally kill your performance. When using logging, make sure to turn off logging 
-(esp. Freemarker generates a LOT of logging), and check if a level is enabled before printing it, or you will get 
+on each request, this setting will totally kill your performance. When using logging, make sure to turn off logging
+(esp. Freemarker generates a LOT of logging), and check if a level is enabled before printing it, or you will get
 the cost of the String parsing/concatenation anyways.
 
 ## Use the Java Templates
 
-If you use the simple theme, and do not overwrite any of the FreeMarker templates, consider using the [java templates](../plugins/javatemplates-plugin/),
+If you use the simple theme, and do not overwrite any of the FreeMarker templates, consider using
+the [java templates](../plugins/javatemplates-plugin/),
 which provide a drop in replacement for most of the tags, and are a lot faster than the regular tags.
 
 ## Do not use interceptors you do not need
@@ -94,7 +96,8 @@ This feature is enabled by default and automatically disabled when `devMode` is 
 **Configuration:**
 
 ```xml
-<constant name="struts.freemarker.whitespaceStripping" value="true" />
+
+<constant name="struts.freemarker.whitespaceStripping" value="true"/>
 ```
 
 Or in `struts.properties`:
@@ -127,8 +130,9 @@ complements FreeMarker whitespace stripping and can further reduce output size f
 Control compression globally:
 
 ```xml
-<constant name="struts.compress.enabled" value="true" />
-<constant name="struts.compress.maxSize" value="10485760" />
+
+<constant name="struts.tag.compress.enabled" value="true"/>
+<constant name="struts.tag.compress.maxSize" value="10485760"/>
 ```
 
 The compress tag is enabled by default and includes security protections:

@@ -80,9 +80,9 @@ struts.devMode = true
   <constant name="struts.freemarker.whitespaceStripping" value="true" />
   
   <!-- Control HTML compression globally -->
-  <constant name="struts.compress.enabled" value="true" />
-  <constant name="struts.compress.maxSize" value="10485760" />
-  <constant name="struts.compress.log.maxLength" value="200" />
+  <constant name="struts.tag.compress.enabled" value="true" />
+  <constant name="struts.tag.compress.maxSize" value="10485760" />
+  <constant name="struts.tag.compress.log.maxLength" value="200" />
 </struts>
 ```
 
