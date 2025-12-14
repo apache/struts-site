@@ -30,4 +30,5 @@ The notions of "themes" and "templates" are at the core of the HTML [Struts Tags
 |[simple theme](simple-theme)| A minimal theme with no "bells and whistles" |
 |[xhtml theme](xhtml-theme)| The default theme that uses common HTML practices |
 |[css_xhtml theme](css-xhtml-theme)| The [xhtml theme](xhtml-theme) re-implemented using strictly CSS for layout |
+|[html5 theme](html5-theme)| A modern HTML5 theme extending simple theme with clean HTML5 output |
 |[ajax theme](ajax-theme)| A theme based on the [xhtml theme](xhtml-theme) that provides advanced AJAX features |

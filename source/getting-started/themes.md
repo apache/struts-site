@@ -18,7 +18,7 @@ The example code for this tutorial, **themes**, is available for checkout at [st
 
 When you use a Struts tag such as `s:select` in your web page, the Struts framework generates HTML that styles 
 the appearance and controls the layout of the select control. The style and layout is determined by which Struts theme 
-is set for the tag. Struts comes with three built-in themes: `simple`, `xhtml`, and `css_xhtml`. If you don’t specify 
+is set for the tag. Struts comes with four built-in themes: `simple`, `xhtml`, `css_xhtml`, and `html5`. If you don't specify
 a theme, then Struts will use the `xhtml` theme by default.
 
 The [Struts user mailing list](http://struts.apache.org/mail) is an excellent place to get help. If you are having 
@@ -59,10 +59,10 @@ select tag the default `xhtml` theme was used.
 ## Specifying The Theme Struts Should Use
 
 The Struts tags have a theme attribute you can use to specify which Struts theme should be used when creating the HTML 
-for that tag. The values for the theme attribute are `simple`, `xhtml`, `css_xhtml`, and `ajax`. To learn more about these themes 
-visit [Themes and Templates Documentation](../tag-developers/themes-and-templates). This tutorial will review 
-the `xhtml`, `css_xhtml`, and the `simple` themes. The `ajax` theme is a special theme used for ajax operations 
-(see [Ajax Theme in the documentation](../tag-developers/ajax-theme)).
+for that tag. The values for the theme attribute are `simple`, `xhtml`, `css_xhtml`, `html5`, and `ajax`. To learn more 
+about these themes visit [Themes and Templates Documentation](../tag-developers/themes-and-templates). This tutorial will review the `xhtml`, `css_xhtml`,
+and the `simple` themes. The `html5` theme extends the simple theme with modern HTML5 output (see [HTML5 Theme in the documentation](../tag-developers/html5-theme).
+The `ajax` theme is a special theme used for ajax operations (see [Ajax Theme in the documentation](../tag-developers/ajax-theme)).
 
 You can specify the theme on a per Struts tag basis or you can use one of the following methods to specify what theme 
 Struts should use:
