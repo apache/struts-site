@@ -228,6 +228,19 @@ so only actions are handled by it. This constant supports a comma separated list
 
 > This feature is experimental, and **should never** be used in production systems.
 
+## Migration Note: autowire alwaysRespect default change (7.2.0)
+
+Starting with Struts 7.2.0, the `struts.objectFactory.spring.autoWire.alwaysRespect` constant defaults to `true`
+(previously `false`). This means the configured autowire strategy is now always applied consistently, which fixes issues
+such as broken redirect URLs when Spring String beans are involved.
+{:.alert .alert-warning}
+
+If you experience unexpected behavior after upgrading to 7.2.0, you can restore the previous behavior by setting:
+
+```xml
+<constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="false" />
+```
+
 ## Settings
 
 The following settings can be customized. See the [developer guide](/core-developers/configuration-files).
@@ -235,7 +248,7 @@ The following settings can be customized. See the [developer guide](/core-develo
 |Setting|Description|Default|Possible Values|
 |-------|-----------|-------|---------------|
 |struts.objectFactory.spring.autoWire|The autowire strategy|name|name,type,auto, or constructor|
-|struts.objectFactory.spring.autoWire.alwaysRespect|Whether the autowire strategy should always be used, or if the framework should try to guess the best strategy based on the situation|false for backwards-compatibility|true or false|
+|struts.objectFactory.spring.autoWire.alwaysRespect|Whether the autowire strategy should always be used, or if the framework should try to guess the best strategy based on the situation|true (changed from false in 7.2.0)|true or false|
 |struts.objectFactory.spring.useClassCache|Whether to have Spring use its class cache or not|true|true or false|
 |struts.class.reloading.watchList|List of jar files or directories to watch for changes|null|Comma separated list of absolute or relative paths to jars or directories|
 |struts.class.reloading.acceptClasses|List of regular expressions of accepted class names|null|Comma separated list of regular expressions of classes that will be loaded by the reloading class loader(we suggest to add regular expressions so only action classes are handled by the reloading class loader)|
