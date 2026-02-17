@@ -160,6 +160,7 @@
   <li><a href="#autowiring" id="markdown-toc-autowiring">Autowiring</a></li>
   <li><a href="#initializing-actions-from-spring" id="markdown-toc-initializing-actions-from-spring">Initializing Actions from Spring</a></li>
   <li><a href="#class-reloading" id="markdown-toc-class-reloading">Class Reloading</a></li>
+  <li><a href="#migration-note-autowire-alwaysrespect-default-change-720" id="markdown-toc-migration-note-autowire-alwaysrespect-default-change-720">Migration Note: autowire alwaysRespect default change (7.2.0)</a></li>
   <li><a href="#settings" id="markdown-toc-settings">Settings</a></li>
   <li><a href="#installation" id="markdown-toc-installation">Installation</a></li>
 </ul>
@@ -404,6 +405,17 @@ so only actions are handled by it. This constant supports a comma separated list
   <p>This feature is experimental, and <strong>should never</strong> be used in production systems.</p>
 </blockquote>
 
+<h2 id="migration-note-autowire-alwaysrespect-default-change-720">Migration Note: autowire alwaysRespect default change (7.2.0)</h2>
+
+<p class="alert alert-warning">Starting with Struts 7.2.0, the <code class="language-plaintext highlighter-rouge">struts.objectFactory.spring.autoWire.alwaysRespect</code> constant defaults to <code class="language-plaintext highlighter-rouge">true</code>
+(previously <code class="language-plaintext highlighter-rouge">false</code>). This means the configured autowire strategy is now always applied consistently, which fixes issues
+such as broken redirect URLs when Spring String beans are involved.</p>
+
+<p>If you experience unexpected behavior after upgrading to 7.2.0, you can restore the previous behavior by setting:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.objectFactory.spring.autoWire.alwaysRespect"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
 <h2 id="settings">Settings</h2>
 
 <p>The following settings can be customized. See the <a href="/core-developers/configuration-files">developer guide</a>.</p>
@@ -427,7 +439,7 @@ so only actions are handled by it. This constant supports a comma separated list
     <tr>
       <td>struts.objectFactory.spring.autoWire.alwaysRespect</td>
       <td>Whether the autowire strategy should always be used, or if the framework should try to guess the best strategy based on the situation</td>
-      <td>false for backwards-compatibility</td>
+      <td>true (changed from false in 7.2.0)</td>
       <td>true or false</td>
     </tr>
     <tr>

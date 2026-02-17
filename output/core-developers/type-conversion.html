@@ -291,12 +291,20 @@ amount=com.acme.converters.MyCustomBigDecimalConverter
 
 <h2 id="applying-a-type-converter-for-an-application">Applying a Type Converter for an application</h2>
 
-<p>Application-wide converters can be specified in a file called <code class="language-plaintext highlighter-rouge">struts-conversion.properties</code> or <code class="language-plaintext highlighter-rouge">xwork-conversion.properties</code> (deprecated) 
+<p>Application-wide converters can be specified in a file called <code class="language-plaintext highlighter-rouge">struts-conversion.properties</code> or <code class="language-plaintext highlighter-rouge">xwork-conversion.properties</code> (deprecated)
 located in the root of the classpath.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># syntax: &lt;type&gt; = &lt;converterClassName&gt;
-java.math.BigDecimal = com.acme.MyBigDecimalConverter 
+java.math.BigDecimal = com.acme.MyBigDecimalConverter
 </code></pre></div></div>
+
+<blockquote>
+  <p>NOTE: since Struts 7.2.0, when the Spring plugin is active, you can use Spring bean names in addition to fully qualified
+class names as converter values in <code class="language-plaintext highlighter-rouge">struts-conversion.properties</code>. For example, if you have a Spring bean named
+<code class="language-plaintext highlighter-rouge">myBigDecimalConverter</code>, you can reference it directly:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java.math.BigDecimal = myBigDecimalConverter
+</code></pre></div>  </div>
+</blockquote>
 
 <h2 id="a-simple-example">A Simple Example</h2>
 

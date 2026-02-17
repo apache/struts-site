@@ -154,7 +154,10 @@
     <h1 class="no_toc" id="action-file-upload-interceptor">Action File Upload Interceptor</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
+  <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a>    <ul>
+      <li><a href="#dynamic-parameter-evaluation" id="markdown-toc-dynamic-parameter-evaluation">Dynamic Parameter Evaluation</a></li>
+    </ul>
+  </li>
   <li><a href="#extending-the-interceptor" id="markdown-toc-extending-the-interceptor">Extending the Interceptor</a></li>
   <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
 </ul>
@@ -186,13 +189,31 @@ file extensions specified</li>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">maximumSize</code> (optional) - the maximum size (in bytes) that the interceptor will allow a file reference to be set
-on the action. Note, this is <b>not</b> related to the various properties found in struts.properties. 
+on the action. Note, this is <b>not</b> related to the various properties found in struts.properties.
 Default to approximately 2MB.</li>
   <li><code class="language-plaintext highlighter-rouge">allowedTypes</code> (optional) - a comma separated list of content types (ie: <code class="language-plaintext highlighter-rouge">text/html</code>) that the interceptor will allow
 a file reference to be set on the action. If none is specified allow all types to be uploaded.</li>
   <li><code class="language-plaintext highlighter-rouge">allowedExtensions</code> (optional) - a comma separated list of file extensions (ie: <code class="language-plaintext highlighter-rouge">.html</code>) that the interceptor will allow
 a file reference to be set on the action. If none is specified allow all extensions to be uploaded.</li>
 </ul>
+
+<h3 id="dynamic-parameter-evaluation">Dynamic Parameter Evaluation</h3>
+
+<blockquote>
+  <p>Since Struts 7.2.0</p>
+</blockquote>
+
+<p>The <code class="language-plaintext highlighter-rouge">allowedTypes</code>, <code class="language-plaintext highlighter-rouge">allowedExtensions</code>, and <code class="language-plaintext highlighter-rouge">maximumSize</code> parameters support <code class="language-plaintext highlighter-rouge">${...}</code> expression evaluation,
+enabling per-request dynamic validation. This is available when used with <code class="language-plaintext highlighter-rouge">WithLazyParams</code>.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"actionFileUpload"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"allowedTypes"</span><span class="nt">&gt;</span>${allowedContentTypes}<span class="nt">&lt;/param&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"maximumSize"</span><span class="nt">&gt;</span>${maxFileSize}<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/interceptor-ref&gt;</span>
+</code></pre></div></div>
+
+<p>The expressions are evaluated against the ValueStack at the time of the upload, allowing your action to provide
+dynamic values based on the current request context.</p>
 
 <h2 id="extending-the-interceptor">Extending the Interceptor</h2>
 

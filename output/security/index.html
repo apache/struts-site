@@ -212,12 +212,17 @@ by security level.</p>
 
 <h3 id="never-expose-jsp-files-directly">Never expose JSP files directly</h3>
 
-<p>You must always hide JSP file behind an action, you cannot allow for direct access to the JSP files as this can leads 
+<p>You must always hide JSP file behind an action, you cannot allow for direct access to the JSP files as this can leads
 to unpredictable security vulnerabilities. You can achieve this by putting all your JSP files under the <code class="language-plaintext highlighter-rouge">WEB-INF</code> folder</p>
 <ul>
-  <li>most of the JEE containers restrict access to files placed under the <code class="language-plaintext highlighter-rouge">WEB-INF</code> folder. Second option is to add security 
+  <li>most of the JEE containers restrict access to files placed under the <code class="language-plaintext highlighter-rouge">WEB-INF</code> folder. Second option is to add security
 constraint to the <code class="language-plaintext highlighter-rouge">web.xml</code> file:</li>
 </ul>
+
+<blockquote>
+  <p>Note: since Struts 7.2.0, the framework now logs a security warning when JSP tags are accessed directly outside of
+an action scope. This helps identify JSP files that are inadvertently exposed without action protection.</p>
+</blockquote>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Restricts access to pure JSP files - access available only via Struts action --&gt;</span>
 <span class="nt">&lt;security-constraint&gt;</span>
