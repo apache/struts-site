@@ -29,8 +29,12 @@ on the actual object loaded from the database. See the example for more info.
 In `PrepareInterceptor` applies only when action implements `Preparable`
  1. if the action class have `prepare<MethodName>()`, it will be invoked
  2. else if the action class have `prepareDo<MethodName>()`, it will be invoked
- 3. no matter if 1] or 2] is performed, if `alwaysInvokePrepare` property of the interceptor is `true` (which is by 
+ 3. no matter if 1) or 2) is performed, if `alwaysInvokePrepare` property of the interceptor is `true` (which is by
    default `true`), `prepare()` will be invoked.
+
+> Note: since Struts 7.2.0, the `Preparable.prepare()` method is now a `default` method with an empty implementation.
+> Actions that only use per-method variants (e.g., `prepareEdit()`, `prepareSave()`) no longer need to provide
+> an empty `prepare()` override.
 
 ## Parameters
 

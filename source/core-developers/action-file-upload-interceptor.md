@@ -37,12 +37,29 @@ You can override the text of these messages by providing text for the following 
 ## Parameters
 
  - `maximumSize` (optional) - the maximum size (in bytes) that the interceptor will allow a file reference to be set
-   on the action. Note, this is <b>not</b> related to the various properties found in struts.properties. 
+   on the action. Note, this is <b>not</b> related to the various properties found in struts.properties.
    Default to approximately 2MB.
  - `allowedTypes` (optional) - a comma separated list of content types (ie: `text/html`) that the interceptor will allow
    a file reference to be set on the action. If none is specified allow all types to be uploaded.
  - `allowedExtensions` (optional) - a comma separated list of file extensions (ie: `.html`) that the interceptor will allow
    a file reference to be set on the action. If none is specified allow all extensions to be uploaded.
+
+### Dynamic Parameter Evaluation
+
+> Since Struts 7.2.0
+
+The `allowedTypes`, `allowedExtensions`, and `maximumSize` parameters support `${...}` expression evaluation,
+enabling per-request dynamic validation. This is available when used with `WithLazyParams`.
+
+```xml
+<interceptor-ref name="actionFileUpload">
+  <param name="allowedTypes">${allowedContentTypes}</param>
+  <param name="maximumSize">${maxFileSize}</param>
+</interceptor-ref>
+```
+
+The expressions are evaluated against the ValueStack at the time of the upload, allowing your action to provide
+dynamic values based on the current request context.
 
 ## Extending the Interceptor
 
