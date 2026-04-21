@@ -98,6 +98,10 @@ version of Struts in the 6.x series.
 
 If you are looking for other versions than above please check the <a href="https://archive.apache.org/dist/struts/">Apache Archive</a> site.
 
+Versions no longer listed above are End-of-Life (EOL) and receive no further security patches from the Apache Struts Team.
+If your organization requires continued security coverage for an EOL version, see the [End-of-Life versions](eol-versions.html)
+page for available options.
+
 ## Verify the integrity of the files {#verify}
 
 We recommend that you verify the integrity of the downloaded files using the PGP or MD5/SHA256 signatures.
