@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Configuration Files</title>
+  <title>End-of-Life Versions</title>
 
   <link href="/css/source-sans-pro.css" rel="stylesheet" type="text/css">
   <link href="/css/font-awesome.css" rel="stylesheet">
@@ -147,96 +147,67 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/core-developers/configuration-files.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/eol-versions.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <h1 id="configuration-files">Configuration Files</h1>
+    <h1 class="no_toc" id="end-of-life-apache-struts-versions">End-of-Life Apache Struts Versions</h1>
 
-<p>From a Struts developer point of view, the one required configuration file used by the framework is <code class="language-plaintext highlighter-rouge">web.xml</code>.<br />
-From here, you have full control over how Struts configures both itself and your application.  By default, Struts will 
-load a set of internal configuration files to configure itself, then another set to configure your application, however 
-it is possible to build an entire Struts application without writing a single configuration file other than <code class="language-plaintext highlighter-rouge">web.xml</code>.</p>
+<ul id="markdown-toc">
+  <li><a href="#what-end-of-life-means" id="markdown-toc-what-end-of-life-means">What End-of-Life means</a></li>
+  <li><a href="#eol-versions" id="markdown-toc-eol-versions">EOL versions</a></li>
+  <li><a href="#commercial-support-for-eol-versions" id="markdown-toc-commercial-support-for-eol-versions">Commercial support for EOL versions</a></li>
+</ul>
 
-<p>The table lists the files that you can use to configure the framework for your application. Some configuration files 
-can be reloaded dynamically. Dynamic reloading makes interactive development possible. 
-See <a href="reloading-configuration">Reloading configuration</a> for more.</p>
+<h2 id="what-end-of-life-means">What End-of-Life means</h2>
+
+<p>When a Struts version reaches End-of-Life (EOL), the Apache Struts Team no longer provides
+security patches, bug fixes, or updates for that branch. Users are strongly encouraged to
+migrate to a <a href="download.cgi">currently supported release</a>.</p>
+
+<p>The user mailing list and issue tracker are the <strong>only</strong> support options hosted by the Apache
+Struts project for supported versions. EOL versions receive no support at all from the project.</p>
+
+<h2 id="eol-versions">EOL versions</h2>
 
 <table>
   <thead>
     <tr>
-      <th>File</th>
-      <th>Optional</th>
-      <th>Location (relative to webapp)</th>
-      <th>Purpose</th>
+      <th>Branch</th>
+      <th>EOL date</th>
+      <th>Announcement</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><a href="web-xml">web.xml</a></td>
-      <td>no</td>
-      <td>/WEB-INF/</td>
-      <td>Web deployment descriptor to include all necessary framework components</td>
+      <td>Struts 2.5.x</td>
+      <td>30 October 2023</td>
+      <td><a href="announce-2023#a20231030">Announcement</a></td>
     </tr>
     <tr>
-      <td><a href="struts-xml">struts.xml</a></td>
-      <td>yes</td>
-      <td>/WEB-INF/classes/</td>
-      <td>Main configuration, contains result/view types, action mappings, interceptors, and so forth</td>
+      <td>Struts 2.3.x</td>
+      <td>earlier</td>
+      <td>—</td>
     </tr>
     <tr>
-      <td><a href="default-properties">default.properties</a></td>
-      <td>yes</td>
-      <td>/WEB-INF/classes/</td>
-      <td>Framework properties</td>
-    </tr>
-    <tr>
-      <td><a href="struts-default-xml">struts-default.xml</a></td>
-      <td>yes</td>
-      <td>/WEB-INF/lib/struts2-core.jar</td>
-      <td>Default configuration provided by Struts</td>
-    </tr>
-    <tr>
-      <td><a href="struts-default-vm">struts-default.vm</a></td>
-      <td>yes</td>
-      <td>/WEB-INF/classes/</td>
-      <td>Default macros referenced by velocity.properties</td>
-    </tr>
-    <tr>
-      <td><a href="../plugins/plugins-architecture">struts-plugin.xml</a></td>
-      <td>yes</td>
-      <td>At the root of a plugin JAR</td>
-      <td>Optional configuration files for Plugins in the same format as struts.xml.</td>
-    </tr>
-    <tr>
-      <td><a href="../plugins/plugins-architecture">struts-deferred.xml</a></td>
-      <td>yes</td>
-      <td>At the root of a plugin JAR</td>
-      <td>Optional configuration files for Plugins, most useful for defining extension points</td>
-    </tr>
-    <tr>
-      <td><a href="velocity-properties">velocity.properties</a></td>
-      <td>yes</td>
-      <td>/WEB-INF/classes/</td>
-      <td>Override the default <em>Velocity</em>  configuration</td>
+      <td>Struts 1.x</td>
+      <td>earlier</td>
+      <td>—</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="static-content">Static Content</h2>
+<p>For a full list of individual releases that are no longer recommended due to known security issues,
+see the <a href="releases.html#prior-releases">Releases</a> page.</p>
 
-<p>Common static content that is needed by the framework (JavaScript and CSS files, etc.) is served automatically by 
-the FilterDispatcher filter.  Any request starting with <code class="language-plaintext highlighter-rouge">/struts/</code> denotes that static content is required, and then 
-mapping the value after <code class="language-plaintext highlighter-rouge">/struts/</code> to common packages in the framework and, optionally in the application’s class path.</p>
+<h2 id="commercial-support-for-eol-versions">Commercial support for EOL versions</h2>
 
-<p>By default, the following packages are searched:</p>
+<p>If migration is not immediately feasible, third-party vendors offer extended security support
+for EOL Struts versions. The Apache Software Foundation does not endorse any commercial offering;
+the following is provided for informational purposes only.</p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">org.apache.struts2.static</code></li>
-  <li><code class="language-plaintext highlighter-rouge">template</code></li>
-</ul>
+<p class="alert alert-info"><a href="https://www.herodevs.com/support/struts-nes" rel="nofollow" target="_blank">HeroDevs Never-Ending Support (NES)</a>
+— extended security coverage and CVE remediation for EOL Apache Struts versions.</p>
 
-<p>Additional packages can be specified by providing a comma separated list to the configuration parameter named “packages” 
-(configured in <code class="language-plaintext highlighter-rouge">web.xml</code> for the FilterDispatcher filter). When specifying additional static content, you should 
-be careful not to expose sensitive configuration information (such as the password to a database).</p>
+<p>For a full list of commercial support options, see the <a href="commercial-support.html">Commercial Support</a> page.</p>
 
   </section>
 </article>
