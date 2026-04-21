@@ -21,7 +21,7 @@ Explore commercial support options for Apache Struts and JavaEE applications thr
 For detailed assistance, kindly reach out to them directly. Help us keep this list current; if you’re aware of other 
 supportive companies, please share details with us.
 
-Last updated: **2024-12-23**
+Last updated: **2026-04-21**
 
 - <a href="https://softwaremill.com/contact/" rel="nofollow" target="_blank">SoftwareMill</a>
     - contact details:
@@ -31,11 +31,11 @@ Last updated: **2024-12-23**
         - [+48 22 188 11 33](tel:+48221881133) (PL)
         - [+44 56 0156 3406](tel:+445601563406) (UK)
     - scope of support: consulting, Java & UI development, audit
-- <a href="https://www.herodevs.com/support/struts-nes" rel="nofollow" target="_blank">HeroDevs</a>
+- <a href="https://www.herodevs.com/support/struts-nes" rel="nofollow" target="_blank">HeroDevs — Never-Ending Support (NES)</a>
     - contact details:
       - email: [hello@herodevs.com](mailto:hello@herodevs.com)
       - phone: [+1 877-586-1965](tel:+18775861965)
-    - scope of support: Extended Long-Term Security Support for Apache Struts, CVE Remediation
+    - scope of support: extended security coverage and CVE remediation for EOL Apache Struts versions
 
 ## How to add a new company
 
