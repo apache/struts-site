@@ -17,11 +17,15 @@ and as well to support the latest IntelliJ IDEA.
 
 Any issues should be reported using ASF JIRA and component [IDEA Plugin](https://issues.apache.org/jira/issues/?jql=project%20%3D%20WW%20AND%20component%20%3D%20%22IDEA%20Plugin%22).
 
-## Version notes
+<iframe width="384px" height="319px" src="https://plugins.jetbrains.com/embeddable/card/1698"></iframe>
 
-The plugin has been officially released yet, it can be only download as a test build from [here](https://dist.apache.org/repos/dist/dev/struts/idea-plugin/)
+## Installation
 
-### Version 2024.4.1
+The plugin is available on the JetBrains Marketplace:
 
-- support for Struts 6.x has been added
-- plugin has been updated to support IDEA version 2024.1.5
+<iframe width="245px" height="48px" src="https://plugins.jetbrains.com/embeddable/install/1698"></iframe>
+
+## Releases
+
+Release notes and downloads for all versions are published on GitHub:
+[apache/struts-intellij-plugin releases](https://github.com/apache/struts-intellij-plugin/releases).
