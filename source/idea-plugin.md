@@ -21,15 +21,14 @@ Any issues should be reported using ASF JIRA and component [IDEA Plugin](https:/
 
 The plugin is available on the JetBrains Marketplace:
 
-<a href="https://plugins.jetbrains.com/plugin/1698-apache-struts"
-   style="display:inline-block;text-decoration:none;color:inherit;border:1px solid #e0e0e0;border-radius:8px;padding:16px;width:340px;font-family:inherit;">
+<div style="display:inline-block;border:1px solid #e0e0e0;border-radius:8px;padding:16px;width:340px;font-family:inherit;">
   <div style="display:flex;align-items:center;gap:12px;">
     <img src="{{ site.baseurl }}/img/struts-logo.svg" alt="Apache Struts" width="48" height="48" style="flex-shrink:0;"/>
     <strong style="font-size:1.1em;">Apache Struts</strong>
   </div>
   <p style="margin:12px 0 0;color:#555;">Provides full integration of Apache Struts 2.</p>
-  <span style="display:inline-block;margin-top:12px;background:#000;color:#fff;padding:8px 16px;border-radius:20px;font-weight:600;">Get from Marketplace</span>
-</a>
+  <a href="https://plugins.jetbrains.com/plugin/1698-apache-struts" style="display:inline-block;margin-top:12px;background:#000;color:#fff;padding:8px 16px;border-radius:20px;font-weight:600;text-decoration:none;">Get from Marketplace</a>
+</div>
 
 ## Releases
 
