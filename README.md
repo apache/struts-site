@@ -26,3 +26,11 @@ All pages are generated into the `content` folder.
 There are two scripts used to build the image but this should be used only when `Dockerfile` was modified.
 
 Some redirect rules are configured in `source/.htaccess` file.
+
+## Preparing a new release
+
+When announcing a new release, update the following files together:
+
+1. `_config.yml` - bump `current_version` / `prev_version` (and the matching `*_short` and `release_date` variables).
+2. `source/announce-YYYY.md` - add the announcement entry for the new release in the current year's file.
+3. `source/releases.md` - move the version that has just been superseded into the **Prior Releases** table so the page reflects what is no longer the recommended download.

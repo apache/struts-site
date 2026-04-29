@@ -85,7 +85,7 @@ Kramdown attribute syntax for Bootstrap classes:
 
 ### Common Tasks
 
-**New release**: Update version variables in `_config.yml`, add announcement entry to the current year's `announce-YYYY.md`.
+**New release**: Update version variables in `_config.yml`, add announcement entry to the current year's `announce-YYYY.md`, and move the now-superseded version into the **Prior Releases** table in `source/releases.md`.
 
 **New announcement year**: Create `source/announce-YYYY.md`, update the redirect in `source/.htaccess` (`RedirectMatch \/announce.html` line) to point to the new year.
 
