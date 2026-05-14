@@ -23,6 +23,7 @@ repositories, like [ibiblio.](http://ibiblio.org)
       the [Apache Maven Repository](https://repository.apache.org/content/groups/snapshots/).
 - **Older Releases** are available here
     - [Archive Site](https://archive.apache.org/dist/struts/)
+    - For support options on older releases, see [End-of-Life versions](eol-versions.html)
 
 Project releases have been approved by the vote of the Apache Struts [Project Management Committee.](bylaws.html)
 Support for a release is provided by [project volunteers](volunteers.html)
@@ -37,7 +38,9 @@ The user mailing list and issue tracker are the **only** support options hosted 
 ## Prior Releases {#prior-releases}
 
 As a courtesy, we retain archival copies of the website for releases that initially were considered
-"General Availability" but which has been reclassified as "Not recommended" since they contain security issues
+"General Availability" but which has been reclassified as "Not recommended" since they contain security issues.
+If you are running one of the versions below and cannot migrate, see the [End-of-Life versions](eol-versions.html)
+page for available options.
 
 | Release         | Release Date      | Vulnerability                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Version Notes                                               |
 |-----------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
