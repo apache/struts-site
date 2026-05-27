@@ -7,7 +7,7 @@ title: Security Issues
 
 > Please read more detailed guideline [here](https://github.com/apache/struts/blob/main/SECURITY.md).
 
-The Apache Struts project takes a very active stance in eliminating security problems  and denial of service attacks against applications using the Apache Struts framework.
+The Apache Struts project takes a very active stance in eliminating security problems and _denial of service_ attacks against applications using the Apache Struts framework.
 
 **We strongly encourage folks to report such security problems to our private security mailing list first, before disclosing them in a public forum**.
 
@@ -15,8 +15,12 @@ We cannot accept regular bug reports or other queries at this address, we ask th
 
 > All mail sent to this address that does not relate to security problems in the Apache Struts source code will be ignored`.
 
-Note that all networked servers are subject to denial of service attacks, and we cannot promise magic  workarounds to generic problems (such as a client streaming lots of data to your server, or re-requesting  the same URL repeatedly). In general our philosophy is to avoid any attacks which can cause the server  to consume resources in a non-linear relationship to the size of inputs.
+Note that all networked servers are subject to _denial of service_ attacks, and we cannot promise magic workarounds to generic problems (such as a client streaming lots of data to your server, or re-requesting the same URL repeatedly). In general, our philosophy is to avoid any attacks, which can cause the server to consume resources in a non-linear relationship to the size of inputs.
 
 The mailing address is: [security@struts.apache.org](mailto:security@struts.apache.org)
+
+## Security guideline
+
+The project also provides a detailed [security guideline](security/index) with many _ready-to-use_ advice and hardening options. Read it through before reporting any potential vulnerability in the framework.  
 
 [The Apache Security Team](https://www.apache.org/security/)
