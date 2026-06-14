@@ -37,6 +37,27 @@ the below three constants in struts.properties or struts.xml:
 <constant name="struts.xwork.chaining.copyErrors" value="true"/>
 ```
 
+## Parameter Authorization
+
+By default the Chaining Interceptor copies **all** properties of the objects on
+the value stack into the target action, regardless of any `@StrutsParameter`
+annotation. To restrict copying to annotated properties only, set the global
+constant:
+
+```xml
+<constant name="struts.chaining.requireAnnotations" value="true"/>
+```
+
+When enabled (default is `false`):
+
+- Only properties whose target setters carry [`@StrutsParameter`](struts-parameter-annotation.html)
+  are copied; rejected properties are skipped and logged at `WARN`.
+- Authorization uses the same `ParameterAuthorizer` service as the
+  [Parameters Interceptor](parameters-interceptor.html), keeping semantics consistent.
+- The behaviour is **fail-closed**: if the target action cannot be introspected,
+  no properties are copied.
+- This is a **global** constant only — there is no per-interceptor override.
+
 ## Parameters
 
  - `excludes` (optional) - the list of parameter names to exclude from copying (all others will be included)

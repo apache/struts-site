@@ -562,6 +562,34 @@ and `jsonRpcContentType` params, see example:
 
 Please be aware that those are scoped params per stack, which means, once set it will be used by actions in scope of this stack.
 
+### Deserialization limits
+
+To guard against malicious or oversized payloads, JSON deserialization enforces
+the following limits. Each can be set globally as a constant or per-interceptor as
+a `<param>` (following the same pattern as the fileUpload interceptor):
+
+| Constant | Default | Controls |
+|----------|---------|----------|
+| `struts.json.maxElements` | `10000` | Maximum number of elements in a single JSON array or object |
+| `struts.json.maxDepth` | `64` | Maximum nesting depth of the JSON structure |
+| `struts.json.maxLength` | `2097152` (2 MB) | Maximum length of the JSON input |
+| `struts.json.maxStringLength` | `262144` (256 KB) | Maximum length of an individual JSON string value |
+| `struts.json.maxKeyLength` | `512` | Maximum length of a JSON object key |
+
+```xml
+<constant name="struts.json.maxLength" value="1048576"/>
+```
+
+The reader and writer implementations are also pluggable via
+`struts.json.reader` and `struts.json.writer` (both default to `struts`).
+
+### Parameter authorization
+
+JSON deserialization enforces the [`@StrutsParameter`](../../core-developers/struts-parameter-annotation.html)
+annotation **per property, during deserialization** — unauthorized fields are
+never set on the target object. Annotate the action properties that may be
+populated from the JSON request body.
+
 ## JSON RPC
 
 The json plugin can be used to execute action methods from javascript and return the output. This feature was developed 

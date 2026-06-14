@@ -313,6 +313,13 @@ look like this:
 <constant name="struts.rest.handlerOverride.xml" value="myXml"/>
 ```
 
+As of Struts 7.2.0 the built-in content type handlers enforce the
+[`@StrutsParameter`](../../core-developers/struts-parameter-annotation.html)
+annotation per property during deserialization. Custom handlers that need the
+same property-level authorization should implement
+`AuthorizationAwareContentTypeHandler` (which extends `ContentTypeHandler` with
+authorization callbacks) instead of `ContentTypeHandler` directly.
+
 ### Settings
 
 The following settings can be customized. See the [developer guide](/core-developers/configuration-files).
