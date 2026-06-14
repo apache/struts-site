@@ -158,6 +158,21 @@
 
 <p>Why it matters: by default (when annotations are required), Struts will only inject request parameters into fields or setter methods that have this annotation. This prevents attackers from setting values on fields you didn’t intend to expose.</p>
 
+<h2 id="where-authorization-applies">Where authorization applies</h2>
+
+<p>As of Struts 7.2.0 the <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> authorization is enforced across every
+channel that can populate an action from request data:</p>
+
+<ul>
+  <li><a href="parameters-interceptor.html">Parameters Interceptor</a> — request parameters
+(default, governed by <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations</code>).</li>
+  <li><a href="chaining-interceptor.html">Chaining Interceptor</a> — value-stack copying during
+action chaining (opt-in via <code class="language-plaintext highlighter-rouge">struts.chaining.requireAnnotations</code>).</li>
+  <li><a href="cookie-interceptor.html">Cookie Interceptor</a> — cookie values.</li>
+  <li><a href="../../plugins/json">JSON</a> and <a href="../../plugins/rest">REST</a> plugins — per-property
+authorization performed during deserialization, so unauthorized fields are never set.</li>
+</ul>
+
 <h2 id="usage">Usage</h2>
 
 <p>The placement of the <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> annotation is crucial and depends on how you want to populate your action properties.</p>

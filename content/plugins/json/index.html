@@ -181,6 +181,8 @@
       <li><a href="#write-the-mapping-for-the-action" id="markdown-toc-write-the-mapping-for-the-action">Write the mapping for the action</a></li>
       <li><a href="#json-example-output" id="markdown-toc-json-example-output">JSON example output</a></li>
       <li><a href="#accepting-json" id="markdown-toc-accepting-json">Accepting JSON</a></li>
+      <li><a href="#deserialization-limits" id="markdown-toc-deserialization-limits">Deserialization limits</a></li>
+      <li><a href="#parameter-authorization" id="markdown-toc-parameter-authorization">Parameter authorization</a></li>
     </ul>
   </li>
   <li><a href="#json-rpc" id="markdown-toc-json-rpc">JSON RPC</a></li>
@@ -757,6 +759,62 @@ and <code class="language-plaintext highlighter-rouge">jsonRpcContentType</code>
 </code></pre></div></div>
 
 <p>Please be aware that those are scoped params per stack, which means, once set it will be used by actions in scope of this stack.</p>
+
+<h3 id="deserialization-limits">Deserialization limits</h3>
+
+<p>To guard against malicious or oversized payloads, JSON deserialization enforces
+the following limits. Each can be set globally as a constant or per-interceptor as
+a <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> (following the same pattern as the fileUpload interceptor):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Constant</th>
+      <th>Default</th>
+      <th>Controls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.json.maxElements</code></td>
+      <td><code class="language-plaintext highlighter-rouge">10000</code></td>
+      <td>Maximum number of elements in a single JSON array or object</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.json.maxDepth</code></td>
+      <td><code class="language-plaintext highlighter-rouge">64</code></td>
+      <td>Maximum nesting depth of the JSON structure</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.json.maxLength</code></td>
+      <td><code class="language-plaintext highlighter-rouge">2097152</code> (2 MB)</td>
+      <td>Maximum length of the JSON input</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.json.maxStringLength</code></td>
+      <td><code class="language-plaintext highlighter-rouge">262144</code> (256 KB)</td>
+      <td>Maximum length of an individual JSON string value</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.json.maxKeyLength</code></td>
+      <td><code class="language-plaintext highlighter-rouge">512</code></td>
+      <td>Maximum length of a JSON object key</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.json.maxLength"</span> <span class="na">value=</span><span class="s">"1048576"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>The reader and writer implementations are also pluggable via
+<code class="language-plaintext highlighter-rouge">struts.json.reader</code> and <code class="language-plaintext highlighter-rouge">struts.json.writer</code> (both default to <code class="language-plaintext highlighter-rouge">struts</code>).</p>
+
+<h3 id="parameter-authorization">Parameter authorization</h3>
+
+<p>JSON deserialization enforces the <a href="../../core-developers/struts-parameter-annotation.html"><code class="language-plaintext highlighter-rouge">@StrutsParameter</code></a>
+annotation <strong>per property, during deserialization</strong> — unauthorized fields are
+never set on the target object. Annotate the action properties that may be
+populated from the JSON request body.</p>
 
 <h2 id="json-rpc">JSON RPC</h2>
 
