@@ -23,6 +23,19 @@ into Struts' action.
 
 The action could implement `CookiesAware` in order to have a `Map` of filtered cookies set into it.
 
+## Parameter Authorization
+
+Cookie values are injected through the same `@StrutsParameter` authorization path
+as the [Parameters Interceptor](parameters-interceptor.html) (previously the
+interceptor wrote directly to the value stack and bypassed authorization).
+
+> **Behaviour change in 7.2.0:** when annotation enforcement is active (the
+> default `struts.parameters.requireAnnotations=true`), cookies will only populate
+> setters marked with [`@StrutsParameter`](struts-parameter-annotation.html).
+> Applications that relied on cookies populating un-annotated setters must either
+> add the annotation to those setters or stop using `cookiesName=*`.
+{:.alert .alert-warning}
+
 ## Parameters
 
  - `cookiesName` (mandatory) - Name of cookies to be injected into the action. If more than one cookie name is desired 
