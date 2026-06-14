@@ -169,6 +169,20 @@ into Struts’ action.</p>
 
 <p>The action could implement <code class="language-plaintext highlighter-rouge">CookiesAware</code> in order to have a <code class="language-plaintext highlighter-rouge">Map</code> of filtered cookies set into it.</p>
 
+<h2 id="parameter-authorization">Parameter Authorization</h2>
+
+<p>Cookie values are injected through the same <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> authorization path
+as the <a href="parameters-interceptor.html">Parameters Interceptor</a> (previously the
+interceptor wrote directly to the value stack and bypassed authorization).</p>
+
+<blockquote class="alert alert-warning">
+  <p><strong>Behaviour change in 7.2.0:</strong> when annotation enforcement is active (the
+default <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations=true</code>), cookies will only populate
+setters marked with <a href="struts-parameter-annotation.html"><code class="language-plaintext highlighter-rouge">@StrutsParameter</code></a>.
+Applications that relied on cookies populating un-annotated setters must either
+add the annotation to those setters or stop using <code class="language-plaintext highlighter-rouge">cookiesName=*</code>.</p>
+</blockquote>
+
 <h2 id="parameters">Parameters</h2>
 
 <ul>

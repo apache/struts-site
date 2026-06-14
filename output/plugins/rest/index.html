@@ -538,6 +538,13 @@ look like this:</p>
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.rest.handlerOverride.xml"</span> <span class="na">value=</span><span class="s">"myXml"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
+<p>As of Struts 7.2.0 the built-in content type handlers enforce the
+<a href="../../core-developers/struts-parameter-annotation.html"><code class="language-plaintext highlighter-rouge">@StrutsParameter</code></a>
+annotation per property during deserialization. Custom handlers that need the
+same property-level authorization should implement
+<code class="language-plaintext highlighter-rouge">AuthorizationAwareContentTypeHandler</code> (which extends <code class="language-plaintext highlighter-rouge">ContentTypeHandler</code> with
+authorization callbacks) instead of <code class="language-plaintext highlighter-rouge">ContentTypeHandler</code> directly.</p>
+
 <h3 id="settings">Settings</h3>
 
 <p>The following settings can be customized. See the <a href="/core-developers/configuration-files">developer guide</a>.

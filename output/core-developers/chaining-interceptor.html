@@ -188,6 +188,28 @@ the below three constants in struts.properties or struts.xml:</p>
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.xwork.chaining.copyErrors"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
+<h2 id="parameter-authorization">Parameter Authorization</h2>
+
+<p>By default the Chaining Interceptor copies <strong>all</strong> properties of the objects on
+the value stack into the target action, regardless of any <code class="language-plaintext highlighter-rouge">@StrutsParameter</code>
+annotation. To restrict copying to annotated properties only, set the global
+constant:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.chaining.requireAnnotations"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>When enabled (default is <code class="language-plaintext highlighter-rouge">false</code>):</p>
+
+<ul>
+  <li>Only properties whose target setters carry <a href="struts-parameter-annotation.html"><code class="language-plaintext highlighter-rouge">@StrutsParameter</code></a>
+are copied; rejected properties are skipped and logged at <code class="language-plaintext highlighter-rouge">WARN</code>.</li>
+  <li>Authorization uses the same <code class="language-plaintext highlighter-rouge">ParameterAuthorizer</code> service as the
+<a href="parameters-interceptor.html">Parameters Interceptor</a>, keeping semantics consistent.</li>
+  <li>The behaviour is <strong>fail-closed</strong>: if the target action cannot be introspected,
+no properties are copied.</li>
+  <li>This is a <strong>global</strong> constant only — there is no per-interceptor override.</li>
+</ul>
+
 <h2 id="parameters">Parameters</h2>
 
 <ul>
