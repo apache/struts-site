@@ -9,8 +9,9 @@ description: Use when a new Apache Struts version has been released and you need
 
 Publishing a release announcement on the struts-site repo is a fixed, repeatable
 procedure: add an announcement entry, bump the right version variables, move the
-superseded version to Prior Releases, open a draft PR, and draft the `[ANN]` email
-(the email is NOT committed — it is sent to the mailing list after merge).
+superseded version to Prior Releases, draft the `[ANN]` email, and open a draft PR
+with the email in its description (the email is NOT committed — the release manager
+copies it from the PR description and sends it to the mailing list after merge).
 
 Model PRs: #292 (6.9.0 GA), this skill was derived from the 6.10.0 release.
 
@@ -46,9 +47,14 @@ Model PRs: #292 (6.9.0 GA), this skill was derived from the 6.10.0 release.
 4. **`source/releases.md`** — move the now-superseded version of the **same line** into
    the **Prior Releases** table, newest first. Match the column widths and the
    vulnerability-cell style of the row above it (empty if no published bulletin).
-5. **Branch + commit + draft PR** — branch `docs/announce-<version>`, commit type
-   `docs:`, then `gh pr create --draft --base main`. Return a clickable PR link.
-6. **Draft the email** — output the `[ANN]` email (below) in chat. Do **not** commit it.
+5. **Draft the email** — build the `[ANN]` email (below). It is **not** committed to
+   the repo; it goes into the PR description in the next step.
+6. **Branch + commit + draft PR** — branch `docs/announce-<version>`, commit type
+   `docs:`, then `gh pr create --draft --base main`. Put the `[ANN]` email in the PR
+   description inside a fenced ```text block under an `## [ANN] email` heading, so the
+   release manager can copy it verbatim after merge. **Write the PR body to a file and
+   pass `--body-file`** — the email contains ``` ``` ``` fences that a shell heredoc /
+   `--body "…"` will mangle (escaped backticks). Return a clickable PR link.
 
 ## Announcement template (`announce-YYYY.md`)
 
@@ -79,10 +85,12 @@ You can download this version from our [download](download.cgi#struts-ga) page.
 For a **7.x** release adjust the spec-versions paragraph to the 7.x requirements
 (Servlet 5.0 / Jakarta / Java 17 — copy from the most recent 7.x announcement).
 
-## Email template (`[ANN]` — NOT committed, sent to announcements list)
+## Email template (`[ANN]` — goes in the PR description, NOT committed)
 
-Sent by the release manager to `announcements@struts.apache.org` (cc user list).
-Plain text, full URLs inline, signed off. Mirror the website announcement wording:
+Placed in the PR description (fenced ```text block under an `## [ANN] email` heading),
+then sent by the release manager to `announcements@struts.apache.org` (cc user list)
+after merge. Plain text, full URLs inline, signed off. Mirror the website announcement
+wording:
 
 ```text
 Subject: [ANN] Apache Struts <X.Y.Z>
@@ -129,6 +137,7 @@ the Version Notes link pointing to `https://cwiki.apache.org/confluence/display/
 | Editing `index.html` when staying in the same year | It auto-renders from variables; only edit when the year file changes. |
 | Adding the new version to Prior Releases | Move the **superseded** (previous) version of that line, not the one just released. |
 | Forgetting `*_short` variables | Short forms are digits-only version (`6100`) and `YYYYMMDD` date — anchors break otherwise. |
-| Committing the email | The email is drafted in chat and sent to the list manually — never committed. |
+| Committing the email | The email goes in the PR description and is sent to the list manually — never committed to the repo. |
+| Escaped ``` ``` ``` fences in the PR body | Write the body to a file and use `gh pr ... --body-file`; inline `--body "…"` / heredoc mangles the email's code fences. |
 | Inventing an `S2-0XX` number | Only link a bulletin that actually exists; otherwise leave it out. |
 ```
