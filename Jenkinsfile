@@ -16,7 +16,31 @@ pipeline {
     PATH="${GEM_HOME}/bin:${RUBY_PATH}/bin:${env.PATH}"
   }
   stages {
+    stage('Check for site changes') {
+      steps {
+        script {
+          if (env.CHANGE_TARGET) {
+            // PR build: only rebuild when files that affect the generated site changed.
+            sh "git fetch --no-tags origin +refs/heads/${env.CHANGE_TARGET}:refs/remotes/origin/${env.CHANGE_TARGET}"
+            def files = sh(
+                script: "git diff --name-only origin/${env.CHANGE_TARGET}...HEAD",
+                returnStdout: true).trim()
+            echo "Files changed in this PR:\n${files}"
+            env.SITE_CHANGED = files.readLines().any {
+              it ==~ /^(source\/.*|_config\.yml|Gemfile(\.lock)?)$/
+            } ? 'true' : 'false'
+          } else {
+            // Branch build (e.g. main): always rebuild.
+            env.SITE_CHANGED = 'true'
+          }
+          echo "SITE_CHANGED=${env.SITE_CHANGED}"
+        }
+      }
+    }
     stage('Build a staged website') {
+      when {
+        expression { env.SITE_CHANGED == 'true' }
+      }
       steps {
         sh '''
           echo Generating a new version of website
@@ -29,6 +53,9 @@ pipeline {
       }
     }
     stage('Deploy to stage area') {
+      when {
+        expression { env.SITE_CHANGED == 'true' }
+      }
       steps {
         sh '''
           echo "Pushing changes into stage site"
@@ -55,7 +82,10 @@ pipeline {
     }
     stage('Comment on PR') {
       when {
-        changeRequest()
+        allOf {
+          changeRequest()
+          expression { env.SITE_CHANGED == 'true' }
+        }
       }
       steps {
         script {
