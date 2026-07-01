@@ -186,10 +186,64 @@ authorization performed during deserialization, so unauthorized fields are never
     </ul>
   </li>
   <li>
-    <p><strong>On a public getter method:</strong> Place the annotation on a getter method when you want to allow populating the properties of the object returned by the getter. The <code class="language-plaintext highlighter-rouge">depth</code> parameter is used to control how deep the object graph can be populated. This is typically used for complex objects or collections of complex objects.</p>
+    <p><strong>On a public getter method:</strong> Place the annotation on a getter method when you want to allow populating the properties of the object (or objects) returned by the getter. The <code class="language-plaintext highlighter-rouge">depth</code> parameter controls how deep into that object graph population is allowed — see <a href="#understanding-the-depth-parameter">Understanding the <code class="language-plaintext highlighter-rouge">depth</code> parameter</a> below. This is typically used for complex objects or collections of complex objects.</p>
   </li>
   <li><strong>On a public field:</strong> For simple types, you can place the annotation directly on the public field as a shorthand for a setter annotation.</li>
 </ul>
+
+<h2 id="understanding-the-depth-parameter">Understanding the <code class="language-plaintext highlighter-rouge">depth</code> parameter</h2>
+
+<p>When you annotate a getter, <code class="language-plaintext highlighter-rouge">depth</code> limits how far Struts may traverse the object
+graph reachable from that getter while applying request parameters. <strong>Each
+navigation step counts as one level</strong> — following a property <em>or</em> indexing into a
+collection or map.</p>
+
+<p>To find the value you need, count the segments after the annotated property in the
+request expression:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Request expression</th>
+      <th>Annotated getter</th>
+      <th>Steps beyond the getter</th>
+      <th>Required <code class="language-plaintext highlighter-rouge">depth</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">user.name</code></td>
+      <td><code class="language-plaintext highlighter-rouge">getUser()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">.name</code></td>
+      <td><code class="language-plaintext highlighter-rouge">1</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">user.address.city</code></td>
+      <td><code class="language-plaintext highlighter-rouge">getUser()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">.address</code> → <code class="language-plaintext highlighter-rouge">.city</code></td>
+      <td><code class="language-plaintext highlighter-rouge">2</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">users[0].name</code></td>
+      <td><code class="language-plaintext highlighter-rouge">getUsers()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[0]</code> → <code class="language-plaintext highlighter-rouge">.name</code></td>
+      <td><code class="language-plaintext highlighter-rouge">2</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The key point for collections and maps: <strong>indexing into the collection is itself a
+level.</strong> Reaching a property of a collection element therefore always costs one more
+level than reaching the same property on a plain object. This holds even when the
+element type is a flat POJO with only simple fields — populating <code class="language-plaintext highlighter-rouge">contents[0].title</code>
+still needs <code class="language-plaintext highlighter-rouge">depth = 2</code> (one level to reach the element, one more to reach its
+property), not <code class="language-plaintext highlighter-rouge">depth = 1</code>.</p>
+
+<p>In the annotation’s own terms, <code class="language-plaintext highlighter-rouge">depth</code> is <em>the number of periods or brackets that
+may appear in the parameter name</em>. The default is <code class="language-plaintext highlighter-rouge">depth = 0</code>, which permits only
+setters and fields directly on the action class. Reaching a property of a returned
+object needs <code class="language-plaintext highlighter-rouge">depth = 1</code> or more; reaching a property of an object held in a
+collection or map needs <code class="language-plaintext highlighter-rouge">depth = 2</code> or more.</p>
 
 <h2 id="examples">Examples</h2>
 
@@ -241,20 +295,29 @@ authorization performed during deserialization, so unauthorized fields are never
 <span class="o">}</span>
 </code></pre></div></div>
 
-<h4 id="populating-properties-of-objects-within-a-collection">Populating properties of objects within a collection</h4>
-
-<p>When populating properties of objects that are already in a collection, annotate the getter.</p>
+<p>When populating properties of objects that are already in a collection, annotate the
+getter. Because reaching an element’s property requires indexing into the collection
+<em>and then</em> following the property, this needs <code class="language-plaintext highlighter-rouge">depth = 2</code> (see
+<a href="#understanding-the-depth-parameter">Understanding the <code class="language-plaintext highlighter-rouge">depth</code> parameter</a>).</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="n">users</span><span class="o">;</span> <span class="c1">// assume this is initialized in the constructor or elsewhere</span>
 
-    <span class="nd">@StrutsParameter</span><span class="o">(</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="nd">@StrutsParameter</span><span class="o">(</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">2</span><span class="o">)</span>
     <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="nf">getUsers</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">users</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="c1">// ...</span>
 <span class="o">}</span>
 </code></pre></div></div>
-<p>This allows requests like <code class="language-plaintext highlighter-rouge">users[0].name=John</code>.</p>
+<p>This allows requests like <code class="language-plaintext highlighter-rouge">users[0].name=John</code>. Note that <code class="language-plaintext highlighter-rouge">depth = 2</code> is required
+even when <code class="language-plaintext highlighter-rouge">User</code> is a flat object with only simple properties — the extra level pays
+for indexing into the collection, not for nesting within the element.</p>
+
+<p>The same rule applies to JSON and REST payloads: a body such as
+<code class="language-plaintext highlighter-rouge">{"users":[{"name":"John"}]}</code> populates <code class="language-plaintext highlighter-rouge">users[0].name</code>, so the <code class="language-plaintext highlighter-rouge">getUsers()</code> getter
+must be annotated with <code class="language-plaintext highlighter-rouge">depth = 2</code> for the nested value to be accepted. Annotating
+only the setter is not enough — the JSON/REST authorization checks the getter when
+descending into the collection’s elements.</p>
 
 <h3 id="complex-object">Complex object</h3>
 
