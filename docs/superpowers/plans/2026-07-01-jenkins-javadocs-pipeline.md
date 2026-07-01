@@ -96,8 +96,9 @@ pipeline {
           fi
 
           git fetch asf
-          git checkout main
-          git pull asf main
+          # Check out asf/main explicitly: the Pipeline SCM checkout also leaves an
+          # origin/main, so a bare `git checkout main` is ambiguous across two remotes.
+          git checkout -B main asf/main
 
           rm -rf source/maven
           mkdir -p source/maven
