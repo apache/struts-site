@@ -101,7 +101,8 @@ pollutes the site repo:
 Mirror the existing `Jenkinsfile` deploy pattern:
 
 - add the `asf` remote if missing → `https://gitbox.apache.org/repos/asf/struts-site.git`
-- `git checkout main` && `git pull asf main`
+- `git checkout -B main asf/main` (explicit remote: a bare `git checkout main` is
+  ambiguous because the Pipeline SCM checkout also leaves an `origin/main`)
 - `rm -rf source/maven && mkdir -p source/maven`
 - `mv target/struts/target/staging/* source/maven/`
 - `git add source/maven`
