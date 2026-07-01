@@ -14,10 +14,14 @@ pipeline {
     disableConcurrentBuilds()
     skipStagesAfterUnstable()
   }
+  tools {
+    // Provisions `mvn` and JDK 17 on PATH via Jenkins tool installers, matching
+    // the apache/struts build. Struts 7 requires JDK 17.
+    jdk 'jdk_17_latest'
+    maven 'maven_3_latest'
+  }
   environment {
     MAVEN_OPTS = '-Xmx2048m -Dhttps.protocols=TLSv1.2 -DfailOnError=false'
-    // Required: resolves `mvn` on the ASF agent (we use plain mvn, not the wrapper).
-    PATH = "${MAVEN_3_LATEST_HOME}:${env.PATH}"
   }
   stages {
     stage('Build Struts & Maven site') {
