@@ -80,7 +80,9 @@ pipeline {
           fi
 
           mvn -B -V clean install -DskipTests
-          mvn -B -V site:site site:stage
+          # Skip the OWASP dependency-check report: its aggregate goal downloads the
+          # full NVD CVE database (~360k records) with no API key, blowing the timeout.
+          mvn -B -V site:site site:stage -Ddependency-check.skip=true
         '''
       }
     }
