@@ -92,7 +92,9 @@ pollutes the site repo:
 - clone `https://gitbox.apache.org/repos/asf/struts.git` into `target/struts`
 - checkout: if `STRUTS_TAG == main` → `git checkout main`, else `git checkout "tags/${STRUTS_TAG}"`
 - `mvn -B -V clean install -DskipTests`
-- `mvn -B -V site:site site:stage`
+- `mvn -B -V site:site site:stage -Ddependency-check.skip=true` (the OWASP
+  dependency-check report is skipped: its aggregate goal downloads the full NVD CVE
+  database with no API key and blows the build timeout; it is not needed for the site)
 
 **Stage 2 — Publish to source/maven**
 
