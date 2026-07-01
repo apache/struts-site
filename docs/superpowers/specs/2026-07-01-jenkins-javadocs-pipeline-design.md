@@ -104,7 +104,17 @@ Mirror the existing `Jenkinsfile` deploy pattern:
 - `git checkout -B main asf/main` (explicit remote: a bare `git checkout main` is
   ambiguous because the Pipeline SCM checkout also leaves an `origin/main`)
 - `rm -rf source/maven && mkdir -p source/maven`
-- `mv target/struts/target/staging/* source/maven/`
+- Publish selectively (the struts reactor nests module sites by POM inheritance, e.g.
+  `struts2-bom/struts2-parent/struts2-core/`, which does not match the website menu):
+  - copy the top-level aggregate site (everything at the staging root **except** the
+    nested `struts2-bom` tree) → `source/maven/` — gives `/maven/project-info.html`,
+    `/maven/index.html`, aggregate `/maven/apidocs/`
+  - copy `…/struts2-bom/struts2-parent/struts2-core` → `source/maven/struts2-core`
+  - copy `…/struts2-bom/struts2-parent/struts2-plugins` → `source/maven/struts2-plugins`
+  - This flattening makes all four `/maven/…` menu links in `source/_includes/header.html`
+    resolve with no menu change. Safe because each module site is self-contained
+    (own css/js/images) and `struts2-plugins` carries its submodule sites. Trade-off:
+    secondary "up"/breadcrumb links inside the Maven pages may not resolve.
 - `git add source/maven`
 - `git diff --cached --quiet || git commit -m "Updates Maven site by Jenkins"`
 - `git push asf main`

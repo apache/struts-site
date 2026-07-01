@@ -100,9 +100,25 @@ pipeline {
           # origin/main, so a bare `git checkout main` is ambiguous across two remotes.
           git checkout -B main asf/main
 
+          # The struts reactor stages module sites nested by POM inheritance, e.g.
+          # struts2-bom/struts2-parent/struts2-core/. Publish only what the website
+          # menu links to: the top-level aggregate site at the root, plus struts2-core
+          # and struts2-plugins flattened to /maven/<module>/. Each module site is
+          # self-contained (own css/js/images) and struts2-plugins carries its own
+          # submodule sites, so moving whole directories keeps their links intact.
+          STAGING=target/struts/target/staging
+          PARENT="${STAGING}/struts2-bom/struts2-parent"
+
           rm -rf source/maven
           mkdir -p source/maven
-          mv target/struts/target/staging/* source/maven/
+
+          for entry in "${STAGING}"/*; do
+            [ "$(basename "${entry}")" = "struts2-bom" ] && continue
+            cp -r "${entry}" source/maven/
+          done
+
+          cp -r "${PARENT}/struts2-core" source/maven/struts2-core
+          cp -r "${PARENT}/struts2-plugins" source/maven/struts2-plugins
 
           git add source/maven
           git status
