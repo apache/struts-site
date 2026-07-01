@@ -31,9 +31,12 @@ existing website-build pipeline already in this repo.
 
 ## Deliberate changes vs. the current shell script
 
-1. **`./mvnw` → `mvn`.** Use the Maven installation on the ASF agent instead of the
-   Struts project's Maven wrapper. This makes the `MAVEN_3_LATEST_HOME` PATH entry
-   load-bearing (it is what resolves `mvn`), so it is kept.
+1. **`./mvnw` → `mvn`.** Use a Jenkins-provisioned Maven instead of the Struts project's
+   Maven wrapper. Maven and JDK 17 are supplied via a declarative `tools` block
+   (`maven 'maven_3_latest'`, `jdk 'jdk_17_latest'`), matching the apache/struts build.
+   (An earlier draft prepended `MAVEN_3_LATEST_HOME` to `PATH`; that env var is not set on
+   the `git-websites`/`websites2` agent, so `mvn` was not found — the `tools` block is the
+   correct mechanism.)
 2. **`git push origin main` → `git push asf main`.** Mirror the existing `Jenkinsfile`'s
    explicit `asf` remote pattern rather than relying on the ambient `origin`.
 
@@ -68,9 +71,13 @@ options {
   skipStagesAfterUnstable()
 }
 
+tools {
+  jdk 'jdk_17_latest'            // Struts 7 requires JDK 17
+  maven 'maven_3_latest'        // puts `mvn` on PATH on whatever node runs
+}
+
 environment {
   MAVEN_OPTS = '-Xmx2048m -Dhttps.protocols=TLSv1.2 -DfailOnError=false'
-  PATH = "${MAVEN_3_LATEST_HOME}:${env.PATH}"   // required: resolves `mvn` on the ASF agent
 }
 ```
 
