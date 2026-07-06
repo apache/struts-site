@@ -63,6 +63,71 @@ If needed you can change the default path at which static content is served. Jus
 
 This value is also used by the Default Content Loader.
 
+## WebJars support
+
+{:.alert .alert-info}
+Available since Struts 7.3.0.
+
+[WebJars](https://www.webjars.org/) package client-side libraries (Bootstrap, jQuery, …) as JARs, shipping their assets
+under `META-INF/resources/webjars/<name>/<version>/…`. Instead of vendoring these files into your web application and
+re-committing them on every upgrade, you add the WebJar as a regular dependency and let Struts resolve and serve it.
+
+Struts serves WebJar assets through the same static content pipeline described above, under
+`<staticContentPath>/webjars/**` (by default `/static/webjars/**`). Resolution is **version-less**: you reference a
+resource by its logical path and Struts resolves the version present on the classpath. For example, a request for:
+
+```
+/static/webjars/bootstrap/css/bootstrap.min.css
+```
+
+is served from `META-INF/resources/webjars/bootstrap/5.3.8/css/bootstrap.min.css` (whichever version is on the
+classpath). To emit these URLs from a template without hardcoding the version, use the
+[webjar tag](../tag-developers/webjar-tag):
+
+```jsp
+<link rel="stylesheet" href="<s:webjar path="bootstrap/css/bootstrap.min.css"/>"/>
+```
+
+Struts resolves versions using [webjars-locator-lite](https://github.com/webjars/webjars-locator-lite), which is bundled
+with `struts2-core`.
+
+### Configuration
+
+| Constant                   | Default | Description                                                                                       |
+|----------------------------|---------|---------------------------------------------------------------------------------------------------|
+| `struts.webjars.enabled`   | `true`  | Master switch for resolving and serving WebJar assets under `<staticContentPath>/webjars/**`.     |
+| `struts.webjars.allowlist` | (empty) | Optional comma-separated allowlist of WebJar names. When empty, all WebJars on the classpath are allowed. |
+
+To restrict serving to specific WebJars:
+
+```xml
+<constant name="struts.webjars.allowlist" value="bootstrap,jquery"/>
+```
+
+To disable the feature entirely:
+
+```xml
+<constant name="struts.webjars.enabled" value="false"/>
+```
+
+### Security
+
+Resolution is hard-constrained to the `META-INF/resources/webjars/` root: path traversal attempts (`..`, `.`,
+backslashes) are rejected before resolution, the resolved path is re-checked for containment, and only paths that the
+locator can resolve to a real WebJar are served. Disabled, unresolved, traversal, and allowlist-blocked requests all
+**fail closed** - a `404` when serving and empty output when building URLs.
+
+### Customizing resolution
+
+URL resolution is provided by the `org.apache.struts2.webjars.WebJarUrlProvider` container bean (default implementation
+`DefaultWebJarUrlProvider`), which exposes `resolveResourcePath(String)` and `resolveUrl(String, HttpServletRequest)`.
+Plugins and applications can replace it by declaring their own bean:
+
+```xml
+<bean type="org.apache.struts2.webjars.WebJarUrlProvider" class="com.example.MyWebJarUrlProvider" name="myProvider"/>
+<constant name="struts.webjars.urlProvider" value="myProvider"/>
+```
+
 ## Preventing Struts from handling a request
 
 If there is a request that Struts is handling as an action, and you wish to make Struts ignore it,

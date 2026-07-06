@@ -30,7 +30,7 @@ Struts Generic Tags control the execution flow as pages render.
 | [if](if-tag)               | [a](a-tag)               | [compress](compress-tag) |
 | [elseif](elseif-tag)       | [action](action-tag)     | [script](script-tag)     |   
 | [else](else-tag)           | [bean](bean-tag)         | [link](link-tag)         |
-| [append](append-tag)       | [date](date-tag)         |                          |
+| [append](append-tag)       | [date](date-tag)         | [webjar](webjar-tag)     |
 | [generator](generator-tag) | [debug](debug-tag)       |                          |
 | [iterator](iterator-tag)   | [i18n](i18n-tag)         |                          |
 | [merge](merge-tag)         | [include](include-tag)   |                          |
