@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Language" content="en"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Tag Reference</title>
+  <title>webjar tag</title>
 
   <link href="/css/source-sans-pro.css" rel="stylesheet" type="text/css">
   <link href="/css/font-awesome.css" rel="stylesheet">
@@ -148,213 +148,88 @@
 
 <article class="container">
   <section class="col-md-12">
-    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/tag-developers/tag-reference.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/tag-developers/webjar-tag.md" title="Edit this page on GitHub">Edit on GitHub</a>
     
-    <a href="index" title="back to Tag Developers Guide"><< back to Tag Developers Guide</a>
+    <a href="tag-reference.html" title="back to Tag Reference"><< back to Tag Reference</a>
     
-    <h1 class="no_toc" id="tag-reference">Tag Reference</h1>
+    <h1 id="webjar">webjar</h1>
 
-<ul id="markdown-toc">
-  <li><a href="#generic-tags" id="markdown-toc-generic-tags">Generic Tags</a></li>
-  <li><a href="#ui-tag-reference" id="markdown-toc-ui-tag-reference">UI Tag Reference</a></li>
-</ul>
+<p class="alert alert-info">Available since Struts 7.3.0.</p>
 
-<p>Generic tags are used for controlling the execution flow when the pages render. These tags also allow for data
-extraction from places other than your action or the value stack, such as <em>Localization</em> , JavaBeans, and including
-additional URLs or action executions.</p>
+<p>Please make sure you have read the <a href="tag-syntax">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
 
-<ul>
-  <li>Control Tags provide control flow, such as <code class="language-plaintext highlighter-rouge">if</code>, <code class="language-plaintext highlighter-rouge">else</code>, and <code class="language-plaintext highlighter-rouge">iterator</code></li>
-  <li>Data Tags allow for data manipulation or creation, such as <code class="language-plaintext highlighter-rouge">bean</code>, <code class="language-plaintext highlighter-rouge">push</code>, and <code class="language-plaintext highlighter-rouge">i18n</code></li>
-</ul>
+<h2 id="description">Description</h2>
 
-<blockquote>
-  <p>Please make sure you have read the <a href="tag-syntax">Tag Syntax</a> document and understand how tag attribute syntax works.</p>
-</blockquote>
+<p>Resolves a version-less <a href="https://www.webjars.org/">WebJar</a> resource path to a servable URL and writes it to the output
+(or stores it in a variable when <code class="language-plaintext highlighter-rouge">var</code> is set). For example, <code class="language-plaintext highlighter-rouge">bootstrap/css/bootstrap.min.css</code> is resolved to
+<code class="language-plaintext highlighter-rouge">&lt;ctx&gt;/static/webjars/bootstrap/5.3.8/css/bootstrap.min.css</code>, so you never hardcode the WebJar version in your templates.</p>
 
-<h2 id="generic-tags">Generic Tags</h2>
+<p>The tag emits a plain URL string, so it composes with <a href="script-tag">script</a>, <a href="link-tag">link</a>, or a raw <code class="language-plaintext highlighter-rouge">&lt;link&gt;</code> /
+<code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> element. See <a href="../core-developers/static-content#webjars-support">Static Content</a> for the serving pipeline and
+configuration constants.</p>
 
-<p>Struts Generic Tags control the execution flow as pages render.</p>
+<p>Resolve a version-less WebJar resource path to a servable URL</p>
 
-<table>
-  <thead>
+<h2 id="attributes">Attributes</h2>
+
+<table class="tag-reference">
     <tr>
-      <th><strong>Control Tags</strong></th>
-      <th><strong>Data Tags</strong></th>
-      <th><strong>Other Tags</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="if-tag">if</a></td>
-      <td><a href="a-tag">a</a></td>
-      <td><a href="compress-tag">compress</a></td>
+        <td colspan="6"><h4>Dynamic Attributes Allowed:</h4> false</td>
     </tr>
     <tr>
-      <td><a href="elseif-tag">elseif</a></td>
-      <td><a href="action-tag">action</a></td>
-      <td><a href="script-tag">script</a></td>
+        <td colspan="6"><hr /></td>
     </tr>
     <tr>
-      <td><a href="else-tag">else</a></td>
-      <td><a href="bean-tag">bean</a></td>
-      <td><a href="link-tag">link</a></td>
+        <th class="tag-header"><h4>Name</h4></th>
+        <th class="tag-header"><h4>Required</h4></th>
+        <th class="tag-header"><h4>Default</h4></th>
+        <th class="tag-header"><h4>Evaluated</h4></th>
+        <th class="tag-header"><h4>Type</h4></th>
+        <th class="tag-header"><h4>Description</h4></th>
     </tr>
     <tr>
-      <td><a href="append-tag">append</a></td>
-      <td><a href="date-tag">date</a></td>
-      <td><a href="webjar-tag">webjar</a></td>
+        <td class="tag-attribute">path</td>
+        <td class="tag-attribute"><strong>true</strong></td>
+        <td class="tag-attribute"></td>
+        <td class="tag-attribute">false</td>
+        <td class="tag-attribute">String</td>
+        <td class="tag-attribute">The version-less WebJar resource path, e.g. bootstrap/css/bootstrap.min.css</td>
     </tr>
     <tr>
-      <td><a href="generator-tag">generator</a></td>
-      <td><a href="debug-tag">debug</a></td>
-      <td> </td>
+        <td class="tag-attribute">performClearTagStateForTagPoolingServers</td>
+        <td class="tag-attribute">false</td>
+        <td class="tag-attribute">false</td>
+        <td class="tag-attribute">false</td>
+        <td class="tag-attribute">Boolean</td>
+        <td class="tag-attribute">Whether to clear all tag state during doEndTag() processing (if applicable)</td>
     </tr>
     <tr>
-      <td><a href="iterator-tag">iterator</a></td>
-      <td><a href="i18n-tag">i18n</a></td>
-      <td> </td>
+        <td class="tag-attribute">var</td>
+        <td class="tag-attribute">false</td>
+        <td class="tag-attribute"></td>
+        <td class="tag-attribute">false</td>
+        <td class="tag-attribute">String</td>
+        <td class="tag-attribute">Name used to reference the value pushed into the Value Stack (scope: action).</td>
     </tr>
-    <tr>
-      <td><a href="merge-tag">merge</a></td>
-      <td><a href="include-tag">include</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="sort-tag">sort</a></td>
-      <td><a href="param-tag">param</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="subset-tag">subset</a></td>
-      <td><a href="property-tag">property</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><a href="push-tag">push</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><a href="set-tag">set</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><a href="text-tag">text</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><a href="url-tag">url</a></td>
-      <td> </td>
-    </tr>
-  </tbody>
 </table>
 
-<h2 id="ui-tag-reference">UI Tag Reference</h2>
+<h2 id="examples">Examples</h2>
 
-<p>Struts UI Tags display data in rich and reusable HTML.</p>
+<p><strong>Example 1</strong> - reference a WebJar stylesheet:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th><strong>Form Tags</strong></th>
-      <th><strong>Non-Form UI Tags</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="checkbox-tag">checkbox</a></td>
-      <td><a href="actionerror-tag">actionerror</a></td>
-    </tr>
-    <tr>
-      <td><a href="checkboxlist-tag">checkboxlist</a></td>
-      <td><a href="actionmessage-tag">actionmessage</a></td>
-    </tr>
-    <tr>
-      <td><a href="combobox-tag">combobox</a></td>
-      <td><a href="component-tag">component</a></td>
-    </tr>
-    <tr>
-      <td><a href="datetextfield-tag">datetextfield</a></td>
-      <td><a href="fielderror-tag">fielderror</a></td>
-    </tr>
-    <tr>
-      <td><a href="doubleselect-tag">doubleselect</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="head-tag">head</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="file-tag">file</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="form-tag">form</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="hidden-tag">hidden</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="inputtransferselect-tag">inputtransferselect</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="label-tag">label</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="optiontransferselect-tag">optiontransferselect</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="optgroup-tag">optgroup</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="password-tag">password</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="radio-tag">radio</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="reset-tag">reset</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="select-tag">select</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="submit-tag">submit</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="textarea-tag">textarea</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="textfield-tag">textfield</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="token-tag">token</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="updownselect-tag">updownselect</a></td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;s:webjar </span><span class="na">path=</span><span class="s">"bootstrap/css/bootstrap.min.css"</span><span class="nt">/&gt;</span><span class="s">"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Example 2</strong> - reference a WebJar script:</p>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:webjar </span><span class="na">var=</span><span class="s">"webjarUrl"</span><span class="na"> path=</span><span class="s">"jquery/jquery.min.js"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;s:script </span><span class="na">src=</span><span class="s">"%{webjarUrl}"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Example 3</strong> - FreeMarker macro:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="err">@</span><span class="na">s.webjar</span> <span class="na">path=</span><span class="s">"jquery/jquery.min.js"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
   </section>
 </article>
