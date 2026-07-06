@@ -159,6 +159,12 @@
   <li><a href="#custom-static-content-loaders" id="markdown-toc-custom-static-content-loaders">Custom Static Content Loaders</a></li>
   <li><a href="#default-content-loader" id="markdown-toc-default-content-loader">Default Content Loader</a></li>
   <li><a href="#default-path" id="markdown-toc-default-path">Default path</a></li>
+  <li><a href="#webjars-support" id="markdown-toc-webjars-support">WebJars support</a>    <ul>
+      <li><a href="#configuration" id="markdown-toc-configuration">Configuration</a></li>
+      <li><a href="#security" id="markdown-toc-security">Security</a></li>
+      <li><a href="#customizing-resolution" id="markdown-toc-customizing-resolution">Customizing resolution</a></li>
+    </ul>
+  </li>
   <li><a href="#preventing-struts-from-handling-a-request" id="markdown-toc-preventing-struts-from-handling-a-request">Preventing Struts from handling a request</a></li>
 </ul>
 
@@ -213,6 +219,82 @@ your static content to the web application directory, and let the container hand
 </code></pre></div></div>
 
 <p>This value is also used by the Default Content Loader.</p>
+
+<h2 id="webjars-support">WebJars support</h2>
+
+<p class="alert alert-info">Available since Struts 7.3.0.</p>
+
+<p><a href="https://www.webjars.org/">WebJars</a> package client-side libraries (Bootstrap, jQuery, …) as JARs, shipping their assets
+under <code class="language-plaintext highlighter-rouge">META-INF/resources/webjars/&lt;name&gt;/&lt;version&gt;/…</code>. Instead of vendoring these files into your web application and
+re-committing them on every upgrade, you add the WebJar as a regular dependency and let Struts resolve and serve it.</p>
+
+<p>Struts serves WebJar assets through the same static content pipeline described above, under
+<code class="language-plaintext highlighter-rouge">&lt;staticContentPath&gt;/webjars/**</code> (by default <code class="language-plaintext highlighter-rouge">/static/webjars/**</code>). Resolution is <strong>version-less</strong>: you reference a
+resource by its logical path and Struts resolves the version present on the classpath. For example, a request for:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/static/webjars/bootstrap/css/bootstrap.min.css
+</code></pre></div></div>
+
+<p>is served from <code class="language-plaintext highlighter-rouge">META-INF/resources/webjars/bootstrap/5.3.8/css/bootstrap.min.css</code> (whichever version is on the
+classpath). To emit these URLs from a template without hardcoding the version, use the
+<a href="../tag-developers/webjar-tag">webjar tag</a>:</p>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;s:webjar </span><span class="na">path=</span><span class="s">"bootstrap/css/bootstrap.min.css"</span><span class="nt">/&gt;</span><span class="s">"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>Struts resolves versions using <a href="https://github.com/webjars/webjars-locator-lite">webjars-locator-lite</a>, which is bundled
+with <code class="language-plaintext highlighter-rouge">struts2-core</code>.</p>
+
+<h3 id="configuration">Configuration</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Constant</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.webjars.enabled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">true</code></td>
+      <td>Master switch for resolving and serving WebJar assets under <code class="language-plaintext highlighter-rouge">&lt;staticContentPath&gt;/webjars/**</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.webjars.allowlist</code></td>
+      <td>(empty)</td>
+      <td>Optional comma-separated allowlist of WebJar names. When empty, all WebJars on the classpath are allowed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To restrict serving to specific WebJars:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.webjars.allowlist"</span> <span class="na">value=</span><span class="s">"bootstrap,jquery"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>To disable the feature entirely:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.webjars.enabled"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<h3 id="security">Security</h3>
+
+<p>Resolution is hard-constrained to the <code class="language-plaintext highlighter-rouge">META-INF/resources/webjars/</code> root: path traversal attempts (<code class="language-plaintext highlighter-rouge">..</code>, <code class="language-plaintext highlighter-rouge">.</code>,
+backslashes) are rejected before resolution, the resolved path is re-checked for containment, and only paths that the
+locator can resolve to a real WebJar are served. Disabled, unresolved, traversal, and allowlist-blocked requests all
+<strong>fail closed</strong> - a <code class="language-plaintext highlighter-rouge">404</code> when serving and empty output when building URLs.</p>
+
+<h3 id="customizing-resolution">Customizing resolution</h3>
+
+<p>URL resolution is provided by the <code class="language-plaintext highlighter-rouge">org.apache.struts2.webjars.WebJarUrlProvider</code> container bean (default implementation
+<code class="language-plaintext highlighter-rouge">DefaultWebJarUrlProvider</code>), which exposes <code class="language-plaintext highlighter-rouge">resolveResourcePath(String)</code> and <code class="language-plaintext highlighter-rouge">resolveUrl(String, HttpServletRequest)</code>.
+Plugins and applications can replace it by declaring their own bean:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.webjars.WebJarUrlProvider"</span> <span class="na">class=</span><span class="s">"com.example.MyWebJarUrlProvider"</span> <span class="na">name=</span><span class="s">"myProvider"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.webjars.urlProvider"</span> <span class="na">value=</span><span class="s">"myProvider"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <h2 id="preventing-struts-from-handling-a-request">Preventing Struts from handling a request</h2>
 
