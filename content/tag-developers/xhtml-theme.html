@@ -218,8 +218,34 @@ by the <a href="ajax-theme">ajax theme</a>.</p>
 <p>Now let’s look at the <code class="language-plaintext highlighter-rouge">controlheader.ftl</code> and <code class="language-plaintext highlighter-rouge">controlheader-core.ftl</code>. Again, these are split up for easy re-use with 
 the <a href="ajax-theme">ajax theme</a>) contents:</p>
 
-<figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">429: Too Many Requests
-For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).</code></pre></figure>
+<figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+--&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/controlheader-core.ftl" /&gt;
+    &lt;td&lt;#rt/&gt;
+&lt;#if attributes.align?? &gt;
+ class="align-${attributes.align}"&lt;#rt/&gt;
+&lt;#else &gt;
+ class="tdInput"&lt;#rt/&gt;
+&lt;/#if&gt;
+&gt;&lt;#t/&gt;</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
 /*
@@ -317,8 +343,41 @@ by this theme. See <a href="template-loading">Template Loading</a> for more info
 <p>The primary objective of <code class="language-plaintext highlighter-rouge">controlfooter.ftl</code> is to close the table. But, before the table closes, the template checks 
 for an <code class="language-plaintext highlighter-rouge">after</code> parameter.</p>
 
-<figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">429: Too Many Requests
-For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).</code></pre></figure>
+<figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+--&gt;
+${attributes.after!}&lt;#t/&gt;
+    &lt;/td&gt;&lt;#lt/&gt;
+&lt;/tr&gt;
+&lt;#if (attributes.errorposition!"top") == 'bottom'&gt;
+&lt;#assign hasFieldErrors = attributes.name?? &amp;&amp; fieldErrors?? &amp;&amp; fieldErrors.get(attributes.name)??/&gt;
+&lt;#if hasFieldErrors&gt;
+&lt;#list fieldErrors.get(attributes.name) as error&gt;
+&lt;tr errorFor="${attributes.id}"&gt;
+    &lt;td class="tdErrorMessage" colspan="2"&gt;&lt;#rt/&gt;
+        &lt;span class="errorMessage"&gt;${error}&lt;/span&gt;&lt;#t/&gt;
+    &lt;/td&gt;&lt;#lt/&gt;
+&lt;/tr&gt;
+&lt;/#list&gt;
+&lt;/#if&gt;
+&lt;/#if&gt;</code></pre></figure>
 
 <p>While <code class="language-plaintext highlighter-rouge">after</code> isn’t an attribute supported by any of the <a href="struts-tags">Struts Tags</a>, if you are using 
 <a href="freemarker-tags">FreeMarker Tags</a>, <a href="velocity-tags">Velocity Tags</a>, or the <a href="param-tag">param</a> tag in any 
@@ -334,13 +393,75 @@ template renders. The <code class="language-plaintext highlighter-rouge">after</
 <p>The xhtml <a href="head-tag">head</a> template extends the <em>simple head template</em> and provides an additional CSS that helps 
 render the form elements.</p>
 
-<figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">429: Too Many Requests
-For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).</code></pre></figure>
+<figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+--&gt;
+&lt;@s.link rel="stylesheet" href="${base}${attributes.staticContentPath}/xhtml/styles.css" type="text/css" /&gt;
+&lt;#include "/${attributes.templateDir}/simple/head.ftl" /&gt;</code></pre></figure>
 
 <p>The head template imports a style sheet. The contents of <strong>styles.css</strong> are:</p>
 
-<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="err">429</span><span class="o">:</span> <span class="nt">Too</span> <span class="nt">Many</span> <span class="nt">Requests</span>
-<span class="nt">For</span> <span class="nt">more</span> <span class="nt">on</span> <span class="nt">scraping</span> <span class="nt">GitHub</span> <span class="nt">and</span> <span class="nt">how</span> <span class="nt">it</span> <span class="nt">may</span> <span class="nt">affect</span> <span class="nt">your</span> <span class="nt">rights</span><span class="o">,</span> <span class="nt">please</span> <span class="nt">review</span> <span class="nt">our</span> <span class="nt">Terms</span> <span class="nt">of</span> <span class="nt">Service</span> <span class="o">(</span><span class="nt">https</span><span class="o">://</span><span class="nt">docs</span><span class="nc">.github.com</span><span class="o">/</span><span class="nt">en</span><span class="o">/</span><span class="nt">site-policy</span><span class="o">/</span><span class="nt">github-terms</span><span class="o">/</span><span class="nt">github-terms-of-service</span><span class="o">).</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="c">/*
+ * $Id$
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */</span>
+
+<span class="nc">.wwFormTable</span> <span class="p">{}</span>
+<span class="nc">.label</span> <span class="p">{</span><span class="nl">font-style</span><span class="p">:</span><span class="nb">italic</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.errorLabel</span> <span class="p">{</span><span class="nl">font-style</span><span class="p">:</span><span class="nb">italic</span><span class="p">;</span> <span class="nl">color</span><span class="p">:</span><span class="no">red</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.errorMessage</span> <span class="p">{</span><span class="nl">font-weight</span><span class="p">:</span><span class="nb">bold</span><span class="p">;</span> <span class="nl">color</span><span class="p">:</span><span class="no">red</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.checkboxLabel</span> <span class="p">{}</span>
+<span class="nc">.checkboxErrorLabel</span> <span class="p">{</span><span class="nl">color</span><span class="p">:</span><span class="no">red</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.required</span> <span class="p">{</span><span class="nl">color</span><span class="p">:</span><span class="no">red</span><span class="p">;}</span>
+<span class="nc">.tdLabel</span> <span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">right</span><span class="p">;</span> <span class="nl">vertical-align</span><span class="p">:</span><span class="nb">top</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="nc">.tdTransferSelect</span> <span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">center</span><span class="p">;</span> <span class="nl">vertical-align</span><span class="p">:</span><span class="nb">middle</span><span class="p">;}</span>
+<span class="nc">.tdLabelTop</span> <span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">left</span><span class="p">;</span> <span class="nl">vertical-align</span><span class="p">:</span><span class="nb">top</span><span class="p">;}</span>
+<span class="nc">.tdCheckboxLabel</span> <span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">right</span><span class="p">;</span> <span class="nl">vertical-align</span><span class="p">:</span><span class="nb">top</span><span class="p">;}</span>
+<span class="nc">.tdCheckboxInput</span> <span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">left</span><span class="p">;</span> <span class="nl">vertical-align</span><span class="p">:</span><span class="nb">top</span><span class="p">;}</span>
+<span class="nc">.tdCheckboxErrorMessage</span> <span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">left</span><span class="p">;</span> <span class="nl">vertical-align</span><span class="p">:</span><span class="nb">top</span><span class="p">;}</span>
+<span class="nc">.tdErrorMessage</span> <span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">center</span><span class="p">;</span> <span class="nl">vertical-align</span><span class="p">:</span><span class="nb">top</span><span class="p">;}</span>
+<span class="nc">.formButton</span> <span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">right</span><span class="p">;}</span>
+<span class="nc">.tdInput</span> <span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">left</span><span class="p">;}</span>
+
+
+<span class="nc">.align-center</span><span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">center</span><span class="p">;}</span>
+<span class="nc">.align-right</span><span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">right</span><span class="p">;}</span>
+<span class="nc">.align-left</span><span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">left</span><span class="p">;}</span>
+<span class="nc">.align-justify</span><span class="p">{</span><span class="nl">text-align</span><span class="p">:</span><span class="nb">justify</span><span class="p">;}</span></code></pre></figure>
 
 <h3 id="form-template">form template</h3>
 
@@ -348,8 +469,37 @@ For more on scraping GitHub and how it may affect your rights, please review our
 wrapping table, the opening and closing templates also, if the <code class="language-plaintext highlighter-rouge">validate</code> parameter is set to true, enable 
 <a href="../core-developers/pure-java-script-client-side-validation">Pure JavaScript Client Side Validation</a>.</p>
 
-<figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">429: Too Many Requests
-For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).</code></pre></figure>
+<figure class="highlight"><pre><code class="language-freemarker" data-lang="freemarker">&lt;#--
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+--&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/form-validate.ftl" /&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/form-common.ftl" /&gt;
+&lt;#if (attributes.validate!false)&gt;
+  onreset="&lt;#outputformat 'JavaScript'&gt;${attributes.onreset!'clearErrorMessages(this);clearErrorLabels(this);'}&lt;/#outputformat&gt;"
+&lt;#else&gt;
+  &lt;#if attributes.onreset??&gt;
+  onreset="&lt;#outputformat 'JavaScript'&gt;${attributes.onreset}&lt;/#outputformat&gt;"
+  &lt;/#if&gt;
+&lt;/#if&gt;
+&gt;
+&lt;#include "/${attributes.templateDir}/${attributes.expandTheme}/control.ftl" /&gt;</code></pre></figure>
 
 <p>The closing template, <code class="language-plaintext highlighter-rouge">form-close.ftl</code>:</p>
 

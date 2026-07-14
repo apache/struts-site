@@ -308,6 +308,22 @@ collection or map needs <code class="language-plaintext highlighter-rouge">depth
 <span class="o">}</span>
 </code></pre></div></div>
 
+<p class="alert alert-warning"><strong>Struts 7.3.0 behavior change (JSON/REST).</strong> When a JSON or REST payload
+populates a collection of <em>simple</em> types element by element — e.g.
+<code class="language-plaintext highlighter-rouge">{"mySelection":["A","B"]}</code> binds to <code class="language-plaintext highlighter-rouge">mySelection[0]</code>, <code class="language-plaintext highlighter-rouge">mySelection[1]</code> — the
+element paths are now authorized on the <strong>getter</strong> at <code class="language-plaintext highlighter-rouge">depth = 1</code>, matching how
+the <a href="parameters-interceptor.html">Parameters Interceptor</a> gates the flat name
+<code class="language-plaintext highlighter-rouge">mySelection[0]</code>. Previously the JSON path checked only the container setter
+(<code class="language-plaintext highlighter-rouge">depth = 0</code>). If your action populates a scalar collection from a JSON/REST body
+under <code class="language-plaintext highlighter-rouge">requireAnnotations</code>, annotate the getter as well:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@StrutsParameter</span><span class="o">(</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getMySelection</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">mySelection</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>List-of-objects payloads (<code class="language-plaintext highlighter-rouge">items[0].name</code>, <code class="language-plaintext highlighter-rouge">depth = 2</code>) are unaffected — they
+already required the annotated getter.</p>
+
 <p>When populating properties of objects that are already in a collection, annotate the
 getter. Because reaching an element’s property requires indexing into the collection
 <em>and then</em> following the property, this needs <code class="language-plaintext highlighter-rouge">depth = 2</code> (see
