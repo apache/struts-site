@@ -1,3 +1,6 @@
+---
+# Empty front matter, required so Jekyll renders the Liquid tags below
+---
 # This file is maintained at https://gitbox.apache.org/repos/asf?p=struts-site.git
 DirectoryIndex index.html
 
@@ -25,6 +28,8 @@ RedirectMatch \/2.*\/(.*)?                          http://struts.apache.org/$1
 # page downloads.html was renamed to releases.html
 RedirectMatch \/downloads /releases
 
-RedirectMatch \/announce.html(#a[0-9]+)? /announce-2024.html$1
+# always points to the most recent announce-YYYY page, no manual update needed
+{% assign announcements = site.pages | where_exp: "page", "page.path contains 'announce-'" | sort: "path" -%}
+RedirectMatch \/announce.html(#a[0-9]+)? {{ announcements.last.url }}$1
 
 ErrorDocument 404 /404

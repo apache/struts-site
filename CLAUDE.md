@@ -28,7 +28,7 @@ bundle exec jekyll serve -w --trace --host 0.0.0.0
   - `_layouts/` - Page templates: `default`, `main-page`, `core-developers`, `maven-archetypes`
   - `_includes/` - Shared partials: `header.html`, `footer.html`
   - `_plugins/` - Custom Liquid tags (see below)
-  - `.htaccess` - Apache redirect rules (update when adding yearly announcement pages)
+  - `.htaccess` - Apache redirect rules (Liquid-processed, has empty front matter)
 - `_config.yml` - Jekyll config and site-wide version/release variables
 - `.asf.yaml` - ASF infrastructure config (deployment, notifications, branch protection)
 
@@ -87,6 +87,6 @@ Kramdown attribute syntax for Bootstrap classes:
 
 **New release**: Update version variables in `_config.yml`, add announcement entry to the current year's `announce-YYYY.md`, and move the now-superseded version into the **Prior Releases** table in `source/releases.md`.
 
-**New announcement year**: Create `source/announce-YYYY.md`, update the redirect in `source/.htaccess` (`RedirectMatch \/announce.html` line) to point to the new year.
+**New announcement year**: Create `source/announce-YYYY.md`. The `/announce.html` redirect in `source/.htaccess` resolves to the newest `announce-YYYY` page at build time, so it needs no manual update.
 
 **New security bulletin**: Add to `source/security/` directory.

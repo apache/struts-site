@@ -42,8 +42,9 @@ Model PRs: #292 (6.9.0 GA), this skill was derived from the 6.10.0 release.
    line and compare its `announce-YYYY` to the year of your new entry.** If they differ
    (the announcement crossed into a new year file), update the `announce-YYYY` part to the
    new year — the anchor itself is variable-driven. If they already match, no edit.
-   Note: a brand-new year file is the "New announcement year" task in CLAUDE.md — also
-   create `source/announce-YYYY.md` and update the `.htaccess` redirect.
+   Note: a brand-new year file is the "New announcement year" task in CLAUDE.md — just
+   create `source/announce-YYYY.md`; the `.htaccess` `/announce.html` redirect picks up
+   the newest year automatically.
 4. **`source/releases.md`** — move the now-superseded version of the **same line** into
    the **Prior Releases** table, newest first. Match the column widths and the
    vulnerability-cell style of the row above it (empty if no published bulletin).
