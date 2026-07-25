@@ -125,6 +125,27 @@ public class MyAction {
 }
 ```
 
+This covers the case where the whole collection is assigned at once (name
+`mySelection`, `depth = 0`), as a checkbox list submits it.
+
+When the collection is instead populated **element by element** through indexed
+names — `mySelection[0]`, `mySelection[1]` — the annotation must be on the
+**getter** with `depth = 1`, because each element path contains one bracket. This
+is how JSON and REST payloads bind a collection of simple types: a body such as
+`{"mySelection":["A","B"]}` populates `mySelection[0]` and `mySelection[1]`, so
+the getter must be annotated for the elements to be accepted.
+```java
+public class MyAction {
+    private List<String> mySelection;
+
+    @StrutsParameter(depth = 1)
+    public List<String> getMySelection() {
+        return mySelection;
+    }
+    // ... setter
+}
+```
+
 When populating properties of objects that are already in a collection, annotate the
 getter. Because reaching an element's property requires indexing into the collection
 *and then* following the property, this needs `depth = 2` (see

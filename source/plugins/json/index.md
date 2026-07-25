@@ -590,6 +590,48 @@ annotation **per property, during deserialization** — unauthorized fields are
 never set on the target object. Annotate the action properties that may be
 populated from the JSON request body.
 
+### Input parameter filtering
+
+Since Struts 7.3.0, populating an action from a JSON request body applies the
+same name/value acceptability controls that the
+[Parameters Interceptor](../../core-developers/parameters-interceptor.html)
+applies to ordinary HTTP request parameters. Filtering uses the same
+dotted/indexed key paths as form parameters (`address.city`, `items[0].name`),
+so the shared pattern checkers behave identically on JSON and form input.
+Population itself stays pure reflection over bean setters — no OGNL name
+evaluation is introduced on the JSON path.
+
+The following controls are **always on**:
+
+- **Excluded and accepted name patterns** — the same framework-wide
+  accepted/excluded parameter-name patterns the Parameters Interceptor uses. A
+  JSON key whose full dotted/indexed path matches an excluded pattern, or fails
+  to match any accepted pattern, is not populated.
+- **Maximum key-path length** — set with the `paramNameMaxLength` interceptor
+  param (default `100`). JSON keys whose full dotted path is longer are rejected.
+- **`ParameterNameAware` / `ParameterValueAware`** action callbacks — honored for
+  JSON input exactly as for form parameters.
+- **`@StrutsParameter` authorization** — see
+  [Parameter authorization](#parameter-authorization) above.
+
+The following controls are **opt-in** — disabled by default to preserve existing
+behavior for permissive JSON apps:
+
+| Interceptor param | Default | Effect |
+|-------------------|---------|--------|
+| `acceptedValuePatterns` | *(none)* | Comma-delimited regular expressions; when set, only JSON leaf **values** matching one of them are accepted (matching is case-insensitive). |
+| `excludedValuePatterns` | *(none)* | Comma-delimited regular expressions; JSON leaf **values** matching any of them are removed (matching is case-insensitive). |
+| `applyPropertyFiltersToInput` | `false` | When `true`, the interceptor's own `excludeProperties` / `includeProperties` patterns — otherwise used only for serialization output — also gate which JSON keys are populated on **input**. |
+
+```xml
+<interceptor-ref name="json">
+  <param name="paramNameMaxLength">120</param>
+  <param name="acceptedValuePatterns">[\w\s.@-]+</param>
+  <param name="applyPropertyFiltersToInput">true</param>
+  <param name="excludeProperties">login.password</param>
+</interceptor-ref>
+```
+
 ## JSON RPC
 
 The json plugin can be used to execute action methods from javascript and return the output. This feature was developed 
