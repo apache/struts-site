@@ -183,7 +183,6 @@
       <li><a href="#accepting-json" id="markdown-toc-accepting-json">Accepting JSON</a></li>
       <li><a href="#deserialization-limits" id="markdown-toc-deserialization-limits">Deserialization limits</a></li>
       <li><a href="#parameter-authorization" id="markdown-toc-parameter-authorization">Parameter authorization</a></li>
-      <li><a href="#input-parameter-filtering" id="markdown-toc-input-parameter-filtering">Input parameter filtering</a></li>
     </ul>
   </li>
   <li><a href="#json-rpc" id="markdown-toc-json-rpc">JSON RPC</a></li>
@@ -816,70 +815,6 @@ a <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> (follo
 annotation <strong>per property, during deserialization</strong> — unauthorized fields are
 never set on the target object. Annotate the action properties that may be
 populated from the JSON request body.</p>
-
-<h3 id="input-parameter-filtering">Input parameter filtering</h3>
-
-<p>Since Struts 7.3.0, populating an action from a JSON request body applies the
-same name/value acceptability controls that the
-<a href="../../core-developers/parameters-interceptor.html">Parameters Interceptor</a>
-applies to ordinary HTTP request parameters. Filtering uses the same
-dotted/indexed key paths as form parameters (<code class="language-plaintext highlighter-rouge">address.city</code>, <code class="language-plaintext highlighter-rouge">items[0].name</code>),
-so the shared pattern checkers behave identically on JSON and form input.
-Population itself stays pure reflection over bean setters — no OGNL name
-evaluation is introduced on the JSON path.</p>
-
-<p>The following controls are <strong>always on</strong>:</p>
-
-<ul>
-  <li><strong>Excluded and accepted name patterns</strong> — the same framework-wide
-accepted/excluded parameter-name patterns the Parameters Interceptor uses. A
-JSON key whose full dotted/indexed path matches an excluded pattern, or fails
-to match any accepted pattern, is not populated.</li>
-  <li><strong>Maximum key-path length</strong> — set with the <code class="language-plaintext highlighter-rouge">paramNameMaxLength</code> interceptor
-param (default <code class="language-plaintext highlighter-rouge">100</code>). JSON keys whose full dotted path is longer are rejected.</li>
-  <li><strong><code class="language-plaintext highlighter-rouge">ParameterNameAware</code> / <code class="language-plaintext highlighter-rouge">ParameterValueAware</code></strong> action callbacks — honored for
-JSON input exactly as for form parameters.</li>
-  <li><strong><code class="language-plaintext highlighter-rouge">@StrutsParameter</code> authorization</strong> — see
-<a href="#parameter-authorization">Parameter authorization</a> above.</li>
-</ul>
-
-<p>The following controls are <strong>opt-in</strong> — disabled by default to preserve existing
-behavior for permissive JSON apps:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Interceptor param</th>
-      <th>Default</th>
-      <th>Effect</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">acceptedValuePatterns</code></td>
-      <td><em>(none)</em></td>
-      <td>Comma-delimited regular expressions; when set, only JSON leaf <strong>values</strong> matching one of them are accepted (matching is case-insensitive).</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">excludedValuePatterns</code></td>
-      <td><em>(none)</em></td>
-      <td>Comma-delimited regular expressions; JSON leaf <strong>values</strong> matching any of them are removed (matching is case-insensitive).</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">applyPropertyFiltersToInput</code></td>
-      <td><code class="language-plaintext highlighter-rouge">false</code></td>
-      <td>When <code class="language-plaintext highlighter-rouge">true</code>, the interceptor’s own <code class="language-plaintext highlighter-rouge">excludeProperties</code> / <code class="language-plaintext highlighter-rouge">includeProperties</code> patterns — otherwise used only for serialization output — also gate which JSON keys are populated on <strong>input</strong>.</td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"json"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"paramNameMaxLength"</span><span class="nt">&gt;</span>120<span class="nt">&lt;/param&gt;</span>
-  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"acceptedValuePatterns"</span><span class="nt">&gt;</span>[\w\s.@-]+<span class="nt">&lt;/param&gt;</span>
-  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"applyPropertyFiltersToInput"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
-  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"excludeProperties"</span><span class="nt">&gt;</span>login.password<span class="nt">&lt;/param&gt;</span>
-<span class="nt">&lt;/interceptor-ref&gt;</span>
-</code></pre></div></div>
 
 <h2 id="json-rpc">JSON RPC</h2>
 
