@@ -15,11 +15,17 @@ parent:
 Struts 2 does not have "forms" like Struts 1 did. In Struts 2 request parameters are bound directly to fields 
 in the actions class, and this class is placed on top of the stack when the action is executed.
 
-If an action class implements the interface `com.opensymphony.xwork2.ModelDriven` then it needs to return an object 
+If an action class implements the interface `org.apache.struts2.ModelDriven` then it needs to return an object 
 from the `getModel()` method. Struts will then populate the fields of this object with the request parameters,
 and this object will be placed on top of the stack once the action is executed. Validation will also be performed
 on this model object, instead of the action. Please read about [VisitorFieldValidator Annotation](visitor-field-validator-annotation)
 which can help you validate model's fields.
+
+The model is also the target of `@StrutsParameter` authorization: its members are populated from the request without
+requiring the annotation, on every input channel. Shape the model as a request DTO holding only the fields the action
+intends to accept, not as a domain or persistence entity. See
+[StrutsParameter Annotation](struts-parameter-annotation.html#modeldriven-actions) for the full rules.
+{:.alert .alert-warning}
 
 ## Interceptor
 
