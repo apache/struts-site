@@ -7,6 +7,10 @@ parent:
 ---
 
 # Message Store Interceptor
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 An interceptor to store a `ValidationAware` action's messages / errors and field errors into HTTP Session, such that it 
 will be retrievable at a later stage. This allows the action's message / errors and field errors to be available longer 

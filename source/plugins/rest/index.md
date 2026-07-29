@@ -245,6 +245,13 @@ public class OrdersController implements ModelDriven<Order> {
 In this example, the `ModelDriven` interface is used to ensure that only my model, the Order object in this case, is 
 returned to the client, otherwise, the whole `OrdersController` object would be serialized.
 
+`ModelDriven` also determines what is bindable *from* the request body: the model is the target of `@StrutsParameter` 
+authorization, so all of `Order` can be populated from an incoming request without the annotation. Shape such a model as 
+a request contract carrying only the fields the controller intends to accept, rather than as a domain or persistence 
+entity — see [`@StrutsParameter`](../../core-developers/struts-parameter-annotation.html#modeldriven-actions) for the 
+full rules.
+{:.alert .alert-warning}
+
 Where's ActionSupport? Normally, you extend ActionSupport when writing Struts 2 actions. In these case, our controller 
 doesn't do that. Why, you ask? ActionSupport provides a bunch of important functionality to our actions, including support 
 for i18n and validation. All of this functionality, in the RESTful case, is provided by the default interceptor stack 

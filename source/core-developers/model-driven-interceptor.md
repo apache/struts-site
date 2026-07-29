@@ -7,6 +7,10 @@ parent:
 ---
 
 # Model Driven Interceptor
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 Watches for `ModelDriven` actions and adds the action's model on to the value stack.
 
@@ -25,6 +29,12 @@ In the implementation of `getModel`, acquire an instance of a business object an
 
 On the page, you can address any JavaBean properties on the business object as if they were coded directly on the Action 
 class. The framework pushes the Model object onto the ValueStack.
+
+Pushing the model onto the stack also makes it the target of parameter binding and of `@StrutsParameter` authorization:
+the model's members are populated from the request without requiring the annotation, on every input channel. Shape the
+model as a request DTO holding only the fields the action intends to accept, not as a domain or persistence entity. See
+[StrutsParameter Annotation](struts-parameter-annotation.html#modeldriven-actions) for the full rules.
+{:.alert .alert-warning}
 
 Many developers use Spring to acquire the business object. With the addition of a `setModel` method, the business logic 
 can be injected automatically.
