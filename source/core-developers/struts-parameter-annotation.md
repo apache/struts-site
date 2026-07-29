@@ -29,6 +29,42 @@ channel that can populate an action from request data:
 - [JSON](../../plugins/json) and [REST](../../plugins/rest) plugins — per-property
   authorization performed during deserialization, so unauthorized fields are never set.
 
+## ModelDriven actions
+
+When an action implements `ModelDriven` and the [Model Driven
+Interceptor](model-driven-interceptor.html) has pushed the model onto the value
+stack, the **model** — not the action — is the authorization target, and the
+model's members are exempt from the annotation requirement. The whole model is
+bindable, including its nested properties, whether or not any of its fields or
+accessors carry `@StrutsParameter`.
+
+This follows from what the interface declares: returning an object from
+`getModel()` designates that object as the request surface. The model has been
+the authorization target since `@StrutsParameter` enforcement was introduced in
+Struts 7.0.0.
+
+The exemption holds on **every** input channel listed above — request
+parameters, JSON bodies and REST bodies alike — because they all resolve the
+authorization target the same way. It is not a JSON- or REST-specific behavior.
+
+The exemption is narrowly scoped. It applies only when the action itself
+implements `ModelDriven` *and* the object being populated is its model rather
+than the action. A root object configured elsewhere — for example the JSON
+interceptor's `root` expression on an action that does not implement
+`ModelDriven` — is not exempt, and each member it binds still requires
+`@StrutsParameter`.
+
+The exemption lifts the annotation requirement only. The other parameter-name
+checks — accepted and excluded name patterns, and `ParameterNameAware` — still
+apply to a model's parameters as they do to an action's.
+
+Because the entire model is bindable, a `ModelDriven` model should be a request
+DTO carrying only the fields the action intends to accept from a request, never
+a domain or persistence entity. If you need member-level control over what is
+bindable, use action properties annotated with `@StrutsParameter` rather than
+`ModelDriven`.
+{:.alert .alert-warning}
+
 ## Usage
 
 The placement of the `@StrutsParameter` annotation is crucial and depends on how you want to populate your action properties.
