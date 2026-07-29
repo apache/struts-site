@@ -472,6 +472,12 @@ that can be hit via the RESTful action mapper’s interpretation of URL’s.</p>
 <p>In this example, the <code class="language-plaintext highlighter-rouge">ModelDriven</code> interface is used to ensure that only my model, the Order object in this case, is 
 returned to the client, otherwise, the whole <code class="language-plaintext highlighter-rouge">OrdersController</code> object would be serialized.</p>
 
+<p class="alert alert-warning"><code class="language-plaintext highlighter-rouge">ModelDriven</code> also determines what is bindable <em>from</em> the request body: the model is the target of <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> 
+authorization, so all of <code class="language-plaintext highlighter-rouge">Order</code> can be populated from an incoming request without the annotation. Shape such a model as 
+a request contract carrying only the fields the controller intends to accept, rather than as a domain or persistence 
+entity — see <a href="../../core-developers/struts-parameter-annotation.html#modeldriven-actions"><code class="language-plaintext highlighter-rouge">@StrutsParameter</code></a> for the 
+full rules.</p>
+
 <p>Where’s ActionSupport? Normally, you extend ActionSupport when writing Struts 2 actions. In these case, our controller 
 doesn’t do that. Why, you ask? ActionSupport provides a bunch of important functionality to our actions, including support 
 for i18n and validation. All of this functionality, in the RESTful case, is provided by the default interceptor stack 

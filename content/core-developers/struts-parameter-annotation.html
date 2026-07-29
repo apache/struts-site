@@ -156,6 +156,7 @@
 
 <ul id="markdown-toc">
   <li><a href="#where-authorization-applies" id="markdown-toc-where-authorization-applies">Where authorization applies</a></li>
+  <li><a href="#modeldriven-actions" id="markdown-toc-modeldriven-actions">ModelDriven actions</a></li>
   <li><a href="#usage" id="markdown-toc-usage">Usage</a></li>
   <li><a href="#understanding-the-depth-parameter" id="markdown-toc-understanding-the-depth-parameter">Understanding the <code class="language-plaintext highlighter-rouge">depth</code> parameter</a></li>
   <li><a href="#examples" id="markdown-toc-examples">Examples</a>    <ul>
@@ -185,6 +186,41 @@ action chaining (opt-in via <code class="language-plaintext highlighter-rouge">s
   <li><a href="../../plugins/json">JSON</a> and <a href="../../plugins/rest">REST</a> plugins — per-property
 authorization performed during deserialization, so unauthorized fields are never set.</li>
 </ul>
+
+<h2 id="modeldriven-actions">ModelDriven actions</h2>
+
+<p>When an action implements <code class="language-plaintext highlighter-rouge">ModelDriven</code> and the <a href="model-driven-interceptor.html">Model Driven
+Interceptor</a> has pushed the model onto the value
+stack, the <strong>model</strong> — not the action — is the authorization target, and the
+model’s members are exempt from the annotation requirement. The whole model is
+bindable, including its nested properties, whether or not any of its fields or
+accessors carry <code class="language-plaintext highlighter-rouge">@StrutsParameter</code>.</p>
+
+<p>This follows from what the interface declares: returning an object from
+<code class="language-plaintext highlighter-rouge">getModel()</code> designates that object as the request surface. The model has been
+the authorization target since <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> enforcement was introduced in
+Struts 7.0.0.</p>
+
+<p>The exemption holds on <strong>every</strong> input channel listed above — request
+parameters, JSON bodies and REST bodies alike — because they all resolve the
+authorization target the same way. It is not a JSON- or REST-specific behavior.</p>
+
+<p>The exemption is narrowly scoped. It applies only when the action itself
+implements <code class="language-plaintext highlighter-rouge">ModelDriven</code> <em>and</em> the object being populated is its model rather
+than the action. A root object configured elsewhere — for example the JSON
+interceptor’s <code class="language-plaintext highlighter-rouge">root</code> expression on an action that does not implement
+<code class="language-plaintext highlighter-rouge">ModelDriven</code> — is not exempt, and each member it binds still requires
+<code class="language-plaintext highlighter-rouge">@StrutsParameter</code>.</p>
+
+<p>The exemption lifts the annotation requirement only. The other parameter-name
+checks — accepted and excluded name patterns, and <code class="language-plaintext highlighter-rouge">ParameterNameAware</code> — still
+apply to a model’s parameters as they do to an action’s.</p>
+
+<p class="alert alert-warning">Because the entire model is bindable, a <code class="language-plaintext highlighter-rouge">ModelDriven</code> model should be a request
+DTO carrying only the fields the action intends to accept from a request, never
+a domain or persistence entity. If you need member-level control over what is
+bindable, use action properties annotated with <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> rather than
+<code class="language-plaintext highlighter-rouge">ModelDriven</code>.</p>
 
 <h2 id="usage">Usage</h2>
 

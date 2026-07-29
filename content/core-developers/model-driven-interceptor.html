@@ -175,6 +175,11 @@ if you want the parameters to be applied to the model.</p>
 <p>On the page, you can address any JavaBean properties on the business object as if they were coded directly on the Action 
 class. The framework pushes the Model object onto the ValueStack.</p>
 
+<p class="alert alert-warning">Pushing the model onto the stack also makes it the target of parameter binding and of <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> authorization:
+the model’s members are populated from the request without requiring the annotation, on every input channel. Shape the
+model as a request DTO holding only the fields the action intends to accept, not as a domain or persistence entity. See
+<a href="struts-parameter-annotation.html#modeldriven-actions">StrutsParameter Annotation</a> for the full rules.</p>
+
 <p>Many developers use Spring to acquire the business object. With the addition of a <code class="language-plaintext highlighter-rouge">setModel</code> method, the business logic 
 can be injected automatically.</p>
 
