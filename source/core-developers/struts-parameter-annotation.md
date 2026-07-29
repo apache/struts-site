@@ -39,9 +39,9 @@ bindable, including its nested properties, whether or not any of its fields or
 accessors carry `@StrutsParameter`.
 
 This follows from what the interface declares: returning an object from
-`getModel()` designates that object as the request surface. The model has been
-the authorization target since `@StrutsParameter` enforcement was introduced in
-Struts 7.0.0.
+`getModel()` designates that object as the request surface. The model has
+been the authorization target since Struts 7.0.0; the `@StrutsParameter`
+annotation itself was introduced earlier, in Struts 6.4.0.
 
 The exemption holds on **every** input channel listed above — request
 parameters, JSON bodies and REST bodies alike — because they all resolve the
