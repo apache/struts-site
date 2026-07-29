@@ -7,6 +7,10 @@ parent:
 ---
 
 # Model Driven Interceptor
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 Watches for `ModelDriven` actions and adds the action's model on to the value stack.
 

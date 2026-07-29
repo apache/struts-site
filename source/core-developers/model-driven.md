@@ -7,6 +7,10 @@ parent:
 ---
 
 # Model Driven
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 Struts 2 does not have "forms" like Struts 1 did. In Struts 2 request parameters are bound directly to fields 
 in the actions class, and this class is placed on top of the stack when the action is executed.

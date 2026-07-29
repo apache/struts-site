@@ -7,6 +7,10 @@ parent:
 ---
 
 # Logging Interceptor
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding a header
+{:toc}
 
 This interceptor logs the start and end of the execution an action (in English-only, not internationalized).
 
