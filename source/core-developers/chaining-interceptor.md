@@ -58,6 +58,29 @@ When enabled (default is `false`):
   no properties are copied.
 - This is a **global** constant only — there is no per-interceptor override.
 
+## Security Considerations
+
+Action chaining makes the data path into the target action implicit: the target is populated
+from whatever happens to be on the value stack rather than from an explicit call. Keep that in
+mind when designing chained actions:
+
+- **Do not carry authorization, trust, identity, or approval state across a chain.** Re-derive
+  such state from the session or your security context inside the target action, so it never
+  depends on what a previous action left on the stack.
+- **Prefer avoiding chaining where practical.** It couples the two actions together and makes
+  the target's inputs harder to reason about; a shared service or an explicit redirect is
+  usually clearer.
+- **If chaining is required, narrow what is copied.** Implement
+  [Unchainable](/maven/struts2-core/apidocs/org/apache/struts2/Unchainable) on objects that must
+  never be copied from, and use the interceptor's `includes` or `excludes` parameters to limit
+  the copied properties to the ones the target genuinely needs.
+- **Do not expose a public setter on the target action for state that must not be settable from
+  outside that action.** Anything with a public setter is, by design, part of the action's
+  input surface.
+
+See also [Where authorization applies](struts-parameter-annotation.html#where-authorization-applies)
+for an overview of the channels that can populate an action.
+
 ## Parameters
 
  - `excludes` (optional) - the list of parameter names to exclude from copying (all others will be included)
