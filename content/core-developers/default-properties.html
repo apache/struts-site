@@ -235,7 +235,10 @@ struts.multipart.parser=jakarta
 ### Uses jakarta.servlet.context.tempdir by default
 struts.multipart.saveDir=
 struts.multipart.maxSize=2097152
+# Maximum number of uploaded files (files only, not form fields)
 struts.multipart.maxFiles=256
+# Maximum number of non-file form fields (parameters)
+struts.multipart.maxParameterCount=256
 struts.multipart.maxStringLength=4096
 # struts.multipart.maxFileSize=
 
@@ -313,6 +316,12 @@ struts.mapper.action.prefix.crossNamespaces = false
 ###                useful to know when these errors are happening and be told of
 ###                them right away.
 struts.devMode = false
+
+### When set to true, a field's remaining validators are skipped once that field
+### has a type conversion error, avoiding a duplicate error (WW-2934).
+### The field's own conversion validator still runs, so its message is still shown.
+### valid values are: true, false (false is the default)
+struts.validators.skipValidatorsOnConversionError = false
 
 ### when set to true, resource bundles will be reloaded on _every_ request.
 ### this is good during development, but should never be used in production

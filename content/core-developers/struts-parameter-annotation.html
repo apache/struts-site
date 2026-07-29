@@ -308,6 +308,26 @@ collection or map needs <code class="language-plaintext highlighter-rouge">depth
 <span class="o">}</span>
 </code></pre></div></div>
 
+<p>This covers the case where the whole collection is assigned at once (name
+<code class="language-plaintext highlighter-rouge">mySelection</code>, <code class="language-plaintext highlighter-rouge">depth = 0</code>), as a checkbox list submits it.</p>
+
+<p>When the collection is instead populated <strong>element by element</strong> through indexed
+names — <code class="language-plaintext highlighter-rouge">mySelection[0]</code>, <code class="language-plaintext highlighter-rouge">mySelection[1]</code> — the annotation must be on the
+<strong>getter</strong> with <code class="language-plaintext highlighter-rouge">depth = 1</code>, because each element path contains one bracket. This
+is how JSON and REST payloads bind a collection of simple types: a body such as
+<code class="language-plaintext highlighter-rouge">{"mySelection":["A","B"]}</code> populates <code class="language-plaintext highlighter-rouge">mySelection[0]</code> and <code class="language-plaintext highlighter-rouge">mySelection[1]</code>, so
+the getter must be annotated for the elements to be accepted.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">mySelection</span><span class="o">;</span>
+
+    <span class="nd">@StrutsParameter</span><span class="o">(</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getMySelection</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">mySelection</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// ... setter</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
 <p>When populating properties of objects that are already in a collection, annotate the
 getter. Because reaching an element’s property requires indexing into the collection
 <em>and then</em> following the property, this needs <code class="language-plaintext highlighter-rouge">depth = 2</code> (see

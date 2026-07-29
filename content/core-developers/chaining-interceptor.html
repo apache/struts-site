@@ -210,6 +210,31 @@ no properties are copied.</li>
   <li>This is a <strong>global</strong> constant only — there is no per-interceptor override.</li>
 </ul>
 
+<h2 id="security-considerations">Security Considerations</h2>
+
+<p>Action chaining makes the data path into the target action implicit: the target is populated
+from whatever happens to be on the value stack rather than from an explicit call. Keep that in
+mind when designing chained actions:</p>
+
+<ul>
+  <li><strong>Do not carry authorization, trust, identity, or approval state across a chain.</strong> Re-derive
+such state from the session or your security context inside the target action, so it never
+depends on what a previous action left on the stack.</li>
+  <li><strong>Prefer avoiding chaining where practical.</strong> It couples the two actions together and makes
+the target’s inputs harder to reason about; a shared service or an explicit redirect is
+usually clearer.</li>
+  <li><strong>If chaining is required, narrow what is copied.</strong> Implement
+<a href="/maven/struts2-core/apidocs/org/apache/struts2/Unchainable">Unchainable</a> on objects that must
+never be copied from, and use the interceptor’s <code class="language-plaintext highlighter-rouge">includes</code> or <code class="language-plaintext highlighter-rouge">excludes</code> parameters to limit
+the copied properties to the ones the target genuinely needs.</li>
+  <li><strong>Do not expose a public setter on the target action for state that must not be settable from
+outside that action.</strong> Anything with a public setter is, by design, part of the action’s
+input surface.</li>
+</ul>
+
+<p>See also <a href="struts-parameter-annotation.html#where-authorization-applies">Where authorization applies</a>
+for an overview of the channels that can populate an action.</p>
+
 <h2 id="parameters">Parameters</h2>
 
 <ul>
