@@ -330,7 +330,7 @@ authorization callbacks) instead of `ContentTypeHandler` directly.
 Since Struts 7.3.0 that enforcement also covers **constructor-bound** properties — Java records, `@JsonCreator`
 constructors and `@ConstructorProperties` — which previously bypassed it. If your controllers accept records in the
 request body, make sure they are reachable from an authorized property; see
-[Creator-bound properties](../../core-developers/struts-parameter-annotation.html#creator-bound-properties-records-jsoncreator).
+[Creator-bound properties](../../core-developers/struts-parameter-annotation.html#creator-bound-properties).
 {:.alert .alert-warning}
 
 ### Settings

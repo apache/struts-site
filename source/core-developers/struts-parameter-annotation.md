@@ -29,7 +29,7 @@ channel that can populate an action from request data:
 - [JSON](../../plugins/json) and [REST](../../plugins/rest) plugins — per-property
   authorization performed during deserialization, so unauthorized fields are never set.
 
-### Creator-bound properties (records, `@JsonCreator`)
+### Creator-bound properties
 
 Up to Struts 7.2.1 the REST plugin's authorization wrapper covered only properties Jackson populates through a setter,
 a field or a builder. Properties bound through a **constructor** — Java records, `@JsonCreator` constructors and
