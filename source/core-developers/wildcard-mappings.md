@@ -83,6 +83,26 @@ Also, the action mapping and action result properties will accept wildcard-match
 
 > See also [Wildcard Method](../getting-started/wildcard-method-selection)
 
+### Ordering of annotated wildcard actions
+
+> Since Struts 7.3.0
+
+The ordering rule above relies on the *physical order* of the mappings, which XML gives you but annotations do not:
+actions declared with the [Convention Plugin](../plugins/convention/)'s `@Action` were registered in class-scan order,
+which is effectively arbitrary and can differ between JVMs and classloaders. A broad pattern registered ahead of a
+narrower one it also matches could therefore shadow it, non-deterministically — see
+[WW-3784](https://issues.apache.org/jira/browse/WW-3784).
+
+Annotated wildcard action names are now sorted most-specific-first before registration, using these keys in order:
+
+1. fewer wildcard tokens first (a `*` / `**` run, or a `{var}` group);
+2. more literal characters first;
+3. fewer path-spanning `**` tokens first;
+4. alphabetical order of the pattern, as a deterministic tie-breaker.
+
+The comparison recognises both `*` / `**` (the default `WildcardHelper` matcher) and `{var}`
+(`NamedVariablePatternMatcher`). XML mappings are unaffected — they keep their declared order.
+
 ## Parameters in namespaces
 
 From Struts 2.1+ namespace patterns can be extracted as request parameters and bound to the action. To enable this 
