@@ -10,39 +10,36 @@ parent:
 
 ## Logging support
 
-> As from Struts 2.5 version, the logging layer is deprecated and Struts uses Log4j2
-> The logging layer will be dropped with the next major release.
+Struts logs through [Log4j2](https://logging.apache.org/log4j/2.x/). The `struts2-core` artifact declares `log4j-api`
+and `log4j-core`, and configuration is plain Log4j2 configuration — a `log4j2.xml` on the classpath, typically under
+`src/main/resources`. See [Debugging Struts](../getting-started/debugging-struts) for an example configuration and the
+framework packages worth raising to `DEBUG`.
 
-> Note: support for a custom logging layer has been removed in Struts 6.x
+The pluggable logging layer that XWork used to provide — `com.opensymphony.xwork2.util.logging.LoggerFactory`, the
+`xwork.loggerFactory` system property and the Commons Logging / SLF4J / JDK Logger delegates — was deprecated in
+Struts 2.5 and **removed in Struts 6.0.0**. There is no framework-level logging abstraction to configure any more, and
+setting `-Dxwork.loggerFactory` has no effect.
+{:.alert .alert-warning}
 
-XWork provides its own layer to support logging - it allows to use many different implementations.
-
-Currently XWork provides support for the following libraries (in that order base on classpath discovery):
-
-- Commons Logging
-- [SLF4J](http://www.slf4j.org/)
-- [Log4j2](http://logging.apache.org/log4j/2.x/)
-- JDK Logger
+The Log4j2 bridges for third-party libraries (`log4j-jcl` for Commons Logging, `log4j-slf4j-impl` for SLF4J) are a
+separate concern and remain available. They route logging emitted by transitive dependencies into Log4j2.
 
 ## Usage
 
-To use given type of library add it as a Maven dependency or drop into WEB-INF/lib folder. XWork LoggerFactory class will 
-use given logging provider if available.
-
-To add logging to your application simply declare a Logger as follow:
+Declare a Log4j2 logger in your own classes as usual:
 
 ```java
-import com.opensymphony.xwork2.util.logging.Logger;
-import com.opensymphony.xwork2.util.logging.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MyAction {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MyAction.class);
+    private static final Logger LOG = LogManager.getLogger(MyAction.class);
 
     private String userName;
 
     public String execute() {
-        LOG.debug("MyAction executed with UserName [#0]", userName);
+        LOG.debug("MyAction executed with UserName [{}]", userName);
         return "success";
     }
 
@@ -51,87 +48,10 @@ public class MyAction {
 }
 ```
 
-## Implementing my own factory
+Note the `{}` placeholder — Log4j2 parameterised messages, not the `#0` syntax used by the removed XWork logger.
 
-You plug in your own logging solution, simple extend LoggerFactory class and provide a delegate which implements Logger 
-interface, like below:
+## Routing Struts logging elsewhere
 
-**JdkLoggerFactory which adds support for JDK logging**
-
-```java
-import com.opensymphony.xwork2.util.logging.Logger;
-import com.opensymphony.xwork2.util.logging.LoggerFactory;
-
-/**
- * Creates jdk loggers
- */
-public class JdkLoggerFactory extends LoggerFactory {
-
-    @Override
-    protected Logger getLoggerImpl(Class<?> cls) {
-        return new JdkLogger(java.util.logging.Logger.getLogger(cls.getName()));
-    }
-    
-    @Override
-    protected Logger getLoggerImpl(String name) {
-        return new JdkLogger(java.util.logging.Logger.getLogger(name));
-    }
-}
-```
-
-**JdkLogger is a wrapper around java.util.logging.Logger and implements Logger interface**
-
-```java
-import com.opensymphony.xwork2.util.logging.Logger;
-import com.opensymphony.xwork2.util.logging.LoggerUtils;
-
-import java.util.logging.Level;
-
-/**
- * Delegates to jdk logger.  Maps fatal to Level.SEVERE along with error.
- */
-public class JdkLogger implements Logger {
-    
-    private java.util.logging.Logger log;
-    
-    public JdkLogger(java.util.logging.Logger log) {
-        this.log = log;
-    }
-
-    public void error(String msg, String... args) {
-        log.log(Level.SEVERE, LoggerUtils.format(msg, args));
-    }
-
-    public void error(String msg, Throwable ex, String... args) {
-        log.log(Level.SEVERE, LoggerUtils.format(msg, args), ex);
-    }
-    
-    ...
-}
-```
-
-Check [the source code](http://struts.apache.org/struts-core/apidocs/org/apache/struts2/util/logging/package-summary)
-to see more details.
-
-## Defining which factory to use
-
-Now you must tell XWork/Struts2 to use your implementation, just define system property like below:
-
-```
--Dxwork.loggerFactory=com.demo.MyLoggerFactory
-```
-
-you can use the same to explicit tell the framework which implementation to use and don't depend on class discovery, eg.:
-
-```
--Dxwork.loggerFactory=com.opensymphony.xwork2.util.logging.slf4j.Slf4jLoggerFactory
-```
-
-or
-
-```
--Dxwork.loggerFactory=com.opensymphony.xwork2.util.logging.log4j2.Log4j2LoggerFactory
-```
-
-will enable Slf4j or Log4j2 even if there is commons-logging on classpath available (commons-logging is the first 
-LoggerFactory to look for).
+Because Struts logs against the Log4j2 API rather than its own abstraction, redirecting its output is a Log4j2
+concern: either configure Log4j2 appenders as you need them, or put a bridge to your logging backend of choice on the
+classpath in place of `log4j-core`. Nothing needs to be declared in `struts.xml`.
