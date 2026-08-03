@@ -156,44 +156,34 @@
 
 <h2 id="logging-support">Logging support</h2>
 
-<blockquote>
-  <p>As from Struts 2.5 version, the logging layer is deprecated and Struts uses Log4j2
-The logging layer will be dropped with the next major release.</p>
-</blockquote>
+<p>Struts logs through <a href="https://logging.apache.org/log4j/2.x/">Log4j2</a>. The <code class="language-plaintext highlighter-rouge">struts2-core</code> artifact declares <code class="language-plaintext highlighter-rouge">log4j-api</code>
+and <code class="language-plaintext highlighter-rouge">log4j-core</code>, and configuration is plain Log4j2 configuration — a <code class="language-plaintext highlighter-rouge">log4j2.xml</code> on the classpath, typically under
+<code class="language-plaintext highlighter-rouge">src/main/resources</code>. See <a href="../getting-started/debugging-struts">Debugging Struts</a> for an example configuration and the
+framework packages worth raising to <code class="language-plaintext highlighter-rouge">DEBUG</code>.</p>
 
-<blockquote>
-  <p>Note: support for a custom logging layer has been removed in Struts 6.x</p>
-</blockquote>
+<p class="alert alert-warning">The pluggable logging layer that XWork used to provide — <code class="language-plaintext highlighter-rouge">com.opensymphony.xwork2.util.logging.LoggerFactory</code>, the
+<code class="language-plaintext highlighter-rouge">xwork.loggerFactory</code> system property and the Commons Logging / SLF4J / JDK Logger delegates — was deprecated in
+Struts 2.5 and <strong>removed in Struts 6.0.0</strong>. There is no framework-level logging abstraction to configure any more, and
+setting <code class="language-plaintext highlighter-rouge">-Dxwork.loggerFactory</code> has no effect.</p>
 
-<p>XWork provides its own layer to support logging - it allows to use many different implementations.</p>
-
-<p>Currently XWork provides support for the following libraries (in that order base on classpath discovery):</p>
-
-<ul>
-  <li>Commons Logging</li>
-  <li><a href="http://www.slf4j.org/">SLF4J</a></li>
-  <li><a href="http://logging.apache.org/log4j/2.x/">Log4j2</a></li>
-  <li>JDK Logger</li>
-</ul>
+<p>The Log4j2 bridges for third-party libraries (<code class="language-plaintext highlighter-rouge">log4j-jcl</code> for Commons Logging, <code class="language-plaintext highlighter-rouge">log4j-slf4j-impl</code> for SLF4J) are a
+separate concern and remain available. They route logging emitted by transitive dependencies into Log4j2.</p>
 
 <h2 id="usage">Usage</h2>
 
-<p>To use given type of library add it as a Maven dependency or drop into WEB-INF/lib folder. XWork LoggerFactory class will 
-use given logging provider if available.</p>
+<p>Declare a Log4j2 logger in your own classes as usual:</p>
 
-<p>To add logging to your application simply declare a Logger as follow:</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.Logger</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.LoggerFactory</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.apache.logging.log4j.LogManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.logging.log4j.Logger</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAction</span> <span class="o">{</span>
 
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Logger</span> <span class="no">LOG</span> <span class="o">=</span> <span class="nc">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="nc">MyAction</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Logger</span> <span class="no">LOG</span> <span class="o">=</span> <span class="nc">LogManager</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="nc">MyAction</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">userName</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
-        <span class="no">LOG</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"MyAction executed with UserName [#0]"</span><span class="o">,</span> <span class="n">userName</span><span class="o">);</span>
+        <span class="no">LOG</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"MyAction executed with UserName [{}]"</span><span class="o">,</span> <span class="n">userName</span><span class="o">);</span>
         <span class="k">return</span> <span class="s">"success"</span><span class="o">;</span>
     <span class="o">}</span>
 
@@ -202,85 +192,13 @@ use given logging provider if available.</p>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<h2 id="implementing-my-own-factory">Implementing my own factory</h2>
+<p>Note the <code class="language-plaintext highlighter-rouge">{}</code> placeholder — Log4j2 parameterised messages, not the <code class="language-plaintext highlighter-rouge">#0</code> syntax used by the removed XWork logger.</p>
 
-<p>You plug in your own logging solution, simple extend LoggerFactory class and provide a delegate which implements Logger 
-interface, like below:</p>
+<h2 id="routing-struts-logging-elsewhere">Routing Struts logging elsewhere</h2>
 
-<p><strong>JdkLoggerFactory which adds support for JDK logging</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.Logger</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.LoggerFactory</span><span class="o">;</span>
-
-<span class="cm">/**
- * Creates jdk loggers
- */</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JdkLoggerFactory</span> <span class="kd">extends</span> <span class="nc">LoggerFactory</span> <span class="o">{</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="nc">Logger</span> <span class="nf">getLoggerImpl</span><span class="o">(</span><span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">cls</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">JdkLogger</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">cls</span><span class="o">.</span><span class="na">getName</span><span class="o">()));</span>
-    <span class="o">}</span>
-    
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="nc">Logger</span> <span class="nf">getLoggerImpl</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">JdkLogger</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">name</span><span class="o">));</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><strong>JdkLogger is a wrapper around java.util.logging.Logger and implements Logger interface</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.Logger</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.util.logging.LoggerUtils</span><span class="o">;</span>
-
-<span class="kn">import</span> <span class="nn">java.util.logging.Level</span><span class="o">;</span>
-
-<span class="cm">/**
- * Delegates to jdk logger.  Maps fatal to Level.SEVERE along with error.
- */</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JdkLogger</span> <span class="kd">implements</span> <span class="nc">Logger</span> <span class="o">{</span>
-    
-    <span class="kd">private</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span> <span class="n">log</span><span class="o">;</span>
-    
-    <span class="kd">public</span> <span class="nf">JdkLogger</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">logging</span><span class="o">.</span><span class="na">Logger</span> <span class="n">log</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">log</span> <span class="o">=</span> <span class="n">log</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">error</span><span class="o">(</span><span class="nc">String</span> <span class="n">msg</span><span class="o">,</span> <span class="nc">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="nc">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="nc">LoggerUtils</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">msg</span><span class="o">,</span> <span class="n">args</span><span class="o">));</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">error</span><span class="o">(</span><span class="nc">String</span> <span class="n">msg</span><span class="o">,</span> <span class="nc">Throwable</span> <span class="n">ex</span><span class="o">,</span> <span class="nc">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="nc">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="nc">LoggerUtils</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">msg</span><span class="o">,</span> <span class="n">args</span><span class="o">),</span> <span class="n">ex</span><span class="o">);</span>
-    <span class="o">}</span>
-    
-    <span class="o">...</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>Check <a href="http://struts.apache.org/struts-core/apidocs/org/apache/struts2/util/logging/package-summary">the source code</a>
-to see more details.</p>
-
-<h2 id="defining-which-factory-to-use">Defining which factory to use</h2>
-
-<p>Now you must tell XWork/Struts2 to use your implementation, just define system property like below:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-Dxwork.loggerFactory=com.demo.MyLoggerFactory
-</code></pre></div></div>
-
-<p>you can use the same to explicit tell the framework which implementation to use and don’t depend on class discovery, eg.:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-Dxwork.loggerFactory=com.opensymphony.xwork2.util.logging.slf4j.Slf4jLoggerFactory
-</code></pre></div></div>
-
-<p>or</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-Dxwork.loggerFactory=com.opensymphony.xwork2.util.logging.log4j2.Log4j2LoggerFactory
-</code></pre></div></div>
-
-<p>will enable Slf4j or Log4j2 even if there is commons-logging on classpath available (commons-logging is the first 
-LoggerFactory to look for).</p>
+<p>Because Struts logs against the Log4j2 API rather than its own abstraction, redirecting its output is a Log4j2
+concern: either configure Log4j2 appenders as you need them, or put a bridge to your logging backend of choice on the
+classpath in place of <code class="language-plaintext highlighter-rouge">log4j-core</code>. Nothing needs to be declared in <code class="language-plaintext highlighter-rouge">struts.xml</code>.</p>
 
   </section>
 </article>
