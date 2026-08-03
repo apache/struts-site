@@ -29,6 +29,25 @@ channel that can populate an action from request data:
 - [JSON](../../plugins/json) and [REST](../../plugins/rest) plugins — per-property
   authorization performed during deserialization, so unauthorized fields are never set.
 
+### Creator-bound properties (records, `@JsonCreator`)
+
+Up to Struts 7.2.1 the REST plugin's authorization wrapper covered only properties Jackson populates through a setter,
+a field or a builder. Properties bound through a **constructor** — Java records, `@JsonCreator` constructors and
+`@ConstructorProperties` — were deserialized on a path that bypassed the wrapper entirely, so with
+`struts.parameters.requireAnnotations` enabled a record-typed value anywhere in a REST request body was populated with
+no authorization check at all. This is fixed in Struts 7.3.0, see
+[WW-5642](https://issues.apache.org/jira/browse/WW-5642).
+
+Creator-bound properties are now authorized like any other property, by their path. Values that are not authorized are
+redacted — the component is left unset rather than taking the client-supplied value — and if a record's own constructor
+rejects that (a compact constructor calling `Objects.requireNonNull`, or `FAIL_ON_NULL_FOR_PRIMITIVES`), the whole
+object under construction is dropped instead of failing the request.
+
+If a REST action relied on record-typed request-body properties binding without annotations, they now need authorizing
+the same way as any nested object: `@StrutsParameter(depth = ...)` on the getter that reaches them, or a `ModelDriven`
+model. Otherwise those values silently stop arriving.
+{:.alert .alert-warning}
+
 ## ModelDriven actions
 
 When an action implements `ModelDriven` and the [Model Driven
