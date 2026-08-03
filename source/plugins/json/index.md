@@ -279,6 +279,42 @@ Enable this parameter through `struts.xml`:
 </result>
 ```
 
+### Java records and Optional
+
+> Since Struts 7.3.0
+
+Java records are serialized by iterating their record components, so a record no longer has to be wrapped in a bean to
+be returned as JSON:
+
+```java
+public record Person(String name, int age) {}
+```
+
+```json
+{"name": "Alice", "age": 30}
+```
+
+The `@JSON` and `@JSONFieldBridge` annotations now also target record components, so they can be declared on the
+component itself and are honoured on the generated accessor:
+
+```java
+public record Person(String name, @JSON(name = "years") int age) {}
+```
+
+The `excludeProperties` / `includeProperties` result parameters apply to record components as they do to bean
+properties.
+
+`java.util.Optional` values are serialized as the contained value, or as `null` when empty — an empty `Optional` is
+therefore subject to `excludeNullProperties` like any other null:
+
+```java
+public record Person(String name, Optional<String> nickname) {}
+```
+
+```json
+{"name": "Alice", "nickname": null}
+```
+
 ### Compressing the output
 
 Set the `enableGZIP` attribute to true to gzip the generated json response. The request **must** include `gzip` 
@@ -382,6 +418,18 @@ The implementation should then be defined in `struts.xml` like:
     <constant name="struts.json.writer" value="myJSONWriter"/>
 </struts>
 ```
+
+The `struts.json.writer` and `struts.json.reader` overrides were ignored in Struts 7.2.x — the plugin's bean selection
+ran before the application's `struts.xml` was folded in, freezing the binding to the built-in implementations. This is
+fixed in Struts 7.3.0, see [WW-5641](https://issues.apache.org/jira/browse/WW-5641); if you carried a workaround for
+that regression, you can drop it.
+{:.alert .alert-warning}
+
+Declare the bean with `scope="prototype"`, as in the example above. Since Struts 7.3.0 the `json` interceptor obtains a
+fresh reader and writer per request, and the built-in implementations keep their parse/write state in plain instance
+fields — cross-request safety relies on the bean being prototype-scoped. A singleton-scoped custom implementation that
+holds per-request state will leak it between concurrent requests.
+{:.alert .alert-warning}
 
 There is an example at [struts-examples/json-customize/FlexJSONWriter.java](https://gitbox.apache.org/repos/asf?p=struts-examples.git;a=blob_plain;f=json-customize/src/main/java/org/demo/FlexJSONWriter.java;hb=HEAD).
 It replaces Struts default json serializer with [Flexjson](http://flexjson.sourceforge.net/) as below:
@@ -579,6 +627,12 @@ a `<param>` (following the same pattern as the fileUpload interceptor):
 ```xml
 <constant name="struts.json.maxLength" value="1048576"/>
 ```
+
+Since Struts 6.11.0 and 7.3.0 `struts.json.maxLength` is evaluated **while** the input is read, in fixed-size chunks,
+rather than after accumulating each line, so enforcement no longer depends on how the payload is split into lines. As
+part of the same change, line terminators are no longer stripped while reading: they are insignificant whitespace
+between tokens, but an unescaped control character inside a string value is now preserved rather than silently removed.
+{:.alert .alert-info}
 
 The reader and writer implementations are also pluggable via
 `struts.json.reader` and `struts.json.writer` (both default to `struts`).
