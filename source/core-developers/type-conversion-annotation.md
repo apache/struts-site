@@ -23,7 +23,28 @@ This annotation is used for class and application wide conversion rules.
 
 ## Usage
 
-The `TypeConversion` annotation can be applied at property and method level.
+The `TypeConversion` annotation can be applied at method level, and since Struts 7.3.0 also at field level.
+
+## Key derivation
+
+> Since Struts 7.3.0
+
+The `key` parameter accepts a bare property name for every `ConversionRule`; the rule's prefix is derived
+automatically. It used to be derived only for method-level annotations, so class-level `@Conversion(conversions = ...)`
+entries had to spell the prefix out:
+
+```java
+// before Struts 7.3.0 — prefix spelled out
+@Conversion(conversions = @TypeConversion(key = "CreateIfNull_users", rule = ConversionRule.CREATE_IF_NULL, value = "true"))
+
+// since Struts 7.3.0 — the CreateIfNull_ prefix is derived
+@Conversion(conversions = @TypeConversion(key = "users", rule = ConversionRule.CREATE_IF_NULL, value = "true"))
+```
+
+Existing annotations that already carry a prefix keep working: a `key` starting with any known rule prefix is used
+as-is, never prefixed twice. The prefixes are `CreateIfNull_`, `Element_`, `Key_` and `KeyProperty_`;
+`ConversionRule.PROPERTY` and `ConversionRule.MAP` have no prefix of their own. Keys of
+`ConversionType.APPLICATION` annotations are class names and are never prefixed.
 
 ## Parameters
 
@@ -78,6 +99,11 @@ The `TypeConversion` annotation can be applied at property and method level.
 
 </p>
 
+`ConversionRule.COLLECTION` is deprecated since Struts 7.3.0 — use `ConversionRule.ELEMENT` instead. The two are handled
+identically by the engine, and `ELEMENT` additionally covers the values of a `Map`. Existing annotations using
+`COLLECTION` keep working and produce the deprecated `Collection_xxx` key, which is still read as a fallback.
+{:.alert .alert-warning}
+
 ## Examples
 
 ```java
@@ -103,7 +129,7 @@ The `TypeConversion` annotation can be applied at property and method level.
        this.convertDouble = convertDouble;
    }
 
-   @TypeConversion(rule = ConversionRule.COLLECTION, converterClass = String.class)
+   @TypeConversion(rule = ConversionRule.ELEMENT, converterClass = String.class)
    @StrutsParameter
    public void setUsers( List users ) {
        this.users = users;

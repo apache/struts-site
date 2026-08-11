@@ -143,6 +143,27 @@ the right name. Just add a constant like this to your struts.xml to be on the ha
 
 ```
 
+### Proxied beans
+
+> Since Struts 7.3.0
+
+Normal-scoped CDI beans (`@SessionScoped`, `@RequestScoped`, `@ApplicationScoped`, …) are injected as client proxies.
+Struts resolves the real target class of a proxy before evaluating the OGNL member allowlist, but only knew about
+Spring and Hibernate proxies — a Weld client proxy was not recognised, so members reached through it were evaluated
+against the proxy class, see [WW-5604](https://issues.apache.org/jira/browse/WW-5604).
+
+The plugin now registers its own `ProxyService` implementation, which adds Weld client-proxy detection on top of the
+default one:
+
+```xml
+<bean type="org.apache.struts2.util.ProxyService" name="cdi" class="org.apache.struts2.cdi.CdiProxyService"/>
+<constant name="struts.proxyService" value="cdi"/>
+```
+
+Both lines ship in the plugin's `struts-plugin.xml`, so nothing has to be configured. Weld detection activates only
+when Weld is on the classpath; with any other CDI implementation the plugin behaves exactly as the default
+`ProxyService` did. Override `struts.proxyService` only if you supply your own implementation.
+
 ## Usage
 
 CDI has an extremely rich feature set, and this section is not intended as a replacement for the CDI reference 

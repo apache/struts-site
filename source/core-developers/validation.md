@@ -516,6 +516,27 @@ both validators will be run, even if the "required" validator short-circuits. "r
 and will not short-circuit the plain ExpressionValidator because FieldValidators only short-circuit other checks on that 
 same field. Since the plain Validator is not field specific, it is not short-circuited.
 
+## Skipping Validators on a Conversion Error
+
+> Since Struts 7.3.0
+
+When a field fails [type conversion](type-conversion) — a user typing `one` into an `Integer age` field, for example —
+the [Conversion Error Interceptor](conversion-error-interceptor) records a conversion error before the validators run.
+The field's own validators then run against a value the user never entered, so a `requiredstring` or `int` validator
+typically adds a second, redundant error for the same field.
+
+Set the following constant to skip a field's remaining validators once that field has a conversion error:
+
+```xml
+<struts>
+    <constant name="struts.validators.skipValidatorsOnConversionError" value="true"/>
+</struts>
+```
+
+The default is `false`, which preserves the long-standing behaviour of reporting both errors. The `conversion` field
+validator itself is never skipped, so a custom conversion message and the `repopulateField` behaviour of
+[Conversion Validator](conversion-validator) keep working. Action-level (non-field) validators are unaffected.
+
 ## How Validators of an Action are Found
 
 As mentioned above, the framework will also search up the inheritance tree of the action to find default validations 

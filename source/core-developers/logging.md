@@ -24,6 +24,18 @@ setting `-Dxwork.loggerFactory` has no effect.
 The Log4j2 bridges for third-party libraries (`log4j-jcl` for Commons Logging, `log4j-slf4j-impl` for SLF4J) are a
 separate concern and remain available. They route logging emitted by transitive dependencies into Log4j2.
 
+Struts 7.3.0 finished the job: the last `java.util.logging` and SLF4J call sites inside the framework — in the
+dependency-injection container, its finalizable reference queue and the Tiles plugin's Velocity renderable — now log
+through Log4j2, and the `slf4j-api` dependency was dropped from `struts2-core`, see
+[WW-5620](https://issues.apache.org/jira/browse/WW-5620). That dependency was declared `optional`, so it was never
+propagated to applications and nothing changes on your classpath. Struts 6.11.0 still declares it.
+
+**Removed in Struts 7.3.0**: the internal DI container no longer provides a `Logger` binding. `@Inject`-ing a
+`java.util.logging.Logger` into a container-managed bean used to yield a JUL logger named after the declaring class;
+that binding was removed along with the JUL usage, so such an injection no longer resolves. Declare a Log4j2 logger
+directly instead, as shown below.
+{:.alert .alert-warning}
+
 ## Usage
 
 Declare a Log4j2 logger in your own classes as usual:

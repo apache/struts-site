@@ -46,6 +46,17 @@ Read JavaDoc of the action for more details.
 
 > Note: the action must always return an HTTP status `204`.
 
+Since Struts 6.11.0 and 7.3.0 the submitted report body is read up to a bounded length instead of being read whole.
+The limit defaults to **8192** characters and is configurable:
+
+```xml
+<constant name="struts.csp.report.maxSize" value="16384"/>
+```
+
+A report larger than the limit is discarded with a warning and `processReport(String)` is not called. Accepted values
+are `1` to `1048576`; anything outside that range is ignored, and the default applies. Raise the limit if your
+browsers submit larger violation reports than the default allows.
+
 ## Action aware
 
 Since Struts 6.2.0 it is possible to configure the CSP interceptor by providing the an instance of `CspSettings` interface.

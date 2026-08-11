@@ -155,6 +155,41 @@ will search the default bundles first. In some cases this can improve overall ap
 
 > More details can be found in [WW-5112](https://issues.apache.org/jira/browse/WW-5112) and the linked PR. 
 
+## Tuning the localized-text caches
+
+> Since Struts 6.11.0 and 7.3.0
+
+`AbstractLocalizedTextProvider` caches resolved bundles, missing-bundle misses, message formats and the class/package
+hierarchy lookups. Those caches are size-bounded and use the same cache abstraction as the
+[OGNL caches](ognl-cache-configuration), configured with two constants:
+
+```xml
+<constant name="struts.i18n.cacheType" value="wtlfu"/>
+<constant name="struts.i18n.cacheMaxSize" value="10000"/>
+```
+
+`struts.i18n.cacheType` accepts `basic` (unbounded `ConcurrentHashMap`), `lru` or `wtlfu` (Window TinyLFU, the default).
+`struts.i18n.cacheMaxSize` (default `10000`) applies to each cache individually. Every entry is fully reconstructible
+on a miss, so eviction only costs a recompute — it can never yield a stale or wrong message. A very large application
+that resolves more than 10 000 distinct message keys may want to raise `struts.i18n.cacheMaxSize` to avoid eviction
+churn.
+
+## Validating the request locale
+
+> Since Struts 6.11.0 and 7.3.0
+
+When `struts.locale` is not set, the framework derives the locale from the request (the `Accept-Language` header).
+`Dispatcher` used to take that value as-is, while [I18n Interceptor](i18n-interceptor) already checked its own resolved
+locale against the JVM's available locales. Set the following constant to apply the same check on the `Dispatcher`
+path:
+
+```xml
+<constant name="struts.locale.validateRequestLocale" value="true"/>
+```
+
+The default is `false`, preserving the previous behaviour. With `true`, a request-derived locale that is not in the
+JVM's available-locale set falls back to the default locale instead of being used.
+
 ## Using only global bundles
 
 If you don't need to use the package-scan-functionality and only base on the global bundles (those provided by

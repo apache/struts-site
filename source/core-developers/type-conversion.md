@@ -226,7 +226,10 @@ contained within Maps and Collections. For Collections, such as Lists, the eleme
 and the value may be specified by using the pattern `Key_xxx` and `Element_xxx`, respectively.
 
 From WebWork 2.1.x, the `Collection_xxx` format is still supported and honored, although it is deprecated and will be 
-removed eventually.
+removed eventually. Since Struts 7.3.0 the matching `ConversionRule.COLLECTION` enum constant used by the
+[TypeConversion Annotation](type-conversion-annotation) is marked `@Deprecated` as well — use `ConversionRule.ELEMENT`,
+which produces the current `Element_xxx` key and additionally covers the values of a `Map`.
+{:.alert .alert-warning}
 
 Additionally, you can create your own custom `ObjectTypeDeterminer` by implementing the `ObjectTypeDeterminer` interface. 
 There is also an optional `ObjectTypeDeterminer` that utilizes Java 5 generics. See the [Annotations](annotations) 

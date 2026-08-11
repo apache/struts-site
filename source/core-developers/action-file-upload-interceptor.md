@@ -33,6 +33,8 @@ You can override the text of these messages by providing text for the following 
    types specified
  - `struts.messages.error.file.extension.not.allowed` - occurs when the uploaded file does not match the expected 
    file extensions specified
+ - `struts.messages.error.upload.policy.unresolved` - occurs when a `${...}` parameter could not be resolved for the
+   current invocation, so the file is rejected (since Struts 7.3.0)
 
 ## Parameters
 
@@ -61,10 +63,48 @@ enabling per-request dynamic validation. This is available when used with `WithL
 The expressions are evaluated against the ValueStack at the time of the upload, allowing your action to provide
 dynamic values based on the current request context.
 
+Since Struts 7.3.0 the resolved values are held in a per-invocation `org.apache.struts2.interceptor.UploadPolicy`
+instead of being written onto the shared interceptor instance, so two concurrent requests can no longer be validated
+against each other's policy — see [WW-5659](https://issues.apache.org/jira/browse/WW-5659).
+
+Also since Struts 7.3.0, an expression that cannot be resolved makes the policy unusable and the upload is **rejected**
+with the `struts.messages.error.upload.policy.unresolved` message, rather than silently validated against a
+partially-resolved policy. A typo in a `${...}` parameter, or a parameter name with no matching property, now fails
+closed instead of relaxing validation. The `disabled` parameter is exempt: unresolved it is simply `false`, which leaves
+the interceptor running with the rest of the policy intact.
+{:.alert .alert-warning}
+
 ## Extending the Interceptor
 
-You can extend this interceptor and override the acceptFile method to provide more control over which files are supported 
-and which are not.
+You can extend this interceptor and override the `acceptFile` method to provide more control over which files are
+supported and which are not.
+
+Since Struts 7.3.0 `acceptFile` takes the per-invocation policy as its first argument:
+
+```java
+protected boolean acceptFile(UploadPolicy policy, Object action, UploadedFile file,
+                             String originalFilename, String contentType, String inputName)
+```
+
+Read `policy.getMaximumSize()`, `policy.getAllowedTypes()` and `policy.getAllowedExtensions()` instead of the former
+interceptor fields, which are configuration-time state only. Subclasses overriding the old five-argument signature must
+be updated — the old method is gone, so the compiler will point them out.
+{:.alert .alert-warning}
+
+The same release changed the `org.apache.struts2.interceptor.WithLazyParams` interface, which is now generic over an
+`org.apache.struts2.interceptor.InterceptorParams` holder:
+
+```java
+public interface WithLazyParams<P extends InterceptorParams> {
+    P newLazyParams();
+    String intercept(ActionInvocation invocation, P lazyParams) throws Exception;
+}
+```
+
+Third-party interceptors implementing `WithLazyParams` must supply a holder class (extend
+`org.apache.struts2.interceptor.DisableParams` if the interceptor supports the `disabled` parameter) and move the
+resolved values off the singleton into it.
+{:.alert .alert-warning}
 
 ## Examples
 

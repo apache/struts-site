@@ -157,6 +157,7 @@ struts.multipart.parser=jakarta
 struts.multipart.saveDir= # Filesystem location to save parsed request data
 struts.multipart.maxSize=2097152 # Max combined size of files per request
 struts.multipart.maxFiles=256 # Max number of files per request
+struts.multipart.maxParameterCount=256 # Max number of normal fields per request (since Struts 7.3.0)
 struts.multipart.maxFileSize= # Max size per file per request
 struts.multipart.maxStringLength=4096 # Max length of a string parameter (a normal field) in a multipart request (since Struts 6.1.2.1)
 ```
@@ -166,9 +167,8 @@ further details on these options first.
 
 ### Files Number Limit
 
-Since Struts 6.1.2 a new option was added, which uses Commons FileUpload feature to limit how many files can be
-uploaded at once, in one request. This option requires to use Commons FileUpload ver. 1.5 at least and by default is set
-to **256**. Please always set this to a finite value to prevent DoS attacks.
+Since Struts 6.1.2 a new option was added to limit how many files can be uploaded at once, in one request. By default it
+is set to **256**. Please always set this to a finite value to prevent DoS attacks.
 
 To change this value define a constant in `struts.xml` as follows:
 
@@ -178,8 +178,31 @@ To change this value define a constant in `struts.xml` as follows:
 </struts>
 ```
 
-**Note**: This limit also affects number of normal fields in the request, there is an open bug in the Commons FileUpload
-library to address this problem, see [FILEUPLOAD-351](https://issues.apache.org/jira/browse/FILEUPLOAD-351).
+### Parameters Number Limit
+
+> Since Struts 7.3.0
+
+`struts.multipart.maxFiles` now counts **uploaded files only**, and a companion option
+`struts.multipart.maxParameterCount` (default **256**) limits the number of normal, non-file fields in a multipart
+request. The two limits are independent: a request may carry up to `maxFiles` files **and** up to `maxParameterCount`
+form fields. Both are enforced identically by the `jakarta` and the `jakarta-stream` parser.
+
+```xml
+<struts>
+    <constant name="struts.multipart.maxFiles" value="500"/>
+    <constant name="struts.multipart.maxParameterCount" value="1000"/>
+</struts>
+```
+
+Exceeding either limit is fail-closed: parsing is aborted, an upload error is recorded, and the action receives **no**
+parameters and **no** files — never a partially populated request.
+
+**Behaviour change in Struts 7.3.0**: before 7.3.0, `struts.multipart.maxFiles` capped files *and* normal fields
+together (`jakarta` parser) or counted distinct file field names (`jakarta-stream` parser), so a form with many normal
+fields and few files could be rejected — see [WW-5474](https://issues.apache.org/jira/browse/WW-5474). Such requests now
+pass, while a request with more than `maxParameterCount` normal fields is rejected with the new
+`struts.messages.upload.error.FileUploadParameterCountLimitException` message. If you raised `maxFiles` only to
+accommodate large forms, lower it back to a realistic file count and raise `struts.multipart.maxParameterCount` instead.
 {:.alert .alert-warning}
 
 ### File Size Limits
@@ -274,16 +297,23 @@ or extends `com.opensymphony.xwork2.ActionSupport`. These error messages are bas
 struts-messages.properties, a default i18n file processed for all i18n requests. You can override the text of these
 messages by providing text for the following keys:
 
-| Error Key                                                      | Description                                                                                            |
-|----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| `struts.messages.error.uploading`                              | A general error that occurs when the file could not be uploaded                                        |
-| `struts.messages.error.file.too.large`                         | Occurs when the uploaded file is too large as specified by maximumSize.                                |
-| `struts.messages.error.content.type.not.allowed`               | Occurs when the uploaded file does not match the expected content types specified                      |
-| `struts.messages.error.file.extension.not.allowed`             | Occurs when uploaded file has disallowed extension                                                     |
-| `struts.messages.upload.error.SizeLimitExceededException`      | Occurs when the upload request (as a whole) exceed configured **struts.multipart.maxSize**             |
-| `struts.messages.upload.error.FileSizeLimitExceededException`  | Occurs when a file within the upload request exceeds configured **struts.multipart.maxFileSize**       |
-| `struts.messages.upload.error.FileCountLimitExceededException` | Occurs when the number of files in the upload request exceeds configured **struts.multipart.maxFiles** |
-| `struts.messages.upload.error.<Exception class SimpleName>`    | Occurs when any other exception took place during file upload process                                  |
+| Error Key                                                             | Description                                                                                                                         |
+|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| `struts.messages.error.uploading`                                     | A general error that occurs when the file could not be uploaded                                                                     |
+| `struts.messages.error.file.too.large`                                | Occurs when the uploaded file is too large as specified by maximumSize.                                                             |
+| `struts.messages.error.content.type.not.allowed`                      | Occurs when the uploaded file does not match the expected content types specified                                                   |
+| `struts.messages.error.file.extension.not.allowed`                    | Occurs when uploaded file has disallowed extension                                                                                  |
+| `struts.messages.error.upload.policy.unresolved`                      | Occurs when a `${...}` interceptor parameter could not be resolved, see [Dynamic Parameter Evaluation](action-file-upload-interceptor#dynamic-parameter-evaluation) (since Struts 7.3.0) |
+| `struts.messages.upload.error.FileUploadSizeException`                | Occurs when the upload request (as a whole) exceeds configured **struts.multipart.maxSize**                                         |
+| `struts.messages.upload.error.FileUploadByteCountLimitException`      | Occurs when a file within the upload request exceeds configured **struts.multipart.maxFileSize**                                    |
+| `struts.messages.upload.error.FileUploadFileCountLimitException`      | Occurs when the number of files in the upload request exceeds configured **struts.multipart.maxFiles**                              |
+| `struts.messages.upload.error.FileUploadParameterCountLimitException` | Occurs when the number of normal fields in the upload request exceeds configured **struts.multipart.maxParameterCount** (since Struts 7.3.0) |
+| `struts.messages.upload.error.<Exception class SimpleName>`           | Occurs when any other exception took place during file upload process                                                               |
+
+The exception-based keys above are the Commons FileUpload 2 names used since Struts 7.0.0. Struts 6.x uses the Commons
+FileUpload 1.x names instead: `SizeLimitExceededException`, `FileSizeLimitExceededException`
+and `FileCountLimitExceededException`.
+{:.alert .alert-info}
 
 ### Temporary Directories
 
@@ -293,6 +323,40 @@ To do this change `struts.multipart.saveDir`
 to the directory where the uploaded files will be placed. If this property is not set it defaults
 to `javax.servlet.context.tempdir`. Keep in mind that on some operating systems, like Solaris, `/tmp` is memory based
 and files stored in that directory would consume an amount of RAM approximately equal to the size of the uploaded file.
+
+### In-Memory Uploads
+
+> Since Struts 7.3.0
+
+Small uploads (below the parser's disk-spill threshold, around 8 KB) are kept in memory and are **no longer written to a
+temporary file eagerly** — see [WW-5413](https://issues.apache.org/jira/browse/WW-5413). The temporary file is written
+lazily, only when something asks for a `java.io.File`. Uploads rejected by size, content-type or extension checks
+therefore never touch the filesystem at all.
+
+Two methods were added to `org.apache.struts2.dispatcher.multipart.UploadedFile` to support this. Both are `default`
+methods, so existing third-party implementations keep compiling:
+
+| Method                            | Purpose                                                                                            |
+|-----------------------------------|----------------------------------------------------------------------------------------------------|
+| `InputStream getInputStream()`    | Reads the uploaded content without forcing it to disk — the preferred way to consume an upload      |
+| `boolean isMissing()`             | Reports a failed upload with no content, answered without materialising the content                 |
+
+```java
+public void withUploadedFiles(List<UploadedFile> uploadedFiles) {
+    for (UploadedFile file : uploadedFiles) {
+        try (InputStream in = file.getInputStream()) {
+            // process the bytes; no temporary file is created for small uploads
+        } catch (IOException e) {
+            // handle
+        }
+    }
+}
+```
+
+`getContent()` and `getAbsolutePath()` still return a `java.io.File` as before, so existing code — including actions
+using the legacy `File`-typed property — keeps working unchanged; the first such call simply materialises the temporary
+file at that point. Prefer `getInputStream()` in new code when you only need the bytes.
+{:.alert .alert-info}
 
 ### Alternate Libraries
 

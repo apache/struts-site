@@ -261,6 +261,7 @@ struts.multipart.parser=jakarta
 struts.multipart.saveDir= # Filesystem location to save parsed request data
 struts.multipart.maxSize=2097152 # Max combined size of files per request
 struts.multipart.maxFiles=256 # Max number of files per request
+struts.multipart.maxParameterCount=256 # Max number of normal fields per request (since Struts 7.3.0)
 struts.multipart.maxFileSize= # Max size per file per request
 struts.multipart.maxStringLength=4096 # Max length of a string parameter (a normal field) in a multipart request (since Struts 6.1.2.1)
 ```
@@ -282,8 +283,10 @@ To change this value define a constant in `struts.xml` as follows:
 </struts>
 ```
 
-**Note**: This limit also affects number of normal fields in the request, there is an open bug in the Commons FileUpload 
-library to address this problem, see [FILEUPLOAD-351](https://issues.apache.org/jira/browse/FILEUPLOAD-351).
+**Note**: Up to Struts 7.2.x this limit also affects the number of normal fields in the request, see
+[FILEUPLOAD-351](https://issues.apache.org/jira/browse/FILEUPLOAD-351). Since Struts 7.3.0 `struts.multipart.maxFiles`
+counts uploaded files only, and normal fields are limited separately by `struts.multipart.maxParameterCount`
+(default **256**) — see [Parameters Number Limit](action-file-upload#parameters-number-limit).
 {:.alert .alert-warning}
 
 ### File Size Limits
@@ -387,6 +390,11 @@ messages by providing text for the following keys:
 | `struts.messages.upload.error.FileSizeLimitExceededException`  | Occurs when a file within the upload request exceeds configured **struts.multipart.maxFileSize**       |
 | `struts.messages.upload.error.FileCountLimitExceededException` | Occurs when the number of files in the upload request exceeds configured **struts.multipart.maxFiles** |
 | `struts.messages.upload.error.<Exception class SimpleName>`    | Occurs when any other exception took place during file upload process                                  |
+
+The exception-based keys above are the Commons FileUpload 1.x names used by Struts 6.x. Since Struts 7.0.0 the
+Commons FileUpload 2 names apply instead — see
+[Error Messages](action-file-upload#error-messages) on the Action File Upload page.
+{:.alert .alert-info}
 
 ### Temporary Directories
 
