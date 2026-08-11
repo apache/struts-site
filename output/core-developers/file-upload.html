@@ -438,6 +438,7 @@ it necessary to change these values. The names and default values are:</p>
 struts.multipart.saveDir= # Filesystem location to save parsed request data
 struts.multipart.maxSize=2097152 # Max combined size of files per request
 struts.multipart.maxFiles=256 # Max number of files per request
+struts.multipart.maxParameterCount=256 # Max number of normal fields per request (since Struts 7.3.0)
 struts.multipart.maxFileSize= # Max size per file per request
 struts.multipart.maxStringLength=4096 # Max length of a string parameter (a normal field) in a multipart request (since Struts 6.1.2.1)
 </code></pre></div></div>
@@ -458,8 +459,10 @@ to <strong>256</strong>. Please always set this to a finite value to prevent DoS
 <span class="nt">&lt;/struts&gt;</span>
 </code></pre></div></div>
 
-<p class="alert alert-warning"><strong>Note</strong>: This limit also affects number of normal fields in the request, there is an open bug in the Commons FileUpload 
-library to address this problem, see <a href="https://issues.apache.org/jira/browse/FILEUPLOAD-351">FILEUPLOAD-351</a>.</p>
+<p class="alert alert-warning"><strong>Note</strong>: Up to Struts 7.2.x this limit also affects the number of normal fields in the request, see
+<a href="https://issues.apache.org/jira/browse/FILEUPLOAD-351">FILEUPLOAD-351</a>. Since Struts 7.3.0 <code class="language-plaintext highlighter-rouge">struts.multipart.maxFiles</code>
+counts uploaded files only, and normal fields are limited separately by <code class="language-plaintext highlighter-rouge">struts.multipart.maxParameterCount</code>
+(default <strong>256</strong>) — see <a href="action-file-upload#parameters-number-limit">Parameters Number Limit</a>.</p>
 
 <h3 id="file-size-limits">File Size Limits</h3>
 
@@ -590,6 +593,10 @@ messages by providing text for the following keys:</p>
     </tr>
   </tbody>
 </table>
+
+<p class="alert alert-info">The exception-based keys above are the Commons FileUpload 1.x names used by Struts 6.x. Since Struts 7.0.0 the
+Commons FileUpload 2 names apply instead — see
+<a href="action-file-upload#error-messages">Error Messages</a> on the Action File Upload page.</p>
 
 <h3 id="temporary-directories">Temporary Directories</h3>
 

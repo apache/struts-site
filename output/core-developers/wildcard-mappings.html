@@ -155,7 +155,10 @@
     <h1 class="no_toc" id="wildcard-mappings">Wildcard Mappings</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#wildcards" id="markdown-toc-wildcards">Wildcards</a></li>
+  <li><a href="#wildcards" id="markdown-toc-wildcards">Wildcards</a>    <ul>
+      <li><a href="#ordering-of-annotated-wildcard-actions" id="markdown-toc-ordering-of-annotated-wildcard-actions">Ordering of annotated wildcard actions</a></li>
+    </ul>
+  </li>
   <li><a href="#parameters-in-namespaces" id="markdown-toc-parameters-in-namespaces">Parameters in namespaces</a></li>
   <li><a href="#parameters-after-the-action-name" id="markdown-toc-parameters-after-the-action-name">Parameters after the action name</a></li>
   <li><a href="#advanced-wildcards" id="markdown-toc-advanced-wildcards">Advanced Wildcards</a></li>
@@ -243,6 +246,30 @@ the <code class="language-plaintext highlighter-rouge">{0}</code> token.</p>
 <blockquote>
   <p>See also <a href="../getting-started/wildcard-method-selection">Wildcard Method</a></p>
 </blockquote>
+
+<h3 id="ordering-of-annotated-wildcard-actions">Ordering of annotated wildcard actions</h3>
+
+<blockquote>
+  <p>Since Struts 7.3.0</p>
+</blockquote>
+
+<p>The ordering rule above relies on the <em>physical order</em> of the mappings, which XML gives you but annotations do not:
+actions declared with the <a href="../plugins/convention/">Convention Plugin</a>’s <code class="language-plaintext highlighter-rouge">@Action</code> were registered in class-scan order,
+which is effectively arbitrary and can differ between JVMs and classloaders. A broad pattern registered ahead of a
+narrower one it also matches could therefore shadow it, non-deterministically — see
+<a href="https://issues.apache.org/jira/browse/WW-3784">WW-3784</a>.</p>
+
+<p>Annotated wildcard action names are now sorted most-specific-first before registration, using these keys in order:</p>
+
+<ol>
+  <li>fewer wildcard tokens first (a <code class="language-plaintext highlighter-rouge">*</code> / <code class="language-plaintext highlighter-rouge">**</code> run, or a <code class="language-plaintext highlighter-rouge">{var}</code> group);</li>
+  <li>more literal characters first;</li>
+  <li>fewer path-spanning <code class="language-plaintext highlighter-rouge">**</code> tokens first;</li>
+  <li>alphabetical order of the pattern, as a deterministic tie-breaker.</li>
+</ol>
+
+<p>The comparison recognises both <code class="language-plaintext highlighter-rouge">*</code> / <code class="language-plaintext highlighter-rouge">**</code> (the default <code class="language-plaintext highlighter-rouge">WildcardHelper</code> matcher) and <code class="language-plaintext highlighter-rouge">{var}</code>
+(<code class="language-plaintext highlighter-rouge">NamedVariablePatternMatcher</code>). XML mappings are unaffected — they keep their declared order.</p>
 
 <h2 id="parameters-in-namespaces">Parameters in namespaces</h2>
 

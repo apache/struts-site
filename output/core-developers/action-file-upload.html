@@ -164,11 +164,13 @@
   <li><a href="#uploading-multiple-files" id="markdown-toc-uploading-multiple-files">Uploading Multiple Files</a></li>
   <li><a href="#advanced-configuration" id="markdown-toc-advanced-configuration">Advanced Configuration</a>    <ul>
       <li><a href="#files-number-limit" id="markdown-toc-files-number-limit">Files Number Limit</a></li>
+      <li><a href="#parameters-number-limit" id="markdown-toc-parameters-number-limit">Parameters Number Limit</a></li>
       <li><a href="#file-size-limits" id="markdown-toc-file-size-limits">File Size Limits</a></li>
       <li><a href="#normal-field-size-limit" id="markdown-toc-normal-field-size-limit">Normal Field Size Limit</a></li>
       <li><a href="#file-types" id="markdown-toc-file-types">File Types</a></li>
       <li><a href="#error-messages" id="markdown-toc-error-messages">Error Messages</a></li>
       <li><a href="#temporary-directories" id="markdown-toc-temporary-directories">Temporary Directories</a></li>
+      <li><a href="#in-memory-uploads" id="markdown-toc-in-memory-uploads">In-Memory Uploads</a></li>
       <li><a href="#alternate-libraries" id="markdown-toc-alternate-libraries">Alternate Libraries</a></li>
       <li><a href="#request-validation" id="markdown-toc-request-validation">Request validation</a></li>
       <li><a href="#disabling-file-upload-support" id="markdown-toc-disabling-file-upload-support">Disabling file upload support</a></li>
@@ -315,6 +317,7 @@ it necessary to change these values. The names and default values are:</p>
 struts.multipart.saveDir= # Filesystem location to save parsed request data
 struts.multipart.maxSize=2097152 # Max combined size of files per request
 struts.multipart.maxFiles=256 # Max number of files per request
+struts.multipart.maxParameterCount=256 # Max number of normal fields per request (since Struts 7.3.0)
 struts.multipart.maxFileSize= # Max size per file per request
 struts.multipart.maxStringLength=4096 # Max length of a string parameter (a normal field) in a multipart request (since Struts 6.1.2.1)
 </code></pre></div></div>
@@ -324,9 +327,8 @@ further details on these options first.</p>
 
 <h3 id="files-number-limit">Files Number Limit</h3>
 
-<p>Since Struts 6.1.2 a new option was added, which uses Commons FileUpload feature to limit how many files can be
-uploaded at once, in one request. This option requires to use Commons FileUpload ver. 1.5 at least and by default is set
-to <strong>256</strong>. Please always set this to a finite value to prevent DoS attacks.</p>
+<p>Since Struts 6.1.2 a new option was added to limit how many files can be uploaded at once, in one request. By default it
+is set to <strong>256</strong>. Please always set this to a finite value to prevent DoS attacks.</p>
 
 <p>To change this value define a constant in <code class="language-plaintext highlighter-rouge">struts.xml</code> as follows:</p>
 
@@ -335,8 +337,32 @@ to <strong>256</strong>. Please always set this to a finite value to prevent DoS
 <span class="nt">&lt;/struts&gt;</span>
 </code></pre></div></div>
 
-<p class="alert alert-warning"><strong>Note</strong>: This limit also affects number of normal fields in the request, there is an open bug in the Commons FileUpload
-library to address this problem, see <a href="https://issues.apache.org/jira/browse/FILEUPLOAD-351">FILEUPLOAD-351</a>.</p>
+<h3 id="parameters-number-limit">Parameters Number Limit</h3>
+
+<blockquote>
+  <p>Since Struts 7.3.0</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">struts.multipart.maxFiles</code> now counts <strong>uploaded files only</strong>, and a companion option
+<code class="language-plaintext highlighter-rouge">struts.multipart.maxParameterCount</code> (default <strong>256</strong>) limits the number of normal, non-file fields in a multipart
+request. The two limits are independent: a request may carry up to <code class="language-plaintext highlighter-rouge">maxFiles</code> files <strong>and</strong> up to <code class="language-plaintext highlighter-rouge">maxParameterCount</code>
+form fields. Both are enforced identically by the <code class="language-plaintext highlighter-rouge">jakarta</code> and the <code class="language-plaintext highlighter-rouge">jakarta-stream</code> parser.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
+    <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.maxFiles"</span> <span class="na">value=</span><span class="s">"500"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.maxParameterCount"</span> <span class="na">value=</span><span class="s">"1000"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/struts&gt;</span>
+</code></pre></div></div>
+
+<p>Exceeding either limit is fail-closed: parsing is aborted, an upload error is recorded, and the action receives <strong>no</strong>
+parameters and <strong>no</strong> files — never a partially populated request.</p>
+
+<p class="alert alert-warning"><strong>Behaviour change in Struts 7.3.0</strong>: before 7.3.0, <code class="language-plaintext highlighter-rouge">struts.multipart.maxFiles</code> capped files <em>and</em> normal fields
+together (<code class="language-plaintext highlighter-rouge">jakarta</code> parser) or counted distinct file field names (<code class="language-plaintext highlighter-rouge">jakarta-stream</code> parser), so a form with many normal
+fields and few files could be rejected — see <a href="https://issues.apache.org/jira/browse/WW-5474">WW-5474</a>. Such requests now
+pass, while a request with more than <code class="language-plaintext highlighter-rouge">maxParameterCount</code> normal fields is rejected with the new
+<code class="language-plaintext highlighter-rouge">struts.messages.upload.error.FileUploadParameterCountLimitException</code> message. If you raised <code class="language-plaintext highlighter-rouge">maxFiles</code> only to
+accommodate large forms, lower it back to a realistic file count and raise <code class="language-plaintext highlighter-rouge">struts.multipart.maxParameterCount</code> instead.</p>
 
 <h3 id="file-size-limits">File Size Limits</h3>
 
@@ -451,16 +477,24 @@ messages by providing text for the following keys:</p>
       <td>Occurs when uploaded file has disallowed extension</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">struts.messages.upload.error.SizeLimitExceededException</code></td>
-      <td>Occurs when the upload request (as a whole) exceed configured <strong>struts.multipart.maxSize</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">struts.messages.error.upload.policy.unresolved</code></td>
+      <td>Occurs when a <code class="language-plaintext highlighter-rouge">${...}</code> interceptor parameter could not be resolved, see <a href="action-file-upload-interceptor#dynamic-parameter-evaluation">Dynamic Parameter Evaluation</a> (since Struts 7.3.0)</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">struts.messages.upload.error.FileSizeLimitExceededException</code></td>
+      <td><code class="language-plaintext highlighter-rouge">struts.messages.upload.error.FileUploadSizeException</code></td>
+      <td>Occurs when the upload request (as a whole) exceeds configured <strong>struts.multipart.maxSize</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.messages.upload.error.FileUploadByteCountLimitException</code></td>
       <td>Occurs when a file within the upload request exceeds configured <strong>struts.multipart.maxFileSize</strong></td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">struts.messages.upload.error.FileCountLimitExceededException</code></td>
+      <td><code class="language-plaintext highlighter-rouge">struts.messages.upload.error.FileUploadFileCountLimitException</code></td>
       <td>Occurs when the number of files in the upload request exceeds configured <strong>struts.multipart.maxFiles</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.messages.upload.error.FileUploadParameterCountLimitException</code></td>
+      <td>Occurs when the number of normal fields in the upload request exceeds configured <strong>struts.multipart.maxParameterCount</strong> (since Struts 7.3.0)</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">struts.messages.upload.error.&lt;Exception class SimpleName&gt;</code></td>
@@ -468,6 +502,10 @@ messages by providing text for the following keys:</p>
     </tr>
   </tbody>
 </table>
+
+<p class="alert alert-info">The exception-based keys above are the Commons FileUpload 2 names used since Struts 7.0.0. Struts 6.x uses the Commons
+FileUpload 1.x names instead: <code class="language-plaintext highlighter-rouge">SizeLimitExceededException</code>, <code class="language-plaintext highlighter-rouge">FileSizeLimitExceededException</code>
+and <code class="language-plaintext highlighter-rouge">FileCountLimitExceededException</code>.</p>
 
 <h3 id="temporary-directories">Temporary Directories</h3>
 
@@ -477,6 +515,54 @@ To do this change <code class="language-plaintext highlighter-rouge">struts.mult
 to the directory where the uploaded files will be placed. If this property is not set it defaults
 to <code class="language-plaintext highlighter-rouge">javax.servlet.context.tempdir</code>. Keep in mind that on some operating systems, like Solaris, <code class="language-plaintext highlighter-rouge">/tmp</code> is memory based
 and files stored in that directory would consume an amount of RAM approximately equal to the size of the uploaded file.</p>
+
+<h3 id="in-memory-uploads">In-Memory Uploads</h3>
+
+<blockquote>
+  <p>Since Struts 7.3.0</p>
+</blockquote>
+
+<p>Small uploads (below the parser’s disk-spill threshold, around 8 KB) are kept in memory and are <strong>no longer written to a
+temporary file eagerly</strong> — see <a href="https://issues.apache.org/jira/browse/WW-5413">WW-5413</a>. The temporary file is written
+lazily, only when something asks for a <code class="language-plaintext highlighter-rouge">java.io.File</code>. Uploads rejected by size, content-type or extension checks
+therefore never touch the filesystem at all.</p>
+
+<p>Two methods were added to <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.multipart.UploadedFile</code> to support this. Both are <code class="language-plaintext highlighter-rouge">default</code>
+methods, so existing third-party implementations keep compiling:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">InputStream getInputStream()</code></td>
+      <td>Reads the uploaded content without forcing it to disk — the preferred way to consume an upload</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">boolean isMissing()</code></td>
+      <td>Reports a failed upload with no content, answered without materialising the content</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">withUploadedFiles</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">UploadedFile</span><span class="o">&gt;</span> <span class="n">uploadedFiles</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">UploadedFile</span> <span class="n">file</span> <span class="o">:</span> <span class="n">uploadedFiles</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">(</span><span class="nc">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())</span> <span class="o">{</span>
+            <span class="c1">// process the bytes; no temporary file is created for small uploads</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// handle</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p class="alert alert-info"><code class="language-plaintext highlighter-rouge">getContent()</code> and <code class="language-plaintext highlighter-rouge">getAbsolutePath()</code> still return a <code class="language-plaintext highlighter-rouge">java.io.File</code> as before, so existing code — including actions
+using the legacy <code class="language-plaintext highlighter-rouge">File</code>-typed property — keeps working unchanged; the first such call simply materialises the temporary
+file at that point. Prefer <code class="language-plaintext highlighter-rouge">getInputStream()</code> in new code when you only need the bytes.</p>
 
 <h3 id="alternate-libraries">Alternate Libraries</h3>
 

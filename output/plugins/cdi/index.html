@@ -160,6 +160,7 @@
       <li><a href="#maven-setup" id="markdown-toc-maven-setup">Maven Setup</a></li>
       <li><a href="#manual-integration" id="markdown-toc-manual-integration">Manual Integration</a></li>
       <li><a href="#configuration" id="markdown-toc-configuration">Configuration</a></li>
+      <li><a href="#proxied-beans" id="markdown-toc-proxied-beans">Proxied beans</a></li>
     </ul>
   </li>
   <li><a href="#usage" id="markdown-toc-usage">Usage</a>    <ul>
@@ -301,6 +302,28 @@ the right name. Just add a constant like this to your struts.xml to be on the ha
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.objectFactory.cdi.jndiKey"</span> <span class="na">value=</span><span class="s">"java:comp/some/weird/BeanManagerReference"</span> <span class="nt">/&gt;</span>
 
 </code></pre></div></div>
+
+<h3 id="proxied-beans">Proxied beans</h3>
+
+<blockquote>
+  <p>Since Struts 7.3.0</p>
+</blockquote>
+
+<p>Normal-scoped CDI beans (<code class="language-plaintext highlighter-rouge">@SessionScoped</code>, <code class="language-plaintext highlighter-rouge">@RequestScoped</code>, <code class="language-plaintext highlighter-rouge">@ApplicationScoped</code>, …) are injected as client proxies.
+Struts resolves the real target class of a proxy before evaluating the OGNL member allowlist, but only knew about
+Spring and Hibernate proxies — a Weld client proxy was not recognised, so members reached through it were evaluated
+against the proxy class, see <a href="https://issues.apache.org/jira/browse/WW-5604">WW-5604</a>.</p>
+
+<p>The plugin now registers its own <code class="language-plaintext highlighter-rouge">ProxyService</code> implementation, which adds Weld client-proxy detection on top of the
+default one:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.util.ProxyService"</span> <span class="na">name=</span><span class="s">"cdi"</span> <span class="na">class=</span><span class="s">"org.apache.struts2.cdi.CdiProxyService"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.proxyService"</span> <span class="na">value=</span><span class="s">"cdi"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>Both lines ship in the plugin’s <code class="language-plaintext highlighter-rouge">struts-plugin.xml</code>, so nothing has to be configured. Weld detection activates only
+when Weld is on the classpath; with any other CDI implementation the plugin behaves exactly as the default
+<code class="language-plaintext highlighter-rouge">ProxyService</code> did. Override <code class="language-plaintext highlighter-rouge">struts.proxyService</code> only if you supply your own implementation.</p>
 
 <h2 id="usage">Usage</h2>
 
