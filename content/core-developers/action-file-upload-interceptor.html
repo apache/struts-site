@@ -184,6 +184,8 @@ You can override the text of these messages by providing text for the following 
 types specified</li>
   <li><code class="language-plaintext highlighter-rouge">struts.messages.error.file.extension.not.allowed</code> - occurs when the uploaded file does not match the expected 
 file extensions specified</li>
+  <li><code class="language-plaintext highlighter-rouge">struts.messages.error.upload.policy.unresolved</code> - occurs when a <code class="language-plaintext highlighter-rouge">${...}</code> parameter could not be resolved for the
+current invocation, so the file is rejected (since Struts 7.3.0)</li>
 </ul>
 
 <h2 id="parameters">Parameters</h2>
@@ -216,10 +218,43 @@ enabling per-request dynamic validation. This is available when used with <code 
 <p>The expressions are evaluated against the ValueStack at the time of the upload, allowing your action to provide
 dynamic values based on the current request context.</p>
 
+<p>Since Struts 7.3.0 the resolved values are held in a per-invocation <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.UploadPolicy</code>
+instead of being written onto the shared interceptor instance, so two concurrent requests can no longer be validated
+against each other’s policy — see <a href="https://issues.apache.org/jira/browse/WW-5659">WW-5659</a>.</p>
+
+<p class="alert alert-warning">Also since Struts 7.3.0, an expression that cannot be resolved makes the policy unusable and the upload is <strong>rejected</strong>
+with the <code class="language-plaintext highlighter-rouge">struts.messages.error.upload.policy.unresolved</code> message, rather than silently validated against a
+partially-resolved policy. A typo in a <code class="language-plaintext highlighter-rouge">${...}</code> parameter, or a parameter name with no matching property, now fails
+closed instead of relaxing validation. The <code class="language-plaintext highlighter-rouge">disabled</code> parameter is exempt: unresolved it is simply <code class="language-plaintext highlighter-rouge">false</code>, which leaves
+the interceptor running with the rest of the policy intact.</p>
+
 <h2 id="extending-the-interceptor">Extending the Interceptor</h2>
 
-<p>You can extend this interceptor and override the acceptFile method to provide more control over which files are supported 
-and which are not.</p>
+<p>You can extend this interceptor and override the <code class="language-plaintext highlighter-rouge">acceptFile</code> method to provide more control over which files are
+supported and which are not.</p>
+
+<p>Since Struts 7.3.0 <code class="language-plaintext highlighter-rouge">acceptFile</code> takes the per-invocation policy as its first argument:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protected</span> <span class="kt">boolean</span> <span class="nf">acceptFile</span><span class="o">(</span><span class="nc">UploadPolicy</span> <span class="n">policy</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">action</span><span class="o">,</span> <span class="nc">UploadedFile</span> <span class="n">file</span><span class="o">,</span>
+                             <span class="nc">String</span> <span class="n">originalFilename</span><span class="o">,</span> <span class="nc">String</span> <span class="n">contentType</span><span class="o">,</span> <span class="nc">String</span> <span class="n">inputName</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p class="alert alert-warning">Read <code class="language-plaintext highlighter-rouge">policy.getMaximumSize()</code>, <code class="language-plaintext highlighter-rouge">policy.getAllowedTypes()</code> and <code class="language-plaintext highlighter-rouge">policy.getAllowedExtensions()</code> instead of the former
+interceptor fields, which are configuration-time state only. Subclasses overriding the old five-argument signature must
+be updated — the old method is gone, so the compiler will point them out.</p>
+
+<p>The same release changed the <code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.WithLazyParams</code> interface, which is now generic over an
+<code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.InterceptorParams</code> holder:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">WithLazyParams</span><span class="o">&lt;</span><span class="no">P</span> <span class="kd">extends</span> <span class="nc">InterceptorParams</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="no">P</span> <span class="nf">newLazyParams</span><span class="o">();</span>
+    <span class="nc">String</span> <span class="nf">intercept</span><span class="o">(</span><span class="nc">ActionInvocation</span> <span class="n">invocation</span><span class="o">,</span> <span class="no">P</span> <span class="n">lazyParams</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p class="alert alert-warning">Third-party interceptors implementing <code class="language-plaintext highlighter-rouge">WithLazyParams</code> must supply a holder class (extend
+<code class="language-plaintext highlighter-rouge">org.apache.struts2.interceptor.DisableParams</code> if the interceptor supports the <code class="language-plaintext highlighter-rouge">disabled</code> parameter) and move the
+resolved values off the singleton into it.</p>
 
 <h2 id="examples">Examples</h2>
 

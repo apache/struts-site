@@ -174,6 +174,7 @@
   <li><a href="#validator-flavor" id="markdown-toc-validator-flavor">Validator Flavor</a></li>
   <li><a href="#non-field-validator-vs-field-validator-validatortypes" id="markdown-toc-non-field-validator-vs-field-validator-validatortypes">Non-Field Validator Vs Field-Validator validatortypes</a></li>
   <li><a href="#short-circuiting-validator" id="markdown-toc-short-circuiting-validator">Short-Circuiting Validator</a></li>
+  <li><a href="#skipping-validators-on-a-conversion-error" id="markdown-toc-skipping-validators-on-a-conversion-error">Skipping Validators on a Conversion Error</a></li>
   <li><a href="#how-validators-of-an-action-are-found" id="markdown-toc-how-validators-of-an-action-are-found">How Validators of an Action are Found</a></li>
   <li><a href="#writing-custom-validators" id="markdown-toc-writing-custom-validators">Writing custom validators</a></li>
   <li><a href="#resources" id="markdown-toc-resources">Resources</a></li>
@@ -736,6 +737,28 @@ syntax was used to declare the validation rule. By way of example, given this <c
 <p>both validators will be run, even if the “required” validator short-circuits. “required” validators are FieldValidator’s 
 and will not short-circuit the plain ExpressionValidator because FieldValidators only short-circuit other checks on that 
 same field. Since the plain Validator is not field specific, it is not short-circuited.</p>
+
+<h2 id="skipping-validators-on-a-conversion-error">Skipping Validators on a Conversion Error</h2>
+
+<blockquote>
+  <p>Since Struts 7.3.0</p>
+</blockquote>
+
+<p>When a field fails <a href="type-conversion">type conversion</a> — a user typing <code class="language-plaintext highlighter-rouge">one</code> into an <code class="language-plaintext highlighter-rouge">Integer age</code> field, for example —
+the <a href="conversion-error-interceptor">Conversion Error Interceptor</a> records a conversion error before the validators run.
+The field’s own validators then run against a value the user never entered, so a <code class="language-plaintext highlighter-rouge">requiredstring</code> or <code class="language-plaintext highlighter-rouge">int</code> validator
+typically adds a second, redundant error for the same field.</p>
+
+<p>Set the following constant to skip a field’s remaining validators once that field has a conversion error:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;struts&gt;</span>
+    <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.validators.skipValidatorsOnConversionError"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/struts&gt;</span>
+</code></pre></div></div>
+
+<p>The default is <code class="language-plaintext highlighter-rouge">false</code>, which preserves the long-standing behaviour of reporting both errors. The <code class="language-plaintext highlighter-rouge">conversion</code> field
+validator itself is never skipped, so a custom conversion message and the <code class="language-plaintext highlighter-rouge">repopulateField</code> behaviour of
+<a href="conversion-validator">Conversion Validator</a> keep working. Action-level (non-field) validators are unaffected.</p>
 
 <h2 id="how-validators-of-an-action-are-found">How Validators of an Action are Found</h2>
 

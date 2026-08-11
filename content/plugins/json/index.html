@@ -166,6 +166,7 @@
       <li><a href="#prefix" id="markdown-toc-prefix">Prefix</a></li>
       <li><a href="#base-classes" id="markdown-toc-base-classes">Base Classes</a></li>
       <li><a href="#enumerations" id="markdown-toc-enumerations">Enumerations</a></li>
+      <li><a href="#java-records-and-optional" id="markdown-toc-java-records-and-optional">Java records and Optional</a></li>
       <li><a href="#compressing-the-output" id="markdown-toc-compressing-the-output">Compressing the output</a></li>
       <li><a href="#preventing-the-browser-from-caching-the-response" id="markdown-toc-preventing-the-browser-from-caching-the-response">Preventing the browser from caching the response</a></li>
       <li><a href="#excluding-properties-with-null-values" id="markdown-toc-excluding-properties-with-null-values">Excluding properties with null values</a></li>
@@ -488,6 +489,39 @@ All properties of the enum are also serialized.</p>
 <span class="nt">&lt;/result&gt;</span>
 </code></pre></div></div>
 
+<h3 id="java-records-and-optional">Java records and Optional</h3>
+
+<blockquote>
+  <p>Since Struts 7.3.0</p>
+</blockquote>
+
+<p>Java records are serialized by iterating their record components, so a record no longer has to be wrapped in a bean to
+be returned as JSON:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">record</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{}</span>
+</code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alice"</span><span class="p">,</span><span class="w"> </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">@JSON</code> and <code class="language-plaintext highlighter-rouge">@JSONFieldBridge</code> annotations now also target record components, so they can be declared on the
+component itself and are honoured on the generated accessor:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">record</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nd">@JSON</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"years"</span><span class="o">)</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">excludeProperties</code> / <code class="language-plaintext highlighter-rouge">includeProperties</code> result parameters apply to record components as they do to bean
+properties.</p>
+
+<p><code class="language-plaintext highlighter-rouge">java.util.Optional</code> values are serialized as the contained value, or as <code class="language-plaintext highlighter-rouge">null</code> when empty — an empty <code class="language-plaintext highlighter-rouge">Optional</code> is
+therefore subject to <code class="language-plaintext highlighter-rouge">excludeNullProperties</code> like any other null:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">record</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">nickname</span><span class="o">)</span> <span class="o">{}</span>
+</code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alice"</span><span class="p">,</span><span class="w"> </span><span class="nl">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
 <h3 id="compressing-the-output">Compressing the output</h3>
 
 <p>Set the <code class="language-plaintext highlighter-rouge">enableGZIP</code> attribute to true to gzip the generated json response. The request <strong>must</strong> include <code class="language-plaintext highlighter-rouge">gzip</code> 
@@ -584,6 +618,16 @@ The implementation should then be defined in <code class="language-plaintext hig
     <span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.json.writer"</span> <span class="na">value=</span><span class="s">"myJSONWriter"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/struts&gt;</span>
 </code></pre></div></div>
+
+<p class="alert alert-warning">The <code class="language-plaintext highlighter-rouge">struts.json.writer</code> and <code class="language-plaintext highlighter-rouge">struts.json.reader</code> overrides were ignored in Struts 7.2.x — the plugin’s bean selection
+ran before the application’s <code class="language-plaintext highlighter-rouge">struts.xml</code> was folded in, freezing the binding to the built-in implementations. This is
+fixed in Struts 7.3.0, see <a href="https://issues.apache.org/jira/browse/WW-5641">WW-5641</a>; if you carried a workaround for
+that regression, you can drop it.</p>
+
+<p class="alert alert-warning">Declare the bean with <code class="language-plaintext highlighter-rouge">scope="prototype"</code>, as in the example above. Since Struts 7.3.0 the <code class="language-plaintext highlighter-rouge">json</code> interceptor obtains a
+fresh reader and writer per request, and the built-in implementations keep their parse/write state in plain instance
+fields — cross-request safety relies on the bean being prototype-scoped. A singleton-scoped custom implementation that
+holds per-request state will leak it between concurrent requests.</p>
 
 <p>There is an example at <a href="https://gitbox.apache.org/repos/asf?p=struts-examples.git;a=blob_plain;f=json-customize/src/main/java/org/demo/FlexJSONWriter.java;hb=HEAD">struts-examples/json-customize/FlexJSONWriter.java</a>.
 It replaces Struts default json serializer with <a href="http://flexjson.sourceforge.net/">Flexjson</a> as below:</p>
@@ -806,6 +850,11 @@ a <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> (follo
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.json.maxLength"</span> <span class="na">value=</span><span class="s">"1048576"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
+
+<p class="alert alert-info">Since Struts 6.11.0 and 7.3.0 <code class="language-plaintext highlighter-rouge">struts.json.maxLength</code> is evaluated <strong>while</strong> the input is read, in fixed-size chunks,
+rather than after accumulating each line, so enforcement no longer depends on how the payload is split into lines. As
+part of the same change, line terminators are no longer stripped while reading: they are insignificant whitespace
+between tokens, but an unescaped control character inside a string value is now preserved rather than silently removed.</p>
 
 <p>The reader and writer implementations are also pluggable via
 <code class="language-plaintext highlighter-rouge">struts.json.reader</code> and <code class="language-plaintext highlighter-rouge">struts.json.writer</code> (both default to <code class="language-plaintext highlighter-rouge">struts</code>).</p>

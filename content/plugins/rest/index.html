@@ -551,6 +551,11 @@ same property-level authorization should implement
 <code class="language-plaintext highlighter-rouge">AuthorizationAwareContentTypeHandler</code> (which extends <code class="language-plaintext highlighter-rouge">ContentTypeHandler</code> with
 authorization callbacks) instead of <code class="language-plaintext highlighter-rouge">ContentTypeHandler</code> directly.</p>
 
+<p class="alert alert-warning">Since Struts 7.3.0 that enforcement also covers <strong>constructor-bound</strong> properties — Java records, <code class="language-plaintext highlighter-rouge">@JsonCreator</code>
+constructors and <code class="language-plaintext highlighter-rouge">@ConstructorProperties</code> — which previously bypassed it. If your controllers accept records in the
+request body, make sure they are reachable from an authorized property; see
+<a href="../../core-developers/struts-parameter-annotation.html#creator-bound-properties">Creator-bound properties</a>.</p>
+
 <h3 id="settings">Settings</h3>
 
 <p>The following settings can be customized. See the <a href="/core-developers/configuration-files">developer guide</a>.

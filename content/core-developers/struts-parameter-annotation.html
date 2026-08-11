@@ -155,7 +155,10 @@
     <h1 class="no_toc" id="strutsparameter-annotation">StrutsParameter Annotation</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#where-authorization-applies" id="markdown-toc-where-authorization-applies">Where authorization applies</a></li>
+  <li><a href="#where-authorization-applies" id="markdown-toc-where-authorization-applies">Where authorization applies</a>    <ul>
+      <li><a href="#creator-bound-properties" id="markdown-toc-creator-bound-properties">Creator-bound properties</a></li>
+    </ul>
+  </li>
   <li><a href="#modeldriven-actions" id="markdown-toc-modeldriven-actions">ModelDriven actions</a></li>
   <li><a href="#usage" id="markdown-toc-usage">Usage</a></li>
   <li><a href="#understanding-the-depth-parameter" id="markdown-toc-understanding-the-depth-parameter">Understanding the <code class="language-plaintext highlighter-rouge">depth</code> parameter</a></li>
@@ -186,6 +189,24 @@ action chaining (opt-in via <code class="language-plaintext highlighter-rouge">s
   <li><a href="../../plugins/json">JSON</a> and <a href="../../plugins/rest">REST</a> plugins — per-property
 authorization performed during deserialization, so unauthorized fields are never set.</li>
 </ul>
+
+<h3 id="creator-bound-properties">Creator-bound properties</h3>
+
+<p>Up to Struts 7.2.1 the REST plugin’s authorization wrapper covered only properties Jackson populates through a setter,
+a field or a builder. Properties bound through a <strong>constructor</strong> — Java records, <code class="language-plaintext highlighter-rouge">@JsonCreator</code> constructors and
+<code class="language-plaintext highlighter-rouge">@ConstructorProperties</code> — were deserialized on a path that bypassed the wrapper entirely, so with
+<code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations</code> enabled a record-typed value anywhere in a REST request body was populated with
+no authorization check at all. This is fixed in Struts 7.3.0, see
+<a href="https://issues.apache.org/jira/browse/WW-5642">WW-5642</a>.</p>
+
+<p>Creator-bound properties are now authorized like any other property, by their path. Values that are not authorized are
+redacted — the component is left unset rather than taking the client-supplied value — and if a record’s own constructor
+rejects that (a compact constructor calling <code class="language-plaintext highlighter-rouge">Objects.requireNonNull</code>, or <code class="language-plaintext highlighter-rouge">FAIL_ON_NULL_FOR_PRIMITIVES</code>), the whole
+object under construction is dropped instead of failing the request.</p>
+
+<p class="alert alert-warning">If a REST action relied on record-typed request-body properties binding without annotations, they now need authorizing
+the same way as any nested object: <code class="language-plaintext highlighter-rouge">@StrutsParameter(depth = ...)</code> on the getter that reaches them, or a <code class="language-plaintext highlighter-rouge">ModelDriven</code>
+model. Otherwise those values silently stop arriving.</p>
 
 <h2 id="modeldriven-actions">ModelDriven actions</h2>
 

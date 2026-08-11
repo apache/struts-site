@@ -200,6 +200,16 @@ Read JavaDoc of the action for more details.</p>
   <p>Note: the action must always return an HTTP status <code class="language-plaintext highlighter-rouge">204</code>.</p>
 </blockquote>
 
+<p>Since Struts 6.11.0 and 7.3.0 the submitted report body is read up to a bounded length instead of being read whole.
+The limit defaults to <strong>8192</strong> characters and is configurable:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.csp.report.maxSize"</span> <span class="na">value=</span><span class="s">"16384"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>A report larger than the limit is discarded with a warning and <code class="language-plaintext highlighter-rouge">processReport(String)</code> is not called. Accepted values
+are <code class="language-plaintext highlighter-rouge">1</code> to <code class="language-plaintext highlighter-rouge">1048576</code>; anything outside that range is ignored, and the default applies. Raise the limit if your
+browsers submit larger violation reports than the default allows.</p>
+
 <h2 id="action-aware">Action aware</h2>
 
 <p>Since Struts 6.2.0 it is possible to configure the CSP interceptor by providing the an instance of <code class="language-plaintext highlighter-rouge">CspSettings</code> interface.
