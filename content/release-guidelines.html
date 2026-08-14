@@ -153,118 +153,484 @@
     <h1 class="no_toc" id="release-guidelines">Release Guidelines</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#release-process" id="markdown-toc-release-process">Release Process</a></li>
-  <li><a href="#coding-conventions-and-guidelines" id="markdown-toc-coding-conventions-and-guidelines">Coding Conventions and Guidelines</a></li>
-  <li><a href="#clarifications" id="markdown-toc-clarifications">Clarifications</a></li>
-</ul>
-
-<p>This document describes the Apache Struts release process and our <a href="#Coding">coding conventions</a>,
-which are applicable to all subprojects. Both stable and development releases are
-<a href="releases">available for download.</a></p>
-
-<h2 id="release-process">Release Process</h2>
-
-<p>A <a href="http://commons.apache.org/releases/versioning">point release</a> should be made before and after
-any product change that is not a “fully-compatible change” (see link). This includes moving a dependency from
-an internal package to an external product, including products distributed through the Apache Commons.
-We should place any fully-compatible changes in the hands of the community before starting on a change that
-is only “interface” or “external-interface” compatible.</p>
-
-<p>Additional remarks:</p>
-
-<ul>
-  <li>Every committer is encouraged to participate in the release process, either as the release manager or a
-helper. Committers may also share the release manager role.</li>
-  <li>The release process can seem daunting when you review it for the first time. But, essentially, it breaks
-down into four phases of just a few steps each:
-    <ul>
-      <li><strong>Rolling</strong> - Issues, dependencies, release notes, JAR manifest, licenses, copyrights,
-and build (using the release target).</li>
-      <li><strong>Testing</strong> - JUnit, Cactus, web apps (for all “supported” containers).</li>
-      <li><strong>Voting</strong> - Upload test build to internal directory, post majority vote on DEV list as to release
-grade: Alpha, Beta, General Availability.</li>
-      <li><strong>Distributing</strong> - Checksum, sign, mirror, update download page, announce.</li>
+  <li><a href="#release-policy" id="markdown-toc-release-policy">Release policy</a></li>
+  <li><a href="#before-you-start" id="markdown-toc-before-you-start">Before you start</a>    <ul>
+      <li><a href="#two-lines-mean-two-releases" id="markdown-toc-two-lines-mean-two-releases">Two lines mean two releases</a></li>
+      <li><a href="#check-the-jdk-before-building-anything" id="markdown-toc-check-the-jdk-before-building-anything">Check the JDK before building anything</a></li>
+      <li><a href="#the-version-number-is-decided-at-release-time" id="markdown-toc-the-version-number-is-decided-at-release-time">The version number is decided at release time</a></li>
+      <li><a href="#what-you-need-access-to" id="markdown-toc-what-you-need-access-to">What you need access to</a></li>
     </ul>
   </li>
-  <li>Committers are <strong>required</strong> to post a release plan before tagging the repository and should wait
-the traditional 72 hours before proceeding.</li>
-  <li>A checklist format can be used for the <a href="http://wiki.apache.org/struts/StrutsReleasePlans">release plan</a>,
-to help step through the process. The plan may be maintained in the repository or on the
-<a href="http://wiki.apache.org/struts/">Struts wiki</a>.</li>
-  <li>Our dependencies on external JARs (including Commons JARs) should be in line with our own release status.
-Our nightly build can be dependant on another nightly build. Our beta can be dependant on another beta (or
-“release candidate”), but should avoid a dependance on a nightly build. Our General Availability release
+  <li><a href="#the-seven-phases" id="markdown-toc-the-seven-phases">The seven phases</a></li>
+  <li><a href="#phase-1--prepare" id="markdown-toc-phase-1--prepare">Phase 1 — Prepare</a></li>
+  <li><a href="#phase-2--cut" id="markdown-toc-phase-2--cut">Phase 2 — Cut</a>    <ul>
+      <li><a href="#cut-from-a-release-branch-not-from-the-line-branch" id="markdown-toc-cut-from-a-release-branch-not-from-the-line-branch">Cut from a release branch, not from the line branch</a></li>
+      <li><a href="#prepare-and-perform" id="markdown-toc-prepare-and-perform">Prepare and perform</a></li>
+      <li><a href="#close-the-staging-repository" id="markdown-toc-close-the-staging-repository">Close the staging repository</a></li>
+    </ul>
+  </li>
+  <li><a href="#phase-3--stage" id="markdown-toc-phase-3--stage">Phase 3 — Stage</a></li>
+  <li><a href="#phase-4--vote" id="markdown-toc-phase-4--vote">Phase 4 — Vote</a></li>
+  <li><a href="#phase-5--promote" id="markdown-toc-phase-5--promote">Phase 5 — Promote</a></li>
+  <li><a href="#phase-6--publish" id="markdown-toc-phase-6--publish">Phase 6 — Publish</a>    <ul>
+      <li><a href="#update-the-website" id="markdown-toc-update-the-website">Update the website</a></li>
+      <li><a href="#un-flag-the-github-release" id="markdown-toc-un-flag-the-github-release">Un-flag the GitHub release</a></li>
+      <li><a href="#announce-it" id="markdown-toc-announce-it">Announce it</a></li>
+    </ul>
+  </li>
+  <li><a href="#phase-7--security-advisories" id="markdown-toc-phase-7--security-advisories">Phase 7 — Security advisories</a></li>
+  <li><a href="#after-the-release" id="markdown-toc-after-the-release">After the release</a></li>
+  <li><a href="#red-flags" id="markdown-toc-red-flags">Red flags</a></li>
+</ul>
+
+<p>This document describes how an Apache Struts release is made: the policy that governs it, the
+seven phases it runs through, and the command needed at each step. It is written for the release
+manager, but every committer is encouraged to read it — releases are easier when more than one
+person knows what the next step is.</p>
+
+<p>This page is the source of truth for the release process. Where an older wiki page disagrees
+with it, this page is current. For coding conventions see <a href="coding-standards">Coding standards</a>,
+and for building the framework day to day see <a href="builds">Builds</a>.</p>
+
+<h2 id="release-policy">Release policy</h2>
+
+<p>A <a href="http://commons.apache.org/releases/versioning">point release</a> should be made before and after
+any product change that is not a “fully-compatible change” (see link). We should place any
+fully-compatible changes in the hands of the community before starting on a change that is only
+“interface” or “external-interface” compatible.</p>
+
+<ul>
+  <li>Every committer is encouraged to participate in the release process, either as the release
+manager or a helper. Committers may also share the release manager role.</li>
+  <li>Our dependencies should be in line with our own release status. A General Availability release
 may only have dependencies on other GA, final, or stable releases.</li>
-  <li>Use your own discretion as to detail needed by the Release Notes. A high-level description of the changes
-is more important than providing uninterpreted detail. At a minimum, new features and deprecations should be
-summarized, since these are commonly asked questions. Ideally, the release notes should be maintained,
-continuously for the nightly build so that we they do not need to be assembled at the last minute.</li>
-  <li>Try building the distribution under prior version of J2SE, if possible, to ensure that we are still
-backwardly-compatible. But, our distributions should be built using the <strong>latest production release of J2SE</strong>,
-to take advantage of all available compiler enhancements.</li>
-  <li>If you have multiple J2SE versions configured, run the JUnit and Cactus tests using the same configuration
-that will be used to build the distribution.</li>
-  <li>There is a “release” target in the buildfile that will zip and tar the distribution. Before uploading the
-distribution, extract the sample web applications and deploy the WARs under each of the “supported”
-containers (if you can). Play test each application under each container to be sure they operate
-nominally.</li>
-  <li>The test build can be posted to the internal distribution directory (svn.apache.org/struts/) and
-announced to the Struts DEV and PMC lists (only!). Do not announce a test build on any other Apache lists or
-link to it from an Apache website.</li>
-  <li>If the test build is voted to Alpha, Beta, or GA status, the release can announced to the User list and
-linked from the website.</li>
+  <li>Provide high-level API compatibility for any changes made within the same major release series
+(<code class="language-plaintext highlighter-rouge">#.x.x</code>). Changes which adversely affect compatibility should be slotted for the next major
+release series.</li>
+  <li>Use your own discretion as to the detail needed in the Version Notes. A high-level description
+of the changes is more important than uninterpreted detail. At a minimum, new features and
+deprecations should be summarised, since these are commonly asked questions.</li>
   <li>Any formal release may be submitted for mirroring. All GA releases <strong>must</strong> be mirrored.</li>
-  <li>After announcing a release, remember to update the Downloads and Announcements pages. If the release is
-to be mirrored, wait at least 24 hours after submittal before making public announcements (as stated in the
-<a href="https://www.apache.org/dev/mirrors">Apache Mirroring guidelines</a>.</li>
-  <li>If a serious flaw if found in a test build or release, it may be withdrawn by a majority vote of the PMC and
-removed from ASF distribution channels.</li>
+  <li>If a serious flaw is found in a release candidate or a release, it may be withdrawn by a
+majority vote of the PMC and removed from ASF distribution channels.</li>
 </ul>
 
-<h2 id="coding-conventions-and-guidelines">Coding Conventions and Guidelines</h2>
+<h2 id="before-you-start">Before you start</h2>
 
-<p>Source code and documentation contributed to the Struts repositories should observe the:</p>
+<h3 id="two-lines-mean-two-releases">Two lines mean two releases</h3>
+
+<p><code class="language-plaintext highlighter-rouge">main</code> is the 7.x line and <code class="language-plaintext highlighter-rouge">support/struts-6-x-x</code> is the 6.x line. Both are protected in
+<code class="language-plaintext highlighter-rouge">.asf.yaml</code> and both must be green before you start.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Line</th>
+      <th>Branch</th>
+      <th>Build check that must pass</th>
+      <th>JDK</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>7.x</td>
+      <td><code class="language-plaintext highlighter-rouge">main</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Build and Test (JDK 17)</code></td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <td>6.x</td>
+      <td><code class="language-plaintext highlighter-rouge">support/struts-6-x-x</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Build and Test (8)</code></td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A change that lands on both lines is <strong>two releases</strong> — each with its own tag, vote, site entry
+and announcement, not one release mentioned twice. They can be cut and voted in parallel, and
+usually are, but keep the version numbers independent: 6.11.0 and 7.3.0 shipped on the same day
+and share nothing but a date.</p>
+
+<h3 id="check-the-jdk-before-building-anything">Check the JDK before building anything</h3>
+
+<p>The whole release is produced by whichever JDK happens to be active in your shell, and the line
+dictates which one that must be. Cutting 6.x on JDK 17 produces artifacts that will not run for
+the users that line exists for.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn <span class="nt">-v</span>    <span class="c"># reports the JDK Maven is actually using, not just $JAVA_HOME</span>
+</code></pre></div></div>
+
+<p class="alert alert-warning">If it reports the wrong version, stop and switch before going any further.</p>
+
+<h3 id="the-version-number-is-decided-at-release-time">The version number is decided at release time</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">-SNAPSHOT</code> in the pom is a placeholder, not a decision. Pick the number from the semantic
+versioning impact of what actually landed since the last tag, and state it before cutting — the
+tag is the first irreversible act of the release.</p>
+
+<p>The pom cannot tell you what the number is. Because releases are cut on a side branch, the root
+pom on <code class="language-plaintext highlighter-rouge">main</code> still read <code class="language-plaintext highlighter-rouge">7.2.2-SNAPSHOT</code> after 7.3.0 had shipped.</p>
+
+<h3 id="what-you-need-access-to">What you need access to</h3>
+
 <ul>
-  <li>The <a href="http://www.oracle.com/technetwork/java/codeconvtoc-136057">“Code Conventions for the Java Programming Language”</a>,
-as published by Oracle.</li>
+  <li>A committer account with your Apache and GitHub accounts linked in
+<a href="https://gitbox.apache.org/setup/">GitBox</a>.</li>
+  <li>A code signing key published in
+<a href="https://dist.apache.org/repos/dist/release/struts/KEYS"><code class="language-plaintext highlighter-rouge">KEYS</code></a> and in the ASF web of trust.</li>
+  <li>ASF credentials for <code class="language-plaintext highlighter-rouge">dist.apache.org</code> (Subversion) and for
+<a href="https://repository.apache.org/">Nexus</a>.</li>
 </ul>
 
-<h2 id="clarifications">Clarifications</h2>
+<h2 id="the-seven-phases">The seven phases</h2>
+
+<p>A release is seven phases with a gate between each. A phase is finished when its gate is
+verifiable by someone other than you: “I ran the command” is not a gate, “the URL resolves” is.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Phase</th>
+      <th>Gate before moving on</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><a href="#phase-1--prepare">Prepare</a></td>
+      <td>Branch green, version decided, parent poms released</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><a href="#phase-2--cut">Cut</a></td>
+      <td>Tag pushed, artifacts in a <strong>closed</strong> Nexus staging repository</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><a href="#phase-3--stage">Stage</a></td>
+      <td>Assemblies in <code class="language-plaintext highlighter-rouge">dist/dev</code>, Version Notes page live, <code class="language-plaintext highlighter-rouge">[TEST]</code> mail sent</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><a href="#phase-4--vote">Vote</a></td>
+      <td>72 hours elapsed, three binding <code class="language-plaintext highlighter-rouge">+1</code>, result mail sent</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><a href="#phase-5--promote">Promote</a></td>
+      <td>Nexus repository released, <code class="language-plaintext highlighter-rouge">dist/dev</code> → <code class="language-plaintext highlighter-rouge">dist/release</code>, 24 hour rsync waited</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><a href="#phase-6--publish">Publish</a></td>
+      <td>Site updated, GitHub release un-flagged, <code class="language-plaintext highlighter-rouge">[ANN]</code> mail delivered</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><a href="#phase-7--security-advisories">Advisories</a></td>
+      <td>Bulletins public, CVE records filled, advisory mails delivered</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Phase 7 exists only when the release carries a security fix, and it is strictly the last thing
+that happens — see <a href="#phase-7--security-advisories">Security advisories</a>.</p>
+
+<h2 id="phase-1--prepare">Phase 1 — Prepare</h2>
+
+<p>Start from a clean, up-to-date checkout of the line you are releasing and confirm it builds.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout main <span class="o">&amp;&amp;</span> git pull <span class="nt">--ff-only</span>
+mvn clean <span class="nb">install</span> <span class="nt">-DskipAssembly</span>
+</code></pre></div></div>
+
+<p>Then:</p>
+
 <ul>
-  <li>First, “Observe the style of the original”. Resist the temptation to make stylistic changes for their own
-sake. But, if you must reformat code, commit style changes separately from code changes. Either change
-the style, commit, and then change the code, or vice-versa.</li>
-  <li>Set editors to replace tabs with spaces and do not trim trailing spaces. Tabs confound the version
-control alerts. Trimming trailing spaces creates unnecessary changes.</li>
-  <li>Specify imported classes (do not use <em>.*</em>).</li>
-  <li>Write all if/else statements as full blocks with each clause within braces, unless the entire statement fits
-on the same line.</li>
-  <li>Use <code class="language-plaintext highlighter-rouge">FIXME:</code> and <code class="language-plaintext highlighter-rouge">TODO:</code> tokens to mark follow up notes in code. You may also
-include your Apache username and the date.</li>
-  <li>Omit <code class="language-plaintext highlighter-rouge">@author</code> tags.</li>
-  <li><code class="language-plaintext highlighter-rouge">@since</code> to document changes between Struts versions, as in <code class="language-plaintext highlighter-rouge">@since Struts 2.1.</code></li>
-  <li>Wrap lines of code and JavaDoc at column 78. You can include a “comment rule” in the source to help with
-this.</li>
-  <li>Please do your best to provide high-quality Javadocs for all source code elements. Package overviews
-(aka “Developer Guides”) are also encouraged.</li>
-  <li>When working on a bugfix, please first write a test case that proves the bug exists, and then use the test
-to prove the bug is fixed. =:0)</li>
-  <li>When working on an enhancement, please feel free to use test-driven design and write the test first <code class="language-plaintext highlighter-rouge">&lt;head-slap/&gt;</code></li>
-  <li>As files are updated from year to year, the copyright on each file should be extended to include the current
-year. <em>You do not need to change the copyright year unless you change the file.</em>  Every source file should
-include the ASF copyright notice and current Apache License and copyright.</li>
-  <li>Provide high-level API compatibility for any changes made within the same major release series (#.x.x).
-Changes which adversely affect compatibility should be slotted for the next major release series (++#.x.x).</li>
-  <li>Our favorite books about programming are
-<a href="http://www.amazon.com/exec/obidos/ISBN=0201633612/apachesoftwar-20/">Design Patterns</a>,
-<a href="http://www.amazon.com/exec/obidos/ISBN=0201485672/apachesoftwar-20/">Refactoring</a>,
-and <a href="http://www.amazon.com/exec/obidos/ISBN=0735619670/apachesoftwar-20/">Code Complete</a></li>
-  <li>Our favorite book about open source development is the
-<a href="http://www.amazon.com/exec/obidos/ISBN=1565927249/apachesoftwar-20/">The Cathedral and the Bazaar</a></li>
-  <li>Our favorite science fiction author is
-<a href="http://www.nitrosyncretic.com/rah/">Robert Heinlein</a>,
-<a href="http://jargon.net/jargonfile/t/TANSTAAFL">TANSTAAFL</a>,
-(Except on Friday, when we favor <a href="http://news.bbc.co.uk/1/hi/uk/1326657.stm">Douglas Adams</a>).</li>
+  <li>Decide the version number from its semantic versioning impact. Do not read it off the
+<code class="language-plaintext highlighter-rouge">-SNAPSHOT</code>.</li>
+  <li>Confirm that <code class="language-plaintext highlighter-rouge">struts-master</code> and <code class="language-plaintext highlighter-rouge">struts-annotations</code> are released versions, not snapshots. The
+root pom’s <code class="language-plaintext highlighter-rouge">&lt;parent&gt;</code> must not point at a snapshot.</li>
+  <li>Review JIRA: every issue fixed since the last tag has a fix version set, and nothing unresolved
+carries the version you are about to release.</li>
+  <li>Release the version in JIRA once the last issue is closed, and add the next version to the
+roadmap.</li>
+</ul>
+
+<p>The BOM needs no version synchronisation. <code class="language-plaintext highlighter-rouge">bom/pom.xml</code> inherits the root version through its
+<code class="language-plaintext highlighter-rouge">&lt;parent&gt;</code> and declares its members as <code class="language-plaintext highlighter-rouge">${project.version}</code>.</p>
+
+<h2 id="phase-2--cut">Phase 2 — Cut</h2>
+
+<h3 id="cut-from-a-release-branch-not-from-the-line-branch">Cut from a release branch, not from the line branch</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> release/7.3.0-RC1 main    <span class="c"># or off support/struts-6-x-x for the 6.x line</span>
+git push <span class="nt">-u</span> origin release/7.3.0-RC1
+</code></pre></div></div>
+
+<p>The two <code class="language-plaintext highlighter-rouge">[maven-release-plugin]</code> commits land on that branch and the line branch is never
+touched. A failed vote is then a deleted branch rather than a revert.</p>
+
+<h3 id="prepare-and-perform">Prepare and perform</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn release:prepare
+</code></pre></div></div>
+
+<p>No flags. <code class="language-plaintext highlighter-rouge">autoVersionSubmodules</code> is configured in the root pom, alongside the ASF parent’s
+<code class="language-plaintext highlighter-rouge">useReleaseProfile=false</code>, <code class="language-plaintext highlighter-rouge">goals=deploy</code> and <code class="language-plaintext highlighter-rouge">releaseProfiles=apache-release</code>. If you find
+yourself passing <code class="language-plaintext highlighter-rouge">-D</code> to the release plugin, the setting belongs in the pom instead — a flag that
+has to be remembered is a flag that will be forgotten.</p>
+
+<p class="alert alert-warning">At the SCM tag prompt, type <code class="language-plaintext highlighter-rouge">STRUTS_X_Y_Z</code>. The plugin’s default is derived from the root
+artifactId and is wrong; every Struts tag in history uses the underscore form, and the GitHub
+release, the Version Notes and the website all assume it.</p>
+
+<p>For a <a href="http://maven.apache.org/plugins/maven-release-plugin/usage.html">dry run</a> add
+<code class="language-plaintext highlighter-rouge">-DdryRun=true</code>, then <code class="language-plaintext highlighter-rouge">mvn release:clean</code> before the real run. If the command fails part way
+through, re-run it as is: <code class="language-plaintext highlighter-rouge">-Dresume</code> defaults to true and it picks up where it stopped.</p>
+
+<p>The result is two commits on the release branch — <code class="language-plaintext highlighter-rouge">[maven-release-plugin] prepare release
+STRUTS_X_Y_Z</code> and <code class="language-plaintext highlighter-rouge">[maven-release-plugin] prepare for next development iteration</code> — plus the tag.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn release:perform
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">retryFailedDeploymentCount</code> is configured on <code class="language-plaintext highlighter-rouge">maven-deploy-plugin</code> in the root pom, not passed
+here. It has to be in the pom to work at all: <code class="language-plaintext highlighter-rouge">release:perform</code> forks a fresh Maven build, and
+that fork does not inherit <code class="language-plaintext highlighter-rouge">-D</code> properties from the outer invocation.</p>
+
+<p>If you need to run the deployment again, or from a different machine:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout STRUTS_X_Y_Z
+mvn javadoc:javadoc deploy <span class="nt">-DperformRelease</span><span class="o">=</span><span class="nb">true</span> <span class="nt">-Papache-release</span>
+</code></pre></div></div>
+
+<h3 id="close-the-staging-repository">Close the staging repository</h3>
+
+<p>Log in to <a href="https://repository.apache.org/">Nexus</a>, then <strong>Staging Repositories</strong> → select the
+repository → <strong>Close</strong>.</p>
+
+<p class="alert alert-warning">A successful <code class="language-plaintext highlighter-rouge">release:perform</code> leaves the repository <em>open</em>, and an open repository serves
+nothing under the staging group URL. Until it is closed, every link in the Version Notes resolves
+to nothing and no one can test the build.</p>
+
+<p>The gate is that the artifacts resolve under:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://repository.apache.org/content/groups/staging/org/apache/struts/struts2-core/$VERSION/
+</code></pre></div></div>
+
+<p>The staging repository is keyed by user <em>and</em> public IP address. If your address changed mid
+release you will have two of them; check the dates and drop the stale one.</p>
+
+<h2 id="phase-3--stage">Phase 3 — Stage</h2>
+
+<p>To make the build testable, the assemblies are moved out of Nexus into
+<code class="language-plaintext highlighter-rouge">https://dist.apache.org/repos/dist/dev/struts/$VERSION</code>. The steps are scripted in
+<a href="https://github.com/apache/struts/blob/main/.claude/skills/releasing-struts/scripts/stage-assemblies.sh"><code class="language-plaintext highlighter-rouge">stage-assemblies.sh</code></a>;
+run it from a scratch directory, since it creates <code class="language-plaintext highlighter-rouge">./$VERSION</code> and a temporary Subversion working
+copy in the current directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">mktemp</span> <span class="nt">-d</span><span class="si">)</span><span class="s2">"</span>
+<span class="nv">VERSION</span><span class="o">=</span>7.3.0 /path/to/stage-assemblies.sh
+</code></pre></div></div>
+
+<p>It fetches the <code class="language-plaintext highlighter-rouge">zip</code>, <code class="language-plaintext highlighter-rouge">md5</code>, <code class="language-plaintext highlighter-rouge">sha1</code> and <code class="language-plaintext highlighter-rouge">asc</code> files from the closed staging repository, strips
+the <code class="language-plaintext highlighter-rouge">2-assembly</code> infix from their names, drops the <code class="language-plaintext highlighter-rouge">.pom</code> files and the legacy <code class="language-plaintext highlighter-rouge">md5</code>/<code class="language-plaintext highlighter-rouge">sha1</code>
+hashes, generates <code class="language-plaintext highlighter-rouge">.sha256</code> and <code class="language-plaintext highlighter-rouge">.sha512</code> locally, prints what it is about to publish, and then
+commits the directory to <code class="language-plaintext highlighter-rouge">dist/dev/struts</code>. In outline:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-erobots</span><span class="o">=</span>off <span class="nt">-nv</span> <span class="nt">-l</span> 1 <span class="nt">--accept</span><span class="o">=</span>zip,md5,sha1,asc <span class="nt">-r</span> <span class="nt">-nd</span> <span class="nt">-nH</span> <span class="se">\</span>
+  https://repository.apache.org/content/groups/staging/org/apache/struts/struts2-assembly/<span class="nv">$VERSION</span>
+<span class="k">for </span>f <span class="k">in</span> <span class="k">*</span>2-assembly<span class="k">*</span>.zip<span class="k">*</span><span class="p">;</span> <span class="k">do </span><span class="nb">mv</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span> | <span class="nb">sed </span>s/2-assembly//g<span class="si">)</span><span class="s2">"</span><span class="p">;</span> <span class="k">done
+</span><span class="nb">rm</span> <span class="nt">-f</span> struts2-assembly-<span class="k">*</span>.pom<span class="k">*</span> ./<span class="k">*</span>.md5 ./<span class="k">*</span>.sha1
+<span class="k">for </span>f <span class="k">in</span> <span class="k">*</span>.zip<span class="p">;</span> <span class="k">do </span>shasum <span class="nt">-a</span> 256 <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span> <span class="o">&gt;</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">.sha256"</span><span class="p">;</span> shasum <span class="nt">-a</span> 512 <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span> <span class="o">&gt;</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">.sha512"</span><span class="p">;</span> <span class="k">done
+</span>svn <span class="nt">--no-auth-cache</span> co <span class="nt">--depth</span> empty https://dist.apache.org/repos/dist/dev/struts/ struts-dev
+<span class="nb">mv</span> <span class="nv">$VERSION</span> struts-dev/ <span class="o">&amp;&amp;</span> <span class="nb">cd </span>struts-dev
+svn add <span class="nt">--force</span> ./
+svn <span class="nt">--no-auth-cache</span> commit <span class="nt">-m</span> <span class="s2">"Updates test release </span><span class="nv">$VERSION</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>The gate is <code class="language-plaintext highlighter-rouge">https://dist.apache.org/repos/dist/dev/struts/$VERSION/</code>, holding <strong>six</strong> assemblies
+— <code class="language-plaintext highlighter-rouge">struts-$VERSION-all.zip</code>, <code class="language-plaintext highlighter-rouge">-apps.zip</code>, <code class="language-plaintext highlighter-rouge">-docs.zip</code>, <code class="language-plaintext highlighter-rouge">-lib.zip</code>, <code class="language-plaintext highlighter-rouge">-min-lib.zip</code> and <code class="language-plaintext highlighter-rouge">-src.zip</code>
+— each with an <code class="language-plaintext highlighter-rouge">.asc</code>, <code class="language-plaintext highlighter-rouge">.sha256</code> and <code class="language-plaintext highlighter-rouge">.sha512</code> beside it: 24 files, no <code class="language-plaintext highlighter-rouge">.md5</code>, no <code class="language-plaintext highlighter-rouge">.sha1</code>, no
+<code class="language-plaintext highlighter-rouge">.pom</code>. <code class="language-plaintext highlighter-rouge">KEYS</code> lives one level up, in <code class="language-plaintext highlighter-rouge">dist/release/struts/</code>.</p>
+
+<p class="alert alert-warning">Count the files. The script stops on a step that fails, not on a download that quietly returns a
+subset, so a short upload can reach <code class="language-plaintext highlighter-rouge">dist/dev</code> looking healthy.</p>
+
+<p>The rest of this phase is paperwork:</p>
+
+<ul>
+  <li>Create the <strong>Version Notes</strong> page in the wiki for the new version, linking the previous notes in
+the series, the JIRA issues fixed, and the staging repository, and link it from the
+<a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Migration Guide</a>.</li>
+  <li>Create the <strong>GitHub release</strong> for the tag, flagged as a <strong>prerelease</strong>.</li>
+  <li>Send a <code class="language-plaintext highlighter-rouge">[TEST]</code> mail to <code class="language-plaintext highlighter-rouge">dev@struts.apache.org</code> and <code class="language-plaintext highlighter-rouge">user@struts.apache.org</code> announcing that the
+build is available, and give people time to test the actual bits.</li>
+</ul>
+
+<h2 id="phase-4--vote">Phase 4 — Vote</h2>
+
+<p>Post a release/quality vote to the dev list and only the dev list.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To: dev@struts.apache.org
+Bcc: private@struts.apache.org
+</code></pre></div></div>
+
+<p>Never <code class="language-plaintext highlighter-rouge">user@</code>. <code class="language-plaintext highlighter-rouge">private@</code> is copied so that binding voters see the thread.</p>
+
+<p>The vote runs for a <strong>minimum of 72 hours</strong> and needs <strong>three binding <code class="language-plaintext highlighter-rouge">+1</code></strong> votes; PMC members’
+votes are the binding ones. Close the vote with a result mail on the same thread.</p>
+
+<p>If the vote fails, delete the release branch and start again from phase 1 with a new version
+number. Nothing that has been published so far is promoted.</p>
+
+<h2 id="phase-5--promote">Phase 5 — Promote</h2>
+
+<p>Move the assemblies from <code class="language-plaintext highlighter-rouge">dist/dev</code> to <code class="language-plaintext highlighter-rouge">dist/release</code>. This is the point at which they start
+replicating to the mirrors. The step is scripted in
+<a href="https://github.com/apache/struts/blob/main/.claude/skills/releasing-struts/scripts/promote-dist.sh"><code class="language-plaintext highlighter-rouge">promote-dist.sh</code></a>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>svn <span class="nb">mv </span>https://dist.apache.org/repos/dist/dev/struts/<span class="nv">$VERSION</span>/ <span class="se">\</span>
+       https://dist.apache.org/repos/dist/release/struts/ <span class="se">\</span>
+       <span class="nt">-m</span> <span class="s2">"Release Struts </span><span class="nv">$VERSION</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>Then log in to <a href="https://repository.apache.org/">Nexus</a> again and <strong>release</strong> the staging
+repository, which replicates the artifacts to Maven Central. See
+<a href="http://maven.apache.org/developers/release/apache-release.html">Releasing a Maven-based project</a>
+for further details.</p>
+
+<p>Old releases may be removed from <code class="language-plaintext highlighter-rouge">dist/release/struts/</code> to keep the mirror set small; everything
+removed stays available from <a href="https://archive.apache.org/dist/struts/">archive.apache.org</a>.
+Decide deliberately which versions to keep — in practice several supported versions from both
+lines are kept — and do not prune on autopilot.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>svn del https://dist.apache.org/repos/dist/release/struts/<span class="nv">$OLD_VERSION</span>/ <span class="nt">-m</span> <span class="s2">"Removing old release"</span>
+</code></pre></div></div>
+
+<p class="alert alert-danger">Wait <strong>24 hours</strong> after the move before anything in phase 6. This is the ASF mirroring
+requirement, and announcing into an unmirrored release sends everyone to a 404.</p>
+
+<h2 id="phase-6--publish">Phase 6 — Publish</h2>
+
+<h3 id="update-the-website">Update the website</h3>
+
+<p>The site is <a href="https://github.com/apache/struts-site">apache/struts-site</a> and publishing is the
+merge — there is no separate deploy step. Open a pull request against <code class="language-plaintext highlighter-rouge">main</code>; it is staged
+automatically at <a href="https://struts.staged.apache.org/">struts.staged.apache.org</a> for review.</p>
+
+<p><code class="language-plaintext highlighter-rouge">_config.yml</code> — these move together:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">current_version</span><span class="pi">:</span> <span class="s">7.3.0</span>
+<span class="na">current_version_short</span><span class="pi">:</span> <span class="m">730</span>
+<span class="na">prev_version</span><span class="pi">:</span> <span class="s">6.11.0</span>
+<span class="na">prev_version_short</span><span class="pi">:</span> <span class="m">6110</span>
+<span class="na">release_date</span><span class="pi">:</span> <span class="s">1 August </span><span class="m">2026</span>
+<span class="na">prev_release_date</span><span class="pi">:</span> <span class="s">1 August </span><span class="m">2026</span>
+<span class="na">release_date_short</span><span class="pi">:</span> <span class="m">20260801</span>
+<span class="na">prev_release_date_short</span><span class="pi">:</span> <span class="s">20260801-6110</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">release_date</code> is the <strong>tag</strong> date, not the announcement date: 7.2.1 was tagged on 15 June and
+announced on 30 June, and the site says 15 June. The <code class="language-plaintext highlighter-rouge">*_date_short</code> values are the anchors in
+<code class="language-plaintext highlighter-rouge">announce-YYYY.md</code>; when two releases share a tag date, disambiguate the second one (as
+<code class="language-plaintext highlighter-rouge">20260801-6110</code> above) so that each home page box links to its own entry.</p>
+
+<p>Then:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">source/announce-YYYY.md</code> — a new <code class="language-plaintext highlighter-rouge">####</code> entry at the top, newest first, with its
+<code class="language-plaintext highlighter-rouge">{#aYYYYMMDD}</code> anchor.</li>
+  <li><code class="language-plaintext highlighter-rouge">source/releases.md</code> — the release table, and move the superseded version into
+<strong>Prior Releases</strong>. This one is easy to miss; a site update without it is incomplete.</li>
+  <li><code class="language-plaintext highlighter-rouge">source/index.html</code> — the GA boxes read their values from <code class="language-plaintext highlighter-rouge">_config.yml</code>; the security boxes are
+hand-edited.</li>
+  <li><code class="language-plaintext highlighter-rouge">source/dtds/</code> — only if a new DTD shipped.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">source/download.cgi</code> and <code class="language-plaintext highlighter-rouge">source/download.md</code> need no per-release edit: the first is a wrapper
+around <code class="language-plaintext highlighter-rouge">mirrors.cgi</code>, and the second interpolates its versions from <code class="language-plaintext highlighter-rouge">_config.yml</code>.</p>
+
+<h3 id="un-flag-the-github-release">Un-flag the GitHub release</h3>
+
+<p>Remove the prerelease flag from the GitHub release created in phase 3. Title <code class="language-plaintext highlighter-rouge">Struts X.Y.Z</code>, tag
+<code class="language-plaintext highlighter-rouge">STRUTS_X_Y_Z</code>.</p>
+
+<p class="alert alert-warning">The release must stay flagged as a prerelease for the whole of the vote. Un-flagging it early
+means voting on an artifact the world already treats as final.</p>
+
+<h3 id="announce-it">Announce it</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To: user@struts.apache.org
+Cc: announce@apache.org, announcements@struts.apache.org
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">dev@</code> is not on it — the list already saw the <code class="language-plaintext highlighter-rouge">[TEST]</code> mail and the vote.</p>
+
+<p class="alert alert-danger">The announcement must be <strong>plain text</strong> and sent from your <code class="language-plaintext highlighter-rouge">@apache.org</code> identity.
+<code class="language-plaintext highlighter-rouge">announce@apache.org</code> rejects any message carrying a <code class="language-plaintext highlighter-rouge">text/html</code> part, and
+<code class="language-plaintext highlighter-rouge">announcements@struts.apache.org</code> rejects anything not sent from an <code class="language-plaintext highlighter-rouge">@apache.org</code> address. One
+list accepting the mail is not evidence that the format was right.</p>
+
+<p>The body carries the General Availability boilerplate, a link to the Version Notes, a link to the
+Migration Guide for a new major line, the minimum JDK and specification requirements for that
+line, and the <a href="download.cgi">download page</a>.</p>
+
+<h2 id="phase-7--security-advisories">Phase 7 — Security advisories</h2>
+
+<p>This phase exists only when the release carries a security fix, and it happens <strong>after</strong> phase 6.
+The bulletin itself is usually written when the report is triaged, which may be months before a
+release carries the fix.</p>
+
+<p>The ordering is not negotiable:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>release GA  →  bulletin published  →  advisory mails  →  CVE record submitted
+</code></pre></div></div>
+
+<p>A bulletin published before the fixed artifact is downloadable tells attackers what to look for
+and gives operators nothing to do about it.</p>
+
+<p class="alert alert-danger">Nothing about an unpublished advisory goes into the release paperwork — not the Version Notes,
+not the <code class="language-plaintext highlighter-rouge">[TEST]</code> mail, not the <code class="language-plaintext highlighter-rouge">[VOTE]</code>, not the commit messages, not the site entry. Neutral
+tickets are what let the embargo survive a public release process.</p>
+
+<p>A release containing <em>only</em> embargoed fixes is self-disclosing: the difference between the two
+tags is the vulnerability, whatever the commit messages say. That is a reason to bundle such
+fixes with unrelated work, or to publish the bulletins together with the release — not a reason
+to pretend otherwise.</p>
+
+<p>The CVE record goes <code class="language-plaintext highlighter-rouge">RESERVED → DRAFT → READY</code>, and <code class="language-plaintext highlighter-rouge">READY</code> is the last state the PMC sets. ASF
+Security submits it to the CVE Program and sets it <code class="language-plaintext highlighter-rouge">PUBLIC</code>, so <code class="language-plaintext highlighter-rouge">cve.org</code> links return 404 until
+they do. That is expected and is not a reason to delay the bulletin or the mails.</p>
+
+<p>See <a href="security/">Security bulletins</a> for how bulletins are written and published, and
+<a href="security">Reporting security issues</a> for how reports reach us in the first place.</p>
+
+<h2 id="after-the-release">After the release</h2>
+
+<ul>
+  <li>Add a site announcement entry for any security advisory, in the same form as the GA one.</li>
+  <li>Check the <a href="https://nvd.nist.gov/">NVD</a> entry once a CVE goes public. The affected ranges have
+been wrong before; the fix is an email to <code class="language-plaintext highlighter-rouge">nvd@nist.gov</code> citing the CVE record.</li>
+  <li>Answer any coordinator who is holding an advisory in their existing thread, once ours is live.</li>
+  <li>Update the Version Notes page if the vote forced a re-cut.</li>
+</ul>
+
+<h2 id="red-flags">Red flags</h2>
+
+<p>Stop if any of these is about to happen:</p>
+
+<ul>
+  <li>Cutting a tag before the version number has been stated and agreed.</li>
+  <li>Inferring the release version from the <code class="language-plaintext highlighter-rouge">-SNAPSHOT</code> in the pom.</li>
+  <li>A <code class="language-plaintext highlighter-rouge">[VOTE]</code> opened on a staging repository that is not closed, or on a link that 404s.</li>
+  <li>Announcing before the 24 hour mirror wait.</li>
+  <li>Any severity, CVE, <code class="language-plaintext highlighter-rouge">S2-XXX</code> or bulletin link appearing in release paperwork.</li>
+  <li>A bulletin published before the fixed release is downloadable.</li>
+  <li>One release “covering” both maintenance lines.</li>
 </ul>
 
 <p>Next: <a href="bylaws">PMC Charter</a></p>
