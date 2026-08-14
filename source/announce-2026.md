@@ -13,6 +13,70 @@ title: Announcements 2026
   Skip to: <a href="announce-2025">Announcements - 2025</a>
 </p>
 
+#### 14 August 2026 - CVE-2026-73631: Shared parsing state in the JSON plugin {#a20260814-s2070}
+
+The Apache Struts group recommends upgrading to Apache Struts version 7.3.0 to mitigate potential security
+vulnerability when populating actions from a JSON request body with the
+[JSON plugin](https://struts.apache.org/plugins/json/). Only Struts 7.2.1 is affected.
+
+> Please read the Security Bulletin [S2-070](https://cwiki.apache.org/confluence/display/WW/S2-070) to find more
+> details about this security vulnerability
+
+**All developers are strongly advised to perform this upgrade.**
+
+You can download the latest version from our [download](download.cgi#struts-ga) page.
+
+#### 14 August 2026 - CVE-2026-73632: Shared serialization state in the JSON plugin {#a20260814-s2071}
+
+The Apache Struts group recommends upgrading to Apache Struts version 7.3.0 to mitigate potential security
+vulnerability when using the SMD / JSON-RPC support of the
+[JSON plugin](https://struts.apache.org/plugins/json/). Only Struts 7.2.1 is affected.
+
+> Please read the Security Bulletin [S2-071](https://cwiki.apache.org/confluence/display/WW/S2-071) to find more
+> details about this security vulnerability
+
+**All developers are strongly advised to perform this upgrade.**
+
+You can download the latest version from our [download](download.cgi#struts-ga) page.
+
+#### 14 August 2026 - CVE-2026-73633: Unbounded read of a JSON request body {#a20260814-s2072}
+
+The Apache Struts group recommends upgrading to Apache Struts version 7.3.0 or 6.11.0 to mitigate potential security
+vulnerability when populating actions from a JSON request body with the
+[JSON plugin](https://struts.apache.org/plugins/json/).
+
+> Please read the Security Bulletin [S2-072](https://cwiki.apache.org/confluence/display/WW/S2-072) to find more
+> details about this security vulnerability
+
+**All developers are strongly advised to perform this upgrade.**
+
+You can download the latest version from our [download](download.cgi#struts-ga) page.
+
+#### 14 August 2026 - CVE-2026-73634: Unbounded read of a Content Security Policy violation report {#a20260814-s2073}
+
+The Apache Struts group recommends upgrading to Apache Struts version 7.3.0 or 6.11.0 to mitigate potential security
+vulnerability in applications that expose an endpoint collecting Content Security Policy violation reports.
+
+> Please read the Security Bulletin [S2-073](https://cwiki.apache.org/confluence/display/WW/S2-073) to find more
+> details about this security vulnerability
+
+**All developers are strongly advised to perform this upgrade.**
+
+You can download the latest version from our [download](download.cgi#struts-ga) page.
+
+#### 14 August 2026 - CVE-2026-73635: Unbounded growth of localized-text caches driven by the request locale {#a20260814-s2074}
+
+The Apache Struts group recommends upgrading to Apache Struts version 7.3.0 or 6.11.0 to mitigate potential security
+vulnerability affecting [localized-text](https://struts.apache.org/core-developers/localization) lookups when no fixed
+locale is configured.
+
+> Please read the Security Bulletin [S2-074](https://cwiki.apache.org/confluence/display/WW/S2-074) to find more
+> details about this security vulnerability
+
+**All developers are strongly advised to perform this upgrade.**
+
+You can download the latest version from our [download](download.cgi#struts-ga) page.
+
 #### 1 August 2026 - Apache Struts version 7.3.0 General Availability {#a20260801}
 
 The Apache Struts group is pleased to announce that Apache Struts version 7.3.0 is available as a "General Availability"
