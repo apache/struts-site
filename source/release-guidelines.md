@@ -87,6 +87,65 @@ pom on `main` still read `7.2.2-SNAPSHOT` after 7.3.0 had shipped.
 - ASF credentials for `dist.apache.org` (Subversion) and for
   [Nexus](https://repository.apache.org/).
 
+### Setting up for your first release
+
+These steps are done once, not per release.
+
+#### Publish your code signing key
+
+Releases are signed with your personal OpenPGP key, and that key has to be discoverable by anyone
+verifying the artifacts. Generate one if you do not have it already, publish it to a keyserver,
+then append it to the project's `KEYS` file:
+
+```bash
+svn co --depth files https://dist.apache.org/repos/dist/release/struts/ struts-release
+cd struts-release
+(gpg --fingerprint --list-sigs "Your Name" && gpg --armor --export "Your Name") >> KEYS
+svn commit KEYS -m "Add public key for <your apache id>"
+```
+
+See the ASF guide to [release signing](https://infra.apache.org/release-signing.html) for key
+size, expiry and web-of-trust recommendations.
+
+#### Configure Maven
+
+`release:perform` deploys to Nexus and signs the artifacts, so `~/.m2/settings.xml` needs both
+your ASF credentials and a way to reach your signing key:
+
+```xml
+<settings>
+  <servers>
+    <server>
+      <id>apache.releases.https</id>
+      <username><!-- your ASF LDAP username --></username>
+      <password><!-- your ASF LDAP password --></password>
+    </server>
+    <server>
+      <id>apache.snapshots.https</id>
+      <username><!-- your ASF LDAP username --></username>
+      <password><!-- your ASF LDAP password --></password>
+    </server>
+  </servers>
+</settings>
+```
+
+{:.alert .alert-warning}
+Do not store either password in clear text. Encrypt them with
+[`mvn --encrypt-password`](https://maven.apache.org/guides/mini/guide-encryption.html), and let
+`gpg-agent` hold your signing passphrase rather than putting a `gpg.passphrase` property in
+`settings.xml`.
+
+See [publishing Maven artifacts](https://infra.apache.org/publishing-maven-artifacts.html) for
+the current ASF settings.
+
+#### Give Maven enough memory
+
+A full build with all tests can need more heap than the default:
+
+```bash
+export MAVEN_OPTS=-Xmx1024m
+```
+
 ## The seven phases
 
 A release is seven phases with a gate between each. A phase is finished when its gate is
