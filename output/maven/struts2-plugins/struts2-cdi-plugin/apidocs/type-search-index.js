@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.apache.struts2.cdi","l":"CdiObjectFactory"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.apache.struts2.cdi","l":"CdiObjectFactory"},{"p":"org.apache.struts2.cdi","l":"CdiProxyService"}];updateSearchResults();
