@@ -159,6 +159,7 @@
       <li><a href="#check-the-jdk-before-building-anything" id="markdown-toc-check-the-jdk-before-building-anything">Check the JDK before building anything</a></li>
       <li><a href="#the-version-number-is-decided-at-release-time" id="markdown-toc-the-version-number-is-decided-at-release-time">The version number is decided at release time</a></li>
       <li><a href="#what-you-need-access-to" id="markdown-toc-what-you-need-access-to">What you need access to</a></li>
+      <li><a href="#setting-up-for-your-first-release" id="markdown-toc-setting-up-for-your-first-release">Setting up for your first release</a></li>
     </ul>
   </li>
   <li><a href="#the-seven-phases" id="markdown-toc-the-seven-phases">The seven phases</a></li>
@@ -282,6 +283,61 @@ pom on <code class="language-plaintext highlighter-rouge">main</code> still read
   <li>ASF credentials for <code class="language-plaintext highlighter-rouge">dist.apache.org</code> (Subversion) and for
 <a href="https://repository.apache.org/">Nexus</a>.</li>
 </ul>
+
+<h3 id="setting-up-for-your-first-release">Setting up for your first release</h3>
+
+<p>These steps are done once, not per release.</p>
+
+<h4 id="publish-your-code-signing-key">Publish your code signing key</h4>
+
+<p>Releases are signed with your personal OpenPGP key, and that key has to be discoverable by anyone
+verifying the artifacts. Generate one if you do not have it already, publish it to a keyserver,
+then append it to the project’s <code class="language-plaintext highlighter-rouge">KEYS</code> file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>svn co <span class="nt">--depth</span> files https://dist.apache.org/repos/dist/release/struts/ struts-release
+<span class="nb">cd </span>struts-release
+<span class="o">(</span>gpg <span class="nt">--fingerprint</span> <span class="nt">--list-sigs</span> <span class="s2">"Your Name"</span> <span class="o">&amp;&amp;</span> gpg <span class="nt">--armor</span> <span class="nt">--export</span> <span class="s2">"Your Name"</span><span class="o">)</span> <span class="o">&gt;&gt;</span> KEYS
+svn commit KEYS <span class="nt">-m</span> <span class="s2">"Add public key for &lt;your apache id&gt;"</span>
+</code></pre></div></div>
+
+<p>See the ASF guide to <a href="https://infra.apache.org/release-signing.html">release signing</a> for key
+size, expiry and web-of-trust recommendations.</p>
+
+<h4 id="configure-maven">Configure Maven</h4>
+
+<p><code class="language-plaintext highlighter-rouge">release:perform</code> deploys to Nexus and signs the artifacts, so <code class="language-plaintext highlighter-rouge">~/.m2/settings.xml</code> needs both
+your ASF credentials and a way to reach your signing key:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;settings&gt;</span>
+  <span class="nt">&lt;servers&gt;</span>
+    <span class="nt">&lt;server&gt;</span>
+      <span class="nt">&lt;id&gt;</span>apache.releases.https<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;username&gt;</span><span class="c">&lt;!-- your ASF LDAP username --&gt;</span><span class="nt">&lt;/username&gt;</span>
+      <span class="nt">&lt;password&gt;</span><span class="c">&lt;!-- your ASF LDAP password --&gt;</span><span class="nt">&lt;/password&gt;</span>
+    <span class="nt">&lt;/server&gt;</span>
+    <span class="nt">&lt;server&gt;</span>
+      <span class="nt">&lt;id&gt;</span>apache.snapshots.https<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;username&gt;</span><span class="c">&lt;!-- your ASF LDAP username --&gt;</span><span class="nt">&lt;/username&gt;</span>
+      <span class="nt">&lt;password&gt;</span><span class="c">&lt;!-- your ASF LDAP password --&gt;</span><span class="nt">&lt;/password&gt;</span>
+    <span class="nt">&lt;/server&gt;</span>
+  <span class="nt">&lt;/servers&gt;</span>
+<span class="nt">&lt;/settings&gt;</span>
+</code></pre></div></div>
+
+<p class="alert alert-warning">Do not store either password in clear text. Encrypt them with
+<a href="https://maven.apache.org/guides/mini/guide-encryption.html"><code class="language-plaintext highlighter-rouge">mvn --encrypt-password</code></a>, and let
+<code class="language-plaintext highlighter-rouge">gpg-agent</code> hold your signing passphrase rather than putting a <code class="language-plaintext highlighter-rouge">gpg.passphrase</code> property in
+<code class="language-plaintext highlighter-rouge">settings.xml</code>.</p>
+
+<p>See <a href="https://infra.apache.org/publishing-maven-artifacts.html">publishing Maven artifacts</a> for
+the current ASF settings.</p>
+
+<h4 id="give-maven-enough-memory">Give Maven enough memory</h4>
+
+<p>A full build with all tests can need more heap than the default:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">MAVEN_OPTS</span><span class="o">=</span><span class="nt">-Xmx1024m</span>
+</code></pre></div></div>
 
 <h2 id="the-seven-phases">The seven phases</h2>
 
