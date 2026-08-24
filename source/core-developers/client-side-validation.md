@@ -69,7 +69,7 @@ an `int` or `double` validator is attached to it.
 | `requiredstring` | `required` | on text-entry controls (`text`, `search`, `tel`, `password`, `email`, `url`) and `textarea` |
 | `required` | `required` | only on `radio` and `file` |
 | `stringlength` | `minlength` / `maxlength` | on text-entry or `textarea`, and only if the validator has `trim="false"`; each attribute is added only if actually configured |
-| `regex` | `pattern` | on text-entry controls only, and only if `caseSensitive="true"`, `trim="false"`, and the regex is ECMAScript-safe (see below) |
+| `regex` | `pattern` | on text-entry controls only, and only if `caseSensitive="true"`, `trim="false"`, the regex is ECMAScript-safe (see below), and the validator is not an `email` or `creditcard` validator (both extend `RegexFieldValidator` but carry grammars the browser does not share) |
 | `int`, `short`, `long` | `min` / `max` | only when the control is already `type="number"` or `type="range"` |
 | `double` | `min` / `max` | same as above; only inclusive bounds are emitted — exclusive bounds have no HTML equivalent and are omitted |
 | `date` | — | nothing yet; temporal `min`/`max` is deferred to a future release |
@@ -77,7 +77,8 @@ an `int` or `double` validator is attached to it.
 | `fieldexpression`, `expression`, `conversion`, visitor validators | — | never emitted |
 | any validator carrying a message | `data-msg-<validatorType>` | always added, including for validators that emit no constraint attribute at all |
 
-Two of these conditions are easy to miss and sharply limit how often `required` and `pattern` actually show up:
+Two of these conditions are easy to miss and sharply limit how often `required`, `minlength`/`maxlength`,
+and `pattern` actually show up:
 
 **`required` is split across two validators, and they don't behave alike.** `requiredstring` fails on
 null, empty, and (by default) blank values, so it is strictly stricter than the browser's `required` — safe
@@ -89,12 +90,15 @@ Only `radio` and `file` controls omit their parameter entirely when left empty, 
 control types where plain `required` agrees with the server — which is why the table above emits `required`
 for the `required` validator on those two types alone.
 
-**`pattern` needs `trim="false"`, which is not the default.** `RegexFieldValidator.trim` defaults to
-`true`, so the server matches the field's *trimmed* value while an HTML `pattern` attribute matches the
-*raw* one. A regex like `[a-z]+` would accept `"abc "` server-side while the browser blocks it. Because of
-this, `pattern` is only ever emitted for validators explicitly configured with `trim="false"` — which most
-existing `regex` validators are not. In practice, expect `pattern` to show up rarely until applications
-start setting `trim="false"` deliberately for fields where it's safe.
+**Both `minlength`/`maxlength` and `pattern` need `trim="false"`, which is not the default.** Both
+`StringLengthFieldValidator.trim` and `RegexFieldValidator.trim` default to `true`, so the server measures
+or matches the field's *trimmed* value while the HTML attribute constrains the *raw* one. A `stringlength`
+validator with `maxLength="4"` would reject `"abcd "` server-side after trimming while the browser, seeing
+five raw characters, would block it first — and a `regex` of `[a-z]+` would accept `"abc "` server-side
+while the browser blocks it. Because of this, `minlength`/`maxlength` and `pattern` are only ever emitted
+for validators explicitly configured with `trim="false"` — which most existing `stringlength` and `regex`
+validators are not. In practice, expect both to show up rarely until applications start setting
+`trim="false"` deliberately for fields where it's safe.
 
 **ECMAScript-safe** means the regex uses only constructs that mean the same thing in Java's regex engine
 and in the browser's: literals, `\d`/`\w` and their negations, character classes without POSIX or Unicode
