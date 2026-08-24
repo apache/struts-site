@@ -14,8 +14,9 @@ The _css_xhtml theme_ provides all the basics that the [simple theme](simple-the
   [textfield](textfield-tag), [select](select-tag), etc)
 - Labels for each of the HTML [Struts Tags](struts-tags), placed according to the CSS stylesheet
 - [Validation](../core-developers/validation) and error reporting
-- [Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation) using 100% 
-  JavaScript on the browser
+- [Pure JavaScript Client Side Validation](../core-developers/client-side-validation#pure-javascript-client-side-validation-deprecated) 
+  using 100% JavaScript on the browser — **deprecated since Struts 7.4.0, removed in 8.0.0**; use the 
+  [html5 theme](html5-theme) instead
 
 ## Wrapping the Simple Theme
 
@@ -69,15 +70,15 @@ The head includes a style sheet. The contents of **styles.css** are:
 ### Form template
 
 The css_xhtml [form](form-tag) template is almost exactly like the _xhtml form template_ , including support for 
-[Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation). The difference 
-is that instead of printing out an opening and closing `<table>` element, there are no elements. Instead, the CSS rules 
-for the individual HTML tags are assumed to handle all display logic. However, as noted, client-side validation is still 
-supported.
+[Pure JavaScript Client Side Validation](../core-developers/client-side-validation#pure-javascript-client-side-validation-deprecated)
+(deprecated since Struts 7.4.0, removed in 8.0.0). The difference is that instead of printing out an opening and closing 
+`<table>` element, there are no elements. Instead, the CSS rules for the individual HTML tags are assumed to handle all 
+display logic. However, as noted, client-side validation is still supported.
 
 ### css_xhtml form template
 
 The css_xhtml [form](form-tag) template is almost exactly like the _xhtml form template_ , including support for 
-[Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation). The only 
-difference is that instead of printing out an opening and closing `<table>` element, there are no elements. Instead, 
-the CSS rules for the individual HTML tags are assumed to handle all display logic. However, as noted, client side 
-validation is still supported.
+[Pure JavaScript Client Side Validation](../core-developers/client-side-validation#pure-javascript-client-side-validation-deprecated)
+(deprecated since Struts 7.4.0, removed in 8.0.0). The only difference is that instead of printing out an opening and 
+closing `<table>` element, there are no elements. Instead, the CSS rules for the individual HTML tags are assumed to 
+handle all display logic. However, as noted, client side validation is still supported.

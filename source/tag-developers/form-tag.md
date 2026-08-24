@@ -41,3 +41,10 @@ There are two flavours [Client Side Validation](../core-developers/client-side-v
 are using (xhtml, ajax, etc). If you are using the [xhtml theme](xhtml-theme) or [css_xhtml theme](css-xhtml-theme), 
 pure client side validation will be used. Read the [Client Side Validation](../core-developers/client-side-validation)
 docs for more information.
+
+> **`validate` is deprecated since Struts 7.4.0 and will be removed in 8.0.0** 
+> ([WW-5694](https://issues.apache.org/jira/browse/WW-5694), 
+> [WW-5696](https://issues.apache.org/jira/browse/WW-5696)). It only controls the older, generated-JavaScript 
+> client-side validator used by the xhtml and css_xhtml themes. It has no effect on the [html5 theme's constraint 
+> validation](../core-developers/client-side-validation#html5-constraint-validation), which applications should 
+> use instead.
