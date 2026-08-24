@@ -39,8 +39,9 @@ theme](../tag-developers/html5-theme#using-the-html5-theme)). There is no per-fo
 unlike the deprecated JavaScript validator, this feature does not use `<s:form validate="true">`. Once the
 constant is on and a field's theme is `html5`, its validators are consulted automatically.
 
-> The constant defaults to `false` in 7.4.0 so existing `html5`-theme forms keep rendering unchanged. The
-> default is expected to flip to `true` in Struts 8.0.0.
+> The constant defaults to `false` so existing `html5`-theme forms keep rendering unchanged. The default is
+> expected to flip to `true` in a future major release, tracked by
+> [WW-5696](https://issues.apache.org/jira/browse/WW-5696).
 
 ### The governing rule: never false-reject
 
