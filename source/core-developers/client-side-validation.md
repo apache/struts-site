@@ -93,9 +93,10 @@ for the `required` validator on those two types alone.
 **Both `minlength`/`maxlength` and `pattern` need `trim="false"`, which is not the default.** Both
 `StringLengthFieldValidator.trim` and `RegexFieldValidator.trim` default to `true`, so the server measures
 or matches the field's *trimmed* value while the HTML attribute constrains the *raw* one. A `stringlength`
-validator with `maxLength="4"` would reject `"abcd "` server-side after trimming while the browser, seeing
-five raw characters, would block it first — and a `regex` of `[a-z]+` would accept `"abc "` server-side
-while the browser blocks it. Because of this, `minlength`/`maxlength` and `pattern` are only ever emitted
+validator with `maxLength="4"` accepts `"abcd "` — it trims to four characters, which is within the limit —
+but a browser enforcing `maxlength="4"` would stop the user typing the fifth character at all. Likewise, a
+`regex` of `[a-z]+` accepts `"abc "` server-side (it trims to `"abc"` first) while the browser, matching the
+raw value, blocks it. Because of this, `minlength`/`maxlength` and `pattern` are only ever emitted
 for validators explicitly configured with `trim="false"` — which most existing `stringlength` and `regex`
 validators are not. In practice, expect both to show up rarely until applications start setting
 `trim="false"` deliberately for fields where it's safe.
