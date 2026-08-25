@@ -156,79 +156,232 @@
 
 <ul id="markdown-toc">
   <li><a href="#basics" id="markdown-toc-basics">Basics</a></li>
-  <li><a href="#referencing-submitprofile-in-the-user-namespace" id="markdown-toc-referencing-submitprofile-in-the-user-namespace">Referencing “submitProfile” in the “/user” namespace</a></li>
-  <li><a href="#wont-work-with-client-side-validation" id="markdown-toc-wont-work-with-client-side-validation">Won’t work with client-side validation!</a></li>
-  <li><a href="#the-left-hand-doesnt-know-" id="markdown-toc-the-left-hand-doesnt-know-">The left hand doesn’t know …</a></li>
+  <li><a href="#html5-constraint-validation" id="markdown-toc-html5-constraint-validation">HTML5 Constraint Validation</a>    <ul>
+      <li><a href="#enabling-it" id="markdown-toc-enabling-it">Enabling it</a></li>
+      <li><a href="#the-governing-rule-never-false-reject" id="markdown-toc-the-governing-rule-never-false-reject">The governing rule: never false-reject</a></li>
+      <li><a href="#mapping-table" id="markdown-toc-mapping-table">Mapping table</a></li>
+      <li><a href="#data-msg--attributes" id="markdown-toc-data-msg--attributes"><code class="language-plaintext highlighter-rouge">data-msg-*</code> attributes</a></li>
+      <li><a href="#requiredlabel-is-unrelated-to-the-required-attribute" id="markdown-toc-requiredlabel-is-unrelated-to-the-required-attribute"><code class="language-plaintext highlighter-rouge">requiredLabel</code> is unrelated to the <code class="language-plaintext highlighter-rouge">required</code> attribute</a></li>
+      <li><a href="#extension-point-htmlconstraintprovider" id="markdown-toc-extension-point-htmlconstraintprovider">Extension point: <code class="language-plaintext highlighter-rouge">HtmlConstraintProvider</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#pure-javascript-client-side-validation-deprecated" id="markdown-toc-pure-javascript-client-side-validation-deprecated">Pure JavaScript Client Side Validation (deprecated)</a></li>
   <li><a href="#example" id="markdown-toc-example">Example</a></li>
-  <li><a href="#client-side-validation-types" id="markdown-toc-client-side-validation-types">Client Side Validation Types</a></li>
 </ul>
 
 <h2 id="basics">Basics</h2>
 
-<p>The framework adds support for client-side validation on top of the standard validation framework.</p>
+<p>Since Struts 7.4.0, the <a href="../tag-developers/html5-theme">html5 theme</a> can derive HTML5 constraint-validation
+attributes (<code class="language-plaintext highlighter-rouge">required</code>, <code class="language-plaintext highlighter-rouge">minlength</code>, <code class="language-plaintext highlighter-rouge">maxlength</code>, <code class="language-plaintext highlighter-rouge">pattern</code>, <code class="language-plaintext highlighter-rouge">min</code>, <code class="language-plaintext highlighter-rouge">max</code>) directly from a field’s
+server-side <a href="validation">validators</a>, so the browser rejects obviously-invalid input before the form is
+even submitted. This replaces the older, generated-JavaScript validator used by the <em>xhtml theme</em> and
+<em>css_xhtml theme</em>, which is now deprecated — see <a href="#pure-javascript-client-side-validation-deprecated">Pure JavaScript Client Side Validation
+(deprecated)</a> below.</p>
 
-<p>Client-side validation can be enabled on a per-form basis by specifying <code class="language-plaintext highlighter-rouge">validate="true"</code> in the <em>form</em> tag.</p>
+<p>There is also <a href="ajax-client-side-validation">AJAX Client Side Validation</a>, which runs the full server-side
+validation stack (including visitor validators and <code class="language-plaintext highlighter-rouge">validate()</code>) over AJAX and is unaffected by any of this.</p>
+
+<h2 id="html5-constraint-validation">HTML5 Constraint Validation</h2>
+
+<h3 id="enabling-it">Enabling it</h3>
+
+<p>HTML5 constraint validation is off by default. Turn it on with the <code class="language-plaintext highlighter-rouge">struts.ui.html5.constraints</code> constant:</p>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">struts.ui.html5.constraints</span><span class="p">=</span><span class="s">true</span>
+</code></pre></div></div>
+
+<p>It only has an effect on fields rendered with the <code class="language-plaintext highlighter-rouge">html5</code> theme (see <a href="../tag-developers/html5-theme#using-the-html5-theme">Using the HTML5
+theme</a>). There is no per-form opt-in attribute —
+unlike the deprecated JavaScript validator, this feature does not use <code class="language-plaintext highlighter-rouge">&lt;s:form validate="true"&gt;</code>. Once the
+constant is on and a field’s theme is <code class="language-plaintext highlighter-rouge">html5</code>, its validators are consulted automatically.</p>
+
+<blockquote>
+  <p>The constant defaults to <code class="language-plaintext highlighter-rouge">false</code> so existing <code class="language-plaintext highlighter-rouge">html5</code>-theme forms keep rendering unchanged. The default is
+expected to flip to <code class="language-plaintext highlighter-rouge">true</code> in a future major release, tracked by
+<a href="https://issues.apache.org/jira/browse/WW-5696">WW-5696</a>.</p>
+</blockquote>
+
+<h3 id="the-governing-rule-never-false-reject">The governing rule: never false-reject</h3>
+
+<p>The mapping is deliberately conservative. A constraint is emitted only when the browser cannot reject
+input the server would have accepted. If the browser rejected something the server allows, the user would
+be stuck with a form that will not submit and no explanation why. Being conservative simply costs a field
+its client-side check — that’s a harmless, quiet failure mode, so the mapping always chooses it over the
+alternative.</p>
+
+<p>The clearest consequence of this rule: <strong>Struts never sets or changes an input’s <code class="language-plaintext highlighter-rouge">type</code>.</strong> A field stays
+whatever <code class="language-plaintext highlighter-rouge">type</code> the developer gave it. In particular:</p>
+
+<ul>
+  <li>Switching a field to <code class="language-plaintext highlighter-rouge">type="number"</code> would reject a value like <code class="language-plaintext highlighter-rouge">1234,50</code>, which the framework’s
+locale-aware numeric conversion happily accepts in a comma-decimal locale.</li>
+  <li>The browsers’ <code class="language-plaintext highlighter-rouge">email</code> and <code class="language-plaintext highlighter-rouge">url</code> input grammars don’t match <code class="language-plaintext highlighter-rouge">EmailValidator</code> and <code class="language-plaintext highlighter-rouge">UrlValidator</code>.</li>
+</ul>
+
+<p>So <code class="language-plaintext highlighter-rouge">min</code>/<code class="language-plaintext highlighter-rouge">max</code> range constraints are only ever added to a control the developer <em>already</em> made numeric
+(<code class="language-plaintext highlighter-rouge">type="number"</code> or <code class="language-plaintext highlighter-rouge">type="range"</code>) — Struts will never promote a plain text field into one just because
+an <code class="language-plaintext highlighter-rouge">int</code> or <code class="language-plaintext highlighter-rouge">double</code> validator is attached to it.</p>
+
+<h3 id="mapping-table">Mapping table</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Validator</th>
+      <th>Emits</th>
+      <th>Condition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">requiredstring</code></td>
+      <td><code class="language-plaintext highlighter-rouge">required</code></td>
+      <td>on text-entry controls (<code class="language-plaintext highlighter-rouge">text</code>, <code class="language-plaintext highlighter-rouge">search</code>, <code class="language-plaintext highlighter-rouge">tel</code>, <code class="language-plaintext highlighter-rouge">password</code>, <code class="language-plaintext highlighter-rouge">email</code>, <code class="language-plaintext highlighter-rouge">url</code>) and <code class="language-plaintext highlighter-rouge">textarea</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">required</code></td>
+      <td><code class="language-plaintext highlighter-rouge">required</code></td>
+      <td>only on <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">file</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">stringlength</code></td>
+      <td><code class="language-plaintext highlighter-rouge">minlength</code> / <code class="language-plaintext highlighter-rouge">maxlength</code></td>
+      <td>on text-entry or <code class="language-plaintext highlighter-rouge">textarea</code>, and only if the validator has <code class="language-plaintext highlighter-rouge">trim="false"</code>; each attribute is added only if actually configured</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">regex</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pattern</code></td>
+      <td>on text-entry controls only, and only if <code class="language-plaintext highlighter-rouge">caseSensitive="true"</code>, <code class="language-plaintext highlighter-rouge">trim="false"</code>, the regex is ECMAScript-safe (see below), and the validator is not an <code class="language-plaintext highlighter-rouge">email</code> or <code class="language-plaintext highlighter-rouge">creditcard</code> validator (both extend <code class="language-plaintext highlighter-rouge">RegexFieldValidator</code> but carry grammars the browser does not share)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">short</code>, <code class="language-plaintext highlighter-rouge">long</code></td>
+      <td><code class="language-plaintext highlighter-rouge">min</code> / <code class="language-plaintext highlighter-rouge">max</code></td>
+      <td>only when the control is already <code class="language-plaintext highlighter-rouge">type="number"</code> or <code class="language-plaintext highlighter-rouge">type="range"</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">double</code></td>
+      <td><code class="language-plaintext highlighter-rouge">min</code> / <code class="language-plaintext highlighter-rouge">max</code></td>
+      <td>same as above; only inclusive bounds are emitted — exclusive bounds have no HTML equivalent and are omitted</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">date</code></td>
+      <td>—</td>
+      <td>nothing yet; temporal <code class="language-plaintext highlighter-rouge">min</code>/<code class="language-plaintext highlighter-rouge">max</code> is deferred to a future release</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">email</code>, <code class="language-plaintext highlighter-rouge">url</code>, <code class="language-plaintext highlighter-rouge">creditcard</code></td>
+      <td>—</td>
+      <td>never emitted</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fieldexpression</code>, <code class="language-plaintext highlighter-rouge">expression</code>, <code class="language-plaintext highlighter-rouge">conversion</code>, visitor validators</td>
+      <td>—</td>
+      <td>never emitted</td>
+    </tr>
+    <tr>
+      <td>any validator carrying a message</td>
+      <td><code class="language-plaintext highlighter-rouge">data-msg-&lt;validatorType&gt;</code></td>
+      <td>always added, including for validators that emit no constraint attribute at all</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Two of these conditions are easy to miss and sharply limit how often <code class="language-plaintext highlighter-rouge">required</code>, <code class="language-plaintext highlighter-rouge">minlength</code>/<code class="language-plaintext highlighter-rouge">maxlength</code>,
+and <code class="language-plaintext highlighter-rouge">pattern</code> actually show up:</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">required</code> is split across two validators, and they don’t behave alike.</strong> <code class="language-plaintext highlighter-rouge">requiredstring</code> fails on
+null, empty, and (by default) blank values, so it is strictly stricter than the browser’s <code class="language-plaintext highlighter-rouge">required</code> — safe
+to emit on any text-entry control. Plain <code class="language-plaintext highlighter-rouge">required</code>, however, only fails on a null value, an empty array,
+or an empty collection. That means an empty text input (which submits <code class="language-plaintext highlighter-rouge">""</code>, not nothing), a <code class="language-plaintext highlighter-rouge">select</code> with
+an empty-valued option, and an <strong>unticked checkbox</strong> (<code class="language-plaintext highlighter-rouge">CheckboxInterceptor</code> substitutes the parameter
+<code class="language-plaintext highlighter-rouge">"false"</code> for it) all pass server-side validation while a browser <code class="language-plaintext highlighter-rouge">required</code> attribute would block them.
+Only <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">file</code> controls omit their parameter entirely when left empty, so those are the only two
+control types where plain <code class="language-plaintext highlighter-rouge">required</code> agrees with the server — which is why the table above emits <code class="language-plaintext highlighter-rouge">required</code>
+for the <code class="language-plaintext highlighter-rouge">required</code> validator on those two types alone.</p>
+
+<p><strong>Both <code class="language-plaintext highlighter-rouge">minlength</code>/<code class="language-plaintext highlighter-rouge">maxlength</code> and <code class="language-plaintext highlighter-rouge">pattern</code> need <code class="language-plaintext highlighter-rouge">trim="false"</code>, which is not the default.</strong> Both
+<code class="language-plaintext highlighter-rouge">StringLengthFieldValidator.trim</code> and <code class="language-plaintext highlighter-rouge">RegexFieldValidator.trim</code> default to <code class="language-plaintext highlighter-rouge">true</code>, so the server measures
+or matches the field’s <em>trimmed</em> value while the HTML attribute constrains the <em>raw</em> one. A <code class="language-plaintext highlighter-rouge">stringlength</code>
+validator with <code class="language-plaintext highlighter-rouge">maxLength="4"</code> accepts <code class="language-plaintext highlighter-rouge">"abcd "</code> — it trims to four characters, which is within the limit —
+but a browser enforcing <code class="language-plaintext highlighter-rouge">maxlength="4"</code> would stop the user typing the fifth character at all. Likewise, a
+<code class="language-plaintext highlighter-rouge">regex</code> of <code class="language-plaintext highlighter-rouge">[a-z]+</code> accepts <code class="language-plaintext highlighter-rouge">"abc "</code> server-side (it trims to <code class="language-plaintext highlighter-rouge">"abc"</code> first) while the browser, matching the
+raw value, blocks it. Because of this, <code class="language-plaintext highlighter-rouge">minlength</code>/<code class="language-plaintext highlighter-rouge">maxlength</code> and <code class="language-plaintext highlighter-rouge">pattern</code> are only ever emitted
+for validators explicitly configured with <code class="language-plaintext highlighter-rouge">trim="false"</code> — which most existing <code class="language-plaintext highlighter-rouge">stringlength</code> and <code class="language-plaintext highlighter-rouge">regex</code>
+validators are not. In practice, expect both to show up rarely until applications start setting
+<code class="language-plaintext highlighter-rouge">trim="false"</code> deliberately for fields where it’s safe.</p>
+
+<p><strong>ECMAScript-safe</strong> means the regex uses only constructs that mean the same thing in Java’s regex engine
+and in the browser’s: literals, <code class="language-plaintext highlighter-rouge">\d</code>/<code class="language-plaintext highlighter-rouge">\w</code> and their negations, character classes without POSIX or Unicode
+property syntax, grouping, alternation, anchors, and bounded quantifiers. Notably, <strong><code class="language-plaintext highlighter-rouge">\s</code> and <code class="language-plaintext highlighter-rouge">\S</code> are
+excluded</strong> — Java’s <code class="language-plaintext highlighter-rouge">\s</code> is ASCII-only by default while ECMAScript’s <code class="language-plaintext highlighter-rouge">\s</code> covers the wider Unicode
+whitespace set, so a pattern like <code class="language-plaintext highlighter-rouge">^\S+$</code> would accept a value containing a non-breaking space server-side
+and reject it in the browser. Any regex using a construct outside this allowlist simply gets no <code class="language-plaintext highlighter-rouge">pattern</code>
+attribute at all — it is never rejected loudly, it just quietly doesn’t get a client-side check.</p>
+
+<h3 id="data-msg--attributes"><code class="language-plaintext highlighter-rouge">data-msg-*</code> attributes</h3>
+
+<p>Every validator carrying a message — even one that emits no HTML constraint attribute at all — adds a
+<code class="language-plaintext highlighter-rouge">data-msg-&lt;validatorType&gt;</code> attribute (for example <code class="language-plaintext highlighter-rouge">data-msg-email</code>, <code class="language-plaintext highlighter-rouge">data-msg-regex</code>) holding the
+validator’s fully resolved, internationalized message. <strong>Struts ships no JavaScript that reads these.</strong>
+They exist purely as a hook: an application can write its own script to read <code class="language-plaintext highlighter-rouge">data-msg-*</code> and show
+whichever messages it wants, in whatever way it wants, including for validators (like <code class="language-plaintext highlighter-rouge">email</code> or
+<code class="language-plaintext highlighter-rouge">creditcard</code>) that never get a native browser check.</p>
+
+<h3 id="requiredlabel-is-unrelated-to-the-required-attribute"><code class="language-plaintext highlighter-rouge">requiredLabel</code> is unrelated to the <code class="language-plaintext highlighter-rouge">required</code> attribute</h3>
+
+<p>This is a common point of confusion: the <code class="language-plaintext highlighter-rouge">requiredLabel</code> tag attribute only controls whether a visual
+marker (usually <code class="language-plaintext highlighter-rouge">*</code>) is drawn next to a field’s label. It has no connection to the HTML <code class="language-plaintext highlighter-rouge">required</code>
+attribute described above, and setting <code class="language-plaintext highlighter-rouge">requiredLabel="true"</code> does not make a field required in the
+browser — the two are decided completely independently.</p>
+
+<h3 id="extension-point-htmlconstraintprovider">Extension point: <code class="language-plaintext highlighter-rouge">HtmlConstraintProvider</code></h3>
+
+<p>The mapping above is implemented by <code class="language-plaintext highlighter-rouge">StrutsHtmlConstraintProvider</code>, the default implementation of the
+<code class="language-plaintext highlighter-rouge">HtmlConstraintProvider</code> interface, registered under the <code class="language-plaintext highlighter-rouge">struts.htmlConstraintProvider</code> constant:</p>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">struts.htmlConstraintProvider</span><span class="p">=</span><span class="s">struts</span>
+</code></pre></div></div>
+
+<p>An application that wants a less conservative mapping — for example, treating an <code class="language-plaintext highlighter-rouge">email</code> validator as
+<code class="language-plaintext highlighter-rouge">type="email"</code>, or emitting <code class="language-plaintext highlighter-rouge">pattern</code> for case-insensitive regexes by rewriting them — can register its own
+<code class="language-plaintext highlighter-rouge">HtmlConstraintProvider</code> implementation under this constant instead of the default. This is the escape
+hatch for every limitation described above: the framework’s own mapping stays deliberately conservative,
+but nothing stops an application from replacing it with one that fits its own validators and locales.</p>
+
+<h2 id="pure-javascript-client-side-validation-deprecated">Pure JavaScript Client Side Validation (deprecated)</h2>
+
+<blockquote>
+  <p><strong>Deprecated since Struts 7.4.0 (<a href="https://issues.apache.org/jira/browse/WW-5694">WW-5694</a>), removed in
+Struts 8.0.0 (<a href="https://issues.apache.org/jira/browse/WW-5696">WW-5696</a>).</strong> New applications should use
+the <a href="#html5-constraint-validation">html5 theme’s constraint validation</a> described above instead.</p>
+</blockquote>
+
+<p>The <code class="language-plaintext highlighter-rouge">&lt;s:form validate="true"&gt;</code> attribute enables an older client-side validation mechanism, used by the
+<em>xhtml theme</em> and <em>css_xhtml theme</em>. It uses 100% client-side JavaScript, generated from the same
+validation configuration used server-side, to try to reject bad input before the form is submitted:</p>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form </span><span class="na">name=</span><span class="s">"test"</span><span class="na"> action=</span><span class="s">"javascriptValidation"</span><span class="na"> validate=</span><span class="s">"true"</span><span class="nt">&gt;</span>
   ...
 <span class="nt">&lt;/s:form&gt;</span>
 </code></pre></div></div>
 
-<p>If a <code class="language-plaintext highlighter-rouge">name</code> for the form is not given, the action mapping name will be used as the form name. Otherwise, a correct 
-<code class="language-plaintext highlighter-rouge">action</code> and <code class="language-plaintext highlighter-rouge">namespace</code> attributes must be provided to the <code class="language-plaintext highlighter-rouge">&lt;saf:form&gt;</code> tag.</p>
+<p>If a <code class="language-plaintext highlighter-rouge">name</code> for the form is not given, the action mapping name is used as the form name. Otherwise, a
+correct <code class="language-plaintext highlighter-rouge">action</code> and <code class="language-plaintext highlighter-rouge">namespace</code> attribute must be provided to the <code class="language-plaintext highlighter-rouge">&lt;s:form&gt;</code> tag — client-side validation
+requires the action name and namespace to be resolvable separately, so a form whose <code class="language-plaintext highlighter-rouge">action</code> is given as a
+full URI (for example <code class="language-plaintext highlighter-rouge">&lt;s:form action="/user/submitProfile.action" validate="true"&gt;</code>) will not get
+client-side validation, even though the form still works.</p>
 
-<h2 id="referencing-submitprofile-in-the-user-namespace">Referencing “submitProfile” in the “/user” namespace</h2>
-
-<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form </span><span class="na">namespace=</span><span class="s">"/user"</span><span class="na"> action=</span><span class="s">"submitProfile"</span><span class="na"> validate=</span><span class="s">"true"</span><span class="nt">&gt;</span>
-  ...
-<span class="nt">&lt;/s:form&gt;</span>
-</code></pre></div></div>
-
-<p>Technically, the form’s action attribute can refer to a “path” that includes the namespace and action as a URI. 
-But, client-side validation <strong>requires</strong> that the action name and namespeact to be set separately.</p>
-
-<h2 id="wont-work-with-client-side-validation">Won’t work with client-side validation!</h2>
-
-<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:form </span><span class="na">action=</span><span class="s">"/user/submitProfile.action"</span><span class="na"> validate=</span><span class="s">"true"</span><span class="nt">&gt;</span>
-  ...
-<span class="nt">&lt;/s:form&gt;</span>
-
-</code></pre></div></div>
-
-<p>All the usual <a href="validation">validation configuration</a> steps apply to client-side validation. Client-side validation 
-uses the same validation rules as server-side validation. If server-side validation doesn’t work, then client-side 
-validation won’t work either.</p>
-
-<h2 id="the-left-hand-doesnt-know-">The left hand doesn’t know …</h2>
-
-<blockquote>
-  <p>The required attribute on many <em>Struts Tags</em> is not integrated with client-side validation! The tag attribute is used 
-by certain themes (like xhtml) to put a visual marker (usually ‘*’) next to the field. The tag doesn’t know 
-if the validation system actually “requires” the field or not.</p>
-</blockquote>
+<p>Because the validation logic is repeated in generated JavaScript, only a subset of validators is
+supported (<code class="language-plaintext highlighter-rouge">required</code>, <code class="language-plaintext highlighter-rouge">requiredstring</code>, <code class="language-plaintext highlighter-rouge">stringlength</code>, <code class="language-plaintext highlighter-rouge">regex</code>, <code class="language-plaintext highlighter-rouge">email</code>, <code class="language-plaintext highlighter-rouge">url</code>, <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">double</code>), it is
+not available for visitor validators at all, and — being a separate implementation of each validator’s
+logic — some values the JavaScript accepts may still be rejected server-side, or vice versa. This is one of
+the reasons it is being replaced: the html5 theme’s constraint validation above is derived directly from
+the real validators, rather than reimplementing them in JavaScript.</p>
 
 <h2 id="example">Example</h2>
 
-<p>See <a href="client-validation-example">Client Validation example</a> for a complete example of client-side validation.</p>
-
-<h2 id="client-side-validation-types">Client Side Validation Types</h2>
-
-<p>There are two styles of client side validation.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th><a href="pure-java-script-client-side-validation">Pure JavaScript Client Side Validation</a></th>
-      <th>Used by the <em>xhtml theme</em> and <em>css_xhtml theme</em></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="ajax-client-side-validation">AJAX Client Side Validation</a></td>
-      <td>Use to used by the <em>ajax theme</em></td>
-    </tr>
-  </tbody>
-</table>
+<p>See <a href="client-validation-example">Client Validation example</a> for a complete, though now-deprecated, example
+of the JavaScript-based client-side validation described above.</p>
 
   </section>
 </article>
