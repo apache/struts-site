@@ -140,7 +140,7 @@ An application that wants a less conservative mapping — for example, treating 
 hatch for every limitation described above: the framework's own mapping stays deliberately conservative,
 but nothing stops an application from replacing it with one that fits its own validators and locales.
 
-## Pure JavaScript Client Side Validation (deprecated)
+## Pure JavaScript Client Side Validation (deprecated) {#pure-javascript-client-side-validation-deprecated}
 
 > **Deprecated since Struts 7.4.0 ([WW-5694](https://issues.apache.org/jira/browse/WW-5694)), removed in
 > Struts 8.0.0 ([WW-5696](https://issues.apache.org/jira/browse/WW-5696)).** New applications should use
