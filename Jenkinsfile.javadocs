@@ -26,6 +26,10 @@ pipeline {
   stages {
     stage('Build Struts & Maven site') {
       steps {
+        // Show the tag being built in the build history, next to the build number.
+        script {
+          currentBuild.displayName = "#${env.BUILD_NUMBER} ${params.STRUTS_TAG}"
+        }
         sh '''
           echo "Building Struts ${STRUTS_TAG} and staging the Maven site"
 
