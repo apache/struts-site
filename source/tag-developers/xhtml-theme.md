@@ -19,8 +19,10 @@ The xhtml provides all the basics that the [simple theme](simple-theme) provides
 - Labels for each of the HTML [Struts Tags](struts-tags) on the left hand side (or top, depending on 
   the `labelposition` attribute)
 - [Validation](../core-developers/validation) and error reporting
-- [Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation) using 
-  100% JavaScript on the browser
+- [Pure JavaScript Client Side Validation](../core-developers/client-side-validation#pure-javascript-client-side-validation-deprecated) 
+  using 100% JavaScript on the browser — deprecated since 7.4.0
+  ([WW-5694](https://issues.apache.org/jira/browse/WW-5694)), removed in 8.0.0
+  ([WW-5696](https://issues.apache.org/jira/browse/WW-5696)); use the [html5 theme](html5-theme) instead
 
 ## Wrapping the Simple Theme
 
@@ -94,7 +96,9 @@ The head template imports a style sheet. The contents of **styles.css** are:
 
 The xhtml form template sets up the wrapping table around all the other  form elements. In addition to creating this 
 wrapping table, the opening and closing templates also, if the `validate` parameter is set to true, enable 
-[Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation).
+[Pure JavaScript Client Side Validation](../core-developers/client-side-validation#pure-javascript-client-side-validation-deprecated)
+(deprecated since 7.4.0 [WW-5694](https://issues.apache.org/jira/browse/WW-5694), removed in 8.0.0
+[WW-5696](https://issues.apache.org/jira/browse/WW-5696)).
 
 {% highlight freemarker %}
 {% remote_file_content https://raw.githubusercontent.com/apache/struts/main/core/src/main/resources/template/xhtml/form.ftl %}
@@ -110,7 +114,9 @@ The closing template, `form-close.ftl`:
 
 The xhtml form template sets up the wrapping table around all the other [xhtml theme](xhtml-theme) form elements. 
 In addition to creating this wrapping table, the opening and closing templates also, if the `validate` parameter is set 
-to `true`, enable [Pure JavaScript Client Side Validation](../core-developers/pure-java-script-client-side-validation.htmk). 
+to `true`, enable [Pure JavaScript Client Side Validation](../core-developers/client-side-validation#pure-javascript-client-side-validation-deprecated)
+(deprecated since 7.4.0 [WW-5694](https://issues.apache.org/jira/browse/WW-5694), removed in 8.0.0
+[WW-5696](https://issues.apache.org/jira/browse/WW-5696)). 
 
 See the **form.ftl** contents:
 

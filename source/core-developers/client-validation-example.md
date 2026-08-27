@@ -8,6 +8,12 @@ parent:
 
 # Client Validation Example
 
+> **Deprecated since Struts 7.4.0 ([WW-5694](https://issues.apache.org/jira/browse/WW-5694)), removed in
+> Struts 8.0.0 ([WW-5696](https://issues.apache.org/jira/browse/WW-5696)).** This example walks through the
+> generated-JavaScript client-side validator (`<s:form validate="true">`) used by the _xhtml theme_ and
+> _css_xhtml theme_. New applications should use the [html5 theme's constraint
+> validation](client-side-validation#html5-constraint-validation) instead.
+
 Let's create a Client-Side validation workflow, step by step. The `validate` attribute is set to `true`.
 
 > Note: Some themes do not support client-side validation.

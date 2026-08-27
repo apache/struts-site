@@ -14,8 +14,9 @@ parent:
 
 ## Description 
 
-AJAX-based client side validation improves upon [Pure JavaScript Client Side Validation](pure-java-script-client-side-validation) 
-by using a combination of JavaScript, DOM manipulation, and remote server communication. Unlike the pure client side 
+AJAX-based client side validation improves upon [Pure JavaScript Client Side Validation](client-side-validation#pure-javascript-client-side-validation-deprecated) 
+(deprecated since 7.4.0 [WW-5694](https://issues.apache.org/jira/browse/WW-5694), removed in 8.0.0
+[WW-5696](https://issues.apache.org/jira/browse/WW-5696)) by using a combination of JavaScript, DOM manipulation, and remote server communication. Unlike the pure client side 
 implementation, AJAX-based validation communicates with the server. This means all your validation rules that worked 
 when submitting a form will still work within the browser.
 
