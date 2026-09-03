@@ -27,7 +27,10 @@ channel that can populate an action from request data:
   action chaining (opt-in via `struts.chaining.requireAnnotations`).
 - [Cookie Interceptor](cookie-interceptor.html) — cookie values.
 - [JSON](../../plugins/json) and [REST](../../plugins/rest) plugins — per-property
-  authorization performed during deserialization, so unauthorized fields are never set.
+  authorization performed during deserialization, so an unauthorized property is not set on
+  the target object. This covers the properties the deserializer binds **by name**; in the
+  REST plugin a Jackson any-setter is a separate sink that is not covered — see
+  [Jackson any-setters](#jackson-any-setters) below.
 
 ### Creator-bound properties
 
@@ -46,6 +49,27 @@ object under construction is dropped instead of failing the request.
 If a REST action relied on record-typed request-body properties binding without annotations, they now need authorizing
 the same way as any nested object: `@StrutsParameter(depth = ...)` on the getter that reaches them, or a `ModelDriven`
 model. Otherwise those values silently stop arriving.
+{:.alert .alert-warning}
+
+### Jackson any-setters
+
+A class that declares a Jackson any-setter — `@JsonAnySetter` on a method, on a field, or on a
+`@JsonCreator` parameter — tells Jackson to route **every otherwise-unknown key** in the request body
+to that member. The REST plugin's authorization wrapper covers the properties Jackson binds by name;
+an any-setter is a separate sink and is not wrapped. Keys arriving through it are therefore set
+without an `@StrutsParameter` check, even with `struts.parameters.requireAnnotations` enabled, and
+even in the same request in which an ordinary unannotated setter on the same class is correctly
+rejected.
+
+Two limits are worth knowing. An any-setter beneath an **unauthorized parent** is still unreachable:
+the parent is rejected first and its whole subtree is skipped. And `@JsonUnwrapped` is a named
+property, so it is unaffected by this.
+
+Declaring an any-setter on a class bound from a REST request body is the application accepting
+arbitrary names and values off the wire — the same decision as binding a `Map`, and it deserves the
+same scrutiny. Where that is not what you want, do not declare one on a request-bound class, or
+narrow what the method accepts before storing it. Tracked as
+[WW-5712](https://issues.apache.org/jira/browse/WW-5712).
 {:.alert .alert-warning}
 
 ## ModelDriven actions
