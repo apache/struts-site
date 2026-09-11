@@ -157,6 +157,7 @@
 <ul id="markdown-toc">
   <li><a href="#where-authorization-applies" id="markdown-toc-where-authorization-applies">Where authorization applies</a>    <ul>
       <li><a href="#creator-bound-properties" id="markdown-toc-creator-bound-properties">Creator-bound properties</a></li>
+      <li><a href="#jackson-any-setters" id="markdown-toc-jackson-any-setters">Jackson any-setters</a></li>
     </ul>
   </li>
   <li><a href="#modeldriven-actions" id="markdown-toc-modeldriven-actions">ModelDriven actions</a></li>
@@ -187,7 +188,10 @@ channel that can populate an action from request data:</p>
 action chaining (opt-in via <code class="language-plaintext highlighter-rouge">struts.chaining.requireAnnotations</code>).</li>
   <li><a href="cookie-interceptor.html">Cookie Interceptor</a> — cookie values.</li>
   <li><a href="../../plugins/json">JSON</a> and <a href="../../plugins/rest">REST</a> plugins — per-property
-authorization performed during deserialization, so unauthorized fields are never set.</li>
+authorization performed during deserialization, so an unauthorized property is not set on
+the target object. This covers the properties the deserializer binds <strong>by name</strong>; in the
+REST plugin a Jackson any-setter is a separate sink that is not covered — see
+<a href="#jackson-any-setters">Jackson any-setters</a> below.</li>
 </ul>
 
 <h3 id="creator-bound-properties">Creator-bound properties</h3>
@@ -207,6 +211,26 @@ object under construction is dropped instead of failing the request.</p>
 <p class="alert alert-warning">If a REST action relied on record-typed request-body properties binding without annotations, they now need authorizing
 the same way as any nested object: <code class="language-plaintext highlighter-rouge">@StrutsParameter(depth = ...)</code> on the getter that reaches them, or a <code class="language-plaintext highlighter-rouge">ModelDriven</code>
 model. Otherwise those values silently stop arriving.</p>
+
+<h3 id="jackson-any-setters">Jackson any-setters</h3>
+
+<p>A class that declares a Jackson any-setter — <code class="language-plaintext highlighter-rouge">@JsonAnySetter</code> on a method, on a field, or on a
+<code class="language-plaintext highlighter-rouge">@JsonCreator</code> parameter — tells Jackson to route <strong>every otherwise-unknown key</strong> in the request body
+to that member. The REST plugin’s authorization wrapper covers the properties Jackson binds by name;
+an any-setter is a separate sink and is not wrapped. Keys arriving through it are therefore set
+without an <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> check, even with <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations</code> enabled, and
+even in the same request in which an ordinary unannotated setter on the same class is correctly
+rejected.</p>
+
+<p>Two limits are worth knowing. An any-setter beneath an <strong>unauthorized parent</strong> is still unreachable:
+the parent is rejected first and its whole subtree is skipped. And <code class="language-plaintext highlighter-rouge">@JsonUnwrapped</code> is a named
+property, so it is unaffected by this.</p>
+
+<p class="alert alert-warning">Declaring an any-setter on a class bound from a REST request body is the application accepting
+arbitrary names and values off the wire — the same decision as binding a <code class="language-plaintext highlighter-rouge">Map</code>, and it deserves the
+same scrutiny. Where that is not what you want, do not declare one on a request-bound class, or
+narrow what the method accepts before storing it. Tracked as
+<a href="https://issues.apache.org/jira/browse/WW-5712">WW-5712</a>.</p>
 
 <h2 id="modeldriven-actions">ModelDriven actions</h2>
 
