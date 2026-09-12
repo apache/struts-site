@@ -159,6 +159,7 @@
   <li><a href="#features" id="markdown-toc-features">Features</a></li>
   <li><a href="#usage" id="markdown-toc-usage">Usage</a>    <ul>
       <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
+      <li><a href="#filling-from-report-parameters" id="markdown-toc-filling-from-report-parameters">Filling from report parameters</a></li>
       <li><a href="#settings" id="markdown-toc-settings">Settings</a></li>
       <li><a href="#installation" id="markdown-toc-installation">Installation</a></li>
     </ul>
@@ -185,7 +186,9 @@ The result takes the following parameters:</p>
 
 <ul>
   <li>location (default) - the location where the compiled jasper report definition is (foo.jasper), relative from current URL</li>
-  <li>dataSource (required) - the EL expression used to retrieve the datasource from the value stack (usually a List)</li>
+  <li>dataSource - the EL expression used to retrieve the datasource from the value stack (usually a List). Since 7.4.0
+it is optional: when neither <code class="language-plaintext highlighter-rouge">dataSource</code> nor <code class="language-plaintext highlighter-rouge">connection</code> is set, the report is filled from its parameters alone
+(see <a href="#filling-from-report-parameters">Filling from report parameters</a>)</li>
   <li>parse - <code class="language-plaintext highlighter-rouge">true</code> by default, if set to false, the location param will not be parsed for EL expressions</li>
   <li>format - the format in which the report should be generated. Valid  values can be found in <code class="language-plaintext highlighter-rouge">JasperReportConstants</code>. 
 If no format is specified, PDF will be used</li>
@@ -223,6 +226,31 @@ if the “parse” parameter is not set to false.</p>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"dataSource"</span><span class="nt">&gt;</span>mySource<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/result&gt;</span>
 </code></pre></div></div>
+
+<h3 id="filling-from-report-parameters">Filling from report parameters</h3>
+
+<p>Since 7.4.0, when neither <code class="language-plaintext highlighter-rouge">dataSource</code> nor <code class="language-plaintext highlighter-rouge">connection</code> is set the result calls
+<code class="language-plaintext highlighter-rouge">JasperFillManager.fillReport(report, parameters)</code> and JasperReports resolves the data from the parameter map,
+exactly as it does when used standalone. Hand the object the report’s query executer expects over via
+<code class="language-plaintext highlighter-rouge">reportParameters</code> - a Hibernate <code class="language-plaintext highlighter-rouge">Session</code> under <code class="language-plaintext highlighter-rouge">HIBERNATE_SESSION</code>, a <code class="language-plaintext highlighter-rouge">CSV_INPUT_STREAM</code>, a <code class="language-plaintext highlighter-rouge">JSON_INPUT_STREAM</code>,
+or a ready <code class="language-plaintext highlighter-rouge">REPORT_DATA_SOURCE</code> / <code class="language-plaintext highlighter-rouge">REPORT_CONNECTION</code>. The report keeps its own <code class="language-plaintext highlighter-rouge">queryString</code> (HQL, CSV, JSON, …)
+and no intermediate <code class="language-plaintext highlighter-rouge">List</code> has to be built in the action.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span> <span class="na">type=</span><span class="s">"jasper"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>foo.jasper<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"reportParameters"</span><span class="nt">&gt;</span>reportParameters<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/result&gt;</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">getReportParameters</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nc">Map</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"HIBERNATE_SESSION"</span><span class="o">,</span> <span class="n">session</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Query executers other than JDBC, CSV and XPath ship as separate JasperReports artifacts (for example
+<code class="language-plaintext highlighter-rouge">net.sf.jasperreports:jasperreports-hibernate</code>); add the one your report needs to the application’s dependencies.
+When the parameter map carries nothing the executer can use, the outcome is JasperReports’ own - it is not checked
+by the plugin.</p>
 
 <h3 id="settings">Settings</h3>
 
