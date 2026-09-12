@@ -16,7 +16,8 @@ parent:
 [JasperReports](http://jasperforge.org/sf/projects/jasperreports) is a powerful open source Java (LGPL) reporting
 tool that has the ability to deliver rich content onto the screen, to the printer or into PDF, HTML, XLS, CSV and XML files.
 
-The JasperReports plugin enables Actions to create high-quality reports as results.
+The JasperReports plugin enables Actions to create high-quality reports as results. It targets the JasperReports 6.x
+line; for JasperReports 7.x use the [JasperReports 7 Plugin](../jasperreports7) instead.
 
 ## Features
 
