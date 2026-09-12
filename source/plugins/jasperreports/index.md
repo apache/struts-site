@@ -29,7 +29,9 @@ package, which contains the `jasper` result type.  Then, simply use the result t
 The result takes the following parameters:
  
  - location (default) - the location where the compiled jasper report definition is (foo.jasper), relative from current URL
- - dataSource (required) - the EL expression used to retrieve the datasource from the value stack (usually a List)
+ - dataSource - the EL expression used to retrieve the datasource from the value stack (usually a List). Since 7.4.0
+   it is optional: when neither `dataSource` nor `connection` is set, the report is filled from its parameters alone
+   (see [Filling from report parameters](#filling-from-report-parameters))
  - parse - `true` by default, if set to false, the location param will not be parsed for EL expressions
  - format - the format in which the report should be generated. Valid  values can be found in `JasperReportConstants`. 
    If no format is specified, PDF will be used
@@ -68,6 +70,33 @@ or for pdf:
     <param name="dataSource">mySource</param>
 </result>
 ```
+
+### Filling from report parameters
+
+Since 7.4.0, when neither `dataSource` nor `connection` is set the result calls
+`JasperFillManager.fillReport(report, parameters)` and JasperReports resolves the data from the parameter map,
+exactly as it does when used standalone. Hand the object the report's query executer expects over via
+`reportParameters` - a Hibernate `Session` under `HIBERNATE_SESSION`, a `CSV_INPUT_STREAM`, a `JSON_INPUT_STREAM`,
+or a ready `REPORT_DATA_SOURCE` / `REPORT_CONNECTION`. The report keeps its own `queryString` (HQL, CSV, JSON, ...)
+and no intermediate `List` has to be built in the action.
+
+```xml
+<result name="success" type="jasper">
+    <param name="location">foo.jasper</param>
+    <param name="reportParameters">reportParameters</param>
+</result>
+```
+
+```java
+public Map<String, Object> getReportParameters() {
+    return Map.of("HIBERNATE_SESSION", session);
+}
+```
+
+Query executers other than JDBC, CSV and XPath ship as separate JasperReports artifacts (for example
+`net.sf.jasperreports:jasperreports-hibernate`); add the one your report needs to the application's dependencies.
+When the parameter map carries nothing the executer can use, the outcome is JasperReports' own - it is not checked
+by the plugin.
 
 ### Settings
 
