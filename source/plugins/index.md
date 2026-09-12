@@ -24,7 +24,8 @@ to share with others. Several plugins are bundled with the framework, and others
 | [Convention Plugin](convention)           | 2.1.3+         |                                                                       |
 | [DWR Plugin](dwr)                         |                |                                                                       |
 | [Embedded JSP Plugin](embedded-jsp)       | 2.1.7+         | deprecated since 6.0.0                                                |
-| [JasperReports Plugin](jasperreports)     |                |                                                                       |
+| [JasperReports Plugin](jasperreports)     |                | JasperReports 6.x                                                     |
+| [JasperReports 7 Plugin](jasperreports7)  | 7.1.0+         | JasperReports 7.x                                                     |
 | [Java 8 Support Plugin](java-8-support)   | 2.3.21 - 2.5.2 |                                                                       |
 | [Javatemplates Plugin](javatemplates)     | 2.1.3+         |                                                                       |
 | [JFreeChart Plugin](jfreechart)           |                |                                                                       |
