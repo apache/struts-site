@@ -38,6 +38,25 @@ implement CSP in a highly secure fashion.
   to allow to define a custom CPS settings. It's alternative approach of using the [CspSettingsAware](#action-aware) 
   interface below (since Struts 6.5.0).
 
+## Nonce source
+
+The interceptor generates a fresh nonce on every request and has to keep it somewhere the tags can read it back from
+when the page renders. By default that is the HTTP session, which means CSP headers are only added once a session
+exists. Since Struts 6.8.0 the nonce can be kept in a request attribute instead, which suits stateless or clustered
+deployments that do not want a session created for it:
+
+```xml
+<constant name="struts.csp.nonce.source" value="request"/>
+```
+
+Accepted values are `session` (the default) and `request`.
+
+> Note: releases before 7.4.0 shipped `default.properties` with this setting under the name `struts.csp.nonceSource`,
+> which the framework never read — configuring it had no effect and the nonce always stayed in the session. Since
+> 7.4.0 that name is honoured as well, so a configuration carrying `struts.csp.nonceSource=request` switches to
+> request-scoped nonces on upgrade. The camel-case name is deprecated and logs a warning; rename it to
+> `struts.csp.nonce.source`.
+
 ## Report action
 
 To receive reports about violations against CSP an abstract `CspReportAction` action has been created, which you can
