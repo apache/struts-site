@@ -51,11 +51,11 @@ deployments that do not want a session created for it:
 
 Accepted values are `session` (the default) and `request`.
 
-> Note: releases before 6.12.0 and 7.4.0 shipped `default.properties` with this setting under the name
-> `struts.csp.nonceSource`, which the framework never read — configuring it had no effect and the nonce always stayed
-> in the session. Since 6.12.0 and 7.4.0 that name is honoured as well, so a configuration carrying
-> `struts.csp.nonceSource=request` switches to request-scoped nonces on upgrade. The camel-case name is deprecated
-> and logs a warning; rename it to `struts.csp.nonce.source`.
+> Note: releases before 7.4.0 shipped `default.properties` with this setting under the name `struts.csp.nonceSource`,
+> which the framework never read — configuring it had no effect and the nonce always stayed in the session. Since
+> 7.4.0 that name is honoured as well, so a configuration carrying `struts.csp.nonceSource=request` switches to
+> request-scoped nonces on upgrade. The camel-case name is deprecated and logs a warning; rename it to
+> `struts.csp.nonce.source`.
 
 ## Report action
 
