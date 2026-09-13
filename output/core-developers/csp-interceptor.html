@@ -157,6 +157,7 @@
 <ul id="markdown-toc">
   <li><a href="#description" id="markdown-toc-description">Description</a></li>
   <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
+  <li><a href="#nonce-source" id="markdown-toc-nonce-source">Nonce source</a></li>
   <li><a href="#report-action" id="markdown-toc-report-action">Report action</a></li>
   <li><a href="#action-aware" id="markdown-toc-action-aware">Action aware</a></li>
   <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
@@ -189,6 +190,26 @@ is going to be enforced.</li>
 to allow to define a custom CPS settings. It’s alternative approach of using the <a href="#action-aware">CspSettingsAware</a> 
 interface below (since Struts 6.5.0).</li>
 </ul>
+
+<h2 id="nonce-source">Nonce source</h2>
+
+<p>The interceptor generates a fresh nonce on every request and has to keep it somewhere the tags can read it back from
+when the page renders. By default that is the HTTP session, which means CSP headers are only added once a session
+exists. Since Struts 6.8.0 the nonce can be kept in a request attribute instead, which suits stateless or clustered
+deployments that do not want a session created for it:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.csp.nonce.source"</span> <span class="na">value=</span><span class="s">"request"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>Accepted values are <code class="language-plaintext highlighter-rouge">session</code> (the default) and <code class="language-plaintext highlighter-rouge">request</code>.</p>
+
+<blockquote>
+  <p>Note: releases before 7.4.0 shipped <code class="language-plaintext highlighter-rouge">default.properties</code> with this setting under the name <code class="language-plaintext highlighter-rouge">struts.csp.nonceSource</code>,
+which the framework never read — configuring it had no effect and the nonce always stayed in the session. Since
+7.4.0 that name is honoured as well, so a configuration carrying <code class="language-plaintext highlighter-rouge">struts.csp.nonceSource=request</code> switches to
+request-scoped nonces on upgrade. The camel-case name is deprecated and logs a warning; rename it to
+<code class="language-plaintext highlighter-rouge">struts.csp.nonce.source</code>.</p>
+</blockquote>
 
 <h2 id="report-action">Report action</h2>
 
