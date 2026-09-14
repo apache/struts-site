@@ -160,7 +160,10 @@
       <li><a href="#jackson-any-setters" id="markdown-toc-jackson-any-setters">Jackson any-setters</a></li>
     </ul>
   </li>
-  <li><a href="#modeldriven-actions" id="markdown-toc-modeldriven-actions">ModelDriven actions</a></li>
+  <li><a href="#modeldriven-actions" id="markdown-toc-modeldriven-actions">ModelDriven actions</a>    <ul>
+      <li><a href="#the-actions-own-members-are-not-exempt" id="markdown-toc-the-actions-own-members-are-not-exempt">The action’s own members are not exempt</a></li>
+    </ul>
+  </li>
   <li><a href="#usage" id="markdown-toc-usage">Usage</a></li>
   <li><a href="#understanding-the-depth-parameter" id="markdown-toc-understanding-the-depth-parameter">Understanding the <code class="language-plaintext highlighter-rouge">depth</code> parameter</a></li>
   <li><a href="#examples" id="markdown-toc-examples">Examples</a>    <ul>
@@ -259,6 +262,34 @@ interceptor’s <code class="language-plaintext highlighter-rouge">root</code> e
 <p>The exemption lifts the annotation requirement only. The other parameter-name
 checks — accepted and excluded name patterns, and <code class="language-plaintext highlighter-rouge">ParameterNameAware</code> — still
 apply to a model’s parameters as they do to an action’s.</p>
+
+<h3 id="the-actions-own-members-are-not-exempt">The action’s own members are not exempt</h3>
+
+<p>Since Struts 7.4.0 the exemption covers the model and only the model. A parameter
+name is resolved against the whole value stack, which holds the action underneath
+the model, so a name can land on a property of the action itself; that property
+needs <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> exactly as it would on any other action. The decision is
+made in this order:</p>
+
+<ol>
+  <li>the model declares the property — bound, no annotation needed;</li>
+  <li>the action declares the property — bound only if it is annotated;</li>
+  <li>neither declares it — bound, to keep models that resolve properties through a
+custom OGNL accessor (a <code class="language-plaintext highlighter-rouge">Map</code>-backed model, for instance) working. This says
+nothing about the action: it only means introspection found no member of that
+name on either object.</li>
+</ol>
+
+<p>Because the model is checked first, a model property that shadows an action
+property of the same name binds without an annotation, matching how OGNL resolves
+the name against the top of the stack.</p>
+
+<p class="alert alert-warning">Before 7.4.0 every parameter sent to a <code class="language-plaintext highlighter-rouge">ModelDriven</code> action was exempt, including
+those reaching the action’s own unannotated setters. An application relying on
+that must either annotate those setters or enable
+<code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations.transitionMode=true</code>, which exempts
+non-nested parameters on <code class="language-plaintext highlighter-rouge">ModelDriven</code> actions as well while the annotations are
+added — see the <a href="../../security/#defining-and-annotating-your-action-parameters">security guide</a>.</p>
 
 <p class="alert alert-warning">Because the entire model is bindable, a <code class="language-plaintext highlighter-rouge">ModelDriven</code> model should be a request
 DTO carrying only the fields the action intends to accept from a request, never
