@@ -75,7 +75,7 @@ an `int` or `double` validator is attached to it.
 | `date` | — | nothing yet; temporal `min`/`max` is deferred to a future release |
 | `email`, `url`, `creditcard` | — | never emitted |
 | `fieldexpression`, `expression`, `conversion` | — | never emitted |
-| `visitor` | — | nothing for the visitor itself; the visited object's own validators apply to its nested fields (`user.name`) exactly as if they were declared on the action |
+| `visitor` | — | nothing for the visitor itself; the visited object's own validators apply to its nested fields (`user.name`) exactly as if they were declared on the action, and their messages resolve as during validation — the visited class's bundle first, then the action's, with `${...}` read from the visited object when it exists |
 | any validator carrying a message | `data-msg-<validatorType>` | always added on a control that submits a value, including for validators that emit no constraint attribute at all; never on `<s:label>` or a control of an unknown `type` |
 
 Two of these conditions are easy to miss and sharply limit how often `required`, `minlength`/`maxlength`,
