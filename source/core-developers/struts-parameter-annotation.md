@@ -100,6 +100,33 @@ The exemption lifts the annotation requirement only. The other parameter-name
 checks — accepted and excluded name patterns, and `ParameterNameAware` — still
 apply to a model's parameters as they do to an action's.
 
+### The action's own members are not exempt
+
+Since Struts 7.4.0 the exemption covers the model and only the model. A parameter
+name is resolved against the whole value stack, which holds the action underneath
+the model, so a name can land on a property of the action itself; that property
+needs `@StrutsParameter` exactly as it would on any other action. The decision is
+made in this order:
+
+1. the model declares the property — bound, no annotation needed;
+2. the action declares the property — bound only if it is annotated;
+3. neither declares it — bound, to keep models that resolve properties through a
+   custom OGNL accessor (a `Map`-backed model, for instance) working. This says
+   nothing about the action: it only means introspection found no member of that
+   name on either object.
+
+Because the model is checked first, a model property that shadows an action
+property of the same name binds without an annotation, matching how OGNL resolves
+the name against the top of the stack.
+
+Before 7.4.0 every parameter sent to a `ModelDriven` action was exempt, including
+those reaching the action's own unannotated setters. An application relying on
+that must either annotate those setters or enable
+`struts.parameters.requireAnnotations.transitionMode=true`, which exempts
+non-nested parameters on `ModelDriven` actions as well while the annotations are
+added — see the [security guide](../../security/#defining-and-annotating-your-action-parameters).
+{:.alert .alert-warning}
+
 Because the entire model is bindable, a `ModelDriven` model should be a request
 DTO carrying only the fields the action intends to accept from a request, never
 a domain or persistence entity. If you need member-level control over what is
