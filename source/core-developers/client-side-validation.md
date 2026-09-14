@@ -74,8 +74,9 @@ an `int` or `double` validator is attached to it.
 | `double` | `min` / `max` | same as above; only inclusive bounds are emitted — exclusive bounds have no HTML equivalent and are omitted |
 | `date` | — | nothing yet; temporal `min`/`max` is deferred to a future release |
 | `email`, `url`, `creditcard` | — | never emitted |
-| `fieldexpression`, `expression`, `conversion`, visitor validators | — | never emitted |
-| any validator carrying a message | `data-msg-<validatorType>` | always added, including for validators that emit no constraint attribute at all |
+| `fieldexpression`, `expression`, `conversion` | — | never emitted |
+| `visitor` | — | nothing for the visitor itself; the visited object's own validators apply to its nested fields (`user.name`) exactly as if they were declared on the action |
+| any validator carrying a message | `data-msg-<validatorType>` | always added on a control that submits a value, including for validators that emit no constraint attribute at all; never on `<s:label>` or a control of an unknown `type` |
 
 Two of these conditions are easy to miss and sharply limit how often `required`, `minlength`/`maxlength`,
 and `pattern` actually show up:
@@ -103,8 +104,14 @@ validators are not. In practice, expect both to show up rarely until application
 
 **ECMAScript-safe** means the regex uses only constructs that mean the same thing in Java's regex engine
 and in the browser's: literals, `\d`/`\w` and their negations, character classes without POSIX or Unicode
-property syntax, grouping, alternation, anchors, and bounded quantifiers. Notably, **`\s` and `\S` are
-excluded** — Java's `\s` is ASCII-only by default while ECMAScript's `\s` covers the wider Unicode
+property syntax, grouping, alternation, anchors, and bounded quantifiers. Browsers compile `pattern` with
+the `v` (unicode sets) flag, which is stricter than Java inside a character class: `( ) { } / |` must be
+escaped there, a hyphen is accepted only as a range operator between two plain literals (`[a-z]`) or
+escaped (`[\w\-]`), doubled punctuators such as `..` or `!!` are reserved, and a class starting with a
+literal `]` (`[]a]`) is rejected. Outside a class, `\-` is not a legal escape and a lone `]` or `}` is
+an error, both of which Java reads as literals. A common email-shaped regex like `[a-z0-9._%+-]+@` is
+therefore *not* safe (the trailing unescaped `-`); `[a-z0-9._%+\-]+@` is. Notably,
+**`\s` and `\S` are excluded** — Java's `\s` is ASCII-only by default while ECMAScript's `\s` covers the wider Unicode
 whitespace set, so a pattern like `^\S+$` would accept a value containing a non-breaking space server-side
 and reject it in the browser. Any regex using a construct outside this allowlist simply gets no `pattern`
 attribute at all — it is never rejected loudly, it just quietly doesn't get a client-side check.
@@ -117,6 +124,11 @@ validator's fully resolved, internationalized message. **Struts ships no JavaScr
 They exist purely as a hook: an application can write its own script to read `data-msg-*` and show
 whichever messages it wants, in whatever way it wants, including for validators (like `email` or
 `creditcard`) that never get a native browser check.
+
+The hook is only rendered on controls that submit a value. `<s:label>` never does, and neither does a text
+field whose `type` the framework does not recognise, so those carry no `data-msg-*` at all. The validator
+type also becomes part of the attribute name, which HTML escaping does not protect; a custom validator whose
+type is not a plain attribute name (letters, digits, `_` and `-`) gets no message attribute.
 
 ### `requiredLabel` is unrelated to the `required` attribute
 
@@ -134,11 +146,18 @@ The mapping above is implemented by `StrutsHtmlConstraintProvider`, the default 
 struts.htmlConstraintProvider=struts
 ```
 
-An application that wants a less conservative mapping — for example, treating an `email` validator as
-`type="email"`, or emitting `pattern` for case-insensitive regexes by rewriting them — can register its own
-`HtmlConstraintProvider` implementation under this constant instead of the default. This is the escape
-hatch for every limitation described above: the framework's own mapping stays deliberately conservative,
-but nothing stops an application from replacing it with one that fits its own validators and locales.
+An application that wants a less conservative mapping — for example, emitting `pattern` for
+case-insensitive regexes by rewriting them, or honouring `min`/`max` on a plain text field — can register
+its own `HtmlConstraintProvider` implementation under this constant instead of the default. This is the
+escape hatch for every limitation described above: the framework's own mapping stays deliberately
+conservative, but nothing stops an application from replacing it with one that fits its own validators and
+locales.
+
+Two things a provider cannot do. It cannot change an input's `type` — the templates have already written
+it by the time the constraint map renders, so a `type` entry is discarded; treating an `email` validator
+as `type="email"` needs a template override instead. And it cannot override an attribute the developer set
+on the tag: a derived entry whose name matches a tag attribute or a dynamic attribute (compared
+case-insensitively, as HTML does) is dropped, so the developer's own value always wins.
 
 ## Pure JavaScript Client Side Validation (deprecated) {#pure-javascript-client-side-validation-deprecated}
 
