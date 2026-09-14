@@ -274,14 +274,19 @@ an <code class="language-plaintext highlighter-rouge">int</code> or <code class=
       <td>never emitted</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">fieldexpression</code>, <code class="language-plaintext highlighter-rouge">expression</code>, <code class="language-plaintext highlighter-rouge">conversion</code>, visitor validators</td>
+      <td><code class="language-plaintext highlighter-rouge">fieldexpression</code>, <code class="language-plaintext highlighter-rouge">expression</code>, <code class="language-plaintext highlighter-rouge">conversion</code></td>
       <td>—</td>
       <td>never emitted</td>
     </tr>
     <tr>
+      <td><code class="language-plaintext highlighter-rouge">visitor</code></td>
+      <td>—</td>
+      <td>nothing for the visitor itself; the visited object’s own validators apply to its nested fields (<code class="language-plaintext highlighter-rouge">user.name</code>) exactly as if they were declared on the action</td>
+    </tr>
+    <tr>
       <td>any validator carrying a message</td>
       <td><code class="language-plaintext highlighter-rouge">data-msg-&lt;validatorType&gt;</code></td>
-      <td>always added, including for validators that emit no constraint attribute at all</td>
+      <td>always added on a control that submits a value, including for validators that emit no constraint attribute at all; never on <code class="language-plaintext highlighter-rouge">&lt;s:label&gt;</code> or a control of an unknown <code class="language-plaintext highlighter-rouge">type</code></td>
     </tr>
   </tbody>
 </table>
@@ -312,8 +317,14 @@ validators are not. In practice, expect both to show up rarely until application
 
 <p><strong>ECMAScript-safe</strong> means the regex uses only constructs that mean the same thing in Java’s regex engine
 and in the browser’s: literals, <code class="language-plaintext highlighter-rouge">\d</code>/<code class="language-plaintext highlighter-rouge">\w</code> and their negations, character classes without POSIX or Unicode
-property syntax, grouping, alternation, anchors, and bounded quantifiers. Notably, <strong><code class="language-plaintext highlighter-rouge">\s</code> and <code class="language-plaintext highlighter-rouge">\S</code> are
-excluded</strong> — Java’s <code class="language-plaintext highlighter-rouge">\s</code> is ASCII-only by default while ECMAScript’s <code class="language-plaintext highlighter-rouge">\s</code> covers the wider Unicode
+property syntax, grouping, alternation, anchors, and bounded quantifiers. Browsers compile <code class="language-plaintext highlighter-rouge">pattern</code> with
+the <code class="language-plaintext highlighter-rouge">v</code> (unicode sets) flag, which is stricter than Java inside a character class: <code class="language-plaintext highlighter-rouge">( ) { } / |</code> must be
+escaped there, a hyphen is accepted only as a range operator between two plain literals (<code class="language-plaintext highlighter-rouge">[a-z]</code>) or
+escaped (<code class="language-plaintext highlighter-rouge">[\w\-]</code>), doubled punctuators such as <code class="language-plaintext highlighter-rouge">..</code> or <code class="language-plaintext highlighter-rouge">!!</code> are reserved, and a class starting with a
+literal <code class="language-plaintext highlighter-rouge">]</code> (<code class="language-plaintext highlighter-rouge">[]a]</code>) is rejected. Outside a class, <code class="language-plaintext highlighter-rouge">\-</code> is not a legal escape and a lone <code class="language-plaintext highlighter-rouge">]</code> or <code class="language-plaintext highlighter-rouge">}</code> is
+an error, both of which Java reads as literals. A common email-shaped regex like <code class="language-plaintext highlighter-rouge">[a-z0-9._%+-]+@</code> is
+therefore <em>not</em> safe (the trailing unescaped <code class="language-plaintext highlighter-rouge">-</code>); <code class="language-plaintext highlighter-rouge">[a-z0-9._%+\-]+@</code> is. Notably,
+<strong><code class="language-plaintext highlighter-rouge">\s</code> and <code class="language-plaintext highlighter-rouge">\S</code> are excluded</strong> — Java’s <code class="language-plaintext highlighter-rouge">\s</code> is ASCII-only by default while ECMAScript’s <code class="language-plaintext highlighter-rouge">\s</code> covers the wider Unicode
 whitespace set, so a pattern like <code class="language-plaintext highlighter-rouge">^\S+$</code> would accept a value containing a non-breaking space server-side
 and reject it in the browser. Any regex using a construct outside this allowlist simply gets no <code class="language-plaintext highlighter-rouge">pattern</code>
 attribute at all — it is never rejected loudly, it just quietly doesn’t get a client-side check.</p>
@@ -326,6 +337,11 @@ validator’s fully resolved, internationalized message. <strong>Struts ships no
 They exist purely as a hook: an application can write its own script to read <code class="language-plaintext highlighter-rouge">data-msg-*</code> and show
 whichever messages it wants, in whatever way it wants, including for validators (like <code class="language-plaintext highlighter-rouge">email</code> or
 <code class="language-plaintext highlighter-rouge">creditcard</code>) that never get a native browser check.</p>
+
+<p>The hook is only rendered on controls that submit a value. <code class="language-plaintext highlighter-rouge">&lt;s:label&gt;</code> never does, and neither does a text
+field whose <code class="language-plaintext highlighter-rouge">type</code> the framework does not recognise, so those carry no <code class="language-plaintext highlighter-rouge">data-msg-*</code> at all. The validator
+type also becomes part of the attribute name, which HTML escaping does not protect; a custom validator whose
+type is not a plain attribute name (letters, digits, <code class="language-plaintext highlighter-rouge">_</code> and <code class="language-plaintext highlighter-rouge">-</code>) gets no message attribute.</p>
 
 <h3 id="requiredlabel-is-unrelated-to-the-required-attribute"><code class="language-plaintext highlighter-rouge">requiredLabel</code> is unrelated to the <code class="language-plaintext highlighter-rouge">required</code> attribute</h3>
 
@@ -342,11 +358,18 @@ browser — the two are decided completely independently.</p>
 <div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">struts.htmlConstraintProvider</span><span class="p">=</span><span class="s">struts</span>
 </code></pre></div></div>
 
-<p>An application that wants a less conservative mapping — for example, treating an <code class="language-plaintext highlighter-rouge">email</code> validator as
-<code class="language-plaintext highlighter-rouge">type="email"</code>, or emitting <code class="language-plaintext highlighter-rouge">pattern</code> for case-insensitive regexes by rewriting them — can register its own
-<code class="language-plaintext highlighter-rouge">HtmlConstraintProvider</code> implementation under this constant instead of the default. This is the escape
-hatch for every limitation described above: the framework’s own mapping stays deliberately conservative,
-but nothing stops an application from replacing it with one that fits its own validators and locales.</p>
+<p>An application that wants a less conservative mapping — for example, emitting <code class="language-plaintext highlighter-rouge">pattern</code> for
+case-insensitive regexes by rewriting them, or honouring <code class="language-plaintext highlighter-rouge">min</code>/<code class="language-plaintext highlighter-rouge">max</code> on a plain text field — can register
+its own <code class="language-plaintext highlighter-rouge">HtmlConstraintProvider</code> implementation under this constant instead of the default. This is the
+escape hatch for every limitation described above: the framework’s own mapping stays deliberately
+conservative, but nothing stops an application from replacing it with one that fits its own validators and
+locales.</p>
+
+<p>Two things a provider cannot do. It cannot change an input’s <code class="language-plaintext highlighter-rouge">type</code> — the templates have already written
+it by the time the constraint map renders, so a <code class="language-plaintext highlighter-rouge">type</code> entry is discarded; treating an <code class="language-plaintext highlighter-rouge">email</code> validator
+as <code class="language-plaintext highlighter-rouge">type="email"</code> needs a template override instead. And it cannot override an attribute the developer set
+on the tag: a derived entry whose name matches a tag attribute or a dynamic attribute (compared
+case-insensitively, as HTML does) is dropped, so the developer’s own value always wins.</p>
 
 <h2 id="pure-javascript-client-side-validation-deprecated">Pure JavaScript Client Side Validation (deprecated)</h2>
 
