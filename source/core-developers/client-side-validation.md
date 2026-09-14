@@ -67,7 +67,7 @@ an `int` or `double` validator is attached to it.
 | Validator | Emits | Condition |
 |---|---|---|
 | `requiredstring` | `required` | on text-entry controls (`text`, `search`, `tel`, `password`, `email`, `url`) and `textarea` |
-| `required` | `required` | only on `radio` and `file` |
+| `required` | `required` | only on `radio` and `file`, and only while the bound property holds a value the validator would reject (null, an empty array or an empty collection) |
 | `stringlength` | `minlength` / `maxlength` | on text-entry or `textarea`, and only if the validator has `trim="false"`; each attribute is added only if actually configured |
 | `regex` | `pattern` | on text-entry controls only, and only if `caseSensitive="true"`, `trim="false"`, the regex is ECMAScript-safe (see below), and the validator is not an `email` or `creditcard` validator (both extend `RegexFieldValidator` but carry grammars the browser does not share) |
 | `int`, `short`, `long` | `min` / `max` | only when the control is already `type="number"` or `type="range"` |
@@ -90,6 +90,14 @@ an empty-valued option, and an **unticked checkbox** (`CheckboxInterceptor` subs
 Only `radio` and `file` controls omit their parameter entirely when left empty, so those are the only two
 control types where plain `required` agrees with the server — which is why the table above emits `required`
 for the `required` validator on those two types alone.
+
+Even there, one more check is needed. An omitted parameter leaves the property at whatever it already
+holds, and that is the value the page is rendering. A `private int priority` bound to a `radio` list of
+1, 2, 3 renders with nothing checked (0 is not in the list), yet the server sees a non-null `Integer` and
+accepts the empty submit; a `file` property that `prepare()` loaded from an existing entity — the ordinary
+edit flow — is accepted the same way. So `required` is emitted only while the bound value is one the
+validator itself would reject: null, an empty array or an empty collection. A property that is null when the
+page renders but populated only on the submit request is the one case this cannot see.
 
 **Both `minlength`/`maxlength` and `pattern` need `trim="false"`, which is not the default.** Both
 `StringLengthFieldValidator.trim` and `RegexFieldValidator.trim` default to `true`, so the server measures
@@ -160,6 +168,11 @@ its own `HtmlConstraintProvider` implementation under this constant instead of t
 escape hatch for every limitation described above: the framework's own mapping stays deliberately
 conservative, but nothing stops an application from replacing it with one that fits its own validators and
 locales.
+
+A provider receives the field's validators, the kind of control being rendered, the object the validators
+run against (the action, or the visited object under a `visitor` validator) and the field's current value
+as the tag resolved it — the last is what lets the default implementation judge `required` against the bound
+property.
 
 Two things a provider cannot do. It cannot change an input's `type` — the templates have already written
 it by the time the constraint map renders, so a `type` entry is discarded; treating an `email` validator
