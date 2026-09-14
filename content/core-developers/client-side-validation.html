@@ -241,7 +241,7 @@ an <code class="language-plaintext highlighter-rouge">int</code> or <code class=
     <tr>
       <td><code class="language-plaintext highlighter-rouge">required</code></td>
       <td><code class="language-plaintext highlighter-rouge">required</code></td>
-      <td>only on <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">file</code></td>
+      <td>only on <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">file</code>, and only while the bound property holds a value the validator would reject (null, an empty array or an empty collection)</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">stringlength</code></td>
@@ -303,6 +303,14 @@ an empty-valued option, and an <strong>unticked checkbox</strong> (<code class="
 Only <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">file</code> controls omit their parameter entirely when left empty, so those are the only two
 control types where plain <code class="language-plaintext highlighter-rouge">required</code> agrees with the server — which is why the table above emits <code class="language-plaintext highlighter-rouge">required</code>
 for the <code class="language-plaintext highlighter-rouge">required</code> validator on those two types alone.</p>
+
+<p>Even there, one more check is needed. An omitted parameter leaves the property at whatever it already
+holds, and that is the value the page is rendering. A <code class="language-plaintext highlighter-rouge">private int priority</code> bound to a <code class="language-plaintext highlighter-rouge">radio</code> list of
+1, 2, 3 renders with nothing checked (0 is not in the list), yet the server sees a non-null <code class="language-plaintext highlighter-rouge">Integer</code> and
+accepts the empty submit; a <code class="language-plaintext highlighter-rouge">file</code> property that <code class="language-plaintext highlighter-rouge">prepare()</code> loaded from an existing entity — the ordinary
+edit flow — is accepted the same way. So <code class="language-plaintext highlighter-rouge">required</code> is emitted only while the bound value is one the
+validator itself would reject: null, an empty array or an empty collection. A property that is null when the
+page renders but populated only on the submit request is the one case this cannot see.</p>
 
 <p><strong>Both <code class="language-plaintext highlighter-rouge">minlength</code>/<code class="language-plaintext highlighter-rouge">maxlength</code> and <code class="language-plaintext highlighter-rouge">pattern</code> need <code class="language-plaintext highlighter-rouge">trim="false"</code>, which is not the default.</strong> Both
 <code class="language-plaintext highlighter-rouge">StringLengthFieldValidator.trim</code> and <code class="language-plaintext highlighter-rouge">RegexFieldValidator.trim</code> default to <code class="language-plaintext highlighter-rouge">true</code>, so the server measures
@@ -372,6 +380,11 @@ its own <code class="language-plaintext highlighter-rouge">HtmlConstraintProvide
 escape hatch for every limitation described above: the framework’s own mapping stays deliberately
 conservative, but nothing stops an application from replacing it with one that fits its own validators and
 locales.</p>
+
+<p>A provider receives the field’s validators, the kind of control being rendered, the object the validators
+run against (the action, or the visited object under a <code class="language-plaintext highlighter-rouge">visitor</code> validator) and the field’s current value
+as the tag resolved it — the last is what lets the default implementation judge <code class="language-plaintext highlighter-rouge">required</code> against the bound
+property.</p>
 
 <p>Two things a provider cannot do. It cannot change an input’s <code class="language-plaintext highlighter-rouge">type</code> — the templates have already written
 it by the time the constraint map renders, so a <code class="language-plaintext highlighter-rouge">type</code> entry is discarded; treating an <code class="language-plaintext highlighter-rouge">email</code> validator
