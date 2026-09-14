@@ -116,6 +116,14 @@ whitespace set, so a pattern like `^\S+$` would accept a value containing a non-
 and reject it in the browser. Any regex using a construct outside this allowlist simply gets no `pattern`
 attribute at all — it is never rejected loudly, it just quietly doesn't get a client-side check.
 
+**A `pattern` may carry a whitespace-only alternative.** `RegexFieldValidator` skips any value that trims to
+the empty string *before* it consults its own `trim` param — the check is `value.trim().isEmpty()` — so even
+with `trim="false"` a single space passes the server. The browser, however, skips `pattern` only for the
+empty string and would block that space. Unless the field also carries a `requiredstring` validator that
+trims (its default), which rejects blank input server-side, the emitted pattern is therefore
+`(?:<regex>)|[\x00-\x20]*`: the original regex, or a value made only of the characters `String.trim()`
+strips. With a trimming `requiredstring` present, the bare regex is emitted.
+
 ### `data-msg-*` attributes
 
 Every validator carrying a message — even one that emits no HTML constraint attribute at all — adds a
