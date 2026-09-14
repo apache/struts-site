@@ -329,6 +329,14 @@ whitespace set, so a pattern like <code class="language-plaintext highlighter-ro
 and reject it in the browser. Any regex using a construct outside this allowlist simply gets no <code class="language-plaintext highlighter-rouge">pattern</code>
 attribute at all — it is never rejected loudly, it just quietly doesn’t get a client-side check.</p>
 
+<p><strong>A <code class="language-plaintext highlighter-rouge">pattern</code> may carry a whitespace-only alternative.</strong> <code class="language-plaintext highlighter-rouge">RegexFieldValidator</code> skips any value that trims to
+the empty string <em>before</em> it consults its own <code class="language-plaintext highlighter-rouge">trim</code> param — the check is <code class="language-plaintext highlighter-rouge">value.trim().isEmpty()</code> — so even
+with <code class="language-plaintext highlighter-rouge">trim="false"</code> a single space passes the server. The browser, however, skips <code class="language-plaintext highlighter-rouge">pattern</code> only for the
+empty string and would block that space. Unless the field also carries a <code class="language-plaintext highlighter-rouge">requiredstring</code> validator that
+trims (its default), which rejects blank input server-side, the emitted pattern is therefore
+<code class="language-plaintext highlighter-rouge">(?:&lt;regex&gt;)|[\x00-\x20]*</code>: the original regex, or a value made only of the characters <code class="language-plaintext highlighter-rouge">String.trim()</code>
+strips. With a trimming <code class="language-plaintext highlighter-rouge">requiredstring</code> present, the bare regex is emitted.</p>
+
 <h3 id="data-msg--attributes"><code class="language-plaintext highlighter-rouge">data-msg-*</code> attributes</h3>
 
 <p>Every validator carrying a message — even one that emits no HTML constraint attribute at all — adds a
