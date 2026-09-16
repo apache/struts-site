@@ -166,9 +166,9 @@
       <li><a href="#evaluating-booleans-verbose-with-property" id="markdown-toc-evaluating-booleans-verbose-with-property">Evaluating booleans (verbose with property)</a></li>
     </ul>
   </li>
-  <li><a href="#value-is-an-object" id="markdown-toc-value-is-an-object">value is an Object!</a></li>
-  <li><a href="#probably-wrong" id="markdown-toc-probably-wrong">Probably wrong!</a></li>
-  <li><a href="#passing-a-literal-value-the-right-way" id="markdown-toc-passing-a-literal-value-the-right-way">Passing a literal value the right way</a></li>
+  <li><a href="#the-value-attribute-of-form-tags" id="markdown-toc-the-value-attribute-of-form-tags">The value attribute of form tags</a></li>
+  <li><a href="#passing-a-literal-value" id="markdown-toc-passing-a-literal-value">Passing a literal value</a></li>
+  <li><a href="#reading-a-property" id="markdown-toc-reading-a-property">Reading a property</a></li>
   <li><a href="#expression-language-notations" id="markdown-toc-expression-language-notations">Expression Language Notations</a></li>
   <li><a href="#disallowed-property-names" id="markdown-toc-disallowed-property-names">Disallowed property names</a></li>
   <li><a href="#escaping-body-of-a-tag" id="markdown-toc-escaping-body-of-a-tag">Escaping body of a tag</a></li>
@@ -230,31 +230,30 @@ The value is evaluated as an expression and automtically converted to a boolean.
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:select</span> <span class="na">key=</span><span class="s">"state.label"</span> <span class="na">name=</span><span class="s">"state"</span> <span class="na">multiple=</span><span class="s">"%{allowMultiple}"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<h2 id="value-is-an-object">value is an Object!</h2>
+<h2 id="the-value-attribute-of-form-tags">The value attribute of form tags</h2>
 
-<p>Most often, the <code class="language-plaintext highlighter-rouge">value</code> attribute is set automatically, since <code class="language-plaintext highlighter-rouge">name</code> attribute usually tells the framework which 
-property to call to set the <code class="language-plaintext highlighter-rouge">value</code>. But, if there is a reason to set the <code class="language-plaintext highlighter-rouge">value</code> directly, be advised that <code class="language-plaintext highlighter-rouge">value</code> 
-<strong>is an Object <em>NOT</em> a String</strong>.</p>
+<p>Most often, the <code class="language-plaintext highlighter-rouge">value</code> attribute is set automatically, since the <code class="language-plaintext highlighter-rouge">name</code> attribute tells the framework which 
+property to read. If there is a reason to set <code class="language-plaintext highlighter-rouge">value</code> directly, be advised that on the form tags — <code class="language-plaintext highlighter-rouge">textfield</code>, 
+<code class="language-plaintext highlighter-rouge">password</code>, <code class="language-plaintext highlighter-rouge">textarea</code>, <code class="language-plaintext highlighter-rouge">hidden</code>, <code class="language-plaintext highlighter-rouge">select</code> and the like — <code class="language-plaintext highlighter-rouge">value</code> <strong>is a String attribute</strong>: it is parsed for the 
+<code class="language-plaintext highlighter-rouge">%{ ... }</code> notation, and anything outside that notation is used literally.</p>
 
-<blockquote>
-  <p>NOTE: Since <code class="language-plaintext highlighter-rouge">value</code> is not a String, whatever is passed to <code class="language-plaintext highlighter-rouge">value</code> is evaluated as an expression - <strong>NOT</strong> a String literal.</p>
-</blockquote>
-
-<h2 id="probably-wrong">Probably wrong!</h2>
+<h2 id="passing-a-literal-value">Passing a literal value</h2>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:textfield</span> <span class="na">key=</span><span class="s">"state.label"</span> <span class="na">name=</span><span class="s">"state"</span> <span class="na">value=</span><span class="s">"ca"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>If a <code class="language-plaintext highlighter-rouge">textfield</code> is passed the value attribute <code class="language-plaintext highlighter-rouge">ca</code>, the framework will look for a property named <code class="language-plaintext highlighter-rouge">getCa</code>. Generally, 
-this is not what we mean. What we mean to do is pass a literal String. In the expression language, literals are placed 
-within quotes</p>
+<p>The field is rendered with the literal text <code class="language-plaintext highlighter-rouge">ca</code>; the framework does <strong>not</strong> look for a <code class="language-plaintext highlighter-rouge">getCa</code> property.</p>
 
-<h2 id="passing-a-literal-value-the-right-way">Passing a literal value the right way</h2>
+<h2 id="reading-a-property">Reading a property</h2>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:textfield</span> <span class="na">key=</span><span class="s">"state.label"</span> <span class="na">name=</span><span class="s">"state"</span> <span class="na">value=</span><span class="s">"%{'ca'}"</span> <span class="nt">/&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:textfield</span> <span class="na">key=</span><span class="s">"state.label"</span> <span class="na">name=</span><span class="s">"state"</span> <span class="na">value=</span><span class="s">"%{selectedState}"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>Another approach would be to use the idiom <code class="language-plaintext highlighter-rouge">value="'ca'"</code>, but, in this case, using the expression notation is recommended.</p>
+<p>To read a property, wrap it in the expression notation. The same goes for <code class="language-plaintext highlighter-rouge">hidden</code> and the other form tags.</p>
+
+<p>Two form tags are the exception: <code class="language-plaintext highlighter-rouge">checkbox</code> evaluates <code class="language-plaintext highlighter-rouge">value</code> as a Boolean and <code class="language-plaintext highlighter-rouge">file</code> as an Object, so on those it 
+is always an expression (rule 2 below). The generic tags — <code class="language-plaintext highlighter-rouge">property</code>, <code class="language-plaintext highlighter-rouge">set</code>, <code class="language-plaintext highlighter-rouge">if</code>, <code class="language-plaintext highlighter-rouge">iterator</code> — take an expression 
+in <code class="language-plaintext highlighter-rouge">value</code> as well.</p>
 
 <p>Boiled down, the tag attributes are evaluated using three rules.</p>
 
@@ -264,8 +263,6 @@ within quotes</p>
   <li>The exception to rule #2 is that if the <em>non-String</em> attribute uses the escape notion <code class="language-plaintext highlighter-rouge">%{}</code>, the notation is ignored 
   as redundant, and the content evaluated.</li>
 </ol>
-
-<p>Please remember about <em>altSyntax</em> option that can change when value is evaluated as an expression - <a href="alt-syntax">Alt Syntax</a></p>
 
 <h2 id="expression-language-notations">Expression Language Notations</h2>
 
