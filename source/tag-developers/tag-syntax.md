@@ -74,31 +74,32 @@ Since it's easy to forget which attributes are String and which are non-String, 
 <s:select key="state.label" name="state" multiple="%{allowMultiple}"/>
 ```
 
-## value is an Object!
+## The value attribute of form tags
 
-Most often, the `value` attribute is set automatically, since `name` attribute usually tells the framework which 
-property to call to set the `value`. But, if there is a reason to set the `value` directly, be advised that `value` 
-**is an Object _NOT_ a String**.
+Most often, the `value` attribute is set automatically, since the `name` attribute tells the framework which 
+property to read. If there is a reason to set `value` directly, be advised that on the form tags — `textfield`, 
+`password`, `textarea`, `hidden`, `select` and the like — `value` **is a String attribute**: it is parsed for the 
+`%{ ... }` notation, and anything outside that notation is used literally.
 
-> NOTE: Since `value` is not a String, whatever is passed to `value` is evaluated as an expression - **NOT** a String literal.
-
-## Probably wrong!
+## Passing a literal value
 
 ```html
 <s:textfield key="state.label" name="state" value="ca"/>
 ```
 
-If a `textfield` is passed the value attribute `ca`, the framework will look for a property named `getCa`. Generally, 
-this is not what we mean. What we mean to do is pass a literal String. In the expression language, literals are placed 
-within quotes
+The field is rendered with the literal text `ca`; the framework does **not** look for a `getCa` property.
 
-## Passing a literal value the right way
+## Reading a property
 
 ```html
-<s:textfield key="state.label" name="state" value="%{'ca'}" />
+<s:textfield key="state.label" name="state" value="%{selectedState}"/>
 ```
 
-Another approach would be to use the idiom `value="'ca'"`, but, in this case, using the expression notation is recommended.
+To read a property, wrap it in the expression notation. The same goes for `hidden` and the other form tags.
+
+Two form tags are the exception: `checkbox` evaluates `value` as a Boolean and `file` as an Object, so on those it 
+is always an expression (rule 2 below). The generic tags — `property`, `set`, `if`, `iterator` — take an expression 
+in `value` as well.
 
 Boiled down, the tag attributes are evaluated using three rules.
 
@@ -106,8 +107,6 @@ Boiled down, the tag attributes are evaluated using three rules.
 2. All _non-String_ attribute types are **not** parsed, but evaluated directly as an expression
 3. The exception to rule #2 is that if the _non-String_ attribute uses the escape notion `%{}`, the notation is ignored 
   as redundant, and the content evaluated.
-
-Please remember about _altSyntax_ option that can change when value is evaluated as an expression - [Alt Syntax](alt-syntax) 
 
 ## Expression Language Notations
 
