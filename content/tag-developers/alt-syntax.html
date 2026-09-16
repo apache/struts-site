@@ -155,24 +155,16 @@
     <h1 id="alt-syntax">Alt Syntax</h1>
 
 <blockquote>
-  <p>Note: As from Struts 2.6 option to disable the AltSyntax has been removed and now using %{…} is the only way 
-to create an expression as stated below.</p>
+  <p>Note: This page is history. The <code class="language-plaintext highlighter-rouge">%{ ... }</code> notation described here is the only tag syntax since Struts 2.6, when the
+option to disable it was removed (WW-3877). See <a href="tag-syntax">Tag Syntax</a> for how tag attributes are evaluated today.</p>
 </blockquote>
 
-<p>The <em>altSyntax</em> is an option that can be defined in <code class="language-plaintext highlighter-rouge">struts.xml</code>. By default it is set to true and it is <strong>strongly</strong> 
-recommend you do not change that unless you are upgrading from WebWork 2.1.7 or previous versions.</p>
+<p>The <em>altSyntax</em> was an option introduced in WebWork 2.1.4 that changed how tag attributes are interpreted. Before it,
+every tag attribute was evaluated against the value stack as an expression, so string literals had to be marked with
+single quotes. With the altSyntax, only expressions enclosed in <code class="language-plaintext highlighter-rouge">%{}</code> are evaluated and everything else is taken
+literally.</p>
 
-<blockquote>
-  <p>You can also turn on the altSyntax on a per-page basis by using the <em>set</em> tag. Simply set the name <em>useAltSyntax</em><br />
-to the value <em>true</em> . From this point on, all tags will use the altSyntax for the rest of the request.</p>
-</blockquote>
-
-<p>The altSyntax changes the behavior of how tags are interpreted. Instead of evaluating each tag parameter against 
-the value stack and needing single quotes to mark string literals, only marked expressions are evaluated.</p>
-
-<p>Example:</p>
-
-<p>the following code uses the <a href="tag-syntax">Tag Syntax</a>:</p>
+<p>The old syntax:</p>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"cart.items"</span><span class="nt">&gt;</span>
    ...
@@ -182,8 +174,8 @@ the value stack and needing single quotes to mark string literals, only marked e
 <span class="nt">&lt;/s:iterator&gt;</span>
 </code></pre></div></div>
 
-<p>this is somewhat counter intuitive to normal HTML tag behaviour, and you get loads of single quotes. Now the same example 
-in altSyntax:</p>
+<p>This was counter-intuitive next to normal HTML tag behaviour and produced loads of single quotes. The same example in
+the altSyntax, which is the syntax Struts uses today:</p>
 
 <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;s:iterator </span><span class="na">value=</span><span class="s">"cart.items"</span><span class="nt">&gt;</span>
    ...
@@ -193,23 +185,18 @@ in altSyntax:</p>
 <span class="nt">&lt;/s:iterator&gt;</span>
 </code></pre></div></div>
 
-<p>Only expressions enclosed with <code class="language-plaintext highlighter-rouge">%{}</code> are evaluated. The code is shorter and clearer, very similar to JSTL EL usage. 
-Quoting problems, eg. with javascript function calls, are avoided.</p>
-
-<p>In order to fully understand why this option exists and what the differences are, it is best to get a bit of history 
-about WebWork.</p>
-
-<blockquote>
-  <p>If you are <em>not</em> upgrading from WebWork 2.1.7 or previous versions and you don’t care about the history of WebWork’s 
-evolution, you can skip this section. See the <a href="tag-syntax">Tag Syntax</a> section for more information 
-on the standard tag syntax support</p>
-</blockquote>
+<p>The code is shorter and clearer, very similar to JSTL EL usage, and quoting problems, e.g. with JavaScript function
+calls, are avoided.</p>
 
 <h2 id="history">History</h2>
 
-<p>In WebWork 2.1.4, the altSyntax option was introduced. The book, WebWork in Action, while based around WebWork 2.1.7, 
-was entirely written with the assumption that the altSyntax was enabled. As of WebWork 2.2, the altSyntax is turned 
-on by default and eventually the old syntax will no longer be supported and will be removed from the code.</p>
+<p>The book WebWork in Action, while based around WebWork 2.1.7, was entirely written with the assumption that the
+altSyntax was enabled. As of WebWork 2.2 it was turned on by default, with a <code class="language-plaintext highlighter-rouge">struts.xml</code> constant and a per-request
+<code class="language-plaintext highlighter-rouge">useAltSyntax</code> flag to switch back to the old syntax. Struts 2.6 removed both, and with them the old syntax.</p>
+
+<p>Documentation written for the old syntax survives in places. If you meet an example where a plain property name is
+passed to <code class="language-plaintext highlighter-rouge">value</code> on a form tag and expected to be evaluated, it predates the altSyntax; today that requires
+<code class="language-plaintext highlighter-rouge">value="%{property}"</code>.</p>
 
   </section>
 </article>
