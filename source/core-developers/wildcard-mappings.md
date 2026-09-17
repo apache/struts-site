@@ -95,10 +95,14 @@ narrower one it also matches could therefore shadow it, non-deterministically �
 
 Annotated wildcard action names are now sorted most-specific-first before registration, using these keys in order:
 
-1. fewer wildcard tokens first (a `*` / `**` run, or a `{var}` group);
-2. more literal characters first;
-3. fewer path-spanning `**` tokens first;
+1. fewer path-spanning `**` tokens first — `**` crosses `/` while `*` and `{var}` never do, so a pattern that
+   relies on it is broader than one that does not (`a/*/*` therefore ranks ahead of `a/**`);
+2. fewer wildcard tokens first (a `*` / `**` run, or a `{var}` group);
+3. more literal characters first;
 4. alphabetical order of the pattern, as a deterministic tie-breaker.
+
+Struts 7.3.0 applied the `**` key third, after the wildcard-token and literal counts, so `a/**` could shadow
+`a/*/*`; 7.4.0 lifts it to the first key ([WW-5743](https://issues.apache.org/jira/browse/WW-5743)).
 
 The comparison recognises both `*` / `**` (the default `WildcardHelper` matcher) and `{var}`
 (`NamedVariablePatternMatcher`). XML mappings are unaffected — they keep their declared order.
