@@ -262,11 +262,15 @@ narrower one it also matches could therefore shadow it, non-deterministically �
 <p>Annotated wildcard action names are now sorted most-specific-first before registration, using these keys in order:</p>
 
 <ol>
+  <li>fewer path-spanning <code class="language-plaintext highlighter-rouge">**</code> tokens first — <code class="language-plaintext highlighter-rouge">**</code> crosses <code class="language-plaintext highlighter-rouge">/</code> while <code class="language-plaintext highlighter-rouge">*</code> and <code class="language-plaintext highlighter-rouge">{var}</code> never do, so a pattern that
+relies on it is broader than one that does not (<code class="language-plaintext highlighter-rouge">a/*/*</code> therefore ranks ahead of <code class="language-plaintext highlighter-rouge">a/**</code>);</li>
   <li>fewer wildcard tokens first (a <code class="language-plaintext highlighter-rouge">*</code> / <code class="language-plaintext highlighter-rouge">**</code> run, or a <code class="language-plaintext highlighter-rouge">{var}</code> group);</li>
   <li>more literal characters first;</li>
-  <li>fewer path-spanning <code class="language-plaintext highlighter-rouge">**</code> tokens first;</li>
   <li>alphabetical order of the pattern, as a deterministic tie-breaker.</li>
 </ol>
+
+<p>Struts 7.3.0 applied the <code class="language-plaintext highlighter-rouge">**</code> key third, after the wildcard-token and literal counts, so <code class="language-plaintext highlighter-rouge">a/**</code> could shadow
+<code class="language-plaintext highlighter-rouge">a/*/*</code>; 7.4.0 lifts it to the first key (<a href="https://issues.apache.org/jira/browse/WW-5743">WW-5743</a>).</p>
 
 <p>The comparison recognises both <code class="language-plaintext highlighter-rouge">*</code> / <code class="language-plaintext highlighter-rouge">**</code> (the default <code class="language-plaintext highlighter-rouge">WildcardHelper</code> matcher) and <code class="language-plaintext highlighter-rouge">{var}</code>
 (<code class="language-plaintext highlighter-rouge">NamedVariablePatternMatcher</code>). XML mappings are unaffected — they keep their declared order.</p>
