@@ -131,6 +131,29 @@ you can use `I18N` prefix to evaluate provided expression as a key in Struts res
 </definition>
 ```
 
+### Legacy OGNL expressions
+
+The plugin also registers the `OGNL` prefix, which comes from Tiles itself. Unlike `S2`, it evaluates the expression
+against the Tiles request rather than the `ValueStack`, and it does not pass through the Struts OGNL controls — the
+member access policy, the allowlist and the expression guard that every other OGNL evaluation in Struts goes through.
+
+As from Struts 7.4.0 the `OGNL` prefix is disabled by default. Evaluating an `OGNL:` expression fails with an
+`EvaluationException` explaining that the evaluator is disabled, so a definition that still relies on it is reported
+instead of rendering incorrectly. Migrate such expressions to `S2:`, which is evaluated by Struts with the full set of OGNL
+controls, or to ordinary Tiles attributes.
+
+If a migration cannot be completed immediately, the previous behaviour can be restored for the affected web
+application only:
+
+```xml
+<constant name="struts.tiles.ognl.legacy.enabled" value="true"/>
+```
+
+The constant is read from the Struts configuration of the web application that owns the Tiles container, on the
+first `OGNL:` evaluation, and a warning is logged once when the legacy evaluator is activated. Both the constant and
+the legacy evaluator are deprecated and will be removed in a future major release, so treat the constant as a
+migration aid rather than a configuration option.
+
 ## Example
 
 This example shows a Tiles layout page using Struts tags:
@@ -156,6 +179,10 @@ Please check [tiles](https://github.com/apache/struts-examples/tree/main/tiles) 
 ## Settings
 
 This plugin does inherit settings from [Tiles configuration](https://tiles.apache.org/framework/config-reference.html).
+
+| Setting | Description | Default | Possible Values |
+|---------|-------------|---------|-----------------|
+| struts.tiles.ognl.legacy.enabled | Restores the legacy `OGNL` expression prefix, which evaluates without the Struts OGNL controls. Deprecated, see [Legacy OGNL expressions](#legacy-ognl-expressions). | false | true, false |
 
 ## Installation
 
