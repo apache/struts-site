@@ -68,11 +68,10 @@ pipeline {
           git checkout asf-staging
           git pull asf asf-staging
 
-          cp -r _site/* content
-          cp -r _site/.htaccess content/.htaccess
+          rm -rf content
+          cp -r _site content
 
-          git add content/*
-          git add content/.htaccess
+          git add -A content
           git status
 
           git commit -m "Updates stage by Jenkins" --allow-empty
