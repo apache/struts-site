@@ -200,7 +200,8 @@ it is optional: when neither <code class="language-plaintext highlighter-rouge">
   <li>parse - <code class="language-plaintext highlighter-rouge">true</code> by default, if set to false, the location param will not be parsed for EL expressions</li>
   <li>format - the format in which the report should be generated. Valid values are the lower-case constants from
 <code class="language-plaintext highlighter-rouge">JasperReport7Constants</code>: <code class="language-plaintext highlighter-rouge">pdf</code>, <code class="language-plaintext highlighter-rouge">xml</code>, <code class="language-plaintext highlighter-rouge">html</code>, <code class="language-plaintext highlighter-rouge">xlsx</code>, <code class="language-plaintext highlighter-rouge">csv</code> and <code class="language-plaintext highlighter-rouge">rtf</code>. The value selects the exporter bean by
-name, so it is case-sensitive. If no format is specified, <code class="language-plaintext highlighter-rouge">pdf</code> will be used</li>
+name; since 7.4.0 a name with no exact match is retried in lower case, so <code class="language-plaintext highlighter-rouge">CSV</code> selects the <code class="language-plaintext highlighter-rouge">csv</code> exporter
+(7.3.0 and earlier match case-sensitively). If no format is specified, <code class="language-plaintext highlighter-rouge">pdf</code> will be used</li>
   <li>contentDisposition - disposition (defaults to “inline”, values are typically <code class="language-plaintext highlighter-rouge">filename="document.pdf"</code>)</li>
   <li>documentName - name of the document (will generate the http header <code class="language-plaintext highlighter-rouge">Content-disposition = X; filename=X.[format]</code>)</li>
   <li>reportParameters - OGNL expression used to retrieve a map of report parameters from the value stack.
@@ -387,7 +388,9 @@ which is an optional dependency of the plugin. As <code class="language-plaintex
 
 <ul>
   <li>the package is <code class="language-plaintext highlighter-rouge">jasperreports7-default</code> and the result type is <code class="language-plaintext highlighter-rouge">jasperReport7</code></li>
-  <li><code class="language-plaintext highlighter-rouge">format</code> values are lower-case (<code class="language-plaintext highlighter-rouge">pdf</code> instead of <code class="language-plaintext highlighter-rouge">PDF</code>); <code class="language-plaintext highlighter-rouge">xls</code> is gone, use <code class="language-plaintext highlighter-rouge">xlsx</code></li>
+  <li><code class="language-plaintext highlighter-rouge">format</code> values are lower-case (<code class="language-plaintext highlighter-rouge">pdf</code> instead of <code class="language-plaintext highlighter-rouge">PDF</code>); since 7.4.0 the upper-case 6.x values still resolve
+(<a href="https://issues.apache.org/jira/browse/WW-5732">WW-5732</a>), but 7.3.0 and earlier reject them; <code class="language-plaintext highlighter-rouge">xls</code> is gone,
+use <code class="language-plaintext highlighter-rouge">xlsx</code></li>
   <li>the <code class="language-plaintext highlighter-rouge">delimiter</code> and <code class="language-plaintext highlighter-rouge">imageServletUrl</code> result parameters are gone; use the constants from <a href="#settings">Settings</a>
 or <code class="language-plaintext highlighter-rouge">JasperReport7Aware.getCsvDelimiter</code> instead</li>
   <li>the <code class="language-plaintext highlighter-rouge">exportParameters</code> result parameter is gone; exporter configuration is done in code by a
