@@ -40,7 +40,8 @@ The result takes the following parameters:
  - parse - `true` by default, if set to false, the location param will not be parsed for EL expressions
  - format - the format in which the report should be generated. Valid values are the lower-case constants from
    `JasperReport7Constants`: `pdf`, `xml`, `html`, `xlsx`, `csv` and `rtf`. The value selects the exporter bean by
-   name, so it is case-sensitive. If no format is specified, `pdf` will be used
+   name; since 7.4.0 a name with no exact match is retried in lower case, so `CSV` selects the `csv` exporter
+   (7.3.0 and earlier match case-sensitively). If no format is specified, `pdf` will be used
  - contentDisposition - disposition (defaults to "inline", values are typically `filename="document.pdf"`)
  - documentName - name of the document (will generate the http header `Content-disposition = X; filename=X.[format]`)
  - reportParameters - OGNL expression used to retrieve a map of report parameters from the value stack.
@@ -216,7 +217,9 @@ Use the same `JASPERREPORTS_VERSION` as the `jasperreports` artifact pulled in b
 The result parameters shared with the [JasperReports Plugin](../jasperreports) behave the same way. What changed:
 
  - the package is `jasperreports7-default` and the result type is `jasperReport7`
- - `format` values are lower-case (`pdf` instead of `PDF`); `xls` is gone, use `xlsx`
+ - `format` values are lower-case (`pdf` instead of `PDF`); since 7.4.0 the upper-case 6.x values still resolve
+   ([WW-5732](https://issues.apache.org/jira/browse/WW-5732)), but 7.3.0 and earlier reject them; `xls` is gone,
+   use `xlsx`
  - the `delimiter` and `imageServletUrl` result parameters are gone; use the constants from [Settings](#settings)
    or `JasperReport7Aware.getCsvDelimiter` instead
  - the `exportParameters` result parameter is gone; exporter configuration is done in code by a
