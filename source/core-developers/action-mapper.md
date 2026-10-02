@@ -143,7 +143,8 @@ For example with the following in struts.xml:
 ```
 
 `CompositeActionMapper` will be configured with 2 ActionMapper, namely "struts" which is `org.apache.struts2.dispatcher.mapper.DefaultActionMapper`
-and "restful" which is `org.apache.struts2.dispatcher.mapper.RestfulActionMapper`. 
+and "restful" which is `org.apache.struts2.dispatcher.mapper.RestfulActionMapper`. The `restful` and `restful2` mappers
+are deprecated since 7.4.0 and 6.12.0, see [RestfulActionMapper](restful-action-mapper).
 
 `CompositeActionMapper` would consult each of them in order described above.
 

@@ -65,6 +65,35 @@ for obtaining and releasing resources that the background process will need to e
 background
 process extension, extend `ExecuteAndWaitInterceptor` and implement the `getNewBackgroundProcess()` method.
 
+### One background process per browser tab
+
+The background process is keyed by action name alone, so a second browser tab of the same session joins the process
+already running instead of starting its own. Override `getBackgroundProcessName(ActionProxy)` to widen that key, for
+example with the transaction token, so that each tab gets its own process:
+
+```java
+public class TokenizedExecuteAndWaitInterceptor extends ExecuteAndWaitInterceptor {
+    @Override
+    protected String getBackgroundProcessName(ActionProxy proxy) {
+        String token = TokenHelper.getToken();
+        return token == null
+            ? super.getBackgroundProcessName(proxy)
+            : super.getBackgroundProcessName(proxy) + "_" + token;
+    }
+}
+```
+
+Two caveats apply to any key that varies per request:
+
+- the entry is dropped from the session only when a request observes the process as done, so every run the user
+  abandons leaves a background process, and the action instance it holds, in the session. With the action-name key
+  that is at most one per action; with a per-tab key it grows without limit.
+- the wait page must send the value used in the key on every refresh, for instance with `<s:url includeParams="all"/>`
+  together with the [Token Interceptor](token-interceptor). Otherwise each refresh starts another background process
+  instead of joining the running one.
+
+See [WW-1742](https://issues.apache.org/jira/browse/WW-1742).
+
 ## Using ExecutorProvider
 
 Since Struts 6.2.0 it is possible to use your own `ExecutorProvider` to run _background tasks_. To use your own executor

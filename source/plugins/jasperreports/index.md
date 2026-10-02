@@ -43,6 +43,9 @@ The result takes the following parameters:
  - reportParameters - (since 2.1.2+) OGNL expression used to retrieve a map of report parameters from the value stack. 
    The parameters may be accessed in the report via the usual JR mechanism and might include data not part of the 
    dataSource, such as the user name of the report creator, etc.
+   A report parameter that is not in this map is looked up on the value stack by its name, so a parameter `title`
+   receives the action's `getTitle()`. This lookup did not reach JasperReports from 6.0.0 to 7.3.0, so those
+   parameters were `null`; it works again since 7.4.0 ([WW-5729](https://issues.apache.org/jira/browse/WW-5729)).
  - exportParameters - (since 2.1.2+) OGNL expression used to retrieve a map of JR exporter parameters from the value stack.
    The export parameters are used to customize the JR export. For example, a PDF export might enable encryption 
    and set the user password to a string known to the report creator.
