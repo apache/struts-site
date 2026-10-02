@@ -345,6 +345,47 @@ For more configuration options see the [Convention Plugin Documentation](../conv
 |struts.rest.validationFailureStatusCode|The HTTP status code to return on validation failure|400|Any HTTP status code as an integer|
 |struts.rest.namespace|Optional parameter to specify namespace for REST services|/|eg. /rest|
 |struts.rest.content.restrictToGET|Optional parameter, if set to true blocks returning content from any other methods than GET, if set to false, the content can be returned for any kind of method|true|eg. put struts.rest.content.restrictToGET = false in struts.properties|
+|struts.rest.content.maxLength|Maximum number of characters read from a request body, see [Request body size limit](#request-body-size-limit). Since 7.4.0 and 6.12.0|2097152|Any integer of 1 or more|
+|struts.rest.anySetter.requireAnnotations|Whether keys bound through a Jackson any-setter require `@StrutsParameter(allowDynamicKeys = true)`, see [Jackson any-setters](/core-developers/struts-parameter-annotation#jackson-any-setters). Since 7.4.0|false|true, false|
+
+### Request body size limit
+
+Since Struts 7.4.0 and 6.12.0 the plugin stops reading a request body once it passes `struts.rest.content.maxLength`
+characters (2 MB by default, the same as `struts.json.maxLength` in the [JSON plugin](../json)) and fails the request
+with a `RequestBodyTooLargeException` before the action runs
+([WW-5723](https://issues.apache.org/jira/browse/WW-5723)). The limit is applied while the content-type handler reads
+the body, so requests whose handler never reads it — HTML, form-urlencoded, multipart — are not affected.
+
+```xml
+<constant name="struts.rest.content.maxLength" value="10485760"/>
+```
+
+An API that accepts JSON or XML payloads larger than 2 MB must raise `struts.rest.content.maxLength` when upgrading,
+otherwise those requests start failing.
+{:.alert .alert-warning}
+
+### Resource isolation in restDefaultStack
+
+Since Struts 7.4.0 and 6.12.0 `restDefaultStack` contains the [`coep`](/core-developers/coep-interceptor),
+[`coop`](/core-developers/coop-interceptor) and [`fetchMetadata`](/core-developers/fetch-metadata-interceptor)
+interceptors, configured as in core's `defaultStack`
+([WW-5718](https://issues.apache.org/jira/browse/WW-5718)). Earlier versions left them out, so a package extending
+`rest-default` sent no COOP/COEP headers and skipped the Fetch Metadata check. A request rejected by the Fetch Metadata
+check is answered with HTTP status 403 and no response body.
+
+The Fetch Metadata check rejects browser requests sent with `Sec-Fetch-Site: cross-site` that use a method other
+than GET and are not navigations, which includes `POST`, `PUT` and `DELETE` calls made with `fetch()`/XHR from a
+single-page application served from another site. If your REST API is meant to be called from such a page, disable the
+check for the stack serving it:
+{:.alert .alert-warning}
+
+```xml
+<interceptor-ref name="restDefaultStack">
+    <param name="fetchMetadata.disabled">true</param>
+</interceptor-ref>
+```
+
+Requests sent by non-browser clients carry no `Sec-Fetch-Site` header and are not affected.
 
 ## Resources
 
