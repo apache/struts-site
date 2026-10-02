@@ -209,6 +209,14 @@ by extending your own application package from <code class="language-plaintext h
 <span class="nt">&lt;/struts&gt;</span>
 </code></pre></div></div>
 
+<p class="alert alert-warning">Since Struts 7.4.0 and 6.12.0 the plugin’s <code class="language-plaintext highlighter-rouge">beanValidationDefaultStack</code> contains the
+<a href="/core-developers/coep-interceptor"><code class="language-plaintext highlighter-rouge">coep</code></a>, <a href="/core-developers/coop-interceptor"><code class="language-plaintext highlighter-rouge">coop</code></a> and
+<a href="/core-developers/fetch-metadata-interceptor"><code class="language-plaintext highlighter-rouge">fetchMetadata</code></a> interceptors, configured as in core’s <code class="language-plaintext highlighter-rouge">defaultStack</code>
+(<a href="https://issues.apache.org/jira/browse/WW-5718">WW-5718</a>). Earlier versions left them out. Cross-site requests that
+use a method other than GET and are not navigations are now rejected: the action is not invoked and the interceptor
+returns the result code <code class="language-plaintext highlighter-rouge">403</code>, which needs a matching (global) result to render a response. Set
+<code class="language-plaintext highlighter-rouge">fetchMetadata.disabled</code> to <code class="language-plaintext highlighter-rouge">true</code> on the stack for actions that must accept such requests.</p>
+
 <p>Here is another example that shows how you can combine bean-validation with other plugins by configuring your own
 Interceptor-Stack (note: this is just a very short example. In a real app you should take more care about your stack).
 You can combine bean validation with classic struts validation (or disable either) by putting the according interceptors

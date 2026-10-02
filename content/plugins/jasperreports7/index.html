@@ -361,8 +361,9 @@ extension when <code class="language-plaintext highlighter-rouge">documentName</
 <h3 id="installation">Installation</h3>
 
 <p>This plugin can be installed by copying the plugin jar into your application’s <code class="language-plaintext highlighter-rouge">/WEB-INF/lib</code> directory. The plugin
-brings the JasperReports 7 core library with it, but the PDF exporter lives in a separate JasperReports artifact
-which is an optional dependency of the plugin. As <code class="language-plaintext highlighter-rouge">pdf</code> is the default format, most applications need to add it:</p>
+does not bring JasperReports with it: add the <code class="language-plaintext highlighter-rouge">jasperreports</code> library yourself, and the <code class="language-plaintext highlighter-rouge">jasperreports-pdf</code> exporter as
+well when you produce PDF output, which as the default format most applications do. The plugin is built against
+JasperReports 7.0.7.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependencies&gt;</span>
    ...
@@ -373,6 +374,11 @@ which is an optional dependency of the plugin. As <code class="language-plaintex
    <span class="nt">&lt;/dependency&gt;</span>
    <span class="nt">&lt;dependency&gt;</span>
        <span class="nt">&lt;groupId&gt;</span>net.sf.jasperreports<span class="nt">&lt;/groupId&gt;</span>
+       <span class="nt">&lt;artifactId&gt;</span>jasperreports<span class="nt">&lt;/artifactId&gt;</span>
+       <span class="nt">&lt;version&gt;</span>JASPERREPORTS_VERSION<span class="nt">&lt;/version&gt;</span>
+   <span class="nt">&lt;/dependency&gt;</span>
+   <span class="nt">&lt;dependency&gt;</span>
+       <span class="nt">&lt;groupId&gt;</span>net.sf.jasperreports<span class="nt">&lt;/groupId&gt;</span>
        <span class="nt">&lt;artifactId&gt;</span>jasperreports-pdf<span class="nt">&lt;/artifactId&gt;</span>
        <span class="nt">&lt;version&gt;</span>JASPERREPORTS_VERSION<span class="nt">&lt;/version&gt;</span>
    <span class="nt">&lt;/dependency&gt;</span>
@@ -380,7 +386,14 @@ which is an optional dependency of the plugin. As <code class="language-plaintex
 <span class="nt">&lt;/dependencies&gt;</span>
 </code></pre></div></div>
 
-<p>Use the same <code class="language-plaintext highlighter-rouge">JASPERREPORTS_VERSION</code> as the <code class="language-plaintext highlighter-rouge">jasperreports</code> artifact pulled in by the plugin.</p>
+<p>Use the same <code class="language-plaintext highlighter-rouge">JASPERREPORTS_VERSION</code> for both artifacts.</p>
+
+<p class="alert alert-warning">Struts 7.1.0 to 7.3.0 declared <code class="language-plaintext highlighter-rouge">jasperreports</code> as a compile dependency of the plugin, so it arrived transitively and
+was bundled in the release distribution. JasperReports is LGPL licensed and cannot be shipped in an Apache release,
+so since 7.4.0 it is a <code class="language-plaintext highlighter-rouge">provided</code> dependency, as it has always been in the
+<a href="../jasperreports">JasperReports Plugin</a> (<a href="https://issues.apache.org/jira/browse/WW-5735">WW-5735</a>). When upgrading,
+add the <code class="language-plaintext highlighter-rouge">jasperreports</code> dependency yourself, otherwise the application fails at runtime with missing JasperReports
+classes.</p>
 
 <h2 id="migrating-from-the-jasperreports-plugin">Migrating from the JasperReports plugin</h2>
 
