@@ -12,6 +12,13 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
+`RestfulActionMapper` and `Restful2ActionMapper` are deprecated since Struts 7.4.0 and 6.12.0 and will be removed in a
+future release ([WW-5707](https://issues.apache.org/jira/browse/WW-5707)). Both predate the
+[REST Plugin](../plugins/rest), which is the maintained way to build REST-style applications; use it instead.
+{:.alert .alert-warning}
+
+## RestfulActionMapper
+
 A custom action mapper using the following format:
 
 ```
