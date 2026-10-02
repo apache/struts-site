@@ -60,6 +60,15 @@ by extending your own application package from `struts-bean-validation` which co
 </struts>
 ```
 
+Since Struts 7.4.0 and 6.12.0 the plugin's `beanValidationDefaultStack` contains the
+[`coep`](/core-developers/coep-interceptor), [`coop`](/core-developers/coop-interceptor) and
+[`fetchMetadata`](/core-developers/fetch-metadata-interceptor) interceptors, configured as in core's `defaultStack`
+([WW-5718](https://issues.apache.org/jira/browse/WW-5718)). Earlier versions left them out. Cross-site requests that
+use a method other than GET and are not navigations are now rejected: the action is not invoked and the interceptor
+returns the result code `403`, which needs a matching (global) result to render a response. Set
+`fetchMetadata.disabled` to `true` on the stack for actions that must accept such requests.
+{:.alert .alert-warning}
+
 Here is another example that shows how you can combine bean-validation with other plugins by configuring your own
 Interceptor-Stack (note: this is just a very short example. In a real app you should take more care about your stack).
 You can combine bean validation with classic struts validation (or disable either) by putting the according interceptors
