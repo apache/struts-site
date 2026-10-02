@@ -199,7 +199,10 @@ If no format is specified, PDF will be used</li>
   <li>imageServletUrl - name of the url that, when prefixed with the context page, can return report images</li>
   <li>reportParameters - (since 2.1.2+) OGNL expression used to retrieve a map of report parameters from the value stack. 
 The parameters may be accessed in the report via the usual JR mechanism and might include data not part of the 
-dataSource, such as the user name of the report creator, etc.</li>
+dataSource, such as the user name of the report creator, etc.
+A report parameter that is not in this map is looked up on the value stack by its name, so a parameter <code class="language-plaintext highlighter-rouge">title</code>
+receives the action’s <code class="language-plaintext highlighter-rouge">getTitle()</code>. This lookup did not reach JasperReports from 6.0.0 to 7.3.0, so those
+parameters were <code class="language-plaintext highlighter-rouge">null</code>; it works again since 7.4.0 (<a href="https://issues.apache.org/jira/browse/WW-5729">WW-5729</a>).</li>
   <li>exportParameters - (since 2.1.2+) OGNL expression used to retrieve a map of JR exporter parameters from the value stack.
 The export parameters are used to customize the JR export. For example, a PDF export might enable encryption 
 and set the user password to a string known to the report creator.</li>

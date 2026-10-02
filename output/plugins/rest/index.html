@@ -177,6 +177,8 @@
       <li><a href="#xstream-configuration" id="markdown-toc-xstream-configuration">XStream configuration</a></li>
       <li><a href="#custom-contenttypehandlers" id="markdown-toc-custom-contenttypehandlers">Custom ContentTypeHandlers</a></li>
       <li><a href="#settings" id="markdown-toc-settings">Settings</a></li>
+      <li><a href="#request-body-size-limit" id="markdown-toc-request-body-size-limit">Request body size limit</a></li>
+      <li><a href="#resource-isolation-in-restdefaultstack" id="markdown-toc-resource-isolation-in-restdefaultstack">Resource isolation in restDefaultStack</a></li>
     </ul>
   </li>
   <li><a href="#resources" id="markdown-toc-resources">Resources</a></li>
@@ -601,8 +603,55 @@ For more configuration options see the <a href="../convention">Convention Plugin
       <td>true</td>
       <td>eg. put struts.rest.content.restrictToGET = false in struts.properties</td>
     </tr>
+    <tr>
+      <td>struts.rest.content.maxLength</td>
+      <td>Maximum number of characters read from a request body, see <a href="#request-body-size-limit">Request body size limit</a>. Since 7.4.0 and 6.12.0</td>
+      <td>2097152</td>
+      <td>Any integer of 1 or more</td>
+    </tr>
+    <tr>
+      <td>struts.rest.anySetter.requireAnnotations</td>
+      <td>Whether keys bound through a Jackson any-setter require <code class="language-plaintext highlighter-rouge">@StrutsParameter(allowDynamicKeys = true)</code>, see <a href="/core-developers/struts-parameter-annotation#jackson-any-setters">Jackson any-setters</a>. Since 7.4.0</td>
+      <td>false</td>
+      <td>true, false</td>
+    </tr>
   </tbody>
 </table>
+
+<h3 id="request-body-size-limit">Request body size limit</h3>
+
+<p>Since Struts 7.4.0 and 6.12.0 the plugin stops reading a request body once it passes <code class="language-plaintext highlighter-rouge">struts.rest.content.maxLength</code>
+characters (2 MB by default, the same as <code class="language-plaintext highlighter-rouge">struts.json.maxLength</code> in the <a href="../json">JSON plugin</a>) and fails the request
+with a <code class="language-plaintext highlighter-rouge">RequestBodyTooLargeException</code> before the action runs
+(<a href="https://issues.apache.org/jira/browse/WW-5723">WW-5723</a>). The limit is applied while the content-type handler reads
+the body, so requests whose handler never reads it — HTML, form-urlencoded, multipart — are not affected.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.rest.content.maxLength"</span> <span class="na">value=</span><span class="s">"10485760"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p class="alert alert-warning">An API that accepts JSON or XML payloads larger than 2 MB must raise <code class="language-plaintext highlighter-rouge">struts.rest.content.maxLength</code> when upgrading,
+otherwise those requests start failing.</p>
+
+<h3 id="resource-isolation-in-restdefaultstack">Resource isolation in restDefaultStack</h3>
+
+<p>Since Struts 7.4.0 and 6.12.0 <code class="language-plaintext highlighter-rouge">restDefaultStack</code> contains the <a href="/core-developers/coep-interceptor"><code class="language-plaintext highlighter-rouge">coep</code></a>,
+<a href="/core-developers/coop-interceptor"><code class="language-plaintext highlighter-rouge">coop</code></a> and <a href="/core-developers/fetch-metadata-interceptor"><code class="language-plaintext highlighter-rouge">fetchMetadata</code></a>
+interceptors, configured as in core’s <code class="language-plaintext highlighter-rouge">defaultStack</code>
+(<a href="https://issues.apache.org/jira/browse/WW-5718">WW-5718</a>). Earlier versions left them out, so a package extending
+<code class="language-plaintext highlighter-rouge">rest-default</code> sent no COOP/COEP headers and skipped the Fetch Metadata check. A request rejected by the Fetch Metadata
+check is answered with HTTP status 403 and no response body.</p>
+
+<p class="alert alert-warning">The Fetch Metadata check rejects browser requests sent with <code class="language-plaintext highlighter-rouge">Sec-Fetch-Site: cross-site</code> that use a method other
+than GET and are not navigations, which includes <code class="language-plaintext highlighter-rouge">POST</code>, <code class="language-plaintext highlighter-rouge">PUT</code> and <code class="language-plaintext highlighter-rouge">DELETE</code> calls made with <code class="language-plaintext highlighter-rouge">fetch()</code>/XHR from a
+single-page application served from another site. If your REST API is meant to be called from such a page, disable the
+check for the stack serving it:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"restDefaultStack"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"fetchMetadata.disabled"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/interceptor-ref&gt;</span>
+</code></pre></div></div>
+
+<p>Requests sent by non-browser clients carry no <code class="language-plaintext highlighter-rouge">Sec-Fetch-Site</code> header and are not affected.</p>
 
 <h2 id="resources">Resources</h2>
 

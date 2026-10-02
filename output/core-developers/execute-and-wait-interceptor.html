@@ -156,7 +156,10 @@
 
 <ul id="markdown-toc">
   <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
-  <li><a href="#extending-the-interceptor" id="markdown-toc-extending-the-interceptor">Extending the Interceptor</a></li>
+  <li><a href="#extending-the-interceptor" id="markdown-toc-extending-the-interceptor">Extending the Interceptor</a>    <ul>
+      <li><a href="#one-background-process-per-browser-tab" id="markdown-toc-one-background-process-per-browser-tab">One background process per browser tab</a></li>
+    </ul>
+  </li>
   <li><a href="#using-executorprovider" id="markdown-toc-using-executorprovider">Using ExecutorProvider</a></li>
   <li><a href="#examples" id="markdown-toc-examples">Examples</a>    <ul>
       <li><a href="#example-code-1" id="markdown-toc-example-code-1">Example code 1</a></li>
@@ -224,6 +227,36 @@ the <code class="language-plaintext highlighter-rouge">BackgroundProcess</code> 
 for obtaining and releasing resources that the background process will need to execute successfully. To use your
 background
 process extension, extend <code class="language-plaintext highlighter-rouge">ExecuteAndWaitInterceptor</code> and implement the <code class="language-plaintext highlighter-rouge">getNewBackgroundProcess()</code> method.</p>
+
+<h3 id="one-background-process-per-browser-tab">One background process per browser tab</h3>
+
+<p>The background process is keyed by action name alone, so a second browser tab of the same session joins the process
+already running instead of starting its own. Override <code class="language-plaintext highlighter-rouge">getBackgroundProcessName(ActionProxy)</code> to widen that key, for
+example with the transaction token, so that each tab gets its own process:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TokenizedExecuteAndWaitInterceptor</span> <span class="kd">extends</span> <span class="nc">ExecuteAndWaitInterceptor</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="nc">String</span> <span class="nf">getBackgroundProcessName</span><span class="o">(</span><span class="nc">ActionProxy</span> <span class="n">proxy</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">token</span> <span class="o">=</span> <span class="nc">TokenHelper</span><span class="o">.</span><span class="na">getToken</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">token</span> <span class="o">==</span> <span class="kc">null</span>
+            <span class="o">?</span> <span class="kd">super</span><span class="o">.</span><span class="na">getBackgroundProcessName</span><span class="o">(</span><span class="n">proxy</span><span class="o">)</span>
+            <span class="o">:</span> <span class="kd">super</span><span class="o">.</span><span class="na">getBackgroundProcessName</span><span class="o">(</span><span class="n">proxy</span><span class="o">)</span> <span class="o">+</span> <span class="s">"_"</span> <span class="o">+</span> <span class="n">token</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Two caveats apply to any key that varies per request:</p>
+
+<ul>
+  <li>the entry is dropped from the session only when a request observes the process as done, so every run the user
+abandons leaves a background process, and the action instance it holds, in the session. With the action-name key
+that is at most one per action; with a per-tab key it grows without limit.</li>
+  <li>the wait page must send the value used in the key on every refresh, for instance with <code class="language-plaintext highlighter-rouge">&lt;s:url includeParams="all"/&gt;</code>
+together with the <a href="token-interceptor">Token Interceptor</a>. Otherwise each refresh starts another background process
+instead of joining the running one.</li>
+</ul>
+
+<p>See <a href="https://issues.apache.org/jira/browse/WW-1742">WW-1742</a>.</p>
 
 <h2 id="using-executorprovider">Using ExecutorProvider</h2>
 

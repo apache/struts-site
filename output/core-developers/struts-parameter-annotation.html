@@ -157,6 +157,7 @@
 <ul id="markdown-toc">
   <li><a href="#where-authorization-applies" id="markdown-toc-where-authorization-applies">Where authorization applies</a>    <ul>
       <li><a href="#creator-bound-properties" id="markdown-toc-creator-bound-properties">Creator-bound properties</a></li>
+      <li><a href="#rest-body-properties-are-matched-by-their-java-name" id="markdown-toc-rest-body-properties-are-matched-by-their-java-name">REST body properties are matched by their Java name</a></li>
       <li><a href="#jackson-any-setters" id="markdown-toc-jackson-any-setters">Jackson any-setters</a></li>
     </ul>
   </li>
@@ -193,7 +194,7 @@ action chaining (opt-in via <code class="language-plaintext highlighter-rouge">s
   <li><a href="../../plugins/json">JSON</a> and <a href="../../plugins/rest">REST</a> plugins — per-property
 authorization performed during deserialization, so an unauthorized property is not set on
 the target object. This covers the properties the deserializer binds <strong>by name</strong>; in the
-REST plugin a Jackson any-setter is a separate sink that is not covered — see
+REST plugin a Jackson any-setter is covered only when you opt in — see
 <a href="#jackson-any-setters">Jackson any-setters</a> below.</li>
 </ul>
 
@@ -215,25 +216,61 @@ object under construction is dropped instead of failing the request.</p>
 the same way as any nested object: <code class="language-plaintext highlighter-rouge">@StrutsParameter(depth = ...)</code> on the getter that reaches them, or a <code class="language-plaintext highlighter-rouge">ModelDriven</code>
 model. Otherwise those values silently stop arriving.</p>
 
+<h3 id="rest-body-properties-are-matched-by-their-java-name">REST body properties are matched by their Java name</h3>
+
+<p>The REST plugin authorizes a request-body property against the Java member Jackson writes to — the
+field, or the bean property its setter is named after — not against the name used on the wire. A
+member renamed with <code class="language-plaintext highlighter-rouge">@JsonProperty</code>, <code class="language-plaintext highlighter-rouge">@JsonAlias</code> or a <code class="language-plaintext highlighter-rouge">PropertyNamingStrategy</code> is authorized by the
+annotation on that member. Up to Struts 7.3.0 the wire name was used, so a renamed annotated member
+was rejected as unannotated (<a href="https://issues.apache.org/jira/browse/WW-5715">WW-5715</a>).</p>
+
+<p>Since Struts 7.4.0 two more REST paths are checked like any other property:</p>
+
+<ul>
+  <li>the id property of a type using a property-based <code class="language-plaintext highlighter-rouge">@JsonIdentityInfo</code>
+(<a href="https://issues.apache.org/jira/browse/WW-5727">WW-5727</a>);</li>
+  <li>a polymorphic (<code class="language-plaintext highlighter-rouge">@JsonTypeInfo</code>) property that is mergeable and already holds a value. The body is no longer merged
+into the existing value; the property is replaced through the authorized path, so the body must carry the type id
+(<a href="https://issues.apache.org/jira/browse/WW-5726">WW-5726</a>).</li>
+</ul>
+
 <h3 id="jackson-any-setters">Jackson any-setters</h3>
 
 <p>A class that declares a Jackson any-setter — <code class="language-plaintext highlighter-rouge">@JsonAnySetter</code> on a method, on a field, or on a
 <code class="language-plaintext highlighter-rouge">@JsonCreator</code> parameter — tells Jackson to route <strong>every otherwise-unknown key</strong> in the request body
 to that member. The REST plugin’s authorization wrapper covers the properties Jackson binds by name;
-an any-setter is a separate sink and is not wrapped. Keys arriving through it are therefore set
-without an <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> check, even with <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations</code> enabled, and
-even in the same request in which an ordinary unannotated setter on the same class is correctly
-rejected.</p>
+by default an any-setter is not wrapped, so keys arriving through it are set without an
+<code class="language-plaintext highlighter-rouge">@StrutsParameter</code> check, even with <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations</code> enabled.</p>
 
-<p>Two limits are worth knowing. An any-setter beneath an <strong>unauthorized parent</strong> is still unreachable:
-the parent is rejected first and its whole subtree is skipped. And <code class="language-plaintext highlighter-rouge">@JsonUnwrapped</code> is a named
-property, so it is unaffected by this.</p>
+<p>Since Struts 7.4.0 you can bring any-setters under authorization by setting
+<code class="language-plaintext highlighter-rouge">struts.rest.anySetter.requireAnnotations</code> to <code class="language-plaintext highlighter-rouge">true</code>
+(<a href="https://issues.apache.org/jira/browse/WW-5712">WW-5712</a>). The setting defaults to <code class="language-plaintext highlighter-rouge">false</code> for compatibility and,
+like the rest of REST body authorization, takes effect only when <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations</code> is enabled.
+With it on, an any-setter receives keys only when the method or field carries
+<code class="language-plaintext highlighter-rouge">@StrutsParameter(allowDynamicKeys = true)</code>:</p>
 
-<p class="alert alert-warning">Declaring an any-setter on a class bound from a REST request body is the application accepting
-arbitrary names and values off the wire — the same decision as binding a <code class="language-plaintext highlighter-rouge">Map</code>, and it deserves the
-same scrutiny. Where that is not what you want, do not declare one on a request-bound class, or
-narrow what the method accepts before storing it. Tracked as
-<a href="https://issues.apache.org/jira/browse/WW-5712">WW-5712</a>.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@StrutsParameter</span><span class="o">(</span><span class="n">allowDynamicKeys</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span> <span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="nd">@JsonAnySetter</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setExtra</span><span class="o">(</span><span class="nc">String</span> <span class="n">key</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">extras</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">depth</code> limits how deeply nested each dynamic key’s value may be: <code class="language-plaintext highlighter-rouge">depth = 0</code> accepts scalar values only, <code class="language-plaintext highlighter-rouge">depth = 1</code>
+also accepts an object or array one level deep. A key whose any-setter is unannotated, or whose value is nested deeper
+than allowed, is dropped. An any-setter on a <code class="language-plaintext highlighter-rouge">@JsonCreator</code> parameter rejects every key. Rejected keys are logged as
+one WARN per any-setter and reason, not one per key. <code class="language-plaintext highlighter-rouge">allowDynamicKeys</code> has no effect on ordinary request parameters.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.rest.anySetter.requireAnnotations"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>An any-setter beneath an <strong>unauthorized parent</strong> is unreachable either way: the parent is rejected first and its whole
+subtree is skipped. <code class="language-plaintext highlighter-rouge">@JsonUnwrapped</code> is a named property, so it is unaffected by this.</p>
+
+<p class="alert alert-warning">With <code class="language-plaintext highlighter-rouge">struts.rest.anySetter.requireAnnotations</code> left at <code class="language-plaintext highlighter-rouge">false</code>, declaring an any-setter on a class bound from a REST
+request body is the application accepting arbitrary names and values off the wire — the same decision as binding a
+<code class="language-plaintext highlighter-rouge">Map</code>, and it deserves the same scrutiny. Enable the setting, do not declare an any-setter on a request-bound class, or
+narrow what the method accepts before storing it.</p>
 
 <h2 id="modeldriven-actions">ModelDriven actions</h2>
 
@@ -302,7 +339,7 @@ bindable, use action properties annotated with <code class="language-plaintext h
 <p>The placement of the <code class="language-plaintext highlighter-rouge">@StrutsParameter</code> annotation is crucial and depends on how you want to populate your action properties.</p>
 
 <ul>
-  <li><strong>On a public setter method:</strong> Place the annotation on a setter method when you want to populate the property with a value from the request. This applies to:
+  <li><strong>On a public setter method:</strong> Place the annotation on a setter method when you want to populate the property with a value from the request. Since Struts 7.4.0 this includes fluent setters that return a value instead of <code class="language-plaintext highlighter-rouge">void</code>; before, an annotation on a fluent setter was ignored (<a href="https://issues.apache.org/jira/browse/WW-5709">WW-5709</a>). This applies to:
     <ul>
       <li>Simple types (String, int, boolean, etc.).</li>
       <li>Checkboxes (single or multiple values).</li>
