@@ -190,8 +190,9 @@ extension when `documentName` is set.
 ### Installation
 
 This plugin can be installed by copying the plugin jar into your application's `/WEB-INF/lib` directory. The plugin
-brings the JasperReports 7 core library with it, but the PDF exporter lives in a separate JasperReports artifact
-which is an optional dependency of the plugin. As `pdf` is the default format, most applications need to add it:
+does not bring JasperReports with it: add the `jasperreports` library yourself, and the `jasperreports-pdf` exporter as
+well when you produce PDF output, which as the default format most applications do. The plugin is built against
+JasperReports 7.0.7.
 
 ```xml
 <dependencies>
@@ -203,6 +204,11 @@ which is an optional dependency of the plugin. As `pdf` is the default format, m
    </dependency>
    <dependency>
        <groupId>net.sf.jasperreports</groupId>
+       <artifactId>jasperreports</artifactId>
+       <version>JASPERREPORTS_VERSION</version>
+   </dependency>
+   <dependency>
+       <groupId>net.sf.jasperreports</groupId>
        <artifactId>jasperreports-pdf</artifactId>
        <version>JASPERREPORTS_VERSION</version>
    </dependency>
@@ -210,7 +216,15 @@ which is an optional dependency of the plugin. As `pdf` is the default format, m
 </dependencies>
 ```
 
-Use the same `JASPERREPORTS_VERSION` as the `jasperreports` artifact pulled in by the plugin.
+Use the same `JASPERREPORTS_VERSION` for both artifacts.
+
+Struts 7.1.0 to 7.3.0 declared `jasperreports` as a compile dependency of the plugin, so it arrived transitively and
+was bundled in the release distribution. JasperReports is LGPL licensed and cannot be shipped in an Apache release,
+so since 7.4.0 it is a `provided` dependency, as it has always been in the
+[JasperReports Plugin](../jasperreports) ([WW-5735](https://issues.apache.org/jira/browse/WW-5735)). When upgrading,
+add the `jasperreports` dependency yourself, otherwise the application fails at runtime with missing JasperReports
+classes.
+{:.alert .alert-warning}
 
 ## Migrating from the JasperReports plugin
 
