@@ -29,7 +29,7 @@ channel that can populate an action from request data:
 - [JSON](../../plugins/json) and [REST](../../plugins/rest) plugins — per-property
   authorization performed during deserialization, so an unauthorized property is not set on
   the target object. This covers the properties the deserializer binds **by name**; in the
-  REST plugin a Jackson any-setter is a separate sink that is not covered — see
+  REST plugin a Jackson any-setter is covered only when you opt in — see
   [Jackson any-setters](#jackson-any-setters) below.
 
 ### Creator-bound properties
@@ -51,25 +51,61 @@ the same way as any nested object: `@StrutsParameter(depth = ...)` on the getter
 model. Otherwise those values silently stop arriving.
 {:.alert .alert-warning}
 
+### REST body properties are matched by their Java name
+
+The REST plugin authorizes a request-body property against the Java member Jackson writes to — the
+field, or the bean property its setter is named after — not against the name used on the wire. A
+member renamed with `@JsonProperty`, `@JsonAlias` or a `PropertyNamingStrategy` is authorized by the
+annotation on that member. Up to Struts 7.3.0 the wire name was used, so a renamed annotated member
+was rejected as unannotated ([WW-5715](https://issues.apache.org/jira/browse/WW-5715)).
+
+Since Struts 7.4.0 two more REST paths are checked like any other property:
+
+- the id property of a type using a property-based `@JsonIdentityInfo`
+  ([WW-5727](https://issues.apache.org/jira/browse/WW-5727));
+- a polymorphic (`@JsonTypeInfo`) property that is mergeable and already holds a value. The body is no longer merged
+  into the existing value; the property is replaced through the authorized path, so the body must carry the type id
+  ([WW-5726](https://issues.apache.org/jira/browse/WW-5726)).
+
 ### Jackson any-setters
 
 A class that declares a Jackson any-setter — `@JsonAnySetter` on a method, on a field, or on a
 `@JsonCreator` parameter — tells Jackson to route **every otherwise-unknown key** in the request body
 to that member. The REST plugin's authorization wrapper covers the properties Jackson binds by name;
-an any-setter is a separate sink and is not wrapped. Keys arriving through it are therefore set
-without an `@StrutsParameter` check, even with `struts.parameters.requireAnnotations` enabled, and
-even in the same request in which an ordinary unannotated setter on the same class is correctly
-rejected.
+by default an any-setter is not wrapped, so keys arriving through it are set without an
+`@StrutsParameter` check, even with `struts.parameters.requireAnnotations` enabled.
 
-Two limits are worth knowing. An any-setter beneath an **unauthorized parent** is still unreachable:
-the parent is rejected first and its whole subtree is skipped. And `@JsonUnwrapped` is a named
-property, so it is unaffected by this.
+Since Struts 7.4.0 you can bring any-setters under authorization by setting
+`struts.rest.anySetter.requireAnnotations` to `true`
+([WW-5712](https://issues.apache.org/jira/browse/WW-5712)). The setting defaults to `false` for compatibility and,
+like the rest of REST body authorization, takes effect only when `struts.parameters.requireAnnotations` is enabled.
+With it on, an any-setter receives keys only when the method or field carries
+`@StrutsParameter(allowDynamicKeys = true)`:
 
-Declaring an any-setter on a class bound from a REST request body is the application accepting
-arbitrary names and values off the wire — the same decision as binding a `Map`, and it deserves the
-same scrutiny. Where that is not what you want, do not declare one on a request-bound class, or
-narrow what the method accepts before storing it. Tracked as
-[WW-5712](https://issues.apache.org/jira/browse/WW-5712).
+```java
+@StrutsParameter(allowDynamicKeys = true, depth = 1)
+@JsonAnySetter
+public void setExtra(String key, Object value) {
+    extras.put(key, value);
+}
+```
+
+`depth` limits how deeply nested each dynamic key's value may be: `depth = 0` accepts scalar values only, `depth = 1`
+also accepts an object or array one level deep. A key whose any-setter is unannotated, or whose value is nested deeper
+than allowed, is dropped. An any-setter on a `@JsonCreator` parameter rejects every key. Rejected keys are logged as
+one WARN per any-setter and reason, not one per key. `allowDynamicKeys` has no effect on ordinary request parameters.
+
+```xml
+<constant name="struts.rest.anySetter.requireAnnotations" value="true"/>
+```
+
+An any-setter beneath an **unauthorized parent** is unreachable either way: the parent is rejected first and its whole
+subtree is skipped. `@JsonUnwrapped` is a named property, so it is unaffected by this.
+
+With `struts.rest.anySetter.requireAnnotations` left at `false`, declaring an any-setter on a class bound from a REST
+request body is the application accepting arbitrary names and values off the wire — the same decision as binding a
+`Map`, and it deserves the same scrutiny. Enable the setting, do not declare an any-setter on a request-bound class, or
+narrow what the method accepts before storing it.
 {:.alert .alert-warning}
 
 ## ModelDriven actions
@@ -138,7 +174,7 @@ bindable, use action properties annotated with `@StrutsParameter` rather than
 
 The placement of the `@StrutsParameter` annotation is crucial and depends on how you want to populate your action properties.
 
-- **On a public setter method:** Place the annotation on a setter method when you want to populate the property with a value from the request. This applies to:
+- **On a public setter method:** Place the annotation on a setter method when you want to populate the property with a value from the request. Since Struts 7.4.0 this includes fluent setters that return a value instead of `void`; before, an annotation on a fluent setter was ignored ([WW-5709](https://issues.apache.org/jira/browse/WW-5709)). This applies to:
     - Simple types (String, int, boolean, etc.).
     - Checkboxes (single or multiple values).
     - Collections and Maps, when you are populating the whole collection/map from the request.
