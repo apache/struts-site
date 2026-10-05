@@ -13,6 +13,57 @@ title: Announcements 2026
   Skip to: <a href="announce-2025">Announcements - 2025</a>
 </p>
 
+#### 5 October 2026 - CVE-2026-104711: OGNL injection in the legacy RESTful action mapper {#a20261005-s2075}
+
+The Apache Struts group recommends upgrading to Apache Struts version 7.4.0 or 6.12.0 to mitigate potential security
+vulnerability in applications configured to use the legacy
+[RESTful action mapper](https://struts.apache.org/core-developers/restful-action-mapper).
+
+> Please read the Security Bulletin [S2-075](https://cwiki.apache.org/confluence/display/WW/S2-075) to find more
+> details about this security vulnerability
+
+**All developers are strongly advised to perform this upgrade.**
+
+You can download the latest version from our [download](download.cgi#struts-ga) page.
+
+#### 5 October 2026 - CVE-2026-104712: Disproportionate response size when rendering BigDecimal request parameters {#a20261005-s2076}
+
+The Apache Struts group recommends upgrading to Apache Struts version 7.4.0 or 6.12.0 to mitigate potential security
+vulnerability in applications that bind request parameters to java.math.BigDecimal properties and render them
+through the Struts tag library.
+
+> Please read the Security Bulletin [S2-076](https://cwiki.apache.org/confluence/display/WW/S2-076) to find more
+> details about this security vulnerability
+
+**All developers are strongly advised to perform this upgrade.**
+
+You can download the latest version from our [download](download.cgi#struts-ga) page.
+
+#### 5 October 2026 - CVE-2026-104713: Unbounded request body read in the REST plugin {#a20261005-s2077}
+
+The Apache Struts group recommends upgrading to Apache Struts version 7.4.0 or 6.12.0 to mitigate potential security
+vulnerability in applications using the [REST plugin](https://struts.apache.org/plugins/rest/).
+
+> Please read the Security Bulletin [S2-077](https://cwiki.apache.org/confluence/display/WW/S2-077) to find more
+> details about this security vulnerability
+
+**All developers are strongly advised to perform this upgrade.**
+
+You can download the latest version from our [download](download.cgi#struts-ga) page.
+
+#### 5 October 2026 - CVE-2026-104714: Shared message formatter exposes date and time values across concurrent requests {#a20261005-s2078}
+
+The Apache Struts group recommends upgrading to Apache Struts version 7.4.0 or 6.12.0 to mitigate potential security
+vulnerability in applications whose [localized messages](https://struts.apache.org/core-developers/localization)
+format a date or time argument.
+
+> Please read the Security Bulletin [S2-078](https://cwiki.apache.org/confluence/display/WW/S2-078) to find more
+> details about this security vulnerability
+
+**All developers are strongly advised to perform this upgrade.**
+
+You can download the latest version from our [download](download.cgi#struts-ga) page.
+
 #### 2 October 2026 - Apache Struts version 7.4.0 General Availability {#a20261002}
 
 The Apache Struts group is pleased to announce that Apache Struts version 7.4.0 is available as a "General Availability"
