@@ -17,7 +17,8 @@ title: Announcements 2026
 
 The Apache Struts group recommends upgrading to Apache Struts version 7.4.0 or 6.12.0 to mitigate potential security
 vulnerability in applications configured to use the legacy
-[RESTful action mapper](https://struts.apache.org/core-developers/restful-action-mapper).
+[RESTful action mapper](https://struts.apache.org/core-developers/restful-action-mapper). Struts 7 is affected only
+when the OGNL allowlist is disabled; it is enabled by default.
 
 > Please read the Security Bulletin [S2-075](https://cwiki.apache.org/confluence/display/WW/S2-075) to find more
 > details about this security vulnerability
