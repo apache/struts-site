@@ -25,6 +25,10 @@ channel that can populate an action from request data:
   (default, governed by `struts.parameters.requireAnnotations`).
 - [Chaining Interceptor](chaining-interceptor.html) — value-stack copying during
   action chaining (opt-in via `struts.chaining.requireAnnotations`).
+- [Alias Interceptor](alias-interceptor.html) — its raw-request-parameter fallback follows
+  `struts.parameters.requireAnnotations` like the Parameters Interceptor; copying a value already
+  resolved on the stack follows `struts.chaining.requireAnnotations` like the Chaining Interceptor
+  (since Struts 7.5.0 — see [Parameter Authorization](alias-interceptor.html#parameter-authorization)).
 - [Cookie Interceptor](cookie-interceptor.html) — cookie values.
 - [JSON](../../plugins/json) and [REST](../../plugins/rest) plugins — per-property
   authorization performed during deserialization, so an unauthorized property is not set on
