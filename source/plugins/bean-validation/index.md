@@ -95,8 +95,17 @@ in your stack (or by removing them from your stack).
 
 Here is an example Action that makes use of bean validation. Note that some of the validation annotations are taken
 from `javax` package (which is defined in the JSR) while others are taken from the validaton provider (in this
-case: `hibernate`). You can specifiy own text keys in the `message` attribute of the annotations. If you do that the
-whole struts i18n mechanism kicks in to resolve those text keys.
+case: `hibernate`). You can specify your own text keys in the `message` attribute of the annotations. The plugin
+looks up the `message` value as a Struts text key, and when the key is found the whole Struts i18n mechanism kicks in
+to resolve it. When no key matches, or `message` keeps the provider's default (like
+`{jakarta.validation.constraints.NotNull.message}`), the message produced by the validation provider is shown
+literally, exactly as the provider interpolated it.
+
+Since Struts 7.5.0 and 6.13.0 the plugin looks up the `message` value itself and shows a provider-produced message
+literally ([WW-5757](https://issues.apache.org/jira/browse/WW-5757)). Earlier versions used the message after the
+provider had interpolated it as the text key, and processed it again as a Struts message when no key matched.
+`struts.beanValidation.convertMessageToUtf` now applies only to messages resolved from Struts bundles.
+{:.alert .alert-info}
 
 **com.example.actions.BeanValidationAction**
 
