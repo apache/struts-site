@@ -77,7 +77,9 @@ migrating,
 [`struts.parameters.requireAnnotations.transitionMode=true`](../../security/#defining-and-annotating-your-action-parameters)
 exempts non-nested alias targets, the same way it exempts any other non-nested setter, on both paths
 above. Nested targets — an alias map value such as `'bean.bar'` is valid — still need the
-annotation. The `ModelDriven` exemption applies here too.
+annotation. In a custom stack that places `alias` after `modelDriven`, a target on the model gets the
+same [`ModelDriven`](struts-parameter-annotation.html#modeldriven-actions) exemption as the Parameters
+Interceptor.
 
 See also [Where authorization applies](struts-parameter-annotation.html#where-authorization-applies)
 for an overview of the channels that can populate an action.
@@ -86,8 +88,8 @@ for an overview of the channels that can populate an action.
 
 If an application already uses this interceptor's documented pattern — the `foo`/`bar` example
 above — `bar` now needs [`@StrutsParameter`](struts-parameter-annotation.html) for the alias to
-keep working once `struts.parameters.requireAnnotations` is enabled. Without it, the alias is
-silently skipped (logged at `WARN`) instead of setting `bar`.
+keep working with `struts.parameters.requireAnnotations` enabled (the default). Without it, the
+alias is skipped and logged at `WARN` instead of setting `bar`.
 
 ## Extending the Interceptor
 
