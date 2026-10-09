@@ -49,6 +49,48 @@ before `conversionError` so that a conversion failure while binding the aliased 
 
 There is no `overwrite` flag on this interceptor; the ordering above is the supported way to get that behavior.
 
+## Parameter Authorization
+
+The value this interceptor copies onto the alias target can come from two different places, and
+each is authorized differently:
+
+- **The source name does not resolve anywhere on the value stack**, so the interceptor falls back
+  to the raw HTTP request parameter of that name — the behavior the `foo`/`bar` example above
+  relies on. This path requires [`@StrutsParameter`](struts-parameter-annotation.html) on the
+  target when `struts.parameters.requireAnnotations` is enabled (the default since Struts 7.0.0),
+  the same as the [Parameters Interceptor](parameters-interceptor.html).
+- **The source name resolves on the value stack** — typically a property an earlier action in a
+  chain already holds. Copying this is the same category of operation as the
+  [Chaining Interceptor](chaining-interceptor.html), so it follows the same opt-in constant:
+
+  ```xml
+  <constant name="struts.chaining.requireAnnotations" value="true"/>
+  ```
+
+  With this off (the default), a stack-resolved value is copied regardless of annotation, matching
+  this interceptor's traditional behavior. With it on, an unannotated target is rejected here too,
+  not just on the request-parameter fallback.
+
+In both cases a rejected target is skipped and logged at `WARN`, and authorization uses the same
+`ParameterAuthorizer` service the Parameters and Chaining interceptors use. While an application is
+migrating,
+[`struts.parameters.requireAnnotations.transitionMode=true`](../../security/#defining-and-annotating-your-action-parameters)
+exempts non-nested alias targets, the same way it exempts any other non-nested setter, on both paths
+above. Nested targets — an alias map value such as `'bean.bar'` is valid — still need the
+annotation. In a custom stack that places `alias` after `modelDriven`, a target on the model gets the
+same [`ModelDriven`](struts-parameter-annotation.html#modeldriven-actions) exemption as the Parameters
+Interceptor.
+
+See also [Where authorization applies](struts-parameter-annotation.html#where-authorization-applies)
+for an overview of the channels that can populate an action.
+
+### Upgrading an existing application
+
+If an application already uses this interceptor's documented pattern — the `foo`/`bar` example
+above — `bar` now needs [`@StrutsParameter`](struts-parameter-annotation.html) for the alias to
+keep working with `struts.parameters.requireAnnotations` enabled (the default). Without it, the
+alias is skipped and logged at `WARN` instead of setting `bar`.
+
 ## Extending the Interceptor
 
 This interceptor does not have any known extension points.
