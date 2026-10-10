@@ -12,6 +12,11 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
+> This plugin got marked as deprecated since Struts 6.7.0 and was removed in Struts 7.0.0. The information below
+> applies to older versions only. Since Struts 7.0.0 SiteMesh can be integrated directly with the framework, please
+> check the [sitemesh3](https://github.com/apache/struts-examples/tree/main/sitemesh3) example.
+{:.alert .alert-warning}
+
 ## About SiteMesh
 
 > [SiteMesh](http://www.sitemesh.org/) is a web-page layout and decoration framework and web application integration 

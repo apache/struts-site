@@ -39,7 +39,7 @@ to share with others. Several plugins are bundled with the framework, and others
 | [Portlet Tiles Plugin](portlet-tiles)     | 2.3.5+         | deprecated since 6.0.0                                                |
 | [REST Plugin](rest)                       | 2.1.1+         |                                                                       |
 | [SiteGraph Plugin](sitegraph)             | < 2.5          | removed since 2.5                                                     |
-| [SiteMesh Plugin](sitemesh)               |                |                                                                       |
+| [SiteMesh Plugin](sitemesh)               | < 7.0.0        | deprecated since 6.7.0, removed since 7.0.0                           |
 | [Spring Plugin](spring)                   |                |                                                                       |
 | [Struts 1 Plugin](struts-1)               | < 2.5          | removed since 2.5                                                     |
 | [TestNG Plugin](testng)                   |                |                                                                       |
