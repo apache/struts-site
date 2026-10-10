@@ -315,6 +315,48 @@ public record Person(String name, Optional<String> nickname) {}
 {"name": "Alice", "nickname": null}
 ```
 
+### Using registered type converters
+
+> Since Struts 7.5.0
+
+A value type that has an [application-wide type converter](../../core-developers/type-conversion.html#applying-a-type-converter-for-an-application)
+can be serialized with that converter instead of as a nested bean, so the JSON response shows the same string as
+the HTML view. This is off by default; enable it with a constant:
+
+```xml
+<constant name="struts.json.writer.useTypeConverters" value="true"/>
+```
+
+With a converter registered in `struts-conversion.properties`:
+
+```
+com.acme.Money = com.acme.MoneyConverter
+```
+
+a `Money` property is written as the string returned by the converter's `convertToString()`:
+
+```json
+{"price": "12.50 EUR"}
+```
+
+instead of:
+
+```json
+{"price": {"amount": "12.50", "currency": "EUR"}}
+```
+
+- Only converters registered **per type** are used — in `struts-conversion.properties` or with
+  `@TypeConversion(type = ConversionType.APPLICATION)`. A converter registered for a superclass or an interface applies to its subtypes. Per-property
+  mappings from `Foo-conversion.properties` are not used.
+- Types the plugin serializes natively are never converted: strings, numbers (including `BigDecimal`), booleans,
+  characters, maps, collections, arrays, dates, `java.time` values, locales and enums. Use `@JSON(format)` or
+  `struts.json.dateformat` for dates.
+- A `@JSONFieldBridge` on the property takes precedence over a registered converter.
+- If the converter throws or returns something other than a `String`, the value is serialized as a bean, as before.
+- A converted value is written as a single string, so `includeProperties` / `excludeProperties` patterns that point
+  inside it, and `@JSON` annotations on its members, no longer apply to it. Make sure the converter's output contains
+  only what the response may expose.
+
 ### Compressing the output
 
 Set the `enableGZIP` attribute to true to gzip the generated json response. The request **must** include `gzip` 
