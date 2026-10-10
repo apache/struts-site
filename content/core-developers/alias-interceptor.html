@@ -213,6 +213,51 @@ before <code class="language-plaintext highlighter-rouge">conversionError</code>
 
 <p>There is no <code class="language-plaintext highlighter-rouge">overwrite</code> flag on this interceptor; the ordering above is the supported way to get that behavior.</p>
 
+<h2 id="parameter-authorization">Parameter Authorization</h2>
+
+<p>The value this interceptor copies onto the alias target can come from two different places, and
+each is authorized differently:</p>
+
+<ul>
+  <li><strong>The source name does not resolve anywhere on the value stack</strong>, so the interceptor falls back
+to the raw HTTP request parameter of that name — the behavior the <code class="language-plaintext highlighter-rouge">foo</code>/<code class="language-plaintext highlighter-rouge">bar</code> example above
+relies on. This path requires <a href="struts-parameter-annotation.html"><code class="language-plaintext highlighter-rouge">@StrutsParameter</code></a> on the
+target when <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations</code> is enabled (the default since Struts 7.0.0),
+the same as the <a href="parameters-interceptor.html">Parameters Interceptor</a>.</li>
+  <li>
+    <p><strong>The source name resolves on the value stack</strong> — typically a property an earlier action in a
+chain already holds. Copying this is the same category of operation as the
+<a href="chaining-interceptor.html">Chaining Interceptor</a>, so it follows the same opt-in constant:</p>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.chaining.requireAnnotations"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+</code></pre></div>    </div>
+
+    <p>With this off (the default), a stack-resolved value is copied regardless of annotation, matching
+this interceptor’s traditional behavior. With it on, an unannotated target is rejected here too,
+not just on the request-parameter fallback.</p>
+  </li>
+</ul>
+
+<p>In both cases a rejected target is skipped and logged at <code class="language-plaintext highlighter-rouge">WARN</code>, and authorization uses the same
+<code class="language-plaintext highlighter-rouge">ParameterAuthorizer</code> service the Parameters and Chaining interceptors use. While an application is
+migrating,
+<a href="../../security/#defining-and-annotating-your-action-parameters"><code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations.transitionMode=true</code></a>
+exempts non-nested alias targets, the same way it exempts any other non-nested setter, on both paths
+above. Nested targets — an alias map value such as <code class="language-plaintext highlighter-rouge">'bean.bar'</code> is valid — still need the
+annotation. In a custom stack that places <code class="language-plaintext highlighter-rouge">alias</code> after <code class="language-plaintext highlighter-rouge">modelDriven</code>, a target on the model gets the
+same <a href="struts-parameter-annotation.html#modeldriven-actions"><code class="language-plaintext highlighter-rouge">ModelDriven</code></a> exemption as the Parameters
+Interceptor.</p>
+
+<p>See also <a href="struts-parameter-annotation.html#where-authorization-applies">Where authorization applies</a>
+for an overview of the channels that can populate an action.</p>
+
+<h3 id="upgrading-an-existing-application">Upgrading an existing application</h3>
+
+<p>If an application already uses this interceptor’s documented pattern — the <code class="language-plaintext highlighter-rouge">foo</code>/<code class="language-plaintext highlighter-rouge">bar</code> example
+above — <code class="language-plaintext highlighter-rouge">bar</code> now needs <a href="struts-parameter-annotation.html"><code class="language-plaintext highlighter-rouge">@StrutsParameter</code></a> for the alias to
+keep working with <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations</code> enabled (the default). Without it, the
+alias is skipped and logged at <code class="language-plaintext highlighter-rouge">WARN</code> instead of setting <code class="language-plaintext highlighter-rouge">bar</code>.</p>
+
 <h2 id="extending-the-interceptor">Extending the Interceptor</h2>
 
 <p>This interceptor does not have any known extension points.</p>
