@@ -34,7 +34,7 @@ replacing `{1}`. For the rest of the request, the framework will see the action 
 the new values.
 
 Mappings are matched against the request in the order they appear in the framework's configuration file. If more than 
-one pattern matches **the last one wins**, so less specific patterns must appear before more specific ones. However, 
+one pattern matches **the first one wins**, so more specific patterns must appear before less specific ones. However, 
 if the request URL can be matched against a path without any wildcards in it, no wildcard matching is performed 
 and order is not important. Also, note that wildcards are not greedy, meaning they only match until the first 
 occurrence of the following string pattern.  For example, consider the following mapping:
