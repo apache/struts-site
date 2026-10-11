@@ -114,6 +114,7 @@ The following extension points are available in Struts 2:
 | struts.securityMemberAccess             | Define a custom SecurityMemberAccess implementation, used to restrict OGNL evaluations based on classes involved (since 6.4.0)                                                               | prototype   | com.opensymphony.xwork2.ognl.SecurityMemberAccess                |
 | struts.compoundRootAccessor             | Define a custom CompoundRootAccessor implementation, used to resolve classes and manipulate the CompoundRoot (since 6.4.0)                                                                   | singleton   | com.opensymphony.xwork2.ognl.accessor.RootAccessor               |
 | struts.methodAccessor                   | Define a custom MethodAccessor implementation, used to evaluate OGNL method calls (since 6.4.0)                                                                                              | singleton   | ognl.MethodAccessor                                              |
+| struts.scopedConstantProvider           | Resolves package-scoped constants declared with `<scoped-constant>` (since 7.5.0)                                                                                                            | singleton   | org.apache.struts2.config.ScopedConstantProvider                 |
 
 ## Plugin Examples
 
