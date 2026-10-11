@@ -255,6 +255,116 @@ by an “extends” should be defined <em>above</em>  the package which extends 
 <span class="nt">&lt;/struts&gt;</span>
 </code></pre></div></div>
 
+<h2 id="scoped-constants">Scoped constants</h2>
+
+<p>Since Struts 7.5.0 a package can override selected <a href="constant-configuration">constants</a> for its own actions with
+the <code class="language-plaintext highlighter-rouge">&lt;scoped-constant&gt;</code> element. Packages that <code class="language-plaintext highlighter-rouge">extends</code> it inherit the override, and an override declared in
+the child package wins.</p>
+
+<p>The element requires the <a href="../dtds/struts-7.5.dtd">struts-7.5.dtd</a> and must come before any other child of
+<code class="language-plaintext highlighter-rouge">&lt;package&gt;</code>:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 7.5//EN"
+    "https://struts.apache.org/dtds/struts-7.5.dtd"&gt;</span>
+<span class="nt">&lt;struts&gt;</span>
+  <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"admin"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/admin"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;scoped-constant</span> <span class="na">name=</span><span class="s">"some.scopable.constant"</span> <span class="na">value=</span><span class="s">"x"</span><span class="nt">/&gt;</span>
+    ...
+  <span class="nt">&lt;/package&gt;</span>
+<span class="nt">&lt;/struts&gt;</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td><strong>yes</strong></td>
+      <td>the name of a scopable constant</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td><strong>yes</strong></td>
+      <td>the value used for actions of the package</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Scoped constants are not a way to override an arbitrary constant per package. Constants are injected into
+framework components once, at startup, so a package value only takes effect where a component explicitly reads
+it per request. Such a component declares the constants it reads as <em>scopable</em>, and only those can appear
+in <code class="language-plaintext highlighter-rouge">&lt;scoped-constant&gt;</code>.</p>
+
+<p class="alert alert-warning">Struts core does not declare any constant as scopable yet. A <code class="language-plaintext highlighter-rouge">&lt;scoped-constant&gt;</code> only works with a constant
+declared scopable by a plugin or by your own application code.</p>
+
+<p>The configuration is validated at startup, and loading fails when:</p>
+
+<ul>
+  <li>a package declares a constant that nothing has declared scopable. This also applies to abstract packages.
+The error message lists the scopable constants that are available.</li>
+  <li>a package declares the same constant more than once.</li>
+</ul>
+
+<p>Values are used as they are. Unlike in <code class="language-plaintext highlighter-rouge">&lt;constant&gt;</code>, <code class="language-plaintext highlighter-rouge">${...}</code> <a href="constant-configuration#value-substitution">value substitution</a>
+is not supported.</p>
+
+<h3 id="making-a-constant-scopable">Making a constant scopable</h3>
+
+<p>A component makes a constant scopable in two steps. First, register a bean that implements
+<code class="language-plaintext highlighter-rouge">org.apache.struts2.config.ScopableConstants</code> and returns the constant names. You can register more than one
+such bean. The scopable set is the union of all of them.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyScopableConstants</span> <span class="kd">implements</span> <span class="nc">ScopableConstants</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getNames</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"myplugin.theme"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.config.ScopableConstants"</span> <span class="na">name=</span><span class="s">"myplugin"</span>
+      <span class="na">class=</span><span class="s">"com.example.MyScopableConstants"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>Second, read the value per request through <code class="language-plaintext highlighter-rouge">org.apache.struts2.config.ScopedConstantProvider</code>, not through
+an <code class="language-plaintext highlighter-rouge">@Inject</code>-ed constant:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">ScopedConstantProvider</span> <span class="n">scopedConstantProvider</span><span class="o">;</span>
+
+<span class="nd">@Inject</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setScopedConstantProvider</span><span class="o">(</span><span class="nc">ScopedConstantProvider</span> <span class="n">scopedConstantProvider</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">scopedConstantProvider</span> <span class="o">=</span> <span class="n">scopedConstantProvider</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getTheme</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">scopedConstantProvider</span><span class="o">.</span><span class="na">getValue</span><span class="o">(</span><span class="s">"myplugin.theme"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">getValue(name)</code> returns the value for the package of the action being executed, taking <code class="language-plaintext highlighter-rouge">extends</code> into account.
+Outside an action invocation, or when no package in the hierarchy overrides the constant, it returns the global
+constant, or <code class="language-plaintext highlighter-rouge">null</code> when that is not set. It throws <code class="language-plaintext highlighter-rouge">IllegalArgumentException</code> for a name that is not scopable.
+The global value injected elsewhere is never changed.</p>
+
+<p>Some constants can never be scoped, because they are read before the package of a request is known, for
+example the <a href="action-mapper">ActionMapper</a> or the multipart upload limits. To use a different mapper per URL space,
+use the <a href="action-mapper#prefixbasedactionmapper">PrefixBasedActionMapper</a> instead.</p>
+
+<p class="alert alert-danger">Do not declare security-related constants scopable, such as <code class="language-plaintext highlighter-rouge">struts.parameters.requireAnnotations</code>,
+<code class="language-plaintext highlighter-rouge">struts.enable.DynamicMethodInvocation</code> or <code class="language-plaintext highlighter-rouge">struts.devMode</code>. Otherwise a single package can relax a setting
+meant to protect the whole application.</p>
+
+<p>The default <code class="language-plaintext highlighter-rouge">ScopedConstantProvider</code> implementation can be replaced with the <code class="language-plaintext highlighter-rouge">struts.scopedConstantProvider</code>
+<a href="../plugins/plugins-architecture#extension-points">extension point</a>.</p>
+
   </section>
 </article>
 
