@@ -85,7 +85,12 @@ The optional `abstract` attribute creates a base package that can omit the actio
 
 Since Struts 7.5.0 a package can override selected [constants](constant-configuration) for its own actions with
 the `<scoped-constant>` element. Packages that `extends` it inherit the override, and an override declared in
-the child package wins.
+the child package wins. When a package extends several packages (`extends="a, b"`) and they override the same
+constant, the first listed package wins, the same rule as for result types.
+
+Packages created by the [Convention plugin](../plugins/convention/) have no `<scoped-constant>` of their own.
+They only get overrides from their parent package, set with `@ParentPackage` or
+`struts.convention.default.parent.package`.
 
 The element requires the [struts-7.5.dtd](../dtds/struts-7.5.dtd) and must come before any other child of
 `<package>`:
@@ -132,6 +137,10 @@ A component makes a constant scopable in two steps. First, register a bean that 
 such bean. The scopable set is the union of all of them.
 
 ```java
+import org.apache.struts2.config.ScopableConstants;
+
+import java.util.Set;
+
 public class MyScopableConstants implements ScopableConstants {
     @Override
     public Set<String> getNames() {
@@ -149,6 +158,9 @@ Second, read the value per request through `org.apache.struts2.config.ScopedCons
 an `@Inject`-ed constant:
 
 ```java
+import org.apache.struts2.config.ScopedConstantProvider;
+import org.apache.struts2.inject.Inject;
+
 private ScopedConstantProvider scopedConstantProvider;
 
 @Inject
@@ -160,6 +172,10 @@ public String getTheme() {
     return scopedConstantProvider.getValue("myplugin.theme");
 }
 ```
+
+{:.alert .alert-info}
+Use `org.apache.struts2.inject.Inject`. The Struts container ignores `jakarta.inject.Inject` and
+`javax.inject.Inject`, so the setter would never be called.
 
 `getValue(name)` returns the value for the package of the action being executed, taking `extends` into account.
 Outside an action invocation, or when no package in the hierarchy overrides the constant, it returns the global
@@ -176,4 +192,5 @@ Do not declare security-related constants scopable, such as `struts.parameters.r
 meant to protect the whole application.
 
 The default `ScopedConstantProvider` implementation can be replaced with the `struts.scopedConstantProvider`
-[extension point](../plugins/plugins-architecture#extension-points).
+[extension point](../plugins/plugins-architecture#extension-points). For now this works only from XML or
+properties configuration. Java-based configuration cannot set it yet.
