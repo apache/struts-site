@@ -80,3 +80,117 @@ The optional `abstract` attribute creates a base package that can omit the actio
   </package>
 </struts>
 ```
+
+## Scoped constants
+
+Since Struts 7.5.0 a package can override selected [constants](constant-configuration) for its own actions with
+the `<scoped-constant>` element. Packages that `extends` it inherit the override, and an override declared in
+the child package wins. When a package extends several packages (`extends="a, b"`) and they override the same
+constant, the first listed package wins, the same rule as for result types.
+
+Packages created by the [Convention plugin](../plugins/convention/) have no `<scoped-constant>` of their own.
+They only get overrides from their parent package, set with `@ParentPackage` or
+`struts.convention.default.parent.package`.
+
+The element requires the [struts-7.5.dtd](../dtds/struts-7.5.dtd) and must come before any other child of
+`<package>`:
+
+```xml
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 7.5//EN"
+    "https://struts.apache.org/dtds/struts-7.5.dtd">
+<struts>
+  <package name="admin" extends="struts-default" namespace="/admin">
+    <scoped-constant name="some.scopable.constant" value="x"/>
+    ...
+  </package>
+</struts>
+```
+
+| Attribute | Required | Description                               |
+|-----------|----------|-------------------------------------------|
+| name      | **yes**  | the name of a scopable constant           |
+| value     | **yes**  | the value used for actions of the package |
+
+Scoped constants are not a way to override an arbitrary constant per package. Constants are injected into
+framework components once, at startup, so a package value only takes effect where a component explicitly reads
+it per request. Such a component declares the constants it reads as _scopable_, and only those can appear
+in `<scoped-constant>`.
+
+{:.alert .alert-warning}
+Struts core does not declare any constant as scopable yet. A `<scoped-constant>` only works with a constant
+declared scopable by a plugin or by your own application code.
+
+The configuration is validated at startup, and loading fails when:
+
+- a package declares a constant that nothing has declared scopable. This also applies to abstract packages.
+  The error message lists the scopable constants that are available.
+- a package declares the same constant more than once.
+
+Values are used as they are. Unlike in `<constant>`, `${...}` [value substitution](constant-configuration#value-substitution)
+is not supported.
+
+### Making a constant scopable
+
+A component makes a constant scopable in two steps. First, register a bean that implements
+`org.apache.struts2.config.ScopableConstants` and returns the constant names. You can register more than one
+such bean. The scopable set is the union of all of them.
+
+```java
+import org.apache.struts2.config.ScopableConstants;
+
+import java.util.Set;
+
+public class MyScopableConstants implements ScopableConstants {
+    @Override
+    public Set<String> getNames() {
+        return Set.of("myplugin.theme");
+    }
+}
+```
+
+```xml
+<bean type="org.apache.struts2.config.ScopableConstants" name="myplugin"
+      class="com.example.MyScopableConstants"/>
+```
+
+Second, read the value per request through `org.apache.struts2.config.ScopedConstantProvider`, not through
+an `@Inject`-ed constant:
+
+```java
+import org.apache.struts2.config.ScopedConstantProvider;
+import org.apache.struts2.inject.Inject;
+
+private ScopedConstantProvider scopedConstantProvider;
+
+@Inject
+public void setScopedConstantProvider(ScopedConstantProvider scopedConstantProvider) {
+    this.scopedConstantProvider = scopedConstantProvider;
+}
+
+public String getTheme() {
+    return scopedConstantProvider.getValue("myplugin.theme");
+}
+```
+
+{:.alert .alert-info}
+Use `org.apache.struts2.inject.Inject`. The Struts container ignores `jakarta.inject.Inject` and
+`javax.inject.Inject`, so the setter would never be called.
+
+`getValue(name)` returns the value for the package of the action being executed, taking `extends` into account.
+Outside an action invocation, or when no package in the hierarchy overrides the constant, it returns the global
+constant, or `null` when that is not set. It throws `IllegalArgumentException` for a name that is not scopable.
+The global value injected elsewhere is never changed.
+
+Some constants can never be scoped, because they are read before the package of a request is known, for
+example the [ActionMapper](action-mapper) or the multipart upload limits. To use a different mapper per URL space,
+use the [PrefixBasedActionMapper](action-mapper#prefixbasedactionmapper) instead.
+
+{:.alert .alert-danger}
+Do not declare security-related constants scopable, such as `struts.parameters.requireAnnotations`,
+`struts.enable.DynamicMethodInvocation` or `struts.devMode`. Otherwise a single package can relax a setting
+meant to protect the whole application.
+
+The default `ScopedConstantProvider` implementation can be replaced with the `struts.scopedConstantProvider`
+[extension point](../plugins/plugins-architecture#extension-points). For now this works only from XML or
+properties configuration. Java-based configuration cannot set it yet.

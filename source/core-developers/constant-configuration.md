@@ -38,6 +38,9 @@ In the [default.properties](default-properties) file, each entry is treated as a
 
 In the [web.xml](web-xml) file, any FilterDispatcher initialization parameters are loaded as constants.
 
+Since Struts 7.5.0 a package can override selected constants for its own actions, see
+[Scoped constants](package-configuration#scoped-constants).
+
 ### Value substitution
 
 Since Apache Struts 2.5.6 it is possible to use value substitution when defining `constant`s in `struts.xml` file.
