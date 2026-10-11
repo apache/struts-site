@@ -259,7 +259,12 @@ by an “extends” should be defined <em>above</em>  the package which extends 
 
 <p>Since Struts 7.5.0 a package can override selected <a href="constant-configuration">constants</a> for its own actions with
 the <code class="language-plaintext highlighter-rouge">&lt;scoped-constant&gt;</code> element. Packages that <code class="language-plaintext highlighter-rouge">extends</code> it inherit the override, and an override declared in
-the child package wins.</p>
+the child package wins. When a package extends several packages (<code class="language-plaintext highlighter-rouge">extends="a, b"</code>) and they override the same
+constant, the first listed package wins, the same rule as for result types.</p>
+
+<p>Packages created by the <a href="../plugins/convention/">Convention plugin</a> have no <code class="language-plaintext highlighter-rouge">&lt;scoped-constant&gt;</code> of their own.
+They only get overrides from their parent package, set with <code class="language-plaintext highlighter-rouge">@ParentPackage</code> or
+<code class="language-plaintext highlighter-rouge">struts.convention.default.parent.package</code>.</p>
 
 <p>The element requires the <a href="../dtds/struts-7.5.dtd">struts-7.5.dtd</a> and must come before any other child of
 <code class="language-plaintext highlighter-rouge">&lt;package&gt;</code>:</p>
@@ -322,7 +327,11 @@ is not supported.</p>
 <code class="language-plaintext highlighter-rouge">org.apache.struts2.config.ScopableConstants</code> and returns the constant names. You can register more than one
 such bean. The scopable set is the union of all of them.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyScopableConstants</span> <span class="kd">implements</span> <span class="nc">ScopableConstants</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.apache.struts2.config.ScopableConstants</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Set</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyScopableConstants</span> <span class="kd">implements</span> <span class="nc">ScopableConstants</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getNames</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="nc">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"myplugin.theme"</span><span class="o">);</span>
@@ -337,7 +346,10 @@ such bean. The scopable set is the union of all of them.</p>
 <p>Second, read the value per request through <code class="language-plaintext highlighter-rouge">org.apache.struts2.config.ScopedConstantProvider</code>, not through
 an <code class="language-plaintext highlighter-rouge">@Inject</code>-ed constant:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">ScopedConstantProvider</span> <span class="n">scopedConstantProvider</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.apache.struts2.config.ScopedConstantProvider</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.struts2.inject.Inject</span><span class="o">;</span>
+
+<span class="kd">private</span> <span class="nc">ScopedConstantProvider</span> <span class="n">scopedConstantProvider</span><span class="o">;</span>
 
 <span class="nd">@Inject</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setScopedConstantProvider</span><span class="o">(</span><span class="nc">ScopedConstantProvider</span> <span class="n">scopedConstantProvider</span><span class="o">)</span> <span class="o">{</span>
@@ -348,6 +360,9 @@ an <code class="language-plaintext highlighter-rouge">@Inject</code>-ed constant
     <span class="k">return</span> <span class="n">scopedConstantProvider</span><span class="o">.</span><span class="na">getValue</span><span class="o">(</span><span class="s">"myplugin.theme"</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
+
+<p class="alert alert-info">Use <code class="language-plaintext highlighter-rouge">org.apache.struts2.inject.Inject</code>. The Struts container ignores <code class="language-plaintext highlighter-rouge">jakarta.inject.Inject</code> and
+<code class="language-plaintext highlighter-rouge">javax.inject.Inject</code>, so the setter would never be called.</p>
 
 <p><code class="language-plaintext highlighter-rouge">getValue(name)</code> returns the value for the package of the action being executed, taking <code class="language-plaintext highlighter-rouge">extends</code> into account.
 Outside an action invocation, or when no package in the hierarchy overrides the constant, it returns the global
@@ -363,7 +378,8 @@ use the <a href="action-mapper#prefixbasedactionmapper">PrefixBasedActionMapper<
 meant to protect the whole application.</p>
 
 <p>The default <code class="language-plaintext highlighter-rouge">ScopedConstantProvider</code> implementation can be replaced with the <code class="language-plaintext highlighter-rouge">struts.scopedConstantProvider</code>
-<a href="../plugins/plugins-architecture#extension-points">extension point</a>.</p>
+<a href="../plugins/plugins-architecture#extension-points">extension point</a>. For now this works only from XML or
+properties configuration. Java-based configuration cannot set it yet.</p>
 
   </section>
 </article>
