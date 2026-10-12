@@ -73,7 +73,8 @@ Struts should use:
 4. The request-scoped attribute named `theme`
 5. The session-scoped attribute named `theme`
 6. The application-scoped attribute named `theme`
-7. The `struts.ui.theme` constant in `struts.xml` (defaults to `xhtml`)
+7. The `struts.ui.theme` scoped constant of the action's package (since 7.5.0)
+8. The `struts.ui.theme` constant in `struts.xml` (defaults to `xhtml`)
 
 Consult [Selecting Themes](../tag-developers/selecting-themes) for how to set the theme using the above approaches.
 

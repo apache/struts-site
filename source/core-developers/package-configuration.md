@@ -101,7 +101,7 @@ The element requires the [struts-7.5.dtd](../dtds/struts-7.5.dtd) and must come 
     "https://struts.apache.org/dtds/struts-7.5.dtd">
 <struts>
   <package name="admin" extends="struts-default" namespace="/admin">
-    <scoped-constant name="some.scopable.constant" value="x"/>
+    <scoped-constant name="struts.ui.theme" value="css_xhtml"/>
     ...
   </package>
 </struts>
@@ -117,9 +117,13 @@ framework components once, at startup, so a package value only takes effect wher
 it per request. Such a component declares the constants it reads as _scopable_, and only those can appear
 in `<scoped-constant>`.
 
-{:.alert .alert-warning}
-Struts core does not declare any constant as scopable yet. A `<scoped-constant>` only works with a constant
-declared scopable by a plugin or by your own application code.
+Since Struts 7.5.0 these core constants are scopable:
+
+- `struts.ui.theme`, the default theme of UI tags, see [Selecting Themes](../tag-developers/selecting-themes)
+- `struts.ui.templateDir`, the default template directory of UI tags, see
+  [Selecting Template Directory](../tag-developers/selecting-template-directory)
+
+Plugins and your own application code can declare more, see [Making a constant scopable](#making-a-constant-scopable).
 
 The configuration is validated at startup, and loading fails when:
 
@@ -133,7 +137,7 @@ value is static:
 
 ```xml
 <package name="admin" extends="struts-default" namespace="/admin">
-  <scoped-constant name="some.scopable.constant" value="${env.ADMIN_VALUE:x}"/>
+  <scoped-constant name="struts.ui.theme" value="${env.ADMIN_THEME:css_xhtml}"/>
   ...
 </package>
 ```
