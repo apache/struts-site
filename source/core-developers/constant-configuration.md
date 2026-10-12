@@ -54,7 +54,8 @@ You can also define a default value if given System property or ENV variable is 
 </struts>
 ```
 
-Note: substitution is limited to System properties and ENV variables and works only for `constant`s (as for now).
+Note: substitution is limited to System properties and ENV variables. It works for `constant`s and, since Struts 7.5.0,
+for [`scoped-constant`s](package-configuration#scoped-constants).
 
 ## Examples
 
