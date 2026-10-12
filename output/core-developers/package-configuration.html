@@ -274,7 +274,7 @@ They only get overrides from their parent package, set with <code class="languag
     "https://struts.apache.org/dtds/struts-7.5.dtd"&gt;</span>
 <span class="nt">&lt;struts&gt;</span>
   <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"admin"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/admin"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;scoped-constant</span> <span class="na">name=</span><span class="s">"some.scopable.constant"</span> <span class="na">value=</span><span class="s">"x"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;scoped-constant</span> <span class="na">name=</span><span class="s">"struts.ui.theme"</span> <span class="na">value=</span><span class="s">"css_xhtml"</span><span class="nt">/&gt;</span>
     ...
   <span class="nt">&lt;/package&gt;</span>
 <span class="nt">&lt;/struts&gt;</span>
@@ -307,8 +307,15 @@ framework components once, at startup, so a package value only takes effect wher
 it per request. Such a component declares the constants it reads as <em>scopable</em>, and only those can appear
 in <code class="language-plaintext highlighter-rouge">&lt;scoped-constant&gt;</code>.</p>
 
-<p class="alert alert-warning">Struts core does not declare any constant as scopable yet. A <code class="language-plaintext highlighter-rouge">&lt;scoped-constant&gt;</code> only works with a constant
-declared scopable by a plugin or by your own application code.</p>
+<p>Since Struts 7.5.0 these core constants are scopable:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">struts.ui.theme</code>, the default theme of UI tags, see <a href="../tag-developers/selecting-themes">Selecting Themes</a></li>
+  <li><code class="language-plaintext highlighter-rouge">struts.ui.templateDir</code>, the default template directory of UI tags, see
+<a href="../tag-developers/selecting-template-directory">Selecting Template Directory</a></li>
+</ul>
+
+<p>Plugins and your own application code can declare more, see <a href="#making-a-constant-scopable">Making a constant scopable</a>.</p>
 
 <p>The configuration is validated at startup, and loading fails when:</p>
 
@@ -323,7 +330,7 @@ System properties and environment variables are resolved once, when the configur
 value is static:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"admin"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/admin"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;scoped-constant</span> <span class="na">name=</span><span class="s">"some.scopable.constant"</span> <span class="na">value=</span><span class="s">"${env.ADMIN_VALUE:x}"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;scoped-constant</span> <span class="na">name=</span><span class="s">"struts.ui.theme"</span> <span class="na">value=</span><span class="s">"${env.ADMIN_THEME:css_xhtml}"</span><span class="nt">/&gt;</span>
   ...
 <span class="nt">&lt;/package&gt;</span>
 </code></pre></div></div>
