@@ -318,8 +318,15 @@ The error message lists the scopable constants that are available.</li>
   <li>a package declares the same constant more than once.</li>
 </ul>
 
-<p>Values are used as they are. Unlike in <code class="language-plaintext highlighter-rouge">&lt;constant&gt;</code>, <code class="language-plaintext highlighter-rouge">${...}</code> <a href="constant-configuration#value-substitution">value substitution</a>
-is not supported.</p>
+<p>Values support the same <code class="language-plaintext highlighter-rouge">${...}</code> <a href="constant-configuration#value-substitution">value substitution</a> as <code class="language-plaintext highlighter-rouge">&lt;constant&gt;</code>.
+System properties and environment variables are resolved once, when the configuration loads, and the resulting
+value is static:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"admin"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">namespace=</span><span class="s">"/admin"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;scoped-constant</span> <span class="na">name=</span><span class="s">"some.scopable.constant"</span> <span class="na">value=</span><span class="s">"${env.ADMIN_VALUE:x}"</span><span class="nt">/&gt;</span>
+  ...
+<span class="nt">&lt;/package&gt;</span>
+</code></pre></div></div>
 
 <h3 id="making-a-constant-scopable">Making a constant scopable</h3>
 
@@ -378,8 +385,8 @@ use the <a href="action-mapper#prefixbasedactionmapper">PrefixBasedActionMapper<
 meant to protect the whole application.</p>
 
 <p>The default <code class="language-plaintext highlighter-rouge">ScopedConstantProvider</code> implementation can be replaced with the <code class="language-plaintext highlighter-rouge">struts.scopedConstantProvider</code>
-<a href="../plugins/plugins-architecture#extension-points">extension point</a>. For now this works only from XML or
-properties configuration. Java-based configuration cannot set it yet.</p>
+<a href="../plugins/plugins-architecture#extension-points">extension point</a>. Java-based configuration sets it with
+<code class="language-plaintext highlighter-rouge">ConstantConfig.setScopedConstantProvider(...)</code>.</p>
 
   </section>
 </article>
