@@ -127,8 +127,16 @@ The configuration is validated at startup, and loading fails when:
   The error message lists the scopable constants that are available.
 - a package declares the same constant more than once.
 
-Values are used as they are. Unlike in `<constant>`, `${...}` [value substitution](constant-configuration#value-substitution)
-is not supported.
+Values support the same `${...}` [value substitution](constant-configuration#value-substitution) as `<constant>`.
+System properties and environment variables are resolved once, when the configuration loads, and the resulting
+value is static:
+
+```xml
+<package name="admin" extends="struts-default" namespace="/admin">
+  <scoped-constant name="some.scopable.constant" value="${env.ADMIN_VALUE:x}"/>
+  ...
+</package>
+```
 
 ### Making a constant scopable
 
@@ -192,5 +200,5 @@ Do not declare security-related constants scopable, such as `struts.parameters.r
 meant to protect the whole application.
 
 The default `ScopedConstantProvider` implementation can be replaced with the `struts.scopedConstantProvider`
-[extension point](../plugins/plugins-architecture#extension-points). For now this works only from XML or
-properties configuration. Java-based configuration cannot set it yet.
+[extension point](../plugins/plugins-architecture#extension-points). Java-based configuration sets it with
+`ConstantConfig.setScopedConstantProvider(...)`.
