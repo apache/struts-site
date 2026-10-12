@@ -20,7 +20,8 @@ overridden, an edited copy can be placed in the application, so that is found fi
 ## Template and Themes
 
 Templates are loaded based the template directory and theme name (see [Selecting Themes](selecting-themes)). 
-The template directory is defined by the `struts.ui.templateDir` property in `struts.xml` (defaults to `template`). 
+The template directory is defined by the `struts.ui.templateDir` property in `struts.xml` (defaults to `template`), 
+and can be overridden per package or per tag (see [Selecting Template Directory](selecting-template-directory)). 
 If a tag is using the `xhtml` theme, the following two locations will be searched (in this order):
 
 |In the application|`/template/xhtml/template.ftl`|
