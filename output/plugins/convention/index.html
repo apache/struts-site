@@ -829,6 +829,28 @@ placed on an action class and also in the package-info.java file. Here is an exa
 
 <p>The result for this class will be located in <code class="language-plaintext highlighter-rouge">WEB-INF/jsps</code> rather than the default of <code class="language-plaintext highlighter-rouge">WEB-INF/content</code>.</p>
 
+<h4 id="result-path-per-package">Result path per package</h4>
+
+<p>Since Struts 7.5.0 a parent package can set the result path for all actions placed under it with a
+<a href="../../core-developers/package-configuration#scoped-constants">scoped constant</a>:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"admin-base"</span> <span class="na">extends=</span><span class="s">"convention-default"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;scoped-constant</span> <span class="na">name=</span><span class="s">"struts.convention.result.path"</span> <span class="na">value=</span><span class="s">"/WEB-INF/admin/"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/package&gt;</span>
+</code></pre></div></div>
+
+<p>Actions pick it up from the package they are placed under, chosen with <code class="language-plaintext highlighter-rouge">@ParentPackage("admin-base")</code> or
+<code class="language-plaintext highlighter-rouge">struts.convention.default.parent.package</code>. The result path of an action is taken from, in order:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">@ResultPath</code> on the action class or its Java package</li>
+  <li>the <code class="language-plaintext highlighter-rouge">struts.convention.result.path</code> scoped constant of the action’s package, including inherited ones</li>
+  <li>the global <code class="language-plaintext highlighter-rouge">struts.convention.result.path</code> constant</li>
+</ol>
+
+<p>A request without an action class, served straight from a template, uses the scoped constant of the default
+parent package (<code class="language-plaintext highlighter-rouge">struts.convention.default.parent.package</code>).</p>
+
 <h3 id="parentpackage-annotation">ParentPackage annotation</h3>
 
 <p>The ParentPackage annotation allows applications to define different parent Struts package for specific action classes 
