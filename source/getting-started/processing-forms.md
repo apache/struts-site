@@ -152,6 +152,7 @@ Here is the Action class used for this example. Place it in package org.apache.s
 package org.apache.struts.register.action;
 
 import org.apache.struts2.ActionSupport;
+import org.apache.struts2.interceptor.parameter.StrutsParameter;
 import org.apache.struts.register.model.Person;
 
 public class Register extends ActionSupport {
