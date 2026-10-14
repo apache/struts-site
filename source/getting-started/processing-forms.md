@@ -99,8 +99,8 @@ then discuss some key points. Create a view page named `register.jsp` (in `src/m
 **register.jsp**
 
 ```jsp
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -110,7 +110,7 @@ then discuss some key points. Create a view page named `register.jsp` (in `src/m
   <body>
     <h3>Register for a prize by completing this form.</h3>
 
-    <s:form action="register">
+    <s:form action="register-submit">
       <s:textfield name="personBean.firstName" label="First name" />
       <s:textfield name="personBean.lastName" label="Last name" />
       <s:textfield name="personBean.email"  label ="Email"/>  
@@ -221,8 +221,8 @@ registration. Add the `thankyou.jsp` below to `src/main/webapp`.
 **thankyou.jsp**
 
 ```jsp
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -244,19 +244,25 @@ If you don't recall how the Struts property and url tags work consult the [Using
 ## Create action mapping in struts.xml
 
 To specify the relationship between the form submission page, the Struts Action class, and the success view page 
-we need to add an action node to `struts.xml`. Add this action node to `struts.xml` (`src/main/resources`) after 
+we need to add action nodes to `struts.xml`. Add this action node to `struts.xml` (`src/main/resources`) after 
 the hello action and before the closing package node.
 
-**action node for struts.xml**
+**action nodes for struts.xml**
 
 ```xml
-<action name="register" class="org.apache.struts.register.action.Register" method="execute">
+<action name="register" class="org.apache.struts.register.action.Register" method="input">
+    <result name="input">/register.jsp</result>
+</action>
+<action name="register-submit" class="org.apache.struts.register.action.Register" method="execute">
     <result name="success">/thankyou.jsp</result>
 </action>
 ```
+The above register action tells Struts that when the register action is provided to call method `input` of class
+`Register` (implemented by parent class `ActionSupport`). If that method returns result "input" return to the browser
+the `register.jsp`.
 
-The above action tells Struts that when the register action is provided to call method `execute` of class `Register`. 
-If that method returns result "success" return to the browser the `thankyou.jsp`.
+The above register-submit action tells Struts that when the register-submit action is provided to call method
+`execute` of class `Register`. If that method returns result "success" return to the browser the `thankyou.jsp`.
 
 Note that we don't need to tell Struts anything about processing the form. The transfer of the form field input values 
 to the `personBean` object will happen automatically provided we've followed the convention of naming our form fields 
@@ -269,7 +275,7 @@ So that the user can find the registration page, add this link to index.jsp
 **Link to register.jsp**
 
 ```html
-<p><a href="register.jsp">Please register</a> for our prize drawing.</p>
+<p><a href="<s:url action='register'/>">Please register</a> for our prize drawing.</p>
 ```
 
 ## Run The Example
