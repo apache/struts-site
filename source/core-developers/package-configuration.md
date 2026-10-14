@@ -123,6 +123,9 @@ Since Struts 7.5.0 these core constants are scopable:
 - `struts.ui.templateDir`, the default template directory of UI tags, see
   [Selecting Template Directory](../tag-developers/selecting-template-directory)
 
+The [Convention plugin](../plugins/convention/) makes `struts.convention.result.path` scopable, see
+[Result path per package](../plugins/convention/#result-path-per-package).
+
 Plugins and your own application code can declare more, see [Making a constant scopable](#making-a-constant-scopable).
 
 The configuration is validated at startup, and loading fails when:

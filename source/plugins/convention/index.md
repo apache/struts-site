@@ -640,6 +640,27 @@ public class HelloWorld extends ActionSupport {
 
 The result for this class will be located in `WEB-INF/jsps` rather than the default of `WEB-INF/content`.
 
+#### Result path per package
+
+Since Struts 7.5.0 a parent package can set the result path for all actions placed under it with a
+[scoped constant](../../core-developers/package-configuration#scoped-constants):
+
+```xml
+<package name="admin-base" extends="convention-default">
+    <scoped-constant name="struts.convention.result.path" value="/WEB-INF/admin/"/>
+</package>
+```
+
+Actions pick it up from the package they are placed under, chosen with `@ParentPackage("admin-base")` or
+`struts.convention.default.parent.package`. The result path of an action is taken from, in order:
+
+1. `@ResultPath` on the action class or its Java package
+2. the `struts.convention.result.path` scoped constant of the action's package, including inherited ones
+3. the global `struts.convention.result.path` constant
+
+A request without an action class, served straight from a template, uses the scoped constant of the default
+parent package (`struts.convention.default.parent.package`).
+
 ### ParentPackage annotation
 
 The ParentPackage annotation allows applications to define different parent Struts package for specific action classes 
