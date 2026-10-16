@@ -377,6 +377,57 @@ you can simple set
 
 in struts.xml to start using it.
 
+### Upload Progress
+
+Struts does not track upload progress itself. To show a progress bar, use the browser's `XMLHttpRequest.upload`
+progress events, which report the bytes sent so far without any server-side support:
+
+```js
+const xhr = new XMLHttpRequest();
+xhr.upload.onprogress = (e) => {
+    if (e.lengthComputable) {
+        progressBar.value = e.loaded / e.total;
+    }
+};
+xhr.open('POST', form.action);
+xhr.send(new FormData(form));
+```
+
+If you need progress on the server side, extend one of the parsers and register a Commons FileUpload
+`ProgressListener`:
+
+```java
+public class ProgressTrackingMultiPartRequest extends JakartaMultiPartRequest {
+
+    private HttpServletRequest request;
+
+    @Override
+    public void parse(HttpServletRequest request, String saveDir) throws IOException {
+        this.request = request;
+        super.parse(request, saveDir);
+    }
+
+    @Override
+    protected JakartaServletDiskFileUpload prepareServletFileUpload(Charset charset, Path saveDir) {
+        JakartaServletDiskFileUpload upload = super.prepareServletFileUpload(charset, saveDir);
+        upload.setProgressListener((bytesRead, contentLength, items) -> {
+            // publish bytesRead / contentLength where your application can read it
+        });
+        return upload;
+    }
+}
+```
+
+and register it as the parser in `struts.xml`:
+
+```xml
+<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest" name="progress"
+      class="com.example.ProgressTrackingMultiPartRequest" scope="prototype"/>
+<constant name="struts.multipart.parser" value="progress"/>
+```
+
+The same approach works with `JakartaStreamMultiPartRequest`.
+
 ### Request validation
 
 The `struts.multipart.validationRegex` is used to define a RegEx to be used to validate if the incoming request is a
