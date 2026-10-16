@@ -172,6 +172,7 @@
       <li><a href="#temporary-directories" id="markdown-toc-temporary-directories">Temporary Directories</a></li>
       <li><a href="#in-memory-uploads" id="markdown-toc-in-memory-uploads">In-Memory Uploads</a></li>
       <li><a href="#alternate-libraries" id="markdown-toc-alternate-libraries">Alternate Libraries</a></li>
+      <li><a href="#upload-progress" id="markdown-toc-upload-progress">Upload Progress</a></li>
       <li><a href="#request-validation" id="markdown-toc-request-validation">Request validation</a></li>
       <li><a href="#disabling-file-upload-support" id="markdown-toc-disabling-file-upload-support">Disabling file upload support</a></li>
     </ul>
@@ -581,6 +582,54 @@ you can simple set</p>
 </code></pre></div></div>
 
 <p>in struts.xml to start using it.</p>
+
+<h3 id="upload-progress">Upload Progress</h3>
+
+<p>Struts does not track upload progress itself. To show a progress bar, use the browser’s <code class="language-plaintext highlighter-rouge">XMLHttpRequest.upload</code>
+progress events, which report the bytes sent so far without any server-side support:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">upload</span><span class="p">.</span><span class="nx">onprogress</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">lengthComputable</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">progressBar</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">loaded</span> <span class="o">/</span> <span class="nx">e</span><span class="p">.</span><span class="nx">total</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span> <span class="nx">form</span><span class="p">.</span><span class="nx">action</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="k">new</span> <span class="nx">FormData</span><span class="p">(</span><span class="nx">form</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>If you need progress on the server side, extend one of the parsers and register a Commons FileUpload
+<code class="language-plaintext highlighter-rouge">ProgressListener</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProgressTrackingMultiPartRequest</span> <span class="kd">extends</span> <span class="nc">JakartaMultiPartRequest</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">parse</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">String</span> <span class="n">saveDir</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">request</span> <span class="o">=</span> <span class="n">request</span><span class="o">;</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">saveDir</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="nc">JakartaServletDiskFileUpload</span> <span class="nf">prepareServletFileUpload</span><span class="o">(</span><span class="nc">Charset</span> <span class="n">charset</span><span class="o">,</span> <span class="nc">Path</span> <span class="n">saveDir</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">JakartaServletDiskFileUpload</span> <span class="n">upload</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">prepareServletFileUpload</span><span class="o">(</span><span class="n">charset</span><span class="o">,</span> <span class="n">saveDir</span><span class="o">);</span>
+        <span class="n">upload</span><span class="o">.</span><span class="na">setProgressListener</span><span class="o">((</span><span class="n">bytesRead</span><span class="o">,</span> <span class="n">contentLength</span><span class="o">,</span> <span class="n">items</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="c1">// publish bytesRead / contentLength where your application can read it</span>
+        <span class="o">});</span>
+        <span class="k">return</span> <span class="n">upload</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>and register it as the parser in <code class="language-plaintext highlighter-rouge">struts.xml</code>:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"org.apache.struts2.dispatcher.multipart.MultiPartRequest"</span> <span class="na">name=</span><span class="s">"progress"</span>
+      <span class="na">class=</span><span class="s">"com.example.ProgressTrackingMultiPartRequest"</span> <span class="na">scope=</span><span class="s">"prototype"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.multipart.parser"</span> <span class="na">value=</span><span class="s">"progress"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>The same approach works with <code class="language-plaintext highlighter-rouge">JakartaStreamMultiPartRequest</code>.</p>
 
 <h3 id="request-validation">Request validation</h3>
 
