@@ -335,6 +335,72 @@ Please be aware when using your own `ConfigurationProvider` that the logic to se
 providers - `XmlConfigurationProvider` and `PackageBasedActionConfigBuilder` - and you must replicate such logic in your 
 code as by default only execute method is allowed, even when SMI is disabled.
 
+## HTTP Methods
+
+> Since Struts 7.5.0
+
+An action can restrict which HTTP methods it accepts with the `http-method` attribute. It takes a single method
+or a comma-separated list, case-insensitive. An action without the attribute accepts any method. This is unrelated
+to `<allowed-methods>` above, which lists Java methods of the action class.
+
+```xml
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 7.5//EN"
+    "https://struts.apache.org/dtds/struts-7.5.dtd">
+<struts>
+  <package name="default" extends="struts-default">
+    <action name="list" class="org.example.ListAction" http-method="get">
+      <result>/list.jsp</result>
+    </action>
+
+    <action name="save" class="org.example.SaveAction" http-method="post">
+      <result>/saved.jsp</result>
+    </action>
+
+    <action name="edit" class="org.example.EditAction" http-method="get,post">
+      <result>/edit.jsp</result>
+    </action>
+  </package>
+</struts>
+```
+
+The attribute requires the 7.5 DTD. An unknown method name, e.g. `http-method="fetch"`, fails configuration loading.
+Actions matched by a wildcard or regex pattern keep the restriction declared on the pattern.
+
+The restriction is enforced by the `httpMethod` interceptor, which is part of `basicStack`, `defaultStack`,
+`paramsPrepareParamsStack` and the stacks built on them. If an action declares `http-method` but its interceptors do
+not include `httpMethod`, a warning is logged at startup and the restriction is not enforced.
+
+The same interceptor enforces the `@AllowedHttpMethod`, `@HttpGet`, `@HttpPost`, `@HttpPut`, `@HttpDelete` and
+`@HttpGetOrPost` annotations on the action class or method. When both the attribute and an annotation apply,
+the request method must be allowed by both.
+
+### Rejected requests
+
+When the request method is not allowed, the interceptor returns the `bad-request` result if it can be resolved:
+mapped on the action, as a global result, through a catch-all `*` result, or by an unknown handler such as
+the Convention plugin. Otherwise, it responds with `405 Method Not Allowed` and an `Allow` header listing
+the accepted methods, e.g. `Allow: GET, POST`.
+
+To send your own status code or message for every action in a package, map `bad-request` as a global result using
+the [HttpHeader Result](httpheader-result):
+
+```xml
+<package name="api" extends="struts-default">
+  <global-results>
+    <result name="bad-request" type="httpheader">
+      <param name="error">400</param>
+      <param name="errorMessage">This endpoint does not accept that HTTP method</param>
+    </result>
+  </global-results>
+  ...
+</package>
+```
+
+Packages extending this one inherit the mapping, and an action can override it with its own `bad-request` result.
+The result name can be changed with the interceptor's `badRequestResultName` parameter, or per action by implementing
+`HttpMethodAware#getBadRequestResultName()`.
+
 ## ActionSupport Default
 
 If the class attribute in an action mapping is left blank, the `com.opensymphony.xwork2.ActionSupport` class is used 
