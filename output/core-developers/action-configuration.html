@@ -164,6 +164,10 @@
       <li><a href="#strict-method-invocation" id="markdown-toc-strict-method-invocation">Strict Method Invocation</a></li>
     </ul>
   </li>
+  <li><a href="#http-methods" id="markdown-toc-http-methods">HTTP Methods</a>    <ul>
+      <li><a href="#rejected-requests" id="markdown-toc-rejected-requests">Rejected requests</a></li>
+    </ul>
+  </li>
   <li><a href="#actionsupport-default" id="markdown-toc-actionsupport-default">ActionSupport Default</a></li>
   <li><a href="#post-back-default" id="markdown-toc-post-back-default">Post-Back Default</a></li>
   <li><a href="#action-default" id="markdown-toc-action-default">Action Default</a></li>
@@ -490,6 +494,72 @@ by annotations or <code class="language-plaintext highlighter-rouge">&lt;allowed
 <p>Please be aware when using your own <code class="language-plaintext highlighter-rouge">ConfigurationProvider</code> that the logic to set allowed methods is defined in built-in 
 providers - <code class="language-plaintext highlighter-rouge">XmlConfigurationProvider</code> and <code class="language-plaintext highlighter-rouge">PackageBasedActionConfigBuilder</code> - and you must replicate such logic in your 
 code as by default only execute method is allowed, even when SMI is disabled.</p>
+
+<h2 id="http-methods">HTTP Methods</h2>
+
+<blockquote>
+  <p>Since Struts 7.5.0</p>
+</blockquote>
+
+<p>An action can restrict which HTTP methods it accepts with the <code class="language-plaintext highlighter-rouge">http-method</code> attribute. It takes a single method
+or a comma-separated list, case-insensitive. An action without the attribute accepts any method. This is unrelated
+to <code class="language-plaintext highlighter-rouge">&lt;allowed-methods&gt;</code> above, which lists Java methods of the action class.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 7.5//EN"
+    "https://struts.apache.org/dtds/struts-7.5.dtd"&gt;</span>
+<span class="nt">&lt;struts&gt;</span>
+  <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"default"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"list"</span> <span class="na">class=</span><span class="s">"org.example.ListAction"</span> <span class="na">http-method=</span><span class="s">"get"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;result&gt;</span>/list.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"save"</span> <span class="na">class=</span><span class="s">"org.example.SaveAction"</span> <span class="na">http-method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;result&gt;</span>/saved.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"edit"</span> <span class="na">class=</span><span class="s">"org.example.EditAction"</span> <span class="na">http-method=</span><span class="s">"get,post"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;result&gt;</span>/edit.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;/package&gt;</span>
+<span class="nt">&lt;/struts&gt;</span>
+</code></pre></div></div>
+
+<p>The attribute requires the 7.5 DTD. An unknown method name, e.g. <code class="language-plaintext highlighter-rouge">http-method="fetch"</code>, fails configuration loading.
+Actions matched by a wildcard or regex pattern keep the restriction declared on the pattern.</p>
+
+<p>The restriction is enforced by the <code class="language-plaintext highlighter-rouge">httpMethod</code> interceptor, which is part of <code class="language-plaintext highlighter-rouge">basicStack</code>, <code class="language-plaintext highlighter-rouge">defaultStack</code>,
+<code class="language-plaintext highlighter-rouge">paramsPrepareParamsStack</code> and the stacks built on them. If an action declares <code class="language-plaintext highlighter-rouge">http-method</code> but its interceptors do
+not include <code class="language-plaintext highlighter-rouge">httpMethod</code>, a warning is logged at startup and the restriction is not enforced.</p>
+
+<p>The same interceptor enforces the <code class="language-plaintext highlighter-rouge">@AllowedHttpMethod</code>, <code class="language-plaintext highlighter-rouge">@HttpGet</code>, <code class="language-plaintext highlighter-rouge">@HttpPost</code>, <code class="language-plaintext highlighter-rouge">@HttpPut</code>, <code class="language-plaintext highlighter-rouge">@HttpDelete</code> and
+<code class="language-plaintext highlighter-rouge">@HttpGetOrPost</code> annotations on the action class or method. When both the attribute and an annotation apply,
+the request method must be allowed by both.</p>
+
+<h3 id="rejected-requests">Rejected requests</h3>
+
+<p>When the request method is not allowed, the interceptor returns the <code class="language-plaintext highlighter-rouge">bad-request</code> result if it can be resolved:
+mapped on the action, as a global result, through a catch-all <code class="language-plaintext highlighter-rouge">*</code> result, or by an unknown handler such as
+the Convention plugin. Otherwise, it responds with <code class="language-plaintext highlighter-rouge">405 Method Not Allowed</code> and an <code class="language-plaintext highlighter-rouge">Allow</code> header listing
+the accepted methods, e.g. <code class="language-plaintext highlighter-rouge">Allow: GET, POST</code>.</p>
+
+<p>To send your own status code or message for every action in a package, map <code class="language-plaintext highlighter-rouge">bad-request</code> as a global result using
+the <a href="httpheader-result">HttpHeader Result</a>:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"api"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;global-results&gt;</span>
+    <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"bad-request"</span> <span class="na">type=</span><span class="s">"httpheader"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"error"</span><span class="nt">&gt;</span>400<span class="nt">&lt;/param&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"errorMessage"</span><span class="nt">&gt;</span>This endpoint does not accept that HTTP method<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;/result&gt;</span>
+  <span class="nt">&lt;/global-results&gt;</span>
+  ...
+<span class="nt">&lt;/package&gt;</span>
+</code></pre></div></div>
+
+<p>Packages extending this one inherit the mapping, and an action can override it with its own <code class="language-plaintext highlighter-rouge">bad-request</code> result.
+The result name can be changed with the interceptor’s <code class="language-plaintext highlighter-rouge">badRequestResultName</code> parameter, or per action by implementing
+<code class="language-plaintext highlighter-rouge">HttpMethodAware#getBadRequestResultName()</code>.</p>
 
 <h2 id="actionsupport-default">ActionSupport Default</h2>
 
