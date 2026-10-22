@@ -30,9 +30,9 @@ like [Preparable Interface](prepare-interceptor).
 
 Because parameter names are effectively OGNL statements, it is important that security be taken in to account. This 
 interceptor will not apply any values in the parameters map if the expression contains an assignment (=), multiple 
-expressions (,), or references any objects in the context (#). This is all done in the `#acceptableName(String)`
+expressions (,), or references any objects in the context (#). This is all done in the `#isAcceptableName(String)`
 method. In addition to this method, if the action being invoked implements the `ParameterNameAware` interface, the action 
-will be consulted to determine if the parameter should be set.
+will be consulted to determine if the parameter should be set. A parameter is set only when both checks accept it.
 
 In addition to these restrictions, a flag (`ReflectionContextState#DENY_METHOD_EXECUTION`) is set such that no methods 
 are allowed to be invoked. That means that any expression such as `person.doSomething()` or `person.getName()` will be 
@@ -48,12 +48,12 @@ conversion errors will be reported in the action context. See the type conversio
 javadocs for more information.
 
 Since Struts 6.1.0 this interceptor also implements a `ParameterValueAware` interface. This interface, in conjunction 
-with the optional `excludeValuePatterns`, can be used to validate the parameter value(s) being set by the interceptor. 
+with the optional `excludedValuePatterns`, can be used to validate the parameter value(s) being set by the interceptor. 
 If the value being set is excluded / not accepted the entire parameter will be dropped. This can be leveraged 
 to mitigate against forced OGNL evaluation due to unsanitized user input being echoed back as part of the action result. 
 This is not intended to replace good coding habits as described on 
 [Proactively protect from OGNL Expression Injections attacks if easily applicable](../../security/#proactively-protect-from-ognl-expression-injections-attacks-if-easily-applicable) 
-and is available as part of a defense in depth methodology. By default excludeValuePatterns is not defined.
+and is available as part of a defense in depth methodology. By default excludedValuePatterns is not defined.
 
 If you are looking for detailed logging information about your parameters, turn on `DEBUG` level logging for this
 interceptor. A detailed log of all the parameter keys and values will be reported.
@@ -71,7 +71,7 @@ For more information on ways to restrict the parameter names allowed, see the `P
   Don't change the default unless you know what you are doing in terms of security implications
 - `excludeParams` - a comma delimited list of regular expressions to describe a denylist of not allowed parameter names
 - `acceptedValuePatterns` - a comma delimited list of regular expressions to describe a allowlist of accepted parameter values 
-- `excludeValuePatterns` - a comma delimited list of regular expressions to describe a denylist of not allowed parameter values
+- `excludedValuePatterns` - a comma delimited list of regular expressions to describe a denylist of not allowed parameter values
 - `paramNameMaxLength` - the maximum length of parameter names; parameters with longer names will be ignored; 
   the default is 100 characters
 
@@ -137,15 +137,24 @@ and only accept **a-z** or **0-9**.
 
 The best way to add behavior to this interceptor is to utilize the `ParameterNameAware` and `ParameterValueAware` 
 interfaces in your actions. However, if you wish to apply a global rule that isn't implemented in your action, then 
-you could extend this interceptor and override the `#acceptableName(String)` and/or `#acceptableParameterValue(String)` 
+you could extend this interceptor and override the `#isAcceptableName(String)` and/or `#isAcceptableValue(String, String)` 
 method.
 
-> Using `ParameterNameAware` could be dangerous as `ParameterNameAware#acceptableParameterName(String)` takes precedence 
-> over `ParametersInterceptor` which means if `ParametersInterceptor` excluded given parameter name you can accept 
-> it with `ParameterNameAware#acceptableParameterName(String)`.
+> `ParameterNameAware#acceptableParameterName(String)` and `ParameterValueAware#acceptableParameterValue(String)` can 
+> only narrow what the interceptor accepts. A parameter rejected by the interceptor's own checks (accepted/excluded 
+> patterns, name length) is never set, even if the action accepts it.
 
-> The best idea is to define very tight restrictions with `ParametersInterceptor` and relax them per action 
-> with `ParameterNameAware#acceptableParameterName(String)` and/or `ParameterValueAware#acceptableParameterValue(String)`
+> To relax the rules for a single action, set the interceptor parameters (`acceptParamNames`, `excludeParams`, 
+> `acceptedValuePatterns`, `excludedValuePatterns`) in that action's configuration instead:
+
+```xml
+<action name="myAction" class="com.example.MyAction">
+    <interceptor-ref name="defaultStack">
+        <param name="params.acceptParamNames">...</param>
+    </interceptor-ref>
+    <result>/success.jsp</result>
+</action>
+```
 
 ## Warning on missing parameters
 
