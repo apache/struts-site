@@ -561,9 +561,10 @@ request body, make sure they are reachable from an authorized property; see
 <p>A custom handler that implements only <code class="language-plaintext highlighter-rouge">ContentTypeHandler</code> is deserialized into a fresh instance of the action or
 model, and only authorized properties are copied back. Since Struts 7.5.0 that copy skips a property whose value is
 null or equal to the constructor default of a fresh instance, so values bound by <code class="language-plaintext highlighter-rouge">params</code> or loaded in <code class="language-plaintext highlighter-rouge">prepare()</code>
-survive a body that omits them (<a href="https://issues.apache.org/jira/browse/WW-5790">WW-5790</a>). Two consequences: a body
-value equal to the constructor default is not applied over a differing existing value, and the constructor of the
-target runs twice per request on this path. Implement <code class="language-plaintext highlighter-rouge">AuthorizationAwareContentTypeHandler</code> to get exact semantics.</p>
+survive a body that omits them (<a href="https://issues.apache.org/jira/browse/WW-5790">WW-5790</a>). Three consequences: a body value
+equal to the constructor default is not applied over a differing existing value, which includes a primitive at its
+zero value and an empty collection; nested beans are compared leaf by leaf, never through their own <code class="language-plaintext highlighter-rouge">equals</code>; and the
+constructor of the target runs twice per request on this path. Implement <code class="language-plaintext highlighter-rouge">AuthorizationAwareContentTypeHandler</code> to get exact semantics.</p>
 
 <h3 id="settings">Settings</h3>
 
