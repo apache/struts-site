@@ -333,6 +333,14 @@ request body, make sure they are reachable from an authorized property; see
 [Creator-bound properties](../../core-developers/struts-parameter-annotation.html#creator-bound-properties).
 {:.alert .alert-warning}
 
+A custom handler that implements only `ContentTypeHandler` is deserialized into a fresh instance of the action or
+model, and only authorized properties are copied back. Since Struts 7.5.0 that copy skips a property whose value is
+null or equal to the constructor default of a fresh instance, so values bound by `params` or loaded in `prepare()`
+survive a body that omits them ([WW-5790](https://issues.apache.org/jira/browse/WW-5790)). Three consequences: a body value
+equal to the constructor default is not applied over a differing existing value, which includes a primitive at its
+zero value and an empty collection; nested beans are compared leaf by leaf, never through their own `equals`; and the
+constructor of the target runs twice per request on this path. Implement `AuthorizationAwareContentTypeHandler` to get exact semantics.
+
 ### Settings
 
 The following settings can be customized. See the [developer guide](/core-developers/configuration-files).
