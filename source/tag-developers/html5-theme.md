@@ -56,7 +56,7 @@ Or globally in `struts.xml`:
 
 The HTML5 theme includes templates for all standard Struts UI tags including:
 textfield, textarea, password, checkbox, checkboxlist, radio, select, file,
-hidden, label, combobox, reset, submit, form, and more.
+hidden, label, combobox, datetextfield, reset, submit, form, and more.
 
 ## Text Field Template Example
 
