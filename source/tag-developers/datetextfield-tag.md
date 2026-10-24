@@ -31,14 +31,22 @@ date in the user's locale and always submits it as `yyyy-MM-dd`, so the `format`
 <input type="date" name="birthday" value="1990-05-17" id="birthday" min="1900-01-01" max="2026-12-31"/>
 ```
 
-- The property must be a `java.util.Date`; its value is rendered in the server's default time zone
+- The property should be a `java.util.Date` or a `java.time.LocalDate` (since 7.5.0); a `java.util.Date` is rendered
+  in the server's default time zone
+- A type with a time part (`LocalDateTime`, `ZonedDateTime`, `OffsetDateTime`) renders its date part, but a date input
+  cannot submit a time, so binding back into such a property fails — use `<s:textfield type="datetime-local"/>` instead
 - `min` and `max` are passed through as dynamic attributes and must be written as `yyyy-MM-dd`
 
 With the [JavaTemplates Plugin](../plugins/javatemplates/) the tag renders one text input per date field, laid out
-by the `format` attribute, and `DateTextFieldInterceptor` assembles them back into a `java.util.Date`:
+by the `format` attribute, and `DateTextFieldInterceptor` assembles them back into a date:
 
 ```jsp
 <s:datetextfield name="birthday" format="dd/MM/yyyy"/>
+<s:datetextfield name="meetingAt" format="dd/MM/yyyy HH:mm"/>
 ```
+
+- The property can be a `java.util.Date`, `java.time.LocalDate`, `java.time.LocalDateTime` or `java.time.LocalTime`
+  (the `java.time` types since 7.5.0), converted in the server's default time zone
+- A field in `format` that the property's type does not have, such as `HH` on a `LocalDate`, renders empty
 
 The simple, xhtml and css_xhtml themes do not support this tag.
