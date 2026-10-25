@@ -59,20 +59,21 @@ whatever `type` the developer gave it. In particular:
 - The browsers' `email` and `url` input grammars don't match `EmailValidator` and `UrlValidator`.
 
 So `min`/`max` range constraints are only ever added to a control the developer *already* made numeric
-(`type="number"` or `type="range"`) — Struts will never promote a plain text field into one just because
-an `int` or `double` validator is attached to it.
+(`type="number"` or `type="range"`) or a date input (`type="date"`, including `<s:datetextfield>` in the
+html5 theme) — Struts will never promote a plain text field into one just because an `int`, `double` or
+`date` validator is attached to it.
 
 ### Mapping table
 
 | Validator | Emits | Condition |
 |---|---|---|
 | `requiredstring` | `required` | on text-entry controls (`text`, `search`, `tel`, `password`, `email`, `url`) and `textarea` |
-| `required` | `required` | only on `radio` and `file`, and only while the bound property holds a value the validator would reject (null, an empty array or an empty collection) |
+| `required` | `required` | on `radio` and `file` only while the bound property holds a value the validator would reject (null, an empty array or an empty collection); on temporal controls (`date`, `month`, `week`, `time`, `datetime-local`) when the bound property is a date/time type (since 7.5.0, see below) |
 | `stringlength` | `minlength` / `maxlength` | on text-entry or `textarea`, and only if the validator has `trim="false"`; each attribute is added only if actually configured |
 | `regex` | `pattern` | on text-entry controls only, and only if `caseSensitive="true"`, `trim="false"`, the regex is ECMAScript-safe (see below), and the validator is not an `email` or `creditcard` validator (both extend `RegexFieldValidator` but carry grammars the browser does not share) |
 | `int`, `short`, `long` | `min` / `max` | only when the control is already `type="number"` or `type="range"` |
 | `double` | `min` / `max` | same as above; only inclusive bounds are emitted — exclusive bounds have no HTML equivalent and are omitted |
-| `date` | — | nothing yet; temporal `min`/`max` is deferred to a future release |
+| `date`, `localdate` | `min` / `max` | only on `type="date"`, as `yyyy-MM-dd` (since 7.5.0, see below); never on `month`, `week`, `time` or `datetime-local` |
 | `email`, `url`, `creditcard` | — | never emitted |
 | `fieldexpression`, `expression`, `conversion` | — | never emitted |
 | `visitor` | — | nothing for the visitor itself; the visited object's own validators apply to its nested fields (`user.name`) exactly as if they were declared on the action, and their messages resolve as during validation — the visited class's bundle first, then the action's, with `${...}` read from the visited object when it exists |
@@ -87,12 +88,19 @@ to emit on any text-entry control. Plain `required`, however, only fails on a nu
 or an empty collection. That means an empty text input (which submits `""`, not nothing), a `select` with
 an empty-valued option, and an **unticked checkbox** (`CheckboxInterceptor` substitutes the parameter
 `"false"` for it) all pass server-side validation while a browser `required` attribute would block them.
-Only `radio` and `file` controls omit their parameter entirely when left empty, so those are the only two
-control types where plain `required` agrees with the server — which is why the table above emits `required`
-for the `required` validator on those two types alone.
+Only `radio` and `file` controls omit their parameter entirely when left empty, so among the controls that
+submit a raw string those are the only two where plain `required` agrees with the server.
 
-Even there, one more check is needed. An omitted parameter leaves the property at whatever it already
-holds, and that is the value the page is rendering. A `private int priority` bound to a `radio` list of
+Temporal controls are the other case. An empty date or time input submits `""` too, but when the bound
+property is a `java.util.Date` (or a subclass), `Calendar`, `LocalDate`, `LocalDateTime`, `LocalTime` or
+`OffsetDateTime`, the framework converts that `""` to null, so `required` then fails on the server just as
+it does in the browser. Struts reads the property's declared type — through any nested path such as
+`user.birthday`, even while `user` is still null — and emits `required` only for those types. A date input
+bound to a `String` property keeps the `""`, passes `required`, and therefore gets no attribute. An indexed
+path (`items[0].when`) or a property it cannot find gets no attribute either.
+
+Even for `radio` and `file`, one more check is needed. An omitted parameter leaves the property at whatever
+it already holds, and that is the value the page is rendering. A `private int priority` bound to a `radio` list of
 1, 2, 3 renders with nothing checked (0 is not in the list), yet the server sees a non-null `Integer` and
 accepts the empty submit; a `file` property that `prepare()` loaded from an existing entity — the ordinary
 edit flow — is accepted the same way. So `required` is emitted only while the bound value is one the
@@ -132,6 +140,15 @@ trims (its default), which rejects blank input server-side, the emitted pattern 
 `(?:<regex>)|[\x00-\x20]*`: the original regex, or a value made only of the characters `String.trim()`
 strips. With a trimming `requiredstring` present, the bare regex is emitted.
 
+**Date ranges are written as plain dates, and only on `type="date"`.** A `localdate` validator's bounds
+are written as they are (`2026-01-01`). A `date` validator's `java.util.Date` bounds are reduced to their
+calendar date in the server's default time zone — the zone the submitted `yyyy-MM-dd` is parsed in — and
+their time of day is dropped. That never makes the browser stricter than the server: with a `min` of 10:00
+on 1 January the browser lets the 1st through and the server still rejects it, and a `max` day submits as
+midnight, which the server accepts. A bound outside the years 0001–9999, or of any other type, is skipped.
+`month`, `week`, `time` and `datetime-local` inputs never get `min`/`max`: none of them has a built-in
+converter and range validator that read their submitted value the way the browser constrains it.
+
 ### `data-msg-*` attributes
 
 Every validator carrying a message — even one that emits no HTML constraint attribute at all — adds a
@@ -170,9 +187,18 @@ conservative, but nothing stops an application from replacing it with one that f
 locales.
 
 A provider receives the field's validators, the kind of control being rendered, the object the validators
-run against (the action, or the visited object under a `visitor` validator) and the field's current value
-as the tag resolved it — the last is what lets the default implementation judge `required` against the bound
-property.
+run against (the action, or the visited object under a `visitor` validator), the field's current value
+as the tag resolved it — what lets the default implementation judge `required` on `radio` and `file` — and,
+since 7.5.0, the declared type of the property the field binds to (null when it cannot be resolved), which
+decides `required` on temporal controls. The framework calls the five-argument
+`constraintsFor(validators, control, action, value, propertyType)`; its default implementation drops the type
+and delegates to the four-argument method, so a provider written for 7.4.0 keeps working unchanged. A
+subclass of `StrutsHtmlConstraintProvider` that overrides the four-argument method, however, must move that
+override to the five-argument one, because the framework no longer calls the four-argument method on it.
+
+An application whose own type converter turns an empty string into a value for a date/time property (a
+default date, say) should override `StrutsHtmlConstraintProvider#convertsBlankToNull(Class)` to exclude that
+type; otherwise the browser would insist on a value the server does not require.
 
 Two things a provider cannot do. It cannot change an input's `type` — the templates have already written
 it by the time the constraint map renders, so a `type` entry is discarded; treating an `email` validator
