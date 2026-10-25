@@ -60,14 +60,15 @@ to have many field-validators which is almost always the case.
 5. [expression validator](expression-validator)
 6. [fieldexpression validator](fieldexpression-validator)
 7. [int validator](int-validator)
-8. [regex validator](regex-validator)
-9. [required validator](required-validator)
-10. [requiredstring validator](requiredstring-validator)
-11. [short validator](short-validator)
-12. [stringlength validator](stringlength-validator)
-13. [url validator](url-validator)
-14. [visitor validator](visitor-validator)
-15. [conditionalvisitor validator](conditionalvisitor-validator)
+8. [localdate validator](localdate-validator)
+9. [regex validator](regex-validator)
+10. [required validator](required-validator)
+11. [requiredstring validator](requiredstring-validator)
+12. [short validator](short-validator)
+13. [stringlength validator](stringlength-validator)
+14. [url validator](url-validator)
+15. [visitor validator](visitor-validator)
+16. [conditionalvisitor validator](conditionalvisitor-validator)
 
 ## Registering Validators
 
