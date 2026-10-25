@@ -76,6 +76,7 @@ To use annotation-based validation, annotate the class or interface with [Valida
 |[ExpressionValidator Annotation](expression-validator-annotation)|Validates an expression.|
 |[FieldExpressionValidator Annotation](field-expression-validator-annotation)|Uses an OGNL expression to perform its validator.|
 |[IntRangeFieldValidator Annotation](int-range-field-validator-annotation)|Checks that a numeric field has a value within a specified range.|
+|[LocalDateRangeFieldValidator Annotation](local-date-range-field-validator-annotation)|Checks that a `LocalDate` field has a value within a specified range.|
 |[RegexFieldValidator Annotation](regex-field-validator-annotation)|Validates a regular expression for a field.|
 |[RequiredFieldValidator Annotation](required-field-validator-annotation)|Checks that a field is non-null.|
 |[RequiredStringValidator Annotation](required-string-validator-annotation)|Checks that a String field is not empty.|

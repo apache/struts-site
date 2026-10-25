@@ -16,6 +16,8 @@ parent:
 
 Field Validator that checks if the date supplied is within a specific range.
 
+For a `java.time.LocalDate` property use the [localdate validator](localdate-validator) instead.
+
 > NOTE: If no date converter is specified, `XWorkBasicConverter` will kick in to do the date conversion, which 
 > by default using the `Date.SHORT` format using the specified locale else falling back to the system default locale.
 

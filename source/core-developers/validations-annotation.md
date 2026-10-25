@@ -22,6 +22,7 @@ Used at METHOD level.
 | customValidators | no | Add list of CustomValidators |
 | conversionErrorFields | no | Add list of ConversionErrorFieldValidators |
 | dateRangeFields | no | Add list of DateRangeFieldValidators |
+| localDateRangeFields | no | Add list of LocalDateRangeFieldValidators (since 7.5.0) |
 | doubleRangeFields | no | Add list of DoubleRangeFieldValidators |
 | emails | no | Add list of EmailValidators |
 | expressions | no | Add list of ExpressionValidators |
