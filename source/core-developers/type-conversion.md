@@ -24,7 +24,7 @@ This includes support for converting to and from Strings for each of the followi
 - boolean / Boolean
 - char / Character
 - int / Integer, float / Float, long / Long, double / Double
-- dates - uses the SHORT format for the Locale associated with the current request
+- dates - see [Dates](#dates)
 - arrays - assuming the individual strings can be coverted to the individual items
 - collections - if not object type can be determined, it is assumed to be a String and a new ArrayList is created
   > Note that with arrays the type conversion will defer to the type of the array elements and try to convert each item 
@@ -32,6 +32,55 @@ This includes support for converting to and from Strings for each of the followi
   > error reporting is used to indicate a problem occurred while processing the type conversion. 
 - Enumerations
 - BigDecimal and BigInteger
+
+### Dates
+
+A request value is converted to a date or time property by trying a list of formats in order and using the first one
+that strictly parses the **whole** value. Most of the formats come from the Locale of the current request, so the 
+accepted input follows that Locale and the JDK's locale data.
+
+| Property type                                          | Formats tried, in order                                                                                                                                                                                                                         |
+|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `java.util.Date`, `java.util.Calendar`                 | `struts.date.format` (if defined), the Locale's SHORT date with LONG, MEDIUM and SHORT time, `yyyy-MM-dd'T'HH:mm:ss`, `yyyy-MM-dd'T'HH:mm:ss'Z'`, `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`, the Locale's SHORT, MEDIUM and LONG date, `yyyy-MM-dd` |
+| `java.sql.Timestamp`                                   | the Locale's SHORT date with MEDIUM time followed by `.SSS`, the same without milliseconds, the Locale's SHORT date                                                                                                                             |
+| `java.sql.Time`                                        | the Locale's MEDIUM time                                                                                                                                                                                                                        |
+| `java.sql.Date`                                        | the Locale's SHORT date                                                                                                                                                                                                                         |
+| `java.time.LocalDateTime`, `LocalDate`, `LocalTime`    | `struts.date.format` (if defined), ISO local date-time, ISO local date, ISO local time                                                                                                                                                          |
+| `java.time.OffsetDateTime`                             | ISO offset date-time                                                                                                                                                                                                                            |
+
+`struts.date.format` is a text key, the same one the [date tag](../tag-developers/date-tag) formats with, so it is 
+defined in a resource bundle:
+
+```
+struts.date.format=dd-MM-yyyy
+```
+
+Since Struts 7.5.0 a value with text left over after a valid date, such as `24-10-2026 at 10:15:30`, is a conversion 
+error. Earlier versions silently dropped the rest and stored midnight of that date. A format later in the list is used 
+when an earlier one matches only part of the value, so an ISO date such as `2026-10-24` converts under a Locale whose 
+own pattern is `dd-MM-y`, and a date-time keeps its time under a date-only `struts.date.format`.
+
+The Locale's patterns come from the JDK and can change between JDK versions. JDK 25, for example, writes the `nl-NL` 
+date-time as `24-10-2026, 10:15:30` where JDK 21 writes `24-10-2026 10:15:30`. Prefer the ISO forms for values sent by 
+scripts and other machines.
+
+#### ISO date-times with a time zone
+
+By default the `Z` of an ISO date-time such as `2026-10-25T05:14:42.000Z` (the form JavaScript's `Date.toISOString()` 
+produces) is read as the server's local time, not UTC, and numeric offsets such as `+02:00` are not accepted.
+
+> Since Struts 7.5.0
+
+Set `struts.converter.date.isoOffsetAware` to `true` to read the offset for `java.util.Date` and `java.util.Calendar` 
+properties: `Z` means UTC, numeric offsets are honoured and any number of fractional-second digits is accepted. 
+Values without an offset are converted as before.
+
+```xml
+<constant name="struts.converter.date.isoOffsetAware" value="true"/>
+```
+
+The default is `false` because turning it on shifts every `Z` value by the server's offset. It is planned to become 
+`true` in Struts 8.0.0 ([WW-5815](https://issues.apache.org/jira/browse/WW-5815)).
 
 ## Relationship to Parameter Names
 
