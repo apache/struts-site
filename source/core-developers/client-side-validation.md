@@ -97,7 +97,9 @@ property is a `java.util.Date` (or a subclass), `Calendar`, `LocalDate`, `LocalD
 it does in the browser. Struts reads the property's declared type — through any nested path such as
 `user.birthday`, even while `user` is still null — and emits `required` only for those types. A date input
 bound to a `String` property keeps the `""`, passes `required`, and therefore gets no attribute. An indexed
-path (`items[0].when`) or a property it cannot find gets no attribute either.
+path (`items[0].when`) or a property it cannot find gets no attribute either. The type is read on the
+form's submission action, not on the action rendering the page; when a different action renders a form
+that submits to a `ModelDriven` action, the model's type is unknown and no `required` is emitted.
 
 Even for `radio` and `file`, one more check is needed. An omitted parameter leaves the property at whatever
 it already holds, and that is the value the page is rendering. A `private int priority` bound to a `radio` list of
@@ -145,7 +147,10 @@ are written as they are (`2026-01-01`). A `date` validator's `java.util.Date` bo
 calendar date in the server's default time zone — the zone the submitted `yyyy-MM-dd` is parsed in — and
 their time of day is dropped. That never makes the browser stricter than the server: with a `min` of 10:00
 on 1 January the browser lets the 1st through and the server still rejects it, and a `max` day submits as
-midnight, which the server accepts. A bound outside the years 0001–9999, or of any other type, is skipped.
+midnight, which the server accepts. A bound outside the years 0001–9999, or of any other type, is skipped,
+and so is a `java.util.Date` bound before the Gregorian cutover (15 October 1582), since the converter
+reads earlier `yyyy-MM-dd` values as Julian dates. A field that sets its own `step` gets no derived
+`min` on any control, date or numeric: `min` would become the step base and move the developer's grid.
 `month`, `week`, `time` and `datetime-local` inputs never get `min`/`max`: none of them has a built-in
 converter and range validator that read their submitted value the way the browser constrains it.
 
