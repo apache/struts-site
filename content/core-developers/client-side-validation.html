@@ -219,8 +219,9 @@ locale-aware numeric conversion happily accepts in a comma-decimal locale.</li>
 </ul>
 
 <p>So <code class="language-plaintext highlighter-rouge">min</code>/<code class="language-plaintext highlighter-rouge">max</code> range constraints are only ever added to a control the developer <em>already</em> made numeric
-(<code class="language-plaintext highlighter-rouge">type="number"</code> or <code class="language-plaintext highlighter-rouge">type="range"</code>) — Struts will never promote a plain text field into one just because
-an <code class="language-plaintext highlighter-rouge">int</code> or <code class="language-plaintext highlighter-rouge">double</code> validator is attached to it.</p>
+(<code class="language-plaintext highlighter-rouge">type="number"</code> or <code class="language-plaintext highlighter-rouge">type="range"</code>) or a date input (<code class="language-plaintext highlighter-rouge">type="date"</code>, including <code class="language-plaintext highlighter-rouge">&lt;s:datetextfield&gt;</code> in the
+html5 theme) — Struts will never promote a plain text field into one just because an <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">double</code> or
+<code class="language-plaintext highlighter-rouge">date</code> validator is attached to it.</p>
 
 <h3 id="mapping-table">Mapping table</h3>
 
@@ -241,7 +242,7 @@ an <code class="language-plaintext highlighter-rouge">int</code> or <code class=
     <tr>
       <td><code class="language-plaintext highlighter-rouge">required</code></td>
       <td><code class="language-plaintext highlighter-rouge">required</code></td>
-      <td>only on <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">file</code>, and only while the bound property holds a value the validator would reject (null, an empty array or an empty collection)</td>
+      <td>on <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">file</code> only while the bound property holds a value the validator would reject (null, an empty array or an empty collection); on temporal controls (<code class="language-plaintext highlighter-rouge">date</code>, <code class="language-plaintext highlighter-rouge">month</code>, <code class="language-plaintext highlighter-rouge">week</code>, <code class="language-plaintext highlighter-rouge">time</code>, <code class="language-plaintext highlighter-rouge">datetime-local</code>) when the bound property is a date/time type (since 7.5.0, see below)</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">stringlength</code></td>
@@ -264,9 +265,9 @@ an <code class="language-plaintext highlighter-rouge">int</code> or <code class=
       <td>same as above; only inclusive bounds are emitted — exclusive bounds have no HTML equivalent and are omitted</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">date</code></td>
-      <td>—</td>
-      <td>nothing yet; temporal <code class="language-plaintext highlighter-rouge">min</code>/<code class="language-plaintext highlighter-rouge">max</code> is deferred to a future release</td>
+      <td><code class="language-plaintext highlighter-rouge">date</code>, <code class="language-plaintext highlighter-rouge">localdate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">min</code> / <code class="language-plaintext highlighter-rouge">max</code></td>
+      <td>only on <code class="language-plaintext highlighter-rouge">type="date"</code>, as <code class="language-plaintext highlighter-rouge">yyyy-MM-dd</code> (since 7.5.0, see below); never on <code class="language-plaintext highlighter-rouge">month</code>, <code class="language-plaintext highlighter-rouge">week</code>, <code class="language-plaintext highlighter-rouge">time</code> or <code class="language-plaintext highlighter-rouge">datetime-local</code></td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">email</code>, <code class="language-plaintext highlighter-rouge">url</code>, <code class="language-plaintext highlighter-rouge">creditcard</code></td>
@@ -300,12 +301,21 @@ to emit on any text-entry control. Plain <code class="language-plaintext highlig
 or an empty collection. That means an empty text input (which submits <code class="language-plaintext highlighter-rouge">""</code>, not nothing), a <code class="language-plaintext highlighter-rouge">select</code> with
 an empty-valued option, and an <strong>unticked checkbox</strong> (<code class="language-plaintext highlighter-rouge">CheckboxInterceptor</code> substitutes the parameter
 <code class="language-plaintext highlighter-rouge">"false"</code> for it) all pass server-side validation while a browser <code class="language-plaintext highlighter-rouge">required</code> attribute would block them.
-Only <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">file</code> controls omit their parameter entirely when left empty, so those are the only two
-control types where plain <code class="language-plaintext highlighter-rouge">required</code> agrees with the server — which is why the table above emits <code class="language-plaintext highlighter-rouge">required</code>
-for the <code class="language-plaintext highlighter-rouge">required</code> validator on those two types alone.</p>
+Only <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">file</code> controls omit their parameter entirely when left empty, so among the controls that
+submit a raw string those are the only two where plain <code class="language-plaintext highlighter-rouge">required</code> agrees with the server.</p>
 
-<p>Even there, one more check is needed. An omitted parameter leaves the property at whatever it already
-holds, and that is the value the page is rendering. A <code class="language-plaintext highlighter-rouge">private int priority</code> bound to a <code class="language-plaintext highlighter-rouge">radio</code> list of
+<p>Temporal controls are the other case. An empty date or time input submits <code class="language-plaintext highlighter-rouge">""</code> too, but when the bound
+property is a <code class="language-plaintext highlighter-rouge">java.util.Date</code> (or a subclass), <code class="language-plaintext highlighter-rouge">Calendar</code>, <code class="language-plaintext highlighter-rouge">LocalDate</code>, <code class="language-plaintext highlighter-rouge">LocalDateTime</code>, <code class="language-plaintext highlighter-rouge">LocalTime</code> or
+<code class="language-plaintext highlighter-rouge">OffsetDateTime</code>, the framework converts that <code class="language-plaintext highlighter-rouge">""</code> to null, so <code class="language-plaintext highlighter-rouge">required</code> then fails on the server just as
+it does in the browser. Struts reads the property’s declared type — through any nested path such as
+<code class="language-plaintext highlighter-rouge">user.birthday</code>, even while <code class="language-plaintext highlighter-rouge">user</code> is still null — and emits <code class="language-plaintext highlighter-rouge">required</code> only for those types. A date input
+bound to a <code class="language-plaintext highlighter-rouge">String</code> property keeps the <code class="language-plaintext highlighter-rouge">""</code>, passes <code class="language-plaintext highlighter-rouge">required</code>, and therefore gets no attribute. An indexed
+path (<code class="language-plaintext highlighter-rouge">items[0].when</code>) or a property it cannot find gets no attribute either. The type is read on the
+form’s submission action, not on the action rendering the page; when a different action renders a form
+that submits to a <code class="language-plaintext highlighter-rouge">ModelDriven</code> action, the model’s type is unknown and no <code class="language-plaintext highlighter-rouge">required</code> is emitted.</p>
+
+<p>Even for <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">file</code>, one more check is needed. An omitted parameter leaves the property at whatever
+it already holds, and that is the value the page is rendering. A <code class="language-plaintext highlighter-rouge">private int priority</code> bound to a <code class="language-plaintext highlighter-rouge">radio</code> list of
 1, 2, 3 renders with nothing checked (0 is not in the list), yet the server sees a non-null <code class="language-plaintext highlighter-rouge">Integer</code> and
 accepts the empty submit; a <code class="language-plaintext highlighter-rouge">file</code> property that <code class="language-plaintext highlighter-rouge">prepare()</code> loaded from an existing entity — the ordinary
 edit flow — is accepted the same way. So <code class="language-plaintext highlighter-rouge">required</code> is emitted only while the bound value is one the
@@ -345,6 +355,18 @@ trims (its default), which rejects blank input server-side, the emitted pattern 
 <code class="language-plaintext highlighter-rouge">(?:&lt;regex&gt;)|[\x00-\x20]*</code>: the original regex, or a value made only of the characters <code class="language-plaintext highlighter-rouge">String.trim()</code>
 strips. With a trimming <code class="language-plaintext highlighter-rouge">requiredstring</code> present, the bare regex is emitted.</p>
 
+<p><strong>Date ranges are written as plain dates, and only on <code class="language-plaintext highlighter-rouge">type="date"</code>.</strong> A <code class="language-plaintext highlighter-rouge">localdate</code> validator’s bounds
+are written as they are (<code class="language-plaintext highlighter-rouge">2026-01-01</code>). A <code class="language-plaintext highlighter-rouge">date</code> validator’s <code class="language-plaintext highlighter-rouge">java.util.Date</code> bounds are reduced to their
+calendar date in the server’s default time zone — the zone the submitted <code class="language-plaintext highlighter-rouge">yyyy-MM-dd</code> is parsed in — and
+their time of day is dropped. That never makes the browser stricter than the server: with a <code class="language-plaintext highlighter-rouge">min</code> of 10:00
+on 1 January the browser lets the 1st through and the server still rejects it, and a <code class="language-plaintext highlighter-rouge">max</code> day submits as
+midnight, which the server accepts. A bound outside the years 0001–9999, or of any other type, is skipped,
+and so is a <code class="language-plaintext highlighter-rouge">java.util.Date</code> bound before the Gregorian cutover (15 October 1582), since the converter
+reads earlier <code class="language-plaintext highlighter-rouge">yyyy-MM-dd</code> values as Julian dates. A field that sets its own <code class="language-plaintext highlighter-rouge">step</code> gets no derived
+<code class="language-plaintext highlighter-rouge">min</code> on any control, date or numeric: <code class="language-plaintext highlighter-rouge">min</code> would become the step base and move the developer’s grid.
+<code class="language-plaintext highlighter-rouge">month</code>, <code class="language-plaintext highlighter-rouge">week</code>, <code class="language-plaintext highlighter-rouge">time</code> and <code class="language-plaintext highlighter-rouge">datetime-local</code> inputs never get <code class="language-plaintext highlighter-rouge">min</code>/<code class="language-plaintext highlighter-rouge">max</code>: none of them has a built-in
+converter and range validator that read their submitted value the way the browser constrains it.</p>
+
 <h3 id="data-msg--attributes"><code class="language-plaintext highlighter-rouge">data-msg-*</code> attributes</h3>
 
 <p>Every validator carrying a message — even one that emits no HTML constraint attribute at all — adds a
@@ -382,9 +404,18 @@ conservative, but nothing stops an application from replacing it with one that f
 locales.</p>
 
 <p>A provider receives the field’s validators, the kind of control being rendered, the object the validators
-run against (the action, or the visited object under a <code class="language-plaintext highlighter-rouge">visitor</code> validator) and the field’s current value
-as the tag resolved it — the last is what lets the default implementation judge <code class="language-plaintext highlighter-rouge">required</code> against the bound
-property.</p>
+run against (the action, or the visited object under a <code class="language-plaintext highlighter-rouge">visitor</code> validator), the field’s current value
+as the tag resolved it — what lets the default implementation judge <code class="language-plaintext highlighter-rouge">required</code> on <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">file</code> — and,
+since 7.5.0, the declared type of the property the field binds to (null when it cannot be resolved), which
+decides <code class="language-plaintext highlighter-rouge">required</code> on temporal controls. The framework calls the five-argument
+<code class="language-plaintext highlighter-rouge">constraintsFor(validators, control, action, value, propertyType)</code>; its default implementation drops the type
+and delegates to the four-argument method, so a provider written for 7.4.0 keeps working unchanged. A
+subclass of <code class="language-plaintext highlighter-rouge">StrutsHtmlConstraintProvider</code> that overrides the four-argument method, however, must move that
+override to the five-argument one, because the framework no longer calls the four-argument method on it.</p>
+
+<p>An application whose own type converter turns an empty string into a value for a date/time property (a
+default date, say) should override <code class="language-plaintext highlighter-rouge">StrutsHtmlConstraintProvider#convertsBlankToNull(Class)</code> to exclude that
+type; otherwise the browser would insist on a value the server does not require.</p>
 
 <p>Two things a provider cannot do. It cannot change an input’s <code class="language-plaintext highlighter-rouge">type</code> — the templates have already written
 it by the time the constraint map renders, so a <code class="language-plaintext highlighter-rouge">type</code> entry is discarded; treating an <code class="language-plaintext highlighter-rouge">email</code> validator
