@@ -155,7 +155,10 @@
     <h1 class="no_toc" id="type-conversion">Type Conversion</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#built-in-type-conversion-support" id="markdown-toc-built-in-type-conversion-support">Built in Type Conversion Support</a></li>
+  <li><a href="#built-in-type-conversion-support" id="markdown-toc-built-in-type-conversion-support">Built in Type Conversion Support</a>    <ul>
+      <li><a href="#dates" id="markdown-toc-dates">Dates</a></li>
+    </ul>
+  </li>
   <li><a href="#relationship-to-parameter-names" id="markdown-toc-relationship-to-parameter-names">Relationship to Parameter Names</a></li>
   <li><a href="#creating-a-type-converter" id="markdown-toc-creating-a-type-converter">Creating a Type Converter</a></li>
   <li><a href="#applying-a-type-converter-to-an-action" id="markdown-toc-applying-a-type-converter-to-an-action">Applying a Type Converter to an Action</a></li>
@@ -194,7 +197,7 @@ This includes support for converting to and from Strings for each of the followi
   <li>boolean / Boolean</li>
   <li>char / Character</li>
   <li>int / Integer, float / Float, long / Long, double / Double</li>
-  <li>dates - uses the SHORT format for the Locale associated with the current request</li>
+  <li>dates - see <a href="#dates">Dates</a></li>
   <li>arrays - assuming the individual strings can be coverted to the individual items</li>
   <li>collections - if not object type can be determined, it is assumed to be a String and a new ArrayList is created
     <blockquote>
@@ -206,6 +209,81 @@ error reporting is used to indicate a problem occurred while processing the type
   <li>Enumerations</li>
   <li>BigDecimal and BigInteger</li>
 </ul>
+
+<h3 id="dates">Dates</h3>
+
+<p>A request value is converted to a date or time property by trying a list of formats in order and using the first one
+that strictly parses the <strong>whole</strong> value. Most of the formats come from the Locale of the current request, so the 
+accepted input follows that Locale and the JDK’s locale data.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property type</th>
+      <th>Formats tried, in order</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">java.util.Date</code>, <code class="language-plaintext highlighter-rouge">java.util.Calendar</code></td>
+      <td><code class="language-plaintext highlighter-rouge">struts.date.format</code> (if defined), the Locale’s SHORT date with LONG, MEDIUM and SHORT time, <code class="language-plaintext highlighter-rouge">yyyy-MM-dd'T'HH:mm:ss</code>, <code class="language-plaintext highlighter-rouge">yyyy-MM-dd'T'HH:mm:ss'Z'</code>, <code class="language-plaintext highlighter-rouge">yyyy-MM-dd'T'HH:mm:ss.SSS'Z'</code>, the Locale’s SHORT, MEDIUM and LONG date, <code class="language-plaintext highlighter-rouge">yyyy-MM-dd</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">java.sql.Timestamp</code></td>
+      <td>the Locale’s SHORT date with MEDIUM time followed by <code class="language-plaintext highlighter-rouge">.SSS</code>, the same without milliseconds, the Locale’s SHORT date</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">java.sql.Time</code></td>
+      <td>the Locale’s MEDIUM time</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">java.sql.Date</code></td>
+      <td>the Locale’s SHORT date</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">java.time.LocalDateTime</code>, <code class="language-plaintext highlighter-rouge">LocalDate</code>, <code class="language-plaintext highlighter-rouge">LocalTime</code></td>
+      <td><code class="language-plaintext highlighter-rouge">struts.date.format</code> (if defined), ISO local date-time, ISO local date, ISO local time</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">java.time.OffsetDateTime</code></td>
+      <td>ISO offset date-time</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">struts.date.format</code> is a text key, the same one the <a href="../tag-developers/date-tag">date tag</a> formats with, so it is 
+defined in a resource bundle:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struts.date.format=dd-MM-yyyy
+</code></pre></div></div>
+
+<p>Since Struts 7.5.0 a value with text left over after a valid date, such as <code class="language-plaintext highlighter-rouge">24-10-2026 at 10:15:30</code>, is a conversion 
+error. Earlier versions silently dropped the rest and stored midnight of that date. A format later in the list is used 
+when an earlier one matches only part of the value, so an ISO date such as <code class="language-plaintext highlighter-rouge">2026-10-24</code> converts under a Locale whose 
+own pattern is <code class="language-plaintext highlighter-rouge">dd-MM-y</code>, and a date-time keeps its time under a date-only <code class="language-plaintext highlighter-rouge">struts.date.format</code>.</p>
+
+<p>The Locale’s patterns come from the JDK and can change between JDK versions. JDK 25, for example, writes the <code class="language-plaintext highlighter-rouge">nl-NL</code> 
+date-time as <code class="language-plaintext highlighter-rouge">24-10-2026, 10:15:30</code> where JDK 21 writes <code class="language-plaintext highlighter-rouge">24-10-2026 10:15:30</code>. Prefer the ISO forms for values sent by 
+scripts and other machines.</p>
+
+<h4 id="iso-date-times-with-a-time-zone">ISO date-times with a time zone</h4>
+
+<p>By default the <code class="language-plaintext highlighter-rouge">Z</code> of an ISO date-time such as <code class="language-plaintext highlighter-rouge">2026-10-25T05:14:42.000Z</code> (the form JavaScript’s <code class="language-plaintext highlighter-rouge">Date.toISOString()</code> 
+produces) is read as the server’s local time, not UTC, and numeric offsets such as <code class="language-plaintext highlighter-rouge">+02:00</code> are not accepted.</p>
+
+<blockquote>
+  <p>Since Struts 7.5.0</p>
+</blockquote>
+
+<p>Set <code class="language-plaintext highlighter-rouge">struts.converter.date.isoOffsetAware</code> to <code class="language-plaintext highlighter-rouge">true</code> to read the offset for <code class="language-plaintext highlighter-rouge">java.util.Date</code> and <code class="language-plaintext highlighter-rouge">java.util.Calendar</code> 
+properties: <code class="language-plaintext highlighter-rouge">Z</code> means UTC, numeric offsets are honoured and any number of fractional-second digits is accepted. 
+Values without an offset are converted as before.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.converter.date.isoOffsetAware"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>The default is <code class="language-plaintext highlighter-rouge">false</code> because turning it on shifts every <code class="language-plaintext highlighter-rouge">Z</code> value by the server’s offset. It is planned to become 
+<code class="language-plaintext highlighter-rouge">true</code> in Struts 8.0.0 (<a href="https://issues.apache.org/jira/browse/WW-5815">WW-5815</a>).</p>
 
 <h2 id="relationship-to-parameter-names">Relationship to Parameter Names</h2>
 
