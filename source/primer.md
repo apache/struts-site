@@ -49,7 +49,7 @@ are often provided where it makes sense.
 
 ### General starting points
 
-If you are not familiar with the Java language generally,then the best starting point is the
+If you are not familiar with the Java language generally, then the best starting point is the
 [Java Tutorial](http://docs.oracle.com/javase/tutorial/index).
 
 If you are familiar with Java, but not the mentioned technologies,
