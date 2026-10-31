@@ -146,10 +146,17 @@ and for both case, it will be parsed into:
 
 ```
 
-You can also use OGNL expressions with dynamic tags like below:
+A dynamic attribute is written out as given, so build its value with FreeMarker's own interpolation:
 
 ```ftl
-<@s.textfield name="test" placeholder="input" foo="checked: %{bar}"/>
+<@s.textfield name="test" placeholder="input" foo="checked: ${bar}"/>
+```
+
+Only the tags that render one element per item of a list, `radio` and `checkboxlist`, evaluate an OGNL
+expression in a dynamic attribute, once per item with that item on top of the value stack:
+
+```ftl
+<@s.radio name="choice" list="choices" data-item="%{top}"/>
 ```
 
 When using attributes with hyphens, use the below syntax (you can also leave the single quotes from false if you want)
