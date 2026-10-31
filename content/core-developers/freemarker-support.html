@@ -306,9 +306,15 @@ webapp-absolute URL, so no configuration in web.xml is needed.</li>
 
 </code></pre></div></div>
 
-<p>You can also use OGNL expressions with dynamic tags like below:</p>
+<p>A dynamic attribute is written out as given, so build its value with FreeMarker’s own interpolation:</p>
 
-<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.textfield</span><span class="w"> </span>name="test" placeholder="input" foo="checked: %<span class="p">{</span><span class="no">bar</span><span class="p">}</span>"/&gt;<span class="w">
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.textfield</span><span class="w"> </span>name="test" placeholder="input" foo="checked: $<span class="p">{</span><span class="no">bar</span><span class="p">}</span>"/&gt;<span class="w">
+</span></code></pre></div></div>
+
+<p>Only the tags that render one element per item of a list, <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">checkboxlist</code>, evaluate an OGNL
+expression in a dynamic attribute, once per item with that item on top of the value stack:</p>
+
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;@</span><span class="no">s</span><span class="na">.radio</span><span class="w"> </span>name="choice" list="choices" data-item="%<span class="p">{</span><span class="no">top</span><span class="p">}</span>"/&gt;<span class="w">
 </span></code></pre></div></div>
 
 <p>When using attributes with hyphens, use the below syntax (you can also leave the single quotes from false if you want)</p>
