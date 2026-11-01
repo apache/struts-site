@@ -113,7 +113,8 @@ public void setUserName(String userName) {
 
 To personalize the MessageStore message (recall that class MessageStore is storing the message to display) 
 add the following Java code to the HelloWorldAction's execute method after the statement that instantiates 
-the MessageStore object. Before doing so, you need to add following setMessage method to MessageStore class.
+the MessageStore object. Before doing so, you need to add the following `setMessage` method to
+`MessageStore` class.
 
 **Add setMessage method to MessageStore**
 
