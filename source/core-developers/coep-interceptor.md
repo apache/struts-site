@@ -25,21 +25,31 @@ COEP is now supported by all major browsers. [More information about COEP](https
 
 ## Parameters
 
-- `exemptedPaths` - Set of opt out endpoints that are meant to serve cross-site traffic. Paths should contain leading
-   slashes and must be relative. This field is empty by default.
+- `exemptedPaths` - Comma-separated list of request paths the COEP header is not sent on. Each entry is compared exactly
+  with the path of the request inside the web application: the servlet path plus the path info, without the context path
+  and without the query string. Include the action extension, e.g. `/embed/widget.action`; if an action is reachable
+  with several extensions, list each form. This field is empty by default.
 - `enforcingMode` - Boolean variable allowing the user to let COEP operate in `enforcing`, which blocks both resource 
    and reports violations, or `report-only` mode, which only reports violations. Default value for field is `false`.
 - `disabled` - Boolean variable disabling and enabling COEP. Default value for field is `false`.
 
+Before Struts 7.5.0 and 6.13.0 `exemptedPaths` was compared with the context path of the application, so an entry
+naming a request path had no effect and an entry equal to the context path disabled the interceptor for the whole
+application. Use `disabled` if you relied on the latter.
+{:.alert .alert-warning}
+
 ## Examples
 
 ```xml
-<action  name="someAction" class="com.examples.SomeAction">
-    <interceptor-ref name="defaultStack">
-        <param name="coep.exemptedPaths">/path1,/path2,/path3</param>
-        <param name="coep.enforcingMode">false</param>
-        <param name="coep.disabled">false</param>
-    </interceptor-ref>
-    <result name="success">good_result.ftl</result>
-</action>
+<package name="default" extends="struts-default">
+    <interceptors>
+        <interceptor-stack name="appDefaultStack">
+            <interceptor-ref name="defaultStack">
+                <param name="coep.exemptedPaths">/embed/widget.action</param>
+                <param name="coep.enforcingMode">false</param>
+            </interceptor-ref>
+        </interceptor-stack>
+    </interceptors>
+    <default-interceptor-ref name="appDefaultStack"/>
+</package>
 ```
