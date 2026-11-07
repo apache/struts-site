@@ -68,14 +68,13 @@ This mapper supports the following parameters:
 - `struts.mapper.postMethodName`  - The method name to call for a POST  request with no id parameter. Defaults to **create**.
 - `struts.mapper.putMethodName`  - The method name to call for a PUT  request with an id parameter. Defaults to **update**.
 - `struts.mapper.deleteMethodName`  - The method name to call for a DELETE  request with an id parameter. Defaults to **destroy**.
-- `struts.mapper.editMethodName`  - The method name to call for a GET  request with an id parameter and the **edit** view specified. Defaults to **edit**.
+- `struts.mapper.editMethodName`  - The method whose result is rendered when a PUT request fails validation. Defaults to **edit**. The mapper itself no longer reads it: the **edit** view is selected by the `/edit` URL form, which names the method.
 - `struts.mapper.newMethodName`  - The method name to call for a GET  request with no id parameter and the **new** view specified. Defaults to **editNew**.
 
 The following URL's will invoke its methods:
 
 - `GET: /movies` => method=**index**
 - `GET: /movies/Thrillers` => method=**show**, id=**Thrillers**
-- `GET: /movies/Thrillers;edit`  => method=**edit**, id=**Thrillers**
 - `GET: /movies/Thrillers/edit`  => method=**edit**, id=**Thrillers**
 - `GET: /movies/new`  => method=**editNew**
 - `POST: /movies`  => method=**create**
