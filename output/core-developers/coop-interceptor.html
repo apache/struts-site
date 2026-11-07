@@ -187,21 +187,32 @@ to allow popups they open to be in their browsing context group (unless the popu
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">exemptedPaths</code> - Set of opt out endpoints that are meant to serve cross-site traffic. Paths should contain leading 
-slashes and must be relative. This field is empty by default.</li>
+  <li><code class="language-plaintext highlighter-rouge">exemptedPaths</code> - Comma-separated list of request paths the COOP header is not sent on. Each entry is compared exactly
+with the path of the request inside the web application: the servlet path plus the path info, without the context path
+and without the query string. Include the action extension, e.g. <code class="language-plaintext highlighter-rouge">/popup/callback.action</code>; if an action is reachable
+with several extensions, list each form. This field is empty by default.</li>
   <li><code class="language-plaintext highlighter-rouge">mode</code> - The policy mode COOP should follow. Available modes are <code class="language-plaintext highlighter-rouge">same-origin</code>, <code class="language-plaintext highlighter-rouge">same-origin-allow-popups</code>, 
 <code class="language-plaintext highlighter-rouge">unsafe-none</code>. Default mode is <code class="language-plaintext highlighter-rouge">same-origin</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">disabled</code> - Set to <code class="language-plaintext highlighter-rouge">true</code> to skip the interceptor for an action. Default value is <code class="language-plaintext highlighter-rouge">false</code>.</li>
 </ul>
+
+<p class="alert alert-warning">Before Struts 7.5.0 and 6.13.0 <code class="language-plaintext highlighter-rouge">exemptedPaths</code> was compared with the context path of the application, so an entry
+naming a request path had no effect and an entry equal to the context path disabled the interceptor for the whole
+application. Use <code class="language-plaintext highlighter-rouge">disabled</code> if you relied on the latter.</p>
 
 <h2 id="examples">Examples</h2>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span>  <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coop.exemptedPaths"</span><span class="nt">&gt;</span>/path1,/path2,/path3<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coop.mode"</span><span class="nt">&gt;</span>same-origin<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;/interceptor-ref&gt;</span>
-    <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
-<span class="nt">&lt;/action&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"default"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;interceptors&gt;</span>
+        <span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"appDefaultStack"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coop.exemptedPaths"</span><span class="nt">&gt;</span>/popup/callback.action<span class="nt">&lt;/param&gt;</span>
+                <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"coop.mode"</span><span class="nt">&gt;</span>same-origin<span class="nt">&lt;/param&gt;</span>
+            <span class="nt">&lt;/interceptor-ref&gt;</span>
+        <span class="nt">&lt;/interceptor-stack&gt;</span>
+    <span class="nt">&lt;/interceptors&gt;</span>
+    <span class="nt">&lt;default-interceptor-ref</span> <span class="na">name=</span><span class="s">"appDefaultStack"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/package&gt;</span>
 </code></pre></div></div>
 
   </section>

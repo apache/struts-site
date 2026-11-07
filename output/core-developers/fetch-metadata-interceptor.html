@@ -160,32 +160,74 @@
 information leaks. Uses a default Resource Isolation Policy to programmatically reject cross-origin requests.</p>
 
 <p>A Resource Isolation Policy is a strong defense in-depth mechanism that prevents the resources on a server from being 
-requested by external websites. This policy can be enabled either for all endpoints of the application and  endpoints 
+requested by external websites. The interceptor is part of the <code class="language-plaintext highlighter-rouge">defaultStack</code> and is enabled by default; endpoints
 that are meant to be loaded in a cross-site context can be exempted from the policy.</p>
 
 <p>The browser provides information about the context of an HTTP request in a set of <code class="language-plaintext highlighter-rouge">Sec-Fetch-*</code> headers. This allows 
 the server processing the request to make decisions on whether the request should be accepted or rejected based 
 on the preferred resource isolation policy. Struts provides a default <em>Resource Isolation Policy</em> that rejects 
-<em>cross-origin</em> requests that aren’t top level navigations.</p>
+<em>cross-site</em> requests that aren’t simple top level navigations:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sec-Fetch-Site == 'cross-site' AND (Sec-Fetch-Mode != 'navigate'/'nested-navigate' OR method NOT IN [GET, HEAD])
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sec-Fetch-Site == 'cross-site' AND (Sec-Fetch-Mode != 'navigate' OR method NOT IN [GET, HEAD] OR Sec-Fetch-Dest IN [object, embed])
 </code></pre></div></div>
+
+<p>Requests without a <code class="language-plaintext highlighter-rouge">Sec-Fetch-Site</code> header and <code class="language-plaintext highlighter-rouge">same-origin</code>, <code class="language-plaintext highlighter-rouge">same-site</code> and <code class="language-plaintext highlighter-rouge">none</code> requests are always accepted.</p>
 
 <p>Refer to <a href="https://web.dev/fetch-metadata/#implementing-a-resource-isolation-policy">Implementing a Resource Isolation Policy</a> 
 for further information on implementing effective Resource Isolation Policies. Fetch Metadata is supported in all major browsers.</p>
 
+<h2 id="cross-site-form-posts">Cross-site form posts</h2>
+
+<p class="alert alert-info">Since Struts 7.5.0 and 6.13.0 cross-site <code class="language-plaintext highlighter-rouge">POST</code> navigations are rejected with <code class="language-plaintext highlighter-rouge">403</code>.</p>
+
+<p>Flows where another site posts the user’s browser back to your application are affected, for example:</p>
+
+<ul>
+  <li>a SAML assertion consumer service or an OpenID Connect <code class="language-plaintext highlighter-rouge">form_post</code> response,</li>
+  <li>a payment gateway returning the user to the shop.</li>
+</ul>
+
+<p>Exempt the endpoints receiving these requests, either by path with <code class="language-plaintext highlighter-rouge">exemptedPaths</code> or per action with the <code class="language-plaintext highlighter-rouge">disabled</code>
+parameter, see the examples below.</p>
+
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">exemptedPaths</code> - Set of opt out endpoints that are meant to serve cross-site traffic. Paths should contain leading 
- slashes and must be relative. This field is empty by default.</li>
+  <li><code class="language-plaintext highlighter-rouge">exemptedPaths</code> - Comma-separated list of request paths the policy is not applied to. Each entry is compared exactly
+with the path of the request inside the web application: the servlet path plus the path info, without the context path
+and without the query string. Include the action extension, e.g. <code class="language-plaintext highlighter-rouge">/saml/acs.action</code>; if an action is reachable with
+several extensions, list each form. This field is empty by default.</li>
+  <li><code class="language-plaintext highlighter-rouge">disabled</code> - Set to <code class="language-plaintext highlighter-rouge">true</code> to skip the interceptor for an action. Default value is <code class="language-plaintext highlighter-rouge">false</code>.</li>
 </ul>
+
+<p class="alert alert-warning">Before Struts 7.5.0 and 6.13.0 <code class="language-plaintext highlighter-rouge">exemptedPaths</code> was compared with the context path of the application, so an entry
+naming a request path had no effect and an entry equal to the context path disabled the interceptor for the whole
+application. Use <code class="language-plaintext highlighter-rouge">disabled</code> if you relied on the latter.</p>
+
+<p>When <code class="language-plaintext highlighter-rouge">struts.mapper.action.prefix.enabled</code> is set to <code class="language-plaintext highlighter-rouge">true</code> (it is <code class="language-plaintext highlighter-rouge">false</code> by default), a request to an exempted path
+can use the <code class="language-plaintext highlighter-rouge">action:</code> parameter prefix to execute another action in the same namespace.</p>
 
 <h2 id="examples">Examples</h2>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span>  <span class="na">name=</span><span class="s">"someAction"</span> <span class="na">class=</span><span class="s">"com.examples.SomeAction"</span><span class="nt">&gt;</span>
+<p>Exempt selected paths for every action using the stack:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"default"</span> <span class="na">extends=</span><span class="s">"struts-default"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;interceptors&gt;</span>
+        <span class="nt">&lt;interceptor-stack</span> <span class="na">name=</span><span class="s">"appDefaultStack"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"fetchMetadata.exemptedPaths"</span><span class="nt">&gt;</span>/saml/acs.action,/payment/return.action<span class="nt">&lt;/param&gt;</span>
+            <span class="nt">&lt;/interceptor-ref&gt;</span>
+        <span class="nt">&lt;/interceptor-stack&gt;</span>
+    <span class="nt">&lt;/interceptors&gt;</span>
+    <span class="nt">&lt;default-interceptor-ref</span> <span class="na">name=</span><span class="s">"appDefaultStack"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/package&gt;</span>
+</code></pre></div></div>
+
+<p>Disable the interceptor for a single action:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"acs"</span> <span class="na">class=</span><span class="s">"com.examples.SamlAssertionConsumerAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;interceptor-ref</span> <span class="na">name=</span><span class="s">"defaultStack"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"fetchMetadata.exemptedPaths"</span><span class="nt">&gt;</span>/path1,/path2,/path3<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"fetchMetadata.disabled"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;/interceptor-ref&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"success"</span><span class="nt">&gt;</span>good_result.ftl<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
