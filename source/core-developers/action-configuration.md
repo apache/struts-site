@@ -368,12 +368,29 @@ The attribute requires the 7.5 DTD. An unknown method name, e.g. `http-method="f
 Actions matched by a wildcard or regex pattern keep the restriction declared on the pattern.
 
 The restriction is enforced by the `httpMethod` interceptor, which is part of `basicStack`, `defaultStack`,
-`paramsPrepareParamsStack` and the stacks built on them. If an action declares `http-method` but its interceptors do
-not include `httpMethod`, a warning is logged at startup and the restriction is not enforced.
+`paramsPrepareParamsStack` and the stacks built on them, as well as the [REST Plugin](../plugins/rest)'s
+`restDefaultStack` and the [Bean Validation Plugin](../plugins/bean-validation)'s `beanValidationDefaultStack`.
+If an action declares `http-method` but its interceptors do not include `httpMethod`, a warning is logged at startup
+and the restriction is not enforced.
 
 The same interceptor enforces the `@AllowedHttpMethod`, `@HttpGet`, `@HttpPost`, `@HttpPut`, `@HttpDelete` and
 `@HttpGetOrPost` annotations on the action class or method. When both the attribute and an annotation apply,
 the request method must be allowed by both.
+
+Annotations are resolved as follows:
+
+- A method-level annotation applies to the action method the request invokes, including the implicit `execute()`
+  when the mapping names no method.
+- An annotation on the invoked method itself takes precedence. Otherwise the interceptor looks for the same method
+  declared on a superclass or on an implemented interface, including interfaces those extend, and uses the first
+  annotated declaration it finds. Only public instance methods count, so a private, static or package-private
+  method of the same name on a parent class carries no restriction.
+- Class-level annotations are consulted only when no method-level annotation applies. They are looked up on the
+  action class, its superclasses and their interfaces in the same way.
+
+The interceptor compares the HTTP method of the request as the container reports it. The `_method` parameter the
+REST plugin uses to route a POST form to `update` or `destroy` does not change it, see
+[HTTP method restrictions in restDefaultStack](../plugins/rest#http-method-restrictions-in-restdefaultstack).
 
 ### Rejected requests
 
