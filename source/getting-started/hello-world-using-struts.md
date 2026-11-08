@@ -171,6 +171,7 @@ with the `name="index"`. Your complete `struts.xml` should look like:
         "https://struts.apache.org/dtds/struts-6.0.dtd">
 <struts>
     <constant name="struts.devMode" value="true" />
+    <constant name="struts.allowlist.classes" value="org.apache.struts.helloworld.model.MessageStore" />
 
     <package name="basicstruts2" extends="struts-default">
         <action name="index">
