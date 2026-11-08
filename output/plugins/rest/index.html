@@ -179,6 +179,7 @@
       <li><a href="#settings" id="markdown-toc-settings">Settings</a></li>
       <li><a href="#request-body-size-limit" id="markdown-toc-request-body-size-limit">Request body size limit</a></li>
       <li><a href="#resource-isolation-in-restdefaultstack" id="markdown-toc-resource-isolation-in-restdefaultstack">Resource isolation in restDefaultStack</a></li>
+      <li><a href="#http-method-restrictions-in-restdefaultstack" id="markdown-toc-http-method-restrictions-in-restdefaultstack">HTTP method restrictions in restDefaultStack</a></li>
     </ul>
   </li>
   <li><a href="#resources" id="markdown-toc-resources">Resources</a></li>
@@ -258,7 +259,9 @@ to truncate the identifier from the url and store it as a parameter.</li>
   <li><code class="language-plaintext highlighter-rouge">DELETE: /movies/Thrillers</code>  =&gt; method=<strong>destroy</strong>, id=<strong>Thrillers</strong></li>
 </ul>
 
-<p>To simulate the HTTP methods PUT and DELETE, since they aren’t supported by HTML, the HTTP parameter <code class="language-plaintext highlighter-rouge">_method</code> will be used.</p>
+<p>To simulate the HTTP methods PUT and DELETE, since they aren’t supported by HTML, the HTTP parameter <code class="language-plaintext highlighter-rouge">_method</code> will be used.
+It changes only which method the mapper selects; the request is still a POST for the <code class="language-plaintext highlighter-rouge">httpMethod</code> interceptor, see
+<a href="#http-method-restrictions-in-restdefaultstack">HTTP method restrictions in restDefaultStack</a>.</p>
 
 <p>Or, expressed as a table:</p>
 
@@ -659,6 +662,37 @@ check for the stack serving it:</p>
 </code></pre></div></div>
 
 <p>Requests sent by non-browser clients carry no <code class="language-plaintext highlighter-rouge">Sec-Fetch-Site</code> header and are not affected.</p>
+
+<h3 id="http-method-restrictions-in-restdefaultstack">HTTP method restrictions in restDefaultStack</h3>
+
+<p>Since Struts 7.5.0 <code class="language-plaintext highlighter-rouge">restDefaultStack</code> contains the <code class="language-plaintext highlighter-rouge">httpMethod</code> interceptor, placed after <code class="language-plaintext highlighter-rouge">servletConfig</code> as in core’s
+<code class="language-plaintext highlighter-rouge">defaultStack</code> (<a href="https://issues.apache.org/jira/browse/WW-5844">WW-5844</a>). The <code class="language-plaintext highlighter-rouge">http-method</code> attribute and the
+<code class="language-plaintext highlighter-rouge">@AllowedHttpMethod</code>, <code class="language-plaintext highlighter-rouge">@HttpGet</code>, <code class="language-plaintext highlighter-rouge">@HttpPost</code>, <code class="language-plaintext highlighter-rouge">@HttpPut</code>, <code class="language-plaintext highlighter-rouge">@HttpDelete</code> and <code class="language-plaintext highlighter-rouge">@HttpGetOrPost</code> annotations are enforced
+for every package extending <code class="language-plaintext highlighter-rouge">rest-default</code>, see <a href="/core-developers/action-configuration#http-methods">HTTP Methods</a>.</p>
+
+<p class="alert alert-warning">The interceptor checks the HTTP method of the request itself, not the <code class="language-plaintext highlighter-rouge">_method</code> parameter. A POST form carrying
+<code class="language-plaintext highlighter-rouge">_method=put</code> or <code class="language-plaintext highlighter-rouge">_method=delete</code> is routed to <code class="language-plaintext highlighter-rouge">update</code> or <code class="language-plaintext highlighter-rouge">destroy</code>, but the request stays a POST, so those methods
+must allow POST. <code class="language-plaintext highlighter-rouge">@HttpPut</code> and <code class="language-plaintext highlighter-rouge">@HttpDelete</code> alone accept only real PUT and DELETE requests, as sent by <code class="language-plaintext highlighter-rouge">fetch()</code>/XHR
+or non-browser clients; combine them with <code class="language-plaintext highlighter-rouge">@HttpPost</code> when the same method also serves HTML forms:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrdersController</span> <span class="kd">implements</span> <span class="nc">ModelDriven</span><span class="o">&lt;</span><span class="nc">Order</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@HttpPost</span>
+    <span class="nd">@HttpPut</span>
+    <span class="kd">public</span> <span class="nc">HttpHeaders</span> <span class="nf">update</span><span class="o">()</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+
+    <span class="nd">@HttpPost</span>
+    <span class="nd">@HttpDelete</span>
+    <span class="kd">public</span> <span class="nc">HttpHeaders</span> <span class="nf">destroy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>An XML <code class="language-plaintext highlighter-rouge">http-method</code> restriction on such an action must likewise include <code class="language-plaintext highlighter-rouge">post</code>. A request whose method is not
+allowed receives <code class="language-plaintext highlighter-rouge">405 Method Not Allowed</code> with an <code class="language-plaintext highlighter-rouge">Allow</code> header, or the <code class="language-plaintext highlighter-rouge">bad-request</code> result when one is mapped.</p>
 
 <h2 id="resources">Resources</h2>
 
