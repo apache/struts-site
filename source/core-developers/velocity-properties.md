@@ -17,4 +17,4 @@ If a `velocity.properties` is provided on the classpath (e.g., `/WEB-INF/classes
 velocimacro.library = action-default.vm, tigris-macros.vm, myapp.vm
 ```
 
-> See [struts-default.vm](struts-default-vm) and the [Velocity](velocity) documentation for more information.
+> See [struts-default.vm](struts-default-vm) and the [Velocity](../plugins/velocity/) documentation for more information.

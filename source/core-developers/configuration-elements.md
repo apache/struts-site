@@ -40,4 +40,4 @@ including packages, namespaces, includes, actions, results, interceptors, and ex
 
 ## Error Handling
 
-- [Exception Configuration](exceptio-configuration)
+- [Exception Configuration](exception-configuration)

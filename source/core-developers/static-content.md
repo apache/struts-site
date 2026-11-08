@@ -15,7 +15,7 @@ parent:
 Struts can serve a static content like CSS and JavaScript files using a predefined path. By default, these resources
 are served using `/static` path defined using a constant `struts.ui.staticContentPath` - see below for more details.
 
-Please remember to include this path in your filter mapping if you use a custom mapping, see [web.xml](web-xml.md) example config. 
+Please remember to include this path in your filter mapping if you use a custom mapping, see [web.xml](web-xml) example config. 
 
 ## Disabling static content
 

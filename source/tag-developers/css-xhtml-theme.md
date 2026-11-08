@@ -10,7 +10,7 @@ parent:
 
 The _css_xhtml theme_ provides all the basics that the [simple theme](simple-theme) provides and adds several features.
 
-- Standard two-column CSS-based layout, using `<div>` for the HTML [Struts Tags](struts-tags) ([form](form-tag.htmk), 
+- Standard two-column CSS-based layout, using `<div>` for the HTML [Struts Tags](struts-tags) ([form](form-tag), 
   [textfield](textfield-tag), [select](select-tag), etc)
 - Labels for each of the HTML [Struts Tags](struts-tags), placed according to the CSS stylesheet
 - [Validation](../core-developers/validation) and error reporting
