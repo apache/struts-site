@@ -304,9 +304,15 @@ The rest of this phase is paperwork:
 - Send a `[TEST]` mail to `dev@struts.apache.org` and `user@struts.apache.org` announcing that the
   build is available, and give people time to test the actual bits.
 
+The test period is the release manager's call. A week is the recommended length: it gives users
+time to run the staged bits against their own applications and report problems while they can
+still be fixed with a re-cut rather than a follow-up release. A shorter period is a legitimate
+choice when circumstances call for it, not a violation.
+
 ## Phase 4 — Vote
 
-Post a release/quality vote to the dev list and only the dev list.
+Open the vote once the test period is over. Post a release/quality vote to the dev list and only
+the dev list.
 
 ```
 To: dev@struts.apache.org
