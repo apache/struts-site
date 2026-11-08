@@ -82,6 +82,8 @@ The following URL's will invoke its methods:
 - `DELETE: /movies/Thrillers`  => method=**destroy**, id=**Thrillers**
 
 To simulate the HTTP methods PUT and DELETE, since they aren't supported by HTML, the HTTP parameter `_method` will be used.
+It changes only which method the mapper selects; the request is still a POST for the `httpMethod` interceptor, see
+[HTTP method restrictions in restDefaultStack](#http-method-restrictions-in-restdefaultstack).
 
 Or, expressed as a table:
 
@@ -393,6 +395,39 @@ check for the stack serving it:
 ```
 
 Requests sent by non-browser clients carry no `Sec-Fetch-Site` header and are not affected.
+
+### HTTP method restrictions in restDefaultStack
+
+Since Struts 7.5.0 `restDefaultStack` contains the `httpMethod` interceptor, placed after `servletConfig` as in core's
+`defaultStack` ([WW-5844](https://issues.apache.org/jira/browse/WW-5844)). The `http-method` attribute and the
+`@AllowedHttpMethod`, `@HttpGet`, `@HttpPost`, `@HttpPut`, `@HttpDelete` and `@HttpGetOrPost` annotations are enforced
+for every package extending `rest-default`, see [HTTP Methods](/core-developers/action-configuration#http-methods).
+
+The interceptor checks the HTTP method of the request itself, not the `_method` parameter. A POST form carrying
+`_method=put` or `_method=delete` is routed to `update` or `destroy`, but the request stays a POST, so those methods
+must allow POST. `@HttpPut` and `@HttpDelete` alone accept only real PUT and DELETE requests, as sent by `fetch()`/XHR
+or non-browser clients; combine them with `@HttpPost` when the same method also serves HTML forms:
+{:.alert .alert-warning}
+
+```java
+public class OrdersController implements ModelDriven<Order> {
+
+    @HttpPost
+    @HttpPut
+    public HttpHeaders update() {
+        ...
+    }
+
+    @HttpPost
+    @HttpDelete
+    public HttpHeaders destroy() {
+        ...
+    }
+}
+```
+
+An XML `http-method` restriction on such an action must likewise include `post`. A request whose method is not
+allowed receives `405 Method Not Allowed` with an `Allow` header, or the `bad-request` result when one is mapped.
 
 ## Resources
 

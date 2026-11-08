@@ -69,6 +69,11 @@ returns the result code `403`, which needs a matching (global) result to render 
 `fetchMetadata.disabled` to `true` on the stack for actions that must accept such requests.
 {:.alert .alert-warning}
 
+Since Struts 7.5.0 `beanValidationDefaultStack` also contains the `httpMethod` interceptor, placed after
+`servletConfig` as in core's `defaultStack` ([WW-5844](https://issues.apache.org/jira/browse/WW-5844)). The
+`http-method` attribute and the `@HttpGet`, `@HttpPost` and related annotations are enforced for every package
+extending `struts-bean-validation`, see [HTTP Methods](/core-developers/action-configuration#http-methods).
+
 Here is another example that shows how you can combine bean-validation with other plugins by configuring your own
 Interceptor-Stack (note: this is just a very short example. In a real app you should take more care about your stack).
 You can combine bean validation with classic struts validation (or disable either) by putting the according interceptors
