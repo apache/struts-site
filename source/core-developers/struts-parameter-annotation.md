@@ -153,7 +153,10 @@ made in this order:
 3. neither declares it — bound, to keep models that resolve properties through a
    custom OGNL accessor (a `Map`-backed model, for instance) working. This says
    nothing about the action: it only means introspection found no member of that
-   name on either object.
+   name on either object. Since Struts 7.5.0, if another object further down the
+   value stack would take the parameter — for example the previous action left
+   there by a `chain` result — that object is held to the `@StrutsParameter`
+   requirement instead.
 
 Because the model is checked first, a model property that shadows an action
 property of the same name binds without an annotation, matching how OGNL resolves
