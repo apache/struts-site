@@ -59,3 +59,13 @@ or
 <s:fielderror fieldName="field1" />
 <s:fielderror fieldName="field1" />
 ```
+
+**Example 3**: display field errors whose names match a regular expression (since Struts 7.5.0)
+
+```jsp
+<s:fielderror fieldName="users\[0\]\..*" regex="true" />
+```
+
+With `regex="true"` the `fieldName` attribute and nested `s:param` values are regular expressions matched against
+the whole field error name, here every error of the first row of an iterated `users` list. Each field error is
+rendered once, even when several patterns match it.
