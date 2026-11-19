@@ -33,7 +33,7 @@ so the starter needs no version of its own:
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-bom</artifactId>
-            <version>{{ site.current_version }}</version>
+            <version>7.5.0</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
