@@ -418,6 +418,65 @@ Packages extending this one inherit the mapping, and an action can override it w
 The result name can be changed with the interceptor's `badRequestResultName` parameter, or per action by implementing
 `HttpMethodAware#getBadRequestResultName()`.
 
+## Action Extensions
+
+> Since Struts 7.5.0
+
+By default every action answers on every extension listed in the global `struts.action.extension` constant
+(`action,,` unless changed). A package or an action can declare its own list with the `extension` attribute,
+so that e.g. one action is served at `.html` and another one without an extension.
+
+```xml
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 7.5//EN"
+    "https://struts.apache.org/dtds/struts-7.5.dtd">
+<struts>
+  <package name="pages" namespace="/pages" extends="struts-default" extension="html">
+    <action name="about" class="org.example.AboutAction">
+      <result>/about.jsp</result>
+    </action>
+
+    <action name="search" class="org.example.SearchAction" extension="html,">
+      <result>/search.jsp</result>
+    </action>
+  </package>
+</struts>
+```
+
+The value has the same format as `struts.action.extension`: a comma-separated list where the first entry is the
+default and an empty entry (`extension=""`, or a trailing comma as in `html,`) means "no extension". Above,
+`/pages/about.html` reaches `about`, while `search` answers on both `/pages/search.html` and `/pages/search`.
+An entry must not start with `.` or contain `/` or whitespace, otherwise configuration loading fails.
+
+The effective list of an action is resolved in this order: the action's own attribute, its package, the package's
+parents, and finally the global `struts.action.extension`. An application that declares no `extension` attribute
+behaves exactly as before. An action without a declaration answers only on the global extensions, never on one that
+some other package declares; a URL with such an extension that maps to no declaring action, e.g. a static
+`/index.html`, is still passed to the container.
+
+The declared list also drives URLs the framework generates: `<s:url>`, `<s:a>`, `<s:form>`, the `redirectAction`
+and `postback` results use the current request's extension when the target action allows it, and the first entry
+of the target's list otherwise.
+
+The restriction is enforced by the `actionExtension` interceptor, placed right after `httpMethod` in `basicStack`,
+`defaultStack`, `paramsPrepareParamsStack` and the stacks built on them. It checks only the action the request URL
+mapped to; actions reached through a `chain` result or `<s:action>` are not checked. If an action declares
+`extension` but its interceptors do not include `actionExtension`, a warning is logged at startup and the
+restriction is not enforced.
+
+The attribute is applied by the `DefaultActionMapper` and its subclasses. Other mappers, such as the
+[REST Plugin](../plugins/rest)'s `RestActionMapper`, ignore it, and a warning is logged at startup when actions
+declare it.
+
+This is URL canonicalisation, not access control. Do not rely on it to hide an action.
+{:.alert .alert-info}
+
+### Rejected extensions
+
+When the request's extension is not in the action's list, the interceptor returns the `bad-extension` result if it
+can be resolved, in the same way as `bad-request` [above](#rejected-requests). Otherwise, it responds with
+`404 Not Found`. The result name can be changed with the interceptor's `badExtensionResultName` parameter.
+
 ## ActionSupport Default
 
 If the class attribute in an action mapping is left blank, the `com.opensymphony.xwork2.ActionSupport` class is used 
