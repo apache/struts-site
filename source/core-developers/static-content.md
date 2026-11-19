@@ -29,6 +29,13 @@ CSS & JavaScript files on your own, which can be a good thing when you want to u
 > If you disable this feature, but you use the `xhtml`, or `css_xhtml` theme, make sure the JavasScript and CSS files
 > shipped inside the core jar are extracted to your web application directory or served in some other way.
 
+Since Struts 7.5.0 the `combobox`, `optiontransferselect`, `inputtransferselect` and `updownselect` tags render no
+inline event handlers or per-tag scripts, so they work under a Content Security Policy without `'unsafe-inline'`.
+Their markup now depends on the matching static scripts: `combobox.js` (new in 7.5.0), `optiontransferselect.js`
+and `inputtransferselect.js`. If you serve your own copies of the static files, update them together with
+the upgrade, and make `combobox.js` available as well.
+{:.alert .alert-warning}
+
 ## Custom Static Content Loaders
 
 Static content is served by an implementation of `org.apache.struts2.dispatcher.StaticContentLoader`. To write your own
