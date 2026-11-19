@@ -15,6 +15,7 @@ and [results](result-configuration). Each may be configured via XML or annotatio
 - [Dependency Injection](dependency-injection)
 - [Debugging](debugging)
 - [Development Mode](development-mode)
+- [Struts Boot](struts-boot) - experimental, run an application from `main()` on an embedded Tomcat
 
 ## Configuration
 
