@@ -420,6 +420,12 @@ There are 4 options that can be used to configure excluded packages and classes:
 
 The defaults are defined [here](https://github.com/apache/struts/blob/main/core/src/main/resources/struts-excluded-classes.xml).
 
+Since Struts 7.5.0 and 6.13.0 the default excluded packages also include `java.beans`, `java.lang.reflect` and
+`java.lang.invoke`, in both the regular and the `devMode` lists. An application that needs a class from one of these
+packages in an expression can re-allow that class with `struts.excludedPackageExemptClasses`
+(`struts.devMode.excludedPackageExemptClasses` in `devMode`).
+{:.alert .alert-warning}
+
 Any expression or target which does not pass this criteria will be blocked, and you will see a warning in the logs:
 
 ```
