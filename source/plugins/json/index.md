@@ -425,6 +425,11 @@ made with the parameter "callback"="exec":
 
 And that the serialized JSON is `{name: 'El Zorro'}`. Then the output will be: `exec({name: 'El Zorro'})`. 
 
+Since Struts 7.5.0 the callback name must be a JavaScript identifier, optionally a dotted path such as
+`app.handlers.exec`, of at most 128 characters. Any other value is not used: the response is the plain JSON without
+a wrapper, and a warning is logged.
+{:.alert .alert-info}
+
 ### Content Type
 
 Content type will be set to `application/json-rpc` by default if SMD is being used, or `application/json` otherwise. 
