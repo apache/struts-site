@@ -186,6 +186,12 @@ CSS &amp; JavaScript files on your own, which can be a good thing when you want 
 shipped inside the core jar are extracted to your web application directory or served in some other way.</p>
 </blockquote>
 
+<p class="alert alert-warning">Since Struts 7.5.0 the <code class="language-plaintext highlighter-rouge">combobox</code>, <code class="language-plaintext highlighter-rouge">optiontransferselect</code>, <code class="language-plaintext highlighter-rouge">inputtransferselect</code> and <code class="language-plaintext highlighter-rouge">updownselect</code> tags render no
+inline event handlers or per-tag scripts, so they work under a Content Security Policy without <code class="language-plaintext highlighter-rouge">'unsafe-inline'</code>.
+Their markup now depends on the matching static scripts: <code class="language-plaintext highlighter-rouge">combobox.js</code> (new in 7.5.0), <code class="language-plaintext highlighter-rouge">optiontransferselect.js</code>
+and <code class="language-plaintext highlighter-rouge">inputtransferselect.js</code>. If you serve your own copies of the static files, update them together with
+the upgrade, and make <code class="language-plaintext highlighter-rouge">combobox.js</code> available as well.</p>
+
 <h2 id="custom-static-content-loaders">Custom Static Content Loaders</h2>
 
 <p>Static content is served by an implementation of <code class="language-plaintext highlighter-rouge">org.apache.struts2.dispatcher.StaticContentLoader</code>. To write your own

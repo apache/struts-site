@@ -318,7 +318,10 @@ made in this order:</p>
   <li>neither declares it — bound, to keep models that resolve properties through a
 custom OGNL accessor (a <code class="language-plaintext highlighter-rouge">Map</code>-backed model, for instance) working. This says
 nothing about the action: it only means introspection found no member of that
-name on either object.</li>
+name on either object. Since Struts 7.5.0, if another object further down the
+value stack would take the parameter — for example the previous action left
+there by a <code class="language-plaintext highlighter-rouge">chain</code> result — that object is held to the <code class="language-plaintext highlighter-rouge">@StrutsParameter</code>
+requirement instead.</li>
 </ol>
 
 <p>Because the model is checked first, a model property that shadows an action

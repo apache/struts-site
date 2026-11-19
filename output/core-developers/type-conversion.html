@@ -210,6 +210,13 @@ error reporting is used to indicate a problem occurred while processing the type
   <li>BigDecimal and BigInteger</li>
 </ul>
 
+<p>Since Struts 7.5.0 surrounding whitespace is trimmed before a value is converted to a non-String type, so <code class="language-plaintext highlighter-rouge">" 42 "</code>
+binds to an <code class="language-plaintext highlighter-rouge">Integer</code> and <code class="language-plaintext highlighter-rouge">" ACTIVE "</code> to an enum constant. <code class="language-plaintext highlighter-rouge">String</code> and <code class="language-plaintext highlighter-rouge">Object</code> targets, and converters you register
+for a type, still receive the raw value. Arrays and collections are trimmed per element.</p>
+
+<p>Since Struts 7.5.0 a numeric string longer than 1000 characters is rejected when converted to a boxed number type,
+<code class="language-plaintext highlighter-rouge">BigInteger</code> or <code class="language-plaintext highlighter-rouge">BigDecimal</code>, and reported as the usual conversion error for the field.</p>
+
 <h3 id="dates">Dates</h3>
 
 <p>A request value is converted to a date or time property by trying a list of formats in order and using the first one

@@ -599,6 +599,11 @@ package name patterns. An exact exemption must exist for each exclusion match (t
 
 <p>The defaults are defined <a href="https://github.com/apache/struts/blob/main/core/src/main/resources/struts-excluded-classes.xml">here</a>.</p>
 
+<p class="alert alert-warning">Since Struts 7.5.0 and 6.13.0 the default excluded packages also include <code class="language-plaintext highlighter-rouge">java.beans</code>, <code class="language-plaintext highlighter-rouge">java.lang.reflect</code> and
+<code class="language-plaintext highlighter-rouge">java.lang.invoke</code>, in both the regular and the <code class="language-plaintext highlighter-rouge">devMode</code> lists. An application that needs a class from one of these
+packages in an expression can re-allow that class with <code class="language-plaintext highlighter-rouge">struts.excludedPackageExemptClasses</code>
+(<code class="language-plaintext highlighter-rouge">struts.devMode.excludedPackageExemptClasses</code> in <code class="language-plaintext highlighter-rouge">devMode</code>).</p>
+
 <p>Any expression or target which does not pass this criteria will be blocked, and you will see a warning in the logs:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[WARNING] Target class [class example.MyBean] or declaring class of member type [public example.MyBean()] are excluded!

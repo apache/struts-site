@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="Date-Revision-yyyymmdd" content="20140918"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Struts Boot</title>
+
+  <link href="/css/source-sans-pro.css" rel="stylesheet" type="text/css">
+  <link href="/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/css/syntax.css" rel="stylesheet">
+
+  <script src="/js/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/community.js"></script>
+
+  <!-- Matomo -->
+  <script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    /* We explicitly disable cookie tracking to avoid privacy issues */
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//analytics.apache.org/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '41']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+<body>
+
+<a href="https://github.com/apache/struts" class="github-ribbon">
+  <img decoding="async" loading="lazy" style="position: absolute; right: 0; border: 0;" width="149" height="149" src="/img/forkme_right_red_aa0000.webp?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1">
+</a>
+
+<header>
+  <nav>
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#struts-menu" class="navbar-toggle">
+            Menu
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/index.html" class="navbar-brand logo"><img src="/img/struts-logo.svg"></a>
+        </div>
+        <div id="struts-menu" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Home<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/index.html">Welcome</a></li>
+                <li><a href="/download.cgi">Download</a></li>
+                <li><a href="/releases.html">Releases</a></li>
+                <li><a href="/announce-2026.html">Announcements</a></li>
+                <li><a href="http://www.apache.org/licenses/">License</a></li>
+                <li><a href="https://www.apache.org/foundation/thanks.html">Thanks!</a></li>
+                <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+                <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Support<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/mail.html">User Mailing List</a></li>
+                <li><a href="https://issues.apache.org/jira/browse/WW">Issue Tracker</a></li>
+                <li><a href="/security.html">Reporting Security Issues</a></li>
+                <li><a href="/commercial-support.html">Commercial Support</a></li>
+                <li><a href="/eol-versions.html">End-of-Life Versions</a></li>
+                <li class="divider"></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Migration+Guide">Version Notes</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins">Security Bulletins</a></li>
+                <li><a href="/idea-plugin">IntelliJ IDEA plugin</a></li>
+                <li class="divider"></li>
+                <li><a href="/maven/project-info.html">Maven Project Info</a></li>
+                <li><a href="/maven/struts2-core/dependencies.html">Struts Core Dependencies</a></li>
+                <li><a href="/maven/struts2-plugins/modules.html">Plugin Dependencies</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Documentation<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/birdseye.html">Birds Eye</a></li>
+                <li><a href="/primer.html">Key Technologies</a></li>
+                <li><a href="/kickstart.html">Kickstart FAQ</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/Home">Wiki</a></li>
+                <li class="divider"></li>
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/security/">Security Guide</a></li>
+                <li><a href="/core-developers/">Core Developers Guide</a></li>
+                <li><a href="/tag-developers/">Tag Developers Guide</a></li>
+                <li><a href="/maven-archetypes/">Maven Archetypes</a></li>
+                <li><a href="/plugins/">Plugins</a></li>
+                <li><a href="/maven/struts2-core/apidocs/index.html">Struts Core API</a></li>
+                <li><a href="/tag-developers/tag-reference.html">Tag reference</a></li>
+                <li><a href="https://cwiki.apache.org/confluence/display/WW/FAQs">FAQs</a></li>
+                <li><a href="http://cwiki.apache.org/S2PLUGINS/home.html">Plugin registry</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                Contributing<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/youatstruts.html">You at Struts</a></li>
+                <li><a href="/helping.html">How to Help FAQ</a></li>
+                <li><a href="/dev-mail.html">Development Lists</a></li>
+                <li class="divider"></li>
+                <li><a href="/submitting-patches.html">Submitting patches</a></li>
+                <li><a href="/builds.html">Source Code and Builds</a></li>
+                <li><a href="/coding-standards.html">Coding standards</a></li>
+                <li><a href="/contributors/">Contributors Guide</a></li>
+                <li class="divider"></li>
+                <li><a href="/release-guidelines.html">Release Guidelines</a></li>
+                <li><a href="/bylaws.html">PMC Charter</a></li>
+                <li><a href="/volunteers.html">Volunteers</a></li>
+                <li><a href="https://gitbox.apache.org/repos/asf?p=struts.git">Source Repository</a></li>
+                <li><a href="/updating-website.html">Updating the website</a></li>
+              </ul>
+            </li>
+            <li class="apache"><a href="http://www.apache.org/"><img src="/img/apache.png"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<article class="container">
+  <section class="col-md-12">
+    <a class="edit-on-gh" href="https://github.com/apache/struts-site/edit/main/source/core-developers/struts-boot.md" title="Edit this page on GitHub">Edit on GitHub</a>
+    
+    <a href="index.html" title="back to Core Developers Guide"><< back to Core Developers Guide</a>
+    
+    <h1 class="no_toc" id="struts-boot">Struts Boot</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#getting-started" id="markdown-toc-getting-started">Getting started</a>    <ul>
+      <li><a href="#dependency" id="markdown-toc-dependency">Dependency</a></li>
+      <li><a href="#application" id="markdown-toc-application">Application</a></li>
+    </ul>
+  </li>
+  <li><a href="#registering-actions" id="markdown-toc-registering-actions">Registering actions</a></li>
+  <li><a href="#settings" id="markdown-toc-settings">Settings</a></li>
+  <li><a href="#defaults" id="markdown-toc-defaults">Defaults</a></li>
+  <li><a href="#starting-from-tests" id="markdown-toc-starting-from-tests">Starting from tests</a></li>
+  <li><a href="#packaging" id="markdown-toc-packaging">Packaging</a></li>
+  <li><a href="#logging" id="markdown-toc-logging">Logging</a></li>
+</ul>
+
+<blockquote>
+  <p>Since Struts 7.5.0</p>
+</blockquote>
+
+<p class="alert alert-warning">Struts Boot is experimental: its API and defaults may change between minor releases.</p>
+
+<p>Struts Boot runs a Struts application from a <code class="language-plaintext highlighter-rouge">main()</code> method on an embedded Tomcat. Actions are registered in Java,
+so the application needs no <code class="language-plaintext highlighter-rouge">web.xml</code> and no <code class="language-plaintext highlighter-rouge">struts.xml</code>, and it can be packaged as a runnable jar.</p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<h3 id="dependency">Dependency</h3>
+
+<p>Add the starter at the same version as the rest of Struts. Importing the <code class="language-plaintext highlighter-rouge">struts2-bom</code> keeps the versions aligned,
+so the starter needs no version of its own:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependencyManagement&gt;</span>
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>struts2-bom<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>7.4.0<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/dependencyManagement&gt;</span>
+
+<span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.apache.struts<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>struts2-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+</code></pre></div></div>
+
+<p>The starter brings <code class="language-plaintext highlighter-rouge">struts2-core</code> and the embedded Tomcat.</p>
+
+<h3 id="application">Application</h3>
+
+<p>Implement <code class="language-plaintext highlighter-rouge">StrutsBootApplication</code>, register the actions and start it from <code class="language-plaintext highlighter-rouge">main()</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloApp</span> <span class="kd">implements</span> <span class="nc">StrutsBootApplication</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">StrutsBoot</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">HelloApp</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actions</span><span class="o">(</span><span class="nc">ActionRegistry</span> <span class="n">actions</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">actions</span><span class="o">.</span><span class="na">action</span><span class="o">(</span><span class="s">"hello"</span><span class="o">,</span> <span class="nc">HelloAction</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">success</span><span class="o">(</span><span class="s">"hello.ftl"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The action is an ordinary Struts action:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloAction</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"success"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"Hello from Struts Boot"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>and the view is a FreeMarker template at <code class="language-plaintext highlighter-rouge">src/main/resources/templates/hello.ftl</code>:</p>
+
+<div class="language-ftl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;</span><span class="no">h1</span><span class="err">&gt;&lt;@</span><span class="no">s</span><span class="na">.property</span><span class="w"> </span>value="message"/&gt;&lt;/h1&gt;<span class="w">
+</span></code></pre></div></div>
+
+<p>Run <code class="language-plaintext highlighter-rouge">main()</code> and open <code class="language-plaintext highlighter-rouge">http://localhost:8080/hello.action</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">StrutsBootApplication</code> class needs a public no-argument constructor. <code class="language-plaintext highlighter-rouge">StrutsBoot.run()</code> blocks until the
+server stops.</p>
+
+<p>A complete example, <code class="language-plaintext highlighter-rouge">apps/boot-hello</code>, is in the <a href="https://github.com/apache/struts/tree/main/apps/boot-hello">Struts source tree</a>.
+It is not deployed to Maven repositories.</p>
+
+<h2 id="registering-actions">Registering actions</h2>
+
+<p><code class="language-plaintext highlighter-rouge">ActionRegistry#action(name, class)</code> registers an action in the root namespace, and <code class="language-plaintext highlighter-rouge">namespace(path, body)</code> groups
+actions under a namespace. Each call returns a definition that is configured fluently:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">actions</span><span class="o">(</span><span class="nc">ActionRegistry</span> <span class="n">actions</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">actions</span><span class="o">.</span><span class="na">action</span><span class="o">(</span><span class="s">"index"</span><span class="o">,</span> <span class="nc">IndexAction</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">success</span><span class="o">(</span><span class="s">"index.ftl"</span><span class="o">);</span>
+
+    <span class="n">actions</span><span class="o">.</span><span class="na">namespace</span><span class="o">(</span><span class="s">"/orders"</span><span class="o">,</span> <span class="n">orders</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="n">orders</span><span class="o">.</span><span class="na">action</span><span class="o">(</span><span class="s">"list"</span><span class="o">,</span> <span class="nc">OrderListAction</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">httpMethods</span><span class="o">(</span><span class="nc">HttpMethods</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">success</span><span class="o">(</span><span class="s">"orders/list.ftl"</span><span class="o">);</span>
+
+        <span class="n">orders</span><span class="o">.</span><span class="na">action</span><span class="o">(</span><span class="s">"save"</span><span class="o">,</span> <span class="nc">OrderSaveAction</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"save"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">httpMethods</span><span class="o">(</span><span class="nc">HttpMethods</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">result</span><span class="o">(</span><span class="s">"input"</span><span class="o">,</span> <span class="s">"orders/edit.ftl"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">redirectAction</span><span class="o">(</span><span class="s">"success"</span><span class="o">,</span> <span class="s">"list"</span><span class="o">);</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">method(name)</code></td>
+      <td>Action method to invoke, <code class="language-plaintext highlighter-rouge">execute</code> by default.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">success(template)</code></td>
+      <td>Shortcut for <code class="language-plaintext highlighter-rouge">result("success", template)</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">result(name, template)</code></td>
+      <td>Renders a FreeMarker template. The path must end with <code class="language-plaintext highlighter-rouge">.ftl</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">redirectAction(resultName, action)</code></td>
+      <td>Redirects to another action, like the <a href="redirect-action-result">Redirect Action Result</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">httpMethods(methods...)</code></td>
+      <td>Restricts the HTTP methods, like the <a href="action-configuration#http-methods"><code class="language-plaintext highlighter-rouge">http-method</code> attribute</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">interceptors(stack)</code></td>
+      <td>Interceptor stack for this action. Also available on a namespace, for all its actions.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The registry’s packages extend <code class="language-plaintext highlighter-rouge">struts-default</code>, so actions use the <code class="language-plaintext highlighter-rouge">defaultStack</code> unless <code class="language-plaintext highlighter-rouge">interceptors(...)</code> names
+another stack. All the usual framework rules apply, including <a href="struts-parameter-annotation"><code class="language-plaintext highlighter-rouge">@StrutsParameter</code></a> on
+the properties a request may set.</p>
+
+<p>A template path is resolved under <code class="language-plaintext highlighter-rouge">templates/</code> on the classpath, so <code class="language-plaintext highlighter-rouge">orders/list.ftl</code> is
+<code class="language-plaintext highlighter-rouge">src/main/resources/templates/orders/list.ftl</code>. Views are FreeMarker only.</p>
+
+<p>The registry is checked at startup, and the application fails to start when:</p>
+
+<ul>
+  <li>an action name is empty, contains <code class="language-plaintext highlighter-rouge">/</code>, or is registered twice in a namespace;</li>
+  <li>a template is missing from the classpath;</li>
+  <li>an action class is not public or has no public no-argument constructor;</li>
+  <li>an action is registered both in the registry and in a <code class="language-plaintext highlighter-rouge">struts.xml</code> package with the same namespace.</li>
+</ul>
+
+<h2 id="settings">Settings</h2>
+
+<p>Settings are read from <code class="language-plaintext highlighter-rouge">struts.properties</code> on the classpath. A <code class="language-plaintext highlighter-rouge">--key=value</code> program argument overrides the file.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Default</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.boot.port</code></td>
+      <td><code class="language-plaintext highlighter-rouge">8080</code></td>
+      <td>HTTP port; <code class="language-plaintext highlighter-rouge">0</code> picks a free port</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.boot.context-path</code></td>
+      <td><code class="language-plaintext highlighter-rouge">""</code></td>
+      <td>Context path the application is served at</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">struts.boot.address</code></td>
+      <td>all interfaces</td>
+      <td>Interface to listen on, e.g. <code class="language-plaintext highlighter-rouge">127.0.0.1</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -jar my-app.jar --struts.boot.port=9090 --struts.boot.address=127.0.0.1
+</code></pre></div></div>
+
+<p>Other Struts <a href="constant-configuration">constants</a> can be set in the same <code class="language-plaintext highlighter-rouge">struts.properties</code> file.</p>
+
+<h2 id="defaults">Defaults</h2>
+
+<ul>
+  <li>Tomcat listens on all interfaces, not only on localhost. Set <code class="language-plaintext highlighter-rouge">struts.boot.address</code> to restrict it.</li>
+  <li>Only a plain HTTP connector is opened. Terminate TLS in front of the application, and mark the session cookie
+<code class="language-plaintext highlighter-rouge">Secure</code> there.</li>
+  <li>Sessions are tracked by cookie only, never through a <code class="language-plaintext highlighter-rouge">;jsessionid=</code> URL parameter, and the session cookie carries
+<code class="language-plaintext highlighter-rouge">SameSite=Lax</code>.</li>
+  <li>Error pages show the status only, without stack traces or the Tomcat version.</li>
+  <li>Struts Boot does not turn on <code class="language-plaintext highlighter-rouge">struts.devMode</code>.</li>
+  <li>Each start uses a fresh temporary base directory that is deleted on shutdown.</li>
+</ul>
+
+<h2 id="starting-from-tests">Starting from tests</h2>
+
+<p><code class="language-plaintext highlighter-rouge">StrutsBoot.start()</code> starts the server without blocking and returns a <code class="language-plaintext highlighter-rouge">StrutsBootServer</code>, which is <code class="language-plaintext highlighter-rouge">AutoCloseable</code>.
+Combined with <code class="language-plaintext highlighter-rouge">--struts.boot.port=0</code> it fits integration tests:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="o">(</span><span class="nc">StrutsBootServer</span> <span class="n">server</span> <span class="o">=</span> <span class="nc">StrutsBoot</span><span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="nc">HelloApp</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">"--struts.boot.port=0"</span><span class="o">))</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="na">baseUrl</span><span class="o">()</span> <span class="o">+</span> <span class="s">"/hello.action"</span><span class="o">;</span>
+    <span class="c1">// send requests to url</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="packaging">Packaging</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">boot-hello</code> example builds a runnable jar with <code class="language-plaintext highlighter-rouge">maven-shade-plugin</code>. Every Struts plugin ships its own
+<code class="language-plaintext highlighter-rouge">META-INF/struts-plugin.xml</code>, and shading keeps only one file with that name, so with two or more plugins on the
+classpath all but one would be silently lost. If your application uses plugins, package it differently: a thin jar
+with its dependencies in a <code class="language-plaintext highlighter-rouge">lib/</code> directory (<code class="language-plaintext highlighter-rouge">maven-dependency-plugin</code> copies them, <code class="language-plaintext highlighter-rouge">maven-jar-plugin</code> writes the
+<code class="language-plaintext highlighter-rouge">Class-Path</code> manifest entry), or a distribution built with <code class="language-plaintext highlighter-rouge">maven-assembly-plugin</code>.</p>
+
+<h2 id="logging">Logging</h2>
+
+<p>Struts logs through the Log4j 2 API and the starter ships no logging backend, so warnings and errors from Struts are
+not printed until you add one, for example:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.logging.log4j<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>log4j-core<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<p>with a <code class="language-plaintext highlighter-rouge">log4j2.xml</code> on the classpath, or <code class="language-plaintext highlighter-rouge">log4j-slf4j2-impl</code> to route to an SLF4J backend.</p>
+
+  </section>
+</article>
+
+
+<footer class="container">
+  <div class="col-md-12">
+    Copyright &copy; 2000-2025 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
+    Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+    trademarks of The Apache Software Foundation. All Rights Reserved.
+  </div>
+  <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+</footer>
+
+<a href="https://twitter.com/x?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @x</a>
+<script async src="/js/twitter-widgets.js" charset="utf-8"></script>
+
+<div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "/js/facebook-all.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+</body>
+</html>
