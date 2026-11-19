@@ -168,6 +168,10 @@
       <li><a href="#rejected-requests" id="markdown-toc-rejected-requests">Rejected requests</a></li>
     </ul>
   </li>
+  <li><a href="#action-extensions" id="markdown-toc-action-extensions">Action Extensions</a>    <ul>
+      <li><a href="#rejected-extensions" id="markdown-toc-rejected-extensions">Rejected extensions</a></li>
+    </ul>
+  </li>
   <li><a href="#actionsupport-default" id="markdown-toc-actionsupport-default">ActionSupport Default</a></li>
   <li><a href="#post-back-default" id="markdown-toc-post-back-default">Post-Back Default</a></li>
   <li><a href="#action-default" id="markdown-toc-action-default">Action Default</a></li>
@@ -579,6 +583,65 @@ the <a href="httpheader-result">HttpHeader Result</a>:</p>
 <p>Packages extending this one inherit the mapping, and an action can override it with its own <code class="language-plaintext highlighter-rouge">bad-request</code> result.
 The result name can be changed with the interceptor’s <code class="language-plaintext highlighter-rouge">badRequestResultName</code> parameter, or per action by implementing
 <code class="language-plaintext highlighter-rouge">HttpMethodAware#getBadRequestResultName()</code>.</p>
+
+<h2 id="action-extensions">Action Extensions</h2>
+
+<blockquote>
+  <p>Since Struts 7.5.0</p>
+</blockquote>
+
+<p>By default every action answers on every extension listed in the global <code class="language-plaintext highlighter-rouge">struts.action.extension</code> constant
+(<code class="language-plaintext highlighter-rouge">action,,</code> unless changed). A package or an action can declare its own list with the <code class="language-plaintext highlighter-rouge">extension</code> attribute,
+so that e.g. one action is served at <code class="language-plaintext highlighter-rouge">.html</code> and another one without an extension.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 7.5//EN"
+    "https://struts.apache.org/dtds/struts-7.5.dtd"&gt;</span>
+<span class="nt">&lt;struts&gt;</span>
+  <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">"pages"</span> <span class="na">namespace=</span><span class="s">"/pages"</span> <span class="na">extends=</span><span class="s">"struts-default"</span> <span class="na">extension=</span><span class="s">"html"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"about"</span> <span class="na">class=</span><span class="s">"org.example.AboutAction"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;result&gt;</span>/about.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+
+    <span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"search"</span> <span class="na">class=</span><span class="s">"org.example.SearchAction"</span> <span class="na">extension=</span><span class="s">"html,"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;result&gt;</span>/search.jsp<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;/package&gt;</span>
+<span class="nt">&lt;/struts&gt;</span>
+</code></pre></div></div>
+
+<p>The value has the same format as <code class="language-plaintext highlighter-rouge">struts.action.extension</code>: a comma-separated list where the first entry is the
+default and an empty entry (<code class="language-plaintext highlighter-rouge">extension=""</code>, or a trailing comma as in <code class="language-plaintext highlighter-rouge">html,</code>) means “no extension”. Above,
+<code class="language-plaintext highlighter-rouge">/pages/about.html</code> reaches <code class="language-plaintext highlighter-rouge">about</code>, while <code class="language-plaintext highlighter-rouge">search</code> answers on both <code class="language-plaintext highlighter-rouge">/pages/search.html</code> and <code class="language-plaintext highlighter-rouge">/pages/search</code>.
+An entry must not start with <code class="language-plaintext highlighter-rouge">.</code> or contain <code class="language-plaintext highlighter-rouge">/</code> or whitespace, otherwise configuration loading fails.</p>
+
+<p>The effective list of an action is resolved in this order: the action’s own attribute, its package, the package’s
+parents, and finally the global <code class="language-plaintext highlighter-rouge">struts.action.extension</code>. An application that declares no <code class="language-plaintext highlighter-rouge">extension</code> attribute
+behaves exactly as before. An action without a declaration answers only on the global extensions, never on one that
+some other package declares; a URL with such an extension that maps to no declaring action, e.g. a static
+<code class="language-plaintext highlighter-rouge">/index.html</code>, is still passed to the container.</p>
+
+<p>The declared list also drives URLs the framework generates: <code class="language-plaintext highlighter-rouge">&lt;s:url&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;s:a&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;s:form&gt;</code>, the <code class="language-plaintext highlighter-rouge">redirectAction</code>
+and <code class="language-plaintext highlighter-rouge">postback</code> results use the current request’s extension when the target action allows it, and the first entry
+of the target’s list otherwise.</p>
+
+<p>The restriction is enforced by the <code class="language-plaintext highlighter-rouge">actionExtension</code> interceptor, placed right after <code class="language-plaintext highlighter-rouge">httpMethod</code> in <code class="language-plaintext highlighter-rouge">basicStack</code>,
+<code class="language-plaintext highlighter-rouge">defaultStack</code>, <code class="language-plaintext highlighter-rouge">paramsPrepareParamsStack</code> and the stacks built on them. It checks only the action the request URL
+mapped to; actions reached through a <code class="language-plaintext highlighter-rouge">chain</code> result or <code class="language-plaintext highlighter-rouge">&lt;s:action&gt;</code> are not checked. If an action declares
+<code class="language-plaintext highlighter-rouge">extension</code> but its interceptors do not include <code class="language-plaintext highlighter-rouge">actionExtension</code>, a warning is logged at startup and the
+restriction is not enforced.</p>
+
+<p>The attribute is applied by the <code class="language-plaintext highlighter-rouge">DefaultActionMapper</code> and its subclasses. Other mappers, such as the
+<a href="../plugins/rest">REST Plugin</a>’s <code class="language-plaintext highlighter-rouge">RestActionMapper</code>, ignore it, and a warning is logged at startup when actions
+declare it.</p>
+
+<p class="alert alert-info">This is URL canonicalisation, not access control. Do not rely on it to hide an action.</p>
+
+<h3 id="rejected-extensions">Rejected extensions</h3>
+
+<p>When the request’s extension is not in the action’s list, the interceptor returns the <code class="language-plaintext highlighter-rouge">bad-extension</code> result if it
+can be resolved, in the same way as <code class="language-plaintext highlighter-rouge">bad-request</code> <a href="#rejected-requests">above</a>. Otherwise, it responds with
+<code class="language-plaintext highlighter-rouge">404 Not Found</code>. The result name can be changed with the interceptor’s <code class="language-plaintext highlighter-rouge">badExtensionResultName</code> parameter.</p>
 
 <h2 id="actionsupport-default">ActionSupport Default</h2>
 
