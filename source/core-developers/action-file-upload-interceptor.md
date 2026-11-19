@@ -40,7 +40,8 @@ You can override the text of these messages by providing text for the following 
 
  - `maximumSize` (optional) - the maximum size (in bytes) that the interceptor will allow a file reference to be set
    on the action. Note, this is <b>not</b> related to the various properties found in struts.properties.
-   Default to approximately 2MB.
+   Default to approximately 2MB. Since Struts 7.5.0 a negative value, e.g. `-1`, disables this check. A value that
+   cannot be converted to a number, such as the literal `null`, makes the interceptor reject every upload.
  - `allowedTypes` (optional) - a comma separated list of content types (ie: `text/html`) that the interceptor will allow
    a file reference to be set on the action. If none is specified allow all types to be uploaded.
  - `allowedExtensions` (optional) - a comma separated list of file extensions (ie: `.html`) that the interceptor will allow
