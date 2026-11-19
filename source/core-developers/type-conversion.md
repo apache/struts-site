@@ -33,6 +33,13 @@ This includes support for converting to and from Strings for each of the followi
 - Enumerations
 - BigDecimal and BigInteger
 
+Since Struts 7.5.0 surrounding whitespace is trimmed before a value is converted to a non-String type, so `" 42 "`
+binds to an `Integer` and `" ACTIVE "` to an enum constant. `String` and `Object` targets, and converters you register
+for a type, still receive the raw value. Arrays and collections are trimmed per element.
+
+Since Struts 7.5.0 a numeric string longer than 1000 characters is rejected when converted to a boxed number type,
+`BigInteger` or `BigDecimal`, and reported as the usual conversion error for the field.
+
 ### Dates
 
 A request value is converted to a date or time property by trying a list of formats in order and using the first one
