@@ -13,7 +13,7 @@ title: Announcements 2026
   Skip to: <a href="announce-2025">Announcements - 2025</a>
 </p>
 
-#### 8 November 2026 - Apache Struts version 7.5.0 General Availability {#a20261108}
+#### 20 November 2026 - Apache Struts version 7.5.0 General Availability {#a20261120}
 
 The Apache Struts group is pleased to announce that Apache Struts version 7.5.0 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
@@ -38,7 +38,7 @@ and, if appropriate, file [a tracking ticket]({{ site.jira_url }}).
 
 You can download this version from our [download](download.cgi#struts-ga) page.
 
-#### 8 November 2026 - Apache Struts version 6.13.0 General Availability {#a20261108-6130}
+#### 20 November 2026 - Apache Struts version 6.13.0 General Availability {#a20261120-6130}
 
 The Apache Struts group is pleased to announce that Apache Struts version 6.13.0 is available as a "General Availability"
 release. The GA designation is our highest quality grade.
