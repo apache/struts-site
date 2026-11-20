@@ -368,25 +368,28 @@ automatically at [struts.staged.apache.org](https://struts.staged.apache.org/) f
 `_config.yml` — these move together:
 
 ```yaml
-current_version: 7.3.0
-current_version_short: 730
-prev_version: 6.11.0
-prev_version_short: 6110
-release_date: 1 August 2026
-prev_release_date: 1 August 2026
-release_date_short: 20260801
-prev_release_date_short: 20260801-6110
+current_version: 7.5.0
+current_version_short: 750
+prev_version: 6.13.0
+prev_version_short: 6130
+release_date: 8 November 2026
+prev_release_date: 8 November 2026
+release_date_short: 20261120
+prev_release_date_short: 20261120-6130
 ```
 
-`release_date` is the **tag** date, not the announcement date: 7.2.1 was tagged on 15 June and
-announced on 30 June, and the site says 15 June. The `*_date_short` values are the anchors in
-`announce-YYYY.md`; when two releases share a tag date, disambiguate the second one (as
-`20260801-6110` above) so that each home page box links to its own entry.
+A release has two dates, and the site uses both. `release_date` is the **tag** date, when the
+packages were built, and the home page box says "released on" it. The announcement entry in
+`announce-YYYY.md` is dated the day it is **announced**, and the `*_date_short` values are its
+anchors: 7.5.0 was tagged on 8 November and announced on 20 November, so the box reads
+8 November and links to `#a20261120`. When two releases are announced on the same day,
+disambiguate the second anchor (as `20261120-6130` above) so that each home page box links to
+its own entry. The **Release Date** column in `releases.md` is the tag date.
 
 Then:
 
-- `source/announce-YYYY.md` — a new `####` entry at the top, newest first, with its
-  `{% raw %}{#aYYYYMMDD}{% endraw %}` anchor.
+- `source/announce-YYYY.md` — a new `####` entry at the top, newest first, headed with the
+  announcement date and carrying its `{% raw %}{#aYYYYMMDD}{% endraw %}` anchor.
 - `source/releases.md` — the release table, and move the superseded version into
   **Prior Releases**. This one is easy to miss; a site update without it is incomplete.
 - `source/index.html` — the GA boxes read their values from `_config.yml`; the security boxes are
