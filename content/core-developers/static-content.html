@@ -310,8 +310,14 @@ you can do so by specifying a comma separated list of regular expressions like:<
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;constant</span> <span class="na">name=</span><span class="s">"struts.action.excludePattern"</span> <span class="na">value=</span><span class="s">"/some/content/.*,/other/content/.*"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p>These regular expression will be evaluated against the request’s URI (<code class="language-plaintext highlighter-rouge">HttpServletRequest.getRequestURI()</code>), and if any
-of them matches, then Struts will not handle the request.</p>
+<p>These regular expressions are evaluated against the request path inside the application: the servlet path followed by
+the path info, without the context path and without the query string. A pattern has to match the whole path. If any of
+them matches, Struts does not handle the request and passes it on to the next filter in the chain.</p>
+
+<p>A pattern excludes paths, not actions. The same action can answer on more than one path, for example through the
+default namespace (see <a href="namespace-configuration">Namespace Configuration</a>) or through each extension listed in
+<code class="language-plaintext highlighter-rouge">struts.action.extension</code> (see <a href="action-mapper">ActionMapper</a>), so an exclusion is not a way to restrict access to
+an action. To make an action unreachable, remove its mapping. To restrict it, apply authorization to the action itself.</p>
 
 <p>To evaluate each pattern the <code class="language-plaintext highlighter-rouge">Pattern</code> class from JDK will be used, you can find more about what kind of pattern you can
 use in the <a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern">Pattern class JavaDoc</a>.</p>
