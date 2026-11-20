@@ -144,8 +144,14 @@ you can do so by specifying a comma separated list of regular expressions like:
 <constant name="struts.action.excludePattern" value="/some/content/.*,/other/content/.*"/>
 ```
 
-These regular expression will be evaluated against the request's URI (`HttpServletRequest.getRequestURI()`), and if any
-of them matches, then Struts will not handle the request.
+These regular expressions are evaluated against the request path inside the application: the servlet path followed by
+the path info, without the context path and without the query string. A pattern has to match the whole path. If any of
+them matches, Struts does not handle the request and passes it on to the next filter in the chain.
+
+A pattern excludes paths, not actions. The same action can answer on more than one path, for example through the
+default namespace (see [Namespace Configuration](namespace-configuration)) or through each extension listed in
+`struts.action.extension` (see [ActionMapper](action-mapper)), so an exclusion is not a way to restrict access to
+an action. To make an action unreachable, remove its mapping. To restrict it, apply authorization to the action itself.
 
 To evaluate each pattern the `Pattern` class from JDK will be used, you can find more about what kind of pattern you can
 use in the [Pattern class JavaDoc](http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern).
