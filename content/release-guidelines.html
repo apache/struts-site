@@ -586,26 +586,29 @@ automatically at <a href="https://struts.staged.apache.org/">struts.staged.apach
 
 <p><code class="language-plaintext highlighter-rouge">_config.yml</code> — these move together:</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">current_version</span><span class="pi">:</span> <span class="s">7.3.0</span>
-<span class="na">current_version_short</span><span class="pi">:</span> <span class="m">730</span>
-<span class="na">prev_version</span><span class="pi">:</span> <span class="s">6.11.0</span>
-<span class="na">prev_version_short</span><span class="pi">:</span> <span class="m">6110</span>
-<span class="na">release_date</span><span class="pi">:</span> <span class="s">1 August </span><span class="m">2026</span>
-<span class="na">prev_release_date</span><span class="pi">:</span> <span class="s">1 August </span><span class="m">2026</span>
-<span class="na">release_date_short</span><span class="pi">:</span> <span class="m">20260801</span>
-<span class="na">prev_release_date_short</span><span class="pi">:</span> <span class="s">20260801-6110</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">current_version</span><span class="pi">:</span> <span class="s">7.5.0</span>
+<span class="na">current_version_short</span><span class="pi">:</span> <span class="m">750</span>
+<span class="na">prev_version</span><span class="pi">:</span> <span class="s">6.13.0</span>
+<span class="na">prev_version_short</span><span class="pi">:</span> <span class="m">6130</span>
+<span class="na">release_date</span><span class="pi">:</span> <span class="s">8 November </span><span class="m">2026</span>
+<span class="na">prev_release_date</span><span class="pi">:</span> <span class="s">8 November </span><span class="m">2026</span>
+<span class="na">release_date_short</span><span class="pi">:</span> <span class="m">20261120</span>
+<span class="na">prev_release_date_short</span><span class="pi">:</span> <span class="s">20261120-6130</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">release_date</code> is the <strong>tag</strong> date, not the announcement date: 7.2.1 was tagged on 15 June and
-announced on 30 June, and the site says 15 June. The <code class="language-plaintext highlighter-rouge">*_date_short</code> values are the anchors in
-<code class="language-plaintext highlighter-rouge">announce-YYYY.md</code>; when two releases share a tag date, disambiguate the second one (as
-<code class="language-plaintext highlighter-rouge">20260801-6110</code> above) so that each home page box links to its own entry.</p>
+<p>A release has two dates, and the site uses both. <code class="language-plaintext highlighter-rouge">release_date</code> is the <strong>tag</strong> date, when the
+packages were built, and the home page box says “released on” it. The announcement entry in
+<code class="language-plaintext highlighter-rouge">announce-YYYY.md</code> is dated the day it is <strong>announced</strong>, and the <code class="language-plaintext highlighter-rouge">*_date_short</code> values are its
+anchors: 7.5.0 was tagged on 8 November and announced on 20 November, so the box reads
+8 November and links to <code class="language-plaintext highlighter-rouge">#a20261120</code>. When two releases are announced on the same day,
+disambiguate the second anchor (as <code class="language-plaintext highlighter-rouge">20261120-6130</code> above) so that each home page box links to
+its own entry. The <strong>Release Date</strong> column in <code class="language-plaintext highlighter-rouge">releases.md</code> is the tag date.</p>
 
 <p>Then:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">source/announce-YYYY.md</code> — a new <code class="language-plaintext highlighter-rouge">####</code> entry at the top, newest first, with its
-<code class="language-plaintext highlighter-rouge">{#aYYYYMMDD}</code> anchor.</li>
+  <li><code class="language-plaintext highlighter-rouge">source/announce-YYYY.md</code> — a new <code class="language-plaintext highlighter-rouge">####</code> entry at the top, newest first, headed with the
+announcement date and carrying its <code class="language-plaintext highlighter-rouge">{#aYYYYMMDD}</code> anchor.</li>
   <li><code class="language-plaintext highlighter-rouge">source/releases.md</code> — the release table, and move the superseded version into
 <strong>Prior Releases</strong>. This one is easy to miss; a site update without it is incomplete.</li>
   <li><code class="language-plaintext highlighter-rouge">source/index.html</code> — the GA boxes read their values from <code class="language-plaintext highlighter-rouge">_config.yml</code>; the security boxes are
