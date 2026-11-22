@@ -172,7 +172,7 @@ mappings into one more generic mapping.</p>
 <p>The best way to explain wildcards is to show an example and walk through how it works. This example modifies 
 a conventional mapping to use wildcards to match all pages that start with <code class="language-plaintext highlighter-rouge">/edit</code>:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/edit*"</span> <span class="na">class=</span><span class="s">"org.apache.struts.webapp.example.Edit{1}Action"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/edit*"</span> <span class="na">class=</span><span class="s">"org.apache.struts.webapp.example.EditAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">"failure"</span><span class="nt">&gt;</span>/mainMenu.jsp<span class="nt">&lt;/result&gt;</span>
     <span class="nt">&lt;result&gt;</span>{1}.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
@@ -190,7 +190,7 @@ if the request URL can be matched against a path without any wildcards in it, no
 and order is not important. Also, note that wildcards are not greedy, meaning they only match until the first 
 occurrence of the following string pattern.  For example, consider the following mapping:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"List*s"</span> <span class="na">class=</span><span class="s">"actions.List{1}s"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"List*s"</span> <span class="na">class=</span><span class="s">"actions.ListAction"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;result&gt;</span>list{1}s.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
 </code></pre></div></div>
@@ -198,7 +198,7 @@ occurrence of the following string pattern.  For example, consider the following
 <p>This mapping would work correctly for the URI <code class="language-plaintext highlighter-rouge">ListAccounts</code> but not <code class="language-plaintext highlighter-rouge">ListSponsors</code>, because the latter would turn into 
 this configuration:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"ListSpons"</span> <span class="na">class=</span><span class="s">"actions.ListSpons"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"ListSpons"</span> <span class="na">class=</span><span class="s">"actions.ListAction"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;result&gt;</span>listSpons.jsp<span class="nt">&lt;/result&gt;</span>
 <span class="nt">&lt;/action&gt;</span>
 </code></pre></div></div>
@@ -232,9 +232,15 @@ the legacy <code class="language-plaintext highlighter-rouge">*!*</code> syntax,
 a number from 1 to 9 indicating which wildcard-matched value to substitute. The whole request URI can be accessed with 
 the <code class="language-plaintext highlighter-rouge">{0}</code> token.</p>
 
+<p class="alert alert-warning">Do not use <code class="language-plaintext highlighter-rouge">{N}</code> in the <code class="language-plaintext highlighter-rouge">class</code> attribute of an action. The value comes from the request URL and can contain any
+character allowed in an action name, including <code class="language-plaintext highlighter-rouge">.</code>, so a request can select any class or Spring bean whose name fits
+the attribute’s prefix and suffix, not only the ones you intended. Struts does not check this value. Use <code class="language-plaintext highlighter-rouge">{N}</code> in the
+<code class="language-plaintext highlighter-rouge">method</code> attribute, results and parameters instead; a substituted method name is limited by
+<a href="action-configuration#strict-method-invocation">Strict Method Invocation</a>, which is enabled by default.</p>
+
 <p>Also, the action mapping and action result properties will accept wildcard-matched strings in their value attribute, like:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/edit/*"</span> <span class="na">class=</span><span class="s">"org.apache.struts.webapp.example.Edit{1}Action"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;action</span> <span class="na">name=</span><span class="s">"/edit/*"</span> <span class="na">class=</span><span class="s">"org.apache.struts.webapp.example.EditAction"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"id"</span><span class="nt">&gt;</span>{1}<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;result&gt;</span>
       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"location"</span><span class="nt">&gt;</span>/mainMenu.jsp<span class="nt">&lt;/param&gt;</span>
