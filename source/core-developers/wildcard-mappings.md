@@ -21,7 +21,7 @@ The best way to explain wildcards is to show an example and walk through how it 
 a conventional mapping to use wildcards to match all pages that start with `/edit`:
 
 ```xml
-<action name="/edit*" class="org.apache.struts.webapp.example.Edit{1}Action">
+<action name="/edit*" class="org.apache.struts.webapp.example.EditAction">
     <result name="failure">/mainMenu.jsp</result>
     <result>{1}.jsp</result>
 </action>
@@ -40,7 +40,7 @@ and order is not important. Also, note that wildcards are not greedy, meaning th
 occurrence of the following string pattern.  For example, consider the following mapping:
 
 ```xml
-<action name="List*s" class="actions.List{1}s">
+<action name="List*s" class="actions.ListAction">
   <result>list{1}s.jsp</result>
 </action>
 ```
@@ -49,7 +49,7 @@ This mapping would work correctly for the URI `ListAccounts` but not `ListSponso
 this configuration:
 
 ```xml
-<action name="ListSpons" class="actions.ListSpons">
+<action name="ListSpons" class="actions.ListAction">
   <result>listSpons.jsp</result>
 </action>
 ```
@@ -69,10 +69,17 @@ In the action mapping and action results, the wildcard-matched values can be acc
 a number from 1 to 9 indicating which wildcard-matched value to substitute. The whole request URI can be accessed with 
 the `{0}` token.
 
+Do not use `{N}` in the `class` attribute of an action. The value comes from the request URL and can contain any
+character allowed in an action name, including `.`, so a request can select any class or Spring bean whose name fits
+the attribute's prefix and suffix, not only the ones you intended. Struts does not check this value. Use `{N}` in the
+`method` attribute, results and parameters instead; a substituted method name is limited by
+[Strict Method Invocation](action-configuration#strict-method-invocation), which is enabled by default.
+{:.alert .alert-warning}
+
 Also, the action mapping and action result properties will accept wildcard-matched strings in their value attribute, like:
 
 ```xml
-<action name="/edit/*" class="org.apache.struts.webapp.example.Edit{1}Action">
+<action name="/edit/*" class="org.apache.struts.webapp.example.EditAction">
     <param name="id">{1}</param>
     <result>
       <param name="location">/mainMenu.jsp</param>
