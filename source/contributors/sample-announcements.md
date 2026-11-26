@@ -12,6 +12,10 @@ parent:
 * Will be replaced with the ToC, excluding a header
 {:toc}
 
+Link a cwiki page by its page URL, `https://cwiki.apache.org/confluence/spaces/WW/pages/<page-id>/<Page+Title>`,
+the address a `display/WW/<Page+Title>` link redirects to. Take `<page-id>` from the page's address bar once
+the page exists.
+
 ## Sample Struts Annotations Release/Quality Vote
 
 ```
@@ -46,7 +50,7 @@ simply a "test build".  We welcome any comments you may have, and will take all 
 is called for this build.
 
 Release notes:
-* [https://cwiki.apache.org/confluence/display/WW/Version+Notes+#.#.#]
+* [https://cwiki.apache.org/confluence/spaces/WW/pages/<page-id>/Version+Notes+#.#.#]
 
 Distribution:
 * [https://dist.apache.org/repos/dist/dev/struts/#.#.#/]
@@ -65,7 +69,7 @@ Subject: [VOTE] Struts #.#.# Vote
 The Struts #.#.# test build is now available.
 
 Release notes:
-* [https://cwiki.apache.org/confluence/display/WW/Version+Notes+#.#.#]
+* [https://cwiki.apache.org/confluence/spaces/WW/pages/<page-id>/Version+Notes+#.#.#]
 
 Distribution:
 * [https://dist.apache.org/repos/dist/dev/struts/#.#.#/]
@@ -119,7 +123,7 @@ The #.#.x series of the Apache Struts framework has a minimum requirement of the
 * Java 2 Standard Platform Edition (J2SE) 7
 
 The release notes are available online at:
-* https://cwiki.apache.org/confluence/display/WW/Version+Notes+#.#.#
+* https://cwiki.apache.org/confluence/spaces/WW/pages/<page-id>/Version+Notes+#.#.#
 
 Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list,
 and, if appropriate, file a tracking ticket.appropriate, file a tracking ticket:
@@ -150,8 +154,8 @@ It includes the latest security patches which fix two possible vulnerabilities:
 
 For details and the rationale behind these changes, please consult the
 corresponding security bulletins:
-* https://cwiki.apache.org/confluence/display/WW/S2-XXX
-* https://cwiki.apache.org/confluence/display/WW/S2-XXX
+* https://cwiki.apache.org/confluence/spaces/WW/pages/<page-id>/S2-XXX
+* https://cwiki.apache.org/confluence/spaces/WW/pages/<page-id>/S2-XXX
 
 Please note that currently these bulletins and the release notes are
 only visible to logged-in users with the struts-committer role. This is
@@ -160,7 +164,7 @@ announced.
 (/optional)
 
 Release notes:
-* [https://cwiki.apache.org/confluence/display/WW/Version+Notes+#.#.#.#]
+* [https://cwiki.apache.org/confluence/spaces/WW/pages/<page-id>/Version+Notes+#.#.#.#]
 
 Distribution:
 * [https://dist.apache.org/repos/dist/dev/struts/#.#.#.#/]
@@ -192,5 +196,5 @@ parameter.
 - The Apache Struts group.
 ```
 
-Please be sure to update [Security Bulletins](https://cwiki.apache.org/confluence/display/WW/Security+Bulletins) accordingly 
+Please be sure to update [Security Bulletins](https://cwiki.apache.org/confluence/spaces/WW/pages/61758/Security+Bulletins) accordingly 
 as described above.
