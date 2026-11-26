@@ -13,6 +13,34 @@ title: Announcements 2026
   Skip to: <a href="announce-2025">Announcements - 2025</a>
 </p>
 
+#### 26 November 2026 - Apache Struts version 7.5.1 General Availability {#a20261126}
+
+The Apache Struts group is pleased to announce that Apache Struts version 7.5.1 is available as a "General Availability"
+release. The GA designation is our highest quality grade.
+
+The Apache Struts is an elegant, extensible framework for creating enterprise-ready Java web applications.
+The framework has been designed to streamline the full development cycle, from building, to deploying,
+to maintaining applications over time.
+
+This is a fast-track release with a single fix: request parameters bound to String properties keep their leading
+and trailing whitespace again, as they did before 7.5.0.
+
+Please read the [Migration Guide]({{ site.wiki_url }}/Struts+6.x.x+to+7.x.x+migration) to find more details about
+how to adopt a new version.
+
+> Please read the [Version Notes]({{ site.wiki_url }}/Version+Notes+7.5.1) to find more details about performed
+> bug fixes and improvements.
+
+**All developers are strongly advised to perform this upgrade.**
+
+The 7.x series of the Apache Struts framework has a minimum requirement of the following specification versions:
+Java 17 and JakartaEE.
+
+Should any issues arise with your use of any version of the Struts framework, please post your comments to the user list,
+and, if appropriate, file [a tracking ticket]({{ site.jira_url }}).
+
+You can download this version from our [download](download.cgi#struts-ga) page.
+
 #### 20 November 2026 - Apache Struts version 7.5.0 General Availability {#a20261120}
 
 The Apache Struts group is pleased to announce that Apache Struts version 7.5.0 is available as a "General Availability"
